@@ -1,0 +1,3669 @@
+{
+  "id": "eva-10",
+  "category": "history",
+  "query": "História da fundação de Ouro Preto",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.633,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "fundação de Ouro Preto História",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "fundação de Ouro Preto",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "fundação de Ouro Preto História",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "fundação de Ouro Preto História",
+      "error": "vazio"
+    },
+    {
+      "provider": "marginalia",
+      "query": "fundação de Ouro Preto",
+      "candidates": 6
+    },
+    {
+      "provider": "wikipedia",
+      "query": "fundação de Ouro Preto",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=funda%C3%A7%C3%A3o+de+Ouro+Preto+Hist%C3%B3ria&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=funda%C3%A7%C3%A3o+de+Ouro+Preto+Hist%C3%B3ria&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5446
+    },
+    {
+      "url": "https://www.bing.com/search?q=funda%C3%A7%C3%A3o+de+Ouro+Preto&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=funda%C3%A7%C3%A3o+de+Ouro+Preto&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5400
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=funda%C3%A7%C3%A3o%20de%20Ouro%20Preto%20Hist%C3%B3ria",
+      "final": "https://html.duckduckgo.com/html/?q=funda%C3%A7%C3%A3o%20de%20Ouro%20Preto%20Hist%C3%B3ria",
+      "chars": 14278
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=funda%C3%A7%C3%A3o+de+Ouro+Preto+Hist%C3%B3ria",
+      "final": "https://old-search.marginalia.nu/search?query=funda%C3%A7%C3%A3o+de+Ouro+Preto+Hist%C3%B3ria",
+      "chars": 1067
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=funda%C3%A7%C3%A3o+de+Ouro+Preto",
+      "final": "https://old-search.marginalia.nu/search?query=funda%C3%A7%C3%A3o+de+Ouro+Preto",
+      "chars": 53964
+    },
+    {
+      "url": "https://fundacao.bradesco/",
+      "final": "https://fundacao.bradesco/",
+      "chars": 115040
+    },
+    {
+      "url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+      "final": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+      "chars": 244399
+    },
+    {
+      "url": "http://www.ev.org.br/",
+      "final": "https://www.ev.org.br/",
+      "chars": 124079
+    },
+    {
+      "url": "https://fundacaosicredi.org.br/",
+      "final": "https://fundacaosicredi.org.br/",
+      "chars": 159066
+    },
+    {
+      "url": "https://www.fcc.org.br/",
+      "final": "https://www.fcc.org.br/",
+      "chars": 165463
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+      "final": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+      "chars": 105824
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "História da fundação de Ouro Preto",
+    "domain": "general",
+    "original_request": "História da fundação de Ouro Preto",
+    "resolved_request": "História da fundação de Ouro Preto",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:11:26.825888+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "c5341128874ba8ee3169",
+        "url": "https://fundacao.bradesco/",
+        "title": "Fundação Bradesco",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "dom., 25 out. 2026 14:49:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "A Fundação Bradesco A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil. São 40 escol",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 402,
+        "final_url": "https://fundacao.bradesco/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "8f424373f4ce0c9f401b",
+        "url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+        "title": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+        "origin": "marginalia",
+        "query": "fundação de Ouro Preto",
+        "date": "2025-01-29T13:19:43+00:00",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "event’s realization. A special thank you to: Ministry of Culture of Brazil Instituto do Patrimônio Histórico e Artístico Nacional (IPHAN) Ministry of Foreign Af",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3335,
+        "final_url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "445e8eeb3bdb1b1c200c",
+        "url": "http://www.ev.org.br/",
+        "title": "Fundação Bradesco - Escola Virtual",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "dom., 25 out. 2026 01:56:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "as regras vigentes. Critérios de acesso. 3.2.2. Nós poderemos recusar, não aprovar, cancelar ou limitar quaisquer solicitações de acessos se você não fornecer o",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.ev.org.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "a844e480a516146edfe4",
+        "url": "https://fundacaosicredi.org.br/",
+        "title": "Sicredi - Fundação",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "dom., 25 out. 2026 00:23:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "infraestruturas resilientes, promover a industrialização inclusiva e sustentável e fomentar a inovação. Reduzir a desigualdade dentro dos países e entre eles. T",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 1829,
+        "final_url": "https://fundacaosicredi.org.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "0f69f89e410fe51619da",
+        "url": "https://www.fcc.org.br/",
+        "title": "Fundação Carlos Chagas | FCC",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "[object Object]",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pesquisa e Educação Conheça nosso Departamento de Pesquisas Educacionais, saiba quem são os integrantes da nossa equipe e os temas que estão sendo abordados. No",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 174,
+        "final_url": "https://www.fcc.org.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "8806e5d8a22d1986292d",
+        "url": "https://www.ev.org.br/areas-de-interesse",
+        "title": "Cursos - Fundação Bradesco - Escola Virtual",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "dom., 25 out. 2026 15:25:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Olá, sou o assistente digital da Escola Virtual, muito prazer! Antes de começar, como prefere que eu chame você? aprender hoje?",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "1ab4f6c0675f3afb932e",
+        "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+        "title": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "fundação de Ouro Preto História",
+        "date": "2006-03-17T17:39:54Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "ensino ou a outros fins de interesse público. O reconhecimento das fundações constitui um ato individual e discricionário da autoridade pública e encontra-se su",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 4057,
+        "final_url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "629173a39e1a5ddc552e",
+        "url": "https://en.wikipedia.org/wiki/Ribeir%C3%A3o_Preto",
+        "title": "Ribeirão Preto",
+        "origin": "marginalia",
+        "query": "fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "5a1520c21188d009a9b4",
+        "url": "https://en.wikipedia.org/wiki/Jo%C3%A3o_Pinheiro",
+        "title": "João Pinheiro",
+        "origin": "marginalia",
+        "query": "fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "93c946301129a66a1f69",
+        "url": "https://en.wikipedia.org/wiki/Dulce_Pereira",
+        "title": "Dulce Pereira",
+        "origin": "marginalia",
+        "query": "fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "5bd3b50e3679d40c2d98",
+        "url": "https://en.wikipedia.org/wiki/Brazilian_Sign_Language",
+        "title": "Brazilian Sign Language",
+        "origin": "marginalia",
+        "query": "fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "2d08c904fdca5b5684b4",
+        "url": "https://en.wikipedia.org/wiki/RedeTV%21_Recife",
+        "title": "RedeTV! Recife",
+        "origin": "marginalia",
+        "query": "fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-7caf8a2dbc83",
+      "type": "image",
+      "title": "Fundação Bradesco",
+      "url": "https://fundacao.bradesco/assets/images/logo_white.svg",
+      "final_url": "https://fundacao.bradesco/assets/images/logo_white.svg",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Fundação Bradesco",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f76f9530c160",
+      "type": "image",
+      "title": "Educação Infantil",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-infantil.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-infantil.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Educação Infantil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6f4136f7d414",
+      "type": "image",
+      "title": "Ensino Fundamental",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-iniciais.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-iniciais.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ensino Fundamental",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0d12c7497b62",
+      "type": "image",
+      "title": "Ensino Fundamental",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-finais.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-finais.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ensino Fundamental",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c2f80e550d80",
+      "type": "image",
+      "title": "Ensino Médio",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-medio.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-medio.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ensino Médio",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b5de5c55011d",
+      "type": "image",
+      "title": "Cursos Técnicos de Nível Médio",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/cursos-tecnicos-de-nivel-medio.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/cursos-tecnicos-de-nivel-medio.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Cursos Técnicos de Nível Médio",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a5b36b2fae77",
+      "type": "image",
+      "title": "Educação de Jovens e Adultos (EJA)",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-de-jovens-e-adultos-eja.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-de-jovens-e-adultos-eja.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Educação de Jovens e Adultos (EJA)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-794b904a4fbc",
+      "type": "image",
+      "title": "Formação Inicial e Continuada (FIC)",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/formacao-inicial-e-continuada-fic.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/formacao-inicial-e-continuada-fic.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Formação Inicial e Continuada (FIC)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-37be815e082c",
+      "type": "image",
+      "title": "Escola Virtual",
+      "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/escola-virtual.webp",
+      "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/escola-virtual.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Escola Virtual",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d2d5e372007d",
+      "type": "image",
+      "title": "Quem é TRANSFORMADO pela educação, TRANSFORMA O MUNDO.",
+      "url": "https://fundacao.bradesco/assets\\noticias\\1541a2fe-0fe6-4c97-ba99-8dfeaddeffd8_DiaDosProfessores_ThumbInstitucional.webp",
+      "final_url": "https://fundacao.bradesco/assets\\noticias\\1541a2fe-0fe6-4c97-ba99-8dfeaddeffd8_DiaDosProfessores_ThumbInstitucional.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Quem é TRANSFORMADO pela educação, TRANSFORMA O MUNDO.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-104e713c6087",
+      "type": "image",
+      "title": "O PAI ENSINA o caminho. A EDUCAÇÃO leva mais longe.",
+      "url": "https://fundacao.bradesco/assets\\noticias\\23e78aff-3037-4b08-bfce-4402879e0941_pecas_diadospais_fb_final_thumb institucional (1).jpg",
+      "final_url": "https://fundacao.bradesco/assets\\noticias\\23e78aff-3037-4b08-bfce-4402879e0941_pecas_diadospais_fb_final_thumb institucional (1).jpg",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "O PAI ENSINA o caminho. A EDUCAÇÃO leva mais longe.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-22b98741b385",
+      "type": "image",
+      "title": "Relatório Anual 2025",
+      "url": "https://fundacao.bradesco/assets\\noticias\\86cbab35-073f-46d2-8291-60d1dfbc496a_banner-2026-RA_.webp",
+      "final_url": "https://fundacao.bradesco/assets\\noticias\\86cbab35-073f-46d2-8291-60d1dfbc496a_banner-2026-RA_.webp",
+      "source_title": "Fundação Bradesco",
+      "source_url": "https://fundacao.bradesco/",
+      "publisher": "fundacao.bradesco",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Relatório Anual 2025",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+      "titulo": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2025-01-29T13:19:43+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://fundacao.bradesco/",
+      "titulo": "Fundação Bradesco",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 14:49:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://fundacao.bradesco/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "http://www.ev.org.br/",
+      "titulo": "Fundação Bradesco - Escola Virtual",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 01:56:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "http://www.ev.org.br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 1,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "fundação de Ouro Preto História",
+      "items": [
+        {
+          "titulo": "Fundação Bradesco - Escola Virtual",
+          "url": "http://www.ev.org.br/",
+          "trecho": "Aprenda os fundamentos básicos da Inteligência Artificial (IA) Generativa de forma acessível e envolvente, desde a sua história até os conceitos essenciais. Explore suas aplicações da IA no dia a dia e em sua produtividade online.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 01:56:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "http://ev.org.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Fundação Bradesco",
+          "url": "https://fundacao.bradesco/",
+          "trecho": "Há quase 70 anos oferecendo ensino gratuito e de excelência para crianças, jovens e adultos em regiões de vulnerabilidade socioeconômica de todo o Brasil. A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 14:49:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "https://fundacao.bradesco/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Cursos - Fundação Bradesco - Escola Virtual",
+          "url": "https://www.ev.org.br/areas-de-interesse",
+          "trecho": "Olá, sou o assistente digital da Escola Virtual, muito prazer! Antes de começar, como prefere que eu chame você? aprender hoje?",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 15:25:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "https://ev.org.br/areas-de-interesse",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+          "trecho": "Uma fundação é uma organização sem fins lucrativos que tem como objetivo gerir uma massa patrimonial cedida pelos fundadores para a satisfação de certas finalidades de interesse social. [1][2] As fundações são instituições não lucrativas dedicadas à beneficência, à ciência, ao ensino ou a outros fin",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 17 out. 2026 06:37:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Sicredi - Fundação",
+          "url": "https://fundacaosicredi.org.br/",
+          "trecho": "A Fundação de Desenvolvimento Educacional e Cultural Sicredi - Fundação Sicredi - tem o propósito de manter viva a essência do cooperativismo por meio do desenvolvimento da estratégia de sustentabilidade sistêmica, e dos programas e iniciativas educacionais, sociais, culturais, ambientais e de gover",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 00:23:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "https://fundacaosicredi.org.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Fundação Carlos Chagas | FCC",
+          "url": "https://www.fcc.org.br/",
+          "trecho": "Danielle Oliveira da Nóbrega, pós-doutoranda na Fundação Carlos Chagas, buscou compreender a dimensão emocional dessas representações no cotidiano docente. Durante o evento, foi lançado o Relatório de Pesquisa Educacional sobre o tema com subsídios para a efetivação do PNE 2026-2036; saiba como foi.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 09:55:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto História",
+          "discovery_provider": "bing",
+          "url_canonica": "https://fcc.org.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "fundação de Ouro Preto",
+      "items": [
+        {
+          "titulo": "Fundação Bradesco - Escola Virtual",
+          "url": "http://www.ev.org.br/",
+          "trecho": "Aprenda os fundamentos básicos da Inteligência Artificial (IA) Generativa de forma acessível e envolvente, desde a sua história até os conceitos essenciais. Explore suas aplicações da IA no dia a dia e em sua produtividade online.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 01:56:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Fundação Bradesco",
+          "url": "https://fundacao.bradesco/",
+          "trecho": "Há quase 70 anos oferecendo ensino gratuito e de excelência para crianças, jovens e adultos em regiões de vulnerabilidade socioeconômica de todo o Brasil. A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 14:49:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Cursos - Fundação Bradesco - Escola Virtual",
+          "url": "https://www.ev.org.br/areas-de-interesse",
+          "trecho": "Olá, sou o assistente digital da Escola Virtual, muito prazer! Antes de começar, como prefere que eu chame você? aprender hoje?",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 15:25:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+          "trecho": "Uma fundação é uma organização sem fins lucrativos que tem como objetivo gerir uma massa patrimonial cedida pelos fundadores para a satisfação de certas finalidades de interesse social. [1][2] As fundações são instituições não lucrativas dedicadas à beneficência, à ciência, ao ensino ou a outros fin",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 17 out. 2026 06:37:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Sicredi - Fundação",
+          "url": "https://fundacaosicredi.org.br/",
+          "trecho": "A Fundação de Desenvolvimento Educacional e Cultural Sicredi - Fundação Sicredi - tem o propósito de manter viva a essência do cooperativismo por meio do desenvolvimento da estratégia de sustentabilidade sistêmica, e dos programas e iniciativas educacionais, sociais, culturais, ambientais e de gover",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 00:23:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Fundação Carlos Chagas | FCC",
+          "url": "https://www.fcc.org.br/",
+          "trecho": "Danielle Oliveira da Nóbrega, pós-doutoranda na Fundação Carlos Chagas, buscou compreender a dimensão emocional dessas representações no cotidiano docente. Durante o evento, foi lançado o Relatório de Pesquisa Educacional sobre o tema com subsídios para a efetivação do PNE 2026-2036; saiba como foi.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 09:55:00 GMT"
+          },
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "bing"
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "fundação de Ouro Preto",
+      "items": [
+        {
+          "titulo": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+          "url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "relevancia": 10.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "João Pinheiro",
+          "url": "https://en.wikipedia.org/wiki/Jo%C3%A3o_Pinheiro",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Jo%C3%A3o_Pinheiro",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Dulce Pereira",
+          "url": "https://en.wikipedia.org/wiki/Dulce_Pereira",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Dulce_Pereira",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Ribeirão Preto",
+          "url": "https://en.wikipedia.org/wiki/Ribeir%C3%A3o_Preto",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Ribeir%C3%A3o_Preto",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 5.0,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Brazilian Sign Language",
+          "url": "https://en.wikipedia.org/wiki/Brazilian_Sign_Language",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Brazilian_Sign_Language",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "RedeTV! Recife",
+          "url": "https://en.wikipedia.org/wiki/RedeTV%21_Recife",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "fundação de Ouro Preto",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/RedeTV%21_Recife",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "http://www.ev.org.br/",
+      "result": {
+        "titulo": "Fundação Bradesco - Escola Virtual",
+        "texto": "(Última versão: 09 de junho de 2026) Bem-vindo(a) à Escola Virtual! A , entidade beneficente de assistência social, inscrita no CNPJ nº 60.701.521/0001-06, com sede no Município de Osasco – SP, visando propiciar um ambiente virtual gratuito de aprendizagem continuada e qualificação profissional para jovens e adultos, criou o portal de educação online dedicado a oferecer cursos livres a distância, via Internet, denominado \"\". FUNDAÇÃO BRADESCO ESCOLA VIRTUAL A seguir apresentamos os Termos e Condições de Uso (\"Termos\"), documento que contém as principais regras que devem ser observadas por todos que acessam ou utilizam as funcionalidades da plataforma. O ambiente, doravante denominado , está à disposição de todos que queiram obter formação inicial e continuada à distância, por meio do endereço eletrônico . ESCOLA VIRTUAL www.ev.org.br Como condição para acesso e uso das funcionalidades da , Você declara que fez a leitura completa e atenta das regras deste documento, estando plenamente ciente e de acordo com elas. ESCOLA VIRTUAL Estamos sempre buscando o aprimoramento dos nossos serviços e funcionalidades, portanto estes Termos poderão sofrer ajustes a qualquer tempo, sem a necessidade de aviso prévio. 1. CONCEITOS BÁSICOS Para melhor entendimento destes Termos, devem ser consideradas as seguintes definições: Pessoas naturais ou jurídicas que utilizam a Plataforma, devidamente inscritos nos Cursos disponibilizados pela . Alunos ou Você: ESCOLA VIRTUAL Meios de contato disponibilizados pela para atendimento aos Alunos e Usuários. Canais de Atendimento: ESCOLA VIRTUAL Conta criada para a utilização das funcionalidades da Plataforma, pela qual é possível a inscrição nos cursos disponibilizados e acessos à área restrita. Conta de Acesso: são quaisquer Dados sobre origem racial ou étnica, convicção religiosa, opinião política, filiação a sindicato ou a organização de caráter religioso, filosófico ou político, dados referentes à saúde ou à vida sexual, dados genéticos ou biométricos, quando vinculados a uma pessoa física. Dados Pessoais Sensíveis: são os dados relativos a uma pessoa física, que sejam capazes de identificá-la ou torná-la identificável. Por exemplo: nome, e-mail, número do RG, preferências pessoais, endereço IP, geolocalização. Dados Pessoais: para fins destes \"Termos\", abrange os Dados Pessoais e Dados Pessoais Sensíveis. Dados: pessoa indicada pela para atuar como canal de comunicação entre nós, os Titulares dos Dados Pessoais e a autoridade nacional competente, como a Agência Nacional de Proteção de Dados (ANPD). Encarregado ou (DPO): Data Protection Officer Fundação Bradesco Terminologia para endereço de internet. Link: ambiente digital disponibilizado pela no link , por meio do qual são oferecidas as funcionalidades, conteúdos e serviços descritos nestes Termos de Uso. Plataforma: ESCOLA VIRTUAL www.ev.org.br toda operação realizada com Dados Pessoais, como as que se referem a coleta, produção, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação, avaliação ou controle da informação, modificação, comunicação, transferência, difusão ou extração. Tratamento: 2. SOBRE AS FUNCIONALIDADES DO SITE E OS CURSOS OFERECIDOS 2.1. Nossa Plataforma e as funcionalidades nela existentes são apresentadas a Você na maneira como estão disponíveis no momento do acesso, mas podem passar por constantes aprimoramentos e atualizações sem a necessidade de prévio aviso. 2.1.1. Neste caso, Nós nos comprometemos a preservar as funcionalidades do site com esforços razoáveis, utilizando layout que respeita a usabilidade e navegabilidade, sempre que possível, bem como a exibir as funcionalidades de maneira clara, completa, precisa e suficiente de modo que exista uma correta percepção do que está sendo praticado e proteger, por meio do estado da técnica disponível, os dados coletados pelas funcionalidades disponibilizadas. 2.1.2. Nós preocupamos com a sua segurança na utilização das nossas funcionalidades, por isso, por meio de nossos procedimentos internos, estamos constantemente aprimorando nossas técnicas, visando garantir a autenticidade, confidencialidade e integridade das informações que nos são fornecidas. Relembramos que a segurança de seus dados não depende exclusivamente de Nós, de modo que Você também deve estar sempre atento às orientações apresentadas a Você. 2.2. Os cursos da são considerados cursos de Formação Inicial e Continuada (FIC). São cursos livres e, portanto, não requerem regulamentação específica ou autorização de órgãos de ensino competentes. Caracterizam-se pela modalidade de educação não formal, destinada a proporcionar ao conhecimentos para o seu desenvolvimento pessoal e profissional. ESCOLA VIRTUAL ALUNO 2.3. A oferece diversos cursos em diferentes áreas de interesse, como: ESCOLA VIRTUAL Administração Contabilidade e Finanças Desenvolvimento Pessoal e Profissional Educação Tecnologia 2.3.1. Os cursos oferecidos pela são integralmente . ESCOLA VIRTUAL gratuitos 3. DAS CONDIÇÕES BÁSICAS PARA ACESSO, CADASTRO E USO 3.1. Para o usufruir dos cursos disponibilizados no ambiente restrito da , é necessário dispor de um computador com conexão à Internet, cujos requisitos mínimos de recursos e configuração exigidos para a visualização das aulas via Internet são os seguintes: ALUNO ESCOLA VIRTUAL Windows 7 (ou superior) Acesso à Internet Uma conta de válida e-mail Bloqueadores de pop-up desabilitados Plugins do Java e Flash Player instalados e atualizados 3.2. Para acesso aos cursos on-line, o deverá realizar o cadastro prévio completo no site (), informando dados pessoais e/ou outros exigidos pela , como nome completo, telefone e e-mail. O cadastro será concluído mediante a criação de uma senha de acesso pessoal e intransferível, sendo o usuário o único responsável por manter a confidencialidade dessas informações. O fornecimento de informações falsas ou incorretas poderá resultar na suspensão ou exclusão da conta, sem prejuízo de outras medidas legais. ALUNO www.ev.org.br ESCOLA VIRTUAL 3.2.1. Nós podemos alterar os critérios de elegibilidade de acesso e utilização da Plataforma a qualquer momento e ao nosso critério, sem a necessidade de comunicação ou aviso prévio a Você ou qualquer terceiro, sendo de extrema importância que Você, ao fazer uso das nossas funcionalidades, sempre verifique as regras vigentes. Critérios de acesso. 3.2.2. Nós poderemos recusar, não aprovar, cancelar ou limitar quaisquer solicitações de acessos se você não fornecer os dados corretos. O mesmo procedimento será aplicável durante a utilização da Plataforma, se esta for utilizada de forma fraudulenta ou de maneira que tente ou viole estes Termos, ou quaisquer legislações vigentes. Recusa de acesso. 3.3. Observadas as condições previstas neste Termo de Uso, o cadastro permanecerá ativo por , contados a partir da última data de em qualquer curso da . Caso o usuário cadastrado a contar da criação do cadastro, este poderá ser excluído pela . 2 (dois) anos conclusão com aprovação ESCOLA VIRTUAL não efetive matrícula em nenhum curso no prazo de 45 (quarenta e cinco) dias ESCOLA VIRTUAL 3.3.1. A também poderá excluir, sem a necessidade de aviso prévio, qualquer cadastro de usuário quando necessário para atender atualizações, migrações sistêmicas ou melhorias de funcionalidade da Plataforma, visando aprimorar nossos serviços e funcionalidades como um todo. ESCOLA VIRTUAL 3.4. Uma vez concluído o cadastro mediante a criação de uma senha de acesso pessoal e escolhido o curso desejado, o fará a sua matrícula no curso desejado e terá acesso a todo o conteúdo para estudo. ALUNO 3.5. O login e a senha permitem, ainda, o acesso ao seu cadastro individual, para eventuais atualizações das informações pessoais, como e-mail, telefone, entre outras. 3.5.1. O cadastro na Plataforma está limitado a 01 (uma) conta por CPF. É expressamente proibido que um mesmo usuário crie ou utilize múltiplos cadastros, s",
+        "final": "https://www.ev.org.br/",
+        "trecho_usado": "as regras vigentes. Critérios de acesso. 3.2.2. Nós poderemos recusar, não aprovar, cancelar ou limitar quaisquer solicitações de acessos se você não fornecer os dados corretos. O mesmo procedimento será aplicável durante a utilização da Plataforma, se esta for utilizada de forma fraudulenta ou de maneira que tente ou viole estes Termos, ou quaisquer legislações vigentes. Recusa de acesso. 3.3.",
+        "metadados": {
+          "titulo": "Fundação Bradesco - Escola Virtual",
+          "descricao": "Fundação Bradesco - Escola Virtual",
+          "canonica": "",
+          "og": {
+            "og:url": "https://www.ev.org.br/",
+            "og:type": "website",
+            "og:title": "Fundação Bradesco - Escola Virtual",
+            "og:description": "Fundação Bradesco - Escola Virtual",
+            "og:image": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:description": "Fundação Bradesco - Escola Virtual",
+            "twitter:title": "Fundação Bradesco - Escola Virtual",
+            "twitter:image": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "(Última versão: 09 de junho de 2026)\nBem-vindo(a) à Escola Virtual!\nA , entidade beneficente de assistência social, inscrita no CNPJ nº 60.701.521/0001-06, com sede no Município de Osasco – SP, visando propiciar um ambiente virtual gratuito de aprendizagem continuada e qualificação profissional para jovens e adultos, criou o portal de educação online dedicado a oferecer cursos livres a distância, via Internet, denominado \"\". FUNDAÇÃO BRADESCO ESCOLA VIRTUAL\nA seguir apresentamos os Termos e Condições de Uso (\"Termos\"), documento que contém as principais regras que devem ser observadas por todos que acessam ou utilizam as funcionalidades da plataforma. O ambiente, doravante denominado , está à disposição de todos que queiram obter formação inicial e continuada à distância, por meio do endereço eletrônico . ESCOLA VIRTUAL www.ev.org.br\nComo condição para acesso e uso das funcionalidades da , Você declara que fez a leitura completa e atenta das regras deste documento, estando plenamente ciente e de acordo com elas. ESCOLA VIRTUAL\nEstamos sempre buscando o aprimoramento dos nossos serviços e funcionalidades, portanto estes Termos poderão sofrer ajustes a qualquer tempo, sem a necessidade de aviso prévio.\nPara melhor entendimento destes Termos, devem ser consideradas as seguintes definições:\nPessoas naturais ou jurídicas que utilizam a Plataforma, devidamente inscritos nos Cursos disponibilizados pela . Alunos ou Você: ESCOLA VIRTUAL\nMeios de contato disponibilizados pela para atendimento aos Alunos e Usuários. Canais de Atendimento: ESCOLA VIRTUAL\nConta criada para a utilização das funcionalidades da Plataforma, pela qual é possível a inscrição nos cursos disponibilizados e acessos à área restrita. Conta de Acesso:\nsão quaisquer Dados sobre origem racial ou étnica, convicção religiosa, opinião política, filiação a sindicato ou a organização de caráter religioso, filosófico ou político, dados referentes à saúde ou à vida sexual, dados genéticos ou biométricos, quando vinculados a uma pessoa física. Dados Pessoais Sensíveis:\nsão os dados relativos a uma pessoa física, que sejam capazes de identificá-la ou torná-la identificável. Por exemplo: nome, e-mail, número do RG, preferências pessoais, endereço IP, geolocalização. Dados Pessoais:\npara fins destes \"Termos\", abrange os Dados Pessoais e Dados Pessoais Sensíveis. Dados:\npessoa indicada pela para atuar como canal de comunicação entre nós, os Titulares dos Dados Pessoais e a autoridade nacional competente, como a Agência Nacional de Proteção de Dados (ANPD). Encarregado ou (DPO): Data Protection Officer Fundação Bradesco\nTerminologia para endereço de internet. Link:\nambiente digital disponibilizado pela no link , por meio do qual são oferecidas as funcionalidades, conteúdos e serviços descritos nestes Termos de Uso. Plataforma: ESCOLA VIRTUAL www.ev.org.br\ntoda operação realizada com Dados Pessoais, como as que se referem a coleta, produção, recepção, classificação, utilização, acesso, reprodução, transmissão, distribuição, processamento, arquivamento, armazenamento, eliminação, avaliação ou controle da informação, modificação, comunicação, transferência, difusão ou extração. Tratamento:\n2. SOBRE AS FUNCIONALIDADES DO SITE E OS CURSOS OFERECIDOS\n2.1. Nossa Plataforma e as funcionalidades nela existentes são apresentadas a Você na maneira como estão disponíveis no momento do acesso, mas podem passar por constantes aprimoramentos e atualizações sem a necessidade de prévio aviso.\n2.1.1. Neste caso, Nós nos comprometemos a preservar as funcionalidades do site com esforços razoáveis, utilizando layout que respeita a usabilidade e navegabilidade, sempre que possível, bem como a exibir as funcionalidades de maneira clara, completa, precisa e suficiente de modo que exista uma correta percepção do que está sendo praticado e proteger, por meio do estado da técnica disponível, os dados coletados pelas funcionalidades disponibilizadas.\n2.1.2. Nós preocupamos com a sua segurança na utilização da"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.ev.org.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/entrar",
+            "texto": "Acessar",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/cadastro?ReturnUrl=https://www.ev.org.br/",
+            "texto": "Cadastrar",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/esqueci-senha",
+            "texto": "Esqueci minha senha",
+            "interno": true
+          },
+          {
+            "url": "https://policies.google.com/privacy?hl=pt-BR",
+            "texto": "Política de Privacidade",
+            "interno": false
+          },
+          {
+            "url": "https://policies.google.com/terms?hl=pt-BR",
+            "texto": "Termos de Uso",
+            "interno": false
+          },
+          {
+            "url": "https://www.ev.org.br/busca",
+            "texto": "Busca",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/areas-de-interesse",
+            "texto": "Cursos",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/cursos",
+            "texto": "Todos os cursos",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/trilhas-de-conhecimento",
+            "texto": "Trilhas de Conhecimento",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/validar-certificado",
+            "texto": "Validação de certificado",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/faq",
+            "texto": "Perguntas Frequentes",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/parcerias",
+            "texto": "Parcerias",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/escola-virtual",
+            "texto": "Sobre",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/acessibilidade",
+            "texto": "Informática para Pessoas com Deficiência Visual",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/api/login/logout",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.ev.org.br/cursos/fluencia",
+            "texto": "IA: Como escrever bons prompts No novo módulo 7 do FluêncIA , você aprenderá a criar prompts claros e eficientes. Oriente a IA para obter respostas mais úteis, ",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/areas-de-interesse/analise-de-dados",
+            "texto": "Análise de Dados",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/areas-de-interesse/desenvolvimento-pessoal-e-profissional",
+            "texto": "Desenvolvimento Pessoal e Profissional",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/areas-de-interesse/educacao-e-tecnologia",
+            "texto": "Educação e Tecnologia",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/areas-de-interesse/inteligencia-artificial",
+            "texto": "Inteligência Artificial",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/areas-de-interesse/negocios-e-inovacao",
+            "texto": "Negócios e Inovação",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/areas-de-interesse/produtividade",
+            "texto": "Produtividade",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/areas-de-interesse/programacao",
+            "texto": "Programação",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/areas-de-interesse/tecnologia-da-informacao",
+            "texto": "Tecnologia da Informação",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/cursos/iaempregos",
+            "texto": "IA para seu novo emprego: Do currículo à entrevista",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/cursos/atendimento-ao-publico",
+            "texto": "Atendimento ao Público",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/cursos/educacao-financeira",
+            "texto": "Educação Financeira",
+            "interno": true
+          },
+          {
+            "url": "https://www.ev.org.br/cursos/cultura-digital",
+            "texto": "Cultura Digital",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg",
+          "https://www.ev.org.br/dist/static/escola_virtual_horizontal_full.svg",
+          "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20agentes%20IA-100.jpg",
+          "https://www.ev.org.br/Uploads/banners/banner%2070%20anos_1337.jpg",
+          "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20Prompt-100.jpg",
+          "https://www.ev.org.br/Uploads/parcerias/49f027ed-8285-4db6-9a39-5a635a272110.png",
+          "https://www.ev.org.br/Uploads/parcerias/23bff0e9-604b-4749-9063-061bdecc6f1c.svg",
+          "https://www.ev.org.br/Uploads/parcerias/5f1e9276-519b-4fb9-9c2c-e780eb3f9189.png",
+          "https://www.ev.org.br/Uploads/parcerias/199b65cf-7968-4275-983a-d8ac8eaf1f44.png",
+          "https://www.ev.org.br/Uploads/parcerias/bb10522b-2ee6-4320-b08a-d36174267156.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-1fc66a9ed4e1",
+            "type": "image",
+            "title": "Fundação Bradesco - Escola Virtual",
+            "url": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg",
+            "final_url": "https://www.ev.org.br/dist/static/cursos-disponiveis.jpg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco - Escola Virtual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a0b6a91cec07",
+            "type": "image",
+            "title": "fundação bradesco | escola virtual",
+            "url": "https://www.ev.org.br/dist/static/escola_virtual_horizontal_full.svg",
+            "final_url": "https://www.ev.org.br/dist/static/escola_virtual_horizontal_full.svg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "fundação bradesco | escola virtual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7a96bc70d988",
+            "type": "image",
+            "title": "Fundação Bradesco",
+            "url": "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20agentes%20IA-100.jpg",
+            "final_url": "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20agentes%20IA-100.jpg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b251ab442677",
+            "type": "image",
+            "title": "Fundação Bradesco",
+            "url": "https://www.ev.org.br/Uploads/banners/banner%2070%20anos_1337.jpg",
+            "final_url": "https://www.ev.org.br/Uploads/banners/banner%2070%20anos_1337.jpg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7abd9cada8c6",
+            "type": "image",
+            "title": "Fundação Bradesco",
+            "url": "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20Prompt-100.jpg",
+            "final_url": "https://www.ev.org.br/Uploads/banners/Banner_1337x648_Flu%C3%AAncia%20Prompt-100.jpg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-42936d35a87f",
+            "type": "image",
+            "title": "Bradesco Seguros",
+            "url": "https://www.ev.org.br/Uploads/parcerias/49f027ed-8285-4db6-9a39-5a635a272110.png",
+            "final_url": "https://www.ev.org.br/Uploads/parcerias/49f027ed-8285-4db6-9a39-5a635a272110.png",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bradesco Seguros",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bac8d0a60f6a",
+            "type": "image",
+            "title": "Instituto Crescer",
+            "url": "https://www.ev.org.br/Uploads/parcerias/23bff0e9-604b-4749-9063-061bdecc6f1c.svg",
+            "final_url": "https://www.ev.org.br/Uploads/parcerias/23bff0e9-604b-4749-9063-061bdecc6f1c.svg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Instituto Crescer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d94cc0bde3c0",
+            "type": "image",
+            "title": "Microsoft",
+            "url": "https://www.ev.org.br/Uploads/parcerias/5f1e9276-519b-4fb9-9c2c-e780eb3f9189.png",
+            "final_url": "https://www.ev.org.br/Uploads/parcerias/5f1e9276-519b-4fb9-9c2c-e780eb3f9189.png",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Microsoft",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0286c33eac44",
+            "type": "image",
+            "title": "Programa Semente",
+            "url": "https://www.ev.org.br/Uploads/parcerias/199b65cf-7968-4275-983a-d8ac8eaf1f44.png",
+            "final_url": "https://www.ev.org.br/Uploads/parcerias/199b65cf-7968-4275-983a-d8ac8eaf1f44.png",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Programa Semente",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a2f0498ae816",
+            "type": "image",
+            "title": "Unibrad",
+            "url": "https://www.ev.org.br/Uploads/parcerias/bb10522b-2ee6-4320-b08a-d36174267156.svg",
+            "final_url": "https://www.ev.org.br/Uploads/parcerias/bb10522b-2ee6-4320-b08a-d36174267156.svg",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.ev.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Unibrad",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8a2391fb3209",
+            "type": "image",
+            "title": "DCSIMG",
+            "url": "http://sdc.fb.org.br/dcsygvxa510000kbumxzxupir_4p4r/njs.gif?dcsuri=/nojavascript&WT.js=No&WT.tv=8.6.2",
+            "final_url": "http://sdc.fb.org.br/dcsygvxa510000kbumxzxupir_4p4r/njs.gif?dcsuri=/nojavascript&WT.js=No&WT.tv=8.6.2",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "sdc.fb.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "DCSIMG",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7a4f45f10abb",
+            "type": "video",
+            "title": "Fundação Bradesco - Escola Virtual",
+            "url": "https://www.youtube.com/embed/SLuJguvou5M",
+            "final_url": "https://www.youtube.com/embed/SLuJguvou5M",
+            "source_title": "Fundação Bradesco - Escola Virtual",
+            "source_url": "https://www.ev.org.br/",
+            "publisher": "www.youtube.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco - Escola Virtual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://fundacao.bradesco/",
+      "result": {
+        "titulo": "Fundação Bradesco",
+        "texto": "A Fundação Bradesco A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil. São 40 escolas próprias instaladas em regiões de reconhecida vulnerabilidade socioeconômica, em todos os estados brasileiros e no Distrito Federal. Todos os anos, mais de 42 mil alunos recebem educação gratuita e de qualidade. Saiba mais sobre a Fundação",
+        "final": "https://fundacao.bradesco/",
+        "trecho_usado": "A Fundação Bradesco A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil. São 40 escolas próprias instaladas em regiões de reconhecida vulnerabilidade socioeconômica, em todos os estados brasileiros e no Distrito Federal. Todos os anos, mais de 42 mil alunos recebem educação gratuita e de qualidade. Saiba mais sobre a",
+        "metadados": {
+          "titulo": "Fundação Bradesco",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "A Fundação Bradesco é uma Instituição privada, sem fins lucrativos, e o maior projeto de investimento social privado do Brasil. São 40 escolas próprias instaladas em regiões de reconhecida vulnerabilidade socioeconômica, em todos os estados brasileiros e no Distrito Federal. Todos os anos, mais de 42 mil alunos recebem educação gratuita e de qualidade."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://fundacao.bradesco/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/a-fundacao#fundador",
+            "texto": "Nosso Fundador",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/a-fundacao",
+            "texto": "Quem Somos",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/a-fundacao#nossa-historia",
+            "texto": "Nossa História",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/como-atuamos/educacao-infantil",
+            "texto": "Educação Infantil",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/como-atuamos/ensino-fundamental-anos-iniciais",
+            "texto": "Ensino Fundamental - Anos Iniciais",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/como-atuamos/ensino-fundamental-anos-finais",
+            "texto": "Ensino Fundamental - Anos Finais",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/como-atuamos/ensino-medio",
+            "texto": "Ensino Médio",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/como-atuamos/cursos-tecnicos-de-nivel-medio",
+            "texto": "Cursos Técnicos de Nível Médio",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/como-atuamos/educacao-de-jovens-e-adultos-eja",
+            "texto": "Educação de Jovens e Adultos (EJA)",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/como-atuamos/formacao-inicial-e-continuada-fic",
+            "texto": "Formação Inicial e Continuada (FIC)",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/como-atuamos/escola-virtual",
+            "texto": "Escola Virtual",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/instituicoes",
+            "texto": "Onde Estamos",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/instituicoes/norte",
+            "texto": "Norte",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/instituicoes/nordeste",
+            "texto": "Nordeste",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/instituicoes/centro-oeste",
+            "texto": "Centro - Oeste",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/instituicoes/sul",
+            "texto": "Sul",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/instituicoes/sudeste",
+            "texto": "Sudeste",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/nossos-resultados",
+            "texto": "Nossos Resultados",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/midias",
+            "texto": "Mídias Fundação Bradesco",
+            "interno": true
+          },
+          {
+            "url": "https://alumni.fundacao.bradesco",
+            "texto": "Alumni FB",
+            "interno": true
+          },
+          {
+            "url": "https://banco.bradesco/html/classic/index.shtm",
+            "texto": "Bradesco",
+            "interno": false
+          },
+          {
+            "url": "https://www.ev.org.br/",
+            "texto": "Escola Virtual",
+            "interno": false
+          },
+          {
+            "url": "https://museubradesco.fb.org.br/pages/capitulos/museu.html",
+            "texto": "Museu Histórico",
+            "interno": false
+          },
+          {
+            "url": "https://www.educacao.org.br/_layouts/15/FundacaoBradesco.PortalEducacao.Provider/Login.aspx?ReturnUrl=%2f_layouts%2f15%2fAuthenticate.aspx%3fSource%3d%252F&amp;Source=%2F",
+            "texto": "Portal Educação",
+            "interno": false
+          },
+          {
+            "url": "https://bradesco.csod.com/ux/ats/careersite/2/home?c=bradesco",
+            "texto": "Trabalhe Conosco",
+            "interno": false
+          },
+          {
+            "url": "https://fundacao.bradesco/contato",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://fundacao.bradesco/a-fundacao#investimentos",
+            "texto": "Conheça mais",
+            "interno": true
+          },
+          {
+            "url": "https://youtu.be/l_5wu8BB0dM",
+            "texto": "Quem é TRANSFORMADO pela educação, TRANSFORMA O MUNDO. Descubra como a educação pode transformar uma geração e até mesmo inspirar a próxima!",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/watch?v=L9U7ZuJeeqw",
+            "texto": "O PAI ENSINA o caminho. A EDUCAÇÃO leva mais longe. Sandro nos mostra que a distância não supera o amor de pai e o poder da educação. Inspire-se com a trajetóri",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://fundacao.bradesco/assets/images/logo_white.svg",
+          "https://fundacao.bradesco/assets/icons/contact_icon.svg",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-infantil.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-iniciais.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-finais.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-medio.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/cursos-tecnicos-de-nivel-medio.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-de-jovens-e-adultos-eja.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/formacao-inicial-e-continuada-fic.webp",
+          "https://fundacao.bradesco/assets/images/segmentos-thumb/escola-virtual.webp"
+        ],
+        "midia": [
+          {
+            "id": "med-7caf8a2dbc83",
+            "type": "image",
+            "title": "Fundação Bradesco",
+            "url": "https://fundacao.bradesco/assets/images/logo_white.svg",
+            "final_url": "https://fundacao.bradesco/assets/images/logo_white.svg",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Bradesco",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f76f9530c160",
+            "type": "image",
+            "title": "Educação Infantil",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-infantil.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-infantil.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Educação Infantil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6f4136f7d414",
+            "type": "image",
+            "title": "Ensino Fundamental",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-iniciais.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-iniciais.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ensino Fundamental",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0d12c7497b62",
+            "type": "image",
+            "title": "Ensino Fundamental",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-finais.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-fundamental-anos-finais.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ensino Fundamental",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c2f80e550d80",
+            "type": "image",
+            "title": "Ensino Médio",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-medio.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/ensino-medio.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ensino Médio",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b5de5c55011d",
+            "type": "image",
+            "title": "Cursos Técnicos de Nível Médio",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/cursos-tecnicos-de-nivel-medio.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/cursos-tecnicos-de-nivel-medio.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Cursos Técnicos de Nível Médio",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a5b36b2fae77",
+            "type": "image",
+            "title": "Educação de Jovens e Adultos (EJA)",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-de-jovens-e-adultos-eja.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/educacao-de-jovens-e-adultos-eja.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Educação de Jovens e Adultos (EJA)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-794b904a4fbc",
+            "type": "image",
+            "title": "Formação Inicial e Continuada (FIC)",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/formacao-inicial-e-continuada-fic.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/formacao-inicial-e-continuada-fic.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Formação Inicial e Continuada (FIC)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-37be815e082c",
+            "type": "image",
+            "title": "Escola Virtual",
+            "url": "https://fundacao.bradesco/assets/images/segmentos-thumb/escola-virtual.webp",
+            "final_url": "https://fundacao.bradesco/assets/images/segmentos-thumb/escola-virtual.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Escola Virtual",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d2d5e372007d",
+            "type": "image",
+            "title": "Quem é TRANSFORMADO pela educação, TRANSFORMA O MUNDO.",
+            "url": "https://fundacao.bradesco/assets\\noticias\\1541a2fe-0fe6-4c97-ba99-8dfeaddeffd8_DiaDosProfessores_ThumbInstitucional.webp",
+            "final_url": "https://fundacao.bradesco/assets\\noticias\\1541a2fe-0fe6-4c97-ba99-8dfeaddeffd8_DiaDosProfessores_ThumbInstitucional.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Quem é TRANSFORMADO pela educação, TRANSFORMA O MUNDO.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-104e713c6087",
+            "type": "image",
+            "title": "O PAI ENSINA o caminho. A EDUCAÇÃO leva mais longe.",
+            "url": "https://fundacao.bradesco/assets\\noticias\\23e78aff-3037-4b08-bfce-4402879e0941_pecas_diadospais_fb_final_thumb institucional (1).jpg",
+            "final_url": "https://fundacao.bradesco/assets\\noticias\\23e78aff-3037-4b08-bfce-4402879e0941_pecas_diadospais_fb_final_thumb institucional (1).jpg",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O PAI ENSINA o caminho. A EDUCAÇÃO leva mais longe.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-22b98741b385",
+            "type": "image",
+            "title": "Relatório Anual 2025",
+            "url": "https://fundacao.bradesco/assets\\noticias\\86cbab35-073f-46d2-8291-60d1dfbc496a_banner-2026-RA_.webp",
+            "final_url": "https://fundacao.bradesco/assets\\noticias\\86cbab35-073f-46d2-8291-60d1dfbc496a_banner-2026-RA_.webp",
+            "source_title": "Fundação Bradesco",
+            "source_url": "https://fundacao.bradesco/",
+            "publisher": "fundacao.bradesco",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Relatório Anual 2025",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+      "result": {
+        "titulo": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+        "texto": "In 2024, the ICOMOS Annual General Assembly, Advisory Committee meetings and Scientific Symposium were held in Ouro Preto, Brazil, from November 10 to 17. Ouro Preto is a living testimony to Brazil’s rich historical and cultural heritage. Founded in the 18th century, the city is known for its maze of narrow streets, Baroque churches and colonial mansions, creating a harmonious blend of cultural and natural landscapes. Over 800 heritage experts, practitioners and professionals from around the world convened in Ouro Preto, seizing an important opportunity for meaningful collaboration and to advance the ICOMOS mission in protecting and safeguarding cultural heritage. Results of the Annual General Assembly Resolutions adopted by the Annual General Assembly (pdf, 199.51 Ko) Draft Minutes of the Annual General Assembly (pdf, 240.71 Ko) Scientific Symposium on Revisiting the Venice Charter: Critical Perspectives and Contemporary Challenges The , marking the 60th anniversary of the Venice Charter, critically examined its relevance in today’s heritage discourse. It explored the Charter’s alignment with contemporary conventions, evolving challenges, and practical applications. Scientific Symposium This discussion was closely tied to the ICOMOS Triennial Scientific Plan (2024-2027) on , emphasizing the need to address modern heritage challenges, particularly in the face of disasters and conflicts. Disaster and Conflict Resilient Heritage: Preparedness, Response, and Recovery Photo credits: Li Xie Ouro Preto, Brazil’s first UNESCO World Heritage Site, was strategically chosen as the venue for its proximity to a major environmental disaster site. This setting enriched discussions on heritage resilience and the ongoing relevance of the Venice Charter. The Symposium attracted a strong intellectual contribution, with 406 submissions, 375 selected abstracts, and 31 thematic sessions. The high-quality presentations and engagement reinforced its global significance in heritage conservation. ICOMOS extends its deepest gratitude to Flavio Carsalade, President of ICOMOS Brazil, Leonardo Castriota, ICOMOS Vice-President for the America, and all members of for their invaluable contributions in making this event a success. ICOMOS Brazil ICOMOS also sincerely appreciates the support of the institutions and organizations whose collaboration and commitment were essential to the event’s realization. A special thank you to: Ministry of Culture of Brazil Instituto do Patrimônio Histórico e Artístico Nacional (IPHAN) Ministry of Foreign Affairs of Brazil Brasunesco Universidade Federal de Ouro Preto (UFOP) Universidade Federal de Minas Gerais (UFMG) Fundação de Desenvolvimento da Pesquisa da UFMG (FUNDEP) Conselho de Arquitetura e Urbanismo do Brasil (CAU-BR) Secretaria Estadual de Cultura de Minas Gerais Instituto Estadual de Patrimônio Histórico e Artístico de Minas Gerais (IEPHA) Fundação de Apoio à Pesquisa de Minas Gerais (FAPEMIG) Conselho de Arquitetura e Urbanismo de Minas Gerais (CAU MG) Prefeitura de Ouro Preto Secretaria de Cultura e Turismo de Ouro Preto Instituto de Estudos para o Desenvolvimento Sustentável (IEDS) Related events See all events Related projects See all projects Related news See all news Invalid Date Invalid Date Invalid Date Invalid Date Related press releases See all releases",
+        "final": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+        "trecho_usado": "event’s realization. A special thank you to: Ministry of Culture of Brazil Instituto do Patrimônio Histórico e Artístico Nacional (IPHAN) Ministry of Foreign Affairs of Brazil Brasunesco Universidade Federal de Ouro Preto (UFOP) Universidade Federal de Minas Gerais (UFMG) Fundação de Desenvolvimento da Pesquisa da UFMG (FUNDEP) Conselho de Arquitetura e Urbanismo do Brasil (CAU-BR) Secretaria",
+        "metadados": {
+          "titulo": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+          "descricao": "In 2024, the ICOMOS Annual General Assembly, Advisory Committee meetings and Scientific Symposium were held in Ouro Preto, Brazil.",
+          "canonica": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+          "og": {
+            "og:title": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+            "og:type": "News",
+            "og:description": "In 2024, the ICOMOS Annual General Assembly, Advisory Committee meetings and Scientific Symposium were held in Ouro Preto, Brazil.",
+            "og:image": "https://admin.icomos.org/wp-content/uploads/2025/03/Pattern_green-1-scaled.jpg",
+            "og:url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image"
+          },
+          "idioma": "en",
+          "publicado_em": "2025-01-29T13:19:43+00:00",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "WebPage",
+          "ld": {
+            "datePublished": "2025-01-29T13:19:43+00:00",
+            "description": "In 2024, the ICOMOS Annual General Assembly, Advisory Committee meetings and Scientific Symposium were held in Ouro Preto, Brazil.",
+            "inLanguage": "en-GB",
+            "publisher": {
+              "@id": "https://www.icomos.org/#organization"
+            }
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "In 2024, the ICOMOS Annual General Assembly, Advisory Committee meetings and Scientific Symposium were held in Ouro Preto, Brazil, from November 10 to 17.\nOuro Preto is a living testimony to Brazil’s rich historical and cultural heritage. Founded in the 18th century, the city is known for its maze of narrow streets, Baroque churches and colonial mansions, creating a harmonious blend of cultural and natural landscapes. Over 800 heritage experts, practitioners and professionals from around the world convened in Ouro Preto, seizing an important opportunity for meaningful collaboration and to advance the ICOMOS mission in protecting and safeguarding cultural heritage."
+          },
+          {
+            "titulo": "Results of the Annual General Assembly",
+            "texto": ""
+          },
+          {
+            "titulo": "Scientific Symposium on Revisiting the Venice Charter: Critical Perspectives and Contemporary Challenges",
+            "texto": "The , marking the 60th anniversary of the Venice Charter, critically examined its relevance in today’s heritage discourse. It explored the Charter’s alignment with contemporary conventions, evolving challenges, and practical applications. Scientific Symposium\nThis discussion was closely tied to the ICOMOS Triennial Scientific Plan (2024-2027) on , emphasizing the need to address modern heritage challenges, particularly in the face of disasters and conflicts. Disaster and Conflict Resilient Heritage: Preparedness, Response, and Recovery\nOuro Preto, Brazil’s first UNESCO World Heritage Site, was strategically chosen as the venue for its proximity to a major environmental disaster site. This setting enriched discussions on heritage resilience and the ongoing relevance of the Venice Charter.\nThe Symposium attracted a strong intellectual contribution, with 406 submissions, 375 selected abstracts, and 31 thematic sessions. The high-quality presentations and engagement reinforced its global significance in heritage conservation.\nICOMOS extends its deepest gratitude to Flavio Carsalade, President of ICOMOS Brazil, Leonardo Castriota, ICOMOS Vice-President for the America, and all members of for their invaluable contributions in making this event a success. ICOMOS Brazil\nICOMOS also sincerely appreciates the support of the institutions and organizations whose collaboration and commitment were essential to the event’s realization. A special thank you to:\nMinistry of Culture of Brazil\nInstituto do Patrimônio Histórico e Artístico Nacional (IPHAN)\nMinistry of Foreign Affairs of Brazil\nUniversidade Federal de Ouro Preto (UFOP)\nUniversidade Federal de Minas Gerais (UFMG)\nFundação de Desenvolvimento da Pesquisa da UFMG (FUNDEP)\nConselho de Arquitetura e Urbanismo do Brasil (CAU-BR)\nSecretaria Estadual de Cultura de Minas Gerais\nInstituto Estadual de Patrimônio Histórico e Artístico de Minas Gerais (IEPHA)\nFundação de Apoio à Pesquisa de Minas Gerais (FAPEMIG)\nConselho de Arquitetura e Urbanismo de Minas Gerais (CAU MG)\nSecretaria de Cultura e Turismo de Ouro Preto\nInstituto de Estudos para o Desenvolvimento Sustentável (IEDS)"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.icomos.org/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/what-is-icomos/",
+            "texto": "What is ICOMOS?",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/icomos-our-mission-and-values/",
+            "texto": "Our Mission and Values",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/the-history-of-icomos/",
+            "texto": "History",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/governance/",
+            "texto": "Governance",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/headquarters/",
+            "texto": "ICOMOS Headquarters",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/honours-and-awards/",
+            "texto": "Honours and Awards",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/advocacy/",
+            "texto": "Advocacy",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/world-heritage/",
+            "texto": "World Heritage",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/international-projects/",
+            "texto": "International projects",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/news/",
+            "texto": "News",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/agenda/",
+            "texto": "Agenda",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/agenda/18-april-celebrating-international-day-for-monuments-and-sites/",
+            "texto": "18 April",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/join-icomos/",
+            "texto": "Join ICOMOS",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/national-committees/",
+            "texto": "National Committees",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/regional-groups/",
+            "texto": "Regional Groups",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/international-scientific-committees/",
+            "texto": "International Scientific Committees",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/working-groups/",
+            "texto": "International Working Groups",
+            "interno": true
+          },
+          {
+            "url": "https://publ.icomos.org/publicomos/jlbSai?html=Pag&amp;page=Acc",
+            "texto": "PUBLICOMOS",
+            "interno": false
+          },
+          {
+            "url": "https://www.icomos.org/charters-and-doctrinal-texts/",
+            "texto": "Charters and doctrinal texts",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/icomos-documentary-resources/",
+            "texto": "Documentary Resources",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomosga2026.org.my/en/home",
+            "texto": "GA2026",
+            "interno": false
+          },
+          {
+            "url": "https://member.icomos.org/en",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.icomos.org/contact/",
+            "texto": "Contact us",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/donate-to-icomos/",
+            "texto": "Donate",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+            "texto": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil",
+            "interno": true
+          },
+          {
+            "url": "https://www.icomos.org/news/?theme=22",
+            "texto": "general assembly",
+            "interno": true
+          },
+          {
+            "url": "https://admin.icomos.org/wp-content/uploads/2025/01/AGA2024_Resolutions_Draft_v3_05112024_EN_adopted.pdf",
+            "texto": "Resolutions adopted by the Annual General Assembly (pdf, 199.51 Ko)",
+            "interno": false
+          },
+          {
+            "url": "https://admin.icomos.org/wp-content/uploads/2025/01/AGA2024_Draft-minutes_EN_v1.pdf",
+            "texto": "Draft Minutes of the Annual General Assembly (pdf, 240.71 Ko)",
+            "interno": false
+          },
+          {
+            "url": "https://aga2024.icomos.org.br/en/scientific-symposium/",
+            "texto": "Scientific Symposium",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://admin.icomos.org/wp-content/uploads/2025/03/Pattern_green-1-scaled.jpg",
+          "https://admin.icomos.org/wp-content/uploads/2025/02/AGA2024-Retour.jpg",
+          "https://admin.icomos.org/wp-content/uploads/2025/02/IMG-20241114-WA0017-e1739368315813.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-9e79b1dc4f5d",
+            "type": "image",
+            "title": "In 2024, the ICOMOS Annual General Assembly, Advisory Committee meetings and Scientific Symposium were held in Ouro Preto, Brazil.",
+            "url": "https://admin.icomos.org/wp-content/uploads/2025/03/Pattern_green-1-scaled.jpg",
+            "final_url": "https://admin.icomos.org/wp-content/uploads/2025/03/Pattern_green-1-scaled.jpg",
+            "source_title": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+            "source_url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+            "publisher": "admin.icomos.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "In 2024, the ICOMOS Annual General Assembly, Advisory Committee meetings and Scientific Symposium were held in Ouro Preto, Brazil.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d1b7e70f5d08",
+            "type": "image",
+            "title": "Man standing, facing a seated crowd, giving a presentation in front of a projected screen showing the words \"el buen vivir\"",
+            "url": "https://admin.icomos.org/wp-content/uploads/2025/02/IMG-20241114-WA0017-e1739368315813.jpg",
+            "final_url": "https://admin.icomos.org/wp-content/uploads/2025/02/IMG-20241114-WA0017-e1739368315813.jpg",
+            "source_title": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+            "source_url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+            "publisher": "admin.icomos.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Man standing, facing a seated crowd, giving a presentation in front of a projected screen showing the words \"el buen vivir\"",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1ee53e3bffce",
+            "type": "document",
+            "title": "AGA2024_Resolutions_Draft_v3_05112024_EN_adopted.pdf",
+            "url": "https://admin.icomos.org/wp-content/uploads/2025/01/AGA2024_Resolutions_Draft_v3_05112024_EN_adopted.pdf",
+            "final_url": "https://admin.icomos.org/wp-content/uploads/2025/01/AGA2024_Resolutions_Draft_v3_05112024_EN_adopted.pdf",
+            "source_title": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+            "source_url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+            "publisher": "admin.icomos.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "In 2024, the ICOMOS Annual General Assembly, Advisory Committee meetings and Scientific Symposium were held in Ouro Preto, Brazil.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-0504adfa048d",
+            "type": "document",
+            "title": "AGA2024_Draft-minutes_EN_v1.pdf",
+            "url": "https://admin.icomos.org/wp-content/uploads/2025/01/AGA2024_Draft-minutes_EN_v1.pdf",
+            "final_url": "https://admin.icomos.org/wp-content/uploads/2025/01/AGA2024_Draft-minutes_EN_v1.pdf",
+            "source_title": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+            "source_url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+            "publisher": "admin.icomos.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "In 2024, the ICOMOS Annual General Assembly, Advisory Committee meetings and Scientific Symposium were held in Ouro Preto, Brazil.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://fundacaosicredi.org.br/",
+      "result": {
+        "titulo": "Fundação",
+        "texto": "Acabar com a pobreza em todas as suas formas, em todos os lugares. Acabar com a fome, alcançar a segurança alimentar e melhoria da nutrição e promover a agricultura sustentável. Assegurar uma vida saudável e promover o bem-estar para todos, em todas as idades. Assegurar a educação inclusiva, equitativa e de qualidade, e promover oportunidades de aprendizagem ao longo da vida para todos. Alcançar a igualdade de gênero e empoderar todas as mulheres e meninas. Assegurar a disponibilidade e gestão sustentável da água e saneamento para todas e todos. Assegurar o acesso confiável, sustentável, moderno e a preço acessível à energia para todas e todos. Promover o crescimento econômico sustentado, inclusivo e sustentável, emprego pleno e produtivo e trabalho decente para todas e todos. Construir infraestruturas resilientes, promover a industrialização inclusiva e sustentável e fomentar a inovação. Reduzir a desigualdade dentro dos países e entre eles. Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis. Assegurar padrões de produção e de consumo sustentáveis. Tomar medidas urgentes para combater a mudança do clima e seus impactos. Conservação e uso sustentável dos oceanos, dos mares e dos recursos marinhos para o desenvolvimento sustentável. Proteger, recuperar e promover o uso sustentável dos ecossistemas terrestres, gerir de forma sustentável as florestas, combater a desertificação, deter e reverter a degradação da terra e deter a perda de biodiversidade. Promover sociedades pacíficas e inclusivas para o desenvolvimento sustentável, proporcionar o acesso à justiça para todas e todos e construir instituições eficazes, responsáveis e inclusivas em todos os níveis. Fortalecer os meios de implementação e revitalizar a parceria global para o desenvolvimento sustentável.",
+        "final": "https://fundacaosicredi.org.br/",
+        "trecho_usado": "infraestruturas resilientes, promover a industrialização inclusiva e sustentável e fomentar a inovação. Reduzir a desigualdade dentro dos países e entre eles. Tornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis. Assegurar padrões de produção e de consumo sustentáveis. Tomar medidas urgentes para combater a mudança do clima e seus impactos. Conservação e uso",
+        "metadados": {
+          "titulo": "Fundação",
+          "descricao": "Nosso propósito é manter viva a essência do cooperativismo na cultura da nossa instituição através de iniciativas educacionais, culturais, sociais e sustentáveis.",
+          "canonica": "https://fundacaosicredi.org.br/",
+          "og": {
+            "og:type": "website",
+            "og:site_name": "Sicredi",
+            "og:description": "Nosso propósito é manter viva a essência do cooperativismo na cultura da nossa instituição através de iniciativas educacionais, culturais, sociais e sustentáveis.",
+            "og:image": "https://fundacaosicredi.org.br/static/home/assets/header/novo-logo.jpg"
+          },
+          "twitter": {},
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "Sicredi",
+          "site": "Sicredi",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Acabar com a pobreza em todas as suas formas, em todos os lugares.\nAcabar com a fome, alcançar a segurança alimentar e melhoria da nutrição e promover a agricultura sustentável.\nAssegurar uma vida saudável e promover o bem-estar para todos, em todas as idades.\nAssegurar a educação inclusiva, equitativa e de qualidade, e promover oportunidades de aprendizagem ao longo da vida para todos.\nAlcançar a igualdade de gênero e empoderar todas as mulheres e meninas.\nAssegurar a disponibilidade e gestão sustentável da água e saneamento para todas e todos.\nAssegurar o acesso confiável, sustentável, moderno e a preço acessível à energia para todas e todos.\nPromover o crescimento econômico sustentado, inclusivo e sustentável, emprego pleno e produtivo e trabalho decente para todas e todos.\nConstruir infraestruturas resilientes, promover a industrialização inclusiva e sustentável e fomentar a inovação.\nReduzir a desigualdade dentro dos países e entre eles.\nTornar as cidades e os assentamentos humanos inclusivos, seguros, resilientes e sustentáveis.\nAssegurar padrões de produção e de consumo sustentáveis.\nTomar medidas urgentes para combater a mudança do clima e seus impactos.\nConservação e uso sustentável dos oceanos, dos mares e dos recursos marinhos para o desenvolvimento sustentável.\nProteger, recuperar e promover o uso sustentável dos ecossistemas terrestres, gerir de forma sustentável as florestas, combater a desertificação, deter e reverter a degradação da terra e deter a perda de biodiversidade.\nPromover sociedades pacíficas e inclusivas para o desenvolvimento sustentável, proporcionar o acesso à justiça para todas e todos e construir instituições eficazes, responsáveis e inclusivas em todos os níveis.\nFortalecer os meios de implementação e revitalizar a parceria global para o desenvolvimento sustentável."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://fundacaosicredi.org.br/home/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/",
+            "texto": "Início",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/uniao-faz-vida/",
+            "texto": "A União Faz a Vida",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/cooperativas-escolares/",
+            "texto": "Cooperativas Escolares",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/comite-mulher/",
+            "texto": "Comitê Mulher",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/comite-jovem/",
+            "texto": "Comitê Jovem",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/programa-crescer/",
+            "texto": "Programa Crescer",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/financas-na-mochila/",
+            "texto": "Finanças na Mochila",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/programa-pertencer/",
+            "texto": "Programa Pertencer",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/cooperacao-na-ponta-do-lapis/",
+            "texto": "Cooperação na Ponta do Lápis",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/fundo-social/",
+            "texto": "Fundo Social",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/leis-de-incentivo/",
+            "texto": "Leis de Incentivo",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/voluntariado/",
+            "texto": "Movimento de Voluntariado",
+            "interno": true
+          },
+          {
+            "url": "https://www.sicredi.com.br/nacomunidade/",
+            "texto": "Sicredi na Comunidade",
+            "interno": false
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/projetos-culturais/",
+            "texto": "Projetos Culturais",
+            "interno": true
+          },
+          {
+            "url": "https://www.sicredi.com.br/memoria/",
+            "texto": "Memória",
+            "interno": false
+          },
+          {
+            "url": "https://www.sicredi.com.br/trajetoria/",
+            "texto": "A Trajetória do Sicredi",
+            "interno": false
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/biblioteca/",
+            "texto": "Biblioteca do Sicredi",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/transparencia/",
+            "texto": "Transparência",
+            "interno": true
+          },
+          {
+            "url": "https://www.sicredi.com.br/site/sobre-nos/sustentabilidade/",
+            "texto": "Acesse o relatório",
+            "interno": false
+          },
+          {
+            "url": "https://www.sicredi.com.br/site/trajetoria/",
+            "texto": "Conheça nossa trajetória",
+            "interno": false
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/estrategia-de-sustentabilidade/",
+            "texto": "Sustentabilidade",
+            "interno": true
+          },
+          {
+            "url": "https://www.sicredi.com.br/nacomunidade/doacoes/",
+            "texto": "Doações Sicredi",
+            "interno": false
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public/2026/06/30/folder_digital_impacto_a_uniao_faz_a_vida.pdf",
+            "texto": "A União Faz a Vida Há mais de 30 anos, promove atitudes e princípios de cooperação e cidadania por meio de práticas de educação cooperativa, contribuindo para a",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public/2026/07/29/folder_-_cooperativas_escolares.pdf",
+            "texto": "Cooperativas Escolares Desafia estudantes a criarem e desenvolverem uma cooperativa escolar com finalidade educativa, permitindo que vivenciem, na prática, os p",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public/2026/06/30/folder_digital_-_financas_na_mochila.pdf",
+            "texto": "Finanças na Mochila Construímos a formação com professores e professoras acerca da Educação Financeira para possibilitarmos que estudantes alcancem uma vida fin",
+            "interno": true
+          },
+          {
+            "url": "https://www.sicredi.com.br/site/fundacao/uniao-faz-vida/",
+            "texto": "A União Faz a Vida Assim como as abelhas, nos desenvolvemos cooperativamente.",
+            "interno": false
+          },
+          {
+            "url": "https://www.sicredi.com.br/site/fundacao/cooperacao-na-ponta-do-lapis/",
+            "texto": "Cooperação na Ponta do Lápis Cooperar para uma vida financeira sustentável.",
+            "interno": false
+          },
+          {
+            "url": "https://www.sicredi.com.br/site/fundacao/cooperativas-escolares/",
+            "texto": "Cooperativas Escolares Jovens construindo comunidades melhores por meio do cooperativismo.",
+            "interno": false
+          },
+          {
+            "url": "https://www.sicredi.com.br/site/fundacao/comite-mulher/",
+            "texto": "Comitê Mulher Promovendo a equidade de gênero e capacitando mulheres para atuarem como líderes e protagonistas no cooperativismo.",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://fundacaosicredi.org.br/static/home/assets/header/novo-logo.jpg",
+          "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/04/23/media_fundacao_filer_public_2025_02_24_ativo_2.png__357x190_subsampling-2.webp",
+          "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/05/20/desktop.png__630x490_subsampling-2.webp",
+          "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/05/21/teste_desktop_-_fundacao_v1.png__100x100_subsampling-2.webp",
+          "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/14/historia-sicredi.png__100x100_subsampling-2.webp",
+          "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/14/desenvolvimento-local.webp__100x100_subsampling-2.webp",
+          "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/14/plataforma-de-doacao-fundacao.webp__100x100_subsampling-2.webp",
+          "https://fundacaosicredi.org.br/home/static/assets/novo/icone-plus.svg",
+          "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/10/02/alt_image-06ddf.jpg__100x100_subsampling-2.webp",
+          "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/10/02/nt_igrejinha006_525x270_topajustado-f434c.jpg__100x100_subsampling-2.webp"
+        ],
+        "midia": [
+          {
+            "id": "med-fe875ca1fadf",
+            "type": "image",
+            "title": "Nosso propósito é manter viva a essência do cooperativismo na cultura da nossa instituição através de iniciativas educacionais, culturais, sociais e sustentávei",
+            "url": "https://fundacaosicredi.org.br/static/home/assets/header/novo-logo.jpg",
+            "final_url": "https://fundacaosicredi.org.br/static/home/assets/header/novo-logo.jpg",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Nosso propósito é manter viva a essência do cooperativismo na cultura da nossa instituição através de iniciativas educacionais, culturais, sociais e sustentáveis.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a918f02166d0",
+            "type": "image",
+            "title": "Fundação Sicredi",
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/04/23/media_fundacao_filer_public_2025_02_24_ativo_2.png__357x190_subsampling-2.webp",
+            "final_url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/04/23/media_fundacao_filer_public_2025_02_24_ativo_2.png__357x190_subsampling-2.webp",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Sicredi",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4d73ac2c6182",
+            "type": "image",
+            "title": "A imagem apresenta duas crianças com sorriso no rosto e se abraçando",
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/05/20/desktop.png__630x490_subsampling-2.webp",
+            "final_url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/05/20/desktop.png__630x490_subsampling-2.webp",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A imagem apresenta duas crianças com sorriso no rosto e se abraçando",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-682338000c45",
+            "type": "image",
+            "title": "imagem de uma mulher e uma criança se abraçando",
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/05/21/teste_desktop_-_fundacao_v1.png__100x100_subsampling-2.webp",
+            "final_url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/05/21/teste_desktop_-_fundacao_v1.png__100x100_subsampling-2.webp",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "imagem de uma mulher e uma criança se abraçando",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-06427efe1e7e",
+            "type": "image",
+            "title": "Cheques antigos da Caixa Rural de Nova Petrópolis organizados sobre uma superfície, acompanhados de moedas e uma cédula antiga, compondo um registro histórico d",
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/14/historia-sicredi.png__100x100_subsampling-2.webp",
+            "final_url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/14/historia-sicredi.png__100x100_subsampling-2.webp",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Cheques antigos da Caixa Rural de Nova Petrópolis organizados sobre uma superfície, acompanhados de moedas e uma cédula antiga, compondo um registro histórico de transações",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b8b7c6774d36",
+            "type": "image",
+            "title": "Pessoa com braços erguidos ao ar livre, vestindo camisa clara e mochila, em meio à natureza com árvores ao fundo e iluminação natural, sugerindo conexão com o a",
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/14/desenvolvimento-local.webp__100x100_subsampling-2.webp",
+            "final_url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/14/desenvolvimento-local.webp__100x100_subsampling-2.webp",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Pessoa com braços erguidos ao ar livre, vestindo camisa clara e mochila, em meio à natureza com árvores ao fundo e iluminação natural, sugerindo conexão com o ambiente externo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-61934998ca66",
+            "type": "image",
+            "title": "Criança em área com árvores ao fundo segura uma pelúcia de abelha com as duas mãos, usando roupa clara e laços no cabelo, compondo uma cena ao ar livre com luz ",
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/14/plataforma-de-doacao-fundacao.webp__100x100_subsampling-2.webp",
+            "final_url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/14/plataforma-de-doacao-fundacao.webp__100x100_subsampling-2.webp",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Criança em área com árvores ao fundo segura uma pelúcia de abelha com as duas mãos, usando roupa clara e laços no cabelo, compondo uma cena ao ar livre com luz natural e elementos da natureza.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-34418cf3d153",
+            "type": "image",
+            "title": "crianças brincando",
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/10/02/alt_image-06ddf.jpg__100x100_subsampling-2.webp",
+            "final_url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/10/02/alt_image-06ddf.jpg__100x100_subsampling-2.webp",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "crianças brincando",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a446a0505df1",
+            "type": "image",
+            "title": "logo do programa cooperativas escolares",
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/10/02/nt_igrejinha006_525x270_topajustado-f434c.jpg__100x100_subsampling-2.webp",
+            "final_url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/10/02/nt_igrejinha006_525x270_topajustado-f434c.jpg__100x100_subsampling-2.webp",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "logo do programa cooperativas escolares",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b495aac1bb74",
+            "type": "image",
+            "title": "crianças desenvolvendo trabalho em sala de aula",
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/10/02/nt_sinimbu_005a20jornada_525x270-fd84b.jpg__100x100_subsampling-2.webp",
+            "final_url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2026/10/02/nt_sinimbu_005a20jornada_525x270-fd84b.jpg__100x100_subsampling-2.webp",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "crianças desenvolvendo trabalho em sala de aula",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-558162c5133b",
+            "type": "image",
+            "title": "Botão de play do vídeo",
+            "url": "https://fundacaosicredi.org.br/home/static/assets/novo/icone-play-destaque.png",
+            "final_url": "https://fundacaosicredi.org.br/home/static/assets/novo/icone-play-destaque.png",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Botão de play do vídeo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-14ca805c33d9",
+            "type": "image",
+            "title": "ilustração do 1º ODS erradicação da pobreza",
+            "url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/08/ods1_-_fundacao_sicredi.png__100x100_subsampling-2.webp",
+            "final_url": "https://fundacaosicredi.org.br/media/fundacao/filer_public_thumbnails/filer_public/2024/11/08/ods1_-_fundacao_sicredi.png__100x100_subsampling-2.webp",
+            "source_title": "Fundação",
+            "source_url": "https://fundacaosicredi.org.br/",
+            "publisher": "fundacaosicredi.org.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ilustração do 1º ODS erradicação da pobreza",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.fcc.org.br/",
+      "result": {
+        "titulo": "Fundação Carlos Chagas",
+        "texto": "Pesquisa e Educação Conheça nosso Departamento de Pesquisas Educacionais, saiba quem são os integrantes da nossa equipe e os temas que estão sendo abordados. Nossas pesquisas",
+        "final": "https://www.fcc.org.br/",
+        "trecho_usado": "Pesquisa e Educação Conheça nosso Departamento de Pesquisas Educacionais, saiba quem são os integrantes da nossa equipe e os temas que estão sendo abordados. Nossas pesquisas",
+        "metadados": {
+          "titulo": "Fundação Carlos Chagas",
+          "descricao": "A FCC, instituição de direito privado e sem fins lucrativos, atua em duas grandes áreas: Avaliação/Concursos/Processo Seletivo e Pesquisa e Educação. Há mais de 50 anos, é reconhecida pela competência na realização de concursos, vestibulares, avaliação de sistemas e pesquisas socioeducativas.",
+          "canonica": "https://www.fcc.org.br/",
+          "og": {
+            "og:site_name": "Fundação Carlos Chagas",
+            "og:url": "https://www.fcc.org.br/",
+            "og:type": "article",
+            "og:title": "Fundação Carlos Chagas | FCC",
+            "og:description": "A FCC, instituição de direito privado e sem fins lucrativos, atua em duas grandes áreas: Avaliação/Concursos/Processo Seletivo e Pesquisa e Educação. Há mais de 50 anos, é reconhecida pela competência na realização de concursos, vestibulares, avaliação de sistemas e pesquisas socioeducativas.",
+            "og:image": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "og:image:secure_url": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "og:image:alt": "Fundação Carlos Chagas | FCC"
+          },
+          "twitter": {
+            "twitter:card": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "twitter:url": "https://www.fcc.org.br/",
+            "twitter:title": "Fundação Carlos Chagas | FCC",
+            "twitter:description": "A FCC, instituição de direito privado e sem fins lucrativos, atua em duas grandes áreas: Avaliação/Concursos/Processo Seletivo e Pesquisa e Educação. Há mais de 50 anos, é reconhecida pela competência na realização de concursos, vestibulares, avaliação de sistemas e pesquisas socioeducativas.",
+            "twitter:image": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "twitter:image:alt": "Fundação Carlos Chagas | FCC",
+            "twitter:site": "@FCC"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "[object Object]",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Fundação Carlos Chagas",
+          "tipo": "Organization",
+          "ld": {
+            "publisher": {
+              "@id": "https://www.fcc.org.br/#organization"
+            },
+            "description": "A FCC, instituição de direito privado e sem fins lucrativos, atua em duas grandes áreas: Avaliação/Concursos/Processo Seletivo e Pesquisa e Educação. Há mais de 50 anos, é reconhecida pela competência na realização de concursos, vestibulares, avaliação de sistemas e pesquisas socioeducativas.",
+            "inLanguage": "pt_BR",
+            "datePublished": "2026-10-23T20:33:03.318Z",
+            "dateModified": "2026-10-23T20:33:03.318Z"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Conheça nosso Departamento de Pesquisas Educacionais, saiba quem são os integrantes da nossa equipe e os temas que estão sendo abordados."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.fcc.org.br/contato",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://extranet.fcc.org.br/extranet/resource/cnc/cliente/init",
+            "texto": "Contrate",
+            "interno": false
+          },
+          {
+            "url": "https://www.fcc.org.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.fcc.org.br/institucional/who-we-are",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://br.linkedin.com/company/fundacaocarloschagas",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/c/Funda%C3%A7%C3%A3oCarlosChagas-FCC",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/fundacaocarloschagas/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.fcc.org.br/noticias",
+            "texto": "Todas as notícias",
+            "interno": true
+          },
+          {
+            "url": "https://www.fcc.org.br/educacao-pesquisa/dep-pesquisa-educacionais",
+            "texto": "Nossas pesquisas",
+            "interno": true
+          },
+          {
+            "url": "https://www.fcc.org.br/premios/rubens",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.fcc.org.br/premios/premio-capes-fcc",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.fcc.org.br/institucional/conheca",
+            "texto": "Quem somos",
+            "interno": true
+          },
+          {
+            "url": "https://extranet.fcc.org.br/extranet/cfa3/jsp/ColaboradorLogin.jsp",
+            "texto": "Portal do Colaborador",
+            "interno": false
+          },
+          {
+            "url": "https://www.fcc.org.br/politicaprivacidade",
+            "texto": "Política de Privacidade",
+            "interno": true
+          },
+          {
+            "url": "https://fundacaocarloschagas.pandape.infojobs.com.br/?_gl=1*ht2nio*_gcl_au*NTQyMDUxMjM5LjE3NzkzMDU5MTg.*_ga*MTQ1NDA3MTMyMC4xNzc5MzA1OTE4*_ga_BLEQGRBWCW*czE3NzkzMDU4OTUkbzEkZzEkdDE3NzkzMDcyMzgkajM1JGwwJGgw",
+            "texto": "Trabalhe Conosco",
+            "interno": false
+          },
+          {
+            "url": "https://www.fcc.org.br/educacao-pesquisa/ciers",
+            "texto": "CIERS-ed",
+            "interno": true
+          },
+          {
+            "url": "https://www.fcc.org.br/educacao-pesquisa/catedra-unesco/",
+            "texto": "Cátedra UNESCO sobre Profissionalização Docente",
+            "interno": true
+          },
+          {
+            "url": "https://www.fcc.org.br/educacao-pesquisa/catedra-franco/",
+            "texto": "Cátedra Franco-Brasileira Serge Moscovici",
+            "interno": true
+          },
+          {
+            "url": "https://www.fcc.org.br/educacao-pesquisa/programa-de-estagio-de-pos-doutorado",
+            "texto": "Programa de estágio e pós-doutorado",
+            "interno": true
+          },
+          {
+            "url": "https://www.concursosfcc.com.br/",
+            "texto": "Concursos",
+            "interno": false
+          },
+          {
+            "url": "https://www.fcc.org.br/[object Object]",
+            "texto": "Assine o nosso conteúdo",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+          "https://www.fcc.org.br/_nuxt/img/bandeiras.31cf4e7.svg",
+          "https://www.fcc.org.br/_nuxt/img/english.9970dc4.webp",
+          "https://www.fcc.org.br/_nuxt/img/instagram.a00fa29.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-bdb7c07b1752",
+            "type": "image",
+            "title": "Fundação Carlos Chagas | FCC",
+            "url": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "final_url": "https://cdn.fcc.org.br/PRODUCAO/eY4uhGpLrjmyY61CdQplMmtyK6v83SLYguU8QTSL6CC0vLPtzcYxfi0BaeT2WQIw7OSiA4wcw81MfMNnRJ24jxuxbpEs3rZyDuhr1zAwB5aQJ3W6FgdvOegLRIIoMsW2n9VecbnVNgXgEzTh.webp",
+            "source_title": "Fundação Carlos Chagas",
+            "source_url": "https://www.fcc.org.br/",
+            "publisher": "cdn.fcc.org.br",
+            "date": "[object Object]",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Carlos Chagas | FCC",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-209a75f927e4",
+            "type": "image",
+            "title": "Fundação Carlos Chagas",
+            "url": "https://www.fcc.org.br/_nuxt/img/bandeiras.31cf4e7.svg",
+            "final_url": "https://www.fcc.org.br/_nuxt/img/bandeiras.31cf4e7.svg",
+            "source_title": "Fundação Carlos Chagas",
+            "source_url": "https://www.fcc.org.br/",
+            "publisher": "www.fcc.org.br",
+            "date": "[object Object]",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Fundação Carlos Chagas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f642cb39e55e",
+            "type": "image",
+            "title": "Who we are | Fundação Carlos Chagas",
+            "url": "https://www.fcc.org.br/_nuxt/img/english.9970dc4.webp",
+            "final_url": "https://www.fcc.org.br/_nuxt/img/english.9970dc4.webp",
+            "source_title": "Fundação Carlos Chagas",
+            "source_url": "https://www.fcc.org.br/",
+            "publisher": "www.fcc.org.br",
+            "date": "[object Object]",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Who we are | Fundação Carlos Chagas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+      "result": {
+        "titulo": "entidade jurídica sem fins lucrativos",
+        "texto": "Esta página ou seção foi marcada para revisão devido a incoerências ou dados de confiabilidade duvidosa. Se tem algum conhecimento sobre o tema, por favor, verifique e a coerência e o rigor deste artigo. Pode encontrar ajuda no . melhore WikiProjeto Ciências sociais Se existir um mais adequado, por favor corrija esta predefinição. WikiProjeto () dezembro de 2012 Uma é uma que tem como objetivo gerir uma massa patrimonial cedida pelos fundadores para a satisfação de certas finalidades de interesse social. As fundações são instituições não lucrativas dedicadas à beneficência, à ciência, ao ensino ou a outros fins de interesse público. O reconhecimento das fundações constitui um ato individual e discricionário da autoridade pública e encontra-se sujeito à verificação cumulativa de um conjunto de requisitos. fundação organização sem fins lucrativos 1 [ ] 2 [ ] Uma fundação é considerada um fundo autônomo, que tem, por finalidade, uma ação definida em seus estatutos por seu instituidor ou instituidores, definido por contrato de . É diferente do chamado pois é impessoal, no sentido de sua operacionalização, podendo inclusive mudar a operacionalização e/ou ampliá-la, de conformidade, sempre com a lei. De forma geral, é uma instituição caracterizada como composta pela organização de um mas que não tem . É uma entidade de , constituída por ata de dotação patrimonial ou para determinada finalidade econômica não distributiva, ou seja, pela lei toda renda deve ser e estar re-investida no chamado \" operation found \" do inglês, segundo novo entendimento internacional que reporta ao usual através dos tempos, sendo dessa feita devida, pelo ( do País). fidúcia cooperativismo pessoa jurídica patrimônio [ carecede fontes ] ? direito privado inter vivos causa mortis fiscalizada Ministério Público Poder Judiciário Portanto, é uma composta por um patrimônio juridicamente indissolúvel e personalizado, destacado pelo seu instituidor ou instituidores públicos ou privados, para uma ou mais finalidades específicas, não distributivas, com relação a sua renda, que deve forçosamente ser reincorporada. Não tem proprietário, nem titular, daí seu caráter não distributivo, que a lei estabelece, desde os primórdios tempos . Consiste apenas num patrimônio administrado, segundo a Lei e destinado a um fim econômico, determinado pela própria lei que a autoriza, sendo acompanhada em sua atuação pelo Ministério Público da União, Estados ou Municípios, dependendo da esfera de atuação. Segundo novo entendimento internacional, é dirigido por administradores ou curadores, autorizados e fiscalizados, na conformidade de seus estatutos, esses aprovados pelo Ministério Público a que está juridicamente subordinado. pessoa jurídica [ carecede fontes ] ? Origem histórica provável [ editar | editar código ] Como curiosidade Histórica, abordada no Dicionário-Enciclopédico de (1952), \"... Fundação, como instituição, teve sua origem Histórica na organização administrativa da , em que o chamado e/ou \"Comandante-em-Cristo\", administrava e guardava o acervo de toda a , numa congregação de regras próprias (localizava-se numa ilha - fortaleza), porém, tinha o dever de obediência ao ...\". Aurélio Buarque de Holanda Ferreira Ordem Beneditina Ecônomo Ordem Soberana e Militar de Malta Vaticano 3 [ ] Referências ↑ . «FUNDAÇÃO: CONCEITO, CARACTERÍSTICAS PRINCIPAIS E INSTITUIÇÃO» Ministério Público de Santa Catarina . Consultado em 11 de abril de 2023 ↑ . «Fundações» Secretaria-Geral da Presidência do Conselho de Ministros . Consultado em 11 de abril de 2023 ↑ Buarque de Hollanda Ferreira Editora do Globo de Porto Alegre, 1952. Dicionário Aurélio Ligações externas [ editar | editar código ] O possui uma com imagens e outros ficheiros sobre Commons categoria Fundação (instituição) Questões de sucessão: a importância das fundações para a salvaguarda patrimonial, Ana Motta Veiga, Academia de Escolas de Arquitetura e Urbanismo de Língua Portuguesa, Novembro de 2012 Este artigo sobre é um . Você pode ajudar a Wikipédia . direito esboço expandindo-o v d e",
+        "final": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+        "trecho_usado": "ensino ou a outros fins de interesse público. O reconhecimento das fundações constitui um ato individual e discricionário da autoridade pública e encontra-se sujeito à verificação cumulativa de um conjunto de requisitos. fundação organização sem fins lucrativos 1 [ ] 2 [ ] Uma fundação é considerada um fundo autônomo, que tem, por finalidade, uma ação definida em seus estatutos por seu instituidor",
+        "metadados": {
+          "titulo": "entidade jurídica sem fins lucrativos",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+          "og": {
+            "og:title": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2006-03-17T17:39:54Z",
+          "atualizado_em": "2023-04-11T21:42:55Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2006-03-17T17:39:54Z",
+            "dateModified": "2023-04-11T21:42:55Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "entidade jurídica sem fins lucrativos"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Esta página ou seção foi marcada para revisão devido a incoerências ou dados de confiabilidade duvidosa. Se tem algum conhecimento sobre o tema, por favor, verifique e a coerência e o rigor deste artigo. Pode encontrar ajuda no . melhore WikiProjeto Ciências sociais Se existir um mais adequado, por favor corrija esta predefinição. WikiProjeto () dezembro de 2012\nUma é uma que tem como objetivo gerir uma massa patrimonial cedida pelos fundadores para a satisfação de certas finalidades de interesse social. As fundações são instituições não lucrativas dedicadas à beneficência, à ciência, ao ensino ou a outros fins de interesse público. O reconhecimento das fundações constitui um ato individual e discricionário da autoridade pública e encontra-se sujeito à verificação cumulativa de um conjunto de requisitos. fundação organização sem fins lucrativos 1 [ ] 2 [ ]\nUma fundação é considerada um fundo autônomo, que tem, por finalidade, uma ação definida em seus estatutos por seu instituidor ou instituidores, definido por contrato de . É diferente do chamado pois é impessoal, no sentido de sua operacionalização, podendo inclusive mudar a operacionalização e/ou ampliá-la, de conformidade, sempre com a lei. De forma geral, é uma instituição caracterizada como composta pela organização de um mas que não tem . É uma entidade de , constituída por ata de dotação patrimonial ou para determinada finalidade econômica não distributiva, ou seja, pela lei toda renda deve ser e estar re-investida no chamado \" operation found \" do inglês, segundo novo entendimento internacional que reporta ao usual através dos tempos, sendo dessa feita devida, pelo ( do País). fidúcia cooperativismo pessoa jurídica patrimônio [ carecede fontes ] ? direito privado inter vivos causa mortis fiscalizada Ministério Público Poder Judiciário\nPortanto, é uma composta por um patrimônio juridicamente indissolúvel e personalizado, destacado pelo seu instituidor ou instituidores públicos ou privados, para uma ou mais finalidades específicas, não distributivas, com relação a sua renda, que deve forçosamente ser reincorporada. Não tem proprietário, nem titular, daí seu caráter não distributivo, que a lei estabelece, desde os primórdios tempos . Consiste apenas num patrimônio administrado, segundo a Lei e destinado a um fim econômico, determinado pela própria lei que a autoriza, sendo acompanhada em sua atuação pelo Ministério Público da União, Estados ou Municípios, dependendo da esfera de atuação. Segundo novo entendimento internacional, é dirigido por administradores ou curadores, autorizados e fiscalizados, na conformidade de seus estatutos, esses aprovados pelo Ministério Público a que está juridicamente subordinado. pessoa jurídica [ carecede fontes ] ?"
+          },
+          {
+            "titulo": "Origem histórica provável",
+            "texto": "Como curiosidade Histórica, abordada no Dicionário-Enciclopédico de (1952), \"... Fundação, como instituição, teve sua origem Histórica na organização administrativa da , em que o chamado e/ou \"Comandante-em-Cristo\", administrava e guardava o acervo de toda a , numa congregação de regras próprias (localizava-se numa ilha - fortaleza), porém, tinha o dever de obediência ao ...\". Aurélio Buarque de Holanda Ferreira Ordem Beneditina Ecônomo Ordem Soberana e Militar de Malta Vaticano 3 [ ]\n↑ . «FUNDAÇÃO: CONCEITO, CARACTERÍSTICAS PRINCIPAIS E INSTITUIÇÃO» Ministério Público de Santa Catarina . Consultado em 11 de abril de 2023\n↑ . «Fundações» Secretaria-Geral da Presidência do Conselho de Ministros . Consultado em 11 de abril de 2023\n↑ Buarque de Hollanda Ferreira Editora do Globo de Porto Alegre, 1952. Dicionário Aurélio\nQuestões de sucessão: a importância das fundações para a salvaguarda patrimonial, Ana Motta Veiga, Academia de Escolas de Arquitetura e Urbanismo de Língua Portuguesa, Novembro de 2012\nEste artigo sobre é um . Você pode ajudar a Wikipédia . direito esboço expandindo-o"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal",
+            "texto": "Página principal",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Conte%C3%BAdo_destacado",
+            "texto": "Conteúdo destacado",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Eventos_atuais",
+            "texto": "Eventos atuais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Esplanada",
+            "texto": "Esplanada",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Aleat%C3%B3ria",
+            "texto": "Página aleatória",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:%C3%8Dndice",
+            "texto": "Portais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_especiais",
+            "texto": "Páginas especiais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Informe_um_erro",
+            "texto": "Informar um erro",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Boas-vindas",
+            "texto": "Boas-vindas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_principal",
+            "texto": "Ajuda",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_de_testes",
+            "texto": "Páginas de testes públicas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Portal_comunit%C3%A1rio",
+            "texto": "Portal comunitário",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Mudan%C3%A7as_recentes",
+            "texto": "Mudanças recentes",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Manuten%C3%A7%C3%A3o",
+            "texto": "Manutenção",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:Guia_de_edi%C3%A7%C3%A3o/Como_come%C3%A7ar_uma_p%C3%A1gina",
+            "texto": "Criar página",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_novas",
+            "texto": "Páginas novas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Contato",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Pesquisar",
+            "texto": "Busca",
+            "interno": true
+          },
+          {
+            "url": "https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=pt.wikipedia.org&amp;uselang=pt",
+            "texto": "Doar",
+            "interno": false
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Criar_conta&amp;returnto=Funda%C3%A7%C3%A3o+%28institui%C3%A7%C3%A3o%29",
+            "texto": "Criar conta",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Entrar&amp;returnto=Funda%C3%A7%C3%A3o+%28institui%C3%A7%C3%A3o%29",
+            "texto": "Iniciar sessão",
+            "interno": true
+          },
+          {
+            "url": "https://als.wikipedia.org/wiki/Stiftung",
+            "texto": "Alemannisch",
+            "interno": false
+          },
+          {
+            "url": "https://ar.wikipedia.org/wiki/%D9%85%D8%A4%D8%B3%D8%B3%D8%A9_(%D8%BA%D9%8A%D8%B1_%D8%B1%D8%A8%D8%AD%D9%8A%D8%A9)",
+            "texto": "العربية",
+            "interno": false
+          },
+          {
+            "url": "https://az.wikipedia.org/wiki/V%C9%99qf",
+            "texto": "Azərbaycanca",
+            "interno": false
+          },
+          {
+            "url": "https://ban.wikipedia.org/wiki/Yayasan_(nirlaba)",
+            "texto": "Basa Bali",
+            "interno": false
+          },
+          {
+            "url": "https://bar.wikipedia.org/wiki/Stiftung",
+            "texto": "Boarisch",
+            "interno": false
+          },
+          {
+            "url": "https://bg.wikipedia.org/wiki/%D0%A4%D0%BE%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D1%8F",
+            "texto": "Български",
+            "interno": false
+          },
+          {
+            "url": "https://bn.wikipedia.org/wiki/%E0%A6%AB%E0%A6%BE%E0%A6%89%E0%A6%A8%E0%A7%8D%E0%A6%A1%E0%A7%87%E0%A6%B6%E0%A6%A8_(%E0%A6%85%E0%A6%B2%E0%A6%BE%E0%A6%AD%E0%A6%9C%E0%A6%A8%E0%A6%95)",
+            "texto": "বাংলা",
+            "interno": false
+          },
+          {
+            "url": "https://bs.wikipedia.org/wiki/Fondacija",
+            "texto": "Bosanski",
+            "interno": false
+          },
+          {
+            "url": "https://ca.wikipedia.org/wiki/Fundaci%C3%B3",
+            "texto": "Català",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/61/Searchtool.svg/40px-Searchtool.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Commons-logo.svg/40px-Commons-logo.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Icon_Hinweis_Rechtsthemen.svg/40px-Icon_Hinweis_Rechtsthemen.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/wiki/Special:CentralAutoLogin/start?useformat=desktop&amp;type=1x1&amp;usesul3=1",
+          "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+          "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "entidade jurídica sem fins lucrativos",
+            "source_url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ecbfcb161a2b",
+            "type": "image",
+            "title": "Ícone de esboço",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Icon_Hinweis_Rechtsthemen.svg/40px-Icon_Hinweis_Rechtsthemen.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Icon_Hinweis_Rechtsthemen.svg/40px-Icon_Hinweis_Rechtsthemen.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "entidade jurídica sem fins lucrativos",
+            "source_url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ícone de esboço",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8930cb3b5a58",
+            "type": "image",
+            "title": "Wikimedia Foundation",
+            "url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "source_title": "entidade jurídica sem fins lucrativos",
+            "source_url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikimedia Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4f63425d32e1",
+            "type": "image",
+            "title": "Powered by MediaWiki",
+            "url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "final_url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "source_title": "entidade jurídica sem fins lucrativos",
+            "source_url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Powered by MediaWiki",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "445e8eeb3bdb1b1c200c",
+            "url": "http://www.ev.org.br/",
+            "title": "Fundação Bradesco - Escola Virtual",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Aprenda os fundamentos básicos da Inteligência Artificial (IA) Generativa de forma acessível e envolvente, desde a sua história até os conceitos essenciais. Exp"
+          },
+          {
+            "id": "c5341128874ba8ee3169",
+            "url": "https://fundacao.bradesco/",
+            "title": "Fundação Bradesco",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Há quase 70 anos oferecendo ensino gratuito e de excelência para crianças, jovens e adultos em regiões de vulnerabilidade socioeconômica de todo o Brasil. A Fun"
+          },
+          {
+            "id": "8806e5d8a22d1986292d",
+            "url": "https://www.ev.org.br/areas-de-interesse",
+            "title": "Cursos - Fundação Bradesco - Escola Virtual",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Olá, sou o assistente digital da Escola Virtual, muito prazer! Antes de começar, como prefere que eu chame você? aprender hoje?"
+          },
+          {
+            "id": "1ab4f6c0675f3afb932e",
+            "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)",
+            "title": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Uma fundação é uma organização sem fins lucrativos que tem como objetivo gerir uma massa patrimonial cedida pelos fundadores para a satisfação de certas finalid"
+          },
+          {
+            "id": "a844e480a516146edfe4",
+            "url": "https://fundacaosicredi.org.br/",
+            "title": "Sicredi - Fundação",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "A Fundação de Desenvolvimento Educacional e Cultural Sicredi - Fundação Sicredi - tem o propósito de manter viva a essência do cooperativismo por meio do desenv"
+          },
+          {
+            "id": "0f69f89e410fe51619da",
+            "url": "https://www.fcc.org.br/",
+            "title": "Fundação Carlos Chagas | FCC",
+            "origin": "bing",
+            "query": "fundação de Ouro Preto História",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Danielle Oliveira da Nóbrega, pós-doutoranda na Fundação Carlos Chagas, buscou compreender a dimensão emocional dessas representações no cotidiano docente. Dura"
+          },
+          {
+            "id": "8f424373f4ce0c9f401b",
+            "url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+            "title": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+            "origin": "marginalia",
+            "query": "fundação de Ouro Preto",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "5a1520c21188d009a9b4",
+            "url": "https://en.wikipedia.org/wiki/Jo%C3%A3o_Pinheiro",
+            "title": "João Pinheiro",
+            "origin": "marginalia",
+            "query": "fundação de Ouro Preto",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "93c946301129a66a1f69",
+            "url": "https://en.wikipedia.org/wiki/Dulce_Pereira",
+            "title": "Dulce Pereira",
+            "origin": "marginalia",
+            "query": "fundação de Ouro Preto",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "629173a39e1a5ddc552e",
+            "url": "https://en.wikipedia.org/wiki/Ribeir%C3%A3o_Preto",
+            "title": "Ribeirão Preto",
+            "origin": "marginalia",
+            "query": "fundação de Ouro Preto",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "5bd3b50e3679d40c2d98",
+            "url": "https://en.wikipedia.org/wiki/Brazilian_Sign_Language",
+            "title": "Brazilian Sign Language",
+            "origin": "marginalia",
+            "query": "fundação de Ouro Preto",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "2d08c904fdca5b5684b4",
+            "url": "https://en.wikipedia.org/wiki/RedeTV%21_Recife",
+            "title": "RedeTV! Recife",
+            "origin": "marginalia",
+            "query": "fundação de Ouro Preto",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (fundação de Ouro Preto História)",
+        "bing (consulta reformulada 'fundação de Ouro Preto'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (fundação de Ouro Preto História)",
+        "ddg: bloqueado (fundação de Ouro Preto História)",
+        "marginalia (consulta reformulada 'fundação de Ouro Preto'): 6 resultados",
+        "marginalia: sem resultados (fundação de Ouro Preto História)",
+        "— recuperação por lacuna —",
+        "wikipedia: sem resultados (fundação de Ouro Preto)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "fundação de Ouro Preto História",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "História da fundação de Ouro Preto",
+          "purpose": "pedido original sem condensação"
+        },
+        {
+          "type": "ENTITY_EXACT",
+          "query": "fundação de Ouro Preto",
+          "purpose": "resolver assunto explícito quando operações dominam os resultados; validar pelo pedido original"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": false,
+        "requirements": [],
+        "passages": [],
+        "complete": false,
+        "scope": "no explicit supported facet parsed; not proof of completeness"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S2",
+          "url": "https://fundacao.bradesco/",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S3",
+          "url": "http://www.ev.org.br/",
+          "answerability": null,
+          "answer_passages": null
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "História da fundação de Ouro Preto",
+      "adapter_query": "fundação de Ouro Preto História",
+      "provider": "bing",
+      "at": "2026-10-25T18:11:26.865400+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Fundação Bradesco - Escola Virtual",
+          "url": "http://www.ev.org.br/"
+        },
+        {
+          "title": "Fundação Bradesco",
+          "url": "https://fundacao.bradesco/"
+        },
+        {
+          "title": "Cursos - Fundação Bradesco - Escola Virtual",
+          "url": "https://www.ev.org.br/areas-de-interesse"
+        },
+        {
+          "title": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)"
+        },
+        {
+          "title": "Sicredi - Fundação",
+          "url": "https://fundacaosicredi.org.br/"
+        },
+        {
+          "title": "Fundação Carlos Chagas | FCC",
+          "url": "https://www.fcc.org.br/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "fundação de Ouro Preto História",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 376.21,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História da fundação de Ouro Preto",
+      "adapter_query": "fundação de Ouro Preto",
+      "provider": "bing",
+      "at": "2026-10-25T18:11:27.250166+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Fundação Bradesco - Escola Virtual",
+          "url": "http://www.ev.org.br/"
+        },
+        {
+          "title": "Fundação Bradesco",
+          "url": "https://fundacao.bradesco/"
+        },
+        {
+          "title": "Cursos - Fundação Bradesco - Escola Virtual",
+          "url": "https://www.ev.org.br/areas-de-interesse"
+        },
+        {
+          "title": "Fundação (instituição) – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Funda%C3%A7%C3%A3o_(institui%C3%A7%C3%A3o)"
+        },
+        {
+          "title": "Sicredi - Fundação",
+          "url": "https://fundacaosicredi.org.br/"
+        },
+        {
+          "title": "Fundação Carlos Chagas | FCC",
+          "url": "https://www.fcc.org.br/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "fundação de Ouro Preto",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 364.85,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História da fundação de Ouro Preto",
+      "adapter_query": "fundação de Ouro Preto História",
+      "provider": "ddg",
+      "at": "2026-10-25T18:11:27.623267+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "bloqueado",
+      "result_count": 0,
+      "classification": "PROVIDER_BLOCKED",
+      "requests": [],
+      "latency_ms": 313.07,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História da fundação de Ouro Preto",
+      "adapter_query": "fundação de Ouro Preto História",
+      "provider": "marginalia",
+      "at": "2026-10-25T18:11:27.936443+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "fundação de Ouro Preto História"
+          },
+          "http_status": null,
+          "final_url": "https://old-search.marginalia.nu/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 826.91,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História da fundação de Ouro Preto",
+      "adapter_query": "fundação de Ouro Preto",
+      "provider": "marginalia",
+      "at": "2026-10-25T18:11:28.763517+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "A look back at the ICOMOS 2024 Annual General Assembly in Ouro Preto, Brazil - ICOMOS",
+          "url": "https://www.icomos.org/news/a-look-back-at-the-icomos-2024-annual-general-assembly-in-ouro-preto-brazil/"
+        },
+        {
+          "title": "João Pinheiro",
+          "url": "https://en.wikipedia.org/wiki/Jo%C3%A3o_Pinheiro"
+        },
+        {
+          "title": "Dulce Pereira",
+          "url": "https://en.wikipedia.org/wiki/Dulce_Pereira"
+        },
+        {
+          "title": "Ribeirão Preto",
+          "url": "https://en.wikipedia.org/wiki/Ribeir%C3%A3o_Preto"
+        },
+        {
+          "title": "Brazilian Sign Language",
+          "url": "https://en.wikipedia.org/wiki/Brazilian_Sign_Language"
+        },
+        {
+          "title": "RedeTV! Recife",
+          "url": "https://en.wikipedia.org/wiki/RedeTV%21_Recife"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "fundação de Ouro Preto"
+          },
+          "http_status": null,
+          "final_url": "https://old-search.marginalia.nu/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 1336.39,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História da fundação de Ouro Preto",
+      "adapter_query": "fundação de Ouro Preto",
+      "provider": "wikipedia",
+      "at": "2026-10-25T18:11:30.189156+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [],
+      "latency_ms": 536.4,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "beab3573022e0e52511357a0636e80f2e14478ed",
+  "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1"
+}

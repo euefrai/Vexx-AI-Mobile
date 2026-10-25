@@ -1,0 +1,2890 @@
+{
+  "id": "holdout-10",
+  "category": "company",
+  "query": "História da empresa WEG fontes primárias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.242,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "WEG História fontes primárias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "WEG",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "WEG História fontes primárias",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "WEG História fontes primárias",
+      "candidates": 1
+    },
+    {
+      "provider": "marginalia",
+      "query": "WEG",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "WEG",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=WEG+Hist%C3%B3ria+fontes+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=WEG+Hist%C3%B3ria+fontes+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4329
+    },
+    {
+      "url": "https://www.bing.com/search?q=WEG&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=WEG&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4205
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=WEG%20Hist%C3%B3ria%20fontes%20prim%C3%A1rias",
+      "final": "https://html.duckduckgo.com/html/?q=WEG%20Hist%C3%B3ria%20fontes%20prim%C3%A1rias",
+      "chars": 14274
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=WEG+Hist%C3%B3ria+fontes+prim%C3%A1rias",
+      "final": "https://old-search.marginalia.nu/search?query=WEG+Hist%C3%B3ria+fontes+prim%C3%A1rias",
+      "chars": 16215
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=WEG",
+      "final": "https://old-search.marginalia.nu/search?query=WEG",
+      "chars": 981
+    },
+    {
+      "url": "https://www.weg.net/institutional/BR/pt/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://ecatalog.weg.net/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "final": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "chars": 268193
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "final": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "chars": 166163
+    },
+    {
+      "url": "https://ri.weg.net/",
+      "final": "https://ri.weg.net/",
+      "chars": 75757
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "final": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "chars": 35264
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "História da empresa WEG fontes primárias",
+    "domain": "general",
+    "original_request": "História da empresa WEG fontes primárias",
+    "resolved_request": "História da empresa WEG fontes primárias",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:14:13.929780+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "26af039bc76859fc07c5",
+        "url": "https://www.weg.net/institutional/BR/pt/",
+        "title": "Homepage | WEG",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "dom., 25 out. 2026 07:54:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Empresa especializada na fabricação e comercialização de motores elétricos, transformadores, geradores e tintas.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "017eed77b13210ac709a",
+        "url": "https://www.weg.net/",
+        "title": "Homepage | WEG",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "dom., 25 out. 2026 11:28:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "WEG provides global solutions for electric motors, variable frequency drives, soft starters, controls, panels, transformers, and generators.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "6cc9bb1d0f6f5ba46fb1",
+        "url": "https://ecatalog.weg.net/",
+        "title": "WEG",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "dom., 25 out. 2026 13:30:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Dimensione Motores Elétricos Alternadores Partida e Proteção de Motores Proteção de Circuitos Elétricos Correção do fator de potência (Motores Elétricos) Correç",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "31cfb26ec87d6f754f80",
+        "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+        "title": "WEG S.A. – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "2005-10-11T01:25:49Z",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "conter informações desatualizadas Se tem conhecimento sobre o tema abordado, edite a página e inclua as informações mais recentes, citando . — e fontes confiáve",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "1c6d4609429570015449",
+        "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+        "title": "WEG S.A. - Wikipedia",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "2006-08-15T01:57:49Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Integration Engineering with products of different manufacturers References [ edit ] ↑ . Mining Review Africa. \"About Zest WEG Group\" . Retrieved 2026 28 August",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "12e2a9ab2d6b5d142e94",
+        "url": "https://ri.weg.net/",
+        "title": "Home - WEG RI",
+        "origin": "bing",
+        "query": "WEG História fontes primárias",
+        "date": "2020-03-02T16:22:20+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Resultados do 3T26 Clique aqui Clique aqui Conheça nossas áreas de negócios Clique aqui Clique aqui",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 99,
+        "final_url": "https://ri.weg.net/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "4dde8ca5fbad97a231ac",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "CC-BY-SA 4.0",
+        "origin": "marginalia",
+        "query": "WEG História fontes primárias",
+        "date": "",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "your intended use. For example, other rights such as may limit how you use the material. publicity, privacy, or moral rights Notice This deed highlights only so",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 2088,
+        "final_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "c7068d8fed2181cd9db5",
+        "url": "https://pt.wikipedia.org/wiki/Wega_Nery",
+        "title": "Wega Nery",
+        "origin": "wikipedia",
+        "query": "WEG",
+        "date": "",
+        "type": "enciclopedia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "29e73cd6f0cf3491ed9c",
+        "url": "https://pt.wikipedia.org/wiki/Wegmans",
+        "title": "Wegmans",
+        "origin": "wikipedia",
+        "query": "WEG",
+        "date": "",
+        "type": "enciclopedia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "3de0a13e89ecaf263c45",
+        "url": "https://pt.wikipedia.org/wiki/Weggis",
+        "title": "Weggis",
+        "origin": "wikipedia",
+        "query": "WEG",
+        "date": "",
+        "type": "enciclopedia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "8a562258804be367c087",
+        "url": "https://pt.wikipedia.org/wiki/Wegahta_Gebreyohannes_Abera",
+        "title": "Wegahta Gebreyohannes Abera",
+        "origin": "wikipedia",
+        "query": "WEG",
+        "date": "",
+        "type": "enciclopedia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "819c3acf6f7365e6d0fc",
+        "url": "https://pt.wikipedia.org/wiki/Wegenstetten",
+        "title": "Wegenstetten",
+        "origin": "wikipedia",
+        "query": "WEG",
+        "date": "",
+        "type": "enciclopedia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-260d63dbf7e6",
+      "type": "image",
+      "title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-772265f31891",
+      "type": "image",
+      "title": "Aumento",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Aumento",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5587b179f607",
+      "type": "image",
+      "title": "Baixa",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Decrease2.svg/20px-Decrease2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Decrease2.svg/20px-Decrease2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Baixa",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-77470f7120a7",
+      "type": "image",
+      "title": "Brasil",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brasil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dc7089a84aae",
+      "type": "image",
+      "title": "company",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "company",
+      "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1af776a0003e",
+      "type": "image",
+      "title": "Wikipedia",
+      "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+      "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+      "source_title": "company",
+      "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipedia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0997b8b9c241",
+      "type": "image",
+      "title": "The Free Encyclopedia",
+      "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+      "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+      "source_title": "company",
+      "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The Free Encyclopedia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b75b26965c71",
+      "type": "image",
+      "title": "Increase",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "company",
+      "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Increase",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a5e0f126b6d6",
+      "type": "image",
+      "title": "Brazil",
+      "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "company",
+      "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brazil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4b9da31b8c1e",
+      "type": "image",
+      "title": "Transformers",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Transformer_Step-up_Iron_Core.svg/120px-Transformer_Step-up_Iron_Core.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Transformer_Step-up_Iron_Core.svg/120px-Transformer_Step-up_Iron_Core.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "company",
+      "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Transformers",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-de5e034dce69",
+      "type": "image",
+      "title": "Wikimedia Foundation",
+      "url": "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+      "final_url": "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+      "source_title": "company",
+      "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikimedia Foundation",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "titulo": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2005-10-11T01:25:49Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "titulo": "company",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2006-08-15T01:57:49Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://ri.weg.net/",
+      "titulo": "Home - WEG RI",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2020-03-02T16:22:20+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://ri.weg.net/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 1,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "WEG História fontes primárias",
+      "items": [
+        {
+          "titulo": "Homepage | WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/",
+          "trecho": "Empresa especializada na fabricação e comercialização de motores elétricos, transformadores, geradores e tintas.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:54:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://weg.net/institutional/BR/pt",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Homepage | WEG",
+          "url": "https://www.weg.net/",
+          "trecho": "WEG provides global solutions for electric motors, variable frequency drives, soft starters, controls, panels, transformers, and generators.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:28:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://weg.net/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "WEG S.A. – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "trecho": "WEG é uma empresa brasileira que atua mundialmente nas áreas de engenharia elétrica, tecnologia de energia elétrica e automação.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:24:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "relevancia": 9.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "WEG",
+          "url": "https://ecatalog.weg.net/",
+          "trecho": "Dimensione Motores Elétricos Alternadores Partida e Proteção de Motores Proteção de Circuitos Elétricos Correção do fator de potência (Motores Elétricos) Correção do fator de potência (Transformadores) Chaves de Partida Estáticas (Soft-Starters) Retorno de Investimento WEG SEE+ Desenhos 2D/3D Motore",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 13:30:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://ecatalog.weg.net/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Home - WEG RI",
+          "url": "https://ri.weg.net/",
+          "trecho": "Investimento de US$ 165 milhões para ampliar produção de gerador ... Investimentos para ampliação do projeto da fábrica de sistemas de ...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:43:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://ri.weg.net/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 8.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "WEG S.A. - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+          "trecho": "WEG S.A. is a Brazilian company operating worldwide in the electrical engineering, power, and automation technology areas. It is headquartered in Jaraguá do Sul, Brazil, and was founded in 1961.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 02:28:00 GMT"
+          },
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.wikipedia.org/wiki/WEG_S.A.",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 9.3,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "WEG",
+      "items": [
+        {
+          "titulo": "Homepage | WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/",
+          "trecho": "Empresa especializada na fabricação e comercialização de motores elétricos, transformadores, geradores e tintas.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:54:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Homepage | WEG",
+          "url": "https://www.weg.net/",
+          "trecho": "WEG provides global solutions for electric motors, variable frequency drives, soft starters, controls, panels, transformers, and generators.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:28:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "WEG S.A. – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "trecho": "WEG é uma empresa brasileira que atua mundialmente nas áreas de engenharia elétrica, tecnologia de energia elétrica e automação.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:24:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "WEG",
+          "url": "https://ecatalog.weg.net/",
+          "trecho": "Dimensione Motores Elétricos Alternadores Partida e Proteção de Motores Proteção de Circuitos Elétricos Correção do fator de potência (Motores Elétricos) Correção do fator de potência (Transformadores) Chaves de Partida Estáticas (Soft-Starters) Retorno de Investimento WEG SEE+ Desenhos 2D/3D Motore",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 13:30:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Home - WEG RI",
+          "url": "https://ri.weg.net/",
+          "trecho": "Investimento de US$ 165 milhões para ampliar produção de gerador ... Investimentos para ampliação do projeto da fábrica de sistemas de ...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:43:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "WEG S.A. - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+          "trecho": "WEG S.A. is a Brazilian company operating worldwide in the electrical engineering, power, and automation technology areas. It is headquartered in Jaraguá do Sul, Brazil, and was founded in 1961.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 02:28:00 GMT"
+          },
+          "discovery_query": "WEG",
+          "discovery_provider": "bing"
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "WEG História fontes primárias",
+      "items": [
+        {
+          "titulo": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "WEG História fontes primárias",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://creativecommons.org/licenses/by-sa/4.0",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "wikipedia",
+      "query": "WEG",
+      "items": [
+        {
+          "titulo": "WEG S.A.",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "trecho": "",
+          "origem": "wikipedia",
+          "tipo": "enciclopedia",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "wikipedia",
+          "url_canonica": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 4.7,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Wega Nery",
+          "url": "https://pt.wikipedia.org/wiki/Wega_Nery",
+          "trecho": "",
+          "origem": "wikipedia",
+          "tipo": "enciclopedia",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "wikipedia",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Wega_Nery",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 1.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Wegmans",
+          "url": "https://pt.wikipedia.org/wiki/Wegmans",
+          "trecho": "",
+          "origem": "wikipedia",
+          "tipo": "enciclopedia",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "wikipedia",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Wegmans",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 1.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Weggis",
+          "url": "https://pt.wikipedia.org/wiki/Weggis",
+          "trecho": "",
+          "origem": "wikipedia",
+          "tipo": "enciclopedia",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "wikipedia",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Weggis",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 1.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Wegahta Gebreyohannes Abera",
+          "url": "https://pt.wikipedia.org/wiki/Wegahta_Gebreyohannes_Abera",
+          "trecho": "",
+          "origem": "wikipedia",
+          "tipo": "enciclopedia",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "wikipedia",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Wegahta_Gebreyohannes_Abera",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 1.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Wegenstetten",
+          "url": "https://pt.wikipedia.org/wiki/Wegenstetten",
+          "trecho": "",
+          "origem": "wikipedia",
+          "tipo": "enciclopedia",
+          "meta": {},
+          "discovery_query": "WEG",
+          "discovery_provider": "wikipedia",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Wegenstetten",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 1.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+      "result": {
+        "titulo": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+        "texto": "WEG Razão social WEG S.A. Tipo Empresa de capital aberto Cotação : : B3 WEGE3 NASDAQ WEGZY Atividade Engenharia industrial Fundação de (65anos) 16 de setembro 1961 Fundador(es) Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus Sede , , Jaraguá do Sul Santa Catarina Brasil Área(s) servida(s) Mundo Proprietário(s) Famílias Silva, Werninghaus e Voigt Presidente Alberto Yoshikazu Kuba 1 [ ] Empregados 40,793 (2023) 2 [ ] 26 694 () América do Sul 5 083 () América do Norte 2 664 () Ásia-Pacífico 1 926 () Europa 620 () África Produtos , , , , , , , , e Motores elétricos geradores transformadores disjuntores acionamento de motores controle e automação industrial componentes mecânicos equipamentos de energia tintas vernizes Acionistas WPA Participações e Serviços (50,10%) (35,30%) Free float Família dos fundadores (14,40%) Administradores (0,10%) (0,10%) Tesouraria Valor de mercado 138 bilhões (dez/2021) R$ 2 [ ] 3 [ ] 4 [ ] Ativos 23.93 bilhões R$ (2021) 2 [ ] Lucro 3.65 bilhões R$ (2021) 2 [ ] LAJIR 4.15 bilhões R$ (2021) 2 [ ] Faturamento 23.56 bilhões R$ (2021) 2 [ ] Website www.weg.net/br é uma que atua nas áreas de , e . Sua sede está em , no de . Fundada originalmente como . em 1961, a empresa foi rebatizada tempos depois para WEG, das iniciais dos três fundadores , e . WEG empresa brasileira mundialmente engenharia elétrica tecnologia de energia elétrica automação Jaraguá do Sul estado Santa Catarina 5 [ ] 6 [ ] Eletromotores Jaraguá 7 [ ] acrônimo Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus 8 [ ] 9 [ ] A empresa possui operações em cerca de 140 países, com aproximadamente 40.000 funcionários. É uma das maiores fabricantes de motores elétricos e equipamentos associados do mundo. A empresa produz motores elétricos, geradores, alternadores, transformadores, turbinas, BESS, drives, revestimentos e presta serviços de automação industrial, entre outros produtos e soluções integradas relacionadas a sistemas elétricos. 10 [ ] História [ editar | editar código ] A WEG surgiu oficialmente em 16 de setembro de 1961 como , em referência à . Mais tarde, a empresa recebeu seu nome atual, WEG, sigla formada pelas iniciais dos três fundadores da empresa: , e . Eletromotores Jaraguá Jaraguá do Sul Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus 7 [ ] 8 [ ] 9 [ ] No ano de 1970 iniciou a sua atuação no mercado internacional ao exportar seus produtos para alguns países da e em 1971 abriu seu capital na Bovespa (atual ). Em setembro de 1975, alcançou a marca de 1 milhão de motores fabricados. América Latina 11 [ ] B3 12 [ ] 13 [ ] Produzindo inicialmente motores elétricos, a WEG começou a ampliar suas atividades a partir da década de 80, com a produção de máquinas elétricas, componentes eletroeletrônicos, produtos para , transformadores de força e distribuição, líquidas e em pó e vernizes eletroisolantes. automação industrial tintas Em 1988, foi criada a WEG Exportadora, empresa criada para exportar os produtos da WEG no mercado internacional. 14 [ ] Em setembro de 1991, começou a atuar na ao abrir a filial WEG Electric Corp nos . Antes de abrir um nos Estados Unidos, a WEG já exportava seus produtos para o mercado americano desde 1977. América do Norte Estados Unidos subsidiária 15 [ ] Em setembro de 1992, começa a atuar na ao adquirir uma empresa na para exportar seus produtos por todo o continente europeu. Atualmente a subsidiária belga se chama WEG Benelux. Europa Bélgica 16 [ ] Em 1994, entrou no mercado asiático após abrir uma subsidiária no , e no ano seguinte passou a atuar também na e . Japão 17 [ ] Alemanha 18 [ ] Austrália 19 [ ] Em março de 2009, fechou sua fábrica em e demitiu 370 pessoas, a alegação das demissões foi devido a uma reestruturação na divisão de motores elétricos para eletrodomésticos e também por causa da . Guarulhos 20 [ ] Grande Recessão 21 [ ] Em 2011, a WEG entra para o mercado de . Em 9 de junho de 2015, ocorreu um incêndio na fábrica da empresa na cidade de Jaraguá do Sul, apesar do problema ninguém ficou ferido e a produção da unidade fabril continuou normalmente pouco tempo depois. aerogeradores 22 [ ] 23 [ ] Expansão [ editar | editar código ] . Esta seção pode conter informações desatualizadas Se tem conhecimento sobre o tema abordado, edite a página e inclua as informações mais recentes, citando . — e fontes confiáveis independentes Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES Visão frontal da fábrica \"WEG II, Asa Leste\" localizada em . Jaraguá do Sul Em abril de 2006, adquiriu 30% da empresa fabricante de Voltran. transformadores mexicana 24 [ ] Em março de 2007, comprou 48,6% da companhia gaucha de transformadores elétricos por 49,4 milhões de e em janeiro de 2010 adquiriu o restante das ações e passou a deter 100% da empresa. Trafo reais 25 [ ] 26 [ ] Em agosto de 2007, comprou a fabricante de e e com isso criou a que passa a ser a divisão do grupo de equipamentos de . catarinense aerogeradores turbinas eólicas HISA WEG HiSA energia eólica 27 [ ] Em 2010, a WEG adquiriu o controle acionário do na e aumentou sua participação acionária para 60% na fabricante de transformadores . ZEST Group África do Sul mexicana Voltran 28 [ ] 29 [ ] Também em 2010 adquiriu a , fabricante de sensores eletrônicos para automação industrial, comercial e de proteção humana e entrou no negócio de com a aquisição da . Instrutech 30 [ ] critical power EQUISUL 31 [ ] Em 2011, adquiriu a fabricante de , a fabricante de redutores , em outubro de 2011 anuncia com Cestari Industrial para redutores e motorredutores, e em novembro de 2011 comprou uma fábrica da (GE) nos . tintas em pó argentina Pulverlux 32 [ ] 33 [ ] austríaca WATT DRIVE 34 [ ] joint venture 35 [ ] General Electric EUA 36 [ ] No ano de 2012, expandiu as suas linhas de tintas com a aquisição da e . Stardur 37 [ ] Tintas Paumar 38 [ ] Em agosto de 2013, adquiriu na a África do Sul Hawker Siddeley Electric Africa. 39 [ ] Em fevereiro de 2014, comprou 100% da fabricantes de motores e motoredutores e em abril de 2014 fez duas aquisições na , a primeira foi a compra da que atua na fabricação de motores e componentes para e de roupas, já a segunda aquisição foi a compra da que produz transmissões e componentes mecânicos para . alemã Württembergishe 40 [ ] China Changzhou Sinya Electromotor máquinas de lavar roupa secadoras Changzhou Machine Master eletrodomésticos 41 [ ] Em setembro, comprou a no estado de . Efacec Energy Service Pernambuco 42 [ ] 43 [ ] Em dezembro, adquiriu 100% da fabricante de equipamentos de alemã , essa foi a segunda aquisição da WEG na Alemanha no ano de 2014 e expandirá a divisão de fabricação de maquinas de alta rotação da empresa. motores elétricos Katt 44 [ ] 45 [ ] Em dezembro de 2016, a WEG anuncia aquisição do controle da TGM, fabricante brasileiro de turbinas e transmissões. 46 [ ] Operações [ editar | editar código ] Brasil [ editar | editar código ] Transformador WEG A WEG possui, no , quatorze parques fabris e a sua sede e principais unidades industriais estão na cidade de , . Suas demais fábricas estão espalhadas pelo (), (), (), ( e ), (, e ) e (, , , e ). Brasil 47 [ ] Jaraguá do Sul Santa Catarina Amazonas Manaus Espírito Santo Linhares Minas Gerais Betim Rio Grande do Sul Bento Gonçalves Gravataí Santa Catarina Blumenau Guaramirim Itajaí São Paulo São Paulo São Bernardo do Campo Sertãozinho Mauá Monte Alto 48 [ ] Exterior [ editar | editar código ] No exterior, a WEG possui 48 unidades fabris distribuídas nos seguintes países: 47 [ ] (, , ) África do Sul Cape Town Gauteng Johanesburgo (, , ) Alemanha Balingen Homberg Nuremberga (, , ) Argentina Burzaco Córdoba San Francisco () Áustria Niederösterreich () Colômbia Sabaneta (, Rugao, ) China Changzhou Nantong () Espanha Valência (, , , ) Estados Unidos Bluffton McHenry Minneapolis Washington () Índia Tâmil Nadu (, , ) México Cidade do México Hidalgo Tizayuca () Portugal Porto (), Turquia Cocaeli Além dessas fábricas, instalações de e comercialização e",
+        "final": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+        "trecho_usado": "conter informações desatualizadas Se tem conhecimento sobre o tema abordado, edite a página e inclua as informações mais recentes, citando . — e fontes confiáveis independentes Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES Visão frontal da fábrica \"WEG II, Asa Leste\" localizada em . Jaraguá do Sul Em abril de 2006, adquiriu 30% da empresa fabricante de Voltran. transformadores",
+        "metadados": {
+          "titulo": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "og": {
+            "og:image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "og:image:width": "1200",
+            "og:image:height": "842",
+            "og:title": "WEG S.A. – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2005-10-11T01:25:49Z",
+          "atualizado_em": "2026-09-25T17:42:16Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2005-10-11T01:25:49Z",
+            "dateModified": "2026-09-25T17:42:16Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Empresa de capital aberto\n: : B3 WEGE3 NASDAQ WEGZY\nde (65anos) 16 de setembro 1961\nWerner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus\n, , Jaraguá do Sul Santa Catarina Brasil\nFamílias Silva, Werninghaus e Voigt\nAlberto Yoshikazu Kuba 1 [ ]\n5 083 () América do Norte\n, , , , , , , , e Motores elétricos geradores transformadores disjuntores acionamento de motores controle e automação industrial componentes mecânicos equipamentos de energia tintas vernizes\nWPA Participações e Serviços (50,10%)\nFamília dos fundadores (14,40%)\n138 bilhões (dez/2021) R$ 2 [ ] 3 [ ] 4 [ ]\n23.93 bilhões R$ (2021) 2 [ ]\n3.65 bilhões R$ (2021) 2 [ ]\n4.15 bilhões R$ (2021) 2 [ ]\n23.56 bilhões R$ (2021) 2 [ ]\né uma que atua nas áreas de , e . Sua sede está em , no de . Fundada originalmente como . em 1961, a empresa foi rebatizada tempos depois para WEG, das iniciais dos três fundadores , e . WEG empresa brasileira mundialmente engenharia elétrica tecnologia de energia elétrica automação Jaraguá do Sul estado Santa Catarina 5 [ ] 6 [ ] Eletromotores Jaraguá 7 [ ] acrônimo Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus 8 [ ] 9 [ ]\nA empresa possui operações em cerca de 140 países, com aproximadamente 40.000 funcionários. É uma das maiores fabricantes de motores elétricos e equipamentos associados do mundo. A empresa produz motores elétricos, geradores, alternadores, transformadores, turbinas, BESS, drives, revestimentos e presta serviços de automação industrial, entre outros produtos e soluções integradas relacionadas a sistemas elétricos. 10 [ ]\nA WEG surgiu oficialmente em 16 de setembro de 1961 como , em referência à . Mais tarde, a empresa recebeu seu nome atual, WEG, sigla formada pelas iniciais dos três fundadores da empresa: , e . Eletromotores Jaraguá Jaraguá do Sul Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus 7 [ ] 8 [ ] 9 [ ]\nNo ano de 1970 iniciou a sua atuação no mercado internacional ao exportar seus produtos para alguns países da e em 1971 abriu seu capital na Bovespa (atual ). Em setembro de 1975, alcançou a marca de 1 milhão de motores fabricados. América Latina 11 [ ] B3 12 [ ] 13 [ ]\nProduzindo inicialmente motores elétricos, a WEG começou a ampliar suas atividades a partir da década de 80, com a produção de máquinas elétricas, componentes eletroeletrônicos, produtos para , transformadores de força e distribuição, líquidas e em pó e vernizes eletroisolantes. automação industrial tintas\nEm 1988, foi criada a WEG Exportadora, empresa criada para exportar os produtos da WEG no mercado internacional. 14 [ ]\nEm setembro de 1991, começou a atuar na ao abrir a filial WEG Electric Corp nos . Antes de abrir um nos Estados Unidos, a WEG já exportava seus produtos para o mercado americano desde 1977. América do Norte Estados Unidos subsidiária 15 [ ]\nEm setembro de 1992, começa a atuar na ao adquirir uma empresa na para exportar seus produtos por todo o continente europeu. Atualmente a subsidiária belga se chama WEG Benelux. Europa Bélgica 16 [ ]\nEm 1994, entrou no mercado asiático após abrir uma subsidiária no , e no ano seguinte passou a atuar também na e . Japão 17 [ ] Alemanha 18 [ ] Austrália 19 [ ]\nEm março de 2009, fechou sua fábrica em e demitiu 370 pessoas, a alegação das demissões foi devido a uma reestruturação na divisão de motores elétricos para eletrodomésticos e também por causa da . Guarulhos 20 [ ] Grande Recessão 21 [ ]\nEm 2011, a WEG entra para o mercado de . Em 9 de junho de 2015, ocorreu um incêndio na fábrica da empresa na cidade de Jaraguá do Sul, apesar do problema ninguém ficou ferido e a produção da unidade fabril continuou normalmente pouco tempo depois. aerogeradores 22 [ ] 23 [ ]\n. Esta seção pode conter informações desatualizadas Se tem conhecimento sobre o tema abordado, edite a página e inclua as informações mais recentes, citando . — e fontes confiáveis independentes Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES\nVisão frontal da fábrica \"WEG II, Asa Leste\" lo"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal",
+            "texto": "Página principal",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Conte%C3%BAdo_destacado",
+            "texto": "Conteúdo destacado",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Eventos_atuais",
+            "texto": "Eventos atuais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Esplanada",
+            "texto": "Esplanada",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Aleat%C3%B3ria",
+            "texto": "Página aleatória",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:%C3%8Dndice",
+            "texto": "Portais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_especiais",
+            "texto": "Páginas especiais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Informe_um_erro",
+            "texto": "Informar um erro",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Boas-vindas",
+            "texto": "Boas-vindas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_principal",
+            "texto": "Ajuda",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_de_testes",
+            "texto": "Páginas de testes públicas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Portal_comunit%C3%A1rio",
+            "texto": "Portal comunitário",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Mudan%C3%A7as_recentes",
+            "texto": "Mudanças recentes",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Manuten%C3%A7%C3%A3o",
+            "texto": "Manutenção",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:Guia_de_edi%C3%A7%C3%A3o/Como_come%C3%A7ar_uma_p%C3%A1gina",
+            "texto": "Criar página",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_novas",
+            "texto": "Páginas novas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Contato",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Pesquisar",
+            "texto": "Busca",
+            "interno": true
+          },
+          {
+            "url": "https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=pt.wikipedia.org&amp;uselang=pt",
+            "texto": "Doar",
+            "interno": false
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Criar_conta&amp;returnto=WEG+S.A.",
+            "texto": "Criar conta",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Entrar&amp;returnto=WEG+S.A.",
+            "texto": "Iniciar sessão",
+            "interno": true
+          },
+          {
+            "url": "https://da.wikipedia.org/wiki/WEG_Industries",
+            "texto": "Dansk",
+            "interno": false
+          },
+          {
+            "url": "https://de.wikipedia.org/wiki/WEG_Equipamentos_El%C3%A9tricos",
+            "texto": "Deutsch",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "texto": "English",
+            "interno": false
+          },
+          {
+            "url": "https://es.wikipedia.org/wiki/WEG",
+            "texto": "Español",
+            "interno": false
+          },
+          {
+            "url": "https://fa.wikipedia.org/wiki/%D8%B5%D9%86%D8%A7%DB%8C%D8%B9_%D9%88%DB%8C%DA%AF",
+            "texto": "فارسی",
+            "interno": false
+          },
+          {
+            "url": "https://fr.wikipedia.org/wiki/WEG_(entreprise)",
+            "texto": "Français",
+            "interno": false
+          },
+          {
+            "url": "https://ko.wikipedia.org/wiki/WEG_%EC%9D%B8%EB%8D%94%EC%8A%A4%ED%8A%B8%EB%A6%AC",
+            "texto": "한국어",
+            "interno": false
+          },
+          {
+            "url": "https://mg.wikipedia.org/wiki/WEG_S.A.",
+            "texto": "Malagasy",
+            "interno": false
+          },
+          {
+            "url": "https://ru.wikipedia.org/wiki/WEG",
+            "texto": "Русский",
+            "interno": false
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "WEG"
+            ],
+            [
+              "Razão social",
+              "WEG S.A."
+            ],
+            [
+              "Tipo",
+              "Empresa de capital aberto"
+            ],
+            [
+              "Cotação",
+              "B3 : WEGE3 NASDAQ : WEGZY"
+            ],
+            [
+              "Atividade",
+              "Engenharia industrial"
+            ],
+            [
+              "Fundação",
+              "16 de setembro de 1961 (65 anos)"
+            ],
+            [
+              "Fundador(es)",
+              "Werner Ricardo Voigt Eggon João da Silva Geraldo Werninghaus"
+            ],
+            [
+              "Sede",
+              "Jaraguá do Sul , Santa Catarina , Brasil"
+            ],
+            [
+              "Área(s) servida(s)",
+              "Mundo"
+            ],
+            [
+              "Proprietário(s)",
+              "Famílias Silva, Werninghaus e Voigt"
+            ],
+            [
+              "Presidente",
+              "Alberto Yoshikazu Kuba [ 1 ]"
+            ],
+            [
+              "Empregados",
+              "40,793 (2023) [ 2 ] 26 694 ( América do Sul ) 5 083 ( América do Norte ) 2 664 ( Ásia-Pacífico ) 1 926 ( Europa ) 620 ( África )"
+            ],
+            [
+              "Produtos",
+              "Motores elétricos , geradores , transformadores , disjuntores , acionamento de motores , controle e automação industrial , componentes mecânicos , equipamentos "
+            ],
+            [
+              "Acionistas",
+              ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-pa"
+            ],
+            [
+              "Valor de mercado",
+              "R$ 138 bilhões (dez/2021) [ 2 ] [ 3 ] [ 4 ]"
+            ],
+            [
+              "Ativos",
+              "R$ 23.93 bilhões (2021) [ 2 ]"
+            ],
+            [
+              "Lucro",
+              "R$ 3.65 bilhões (2021) [ 2 ]"
+            ],
+            [
+              "LAJIR",
+              "R$ 4.15 bilhões (2021) [ 2 ]"
+            ],
+            [
+              "Faturamento",
+              "R$ 23.56 bilhões (2021) [ 2 ]"
+            ],
+            [
+              "Website",
+              "www.weg.net/br"
+            ]
+          ],
+          [
+            [
+              ".mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,."
+            ],
+            [
+              "Finanças, seguros e exploração de imóveis",
+              "ALLOS B3 Banco do Brasil BB Seguridade Bradesco Bradespar BTG Pactual Caixa Seguridade Iguatemi IRB(Re) Itaúsa Itaú Unibanco Santander Brasil Multiplan Porto"
+            ],
+            [
+              "Petróleo e gás",
+              "Brava Energia Cosan Petrobras PRIO PetroRecôncavo Raízen Ultra Vibra Energia"
+            ],
+            [
+              "Utilidade pública, energia e saneamento",
+              "Auren Axia Energia Cemig Copel Copasa CPFL Energia Energisa Engie Brasil Eneva Equatorial ISA Energia Sabesp Taesa"
+            ],
+            [
+              "Bens industriais e transporte",
+              "Embraer Localiza Marcopolo Motiva Rumo Logística Vamos WEG"
+            ],
+            [
+              "Consumo não cíclico, alimentos, comércio/distribuição e agropecuária",
+              "Ambev Assaí Grupo Pão de Açúcar MBRF Minerva Foods Natura SLC Agrícola"
+            ],
+            [
+              "Consumo cíclico e construção civil",
+              "Azzas 2154 C&A Cogna Educação Cury Cyrela Lojas Renner Magazine Luiza MRV Smart Fit Vivara Yduqs"
+            ],
+            [
+              "Materiais básicos",
+              "Braskem CSN CSN Mineração Gerdau Metalúrgica Gerdau Klabin Suzano Papel e Celulose Usiminas Vale"
+            ],
+            [
+              "Telefonia",
+              "Telefônica Brasil TIM Brasil"
+            ],
+            [
+              "Saúde",
+              "Fleury Hapvida Hypera Pharma RD Saúde Rede D'Or São Luiz"
+            ],
+            [
+              "Tecnologia da informação",
+              "Totvs"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/8/81/Weg_logo_blue_vector.svg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/250px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d3/Newworldmap.svg/40px-Newworldmap.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Decrease2.svg/20px-Decrease2.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-260d63dbf7e6",
+            "type": "image",
+            "title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-772265f31891",
+            "type": "image",
+            "title": "Aumento",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Aumento",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5587b179f607",
+            "type": "image",
+            "title": "Baixa",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Decrease2.svg/20px-Decrease2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/Decrease2.svg/20px-Decrease2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Baixa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-77470f7120a7",
+            "type": "image",
+            "title": "Brasil",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+            "source_url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "result": {
+        "titulo": "company",
+        "texto": "Brazilian electronics company WEG S.A. Front view of \"WEG II, Asa Leste\", a unit of WEG Industries in Jaraguá do Sul Type Sociedade Anônima Traded as : B3 WEGE3 Ibovespa Component Industry Electrical equipment Founded 16 September 1961 65 years ago ; () 16 September 1961 Headquarters , Jaraguá do Sul Brazil Area served Worldwide Keypeople Décio da Silva () Alberto Kuba () Chairman CEO Products electric motors, industrial automation and control, industrial sensors, generators, alternators, industrial gearboxes, transformers, switchgears, electrical substations, electric panels, BESS, wind and steam turbines, motor drives, coatings and varnishes Revenue 6.82 billion US$ (2024) Number of employees c. 40,000 [ when? ] Subsidiaries Zest WEG Group 1 [ ] Website weg.net Footnotes 2 [ ] is a company operating worldwide in the , power, and automation technology areas. It is headquartered in , Brazil, and was founded in 1961. WEG S.A. Brazilian electrical engineering Jaraguá do Sul The company produces , , , , , , , , and provides services, among other products and integrated solutions related to electric systems. electric motors generators alternators transformers turbines BESS drives coatings industrial automation WEG was founded in 1961 by Werner Ricardo Voigt, Eggon João da Silva and Geraldo Werninghaus, the name of the company being an acronym formed from the first names of the founders. The company has operations in around 140 countries, with approximately 40,000 employees. It's one of the largest manufacturers of electric motors and associated equipment in the world. 3 [ ] History [ edit ] The company Eletromotores Jaraguá was created on 16 September 1961 by Werner Ricardo Voigt, Eggon João da Silva and Geraldo Werninghaus (respectively an electrician, an administrator and a mechanic). Years later changed its name to Eletromotores WEG SA, the name WEG being formed with the first letter of each founder's first name. 4 [ ] Initially producing electric motors, WEG started diversifying its activities during the eighties, with the production of electric components, products for industrial automation, power and distribution transformers, liquid and powder paints and electrical insulation varnishes. The company grew into a global motor manufacturer. In 1968, WEG created CentroWEG, a training center to aid in the lack of qualified professionals in the area of mechanical engineers. In May 2008, WEG announced a new factory in India. 5 [ ] In February 2012, the Canadian manufacturer signed a deal with WEG to assess the market opportunities for hydrogen PEM fuel cell products and services in applications. Ballard Power Systems 6 [ ] 7 [ ] In February 2019, WEG acquired Energy Storage System, the storage business of US-based (NPS). WEG had previously bought the utility-scale turbine business of NPS in 2016. In May 2019, WEG signed a deal with the aerospace conglomerate to work on new electrical propulsion systems for aircraft. Northern Power Systems 8 [ ] Embraer 9 [ ] In May 2019, WEG also introduced the 4MW wind turbine. By 2024, WEG also started producing 7MW wind turbines. 10 [ ] 11 [ ] In 2024, WEG acquired the industrial electric motors and generators business of Regal Rexnord Corporation, including the Marathon, Cemp, and Rotor brands. WEG will also integrate a team of approximately 2,800 employees operating in 10 factories located in seven countries (United States, Mexico, China, India, Italy, the Netherlands, and Canada), as well as commercial subsidiaries in 11 countries. The net operating revenue of these businesses in 2022 was approximately $542 million. 12 [ ] Activities [ edit ] Description [ edit ] The company has subsidiaries in 37 countries, and production is distributed in manufacturing plants in 15 countries, including: , , , , , , , , , , , and . Brazil Argentina Colombia India Mexico Portugal Austria Germany China South Africa Turkey United States 13 [ ] Products [ edit ] Generation (, , , ) Generators wind turbines steam turbines water turbines Transmission (, , ) EPC switchgear transformers Distribution (, ) EPC transformers Electric products (, , , , , , , and , etc.) motors switchgear industrial gearboxes frequency inverters AC/DC converters contactors fuses circuit breakers servomotors Coatings and Varnishes (Marine, Automotive, Industrial) Battery Energy Store () BESS Automation (Hardware and Software) Integration Engineering with products of different manufacturers References [ edit ] ↑ . Mining Review Africa. \"About Zest WEG Group\" . Retrieved 2026 28 August ↑ . . \"WEG Revenue\" Companies Market Cap . Retrieved 2024 11 February ↑ . . 11 June 2012. \"WEG Electric Corp\" Nema.org . Retrieved 2024 26 June ↑ . \"History\" ↑ . \"Goliath\" . Retrieved 2008 30 August ↑ . . 9 February 2012. \"Brazil: Ballard to supply fuel cells to WEG Industries\" Automotive World . Retrieved 2019 29 May ↑ . . 8 February 2012. \"Ballard signs deal with WEG Industries to develop fuel cells for clean energy in Brazil\" Renewable Energy Focus . Retrieved 2019 29 May ↑ Alexandre Spatuzza (13 February 2019). . . \"Brazil's WEG enters storage market with NPS acquisition\" Recharge . Retrieved 2019 29 May ↑ . . 29 May 2019. \"Embraer, WEG team up to build electric motor for planes: statement\" Reuters . Retrieved 2019 29 May ↑ . . 28 May 2019. \"Brazil's WEG unveils 4MW wind turbine to battle global giants\" Recharge ↑ . \"WEG to launch a 7 MW wind turbine\" ↑ . \"WEG acquires industrial electric motors and generators business from Regal Rexnord\" ↑ . \"WEG in Numbers\" v t e companies of Ibovespa Brazil 3R Petroleum ALLOS Alpargatas Ambev Arezzo & Co Assaí Azul Brazilian Airlines B3 Banco do Brasil BB Seguridade Bradesco Bradespar Braskem BRF BTG Pactual Carrefour Brasil CEMIG Cielo Cogna Copel Cosan CPFL Energia CSN CVC Corp Cyrela Brazil Realty Direcional Dexco EcoRodovias EDP - Energias do Brasil Eletrobras Embraer Energisa Eneva ENGIE Brasil Equatorial Eztec Fleury S.A Gerdau Gol GPA Grupo Casas Bahia Grupo Soma Hapvida Hypera Pharma Iguatemi IRB Brasil RE Itaú Unibanco Itaúsa JBS Klabin Localiza Locaweb Lojas Renner Magazine Luiza Marfrig Méliuz Minerva Foods Motiva MRV Multiplan Natura & Co Petrobras Petz PRIO S.A. Qualicorp RD Rede D'Or Rumo Sabesp Santander Brasil São Martinho SLC Agrícola Suzano Taesa Telefônica Brasil TIM Brasil TOTVS Ultrapar Usiminas Vale Vibra Energia WEG YDUQS v t e Selected companies in the index S&P Latin America 40 (as of 20January2022) update [ ] AmBev América Móvil B3 Bradesco Banco de Chile Banco do Brasil Banco Santander-Chile Bancolombia Banorte BRF CCR Cemex Cencosud Ecopetrol Empresas CMPC Empresas Copec Falabella FEMSA Fibra Uno Gerdau Grupo México Interconexión Eléctrica Itaú Unibanco Itaúsa Localiza Lojas Renner Magazine Luiza Millicom Natura & Co PagSeguro Petrobras SQM Southern Copper Televisa Vale Wal-Mart de Mexico WEG v t e topics Transformer Topics Balun Buchholz relay Bushing Center tap Circle diagram Condition monitoring of transformers Electrical insulation paper Growler High-leg delta Induction regulator Leakage inductance Magnet wire Metadyne Open-circuit test Polarity Pressure relief valve Quadrature booster Resolver Resonant inductive coupling Severity factor Short-circuit test Stacking factor Synchro Tap changer Toroidal inductors and transformers Transformer oil Dissolved gas analysis Transformer oil testing Transformer utilization factor Vector group Types Autotransformer Buck–boost transformer Distribution transformer Pad-mounted transformer Delta-wye transformer Energy efficient transformer Amorphous metal transformer Flyback transformer Grounding transformer Instrument transformer Current transformer Voltage transformer Isolation transformer Austin transformer Linear variable differential transformer Parametric transformer Planar transformer Rotary transformer Rotary variable differential transformer Scott-T transformer Solid-state transformer Trigger transformer Variable-frequency transformer Zigzag transformer Coils Hybrid ",
+        "final": "https://en.wikipedia.org/wiki/WEG_S.A.",
+        "trecho_usado": "Integration Engineering with products of different manufacturers References [ edit ] ↑ . Mining Review Africa. \"About Zest WEG Group\" . Retrieved 2026 28 August ↑ . . \"WEG Revenue\" Companies Market Cap . Retrieved 2024 11 February ↑ . . 11 June 2012. \"WEG Electric Corp\" Nema.org . Retrieved 2024 26 June ↑ . \"History\" ↑ . \"Goliath\" . Retrieved 2008 30 August ↑ . . 9 February 2012. \"Brazil: Ballard",
+        "metadados": {
+          "titulo": "company",
+          "descricao": "",
+          "canonica": "https://en.wikipedia.org/wiki/WEG_S.A.",
+          "og": {
+            "og:image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "og:image:width": "1200",
+            "og:image:height": "842",
+            "og:title": "WEG S.A. - Wikipedia",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "2006-08-15T01:57:49Z",
+          "atualizado_em": "2026-09-16T23:41:45Z",
+          "autor": "Contributors to Wikimedia projects",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2006-08-15T01:57:49Z",
+            "dateModified": "2026-09-16T23:41:45Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contributors to Wikimedia projects"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "company"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Front view of \"WEG II, Asa Leste\", a unit of WEG Industries in Jaraguá do Sul\n: B3 WEGE3 Ibovespa Component\n16 September 1961 65 years ago ; () 16 September 1961\nDécio da Silva () Alberto Kuba () Chairman CEO\nelectric motors, industrial automation and control, industrial sensors, generators, alternators, industrial gearboxes, transformers, switchgears, electrical substations, electric panels, BESS, wind and steam turbines, motor drives, coatings and varnishes\nis a company operating worldwide in the , power, and automation technology areas. It is headquartered in , Brazil, and was founded in 1961. WEG S.A. Brazilian electrical engineering Jaraguá do Sul\nThe company produces , , , , , , , , and provides services, among other products and integrated solutions related to electric systems. electric motors generators alternators transformers turbines BESS drives coatings industrial automation\nWEG was founded in 1961 by Werner Ricardo Voigt, Eggon João da Silva and Geraldo Werninghaus, the name of the company being an acronym formed from the first names of the founders. The company has operations in around 140 countries, with approximately 40,000 employees. It's one of the largest manufacturers of electric motors and associated equipment in the world. 3 [ ]\nThe company Eletromotores Jaraguá was created on 16 September 1961 by Werner Ricardo Voigt, Eggon João da Silva and Geraldo Werninghaus (respectively an electrician, an administrator and a mechanic). Years later changed its name to Eletromotores WEG SA, the name WEG being formed with the first letter of each founder's first name. 4 [ ]\nInitially producing electric motors, WEG started diversifying its activities during the eighties, with the production of electric components, products for industrial automation, power and distribution transformers, liquid and powder paints and electrical insulation varnishes. The company grew into a global motor manufacturer.\nIn 1968, WEG created CentroWEG, a training center to aid in the lack of qualified professionals in the area of mechanical engineers.\nIn May 2008, WEG announced a new factory in India. 5 [ ]\nIn February 2012, the Canadian manufacturer signed a deal with WEG to assess the market opportunities for hydrogen PEM fuel cell products and services in applications. Ballard Power Systems 6 [ ] 7 [ ]\nIn February 2019, WEG acquired Energy Storage System, the storage business of US-based (NPS). WEG had previously bought the utility-scale turbine business of NPS in 2016. In May 2019, WEG signed a deal with the aerospace conglomerate to work on new electrical propulsion systems for aircraft. Northern Power Systems 8 [ ] Embraer 9 [ ]\nIn May 2019, WEG also introduced the 4MW wind turbine. By 2024, WEG also started producing 7MW wind turbines. 10 [ ] 11 [ ]\nIn 2024, WEG acquired the industrial electric motors and generators business of Regal Rexnord Corporation, including the Marathon, Cemp, and Rotor brands. WEG will also integrate a team of approximately 2,800 employees operating in 10 factories located in seven countries (United States, Mexico, China, India, Italy, the Netherlands, and Canada), as well as commercial subsidiaries in 11 countries. The net operating revenue of these businesses in 2022 was approximately $542 million. 12 [ ]\nThe company has subsidiaries in 37 countries, and production is distributed in manufacturing plants in 15 countries, including: , , , , , , , , , , , and . Brazil Argentina Colombia India Mexico Portugal Austria Germany China South Africa Turkey United States 13 [ ]\nGeneration (, , , ) Generators wind turbines steam turbines water turbines\nTransmission (, , ) EPC switchgear transformers\nDistribution (, ) EPC transformers\nElectric products (, , , , , , , and , etc.) motors switchgear industrial gearboxes frequency inverters AC/DC converters contactors fuses circuit breakers servomotors\nCoatings and Varnishes (Marine, Automotive, Industrial)\nBattery Energy Store () BESS\nAutomation (Hardware and Software)\nIntegra"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Main_Page",
+            "texto": "Main page",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents",
+            "texto": "Contents",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Portal:Current_events",
+            "texto": "Current events",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:Random",
+            "texto": "Random article",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:About",
+            "texto": "About Wikipedia",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us",
+            "texto": "Contact us",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Help:Contents",
+            "texto": "Help",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Help:Introduction",
+            "texto": "Learn to edit",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:Community_portal",
+            "texto": "Community portal",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:RecentChanges",
+            "texto": "Recent changes",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:File_upload_wizard",
+            "texto": "Upload file",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:SpecialPages",
+            "texto": "Special pages",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:Search",
+            "texto": "Search",
+            "interno": true
+          },
+          {
+            "url": "https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=en.wikipedia.org&amp;uselang=en",
+            "texto": "Donate",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&amp;returnto=WEG+S.A.",
+            "texto": "Create account",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&amp;returnto=WEG+S.A.",
+            "texto": "Log in",
+            "interno": true
+          },
+          {
+            "url": "https://da.wikipedia.org/wiki/WEG_Industries",
+            "texto": "Dansk",
+            "interno": false
+          },
+          {
+            "url": "https://de.wikipedia.org/wiki/WEG_Equipamentos_El%C3%A9tricos",
+            "texto": "Deutsch",
+            "interno": false
+          },
+          {
+            "url": "https://es.wikipedia.org/wiki/WEG",
+            "texto": "Español",
+            "interno": false
+          },
+          {
+            "url": "https://fa.wikipedia.org/wiki/%D8%B5%D9%86%D8%A7%DB%8C%D8%B9_%D9%88%DB%8C%DA%AF",
+            "texto": "فارسی",
+            "interno": false
+          },
+          {
+            "url": "https://fr.wikipedia.org/wiki/WEG_(entreprise)",
+            "texto": "Français",
+            "interno": false
+          },
+          {
+            "url": "https://ko.wikipedia.org/wiki/WEG_%EC%9D%B8%EB%8D%94%EC%8A%A4%ED%8A%B8%EB%A6%AC",
+            "texto": "한국어",
+            "interno": false
+          },
+          {
+            "url": "https://mg.wikipedia.org/wiki/WEG_S.A.",
+            "texto": "Malagasy",
+            "interno": false
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "texto": "Português",
+            "interno": false
+          },
+          {
+            "url": "https://ru.wikipedia.org/wiki/WEG",
+            "texto": "Русский",
+            "interno": false
+          },
+          {
+            "url": "https://ur.wikipedia.org/wiki/%D9%88%DB%8C%DA%AF_%D8%A7%D9%86%DA%88%D8%B3%D9%B9%D8%B1%DB%8C%D8%B2",
+            "texto": "اردو",
+            "interno": false
+          },
+          {
+            "url": "https://www.wikidata.org/wiki/Special:EntityPage/Q634794#sitelinks-wikipedia",
+            "texto": "Edit links",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "texto": "Article",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Talk:WEG_S.A.",
+            "texto": "Talk",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/w/index.php?title=WEG_S.A.&amp;action=edit",
+            "texto": "Edit",
+            "interno": true
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "WEG S.A."
+            ],
+            [
+              "Front view of \"WEG II, Asa Leste\", a unit of WEG Industries in Jaraguá do Sul"
+            ],
+            [
+              "Type",
+              "Sociedade Anônima"
+            ],
+            [
+              "Traded as",
+              "B3 : WEGE3 Ibovespa Component"
+            ],
+            [
+              "Industry",
+              "Electrical equipment"
+            ],
+            [
+              "Founded",
+              "16 September 1961 ; 65 years ago ( 16 September 1961 )"
+            ],
+            [
+              "Headquarters",
+              "Jaraguá do Sul , Brazil"
+            ],
+            [
+              "Area served",
+              "Worldwide"
+            ],
+            [
+              "Key people",
+              "Décio da Silva ( Chairman ) Alberto Kuba ( CEO )"
+            ],
+            [
+              "Products",
+              "electric motors, industrial automation and control, industrial sensors, generators, alternators, industrial gearboxes, transformers, switchgears, electrical sub"
+            ],
+            [
+              "Revenue",
+              "US$ 6.82 billion (2024)"
+            ],
+            [
+              "Number of employees",
+              "c. 40,000 [ when? ]"
+            ],
+            [
+              "Subsidiaries",
+              "Zest WEG Group [ 1 ]"
+            ],
+            [
+              "Website",
+              "weg .net"
+            ],
+            [
+              "Footnotes [ 2 ]"
+            ]
+          ],
+          [
+            [
+              ".mw-parser-output .navbar{display:inline;font-size:88%;font-weight:normal}.mw-parser-output .navbar-collapse{float:left;text-align:left}.mw-parser-output .navba"
+            ],
+            [
+              "3R Petroleum ALLOS Alpargatas Ambev Arezzo & Co Assaí Azul Brazilian Airlines B3 Banco do Brasil BB Seguridade Bradesco Bradespar Braskem BRF BTG Pactual Carref"
+            ]
+          ],
+          [
+            [
+              "v t e Selected companies in the S&P Latin America 40 index (as of 20 January 2022 [ update ] )"
+            ],
+            [
+              "AmBev América Móvil B3 Bradesco Banco de Chile Banco do Brasil Banco Santander-Chile Bancolombia Banorte BRF CCR Cemex Cencosud Ecopetrol Empresas CMPC Empresas"
+            ]
+          ],
+          [
+            [
+              "v t e Transformer topics"
+            ],
+            [
+              "Topics",
+              "Balun Buchholz relay Bushing Center tap Circle diagram Condition monitoring of transformers Electrical insulation paper Growler High-leg delta Induction regulat",
+              ""
+            ],
+            [
+              "Types",
+              "Autotransformer Buck–boost transformer Distribution transformer Pad-mounted transformer Delta-wye transformer Energy efficient transformer Amorphous metal trans"
+            ],
+            [
+              "Coils",
+              "Hybrid coil Induction coil Oudin coil Polyphase coil Repeating coil Tesla coil Trembler coil"
+            ],
+            [
+              "Manufacturers",
+              "ABB General Electric Maddox Mitsubishi Electric ProlecGE Schneider Electric Siemens TBEA WEG"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/8/81/Weg_logo_blue_vector.svg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+          "https://en.wikipedia.org/static/images/icons/enwiki-25.svg",
+          "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+          "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/250px-Weg_logo_blue_vector.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/WEG_II%2C_Asa_leste.jpg/250px-WEG_II%2C_Asa_leste.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Transformer_Step-up_Iron_Core.svg/120px-Transformer_Step-up_Iron_Core.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-dc7089a84aae",
+            "type": "image",
+            "title": "company",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/81/Weg_logo_blue_vector.svg/1280px-Weg_logo_blue_vector.svg.png?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "source_title": "company",
+            "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1af776a0003e",
+            "type": "image",
+            "title": "Wikipedia",
+            "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+            "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+            "source_title": "company",
+            "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipedia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0997b8b9c241",
+            "type": "image",
+            "title": "The Free Encyclopedia",
+            "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+            "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+            "source_title": "company",
+            "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The Free Encyclopedia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b75b26965c71",
+            "type": "image",
+            "title": "Increase",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "company",
+            "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Increase",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a5e0f126b6d6",
+            "type": "image",
+            "title": "Brazil",
+            "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "company",
+            "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brazil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4b9da31b8c1e",
+            "type": "image",
+            "title": "Transformers",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Transformer_Step-up_Iron_Core.svg/120px-Transformer_Step-up_Iron_Core.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e6/Transformer_Step-up_Iron_Core.svg/120px-Transformer_Step-up_Iron_Core.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "company",
+            "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Transformers",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-de5e034dce69",
+            "type": "image",
+            "title": "Wikimedia Foundation",
+            "url": "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+            "final_url": "https://en.wikipedia.org/static/images/footer/wikimedia.svg",
+            "source_title": "company",
+            "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikimedia Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f861890d8556",
+            "type": "image",
+            "title": "Powered by MediaWiki",
+            "url": "https://en.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "final_url": "https://en.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "source_title": "company",
+            "source_url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Powered by MediaWiki",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://ri.weg.net/",
+      "result": {
+        "titulo": "Home - WEG RI",
+        "texto": "Resultados do 3T26 Clique aqui Clique aqui Conheça nossas áreas de negócios Clique aqui Clique aqui",
+        "final": "https://ri.weg.net/",
+        "trecho_usado": "Resultados do 3T26 Clique aqui Clique aqui Conheça nossas áreas de negócios Clique aqui Clique aqui",
+        "metadados": {
+          "titulo": "Home - WEG RI",
+          "descricao": "Relações com Investidores",
+          "canonica": "https://ri.weg.net/",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "website",
+            "og:title": "Home - WEG RI",
+            "og:url": "https://ri.weg.net/",
+            "og:site_name": "WEG RI"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "2020-03-02T16:22:20+00:00",
+          "atualizado_em": "2026-10-22T18:56:24+00:00",
+          "autor": "",
+          "site": "WEG RI",
+          "tipo": "WebPage",
+          "ld": {
+            "datePublished": "2020-03-02T16:22:20+00:00",
+            "dateModified": "2026-10-22T18:56:24+00:00",
+            "inLanguage": "pt-BR",
+            "description": "Relações com Investidores"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Conheça nossas áreas de negócios",
+            "texto": ""
+          }
+        ],
+        "links": [
+          {
+            "url": "https://ri.weg.net",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/",
+            "texto": "Português",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/en/",
+            "texto": "English",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/a-weg/por-que-a-weg/",
+            "texto": "Por que a WEG?",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/a-weg/perfil-corporativo/",
+            "texto": "Perfil Corporativo",
+            "interno": true
+          },
+          {
+            "url": "https://www.weg.net/institutional/BR/pt/sustainability/home",
+            "texto": "Sustentabilidade",
+            "interno": false
+          },
+          {
+            "url": "https://ri.weg.net/a-weg/codigo-de-etica/",
+            "texto": "Código de Ética",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/a-weg/weg-day/",
+            "texto": "WEG Day",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/governanca-corporativa/estrutura-societaria/",
+            "texto": "Estrutura Societária",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/governanca-corporativa/conselhos-e-comites/",
+            "texto": "Conselhos e Comitês",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/governanca-corporativa/diretoria-executiva/",
+            "texto": "Diretoria Executiva",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/governanca-corporativa/assembleias-e-reunioes/",
+            "texto": "Assembleias e Reuniões",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/governanca-corporativa/estatuto-e-politicas/",
+            "texto": "Estatuto e Políticas",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/governanca-corporativa/informe-de-governanca/",
+            "texto": "Informe de Governança",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/nossas-acoes/cotacoes-e-graficos/",
+            "texto": "Cotações e Gráficos",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/nossas-acoes/dividendos-e-jcp/",
+            "texto": "Dividendos e JCP",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/nossas-acoes/programa-de-adr/",
+            "texto": "Programa de ADR",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/nossas-acoes/cobertura-de-analistas/",
+            "texto": "Cobertura de Analistas",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/nossas-acoes/informe-de-rendimentos/",
+            "texto": "Informe de Rendimentos",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/informacoes-financeiras/central-de-resultados/",
+            "texto": "Central de Resultados",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/informacoes-financeiras/formulario-de-referencia-e-cadastral/",
+            "texto": "Formulário de Referência e Cadastral",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/informacoes-financeiras/relatorios-anuais/",
+            "texto": "Relatórios Anuais",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/informacoes-financeiras/planilhas/",
+            "texto": "Planilhas",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/publicacoes-e-comunicados/avisos-comunicados-e-fatos-relevantes/",
+            "texto": "Avisos, Comunicados e Fatos Relevantes",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/publicacoes-e-comunicados/outros-documentos-cvm/",
+            "texto": "Outros Documentos CVM",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/publicacoes-e-comunicados/apresentacoes-e-documentos/",
+            "texto": "Apresentações e Documentos",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/servicos-de-ri/agenda-de-ri/",
+            "texto": "Agenda de RI",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/servicos-de-ri/e-mail-alerta/",
+            "texto": "E-mail Alerta",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/servicos-de-ri/fale-com-ri/",
+            "texto": "Fale com o RI",
+            "interno": true
+          },
+          {
+            "url": "https://ri.weg.net/servicos-de-ri/central-de-downloads/",
+            "texto": "Central de Downloads",
+            "interno": true
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "",
+              "Valor",
+              "Variação",
+              "Variação em 52 semanas"
+            ],
+            [
+              "-",
+              "-",
+              "-",
+              "- -"
+            ],
+            [
+              "WEGZY",
+              "-",
+              "+-",
+              "- -"
+            ],
+            [
+              "-",
+              "-",
+              "-",
+              "- -"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/weg.png",
+          "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/indiceMSCI2.png",
+          "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/indices-v2022.png",
+          "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/twitter.png",
+          "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/wendi-spy.png",
+          "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/wendi-atendimento.png"
+        ],
+        "midia": [
+          {
+            "id": "med-7c2dbd75e002",
+            "type": "image",
+            "title": "WEG",
+            "url": "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/weg.png",
+            "final_url": "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/weg.png",
+            "source_title": "Home - WEG RI",
+            "source_url": "https://ri.weg.net/",
+            "publisher": "cdn-sites-assets.mziq.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WEG",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8ea936b8edc0",
+            "type": "image",
+            "title": "WENDi",
+            "url": "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/wendi-spy.png",
+            "final_url": "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/wendi-spy.png",
+            "source_title": "Home - WEG RI",
+            "source_url": "https://ri.weg.net/",
+            "publisher": "cdn-sites-assets.mziq.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WENDi",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2c26a56f1dba",
+            "type": "image",
+            "title": "WENDi - Atendimento",
+            "url": "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/wendi-atendimento.png",
+            "final_url": "https://cdn-sites-assets.mziq.com/wp-content/themes/mziq_weg_ri/img/wendi-atendimento.png",
+            "source_title": "Home - WEG RI",
+            "source_url": "https://ri.weg.net/",
+            "publisher": "cdn-sites-assets.mziq.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WENDi - Atendimento",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a054f582a2df",
+            "type": "video",
+            "title": "YouTube video player",
+            "url": "https://www.youtube.com/embed/cFPY_rFBJTc?si=edgMiZsXUMBr5ugW",
+            "final_url": "https://www.youtube.com/embed/cFPY_rFBJTc?si=edgMiZsXUMBr5ugW",
+            "source_title": "Home - WEG RI",
+            "source_url": "https://ri.weg.net/",
+            "publisher": "www.youtube.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Relações com Investidores",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+      "result": {
+        "titulo": "Deed - Attribution-ShareAlike 4.0 International - Creative Commons",
+        "texto": "Canonical URL https://creativecommons.org/licenses/by-sa/4.0/ See the legal code You are free to: — copy and redistribute the material in any medium or format for any purpose, even commercially. Share — remix, transform, and build upon the material for any purpose, even commercially. Adapt The licensor cannot revoke these freedoms as long as you follow the license terms. Under the following terms: — You must give , provide a link to the license, and . You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. Attribution appropriate credit indicate if changes were made — If you remix, transform, or build upon the material, you must distribute your contributions under the as the original. ShareAlike same license — You may not apply legal terms or that legally restrict others from doing anything the license permits. No additional restrictions technological measures Notices: You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable . exception or limitation No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as may limit how you use the material. publicity, privacy, or moral rights Notice This deed highlights only some of the key features and terms of the actual license. It is not a license and has no legal value. You should carefully review all of the terms and conditions of the actual license before using the licensed material. Creative Commons is not a law firm and does not provide legal services. Distributing, displaying, or linking to this deed or the license that it summarizes does not create a lawyer-client or any other relationship. Creative Commons is the nonprofit behind the open licenses and other legal tools that allow creators to share their work. Our legal tools are free to use. Learn more about our work Learn more about CC Licensing Support our work Use the license for your own material. Licenses List Public Domain List",
+        "final": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "trecho_usado": "your intended use. For example, other rights such as may limit how you use the material. publicity, privacy, or moral rights Notice This deed highlights only some of the key features and terms of the actual license. It is not a license and has no legal value. You should carefully review all of the terms and conditions of the actual license before using the licensed material. Creative Commons is",
+        "metadados": {
+          "titulo": "Deed - Attribution-ShareAlike 4.0 International - Creative Commons",
+          "descricao": "",
+          "canonica": "https://creativecommons.org/licenses/by-sa/4.0/deed.en",
+          "og": {},
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "— copy and redistribute the material in any medium or format for any purpose, even commercially. Share\n— remix, transform, and build upon the material for any purpose, even commercially. Adapt\nThe licensor cannot revoke these freedoms as long as you follow the license terms."
+          },
+          {
+            "titulo": "Under the following terms:",
+            "texto": "— You must give , provide a link to the license, and . You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. Attribution appropriate credit indicate if changes were made\n— If you remix, transform, or build upon the material, you must distribute your contributions under the as the original. ShareAlike same license\n— You may not apply legal terms or that legally restrict others from doing anything the license permits. No additional restrictions technological measures\nYou do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable . exception or limitation\nNo warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as may limit how you use the material. publicity, privacy, or moral rights\nThis deed highlights only some of the key features and terms of the actual license. It is not a license and has no legal value. You should carefully review all of the terms and conditions of the actual license before using the licensed material.\nCreative Commons is not a law firm and does not provide legal services. Distributing, displaying, or linking to this deed or the license that it summarizes does not create a lawyer-client or any other relationship.\nCreative Commons is the nonprofit behind the open licenses and other legal tools that allow creators to share their work. Our legal tools are free to use.\nLearn more about our work\nLearn more about CC Licensing\nUse the license for your own material."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://creativecommons.org/",
+            "texto": "Creative Commons",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/who-we-are",
+            "texto": "Who We Are",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/strategic-plan",
+            "texto": "Strategic Plan",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/team",
+            "texto": "Team",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/governance",
+            "texto": "Governance",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/opportunities",
+            "texto": "Opportunities",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/annual-reports/",
+            "texto": "Annual Reports & Financials",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/history/",
+            "texto": "History",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/press",
+            "texto": "Press",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/what-we-do",
+            "texto": "What We Do",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/build/",
+            "texto": "Build Open Infrastructure Expand CC Licenses",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/cc-signals",
+            "texto": "CC Signals",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/public-domain",
+            "texto": "Public Domain",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/chooser",
+            "texto": "Chooser",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/faq",
+            "texto": "FAQs",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/implement/",
+            "texto": "Implement the Commons Expand Where CC Makes An Impact",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/resources",
+            "texto": "Resources",
+            "interno": true
+          },
+          {
+            "url": "https://search.creativecommons.org",
+            "texto": "Search the Commons Engage the People Expand Training + Webinars",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/advocacy",
+            "texto": "Advocacy",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/community",
+            "texto": "Community",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/partnerships",
+            "texto": "Partnerships",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/events",
+            "texto": "Events",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/blog",
+            "texto": "Blog",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/support",
+            "texto": "Support Us",
+            "interno": true
+          },
+          {
+            "url": "https://giving.gofundme.com/campaign/778218/donate",
+            "texto": "Make a Gift Ways to Give",
+            "interno": false
+          },
+          {
+            "url": "https://creativecommons.org/support/oic",
+            "texto": "Open Infrastructure Circle",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/support/donor-faq",
+            "texto": "Donor FAQ",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "texto": "https://creativecommons.org/licenses/by-sa/4.0/ See the legal code",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/share-your-work/cclicenses/",
+            "texto": "Learn more about CC Licensing Support our work",
+            "interno": true
+          },
+          {
+            "url": "https://creativecommons.org/choose/",
+            "texto": "Use the license for your own material.",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "26af039bc76859fc07c5",
+            "url": "https://www.weg.net/institutional/BR/pt/",
+            "title": "Homepage | WEG",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Empresa especializada na fabricação e comercialização de motores elétricos, transformadores, geradores e tintas."
+          },
+          {
+            "id": "017eed77b13210ac709a",
+            "url": "https://www.weg.net/",
+            "title": "Homepage | WEG",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "WEG provides global solutions for electric motors, variable frequency drives, soft starters, controls, panels, transformers, and generators."
+          },
+          {
+            "id": "31cfb26ec87d6f754f80",
+            "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "title": "WEG S.A. – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "WEG é uma empresa brasileira que atua mundialmente nas áreas de engenharia elétrica, tecnologia de energia elétrica e automação."
+          },
+          {
+            "id": "6cc9bb1d0f6f5ba46fb1",
+            "url": "https://ecatalog.weg.net/",
+            "title": "WEG",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Dimensione Motores Elétricos Alternadores Partida e Proteção de Motores Proteção de Circuitos Elétricos Correção do fator de potência (Motores Elétricos) Correç"
+          },
+          {
+            "id": "12e2a9ab2d6b5d142e94",
+            "url": "https://ri.weg.net/",
+            "title": "Home - WEG RI",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Investimento de US$ 165 milhões para ampliar produção de gerador ... Investimentos para ampliação do projeto da fábrica de sistemas de ..."
+          },
+          {
+            "id": "1c6d4609429570015449",
+            "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "title": "WEG S.A. - Wikipedia",
+            "origin": "bing",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "WEG S.A. is a Brazilian company operating worldwide in the electrical engineering, power, and automation technology areas. It is headquartered in Jaraguá do Sul"
+          },
+          {
+            "id": "4dde8ca5fbad97a231ac",
+            "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "title": "CC-BY-SA 4.0",
+            "origin": "marginalia",
+            "query": "WEG História fontes primárias",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          }
+        ],
+        "unique_candidates": 7,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (WEG História fontes primárias)",
+        "bing (consulta reformulada 'WEG'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (WEG História fontes primárias)",
+        "ddg: bloqueado (WEG História fontes primárias)",
+        "marginalia: 1 resultados (WEG História fontes primárias)",
+        "marginalia: sem correspondência com o pedido; tentando outro provedor (WEG História fontes primárias)",
+        "— recuperação por lacuna —",
+        "wikipedia: 6 resultados (WEG)",
+        "wikipedia: sem correspondência com o pedido; tentando outro provedor (WEG)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "WEG História fontes primárias",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "História da empresa WEG fontes primárias",
+          "purpose": "pedido original sem condensação"
+        },
+        {
+          "type": "ENTITY_EXACT",
+          "query": "WEG",
+          "purpose": "resolver assunto explícito quando operações dominam os resultados; validar pelo pedido original"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": false,
+        "requirements": [],
+        "passages": [],
+        "complete": false,
+        "scope": "no explicit supported facet parsed; not proof of completeness"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S2",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S3",
+          "url": "https://ri.weg.net/",
+          "answerability": null,
+          "answer_passages": null
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "História da empresa WEG fontes primárias",
+      "adapter_query": "WEG História fontes primárias",
+      "provider": "bing",
+      "at": "2026-10-25T18:14:13.975425+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Homepage | WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/"
+        },
+        {
+          "title": "Homepage | WEG",
+          "url": "https://www.weg.net/"
+        },
+        {
+          "title": "WEG S.A. – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "title": "WEG",
+          "url": "https://ecatalog.weg.net/"
+        },
+        {
+          "title": "Home - WEG RI",
+          "url": "https://ri.weg.net/"
+        },
+        {
+          "title": "WEG S.A. - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A."
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "WEG História fontes primárias",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 388.97,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História da empresa WEG fontes primárias",
+      "adapter_query": "WEG",
+      "provider": "bing",
+      "at": "2026-10-25T18:14:14.376556+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Homepage | WEG",
+          "url": "https://www.weg.net/institutional/BR/pt/"
+        },
+        {
+          "title": "Homepage | WEG",
+          "url": "https://www.weg.net/"
+        },
+        {
+          "title": "WEG S.A. – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "title": "WEG",
+          "url": "https://ecatalog.weg.net/"
+        },
+        {
+          "title": "Home - WEG RI",
+          "url": "https://ri.weg.net/"
+        },
+        {
+          "title": "WEG S.A. - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A."
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "WEG",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 355.77,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História da empresa WEG fontes primárias",
+      "adapter_query": "WEG História fontes primárias",
+      "provider": "ddg",
+      "at": "2026-10-25T18:14:14.745163+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "bloqueado",
+      "result_count": 0,
+      "classification": "PROVIDER_BLOCKED",
+      "requests": [],
+      "latency_ms": 297.17,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História da empresa WEG fontes primárias",
+      "adapter_query": "WEG História fontes primárias",
+      "provider": "marginalia",
+      "at": "2026-10-25T18:14:15.042569+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 1,
+      "results": [
+        {
+          "title": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "WEG História fontes primárias"
+          },
+          "http_status": null,
+          "final_url": "https://old-search.marginalia.nu/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 1050.62,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História da empresa WEG fontes primárias",
+      "adapter_query": "WEG",
+      "provider": "marginalia",
+      "at": "2026-10-25T18:14:16.093732+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "WEG"
+          },
+          "http_status": null,
+          "final_url": "https://old-search.marginalia.nu/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 804.11,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História da empresa WEG fontes primárias",
+      "adapter_query": "WEG",
+      "provider": "wikipedia",
+      "at": "2026-10-25T18:14:16.955405+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "WEG S.A.",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "title": "Wega Nery",
+          "url": "https://pt.wikipedia.org/wiki/Wega_Nery"
+        },
+        {
+          "title": "Wegmans",
+          "url": "https://pt.wikipedia.org/wiki/Wegmans"
+        },
+        {
+          "title": "Weggis",
+          "url": "https://pt.wikipedia.org/wiki/Weggis"
+        },
+        {
+          "title": "Wegahta Gebreyohannes Abera",
+          "url": "https://pt.wikipedia.org/wiki/Wegahta_Gebreyohannes_Abera"
+        },
+        {
+          "title": "Wegenstetten",
+          "url": "https://pt.wikipedia.org/wiki/Wegenstetten"
+        }
+      ],
+      "requests": [],
+      "latency_ms": 528.37,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "beab3573022e0e52511357a0636e80f2e14478ed",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

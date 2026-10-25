@@ -1,0 +1,3306 @@
+{
+  "id": "ord-02",
+  "category": "universal",
+  "query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 11.815,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "stackexchange",
+      "query": "String.prototype.replaceAll limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "stackexchange",
+      "query": "String.prototype.replaceAll",
+      "candidates": 6
+    },
+    {
+      "provider": "hn",
+      "query": "String.prototype.replaceAll limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "String.prototype.replaceAll",
+      "candidates": 2
+    },
+    {
+      "provider": "bing",
+      "query": "String.prototype.replaceAll limitações",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "String.prototype.replaceAll",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=String.prototype.replaceAll+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=String.prototype.replaceAll+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4857
+    },
+    {
+      "url": "https://www.bing.com/search?q=String.prototype.replaceAll&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=String.prototype.replaceAll&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4793
+    },
+    {
+      "url": "https://stackoverflow.com/questions/13340131/string-prototype-replaceall-not-working",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://2ality.com/2019/12/string-prototype-replaceall.html",
+      "error": "http"
+    },
+    {
+      "url": "https://github.com/tc39/proposal-string-replaceall",
+      "final": "https://github.com/tc39/proposal-string-replaceall",
+      "chars": 315203
+    },
+    {
+      "url": "https://github.com/es-shims/String.prototype.replaceAll",
+      "final": "https://github.com/es-shims/String.prototype.replaceAll",
+      "chars": 310721
+    },
+    {
+      "url": "https://github.com/tc39/proposal-string-replaceall/issues",
+      "final": "https://github.com/tc39/proposal-string-replaceall/issues",
+      "chars": 249144
+    },
+    {
+      "url": "https://string-db.org/",
+      "final": "https://string-db.org/",
+      "chars": 134087
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+    "domain": "general",
+    "original_request": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+    "resolved_request": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:30:20.282819+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "3bcd2e363a0c6e75a42f",
+        "url": "https://stackoverflow.com/questions/13340131/string-prototype-replaceall-not-working",
+        "title": "String.prototype.replaceAll() not working",
+        "origin": "stackexchange",
+        "query": "String.prototype.replaceAll",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "I need to replace all the string in a variable. var a = \"::::::\"; a = a.replace(\":\", \"hi\"); console.log(a); The above code replaces only the first string i.e.. ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "edf5c17c455b2c51118e",
+        "url": "https://stackoverflow.com/questions/65023675/react-why-does-babel-not-polyfill-string-prototype-replaceall",
+        "title": "React: Why does Babel not polyfill String.prototype.replaceAll?",
+        "origin": "stackexchange",
+        "query": "String.prototype.replaceAll",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Having read that React takes care of setting up Babel and webpack for me, I used the new (ES2020 or ES2021?) String.prototype.replaceAll() function in my code, ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "05199809764736797349",
+        "url": "https://stackoverflow.com/questions/74504688/callthis-triggering-string-prototype-replaceall-from-unrelated-function",
+        "title": ".call(this) triggering String.prototype.replaceAll from unrelated function",
+        "origin": "stackexchange",
+        "query": "String.prototype.replaceAll",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Below I have shown two scripts and I would like to understand why the second script is triggered by the first script. The second script fails because an unescap",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "3c6903967047185fcceb",
+        "url": "https://2ality.com/2019/12/string-prototype-replaceall.html",
+        "title": "ECMAScript proposal: String.prototype.replaceAll",
+        "origin": "hn",
+        "query": "String.prototype.replaceAll",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "HN: 56 pontos · 67 comentários",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "http",
+        "losses": [
+          "FETCH_FAILED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "e15745501001d1636cc2",
+        "url": "https://github.com/tc39/proposal-string-replaceall",
+        "title": "String.prototype.replaceAll",
+        "origin": "hn",
+        "query": "String.prototype.replaceAll",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "proposal String.prototype.replaceAll Status Champion: Mathias Bynens (Google, @mathiasbynens). This proposal is at stage 4 of , and is scheduled to be included ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 4354,
+        "final_url": "https://github.com/tc39/proposal-string-replaceall",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "0f9c0c0d61caacdab86a",
+        "url": "https://stackoverflow.com/questions/66937529/why-doesnt-nodejs-support-string-prototype-replaceall",
+        "title": "why doesn't NodeJS support String.prototype.replaceAll?",
+        "origin": "stackexchange",
+        "query": "String.prototype.replaceAll",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "This string method exists in browserland, but not in Node. Why not? It's neither brand-new nor exotic. replaceAll is part of ECMA-262 src replaceAll is describe",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "c188a0d3323017d03eca",
+        "url": "https://stackoverflow.com/questions/69322809/typescript-compiler-does-not-convert-string-prototype-replaceall-es2021-to-tar",
+        "title": "Typescript compiler does not convert String.prototype.replaceAll (ES2021) to target ES2020",
+        "origin": "stackexchange",
+        "query": "String.prototype.replaceAll",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "I'm trying to compile my ts code with the target ES2020 as my node version is v14.17.3 , according to the following tsconfig : { \"compilerOptions\": { \"target\": ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "9fe21a8067bdafc6dc23",
+        "url": "https://stackoverflow.com/questions/494035/how-do-you-use-a-variable-in-a-regular-expression",
+        "title": "How do you use a variable in a regular expression?",
+        "origin": "stackexchange",
+        "query": "String.prototype.replaceAll",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "I would like to create a String.replaceAll() method in JavaScript and think using a regex would be the most terse way to do it. However, I can't figure out how ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "4b710fea57b8ca496102",
+        "url": "https://string-db.org/",
+        "title": "STRING: functional protein association networks",
+        "origin": "bing",
+        "query": "String.prototype.replaceAll limitações",
+        "date": "dom., 25 out. 2026 07:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Welcome to STRING Protein-Protein Interaction NetworksFunctional Enrichment Analysis Organisms 12535 Proteins 59.3 mio Interactions >20 bln Search",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 146,
+        "final_url": "https://string-db.org/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "9a369d69170b0a6614ac",
+        "url": "https://www.pythonprogressivo.net/2018/10/String-O-que-e-Para-que-serve-Como-funciona-Onde-usa.html",
+        "title": "String - O que é ? Como funciona ? Onde se usa - Python Progressivo",
+        "origin": "bing",
+        "query": "String.prototype.replaceAll limitações",
+        "date": "sex., 23 out. 2026 21:18:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Neste tutorial inicial de nossa seção de Strings em Python, vamos ver o que de fato é uma string, como funciona, para que servem e onde diachos vamos usar elas ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "d9c881035974ddfce087",
+        "url": "https://www.linguee.com.br/ingles-portugues/traducao/string.html",
+        "title": "string - Tradução em português – Linguee",
+        "origin": "bing",
+        "query": "String.prototype.replaceAll limitações",
+        "date": "qui., 22 out. 2026 06:53:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Muitos exemplos de traduções com \"string\" – Dicionário português-inglês e busca em milhões de traduções.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "1e7f6eae6fcf3603d61f",
+        "url": "https://docs.python.org/pt-br/3/library/string.html",
+        "title": "string — Operações comuns de strings — Documentação Python 3.15.1",
+        "origin": "bing",
+        "query": "String.prototype.replaceAll limitações",
+        "date": "sáb., 24 out. 2026 04:13:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Uma string contendo todos os caracteres ASCII que são considerados espaços em branco. Isso inclui espaço de caracteres, tabulação, avanço de linha, retorno, ava",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "75a484c998a9cdf65742",
+        "url": "https://github.com/es-shims/String.prototype.replaceAll",
+        "title": "es-shims",
+        "origin": "in_source_link",
+        "query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "require ( 'string.prototype.replaceall' ) ; const str = 'aabc' ; // replaceAll and replace are the same, when given a global regex to replace assert . equal ( r",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1320,
+        "final_url": "https://github.com/es-shims/String.prototype.replaceAll",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "7b8cd18800abf5428d1a",
+        "url": "https://github.com/tc39/proposal-string-replaceall/issues",
+        "title": "Issues",
+        "origin": "in_source_link",
+        "query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry Integrate external tools DEVELOPER W",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 1523,
+        "final_url": "https://github.com/tc39/proposal-string-replaceall/issues",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      }
+    ],
+    "unique_candidates": 14,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-8ba6024d77f1",
+      "type": "image",
+      "title": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+      "url": "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+      "final_url": "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+      "source_title": "Issues · tc39/proposal-string-replaceall",
+      "source_url": "https://github.com/tc39/proposal-string-replaceall/issues",
+      "publisher": "opengraph.githubassets.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dc4ae02bfee7",
+      "type": "image",
+      "title": "tc39",
+      "url": "https://avatars.githubusercontent.com/u/1725583?s=60&v=4",
+      "final_url": "https://avatars.githubusercontent.com/u/1725583?s=60&v=4",
+      "source_title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+      "source_url": "https://github.com/tc39/proposal-string-replaceall",
+      "publisher": "avatars.githubusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "tc39",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9ecd7798dc7b",
+      "type": "document",
+      "title": "README.md",
+      "url": "https://github.com/tc39/proposal-string-replaceall/blob/master/README.md",
+      "final_url": "https://github.com/tc39/proposal-string-replaceall/blob/master/README.md",
+      "source_title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+      "source_url": "https://github.com/tc39/proposal-string-replaceall",
+      "publisher": "github.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-e792a9e6c894",
+      "type": "document",
+      "title": "package.json",
+      "url": "https://github.com/tc39/proposal-string-replaceall/blob/master/package.json",
+      "final_url": "https://github.com/tc39/proposal-string-replaceall/blob/master/package.json",
+      "source_title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+      "source_url": "https://github.com/tc39/proposal-string-replaceall",
+      "publisher": "github.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-ab2d9ba5da1e",
+      "type": "document",
+      "title": "spec.html",
+      "url": "https://github.com/tc39/proposal-string-replaceall/blob/master/spec.html",
+      "final_url": "https://github.com/tc39/proposal-string-replaceall/blob/master/spec.html",
+      "source_title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+      "source_url": "https://github.com/tc39/proposal-string-replaceall",
+      "publisher": "github.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-15746e10846d",
+      "type": "image",
+      "title": "Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal. - es-shims/String.prototype.replaceAll",
+      "url": "https://opengraph.githubassets.com/41bd850875d71565777329282f1ae28c86fdc6b8bab09a1d90ed62f540f11d85/es-shims/String.prototype.replaceAll",
+      "final_url": "https://opengraph.githubassets.com/41bd850875d71565777329282f1ae28c86fdc6b8bab09a1d90ed62f540f11d85/es-shims/String.prototype.replaceAll",
+      "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+      "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+      "publisher": "opengraph.githubassets.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal. - es-shims/String.prototype.replaceAll",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-86133c5ae921",
+      "type": "image",
+      "title": "es-shims",
+      "url": "https://avatars.githubusercontent.com/u/6288429?s=60&v=4",
+      "final_url": "https://avatars.githubusercontent.com/u/6288429?s=60&v=4",
+      "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+      "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+      "publisher": "avatars.githubusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "es-shims",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e325b2396f56",
+      "type": "image",
+      "title": "Version Badge",
+      "url": "https://camo.githubusercontent.com/2a07c19cd47468d378c50b6089e6e5405d426ebac40b82244e48b70861865a4b/68747470733a2f2f76657273696f6e626164672e65732f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2e737667",
+      "final_url": "https://camo.githubusercontent.com/2a07c19cd47468d378c50b6089e6e5405d426ebac40b82244e48b70861865a4b/68747470733a2f2f76657273696f6e626164672e65732f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2e737667",
+      "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+      "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+      "publisher": "camo.githubusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Version Badge",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ba825be40635",
+      "type": "image",
+      "title": "github actions",
+      "url": "https://camo.githubusercontent.com/ccfc821921cb7e978bcec8d87a668c4b69b4ff46e040bd391f5f603cab6b45a5/68747470733a2f2f696d672e736869656c64732e696f2f656e64706f696e743f75726c3d68747470733a2f2f6769746875622d616374696f6e732d62616467652d75336a6e347466706f6363682e72756e6b69742e73682f65732d7368696d732f737472696e672e70726f746f747970652e7265706c616365616c6c",
+      "final_url": "https://camo.githubusercontent.com/ccfc821921cb7e978bcec8d87a668c4b69b4ff46e040bd391f5f603cab6b45a5/68747470733a2f2f696d672e736869656c64732e696f2f656e64706f696e743f75726c3d68747470733a2f2f6769746875622d616374696f6e732d62616467652d75336a6e347466706f6363682e72756e6b69742e73682f65732d7368696d732f737472696e672e70726f746f747970652e7265706c616365616c6c",
+      "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+      "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+      "publisher": "camo.githubusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "github actions",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7378080da6f6",
+      "type": "image",
+      "title": "coverage",
+      "url": "https://camo.githubusercontent.com/a9b702cd877b1b695d31262325b45f4296fddfdb29cdc4256bbbc893c0d1749e/68747470733a2f2f636f6465636f762e696f2f67682f65732d7368696d732f737472696e672e70726f746f747970652e7265706c616365616c6c2f6272616e63682f6d61696e2f6772617068732f62616467652e737667",
+      "final_url": "https://camo.githubusercontent.com/a9b702cd877b1b695d31262325b45f4296fddfdb29cdc4256bbbc893c0d1749e/68747470733a2f2f636f6465636f762e696f2f67682f65732d7368696d732f737472696e672e70726f746f747970652e7265706c616365616c6c2f6272616e63682f6d61696e2f6772617068732f62616467652e737667",
+      "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+      "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+      "publisher": "camo.githubusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "coverage",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-866637346527",
+      "type": "image",
+      "title": "dependency status",
+      "url": "https://camo.githubusercontent.com/f0e641c74500bdfdc9088257ae8c9e7b132a1bf12b123c56744efb4099727b34/68747470733a2f2f64617669642d646d2e6f72672f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2e737667",
+      "final_url": "https://camo.githubusercontent.com/f0e641c74500bdfdc9088257ae8c9e7b132a1bf12b123c56744efb4099727b34/68747470733a2f2f64617669642d646d2e6f72672f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2e737667",
+      "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+      "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+      "publisher": "camo.githubusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "dependency status",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4a3b5c840890",
+      "type": "image",
+      "title": "dev dependency status",
+      "url": "https://camo.githubusercontent.com/454f633a8f7850f0460b1f29f2f437c2b708db18da5dd1c99e07ce507b87da36/68747470733a2f2f64617669642d646d2e6f72672f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2f6465762d7374617475732e737667",
+      "final_url": "https://camo.githubusercontent.com/454f633a8f7850f0460b1f29f2f437c2b708db18da5dd1c99e07ce507b87da36/68747470733a2f2f64617669642d646d2e6f72672f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2f6465762d7374617475732e737667",
+      "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+      "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+      "publisher": "camo.githubusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "dev dependency status",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://github.com/tc39/proposal-string-replaceall",
+      "titulo": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://github.com/tc39/proposal-string-replaceall",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://string-db.org/",
+      "titulo": "The STRING database in 2023: protein-protein association networks and functional enrichment analyses for any sequenced genome of interest.",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 07:03:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://string-db.org/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://github.com/es-shims/String.prototype.replaceAll",
+      "titulo": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://github.com/es-shims/String.prototype.replaceAll",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "stackexchange",
+      "query": "String.prototype.replaceAll",
+      "items": [
+        {
+          "titulo": "How do you use a variable in a regular expression?",
+          "url": "https://stackoverflow.com/questions/494035/how-do-you-use-a-variable-in-a-regular-expression",
+          "trecho": "I would like to create a String.replaceAll() method in JavaScript and think using a regex would be the most terse way to do it. However, I can't figure out how to pass a variable into a regex. I can do this already which · respondida · javascript, regex",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 1984
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/494035/how-do-you-use-a-variable-in-a-regular-expression",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 7.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "String.prototype.replaceAll() not working",
+          "url": "https://stackoverflow.com/questions/13340131/string-prototype-replaceall-not-working",
+          "trecho": "I need to replace all the string in a variable. var a = \"::::::\"; a = a.replace(\":\", \"hi\"); console.log(a); The above code replaces only the first string i.e.. hi:::::: I used replaceAll but it's not working. · respondida · javascript",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 143
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/13340131/string-prototype-replaceall-not-working",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.4,
+          "relevancia": 10.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "React: Why does Babel not polyfill String.prototype.replaceAll?",
+          "url": "https://stackoverflow.com/questions/65023675/react-why-does-babel-not-polyfill-string-prototype-replaceall",
+          "trecho": "Having read that React takes care of setting up Babel and webpack for me, I used the new (ES2020 or ES2021?) String.prototype.replaceAll() function in my code, assuming it would be polyfilled by Babel for unsupported bro · respondida · reactjs, babeljs",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 5
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/65023675/react-why-does-babel-not-polyfill-string-prototype-replaceall",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 10.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "why doesn't NodeJS support String.prototype.replaceAll?",
+          "url": "https://stackoverflow.com/questions/66937529/why-doesnt-nodejs-support-string-prototype-replaceall",
+          "trecho": "This string method exists in browserland, but not in Node. Why not? It's neither brand-new nor exotic. replaceAll is part of ECMA-262 src replaceAll is described in detail on the V8 blog (added in v8.1) src NodeJS upgrad · respondida · node.js, v8",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 27
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/66937529/why-doesnt-nodejs-support-string-prototype-replaceall",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": ".call(this) triggering String.prototype.replaceAll from unrelated function",
+          "url": "https://stackoverflow.com/questions/74504688/callthis-triggering-string-prototype-replaceall-from-unrelated-function",
+          "trecho": "Below I have shown two scripts and I would like to understand why the second script is triggered by the first script. The second script fails because an unescaped \"[\" is passed to new RegExp(search, 'g'). The failure in  · sem resposta aceita · javascript, jquery, prototype",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 0
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/74504688/callthis-triggering-string-prototype-replaceall-from-unrelated-function",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.4,
+          "relevancia": 10.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Typescript compiler does not convert String.prototype.replaceAll (ES2021) to target ES2020",
+          "url": "https://stackoverflow.com/questions/69322809/typescript-compiler-does-not-convert-string-prototype-replaceall-es2021-to-tar",
+          "trecho": "I'm trying to compile my ts code with the target ES2020 as my node version is v14.17.3 , according to the following tsconfig : { \"compilerOptions\": { \"target\": \"es2020\", \"lib\": [\"ESNext.String\"], \"module\": \"commonjs\", \"a · sem resposta aceita · typescript, tsc",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 2
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/69322809/typescript-compiler-does-not-convert-string-prototype-replaceall-es2021-to-tar",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "hn",
+      "query": "String.prototype.replaceAll",
+      "items": [
+        {
+          "titulo": "ECMAScript proposal: String.prototype.replaceAll",
+          "url": "https://2ality.com/2019/12/string-prototype-replaceall.html",
+          "trecho": "HN: 56 pontos · 67 comentários",
+          "origem": "hn",
+          "tipo": "tecnico",
+          "meta": {
+            "pontos": 56,
+            "comentarios": 67
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "hn",
+          "url_canonica": "https://2ality.com/2019/12/string-prototype-replaceall.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "String.prototype.replaceAll",
+          "url": "https://github.com/tc39/proposal-string-replaceall",
+          "trecho": "HN: 1 pontos · 0 comentários",
+          "origem": "hn",
+          "tipo": "tecnico",
+          "meta": {
+            "pontos": 1,
+            "comentarios": 0
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "hn",
+          "url_canonica": "https://github.com/tc39/proposal-string-replaceall",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "String.prototype.replaceAll limitações",
+      "items": [
+        {
+          "titulo": "STRING: functional protein association networks",
+          "url": "https://string-db.org/",
+          "trecho": "STRING is a database of known and predicted protein-protein interactions and a functional enrichment tool.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:03:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://string-db.org/",
+          "republicacoes": [
+            "https://version-10.string-db.org/"
+          ],
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "String - O que é ? Como funciona ? Onde se usa - Python Progressivo",
+          "url": "https://www.pythonprogressivo.net/2018/10/String-O-que-e-Para-que-serve-Como-funciona-Onde-usa.html",
+          "trecho": "Neste tutorial inicial de nossa seção de Strings em Python, vamos ver o que de fato é uma string, como funciona, para que servem e onde diachos vamos usar elas em nosso estudo.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 21:18:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pythonprogressivo.net/2018/10/String-O-que-e-Para-que-serve-Como-funciona-Onde-usa.html",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "string - Tradução em português – Linguee",
+          "url": "https://www.linguee.com.br/ingles-portugues/traducao/string.html",
+          "trecho": "Muitos exemplos de traduções com \"string\" – Dicionário português-inglês e busca em milhões de traduções.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 06:53:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://linguee.com.br/ingles-portugues/traducao/string.html",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "string — Operações comuns de strings — Documentação Python 3.15.1",
+          "url": "https://docs.python.org/pt-br/3/library/string.html",
+          "trecho": "Uma string contendo todos os caracteres ASCII que são considerados espaços em branco. Isso inclui espaço de caracteres, tabulação, avanço de linha, retorno, avanço de formulário e tabulação vertical.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 04:13:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://docs.python.org/pt-br/3/library/string.html",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "String (computer science) - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/String_(computer_science)",
+          "trecho": "A string is often implemented as an array data structure of bytes (or words) that stores a sequence of elements, typically characters, using some character encoding. More general, string may also denote a sequence (or list) of data other than just characters.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 19:16:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.wikipedia.org/wiki/String_(computer_science)",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "STRING: functional protein association networks",
+          "url": "https://version-10.string-db.org/",
+          "trecho": "Welcome to STRING Protein-Protein Interaction Networks Organisms 2031 Proteins 9.6 mio Interactions 184 mio Search",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 20 out. 2026 02:52:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://version-10.string-db.org/"
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "String.prototype.replaceAll",
+      "items": [
+        {
+          "titulo": "STRING: functional protein association networks",
+          "url": "https://string-db.org/",
+          "trecho": "STRING is a database of known and predicted protein-protein interactions and a functional enrichment tool.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:03:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "String - O que é ? Como funciona ? Onde se usa - Python Progressivo",
+          "url": "https://www.pythonprogressivo.net/2018/10/String-O-que-e-Para-que-serve-Como-funciona-Onde-usa.html",
+          "trecho": "Neste tutorial inicial de nossa seção de Strings em Python, vamos ver o que de fato é uma string, como funciona, para que servem e onde diachos vamos usar elas em nosso estudo.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 21:18:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "string - Tradução em português – Linguee",
+          "url": "https://www.linguee.com.br/ingles-portugues/traducao/string.html",
+          "trecho": "Muitos exemplos de traduções com \"string\" – Dicionário português-inglês e busca em milhões de traduções.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 06:53:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "string — Operações comuns de strings — Documentação Python 3.15.1",
+          "url": "https://docs.python.org/pt-br/3/library/string.html",
+          "trecho": "Uma string contendo todos os caracteres ASCII que são considerados espaços em branco. Isso inclui espaço de caracteres, tabulação, avanço de linha, retorno, avanço de formulário e tabulação vertical.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 04:13:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "String (computer science) - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/String_(computer_science)",
+          "trecho": "A string is often implemented as an array data structure of bytes (or words) that stores a sequence of elements, typically characters, using some character encoding. More general, string may also denote a sequence (or list) of data other than just characters.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 19:16:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "STRING: functional protein association networks",
+          "url": "https://version-10.string-db.org/",
+          "trecho": "Welcome to STRING Protein-Protein Interaction Networks Organisms 2031 Proteins 9.6 mio Interactions 184 mio Search",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 20 out. 2026 02:52:00 GMT"
+          },
+          "discovery_query": "String.prototype.replaceAll",
+          "discovery_provider": "bing"
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://github.com/tc39/proposal-string-replaceall",
+      "result": {
+        "titulo": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+        "texto": "proposal String.prototype.replaceAll Status Champion: Mathias Bynens (Google, @mathiasbynens). This proposal is at stage 4 of , and is scheduled to be included in ES2021. the TC39 process Motivation (Also see .) our TL;DR explainer Currently there is no way to replace all instances of a substring in a string without use of a global regexp. only affects the first occurrence when used with a string argument. There is a lot of evidence that developers are trying to do this in JS — see the with thousands of votes. String.prototype.replace StackOverflow question Currently the most common way of achieving this is to use a global regexp. const queryString = 'q=query+string+parameters' ; const withSpaces = queryString . replace ( g / \\+ / , ' ' ) ; This approach has the downside of requiring special RegExp characters to be escaped — note the escaped . '+' An alternate solution is to combine with : String#split Array#join const queryString = 'q=query+string+parameters' ; const withSpaces = queryString . split ( '+' ) . join ( ' ' ) ; This approach avoids any escaping but comes with the overhead of splitting the string into an array of parts only to glue it back together. Proposed solution We propose the addition of a new method to the String prototype - . This would give developers a straight-forward way to accomplish this common, basic operation. replaceAll const queryString = 'q=query+string+parameters' ; const withSpaces = queryString . replaceAll ( '+' , ' ' ) ; It also removes the need to escape special regexp characters (note the unescaped ). '+' High-level API The proposed signature is the same as the existing method: String.prototype.replace String . prototype . replaceAll ( searchValue , replaceValue ) Per the current TC39 consensus, behaves identically to in all cases, for the following two cases: String.prototype.replaceAll String.prototype.replace except If is a string, only replaces a single occurrence of the , whereas replaces occurrences of the (as if or a global & properly-escaped regular expression had been used). searchValue String.prototype.replace searchValue String.prototype.replaceAll all searchValue .split(searchValue).join(replaceValue) If is a non-global regular expression, replaces a single match, whereas throws an exception. This is done to avoid the inherent confusion between the lack of a global flag (which implies \"do NOT replace all\") and the name of the method being called (which strongly suggests \"replace all\"). searchValue String.prototype.replace String.prototype.replaceAll Notably, behaves just like if is a global regular expression. String.prototype.replaceAll String.prototype.replace searchValue Comparison to other languages Java has , accepting a and replacing all occurrences. Java also has which accepts a regex as the search term (requiring the user to escape special regex characters), again replacing all occurrences by default. replace CharSequence replaceAll Python replaces all occurrences, but accepts an optional param to limit the number of replacements. replace PHP has which has an optional limit parameter like python. str_replace Ruby has , accepting a regexp or string, but also accepts a callback block and a hash of match -> replacement pairs. gsub FAQ What are the main benefits? A simplified API for this common use-case that does not require RegExp knowledge. A way to global-replace strings without having to escape RegExp syntax characters. Possibly improved optimization potential on the VM side. What about adding a parameter to instead? limit replace A: This is an awkward interface — because the default limit is 1, the user would have to know how many occurrences already exist, or use something like Infinity. What happens if is the empty string? searchValue follows the precedent set by , and returns the input string with the replacement value spliced in between every UCS-2/UTF-16 code unit. String.prototype.replaceAll String.prototype.replace 'x' . replace ( '' , '_' ) ; // → '_x' 'xxx' . replace ( g / (?: ) / , '_' ) ; // → '_x_x_x_' 'xxx' . replaceAll ( '' , '_' ) ; // → '_x_x_x_' TC39 meeting notes November 2017 March 2019 July 2019 June 2020 Specification Ecmarkup source HTML version Implementations , shipping in SpiderMonkey Firefox 77 , shipping in JavaScriptCore Safari 13.1 , shipping in Chrome 85 V8 Polyfills: core-js es-shims",
+        "final": "https://github.com/tc39/proposal-string-replaceall",
+        "trecho_usado": "queryString . split ( '+' ) . join ( ' ' ) ; This approach avoids any escaping but comes with the overhead of splitting the string into an array of parts only to glue it back together. Proposed solution We propose the addition of a new method to the String prototype - . This would give developers a straight-forward way to accomplish this common, basic operation. replaceAll const queryString =",
+        "metadados": {
+          "titulo": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+          "descricao": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+          "canonica": "",
+          "og": {
+            "og:image": "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+            "og:image:alt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+            "og:image:width": "1200",
+            "og:image:height": "600",
+            "og:site_name": "GitHub",
+            "og:type": "object",
+            "og:title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+            "og:url": "https://github.com/tc39/proposal-string-replaceall",
+            "og:description": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub."
+          },
+          "twitter": {
+            "twitter:image": "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+            "twitter:site": "@github",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+            "twitter:description": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub."
+          },
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "GitHub",
+          "tipo": "object",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "proposal String.prototype.replaceAll",
+            "texto": "Champion: Mathias Bynens (Google, @mathiasbynens).\nThis proposal is at stage 4 of , and is scheduled to be included in ES2021. the TC39 process\n(Also see .) our TL;DR explainer\nCurrently there is no way to replace all instances of a substring in a string without use of a global regexp. only affects the first occurrence when used with a string argument. There is a lot of evidence that developers are trying to do this in JS — see the with thousands of votes. String.prototype.replace StackOverflow question\nCurrently the most common way of achieving this is to use a global regexp.\nconst queryString = 'q=query+string+parameters' ; const withSpaces = queryString . replace ( g / \\+ / , ' ' ) ;\nThis approach has the downside of requiring special RegExp characters to be escaped — note the escaped . '+'\nAn alternate solution is to combine with : String#split Array#join\nconst queryString = 'q=query+string+parameters' ; const withSpaces = queryString . split ( '+' ) . join ( ' ' ) ;\nThis approach avoids any escaping but comes with the overhead of splitting the string into an array of parts only to glue it back together.\nWe propose the addition of a new method to the String prototype - . This would give developers a straight-forward way to accomplish this common, basic operation. replaceAll\nconst queryString = 'q=query+string+parameters' ; const withSpaces = queryString . replaceAll ( '+' , ' ' ) ;\nIt also removes the need to escape special regexp characters (note the unescaped ). '+'\nThe proposed signature is the same as the existing method: String.prototype.replace\nString . prototype . replaceAll ( searchValue , replaceValue )\nPer the current TC39 consensus, behaves identically to in all cases, for the following two cases: String.prototype.replaceAll String.prototype.replace except\nIf is a string, only replaces a single occurrence of the , whereas replaces occurrences of the (as if or a global & properly-escaped regular expression had been used). searchValue String.prototype.replace searchValue String.prototype.replaceAll all searchValue .split(searchValue).join(replaceValue)\nIf is a non-global regular expression, replaces a single match, whereas throws an exception. This is done to avoid the inherent confusion between the lack of a global flag (which implies \"do NOT replace all\") and the name of the method being called (which strongly suggests \"replace all\"). searchValue String.prototype.replace String.prototype.replaceAll\nNotably, behaves just like if is a global regular expression. String.prototype.replaceAll String.prototype.replace searchValue"
+          },
+          {
+            "titulo": "Comparison to other languages",
+            "texto": "Java has , accepting a and replacing all occurrences. Java also has which accepts a regex as the search term (requiring the user to escape special regex characters), again replacing all occurrences by default. replace CharSequence replaceAll\nPython replaces all occurrences, but accepts an optional param to limit the number of replacements. replace\nPHP has which has an optional limit parameter like python. str_replace\nRuby has , accepting a regexp or string, but also accepts a callback block and a hash of match -> replacement pairs. gsub"
+          },
+          {
+            "titulo": "What are the main benefits?",
+            "texto": "A simplified API for this common use-case that does not require RegExp knowledge. A way to global-replace strings without having to escape RegExp syntax characters. Possibly improved optimization potential on the VM side."
+          },
+          {
+            "titulo": "What about adding a parameter to instead? limit replace",
+            "texto": "A: This is an awkward interface — because the default limit is 1, the user would have to know how many occurrences already exist, or use something like Infinity."
+          },
+          {
+            "titulo": "What happens if is the empty string? searchValue",
+            "texto": "follows the precedent set by , and returns the input string with the replacement value spliced in between every UCS-2/UTF-16 code unit. String.prototype.replaceAll String.prototype.replace\n'x' . replace ( '' , '_' ) ; // → '_x' 'xxx' . replace ( g / (?: ) / , '_' ) ; // → '_x_x_x_' 'xxx' . replaceAll ( '' , '_' ) ; // → '_x_x_x_'\n, shipping in SpiderMonkey Firefox 77\n, shipping in JavaScriptCore Safari 13.1\n, shipping in Chrome 85 V8"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/issues",
+            "texto": "Issues",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/pulls",
+            "texto": "Pull requests",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/actions",
+            "texto": "Actions",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/security",
+            "texto": "Security and quality",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/pulse",
+            "texto": "Insights",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/activity",
+            "texto": "Activity",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/custom-properties",
+            "texto": "Custom properties",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/forks",
+            "texto": "12 forks",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/branches",
+            "texto": "Branches",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "texto": "es-shims",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Ftc39%2Fproposal-string-replaceall",
+            "texto": "Sign in",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/copilot",
+            "texto": "GitHub Copilot Write better code with AI",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/ai/github-app",
+            "texto": "GitHub Copilot app Direct agents from issue to merge",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/mcp",
+            "texto": "MCP Registry Integrate external tools",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/actions",
+            "texto": "Actions Automate any workflow",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/codespaces",
+            "texto": "Codespaces Instant dev environments",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/issues",
+            "texto": "Issues Plan and track work",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/code-review",
+            "texto": "Code Review Manage code changes",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/code-quality",
+            "texto": "Code Quality Enforce quality at merge",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/security/advanced-security",
+            "texto": "GitHub Advanced Security Find and fix vulnerabilities",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/security/advanced-security/code-security",
+            "texto": "Code security Secure your code as you build",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/security/advanced-security/secret-protection",
+            "texto": "Secret protection Stop leaks before they start",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/why-github",
+            "texto": "Why GitHub",
+            "interno": true
+          },
+          {
+            "url": "https://docs.github.com",
+            "texto": "Documentation",
+            "interno": true
+          },
+          {
+            "url": "https://github.blog",
+            "texto": "Blog",
+            "interno": false
+          },
+          {
+            "url": "https://github.blog/changelog",
+            "texto": "Changelog",
+            "interno": false
+          },
+          {
+            "url": "https://github.com/marketplace",
+            "texto": "Marketplace",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features",
+            "texto": "View all features",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/enterprise",
+            "texto": "Enterprises",
+            "interno": true
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Name",
+              "Name",
+              "Last commit message",
+              "Last commit date"
+            ],
+            [
+              ".editorconfig",
+              ".editorconfig",
+              "",
+              ""
+            ],
+            [
+              ".gitignore",
+              ".gitignore",
+              "",
+              ""
+            ],
+            [
+              ".nvmrc",
+              ".nvmrc",
+              "",
+              ""
+            ],
+            [
+              ".travis-github-deploy-key.enc",
+              ".travis-github-deploy-key.enc",
+              "",
+              ""
+            ],
+            [
+              ".travis.yml",
+              ".travis.yml",
+              "",
+              ""
+            ],
+            [
+              "README.md",
+              "README.md",
+              "",
+              ""
+            ],
+            [
+              "package.json",
+              "package.json",
+              "",
+              ""
+            ],
+            [
+              "spec.html",
+              "spec.html",
+              "",
+              ""
+            ],
+            [
+              "View all files"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+          "https://avatars.githubusercontent.com/u/1725583?s=60&amp;v=4"
+        ],
+        "midia": [
+          {
+            "id": "med-8ba6024d77f1",
+            "type": "image",
+            "title": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+            "url": "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+            "final_url": "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+            "source_title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+            "source_url": "https://github.com/tc39/proposal-string-replaceall",
+            "publisher": "opengraph.githubassets.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dc4ae02bfee7",
+            "type": "image",
+            "title": "tc39",
+            "url": "https://avatars.githubusercontent.com/u/1725583?s=60&v=4",
+            "final_url": "https://avatars.githubusercontent.com/u/1725583?s=60&v=4",
+            "source_title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+            "source_url": "https://github.com/tc39/proposal-string-replaceall",
+            "publisher": "avatars.githubusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "tc39",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9ecd7798dc7b",
+            "type": "document",
+            "title": "README.md",
+            "url": "https://github.com/tc39/proposal-string-replaceall/blob/master/README.md",
+            "final_url": "https://github.com/tc39/proposal-string-replaceall/blob/master/README.md",
+            "source_title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+            "source_url": "https://github.com/tc39/proposal-string-replaceall",
+            "publisher": "github.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-e792a9e6c894",
+            "type": "document",
+            "title": "package.json",
+            "url": "https://github.com/tc39/proposal-string-replaceall/blob/master/package.json",
+            "final_url": "https://github.com/tc39/proposal-string-replaceall/blob/master/package.json",
+            "source_title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+            "source_url": "https://github.com/tc39/proposal-string-replaceall",
+            "publisher": "github.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-ab2d9ba5da1e",
+            "type": "document",
+            "title": "spec.html",
+            "url": "https://github.com/tc39/proposal-string-replaceall/blob/master/spec.html",
+            "final_url": "https://github.com/tc39/proposal-string-replaceall/blob/master/spec.html",
+            "source_title": "GitHub - tc39/proposal-string-replaceall: ECMAScript proposal: String.prototype.replaceAll",
+            "source_url": "https://github.com/tc39/proposal-string-replaceall",
+            "publisher": "github.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://github.com/tc39/proposal-string-replaceall/issues",
+      "result": {
+        "titulo": "Issues · tc39/proposal-string-replaceall",
+        "texto": "AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes Code Quality Enforce quality at merge APPLICATION SECURITY GitHub Advanced Security Find and fix vulnerabilities Code security Secure your code as you build Secret protection Stop leaks before they start EXPLORE Why GitHub Documentation Blog Changelog Marketplace View all features BY COMPANY SIZE Enterprises Small and medium teams Startups Nonprofits BY USE CASE App Modernization DevSecOps DevOps CI/CD View all use cases BY INDUSTRY Healthcare Financial services Manufacturing Government See all industries View all solutions EXPLORE BY TOPIC AI Software Development DevOps Security View all topics EXPLORE BY TYPE Customer stories Events & webinars Ebooks & reports Business insights GitHub Skills SUPPORT & SERVICES Documentation Customer support Community forum Trust center Partners View all resources COMMUNITY GitHub Sponsors Fund open source developers PROGRAMS Security Lab Maintainer Community GitHub Stars Archive Program REPOSITORIES Topics Trending Collections ENTERPRISE SOLUTIONS Enterprise platform AI-powered developer platform AVAILABLE ADD-ONS GitHub Advanced Security Enterprise-grade security features Copilot for Business Enterprise-grade AI features Premium Support Enterprise-grade 24/7 support Pricing",
+        "final": "https://github.com/tc39/proposal-string-replaceall/issues",
+        "trecho_usado": "AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes Code Quality Enforce quality at merge APPLICATION SECURITY GitHub Advanced Security Find and fix",
+        "metadados": {
+          "titulo": "Issues · tc39/proposal-string-replaceall",
+          "descricao": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+          "canonica": "",
+          "og": {
+            "og:image": "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+            "og:image:alt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+            "og:image:width": "1200",
+            "og:image:height": "600",
+            "og:site_name": "GitHub",
+            "og:type": "object",
+            "og:title": "Issues · tc39/proposal-string-replaceall",
+            "og:url": "https://github.com/tc39/proposal-string-replaceall",
+            "og:description": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub."
+          },
+          "twitter": {
+            "twitter:image": "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+            "twitter:site": "@github",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Issues · tc39/proposal-string-replaceall",
+            "twitter:description": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub."
+          },
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "GitHub",
+          "tipo": "object",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "GitHub Copilot Write better code with AI\nGitHub Copilot app Direct agents from issue to merge\nMCP Registry Integrate external tools\nActions Automate any workflow\nCodespaces Instant dev environments\nIssues Plan and track work\nCode Review Manage code changes\nCode Quality Enforce quality at merge\nGitHub Advanced Security Find and fix vulnerabilities\nCode security Secure your code as you build\nSecret protection Stop leaks before they start\nGitHub Sponsors Fund open source developers\nEnterprise platform AI-powered developer platform\nGitHub Advanced Security Enterprise-grade security features\nCopilot for Business Enterprise-grade AI features\nPremium Support Enterprise-grade 24/7 support"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall",
+            "texto": "proposal-string-replaceall",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/pulls",
+            "texto": "Pull requests",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/actions",
+            "texto": "Actions",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/security",
+            "texto": "Security and quality",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/pulse",
+            "texto": "Insights",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/issues?q=is%3Aissue+state%3Aopen",
+            "texto": "Issues",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/issues?q=is%3Aissue+state%3Aopen+assignee%3A%40me",
+            "texto": "Assigned to me",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/issues?q=is%3Aissue+state%3Aopen+author%3A%40me",
+            "texto": "Created by me",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/issues?q=is%3Aissue+state%3Aopen+mentions%3A%40me",
+            "texto": "Mentioned",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/tc39/proposal-string-replaceall/issues?q=is%3Aissue+updated%3A%3E%40today-1w+sort%3Aupdated-desc",
+            "texto": "Recent activity",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Ftc39%2Fproposal-string-replaceall%2Fissues",
+            "texto": "Sign in",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/copilot",
+            "texto": "GitHub Copilot Write better code with AI",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/ai/github-app",
+            "texto": "GitHub Copilot app Direct agents from issue to merge",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/mcp",
+            "texto": "MCP Registry Integrate external tools",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/actions",
+            "texto": "Actions Automate any workflow",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/codespaces",
+            "texto": "Codespaces Instant dev environments",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/issues",
+            "texto": "Issues Plan and track work",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/code-review",
+            "texto": "Code Review Manage code changes",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/code-quality",
+            "texto": "Code Quality Enforce quality at merge",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/security/advanced-security",
+            "texto": "GitHub Advanced Security Find and fix vulnerabilities",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/security/advanced-security/code-security",
+            "texto": "Code security Secure your code as you build",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/security/advanced-security/secret-protection",
+            "texto": "Secret protection Stop leaks before they start",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/why-github",
+            "texto": "Why GitHub",
+            "interno": true
+          },
+          {
+            "url": "https://docs.github.com",
+            "texto": "Documentation",
+            "interno": true
+          },
+          {
+            "url": "https://github.blog",
+            "texto": "Blog",
+            "interno": false
+          },
+          {
+            "url": "https://github.blog/changelog",
+            "texto": "Changelog",
+            "interno": false
+          },
+          {
+            "url": "https://github.com/marketplace",
+            "texto": "Marketplace",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features",
+            "texto": "View all features",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/enterprise",
+            "texto": "Enterprises",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall"
+        ],
+        "midia": [
+          {
+            "id": "med-8ba6024d77f1",
+            "type": "image",
+            "title": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+            "url": "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+            "final_url": "https://opengraph.githubassets.com/c11c4008df1ce9d9d42afceccc983347702a916bab70dc2539a0f34f0c15c33e/tc39/proposal-string-replaceall",
+            "source_title": "Issues · tc39/proposal-string-replaceall",
+            "source_url": "https://github.com/tc39/proposal-string-replaceall/issues",
+            "publisher": "opengraph.githubassets.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ECMAScript proposal: String.prototype.replaceAll. Contribute to tc39/proposal-string-replaceall development by creating an account on GitHub.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://string-db.org/",
+      "result": {
+        "titulo": "The STRING database in 2023: protein-protein association networks and functional enrichment analyses for any sequenced genome of interest.",
+        "texto": "Welcome to STRING Protein-Protein Interaction NetworksFunctional Enrichment Analysis Organisms 12535 Proteins 59.3 mio Interactions >20 bln Search",
+        "final": "https://string-db.org/",
+        "trecho_usado": "Welcome to STRING Protein-Protein Interaction NetworksFunctional Enrichment Analysis Organisms 12535 Proteins 59.3 mio Interactions >20 bln Search",
+        "metadados": {
+          "titulo": "The STRING database in 2023: protein-protein association networks and functional enrichment analyses for any sequenced genome of interest.",
+          "descricao": "STRING is a database of known and predicted protein-protein interactions and a functional enrichment tool.",
+          "canonica": "https://string-db.org",
+          "og": {},
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "Damian Szklarczyk",
+          "site": "",
+          "tipo": "ScholarlyArticle",
+          "ld": {
+            "author": [
+              {
+                "@type": "Person",
+                "name": "Damian Szklarczyk",
+                "url": "https://orcid.org/0000-0002-4052-5069"
+              },
+              {
+                "@type": "Person",
+                "name": "Rebecca Kirsch",
+                "url": "https://orcid.org/0000-0002-0351-4993"
+              },
+              {
+                "@type": "Person",
+                "name": "Mikaela Koutrouli",
+                "url": "https://orcid.org/0000-0002-8953-3561"
+              },
+              {
+                "@type": "Person",
+                "name": "Peer Bork",
+                "url": "https://orcid.org/0000-0002-2627-833X"
+              },
+              {
+                "@type": "Person",
+                "name": "Lars J Jensen",
+                "url": "https://orcid.org/0000-0001-7885-715X"
+              },
+              {
+                "@type": "Person",
+                "name": "Christian von Mering",
+                "url": "https://orcid.org/0000-0001-7734-9102"
+              }
+            ],
+            "headline": "The STRING database in 2023: protein-protein association networks and functional enrichment analyses for any sequenced genome of interest."
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Protein-Protein Interaction NetworksFunctional Enrichment Analysis",
+            "texto": ""
+          }
+        ],
+        "links": [
+          {
+            "url": "https://string-db.org/cgi/access?sessionId=bNPjLHSL58pB&footer_active_subpage=archive",
+            "texto": "12.5",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.eu.auth0.com/authorize?client_id=V6E4n1vLLdhvu4HEvX1OBkrRDrLj5YLZ&response_type=code&redirect_uri=https%3A//string-db.org/cgi/login%3Fscript_name%3Dinput",
+            "texto": "Login",
+            "interno": false
+          },
+          {
+            "url": "https://string-db.org/cgi/register?sessionId=bNPjLHSL58pB",
+            "texto": "Register",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_show_search=on",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/download?sessionId=bNPjLHSL58pB",
+            "texto": "Download",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/help?sessionId=bNPjLHSL58pB",
+            "texto": "Help",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/my?sessionId=bNPjLHSL58pB",
+            "texto": "My Data",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?input_page_show_search=on&sessionId=bNPjLHSL58pB",
+            "texto": "Search",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=single_identifier",
+            "texto": "Protein by name",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=multiple_identifiers",
+            "texto": "Multiple proteins",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=multiple_sequences",
+            "texto": "Proteins by sequences",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=proteins_with_values",
+            "texto": "Proteins with Values/Ranks",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=COG_family_identifier",
+            "texto": "Protein families (\"COGs\")",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=COG_single_identifier",
+            "texto": "... by protein name",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=COG_single_sequence",
+            "texto": "... by protein sequence",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=COG_multiple_identifiers",
+            "texto": "... multiple protein names",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=COG_multiple_sequences",
+            "texto": "... multiple sequences",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=single_term",
+            "texto": "Pathway / Process / Disease",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=annot_proteome",
+            "texto": "Add organism",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=organisms",
+            "texto": "Organisms",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/input?sessionId=bNPjLHSL58pB&input_page_active_form=examples",
+            "texto": "Examples",
+            "interno": true
+          },
+          {
+            "url": "https://www.isb-sib.ch/",
+            "texto": "SIB - Swiss Institute of Bioinformatics",
+            "interno": false
+          },
+          {
+            "url": "https://www.cpr.ku.dk/",
+            "texto": "CPR - Novo Nordisk Foundation Center Protein Research",
+            "interno": false
+          },
+          {
+            "url": "https://www.embl.de/",
+            "texto": "EMBL - European Molecular Biology Laboratory",
+            "interno": false
+          },
+          {
+            "url": "https://string-db.org/cgi/credits",
+            "texto": "Credits",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/credits?footer_active_subpage=funding",
+            "texto": "Funding",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/credits?footer_active_subpage=datasources",
+            "texto": "Datasources",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/credits?footer_active_subpage=partners",
+            "texto": "Partners",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/credits?footer_active_subpage=libraries",
+            "texto": "Software",
+            "interno": true
+          },
+          {
+            "url": "https://string-db.org/cgi/access",
+            "texto": "Access",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://academic.oup.com/view-large/figure/389815361/gkac1000fig1.jpg",
+          "https://string-db.org/images/STRING_logo.png",
+          "https://string-db.org/images/string_spinner.svg",
+          "https://string-db.org/images/string_spinner_on_brand.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-8f424a0030e8",
+            "type": "image",
+            "title": "STRING logo",
+            "url": "https://string-db.org/images/STRING_logo.png",
+            "final_url": "https://string-db.org/images/STRING_logo.png",
+            "source_title": "The STRING database in 2023: protein-protein association networks and functional enrichment analyses for any sequenced genome of interest.",
+            "source_url": "https://string-db.org/",
+            "publisher": "string-db.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "STRING logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-11c297e6dffd",
+            "type": "image",
+            "title": "Working...",
+            "url": "https://string-db.org/images/string_spinner.svg",
+            "final_url": "https://string-db.org/images/string_spinner.svg",
+            "source_title": "The STRING database in 2023: protein-protein association networks and functional enrichment analyses for any sequenced genome of interest.",
+            "source_url": "https://string-db.org/",
+            "publisher": "string-db.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Working...",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9ffea62eea44",
+            "type": "image",
+            "title": "waiting spinner",
+            "url": "https://string-db.org/images/string_spinner_on_brand.svg",
+            "final_url": "https://string-db.org/images/string_spinner_on_brand.svg",
+            "source_title": "The STRING database in 2023: protein-protein association networks and functional enrichment analyses for any sequenced genome of interest.",
+            "source_url": "https://string-db.org/",
+            "publisher": "string-db.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "waiting spinner",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://github.com/es-shims/String.prototype.replaceAll",
+      "result": {
+        "titulo": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+        "texto": "string.prototype.replaceall ES Proposal spec-compliant shim for String.prototype.replaceAll. Invoke its \"shim\" method to shim if it is unavailable or noncompliant. String.prototype.replaceAll This package implements the interface. It works in an ES3-supported environment, and complies with the . es-shim API proposed spec Most common usage: const assert = require ( 'assert' ) ; const replaceAll = require ( 'string.prototype.replaceall' ) ; const str = 'aabc' ; // replaceAll and replace are the same, when given a global regex to replace assert . equal ( replaceAll ( str , g / a / , 'z' ) , str . replace ( g / a / , 'z' ) ) ; // replace, with a string, replaces once assert . equal ( str . replace ( 'a' , 'z' ) , 'zabc' ) ; // replaceAll, with a string, replaces all assert . equal ( replaceAll ( str , 'a' , 'z' ) , 'zzbc' ) ; replaceAll . shim ( ) ; // will be a no-op if not needed // replaceAll and replace are the same, when given a global regex to replace assert . equal ( str . replaceAll ( g / a / , 'z' ) , str . replace ( g / a / , 'z' ) ) ; // replace, with a string, replaces once assert . equal ( str . replace ( 'a' , 'z' ) , 'zabc' ) ; // replaceAll, with a string, replaces all assert . equal ( str . replaceAll ( 'a' , 'z' ) , 'zzbc' ) ; Tests Simply clone the repo, , and run npm install npm test",
+        "final": "https://github.com/es-shims/String.prototype.replaceAll",
+        "trecho_usado": "require ( 'string.prototype.replaceall' ) ; const str = 'aabc' ; // replaceAll and replace are the same, when given a global regex to replace assert . equal ( replaceAll ( str , g / a / , 'z' ) , str . replace ( g / a / , 'z' ) ) ; // replace, with a string, replaces once assert . equal ( str . replace ( 'a' , 'z' ) , 'zabc' ) ; // replaceAll, with a string, replaces all assert . equal (",
+        "metadados": {
+          "titulo": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+          "descricao": "Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal. - es-shims/String.prototype.replaceAll",
+          "canonica": "",
+          "og": {
+            "og:image": "https://opengraph.githubassets.com/41bd850875d71565777329282f1ae28c86fdc6b8bab09a1d90ed62f540f11d85/es-shims/String.prototype.replaceAll",
+            "og:image:alt": "Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal. - es-shims/String.prototype.replaceAll",
+            "og:image:width": "1200",
+            "og:image:height": "600",
+            "og:site_name": "GitHub",
+            "og:type": "object",
+            "og:title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "og:url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "og:description": "Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal. - es-shims/String.prototype.replaceAll"
+          },
+          "twitter": {
+            "twitter:image": "https://opengraph.githubassets.com/41bd850875d71565777329282f1ae28c86fdc6b8bab09a1d90ed62f540f11d85/es-shims/String.prototype.replaceAll",
+            "twitter:site": "@github",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "twitter:description": "Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal. - es-shims/String.prototype.replaceAll"
+          },
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "GitHub",
+          "tipo": "object",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "string.prototype.replaceall",
+            "texto": "ES Proposal spec-compliant shim for String.prototype.replaceAll. Invoke its \"shim\" method to shim if it is unavailable or noncompliant. String.prototype.replaceAll\nThis package implements the interface. It works in an ES3-supported environment, and complies with the . es-shim API proposed spec\nconst assert = require ( 'assert' ) ; const replaceAll = require ( 'string.prototype.replaceall' ) ; const str = 'aabc' ; // replaceAll and replace are the same, when given a global regex to replace assert . equal ( replaceAll ( str , g / a / , 'z' ) , str . replace ( g / a / , 'z' ) ) ; // replace, with a string, replaces once assert . equal ( str . replace ( 'a' , 'z' ) , 'zabc' ) ; // replaceAll, with a string, replaces all assert . equal ( replaceAll ( str , 'a' , 'z' ) , 'zzbc' ) ; replaceAll . shim ( ) ; // will be a no-op if not needed // replaceAll and replace are the same, when given a global regex to replace assert . equal ( str . replaceAll ( g / a / , 'z' ) , str . replace ( g / a / , 'z' ) ) ; // replace, with a string, replaces once assert . equal ( str . replace ( 'a' , 'z' ) , 'zabc' ) ; // replaceAll, with a string, replaces all assert . equal ( str . replaceAll ( 'a' , 'z' ) , 'zzbc' ) ;\nSimply clone the repo, , and run npm install npm test"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/issues",
+            "texto": "Issues 1 ( 1 )",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/pulls",
+            "texto": "Pull requests",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/actions",
+            "texto": "Actions",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/security",
+            "texto": "Security and quality",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/pulse",
+            "texto": "Insights",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/activity",
+            "texto": "Activity",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/custom-properties",
+            "texto": "Custom properties",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/forks",
+            "texto": "1 fork",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/branches",
+            "texto": "Branches",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/tags",
+            "texto": "Tags",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fes-shims%2FString.prototype.replaceAll",
+            "texto": "Sign in",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/copilot",
+            "texto": "GitHub Copilot Write better code with AI",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/ai/github-app",
+            "texto": "GitHub Copilot app Direct agents from issue to merge",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/mcp",
+            "texto": "MCP Registry Integrate external tools",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/actions",
+            "texto": "Actions Automate any workflow",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/codespaces",
+            "texto": "Codespaces Instant dev environments",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/issues",
+            "texto": "Issues Plan and track work",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/code-review",
+            "texto": "Code Review Manage code changes",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features/code-quality",
+            "texto": "Code Quality Enforce quality at merge",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/security/advanced-security",
+            "texto": "GitHub Advanced Security Find and fix vulnerabilities",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/security/advanced-security/code-security",
+            "texto": "Code security Secure your code as you build",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/security/advanced-security/secret-protection",
+            "texto": "Secret protection Stop leaks before they start",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/why-github",
+            "texto": "Why GitHub",
+            "interno": true
+          },
+          {
+            "url": "https://docs.github.com",
+            "texto": "Documentation",
+            "interno": true
+          },
+          {
+            "url": "https://github.blog",
+            "texto": "Blog",
+            "interno": false
+          },
+          {
+            "url": "https://github.blog/changelog",
+            "texto": "Changelog",
+            "interno": false
+          },
+          {
+            "url": "https://github.com/marketplace",
+            "texto": "Marketplace",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/features",
+            "texto": "View all features",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/enterprise",
+            "texto": "Enterprises",
+            "interno": true
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Name",
+              "Name",
+              "Last commit message",
+              "Last commit date"
+            ],
+            [
+              ".github",
+              ".github",
+              "",
+              ""
+            ],
+            [
+              "test",
+              "test",
+              "",
+              ""
+            ],
+            [
+              ".eslintrc",
+              ".eslintrc",
+              "",
+              ""
+            ],
+            [
+              ".gitignore",
+              ".gitignore",
+              "",
+              ""
+            ],
+            [
+              ".npmrc",
+              ".npmrc",
+              "",
+              ""
+            ],
+            [
+              ".nycrc",
+              ".nycrc",
+              "",
+              ""
+            ],
+            [
+              "CHANGELOG.md",
+              "CHANGELOG.md",
+              "",
+              ""
+            ],
+            [
+              "LICENSE",
+              "LICENSE",
+              "",
+              ""
+            ],
+            [
+              "README.md",
+              "README.md",
+              "",
+              ""
+            ],
+            [
+              "auto.js",
+              "auto.js",
+              "",
+              ""
+            ],
+            [
+              "implementation.js",
+              "implementation.js",
+              "",
+              ""
+            ],
+            [
+              "index.js",
+              "index.js",
+              "",
+              ""
+            ],
+            [
+              "package.json",
+              "package.json",
+              "",
+              ""
+            ],
+            [
+              "polyfill.js",
+              "polyfill.js",
+              "",
+              ""
+            ],
+            [
+              "shim.js",
+              "shim.js",
+              "",
+              ""
+            ],
+            [
+              "View all files"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://opengraph.githubassets.com/41bd850875d71565777329282f1ae28c86fdc6b8bab09a1d90ed62f540f11d85/es-shims/String.prototype.replaceAll",
+          "https://avatars.githubusercontent.com/u/6288429?s=60&amp;v=4",
+          "https://camo.githubusercontent.com/2a07c19cd47468d378c50b6089e6e5405d426ebac40b82244e48b70861865a4b/68747470733a2f2f76657273696f6e626164672e65732f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2e737667",
+          "https://camo.githubusercontent.com/ccfc821921cb7e978bcec8d87a668c4b69b4ff46e040bd391f5f603cab6b45a5/68747470733a2f2f696d672e736869656c64732e696f2f656e64706f696e743f75726c3d68747470733a2f2f6769746875622d616374696f6e732d62616467652d75336a6e347466706f6363682e72756e6b69742e73682f65732d7368696d732f737472696e672e70726f746f747970652e7265706c616365616c6c",
+          "https://camo.githubusercontent.com/a9b702cd877b1b695d31262325b45f4296fddfdb29cdc4256bbbc893c0d1749e/68747470733a2f2f636f6465636f762e696f2f67682f65732d7368696d732f737472696e672e70726f746f747970652e7265706c616365616c6c2f6272616e63682f6d61696e2f6772617068732f62616467652e737667",
+          "https://camo.githubusercontent.com/f0e641c74500bdfdc9088257ae8c9e7b132a1bf12b123c56744efb4099727b34/68747470733a2f2f64617669642d646d2e6f72672f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2e737667",
+          "https://camo.githubusercontent.com/454f633a8f7850f0460b1f29f2f437c2b708db18da5dd1c99e07ce507b87da36/68747470733a2f2f64617669642d646d2e6f72672f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2f6465762d7374617475732e737667",
+          "https://camo.githubusercontent.com/7221605ac579568d6305d67ecae38571e780723aa1b5307303a6492ab86cdb62/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f6c2f737472696e672e70726f746f747970652e7265706c616365616c6c2e737667",
+          "https://camo.githubusercontent.com/324a8ece9abd650d3072f2ca235d07519f2e6fa4073d48c5fad2442a74232b3a/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f646d2f737472696e672e70726f746f747970652e7265706c616365616c6c2e737667",
+          "https://camo.githubusercontent.com/6b09b26efb94ecd0fd6f660630e4cfb8d832331dc79fb0a8b36f667228c7e0d0/68747470733a2f2f6e6f6465692e636f2f6e706d2f737472696e672e70726f746f747970652e7265706c616365616c6c2e706e673f646f776e6c6f6164733d747275652673746172733d74727565"
+        ],
+        "midia": [
+          {
+            "id": "med-15746e10846d",
+            "type": "image",
+            "title": "Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal. - es-shims/String.prototype.replaceAll",
+            "url": "https://opengraph.githubassets.com/41bd850875d71565777329282f1ae28c86fdc6b8bab09a1d90ed62f540f11d85/es-shims/String.prototype.replaceAll",
+            "final_url": "https://opengraph.githubassets.com/41bd850875d71565777329282f1ae28c86fdc6b8bab09a1d90ed62f540f11d85/es-shims/String.prototype.replaceAll",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "opengraph.githubassets.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal. - es-shims/String.prototype.replaceAll",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-86133c5ae921",
+            "type": "image",
+            "title": "es-shims",
+            "url": "https://avatars.githubusercontent.com/u/6288429?s=60&v=4",
+            "final_url": "https://avatars.githubusercontent.com/u/6288429?s=60&v=4",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "avatars.githubusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "es-shims",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e325b2396f56",
+            "type": "image",
+            "title": "Version Badge",
+            "url": "https://camo.githubusercontent.com/2a07c19cd47468d378c50b6089e6e5405d426ebac40b82244e48b70861865a4b/68747470733a2f2f76657273696f6e626164672e65732f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2e737667",
+            "final_url": "https://camo.githubusercontent.com/2a07c19cd47468d378c50b6089e6e5405d426ebac40b82244e48b70861865a4b/68747470733a2f2f76657273696f6e626164672e65732f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2e737667",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "camo.githubusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Version Badge",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ba825be40635",
+            "type": "image",
+            "title": "github actions",
+            "url": "https://camo.githubusercontent.com/ccfc821921cb7e978bcec8d87a668c4b69b4ff46e040bd391f5f603cab6b45a5/68747470733a2f2f696d672e736869656c64732e696f2f656e64706f696e743f75726c3d68747470733a2f2f6769746875622d616374696f6e732d62616467652d75336a6e347466706f6363682e72756e6b69742e73682f65732d7368696d732f737472696e672e70726f746f747970652e7265706c616365616c6c",
+            "final_url": "https://camo.githubusercontent.com/ccfc821921cb7e978bcec8d87a668c4b69b4ff46e040bd391f5f603cab6b45a5/68747470733a2f2f696d672e736869656c64732e696f2f656e64706f696e743f75726c3d68747470733a2f2f6769746875622d616374696f6e732d62616467652d75336a6e347466706f6363682e72756e6b69742e73682f65732d7368696d732f737472696e672e70726f746f747970652e7265706c616365616c6c",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "camo.githubusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "github actions",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7378080da6f6",
+            "type": "image",
+            "title": "coverage",
+            "url": "https://camo.githubusercontent.com/a9b702cd877b1b695d31262325b45f4296fddfdb29cdc4256bbbc893c0d1749e/68747470733a2f2f636f6465636f762e696f2f67682f65732d7368696d732f737472696e672e70726f746f747970652e7265706c616365616c6c2f6272616e63682f6d61696e2f6772617068732f62616467652e737667",
+            "final_url": "https://camo.githubusercontent.com/a9b702cd877b1b695d31262325b45f4296fddfdb29cdc4256bbbc893c0d1749e/68747470733a2f2f636f6465636f762e696f2f67682f65732d7368696d732f737472696e672e70726f746f747970652e7265706c616365616c6c2f6272616e63682f6d61696e2f6772617068732f62616467652e737667",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "camo.githubusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "coverage",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-866637346527",
+            "type": "image",
+            "title": "dependency status",
+            "url": "https://camo.githubusercontent.com/f0e641c74500bdfdc9088257ae8c9e7b132a1bf12b123c56744efb4099727b34/68747470733a2f2f64617669642d646d2e6f72672f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2e737667",
+            "final_url": "https://camo.githubusercontent.com/f0e641c74500bdfdc9088257ae8c9e7b132a1bf12b123c56744efb4099727b34/68747470733a2f2f64617669642d646d2e6f72672f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2e737667",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "camo.githubusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "dependency status",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4a3b5c840890",
+            "type": "image",
+            "title": "dev dependency status",
+            "url": "https://camo.githubusercontent.com/454f633a8f7850f0460b1f29f2f437c2b708db18da5dd1c99e07ce507b87da36/68747470733a2f2f64617669642d646d2e6f72672f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2f6465762d7374617475732e737667",
+            "final_url": "https://camo.githubusercontent.com/454f633a8f7850f0460b1f29f2f437c2b708db18da5dd1c99e07ce507b87da36/68747470733a2f2f64617669642d646d2e6f72672f65732d7368696d732f537472696e672e70726f746f747970652e7265706c616365416c6c2f6465762d7374617475732e737667",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "camo.githubusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "dev dependency status",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a3b0abd9551a",
+            "type": "image",
+            "title": "License",
+            "url": "https://camo.githubusercontent.com/7221605ac579568d6305d67ecae38571e780723aa1b5307303a6492ab86cdb62/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f6c2f737472696e672e70726f746f747970652e7265706c616365616c6c2e737667",
+            "final_url": "https://camo.githubusercontent.com/7221605ac579568d6305d67ecae38571e780723aa1b5307303a6492ab86cdb62/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f6c2f737472696e672e70726f746f747970652e7265706c616365616c6c2e737667",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "camo.githubusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "License",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-fbd8918e94df",
+            "type": "image",
+            "title": "Downloads",
+            "url": "https://camo.githubusercontent.com/324a8ece9abd650d3072f2ca235d07519f2e6fa4073d48c5fad2442a74232b3a/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f646d2f737472696e672e70726f746f747970652e7265706c616365616c6c2e737667",
+            "final_url": "https://camo.githubusercontent.com/324a8ece9abd650d3072f2ca235d07519f2e6fa4073d48c5fad2442a74232b3a/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f646d2f737472696e672e70726f746f747970652e7265706c616365616c6c2e737667",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "camo.githubusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Downloads",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-787534c850e0",
+            "type": "image",
+            "title": "npm badge",
+            "url": "https://camo.githubusercontent.com/6b09b26efb94ecd0fd6f660630e4cfb8d832331dc79fb0a8b36f667228c7e0d0/68747470733a2f2f6e6f6465692e636f2f6e706d2f737472696e672e70726f746f747970652e7265706c616365616c6c2e706e673f646f776e6c6f6164733d747275652673746172733d74727565",
+            "final_url": "https://camo.githubusercontent.com/6b09b26efb94ecd0fd6f660630e4cfb8d832331dc79fb0a8b36f667228c7e0d0/68747470733a2f2f6e6f6465692e636f2f6e706d2f737472696e672e70726f746f747970652e7265706c616365616c6c2e706e673f646f776e6c6f6164733d747275652673746172733d74727565",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "camo.githubusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "npm badge",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-88c1f1456978",
+            "type": "document",
+            "title": "CHANGELOG.md",
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/blob/main/CHANGELOG.md",
+            "final_url": "https://github.com/es-shims/String.prototype.replaceAll/blob/main/CHANGELOG.md",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "github.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal. - es-shims/String.prototype.replaceAll",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-1fdb2b10924d",
+            "type": "document",
+            "title": "README.md",
+            "url": "https://github.com/es-shims/String.prototype.replaceAll/blob/main/README.md",
+            "final_url": "https://github.com/es-shims/String.prototype.replaceAll/blob/main/README.md",
+            "source_title": "GitHub - es-shims/String.prototype.replaceAll: Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal.",
+            "source_url": "https://github.com/es-shims/String.prototype.replaceAll",
+            "publisher": "github.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Spec-compliant polyfill for String.prototype.replaceAll ESnext proposal. - es-shims/String.prototype.replaceAll",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "9fe21a8067bdafc6dc23",
+            "url": "https://stackoverflow.com/questions/494035/how-do-you-use-a-variable-in-a-regular-expression",
+            "title": "How do you use a variable in a regular expression?",
+            "origin": "stackexchange",
+            "query": "String.prototype.replaceAll",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "I would like to create a String.replaceAll() method in JavaScript and think using a regex would be the most terse way to do it. However, I can't figure out how "
+          },
+          {
+            "id": "3bcd2e363a0c6e75a42f",
+            "url": "https://stackoverflow.com/questions/13340131/string-prototype-replaceall-not-working",
+            "title": "String.prototype.replaceAll() not working",
+            "origin": "stackexchange",
+            "query": "String.prototype.replaceAll",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "I need to replace all the string in a variable. var a = \"::::::\"; a = a.replace(\":\", \"hi\"); console.log(a); The above code replaces only the first string i.e.. "
+          },
+          {
+            "id": "edf5c17c455b2c51118e",
+            "url": "https://stackoverflow.com/questions/65023675/react-why-does-babel-not-polyfill-string-prototype-replaceall",
+            "title": "React: Why does Babel not polyfill String.prototype.replaceAll?",
+            "origin": "stackexchange",
+            "query": "String.prototype.replaceAll",
+            "date": "",
+            "type": "tecnico",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Having read that React takes care of setting up Babel and webpack for me, I used the new (ES2020 or ES2021?) String.prototype.replaceAll() function in my code, "
+          },
+          {
+            "id": "0f9c0c0d61caacdab86a",
+            "url": "https://stackoverflow.com/questions/66937529/why-doesnt-nodejs-support-string-prototype-replaceall",
+            "title": "why doesn't NodeJS support String.prototype.replaceAll?",
+            "origin": "stackexchange",
+            "query": "String.prototype.replaceAll",
+            "date": "",
+            "type": "tecnico",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "This string method exists in browserland, but not in Node. Why not? It's neither brand-new nor exotic. replaceAll is part of ECMA-262 src replaceAll is describe"
+          },
+          {
+            "id": "05199809764736797349",
+            "url": "https://stackoverflow.com/questions/74504688/callthis-triggering-string-prototype-replaceall-from-unrelated-function",
+            "title": ".call(this) triggering String.prototype.replaceAll from unrelated function",
+            "origin": "stackexchange",
+            "query": "String.prototype.replaceAll",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Below I have shown two scripts and I would like to understand why the second script is triggered by the first script. The second script fails because an unescap"
+          },
+          {
+            "id": "c188a0d3323017d03eca",
+            "url": "https://stackoverflow.com/questions/69322809/typescript-compiler-does-not-convert-string-prototype-replaceall-es2021-to-tar",
+            "title": "Typescript compiler does not convert String.prototype.replaceAll (ES2021) to target ES2020",
+            "origin": "stackexchange",
+            "query": "String.prototype.replaceAll",
+            "date": "",
+            "type": "tecnico",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "I'm trying to compile my ts code with the target ES2020 as my node version is v14.17.3 , according to the following tsconfig : { \"compilerOptions\": { \"target\": "
+          },
+          {
+            "id": "3c6903967047185fcceb",
+            "url": "https://2ality.com/2019/12/string-prototype-replaceall.html",
+            "title": "ECMAScript proposal: String.prototype.replaceAll",
+            "origin": "hn",
+            "query": "String.prototype.replaceAll",
+            "date": "",
+            "type": "tecnico",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "HN: 56 pontos · 67 comentários"
+          },
+          {
+            "id": "e15745501001d1636cc2",
+            "url": "https://github.com/tc39/proposal-string-replaceall",
+            "title": "String.prototype.replaceAll",
+            "origin": "hn",
+            "query": "String.prototype.replaceAll",
+            "date": "",
+            "type": "tecnico",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "HN: 1 pontos · 0 comentários"
+          },
+          {
+            "id": "4b710fea57b8ca496102",
+            "url": "https://string-db.org/",
+            "title": "STRING: functional protein association networks",
+            "origin": "bing",
+            "query": "String.prototype.replaceAll limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "STRING is a database of known and predicted protein-protein interactions and a functional enrichment tool."
+          },
+          {
+            "id": "9a369d69170b0a6614ac",
+            "url": "https://www.pythonprogressivo.net/2018/10/String-O-que-e-Para-que-serve-Como-funciona-Onde-usa.html",
+            "title": "String - O que é ? Como funciona ? Onde se usa - Python Progressivo",
+            "origin": "bing",
+            "query": "String.prototype.replaceAll limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Neste tutorial inicial de nossa seção de Strings em Python, vamos ver o que de fato é uma string, como funciona, para que servem e onde diachos vamos usar elas "
+          },
+          {
+            "id": "d9c881035974ddfce087",
+            "url": "https://www.linguee.com.br/ingles-portugues/traducao/string.html",
+            "title": "string - Tradução em português – Linguee",
+            "origin": "bing",
+            "query": "String.prototype.replaceAll limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Muitos exemplos de traduções com \"string\" – Dicionário português-inglês e busca em milhões de traduções."
+          },
+          {
+            "id": "1e7f6eae6fcf3603d61f",
+            "url": "https://docs.python.org/pt-br/3/library/string.html",
+            "title": "string — Operações comuns de strings — Documentação Python 3.15.1",
+            "origin": "bing",
+            "query": "String.prototype.replaceAll limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Uma string contendo todos os caracteres ASCII que são considerados espaços em branco. Isso inclui espaço de caracteres, tabulação, avanço de linha, retorno, ava"
+          },
+          {
+            "id": "0ffb3a9957cd58afb780",
+            "url": "https://en.wikipedia.org/wiki/String_(computer_science)",
+            "title": "String (computer science) - Wikipedia",
+            "origin": "bing",
+            "query": "String.prototype.replaceAll limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "A string is often implemented as an array data structure of bytes (or words) that stores a sequence of elements, typically characters, using some character enco"
+          },
+          {
+            "id": "65fdcad59b2600a4a2c9",
+            "url": "https://version-10.string-db.org/",
+            "title": "STRING: functional protein association networks",
+            "origin": "bing",
+            "query": "String.prototype.replaceAll limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          }
+        ],
+        "unique_candidates": 14,
+        "omitted": 0
+      },
+      "etapas": [
+        "stackexchange (consulta reformulada 'String.prototype.replaceAll'): 6 resultados",
+        "stackexchange: sem resultados (String.prototype.replaceAll limitações)",
+        "hn (consulta reformulada 'String.prototype.replaceAll'): 2 resultados",
+        "hn: sem resultados (String.prototype.replaceAll limitações)",
+        "bing: 6 resultados (String.prototype.replaceAll limitações)",
+        "bing (consulta reformulada 'String.prototype.replaceAll'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (String.prototype.replaceAll limitações)",
+        "— recuperação por lacuna —",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "String.prototype.replaceAll limitações",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+          "purpose": "pedido original sem condensação"
+        },
+        {
+          "type": "ENTITY_EXACT",
+          "query": "String.prototype.replaceAll",
+          "purpose": "resolver assunto explícito quando operações dominam os resultados; validar pelo pedido original"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-28ecd2322027",
+            "type": "explicit_attribute",
+            "description": "Sintaxe ou assinatura",
+            "entity": "String.prototype.replaceAll",
+            "attribute": "syntax",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Sintaxe ou assinatura",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-3cfd528fe270",
+            "type": "explicit_attribute",
+            "description": "Comportamento da operação",
+            "entity": "String.prototype.replaceAll",
+            "attribute": "behavior",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Comportamento da operação",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-56eda73068cf",
+            "type": "explicit_attribute",
+            "description": "Limitações",
+            "entity": "String.prototype.replaceAll",
+            "attribute": "limitations",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Limitações",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://github.com/tc39/proposal-string-replaceall",
+          "answerability": {
+            "state": "PARTIAL_ANSWER",
+            "requirement_ids": [
+              "R-28ecd2322027"
+            ],
+            "aspects": [
+              "Sintaxe ou assinatura"
+            ],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": [
+            {
+              "id": "P-b935976bb62ff3f5",
+              "source_url": "https://github.com/tc39/proposal-string-replaceall",
+              "text": "proposal String.prototype.replaceAll Status Champion: Mathias Bynens (Google, @mathiasbynens). This proposal is at stage 4 of , and is scheduled to be included in ES2021. the TC39 process Motivation (Also see .) our TL;DR explainer Currently there is no way to replace all instances of a substring in a string without use of a global regexp. only affects the first occurrence when used with a string argument. There is a lot of evidence that developers are trying to do this in JS — see the with thousands of votes.",
+              "text_span": {
+                "start": 0,
+                "end": 515,
+                "scope": "returned_extracted_text"
+              },
+              "section": "",
+              "requirement_id": "R-28ecd2322027",
+              "source_id": "https://github.com/tc39/proposal-string-replaceall",
+              "evidence_id": "",
+              "support_label": "DIRECT_SUPPORT",
+              "answerability": "DIRECT_ANSWER",
+              "reason": "bounded_explicit_entity_attribute_relation",
+              "requirement_ids": [
+                "R-28ecd2322027"
+              ],
+              "requirement_support": {
+                "R-28ecd2322027": "DIRECT_SUPPORT"
+              }
+            },
+            {
+              "id": "P-80d5723758f0814e",
+              "source_url": "https://github.com/tc39/proposal-string-replaceall",
+              "text": "Proposed solution We propose the addition of a new method to the String prototype - . This would give developers a straight-forward way to accomplish this common, basic operation. replaceAll const queryString = 'q=query+string+parameters' ; const withSpaces = queryString . replaceAll ( '+' , ' ' ) ; It also removes the need to escape special regexp characters (note the unescaped ). '+' High-level API The proposed signature is the same as the existing method: String.prototype.replace String . prototype . replaceAll ( searchValue , replaceValue ) Per the current TC39 consensus, behaves identically to in all cases, for the following two cases: String.prototype.replaceAll String.prototype.replace except If is a string, only replaces a single occurrence of the , whereas replaces occurrences of the (as if or a global & properly-escaped regular expression had been used). searchValue String.prototype.replace searchValue String.prototype.replaceAll all searchValue .split(searchValue).join(replaceValue) If is a non-global regular expression, replaces a single match, whereas throws an",
+              "text_span": {
+                "start": 1181,
+                "end": 2271,
+                "scope": "returned_extracted_text"
+              },
+              "section": "",
+              "requirement_id": "R-28ecd2322027",
+              "source_id": "https://github.com/tc39/proposal-string-replaceall",
+              "evidence_id": "",
+              "support_label": "DIRECT_SUPPORT",
+              "answerability": "DIRECT_ANSWER",
+              "reason": "bounded_explicit_entity_attribute_relation",
+              "requirement_ids": [
+                "R-28ecd2322027"
+              ],
+              "requirement_support": {
+                "R-28ecd2322027": "DIRECT_SUPPORT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "S2",
+          "url": "https://string-db.org/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://github.com/es-shims/String.prototype.replaceAll",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+      "adapter_query": "String.prototype.replaceAll limitações",
+      "provider": "stackexchange",
+      "at": "2026-10-25T18:30:20.323166+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "String.prototype.replaceAll limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "String.prototype.replaceAll limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "String.prototype.replaceAll limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "String.prototype.replaceAll limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "String.prototype.replaceAll limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 2730.29,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+      "adapter_query": "String.prototype.replaceAll",
+      "provider": "stackexchange",
+      "at": "2026-10-25T18:30:23.053903+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "How do you use a variable in a regular expression?",
+          "url": "https://stackoverflow.com/questions/494035/how-do-you-use-a-variable-in-a-regular-expression"
+        },
+        {
+          "title": "String.prototype.replaceAll() not working",
+          "url": "https://stackoverflow.com/questions/13340131/string-prototype-replaceall-not-working"
+        },
+        {
+          "title": "React: Why does Babel not polyfill String.prototype.replaceAll?",
+          "url": "https://stackoverflow.com/questions/65023675/react-why-does-babel-not-polyfill-string-prototype-replaceall"
+        },
+        {
+          "title": "why doesn't NodeJS support String.prototype.replaceAll?",
+          "url": "https://stackoverflow.com/questions/66937529/why-doesnt-nodejs-support-string-prototype-replaceall"
+        },
+        {
+          "title": ".call(this) triggering String.prototype.replaceAll from unrelated function",
+          "url": "https://stackoverflow.com/questions/74504688/callthis-triggering-string-prototype-replaceall-from-unrelated-function"
+        },
+        {
+          "title": "Typescript compiler does not convert String.prototype.replaceAll (ES2021) to target ES2020",
+          "url": "https://stackoverflow.com/questions/69322809/typescript-compiler-does-not-convert-string-prototype-replaceall-es2021-to-tar"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "String.prototype.replaceAll"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 584.96,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+      "adapter_query": "String.prototype.replaceAll limitações",
+      "provider": "hn",
+      "at": "2026-10-25T18:30:23.651142+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://hn.algolia.com/api/v1/search",
+          "parameters": {
+            "query": "String.prototype.replaceAll limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 826.05,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+      "adapter_query": "String.prototype.replaceAll",
+      "provider": "hn",
+      "at": "2026-10-25T18:30:24.477594+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 2,
+      "results": [
+        {
+          "title": "ECMAScript proposal: String.prototype.replaceAll",
+          "url": "https://2ality.com/2019/12/string-prototype-replaceall.html"
+        },
+        {
+          "title": "String.prototype.replaceAll",
+          "url": "https://github.com/tc39/proposal-string-replaceall"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://hn.algolia.com/api/v1/search",
+          "parameters": {
+            "query": "String.prototype.replaceAll"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 1970.21,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+      "adapter_query": "String.prototype.replaceAll limitações",
+      "provider": "bing",
+      "at": "2026-10-25T18:30:26.453083+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "STRING: functional protein association networks",
+          "url": "https://string-db.org/"
+        },
+        {
+          "title": "String - O que é ? Como funciona ? Onde se usa - Python Progressivo",
+          "url": "https://www.pythonprogressivo.net/2018/10/String-O-que-e-Para-que-serve-Como-funciona-Onde-usa.html"
+        },
+        {
+          "title": "string - Tradução em português – Linguee",
+          "url": "https://www.linguee.com.br/ingles-portugues/traducao/string.html"
+        },
+        {
+          "title": "string — Operações comuns de strings — Documentação Python 3.15.1",
+          "url": "https://docs.python.org/pt-br/3/library/string.html"
+        },
+        {
+          "title": "String (computer science) - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/String_(computer_science)"
+        },
+        {
+          "title": "STRING: functional protein association networks",
+          "url": "https://version-10.string-db.org/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "String.prototype.replaceAll limitações",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 605.15,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript String.prototype.replaceAll, qual sua sintaxe e limitações?",
+      "adapter_query": "String.prototype.replaceAll",
+      "provider": "bing",
+      "at": "2026-10-25T18:30:27.072308+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "STRING: functional protein association networks",
+          "url": "https://string-db.org/"
+        },
+        {
+          "title": "String - O que é ? Como funciona ? Onde se usa - Python Progressivo",
+          "url": "https://www.pythonprogressivo.net/2018/10/String-O-que-e-Para-que-serve-Como-funciona-Onde-usa.html"
+        },
+        {
+          "title": "string - Tradução em português – Linguee",
+          "url": "https://www.linguee.com.br/ingles-portugues/traducao/string.html"
+        },
+        {
+          "title": "string — Operações comuns de strings — Documentação Python 3.15.1",
+          "url": "https://docs.python.org/pt-br/3/library/string.html"
+        },
+        {
+          "title": "String (computer science) - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/String_(computer_science)"
+        },
+        {
+          "title": "STRING: functional protein association networks",
+          "url": "https://version-10.string-db.org/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "String.prototype.replaceAll",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 538.56,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "76e6af3d0363b1a2a03db5d4009dfe376ac5d8fb",
+  "dataset_sha256": "fb79939c1320f93670acede8c8846a00fdf78247bb5b4cae687554496f2e9e3a"
+}

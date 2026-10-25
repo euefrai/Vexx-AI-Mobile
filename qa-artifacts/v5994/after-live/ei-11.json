@@ -1,0 +1,1978 @@
+{
+  "id": "ei-11",
+  "category": "universal",
+  "query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 10.744,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "stackexchange",
+      "query": "pathlib.Path.unlink limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "stackexchange",
+      "query": "pathlib.Path.unlink",
+      "candidates": 3
+    },
+    {
+      "provider": "hn",
+      "query": "pathlib.Path.unlink limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "pathlib.Path.unlink",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "pathlib.Path.unlink limitações",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "pathlib.Path.unlink",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=pathlib.Path.unlink+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=pathlib.Path.unlink+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4639
+    },
+    {
+      "url": "https://www.bing.com/search?q=pathlib.Path.unlink&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=pathlib.Path.unlink&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4875
+    },
+    {
+      "url": "https://stackoverflow.com/questions/70893660/how-can-i-mock-pathlib-path-open-and-pathlib-path-unlink-with-the-same-syntax",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://tr.hotels.com/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://jp.hotels.com/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://fr.hotels.com/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://www.hotels.com/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "final": "https://pt.pornhub.com/video/search?search=rebolando",
+      "chars": 1174594
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+    "domain": "general",
+    "original_request": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+    "resolved_request": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T15:47:48.033470+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "cea5b095168e9300e4fa",
+        "url": "https://stackoverflow.com/questions/70893660/how-can-i-mock-pathlib-path-open-and-pathlib-path-unlink-with-the-same-syntax",
+        "title": "How can I mock pathlib.Path.open and pathlib.path.unlink with the same syntax?",
+        "origin": "stackexchange",
+        "query": "pathlib.Path.unlink",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "I use pathlib.Path.open() and pathlib.Path.unlink() in my productive code. The unittest for that work. But I use two different ways to patch() . One with @patch",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "908aa97392756fa76f3a",
+        "url": "https://stackoverflow.com/questions/70947764/check-the-value-of-path-object-when-mocking-unlink",
+        "title": "Check the value of Path-object when mocking unlink()",
+        "origin": "stackexchange",
+        "query": "pathlib.Path.unlink",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "My productive code takes a pathlib.Path instance and creates a second one with modified suffix out of it and delete that second file if it exists. def productiv",
+        "selected": false,
+        "returned": true,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "a7e08d5d82bc0cfd37b3",
+        "url": "https://stackoverflow.com/questions/78691822/how-can-i-prevent-a-permissionerror-when-i-try-to-delete-a-gif-previously-star",
+        "title": "How can I prevent a PermissionError when I try to delete a .GIF previously 'started' in a PySide6 QLabel?",
+        "origin": "stackexchange",
+        "query": "pathlib.Path.unlink",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "I would be very grateful for your help overcoming this PermissionError problem when I try to delete a .GIF file that I have previously been 'playing' in my PySi",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "fc164c1376520a45481f",
+        "url": "https://tr.hotels.com/",
+        "title": "Hotels.com - Lüks Otellerden Uygun Fiyatlı Konaklama Birimlerine Kadar ...",
+        "origin": "bing",
+        "query": "pathlib.Path.unlink limitações",
+        "date": "dom., 25 out. 2026 12:40:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Hotels.com | Hotels.com’dan rezervasyon yaparak uygun fiyatlı oteller bulun ve indirimlerden yararlanın. Otel fiyatlarını ve teklifleri karşılaştırın, oteller h",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "758452582802d693e7f5",
+        "url": "https://jp.hotels.com/",
+        "title": "国内・海外の宿泊・ホテル予約｜ホテルズドットコム",
+        "origin": "bing",
+        "query": "pathlib.Path.unlink limitações",
+        "date": "dom., 25 out. 2026 08:01:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "国内・海外ホテルならホテルズドットコム。割引クーポン・直前割引などでさらにお得な価格でお気に入りのホテルを予約できます。温泉宿・旅館・ビジネスホテルまで簡単検索。変更・キャンセル料もありません！後払いもできるホテルズドットコムで国内・海外旅行を安心予約",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "b5d77ce09f7ba9885fad",
+        "url": "https://www.hotels.com/",
+        "title": "Hotels.com - Deals & Discounts for Hotel Reservations from Luxury ...",
+        "origin": "bing",
+        "query": "pathlib.Path.unlink limitações",
+        "date": "sáb., 24 out. 2026 05:10:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Find cheap hotels and discounts when you book on Hotels.com. Compare hotel deals, offers and read unbiased reviews on hotels.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "27eb7c964d0c41b581e7",
+        "url": "https://fr.hotels.com/",
+        "title": "Hotels.com - Promotions et réductions sur vos réservations d’hôtels, du ...",
+        "origin": "bing",
+        "query": "pathlib.Path.unlink limitações",
+        "date": "dom., 25 out. 2026 07:18:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Hotels.com FRANCE - Réservez des chambres dans des hôtels de luxe ou des hôtels pour les budgets limités. Lisez les avis impartiaux des voyageurs, situez les hô",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "c679cb76c1b1d8d223da",
+        "url": "https://pt.pornhub.com/video/search?search=rebolando",
+        "title": "Vídeos Pornôs Com Rebolando - Pornhub.com",
+        "origin": "bing",
+        "query": "pathlib.Path.unlink",
+        "date": "sáb., 24 out. 2026 10:47:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Acesso gratuito a 7 dias premium Sem Anúncios + Conteudo Exclusivo + Vídeos em HD + Cancele a Qualquer Momento Comece já Assista a este vídeo exclusivo apenas n",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 851,
+        "final_url": "https://pt.pornhub.com/video/search?search=rebolando",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "883e92c5b7d170d8b007",
+        "url": "https://jp.hotels.com/de725674/hotels-jing-dou-shi-ri-ben/",
+        "title": "【Hotels.com】宿泊予約 ￥13,857 ～【京都市】ホテル・人気おすすめホテルの最安値検索",
+        "origin": "bing",
+        "query": "pathlib.Path.unlink limitações",
+        "date": "sáb., 24 out. 2026 20:05:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "リアルな旅行者のレビューと、Hotels.com で 京都市 の宿泊を予約したゲスト間の人気に基づいて宿泊施設が選択されます。これらの 京都市 ホテルは、品質、ロケーション、そして旅行者の体験において常に期待に応えます。最終更新日： 2026 年 10 月 24 日。",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "371fbfaa7a56263c68cf",
+        "url": "https://fr.hotels.com/de500044/hotels-bourges-france/",
+        "title": "Hôtels à Bourges",
+        "origin": "bing",
+        "query": "pathlib.Path.unlink limitações",
+        "date": "sáb., 24 out. 2026 13:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Comparez les prix de 66 hébergements à Bourges ! Découvrez notre sélection d'hôtels aux prix les plus avantageux, accessibles à tous.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "ebd20ecf686a861f5761",
+        "url": "https://pt.erome.com/search?q=rebolando",
+        "title": "Rebolando - Fotos e Vídeos Pornô - EroMe",
+        "origin": "bing",
+        "query": "pathlib.Path.unlink",
+        "date": "dom., 25 out. 2026 03:57:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Rebolando fotos e vídeos. EroMe é o melhor lugar para compartilhar suas fotos eróticas e vídeos pornô. Todos os dias, milhares de pessoas usam o EroMe para desf",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "326fcd2ac7814017947c",
+        "url": "https://pt.erome.com/search?q=gostosa+brasileiras+rebolando",
+        "title": "Gostosa Brasileiras Rebolando - Fotos e Vídeos Pornô - EroMe",
+        "origin": "bing",
+        "query": "pathlib.Path.unlink",
+        "date": "sex., 23 out. 2026 18:47:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Gostosa Brasileiras Rebolando fotos e vídeos. EroMe é o melhor lugar para compartilhar suas fotos eróticas e vídeos pornô. Todos os dias, milhares de pessoas us",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-e24b92f4d8d3",
+      "type": "image",
+      "title": "Logo do Pornhub",
+      "url": "https://ei.phncdn.com/www-static/images/pornhub_logo_straight.svg?cache=2026102205",
+      "final_url": "https://ei.phncdn.com/www-static/images/pornhub_logo_straight.svg?cache=2026102205",
+      "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+      "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "publisher": "ei.phncdn.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo do Pornhub",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4951b2e40ba9",
+      "type": "image",
+      "title": "Google SSO",
+      "url": "https://ei.phncdn.com/www-static/images/google-sso-icon.svg?cache=2026102205",
+      "final_url": "https://ei.phncdn.com/www-static/images/google-sso-icon.svg?cache=2026102205",
+      "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+      "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "publisher": "ei.phncdn.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Google SSO",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-18817a79e1a3",
+      "type": "image",
+      "title": "Logo do Pornhub",
+      "url": "https://ei.phncdn.com/www-static/images//pornhub_logo_straight.png?cache=2026102205",
+      "final_url": "https://ei.phncdn.com/www-static/images//pornhub_logo_straight.png?cache=2026102205",
+      "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+      "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "publisher": "ei.phncdn.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo do Pornhub",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-078ccedc1f8c",
+      "type": "image",
+      "title": "Playlists",
+      "url": "https://ei.phncdn.com/www-static/images/signup_playlists.svg?cache=2026102205",
+      "final_url": "https://ei.phncdn.com/www-static/images/signup_playlists.svg?cache=2026102205",
+      "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+      "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "publisher": "ei.phncdn.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Playlists",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7004013f9748",
+      "type": "image",
+      "title": "Community",
+      "url": "https://ei.phncdn.com/www-static/images/signup_community.svg?cache=2026102205",
+      "final_url": "https://ei.phncdn.com/www-static/images/signup_community.svg?cache=2026102205",
+      "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+      "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "publisher": "ei.phncdn.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Community",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a877deb7ab92",
+      "type": "image",
+      "title": "Tailored",
+      "url": "https://ei.phncdn.com/www-static/images/signup_tailored.svg?cache=2026102205",
+      "final_url": "https://ei.phncdn.com/www-static/images/signup_tailored.svg?cache=2026102205",
+      "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+      "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "publisher": "ei.phncdn.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Tailored",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dd21168efe34",
+      "type": "image",
+      "title": "Coroas",
+      "url": "https://es.phncdn.com/images/categories/118x88/28.jpg?cache=1538057919",
+      "final_url": "https://es.phncdn.com/images/categories/118x88/28.jpg?cache=1538057919",
+      "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+      "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "publisher": "es.phncdn.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Coroas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-bda71c0a65cf",
+      "type": "image",
+      "title": "18 a 25 anos",
+      "url": "https://es.phncdn.com/images/categories/118x88/37.jpg?cache=1538058943",
+      "final_url": "https://es.phncdn.com/images/categories/118x88/37.jpg?cache=1538058943",
+      "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+      "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "publisher": "es.phncdn.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "18 a 25 anos",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "titulo": "Vídeos pornôs com Rebolando | Pornhub.com",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 10:47:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://pt.pornhub.com/video/search?search=rebolando",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://stackoverflow.com/questions/70893660/how-can-i-mock-pathlib-path-open-and-pathlib-path-unlink-with-the-same-syntax",
+      "titulo": "How can I mock pathlib.Path.open and pathlib.path.unlink with the same syntax?",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "metadata_only",
+      "vertical": {
+        "kind": "general",
+        "url": "https://stackoverflow.com/questions/70893660/how-can-i-mock-pathlib-path-open-and-pathlib-path-unlink-with-the-same-syntax",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://stackoverflow.com/questions/70947764/check-the-value-of-path-object-when-mocking-unlink",
+      "titulo": "Check the value of Path-object when mocking unlink()",
+      "status": "encontrada",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "metadata_only",
+      "vertical": {
+        "kind": "general",
+        "url": "https://stackoverflow.com/questions/70947764/check-the-value-of-path-object-when-mocking-unlink",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 1,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "stackexchange",
+      "query": "pathlib.Path.unlink",
+      "items": [
+        {
+          "titulo": "How can I mock pathlib.Path.open and pathlib.path.unlink with the same syntax?",
+          "url": "https://stackoverflow.com/questions/70893660/how-can-i-mock-pathlib-path-open-and-pathlib-path-unlink-with-the-same-syntax",
+          "trecho": "I use pathlib.Path.open() and pathlib.Path.unlink() in my productive code. The unittest for that work. But I use two different ways to patch() . One with @patch decorator and one with a context manager with mock.patch()  · respondida · python, python-3.x, unit-testing, mocking",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 3
+          },
+          "discovery_query": "pathlib.Path.unlink",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/70893660/how-can-i-mock-pathlib-path-open-and-pathlib-path-unlink-with-the-same-syntax",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "relevancia": 12.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Check the value of Path-object when mocking unlink()",
+          "url": "https://stackoverflow.com/questions/70947764/check-the-value-of-path-object-when-mocking-unlink",
+          "trecho": "My productive code takes a pathlib.Path instance and creates a second one with modified suffix out of it and delete that second file if it exists. def productive_code(fp): # \"foo\" + \".wrong\" + \".csv\" = \"foo.wrong.csv\" fp · respondida · python, unit-testing, mocking, python-3.8",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 0
+          },
+          "discovery_query": "pathlib.Path.unlink",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/70947764/check-the-value-of-path-object-when-mocking-unlink",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 7.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "How can I prevent a PermissionError when I try to delete a .GIF previously 'started' in a PySide6 QLabel?",
+          "url": "https://stackoverflow.com/questions/78691822/how-can-i-prevent-a-permissionerror-when-i-try-to-delete-a-gif-previously-star",
+          "trecho": "I would be very grateful for your help overcoming this PermissionError problem when I try to delete a .GIF file that I have previously been 'playing' in my PySide6 application. Full reproduceable code + an example .gif f · respondida · python, qt, permissions, pyside6",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 1
+          },
+          "discovery_query": "pathlib.Path.unlink",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/78691822/how-can-i-prevent-a-permissionerror-when-i-try-to-delete-a-gif-previously-star",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "pathlib.Path.unlink limitações",
+      "items": [
+        {
+          "titulo": "Hotels.com - Lüks Otellerden Uygun Fiyatlı Konaklama Birimlerine Kadar ...",
+          "url": "https://tr.hotels.com/",
+          "trecho": "Hotels.com | Hotels.com’dan rezervasyon yaparak uygun fiyatlı oteller bulun ve indirimlerden yararlanın. Otel fiyatlarını ve teklifleri karşılaştırın, oteller hakkındaki tarafsız yorumları okuyun.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 12:40:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tr.hotels.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "国内・海外の宿泊・ホテル予約｜ホテルズドットコム",
+          "url": "https://jp.hotels.com/",
+          "trecho": "国内・海外ホテルならホテルズドットコム。割引クーポン・直前割引などでさらにお得な価格でお気に入りのホテルを予約できます。温泉宿・旅館・ビジネスホテルまで簡単検索。変更・キャンセル料もありません！後払いもできるホテルズドットコムで国内・海外旅行を安心予約",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 08:01:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://jp.hotels.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Hotels.com - Deals & Discounts for Hotel Reservations from Luxury ...",
+          "url": "https://www.hotels.com/",
+          "trecho": "Find cheap hotels and discounts when you book on Hotels.com. Compare hotel deals, offers and read unbiased reviews on hotels.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:10:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://hotels.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "【Hotels.com】宿泊予約 ￥13,857 ～【京都市】ホテル・人気おすすめホテルの最安値検索",
+          "url": "https://jp.hotels.com/de725674/hotels-jing-dou-shi-ri-ben/",
+          "trecho": "リアルな旅行者のレビューと、Hotels.com で 京都市 の宿泊を予約したゲスト間の人気に基づいて宿泊施設が選択されます。これらの 京都市 ホテルは、品質、ロケーション、そして旅行者の体験において常に期待に応えます。最終更新日： 2026 年 10 月 24 日。",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 20:05:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://jp.hotels.com/de725674/hotels-jing-dou-shi-ri-ben",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Hotels.com - Promotions et réductions sur vos réservations d’hôtels, du ...",
+          "url": "https://fr.hotels.com/",
+          "trecho": "Hotels.com FRANCE - Réservez des chambres dans des hôtels de luxe ou des hôtels pour les budgets limités. Lisez les avis impartiaux des voyageurs, situez les hôtels sur le plan et regardez les photos de qualité. Réservez votre chambre d’hôtel des aujourd’hui et faites des économies avec notre Garant",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:18:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://fr.hotels.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Hôtels à Bourges",
+          "url": "https://fr.hotels.com/de500044/hotels-bourges-france/",
+          "trecho": "Comparez les prix de 66 hébergements à Bourges ! Découvrez notre sélection d'hôtels aux prix les plus avantageux, accessibles à tous.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 13:24:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://fr.hotels.com/de500044/hotels-bourges-france",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "pathlib.Path.unlink",
+      "items": [
+        {
+          "titulo": "Rebolando - Porn Photos & Videos - EroMe",
+          "url": "https://www.erome.com/search?q=rebolando",
+          "trecho": "Rebolando photos & videos. EroMe is the best place to share your erotic pics and porn videos. Every day, thousands of people use EroMe to enjoy free photos and videos. Come share your amateur...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 05:45:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink",
+          "discovery_provider": "bing",
+          "url_canonica": "https://erome.com/search?q=rebolando",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 2.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Rebolando - Fotos e Vídeos Pornô - EroMe",
+          "url": "https://pt.erome.com/search?q=rebolando",
+          "trecho": "Rebolando fotos e vídeos. EroMe é o melhor lugar para compartilhar suas fotos eróticas e vídeos pornô. Todos os dias, milhares de pessoas usam o EroMe para desfrutar de fotos e vídeos gratuitos....",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 03:57:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.erome.com/search?q=rebolando",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "pagina_de_indice": true,
+          "relevancia": 4.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Gostosa Brasileiras Rebolando - Fotos e Vídeos Pornô - EroMe",
+          "url": "https://pt.erome.com/search?q=gostosa+brasileiras+rebolando",
+          "trecho": "Gostosa Brasileiras Rebolando fotos e vídeos. EroMe é o melhor lugar para compartilhar suas fotos eróticas e vídeos pornô. Todos os dias, milhares de pessoas usam o EroMe para desfrutar de fotos e...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 18:47:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.erome.com/search?q=gostosa+brasileiras+rebolando",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "pagina_de_indice": true,
+          "relevancia": 4.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Brasileira Rebolando - Porn Photos & Videos - EroMe",
+          "url": "https://www.erome.com/search?q=brasileira+rebolando",
+          "trecho": "Brasileira Rebolando photos & videos. EroMe is the best place to share your erotic pics and porn videos. Every day, thousands of people use EroMe to enjoy free photos and videos. Come share your...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 04:40:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink",
+          "discovery_provider": "bing",
+          "url_canonica": "https://erome.com/search?q=brasileira+rebolando",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 2.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Rebolando - Fotos y Vídeos Porno - EroMe",
+          "url": "https://es.erome.com/search?q=rebolando",
+          "trecho": "Rebolando fotos y vídeos. EroMe es el mejor lugar para compartir tus fotos eróticas y vídeos porno. Cada día, miles de personas usan EroMe para disfrutar de fotos y vídeos gratis. Ven a compartir...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:07:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink",
+          "discovery_provider": "bing",
+          "url_canonica": "https://es.erome.com/search?q=rebolando",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 2.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Vídeos Pornôs Com Rebolando - Pornhub.com",
+          "url": "https://pt.pornhub.com/video/search?search=rebolando",
+          "trecho": "Nenhum outro site pornô é mais popular e tem mais cenas de Rebolando do que o Pornhub! Navegue por nossa impressionante seleção de vídeos pornôs em qualidade HD em qualquer dispositivo seu.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 10:47:00 GMT"
+          },
+          "discovery_query": "pathlib.Path.unlink",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.pornhub.com/video/search?search=rebolando",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://pt.pornhub.com/video/search?search=rebolando",
+      "result": {
+        "titulo": "Vídeos pornôs com Rebolando | Pornhub.com",
+        "texto": "Acesso gratuito a 7 dias premium Sem Anúncios + Conteudo Exclusivo + Vídeos em HD + Cancele a Qualquer Momento Comece já Assista a este vídeo exclusivo apenas no pornhub premium. Felizmente, você pode ter acesso GRÁTIS por 7 dias! Assista a este vídeo em HD agora Você nunca verá anúncios novamente! Reivindique o seu acesso gratuito de 7 dias Assista este vídeo em 1080p apenas no pornhub premium. Felizmente, você pode ter acesso GRÁTIS por 7 dias! Assista a este vídeo em HD agora Atualizando hoje, você recebe uma semana de acesso gratuito Sem Anúncios + Conteudo Exclusivo + Vídeos em HD + Cancele a Qualquer Momento Reivindique o seu acesso gratuito de 7 dias Ao se inscrever hoje, você recebe uma semana de acesso gratuito Sem Anúncios + Conteudo Exclusivo + Vídeos em HD + Cancele a Qualquer Momento Reivindique o seu acesso gratuito de 7 dias",
+        "final": "https://pt.pornhub.com/video/search?search=rebolando",
+        "trecho_usado": "Acesso gratuito a 7 dias premium Sem Anúncios + Conteudo Exclusivo + Vídeos em HD + Cancele a Qualquer Momento Comece já Assista a este vídeo exclusivo apenas no pornhub premium. Felizmente, você pode ter acesso GRÁTIS por 7 dias! Assista a este vídeo em HD agora Você nunca verá anúncios novamente! Reivindique o seu acesso gratuito de 7 dias Assista este vídeo em 1080p apenas no pornhub premium.",
+        "metadados": {
+          "titulo": "Vídeos pornôs com Rebolando | Pornhub.com",
+          "descricao": "Assista vídeos pornôs com Rebolando grátis, aqui na Pornhub.com. Descubra a crescente coleção de filmes e clipes XXX de alta qualidade por Mais relevantes. Nenhum outro site pornô é mais popular e tem mais cenas de Rebolando do que o Pornhub! Navegue por nossa impressionante seleção de vídeos pornôs em qualidade HD em qualquer dispositivo seu.",
+          "canonica": "https://pt.pornhub.com/video/search?search=rebolando",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Acesso gratuito a 7 dias premium",
+            "texto": "Sem Anúncios + Conteudo Exclusivo + Vídeos em HD + Cancele a Qualquer Momento"
+          },
+          {
+            "titulo": "Assista a este vídeo exclusivo apenas no pornhub premium.",
+            "texto": "Felizmente, você pode ter acesso GRÁTIS por 7 dias!"
+          },
+          {
+            "titulo": "Você nunca verá anúncios novamente!",
+            "texto": ""
+          },
+          {
+            "titulo": "Assista este vídeo em 1080p apenas no pornhub premium.",
+            "texto": "Felizmente, você pode ter acesso GRÁTIS por 7 dias!"
+          },
+          {
+            "titulo": "Atualizando hoje, você recebe uma semana de acesso gratuito",
+            "texto": "Sem Anúncios + Conteudo Exclusivo + Vídeos em HD + Cancele a Qualquer Momento"
+          },
+          {
+            "titulo": "Ao se inscrever hoje, você recebe uma semana de acesso gratuito",
+            "texto": "Sem Anúncios + Conteudo Exclusivo + Vídeos em HD + Cancele a Qualquer Momento"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://help.pornhub.com/hc/en-us/articles/44854458951571-The-Steps-We-re-Taking-to-Stop-the-Publication-of-CSAM-and-NCM",
+            "texto": "Aviso aos usuários",
+            "interno": false
+          },
+          {
+            "url": "https://pt.pornhub.com/content-removal",
+            "texto": "Remoção dos conteúdos",
+            "interno": true
+          },
+          {
+            "url": "https://www.rtalabel.org",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://pt.pornhub.com/front/lost_password",
+            "texto": "Esqueceu a Senha?",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/",
+            "texto": "Heterosexual",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/gayporn",
+            "texto": "Gay",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/lesbian",
+            "texto": "Safica Beta",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/transgender",
+            "texto": "Trans",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/video",
+            "texto": "Vídeos Pornô Em Destaque",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/clips",
+            "texto": "Clipes",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/shorties",
+            "texto": "Rapidinhas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/recommended",
+            "texto": "Vídeos recomendados",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/video?o=ht",
+            "texto": "Mais Populares em Brasil",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/pornstars?performerType=amateur",
+            "texto": "Amadoras Verificadas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/pornstars?o=t",
+            "texto": "Pornstars Mais Populares",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/pornstars?performerType=pornstar",
+            "texto": "Pornstars Verificadas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/pornstars",
+            "texto": "Todos o Pornstars & Modelos",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/channels",
+            "texto": "Canais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/categories",
+            "texto": "Categorias Principais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/video?c=27",
+            "texto": "Lésbicas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/categories/teen",
+            "texto": "18 a 25 anos",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/video?c=29",
+            "texto": "MILF",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/popularwithwomen",
+            "texto": "Popular Entre as Mulheres",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/video?c=35",
+            "texto": "Sexo Anal",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/video?c=65",
+            "texto": "Ménage à Trois",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/video?c=28",
+            "texto": "Coroas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/categories/hentai",
+            "texto": "Hentai",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/video?c=17",
+            "texto": "Negras",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/video?c=111",
+            "texto": "Japonesas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.pornhub.com/playlists",
+            "texto": "Playlists",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://ei.phncdn.com/www-static/images/pornhub_logo_straight.svg?cache=2026102205",
+          "https://ei.phncdn.com/www-static/images/google-sso-icon.svg?cache=2026102205",
+          "https://ei.phncdn.com/www-static/images//pornhub_logo_straight.png?cache=2026102205",
+          "https://ei.phncdn.com/www-static/images/signup_playlists.svg?cache=2026102205",
+          "https://ei.phncdn.com/www-static/images/signup_community.svg?cache=2026102205",
+          "https://ei.phncdn.com/www-static/images/signup_tailored.svg?cache=2026102205",
+          "https://pix-cdn77.phncdn.com/c6251/videos/202609/29/63994605/original/01a0ead2-6e48-7dc5-83cb-c8da1e6fec72.png/plain/rs:fit:320:180?hash=yTd4pBRGlManzsFRslwoVhTyypc=&validto=1793029747",
+          "https://pix-fl.phncdn.com/c6531/videos/202610/01/64243715/original_64243715.mp4/plain/ex:1:no/bg:0:0:0/rs:fit:320:180/vts:677?hdnea=st=1792943658~exp=1793030058~hdl=-1~hmac=17314b10a21bc10cbf702a09820e02b7baee035e",
+          "https://pix-fl.phncdn.com/c6251/videos/202607/17/55857335/original/019feccd-e365-737b-8e0c-b5da0d24907d.jpg/plain/rs:fit:320:180?hdnea=st=1792943976~exp=1793030376~hdl=-1~hmac=9ccf8e57fdda70a301200b00639f34d4c284e846",
+          "https://pix-fl.phncdn.com/c6541/videos/202610/01/64247625/original/01a0f56b-d51c-770a-b4ef-4cede5413a7b.png/plain/rs:fit:320:180?hdnea=st=1792943976~exp=1793030376~hdl=-1~hmac=b648df490326633b673a1e32950d741f0d10d659"
+        ],
+        "midia": [
+          {
+            "id": "med-e24b92f4d8d3",
+            "type": "image",
+            "title": "Logo do Pornhub",
+            "url": "https://ei.phncdn.com/www-static/images/pornhub_logo_straight.svg?cache=2026102205",
+            "final_url": "https://ei.phncdn.com/www-static/images/pornhub_logo_straight.svg?cache=2026102205",
+            "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+            "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+            "publisher": "ei.phncdn.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo do Pornhub",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4951b2e40ba9",
+            "type": "image",
+            "title": "Google SSO",
+            "url": "https://ei.phncdn.com/www-static/images/google-sso-icon.svg?cache=2026102205",
+            "final_url": "https://ei.phncdn.com/www-static/images/google-sso-icon.svg?cache=2026102205",
+            "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+            "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+            "publisher": "ei.phncdn.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Google SSO",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-18817a79e1a3",
+            "type": "image",
+            "title": "Logo do Pornhub",
+            "url": "https://ei.phncdn.com/www-static/images//pornhub_logo_straight.png?cache=2026102205",
+            "final_url": "https://ei.phncdn.com/www-static/images//pornhub_logo_straight.png?cache=2026102205",
+            "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+            "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+            "publisher": "ei.phncdn.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo do Pornhub",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-078ccedc1f8c",
+            "type": "image",
+            "title": "Playlists",
+            "url": "https://ei.phncdn.com/www-static/images/signup_playlists.svg?cache=2026102205",
+            "final_url": "https://ei.phncdn.com/www-static/images/signup_playlists.svg?cache=2026102205",
+            "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+            "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+            "publisher": "ei.phncdn.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Playlists",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7004013f9748",
+            "type": "image",
+            "title": "Community",
+            "url": "https://ei.phncdn.com/www-static/images/signup_community.svg?cache=2026102205",
+            "final_url": "https://ei.phncdn.com/www-static/images/signup_community.svg?cache=2026102205",
+            "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+            "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+            "publisher": "ei.phncdn.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Community",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a877deb7ab92",
+            "type": "image",
+            "title": "Tailored",
+            "url": "https://ei.phncdn.com/www-static/images/signup_tailored.svg?cache=2026102205",
+            "final_url": "https://ei.phncdn.com/www-static/images/signup_tailored.svg?cache=2026102205",
+            "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+            "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+            "publisher": "ei.phncdn.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Tailored",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dd21168efe34",
+            "type": "image",
+            "title": "Coroas",
+            "url": "https://es.phncdn.com/images/categories/118x88/28.jpg?cache=1538057919",
+            "final_url": "https://es.phncdn.com/images/categories/118x88/28.jpg?cache=1538057919",
+            "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+            "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+            "publisher": "es.phncdn.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Coroas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bda71c0a65cf",
+            "type": "image",
+            "title": "18 a 25 anos",
+            "url": "https://es.phncdn.com/images/categories/118x88/37.jpg?cache=1538058943",
+            "final_url": "https://es.phncdn.com/images/categories/118x88/37.jpg?cache=1538058943",
+            "source_title": "Vídeos pornôs com Rebolando | Pornhub.com",
+            "source_url": "https://pt.pornhub.com/video/search?search=rebolando",
+            "publisher": "es.phncdn.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "18 a 25 anos",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "cea5b095168e9300e4fa",
+            "url": "https://stackoverflow.com/questions/70893660/how-can-i-mock-pathlib-path-open-and-pathlib-path-unlink-with-the-same-syntax",
+            "title": "How can I mock pathlib.Path.open and pathlib.path.unlink with the same syntax?",
+            "origin": "stackexchange",
+            "query": "pathlib.Path.unlink",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "I use pathlib.Path.open() and pathlib.Path.unlink() in my productive code. The unittest for that work. But I use two different ways to patch() . One with @patch"
+          },
+          {
+            "id": "908aa97392756fa76f3a",
+            "url": "https://stackoverflow.com/questions/70947764/check-the-value-of-path-object-when-mocking-unlink",
+            "title": "Check the value of Path-object when mocking unlink()",
+            "origin": "stackexchange",
+            "query": "pathlib.Path.unlink",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "My productive code takes a pathlib.Path instance and creates a second one with modified suffix out of it and delete that second file if it exists. def productiv"
+          },
+          {
+            "id": "a7e08d5d82bc0cfd37b3",
+            "url": "https://stackoverflow.com/questions/78691822/how-can-i-prevent-a-permissionerror-when-i-try-to-delete-a-gif-previously-star",
+            "title": "How can I prevent a PermissionError when I try to delete a .GIF previously 'started' in a PySide6 QLabel?",
+            "origin": "stackexchange",
+            "query": "pathlib.Path.unlink",
+            "date": "",
+            "type": "tecnico",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "I would be very grateful for your help overcoming this PermissionError problem when I try to delete a .GIF file that I have previously been 'playing' in my PySi"
+          },
+          {
+            "id": "fc164c1376520a45481f",
+            "url": "https://tr.hotels.com/",
+            "title": "Hotels.com - Lüks Otellerden Uygun Fiyatlı Konaklama Birimlerine Kadar ...",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Hotels.com | Hotels.com’dan rezervasyon yaparak uygun fiyatlı oteller bulun ve indirimlerden yararlanın. Otel fiyatlarını ve teklifleri karşılaştırın, oteller h"
+          },
+          {
+            "id": "758452582802d693e7f5",
+            "url": "https://jp.hotels.com/",
+            "title": "国内・海外の宿泊・ホテル予約｜ホテルズドットコム",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "国内・海外ホテルならホテルズドットコム。割引クーポン・直前割引などでさらにお得な価格でお気に入りのホテルを予約できます。温泉宿・旅館・ビジネスホテルまで簡単検索。変更・キャンセル料もありません！後払いもできるホテルズドットコムで国内・海外旅行を安心予約"
+          },
+          {
+            "id": "b5d77ce09f7ba9885fad",
+            "url": "https://www.hotels.com/",
+            "title": "Hotels.com - Deals & Discounts for Hotel Reservations from Luxury ...",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Find cheap hotels and discounts when you book on Hotels.com. Compare hotel deals, offers and read unbiased reviews on hotels."
+          },
+          {
+            "id": "883e92c5b7d170d8b007",
+            "url": "https://jp.hotels.com/de725674/hotels-jing-dou-shi-ri-ben/",
+            "title": "【Hotels.com】宿泊予約 ￥13,857 ～【京都市】ホテル・人気おすすめホテルの最安値検索",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "リアルな旅行者のレビューと、Hotels.com で 京都市 の宿泊を予約したゲスト間の人気に基づいて宿泊施設が選択されます。これらの 京都市 ホテルは、品質、ロケーション、そして旅行者の体験において常に期待に応えます。最終更新日： 2026 年 10 月 24 日。"
+          },
+          {
+            "id": "27eb7c964d0c41b581e7",
+            "url": "https://fr.hotels.com/",
+            "title": "Hotels.com - Promotions et réductions sur vos réservations d’hôtels, du ...",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Hotels.com FRANCE - Réservez des chambres dans des hôtels de luxe ou des hôtels pour les budgets limités. Lisez les avis impartiaux des voyageurs, situez les hô"
+          },
+          {
+            "id": "371fbfaa7a56263c68cf",
+            "url": "https://fr.hotels.com/de500044/hotels-bourges-france/",
+            "title": "Hôtels à Bourges",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Comparez les prix de 66 hébergements à Bourges ! Découvrez notre sélection d'hôtels aux prix les plus avantageux, accessibles à tous."
+          },
+          {
+            "id": "c8a451831dbc37a4bee2",
+            "url": "https://www.erome.com/search?q=rebolando",
+            "title": "Rebolando - Porn Photos & Videos - EroMe",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Rebolando photos & videos. EroMe is the best place to share your erotic pics and porn videos. Every day, thousands of people use EroMe to enjoy free photos and "
+          },
+          {
+            "id": "ebd20ecf686a861f5761",
+            "url": "https://pt.erome.com/search?q=rebolando",
+            "title": "Rebolando - Fotos e Vídeos Pornô - EroMe",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Rebolando fotos e vídeos. EroMe é o melhor lugar para compartilhar suas fotos eróticas e vídeos pornô. Todos os dias, milhares de pessoas usam o EroMe para desf"
+          },
+          {
+            "id": "326fcd2ac7814017947c",
+            "url": "https://pt.erome.com/search?q=gostosa+brasileiras+rebolando",
+            "title": "Gostosa Brasileiras Rebolando - Fotos e Vídeos Pornô - EroMe",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Gostosa Brasileiras Rebolando fotos e vídeos. EroMe é o melhor lugar para compartilhar suas fotos eróticas e vídeos pornô. Todos os dias, milhares de pessoas us"
+          },
+          {
+            "id": "1af92e7cbcd67734df01",
+            "url": "https://www.erome.com/search?q=brasileira+rebolando",
+            "title": "Brasileira Rebolando - Porn Photos & Videos - EroMe",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Brasileira Rebolando photos & videos. EroMe is the best place to share your erotic pics and porn videos. Every day, thousands of people use EroMe to enjoy free "
+          },
+          {
+            "id": "a29ab5cbe5246180263a",
+            "url": "https://es.erome.com/search?q=rebolando",
+            "title": "Rebolando - Fotos y Vídeos Porno - EroMe",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Rebolando fotos y vídeos. EroMe es el mejor lugar para compartir tus fotos eróticas y vídeos porno. Cada día, miles de personas usan EroMe para disfrutar de fot"
+          },
+          {
+            "id": "c679cb76c1b1d8d223da",
+            "url": "https://pt.pornhub.com/video/search?search=rebolando",
+            "title": "Vídeos Pornôs Com Rebolando - Pornhub.com",
+            "origin": "bing",
+            "query": "pathlib.Path.unlink",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Nenhum outro site pornô é mais popular e tem mais cenas de Rebolando do que o Pornhub! Navegue por nossa impressionante seleção de vídeos pornôs em qualidade HD"
+          }
+        ],
+        "unique_candidates": 15,
+        "omitted": 0
+      },
+      "etapas": [
+        "stackexchange (consulta reformulada 'pathlib.Path.unlink'): 3 resultados",
+        "stackexchange: sem resultados (pathlib.Path.unlink limitações)",
+        "hn: sem resultados (pathlib.Path.unlink limitações)",
+        "bing: 6 resultados (pathlib.Path.unlink limitações)",
+        "bing (consulta reformulada 'pathlib.Path.unlink'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (pathlib.Path.unlink limitações)",
+        "— recuperação por lacuna —",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "pathlib.Path.unlink limitações",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+          "purpose": "pedido original sem condensação"
+        },
+        {
+          "type": "ENTITY_EXACT",
+          "query": "pathlib.Path.unlink",
+          "purpose": "resolver assunto explícito quando operações dominam os resultados; validar pelo pedido original"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-83a030853294",
+            "type": "explicit_attribute",
+            "description": "Comportamento da operação",
+            "entity": "pathlib.Path.unlink",
+            "attribute": "behavior",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Comportamento da operação",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-f9618341c49c",
+            "type": "explicit_attribute",
+            "description": "Limitações",
+            "entity": "pathlib.Path.unlink",
+            "attribute": "limitations",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Limitações",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://pt.pornhub.com/video/search?search=rebolando",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S2",
+          "url": "https://stackoverflow.com/questions/70893660/how-can-i-mock-pathlib-path-open-and-pathlib-path-unlink-with-the-same-syntax",
+          "answerability": {
+            "state": "UNREADABLE",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://stackoverflow.com/questions/70947764/check-the-value-of-path-object-when-mocking-unlink",
+          "answerability": {
+            "state": "UNREADABLE",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+      "adapter_query": "pathlib.Path.unlink limitações",
+      "provider": "stackexchange",
+      "at": "2026-10-25T16:01:10.767584+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "pathlib.Path.unlink limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "pathlib.Path.unlink limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "pathlib.Path.unlink limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "pathlib.Path.unlink limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "pathlib.Path.unlink limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 2483.7,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+      "adapter_query": "pathlib.Path.unlink",
+      "provider": "stackexchange",
+      "at": "2026-10-25T16:01:13.251703+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 3,
+      "results": [
+        {
+          "title": "How can I mock pathlib.Path.open and pathlib.path.unlink with the same syntax?",
+          "url": "https://stackoverflow.com/questions/70893660/how-can-i-mock-pathlib-path-open-and-pathlib-path-unlink-with-the-same-syntax"
+        },
+        {
+          "title": "Check the value of Path-object when mocking unlink()",
+          "url": "https://stackoverflow.com/questions/70947764/check-the-value-of-path-object-when-mocking-unlink"
+        },
+        {
+          "title": "How can I prevent a PermissionError when I try to delete a .GIF previously 'started' in a PySide6 QLabel?",
+          "url": "https://stackoverflow.com/questions/78691822/how-can-i-prevent-a-permissionerror-when-i-try-to-delete-a-gif-previously-star"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "pathlib.Path.unlink"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 690.04,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+      "adapter_query": "pathlib.Path.unlink limitações",
+      "provider": "hn",
+      "at": "2026-10-25T16:01:13.954064+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://hn.algolia.com/api/v1/search",
+          "parameters": {
+            "query": "pathlib.Path.unlink limitações"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 1284.0,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+      "adapter_query": "pathlib.Path.unlink",
+      "provider": "hn",
+      "at": "2026-10-25T16:01:15.238601+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://hn.algolia.com/api/v1/search",
+          "parameters": {
+            "query": "pathlib.Path.unlink"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 927.18,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+      "adapter_query": "pathlib.Path.unlink limitações",
+      "provider": "bing",
+      "at": "2026-10-25T16:01:16.165928+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Hotels.com - Lüks Otellerden Uygun Fiyatlı Konaklama Birimlerine Kadar ...",
+          "url": "https://tr.hotels.com/"
+        },
+        {
+          "title": "国内・海外の宿泊・ホテル予約｜ホテルズドットコム",
+          "url": "https://jp.hotels.com/"
+        },
+        {
+          "title": "Hotels.com - Deals & Discounts for Hotel Reservations from Luxury ...",
+          "url": "https://www.hotels.com/"
+        },
+        {
+          "title": "【Hotels.com】宿泊予約 ￥13,857 ～【京都市】ホテル・人気おすすめホテルの最安値検索",
+          "url": "https://jp.hotels.com/de725674/hotels-jing-dou-shi-ri-ben/"
+        },
+        {
+          "title": "Hotels.com - Promotions et réductions sur vos réservations d’hôtels, du ...",
+          "url": "https://fr.hotels.com/"
+        },
+        {
+          "title": "Hôtels à Bourges",
+          "url": "https://fr.hotels.com/de500044/hotels-bourges-france/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "pathlib.Path.unlink limitações",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 525.46,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+      "adapter_query": "pathlib.Path.unlink",
+      "provider": "bing",
+      "at": "2026-10-25T16:01:16.700111+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Rebolando - Porn Photos & Videos - EroMe",
+          "url": "https://www.erome.com/search"
+        },
+        {
+          "title": "Rebolando - Fotos e Vídeos Pornô - EroMe",
+          "url": "https://pt.erome.com/search"
+        },
+        {
+          "title": "Gostosa Brasileiras Rebolando - Fotos e Vídeos Pornô - EroMe",
+          "url": "https://pt.erome.com/search"
+        },
+        {
+          "title": "Brasileira Rebolando - Porn Photos & Videos - EroMe",
+          "url": "https://www.erome.com/search"
+        },
+        {
+          "title": "Rebolando - Fotos y Vídeos Porno - EroMe",
+          "url": "https://es.erome.com/search"
+        },
+        {
+          "title": "Vídeos Pornôs Com Rebolando - Pornhub.com",
+          "url": "https://pt.pornhub.com/video/search"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "pathlib.Path.unlink",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 476.41,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": "2026-10-25T15:47:48.033470+00:00",
+  "source_revision": "beab3573022e0e52511357a0636e80f2e14478ed",
+  "dataset_sha256": "6f38b89f96367212ba5e68888f57bbb43e7ab7331047eaac7df6f13e1bf4dee2"
+}

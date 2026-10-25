@@ -1,0 +1,33 @@
+.....F.F.....................                                            [100%]
+================================== FAILURES ===================================
+____________ test_local_antecedent_and_adjacent_operation_heading _____________
+
+    def test_local_antecedent_and_adjacent_operation_heading():
+        q='Companhia Boreal, produtos?'
+        cov=eg.requirement_coverage(q,[src('A Companhia Boreal foi fundada em 1952.\n\nEla fabrica motores e geradores.')])
+>       assert cov['complete']
+E       assert False
+
+tests\test_evidence_calibration_v5994.py:65: AssertionError
+_____ test_multifacet_passage_retains_all_requirement_bindings_and_sqlite _____
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-475/test_multifacet_passage_retain0')
+
+    def test_multifacet_passage_retains_all_requirement_bindings_and_sqlite(tmp_path):
+        import pc_agent
+        q='Quem fundou a Empresa Clara, em que ano e quais produtos fabrica?'
+        text='A Empresa Clara foi fundada em 1948 por Ana e Leo. A Empresa Clara fabrica motores e geradores.'
+        cov=eg.requirement_coverage(q,[src(text)])
+        selected=eg.select_answer_passages(cov)
+>       assert {r['id'] for r in cov['requirements']}==set().union(*(set(p['requirement_ids']) for p in selected))
+E       AssertionError: assert {'R-16bf52b2b...d81ca93f7dfb'} == {'R-3b8e7b4c6...d81ca93f7dfb'}
+E         
+E         Extra items in the left set:
+E         'R-16bf52b2b674'
+E         Use -v to get more diff
+
+tests\test_evidence_calibration_v5994.py:88: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_evidence_calibration_v5994.py::test_local_antecedent_and_adjacent_operation_heading
+FAILED tests/test_evidence_calibration_v5994.py::test_multifacet_passage_retains_all_requirement_bindings_and_sqlite
+2 failed, 27 passed in 2.16s

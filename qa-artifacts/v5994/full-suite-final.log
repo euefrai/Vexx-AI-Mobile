@@ -1,0 +1,39 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 13%]
+........................................................................ [ 18%]
+......................................................s................. [ 22%]
+........................................................................ [ 27%]
+........................................................................ [ 31%]
+........................................................................ [ 36%]
+........................................................................ [ 40%]
+........................................................................ [ 45%]
+........................................................................ [ 49%]
+.................................................................s...... [ 54%]
+........................................................................ [ 58%]
+........................................................................ [ 63%]
+........................................................................ [ 67%]
+.............................................................s.......... [ 72%]
+s....................................................................... [ 76%]
+........................................................................ [ 81%]
+........................................................................ [ 85%]
+........................................................................ [ 90%]
+........................................................................ [ 94%]
+........................................................................ [ 99%]
+........                                                                 [100%]
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+SKIPPED [1] tests\test_evidence_benchmarks.py:229: Verificação semântica LLM BLOQUEADA sem provedor; determinístico cobre o resto.
+SKIPPED [1] tests\test_research_quality.py:162: Inferência Hermes real bloqueada no provedor; síntese LLM marcada BLOQUEADA.
+SKIPPED [1] tests\test_shopping.py:438: DDG sem resultados (rede instável)
+SKIPPED [1] tests\test_shopping.py:627: BLOQUEADO: mlb=ResearchErro: Provedor HTTP 403. ddg=página sem resultados (bot-wall?) lite=página sem resultados (bot-wall?)
+1588 passed, 4 skipped, 2 warnings in 240.36s (0:04:00)

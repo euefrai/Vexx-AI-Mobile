@@ -1,0 +1,225 @@
+{
+  "scope": "FIXTURE_DISCOVERY_REAL_PUBLIC_READ_SQLITE_DELIVERY_NO_MODEL",
+  "job_id": "rj-c63d274a1e86",
+  "reply_id": "rj-c63d274a1e86-result",
+  "question": "Como funciona Array.prototype.toSorted, qual sua sintaxe e limitações?",
+  "state": "concluida",
+  "coverage": {
+    "applicable": true,
+    "requirements": [
+      {
+        "id": "R-e3ab9f882fc3",
+        "type": "explicit_attribute",
+        "description": "Sintaxe ou assinatura",
+        "entity": "Array.prototype.toSorted",
+        "attribute": "syntax",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Sintaxe ou assinatura",
+        "candidate_evidence_ids": [
+          "ev-e998ac809d4a",
+          "ev-3a7d6ef93a88"
+        ],
+        "confirmed_evidence_ids": [
+          "ev-e998ac809d4a",
+          "ev-3a7d6ef93a88"
+        ],
+        "state": "SUPPORTED",
+        "insufficiency_reason": "",
+        "passage_ids": [
+          "P-7d9c508cf6af1a62",
+          "P-5b98b21f55ad4a03",
+          "P-2f5940b7b14a4719"
+        ]
+      },
+      {
+        "id": "R-ceea65f6e835",
+        "type": "explicit_attribute",
+        "description": "Comportamento da operação",
+        "entity": "Array.prototype.toSorted",
+        "attribute": "behavior",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Comportamento da operação",
+        "candidate_evidence_ids": [
+          "ev-e998ac809d4a",
+          "ev-3a7d6ef93a88"
+        ],
+        "confirmed_evidence_ids": [],
+        "state": "DISCOVERED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      },
+      {
+        "id": "R-b600633891f9",
+        "type": "explicit_attribute",
+        "description": "Limitações",
+        "entity": "Array.prototype.toSorted",
+        "attribute": "limitations",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Limitações",
+        "candidate_evidence_ids": [
+          "ev-e998ac809d4a",
+          "ev-3a7d6ef93a88"
+        ],
+        "confirmed_evidence_ids": [],
+        "state": "DISCOVERED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      }
+    ],
+    "passages": [
+      {
+        "id": "P-7d9c508cf6af1a62",
+        "source_id": "ev-e998ac809d4a",
+        "requirement_id": "R-e3ab9f882fc3",
+        "text_span": {
+          "start": 1524,
+          "end": 2403,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "DIRECT_ANSWER",
+        "support_label": "DIRECT_SUPPORT"
+      },
+      {
+        "id": "P-5b98b21f55ad4a03",
+        "source_id": "ev-3a7d6ef93a88",
+        "requirement_id": "R-e3ab9f882fc3",
+        "text_span": {
+          "start": 0,
+          "end": 1018,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "DIRECT_ANSWER",
+        "support_label": "DIRECT_SUPPORT"
+      },
+      {
+        "id": "P-2f5940b7b14a4719",
+        "source_id": "ev-3a7d6ef93a88",
+        "requirement_id": "R-e3ab9f882fc3",
+        "text_span": {
+          "start": 2280,
+          "end": 3213,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "DIRECT_ANSWER",
+        "support_label": "DIRECT_SUPPORT"
+      }
+    ],
+    "complete": false,
+    "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+  },
+  "evidence": [
+    {
+      "id": "ev-3a7d6ef93a88",
+      "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+      "answer_passages": [
+        {
+          "id": "P-5b98b21f55ad4a03",
+          "source_url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "text": "Dieser Inhalt wurde automatisch aus dem Englischen übersetzt, und kann Fehler enthalten. Erfahre mehr über dieses Experiment. View in English Always switch to English Array.prototype.toSorted() Baseline Weitgehend verfügbar Diese Funktion ist gut etabliert und funktioniert auf vielen Geräten und in vielen Browserversionen. Sie ist seit Juli 2023 browserübergreifend verfügbar. Vollständige Kompatibilität anzeigen Mehr erfahren Die toSorted() Methode von Array Instanzen ist die kopierende Version der sort() Methode. Sie gibt ein neues Array zurück, bei dem die Elemente in aufsteigender Reihenfolge sortiert sind. Syntax js toSorted() toSorted(compareFn) Parameter compareFn Optional Eine Funktion, die die Reihenfolge der Elemente bestimmt. Wird sie weggelassen, werden die Array-Elemente in Zeichenfolgen umgewandelt und dann gemäß jedem Zeichen-Unicode-Codepunktwert sortiert. Siehe sort() für weitere Informationen. Rückgabewert Ein neues Array, bei dem die Elemente in aufsteigender Reihenfolge sortiert sind.",
+          "text_span": {
+            "start": 0,
+            "end": 1018,
+            "scope": "returned_extracted_text"
+          },
+          "section": "",
+          "requirement_id": "R-e3ab9f882fc3",
+          "source_id": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "evidence_id": "",
+          "support_label": "DIRECT_SUPPORT",
+          "answerability": "DIRECT_ANSWER",
+          "reason": "bounded_explicit_entity_attribute_relation",
+          "requirement_ids": [
+            "R-e3ab9f882fc3"
+          ],
+          "requirement_support": {
+            "R-e3ab9f882fc3": "DIRECT_SUPPORT"
+          }
+        },
+        {
+          "id": "P-2f5940b7b14a4719",
+          "source_url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "text": "Sie sammelt dann alle existierenden integer-gekoppelten Eigenschaften im Bereich von 0 bis length - 1, sortiert sie und schreibt sie in ein neues Array. js const arrayLike = { length: 3, unrelated: \"foo\", 0: 5, 2: 4, 3: 3, // ignored by toSorted() since length is 3 }; console.log(Array.prototype.toSorted.call(arrayLike)); // [4, 5, undefined] Spezifikationen Spezifikation ECMAScript® 2027 Language Specification # sec-array.prototype.tosorted Browser-Kompatibilität Siehe auch Polyfill von Array.prototype.toSorted in core-js es-shims Polyfill von Array.prototype.toSorted Leitfaden für indizierte Sammlungen Array.prototype.sort() Array.prototype.toReversed() Array.prototype.toSpliced() Array.prototype.with() TypedArray.prototype.toSorted() Help improve MDN Erfahren Sie, wie Sie beitragen können Diese Seite wurde automatisch aus dem Englischen übersetzt. Übersetzung auf GitHub anzeigen • Fehler mit dieser Übersetzung melden",
+          "text_span": {
+            "start": 2280,
+            "end": 3213,
+            "scope": "returned_extracted_text"
+          },
+          "section": "",
+          "requirement_id": "R-e3ab9f882fc3",
+          "source_id": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "evidence_id": "",
+          "support_label": "DIRECT_SUPPORT",
+          "answerability": "DIRECT_ANSWER",
+          "reason": "bounded_explicit_entity_attribute_relation",
+          "requirement_ids": [
+            "R-e3ab9f882fc3"
+          ],
+          "requirement_support": {
+            "R-e3ab9f882fc3": "DIRECT_SUPPORT"
+          }
+        }
+      ],
+      "answerability": {
+        "state": "PARTIAL_ANSWER",
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification",
+        "aspects": [
+          "Sintaxe ou assinatura"
+        ],
+        "partial_aspects": []
+      }
+    },
+    {
+      "id": "ev-e998ac809d4a",
+      "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+      "answer_passages": [
+        {
+          "id": "P-7d9c508cf6af1a62",
+          "source_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "text": "It then collects all existing integer-keyed properties in the range of 0 to length - 1, sorts them, and writes them into a new array. js const arrayLike = { length: 3, unrelated: \"foo\", 0: 5, 2: 4, 3: 3, // ignored by toSorted() since length is 3 }; console.log(Array.prototype.toSorted.call(arrayLike)); // [4, 5, undefined] Specifications Specification ECMAScript® 2027 Language Specification # sec-array.prototype.tosorted Browser compatibility See also Polyfill of Array.prototype.toSorted in core-js es-shims polyfill of Array.prototype.toSorted Indexed collections guide Array.prototype.sort() Array.prototype.toReversed() Array.prototype.toSpliced() Array.prototype.with() TypedArray.prototype.toSorted() Help improve MDN Learn how to contribute This page was last modified on Jul 10, 2025 by MDN contributors. View this page on GitHub • Report a problem with this content",
+          "text_span": {
+            "start": 1524,
+            "end": 2403,
+            "scope": "returned_extracted_text"
+          },
+          "section": "",
+          "requirement_id": "R-e3ab9f882fc3",
+          "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "evidence_id": "",
+          "support_label": "DIRECT_SUPPORT",
+          "answerability": "DIRECT_ANSWER",
+          "reason": "bounded_explicit_entity_attribute_relation",
+          "requirement_ids": [
+            "R-e3ab9f882fc3"
+          ],
+          "requirement_support": {
+            "R-e3ab9f882fc3": "DIRECT_SUPPORT"
+          }
+        }
+      ],
+      "answerability": {
+        "state": "PARTIAL_ANSWER",
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification",
+        "aspects": [
+          "Sintaxe ou assinatura"
+        ],
+        "partial_aspects": []
+      }
+    }
+  ],
+  "limitations": [
+    "Discovery URL explicitly seeded as a test fixture; not discovered autonomously.",
+    "Extractive fallback, no model inference in this test."
+  ]
+}

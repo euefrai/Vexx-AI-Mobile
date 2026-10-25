@@ -1,0 +1,3068 @@
+{
+  "id": "aa-09",
+  "category": "company_history",
+  "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 5.598,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "wikipedia",
+      "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "origem da empresa O Boticário e quem foi seu fundador",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "origem da empresa O Boticário e quem foi seu fundador",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "origem empresa boticário quem seu fundador",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Qual+%C3%A9+a+origem+da+empresa+O+Botic%C3%A1rio+e+quem+foi+seu+fundador%3F&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Qual+%C3%A9+a+origem+da+empresa+O+Botic%C3%A1rio+e+quem+foi+seu+fundador%3F&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5153
+    },
+    {
+      "url": "https://www.bing.com/search?q=origem+da+empresa+O+Botic%C3%A1rio+e+quem+foi+seu+fundador&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=origem+da+empresa+O+Botic%C3%A1rio+e+quem+foi+seu+fundador&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5099
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Qual%20%C3%A9%20a%20origem%20da%20empresa%20O%20Botic%C3%A1rio%20e%20quem%20foi%20seu%20fundador%3F",
+      "final": "https://html.duckduckgo.com/html/?q=Qual%20%C3%A9%20a%20origem%20da%20empresa%20O%20Botic%C3%A1rio%20e%20quem%20foi%20seu%20fundador%3F",
+      "chars": 14348
+    },
+    {
+      "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "final": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "chars": 111602
+    },
+    {
+      "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "final": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "chars": 91154
+    },
+    {
+      "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+      "error": "http"
+    },
+    {
+      "url": "https://www.imdb.com/pt/title/tt9813792/",
+      "final": "https://www.imdb.com/pt/title/tt9813792/",
+      "chars": 0
+    },
+    {
+      "url": "https://www.adorocinema.com/series/serie-28959/",
+      "final": "https://www.adorocinema.com/series/serie-28959/",
+      "chars": 328113
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/From",
+      "final": "https://pt.wikipedia.org/wiki/From",
+      "chars": 335047
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+    "domain": "general",
+    "original_request": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+    "resolved_request": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:17:56.254230+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "ccc3e5a57f856ca8e02f",
+        "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+        "title": "Origem | Série é renovada para 5ª e última temporada",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "2026-04-16T14:17:28+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "2027. O. Origem quarto ano estreia em breve no Brasil Tudo sobre Origem acompanha moradores de uma misteriosa cidade que aprisiona todos que passam por ela. Sem",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1830,
+        "final_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "1502d638c6fe17ce940c",
+        "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+        "title": "Origem: assista agora! - Globoplay",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "sáb., 24 out. 2026 16:30:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança. 1",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 2304,
+        "final_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "835f2166342b4573f980",
+        "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+        "title": "Origem: entenda como surgem os monstros da série From - UOL",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "qua., 26 fev. 2025 05:26:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura t",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "http",
+        "losses": [
+          "FETCH_FAILED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "adbeb420ed9a5325ff22",
+        "url": "https://www.adorocinema.com/series/serie-28959/",
+        "title": "Origem - Série 2022 - AdoroCinema",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "dom., 25 out. 2026 05:23:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHeramy) e Eth",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1010,
+        "final_url": "https://www.adorocinema.com/series/serie-28959/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "0c133cec08fe9663b0d4",
+        "url": "https://www.imdb.com/pt/title/tt9813792/",
+        "title": "Origem (Série de TV 2022– ) - IMDb",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "sáb., 24 out. 2026 22:57:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Origem: Criado por John Griffin. Com Harold Perrineau, Catalina Sandino Moreno, David Alpay, Elizabeth Saunders. Desvenda o mistério de uma cidade na América Ce",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://www.imdb.com/pt/title/tt9813792/",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "f8cbda44969b8c494bdc",
+        "url": "https://pt.wikipedia.org/wiki/From",
+        "title": "From – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+        "date": "2023-04-02T16:20:55Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "acontecem com seus amigos. Jim tenta convencer Randall de que ele seria útil na busca pela fuga. Marielle começa a passar por crises de abstinência. Kenny se pe",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 7993,
+        "final_url": "https://pt.wikipedia.org/wiki/From",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 6,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-e5025a36c446",
+      "type": "image",
+      "title": "Origem | Série é renovada para 5ª e última temporada",
+      "url": "https://cdn.ome.lt/vyg5KfBWYI7rX7twNKUaEXE6VTE=/1200x630/smart/filters:format(webp)/extras/conteudos/from.webp",
+      "final_url": "https://cdn.ome.lt/vyg5KfBWYI7rX7twNKUaEXE6VTE=/1200x630/smart/filters:format(webp)/extras/conteudos/from.webp",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Origem | Série é renovada para 5ª e última temporada",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-759ba4f3c68b",
+      "type": "image",
+      "title": "Icone Fechar",
+      "url": "https://cdn.ome.lt/static/omelete25/img/close.svg?v=26.10.62",
+      "final_url": "https://cdn.ome.lt/static/omelete25/img/close.svg?v=26.10.62",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Icone Fechar",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4e3ad2d34c82",
+      "type": "image",
+      "title": "Podcasts",
+      "url": "https://cdn.ome.lt/YnOJfEEMAmh0FhxJAbzFN6wXNPs=/16x16/smart/filters:format(webp)/uploads/menu/icones/podcast.png",
+      "final_url": "https://cdn.ome.lt/YnOJfEEMAmh0FhxJAbzFN6wXNPs=/16x16/smart/filters:format(webp)/uploads/menu/icones/podcast.png",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Podcasts",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dc1038231c4c",
+      "type": "image",
+      "title": "Filmes",
+      "url": "https://cdn.ome.lt/wN5wSHRwUzfSeQc2u9Ors6Na3rA=/16x16/smart/filters:format(webp)/uploads/menu/icones/filmes.png",
+      "final_url": "https://cdn.ome.lt/wN5wSHRwUzfSeQc2u9Ors6Na3rA=/16x16/smart/filters:format(webp)/uploads/menu/icones/filmes.png",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Filmes",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0fe884248830",
+      "type": "image",
+      "title": "Icone Expandir Seção",
+      "url": "https://cdn.ome.lt/static/omelete25/img/expanded-more.svg?v=26.10.62",
+      "final_url": "https://cdn.ome.lt/static/omelete25/img/expanded-more.svg?v=26.10.62",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Icone Expandir Seção",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-bd1e619b0537",
+      "type": "image",
+      "title": "Séries e TV",
+      "url": "https://cdn.ome.lt/S1kXAWtO7Ln1gtBTV5CGikJQEUE=/16x16/smart/filters:format(webp)/uploads/menu/icones/series-tv.png",
+      "final_url": "https://cdn.ome.lt/S1kXAWtO7Ln1gtBTV5CGikJQEUE=/16x16/smart/filters:format(webp)/uploads/menu/icones/series-tv.png",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Séries e TV",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f80cb2f06163",
+      "type": "image",
+      "title": "Animes",
+      "url": "https://cdn.ome.lt/Q5Mo_G-W7hf7ZZOrqork8ba6-44=/16x16/smart/filters:format(webp)/uploads/menu/icones/animes.png",
+      "final_url": "https://cdn.ome.lt/Q5Mo_G-W7hf7ZZOrqork8ba6-44=/16x16/smart/filters:format(webp)/uploads/menu/icones/animes.png",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Animes",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ba4b8a5d3876",
+      "type": "image",
+      "title": "Games",
+      "url": "https://cdn.ome.lt/7P5UTso1n_VvbCQm9_XHKyVw_VI=/16x16/smart/filters:format(webp)/uploads/menu/icones/game-controller-01.png",
+      "final_url": "https://cdn.ome.lt/7P5UTso1n_VvbCQm9_XHKyVw_VI=/16x16/smart/filters:format(webp)/uploads/menu/icones/game-controller-01.png",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Games",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-eacf2ef0dbe2",
+      "type": "image",
+      "title": "Korea",
+      "url": "https://cdn.ome.lt/dPqL7X64-UiT9MqWcDCqUBb_Lb0=/16x16/smart/filters:format(webp)/uploads/menu/icones/korea.png",
+      "final_url": "https://cdn.ome.lt/dPqL7X64-UiT9MqWcDCqUBb_Lb0=/16x16/smart/filters:format(webp)/uploads/menu/icones/korea.png",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Korea",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-3734479eed20",
+      "type": "image",
+      "title": "Críticas",
+      "url": "https://cdn.ome.lt/QU4U6Af3x9f5mfeVHZgAZjuX7c8=/16x16/smart/filters:format(webp)/uploads/menu/icones/criticas.png",
+      "final_url": "https://cdn.ome.lt/QU4U6Af3x9f5mfeVHZgAZjuX7c8=/16x16/smart/filters:format(webp)/uploads/menu/icones/criticas.png",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Críticas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dd35bdb9b561",
+      "type": "image",
+      "title": "Listas",
+      "url": "https://cdn.ome.lt/MZ53gDyVBTc4-6FJvi4iyP9TxLc=/16x16/smart/filters:format(webp)/uploads/menu/icones/listas.webp",
+      "final_url": "https://cdn.ome.lt/MZ53gDyVBTc4-6FJvi4iyP9TxLc=/16x16/smart/filters:format(webp)/uploads/menu/icones/listas.webp",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Listas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-12f26c71abd0",
+      "type": "image",
+      "title": "Música",
+      "url": "https://cdn.ome.lt/USfSf2tUbwkcwiWi3E6791JnEfQ=/16x16/smart/filters:format(webp)/uploads/menu/icones/music-note-03.png",
+      "final_url": "https://cdn.ome.lt/USfSf2tUbwkcwiWi3E6791JnEfQ=/16x16/smart/filters:format(webp)/uploads/menu/icones/music-note-03.png",
+      "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+      "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "publisher": "cdn.ome.lt",
+      "date": "2026-04-16 14:17:28+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Música",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "titulo": "Origem | 5ª temporada é confirmada e será a última da série",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2026-04-16T14:17:28+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "titulo": "Origem: assista agora!",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 16:30:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.adorocinema.com/series/serie-28959/",
+      "titulo": "Origem",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 05:23:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.adorocinema.com/series/serie-28959/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "items": [
+        {
+          "titulo": "Origem: assista agora! - Globoplay",
+          "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+          "trecho": "Veja Origem online no Globoplay 4. Uma Pedra e uma Árvore Distante Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 16:30:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://globoplay.globo.com/origem/t/t89f1QshQP",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Origem - Série 2022 - AdoroCinema",
+          "url": "https://www.adorocinema.com/series/serie-28959/",
+          "trecho": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 05:23:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://adorocinema.com/series/serie-28959",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Origem (Série de TV 2022– ) - IMDb",
+          "url": "https://www.imdb.com/pt/title/tt9813792/",
+          "trecho": "Origem: Criado por John Griffin. Com Harold Perrineau, Catalina Sandino Moreno, David Alpay, Elizabeth Saunders. Desvenda o mistério de uma cidade na América Central que aprisiona todos os que entram.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 22:57:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://imdb.com/pt/title/tt9813792",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Origem: entenda como surgem os monstros da série From - UOL",
+          "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+          "trecho": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura terror, suspense e ficção. Splash reuniu alguns dos pontos que podem ajudar a desvendar mais sobre as criaturas do vilarejo Fromville.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 26 fev. 2025 05:26:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "From – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/From",
+          "trecho": "From (bra: Origem[1]) é uma série de televisão estadunidense, do gênero terror, mistério e ficção científica, criada por John Griffin. É estrelado por um elenco composto por Harold Perrineau, Catalina Sandino Moreno, Eion Bailey, David Alpay, Elizabeth Saunders, Shaun Majumder, Scott McCord, Ricky H",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 04:41:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/From",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Origem | Série é renovada para 5ª e última temporada",
+          "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+          "trecho": "A série Origem já teve seu fim decretado e foi renovada para uma 5ª e última temporada. Em um comunicado, o showrunner Jeff Pinkner, o criador John Griffin e o diretor Jack Bender, anunciaram que já estão trabalhando nos últimos episódios.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 19 abr. 2016 23:55:00 GMT"
+          },
+          "discovery_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "discovery_provider": "bing",
+          "url_canonica": "https://omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 11.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "origem da empresa O Boticário e quem foi seu fundador",
+      "items": [
+        {
+          "titulo": "Origem: assista agora! - Globoplay",
+          "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+          "trecho": "Veja Origem online no Globoplay 4. Uma Pedra e uma Árvore Distante Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 16:30:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Origem - Série 2022 - AdoroCinema",
+          "url": "https://www.adorocinema.com/series/serie-28959/",
+          "trecho": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 05:23:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Origem (Série de TV 2022– ) - IMDb",
+          "url": "https://www.imdb.com/pt/title/tt9813792/",
+          "trecho": "Origem: Criado por John Griffin. Com Harold Perrineau, Catalina Sandino Moreno, David Alpay, Elizabeth Saunders. Desvenda o mistério de uma cidade na América Central que aprisiona todos os que entram.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 22:57:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Origem: entenda como surgem os monstros da série From - UOL",
+          "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+          "trecho": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura terror, suspense e ficção. Splash reuniu alguns dos pontos que podem ajudar a desvendar mais sobre as criaturas do vilarejo Fromville.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 26 fev. 2025 05:26:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "From – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/From",
+          "trecho": "From (bra: Origem[1]) é uma série de televisão estadunidense, do gênero terror, mistério e ficção científica, criada por John Griffin. É estrelado por um elenco composto por Harold Perrineau, Catalina Sandino Moreno, Eion Bailey, David Alpay, Elizabeth Saunders, Shaun Majumder, Scott McCord, Ricky H",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 04:41:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Origem | Série é renovada para 5ª e última temporada",
+          "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+          "trecho": "A série Origem já teve seu fim decretado e foi renovada para uma 5ª e última temporada. Em um comunicado, o showrunner Jeff Pinkner, o criador John Griffin e o diretor Jack Bender, anunciaram que já estão trabalhando nos últimos episódios.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 19 abr. 2016 23:55:00 GMT"
+          },
+          "discovery_query": "origem da empresa O Boticário e quem foi seu fundador",
+          "discovery_provider": "bing"
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+      "result": {
+        "titulo": "Origem: assista agora!",
+        "texto": "1 h 1. A Longa Jornada Noite Adentro A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer. A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer. 1 h 2. Como as Coisas Estão Agora Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade. Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade. 1 h 3. O Dia da Escolha A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade. A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade. 1 h 4. Uma Pedra e uma Árvore Distante Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança. Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança. 1 h 5. Silhuetas Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino. Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino. 1 h 6. Livro 74 Após a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores. Após a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores.",
+        "final": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+        "trecho_usado": "confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança. 1 h 5. Silhuetas Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino. Jim, Tabitha e Ethan fazem perguntas na",
+        "metadados": {
+          "titulo": "Origem: assista agora!",
+          "descricao": "Veja Origem online no Globoplay",
+          "canonica": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+          "og": {
+            "og:title": "Origem: assista agora!",
+            "og:url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "og:description": "Veja Origem online no Globoplay",
+            "og:image": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "og:image:url": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "og:image:type": "image/jpeg",
+            "og:image:secure_url": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "og:image:width": "830",
+            "og:image:height": "558",
+            "og:image:alt": "Veja Origem online no Globoplay",
+            "og:site_name": "Globoplay",
+            "og:type": "video.tv_show"
+          },
+          "twitter": {
+            "twitter:title": "Origem: assista agora!",
+            "twitter:description": "Veja Origem online no Globoplay",
+            "twitter:image": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "twitter:site": "@globoplay",
+            "twitter:card": "summary_large_image"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Globoplay",
+          "tipo": "video.tv_show",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "1. A Longa Jornada Noite Adentro",
+            "texto": "A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer.\nA viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer."
+          },
+          {
+            "titulo": "2. Como as Coisas Estão Agora",
+            "texto": "Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade.\nJim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade.\nA família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade.\nA família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade."
+          },
+          {
+            "titulo": "4. Uma Pedra e uma Árvore Distante",
+            "texto": "Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.\nOs amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.\nJim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino.\nJim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino.\nApós a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores.\nApós a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://globoplay.globo.com/",
+            "texto": "Logo Globoplay",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/agora-na-tv/",
+            "texto": "Agora na TV",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/categorias/novelas/",
+            "texto": "Novelas",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/categorias/series/",
+            "texto": "Séries",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/categorias/esportes/",
+            "texto": "Esportes",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/categorias/filmes/",
+            "texto": "Filmes",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/catalogo/",
+            "texto": "Catálogo",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/assine/?origemId=93915&amp;f_area=menu&amp;f_cpnt=selecionou&amp;f_label=assine&amp;url=https%3A%2F%2Fgloboplay.globo.com",
+            "texto": "Assine",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/busca/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/categorias/suspense/",
+            "texto": "Suspense",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/assine/?origemId=867&amp;f_area=titulo&amp;f_cpnt=destaque&amp;f_label=assinatura.assine_ja.t89f1QshQP&amp;f_tpidtit=t89f1QshQP&amp;url=https%3A%2F%2Fgloboplay.globo.com%2Forigem%2Ft%2Ft89f1QshQP%2F",
+            "texto": "Assine já",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/v/11571087/?s=0",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "texto": "Episódios",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/extras/",
+            "texto": "Trailers e mais",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/similares/",
+            "texto": "Similares",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/detalhes/",
+            "texto": "Detalhes",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/v/11304251/?s=0s",
+            "texto": "1 h",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/v/11304546/?s=0s",
+            "texto": "1 h",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/v/11304519/?s=0s",
+            "texto": "1 h",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/v/11304378/?s=0s",
+            "texto": "1 h",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/v/11304520/?s=0s",
+            "texto": "1 h",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/v/11304525/?s=0s",
+            "texto": "1 h",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/termosepoliticas/",
+            "texto": "Termos e políticas Link externo - abre em uma nova janela",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+          "https://s04.video.glbimg.com/x216/11304251.jpg",
+          "https://s03.video.glbimg.com/x216/11304546.jpg",
+          "https://s04.video.glbimg.com/x216/11304519.jpg",
+          "https://s03.video.glbimg.com/x216/11304378.jpg",
+          "https://s01.video.glbimg.com/x216/11304520.jpg",
+          "https://s02.video.glbimg.com/x216/11304525.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-5cfbe4220de1",
+            "type": "image",
+            "title": "Veja Origem online no Globoplay",
+            "url": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "final_url": "https://s2-globo-play.glbimg.com/tRrwDDqQVqfjBhLpZjMJXlgSqB0=/830x0/https://s2-globo-play.glbimg.com/mG82kGvGN-eknB39-tJtcY16jq0=/627x0:3840x2160/https://s2-globo-play.glbimg.com/v5TWccPRuF4qB04wCiS--V50VgE=/https://s2.glbimg.com/aEKE8ubL_P5qfIUlXVTwxGQRhWA=/i.s3.glbimg.com/v1/AUTH_c3c606ff68e7478091d1ca496f9c5625/internal_photos/bs/2026/1/y/xNDnKqQKSVaewGYjfDoQ/2026-5312-origem-t4-background.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s2-globo-play.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Veja Origem online no Globoplay",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-319e407b40ae",
+            "type": "image",
+            "title": "A Longa Jornada Noite Adentro - A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e persegu",
+            "url": "https://s04.video.glbimg.com/x216/11304251.jpg",
+            "final_url": "https://s04.video.glbimg.com/x216/11304251.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s04.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A Longa Jornada Noite Adentro - A viagem da família Matthews acaba mal quando saem da rota e acabam em uma cidade interiorana na qual são aprisionados e perseguidos por criaturas que caçam almas após o anoitecer.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4166598579e5",
+            "type": "image",
+            "title": "Como as Coisas Estão Agora - Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas ",
+            "url": "https://s03.video.glbimg.com/x216/11304546.jpg",
+            "final_url": "https://s03.video.glbimg.com/x216/11304546.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s03.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Como as Coisas Estão Agora - Jim, o xerife Boyd e a médica da cidade tratam os ferimentos de Ethan, enquanto torcem para que o talismã os proteja das criaturas da floresta. Uma nova ameaça surge na cidade.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4c42814455b7",
+            "type": "image",
+            "title": "O Dia da Escolha - A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará",
+            "url": "https://s04.video.glbimg.com/x216/11304519.jpg",
+            "final_url": "https://s04.video.glbimg.com/x216/11304519.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s04.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O Dia da Escolha - A família tem que escolher se juntar a um dos grupos: o povo da cidade, ou as pessoas da casa colonial. Boyd enfrenta uma decisão que afetará profundamente a vida na cidade.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7afa45d6b893",
+            "type": "image",
+            "title": "Uma Pedra e uma Árvore Distante - Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cida",
+            "url": "https://s03.video.glbimg.com/x216/11304378.jpg",
+            "final_url": "https://s03.video.glbimg.com/x216/11304378.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s03.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Uma Pedra e uma Árvore Distante - Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventura e descobre um mistério da cidade. O padre apela para que Boyd exerça sua liderança.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-065b27726ce4",
+            "type": "image",
+            "title": "Silhuetas - Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tent",
+            "url": "https://s01.video.glbimg.com/x216/11304520.jpg",
+            "final_url": "https://s01.video.glbimg.com/x216/11304520.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s01.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Silhuetas - Jim, Tabitha e Ethan fazem perguntas na esperança de conseguir escapar. Julie conhece o lado leve da vida na cidade. Boyd busca por ajuda. Sara tenta controlar seu ímpeto assassino.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ac45d95f9105",
+            "type": "image",
+            "title": "Livro 74 - Após a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com ",
+            "url": "https://s02.video.glbimg.com/x216/11304525.jpg",
+            "final_url": "https://s02.video.glbimg.com/x216/11304525.jpg",
+            "source_title": "Origem: assista agora!",
+            "source_url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "publisher": "s02.video.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Livro 74 - Após a tragédia, padre Khatri diz que há um caminho de redenção. O plano de Boyd gera uma reação inesperada. Jade inscreve Jim em um experimento com resultados perturbadores.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+      "result": {
+        "titulo": "Origem | 5ª temporada é confirmada e será a última da série",
+        "texto": "A série já teve seu fim decretado e foi renovada para uma 5ª e última temporada. Em um comunicado, o showrunner Origem Jeff Pinkner , o criador e o diretor , anunciaram que já estão trabalhando nos últimos episódios. Além disso, eles também adiantaram o que o público pode esperar do final: John Griffin Jack Bender “Estamos extremamente animados em anunciar que começamos oficialmente a trabalhar na 5ª temporada. Isso significa que teremos a chance de ver nossa história chegar ao fim. O que significa que perguntas serão respondidas. Respostas serão questionadas. E certamente haverá uma avalanche de lágrimas e terrores pelo caminho. Somos gratos pelo apoio de nossos amigos e parceiros da MGM+. E somos imensamente gratos pela paixão de toda a nossa família FROM. Estamos ansiosos para compartilhar a 4ª temporada com vocês e esperamos que ela aguce o apetite para o que está por vir.” Omelete Recomenda Continua depois da Publicidade A 5ª e última temporada de está prevista para estrear em 2027. O. Origem quarto ano estreia em breve no Brasil Tudo sobre Origem acompanha moradores de uma misteriosa cidade que aprisiona todos que passam por ela. Sem conseguir sair do local, os habitantes precisam sobreviver enquanto tentam entender os segredos do lugar. À noite, criaturas aterrorizantes surgem da floresta e ameaçam qualquer um que esteja fora de abrigo. Origem Reserva Imovision | Assine o streaming cinéfilo aqui O elenco da série de mistério, criada por John Griffin (), conta com Harold Perrineau, Eion Bailey, David Alpay, Elizabeth Saunders, Scott McCord e Chloe Van Landschoot. A Cratera No Brasil, está disponível para streaming pelo Globoplay, com suas três temporadas. Ainda não há data de estreia para a 4ª temporada, que chega em 19 de abril nos Estados Unidos no MGM+. Origem Continua depois da Publicidade",
+        "final": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+        "trecho_usado": "2027. O. Origem quarto ano estreia em breve no Brasil Tudo sobre Origem acompanha moradores de uma misteriosa cidade que aprisiona todos que passam por ela. Sem conseguir sair do local, os habitantes precisam sobreviver enquanto tentam entender os segredos do lugar. À noite, criaturas aterrorizantes surgem da floresta e ameaçam qualquer um que esteja fora de abrigo. Origem Reserva Imovision |",
+        "metadados": {
+          "titulo": "Origem | 5ª temporada é confirmada e será a última da série",
+          "descricao": "Origem | Série é renovada para 5ª e última temporada",
+          "canonica": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:site_name": "Omelete",
+            "og:title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "og:description": "Origem | Série é renovada para 5ª e última temporada",
+            "og:url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "og:image": "https://cdn.ome.lt/vyg5KfBWYI7rX7twNKUaEXE6VTE=/1200x630/smart/filters:format(webp)/extras/conteudos/from.webp",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "og:type": "article"
+          },
+          "twitter": {
+            "twitter:site": "@omelete",
+            "twitter:creator": "@omelete",
+            "twitter:url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "twitter:domain": "https://www.omelete.com.br/",
+            "twitter:title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "twitter:description": "Origem | Série é renovada para 5ª e última temporada",
+            "twitter:card": "summary_large_image",
+            "twitter:image": "https://cdn.ome.lt/vyg5KfBWYI7rX7twNKUaEXE6VTE=/1200x630/smart/filters:format(webp)/extras/conteudos/from.webp"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "2026-04-16T14:17:28+00:00",
+          "atualizado_em": "2026-04-16T17:25:59.750000+00:00",
+          "autor": "Felipe Rocha",
+          "site": "",
+          "tipo": "NewsArticle",
+          "ld": {
+            "datePublished": "2026-04-16T14:17:28+00:00",
+            "dateModified": "2026-04-16T17:25:59.750000+00:00",
+            "author": {
+              "@type": "Person",
+              "name": "Felipe Rocha",
+              "url": "https://www.omelete.com.br/felipe-rocha"
+            },
+            "publisher": {
+              "@id": "https://www.omelete.com.br/#organization"
+            },
+            "headline": "Origem | 5ª temporada é confirmada e será a última da série",
+            "articleSection": "Séries e TV",
+            "keywords": "FROM, Origem, Origem 5ª e última temporada, Origem 5ª temporada, Origem renovação, Origem globoplay, Origem série, origem estreia",
+            "description": "Origem | Série é renovada para 5ª e última temporada",
+            "inLanguage": "pt-BR"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "A série já teve seu fim decretado e foi renovada para uma 5ª e última temporada. Em um comunicado, o showrunner Origem Jeff Pinkner , o criador e o diretor , anunciaram que já estão trabalhando nos últimos episódios. Além disso, eles também adiantaram o que o público pode esperar do final: John Griffin Jack Bender\n“Estamos extremamente animados em anunciar que começamos oficialmente a trabalhar na 5ª temporada. Isso significa que teremos a chance de ver nossa história chegar ao fim. O que significa que perguntas serão respondidas. Respostas serão questionadas. E certamente haverá uma avalanche de lágrimas e terrores pelo caminho. Somos gratos pelo apoio de nossos amigos e parceiros da MGM+. E somos imensamente gratos pela paixão de toda a nossa família FROM. Estamos ansiosos para compartilhar a 4ª temporada com vocês e esperamos que ela aguce o apetite para o que está por vir.”\nA 5ª e última temporada de está prevista para estrear em 2027. O. Origem quarto ano estreia em breve no Brasil\nacompanha moradores de uma misteriosa cidade que aprisiona todos que passam por ela. Sem conseguir sair do local, os habitantes precisam sobreviver enquanto tentam entender os segredos do lugar. À noite, criaturas aterrorizantes surgem da floresta e ameaçam qualquer um que esteja fora de abrigo. Origem\nReserva Imovision | Assine o streaming cinéfilo aqui\nO elenco da série de mistério, criada por John Griffin (), conta com Harold Perrineau, Eion Bailey, David Alpay, Elizabeth Saunders, Scott McCord e Chloe Van Landschoot. A Cratera\nNo Brasil, está disponível para streaming pelo Globoplay, com suas três temporadas. Ainda não há data de estreia para a 4ª temporada, que chega em 19 de abril nos Estados Unidos no MGM+. Origem"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.omelete.com.br/podcasts",
+            "texto": "Podcasts",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/filmes",
+            "texto": "Filmes",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/noticias?section=filmes",
+            "texto": "Notícias",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/criticas?section=filmes",
+            "texto": "Críticas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/listas?section=filmes",
+            "texto": "Listas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/series-tv",
+            "texto": "Séries e TV",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/noticias?section=series-tv",
+            "texto": "Notícias",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/criticas?section=series-tv",
+            "texto": "Críticas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/listas?section=series-tv",
+            "texto": "Listas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/mangas-animes",
+            "texto": "Animes",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/noticias?section=mangas-animes",
+            "texto": "Notícias",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/criticas?section=quadrinhos",
+            "texto": "Críticas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/listas?section=quadrinhos",
+            "texto": "Listas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/games",
+            "texto": "Games",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/noticias?section=games",
+            "texto": "Notícias",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/criticas?section=games",
+            "texto": "Reviews",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/listas?section=games",
+            "texto": "Listas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/korea",
+            "texto": "Korea",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/noticias?section=korea",
+            "texto": "Notícias",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/criticas?section=korea",
+            "texto": "Críticas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/listas?section=korea",
+            "texto": "Listas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/criticas",
+            "texto": "Críticas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/criticas?section=mangas-animes",
+            "texto": "Anime",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/listas",
+            "texto": "Listas",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/busca?q=melhores-filmes",
+            "texto": "Melhores Filmes",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/busca?q=melhores-series",
+            "texto": "Melhores Séries",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/busca?q=melhores-animes",
+            "texto": "Melhores Animes",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/busca?q=melhores-games",
+            "texto": "Melhores Games",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/musica",
+            "texto": "Música",
+            "interno": true
+          },
+          {
+            "url": "https://www.omelete.com.br/ofertas",
+            "texto": "Ofertas",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://cdn.ome.lt/vyg5KfBWYI7rX7twNKUaEXE6VTE=/1200x630/smart/filters:format(webp)/extras/conteudos/from.webp",
+          "https://cdn.ome.lt/CHRXwkyUaeabQIWQ8FnXQ5gtFKg=/970x360/smart/filters:format(webp)/extras/conteudos/from.webp",
+          "https://cdn.ome.lt/pPqXOY0l18tyAcqh7w2tGNyiEms=/480x360/smart/filters:format(webp)/extras/conteudos/from.webp",
+          "https://cdn.ome.lt/static/omelete25/img/close.svg?v=26.10.62",
+          "https://cdn.ome.lt/YnOJfEEMAmh0FhxJAbzFN6wXNPs=/16x16/smart/filters:format(webp)/uploads/menu/icones/podcast.png",
+          "https://cdn.ome.lt/wN5wSHRwUzfSeQc2u9Ors6Na3rA=/16x16/smart/filters:format(webp)/uploads/menu/icones/filmes.png",
+          "https://cdn.ome.lt/static/omelete25/img/expanded-more.svg?v=26.10.62",
+          "https://cdn.ome.lt/S1kXAWtO7Ln1gtBTV5CGikJQEUE=/16x16/smart/filters:format(webp)/uploads/menu/icones/series-tv.png",
+          "https://cdn.ome.lt/Q5Mo_G-W7hf7ZZOrqork8ba6-44=/16x16/smart/filters:format(webp)/uploads/menu/icones/animes.png",
+          "https://cdn.ome.lt/7P5UTso1n_VvbCQm9_XHKyVw_VI=/16x16/smart/filters:format(webp)/uploads/menu/icones/game-controller-01.png"
+        ],
+        "midia": [
+          {
+            "id": "med-e5025a36c446",
+            "type": "image",
+            "title": "Origem | Série é renovada para 5ª e última temporada",
+            "url": "https://cdn.ome.lt/vyg5KfBWYI7rX7twNKUaEXE6VTE=/1200x630/smart/filters:format(webp)/extras/conteudos/from.webp",
+            "final_url": "https://cdn.ome.lt/vyg5KfBWYI7rX7twNKUaEXE6VTE=/1200x630/smart/filters:format(webp)/extras/conteudos/from.webp",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Origem | Série é renovada para 5ª e última temporada",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-759ba4f3c68b",
+            "type": "image",
+            "title": "Icone Fechar",
+            "url": "https://cdn.ome.lt/static/omelete25/img/close.svg?v=26.10.62",
+            "final_url": "https://cdn.ome.lt/static/omelete25/img/close.svg?v=26.10.62",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Icone Fechar",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4e3ad2d34c82",
+            "type": "image",
+            "title": "Podcasts",
+            "url": "https://cdn.ome.lt/YnOJfEEMAmh0FhxJAbzFN6wXNPs=/16x16/smart/filters:format(webp)/uploads/menu/icones/podcast.png",
+            "final_url": "https://cdn.ome.lt/YnOJfEEMAmh0FhxJAbzFN6wXNPs=/16x16/smart/filters:format(webp)/uploads/menu/icones/podcast.png",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Podcasts",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dc1038231c4c",
+            "type": "image",
+            "title": "Filmes",
+            "url": "https://cdn.ome.lt/wN5wSHRwUzfSeQc2u9Ors6Na3rA=/16x16/smart/filters:format(webp)/uploads/menu/icones/filmes.png",
+            "final_url": "https://cdn.ome.lt/wN5wSHRwUzfSeQc2u9Ors6Na3rA=/16x16/smart/filters:format(webp)/uploads/menu/icones/filmes.png",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Filmes",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0fe884248830",
+            "type": "image",
+            "title": "Icone Expandir Seção",
+            "url": "https://cdn.ome.lt/static/omelete25/img/expanded-more.svg?v=26.10.62",
+            "final_url": "https://cdn.ome.lt/static/omelete25/img/expanded-more.svg?v=26.10.62",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Icone Expandir Seção",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bd1e619b0537",
+            "type": "image",
+            "title": "Séries e TV",
+            "url": "https://cdn.ome.lt/S1kXAWtO7Ln1gtBTV5CGikJQEUE=/16x16/smart/filters:format(webp)/uploads/menu/icones/series-tv.png",
+            "final_url": "https://cdn.ome.lt/S1kXAWtO7Ln1gtBTV5CGikJQEUE=/16x16/smart/filters:format(webp)/uploads/menu/icones/series-tv.png",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Séries e TV",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f80cb2f06163",
+            "type": "image",
+            "title": "Animes",
+            "url": "https://cdn.ome.lt/Q5Mo_G-W7hf7ZZOrqork8ba6-44=/16x16/smart/filters:format(webp)/uploads/menu/icones/animes.png",
+            "final_url": "https://cdn.ome.lt/Q5Mo_G-W7hf7ZZOrqork8ba6-44=/16x16/smart/filters:format(webp)/uploads/menu/icones/animes.png",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Animes",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ba4b8a5d3876",
+            "type": "image",
+            "title": "Games",
+            "url": "https://cdn.ome.lt/7P5UTso1n_VvbCQm9_XHKyVw_VI=/16x16/smart/filters:format(webp)/uploads/menu/icones/game-controller-01.png",
+            "final_url": "https://cdn.ome.lt/7P5UTso1n_VvbCQm9_XHKyVw_VI=/16x16/smart/filters:format(webp)/uploads/menu/icones/game-controller-01.png",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Games",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-eacf2ef0dbe2",
+            "type": "image",
+            "title": "Korea",
+            "url": "https://cdn.ome.lt/dPqL7X64-UiT9MqWcDCqUBb_Lb0=/16x16/smart/filters:format(webp)/uploads/menu/icones/korea.png",
+            "final_url": "https://cdn.ome.lt/dPqL7X64-UiT9MqWcDCqUBb_Lb0=/16x16/smart/filters:format(webp)/uploads/menu/icones/korea.png",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Korea",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3734479eed20",
+            "type": "image",
+            "title": "Críticas",
+            "url": "https://cdn.ome.lt/QU4U6Af3x9f5mfeVHZgAZjuX7c8=/16x16/smart/filters:format(webp)/uploads/menu/icones/criticas.png",
+            "final_url": "https://cdn.ome.lt/QU4U6Af3x9f5mfeVHZgAZjuX7c8=/16x16/smart/filters:format(webp)/uploads/menu/icones/criticas.png",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Críticas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dd35bdb9b561",
+            "type": "image",
+            "title": "Listas",
+            "url": "https://cdn.ome.lt/MZ53gDyVBTc4-6FJvi4iyP9TxLc=/16x16/smart/filters:format(webp)/uploads/menu/icones/listas.webp",
+            "final_url": "https://cdn.ome.lt/MZ53gDyVBTc4-6FJvi4iyP9TxLc=/16x16/smart/filters:format(webp)/uploads/menu/icones/listas.webp",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Listas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-12f26c71abd0",
+            "type": "image",
+            "title": "Música",
+            "url": "https://cdn.ome.lt/USfSf2tUbwkcwiWi3E6791JnEfQ=/16x16/smart/filters:format(webp)/uploads/menu/icones/music-note-03.png",
+            "final_url": "https://cdn.ome.lt/USfSf2tUbwkcwiWi3E6791JnEfQ=/16x16/smart/filters:format(webp)/uploads/menu/icones/music-note-03.png",
+            "source_title": "Origem | 5ª temporada é confirmada e será a última da série",
+            "source_url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "publisher": "cdn.ome.lt",
+            "date": "2026-04-16 14:17:28+00:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Música",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.imdb.com/pt/title/tt9813792/",
+      "result": {
+        "titulo": "Origem (Série de TV 2022– ) - IMDb",
+        "texto": "",
+        "final": "https://www.imdb.com/pt/title/tt9813792/",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://www.adorocinema.com/series/serie-28959/",
+      "result": {
+        "titulo": "Origem",
+        "texto": "Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHeramy) e Ethan (Simon Webster). Durante uma viagem de trailer pelos Estados Unidos, eles se perdem e acabam entrando em uma pequena cidade interiorana no meio-oeste americano. A estrada principal está barrada por uma árvore caída, mas ele encontram um caminho improvisado para passar. A princípio, tudo parece normal, mas, então, eles notam que não conseguem sair do vilarejo. Toda rua que entram leva sempre de volta ao mesmo lugar. Conversando com os outros moradores, eles decobrem que todos também chegaram a cidade da mesma forma e ficaram presos. Para piorar, a noite o lugar é cercado por misteriosas criaturas. Enquanto tentam descobrir o que tem de errado com a cidade, eles percebem que não chegaram até lá por acaso. Cada um dos moradores desavisados foi levado por uma força sobrenatural inexplicável que os prende para sempre nesse assustador lugar.",
+        "final": "https://www.adorocinema.com/series/serie-28959/",
+        "trecho_usado": "Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHeramy) e Ethan (Simon Webster). Durante uma viagem de trailer pelos Estados Unidos, eles se perdem e acabam entrando em uma pequena cidade interiorana no meio-oeste americano. A estrada principal está barrada por uma árvore caída, mas ele encontram um",
+        "metadados": {
+          "titulo": "Origem",
+          "descricao": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos. Sinopse: Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHer",
+          "canonica": "",
+          "og": {
+            "og:site_name": "AdoroCinema",
+            "og:locale": "pt_BR",
+            "og:title": "Origem",
+            "og:description": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos. Sinopse: Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHer",
+            "og:image": "https://br.web.img3.acsta.net/pictures/22/02/04/12/42/2264086.jpg",
+            "og:type": "video.tv_show"
+          },
+          "twitter": {
+            "twitter:app:name:iphone": "adorocinema",
+            "twitter:app:name:ipad": "adorocinema",
+            "twitter:app:name:googleplay": "adorocinema",
+            "twitter:app:url:iphone": "adorocinema://open/",
+            "twitter:app:url:ipad": "adorocinema://open/",
+            "twitter:app:url:googleplay": "adorocinema://open/",
+            "twitter:app:id:iphone": "926254990",
+            "twitter:app:id:ipad": "926254990",
+            "twitter:app:id:googleplay": "com.adorocinema.android",
+            "twitter:card": "photo",
+            "twitter:title": "Origem",
+            "twitter:description": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos. Sinopse: Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHer",
+            "twitter:site": "@adorocinema",
+            "twitter:image": "https://br.web.img3.acsta.net/pictures/22/02/04/12/42/2264086.jpg"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "AdoroCinema",
+          "site": "AdoroCinema",
+          "tipo": "video.tv_show",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filhos Julie (Hannah CHeramy) e Ethan (Simon Webster). Durante uma viagem de trailer pelos Estados Unidos, eles se perdem e acabam entrando em uma pequena cidade interiorana no meio-oeste americano. A estrada principal está barrada por uma árvore caída, mas ele encontram um caminho improvisado para passar. A princípio, tudo parece normal, mas, então, eles notam que não conseguem sair do vilarejo. Toda rua que entram leva sempre de volta ao mesmo lugar. Conversando com os outros moradores, eles decobrem que todos também chegaram a cidade da mesma forma e ficaram presos. Para piorar, a noite o lugar é cercado por misteriosas criaturas. Enquanto tentam descobrir o que tem de errado com a cidade, eles percebem que não chegaram até lá por acaso. Cada um dos moradores desavisados foi levado por uma força sobrenatural inexplicável que os prende para sempre nesse assustador lugar."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.adorocinema.com/series/serie-451/",
+            "texto": "Prison Break",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-238/",
+            "texto": "House",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-19156/",
+            "texto": "Stranger Things",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-20677/",
+            "texto": "The Handmaid’s Tale",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/",
+            "texto": "Inicial",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/",
+            "texto": "Séries",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series-tv/",
+            "texto": "Séries mais assistidas",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series-tv/genero-13009/",
+            "texto": "Séries Terror",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-28959/videos/",
+            "texto": "Vídeos",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-28959/criticas/",
+            "texto": "Críticas",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-28959/streaming/",
+            "texto": "Streaming",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-28959/temporada-52069/",
+            "texto": "Temporada 3",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-28959/temporada-46898/",
+            "texto": "Temporada 2",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-28959/temporada-42517/",
+            "texto": "Temporada 1",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-28959/temporada-52069/elenco/",
+            "texto": "Elenco",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/personalidades/personalidade-104914/",
+            "texto": "Harold Perrineau",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/personalidades/personalidade-96217/",
+            "texto": "Catalina Sandino Moreno",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/personalidades/personalidade-50617/",
+            "texto": "Eion Bailey",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/personalidades/personalidade-70607/",
+            "texto": "David Alpay",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-28959/noticias/",
+            "texto": "Últimas notícias",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/noticias/series/noticia-1000220991/",
+            "texto": "Paradise tem tudo o que eu adorava nas séries de TV de 20 anos atrás: Finais de episódio com suspense exagerado, ficção científica esquizofrênica e um enredo in",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/noticias/series/noticia-1000214545/",
+            "texto": "O episódio final da 4ª temporada de Origem se conecta com um dos episódios mais importantes da 1ª temporada",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/noticias/series/noticia-1000212221/",
+            "texto": "5ª temporada de Origem: Perguntas a serem respondidas, personagens principais e tudo o que sabemos sobre o final da série",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/noticias/series/noticia-1000213214/",
+            "texto": "A temporada final de Origem não contará com um dos \"protagonistas\" da 4ª parcela",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/noticias/series/noticia-1000211192/",
+            "texto": "O episódio final da temporada de Origem surpreende com algo que poucas séries de mistério ousam fazer: Mudar as regras",
+            "interno": true
+          },
+          {
+            "url": "https://www.adorocinema.com/series/serie-28959/fotos/",
+            "texto": "Fotos",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://br.web.img3.acsta.net/pictures/22/02/04/12/42/2264086.jpg",
+          "https://assets.adorocinema.com/skin/img/adorocinema/logo-main.6419f574.svg",
+          "https://br.web.img3.acsta.net/c_310_420/pictures/22/02/04/12/42/2264086.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-d305f1eda8ec",
+            "type": "image",
+            "title": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos. Sinopse: Dos mesmos produtores de Lost, Origem acompanha o",
+            "url": "https://br.web.img3.acsta.net/pictures/22/02/04/12/42/2264086.jpg",
+            "final_url": "https://br.web.img3.acsta.net/pictures/22/02/04/12/42/2264086.jpg",
+            "source_title": "Origem",
+            "source_url": "https://www.adorocinema.com/series/serie-28959/",
+            "publisher": "br.web.img3.acsta.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos. Sinopse: Dos mesmos produtores de Lost, Origem acompanha o casal Jim (Eion Bailey) e Tabitha Matthew (Catalino Sandino Moreno) e seus filh",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c1922aec8fad",
+            "type": "image",
+            "title": "AdoroCinema",
+            "url": "https://assets.adorocinema.com/skin/img/adorocinema/logo-main.6419f574.svg",
+            "final_url": "https://assets.adorocinema.com/skin/img/adorocinema/logo-main.6419f574.svg",
+            "source_title": "Origem",
+            "source_url": "https://www.adorocinema.com/series/serie-28959/",
+            "publisher": "assets.adorocinema.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "AdoroCinema",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e0b78fb6b5c9",
+            "type": "image",
+            "title": "Pôster de Origem",
+            "url": "https://br.web.img3.acsta.net/c_310_420/pictures/22/02/04/12/42/2264086.jpg",
+            "final_url": "https://br.web.img3.acsta.net/c_310_420/pictures/22/02/04/12/42/2264086.jpg",
+            "source_title": "Origem",
+            "source_url": "https://www.adorocinema.com/series/serie-28959/",
+            "publisher": "br.web.img3.acsta.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Pôster de Origem",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/From",
+      "result": {
+        "titulo": "From",
+        "texto": "transfere uma espécie de parasitas semelhantes a vermes para ele antes de morrer. Boyd então se encontra de volta à floresta. Kristi tenta se reconectar com Marielle, sua namorada e uma das passageiras do ônibus. À noite, enquanto Donna força a maioria dos passageiros do ônibus a se abrigarem na lanchonete, as criaturas caçam e matam qualquer um do lado de fora, incluindo Tom, que está preso sob a casa desabada, enquanto Jim assiste a tudo horrorizado. Boyd sai da floresta e se encontra com Victor e Tabitha, que se abrigaram em um antigo trailer. 13 3 \"Tether\" Alexandra La Roche ASA 7 de maiode 2023 () 2023-05-07 Ellis confronta Boyd sobre estar na floresta por tanto tempo e perder Sara. Ellis diz que acha que Fatima está perdendo uma parte de si mesma. Enquanto Jim está se recuperando no hospital, Tabitha revela que os fios não estão conectados a nada. Boyd tenta acalmar a situação com Randall e o resto dos passageiros do ônibus, que são levados para a Colony House. Enquanto Kenny verifica as armadilhas e Ellis colhe flores, eles descobrem Kelly, uma das passageiras empalada em uma árvore com uma haste que faltava em uma das armadilhas. Após descobrir que seu violino sumiu, Victor confronta Jade, que pergunta sobre o símbolo. Victor sai furioso. Kristi e Marielle começam a discutir seu relacionamento, mas Kenny vem pedir ajuda para Kelly. Fatima leva Elgin para os Brundles, local que ele disse ter visto em seu sonho no ônibus. Kristi dá a notícia a Kelly de que ela não sobreviverá. Tabitha vê as crianças estranhas enquanto ela e Julie se preparam para se mudar com os Lius. Ethan trabalha em um quebra-cabeça de escultura e Tabitha vê que ele se assemelha à pilha de pedras que ela viu desabar nos túneis. Kenny descobre Sara no porão da igreja. 14 4 \"This Way Gone\" Alexandra La Roche ASA 14 de maiode 2023 () 2023-05-14 Vemos a chegada dos Lius em um flashback. Kenny leva Boyd até Sara na igreja. Boyd conta a Kenny sobre a conexão única de Sara com a cidade. Julie e Ethan visitam a Colony House. Julie vê Elgin olhando para o nada e inicia uma conversa com ele. Kristi e Boyd discutem a progressão de sua doença de Parkinson e seus ferimentos recentes da floresta. Jim conta a Tabitha sobre a voz no rádio e suas suspeitas de estarem sendo vigiados. Boyd tem uma visão do Padre Khatri, que discute com ele a situação entre Sara e Kenny. Jim e Donna discutem a voz no rádio. Randall tem outro surto na Colony House e Donna o coloca para fora no ônibus. Sara conta a Kenny sobre ter aberto a porta da clínica, ele confronta Boyd e se demite do cargo de vice-xerife. 15 5 \"Lullaby\" Jack Bender John Griffin & Vivian Lee 21 de maiode 2023 () 2023-05-21 Randall passa sua primeira noite no ônibus. Jade vê uma visão de Christopher, que está segurando o livro com os símbolos, que começa a pingar sangue. Jim e Tabitha confrontam Boyd e Sara na igreja. Ethan se tranca em seu quarto após ouvir sua família falar sobre Sara, e pede para ver Sara. Kristi e Marielle se aproximam. Sara entra escondida em sua antiga casa e na de Nathan, mas é rejeitada pelos atuais ocupantes. Victor mostra a Jade o cemitério de carros e pede para ele tocar seu violino. Elgin e Sara conversam na igreja. Sara vai à lanchonete para pegar suas coisas e as de Nathan, onde é confrontada por Kenny. Kristi corta o cabelo. Victor conta a Jade sobre Christopher. Tabitha é confrontada pelas crianças que cantam. Jim conta a Boyd sobre a voz no rádio. Marielle consome morfina escondida. Boyd pede para conversar com Tian-Chen. 16 6 \"Pas de Deux\" Jack Bender ASA 28 de maiode 2023 () 2023-05-28 Boyd conversa com Tian-Chen sobre a presença de Sara na cidade. Dale argumenta que as pessoas do ônibus não deveriam receber comida, já que há escassez. Durante a discussão, Dale esfaqueia Ellis. Elgin o leva para a clínica de carro com Fatima durante a noite. Boyd é necessário para transfundir sangue e salvar Ellis. Ele sai à noite para encontrar as criaturas e passar seus parasitas semelhantes a vermes adiante. Ele transfere os parasitas para a criatura \"Smiley\", matando a criatura no processo. Fatima pede a Kristi um teste de gravidez. A transfusão de Ellis é bem-sucedida. Kenny admite que eles deveriam ter acreditado em Boyd sobre sua jornada na floresta e os parasitas sob sua pele. 17 7 \"Belly of the Beast\" Brad Turner ASA 4 de junhode 2023 () 2023-06-04 Kristi se prepara para a autópsia. Jim e Tabitha discutem se Ethan deveria passar tempo com Victor. Randall, um dos passageiros do ônibus, pilota seu drone sobre Jim. Victor tenta ser rude com Ethan, pois diz que coisas ruins acontecem com seus amigos. Jim tenta convencer Randall de que ele seria útil na busca pela fuga. Marielle começa a passar por crises de abstinência. Kenny se pergunta para onde foram os vermes. Jade confessa sua visão para Tabitha. Jim conta a Randall sua teoria de que o lugar é um experimento; Randall pergunta se ele já pensou sobre quem na cidade poderia estar envolvido no experimento. Marielle tem um sonho com a criatura acordando e a caixa de música tocando. Fatima conta a Donna que lhe disseram que ela não podia ter filhos. Kristi descobre que o interior da criatura está seco, exceto pela bile que eles extraem. Elgin tenta se lembrar de um detalhe importante de seu sonho. Ele prepara um banho de banheira, ouve a caixa de música e então parece ser mantido sob a água por uma mulher monstruosa vestindo um . quimono 18 8 \"Forest for the Trees\" Brad Turner John Griffin & Vivian Lee 11 de junhode 2023 () 2023-06-11 Kenny sonha com o telefone tocando na casa. Quando ele atende, uma voz canta: \"Eles tocam, eles quebram, eles roubam. Ninguém aqui é livre.\" Ele então tem uma visão de criaturas semelhantes a cigarras saindo da panela de cozinha. Randall começa a alimentar medos de uma conspiração na cidade, sugerindo que os moradores podem estar envolvidos em seu cativeiro. Tabitha mostra a Jade a entrada do túnel onde viu o símbolo e as crianças cantando. Victor não conta a Jade toda a verdade sobre os símbolos porque, quando as pessoas fazem perguntas e buscam respostas, elas não retornam. Boyd e Kenny queimam o corpo da criatura no porão após descobrirem que não há insetos lá dentro. Victor leva Tabitha ao cemitério de carros e mostra os desenhos a ela. Isso engatilha um flashback de sua mãe e irmã deixando-o no porão. Eles veem o desenho da torre e Victor diz que foi para lá que sua mãe foi para \"salvar as crianças\". Boyd e Kenny ouvem cigarras, e Reggie, um morador da cidade, sai de sua casa gritando. Jim encontra Donna amarrada a uma árvore na floresta e descobre que Randall foi o responsável após tentar testar suas teorias. 19 9 \"Ball of Magic Fire\" Jack Bender ASA 18 de junhode 2023 () 2023-06-18 Boyd e Kenny descobrem que as cigarras mataram a esposa de Reggie enquanto ela dormia. Antes de morrer, ela disse: \"Eles tocam, eles quebram, eles roubam. Ninguém aqui é livre.\" Boyd reúne os moradores para vasculhar a cidade e avisar que todos precisam permanecer acordados. Boyd pega Randall mantendo Jim sob a mira de uma faca. Kenny concorda em manter Sara na delegacia do xerife. Reggie é levado para a Colony House e informa os moradores que eles devem ficar acordados. Kristi e Marielle se acomodam na Colony House. Boyd, Donna, Jim e Randall passam a noite no trailer. As criaturas saem da floresta, mas param logo antes quando a música da caixa de música começa a tocar no rádio. Randall surta, quebra a janela do trailer, corre para a floresta e é atacado por cigarras. Boyd, Jim e Donna escapam na van. Enquanto passa pela abstinência, Marielle tem uma visão de cigarras e entra em coma. Elgin relata seu sonho a Boyd e aos outros, no qual o Garoto de Branco diz: \"Aqui vêm eles, eles vêm por três, a menos que você pare a melodia\". Bakta diz que sua avó costumava cantar uma cantiga de ninar que combina as duas frases. Julie também tem uma visão e entra em coma. 20 10 \"Once Upon a Time...\" Jack Bender John Griffin & Jeff Pinkner 25 de junhode 2023 ()",
+        "final": "https://pt.wikipedia.org/wiki/From",
+        "trecho_usado": "acontecem com seus amigos. Jim tenta convencer Randall de que ele seria útil na busca pela fuga. Marielle começa a passar por crises de abstinência. Kenny se pergunta para onde foram os vermes. Jade confessa sua visão para Tabitha. Jim conta a Randall sua teoria de que o lugar é um experimento; Randall pergunta se ele já pensou sobre quem na cidade poderia estar envolvido no experimento. Marielle",
+        "metadados": {
+          "titulo": "From",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/From",
+          "og": {
+            "og:image": "https://upload.wikimedia.org/wikipedia/pt/c/c0/From_%28s%C3%A9rie%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "og:image:width": "844",
+            "og:image:height": "1200",
+            "og:title": "From – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2023-04-02T16:20:55Z",
+          "atualizado_em": "2026-07-08T14:50:45Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2023-04-02T16:20:55Z",
+            "dateModified": "2026-07-08T14:50:45Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            }
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Terror Mistério Ficção científica\n\"\", de Que Sera, Sera (Whatever Will Be, Will Be) Pixies\nMidnight RadioGozie AGBOEpix Studios MGM+\n20 de fevereirode 2022 – presente () 2022-02-20 () presente\né uma , do gênero , e , criada por John Griffin. É estrelado por um elenco composto por , , , David Alpay, Elizabeth Saunders, Shaun Majumder, Scott McCord, Ricky He, Chloe Van Landschoot, Pegah Ghafoori, Corteon Moore, Hannah Cheramy, Simon Webster, Avery Konrad, Paul Zinno e Elizabeth Moy. From ( bra : Origem 1 [ ] ) série de televisão estadunidense terror mistério ficção científica Harold Perrineau Catalina Sandino Moreno Eion Bailey\nO programa estreou no em 20 de fevereiro de 2022. Recebeu avaliações geralmente positivas dos críticos por sua história e atuação de Perrineau. Em abril de 2022, a série foi renovada para uma segunda temporada, com estreia marcada para 23 de abril de 2023. Epix 2 [ ]\nA série foi renovada para a terceira temporada em junho de 2023, encomenda feita após a série bater recordes de audiência. 3 [ ]\nA série acompanha a história de uma misteriosa e assustadora cidade sem nome, localizada no interior dos , que atua como uma armadilha literal para qualquer pessoa que entre nela. Quando viajantes perdidos chegam de carro ao local, eles descobrem que todas as estradas entram em um ciclo em infinito, forçando-os a retornar sempre para o centro do vilarejo, tornando a fuga impossível. Como se o isolamento psicológico e a falta de respostas não fossem suficientes, os moradores sobreviventes precisam lidar com uma ameaça terrível de natureza sobrenatural: ao cair da noite, criaturas humanoides e metamorfas emergem das florestas vizinhas. Essas criaturas, que sempre trazem sorrisos macabros no rosto, caçam os humanos não por fome, mas por puro sadismo e prazer em torturar. A única defesa da comunidade são talismãs de pedra misteriosos encontrados pelo xerife Boyd Stevens, que, quando pendurados na entrada de uma estrutura fechada, impedem a entrada dos monstros. Estados Unidos looping 4 [ ] vampirescas 5 [ ] 6 [ ] 7 [ ]\nPara sobreviverem e manterem a sanidade dentro deste cenário desesperador, os residentes se dividiram em duas facções distintas com filosofias de vida completamente opostas. Por um lado, há o Município, que é liderado de perto pelo xerife Boyd e foca na ordem, no mapeamento minucioso de recursos, no cultivo de regras rígidas de recolher obrigatório e na busca ativa por uma resposta científica ou militar que os leve à fuga. Por outro lado, existe a Colony House, uma comunidade de estilo liderada por Donna Raines onde os membros preferem viver apenas o momento presente, compartilhando tudo dentro de uma grande mansão e focando no hedonismo e na convivência pacífica como uma forma de esquecer os traumas do mundo exterior. comunal\nAo longo das temporadas, o enredo evolui de uma narrativa básica de sobrevivência para uma complexa teia mitológica. Descobre-se que a cidade possui conexões profundas com o passado através de ciclos de de antigos moradores, forças eletromagnéticas inexplicáveis e visões proféticas perturbadoras sofridas por personagens específicos através de figuras como o \"Garoto de Branco\" e a \"Mulher de Quimono\". O grande mistério da trama passa a girar em torno de decifrar a verdadeira natureza daquele lugar, questionando se a comunidade está presa em uma espécie de , em um experimento governamental de grande escala, ou se o vilarejo é uma entidade viva milenar dominada por forças malévolas antigas, representadas na figura do \"Homem de Amarelo\". reencarnação 8 [ ] purgatório 9 [ ]\nSophia / Homem de Amarelo\ncomo Boyd Stevens, o auto-nomeado e prefeito do Município. Ele é um veterano aposentado do que serviu na e na . Boyd é afastado de seu filho, Ellis, após matar sua esposa, Abby, que teve um súbito e inexplicavelmente matou vários moradores da cidade. Harold Perrineau xerife de facto Exército dos Estados Unidos Guerra do Afeganistão Guerra do Iraque surto psicótico\ncomo Tabitha Matthews, espos"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal",
+            "texto": "Página principal",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Conte%C3%BAdo_destacado",
+            "texto": "Conteúdo destacado",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Eventos_atuais",
+            "texto": "Eventos atuais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Esplanada",
+            "texto": "Esplanada",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Aleat%C3%B3ria",
+            "texto": "Página aleatória",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:%C3%8Dndice",
+            "texto": "Portais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_especiais",
+            "texto": "Páginas especiais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Informe_um_erro",
+            "texto": "Informar um erro",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Boas-vindas",
+            "texto": "Boas-vindas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_principal",
+            "texto": "Ajuda",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_de_testes",
+            "texto": "Páginas de testes públicas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Portal_comunit%C3%A1rio",
+            "texto": "Portal comunitário",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Mudan%C3%A7as_recentes",
+            "texto": "Mudanças recentes",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Manuten%C3%A7%C3%A3o",
+            "texto": "Manutenção",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:Guia_de_edi%C3%A7%C3%A3o/Como_come%C3%A7ar_uma_p%C3%A1gina",
+            "texto": "Criar página",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_novas",
+            "texto": "Páginas novas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Contato",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Pesquisar",
+            "texto": "Busca",
+            "interno": true
+          },
+          {
+            "url": "https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=pt.wikipedia.org&amp;uselang=pt",
+            "texto": "Doar",
+            "interno": false
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Criar_conta&amp;returnto=From",
+            "texto": "Criar conta",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Entrar&amp;returnto=From",
+            "texto": "Iniciar sessão",
+            "interno": true
+          },
+          {
+            "url": "https://ar.wikipedia.org/wiki/%D9%85%D9%86_(%D9%85%D8%B3%D9%84%D8%B3%D9%84)",
+            "texto": "العربية",
+            "interno": false
+          },
+          {
+            "url": "https://az.wikipedia.org/wiki/K%C9%99narda_(teleserial,_2022)",
+            "texto": "Azərbaycanca",
+            "interno": false
+          },
+          {
+            "url": "https://be-tarask.wikipedia.org/wiki/%D0%97%D0%B2%D0%BE%D0%BD%D0%BA%D1%83_(%D1%81%D1%8D%D1%80%D1%8B%D1%8F%D0%BB)",
+            "texto": "Беларуская (тарашкевіца)",
+            "interno": false
+          },
+          {
+            "url": "https://ca.wikipedia.org/wiki/From_(s%C3%A8rie_de_televisi%C3%B3)",
+            "texto": "Català",
+            "interno": false
+          },
+          {
+            "url": "https://ckb.wikipedia.org/wiki/%D9%81%DA%95%DB%86%D9%85",
+            "texto": "کوردی",
+            "interno": false
+          },
+          {
+            "url": "https://cs.wikipedia.org/wiki/Cesta_ven_(seri%C3%A1l)",
+            "texto": "Čeština",
+            "interno": false
+          },
+          {
+            "url": "https://de.wikipedia.org/wiki/From_(Fernsehserie)",
+            "texto": "Deutsch",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/From_(TV_series)",
+            "texto": "English",
+            "interno": false
+          },
+          {
+            "url": "https://es.wikipedia.org/wiki/From_(serie_de_televisi%C3%B3n)",
+            "texto": "Español",
+            "interno": false
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "From"
+            ],
+            [
+              "Cartaz da série."
+            ],
+            [
+              ".mw-parser-output .noitalic{font-style:normal} No Brasil :",
+              "Origem"
+            ],
+            [
+              "Informações gerais"
+            ],
+            [
+              "Formato",
+              "série de televisão"
+            ],
+            [
+              "Gêneros",
+              "Terror Mistério Ficção científica"
+            ],
+            [
+              "Criação",
+              "John Griffin"
+            ],
+            [
+              "Elenco",
+              "Ver elenco"
+            ],
+            [
+              "Tema de abertura",
+              "\" Que Sera, Sera (Whatever Will Be, Will Be) \", de Pixies"
+            ],
+            [
+              "País de origem",
+              "Estados Unidos"
+            ],
+            [
+              "Idioma original",
+              "inglês"
+            ],
+            [
+              "Temporadas",
+              "4"
+            ],
+            [
+              "Episódios",
+              "35"
+            ],
+            [
+              "Produção"
+            ],
+            [
+              "Produtores executivos",
+              ".mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,."
+            ],
+            [
+              "Produtor",
+              "Michael Mahoney"
+            ],
+            [
+              "Localização",
+              "Nova Escócia , Canadá"
+            ],
+            [
+              "Editores",
+              "Wendy Hallam Martin Ana Yavari Dan Briceno Stephen Lawrence Michele Conroy Maxyme Tremblay"
+            ],
+            [
+              "Duração",
+              "46–60 minutos"
+            ],
+            [
+              "Empresas produtoras",
+              "Midnight Radio Gozie AGBO Epix Studios MGM+"
+            ],
+            [
+              "Distribuição",
+              "MGM Television"
+            ],
+            [
+              "Exibição original"
+            ],
+            [
+              "Emissora",
+              "Epix"
+            ],
+            [
+              "Transmissão",
+              "20 de fevereiro de 2022 ( 2022-02-20 ) – presente ( presente )"
+            ]
+          ],
+          [
+            [
+              "Atores",
+              "Personagens",
+              "1",
+              "2",
+              "3",
+              "4"
+            ],
+            [
+              "Harold Perrineau",
+              "Boyd Stevens",
+              "Principal"
+            ],
+            [
+              "Catalina Sandino Moreno",
+              "Tabitha Matthews",
+              "Principal"
+            ],
+            [
+              "Eion Bailey",
+              "Jim Matthews",
+              "Principal",
+              "Convidado"
+            ],
+            [
+              "David Alpay",
+              "Jade Herrera",
+              "Principal"
+            ],
+            [
+              "Elizabeth Saunders",
+              "Donna Raines",
+              "Principal"
+            ],
+            [
+              "Shaun Majumder",
+              "Padre Rudra Khatri",
+              "Principal",
+              "Convidado"
+            ],
+            [
+              "Scott McCord",
+              "Victor Kavanaugh",
+              "Principal"
+            ],
+            [
+              "Ricky He",
+              "Kenny Liu",
+              "Principal"
+            ],
+            [
+              "Chloe Van Landschoot",
+              "Kristi Miller",
+              "Principal"
+            ],
+            [
+              "Pegah Ghafoori",
+              "Fatima Hassan",
+              "Recorrente",
+              "Principal"
+            ],
+            [
+              "Hannah Cheramy",
+              "Julie Matthews",
+              "Principal"
+            ],
+            [
+              "Simon Webster",
+              "Ethan Matthews",
+              "Principal"
+            ],
+            [
+              "Avery Konrad",
+              "Sara Myers",
+              "Principal"
+            ],
+            [
+              "Robert Joy",
+              "Henry Kavanaugh",
+              "",
+              "Principal"
+            ],
+            [
+              "Julia Doyle",
+              "Sophia / Homem de Amarelo",
+              "",
+              "Principal"
+            ],
+            [
+              "Corteon Moore",
+              "Ellis Stevens",
+              "Recorrente"
+            ],
+            [
+              "Paul Zinno",
+              "Nathan Myers",
+              "Recorrente",
+              ""
+            ],
+            [
+              "Elizabeth Moy",
+              "Tian-Chen Liu",
+              "Recorrente",
+              ""
+            ],
+            [
+              "Deborah Grover",
+              "Tillie",
+              "",
+              "Recorrente",
+              ""
+            ],
+            [
+              "Angela Moore",
+              "Bakta",
+              "",
+              "Recorrente"
+            ],
+            [
+              "Kaelen Ohm",
+              "Marielle Sinclair",
+              "",
+              "Recorrente"
+            ],
+            [
+              "A.J. Simmons",
+              "Randall Kirkland",
+              "",
+              "Recorrente"
+            ],
+            [
+              "Nathan D. Simmons",
+              "Elgin Williams",
+              "",
+              "Recorrente"
+            ],
+            [
+              "Samantha Brown",
+              "Dani Acosta",
+              "",
+              "Recorrente"
+            ]
+          ],
+          [
+            [
+              "Temporada",
+              "Episódios",
+              "Exibição original"
+            ],
+            [
+              "Primeira exibição",
+              "Última exibição",
+              "Emissora"
+            ],
+            [
+              "1",
+              "10",
+              "20 de fevereiro de 2022 ( 2022-02-20 )",
+              "10 de abril de 2022 ( 2022-04-10 )",
+              "Epix"
+            ],
+            [
+              "2",
+              "10",
+              "23 de abril de 2023",
+              "25 de junho de 2023",
+              "MGM+"
+            ],
+            [
+              "3",
+              "10",
+              "22 de setembro de 2024",
+              "24 de novembro de 2024",
+              "MGM+"
+            ],
+            [
+              "4",
+              "10",
+              "19 de abril de 2026",
+              "28 de junho de 2026",
+              "MGM+"
+            ]
+          ],
+          [
+            [
+              "N.º geral",
+              "N.º na temp.",
+              "Título",
+              "Dirigido por",
+              "Escrito por",
+              "Exibição original"
+            ],
+            [
+              "1",
+              "1",
+              "\"Long Day's Journey into Night\"",
+              "Jack Bender",
+              "John Griffin",
+              "20 de fevereiro de 2022 ( 2022-02-20 )"
+            ],
+            [
+              "Uma garotinha e sua mãe são mortas por uma criatura que se passa por uma velha senhora depois que a menina a deixa entrar em sua casa. A família Matthews—Jim, T"
+            ],
+            [
+              "2",
+              "2",
+              "\"The Way Things Are Now\"",
+              "Jack Bender",
+              "John Griffin",
+              "20 de fevereiro de 2022 ( 2022-02-20 )"
+            ],
+            [
+              "O grupo mal consegue chegar à Colony House, onde são deixados entrar pela líder, Donna, no momento em que as figuras se aproximam. Seguindo o protocolo, Tabitha"
+            ],
+            [
+              "3",
+              "3",
+              "\"Choosing Day\"",
+              "Jack Bender",
+              "John Griffin",
+              "20 de fevereiro de 2022 ( 2022-02-20 )"
+            ],
+            [
+              "Depois que Jade acorda, Donna explica a situação da cidade, mas ele desdenha, acreditando que se trata de um jogo de escape room elaborado criado por Tobey. Mai"
+            ],
+            [
+              "4",
+              "4",
+              "\"A Rock and a Farway\"",
+              "Javier Grillo-Marxuach",
+              "John Griffin",
+              "27 de fevereiro de 2022 ( 2022-02-27 )"
+            ],
+            [
+              "No passado, Victor, ainda criança, testemunha os cadáveres de muitos moradores da cidade, após o qual o Garoto de Branco aparece e o convida para jogar. No pres"
+            ],
+            [
+              "5",
+              "5",
+              "\"Silhouettes\"",
+              "Brad Turner",
+              "Vivian Lee",
+              "6 de março de 2022 ( 2022-03-06 )"
+            ],
+            [
+              "Sara se recupera na clínica. Boyd começa a suspeitar que a cidade pode causar algum tipo de reação física devido às convulsões de Sara e Ethan; ele revela a Kri"
+            ],
+            [
+              "6",
+              "6",
+              "\"Book 74\"",
+              "Brad Turner",
+              "John Griffin",
+              "13 de março de 2022 ( 2022-03-13 )"
+            ],
+            [
+              "Mantendo Sara cativa em um porão, Khatri explica a ela que a Bíblia moderna é composta por 73 livros e expõe sua teoria de que os moradores da cidade estão send"
+            ],
+            [
+              "7",
+              "7",
+              "\"All Good Things\"",
+              "Jennifer Liao",
+              "Vivian Lee e John Griffin",
+              "20 de março de 2022 ( 2022-03-20 )"
+            ],
+            [
+              "Khatri conta a Boyd sobre Sara e as vozes, e sugere que ele e Sara se juntem à expedição de Boyd na floresta. Jim propõe a construção de uma torre de rádio adeq"
+            ],
+            [
+              "8",
+              "8",
+              "\"Broken Windows, Open Doors\"",
+              "Jennifer Liao",
+              "Javier Grillo-Marxuach e John Griffin",
+              "27 de março de 2022 ( 2022-03-27 )"
+            ],
+            [
+              "Boyd, sua esposa Abby e Ellis chegam à cidade pouco antes do anoitecer, onde encontram Khatri, que os conduz a um porão escondido contendo Donna e outros morado"
+            ],
+            [
+              "9",
+              "9",
+              "\"Into the Woods\"",
+              "Jeff Renfroe",
+              "John Griffin",
+              "3 de abril de 2022 ( 2022-04-03 )"
+            ],
+            [
+              "Boyd e Sara chegam à caverna onde ele encontrou os talismãs pela primeira vez e a estabelecem como ponto de referência. Viajando mais longe do que qualquer mora"
+            ],
+            [
+              "10",
+              "10",
+              "\"Oh, the Places We'll Go\"",
+              "Jeff Renfroe",
+              "John Griffin",
+              "10 de abril de 2022 ( 2022-04-10 )"
+            ],
+            [
+              "Os moradores da cidade reúnem o máximo de fiação que podem para alimentar a torre de rádio. Ellis pede Fatima em casamento, que aceita; Kenny tenta se aproximar"
+            ]
+          ],
+          [
+            [
+              "N.º geral",
+              "N.º na temp.",
+              "Título",
+              "Dirigido por",
+              "Escrito por",
+              "Exibição original"
+            ],
+            [
+              "11",
+              "1",
+              "\"Strangers in a Strange Land\"",
+              "Jack Bender",
+              "ASA",
+              "23 de abril de 2023 ( 2023-04-23 )"
+            ],
+            [
+              "Um passageiro de um ônibus avisa sobre o perigo, levando os moradores a reunirem os passageiros e protegerem um prédio próximo. Donna tenta convencer Bakta, a m"
+            ],
+            [
+              "12",
+              "2",
+              "\"The Kindness of Strangers\"",
+              "Jack Bender",
+              "ASA",
+              "30 de abril de 2023 ( 2023-04-30 )"
+            ],
+            [
+              "Boyd se recusa a matar o homem, cujo nome é Martin, e tenta libertá-lo. Martin avisa Boyd que as criaturas na floresta são apenas a \"ponta da lança\". Boyd vê um"
+            ],
+            [
+              "13",
+              "3",
+              "\"Tether\"",
+              "Alexandra La Roche",
+              "ASA",
+              "7 de maio de 2023 ( 2023-05-07 )"
+            ],
+            [
+              "Ellis confronta Boyd sobre estar na floresta por tanto tempo e perder Sara. Ellis diz que acha que Fatima está perdendo uma parte de si mesma. Enquanto Jim está"
+            ],
+            [
+              "14",
+              "4",
+              "\"This Way Gone\"",
+              "Alexandra La Roche",
+              "ASA",
+              "14 de maio de 2023 ( 2023-05-14 )"
+            ],
+            [
+              "Vemos a chegada dos Lius em um flashback. Kenny leva Boyd até Sara na igreja. Boyd conta a Kenny sobre a conexão única de Sara com a cidade. Julie e Ethan visit"
+            ],
+            [
+              "15",
+              "5",
+              "\"Lullaby\"",
+              "Jack Bender",
+              "John Griffin & Vivian Lee",
+              "21 de maio de 2023 ( 2023-05-21 )"
+            ],
+            [
+              "Randall passa sua primeira noite no ônibus. Jade vê uma visão de Christopher, que está segurando o livro com os símbolos, que começa a pingar sangue. Jim e Tabi"
+            ],
+            [
+              "16",
+              "6",
+              "\"Pas de Deux\"",
+              "Jack Bender",
+              "ASA",
+              "28 de maio de 2023 ( 2023-05-28 )"
+            ],
+            [
+              "Boyd conversa com Tian-Chen sobre a presença de Sara na cidade. Dale argumenta que as pessoas do ônibus não deveriam receber comida, já que há escassez. Durante"
+            ],
+            [
+              "17",
+              "7",
+              "\"Belly of the Beast\"",
+              "Brad Turner",
+              "ASA",
+              "4 de junho de 2023 ( 2023-06-04 )"
+            ],
+            [
+              "Kristi se prepara para a autópsia. Jim e Tabitha discutem se Ethan deveria passar tempo com Victor. Randall, um dos passageiros do ônibus, pilota seu drone sobr"
+            ],
+            [
+              "18",
+              "8",
+              "\"Forest for the Trees\"",
+              "Brad Turner",
+              "John Griffin & Vivian Lee",
+              "11 de junho de 2023 ( 2023-06-11 )"
+            ],
+            [
+              "Kenny sonha com o telefone tocando na casa. Quando ele atende, uma voz canta: \"Eles tocam, eles quebram, eles roubam. Ninguém aqui é livre.\" Ele então tem uma v"
+            ],
+            [
+              "19",
+              "9",
+              "\"Ball of Magic Fire\"",
+              "Jack Bender",
+              "ASA",
+              "18 de junho de 2023 ( 2023-06-18 )"
+            ],
+            [
+              "Boyd e Kenny descobrem que as cigarras mataram a esposa de Reggie enquanto ela dormia. Antes de morrer, ela disse: \"Eles tocam, eles quebram, eles roubam. Ningu"
+            ],
+            [
+              "20",
+              "10",
+              "\"Once Upon a Time...\"",
+              "Jack Bender",
+              "John Griffin & Jeff Pinkner",
+              "25 de junho de 2023 ( 2023-06-25 )"
+            ],
+            [
+              "Donna resgata Randall, que está em coma. Sara diz a Boyd que ele fez isso acontecer ao libertar a entidade inadvertidamente, e que ele precisa destruir a caixa "
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/pt/c/c0/From_%28s%C3%A9rie%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://upload.wikimedia.org/wikipedia/pt/c/c0/From_%28s%C3%A9rie%29.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/pt/thumb/c/c0/From_%28s%C3%A9rie%29.jpg/250px-From_%28s%C3%A9rie%29.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Flag_of_the_United_States.svg/40px-Flag_of_the_United_States.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/20px-Wikidata-logo.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/wiki/Special:CentralAutoLogin/start?useformat=desktop&amp;type=1x1&amp;usesul3=1",
+          "https://pt.wikipedia.org/static/images/footer/wikimedia.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-84f7f6c6f80d",
+            "type": "image",
+            "title": "From",
+            "url": "https://upload.wikimedia.org/wikipedia/pt/c/c0/From_%28s%C3%A9rie%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "final_url": "https://upload.wikimedia.org/wikipedia/pt/c/c0/From_%28s%C3%A9rie%29.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "source_title": "From",
+            "source_url": "https://pt.wikipedia.org/wiki/From",
+            "publisher": "upload.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "From",
+            "source_url": "https://pt.wikipedia.org/wiki/From",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-355ea4f50b5f",
+            "type": "image",
+            "title": "Wd",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/20px-Wikidata-logo.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/20px-Wikidata-logo.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "From",
+            "source_url": "https://pt.wikipedia.org/wiki/From",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wd",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8930cb3b5a58",
+            "type": "image",
+            "title": "Wikimedia Foundation",
+            "url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "source_title": "From",
+            "source_url": "https://pt.wikipedia.org/wiki/From",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikimedia Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4f63425d32e1",
+            "type": "image",
+            "title": "Powered by MediaWiki",
+            "url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "final_url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "source_title": "From",
+            "source_url": "https://pt.wikipedia.org/wiki/From",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Powered by MediaWiki",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "1502d638c6fe17ce940c",
+            "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+            "title": "Origem: assista agora! - Globoplay",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Veja Origem online no Globoplay 4. Uma Pedra e uma Árvore Distante Os amigos de Julie a confortam. Jim e Tabitha lidam com a crise no casamento. Ethan se aventu"
+          },
+          {
+            "id": "adbeb420ed9a5325ff22",
+            "url": "https://www.adorocinema.com/series/serie-28959/",
+            "title": "Origem - Série 2022 - AdoroCinema",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Encontre todos os detalhes para as 3 temporadas e 10 episódias de Origem, bem como notícias e vídeos."
+          },
+          {
+            "id": "0c133cec08fe9663b0d4",
+            "url": "https://www.imdb.com/pt/title/tt9813792/",
+            "title": "Origem (Série de TV 2022– ) - IMDb",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Origem: Criado por John Griffin. Com Harold Perrineau, Catalina Sandino Moreno, David Alpay, Elizabeth Saunders. Desvenda o mistério de uma cidade na América Ce"
+          },
+          {
+            "id": "835f2166342b4573f980",
+            "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm",
+            "title": "Origem: entenda como surgem os monstros da série From - UOL",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "A série \"Origem\" (\"From\") estreou recentemente sua terceira temporada no Globoplay, trazendo poucas explicações e muitas novas dúvidas a um enredo que mistura t"
+          },
+          {
+            "id": "f8cbda44969b8c494bdc",
+            "url": "https://pt.wikipedia.org/wiki/From",
+            "title": "From – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "From (bra: Origem[1]) é uma série de televisão estadunidense, do gênero terror, mistério e ficção científica, criada por John Griffin. É estrelado por um elenco"
+          },
+          {
+            "id": "ccc3e5a57f856ca8e02f",
+            "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+            "title": "Origem | Série é renovada para 5ª e última temporada",
+            "origin": "bing",
+            "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "A série Origem já teve seu fim decretado e foi renovada para uma 5ª e última temporada. Em um comunicado, o showrunner Jeff Pinkner, o criador John Griffin e o "
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "wikipedia: sem resultados (Qual é a origem da empresa O Boticário e)",
+        "bing: 6 resultados (Qual é a origem da empresa O Boticário e)",
+        "bing (consulta reformulada 'origem da empresa O Boticário e quem foi'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Qual é a origem da empresa O Boticário e)",
+        "ddg: bloqueado (Qual é a origem da empresa O Boticário e)",
+        "— recuperação por lacuna —",
+        "wikipedia: sem resultados (origem empresa boticário quem seu fundad)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-7381cacebf51",
+            "type": "explicit_attribute",
+            "description": "Fundadores",
+            "entity": "Boticário",
+            "attribute": "founders",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Fundadores",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S2",
+          "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://www.adorocinema.com/series/serie-28959/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "adapter_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "provider": "wikipedia",
+      "at": "2026-10-25T18:17:56.295052+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [],
+      "latency_ms": 478.42,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "adapter_query": "origem da empresa O Boticário e quem foi seu fundador",
+      "provider": "wikipedia",
+      "at": "2026-10-25T18:17:56.774986+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [],
+      "latency_ms": 412.69,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "adapter_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "provider": "bing",
+      "at": "2026-10-25T18:17:57.187859+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Origem: assista agora! - Globoplay",
+          "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/"
+        },
+        {
+          "title": "Origem - Série 2022 - AdoroCinema",
+          "url": "https://www.adorocinema.com/series/serie-28959/"
+        },
+        {
+          "title": "Origem (Série de TV 2022– ) - IMDb",
+          "url": "https://www.imdb.com/pt/title/tt9813792/"
+        },
+        {
+          "title": "Origem: entenda como surgem os monstros da série From - UOL",
+          "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm"
+        },
+        {
+          "title": "From – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/From"
+        },
+        {
+          "title": "Origem | Série é renovada para 5ª e última temporada",
+          "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 417.61,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "adapter_query": "origem da empresa O Boticário e quem foi seu fundador",
+      "provider": "bing",
+      "at": "2026-10-25T18:17:57.612200+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Origem: assista agora! - Globoplay",
+          "url": "https://globoplay.globo.com/origem/t/t89f1QshQP/"
+        },
+        {
+          "title": "Origem - Série 2022 - AdoroCinema",
+          "url": "https://www.adorocinema.com/series/serie-28959/"
+        },
+        {
+          "title": "Origem (Série de TV 2022– ) - IMDb",
+          "url": "https://www.imdb.com/pt/title/tt9813792/"
+        },
+        {
+          "title": "Origem: entenda como surgem os monstros da série From - UOL",
+          "url": "https://www.uol.com.br/splash/noticias/2025/02/26/origem-monstros-serie-from.htm"
+        },
+        {
+          "title": "From – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/From"
+        },
+        {
+          "title": "Origem | Série é renovada para 5ª e última temporada",
+          "url": "https://www.omelete.com.br/series-tv/origem-renovacao-5a-temporada-final"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "origem da empresa O Boticário e quem foi seu fundador",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 389.94,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "adapter_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "provider": "ddg",
+      "at": "2026-10-25T18:17:58.005867+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "bloqueado",
+      "result_count": 0,
+      "classification": "PROVIDER_BLOCKED",
+      "requests": [],
+      "latency_ms": 277.3,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Qual é a origem da empresa O Boticário e quem foi seu fundador?",
+      "adapter_query": "origem empresa boticário quem seu fundador",
+      "provider": "wikipedia",
+      "at": "2026-10-25T18:17:58.302655+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [],
+      "latency_ms": 415.15,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "beab3573022e0e52511357a0636e80f2e14478ed",
+  "dataset_sha256": "24d79cf7bd519c332a8c7c44952bfa7728e3703d14621aed15580621f63a0cef"
+}

@@ -1,0 +1,95 @@
+### Page
+- Page URL: http://127.0.0.1:53144/
+- Page Title: Vexx AI
+- Console: 1 errors, 0 warnings
+### Snapshot
+```yaml
+- main [ref=e2]:
+  - complementary "Menu lateral" [ref=e3]:
+    - generic [ref=e5]:
+      - generic [ref=e6]: v.
+      - generic [ref=e8]:
+        - strong [ref=e9]: Vexx AI
+        - text: Seu espaço pessoal
+    - generic [ref=e10]:
+      - generic [ref=e11]: O
+      - button "Ajustes e conta" [ref=e12] [cursor=pointer]:
+        - strong [ref=e14]: Offline
+      - button "Sair" [ref=e17] [cursor=pointer]: ⏻
+    - button "Nova conversa" [ref=e18] [cursor=pointer]
+    - searchbox "Buscar conversas" [ref=e24]
+    - generic [ref=e25]:
+      - generic [ref=e26]:
+        - paragraph [ref=e27]: Projetos
+        - button "Criar projeto" [ref=e28] [cursor=pointer]
+      - generic "Projetos" [ref=e31]:
+        - paragraph [ref=e32]: Agrupe suas conversas por assunto.
+      - generic [ref=e33]:
+        - paragraph [ref=e34]: Sem projeto 1
+        - button "Mostrar conversas arquivadas" [ref=e35] [cursor=pointer]
+      - generic "Conversas sem projeto" [ref=e38]:
+        - generic [ref=e39]:
+          - button "Nova conversa" [ref=e40] [cursor=pointer]
+          - button "Organizar Nova conversa" [ref=e43] [cursor=pointer]: ···
+    - paragraph [ref=e44]: Seu espaço
+    - navigation "Navegação" [ref=e45]:
+      - button "Documentos 0" [ref=e46] [cursor=pointer]:
+        - text: Documentos
+        - generic [ref=e49]: "0"
+      - button "Pesquisas" [ref=e50] [cursor=pointer]
+      - button "Meu PC" [ref=e53] [cursor=pointer]
+      - button "Meus Estudos" [ref=e56] [cursor=pointer]
+      - button "Memória" [ref=e59] [cursor=pointer]
+      - button "Provedores de IA" [ref=e62] [cursor=pointer]
+    - generic [ref=e65]:
+      - group [ref=e66]:
+        - generic "Conexão e memória" [ref=e67] [cursor=pointer]
+      - status [ref=e68]: Organização salva neste aparelho
+  - generic [ref=e69]:
+    - generic [ref=e70]:
+      - generic [ref=e71]:
+        - strong [ref=e72]: Nova conversa
+        - generic [ref=e73]: Sem projeto
+      - button "Nova conversa" [ref=e74] [cursor=pointer]
+      - button "Opções da conversa" [ref=e77] [cursor=pointer]: ···
+      - 'button "Conexão: PC desconectado" [ref=e130] [cursor=pointer]':
+        - generic [ref=e80]: Offline
+    - region "Chat" [ref=e81]:
+      - log "Mensagens" [ref=e82]:
+        - generic [ref=e83]:
+          - generic [aria-hidden] [ref=e84]: v.
+          - paragraph [ref=e85]: Seu espaço para pensar e criar.
+          - heading "O que vamos fazer hoje?" [level=1] [ref=e86]
+          - generic [ref=e87]: Converse, estude ou organize suas ideias em projetos.
+      - generic [ref=e88]:
+        - button "Organizar uma ideia" [ref=e89] [cursor=pointer]
+        - button "Estudar um assunto" [ref=e92] [cursor=pointer]
+        - button "Pesquisar com fontes" [ref=e95] [cursor=pointer]
+    - generic [ref=e98]:
+      - generic [ref=e99]:
+        - button "Anexar documento (PDF, DOCX, TXT, CSV, XLSX)" [ref=e100] [cursor=pointer]
+        - generic [ref=e103]: Mensagem
+        - textbox "Mensagem" [ref=e104]:
+          - /placeholder: Pergunte, explore ou crie algo…
+        - button "Enviar" [ref=e105] [cursor=pointer]
+      - generic [ref=e108]: Enter para enviar · Shift + Enter para nova linha
+    - status
+    - generic "Login" [ref=e110]:
+      - generic [ref=e111]:
+        - generic [ref=e112]: v.
+        - paragraph [ref=e113]: ACESSO
+        - heading "Bem-vindo ao Vexx AI." [level=2] [ref=e114]
+        - generic [ref=e115]:
+          - generic [ref=e116]: Usuário
+          - textbox "Usuário" [ref=e117]
+          - generic [ref=e118]: Senha
+          - generic [ref=e119]:
+            - textbox "Senha" [ref=e120]
+            - button "Mostrar senha" [ref=e121] [cursor=pointer]
+          - alert [ref=e124]
+          - button "Entrar ↗" [ref=e125] [cursor=pointer]:
+            - text: Entrar
+            - generic [ref=e126]: ↗
+        - button "Não tem uma conta? Criar conta" [ref=e128] [cursor=pointer]
+        - generic [ref=e129]: Seu histórico fica neste aparelho e no PC conectado.
+```

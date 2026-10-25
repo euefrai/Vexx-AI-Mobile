@@ -1,0 +1,116 @@
+{
+  "scope": "REAL_MODEL_ISOLATED_SYNTHESIS_NOT_AUTHENTICATED_SEARCH_E2E",
+  "model": "poolside/laguna-s-2.1:free",
+  "source_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+  "objective": "Como funciona Array.prototype.toSorted, qual sua sintaxe e quais as limitações?",
+  "calls": [
+    {
+      "context_chars": 2686,
+      "timeout_seconds": 15,
+      "response_chars": 691,
+      "seconds": 4.765
+    }
+  ],
+  "status": "SYNTHESIS_REJECTED",
+  "phase_seconds": {
+    "retrieval": 0.3,
+    "extraction": 0.059
+  },
+  "source_read": true,
+  "coverage": {
+    "applicable": true,
+    "requirements": [
+      {
+        "id": "R-78c64a7623f9",
+        "type": "explicit_attribute",
+        "description": "Sintaxe ou assinatura",
+        "entity": "Array.prototype.toSorted",
+        "attribute": "syntax",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Sintaxe ou assinatura",
+        "candidate_evidence_ids": [
+          "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted"
+        ],
+        "confirmed_evidence_ids": [
+          "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted"
+        ],
+        "state": "SUPPORTED",
+        "insufficiency_reason": "",
+        "passage_ids": [
+          "P-7d9c508cf6af1a62"
+        ]
+      },
+      {
+        "id": "R-5b17dcc0db05",
+        "type": "explicit_attribute",
+        "description": "Comportamento da operação",
+        "entity": "Array.prototype.toSorted",
+        "attribute": "behavior",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Comportamento da operação",
+        "candidate_evidence_ids": [
+          "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted"
+        ],
+        "confirmed_evidence_ids": [],
+        "state": "DISCOVERED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      },
+      {
+        "id": "R-b3e0550754aa",
+        "type": "explicit_attribute",
+        "description": "Limitações",
+        "entity": "Array.prototype.toSorted",
+        "attribute": "limitations",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Limitações",
+        "candidate_evidence_ids": [
+          "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted"
+        ],
+        "confirmed_evidence_ids": [],
+        "state": "DISCOVERED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      }
+    ],
+    "passages": [
+      {
+        "id": "P-7d9c508cf6af1a62",
+        "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+        "requirement_id": "R-78c64a7623f9",
+        "text_span": {
+          "start": 1524,
+          "end": 2403,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "DIRECT_ANSWER",
+        "support_label": "DIRECT_SUPPORT"
+      }
+    ],
+    "complete": false,
+    "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+  },
+  "evidence_passage_ids": [
+    "P-7d9c508cf6af1a62"
+  ],
+  "error_code": "unknown",
+  "failure_detail": "invalid_json",
+  "limits": [
+    "No discovery/plan/chat delivery/reload in this diagnostic.",
+    "No SUCCESS_VERIFIED declaration; parsed facet coverage is not complete factual verification.",
+    "First token timing unavailable in the nonstreaming research writer.",
+    "Synthesis and validation time reported together where nested calls cannot be separated."
+  ]
+}

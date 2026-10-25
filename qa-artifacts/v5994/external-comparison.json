@@ -1,0 +1,83 @@
+{
+  "scope": "LIVE_EXTERNAL_ENGINE_COUNTERS_NOT_GOLD_PRECISION_OR_COMPLETE_ANSWERS",
+  "runs": {
+    "baseline-live-sealed": {
+      "cases": 12,
+      "eligible_reads": 0,
+      "cases_with_eligible_read": 0,
+      "opened": 36,
+      "calls": 67,
+      "fetches": 123,
+      "errors": 0,
+      "median_seconds": 8.107,
+      "supported_requirement_flags": 0,
+      "partial_requirement_flags": 0
+    },
+    "after-live": {
+      "cases": 12,
+      "eligible_reads": 1,
+      "cases_with_eligible_read": 1,
+      "opened": 34,
+      "calls": 64,
+      "fetches": 122,
+      "errors": 0,
+      "median_seconds": 7.33,
+      "supported_requirement_flags": 1,
+      "partial_requirement_flags": 0
+    },
+    "historical": {
+      "cases": 20,
+      "eligible_reads": 12,
+      "cases_with_eligible_read": 5,
+      "opened": 57,
+      "calls": 107,
+      "fetches": 221,
+      "errors": 0,
+      "median_seconds": 7.88,
+      "supported_requirement_flags": 0,
+      "partial_requirement_flags": 0
+    },
+    "old-twelve": {
+      "cases": 12,
+      "eligible_reads": 4,
+      "cases_with_eligible_read": 2,
+      "opened": 33,
+      "calls": 54,
+      "fetches": 123,
+      "errors": 0,
+      "median_seconds": 7.4885,
+      "supported_requirement_flags": 0,
+      "partial_requirement_flags": 0
+    },
+    "old-fifteen": {
+      "cases": 15,
+      "eligible_reads": 1,
+      "cases_with_eligible_read": 1,
+      "opened": 42,
+      "calls": 73,
+      "fetches": 151,
+      "errors": 0,
+      "median_seconds": 7.878,
+      "supported_requirement_flags": 0,
+      "partial_requirement_flags": 0
+    },
+    "previous-twenty": {
+      "cases": 20,
+      "eligible_reads": 2,
+      "cases_with_eligible_read": 2,
+      "opened": 59,
+      "calls": 111,
+      "fetches": 210,
+      "errors": 0,
+      "median_seconds": 7.558999999999999,
+      "supported_requirement_flags": 2,
+      "partial_requirement_flags": 0
+    }
+  },
+  "limits": [
+    "No model/chat in these retrieval probes.",
+    "Live network/index/load differ; no causal latency or recall claim.",
+    "One new eligible read is not consistent external improvement.",
+    "Previously opened sets are diagnostics; no post-holdout algorithm tuning."
+  ]
+}

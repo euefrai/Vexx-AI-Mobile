@@ -1,0 +1,3261 @@
+{
+  "id": "ei-04",
+  "category": "universal",
+  "query": "Quais foram as causas e as consequências da Revolta da Vacina?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 9.574,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "pubmed",
+      "query": "Quais foram as",
+      "candidates": 6
+    },
+    {
+      "provider": "wikipedia",
+      "query": "Quais foram as",
+      "candidates": 1
+    },
+    {
+      "provider": "bing",
+      "query": "Quais foram as",
+      "candidates": 6
+    },
+    {
+      "provider": "pubmed",
+      "query": "causas consequências revolta vacina",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "causas consequências revolta vacina",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "causas consequências revolta vacina",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Quais+foram+as&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Quais+foram+as&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5030
+    },
+    {
+      "url": "https://www.bing.com/search?q=causas+consequ%C3%AAncias+revolta+vacina&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=causas+consequ%C3%AAncias+revolta+vacina&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5179
+    },
+    {
+      "url": "https://www.dicio.com.br/causas/",
+      "final": "https://www.dicio.com.br/causas/",
+      "chars": 209440
+    },
+    {
+      "url": "https://escreva.ai/palavra/causas/",
+      "final": "https://escreva.ai/palavra/causas/",
+      "chars": 88019
+    },
+    {
+      "url": "https://dicionario.priberam.org/causas",
+      "final": "https://dicionario.priberam.org/pt-pt/causas",
+      "chars": 100851
+    },
+    {
+      "url": "https://conceito.de/causa",
+      "final": "https://conceito.de/causa",
+      "chars": 24918
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41947917/",
+      "final": "https://pubmed.ncbi.nlm.nih.gov/41947917/",
+      "chars": 5590
+    },
+    {
+      "url": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/",
+      "final": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/",
+      "chars": 341724
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Quais foram as causas e as consequências da Revolta da Vacina?",
+    "domain": "general",
+    "original_request": "Quais foram as causas e as consequências da Revolta da Vacina?",
+    "resolved_request": "Quais foram as causas e as consequências da Revolta da Vacina?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T15:46:42.155724+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "73acee9a07f65a8776ee",
+        "url": "https://www.dicio.com.br/causas/",
+        "title": "Causas - Dicio, Dicionário Online de Português",
+        "origin": "bing",
+        "query": "causas consequências revolta vacina",
+        "date": "sáb., 18 jul. 2026 18:41:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "a escrita sem mudar o sentido. causas Reescrever Texto Significado de causar Ser a razão, o motivo ou a causa de; dar origem a; ser a origem de; provocar: o ven",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1675,
+        "final_url": "https://www.dicio.com.br/causas/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "50249d81a3dd92b7ad89",
+        "url": "https://escreva.ai/palavra/causas/",
+        "title": "Causas - Significado e Sinônimo - escreva.ai",
+        "origin": "bing",
+        "query": "causas consequências revolta vacina",
+        "date": "2025-05-30T01:47:08+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Antônimo de Causas consequências efeitos resultados Exemplos de Uso de Causas As do aquecimento global são múltiplas e complexas. causas Relatório do IPCC, 2021",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1097,
+        "final_url": "https://escreva.ai/palavra/causas/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "1199d2fc41020bf9438f",
+        "url": "https://dicionario.priberam.org/causas",
+        "title": "Significado de causas - Dicionário Priberam da Língua Portuguesa",
+        "origin": "bing",
+        "query": "causas consequências revolta vacina",
+        "date": "qui., 22 out. 2026 12:58:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "© 2026 Priberam Informática, S.A. Todos os direitos reservados",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 62,
+        "final_url": "https://dicionario.priberam.org/pt-pt/causas",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "c8e951cd66285d1a1a2f",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/41947917/",
+        "title": "Melhorando a apresentação de informações sobre equidade em saúde em pesquisas observacionais (STROBE-Equity): lista de verificação estendida e sua elaboração.",
+        "origin": "pubmed",
+        "query": "Quais foram as",
+        "date": "",
+        "type": "saude",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Cookies must be enabled Enable cookies for and reload this page to continue. pubmed.ncbi.nlm.nih.gov",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 100,
+        "final_url": "https://pubmed.ncbi.nlm.nih.gov/41947917/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "beedb4243bbb2616bde0",
+        "url": "https://conceito.de/causa",
+        "title": "Causa - O que é, conceito e definição",
+        "origin": "bing",
+        "query": "causas consequências revolta vacina",
+        "date": "qui., 22 out. 2026 12:43:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "seria se esse barco estivesse com um furo, então o barco poderia afundar ou essa pessoa chegaria do outro lado com muita , podendo se molhar e, no caso de ser u",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 5095,
+        "final_url": "https://conceito.de/causa",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "a1e6aacb6bd0ae4171ad",
+        "url": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/",
+        "title": "Conceito de Causa: Origem, Definição e Significado",
+        "origin": "bing",
+        "query": "causas consequências revolta vacina",
+        "date": "2025-06-15T04:24:20-03:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "adequada. Essa prática de investigação do motivo por trás de acontecimentos cotidianos também estimula o pensamento crítico e autoconhecimento. Reconhecer causa",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 7998,
+        "final_url": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "4b078b1fc974992f136b",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28327878/",
+        "title": "Social networks in nursing work processes: an integrative literature review.",
+        "origin": "pubmed",
+        "query": "Quais foram as",
+        "date": "",
+        "type": "saude",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Rev Esc Enferm USP · 2017 Mar 20 · Mesquita AC",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "b35ad883eea75df416eb",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27680055/",
+        "title": "Family caregivers: what do they need? An integrative review.",
+        "origin": "pubmed",
+        "query": "Quais foram as",
+        "date": "",
+        "type": "saude",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Rev Esc Enferm USP · 2016 Jul-Aug · Fernandes CS",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "dc61921b73e70b18efb6",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28099587/",
+        "title": "Non-Invasive Ventilation in Patients with Heart Failure: A Systematic Review and Meta-Analysis.",
+        "origin": "pubmed",
+        "query": "Quais foram as",
+        "date": "",
+        "type": "saude",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Arq Bras Cardiol · 2017 Feb · Bittencourt HS",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "414fc1605fe9eb7bf972",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/27533273/",
+        "title": "The Palliative Outcome Scale (POS) applied to clinical practice and research: an integrative review.",
+        "origin": "pubmed",
+        "query": "Quais foram as",
+        "date": "",
+        "type": "saude",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Rev Lat Am Enfermagem · 2016 Aug 15 · Rugno FC",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "f37e4e30e7951b27a976",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/28977225/",
+        "title": "Job satisfaction in an oncology nursing team.",
+        "origin": "pubmed",
+        "query": "Quais foram as",
+        "date": "",
+        "type": "saude",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Rev Bras Enferm · 2017 Sep-Oct · Silva VRD",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "6c6d309e6ed6bd49deb1",
+        "url": "https://www.dicio.com.br/causa/",
+        "title": "Causa - Dicio, Dicionário Online de Português",
+        "origin": "bing",
+        "query": "causas consequências revolta vacina",
+        "date": "ter., 13 out. 2026 07:46:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Definição de Causa Classe gramatical: substantivo feminino Flexão do verbo causar na: 3ª pessoa do singular do presente do indicativo, 2ª pessoa do singular do ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-f78873a71d02",
+      "type": "image",
+      "title": "Significado de Causas no Dicio, Dicionário Online de Português. Causas vem do verbo causar. O mesmo que: escandalizas, promoves, provocas, acarreias, acarretas,",
+      "url": "https://www.dicio.com.br/ogimage.png",
+      "final_url": "https://www.dicio.com.br/ogimage.png",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "www.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Significado de Causas no Dicio, Dicionário Online de Português. Causas vem do verbo causar. O mesmo que: escandalizas, promoves, provocas, acarreias, acarretas, fomentas, aticas, atiças, motivas.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-966978ee31b5",
+      "type": "image",
+      "title": "Dicio, Dicionário Online de Português",
+      "url": "https://www.dicio.com.br/img/logo-dicio.svg",
+      "final_url": "https://www.dicio.com.br/img/logo-dicio.svg",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "www.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Dicio, Dicionário Online de Português",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ed853e8cf08e",
+      "type": "image",
+      "title": "Ouvir",
+      "url": "https://www.dicio.com.br/img/btn-audio.svg",
+      "final_url": "https://www.dicio.com.br/img/btn-audio.svg",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "www.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ouvir",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-790b86f30826",
+      "type": "image",
+      "title": "A Palavra do Ano de 2024 no Dicio é Imersão",
+      "url": "https://static.dicio.com.br/upload/ap/al/a-palavra-do-ano-de-2024-no-dicio-e-imersao-ac1.jpg",
+      "final_url": "https://static.dicio.com.br/upload/ap/al/a-palavra-do-ano-de-2024-no-dicio-e-imersao-ac1.jpg",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "static.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A Palavra do Ano de 2024 no Dicio é Imersão",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-cead145b0357",
+      "type": "image",
+      "title": "30 palavras formais em português para se expressar com sofisticação",
+      "url": "https://static.dicio.com.br/upload/17/26/1726877242ic66ee0e3a2fe63-ac1.jpg",
+      "final_url": "https://static.dicio.com.br/upload/17/26/1726877242ic66ee0e3a2fe63-ac1.jpg",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "static.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "30 palavras formais em português para se expressar com sofisticação",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a52f89398b46",
+      "type": "image",
+      "title": "5 crônicas tão irresistíveis que vão fazer você se apaixonar pelo gênero",
+      "url": "https://static.dicio.com.br/upload/17/21/1721952326ic66a2e84692560-ac1.jpg",
+      "final_url": "https://static.dicio.com.br/upload/17/21/1721952326ic66a2e84692560-ac1.jpg",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "static.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "5 crônicas tão irresistíveis que vão fazer você se apaixonar pelo gênero",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0a3f191d07bc",
+      "type": "image",
+      "title": "Captura do Reescrever a reformular um texto completo, com as alterações destacadas a azul.",
+      "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-01.png",
+      "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-01.png",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "www.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Captura do Reescrever a reformular um texto completo, com as alterações destacadas a azul.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e306e01816e9",
+      "type": "image",
+      "title": "Captura do Reescrever a sugerir novas versões de uma frase selecionada.",
+      "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-02.png",
+      "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-02.png",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "www.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Captura do Reescrever a sugerir novas versões de uma frase selecionada.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-923d29ce75f2",
+      "type": "image",
+      "title": "Captura do Reescrever a sugerir sinônimos para uma palavra selecionada.",
+      "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-03.png",
+      "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-03.png",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "www.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Captura do Reescrever a sugerir sinônimos para uma palavra selecionada.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-786145739f58",
+      "type": "image",
+      "title": "Captura do Reescrever com os níveis de criatividade Baixa, Média e Alta.",
+      "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-04.png",
+      "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-04.png",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "www.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Captura do Reescrever com os níveis de criatividade Baixa, Média e Alta.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-43364245b048",
+      "type": "image",
+      "title": "Dicio",
+      "url": "https://www.dicio.com.br/img/logo-dicio-footer-word.svg",
+      "final_url": "https://www.dicio.com.br/img/logo-dicio-footer-word.svg",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "www.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Dicio",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0df2f83b6bd4",
+      "type": "image",
+      "title": "Disponível no Google Play",
+      "url": "https://www.dicio.com.br/img/google-play-badge.png",
+      "final_url": "https://www.dicio.com.br/img/google-play-badge.png",
+      "source_title": "Causas",
+      "source_url": "https://www.dicio.com.br/causas/",
+      "publisher": "www.dicio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Disponível no Google Play",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.dicio.com.br/causas/",
+      "titulo": "Causas",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 18 jul. 2026 18:41:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.dicio.com.br/causas/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://escreva.ai/palavra/causas/",
+      "titulo": "causas - Significado e Sinônimo - escreva.ai",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2025-05-30T01:47:08+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://escreva.ai/palavra/causas/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://dicionario.priberam.org/causas",
+      "titulo": "causas",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "qui., 22 out. 2026 12:58:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://dicionario.priberam.org/causas",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "pubmed",
+      "query": "Quais foram as",
+      "items": [
+        {
+          "titulo": "Melhorando a apresentação de informações sobre equidade em saúde em pesquisas observacionais (STROBE-Equity): lista de verificação estendida e sua elaboração.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/41947917/",
+          "trecho": "Rev Panam Salud Publica · 2026 · Dewidar O",
+          "origem": "pubmed",
+          "tipo": "saude",
+          "meta": {
+            "pmid": "41947917"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "pubmed",
+          "url_canonica": "https://pubmed.ncbi.nlm.nih.gov/41947917",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 7.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Social networks in nursing work processes: an integrative literature review.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28327878/",
+          "trecho": "Rev Esc Enferm USP · 2017 Mar 20 · Mesquita AC",
+          "origem": "pubmed",
+          "tipo": "saude",
+          "meta": {
+            "pmid": "28327878"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "pubmed",
+          "url_canonica": "https://pubmed.ncbi.nlm.nih.gov/28327878",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 7.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Family caregivers: what do they need? An integrative review.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27680055/",
+          "trecho": "Rev Esc Enferm USP · 2016 Jul-Aug · Fernandes CS",
+          "origem": "pubmed",
+          "tipo": "saude",
+          "meta": {
+            "pmid": "27680055"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "pubmed",
+          "url_canonica": "https://pubmed.ncbi.nlm.nih.gov/27680055",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 7.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Non-Invasive Ventilation in Patients with Heart Failure: A Systematic Review and Meta-Analysis.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28099587/",
+          "trecho": "Arq Bras Cardiol · 2017 Feb · Bittencourt HS",
+          "origem": "pubmed",
+          "tipo": "saude",
+          "meta": {
+            "pmid": "28099587"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "pubmed",
+          "url_canonica": "https://pubmed.ncbi.nlm.nih.gov/28099587",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 7.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "The Palliative Outcome Scale (POS) applied to clinical practice and research: an integrative review.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/27533273/",
+          "trecho": "Rev Lat Am Enfermagem · 2016 Aug 15 · Rugno FC",
+          "origem": "pubmed",
+          "tipo": "saude",
+          "meta": {
+            "pmid": "27533273"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "pubmed",
+          "url_canonica": "https://pubmed.ncbi.nlm.nih.gov/27533273",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 7.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Job satisfaction in an oncology nursing team.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/28977225/",
+          "trecho": "Rev Bras Enferm · 2017 Sep-Oct · Silva VRD",
+          "origem": "pubmed",
+          "tipo": "saude",
+          "meta": {
+            "pmid": "28977225"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "pubmed",
+          "url_canonica": "https://pubmed.ncbi.nlm.nih.gov/28977225",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 7.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "wikipedia",
+      "query": "Quais foram as",
+      "items": [
+        {
+          "titulo": "Quais foram os três cavalheiros",
+          "url": "https://pt.wikipedia.org/wiki/Quais_foram_os_tr%C3%AAs_cavalheiros",
+          "trecho": "",
+          "origem": "wikipedia",
+          "tipo": "enciclopedia",
+          "meta": {},
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "wikipedia",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Quais_foram_os_tr%C3%AAs_cavalheiros",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 1.7,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Quais foram as",
+      "items": [
+        {
+          "titulo": "Quais - Dicio, Dicionário Online de Português",
+          "url": "https://www.dicio.com.br/quais/",
+          "trecho": "Significado de Quais no Dicio, Dicionário Online de Português. O que é quais: pron. pl. Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favoritos?...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 05:48:00 GMT"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "bing",
+          "url_canonica": "https://dicio.com.br/quais",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Qual o significado de Quais? - todasasrespostas.com",
+          "url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+          "trecho": "Com verbos transitivos diretos, que não pedem preposição, deverá ser usado o pronome relativo o qual. Já com verbos transitivos indiretos, que pedem preposição, são usadas as formas preposicionadas do pronome. Com a preposição a: ao qual, aos quais, à qual, às quais. O quê ou o qual?",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 10 out. 2026 12:43:00 GMT"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "bing",
+          "url_canonica": "https://todasasrespostas.com/qual-o-significado-de-quais",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Os Quais ou As Quais: uso correto e exemplos",
+          "url": "https://cidesp.com.br/v2/os-quais-ou-as-quais",
+          "trecho": "O emprego de os quais ou as quais costuma gerar dúvidas até mesmo entre falantes com bom domínio da língua portuguesa. Embora pareçam formas muito específicas, esses pronomes relativos têm papel importante na construção de frases claras, elegantes e compatíveis com a norma culta.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:52:00 GMT"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "bing",
+          "url_canonica": "https://cidesp.com.br/v2/os-quais-ou-as-quais",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "quais - Wikcionário",
+          "url": "https://pt.m.wiktionary.org/wiki/quais",
+          "trecho": "Este texto é disponibilizado nos termos da licença Atribuição-CompartilhaIgual 4.0 (CC BY-SA 4.0) da Creative Commons; pode estar sujeito a condições adicionais. Para mais detalhes, consulte as condições de utilização.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 09 out. 2026 11:11:00 GMT"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.m.wiktionary.org/wiki/quais",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "quais | Dicionário Infopédia da Língua Portuguesa",
+          "url": "https://www.infopedia.pt/dicionarios/lingua-portuguesa/quais",
+          "trecho": "Definição ou significado de quais no Dicionário Infopédia da Língua Portuguesa",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 08:45:00 GMT"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "bing",
+          "url_canonica": "https://infopedia.pt/dicionarios/lingua-portuguesa/quais",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Entenda a palavra 'quais' e suas aplicações práticas",
+          "url": "https://www.significadosdepalavras.com/quais",
+          "trecho": "Descubra o significado de 'quais', como usá-la no dia a dia e suas diferenças com 'qual'.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 11 out. 2026 09:29:00 GMT"
+          },
+          "discovery_query": "Quais foram as",
+          "discovery_provider": "bing",
+          "url_canonica": "https://significadosdepalavras.com/quais",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "causas consequências revolta vacina",
+      "items": [
+        {
+          "titulo": "Causa - Dicio, Dicionário Online de Português",
+          "url": "https://www.dicio.com.br/causa/",
+          "trecho": "Definição de Causa Classe gramatical: substantivo feminino Flexão do verbo causar na: 3ª pessoa do singular do presente do indicativo, 2ª pessoa do singular do imperativo afirmativo Separação silábica: cau-sa Plural: causas",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 13 out. 2026 07:46:00 GMT"
+          },
+          "discovery_query": "causas consequências revolta vacina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://dicio.com.br/causa",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Causa - O que é, conceito e definição",
+          "url": "https://conceito.de/causa",
+          "trecho": "O Diagrama de Causa e Efeito, Diagrama Espinha de Peixe ou mesmo Diagrama de Ishikawa é um gráfico criado em 1943 com o objetivo de fazer a organização do raciocínio em discussões de um problema previamente determinado, orientando o processo de análise de causas raízes.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 12:43:00 GMT"
+          },
+          "discovery_query": "causas consequências revolta vacina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://conceito.de/causa",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Causas - Dicio, Dicionário Online de Português",
+          "url": "https://www.dicio.com.br/causas/",
+          "trecho": "Significado de Causas no Dicio, Dicionário Online de Português. Causas vem do verbo causar. O mesmo que: escandalizas, promoves, provocas, acarreias, acarretas, fomentas, aticas,...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 18 jul. 2026 18:41:00 GMT"
+          },
+          "discovery_query": "causas consequências revolta vacina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://dicio.com.br/causas",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Conceito de Causa: Origem, Definição e Significado",
+          "url": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/",
+          "trecho": "Afinal, entender as causas permite explicar por que algo acontece, prever resultados futuros e evitar problemas. Por exemplo, no estudo de doenças, identificar o agente causador – vírus, bactéria, vírus ou fatores ambientais – é fundamental para tratá-las eficazmente.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 12:49:00 GMT"
+          },
+          "discovery_query": "causas consequências revolta vacina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Causas - Significado e Sinônimo - escreva.ai",
+          "url": "https://escreva.ai/palavra/causas/",
+          "trecho": "Veja significado, sinônimo, antônimo, origem e muito mais sobre a palavra causas no maior Dicionário Online para Português do Brasil",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "seg., 05 out. 2026 00:46:00 GMT"
+          },
+          "discovery_query": "causas consequências revolta vacina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://escreva.ai/palavra/causas",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Significado de causas - Dicionário Priberam da Língua Portuguesa",
+          "url": "https://dicionario.priberam.org/causas",
+          "trecho": "Significado de causas, verbo transitivo: Ser causa, a origem de; Chamar a atenção sobre si; Agente eficaz que dá existência ao que não… — Dicionário Priberam",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 12:58:00 GMT"
+          },
+          "discovery_query": "causas consequências revolta vacina",
+          "discovery_provider": "bing",
+          "url_canonica": "https://dicionario.priberam.org/causas",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://escreva.ai/palavra/causas/",
+      "result": {
+        "titulo": "causas - Significado e Sinônimo - escreva.ai",
+        "texto": "Significado de Causas Aquilo que origina ou produz um efeito; razão, motivo Princípio ou origem de algo Conjunto de interesses ou ideais pelos quais se luta No Direito, fundamento jurídico de uma ação ou demanda Na Filosofia, princípio que determina a existência de algo Na Medicina, fator que desencadeia uma doença ou condição Sinônimo de Causas fundamentos motivos origens princípios razões Antônimo de Causas consequências efeitos resultados Exemplos de Uso de Causas As do aquecimento global são múltiplas e complexas. causas Relatório do IPCC, 2021 A causa da liberdade sempre terá defensores. Thomas Jefferson O juiz analisou as apresentadas no processo. causas Diário da Justiça, 15/03/2022 Origem / Etimologia de Causas A palavra 'causas' tem sua origem no latim 'causa', que significa 'motivo', 'razão' ou 'origem'. Inicialmente usada no contexto jurídico, seu uso se expandiu para diversos campos do conhecimento. No português, a forma plural 'causas' manteve o significado original, mas também adquiriu nuances adicionais, como 'conjunto de interesses' ou 'ideais pelos quais se luta'.",
+        "final": "https://escreva.ai/palavra/causas/",
+        "trecho_usado": "Antônimo de Causas consequências efeitos resultados Exemplos de Uso de Causas As do aquecimento global são múltiplas e complexas. causas Relatório do IPCC, 2021 A causa da liberdade sempre terá defensores. Thomas Jefferson O juiz analisou as apresentadas no processo. causas Diário da Justiça, 15/03/2022 Origem / Etimologia de Causas A palavra 'causas' tem sua origem no latim 'causa', que significa",
+        "metadados": {
+          "titulo": "causas - Significado e Sinônimo - escreva.ai",
+          "descricao": "Veja significado, sinônimo, antônimo, origem e muito mais sobre a palavra causas no maior Dicionário Online para Português do Brasil",
+          "canonica": "https://escreva.ai/palavra/causas/",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "article",
+            "og:title": "causas - Significado e Sinônimo - escreva.ai",
+            "og:description": "Veja significado, sinônimo, antônimo, origem e muito mais sobre a palavra causas no maior Dicionário Online para Português do Brasil",
+            "og:url": "https://escreva.ai/palavra/causas/",
+            "og:site_name": "escreva.ai",
+            "og:image": "https://og.escreva.ai/word/causas",
+            "og:image:width": "1200",
+            "og:image:height": "840",
+            "og:image:type": "image/png"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@escrevaaibr",
+            "twitter:title": "causas — Substantivo Feminino",
+            "twitter:description": "Aquilo que origina ou produz um efeito; razão, motivo; Princípio ou origem de algo",
+            "twitter:image": "https://og.escreva.ai/word/causas"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2025-05-30T01:47:08+00:00",
+          "atualizado_em": "2025-08-29T02:46:09+00:00",
+          "autor": "",
+          "site": "escreva.ai",
+          "tipo": "WebPage",
+          "ld": {
+            "datePublished": "2025-05-30T01:47:08+00:00",
+            "dateModified": "2025-08-29T02:46:09+00:00",
+            "description": "Veja significado, sinônimo, antônimo, origem e muito mais sobre a palavra causas no maior Dicionário Online para Português do Brasil",
+            "inLanguage": "pt-BR",
+            "publisher": {
+              "@id": "https://escreva.ai/#organization"
+            }
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Aquilo que origina ou produz um efeito; razão, motivo\nPrincípio ou origem de algo\nConjunto de interesses ou ideais pelos quais se luta\nNo Direito, fundamento jurídico de uma ação ou demanda\nNa Filosofia, princípio que determina a existência de algo\nNa Medicina, fator que desencadeia uma doença ou condição"
+          },
+          {
+            "titulo": "Exemplos de Uso de Causas",
+            "texto": "As do aquecimento global são múltiplas e complexas. causas\nA causa da liberdade sempre terá defensores.\nO juiz analisou as apresentadas no processo. causas\nDiário da Justiça, 15/03/2022\nA palavra 'causas' tem sua origem no latim 'causa', que significa 'motivo', 'razão' ou 'origem'. Inicialmente usada no contexto jurídico, seu uso se expandiu para diversos campos do conhecimento. No português, a forma plural 'causas' manteve o significado original, mas também adquiriu nuances adicionais, como 'conjunto de interesses' ou 'ideais pelos quais se luta'."
+          },
+          {
+            "titulo": "Origem / Etimologia de Causas",
+            "texto": ""
+          }
+        ],
+        "links": [
+          {
+            "url": "https://escreva.ai/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/fundamentos/",
+            "texto": "fundamentos",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/motivos/",
+            "texto": "motivos",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/origens/",
+            "texto": "origens",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/principios/",
+            "texto": "princípios",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/razoes/",
+            "texto": "razões",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/consequencias/",
+            "texto": "consequências",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/efeitos/",
+            "texto": "efeitos",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/resultados/",
+            "texto": "resultados",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/pausas/",
+            "texto": "pausas",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/blog/",
+            "texto": "Blog / Artigos",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/nome/",
+            "texto": "Nomes",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/sinonimos/",
+            "texto": "Dicionário de Sinônimos",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/antonimos/",
+            "texto": "Dicionário de Antônimos",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/caco/",
+            "texto": "caco",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/coco/",
+            "texto": "cocô",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/cacoe/",
+            "texto": "caçoe",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/cacasse/",
+            "texto": "cacasse",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/cachaco/",
+            "texto": "cachaço",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/",
+            "texto": "Mais Palavras",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/letra/A/",
+            "texto": "Aa",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/letra/B/",
+            "texto": "Bb",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/letra/C/",
+            "texto": "Cc",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/letra/D/",
+            "texto": "Dd",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/letra/E/",
+            "texto": "Ee",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/letra/F/",
+            "texto": "Ff",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/letra/G/",
+            "texto": "Gg",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/letra/H/",
+            "texto": "Hh",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/letra/I/",
+            "texto": "Ii",
+            "interno": true
+          },
+          {
+            "url": "https://escreva.ai/palavra/letra/J/",
+            "texto": "Jj",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://og.escreva.ai/word/causas",
+          "https://escreva.ai/wp-content/themes/escrevai/assets/images/logo.png",
+          "https://og.escreva.ai/synonyms/causas",
+          "https://og.escreva.ai/antonyms/causas"
+        ],
+        "midia": [
+          {
+            "id": "med-bb46683d1ad1",
+            "type": "image",
+            "title": "Veja significado, sinônimo, antônimo, origem e muito mais sobre a palavra causas no maior Dicionário Online para Português do Brasil",
+            "url": "https://og.escreva.ai/word/causas",
+            "final_url": "https://og.escreva.ai/word/causas",
+            "source_title": "causas - Significado e Sinônimo - escreva.ai",
+            "source_url": "https://escreva.ai/palavra/causas/",
+            "publisher": "og.escreva.ai",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Veja significado, sinônimo, antônimo, origem e muito mais sobre a palavra causas no maior Dicionário Online para Português do Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-24279cae7fd3",
+            "type": "image",
+            "title": "escreva.ai",
+            "url": "https://escreva.ai/wp-content/themes/escrevai/assets/images/logo.png",
+            "final_url": "https://escreva.ai/wp-content/themes/escrevai/assets/images/logo.png",
+            "source_title": "causas - Significado e Sinônimo - escreva.ai",
+            "source_url": "https://escreva.ai/palavra/causas/",
+            "publisher": "escreva.ai",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "escreva.ai",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3516169905f2",
+            "type": "image",
+            "title": "causas",
+            "url": "https://og.escreva.ai/synonyms/causas",
+            "final_url": "https://og.escreva.ai/synonyms/causas",
+            "source_title": "causas - Significado e Sinônimo - escreva.ai",
+            "source_url": "https://escreva.ai/palavra/causas/",
+            "publisher": "og.escreva.ai",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "causas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a9031b548302",
+            "type": "image",
+            "title": "causas",
+            "url": "https://og.escreva.ai/antonyms/causas",
+            "final_url": "https://og.escreva.ai/antonyms/causas",
+            "source_title": "causas - Significado e Sinônimo - escreva.ai",
+            "source_url": "https://escreva.ai/palavra/causas/",
+            "publisher": "og.escreva.ai",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "causas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.dicio.com.br/causas/",
+      "result": {
+        "titulo": "Causas",
+        "texto": "causas Significado de Causas vem do verbo causar. O mesmo que: escandalizas, promoves, provocas, acarreias, acarretas, fomentas, aticas, atiças, motivas. Causas Usando \"\" num texto? O ajuda a variar a escrita sem mudar o sentido. causas Reescrever Texto Significado de causar Ser a razão, o motivo ou a causa de; dar origem a; ser a origem de; provocar: o vento forte causou o desabamento; causou ao pai uma enorme decepção. Chamar a atenção para si; ser alvo de escândalo, de comentários; escandalizar: ele acabou por causar na festa. [Gíria] Etimologia (origem da palavra ). O verbo causar tem sua origem controversa, talvez derive da junção da palavra causa e do sufixo verbal -ar. causar Sinônimos de Causas Causas é sinônimo de: , , , , , , , , , , , , , , , escandalizas promoves provocas acarreias acarretas fomentas aticas atiças motivas ocasionas originas suscitas engendras acendes dás abrolhas Antônimos de Causas Causas é antônimo de: , , desfazes enfraqueces amorteces Definição de Causas Flexão do verbo na: 2ª pessoa do singular do presente do indicativo Singular: causar causa Exemplos com a palavra causas As do afastamento foram justamente as suspeitas de fraudes em contratações sem licitações. causas Folha de S.Paulo, 06/08/2011 Segundo ele, autoridades decidiram adiar os testes até que as do acidente sejam investigadas. causas Folha de S.Paulo, 15/02/2012 Segundo o professor, uma série de vem sendo estudada para entender o porquê desse fenômeno. causas Folha de S.Paulo, 22/07/2009 Outras informações sobre a palavra Possui as vogais: Possui as consoantes: A palavra escrita ao contrário: sasuac Possui 6 letras a u c s Rimas com causas meias-pausas",
+        "final": "https://www.dicio.com.br/causas/",
+        "trecho_usado": "a escrita sem mudar o sentido. causas Reescrever Texto Significado de causar Ser a razão, o motivo ou a causa de; dar origem a; ser a origem de; provocar: o vento forte causou o desabamento; causou ao pai uma enorme decepção. Chamar a atenção para si; ser alvo de escândalo, de comentários; escandalizar: ele acabou por causar na festa. [Gíria] Etimologia (origem da palavra ). O verbo causar tem sua",
+        "metadados": {
+          "titulo": "Causas",
+          "descricao": "Significado de Causas no Dicio, Dicionário Online de Português. Causas vem do verbo causar. O mesmo que: escandalizas, promoves, provocas, acarreias, acarretas, fomentas, aticas,...",
+          "canonica": "https://www.dicio.com.br/causas/",
+          "og": {
+            "og:title": "Causas",
+            "og:description": "Significado de Causas no Dicio, Dicionário Online de Português. Causas vem do verbo causar. O mesmo que: escandalizas, promoves, provocas, acarreias, acarretas, fomentas, aticas, atiças, motivas.",
+            "og:url": "https://www.dicio.com.br/causas/",
+            "og:image": "https://www.dicio.com.br/ogimage.png",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "og:type": "article",
+            "og:site_name": "Dicio, Dicionário Online de Português"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:creator": "@diciocombr",
+            "twitter:site": "@diciocombr"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Dicio, Dicionário Online de Português",
+          "tipo": "article",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "vem do verbo causar. O mesmo que: escandalizas, promoves, provocas, acarreias, acarretas, fomentas, aticas, atiças, motivas. Causas\nSer a razão, o motivo ou a causa de; dar origem a; ser a origem de; provocar: o vento forte causou o desabamento; causou ao pai uma enorme decepção. Chamar a atenção para si; ser alvo de escândalo, de comentários; escandalizar: ele acabou por causar na festa. [Gíria] Etimologia (origem da palavra ). O verbo causar tem sua origem controversa, talvez derive da junção da palavra causa e do sufixo verbal -ar. causar\nCausas é sinônimo de: , , , , , , , , , , , , , , , escandalizas promoves provocas acarreias acarretas fomentas aticas atiças motivas ocasionas originas suscitas engendras acendes dás abrolhas\nCausas é antônimo de: , , desfazes enfraqueces amorteces\nFlexão do verbo na: 2ª pessoa do singular do presente do indicativo Singular: causar causa"
+          },
+          {
+            "titulo": "Exemplos com a palavra causas",
+            "texto": ""
+          },
+          {
+            "titulo": "Outras informações sobre a palavra",
+            "texto": "Possui as vogais: Possui as consoantes: A palavra escrita ao contrário: sasuac Possui 6 letras a u c s"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.dicio.com.br/",
+            "texto": "Dicionário Online de Português",
+            "interno": true
+          },
+          {
+            "url": "https://www.sinonimos.com.br/reescrever-texto/",
+            "texto": "Reescrever Texto",
+            "interno": false
+          },
+          {
+            "url": "https://www.sinonimos.com.br/resumir-texto/",
+            "texto": "Resumir Texto",
+            "interno": false
+          },
+          {
+            "url": "https://www.sinonimos.com.br/corretor-de-texto/",
+            "texto": "Corrigir Texto",
+            "interno": false
+          },
+          {
+            "url": "https://www.sinonimos.com.br/detector-de-ia/",
+            "texto": "Detector de IA",
+            "interno": false
+          },
+          {
+            "url": "https://www.sinonimos.com.br/humanizar-texto-ia/",
+            "texto": "Humanizador de IA",
+            "interno": false
+          },
+          {
+            "url": "https://www.dicio.com.br/cata-letras/",
+            "texto": "Cata-letras",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/jogo-conexoes/",
+            "texto": "Conexões",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/jogos-caca-palavras/",
+            "texto": "Caça-palavras",
+            "interno": true
+          },
+          {
+            "url": "https://www.sinonimos.com.br/",
+            "texto": "Sinônimos",
+            "interno": false
+          },
+          {
+            "url": "https://www.sinonimos.com.br/ir-extensao.php?from=dicio",
+            "texto": "Sinônimos no Chrome",
+            "interno": false
+          },
+          {
+            "url": "https://www.sinonimos.com.br/reescrever-texto/?utm_source=dicio&utm_medium=banner&utm_campaign=ferramentas&utm_content=topo_site_reescrever",
+            "texto": "Reescreva textos mantendo o sentido original Reescrever",
+            "interno": false
+          },
+          {
+            "url": "https://www.sinonimos.com.br/corretor-de-texto/?utm_source=dicio&utm_medium=banner&utm_campaign=ferramentas&utm_content=topo_site_corretor",
+            "texto": "Corrija erros de gramática com um clique Corretor de texto",
+            "interno": false
+          },
+          {
+            "url": "https://www.sinonimos.com.br/detector-de-ia/?utm_source=dicio&utm_medium=banner&utm_campaign=ferramentas&utm_content=topo_site_detector",
+            "texto": "Descubra se um texto foi escrito por IA Detector de IA",
+            "interno": false
+          },
+          {
+            "url": "https://www.sinonimos.com.br/reescrever-texto/?utm_source=dicio&utm_medium=banner&utm_campaign=ferramentas&utm_content=inline_definicao",
+            "texto": "Reescrever Texto",
+            "interno": false
+          },
+          {
+            "url": "https://www.dicio.com.br/escandalizas/",
+            "texto": "escandalizas",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/promoves/",
+            "texto": "promoves",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/provocas/",
+            "texto": "provocas",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/acarreias/",
+            "texto": "acarreias",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/acarretas/",
+            "texto": "acarretas",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/fomentas/",
+            "texto": "fomentas",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/aticas-2/",
+            "texto": "aticas",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/aticas/",
+            "texto": "atiças",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/motivas/",
+            "texto": "motivas",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/ocasionas/",
+            "texto": "ocasionas",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/originas/",
+            "texto": "originas",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/suscitas/",
+            "texto": "suscitas",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/engendras/",
+            "texto": "engendras",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/acendes/",
+            "texto": "acendes",
+            "interno": true
+          },
+          {
+            "url": "https://www.dicio.com.br/das-3/",
+            "texto": "dás",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.dicio.com.br/ogimage.png",
+          "https://www.dicio.com.br/img/logo-dicio.svg",
+          "https://www.dicio.com.br/img/btn-audio.svg",
+          "https://static.dicio.com.br/upload/ap/al/a-palavra-do-ano-de-2024-no-dicio-e-imersao-ac1.jpg",
+          "https://static.dicio.com.br/upload/17/26/1726877242ic66ee0e3a2fe63-ac1.jpg",
+          "https://static.dicio.com.br/upload/17/21/1721952326ic66a2e84692560-ac1.jpg",
+          "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-01.png",
+          "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-02.png",
+          "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-03.png",
+          "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-04.png"
+        ],
+        "midia": [
+          {
+            "id": "med-f78873a71d02",
+            "type": "image",
+            "title": "Significado de Causas no Dicio, Dicionário Online de Português. Causas vem do verbo causar. O mesmo que: escandalizas, promoves, provocas, acarreias, acarretas,",
+            "url": "https://www.dicio.com.br/ogimage.png",
+            "final_url": "https://www.dicio.com.br/ogimage.png",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Significado de Causas no Dicio, Dicionário Online de Português. Causas vem do verbo causar. O mesmo que: escandalizas, promoves, provocas, acarreias, acarretas, fomentas, aticas, atiças, motivas.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-966978ee31b5",
+            "type": "image",
+            "title": "Dicio, Dicionário Online de Português",
+            "url": "https://www.dicio.com.br/img/logo-dicio.svg",
+            "final_url": "https://www.dicio.com.br/img/logo-dicio.svg",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dicio, Dicionário Online de Português",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ed853e8cf08e",
+            "type": "image",
+            "title": "Ouvir",
+            "url": "https://www.dicio.com.br/img/btn-audio.svg",
+            "final_url": "https://www.dicio.com.br/img/btn-audio.svg",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ouvir",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-790b86f30826",
+            "type": "image",
+            "title": "A Palavra do Ano de 2024 no Dicio é Imersão",
+            "url": "https://static.dicio.com.br/upload/ap/al/a-palavra-do-ano-de-2024-no-dicio-e-imersao-ac1.jpg",
+            "final_url": "https://static.dicio.com.br/upload/ap/al/a-palavra-do-ano-de-2024-no-dicio-e-imersao-ac1.jpg",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "static.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A Palavra do Ano de 2024 no Dicio é Imersão",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-cead145b0357",
+            "type": "image",
+            "title": "30 palavras formais em português para se expressar com sofisticação",
+            "url": "https://static.dicio.com.br/upload/17/26/1726877242ic66ee0e3a2fe63-ac1.jpg",
+            "final_url": "https://static.dicio.com.br/upload/17/26/1726877242ic66ee0e3a2fe63-ac1.jpg",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "static.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "30 palavras formais em português para se expressar com sofisticação",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a52f89398b46",
+            "type": "image",
+            "title": "5 crônicas tão irresistíveis que vão fazer você se apaixonar pelo gênero",
+            "url": "https://static.dicio.com.br/upload/17/21/1721952326ic66a2e84692560-ac1.jpg",
+            "final_url": "https://static.dicio.com.br/upload/17/21/1721952326ic66a2e84692560-ac1.jpg",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "static.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "5 crônicas tão irresistíveis que vão fazer você se apaixonar pelo gênero",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0a3f191d07bc",
+            "type": "image",
+            "title": "Captura do Reescrever a reformular um texto completo, com as alterações destacadas a azul.",
+            "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-01.png",
+            "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-01.png",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Captura do Reescrever a reformular um texto completo, com as alterações destacadas a azul.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e306e01816e9",
+            "type": "image",
+            "title": "Captura do Reescrever a sugerir novas versões de uma frase selecionada.",
+            "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-02.png",
+            "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-02.png",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Captura do Reescrever a sugerir novas versões de uma frase selecionada.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-923d29ce75f2",
+            "type": "image",
+            "title": "Captura do Reescrever a sugerir sinônimos para uma palavra selecionada.",
+            "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-03.png",
+            "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-03.png",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Captura do Reescrever a sugerir sinônimos para uma palavra selecionada.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-786145739f58",
+            "type": "image",
+            "title": "Captura do Reescrever com os níveis de criatividade Baixa, Média e Alta.",
+            "url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-04.png",
+            "final_url": "https://www.dicio.com.br/img/tool-modal/tool-feat--reescrever-04.png",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Captura do Reescrever com os níveis de criatividade Baixa, Média e Alta.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-43364245b048",
+            "type": "image",
+            "title": "Dicio",
+            "url": "https://www.dicio.com.br/img/logo-dicio-footer-word.svg",
+            "final_url": "https://www.dicio.com.br/img/logo-dicio-footer-word.svg",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dicio",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0df2f83b6bd4",
+            "type": "image",
+            "title": "Disponível no Google Play",
+            "url": "https://www.dicio.com.br/img/google-play-badge.png",
+            "final_url": "https://www.dicio.com.br/img/google-play-badge.png",
+            "source_title": "Causas",
+            "source_url": "https://www.dicio.com.br/causas/",
+            "publisher": "www.dicio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Disponível no Google Play",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://dicionario.priberam.org/causas",
+      "result": {
+        "titulo": "causas",
+        "texto": "© 2026 Priberam Informática, S.A. Todos os direitos reservados",
+        "final": "https://dicionario.priberam.org/pt-pt/causas",
+        "trecho_usado": "© 2026 Priberam Informática, S.A. Todos os direitos reservados",
+        "metadados": {
+          "titulo": "causas",
+          "descricao": "Significado de causas, verbo transitivo: Ser causa, a origem de; Chamar a atenção sobre si; Agente eficaz que dá existência ao que não… — Dicionário Priberam",
+          "canonica": "https://dicionario.priberam.org/causas",
+          "og": {
+            "og:type": "website",
+            "og:site_name": "Dicionário Priberam da Língua Portuguesa",
+            "og:url": "https://dicionario.priberam.org/causas",
+            "og:locale": "pt_PT",
+            "og:locale:alternate": "pt_BR",
+            "og:description": "Significado de causas, verbo transitivo: Ser causa, a origem de; Chamar a atenção sobre si; Agente eficaz que dá existência ao que não… — Dicionário Priberam",
+            "og:title": "causas",
+            "og:image": "https://dicionario.priberam.org/imagem.png"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "Priberam Informática, S.A.",
+          "site": "Dicionário Priberam da Língua Portuguesa",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "© 2026 Priberam Informática, S.A. Todos os direitos reservados"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://dicionario.priberam.org/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/pesquisar_definicoes",
+            "texto": "Pesquisa nas Definições",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/sobre.aspx",
+            "texto": "Sobre",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/consultar.aspx",
+            "texto": "Como consultar",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/abreviaturas.aspx",
+            "texto": "Abreviaturas",
+            "interno": true
+          },
+          {
+            "url": "https://www.flip.pt/gramatica",
+            "texto": "Gramática",
+            "interno": false
+          },
+          {
+            "url": "https://dicionario.priberam.org/cadeira",
+            "texto": "cadeira",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/definição",
+            "texto": "definição",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/quanto",
+            "texto": "quanto",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/contato",
+            "texto": "contato",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/precisa",
+            "texto": "precisa",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/didução",
+            "texto": "didução",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/login",
+            "texto": "login",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/acampada",
+            "texto": "acampada",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/sacudir a água do capote",
+            "texto": "sacudir a água do capote",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/refazimento",
+            "texto": "refazimento",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/visualizações",
+            "texto": "visualizações",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/aerostateiro",
+            "texto": "aerostateiro",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/quenga",
+            "texto": "quenga",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/acéfalos",
+            "texto": "acéfalos",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/promiscuidade",
+            "texto": "promiscuidade",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/profanada",
+            "texto": "profanada",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/verificada",
+            "texto": "verificada",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/compadre",
+            "texto": "compadre",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/xurdir",
+            "texto": "xurdir",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/aerosteiro",
+            "texto": "aerosteiro",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/causa",
+            "texto": "causa causa",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/causar",
+            "texto": "causar causar",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/Conjugar/causar",
+            "texto": "Conjugar",
+            "interno": true
+          },
+          {
+            "url": "https://dicionario.priberam.org/Traduzir/ES/causas",
+            "texto": "Espanhol",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://dicionario.priberam.org/imagem.png",
+          "https://dicionario.priberam.org/img/dicionario_single.webp",
+          "https://dicionario.priberam.org/img/logobranco.webp",
+          "https://dicionario.priberam.org/img/dicionario_icon_aAO.svg",
+          "https://dicionario.priberam.org/img/dicionario_icon_dAO.svg",
+          "https://dicionario.priberam.org/img/dicionario_icon_notes_small.svg",
+          "https://dicionario.priberam.org/img/dicionario_icon_etimology.svg",
+          "https://dicionario.priberam.org/images/wait24.gif",
+          "https://dicionario.priberam.org/img/og/didu%c3%a7%c3%a3o-pt-sm.jpg",
+          "https://dicionario.priberam.org/img/claro.png"
+        ],
+        "midia": [
+          {
+            "id": "med-450db35d0c44",
+            "type": "image",
+            "title": "Significado de causas, verbo transitivo: Ser causa, a origem de; Chamar a atenção sobre si; Agente eficaz que dá existência ao que não… — Dicionário Priberam",
+            "url": "https://dicionario.priberam.org/imagem.png",
+            "final_url": "https://dicionario.priberam.org/imagem.png",
+            "source_title": "causas",
+            "source_url": "https://dicionario.priberam.org/pt-pt/causas",
+            "publisher": "dicionario.priberam.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Significado de causas, verbo transitivo: Ser causa, a origem de; Chamar a atenção sobre si; Agente eficaz que dá existência ao que não… — Dicionário Priberam",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-abb722977b79",
+            "type": "image",
+            "title": "Logótipo do Dicionário Priberam",
+            "url": "https://dicionario.priberam.org/img/dicionario_single.webp",
+            "final_url": "https://dicionario.priberam.org/img/dicionario_single.webp",
+            "source_title": "causas",
+            "source_url": "https://dicionario.priberam.org/pt-pt/causas",
+            "publisher": "dicionario.priberam.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logótipo do Dicionário Priberam",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f75a2f554795",
+            "type": "image",
+            "title": "Logótipo Branco do Dicionário Priberam",
+            "url": "https://dicionario.priberam.org/img/logobranco.webp",
+            "final_url": "https://dicionario.priberam.org/img/logobranco.webp",
+            "source_title": "causas",
+            "source_url": "https://dicionario.priberam.org/pt-pt/causas",
+            "publisher": "dicionario.priberam.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logótipo Branco do Dicionário Priberam",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-124ac80906dd",
+            "type": "image",
+            "title": "aAO",
+            "url": "https://dicionario.priberam.org/img/dicionario_icon_aAO.svg",
+            "final_url": "https://dicionario.priberam.org/img/dicionario_icon_aAO.svg",
+            "source_title": "causas",
+            "source_url": "https://dicionario.priberam.org/pt-pt/causas",
+            "publisher": "dicionario.priberam.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "aAO",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3d7f1db161c7",
+            "type": "image",
+            "title": "dAO",
+            "url": "https://dicionario.priberam.org/img/dicionario_icon_dAO.svg",
+            "final_url": "https://dicionario.priberam.org/img/dicionario_icon_dAO.svg",
+            "source_title": "causas",
+            "source_url": "https://dicionario.priberam.org/pt-pt/causas",
+            "publisher": "dicionario.priberam.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "dAO",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-22c057b00d6a",
+            "type": "image",
+            "title": "icone",
+            "url": "https://dicionario.priberam.org/img/dicionario_icon_notes_small.svg",
+            "final_url": "https://dicionario.priberam.org/img/dicionario_icon_notes_small.svg",
+            "source_title": "causas",
+            "source_url": "https://dicionario.priberam.org/pt-pt/causas",
+            "publisher": "dicionario.priberam.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "icone",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-accba6d7ec02",
+            "type": "image",
+            "title": "etimologia",
+            "url": "https://dicionario.priberam.org/img/dicionario_icon_etimology.svg",
+            "final_url": "https://dicionario.priberam.org/img/dicionario_icon_etimology.svg",
+            "source_title": "causas",
+            "source_url": "https://dicionario.priberam.org/pt-pt/causas",
+            "publisher": "dicionario.priberam.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "etimologia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7eb3a1238f91",
+            "type": "image",
+            "title": "Palavra do dia: didução",
+            "url": "https://dicionario.priberam.org/img/og/didu%c3%a7%c3%a3o-pt-sm.jpg",
+            "final_url": "https://dicionario.priberam.org/img/og/didu%c3%a7%c3%a3o-pt-sm.jpg",
+            "source_title": "causas",
+            "source_url": "https://dicionario.priberam.org/pt-pt/causas",
+            "publisher": "dicionario.priberam.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Palavra do dia: didução",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7712061f7fa8",
+            "type": "image",
+            "title": "Dicionário Priberam da Língua Portuguesa",
+            "url": "https://dicionario.priberam.org/img/claro.png",
+            "final_url": "https://dicionario.priberam.org/img/claro.png",
+            "source_title": "causas",
+            "source_url": "https://dicionario.priberam.org/pt-pt/causas",
+            "publisher": "dicionario.priberam.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dicionário Priberam da Língua Portuguesa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pubmed.ncbi.nlm.nih.gov/41947917/",
+      "result": {
+        "titulo": "pubmed.ncbi.nlm.nih.gov",
+        "texto": "Cookies must be enabled Enable cookies for and reload this page to continue. pubmed.ncbi.nlm.nih.gov",
+        "final": "https://pubmed.ncbi.nlm.nih.gov/41947917/",
+        "trecho_usado": "Cookies must be enabled Enable cookies for and reload this page to continue. pubmed.ncbi.nlm.nih.gov",
+        "metadados": {
+          "titulo": "pubmed.ncbi.nlm.nih.gov",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Enable cookies for and reload this page to continue. pubmed.ncbi.nlm.nih.gov"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.hhs.gov/vulnerability-disclosure-policy/index.html",
+            "texto": "HHS Vulnerability Disclosure",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [
+          {
+            "id": "med-e3518e9adf7b",
+            "type": "document",
+            "title": "index.html",
+            "url": "https://www.hhs.gov/vulnerability-disclosure-policy/index.html",
+            "final_url": "https://www.hhs.gov/vulnerability-disclosure-policy/index.html",
+            "source_title": "pubmed.ncbi.nlm.nih.gov",
+            "source_url": "https://pubmed.ncbi.nlm.nih.gov/41947917/",
+            "publisher": "www.hhs.gov",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/",
+      "result": {
+        "titulo": "Conceito de Causa: Origem, Definição e Significado",
+        "texto": "Você já se perguntou por que alguns eventos acontecem e outros não? Ou por que determinadas situações se repetem em nossas vidas, enquanto outras parecem surgir do nada? Essas perguntas nos levam a refletir sobre um conceito fundamental que está presente em diversas áreas do conhecimento: a causa. Afinal, o que realmente significa entender a origem de um fenômeno ou evento? Como podemos identificar a causa de um problema, seja ele pessoal, profissional ou social? Se essas questões despertam sua curiosidade, você está no caminho certo para uma compreensão mais profunda sobre o conceito de causa. A busca pela origem do que acontece ao nosso redor é antiga, permeando o pensamento filosófico, científico e até mesmo cotidiano. Entender o conceito de causa nos permite desvendar relações de causa e efeito, fundamentais para tomadas de decisão, solução de problemas e avanço do conhecimento. Este artigo irá explorar esse conceito de forma clara e aprofundada, abordando sua definição, origens, significados e aplicações práticas. Se você deseja compreender como identificar as causas de problemas complexos ou entender a importância do que está por trás de eventos específicos, continue a leitura. Aqui, vamos desvendar as raízes desse conceito universal e mostrar como ele pode ser utilizado para transformar sua visão e suas ações. ⚡️ Pegue um atalho: O que é a causa e qual sua definição essencial? Como a origem do conceito de causa se deu na história? Qual a importância de compreender o conceito de causa na ciência? Quais são os tipos de causas e como eles influenciam nossas decisões? Como identificar a causa de um problema na prática? Quais os benefícios de entender a origem das causas? Conceito de causa na experiência cotidiana: por que é importante? Conclusão O que é a causa e qual sua definição essencial? A causa é um conceito central na filosofia, na ciência, na lógica e até na vida cotidiana. Simplificando, ela pode ser definida como o motivo, o fator ou o evento que origina ou induz a ocorrência de outro fenômeno. Dizemos que a causa é o porquê de algo acontecer, atuando como a explicação do motivo de uma determinada situação. Por exemplo, se uma planta não cresce, podemos procurar a causa, que pode ser a falta de água, nutrientes ou luz suficiente. Na ciência, a causa possibilita entender as relações de dependência entre variáveis, buscando identificar fatores que levam a determinado resultado. De uma forma mais técnica, podemos dizer que a causa é aquilo que precede e contribui para o efeito, podendo ser direta ou indireta. Em termos de lógica formal, a causa é o antecedente que, se presente, garante a ocorrência do efeito. Como a origem do conceito de causa se deu na história? A origem do conceito de causa remonta às raízes filosóficas da Grécia Antiga, especialmente às reflexões de Aristóteles. Para o filósofo, a causa era uma das quatro razões essenciais que explicavam a existência ou a mudança de algo: causa material, formal, eficiente e final. | Tipo de causa | Descrição | Exemplo | |————————–|————————————————————–|—————————————-| | Causa Material | Material de que algo é feito | Madeira na confecção de uma cadeira | | Causa Formal | Forma, estrutura ou design de um objeto | Desenho de uma obra de arte | | Causa Eficiente | Agente ou força que causa a mudança ou criação | Carpinteiro construindo uma cadeira | | Causa Final | Propósito ou objetivo da existência de algo | Conforto proporcionado pela cadeira| Esse entendimento clássico evoluiu ao longo do tempo, sendo incorporado por diferentes áreas, como a física, que trabalha com leis causais para explicar fenômenos naturais, e a psicologia, que busca compreender causas de comportamentos humanos. Qual a importância de compreender o conceito de causa na ciência? Na ciência, conhecer a causa de um fenômeno é essencial para estabelecer leis, criar hipóteses e desenvolver teorias confiáveis. Afinal, entender as causas permite explicar por que algo acontece, prever resultados futuros e evitar problemas. Por exemplo, no estudo de doenças, identificar o agente causador – vírus, bactéria, vírus ou fatores ambientais – é fundamental para tratá-las eficazmente. Sem essa compreensão, as intervenções podem ser ineficazes ou até prejudiciais. Além disso, a investigação científica muitas vezes parte de uma pergunta fundamental: “Qual a causa desse fenômeno?” Essa busca por respostas fundamenta o método científico, que envolve a formulação de hipóteses, experimentação e análises de causa e efeito. Quais são os tipos de causas e como eles influenciam nossas decisões? As causas podem ser classificadas de diversas formas, dependendo do contexto. Algumas categorias comuns incluem: – Causas essenciais: fatores imprescindíveis para a ocorrência de algo; – Causas acidentais: fatores secundários ou não essenciais; – Causas imediatas: que atuam diretamente no efeito; – Causas mediatas ou remotas: que influenciam de forma indireta. Compreender esses tipos de causa ajuda a identificar as ações mais eficazes na resolução de problemas, seja na gestão empresarial, na saúde ou na vida pessoal. Conhecer a causa principal de uma questão é o primeiro passo para encontrar as soluções mais duradouras. Como identificar a causa de um problema na prática? Detectar a causa de um problema pode parecer desafiador, mas existem métodos e dicas que facilitam esse processo: – Análise de causa e efeito: Utilize diagramas de espinha de peixe ou diagrama de Ishikawa para mapear possíveis causas; – Observação cuidadosa: Preste atenção a detalhes que podem indicar fatores desencadeantes; – Coleta de dados: Reúna informações relevantes para fundamentar suas hipóteses; – Questionamento múltiplo: Pergunte “por quê?” repetidamente para chegar à origem do problema; – Experimentos controlados: Teste hipóteses em ambientes controlados para verificar relações de causa e efeito. Ao adotar essas práticas, você aumentará suas chances de descobrir a causa raiz de questões complexas, facilitando a implementação de soluções duradouras e eficazes. Quais os benefícios de entender a origem das causas? Compreender a causa de um fenômeno oferece diversos benefícios, tais como: – Soluções mais eficazes e duradouras; – Prevenção de problemas futuros; – Melhoria na tomada de decisão; – Incremento no conhecimento técnico e científico; – Redução de custos, ao evitar tratamentos ou ações erradas; – Fortalecimento da capacidade de análise e raciocínio lógico. Além disso, o entendimento profundo das causas gera uma visão mais clara do que precisa ser mudado, promovendo mudanças positivas tanto na vida pessoal quanto na profissional. Conceito de causa na experiência cotidiana: por que é importante? Na rotina diária, a busca pela causa de uma dor, um conflito ou um sucesso é fundamental para atitudes mais conscientes. Por exemplo, se alguém sofre frequentes dores de cabeça, investigar fatores como estresse, alimentação ou sono pode revelar a verdadeira causa, ajudando a aplicar a solução adequada. Essa prática de investigação do motivo por trás de acontecimentos cotidianos também estimula o pensamento crítico e autoconhecimento. Reconhecer causas leva à responsabilização por nossas ações e escolhas, promovendo uma vida mais equilibrada e inteligente. Conclusão O conceito de causa é uma ferramenta poderosa que atravessa várias áreas do saber e da vida prática. Desde as reflexões filosóficas de Aristóteles até as modernas investigações científicas, compreender a origem e o efeito de eventos é crucial para evoluirmos como indivíduos e sociedade. Identificar causas eficazmente possibilita resolver problemas, prevenir obstáculos e tomar decisões mais acertadas. Investir na compreensão das causas não só melhora nossa capacidade de análise, como também nos torna protagonistas de nossas ações e mudanças. Portanto, explore sempre as raízes de tudo que acontece ao seu redor e descubra um mundo de possibilidades para transformar sua realidade, com mais conhecimento, responsabilidade e",
+        "final": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/",
+        "trecho_usado": "adequada. Essa prática de investigação do motivo por trás de acontecimentos cotidianos também estimula o pensamento crítico e autoconhecimento. Reconhecer causas leva à responsabilização por nossas ações e escolhas, promovendo uma vida mais equilibrada e inteligente. Conclusão O conceito de causa é uma ferramenta poderosa que atravessa várias áreas do saber e da vida prática. Desde as reflexões",
+        "metadados": {
+          "titulo": "Conceito de Causa: Origem, Definição e Significado",
+          "descricao": "Você já se perguntou por que alguns eventos acontecem e outros não? Ou por que determinadas situações se repetem em nossas vidas, enquanto outras parecem",
+          "canonica": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "article",
+            "og:title": "Conceito de Causa: Origem, Definição e Significado",
+            "og:description": "Você já se perguntou por que alguns eventos acontecem e outros não? Ou por que determinadas situações se repetem em nossas vidas, enquanto outras parecem",
+            "og:url": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/",
+            "og:site_name": "Lucidarium"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Conceito de Causa: Origem, Definição e Significado",
+            "twitter:description": "Você já se perguntou por que alguns eventos acontecem e outros não? Ou por que determinadas situações se repetem em nossas vidas, enquanto outras parecem",
+            "twitter:label1": "Escrito por",
+            "twitter:data1": "Ricardo",
+            "twitter:label2": "Tempo para leitura",
+            "twitter:data2": "5 minutos"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2025-06-15T04:24:20-03:00",
+          "atualizado_em": "2025-06-15T04:24:20-03:00",
+          "autor": "Ricardo",
+          "site": "",
+          "tipo": "BlogPosting",
+          "ld": {
+            "datePublished": "2025-06-15T04:24:20-03:00",
+            "dateModified": "2025-06-15T04:24:20-03:00",
+            "author": {
+              "@id": "https://lucidarium.com.br/author/ricardo-da-silva/",
+              "name": "Ricardo"
+            },
+            "publisher": {
+              "@id": "https://lucidarium.com.br/#organization"
+            },
+            "headline": "Conceito de Causa: Origem, Definição e Significado",
+            "articleSection": "Conceitos",
+            "description": "Você já se perguntou por que alguns eventos acontecem e outros não? Ou por que determinadas situações se repetem em nossas vidas, enquanto outras parecem",
+            "inLanguage": "pt-BR"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Você já se perguntou por que alguns eventos acontecem e outros não? Ou por que determinadas situações se repetem em nossas vidas, enquanto outras parecem surgir do nada? Essas perguntas nos levam a refletir sobre um conceito fundamental que está presente em diversas áreas do conhecimento: a causa. Afinal, o que realmente significa entender a origem de um fenômeno ou evento? Como podemos identificar a causa de um problema, seja ele pessoal, profissional ou social? Se essas questões despertam sua curiosidade, você está no caminho certo para uma compreensão mais profunda sobre o conceito de causa.\nA busca pela origem do que acontece ao nosso redor é antiga, permeando o pensamento filosófico, científico e até mesmo cotidiano. Entender o conceito de causa nos permite desvendar relações de causa e efeito, fundamentais para tomadas de decisão, solução de problemas e avanço do conhecimento. Este artigo irá explorar esse conceito de forma clara e aprofundada, abordando sua definição, origens, significados e aplicações práticas.\nSe você deseja compreender como identificar as causas de problemas complexos ou entender a importância do que está por trás de eventos específicos, continue a leitura. Aqui, vamos desvendar as raízes desse conceito universal e mostrar como ele pode ser utilizado para transformar sua visão e suas ações."
+          },
+          {
+            "titulo": "O que é a causa e qual sua definição essencial?",
+            "texto": "A causa é um conceito central na filosofia, na ciência, na lógica e até na vida cotidiana. Simplificando, ela pode ser definida como o motivo, o fator ou o evento que origina ou induz a ocorrência de outro fenômeno. Dizemos que a causa é o porquê de algo acontecer, atuando como a explicação do motivo de uma determinada situação.\nPor exemplo, se uma planta não cresce, podemos procurar a causa, que pode ser a falta de água, nutrientes ou luz suficiente. Na ciência, a causa possibilita entender as relações de dependência entre variáveis, buscando identificar fatores que levam a determinado resultado.\nDe uma forma mais técnica, podemos dizer que a causa é aquilo que precede e contribui para o efeito, podendo ser direta ou indireta. Em termos de lógica formal, a causa é o antecedente que, se presente, garante a ocorrência do efeito."
+          },
+          {
+            "titulo": "Como a origem do conceito de causa se deu na história?",
+            "texto": "A origem do conceito de causa remonta às raízes filosóficas da Grécia Antiga, especialmente às reflexões de Aristóteles. Para o filósofo, a causa era uma das quatro razões essenciais que explicavam a existência ou a mudança de algo: causa material, formal, eficiente e final.\n| Tipo de causa | Descrição | Exemplo | |————————–|————————————————————–|—————————————-| | Causa Material | Material de que algo é feito | Madeira na confecção de uma cadeira | | Causa Formal | Forma, estrutura ou design de um objeto | Desenho de uma obra de arte | | Causa Eficiente | Agente ou força que causa a mudança ou criação | Carpinteiro construindo uma cadeira | | Causa Final | Propósito ou objetivo da existência de algo | Conforto proporcionado pela cadeira|\nEsse entendimento clássico evoluiu ao longo do tempo, sendo incorporado por diferentes áreas, como a física, que trabalha com leis causais para explicar fenômenos naturais, e a psicologia, que busca compreender causas de comportamentos humanos."
+          },
+          {
+            "titulo": "Qual a importância de compreender o conceito de causa na ciência?",
+            "texto": "Na ciência, conhecer a causa de um fenômeno é essencial para estabelecer leis, criar hipóteses e desenvolver teorias confiáveis. Afinal, entender as causas permite explicar por que algo acontece, prever resultados futuros e evitar problemas.\nPor exemplo, no estudo de doenças, identificar o agente causador – vírus, bactéria, vírus ou fatores ambientais – é fundamental para tratá-las eficazmente. Sem essa compreensão, as intervenções podem ser ineficazes ou até prejudiciais.\nAlém disso, a investigação científica muitas vezes parte de uma pergunta fundamental: “Qual a causa desse fenômeno?” Essa busca por respostas fundamenta o método científico, que envolve a formulação de hipóteses, experimentação e análises de causa e efeito."
+          },
+          {
+            "titulo": "Quais são os tipos de causas e como eles influenciam nossas decisões?",
+            "texto": "As causas podem ser classificadas de diversas formas, dependendo do contexto. Algumas categorias comuns incluem:\n– Causas essenciais: fatores imprescindíveis para a ocorrência de algo; – Causas acidentais: fatores secundários ou não essenciais; – Causas imediatas: que atuam diretamente no efeito; – Causas mediatas ou remotas: que influenciam de forma indireta.\nCompreender esses tipos de causa ajuda a identificar as ações mais eficazes na resolução de problemas, seja na gestão empresarial, na saúde ou na vida pessoal. Conhecer a causa principal de uma questão é o primeiro passo para encontrar as soluções mais duradouras."
+          },
+          {
+            "titulo": "Como identificar a causa de um problema na prática?",
+            "texto": "Detectar a causa de um problema pode parecer desafiador, mas existem métodos e dicas que facilitam esse processo:\n– Análise de causa e efeito: Utilize diagramas de espinha de peixe ou diagrama de Ishikawa para mapear possíveis causas; – Observação cuidadosa: Preste atenção a detalhes que podem indicar fatores desencadeantes; – Coleta de dados: Reúna informações relevantes para fundamentar suas hipóteses; – Questionamento múltiplo: Pergunte “por quê?” repetidamente para chegar à origem do problema; – Experimentos controlados: Teste hipóteses em ambientes controlados para verificar relações de causa e efeito.\nAo adotar essas práticas, você aumentará suas chances de descobrir a causa raiz de questões complexas, facilitando a implementação de soluções duradouras e eficazes."
+          },
+          {
+            "titulo": "Quais os benefícios de entender a origem das causas?",
+            "texto": "Compreender a causa de um fenômeno oferece diversos benefícios, tais como:\n– Soluções mais eficazes e duradouras; – Prevenção de problemas futuros; – Melhoria na tomada de decisão; – Incremento no conhecimento técnico e científico; – Redução de custos, ao evitar tratamentos ou ações erradas; – Fortalecimento da capacidade de análise e raciocínio lógico.\nAlém disso, o entendimento profundo das causas gera uma visão mais clara do que precisa ser mudado, promovendo mudanças positivas tanto na vida pessoal quanto na profissional."
+          },
+          {
+            "titulo": "Conceito de causa na experiência cotidiana: por que é importante?",
+            "texto": "Na rotina diária, a busca pela causa de uma dor, um conflito ou um sucesso é fundamental para atitudes mais conscientes. Por exemplo, se alguém sofre frequentes dores de cabeça, investigar fatores como estresse, alimentação ou sono pode revelar a verdadeira causa, ajudando a aplicar a solução adequada.\nEssa prática de investigação do motivo por trás de acontecimentos cotidianos também estimula o pensamento crítico e autoconhecimento. Reconhecer causas leva à responsabilização por nossas ações e escolhas, promovendo uma vida mais equilibrada e inteligente.\nO conceito de causa é uma ferramenta poderosa que atravessa várias áreas do saber e da vida prática. Desde as reflexões filosóficas de Aristóteles até as modernas investigações científicas, compreender a origem e o efeito de eventos é crucial para evoluirmos como indivíduos e sociedade. Identificar causas eficazmente possibilita resolver problemas, prevenir obstáculos e tomar decisões mais acertadas.\nInvestir na compreensão das causas não só melhora nossa capacidade de análise, como também nos torna protagonistas de nossas ações e mudanças. Portanto, explore sempre as raízes de tudo que acontece ao seu redor e descubra um mundo de possibilidades para transformar sua realidade, com mais conhecimento, responsabilidade e eficiência."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://lucidarium.com.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/conceitos/",
+            "texto": "Conceitos",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/filosofia/",
+            "texto": "Filosofia",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/politica/",
+            "texto": "Política",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br",
+            "texto": "Lucidarium",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/#respond",
+            "texto": "Deixe um comentário",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/author/ricardo-da-silva/",
+            "texto": "Ricardo",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/conceito-de-amostra-origem-definicao-e-significado/",
+            "texto": "← Post anterior",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/conceito-de-dentina-origem-definicao-e-significado/",
+            "texto": "Post seguinte →",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/ivan-pavlov-o-fisiologista-russo-e-o-condicionamento-classico/",
+            "texto": "Ivan Pavlov: O Fisiologista Russo e o Condicionamento Clássico",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/angela-merkel-biografia-e-mandato-como-chanceler-da-alemanha/",
+            "texto": "Angela Merkel: biografia e mandato como chanceler da Alemanha",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/abre-alas-curiosidades-da-vida-polemica-de-chiquinha-gonzaga/",
+            "texto": "Abre Alas: Curiosidades da Vida Polêmica de Chiquinha Gonzaga",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/principais-filosofos-iluministas-e-suas-ideias-mais-polemicas-vida-historia-e-obra/",
+            "texto": "Principais filósofos iluministas e suas ideias mais polêmicas: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/poetas-brasileiros-essenciais-a-evolucao-da-poesia-no-brasil-vida-historia-e-obra/",
+            "texto": "Poetas brasileiros essenciais: a evolução da poesia no Brasil: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/alan-turing-o-pai-da-computacao-e-da-inteligencia-artificial-vida-historia-e-obra/",
+            "texto": "Alan Turing: O pai da computação e da inteligência artificial: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/leandro-karnal-biografia-e-frases-do-historiador-e-escritor-vida-historia-e-obra/",
+            "texto": "Leandro Karnal: biografia e frases do historiador e escritor: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/alfred-radcliffe-brown-biografia-e-principais-contribuicoes-vida-historia-e-obra/",
+            "texto": "Alfred Radcliffe-Brown: Biografia e Principais Contribuições: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/lideres-mundiais-biografias-e-historias-de-grandes-lideres-vida-historia-e-obra/",
+            "texto": "Líderes Mundiais – Biografias e Histórias de Grandes Líderes: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/roberto-carlos-biografia-e-historia-do-jogador-de-futebol-vida-historia-e-obra/",
+            "texto": "Roberto Carlos – Biografia e História do Jogador de Futebol: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/jackson-pollock-biografia-e-obras-do-pintor-abstracionista-vida-historia-e-obra/",
+            "texto": "Jackson Pollock: Biografia e Obras do Pintor Abstracionista: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/andre-marie-ampere-biografia-e-contribuicoes-para-a-fisica-vida-historia-e-obra/",
+            "texto": "André-Marie Ampère: Biografia e Contribuições para a Física: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/maria-montessori-biografia-e-contribuicoes-para-a-educacao-vida-historia-e-obra/",
+            "texto": "Maria Montessori: Biografia e Contribuições para a Educação: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/frases-de-paulo-freire-explicadas-para-entender-suas-ideias-vida-historia-e-obra/",
+            "texto": "Frases de Paulo Freire explicadas para entender suas ideias: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/ludwig-wittgenstein-biografia-e-obra-do-filosofo-austriaco-vida-historia-e-obra/",
+            "texto": "Ludwig Wittgenstein: Biografia e Obra do Filósofo Austríaco: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/o-que-a-ia-fala-sobre-a-sua-marca-quando-voce-nao-esta-olhando-e-como-a-geostack-garante-que-a-narrativa-seja-a-certa/",
+            "texto": "O que a IA fala sobre a sua marca quando você não está olhando — e como a Geostack garante que a narrativa seja a certa",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/vida-obra-e-principais-escritores-do-romantismo-brasileiro-vida-historia-e-obra/",
+            "texto": "Vida, obra e principais escritores do Romantismo brasileiro: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/antoine-lavoisier-biografia-e-contribuicoes-para-a-quimica-vida-historia-e-obra/",
+            "texto": "Antoine Lavoisier: Biografia e Contribuições para a Química: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/ernest-rutherford-biografia-e-contribuicoes-para-a-ciencia-vida-historia-e-obra/",
+            "texto": "Ernest Rutherford: Biografia e Contribuições para a Ciência: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/jean-piaget-biografia-e-teoria-do-desenvolvimento-infantil-vida-historia-e-obra/",
+            "texto": "Jean Piaget: Biografia e Teoria do Desenvolvimento Infantil: Vida, História e Obra",
+            "interno": true
+          },
+          {
+            "url": "https://lucidarium.com.br/anarquismo/",
+            "texto": "Anarquismo",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://secure.gravatar.com/avatar/b322c04366f23c8b4474639c7d579e53e73a45fce19810739c90aff0f05fee7b?s=96&amp;d=mm&amp;r=g",
+          "https://imagensblogs.nyc3.digitaloceanspaces.com/lucidarium/2025/05/28122623/lucidarium.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-f689a3bd12f0",
+            "type": "image",
+            "title": "🌀 Lucidarium",
+            "url": "https://imagensblogs.nyc3.digitaloceanspaces.com/lucidarium/2025/05/28122623/lucidarium.jpg",
+            "final_url": "https://imagensblogs.nyc3.digitaloceanspaces.com/lucidarium/2025/05/28122623/lucidarium.jpg",
+            "source_title": "Conceito de Causa: Origem, Definição e Significado",
+            "source_url": "https://lucidarium.com.br/conceito-de-causa-origem-definicao-e-significado/",
+            "publisher": "imagensblogs.nyc3.digitaloceanspaces.com",
+            "date": "2025-06-15T04:24:20-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "🌀 Lucidarium",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://conceito.de/causa",
+      "result": {
+        "titulo": "Conceito de causa - Conceito.de",
+        "texto": "Causa designa aquilo que provoca algo, seja bom ou ruim é um termo usado para designar aquilo que faz com que algo exista ou aconteça. Assim, seus sinônimos podem ainda ser ou razão. Causa motivo A causa também pode ser descrita como o que se faz por algo, por exemplo: a causa daquela escolha foi o potencial que o profissional tinha. Causa é um termo com sua origem no latim e que possui o significado de razão ou mesmo origem. Quando uma pessoa está apaixonada, esse sentimento causa efeitos no corpo e no cérebro dela. O estar apaixonado faz com que seja liberada adrenalina, dopamina e também serotonina, fazendo a pessoa se sentir feliz e até mesmo desnorteada quando está perto de quem gosta. Mas uma causa pode provocar algo bom ou também algo ruim. Nesse caso, se pode falar da causa de uma doença, que seria algo ruim: as micoses são doenças causadas por fungos; as verminoses são causadas pela ingestão de água ou alimentos contaminados. Também se pode falar de uma ação ou que pode causar um ou mais problemas: deixar água parada causa focos do mosquito da dengue; o sedentarismo pode causar muitos problemas de saúde; o tabagismo pode causar câncer. hábito E também se fala em causa relacionado a algo bom. Nesse caso, uma pessoa pode falar que um familiar (como um filho, mãe, pai ou cônjuge, por exemplo) é a causa da sua felicidade ou que seu trabalho é o que lhe causa satisfação. Uma pessoa ou elemento que provoca alguma coisa é conhecido ainda como causador ou causadora: – Ele é o causador de todos os problemas que a empresa teve até agora; – A causadora da confusão daquele dia foi uma dívida antiga. Navegue pelo índice de temas. Índice + Causa mortis Diagrama de causa e efeito Causa e efeito Causa mortis A é uma expressão usada na a fim de designar o que provocou a morte de um indivíduo. E esse indivíduo pode ser uma pessoa ou um animal. O médio então informa qual foi a causa mortis de um paciente e isso é informado no atestado de óbito. causa mortis medicina Já no meio , a causa mortis se trata do imposto que se paga sobre uma quantia líquida do imposto de uma herança ou legado jurídico Diagrama de causa e efeito O , Diagrama Espinha de Peixe ou mesmo Diagrama de Ishikawa é um gráfico criado em 1943 com o objetivo de fazer a organização do raciocínio em discussões de um problema previamente determinado, orientando o processo de de causas raízes. Esse diagrama é usado e diferentes processos, mas em especial na produção industrial. Diagrama de Causa e Efeito análise Esse diagrama visa identificar os fatores que causam uma situação indesejada na empresa. Devido a se tratar de uma representação visual, tal diagrama contribui para que as equipes cheguem à raiz de um problema que esteja reduzindo a produtividade no ambiente de trabalho. O responsável pela criação do O Diagrama de Causa e Efeito foi o químico Kaoru Ishikawa. engenheiro Ao construir esse diagrama, é possível adaptar o mesmo. E a elaboração dele pode ocorrer por meio de uma ou mais sessões de Brainstorming. No de elaboração dele, é comum usar um quadro branco e várias canetas coloridas a fim de destacar e organizar melhor os elementos nele. processo Causa e efeito Causa e efeito se trata de um relacionamento essencial em diversas áreas e situações As coisas, sejam elas físicas ou não, estão todas relacionados de algum modo. E é chamado de causa e o relacionamento existente entre coisas, acontecimentos, etc. E aqui um resulta do outro (ou de outros). Se trata de um relacionamento de ação e reação. A isso é dado o nome também de relacionamento causa-efeito. consequência O se trata de um instrumento de suma importância para diferentes áreas da vida, seja no âmbito pessoal ou mesmo profissional. Diz-se que tudo vem de alguma coisa e que a causa e é algo que rege praticamente tudo sobre a vida. relacionamento causa-efeito efeito E esse relacionamento se trata de algo que é fundamental para e melhorar processos. controlar Veja a frase a seguir e logo depois será feita uma análise: – Se Maria não escovar regularmente os dentes ela terá cárie. Na frase acima, a consequência (o efeito) é Maria ficar com os dentes cariados. E o que causaria essas cáries seria Maria não adotar hábitos de higiene bucal como escovar os dentes de forma regular. Mas nem sempre uma causa pode gerar um , apesar de sempre provocar um acontecimento. Um exemplo é se uma pessoa atravessar um rio raso com um barco velho, nesse caso poderia acontecer uma das duas coisas: efeito – Essa pessoa poderia atravessar o rio e chegar até o outro lado bem – Aqui não haveria consequência; – Outra situação seria se esse barco estivesse com um furo, então o barco poderia afundar ou essa pessoa chegaria do outro lado com muita , podendo se molhar e, no caso de ser um rio sujo, ainda correria o risco de desenvolver alguma doença. Essas seriam a consequências possíveis. dificuldade Continua com Motivo → Citação SOUSA, Priscila. (6 de Janeiro de 2023). . Conceito.de. https://conceito.de/causa Causa - O que é, conceito e definição Veja também Diagrama de blocos Diagrama Efeito Fluxograma Esquema Fluxo",
+        "final": "https://conceito.de/causa",
+        "trecho_usado": "seria se esse barco estivesse com um furo, então o barco poderia afundar ou essa pessoa chegaria do outro lado com muita , podendo se molhar e, no caso de ser um rio sujo, ainda correria o risco de desenvolver alguma doença. Essas seriam a consequências possíveis. dificuldade Continua com Motivo → Citação SOUSA, Priscila. (6 de Janeiro de 2023). . Conceito.de. https://conceito.de/causa Causa - O",
+        "metadados": {
+          "titulo": "Conceito de causa - Conceito.de",
+          "descricao": "Causa é um termo usado para designar aquilo que faz com que algo exista ou aconteça. Assim, seus sinônimos podem ainda ser motivo ou razão. A causa também pode ser descrita como o que se faz por algo, por exemplo: a causa daquela escolha foi o potencial que o profissional tinha. Causa é um termo […]",
+          "canonica": "https://conceito.de/causa",
+          "og": {
+            "og:title": "Conceito de causa - Conceito.de",
+            "og:type": "article",
+            "og:url": "https://conceito.de/causa",
+            "og:image": "https://conceito.de/wp-content/uploads/2023/01/cigarette-2456476_1280-300x300.jpg",
+            "og:site_name": "Conceito.de",
+            "og:description": "Causa é um termo usado para designar aquilo que faz com que algo exista ou aconteça. Assim, seus sinônimos podem ainda ser motivo ou razão. A causa também pode ser descrita como o que se faz por algo, por exemplo: a causa daquela escolha foi o potencial que o profissional tinha. Causa é um termo […]"
+          },
+          "twitter": {},
+          "idioma": "pt-PT",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Conceito.de",
+          "tipo": "article",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Causa designa aquilo que provoca algo, seja bom ou ruim\né um termo usado para designar aquilo que faz com que algo exista ou aconteça. Assim, seus sinônimos podem ainda ser ou razão. Causa motivo\nA causa também pode ser descrita como o que se faz por algo, por exemplo: a causa daquela escolha foi o potencial que o profissional tinha.\nCausa é um termo com sua origem no latim e que possui o significado de razão ou mesmo origem.\nQuando uma pessoa está apaixonada, esse sentimento causa efeitos no corpo e no cérebro dela. O estar apaixonado faz com que seja liberada adrenalina, dopamina e também serotonina, fazendo a pessoa se sentir feliz e até mesmo desnorteada quando está perto de quem gosta.\nMas uma causa pode provocar algo bom ou também algo ruim.\nNesse caso, se pode falar da causa de uma doença, que seria algo ruim: as micoses são doenças causadas por fungos; as verminoses são causadas pela ingestão de água ou alimentos contaminados.\nTambém se pode falar de uma ação ou que pode causar um ou mais problemas: deixar água parada causa focos do mosquito da dengue; o sedentarismo pode causar muitos problemas de saúde; o tabagismo pode causar câncer. hábito\nE também se fala em causa relacionado a algo bom. Nesse caso, uma pessoa pode falar que um familiar (como um filho, mãe, pai ou cônjuge, por exemplo) é a causa da sua felicidade ou que seu trabalho é o que lhe causa satisfação.\nUma pessoa ou elemento que provoca alguma coisa é conhecido ainda como causador ou causadora:\n– Ele é o causador de todos os problemas que a empresa teve até agora;\n– A causadora da confusão daquele dia foi uma dívida antiga.\nDiagrama de causa e efeito\nA é uma expressão usada na a fim de designar o que provocou a morte de um indivíduo. E esse indivíduo pode ser uma pessoa ou um animal. O médio então informa qual foi a causa mortis de um paciente e isso é informado no atestado de óbito. causa mortis medicina\nJá no meio , a causa mortis se trata do imposto que se paga sobre uma quantia líquida do imposto de uma herança ou legado jurídico"
+          },
+          {
+            "titulo": "Diagrama de causa e efeito",
+            "texto": "O , Diagrama Espinha de Peixe ou mesmo Diagrama de Ishikawa é um gráfico criado em 1943 com o objetivo de fazer a organização do raciocínio em discussões de um problema previamente determinado, orientando o processo de de causas raízes. Esse diagrama é usado e diferentes processos, mas em especial na produção industrial. Diagrama de Causa e Efeito análise\nEsse diagrama visa identificar os fatores que causam uma situação indesejada na empresa. Devido a se tratar de uma representação visual, tal diagrama contribui para que as equipes cheguem à raiz de um problema que esteja reduzindo a produtividade no ambiente de trabalho.\nO responsável pela criação do O Diagrama de Causa e Efeito foi o químico Kaoru Ishikawa. engenheiro\nAo construir esse diagrama, é possível adaptar o mesmo. E a elaboração dele pode ocorrer por meio de uma ou mais sessões de Brainstorming. No de elaboração dele, é comum usar um quadro branco e várias canetas coloridas a fim de destacar e organizar melhor os elementos nele. processo\nCausa e efeito se trata de um relacionamento essencial em diversas áreas e situações\nAs coisas, sejam elas físicas ou não, estão todas relacionados de algum modo. E é chamado de causa e o relacionamento existente entre coisas, acontecimentos, etc. E aqui um resulta do outro (ou de outros). Se trata de um relacionamento de ação e reação. A isso é dado o nome também de relacionamento causa-efeito. consequência\nO se trata de um instrumento de suma importância para diferentes áreas da vida, seja no âmbito pessoal ou mesmo profissional. Diz-se que tudo vem de alguma coisa e que a causa e é algo que rege praticamente tudo sobre a vida. relacionamento causa-efeito efeito\nE esse relacionamento se trata de algo que é fundamental para e melhorar processos. controlar\nVeja a frase a seguir e logo depois será feita uma análise:\n– Se Maria não escovar regularmente os dentes ela terá cárie.\nNa frase acima, a consequência (o efeito) é Maria ficar com os dentes cariados.\nE o que causaria essas cáries seria Maria não adotar hábitos de higiene bucal como escovar os dentes de forma regular.\nMas nem sempre uma causa pode gerar um , apesar de sempre provocar um acontecimento. Um exemplo é se uma pessoa atravessar um rio raso com um barco velho, nesse caso poderia acontecer uma das duas coisas: efeito\n– Essa pessoa poderia atravessar o rio e chegar até o outro lado bem – Aqui não haveria consequência;\n– Outra situação seria se esse barco estivesse com um furo, então o barco poderia afundar ou essa pessoa chegaria do outro lado com muita , podendo se molhar e, no caso de ser um rio sujo, ainda correria o risco de desenvolver alguma doença. Essas seriam a consequências possíveis. dificuldade\nSOUSA, Priscila. (6 de Janeiro de 2023). . Conceito.de. https://conceito.de/causa Causa - O que é, conceito e definição"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://conceito.de",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/filosofia",
+            "texto": "Filosofia",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/motivo",
+            "texto": "motivo",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/analise",
+            "texto": "análise",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/processo",
+            "texto": "processo",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/consequencia",
+            "texto": "consequência",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/efeito",
+            "texto": "efeito",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/diagrama-de-blocos",
+            "texto": "Diagrama de blocos",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/diagrama",
+            "texto": "Diagrama",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/fluxograma",
+            "texto": "Fluxograma",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/esquema",
+            "texto": "Esquema",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/fluxo",
+            "texto": "Fluxo",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/ciencias-naturais",
+            "texto": "Ciencias Naturais Cs Naturais",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/anatomia",
+            "texto": "Anatomia",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/astronomia",
+            "texto": "Astronomia",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/biologia",
+            "texto": "Biologia",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/fauna",
+            "texto": "Fauna",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/fisica",
+            "texto": "Física",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/flora",
+            "texto": "Flora",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/geologia",
+            "texto": "Geologia",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/matematica",
+            "texto": "Matemática",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/quimica",
+            "texto": "Química",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/ciencias-sociais",
+            "texto": "Ciencias Sociais Cs Sociais",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/antropologia",
+            "texto": "Antropologia",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/direito",
+            "texto": "Direito",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/educacao",
+            "texto": "Educação",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/geografia",
+            "texto": "Geografia",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/historia",
+            "texto": "História",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/sociologia",
+            "texto": "Sociologia",
+            "interno": true
+          },
+          {
+            "url": "https://conceito.de/categoria/cultura",
+            "texto": "Cultura",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://conceito.de/wp-content/uploads/2023/01/cigarette-2456476_1280-300x300.jpg",
+          "https://conceito.de/wp-content/themes/conceito/images/logo.svg",
+          "https://conceito.de/wp-content/themes/conceito/images/lupa-conceito.png",
+          "https://conceito.de/wp-content/uploads/2023/01/cigarette-2456476_1280.jpg",
+          "https://conceito.de/wp-content/uploads/2023/01/dominoes-4020617_1280.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-f1ad4ce202b2",
+            "type": "image",
+            "title": "Causa é um termo usado para designar aquilo que faz com que algo exista ou aconteça. Assim, seus sinônimos podem ainda ser motivo ou razão. A causa também pode ",
+            "url": "https://conceito.de/wp-content/uploads/2023/01/cigarette-2456476_1280-300x300.jpg",
+            "final_url": "https://conceito.de/wp-content/uploads/2023/01/cigarette-2456476_1280-300x300.jpg",
+            "source_title": "Conceito de causa - Conceito.de",
+            "source_url": "https://conceito.de/causa",
+            "publisher": "conceito.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Causa é um termo usado para designar aquilo que faz com que algo exista ou aconteça. Assim, seus sinônimos podem ainda ser motivo ou razão. A causa também pode ser descrita como o que se faz por algo, por exemplo: a causa daquela escolha fo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6581aef43f19",
+            "type": "image",
+            "title": "Conceito.de",
+            "url": "https://conceito.de/wp-content/themes/conceito/images/logo.svg",
+            "final_url": "https://conceito.de/wp-content/themes/conceito/images/logo.svg",
+            "source_title": "Conceito de causa - Conceito.de",
+            "source_url": "https://conceito.de/causa",
+            "publisher": "conceito.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Conceito.de",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c98293065669",
+            "type": "image",
+            "title": "Pesquisar",
+            "url": "https://conceito.de/wp-content/themes/conceito/images/lupa-conceito.png",
+            "final_url": "https://conceito.de/wp-content/themes/conceito/images/lupa-conceito.png",
+            "source_title": "Conceito de causa - Conceito.de",
+            "source_url": "https://conceito.de/causa",
+            "publisher": "conceito.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Pesquisar",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c5e4911fc465",
+            "type": "image",
+            "title": "causa",
+            "url": "https://conceito.de/wp-content/uploads/2023/01/cigarette-2456476_1280.jpg",
+            "final_url": "https://conceito.de/wp-content/uploads/2023/01/cigarette-2456476_1280.jpg",
+            "source_title": "Conceito de causa - Conceito.de",
+            "source_url": "https://conceito.de/causa",
+            "publisher": "conceito.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "causa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-15d3d9c2a95e",
+            "type": "image",
+            "title": "conceito de causa",
+            "url": "https://conceito.de/wp-content/uploads/2023/01/dominoes-4020617_1280.jpg",
+            "final_url": "https://conceito.de/wp-content/uploads/2023/01/dominoes-4020617_1280.jpg",
+            "source_title": "Conceito de causa - Conceito.de",
+            "source_url": "https://conceito.de/causa",
+            "publisher": "conceito.de",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "conceito de causa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6c0817d1ea2f",
+            "type": "video",
+            "title": "Conceito de causa - Conceito.de",
+            "url": "https://s3.us-east-1.amazonaws.com/audio-for-wordpress-3376585022043beb8ae0656ebf094c787bff99d0/2023/01/amazon_polly_43938.mp3?version=1673391620",
+            "final_url": "https://s3.us-east-1.amazonaws.com/audio-for-wordpress-3376585022043beb8ae0656ebf094c787bff99d0/2023/01/amazon_polly_43938.mp3?version=1673391620",
+            "source_title": "Conceito de causa - Conceito.de",
+            "source_url": "https://conceito.de/causa",
+            "publisher": "s3.us-east-1.amazonaws.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Causa é um termo usado para designar aquilo que faz com que algo exista ou aconteça. Assim, seus sinônimos podem ainda ser motivo ou razão. A causa também pode ser descrita como o que se faz por algo, por exemplo: a causa daquela escolha fo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "c8e951cd66285d1a1a2f",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/41947917/",
+            "title": "Melhorando a apresentação de informações sobre equidade em saúde em pesquisas observacionais (STROBE-Equity): lista de verificação estendida e sua elaboração.",
+            "origin": "pubmed",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "saude",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Rev Panam Salud Publica · 2026 · Dewidar O"
+          },
+          {
+            "id": "4b078b1fc974992f136b",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/28327878/",
+            "title": "Social networks in nursing work processes: an integrative literature review.",
+            "origin": "pubmed",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "saude",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Rev Esc Enferm USP · 2017 Mar 20 · Mesquita AC"
+          },
+          {
+            "id": "b35ad883eea75df416eb",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/27680055/",
+            "title": "Family caregivers: what do they need? An integrative review.",
+            "origin": "pubmed",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "saude",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Rev Esc Enferm USP · 2016 Jul-Aug · Fernandes CS"
+          },
+          {
+            "id": "dc61921b73e70b18efb6",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/28099587/",
+            "title": "Non-Invasive Ventilation in Patients with Heart Failure: A Systematic Review and Meta-Analysis.",
+            "origin": "pubmed",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "saude",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Arq Bras Cardiol · 2017 Feb · Bittencourt HS"
+          },
+          {
+            "id": "414fc1605fe9eb7bf972",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/27533273/",
+            "title": "The Palliative Outcome Scale (POS) applied to clinical practice and research: an integrative review.",
+            "origin": "pubmed",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "saude",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Rev Lat Am Enfermagem · 2016 Aug 15 · Rugno FC"
+          },
+          {
+            "id": "f37e4e30e7951b27a976",
+            "url": "https://pubmed.ncbi.nlm.nih.gov/28977225/",
+            "title": "Job satisfaction in an oncology nursing team.",
+            "origin": "pubmed",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "saude",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Rev Bras Enferm · 2017 Sep-Oct · Silva VRD"
+          },
+          {
+            "id": "c2bd07a09af9fd125719",
+            "url": "https://pt.wikipedia.org/wiki/Quais_foram_os_tr%C3%AAs_cavalheiros",
+            "title": "Quais foram os três cavalheiros",
+            "origin": "wikipedia",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "enciclopedia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "3fbe50589d0496bf18e1",
+            "url": "https://www.dicio.com.br/quais/",
+            "title": "Quais - Dicio, Dicionário Online de Português",
+            "origin": "bing",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Significado de Quais no Dicio, Dicionário Online de Português. O que é quais: pron. pl. Refere-se às pessoas ou coisas dentre outras: quais são seus filmes favo"
+          },
+          {
+            "id": "5fcd51d80694dd202e35",
+            "url": "https://todasasrespostas.com/qual-o-significado-de-quais",
+            "title": "Qual o significado de Quais? - todasasrespostas.com",
+            "origin": "bing",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Com verbos transitivos diretos, que não pedem preposição, deverá ser usado o pronome relativo o qual. Já com verbos transitivos indiretos, que pedem preposição,"
+          },
+          {
+            "id": "0628eab884eab5394c53",
+            "url": "https://cidesp.com.br/v2/os-quais-ou-as-quais",
+            "title": "Os Quais ou As Quais: uso correto e exemplos",
+            "origin": "bing",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O emprego de os quais ou as quais costuma gerar dúvidas até mesmo entre falantes com bom domínio da língua portuguesa. Embora pareçam formas muito específicas, "
+          },
+          {
+            "id": "454eea14b260e06329a0",
+            "url": "https://pt.m.wiktionary.org/wiki/quais",
+            "title": "quais - Wikcionário",
+            "origin": "bing",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Este texto é disponibilizado nos termos da licença Atribuição-CompartilhaIgual 4.0 (CC BY-SA 4.0) da Creative Commons; pode estar sujeito a condições adicionais"
+          },
+          {
+            "id": "e49a060c5fdf6376f79d",
+            "url": "https://www.infopedia.pt/dicionarios/lingua-portuguesa/quais",
+            "title": "quais | Dicionário Infopédia da Língua Portuguesa",
+            "origin": "bing",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Definição ou significado de quais no Dicionário Infopédia da Língua Portuguesa"
+          },
+          {
+            "id": "203e518f7ed0d0d5aa85",
+            "url": "https://www.significadosdepalavras.com/quais",
+            "title": "Entenda a palavra 'quais' e suas aplicações práticas",
+            "origin": "bing",
+            "query": "Quais foram as",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Descubra o significado de 'quais', como usá-la no dia a dia e suas diferenças com 'qual'."
+          }
+        ],
+        "unique_candidates": 13,
+        "omitted": 0
+      },
+      "etapas": [
+        "pubmed: 6 resultados (Quais foram as)",
+        "pubmed: sem correspondência com o pedido; tentando outro provedor (Quais foram as)",
+        "wikipedia: 1 resultados (Quais foram as)",
+        "wikipedia: sem correspondência com o pedido; tentando outro provedor (Quais foram as)",
+        "bing: 6 resultados (Quais foram as)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Quais foram as)",
+        "— recuperação por lacuna —",
+        "pubmed: sem resultados (causas consequências revolta vacina)",
+        "wikipedia: sem resultados (causas consequências revolta vacina)",
+        "bing: 6 resultados (causas consequências revolta vacina)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (causas consequências revolta vacina)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Quais foram as",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Quais foram as causas e as consequências da Revolta da Vacina?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-404b53a66118",
+            "type": "explicit_attribute",
+            "description": "Causas",
+            "entity": "Quais foram as",
+            "attribute": "causes",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Causas",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-ef9b279fd8b2",
+            "type": "explicit_attribute",
+            "description": "Consequências",
+            "entity": "Quais foram as",
+            "attribute": "consequences",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Consequências",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://www.dicio.com.br/causas/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S2",
+          "url": "https://escreva.ai/palavra/causas/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://dicionario.priberam.org/causas",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "e8f9443b054d9ab8e9e91207038eb9f198ab1c85",
+  "dataset_sha256": "6f38b89f96367212ba5e68888f57bbb43e7ab7331047eaac7df6f13e1bf4dee2"
+}

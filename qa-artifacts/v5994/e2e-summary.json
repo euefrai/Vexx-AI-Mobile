@@ -1,0 +1,39 @@
+{
+  "scope": "AUTHENTICATED_E2E_PARTIAL_OR_CANCELLED_NOT_VERIFIED_COMPLETE_RESEARCH",
+  "runs": [
+    {
+      "artifact": "e2e-real-model",
+      "status": "interrompida",
+      "seconds": 23.219
+    },
+    {
+      "artifact": "e2e-history-real-model",
+      "status": "interrompida",
+      "seconds": 21.481
+    },
+    {
+      "artifact": "e2e-technical-real-model",
+      "status": "interrompida",
+      "seconds": 18.176
+    },
+    {
+      "artifact": "e2e-cancel",
+      "status": "cancelada",
+      "seconds": 1.067
+    },
+    {
+      "artifact": "direct-visual",
+      "status": null,
+      "seconds": null
+    },
+    {
+      "artifact": "source-interactions",
+      "status": null,
+      "seconds": null
+    }
+  ],
+  "known_limits": [
+    "No complete model-based autonomous research confirmed.",
+    "Isolated synthesis response rejected; fine-grained exception detail was not saved on that run."
+  ]
+}

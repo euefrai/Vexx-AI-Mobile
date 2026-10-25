@@ -1,0 +1,53 @@
+FFFFF.                                                                   [100%]
+================================== FAILURES ===================================
+_____________ test_preserves_inline_subject_predicate_order_once ______________
+
+    def test_preserves_inline_subject_predicate_order_once():
+        text='A Empresa Clara foi fundada em 1950 por Ana e Leo e fabrica motores.'
+        doc=extract('<p>A <strong>Empresa Clara</strong> foi fundada em <em>1950</em> por <a href="/ana">Ana</a> e Leo e fabrica motores.</p>')
+>       assert doc['texto']==text
+E       AssertionError: assert 'A foi fundad...lara 1950 Ana' == 'A Empresa Cl...rica motores.'
+E         
+E         - A Empresa Clara foi fundada em 1950 por Ana e Leo e fabrica motores.
+E         + A foi fundada em por e Leo e fabrica motores. Empresa Clara 1950 Ana
+
+tests\test_ordered_extraction_v5994.py:13: AssertionError
+___________ test_signature_parameters_never_move_after_parentheses ____________
+
+    def test_signature_parameters_never_move_after_parentheses():
+        doc=extract('<h1>Map.prototype.set()</h1><p><code>Map.prototype.set(<var>key</var>, <var>value</var>)</code> returns the map.</p>')
+>       assert 'Map.prototype.set(key, value) returns the map.' in doc['texto']
+E       AssertionError: assert 'Map.prototype.set(key, value) returns the map.' in 'Map.prototype.set() returns the map. Map.prototype.set(, ) key value'
+
+tests\test_ordered_extraction_v5994.py:19: AssertionError
+____________ test_inline_negation_and_numeric_units_stay_attached _____________
+
+    def test_inline_negation_and_numeric_units_stay_attached():
+        doc=extract('<p>A função <code>Orbe.copy()</code> <strong>não</strong> modifica o original e retorna <span>2,5</span> <abbr>kg</abbr>.</p>')
+>       assert 'Orbe.copy() não modifica' in doc['texto']
+E       AssertionError: assert 'Orbe.copy() não modifica' in 'A função modifica o original e retorna . Orbe.copy() não 2,5 kg'
+
+tests\test_ordered_extraction_v5994.py:25: AssertionError
+__________ test_split_word_inline_does_not_gain_spaces_and_blocks_do __________
+
+    def test_split_word_inline_does_not_gain_spaces_and_blocks_do():
+        doc=extract('<p>to<em>Sorted</em></p><p>Outra linha suficientemente longa para formar um parágrafo separado.</p>')
+>       assert 'toSorted Outra' in doc['texto']
+E       AssertionError: assert 'toSorted Outra' in 'to Sorted Outra linha suficientemente longa para formar um parágrafo separado.'
+
+tests\test_ordered_extraction_v5994.py:31: AssertionError
+_________ test_nested_boilerplate_is_not_reintroduced_by_ordered_text _________
+
+    def test_nested_boilerplate_is_not_reintroduced_by_ordered_text():
+        doc=extract('<article><p>Texto público <a href="/real">com origem</a> e informação verificável.</p><nav>MENU OCULTO</nav><script>alert(1)</script></article>')
+>       assert 'Texto público com origem e informação verificável.' in doc['texto']
+E       AssertionError: assert 'Texto público com origem e informação verificável.' in 'Texto público e informação verificável. com origem'
+
+tests\test_ordered_extraction_v5994.py:37: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_ordered_extraction_v5994.py::test_preserves_inline_subject_predicate_order_once
+FAILED tests/test_ordered_extraction_v5994.py::test_signature_parameters_never_move_after_parentheses
+FAILED tests/test_ordered_extraction_v5994.py::test_inline_negation_and_numeric_units_stay_attached
+FAILED tests/test_ordered_extraction_v5994.py::test_split_word_inline_does_not_gain_spaces_and_blocks_do
+FAILED tests/test_ordered_extraction_v5994.py::test_nested_boilerplate_is_not_reintroduced_by_ordered_text
+5 failed, 1 passed in 0.35s

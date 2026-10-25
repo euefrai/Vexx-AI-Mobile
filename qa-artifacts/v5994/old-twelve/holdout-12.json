@@ -1,0 +1,3684 @@
+{
+  "id": "holdout-12",
+  "category": "technology_news",
+  "query": "Novidades sobre baterias de estado sólido fontes originais",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 11.1,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "notícias baterias de estado sólido",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "notícias baterias de estado sólido",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "notícias baterias de estado sólido",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios\" site:mecanicaonline.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 140065
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5530
+    },
+    {
+      "url": "https://www.bing.com/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=not%C3%ADcias+baterias+de+estado+s%C3%B3lido&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 3353
+    },
+    {
+      "url": "https://mecanicaonline.com.br",
+      "final": "https://mecanicaonline.com.br",
+      "chars": 526396
+    },
+    {
+      "url": "https://mecanicaonline.com.br/feed/",
+      "final": "https://mecanicaonline.com.br/feed/",
+      "chars": 142286
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Bateria+de+estado+s%C3%B3lido+promete+at%C3%A9+1.500+km+de+autonomia%2C+mas+ainda+enfrenta+desafios%22+site%3Amecanicaonline.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Bateria+de+estado+s%C3%B3lido+promete+at%C3%A9+1.500+km+de+autonomia%2C+mas+ainda+enfrenta+desafios%22+site%3Amecanicaonline.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5020
+    },
+    {
+      "url": "https://noticias.uol.com.br/%3B/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://www.bbc.com/portuguese",
+      "final": "https://www.bbc.com/portuguese",
+      "chars": 436674
+    },
+    {
+      "url": "https://g1.globo.com/",
+      "final": "https://g1.globo.com/",
+      "chars": 902672
+    },
+    {
+      "url": "https://www.cnnbrasil.com.br/",
+      "final": "https://www.cnnbrasil.com.br/",
+      "chars": 1032543
+    },
+    {
+      "url": "https://www.terra.com.br/noticias/",
+      "final": "https://www.terra.com.br/noticias/",
+      "chars": 375639
+    },
+    {
+      "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+      "final": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419&gl=BR",
+      "chars": 1860136
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "notícias baterias de estado sólido",
+    "domain": "news",
+    "original_request": "Novidades sobre baterias de estado sólido fontes originais",
+    "resolved_request": "Novidades sobre baterias de estado sólido fontes originais",
+    "parameters": {
+      "topic": "baterias de estado sólido"
+    },
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:14:28.320535+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "topic": "baterias de estado sólido"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "4fd21506ee90e1edea29",
+        "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM?oc=5",
+        "title": "Peugeot aponta às baterias de estado sólido no novo concept - Notícias ao Minuto",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Sat, 24 Oct 2026 06:45:48 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Peugeot aponta às baterias de estado sólido no novo concept Notícias ao Minuto",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "eb1378c560246b9a2a3d",
+        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw?oc=5",
+        "title": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo - InsideEVs Brasil",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Fri, 14 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo InsideEVs Brasil",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "735728c589adf30f385d",
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00?oc=5",
+        "title": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios - Mecânica Online",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Thu, 22 Oct 2026 18:51:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios Mecânica Online",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "775c8ee6fa32276c7659",
+        "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOOTV3dUNxWU9uMmdiS1puUmQxMEpwRE1aMWJkRHpTbmt2SEhrcDFkS1VxcFZoTHd3VGlkTHBjVDEteExJZTBMcS1zQ1d1TFVGZ1dweFpUNE51VEcxZnhIaER2R3lWT1ZKdUcwblI0RW9KSWUtUmVYeXBZVk9hQ1VDOXBRb1Q?oc=5",
+        "title": "Peugeot revela conceito elétrico com bateria de estado sólido - Canal VE",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Tue, 13 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Peugeot revela conceito elétrico com bateria de estado sólido Canal VE",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "950f619a25d3597b0815",
+        "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc?oc=5",
+        "title": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 - Quatro Rodas",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Tue, 18 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 Quatro Rodas",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "159629efc4e40b660600",
+        "url": "https://g1.globo.com/",
+        "title": "g1 - O portal de notícias da Globo",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "dom., 25 out. 2026 16:58:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Editorias Editorias Agro Agro Primeira Página Agro de gente pra gente Globo Rural Carnaval 2026 Carnaval 2026 primeira página Rio de Janeiro São Paulo Pernambuc",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://g1.globo.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "63b2c72b28f5501a2f17",
+        "url": "https://www.cnnbrasil.com.br/",
+        "title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "2022-06-23T15:04:17-03:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "PT e aliados pedem mais duas hora de votação em SP por falta de ônibus 15:14 - PT pede a Nunes e Tarcísio transporte público com capacidade máxima 15:13 - Lobis",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 902,
+        "final_url": "https://www.cnnbrasil.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "e82e0c8552226e41ac29",
+        "url": "https://noticias.uol.com.br/%3B/",
+        "title": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "dom., 25 out. 2026 17:05:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Veja as principais notícias e manchetes do dia no Brasil e no Mundo. Leia textos e assista a vídeos de Política, Cotidiano, Crimes e mais.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "a639b02f428545a56d6f",
+        "url": "https://www.bbc.com/portuguese",
+        "title": "Notícias, vídeos, análise e contexto em português - BBC News ...",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "dom., 31 mai. 2026 05:40:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "eleitores estão prestes a decidir se os super-ricos entre eles devem entregar bilhões de dólares para financiar melhorias no sistema de saúde. 24 outubro 2026 O",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1410,
+        "final_url": "https://www.bbc.com/portuguese",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "5a7484e5e4c394f72bd1",
+        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSDl6RUltS0lLd0ZPYmxiemRVeHNZcmREMGNZZkw0enp0MXF3d2I4bGhkTndNa2ZQMDlkUEpLbGpFZU5KQ0h5ZXRhbHZaa0ptYmNBUV9fV2pNSjFFVExfTlNvSGNDTDVvU3YwU1hHZ3N4RGJPY3poeGZnTlo1d0ZNa2Z5TzM0bW1JeWFzRmd6MU5aam10bUc0ZXMwT0pHYmRwYXNqdzUydHdXOUs1?oc=5",
+        "title": "Bateria do futuro vem aí: Samsung começa a produção de nova tecnologia para linha Galaxy - TudoCelular.com",
+        "origin": "google-news",
+        "query": "notícias baterias de estado sólido",
+        "date": "Tue, 06 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Bateria do futuro vem aí: Samsung começa a produção de nova tecnologia para linha Galaxy TudoCelular.com",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "LOW_RELEVANCE",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "7c9e707ac422f77f6562",
+        "url": "https://www.terra.com.br/noticias/",
+        "title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "dom., 25 out. 2026 16:36:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Michelle Bolsonaro fala em aposentar 'retrocesso' com vitória de Flávio e afirma que acompanhará apuração ao lado de Jair: 'Vou ficar com meu galego'",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 149,
+        "final_url": "https://www.terra.com.br/noticias/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "047cd59c18bcf5d75b6f",
+        "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+        "title": "Google Notícias",
+        "origin": "bing",
+        "query": "notícias baterias de estado sólido",
+        "date": "dom., 25 out. 2026 16:50:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Notícias Google Notícias Suas notícias Hoje 34 ° 24 ° seg. 33 ° 24 ° ter. 28 ° 22 ° qua. 26 ° 22 ° Alerta amarelo: tempestade INMET publica aviso iniciando em: ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 1961,
+        "final_url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419&gl=BR",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "INDEX_PAGE",
+          "REDIRECT_TO_AGGREGATOR"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-36826a037f12",
+      "type": "image",
+      "title": "BBC News Brasil",
+      "url": "https://static.files.bbci.co.uk/ws/simorgh-assets/public/portuguese/images/metadata/poster-1024x576.png",
+      "final_url": "https://static.files.bbci.co.uk/ws/simorgh-assets/public/portuguese/images/metadata/poster-1024x576.png",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "static.files.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "BBC News Brasil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2f9ed8d4a6ea",
+      "type": "image",
+      "title": "Eleitores fazem fila para votar neste domingo. Acompanhe a apuração das eleições 2026",
+      "url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/fbc6/live/ed327540-d089-11f1-a701-fddedf244c16.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/fbc6/live/ed327540-d089-11f1-a701-fddedf244c16.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Eleitores fazem fila para votar neste domingo. Acompanhe a apuração das eleições 2026",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ea7ec26730d6",
+      "type": "image",
+      "title": "Uma mulher carregando uma bandeira brasileira passa por cidadãos brasileiros que fazem fila do lado de fora da seção eleitoral no Centro de Congressos de Zuriqu",
+      "url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/ebbc/live/3797fef0-d082-11f1-93e1-3b657b665bcf.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/ebbc/live/3797fef0-d082-11f1-93e1-3b657b665bcf.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Uma mulher carregando uma bandeira brasileira passa por cidadãos brasileiros que fazem fila do lado de fora da seção eleitoral no Centro de Congressos de Zurique para votar no segundo turno das eleições presidenciais brasileiras em Zurique,",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-3552898053a9",
+      "type": "image",
+      "title": "Homem vestido de Donald Trump em ato de Flávio Bolsonaro em Goiânia",
+      "url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/5184/live/91fb3950-d08e-11f1-92f6-357f3b0f345f.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/5184/live/91fb3950-d08e-11f1-92f6-357f3b0f345f.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Homem vestido de Donald Trump em ato de Flávio Bolsonaro em Goiânia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-92ca8a6bdd09",
+      "type": "image",
+      "title": "Lula segurando uma estrela vermelha, símbolo do PT, no meio de uma manifestação",
+      "url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/e656/live/91806560-ce5c-11f1-a166-e30097724580.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/e656/live/91806560-ce5c-11f1-a166-e30097724580.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Lula segurando uma estrela vermelha, símbolo do PT, no meio de uma manifestação",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a52391fcaad3",
+      "type": "image",
+      "title": "Flavio Bolsonaro, de perfil",
+      "url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/ded2/live/34212cb0-4ee6-11f1-88a2-2b60a3feece0.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/ded2/live/34212cb0-4ee6-11f1-88a2-2b60a3feece0.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Flavio Bolsonaro, de perfil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8724bc8d7096",
+      "type": "image",
+      "title": "Eleitora",
+      "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/e562/live/94ea1150-d08d-11f1-92f6-357f3b0f345f.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/e562/live/94ea1150-d08d-11f1-92f6-357f3b0f345f.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Eleitora",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4f4633b87727",
+      "type": "image",
+      "title": "Flavio Bolsonaro votando",
+      "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/b321/live/ad6698a0-d071-11f1-afcb-6b9b9432d8fc.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/b321/live/ad6698a0-d071-11f1-afcb-6b9b9432d8fc.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Flavio Bolsonaro votando",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-11b8467f6deb",
+      "type": "image",
+      "title": "Lula votando",
+      "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/3da0/live/ace2ac80-d07a-11f1-afcb-6b9b9432d8fc.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/3da0/live/ace2ac80-d07a-11f1-afcb-6b9b9432d8fc.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Lula votando",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-bd1a714eb6b6",
+      "type": "image",
+      "title": "Flávio Bolsonaro durante debate",
+      "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/e129/live/a0b2f6a0-cf5c-11f1-af5a-c5b2c7569148.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/e129/live/a0b2f6a0-cf5c-11f1-af5a-c5b2c7569148.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Flávio Bolsonaro durante debate",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-db68a38d2cb8",
+      "type": "image",
+      "title": "Flávio Bolsonaro",
+      "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/721c/live/4365cba0-cf64-11f1-a701-fddedf244c16.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/721c/live/4365cba0-cf64-11f1-a701-fddedf244c16.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Flávio Bolsonaro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-36265522ab33",
+      "type": "image",
+      "title": "A repórter Stephanie Rodrigues, da BBC News Brasil",
+      "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/35c8/live/0b45aa10-cf0f-11f1-93e1-3b657b665bcf.jpg.webp",
+      "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/35c8/live/0b45aa10-cf0f-11f1-93e1-3b657b665bcf.jpg.webp",
+      "source_title": "Notícias, vídeos, análise e contexto em português",
+      "source_url": "https://www.bbc.com/portuguese",
+      "publisher": "ichef.bbci.co.uk",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A repórter Stephanie Rodrigues, da BBC News Brasil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://g1.globo.com/",
+      "titulo": "g1 - O portal de notícias da Globo",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 16:58:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://g1.globo.com/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "data": {
+          "published_at": "dom., 25 out. 2026 16:58:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.cnnbrasil.com.br/",
+      "titulo": "CNN Brasil",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2022-06-23T15:04:17-03:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.cnnbrasil.com.br/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2022-06-23T15:04:17-03:00"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.bbc.com/portuguese",
+      "titulo": "Notícias, vídeos, análise e contexto em português",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 31 mai. 2026 05:40:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.bbc.com/portuguese",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH"
+        ],
+        "data": {
+          "published_at": "dom., 31 mai. 2026 05:40:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "google-news",
+      "query": "notícias baterias de estado sólido",
+      "items": [
+        {
+          "titulo": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios - Mecânica Online",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00?oc=5",
+          "trecho": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios Mecânica Online",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Mecânica Online",
+          "publisher_url": "https://mecanicaonline.com.br",
+          "meta": {
+            "publicado_em": "Thu, 22 Oct 2026 18:51:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00?oc=5",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "pagina_de_indice": true,
+          "relevancia": 12.7,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Thu, 22 Oct 2026 18:51:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Peugeot aponta às baterias de estado sólido no novo concept - Notícias ao Minuto",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM?oc=5",
+          "trecho": "Peugeot aponta às baterias de estado sólido no novo concept Notícias ao Minuto",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Notícias ao Minuto",
+          "publisher_url": "https://www.noticiasaominuto.com",
+          "meta": {
+            "publicado_em": "Sat, 24 Oct 2026 06:45:48 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM?oc=5",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.75,
+          "pagina_de_indice": true,
+          "relevancia": 17.2,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sat, 24 Oct 2026 06:45:48 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo - InsideEVs Brasil",
+          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw?oc=5",
+          "trecho": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo InsideEVs Brasil",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "InsideEVs Brasil",
+          "publisher_url": "https://insideevs.uol.com.br",
+          "meta": {
+            "publicado_em": "Fri, 14 Aug 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw?oc=5",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.75,
+          "pagina_de_indice": true,
+          "relevancia": 17.2,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Fri, 14 Aug 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Bateria do futuro vem aí: Samsung começa a produção de nova tecnologia para linha Galaxy - TudoCelular.com",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSDl6RUltS0lLd0ZPYmxiemRVeHNZcmREMGNZZkw0enp0MXF3d2I4bGhkTndNa2ZQMDlkUEpLbGpFZU5KQ0h5ZXRhbHZaa0ptYmNBUV9fV2pNSjFFVExfTlNvSGNDTDVvU3YwU1hHZ3N4RGJPY3poeGZnTlo1d0ZNa2Z5TzM0bW1JeWFzRmd6MU5aam10bUc0ZXMwT0pHYmRwYXNqdzUydHdXOUs1?oc=5",
+          "trecho": "Bateria do futuro vem aí: Samsung começa a produção de nova tecnologia para linha Galaxy TudoCelular.com",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "TudoCelular.com",
+          "publisher_url": "https://www.tudocelular.com",
+          "meta": {
+            "publicado_em": "Tue, 06 Oct 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSDl6RUltS0lLd0ZPYmxiemRVeHNZcmREMGNZZkw0enp0MXF3d2I4bGhkTndNa2ZQMDlkUEpLbGpFZU5KQ0h5ZXRhbHZaa0ptYmNBUV9fV2pNSjFFVExfTlNvSGNDTDVvU3YwU1hHZ3N4RGJPY3poeGZnTlo1d0ZNa2Z5TzM0bW1JeWFzRmd6MU5aam10bUc0ZXMwT0pHYmRwYXNqdzUydHdXOUs1?oc=5",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 3.7,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSDl6RUltS0lLd0ZPYmxiemRVeHNZcmREMGNZZkw0enp0MXF3d2I4bGhkTndNa2ZQMDlkUEpLbGpFZU5KQ0h5ZXRhbHZaa0ptYmNBUV9fV2pNSjFFVExfTlNvSGNDTDVvU3YwU1hHZ3N4RGJPY3poeGZnTlo1d0ZNa2Z5TzM0bW1JeWFzRmd6MU5aam10bUc0ZXMwT0pHYmRwYXNqdzUydHdXOUs1?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 06 Oct 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Peugeot revela conceito elétrico com bateria de estado sólido - Canal VE",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOOTV3dUNxWU9uMmdiS1puUmQxMEpwRE1aMWJkRHpTbmt2SEhrcDFkS1VxcFZoTHd3VGlkTHBjVDEteExJZTBMcS1zQ1d1TFVGZ1dweFpUNE51VEcxZnhIaER2R3lWT1ZKdUcwblI0RW9KSWUtUmVYeXBZVk9hQ1VDOXBRb1Q?oc=5",
+          "trecho": "Peugeot revela conceito elétrico com bateria de estado sólido Canal VE",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Canal VE",
+          "publisher_url": "https://canalve.com.br",
+          "meta": {
+            "publicado_em": "Tue, 13 Oct 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOOTV3dUNxWU9uMmdiS1puUmQxMEpwRE1aMWJkRHpTbmt2SEhrcDFkS1VxcFZoTHd3VGlkTHBjVDEteExJZTBMcS1zQ1d1TFVGZ1dweFpUNE51VEcxZnhIaER2R3lWT1ZKdUcwblI0RW9KSWUtUmVYeXBZVk9hQ1VDOXBRb1Q?oc=5",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.5,
+          "pagina_de_indice": true,
+          "relevancia": 12.7,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOOTV3dUNxWU9uMmdiS1puUmQxMEpwRE1aMWJkRHpTbmt2SEhrcDFkS1VxcFZoTHd3VGlkTHBjVDEteExJZTBMcS1zQ1d1TFVGZ1dweFpUNE51VEcxZnhIaER2R3lWT1ZKdUcwblI0RW9KSWUtUmVYeXBZVk9hQ1VDOXBRb1Q?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 13 Oct 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 - Quatro Rodas",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc?oc=5",
+          "trecho": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 Quatro Rodas",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Quatro Rodas",
+          "publisher_url": "https://quatrorodas.abril.com.br",
+          "meta": {
+            "publicado_em": "Tue, 18 Aug 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc?oc=5",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "pagina_de_indice": true,
+          "relevancia": 8.2,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 18 Aug 2026 07:00:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "notícias baterias de estado sólido",
+      "items": [
+        {
+          "titulo": "g1 - O portal de notícias da Globo",
+          "url": "https://g1.globo.com/",
+          "trecho": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 16:58:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://g1.globo.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://g1.globo.com/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 16:58:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+          "url": "https://www.cnnbrasil.com.br/",
+          "trecho": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 15:32:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://cnnbrasil.com.br/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.cnnbrasil.com.br/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 15:32:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Google Notícias",
+          "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+          "trecho": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 16:50:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://news.google.com/home?ceid=BR%3Apt-419&hl=pt-BR",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 1.3,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 16:50:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+          "url": "https://www.terra.com.br/noticias/",
+          "trecho": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 16:36:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://terra.com.br/noticias",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "pagina_de_indice": true,
+          "relevancia": 2.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.terra.com.br/noticias/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 16:36:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+          "url": "https://noticias.uol.com.br/%3B/",
+          "trecho": "Veja as principais notícias e manchetes do dia no Brasil e no Mundo. Leia textos e assista a vídeos de Política, Cotidiano, Crimes e mais.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 17:05:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://noticias.uol.com.br/%3B",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://noticias.uol.com.br/%3B/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 17:05:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Notícias, vídeos, análise e contexto em português - BBC News ...",
+          "url": "https://www.bbc.com/portuguese",
+          "trecho": "Com redações em Londres e São Paulo e mais de 200 repórteres internacionais, nossa cobertura leva a você as principais notícias de política, economia, ciência, saúde e comportamento.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 31 mai. 2026 05:40:00 GMT"
+          },
+          "discovery_query": "notícias baterias de estado sólido",
+          "discovery_provider": "bing",
+          "url_canonica": "https://bbc.com/portuguese",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.bbc.com/portuguese",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "data": {
+              "published_at": "dom., 31 mai. 2026 05:40:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios\" site:mecanicaonline.com.br",
+      "items": [
+        {
+          "titulo": "Bateria virtual – Toca bateria online | Musicca",
+          "url": "https://www.musicca.com/pt/bateria",
+          "trecho": "Toca bateria online gratuitamente. Escolhe entre conjuntos de baterias diferentes, toca batidas e ritmos, e grava o que tocares directamente no teu navegador.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 23:18:00 GMT"
+          }
+        },
+        {
+          "titulo": "Bateria - Mercado Livre",
+          "url": "https://lista.mercadolivre.com.br/bateria",
+          "trecho": "A capacidade de uma bateria, medida em miliampere-hora (mAh), indica a quantidade de carga elétrica que ela pode armazenar. Quanto maior a capacidade, mais tempo a bateria pode alimentar um dispositivo antes de precisar ser recarregada.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 04 set. 2026 18:48:00 GMT"
+          }
+        },
+        {
+          "titulo": "Bateria musical - Mercado Livre",
+          "url": "https://lista.mercadolivre.com.br/bateria-musical",
+          "trecho": "A bateria musical possui modelos específicos para estudo, com dimensões e configurações adaptadas ao aprendizado. Recursos como metrônomo integrado ou kit reduzido facilitam a coordenação inicial.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 08 ago. 2026 11:49:00 GMT"
+          }
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.bbc.com/portuguese",
+      "result": {
+        "titulo": "Notícias, vídeos, análise e contexto em português",
+        "texto": "Quase mil pessoas são presas após confrontos em mais um dia de protestos em massa na França Até o momento, as autoridades conseguiram evitar a repetição dos tumultos e saques do último fim de semana, apesar da participação de centenas de milhares de pessoas em manifestações 24 outubro 2026 Taxação de bilionários: eleitores da Califórnia podem aprovar primeiro imposto do tipo no mundo? Os eleitores estão prestes a decidir se os super-ricos entre eles devem entregar bilhões de dólares para financiar melhorias no sistema de saúde. 24 outubro 2026 Os anúncios no Facebook que espalham desinformação em eleição na Sérvia Reportagem da BBC identificou dezenas de páginas na rede social da Meta que publicaram anúncios pagos contendo acusações sem comprovação contra opositores políticos. Eleição parlamentar ocorre neste domingo (25/10). 24 outubro 2026 'Derruba esse site': como Vorcaro tentava controlar sua imagem e a de aliados na internet Mensagens obtidas pela BBC News Brasil citam 189 pedidos e relatos de remoção de conteúdo online, além de propostas para invadir sistemas de jornais e promover conteúdo positivo para melhorar buscas na internet. 23 outubro 2026 Soldados israelenses são mortos em ataque de supostos atiradores palestinos na Cisjordânia Ataque em posto de controle de fronteira veio a poucos dias de eleições gerais no país; Netanyahu ordena fechamento da Cisjordânia. 23 outubro 2026",
+        "final": "https://www.bbc.com/portuguese",
+        "trecho_usado": "eleitores estão prestes a decidir se os super-ricos entre eles devem entregar bilhões de dólares para financiar melhorias no sistema de saúde. 24 outubro 2026 Os anúncios no Facebook que espalham desinformação em eleição na Sérvia Reportagem da BBC identificou dezenas de páginas na rede social da Meta que publicaram anúncios pagos contendo acusações sem comprovação contra opositores políticos.",
+        "metadados": {
+          "titulo": "Notícias, vídeos, análise e contexto em português",
+          "descricao": "Na BBC News Brasil você fica por dentro do que acontece no Brasil e no mundo. Com redações em Londres e São Paulo e mais de 200 repórteres internacionais, nossa cobertura leva a você as principais notícias de política, economia, ciência, saúde e comportamento.",
+          "canonica": "https://www.bbc.com/portuguese",
+          "og": {
+            "og:description": "Na BBC News Brasil você fica por dentro do que acontece no Brasil e no mundo. Com redações em Londres e São Paulo e mais de 200 repórteres internacionais, nossa cobertura leva a você as principais notícias de política, economia, ciência, saúde e comportamento.",
+            "og:image": "https://static.files.bbci.co.uk/ws/simorgh-assets/public/portuguese/images/metadata/poster-1024x576.png",
+            "og:image:alt": "BBC News Brasil",
+            "og:locale": "pt-BR",
+            "og:site_name": "BBC News Brasil",
+            "og:title": "Notícias, vídeos, análise e contexto em português - BBC News Brasil",
+            "og:type": "website",
+            "og:url": "https://www.bbc.com/portuguese"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:creator": "@bbcbrasil",
+            "twitter:description": "Na BBC News Brasil você fica por dentro do que acontece no Brasil e no mundo. Com redações em Londres e São Paulo e mais de 200 repórteres internacionais, nossa cobertura leva a você as principais notícias de política, economia, ciência, saúde e comportamento.",
+            "twitter:image:alt": "BBC News Brasil",
+            "twitter:image:src": "https://static.files.bbci.co.uk/ws/simorgh-assets/public/portuguese/images/metadata/poster-1024x576.png",
+            "twitter:site": "@bbcbrasil",
+            "twitter:title": "Notícias, vídeos, análise e contexto em português - BBC News Brasil"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "BBC News Brasil",
+          "tipo": "WebPage",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Quase mil pessoas são presas após confrontos em mais um dia de protestos em massa na França",
+            "texto": "Até o momento, as autoridades conseguiram evitar a repetição dos tumultos e saques do último fim de semana, apesar da participação de centenas de milhares de pessoas em manifestações"
+          },
+          {
+            "titulo": "Taxação de bilionários: eleitores da Califórnia podem aprovar primeiro imposto do tipo no mundo?",
+            "texto": "Os eleitores estão prestes a decidir se os super-ricos entre eles devem entregar bilhões de dólares para financiar melhorias no sistema de saúde."
+          },
+          {
+            "titulo": "Os anúncios no Facebook que espalham desinformação em eleição na Sérvia",
+            "texto": "Reportagem da BBC identificou dezenas de páginas na rede social da Meta que publicaram anúncios pagos contendo acusações sem comprovação contra opositores políticos. Eleição parlamentar ocorre neste domingo (25/10)."
+          },
+          {
+            "titulo": "'Derruba esse site': como Vorcaro tentava controlar sua imagem e a de aliados na internet",
+            "texto": "Mensagens obtidas pela BBC News Brasil citam 189 pedidos e relatos de remoção de conteúdo online, além de propostas para invadir sistemas de jornais e promover conteúdo positivo para melhorar buscas na internet."
+          },
+          {
+            "titulo": "Soldados israelenses são mortos em ataque de supostos atiradores palestinos na Cisjordânia",
+            "texto": "Ataque em posto de controle de fronteira veio a poucos dias de eleições gerais no país; Netanyahu ordena fechamento da Cisjordânia."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.bbc.com/ws/languages",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://session.bbc.com/session?lang=pt-BR&amp;skipAgeBracketScreen=true&amp;userOrigin=WS_NEWS_BRASIL&amp;context=international",
+            "texto": "Fazer login",
+            "interno": false
+          },
+          {
+            "url": "https://www.bbc.com/portuguese",
+            "texto": "BBC News, Brasil",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/topics/c9y2j35dn2zt",
+            "texto": "Assista",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/topics/cx2ggnx4j72t",
+            "texto": "Ouça",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/my-news",
+            "texto": "Notícias para você",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/topics/c8epw74n6k0t",
+            "texto": "Eleições 2026",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/cvrly555knx9o",
+            "texto": "Pesquisas eleitorais",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/ckq5ne65q14go",
+            "texto": "Propostas",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/topics/cz74k717pw5t",
+            "texto": "Brasil",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/topics/cmdm4ynm24kt",
+            "texto": "Internacional",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/topics/cvjp2jr0k9rt",
+            "texto": "Economia",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/topics/c340q430z4vt",
+            "texto": "Saúde",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/topics/cr50y580rjxt",
+            "texto": "Ciência",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/topics/c404v027pd4t",
+            "texto": "Tecnologia",
+            "interno": true
+          },
+          {
+            "url": "https://session.bbc.com/session?action=register&amp;lang=pt-BR&amp;skipAgeBracketScreen=true&amp;userOrigin=WS_NEWS_BRASIL&amp;context=international",
+            "texto": "Criar conta",
+            "interno": false
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/live/c6vg0rrxzx13t",
+            "texto": "AO VIVO , Eleições 2026 ao vivo: Mais de 2,6 milhões de ausentes, denúncias no transporte e os primeiros resultado no exterior; siga",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/cw5yn34exenno",
+            "texto": "Voto no exterior: veja os resultados por país e a apuração de Lula x Flávio no 2º turno das eleições 2026",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/cwdd8g54j7qqo",
+            "texto": "Brasil pode ser próximo em 'onda MAGA' e última chance de Lula 'gigante da esquerda': como a imprensa internacional vê a eleição",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/cx240l916lneo",
+            "texto": "Lula aos 80 anos: a 'última dança' do presidente em sua eleição mais difícil",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/cq7838ydk87jo",
+            "texto": "Flávio Bolsonaro: o herdeiro de Jair tenta levar o clã de volta ao Planalto",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/cm1dlv13yql9o",
+            "texto": "Clique aqui",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/cwrkyjpv5p7no",
+            "texto": "BBC News Brasil faz transmissão AO VIVO para você acompanhar apuração e resultados do 2º turno",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/cmvg9v4v8kwgo",
+            "texto": "Votos do Nordeste demoram mais para chegar ao TSE? Tudo para acompanhar a apuração",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/c617kxp8l79jo",
+            "texto": "Como a vitória da direita radical na Colômbia provocou mudanças na campanha de Lula no 2º turno",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/c61m430mdek2o",
+            "texto": "Mapa das Eleições 2026: veja o resultado para presidente e governador no 2º turno",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/c9e8lz52dg70o",
+            "texto": "Como justificar seu voto no segundo turno e o que acontece se você não votar",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/cqm26v3llpgdo",
+            "texto": "Que horas saem os resultados do 2º turno das eleições e como acompanhar a apuração?",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/c875pvze4w6zo",
+            "texto": "Quem não votou no 1º turno pode votar no 2º turno? Veja o que você precisa levar",
+            "interno": true
+          },
+          {
+            "url": "https://www.bbc.com/portuguese/articles/c8ly033zpr1wo",
+            "texto": "Guia das Eleições 2026: ônibus e metrô de graça para votar e tudo o que você precisa saber no 2º turno",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://static.files.bbci.co.uk/ws/simorgh-assets/public/portuguese/images/metadata/poster-1024x576.png",
+          "https://a1.api.bbc.co.uk/hit.xiti?s=598342&amp;s2=33&amp;p=portuguese.page&amp;x1=[urn%3Abbc%3Atipo%3Atopic%3Ac0rp0kp57p1t]&amp;x2=[responsive]&amp;x3=[news-portuguese]&amp;x4=[pt-BR]&amp;x7=[index-home]&amp;x8=[simorgh-nojs]&amp;x9=[Not%C3%ADcias%2C%2520v%C3%ADdeos%2C%2520an%C3%A1lise%2520e%2520contexto%2520em%2520portugu%C3%AAs%2520-%2520BBC%2520News%2520Brasil]",
+          "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/fbc6/live/ed327540-d089-11f1-a701-fddedf244c16.jpg.webp",
+          "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/ebbc/live/3797fef0-d082-11f1-93e1-3b657b665bcf.jpg.webp",
+          "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/5184/live/91fb3950-d08e-11f1-92f6-357f3b0f345f.jpg.webp",
+          "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/e656/live/91806560-ce5c-11f1-a166-e30097724580.jpg.webp",
+          "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/ded2/live/34212cb0-4ee6-11f1-88a2-2b60a3feece0.jpg.webp",
+          "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/e562/live/94ea1150-d08d-11f1-92f6-357f3b0f345f.jpg.webp",
+          "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/b321/live/ad6698a0-d071-11f1-afcb-6b9b9432d8fc.jpg.webp",
+          "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/3da0/live/ace2ac80-d07a-11f1-afcb-6b9b9432d8fc.jpg.webp"
+        ],
+        "midia": [
+          {
+            "id": "med-36826a037f12",
+            "type": "image",
+            "title": "BBC News Brasil",
+            "url": "https://static.files.bbci.co.uk/ws/simorgh-assets/public/portuguese/images/metadata/poster-1024x576.png",
+            "final_url": "https://static.files.bbci.co.uk/ws/simorgh-assets/public/portuguese/images/metadata/poster-1024x576.png",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "static.files.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "BBC News Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2f9ed8d4a6ea",
+            "type": "image",
+            "title": "Eleitores fazem fila para votar neste domingo. Acompanhe a apuração das eleições 2026",
+            "url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/fbc6/live/ed327540-d089-11f1-a701-fddedf244c16.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/fbc6/live/ed327540-d089-11f1-a701-fddedf244c16.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Eleitores fazem fila para votar neste domingo. Acompanhe a apuração das eleições 2026",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ea7ec26730d6",
+            "type": "image",
+            "title": "Uma mulher carregando uma bandeira brasileira passa por cidadãos brasileiros que fazem fila do lado de fora da seção eleitoral no Centro de Congressos de Zuriqu",
+            "url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/ebbc/live/3797fef0-d082-11f1-93e1-3b657b665bcf.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/ebbc/live/3797fef0-d082-11f1-93e1-3b657b665bcf.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Uma mulher carregando uma bandeira brasileira passa por cidadãos brasileiros que fazem fila do lado de fora da seção eleitoral no Centro de Congressos de Zurique para votar no segundo turno das eleições presidenciais brasileiras em Zurique,",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3552898053a9",
+            "type": "image",
+            "title": "Homem vestido de Donald Trump em ato de Flávio Bolsonaro em Goiânia",
+            "url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/5184/live/91fb3950-d08e-11f1-92f6-357f3b0f345f.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/5184/live/91fb3950-d08e-11f1-92f6-357f3b0f345f.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Homem vestido de Donald Trump em ato de Flávio Bolsonaro em Goiânia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-92ca8a6bdd09",
+            "type": "image",
+            "title": "Lula segurando uma estrela vermelha, símbolo do PT, no meio de uma manifestação",
+            "url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/e656/live/91806560-ce5c-11f1-a166-e30097724580.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/e656/live/91806560-ce5c-11f1-a166-e30097724580.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lula segurando uma estrela vermelha, símbolo do PT, no meio de uma manifestação",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a52391fcaad3",
+            "type": "image",
+            "title": "Flavio Bolsonaro, de perfil",
+            "url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/ded2/live/34212cb0-4ee6-11f1-88a2-2b60a3feece0.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/240/cpsprodpb/ded2/live/34212cb0-4ee6-11f1-88a2-2b60a3feece0.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Flavio Bolsonaro, de perfil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8724bc8d7096",
+            "type": "image",
+            "title": "Eleitora",
+            "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/e562/live/94ea1150-d08d-11f1-92f6-357f3b0f345f.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/e562/live/94ea1150-d08d-11f1-92f6-357f3b0f345f.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Eleitora",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4f4633b87727",
+            "type": "image",
+            "title": "Flavio Bolsonaro votando",
+            "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/b321/live/ad6698a0-d071-11f1-afcb-6b9b9432d8fc.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/b321/live/ad6698a0-d071-11f1-afcb-6b9b9432d8fc.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Flavio Bolsonaro votando",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-11b8467f6deb",
+            "type": "image",
+            "title": "Lula votando",
+            "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/3da0/live/ace2ac80-d07a-11f1-afcb-6b9b9432d8fc.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/3da0/live/ace2ac80-d07a-11f1-afcb-6b9b9432d8fc.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lula votando",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bd1a714eb6b6",
+            "type": "image",
+            "title": "Flávio Bolsonaro durante debate",
+            "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/e129/live/a0b2f6a0-cf5c-11f1-af5a-c5b2c7569148.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/e129/live/a0b2f6a0-cf5c-11f1-af5a-c5b2c7569148.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Flávio Bolsonaro durante debate",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-db68a38d2cb8",
+            "type": "image",
+            "title": "Flávio Bolsonaro",
+            "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/721c/live/4365cba0-cf64-11f1-a701-fddedf244c16.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/721c/live/4365cba0-cf64-11f1-a701-fddedf244c16.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Flávio Bolsonaro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-36265522ab33",
+            "type": "image",
+            "title": "A repórter Stephanie Rodrigues, da BBC News Brasil",
+            "url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/35c8/live/0b45aa10-cf0f-11f1-93e1-3b657b665bcf.jpg.webp",
+            "final_url": "https://ichef.bbci.co.uk/ace/ws/1024/cpsprodpb/35c8/live/0b45aa10-cf0f-11f1-93e1-3b657b665bcf.jpg.webp",
+            "source_title": "Notícias, vídeos, análise e contexto em português",
+            "source_url": "https://www.bbc.com/portuguese",
+            "publisher": "ichef.bbci.co.uk",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A repórter Stephanie Rodrigues, da BBC News Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://g1.globo.com/",
+      "result": {
+        "titulo": "g1 - O portal de notícias da Globo",
+        "texto": "Editorias Editorias Agro Agro Primeira Página Agro de gente pra gente Globo Rural Carnaval 2026 Carnaval 2026 primeira página Rio de Janeiro São Paulo Pernambuco Minas Gerais Carros Carros primeira página Motos Dinheiro sobre rodas Ciência Ciência Primeira Página Viva Você Economia Economia Primeira Página Bitcoin Calculadoras Dólar Educação Financeira Imposto de Renda Mídia e Marketing Open banking Educação Educação Primeira Página Enem Guia de Carreiras Simulado Enem Teste Vocacional Universidades Empreendedorismo​ Empreendedorismo​ Primeira página pequenas empresas Menos 30 Fest Dia do Empreendedor Fato ou Fake Guia de compras Inovação Loterias Meio Ambiente Meio Ambiente Primeira Página Amazônia Globo Natureza Sustentabilidade​ Monitor da Violência Mundo Mundo Primeira página Guerra na Ucrânia Olha que legal Política Política Primeira Página Eleições 2026 Pop & Arte Pop & Arte Primeira Página Cinema Diversidade Games Música Tv e séries Circuito Sertanejo The Town Saúde Saúde Primeira página Bem Estar Coronavirus Tecnologia Tecnologia primeira página cibersegurança Trabalho e Carreira​ Trabalho e Carreira​ Primeira página Concursos Vagas de emprego Turismo e Viagem Turismo e Viagem Primeira Página Descubra o Brasil Jogos Jogos Todos os jogos Soletra Labirinto Combinado Dito Palavras cruzadas Palavras cruzadas mini Sudoku Caça-Palavras Assine Coquetel Eleições 2026 Guia de Compras Guia de Compras Primeira página Casa Celulares Lazer Moda e beleza Presentes Tecnologia Especial Vem Que Tem Especial Vem Que Tem Mercado Pago Carros Regiões Regiões centro-oeste centro-oeste Distrito Federal Distrito Federal Primeira página Bom Dia DF DF1 DF2 Globo Comunidade DF DF no campo O que fazer no DF Moto Week Goiás Goiás Primeira página Bom Dia GO Bom dia sábado JA 1ª Edição JA 2ª Edição Jornal do Campo Esporte Mercado Imobiliário Mato Grosso Mato Grosso Primeira Página Bom Dia MT MT TV 1ª Edição MT Rural MT TV 2ª Edição Esporte Mato Grosso do Sul Mato Grosso do Sul Primeira Página Bom Dia MS MS TV 1ª Edição MS TV 2ª Edição MS Rural Esporte nordeste nordeste Alagoas Alagoas Primeira Página Esporte Bahia Bahia Primeira Página Jornal da manhã Bahia Meio Dia BATV Bahia Rural Esporte Ceará Ceará Primeira Página Bom Dia CE CETV 1ª Edição CETV 2ª Edição NE Rural Esporte Maranhão Maranhão Primeira Página Bom Dia Mirante JMTV 1ª Edição JMTV 2ª edição Mirante Rural Esporte Daqui Repórter Mirante Paraíba Paraíba Primeira Página Bom Dia Paraíba JPB 1ª Edição JPB 2ª Edição Paraíba Comunidade Esporte Pernambuco Pernambuco Recife e região Recife e região Primeira página Bom Dia PE NE 1 NE 2 Espaço PE Globo Comunidade PE Nordeste Viver e Preservar Educação Esporte Praia Limpa São João 2025 Caruaru e região Caruaru e região Primeira Página Bom Dia PE ABTV 1ª Edição ABTV 2ª Edição Globo Comunidade Esporte Paixão de Cristo Petrolina e região Petrolina e região Primeira Página Bom Dia Pernambuco GRTV 1ª Edição GRTV 2ª edição Esporte Piauí Piauí Primeira Página Bom Dia Piauí Bom dia Sábado PI TV 1ª edição PI TV 2ª Edição Clube Rural Esporte Rio Grande do Norte Rio Grande do Norte Primeira Página Bom Dia RN RN TV 1ª Edição RN TV 2ª edição Inter TV Rural Esporte Sergipe Sergipe Primeira página Bom Dia SE SETV 1ª Edição SETV 2ª Edição Estação Agrícola Esporte norte norte Acre Acre Primeira Página Bom Dia Amazônia JAC 1ª Edição JAC 2ª Edição Globo Esporte Acre Amapá Amapá Primeira Página Bom Dia Amazônia JAP 1ª Edição JAP 2ª Edição Amazônia Rural Esporte Amazonas Amazonas Primeira Página Bom Dia Amazônia JAM 1ª Edição JAM 2ª Edição Amazônia rural Esporte Pará Pará Belém e região Belém e região Primeira Página Bom Dia Pará Jornal Liberal 1ª Edição Jornal Liberal 2ª Edição Liberal Comunidade É do Pará Esporte Santarém e região Santarém e região Primeira Página Bom Dia Santarém Jornal Tapajós 1ª Edição Jornal Tapajós 2ª Edição Esporte Rondônia Rondônia Primeira Página Bom Dia Amazônia JRO 1ª Edição JRO 2ª Edição Amazônia Rural Esporte Roraima Roraima Primeira Página Bom Dia Amazônia JRR 1ª Edição JRR 2ª Edição Amazônia Rural Esporte Tocantins Tocantins Primeira Página Bom Dia Tocantins JA 1ª Edição JA 2ª Edição Jornal do Campo Esporte sudeste sudeste Espírito Santo Espírito Santo Primeira Página Bom dia Espírito Santo Gazeta Meio Dia Boa Noite ES Jornal do Campo Agronégocios Educação Concursos Esporte Minas Gerais Minas Gerais Belo Horizonte e região Belo Horizonte e região Primeira Página Bom dia Minas MG1 MG2 Rolê nas Gerais Terra de Minas pelas cozinhas de minas Esporte Centro-Oeste Centro-Oeste Primeira Página Bom dia Minas MG TV 1ª Edição MG TV 2ª Edição MG Rural Integração notícia Esporte Grande Minas Grande Minas Primeira página Inter TV Notícia MG Inter TV 1ª Edição MG Inter TV 2ª Edição Inter TV Rural É o bicho Esporte Sul de Minas Sul de Minas Primeira Página Bom dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da gente Esporte Triângulo Mineiro Triângulo Mineiro Primeira Página Bom dia Minas Uberlândia Uberlândia MG TV 1ª Edição MGTV 2ª edição Uberaba Uberaba MGTV 1ª Edição MGTV 2ª Edição MG Rural Integração notícia Concursos Esporte Globo Esporte Vales de Minas Gerais Vales de Minas Gerais Primeira Página Inter TV notícia MG Inter TV 1ª Edição MG Inter TV 2ª Edição Inter TV Rural É o bicho Esporte Zona da Mata Zona da Mata Primeira Página Bom dia Minas MG TV 1ª Edição MG TV 2ª Edição MG Rural Integração notícia Esporte Globo Esporte Rio de Janeiro Rio de Janeiro Rio de Janeiro e região Rio de Janeiro e região Primeira Página Bom dia Rio RJ1 RJ2 Globo Comunidade RJ show da madonna guia rj Fora do ponto Esporte Rio Innovation Week Norte Fluminense Norte Fluminense Primeira Página Bom dia da inter Inter 1 Inter 2 Inter TV Rural Esporte Região dos Lagos Região dos Lagos Primeira Página Bom dia da Inter Inter 1 Inter 2 Inter TV Rural Esporte Região Serrana Região Serrana Primeira Página Bom dia da Inter Inter 1 Inter 2 Inter TV Rural Esporte Sul e Costa Verde Sul e Costa Verde Primeira Página Bom dia Rio RJ TV 1ª Edição RJ TV 2ª Edição Esporte bom dia sábado São Paulo São Paulo São Paulo e região São Paulo e região Primeira Página Bom Dia SP SP1 SP2 Antena Paulista Mistura Paulista O que fazer em SP Esporte Bauru e Marília Bauru e Marília Primeira Página Bom Dia SP Bom Dia Cidade Tem Notícias 1ª Edição Tem Notícias 2ª Edição Nosso Campo Esporte Campinas e região Campinas e região Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da Gente Concursos Esporte Itapetininga e região Itapetininga e região Primeira Página Bom Dia SP Bom Dia Cidade TEM Notícias 1ª Edição TEM Notícias 2ª Edição Antena Paulista Nosso Campo Resumo da Notícia Memória TEM Comunidade Esporte Mogi das Cruzes e Suzano Mogi das Cruzes e Suzano Primeira Página Bom Dia Diário Diário TV 1ª Edição Diário TV 2ª Edição Diário Comunidade Concursos Esporte Piracicaba e região Piracicaba e região Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da Gente Esporte Pres. Prudente e Região Ribeirão Preto e Franca Ribeirão Preto e Franca Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da Gente Esporte Rio Preto e Araçatuba Rio Preto e Araçatuba Primeira Página Bom Dia SP Bom Dia Cidade TEM Notícias 1ª Edição TEM Notícias 2ª Edição Nosso Campo Esporte Santos e região Santos e região Primeira Página Bom Dia Região Jornal Tribuna 1ª Edição Jornal Tribuna 2ª Edição Antena Paulista G1 em um Minuto Santos Viver Bem O Que Fazer Em Santos Culinária #13 Por Dentro do Porto Esporte São Carlos e Araraquara São Carlos e Araraquara Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª edição Terra da Gente Sorocaba e Jundiaí Sorocaba e Jundiaí Primeira Página Bom Dia SP Bom Dia Cidade Tem Notícias 1ª Edição Tem notícias 2ª Edição Nosso Campo Esporte Vale do Paraíba e região Vale do Paraíba e região Primeira Página Bom Dia Vanguarda Link Vanguarda Jornal Vanguarda Vanguarda Comunidade Esporte ",
+        "final": "https://g1.globo.com/",
+        "trecho_usado": "Editorias Editorias Agro Agro Primeira Página Agro de gente pra gente Globo Rural Carnaval 2026 Carnaval 2026 primeira página Rio de Janeiro São Paulo Pernambuco Minas Gerais Carros Carros primeira página Motos Dinheiro sobre rodas Ciência Ciência Primeira Página Viva Você Economia Economia Primeira Página Bitcoin Calculadoras Dólar Educação Financeira Imposto de Renda Mídia e Marketing Open",
+        "metadados": {
+          "titulo": "g1 - O portal de notícias da Globo",
+          "descricao": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+          "canonica": "https://g1.globo.com/",
+          "og": {
+            "og:type": "website",
+            "og:description": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "og:title": "g1 - O portal de notícias da Globo",
+            "og:locale": "pt_BR",
+            "og:site_name": "G1",
+            "og:image": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+            "og:image:width": "1200",
+            "og:url": "https://g1.globo.com/"
+          },
+          "twitter": {
+            "twitter:description": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "g1 - O portal de notícias da Globo",
+            "twitter:image": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "G1",
+          "tipo": "Organization",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Carnaval 2026 Carnaval 2026\nEmpreendedorismo​ Empreendedorismo​\nMeio Ambiente Meio Ambiente\nTrabalho e Carreira​ Trabalho e Carreira​\nTurismo e Viagem Turismo e Viagem\nGuia de Compras Guia de Compras\nEspecial Vem Que Tem Especial Vem Que Tem\ncentro-oeste centro-oeste\nDistrito Federal Distrito Federal\nMato Grosso do Sul Mato Grosso do Sul\nRecife e região Recife e região\nNordeste Viver e Preservar\nCaruaru e região Caruaru e região\nPetrolina e região Petrolina e região\nRio Grande do Norte Rio Grande do Norte\nBelém e região Belém e região\nSantarém e região Santarém e região\nEspírito Santo Espírito Santo\nMinas Gerais Minas Gerais\nBelo Horizonte e região Belo Horizonte e região\nCentro-Oeste Centro-Oeste\nGrande Minas Grande Minas\nSul de Minas Sul de Minas\nTriângulo Mineiro Triângulo Mineiro\nVales de Minas Gerais Vales de Minas Gerais\nZona da Mata Zona da Mata\nRio de Janeiro Rio de Janeiro\nRio de Janeiro e região Rio de Janeiro e região\nNorte Fluminense Norte Fluminense\nRegião dos Lagos Região dos Lagos\nRegião Serrana Região Serrana\nSul e Costa Verde Sul e Costa Verde\nSão Paulo e região São Paulo e região\nBauru e Marília Bauru e Marília\nCampinas e região Campinas e região\nItapetininga e região Itapetininga e região\nMogi das Cruzes e Suzano Mogi das Cruzes e Suzano\nPiracicaba e região Piracicaba e região\nRibeirão Preto e Franca Ribeirão Preto e Franca\nRio Preto e Araçatuba Rio Preto e Araçatuba\nSantos e região Santos e região\nSão Carlos e Araraquara São Carlos e Araraquara\nSorocaba e Jundiaí Sorocaba e Jundiaí\nVale do Paraíba e região Vale do Paraíba e região\nCuritiba e Região Curitiba e Região\nCampos Gerais e Sul Campos Gerais e Sul\nMeio Dia Paraná – Ponta Grossa\nNorte e Noroeste Norte e Noroeste\nMeio Dia Paraná – Maringá\nMeio Dia Paraná – Londrina\nMeio Dia Paraná - Noroeste\nOeste e Sudoeste Oeste e Sudoeste\nMeio Dia Paraná – Foz do Iguaçu\nMeio Dia Paraná – Cascavel\nRio Grande do Sul Rio Grande do Sul\nSanta Catarina Santa Catarina\nBom Dia Brasil Bom Dia Brasil\nquadros e séries quadros e séries\nGlobo Repórter Globo Repórter\nJornal da Globo Jornal da Globo\nJornal Nacional Jornal Nacional\nPequenas Empresas Pequenas Empresas\nProfissão Repórter Profissão Repórter\ndiálogos com mario sergio conti\nas histórias na globonews\nConverse com outras ideias\nredes sociais redes sociais\nMarília: O outro lado da sofrência\nDe onde vem o que eu como\nConteúdos publicitários Conteúdos publicitários\nAgenda de jogos do Flamengo\nAgenda de jogos do Corinthians\nAgenda de jogos do Grêmio\nAgenda de jogos do Palmeiras\nAgenda de jogos do Santos\nAgenda de jogos do São Paulo\nAgenda de jogos do Atlético MG\nAgenda de jogos do Fluminense\nAgenda de jogos do Botafogo\nAgenda de jogos do Cruzeiro\nInternacional Internacional\nAgenda de jogos do Internacional\nAthletico PR Athletico PR\nAgenda de jogos do Athletico PR\nAgenda de jogos do Fortaleza\nAgenda de jogos do América MG\nAgenda de jogos do Atlético GO\nAgenda de jogos do Juventude\nEntretenimento Entretenimento\nAcesse sua conta ou cadastre-se grátis"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://g1.globo.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/presidente.ghtml",
+            "texto": "Presidente Brasil",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/distrito-federal.ghtml",
+            "texto": "Governador Distrito Federal",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/espirito-santo.ghtml",
+            "texto": "Governador Espírito Santo",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/amazonas.ghtml",
+            "texto": "Governador Amazonas",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/rio-grande-do-norte.ghtml",
+            "texto": "Governador Rio Grande Do Norte",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/tocantins.ghtml",
+            "texto": "Governador Tocantins",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/acre.ghtml",
+            "texto": "Governador Acre",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/pelo-brasil.ghtml",
+            "texto": "Apuração pelo Brasil Veja o panorama completo da votação",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/globonews/noticia/2026/10/25/eleicoes-2026-assista-a-globonews-ao-vivo-com-sinal-aberto-no-globoplay.ghtml",
+            "texto": "ASSISTA à repercussão da votação do 2º turno no sinal aberto da GloboNews",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/ba/bahia/eleicoes/2026/noticia/2026/10/25/justica-determina-que-policia-federal-prenda-secretario-municipal-de-mobilidade-de-salvador.ghtml",
+            "texto": "Ônibus impedidos de circular: TRE manda prender secretário de Salvador",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/ba/bahia/eleicoes/2026/noticia/2026/10/25/prefeitura-de-salvador-determina-retomada-de-onibus-apos-decisao-do-tre-ba.ghtml",
+            "texto": "Após decisão, prefeitura manda todos os ônibus serem liberados",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/sp/sao-paulo/eleicoes/2026/noticia/2026/10/25/pt-denuncia-a-justica-eleitoral-que-sp-opera-com-apenas-60percent-da-frota-de-onibus-no-dia-da-eleicao-passageiros-relatam-longas-esperas.ghtml",
+            "texto": "PT denuncia à Justiça Eleitoral que SP opera só com 60% da frota",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/ba/bahia/eleicoes/2026/noticia/2026/10/25/tse-prorroga-horario-de-votacao-em-salvador-feira-de-santana-e-lauro-de-freitas-apos-impedimento-na-saida-de-onibus-de-garagens.ghtml",
+            "texto": "PT pede ao TSE prorrogação do horário de votação em Salvador",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/ba/bahia/noticia/2026/10/25/onibus-sao-retidos-em-garagem-de-salvador-durante-o-2o-turno-das-eleicoes.ghtml",
+            "texto": "Ao menos 75 ônibus são impedidos de sair de garagens",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/mundo/noticia/2026/10/25/votacao-no-exterior-confira-os-resultados-do-2o-turno-entre-lula-e-flavio-bolsonaro.ghtml",
+            "texto": "Votação no exterior: Lula vence em 29 países; Flávio Bolsonaro, em 12",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/ao-vivo/apuracao-eleicoes-2026-resultados-segundo-turno.ghtml?postId=5c036c1d-c7a2-42f6-9bcb-a35682e13ca3",
+            "texto": "SIGA: PF apura 58 suspeitas de crime eleitoral; 900 urnas são trocadas",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/10/25/eleicoes-2026-o-que-acontece-se-lula-e-flavio-bolsonaro-empatarem-no-segundo-turno.ghtml",
+            "texto": "O que acontece se Flávio e Lula empatarem em votos?",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/10/25/presidente-do-tse-diz-que-eleicoes-estao-dentro-do-esperado-e-estima-resultado-ate-21h.ghtml",
+            "texto": "Nunes Marques estima que resultado da eleição saia até as 21h",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/10/25/mais-de-1-milhao-de-eleitores-justificam-ausencia-pelo-e-titulo-ate-as-9h-diz-tse.ghtml",
+            "texto": "2,6 milhões justificam ausência pelo e-Título até as 12h, diz TSE",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/10/25/sete-municipios-terao-eleicoes-suplementares-para-prefeito-e-vice-neste-domingo-veja-lista.ghtml",
+            "texto": "Sete cidades têm eleição para prefeito e vice; veja a lista",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/10/25/andre-mendonca-vota-em-brasilia-que-o-grande-vencedor-seja-o-eleitor-seja-o-pais.ghtml",
+            "texto": "'Início de um novo ciclo no país', diz André Mendonça após votar em Brasília",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/noticia/2026/10/25/daniel-vorcaro-e-alessandro-stefanutto-votam-na-papuda-bolsonaro-nao-pode-votar.ghtml",
+            "texto": "Vorcaro vai votar na Papuda; Bolsonaro não pode votar",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/rj/rio-de-janeiro/eleicoes/2026/noticia/2026/10/25/garotinho-e-impedido-de-votar-no-2o-turno-das-eleicoes.ghtml",
+            "texto": "Entenda por que Garotinho, ex-candidato no RJ, não poderá votar",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/rj/rio-de-janeiro/eleicoes/2026/noticia/2026/10/25/video-eleitores-denunciam-mulher-fazendo-saudacao-nazista-apos-votar-no-rio.ghtml",
+            "texto": "VÍDEO: eleitores denunciam mulher fazendo saudação nazista após votar",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/pi/piaui/eleicoes/2026/noticia/2026/10/25/suspeita-de-injuria-racial-em-local-de-votacao-teresina.ghtml",
+            "texto": "Eleitora é detida suspeita de injúria racial contra guarda no Piauí",
+            "interno": true
+          },
+          {
+            "url": "http://g1.globo.com",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/ultimas-noticias.html",
+            "texto": "Últimas Notícias",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+            "texto": "princípios editoriais",
+            "interno": true
+          },
+          {
+            "url": "https://privacidade.globo.com/privacy-policy/",
+            "texto": "política de privacidade",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+          "https://s2-g1.glbimg.com/3SMxR6jIY-vtsz4X-Zi-yz-Pg84=/326x60:1545x746/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/h/N/Ot1GhiRbAASrlpB0q8Jg/captura-de-tela-2026-10-25-141829.png",
+          "https://s2-g1.glbimg.com/sdTbUYLZr53yIxQVFXovPZLApto=/0x109:1700x1065/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/n/L/jjs1TrSuyxQqxt5CBHLg/bg-red-19-.png",
+          "https://s2-g1.glbimg.com/WbHdqqSaEg-L6eK-YLQNSTs8aeo=/0x300:1600x1200/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/b/M/f5CH8ETiiUMBjwyActhg/whatsapp-image-2026-10-25-at-10.36.13.jpeg",
+          "https://s2-g1.glbimg.com/MrY2oV-xW0T_JcJr4zBqdyVC8hw=/0x0:565x318/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/s/m/dBfTuvRxKdBGBdVOVpdg/selohome-votacao-exterior.gif",
+          "https://s2-g1.glbimg.com/aKqEgDFtZfjIwttTkaaPq2zK8H8=/0x252:576x576/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/S/2/HW2dT6SAOPsGnZ5ryFTA/e48fc4f5-1243-422d-9240-1f51ec9524ec.jpeg",
+          "https://s2-g1.glbimg.com/3QcwEYVYFEFSd2yH5tlbAeJNr34=/0x350:1412x1145/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/m/f/srDbO6T0qBuqnpaSI7hw/55611264771-48fe8869fa-k.jpg",
+          "https://s2-g1.glbimg.com/l8vkTz-kRfnI0tXLPli0Bd2d2Dk=/174x3:617x252/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/o/Z/2RouakQi6RipfSBMkBnQ/captura-de-tela-2026-10-25-101953.png",
+          "https://s2-g1.glbimg.com/UkAfilZCvQV1S4JWW0NDYrYQK4g=/0x158:1321x901/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/0/S/1jokNITHSTHmbYiZHzeg/25santoinacio-copiar.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-116632be447f",
+            "type": "image",
+            "title": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos tele",
+            "url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+            "final_url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "s.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e630729f6153",
+            "type": "document",
+            "title": "ultimas-noticias.html",
+            "url": "https://g1.globo.com/ultimas-noticias.html",
+            "final_url": "https://g1.globo.com/ultimas-noticias.html",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "g1.globo.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-9f139da7a3ab",
+            "type": "document",
+            "title": "principios-editoriais-do-grupo-globo.html",
+            "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+            "final_url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "g1.globo.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-ebe26ebbabdf",
+            "type": "document",
+            "title": "universidades.html",
+            "url": "https://g1.globo.com/educacao/universidades.html",
+            "final_url": "https://g1.globo.com/educacao/universidades.html",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "g1.globo.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.cnnbrasil.com.br/",
+      "result": {
+        "titulo": "CNN Brasil",
+        "texto": "PT e aliados pedem mais duas hora de votação em SP por falta de ônibus 15:14 - PT pede a Nunes e Tarcísio transporte público com capacidade máxima 15:13 - Lobista amiga de Lulinha declara voto em Flávio Bolsonaro no 2° turno 15:09 - Homem é preso por atropelar crianças em carreata política em Ilhabela (SP) 14:59 - Acompanhe ao vivo a apuração do 2º turno das eleições 2026 14:54 - Governador da Bahia coloca PMs à disposição para dirigir ônibus 14:41 - Lula pede prorrogação da votação em cidades baianas após falta de ônibus 14:39 - Polícia Militar detém cinco pessoas durante o 2º turno em São Paulo 14:30 - Flávio Dino, ministro do STF, vota no Maranhão no 2° turno 14:26 - Luiz Fux, ministro do STF, vota no 2º turno em Brasília 14:15 - Trump diz que monitora segundo turno da eleição presidencial no Brasil 13:51 - Eleições no exterior: quase um milhão de brasileiros estão aptos a votar 13:41 -",
+        "final": "https://www.cnnbrasil.com.br/",
+        "trecho_usado": "PT e aliados pedem mais duas hora de votação em SP por falta de ônibus 15:14 - PT pede a Nunes e Tarcísio transporte público com capacidade máxima 15:13 - Lobista amiga de Lulinha declara voto em Flávio Bolsonaro no 2° turno 15:09 - Homem é preso por atropelar crianças em carreata política em Ilhabela (SP) 14:59 - Acompanhe ao vivo a apuração do 2º turno das eleições 2026 14:54 - Governador da",
+        "metadados": {
+          "titulo": "CNN Brasil",
+          "descricao": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+          "canonica": "https://www.cnnbrasil.com.br/",
+          "og": {
+            "og:title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+            "og:description": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+            "og:url": "https://www.cnnbrasil.com.br/",
+            "og:site_name": "CNN Brasil",
+            "og:locale": "pt_BR",
+            "og:image": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+            "og:image:width": "1280",
+            "og:image:height": "720",
+            "og:image:type": "image/jpeg",
+            "og:type": "article"
+          },
+          "twitter": {
+            "twitter:label1": "Written by",
+            "twitter:label2": "Est. reading time",
+            "twitter:data2": "menos de 1 minuto",
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@cnnbrasil",
+            "twitter:creator": "@cnnbrasil",
+            "twitter:title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+            "twitter:description": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+            "twitter:image": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2022-06-23T15:04:17-03:00",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "CNN Brasil",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "PT e aliados pedem mais duas hora de votação em SP por falta de ônibus 15:14 -",
+            "texto": ""
+          },
+          {
+            "titulo": "PT pede a Nunes e Tarcísio transporte público com capacidade máxima 15:13 -",
+            "texto": ""
+          },
+          {
+            "titulo": "Lobista amiga de Lulinha declara voto em Flávio Bolsonaro no 2° turno 15:09 -",
+            "texto": ""
+          },
+          {
+            "titulo": "Homem é preso por atropelar crianças em carreata política em Ilhabela (SP) 14:59 -",
+            "texto": ""
+          },
+          {
+            "titulo": "Acompanhe ao vivo a apuração do 2º turno das eleições 2026 14:54 -",
+            "texto": ""
+          },
+          {
+            "titulo": "Governador da Bahia coloca PMs à disposição para dirigir ônibus 14:41 -",
+            "texto": ""
+          },
+          {
+            "titulo": "Lula pede prorrogação da votação em cidades baianas após falta de ônibus 14:39 -",
+            "texto": ""
+          },
+          {
+            "titulo": "Polícia Militar detém cinco pessoas durante o 2º turno em São Paulo 14:30 -",
+            "texto": ""
+          },
+          {
+            "titulo": "Flávio Dino, ministro do STF, vota no Maranhão no 2° turno 14:26 -",
+            "texto": ""
+          },
+          {
+            "titulo": "Luiz Fux, ministro do STF, vota no 2º turno em Brasília 14:15 -",
+            "texto": ""
+          },
+          {
+            "titulo": "Trump diz que monitora segundo turno da eleição presidencial no Brasil 13:51 -",
+            "texto": ""
+          },
+          {
+            "titulo": "Eleições no exterior: quase um milhão de brasileiros estão aptos a votar 13:41 -",
+            "texto": ""
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.cnnbrasil.com.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/ao-vivo/",
+            "texto": "Ao vivo",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/politica/",
+            "texto": "Política",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/money/",
+            "texto": "Money",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/ww/",
+            "texto": "WW",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/agro/",
+            "texto": "Agro",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/infra/",
+            "texto": "Infra",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/ia/",
+            "texto": "IA",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/esportes/",
+            "texto": "Esportes",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/viagemegastronomia/",
+            "texto": "Viagem & Gastronomia",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/presidente-do-tse-ve-eleicao-dentro-do-esperado-e-preve-resultado-ate-21h/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/kassio-diz-que-falhas-no-transporte-no-2o-turno-estao-sendo-corrigidas/",
+            "texto": "Kassio diz que falhas no transporte no 2º turno “estão sendo corrigidas”",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/lula-pede-prorrogacao-da-votacao-em-cidades-baianas-apos-falta-de-onibus/",
+            "texto": "Campanha de Lula pede prorrogação da votação em cidades baianas após falta de ônibus",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/eleicoes-ocorrencias-brasil-hoje-25-outubro-2026/",
+            "texto": "Brasil registra 89 ocorrências e nove prisões em flagrante até o momento no 2º turno",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/tre-ba-determina-prisao-de-secretario-em-salvador/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/pt-aciona-justica-eleitoral-por-onibus-em-sp-prefeitura-diz-que-cumprira/",
+            "texto": "PT aciona Justiça por ônibus em SP; Prefeitura diz que cumprirá",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/internacional/eleicoes-2026-exterior-boletins-urna-flavio-lula/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/acompanhe-ao-vivo-a-apuracao-do-2o-turno-das-eleicoes-2026/",
+            "texto": "Acompanhe ao vivo a apuração do 2º turno a partir das 17h",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/ao-votar-flavio-fala-em-nao-insistir-no-erro-lula-enaltece-atos-nas-ruas/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/eleicoes-2026-voto-flavio-lula-hoje-25-outubro/",
+            "texto": "Flávio vota no Rio de Janeiro; Lula, no ABC Paulista; veja como foi",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/eleicoes-2026-entenda-o-caminho-do-voto-ate-a-divulgacao-do-resultado/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/estarei-fora-da-minha-cidade-como-justificar-a-ausencia-nas-eleicoes/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/curiosidades/voto-impresso-no-brasil-o-que-a-justica-eleitoral-fazia-com-toneladas-de-papel-de-voto-apos-a-apuracao-das-eleicoes/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/cleitinho-faz-eleitores-de-flavio-e-lula-se-abracarem-e-pede-pacificacao/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/internacional/trump-diz-que-monitora-segundo-turno-da-eleicao-presidencial-no-brasil/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/ao-votar-moraes-brinca-com-situacao-do-corinthians-nao-vamos-cair/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/eleicoes/andre-mendonca-ministro-do-stf-e-do-tse-vota-no-2o-turno-em-brasilia/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/blogs/",
+            "texto": "Blogs e colunas",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/blogs/lucinda-pinto",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cnnbrasil.com.br/blogs/lucinda-pinto/economia/money/macroeconomia/lula-e-flavio-prometem-mais-beneficios-mas-nao-dizem-como-pagarao/",
+            "texto": "Lula e Flávio prometem mais benefícios, mas não dizem como pagarão",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+          "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&amp;h=56&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/ministro-kassio-nunes-marques-tse_9d776b.jpg?w=532&amp;h=299&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/01/WhatsApp-Image-2025-01-03-at-08.31.45-e1735904777899.jpeg?w=306&amp;h=172&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/urna.jpg?w=306&amp;h=172&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/Catarina-Distribuicao-6.png?w=306&amp;h=172&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/urna-eletronica-tse.jpg?w=419&amp;h=249&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/fila_eleicao.jpg?w=419&amp;h=249&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/Voto-impresso-no-Brasil.jpg?w=419&amp;h=249&amp;crop=1&amp;quality=90",
+          "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/10/APURACAO-CNN-2-1.png?w=128&amp;h=112&amp;crop=1&amp;quality=90"
+        ],
+        "midia": [
+          {
+            "id": "med-56d8b59ede85",
+            "type": "image",
+            "title": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/fallbackImage.jpg",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-14b92c9f90e8",
+            "type": "image",
+            "title": "Logo CNN Brasil",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/themes/master-theme/assets/img/log-cnn-brasil-transparent.svg?w=218&h=56&crop=1&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo CNN Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-80575135818c",
+            "type": "image",
+            "title": "Lucinda Pinto",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/LUCINDA_01.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/LUCINDA_01.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lucinda Pinto",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e4ecafef273e",
+            "type": "image",
+            "title": "Isabel Mega",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/02/IsabelMega_2025_transp.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/02/IsabelMega_2025_transp.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Isabel Mega",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-15c2cfb1b893",
+            "type": "image",
+            "title": "Jussara Soares",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_jussara_soares_blog-e1707507218548.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_jussara_soares_blog-e1707507218548.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Jussara Soares",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f94763fae17b",
+            "type": "image",
+            "title": "Julliana Lopes",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_julliana_lopes_blog-e1707507820831.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_julliana_lopes_blog-e1707507820831.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Julliana Lopes",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f0113dcd3110",
+            "type": "image",
+            "title": "Caio Junqueira",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2025/07/caiojunqueira3-e1752577221487.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Caio Junqueira",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-cc1aa81db9a3",
+            "type": "image",
+            "title": "Larissa Rodrigues",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_larissa_rodrigues_blog_3x4.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_larissa_rodrigues_blog_3x4.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Larissa Rodrigues",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0ba7beb4bc74",
+            "type": "image",
+            "title": "Iuri Pitta",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/Sem-Titulo-3.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/Sem-Titulo-3.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Iuri Pitta",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-39ef96938452",
+            "type": "image",
+            "title": "Pedro Venceslau",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_pedro_venceslau_blog.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2024/02/foto_pedro_venceslau_blog.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Pedro Venceslau",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9be8563a97ad",
+            "type": "image",
+            "title": "Edilene Lopes",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/fotosite-e1786464324512.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/08/fotosite-e1786464324512.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Edilene Lopes",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0147582a5470",
+            "type": "image",
+            "title": "Matheus Teixeira",
+            "url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Matheus_TeixeiraBlog-e1768593558959.png?w=117&h=116&crop=0&quality=90",
+            "final_url": "https://admin.cnnbrasil.com.br/wp-content/uploads/sites/12/2026/01/Matheus_TeixeiraBlog-e1768593558959.png?w=117&h=116&crop=0&quality=90",
+            "source_title": "CNN Brasil",
+            "source_url": "https://www.cnnbrasil.com.br/",
+            "publisher": "admin.cnnbrasil.com.br",
+            "date": "2022-06-23T15:04:17-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Matheus Teixeira",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.terra.com.br/noticias/",
+      "result": {
+        "titulo": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+        "texto": "Michelle Bolsonaro fala em aposentar 'retrocesso' com vitória de Flávio e afirma que acompanhará apuração ao lado de Jair: 'Vou ficar com meu galego'",
+        "final": "https://www.terra.com.br/noticias/",
+        "trecho_usado": "Michelle Bolsonaro fala em aposentar 'retrocesso' com vitória de Flávio e afirma que acompanhará apuração ao lado de Jair: 'Vou ficar com meu galego'",
+        "metadados": {
+          "titulo": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+          "descricao": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+          "canonica": "https://www.terra.com.br/noticias/",
+          "og": {
+            "og:site_name": "Terra",
+            "og:url": "https://www.terra.com.br/noticias/",
+            "og:title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "og:description": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+            "og:image": "https://s1.trrsf.com/update-1698692222/fe/zaz-mod-t360-icons/svg/logos/terra-16x9-borda.png"
+          },
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Terra",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Michelle Bolsonaro fala em aposentar 'retrocesso' com vitória de Flávio e afirma que acompanhará apuração ao lado de Jair: 'Vou ficar com meu galego'",
+            "texto": ""
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.terra.com.br",
+            "texto": "Página principal",
+            "interno": true
+          },
+          {
+            "url": "https://servicos.terra.com.br/para-voce/terra-mail/?utm_source=portal-terra&utm_medium=espaco-fixo&utm_campaign=header-headerds&utm_content=lp&utm_term=terra-mail-b2c_pos-01&cdConvenio=CVTR00001907",
+            "texto": "ASSINE O TERRA MAIL",
+            "interno": false
+          },
+          {
+            "url": "https://servicos.terra.com.br/para-seu-negocio/loja-virtual/?utm_source=portal-terra&utm_medium=espaco-fixo&utm_campaign=menu_pulldown&utm_content=lp&utm_term=loja-virtual_pos-01&cdConvenio=CVTR00002062",
+            "texto": "CRIE SUA LOJA AQUI",
+            "interno": false
+          },
+          {
+            "url": "https://servicos.terra.com.br/para-voce/cursos-online?utm_source=portal-terra&utm_medium=espaco-fixo&utm_campaign=header&utm_content=lp&utm_term=cursos-online_pos-03&cdConvenio=CVTR00001907",
+            "texto": "CURSOS ONLINE",
+            "interno": false
+          },
+          {
+            "url": "https://www.fotosparaiphone.com.br/fotos-e-videos-incriveis-com-iphone-1/?utm_source=portal-terra&utm_medium=header&utm_campaign=cap",
+            "texto": "FOTOS PROFISSIONAIS COM IPHONE",
+            "interno": false
+          },
+          {
+            "url": "https://central.terra.com.br/login?next=http://central.terra.com.br/?utm_source=portal-terra&utm_medium=espaco-fixo&utm_campaign=header&utm_content=pg&utm_term=central-do-assinante_pos-06&cdConvenio=CVTR00001907",
+            "texto": "Central do Assinante",
+            "interno": false
+          },
+          {
+            "url": "https://mail.terra.com.br/?utm_source=portal-terra&utm_medium=home",
+            "texto": "E-mail",
+            "interno": false
+          },
+          {
+            "url": "https://www.terra.com.br/",
+            "texto": "Capa",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://pt-br.facebook.com/TerraBrasil",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/terragora/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.tiktok.com/@terragora/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/channel/UCWeXgaH6wwyTRAkA3n6sRxg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/eleicoes/apuracao/eleicoes-2026-apuracao/",
+            "texto": "Apuração 2° Turno",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/eleicoes/",
+            "texto": "Eleições",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/brasil/",
+            "texto": "Brasil",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/mundo/",
+            "texto": "Mundo",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/checamos/",
+            "texto": "Checamos",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/loterias/",
+            "texto": "Loterias",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/previsao-do-tempo/",
+            "texto": "Previsão do Tempo",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/videos/",
+            "texto": "Vídeos",
+            "interno": true
+          },
+          {
+            "url": "https://diariodorio.com/rio-de-janeiro/2026/10/25/mulher-e-denunciada-por-fazer-saudacao-nazista-apos-votar-em-colegio-de-botafogo.html?utm_source=terra_capa_noticias&utm_medium=referral",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://apublica.org/2026/10/faltou-onibus-em-salvador-no-2o-turno-oito-dias-apos-camara-dar-titulo-a-flavio-bolsonaro/?utm_source=terra_capa_noticias&utm_medium=referral",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.cartacapital.com.br/politica/lula-derrota-flavio-bolsonaro-na-franca-com-84-dos-votos-no-2o-turno/?utm_source=terra_capa_noticias&utm_medium=referral",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/brasil/politica/",
+            "texto": "Política",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/eleicoes/tse-vai-analisar-demanda-sobre-falta-de-onibus-em-salvador-mas-nunes-marques-se-esquiva-de-responder-sobre-prorrogacao-da-votacao,c22756b1ad80d8625854f69f1f85048fskrc8pev.html",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cartacapital.com.br/justica/pt-pede-para-estender-horario-de-votacao-em-salvador-e-mais-duas-cidades-da-ba/?utm_source=terra_capa_noticias&utm_medium=referral",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/brasil/politica/com-mandado-de-prisao-por-falta-de-onibus-secretario-de-salvador-esta-em-paris-diz-governador,e75ac9e312451e625ae0a054ffdd18a5q9j2r40k.html",
+            "texto": "Com mandado de prisão por falta de ônibus, secretário de Salvador está em Paris, diz governador",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/mundo/marine-le-pen-lanca-candidatura-a-presidencia-da-franca-em-meio-a-onda-de-protestos,5db162acb4bf875dcd449cb3e723a8deizyeno7k.html",
+            "texto": "Marine Le Pen lança candidatura à presidência da França em meio a onda de protestos",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/noticias/brasil/politica/trump-diz-estar-observando-eleicoes-no-brasil-mas-desconversa-sobre-apoiar-algum-candidato,8a6388ee559ae402a6483f20ad06a2efd5u2wet2.html",
+            "texto": "Trump diz estar observando eleições no Brasil, mas desconversa sobre apoiar algum candidato",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://s1.trrsf.com/update-1698692222/fe/zaz-mod-t360-icons/svg/logos/terra-16x9-borda.png",
+          "https://p2.trrsf.com/image/fget/cf/98/40/images.terra.com/2024/09/02/agora-marca-2x-uv5to8qvvy2g.png",
+          "https://p2.trrsf.com/image/fget/cf/306/304/smart/images.terra.com/2026/10/25/899840531-designsemnome10-599361.jpg",
+          "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/527125359-imagem-de-capa-1.jpg",
+          "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/1646902544-andre-janones-e-lula-foto-ricardo-stuckert-campanha.jpg",
+          "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/imagem_2026-10-25_141207404-urmv7k6y1d89.png",
+          "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/971919966-onibus.jpg",
+          "https://s1.trrsf.com/update-1/fe/zaz-app-t360-user-table/_img/not-found-interests.png",
+          "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/wordle.png",
+          "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/crossword.png"
+        ],
+        "midia": [
+          {
+            "id": "med-708dae839e70",
+            "type": "image",
+            "title": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+            "url": "https://s1.trrsf.com/update-1698692222/fe/zaz-mod-t360-icons/svg/logos/terra-16x9-borda.png",
+            "final_url": "https://s1.trrsf.com/update-1698692222/fe/zaz-mod-t360-icons/svg/logos/terra-16x9-borda.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "s1.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ba2ffe3222d0",
+            "type": "image",
+            "title": "Notícias",
+            "url": "https://p2.trrsf.com/image/fget/cf/98/40/images.terra.com/2024/09/02/agora-marca-2x-uv5to8qvvy2g.png",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/98/40/images.terra.com/2024/09/02/agora-marca-2x-uv5to8qvvy2g.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Notícias",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-74b5045b4b2a",
+            "type": "image",
+            "title": "Mulher é denunciada por fazer saudação nazista após votar em colégio de Botafogo",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/304/smart/images.terra.com/2026/10/25/899840531-designsemnome10-599361.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/304/smart/images.terra.com/2026/10/25/899840531-designsemnome10-599361.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mulher é denunciada por fazer saudação nazista após votar em colégio de Botafogo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-36683d3f8732",
+            "type": "image",
+            "title": "Faltou ônibus em Salvador no 2º turno, oito dias após Câmara dar título a Flávio Bolsonaro",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/527125359-imagem-de-capa-1.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/527125359-imagem-de-capa-1.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Faltou ônibus em Salvador no 2º turno, oito dias após Câmara dar título a Flávio Bolsonaro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-83efce79d26f",
+            "type": "image",
+            "title": "Lula derrota Flávio Bolsonaro na França com 84% dos votos no 2º turno",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/1646902544-andre-janones-e-lula-foto-ricardo-stuckert-campanha.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/1646902544-andre-janones-e-lula-foto-ricardo-stuckert-campanha.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lula derrota Flávio Bolsonaro na França com 84% dos votos no 2º turno",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6d3c281baf30",
+            "type": "image",
+            "title": "TSE vai analisar demanda sobre falta de ônibus em Salvador, mas Nunes Marques se esquiva de responder sobre prorrogação da votação",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/imagem_2026-10-25_141207404-urmv7k6y1d89.png",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/imagem_2026-10-25_141207404-urmv7k6y1d89.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "TSE vai analisar demanda sobre falta de ônibus em Salvador, mas Nunes Marques se esquiva de responder sobre prorrogação da votação",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-925717914b5e",
+            "type": "image",
+            "title": "PT pede para estender horário de votação em Salvador e mais duas cidades da BA",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/971919966-onibus.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/168/smart/images.terra.com/2026/10/25/971919966-onibus.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "PT pede para estender horário de votação em Salvador e mais duas cidades da BA",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5b6902a0f493",
+            "type": "image",
+            "title": "Jogo Termo",
+            "url": "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/wordle.png",
+            "final_url": "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/wordle.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "www.terra.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Jogo Termo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-238fb7c70356",
+            "type": "image",
+            "title": "Jogo Palavras Cruzadas",
+            "url": "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/crossword.png",
+            "final_url": "https://www.terra.com.br/globalSTATIC/fe/zaz-ui-t360-games/_img/crossword.png",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "www.terra.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Jogo Palavras Cruzadas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-aa9ccc84f0a1",
+            "type": "image",
+            "title": "Gol cancelou voos para o Nordeste na véspera da eleição? Entenda a polêmica",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2025/11/02/aviao_gol-1h7u9mp7k8sbq.PNG",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2025/11/02/aviao_gol-1h7u9mp7k8sbq.PNG",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Gol cancelou voos para o Nordeste na véspera da eleição? Entenda a polêmica",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-94cf0afe7a7d",
+            "type": "image",
+            "title": "Filha de ex-BBB morre 29 dias após nascimento",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/179286836113686-u8b7qh0g3m7r.JPG",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/179286836113686-u8b7qh0g3m7r.JPG",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Filha de ex-BBB morre 29 dias após nascimento",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6f14d45728b3",
+            "type": "image",
+            "title": "Flamengo tem data para julgamento que pode mudar final da Libertadores",
+            "url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/1429414427-libertadores.jpg",
+            "final_url": "https://p2.trrsf.com/image/fget/cf/306/356/smart/images.terra.com/2026/10/24/1429414427-libertadores.jpg",
+            "source_title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "source_url": "https://www.terra.com.br/noticias/",
+            "publisher": "p2.trrsf.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Flamengo tem data para julgamento que pode mudar final da Libertadores",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+      "result": {
+        "titulo": "Google Notícias",
+        "texto": "Notícias Google Notícias Suas notícias Hoje 34 ° 24 ° seg. 33 ° 24 ° ter. 28 ° 22 ° qua. 26 ° 22 ° Alerta amarelo: tempestade INMET publica aviso iniciando em: 27/10/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia ... Ubatã 34 °C Google Clima Principais notícias G1 Mais TRE-BA determina retomada integral da frota de ônibus em Salvador durante segundo turno das eleições 2 horas atrás Folha de S.Paulo Mais TRE manda prender secretário de Salvador por falta de ônibus, e PT pede prisão de prefeito 1 hora atrás VEJA Mais Nunes Marque: extensão da votação na Bahia será analisada ‘a seu tempo’ 9 minutos atrás CNN Brasil Mais TRE-BA determina prisão de secretário em Salvador por crime eleitoral 1 hora atrás Veja mais manchetes e perspectivas Mais de 918 mil eleitores estão aptos a votar no exterior chevron_right Poder360 Mais Lula vence em 27 países e Flávio em 12; acompanhe votação no exterior 1 hora atrás G1 Mais Votação no exterior: Lula vence na Nova Zelândia e Austrália; Flávio Bolsonaro vence no Japão e no Catar 15 horas atrás CNN Brasil Mais Eleições no exterior: quase um milhão de brasileiros estão aptos a votar 1 hora atrás BBC Mais Voto no exterior: veja os resultados por país e a apuração de Lula x Flávio no 2º turno das eleições 2026 3 horas atrás Veja mais manchetes e perspectivas CNN Brasil Mais Ao votar, Flávio fala em não insistir no erro; Lula enaltece atos nas ruas 3 horas atrás Veja mais CNN Brasil Mais Lula pede prorrogação da votação em cidades baianas após falta de ônibus 35 minutos atrás Veja mais Notícias locais Opções para você Faça login para receber matérias personalizadas no feed e no resumo de notícias Fazer login Página inicial Para você Seguindo Destaques Jornalísticos Brasil Mundo Local Negócios Ciência e tecnologia Entretenimento Esportes Saúde Mais Pesquisa Limpar pesquisa Fechar pesquisa Google Apps Menu principal",
+        "final": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419&gl=BR",
+        "trecho_usado": "Notícias Google Notícias Suas notícias Hoje 34 ° 24 ° seg. 33 ° 24 ° ter. 28 ° 22 ° qua. 26 ° 22 ° Alerta amarelo: tempestade INMET publica aviso iniciando em: 27/10/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda de granizo. Baixo risco de corte de energia ... Ubatã 34 °C Google Clima Principais notícias G1 Mais TRE-BA determina retomada integral da",
+        "metadados": {
+          "titulo": "Google Notícias",
+          "descricao": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias.",
+          "canonica": "https://news.google.com/home?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:title": "Google Notícias",
+            "og:site_name": "Google Notícias",
+            "og:url": "https://news.google.com",
+            "og:type": "website",
+            "og:image": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+            "og:image:type": "image/jpeg",
+            "og:image:width": "300",
+            "og:image:height": "300",
+            "og:description": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias."
+          },
+          "twitter": {
+            "twitter:title": "Google Notícias",
+            "twitter:card": "summary",
+            "twitter:image": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+            "twitter:description": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias."
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Google Notícias",
+          "tipo": "Organization",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [
+          {
+            "url": "https://news.google.com/?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Notícias",
+            "interno": true
+          },
+          {
+            "url": "https://www.google.com.br/intl/pt-BR/about/products?tab=nh",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://accounts.google.com/ServiceLogin?passive=1209600&amp;continue=https://news.google.com/home?hl%3Dpt-BR%26ceid%3DBR:pt-419%26gl%3DBR&amp;followup=https://news.google.com/home?hl%3Dpt-BR%26ceid%3DBR:pt-419%26gl%3DBR&amp;hl=pt-BR&amp;ec=GAZAqgM",
+            "texto": "Fazer login",
+            "interno": false
+          },
+          {
+            "url": "https://www.google.com/search?q=Alerta%20amarelo%3A%20tempestade&amp;hl=pt&amp;stick=H4sIAAAAAAAAAONQUeLVT9c3NCwwssyuLCtKesTowS3w8sc9YSn7XWcbq624NLhQFSiJc4nqJ-fn5KQml2Tm5-mnZBYnFpekFhULMC5i5Hb393f3cY33cw0P5lnEKuWYk1pUkqiQmJtYlJqTb6VQkppbkFpckpiSCgC27l6VeQAAAA",
+            "texto": "Alerta amarelo: tempestade INMET publica aviso iniciando em: 27/10/2026 00:00. Chuva entre 20 e 30 mm/h ou até 50 mm/dia, ventos intensos (40-60 km/h), e queda ",
+            "interno": false
+          },
+          {
+            "url": "https://support.google.com/websearch/answer/13687874",
+            "texto": "Google Clima",
+            "interno": false
+          },
+          {
+            "url": "https://news.google.com/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNRFZxYUdjU0JYQjBMVUpTR2dKQ1VpZ0FQAQ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Principais notícias",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/read/CBMi_gFBVV95cUxPYzNiWnVKMjVRWE1fcnlmWFFSSXVza3dTVkRONTM5Q2RPYUFJTVVxMGNVNTRiQzBGV1pZRmZkQWh1MklmbUtJR29EVEhqV1FLcDhBTHAwSE53VzduNWxQYzFmNEI3SE00X1dqdmpiMWtkbVduMUVqWFVmejhBR294MnBabFV0MGZkeDh5elhOSV84VGFyTHo1cW1HazBRV0FqeUlTMDZWUDZ4bjVEMHozRlNuZDcwM3BHLU5oQWR4RVNUM25UdlR4aTI2YTdtMS16Y3lUWW5MNHVqanUyWFdrbHpKbUVxR2ZYMzlBYVZaQ2ZRQW5HVElyTG11WkpvUdIBjAJBVV95cUxOUURrMlEzc053aXAzSzFVU3V6aEdNa0c0dUJvT3k3MmRTMm8tTzdFVXdmTWV3NUE5b25Odjd6d005Mk4xYm5meE9QNDVuMk1rTlFZNGV6OGhNZGk",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/read/CBMi2AFBVV95cUxNRnJTTW1zc0dObThsUGRndVBMdHN1UjEtb1pLLW9KOE5TbnF5ay1qYVdaNC1FazFjNjJQZ0pWMXdnNERuc28zQmtNTENSNzJFRWRxSFNaOVROZUlzS0NibmI1R2thdUxsa1YyN2trM29VcmEzTHVyRzZnX3loMWxMcFZycFpCYW82Z2tMcHo0aDh1MTY4TkV1WWo1Mmp2NkNOZ291dWxlTXhzaGxZTmtxaWtUc3otc2o0R2p6WDRSTGVMYXJQd0FzUHJTM2lXUHF3TXVmeEpnNTM?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/read/CBMipwFBVV95cUxPcFJ4UGpLV09tLVhPSnZtZXgyWFFFdkdFTDBaVlRsbExRSkN1VHNwTGRhU1R3bVpvTXN3bE5pZE1FZXk2U2JPdHdUc3hKX1lEX1JmZUVSeU9TMkY1NHl6V1RnaE1uaTZ0TC1DcE53aHJGbVUzSVQwV1Bnam52dVZldTJoN045V2VycEQ3dmdnLXJTRW0wTXNBc2RYVkZFRXVMZnhKVDRCOA?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/read/CBMikgFBVV95cUxPcWRXZE0xTVBmaGViakJ4TklZUE9CVGdvNFZYaDZQbmhoVzdjUElCT29JYUZoZk8yZ1plODFnSFI0SVV0dzBaTU9ldVpGMjNJOVRfSmRZUVJONzI4Tm8xVktkU0VoQWRNOFBYYlpIX1Z1ZXhDSUx6Z0drTXowWXZZZkVlc1lxYXh5WEc1bTVvZUlpUQ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/stories/CAAqNggKIjBDQklTSGpvSmMzUnZjbmt0TXpZd1NoRUtEd2k2OHRlZUVoRjgyYmR4NWlxdnJDZ0FQAQ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Veja mais manchetes e perspectivas",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/stories/CAAqNggKIjBDQklTSGpvSmMzUnZjbmt0TXpZd1NoRUtEd2o0eWFPVUVoRldWbVFKbWxRRDBpZ0FQAQ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Mais de 918 mil eleitores estão aptos a votar no exterior chevron_right",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/read/CBMilAFBVV95cUxPRWlpM1VNS3dVYVV6SDBNcklHb3NaempTWEltYW9vbHA1MmZ6SWo5MG9DV2pmUDd4VUlBSDMwZ01KeHhpTjBWbGxkTW1QUktRWklVZWNLQXJpRmxhazFES1E1UF91eWhHVjFvQW1oMDJ3M3VrSFhxYlEtQVBRMzJ5QjQ0NDBISHV5aHgxMGNCNXZpa1dK?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/read/CBMi0AFBVV95cUxQTzJBSHFYWHVMTWdFdVpqY2ZfME1EWjk4ZTRqbTZEZzZYOGR5WXgwaDV2ZC1yR3Jsb0g3a0FWZmRIbUx3T1FXUjlWaGxtMWh0ZnRKRFVjYkw1LXhSTzZvQlVmS0FmeFBxdFJHazBxTXdZMjYxRk5Eek5UWWxzOWwwNW5DU24xUHNZRXRoUFdla1BlcFNJRDlqY1NJdG1vNFZ0LVFsT2xVUkp1cHpaeHo0MWE1ZXBpQU01UXNzeXpFVi1TOGFLdGFmeGJWQXdxMFhT0gHfAUFVX3lxTE91bi12SnhWNmdSZENWZEpJak40U3B6NVNvOFNDeFhrWkJSMDlyZnAyaFNWY2RpZjJ6QTMzWmd4TElZZndnQVhldEZHMnhVUzRxeE5aaDNzRFp4OTZteFU2RmtTQWRkc3hRMHJoMFZkOGN6SkNyeDNMRDZodEswaVFvejc5bkJmY3R",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/read/CBMirwFBVV95cUxPS3Q3UmdNaFJ1cmZoV1d6eEhPQ3U3bWpqbUdjQy1idWMyMHhHYlliNjUtLXNUVW1xR2tfVDVQSWt3VkVzdElpRV9sUmdRTU0xVGVYMmRoQXNEZTlURF9kd3M5TjZXajF1WDcxd0xuVkxZU1c2TkZZUlNzR2ppTkU5ZGUyU3Y1WlMzSDVkMl94RklYNFpqeFBRc0twcnhONGVkVEFKVHRpTDR1NWRlbTdJ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/read/CBMiY0FVX3lxTE8wa3RNVU5pRGR1UlpoTlhRLW9zUEt0MU5vaWxScllPQjJJQ1FWXzhEd05vd0lUR3I4OVllSURvS2RJbjBxODZKMkc4WmdhYXNlTTNGY0FlQWFMU0lBamNvY3kxZw?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/read/CBMisAFBVV95cUxOSXMydFhMQ1ZINFZkSzJLazJ6WGI1ZGNmUUlua2RFN0hVNU5YUkRwSDlGMVh3RDJXYm1YUFZReFVyQ2gtUVZVenhRYnJiNGRxVE4tbVFIVVVjZU1yT2h5cE1EOTZlWlZvWDl2d004OHV5dnpuRWI4b05QQU5SZ2cyTmpwQjVzeXZjNF9fdXh4LUIxbU5lNWR2R1NMeUdLXzhnS0VMSjRTbXB5LTMyVmVGQw?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/stories/CAAqNggKIjBDQklTSGpvSmMzUnZjbmt0TXpZd1NoRUtEd2pXbHZTZUVoR09UX1JzRUc5czF5Z0FQAQ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Veja mais",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/read/CBMisAFBVV95cUxOWE1XWGhMaUhmS0FGb1lQazc3TjJ3MXBSemxJTVRHaFZmR1Z3MEUxLVhqTEhiMVhCUXFOZDFJdmhCVlpOTU9reUVVeFYtUTJUaGR6b1Y1OE9oeVdVWWVlc2JDampxaHd2RDFTN1R4RjlScEJVRHFqLVpXeWI5dzJoNDFpUnp5Q010TUh6SllQZHBEWk5USDRvZ2E2ZHJOd0ZWQ2RVdVRwbXRsZ2Y3SWx2Tw?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/stories/CAAqNggKIjBDQklTSGpvSmMzUnZjbmt0TXpZd1NoRUtEd2ppOXFDZUVoSFVqSl9IWkl2REFTZ0FQAQ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Veja mais",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/topics/CAAqHAgKIhZDQklTQ2pvSWJHOWpZV3hmZGpJb0FBUAE?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Notícias locais",
+            "interno": true
+          },
+          {
+            "url": "https://accounts.google.com/ServiceLogin?hl=pt-BR&amp;continue=https://news.google.com/home?hl%3Dpt-BR%26ceid%3DBR:pt-419%26gl%3DBR&amp;hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://news.google.com/home?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Página inicial",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/showcase?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Destaques Jornalísticos",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/topics/CAAqJQgKIh9DQkFTRVFvSUwyMHZNREUxWm5JU0JYQjBMVUpTS0FBUAE?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Brasil",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNRGx1YlY4U0JYQjBMVUpTR2dKQ1VpZ0FQAQ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Mundo",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNRGx6TVdZU0JYQjBMVUpTR2dKQ1VpZ0FQAQ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Negócios",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/topics/CAAqLAgKIiZDQkFTRmdvSkwyMHZNR1ptZHpWbUVnVndkQzFDVWhvQ1FsSW9BQVAB?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Ciência e tecnologia",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNREpxYW5RU0JYQjBMVUpTR2dKQ1VpZ0FQAQ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Entretenimento",
+            "interno": true
+          },
+          {
+            "url": "https://news.google.com/topics/CAAqKggKIiRDQkFTRlFvSUwyMHZNRFp1ZEdvU0JYQjBMVUpTR2dKQ1VpZ0FQAQ?hl=pt-BR&amp;gl=BR&amp;ceid=BR%3Apt-419",
+            "texto": "Esportes",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+          "https://news.google.com/api/attachments/CC8iL0NnNWljMGd5ZUVzM09XRktlR1phVFJDMkF4aThCU2dLTWdrQk1JQ0NwS004ZWdB=-w280-h168-p-df",
+          "https://encrypted-tbn0.gstatic.com/faviconV2?url=https://g1.globo.com&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://encrypted-tbn2.gstatic.com/faviconV2?url=https://www1.folha.uol.com.br&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://encrypted-tbn1.gstatic.com/faviconV2?url=https://veja.abril.com.br&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://encrypted-tbn0.gstatic.com/faviconV2?url=https://www.cnnbrasil.com.br&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://news.google.com/api/attachments/CC8iK0NnNTVVVEZLZDNoMFFuZFdVbUl5VFJDZkF4ampCU2dLTWdZQnNJb0NSd1U=-w280-h168-p-df",
+          "https://encrypted-tbn2.gstatic.com/faviconV2?url=https://www.poder360.com.br&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://encrypted-tbn2.gstatic.com/faviconV2?url=https://www.bbc.com&amp;client=NEWS_360&amp;size=96&amp;type=FAVICON&amp;fallback_opts=TYPE,SIZE,URL",
+          "https://news.google.com/api/attachments/CC8iL0NnNXJSSEY0TW5CeU1IWlVTVWhLVFJEckFSaWlBeWdLTWdrRklaaGxIdW90cFFJ=-w100-h100-p-df"
+        ],
+        "midia": [
+          {
+            "id": "med-4c71ffc32a85",
+            "type": "image",
+            "title": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias.",
+            "url": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+            "final_url": "https://lh3.googleusercontent.com/J6_coFbogxhRI9iM864NL_liGXvsQp2AupsKei7z0cNNfDvGUmWUy20nuUhkREQyrpY4bEeIBuc=s0-w300",
+            "source_title": "Google Notícias",
+            "source_url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419&gl=BR",
+            "publisher": "lh3.googleusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "735728c589adf30f385d",
+            "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00?oc=5",
+            "title": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios - Mecânica Online",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios Mecânica Online"
+          },
+          {
+            "id": "4fd21506ee90e1edea29",
+            "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM?oc=5",
+            "title": "Peugeot aponta às baterias de estado sólido no novo concept - Notícias ao Minuto",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Peugeot aponta às baterias de estado sólido no novo concept Notícias ao Minuto"
+          },
+          {
+            "id": "eb1378c560246b9a2a3d",
+            "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw?oc=5",
+            "title": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo - InsideEVs Brasil",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo InsideEVs Brasil"
+          },
+          {
+            "id": "5a7484e5e4c394f72bd1",
+            "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSDl6RUltS0lLd0ZPYmxiemRVeHNZcmREMGNZZkw0enp0MXF3d2I4bGhkTndNa2ZQMDlkUEpLbGpFZU5KQ0h5ZXRhbHZaa0ptYmNBUV9fV2pNSjFFVExfTlNvSGNDTDVvU3YwU1hHZ3N4RGJPY3poeGZnTlo1d0ZNa2Z5TzM0bW1JeWFzRmd6MU5aam10bUc0ZXMwT0pHYmRwYXNqdzUydHdXOUs1?oc=5",
+            "title": "Bateria do futuro vem aí: Samsung começa a produção de nova tecnologia para linha Galaxy - TudoCelular.com",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Bateria do futuro vem aí: Samsung começa a produção de nova tecnologia para linha Galaxy TudoCelular.com"
+          },
+          {
+            "id": "775c8ee6fa32276c7659",
+            "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOOTV3dUNxWU9uMmdiS1puUmQxMEpwRE1aMWJkRHpTbmt2SEhrcDFkS1VxcFZoTHd3VGlkTHBjVDEteExJZTBMcS1zQ1d1TFVGZ1dweFpUNE51VEcxZnhIaER2R3lWT1ZKdUcwblI0RW9KSWUtUmVYeXBZVk9hQ1VDOXBRb1Q?oc=5",
+            "title": "Peugeot revela conceito elétrico com bateria de estado sólido - Canal VE",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Peugeot revela conceito elétrico com bateria de estado sólido Canal VE"
+          },
+          {
+            "id": "950f619a25d3597b0815",
+            "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc?oc=5",
+            "title": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 - Quatro Rodas",
+            "origin": "google-news",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 Quatro Rodas"
+          },
+          {
+            "id": "159629efc4e40b660600",
+            "url": "https://g1.globo.com/",
+            "title": "g1 - O portal de notícias da Globo",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros."
+          },
+          {
+            "id": "63b2c72b28f5501a2f17",
+            "url": "https://www.cnnbrasil.com.br/",
+            "title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!"
+          },
+          {
+            "id": "047cd59c18bcf5d75b6f",
+            "url": "https://news.google.com/home?hl=pt-BR&ceid=BR:pt-419",
+            "title": "Google Notícias",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias."
+          },
+          {
+            "id": "7c9e707ac422f77f6562",
+            "url": "https://www.terra.com.br/noticias/",
+            "title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra."
+          },
+          {
+            "id": "e82e0c8552226e41ac29",
+            "url": "https://noticias.uol.com.br/%3B/",
+            "title": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Veja as principais notícias e manchetes do dia no Brasil e no Mundo. Leia textos e assista a vídeos de Política, Cotidiano, Crimes e mais."
+          },
+          {
+            "id": "a639b02f428545a56d6f",
+            "url": "https://www.bbc.com/portuguese",
+            "title": "Notícias, vídeos, análise e contexto em português - BBC News ...",
+            "origin": "bing",
+            "query": "notícias baterias de estado sólido",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Com redações em Londres e São Paulo e mais de 200 repórteres internacionais, nossa cobertura leva a você as principais notícias de política, economia, ciência, "
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "google-news: 6 resultados (notícias baterias de estado sólido)",
+        "google-news: RSS apenas para descoberta; procurando artigos originais",
+        "bing-news: sem resultados (notícias baterias de estado sólido)",
+        "bing: 6 resultados (notícias baterias de estado sólido)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (notícias baterias de estado sólido)",
+        "RSS do publicador: 0 artigo(s) candidato(s), leitura pendente",
+        "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+        "Recuperação no publicador limitada: orcamento",
+        "1ª rodada só com páginas de índice geral (8 sinalizada(s)); fontes primárias não alcançadas",
+        "— recuperação por lacuna —",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "notícias baterias de estado sólido",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": false,
+        "requirements": [],
+        "passages": [],
+        "complete": false,
+        "scope": "no explicit supported facet parsed; not proof of completeness"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://g1.globo.com/",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S2",
+          "url": "https://www.cnnbrasil.com.br/",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S3",
+          "url": "https://www.bbc.com/portuguese",
+          "answerability": null,
+          "answer_passages": null
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Novidades sobre baterias de estado sólido fontes originais",
+      "adapter_query": "notícias baterias de estado sólido",
+      "provider": "google-news",
+      "at": "2026-10-25T18:14:28.361363+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios - Mecânica Online",
+          "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQcUU1OVdueldHempkUURUcS1pUkZDa2draFZjNkNZdGhoeDhpVlZlVldiWkpHNnNKYi1wdTBXUzRqQUJFT0VHMzZlWG8ycWR2Y1Rpc1JKME5RNUpsbWRfczBSbTYwTk9id2EtOGljS04tZndnNWcxOVNqUW4tSjRRSTh6TGUxLWlkV2xkN3AzdnNiSUZWaG83ZC02c3JPUTNDTUZlMm9UWlpsN3VXcmxOckl5NGFBYkUxWnhtRFRHS3cxZ00"
+        },
+        {
+          "title": "Peugeot aponta às baterias de estado sólido no novo concept - Notícias ao Minuto",
+          "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNdDNPOGx6cExOX3BYbndpSGY2Qi1oaXR0RDhTRHpUYldXLWtsMkNnNGo4MGRyM1ZraEN0cnZrV3V3SXE0c2FpekhzLUU2RUIyRXhiVk5xNUYyWVN3MGw0NmktMXlnRzJTcEl2SWhpQ0NmbjNUcWFUUTZtMmFOSHR4azR2UnZ4TzVsTDJvVC1ORnlLelptNVhWaHNuTjJZSEJiaEJQQjZ2UkM"
+        },
+        {
+          "title": "CATL e BYD aceleram baterias de estado sólido, mas 2027 será só o começo - InsideEVs Brasil",
+          "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTFBSRWg4ZEU2bkhvUFJWM3hYRFdPMGl5Vk1xTElpOUxfM2ZBYXh2THhNOUY1blJvYnBENEZzS3BDdDMzdHZteWVNYm1FSW9rQ1pNeGJ3MVptVjBnVkVYWXVhZTBkY2xKX0pTaFBaNG1fNXZGUVZOLXNKRHdiREMtZw"
+        },
+        {
+          "title": "Bateria do futuro vem aí: Samsung começa a produção de nova tecnologia para linha Galaxy - TudoCelular.com",
+          "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQSDl6RUltS0lLd0ZPYmxiemRVeHNZcmREMGNZZkw0enp0MXF3d2I4bGhkTndNa2ZQMDlkUEpLbGpFZU5KQ0h5ZXRhbHZaa0ptYmNBUV9fV2pNSjFFVExfTlNvSGNDTDVvU3YwU1hHZ3N4RGJPY3poeGZnTlo1d0ZNa2Z5TzM0bW1JeWFzRmd6MU5aam10bUc0ZXMwT0pHYmRwYXNqdzUydHdXOUs1"
+        },
+        {
+          "title": "Peugeot revela conceito elétrico com bateria de estado sólido - Canal VE",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOOTV3dUNxWU9uMmdiS1puUmQxMEpwRE1aMWJkRHpTbmt2SEhrcDFkS1VxcFZoTHd3VGlkTHBjVDEteExJZTBMcS1zQ1d1TFVGZ1dweFpUNE51VEcxZnhIaER2R3lWT1ZKdUcwblI0RW9KSWUtUmVYeXBZVk9hQ1VDOXBRb1Q"
+        },
+        {
+          "title": "Fabricantes chinesas se unem para lançar baterias que recarregam em 15 minutos até 2027 - Quatro Rodas",
+          "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxNd0Z5bmxtZ1pLSUVNVC01S3c5M0lkajM3Y3BTdTJaNklrTmdkYUtpOWE3VVRZWVlzNWl4ZnFFQ1BBaXdoYWJvRVdCTjh3YUcwX0dHaGJ4M0J4Wk9LS01qcGNCUndzam9IbkRuekFpQ1JmUmlrNUNMV3JHTDRrRzdYLWdGSWlYN0sza3ZFM2FQRWhDa3FITHc"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://news.google.com/rss/search",
+          "parameters": {
+            "q": "notícias baterias de estado sólido",
+            "hl": "pt-BR",
+            "gl": "BR",
+            "ceid": "BR:pt-419"
+          },
+          "http_status": null,
+          "final_url": "https://news.google.com/rss/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 959.57,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Novidades sobre baterias de estado sólido fontes originais",
+      "adapter_query": "notícias baterias de estado sólido",
+      "provider": "bing-news",
+      "at": "2026-10-25T18:14:29.335193+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://www.bing.com/news/search",
+          "parameters": {
+            "q": "notícias baterias de estado sólido",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/news/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 449.47,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Novidades sobre baterias de estado sólido fontes originais",
+      "adapter_query": "notícias baterias de estado sólido",
+      "provider": "bing",
+      "at": "2026-10-25T18:14:29.786353+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "g1 - O portal de notícias da Globo",
+          "url": "https://g1.globo.com/"
+        },
+        {
+          "title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+          "url": "https://www.cnnbrasil.com.br/"
+        },
+        {
+          "title": "Google Notícias",
+          "url": "https://news.google.com/home"
+        },
+        {
+          "title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+          "url": "https://www.terra.com.br/noticias/"
+        },
+        {
+          "title": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+          "url": "https://noticias.uol.com.br/%3B/"
+        },
+        {
+          "title": "Notícias, vídeos, análise e contexto em português - BBC News ...",
+          "url": "https://www.bbc.com/portuguese"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "notícias baterias de estado sólido",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 380.5,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Novidades sobre baterias de estado sólido fontes originais",
+      "adapter_query": "\"Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios\" site:mecanicaonline.com.br",
+      "provider": "bing",
+      "at": "2026-10-25T18:14:34.150398+00:00",
+      "limit": 3,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 3,
+      "results": [
+        {
+          "title": "Bateria virtual – Toca bateria online | Musicca",
+          "url": "https://www.musicca.com/pt/bateria"
+        },
+        {
+          "title": "Bateria - Mercado Livre",
+          "url": "https://lista.mercadolivre.com.br/bateria"
+        },
+        {
+          "title": "Bateria musical - Mercado Livre",
+          "url": "https://lista.mercadolivre.com.br/bateria-musical"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "\"Bateria de estado sólido promete até 1.500 km de autonomia, mas ainda enfrenta desafios\" site:mecanicaonline.com.br",
+            "format": "rss",
+            "count": "3",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 548.89,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "beab3573022e0e52511357a0636e80f2e14478ed",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

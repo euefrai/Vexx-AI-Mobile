@@ -1,0 +1,3507 @@
+{
+  "id": "new-02",
+  "category": "national_news",
+  "query": "Notícias do Brasil sobre educação nos últimos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 9.144,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Brasil\" notícias educação",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Brasil\" notícias educação",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Brasil\" notícias educação",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Quem vai ensinar o Brasil de amanhã?\" site:www.terra.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Brasil%22+not%C3%ADcias+educa%C3%A7%C3%A3o&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Brasil%22+not%C3%ADcias+educa%C3%A7%C3%A3o&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 146770
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Brasil%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Brasil%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5836
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Brasil%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Brasil%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4801
+    },
+    {
+      "url": "https://www.terra.com.br",
+      "final": "https://www.terra.com.br",
+      "chars": 383280
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Quem+vai+ensinar+o+Brasil+de+amanh%C3%A3%3F%22+site%3Awww.terra.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Quem+vai+ensinar+o+Brasil+de+amanh%C3%A3%3F%22+site%3Awww.terra.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 4727
+    },
+    {
+      "url": "https://agenciabrasil.ebc.com.br",
+      "final": "https://agenciabrasil.ebc.com.br",
+      "chars": 108523
+    },
+    {
+      "url": "https://pt.m.wikipedia.org/wiki/Brasil",
+      "final": "https://pt.wikipedia.org/wiki/Brasil",
+      "chars": 1996338
+    },
+    {
+      "url": "https://www.gov.br/pt-br/",
+      "final": "https://www.gov.br/pt-br/",
+      "chars": 131680
+    },
+    {
+      "url": "https://en.m.wikipedia.org/wiki/Brazil",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://empregabrasil.trabalho.gov.br/trabalhador/",
+      "final": "https://empregabrasil.trabalho.gov.br/trabalhador/",
+      "chars": 6784
+    },
+    {
+      "url": "https://g1.globo.com/",
+      "final": "https://g1.globo.com/",
+      "chars": 902672
+    },
+    {
+      "url": "https://plataformabrasil.saude.gov.br/",
+      "final": "https://plataformabrasil.saude.gov.br/",
+      "chars": 279
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Brasil\" notícias educação",
+    "domain": "news",
+    "original_request": "Notícias do Brasil sobre educação nos últimos sete dias",
+    "resolved_request": "Notícias do Brasil sobre educação entre 2026-10-18 e 2026-10-25",
+    "parameters": {
+      "start_date": "2026-10-18",
+      "end_date": "2026-10-25",
+      "location": "Brasil",
+      "topic": "educação"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-25T18:14:50.126245+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-18",
+        "end_date": "2026-10-25",
+        "location": "Brasil",
+        "topic": "educação"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "01770d5a5478e2c20594",
+        "url": "https://pt.m.wikipedia.org/wiki/Brasil",
+        "title": "Brasil – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias educação",
+        "date": "2003-08-31T18:29:19Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "como uma por vários analistas. O brasileiro é o e o por (PPC), sendo, em ambos, o maior da América Latina e do . O país é um dos principais celeiros do planeta,",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Brasil",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "159629efc4e40b660600",
+        "url": "https://g1.globo.com/",
+        "title": "g1 - O portal de notícias da Globo",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias educação",
+        "date": "dom., 25 out. 2026 14:56:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "página Motos Dinheiro sobre rodas Ciência Ciência Primeira Página Viva Você Economia Economia Primeira Página Bitcoin Calculadoras Dólar Educação Financeira Imp",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://g1.globo.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "8b161ad765938c8d36fe",
+        "url": "https://www.gov.br/pt-br/",
+        "title": "Serviços e Informações do Brasil",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias educação",
+        "date": "dom., 02 nov. 2025 02:18:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Ouvidoria e Acesso à Informação Você pode realizar manifestações nos seguintes canais Denúncia Solicitação Elogio Reclamações",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 125,
+        "final_url": "https://www.gov.br/pt-br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "1dad515a9f694df2f8f4",
+        "url": "https://plataformabrasil.saude.gov.br/",
+        "title": "Plataforma Brasil",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias educação",
+        "date": "sáb., 24 out. 2026 05:10:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Plataforma Brasil Manuais da Plataforma Brasil Histórico de Versões Ensino a Distância do sistema CEP/INAEP Perguntas e Respostas Pesquisas Buscar Pesquisas Apr",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://plataformabrasil.saude.gov.br/",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY",
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "2817745aafde44522c26",
+        "url": "https://en.m.wikipedia.org/wiki/Brazil",
+        "title": "Brazil - Wikipedia",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias educação",
+        "date": "sáb., 24 out. 2026 23:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "↑ According to Article 13 of the Constitution: A língua portuguesa é o idioma oficial da República Federativa do Brasil (\"The Portuguese language is the officia",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "tamanho",
+        "losses": [
+          "FETCH_FAILED",
+          "LOW_RELEVANCE",
+          "INTENT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "b2069550090473378134",
+        "url": "https://empregabrasil.trabalho.gov.br/trabalhador/",
+        "title": "Portal Emprega Brasil",
+        "origin": "bing",
+        "query": "\"Brasil\" notícias educação",
+        "date": "dom., 25 out. 2026 14:20:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Portal Emprega Brasil - Governo Federal obter informações da sua Carteira de Trabalho Digital; consultar a situação do requerimento de Seguro-Desemprego e infor",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://empregabrasil.trabalho.gov.br/trabalhador/",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY",
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "e193c6c126efac77dcae",
+        "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQRy1tVGliX19aUl9RNTBoeF80T19ZbV9uaFVfSjBPMjE1UTI5M3BxZHA3ZW1sNlRqbWJsYjBLQ1M5VXJ5LWhsR1Y1TVZBZUVQWW5XSUtBMFBZa3hSUFo3NG9nOFhVOFJieUtzZXIzVG9JZHVXZFdRX0lISHJtZlFYTkQxbzVkTDNKZ3JCM21pdW5NLWVNVXp5ekVoM3Q1LThfeWwxMXZSVjVRQXZPamZ3QXE4TTJLdmdhYURXdFRMQktJQQ?oc=5",
+        "title": "Quem vai ensinar o Brasil de amanhã? - Terra",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias educação",
+        "date": "Tue, 20 Oct 2026 11:50:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Quem vai ensinar o Brasil de amanhã? Terra",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "LOW_RELEVANCE",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "f68bf8b27f914750686d",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPclhvbTZBODlQTTlZRFBSeUNIQUp0NHFDODdZaWUxcUM2ZGMtbEhad2VrbzhReVpLM250M2x2V2tpa1EtM2pvSXpPd3RHaE9uYmpWbFBxRm5NTG00dFc4YmZ0ZjZiWnNrdmhRTF8xZXA5ZmJFSXpvSF9RS1NpVkN4ZVZKYTlIM2M5Y0FuYTBtdXBJN21xYVNHQzcxZW03dlpPQktpdHVTMlVBVHpvOVZTNHhKclBROEU0ZXlhZg?oc=5",
+        "title": "Estudantes desenvolvem plataformas para combater a desinformação - Agência Brasil",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias educação",
+        "date": "Sat, 17 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Estudantes desenvolvem plataformas para combater a desinformação Agência Brasil",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "54f8eb1254166aafee35",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQNmx4U0FGRm1TV2YzUEZ0aEZ4cy1mcVpPVkdQd1VQclluUE1lSjg0ejlBN09uYlNLaURQMkpqdWoyei1BVk5HaGNVN3ItaWZIUWd4UjVLdzVnY18zdkpVVzJJWTFiZ0ZzQmRfd1huV1pfNkRtZzFkUFFWeV9nWTRoRzl4NENDRnB2blBXWG0tTVcwUGtLLTR0TTlXQWRnZWdHc1U5OHhLYkItS3fSAboBQVVfeXFMTTdnY2c0M2xyUGNFT19KNzZyMWRoNEZkNUlJdGw2UldVYlE5ZVZvNnpMb0ZTMV9HeDZWUmVwbkJnQUZkODlBZWQyc0xwbVNFWkRDMWhPMU1ES2I4ZWY4R2pZdExneWRHeWxQT3ZLM2tqVGZGVmxyY0loendjN3JqWXZSSXlyN3pGWmpyVmJ2OV9iaUpUX21ZQzVSOGR6N0pvZjZCeFlscDB",
+        "title": "No Brasil, jovens entram no ensino médio, mas 1 em cada 5 não conclui a etapa - G1",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias educação",
+        "date": "Tue, 29 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "No Brasil, jovens entram no ensino médio, mas 1 em cada 5 não conclui a etapa G1",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "73c67c62ac7f4d8d875f",
+        "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQeTZlSlFZMTBLb2tpcjJBWE5MSFhsZjdJV1ZMRHNwMUxFa0dXZEp1VWxWWl9jRmZtdDY4VVJMdEdkSEIzam5WeC1qN243eEpzek1wbXV2aGxmZHlOM3gzcm9Vd242TnpYRldoUWVFSm5IX1ZHVjBxY0VxbXN3VFc0RG5RdE9QczZFOE1uRHdOODhuZ2Q5di1adHY1MnV0UDN0Q2tVVXk5SHFnMFBya1NRdzNSdk5pWGlabzFlQU1n?oc=5",
+        "title": "Brasil tem mais de 2,4 milhões de docentes na educação básica — Ministério da Educação - Governo Federal",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias educação",
+        "date": "Thu, 15 Oct 2026 16:04:54 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Brasil tem mais de 2,4 milhões de docentes na educação básica — Ministério da Educação Governo Federal",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "0d156ca0be9b457bd603",
+        "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQaFVtQkhtTW1vYWVEeDZnQ1p4SE1POXRsWktneU1oTzNENTRxajd2TEowbzFYaTVDTzF5OGZlc1oxU1RHOWoxdWdCRU5kdUlJT3hfMnVCNFExZDYwdHp4RTJSUzhQMjA5V3lhVm91eUtFdF9OTHg4MHNLVFIxYmFFaWZyN1B2a1BaWkphUG5xbnFDTnk5N0tZOGd4eFczT21LblNuOVFxYTFxYlZDQWFQbnowcjJhbkxta1hsQThtZUZyNEZwTUUw?oc=5",
+        "title": "Educadores e estudantes abordam rumos da Educação Superior no Brasil em debate na UFBA - ba.gov.br",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias educação",
+        "date": "Fri, 16 Oct 2026 15:16:39 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Educadores e estudantes abordam rumos da Educação Superior no Brasil em debate na UFBA ba.gov.br",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "9befea2a6af7cdec4c3c",
+        "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOMjBFYk1KT2llbFpFQ2JlbElMOXptN1RlTzl5cWVEdlNLLUVEOTMyT3NPMEVzaVY0T0JITFpmcElXZ0Flcl93Y1htNFB0V0hqSUdlTjlzREFnYzI2eUx5N3d3bU1tNGRURVFmZzh4eklqT3lyWFF4bDA5dVlMd053X1FITHpTdmhoMVBqWTVfeTJwSWZjM184S1BmaEVFYnM?oc=5",
+        "title": "OCDE: Brasil reduz percentual de jovens nem-nem - Educa Mais Brasil",
+        "origin": "google-news",
+        "query": "\"Brasil\" notícias educação",
+        "date": "Thu, 01 Oct 2026 16:18:03 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "OCDE: Brasil reduz percentual de jovens nem-nem Educa Mais Brasil",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-799a0dd2c0e6",
+      "type": "image",
+      "title": "país na América do Sul",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c6b42cbb00e6",
+      "type": "image",
+      "title": "Este é um artigo destacado. Clique aqui para mais informações.",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Cscr-featured1.svg/20px-Cscr-featured1.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Cscr-featured1.svg/20px-Cscr-featured1.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Este é um artigo destacado. Clique aqui para mais informações.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-17d890711b1d",
+      "type": "image",
+      "title": "Esta é uma versão em áudio do artigo. Clique aqui para ouvi-lo.",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Sound-icon.svg/20px-Sound-icon.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Sound-icon.svg/20px-Sound-icon.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Esta é uma versão em áudio do artigo. Clique aqui para ouvi-lo.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1d5f7a522a3d",
+      "type": "image",
+      "title": "Bandeira do Brasil",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/250px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/250px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Bandeira do Brasil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d137913f6998",
+      "type": "image",
+      "title": "Armas Nacionais",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/120px-Coat_of_arms_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/120px-Coat_of_arms_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Armas Nacionais",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-772265f31891",
+      "type": "image",
+      "title": "Aumento",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Aumento",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-333ed72d24f6",
+      "type": "image",
+      "title": "BaixaPositiva",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Decrease_Positive.svg/20px-Decrease_Positive.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Decrease_Positive.svg/20px-Decrease_Positive.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "BaixaPositiva",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-93a1fd15190b",
+      "type": "video",
+      "title": "país na América do Sul",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Hino-Nacional-Brasil-instrumental-mec.ogg?utm_source=pt.wikipedia.org&utm_campaign=rest&utm_content=original",
+      "final_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Hino-Nacional-Brasil-instrumental-mec.ogg?utm_source=pt.wikipedia.org&utm_campaign=rest&utm_content=original",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "upload.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-6d31727111f8",
+      "type": "video",
+      "title": "país na América do Sul",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0d/Hino-Nacional-Brasil-instrumental-mec.ogg/Hino-Nacional-Brasil-instrumental-mec.ogg.mp3",
+      "final_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0d/Hino-Nacional-Brasil-instrumental-mec.ogg/Hino-Nacional-Brasil-instrumental-mec.ogg.mp3",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "upload.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-f8002831df25",
+      "type": "video",
+      "title": "país na América do Sul",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg?utm_source=pt.wikipedia.org&utm_campaign=rest&utm_content=original",
+      "final_url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg?utm_source=pt.wikipedia.org&utm_campaign=rest&utm_content=original",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "upload.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-0495ed72c501",
+      "type": "video",
+      "title": "país na América do Sul",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/8/84/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg.mp3",
+      "final_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/8/84/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg.mp3",
+      "source_title": "país na América do Sul",
+      "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+      "publisher": "upload.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://pt.m.wikipedia.org/wiki/Brasil",
+      "titulo": "país na América do Sul",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2003-08-31T18:29:19Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://pt.m.wikipedia.org/wiki/Brasil",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2003-08-31T18:29:19Z"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://g1.globo.com/",
+      "titulo": "g1 - O portal de notícias da Globo",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 14:56:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://g1.globo.com/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "dom., 25 out. 2026 14:56:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.gov.br/pt-br/",
+      "titulo": "GOV.BR",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 02 nov. 2025 02:18:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.gov.br/pt-br/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "dom., 02 nov. 2025 02:18:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "google-news",
+      "query": "\"Brasil\" notícias educação",
+      "items": [
+        {
+          "titulo": "Quem vai ensinar o Brasil de amanhã? - Terra",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQRy1tVGliX19aUl9RNTBoeF80T19ZbV9uaFVfSjBPMjE1UTI5M3BxZHA3ZW1sNlRqbWJsYjBLQ1M5VXJ5LWhsR1Y1TVZBZUVQWW5XSUtBMFBZa3hSUFo3NG9nOFhVOFJieUtzZXIzVG9JZHVXZFdRX0lISHJtZlFYTkQxbzVkTDNKZ3JCM21pdW5NLWVNVXp5ekVoM3Q1LThfeWwxMXZSVjVRQXZPamZ3QXE4TTJLdmdhYURXdFRMQktJQQ?oc=5",
+          "trecho": "Quem vai ensinar o Brasil de amanhã? Terra",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Terra",
+          "publisher_url": "https://www.terra.com.br",
+          "meta": {
+            "publicado_em": "Tue, 20 Oct 2026 11:50:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQRy1tVGliX19aUl9RNTBoeF80T19ZbV9uaFVfSjBPMjE1UTI5M3BxZHA3ZW1sNlRqbWJsYjBLQ1M5VXJ5LWhsR1Y1TVZBZUVQWW5XSUtBMFBZa3hSUFo3NG9nOFhVOFJieUtzZXIzVG9JZHVXZFdRX0lISHJtZlFYTkQxbzVkTDNKZ3JCM21pdW5NLWVNVXp5ekVoM3Q1LThfeWwxMXZSVjVRQXZPamZ3QXE4TTJLdmdhYURXdFRMQktJQQ?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 4.7,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQRy1tVGliX19aUl9RNTBoeF80T19ZbV9uaFVfSjBPMjE1UTI5M3BxZHA3ZW1sNlRqbWJsYjBLQ1M5VXJ5LWhsR1Y1TVZBZUVQWW5XSUtBMFBZa3hSUFo3NG9nOFhVOFJieUtzZXIzVG9JZHVXZFdRX0lISHJtZlFYTkQxbzVkTDNKZ3JCM21pdW5NLWVNVXp5ekVoM3Q1LThfeWwxMXZSVjVRQXZPamZ3QXE4TTJLdmdhYURXdFRMQktJQQ?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 20 Oct 2026 11:50:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Estudantes desenvolvem plataformas para combater a desinformação - Agência Brasil",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPclhvbTZBODlQTTlZRFBSeUNIQUp0NHFDODdZaWUxcUM2ZGMtbEhad2VrbzhReVpLM250M2x2V2tpa1EtM2pvSXpPd3RHaE9uYmpWbFBxRm5NTG00dFc4YmZ0ZjZiWnNrdmhRTF8xZXA5ZmJFSXpvSF9RS1NpVkN4ZVZKYTlIM2M5Y0FuYTBtdXBJN21xYVNHQzcxZW03dlpPQktpdHVTMlVBVHpvOVZTNHhKclBROEU0ZXlhZg?oc=5",
+          "trecho": "Estudantes desenvolvem plataformas para combater a desinformação Agência Brasil",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Agência Brasil",
+          "publisher_url": "https://agenciabrasil.ebc.com.br",
+          "meta": {
+            "publicado_em": "Sat, 17 Oct 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPclhvbTZBODlQTTlZRFBSeUNIQUp0NHFDODdZaWUxcUM2ZGMtbEhad2VrbzhReVpLM250M2x2V2tpa1EtM2pvSXpPd3RHaE9uYmpWbFBxRm5NTG00dFc4YmZ0ZjZiWnNrdmhRTF8xZXA5ZmJFSXpvSF9RS1NpVkN4ZVZKYTlIM2M5Y0FuYTBtdXBJN21xYVNHQzcxZW03dlpPQktpdHVTMlVBVHpvOVZTNHhKclBROEU0ZXlhZg?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 4.7,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPclhvbTZBODlQTTlZRFBSeUNIQUp0NHFDODdZaWUxcUM2ZGMtbEhad2VrbzhReVpLM250M2x2V2tpa1EtM2pvSXpPd3RHaE9uYmpWbFBxRm5NTG00dFc4YmZ0ZjZiWnNrdmhRTF8xZXA5ZmJFSXpvSF9RS1NpVkN4ZVZKYTlIM2M5Y0FuYTBtdXBJN21xYVNHQzcxZW03dlpPQktpdHVTMlVBVHpvOVZTNHhKclBROEU0ZXlhZg?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Sat, 17 Oct 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "No Brasil, jovens entram no ensino médio, mas 1 em cada 5 não conclui a etapa - G1",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQNmx4U0FGRm1TV2YzUEZ0aEZ4cy1mcVpPVkdQd1VQclluUE1lSjg0ejlBN09uYlNLaURQMkpqdWoyei1BVk5HaGNVN3ItaWZIUWd4UjVLdzVnY18zdkpVVzJJWTFiZ0ZzQmRfd1huV1pfNkRtZzFkUFFWeV9nWTRoRzl4NENDRnB2blBXWG0tTVcwUGtLLTR0TTlXQWRnZWdHc1U5OHhLYkItS3fSAboBQVVfeXFMTTdnY2c0M2xyUGNFT19KNzZyMWRoNEZkNUlJdGw2UldVYlE5ZVZvNnpMb0ZTMV9HeDZWUmVwbkJnQUZkODlBZWQyc0xwbVNFWkRDMWhPMU1ES2I4ZWY4R2pZdExneWRHeWxQT3ZLM2tqVGZGVmxyY0loendjN3JqWXZSSXlyN3pGWmpyVmJ2OV9iaUpUX21ZQzVSOGR6N0pvZjZCeFlscDB",
+          "trecho": "No Brasil, jovens entram no ensino médio, mas 1 em cada 5 não conclui a etapa G1",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "G1",
+          "publisher_url": "https://g1.globo.com",
+          "meta": {
+            "publicado_em": "Tue, 29 Sep 2026 07:00:00 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQNmx4U0FGRm1TV2YzUEZ0aEZ4cy1mcVpPVkdQd1VQclluUE1lSjg0ejlBN09uYlNLaURQMkpqdWoyei1BVk5HaGNVN3ItaWZIUWd4UjVLdzVnY18zdkpVVzJJWTFiZ0ZzQmRfd1huV1pfNkRtZzFkUFFWeV9nWTRoRzl4NENDRnB2blBXWG0tTVcwUGtLLTR0TTlXQWRnZWdHc1U5OHhLYkItS3fSAboBQVVfeXFMTTdnY2c0M2xyUGNFT19KNzZyMWRoNEZkNUlJdGw2UldVYlE5ZVZvNnpMb0ZTMV9HeDZWUmVwbkJnQUZkODlBZWQyc0xwbVNFWkRDMWhPMU1ES2I4ZWY4R2pZdExneWRHeWxQT3ZLM2tqVGZGVmxyY0loendjN3JqWXZSSXlyN3pGWmpyVmJ2OV9iaUpUX21ZQzVSOGR6N0pvZjZCeFlscDB",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 4.7,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQNmx4U0FGRm1TV2YzUEZ0aEZ4cy1mcVpPVkdQd1VQclluUE1lSjg0ejlBN09uYlNLaURQMkpqdWoyei1BVk5HaGNVN3ItaWZIUWd4UjVLdzVnY18zdkpVVzJJWTFiZ0ZzQmRfd1huV1pfNkRtZzFkUFFWeV9nWTRoRzl4NENDRnB2blBXWG0tTVcwUGtLLTR0TTlXQWRnZWdHc1U5OHhLYkItS3fSAboBQVVfeXFMTTdnY2c0M2xyUGNFT19KNzZyMWRoNEZkNUlJdGw2UldVYlE5ZVZvNnpMb0ZTMV9HeDZWUmVwbkJnQUZkODlBZWQyc0xwbVNFWkRDMWhPMU1ES2I4ZWY4R2pZdExneWRHeWxQT3ZLM2tqVGZGVmxyY0loendjN3JqWXZSSXlyN3pGWmpyVmJ2OV9iaUpUX21ZQzVSOGR6N0pvZjZCeFlscDB",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Tue, 29 Sep 2026 07:00:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Brasil tem mais de 2,4 milhões de docentes na educação básica — Ministério da Educação - Governo Federal",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQeTZlSlFZMTBLb2tpcjJBWE5MSFhsZjdJV1ZMRHNwMUxFa0dXZEp1VWxWWl9jRmZtdDY4VVJMdEdkSEIzam5WeC1qN243eEpzek1wbXV2aGxmZHlOM3gzcm9Vd242TnpYRldoUWVFSm5IX1ZHVjBxY0VxbXN3VFc0RG5RdE9QczZFOE1uRHdOODhuZ2Q5di1adHY1MnV0UDN0Q2tVVXk5SHFnMFBya1NRdzNSdk5pWGlabzFlQU1n?oc=5",
+          "trecho": "Brasil tem mais de 2,4 milhões de docentes na educação básica — Ministério da Educação Governo Federal",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Governo Federal",
+          "publisher_url": "https://www.gov.br",
+          "meta": {
+            "publicado_em": "Thu, 15 Oct 2026 16:04:54 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQeTZlSlFZMTBLb2tpcjJBWE5MSFhsZjdJV1ZMRHNwMUxFa0dXZEp1VWxWWl9jRmZtdDY4VVJMdEdkSEIzam5WeC1qN243eEpzek1wbXV2aGxmZHlOM3gzcm9Vd242TnpYRldoUWVFSm5IX1ZHVjBxY0VxbXN3VFc0RG5RdE9QczZFOE1uRHdOODhuZ2Q5di1adHY1MnV0UDN0Q2tVVXk5SHFnMFBya1NRdzNSdk5pWGlabzFlQU1n?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 4.7,
+          "relevance_reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQeTZlSlFZMTBLb2tpcjJBWE5MSFhsZjdJV1ZMRHNwMUxFa0dXZEp1VWxWWl9jRmZtdDY4VVJMdEdkSEIzam5WeC1qN243eEpzek1wbXV2aGxmZHlOM3gzcm9Vd242TnpYRldoUWVFSm5IX1ZHVjBxY0VxbXN3VFc0RG5RdE9QczZFOE1uRHdOODhuZ2Q5di1adHY1MnV0UDN0Q2tVVXk5SHFnMFBya1NRdzNSdk5pWGlabzFlQU1n?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Thu, 15 Oct 2026 16:04:54 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Educadores e estudantes abordam rumos da Educação Superior no Brasil em debate na UFBA - ba.gov.br",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQaFVtQkhtTW1vYWVEeDZnQ1p4SE1POXRsWktneU1oTzNENTRxajd2TEowbzFYaTVDTzF5OGZlc1oxU1RHOWoxdWdCRU5kdUlJT3hfMnVCNFExZDYwdHp4RTJSUzhQMjA5V3lhVm91eUtFdF9OTHg4MHNLVFIxYmFFaWZyN1B2a1BaWkphUG5xbnFDTnk5N0tZOGd4eFczT21LblNuOVFxYTFxYlZDQWFQbnowcjJhbkxta1hsQThtZUZyNEZwTUUw?oc=5",
+          "trecho": "Educadores e estudantes abordam rumos da Educação Superior no Brasil em debate na UFBA ba.gov.br",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "ba.gov.br",
+          "publisher_url": "http://www.ba.gov.br",
+          "meta": {
+            "publicado_em": "Fri, 16 Oct 2026 15:16:39 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQaFVtQkhtTW1vYWVEeDZnQ1p4SE1POXRsWktneU1oTzNENTRxajd2TEowbzFYaTVDTzF5OGZlc1oxU1RHOWoxdWdCRU5kdUlJT3hfMnVCNFExZDYwdHp4RTJSUzhQMjA5V3lhVm91eUtFdF9OTHg4MHNLVFIxYmFFaWZyN1B2a1BaWkphUG5xbnFDTnk5N0tZOGd4eFczT21LblNuOVFxYTFxYlZDQWFQbnowcjJhbkxta1hsQThtZUZyNEZwTUUw?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 4.7,
+          "relevance_reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQaFVtQkhtTW1vYWVEeDZnQ1p4SE1POXRsWktneU1oTzNENTRxajd2TEowbzFYaTVDTzF5OGZlc1oxU1RHOWoxdWdCRU5kdUlJT3hfMnVCNFExZDYwdHp4RTJSUzhQMjA5V3lhVm91eUtFdF9OTHg4MHNLVFIxYmFFaWZyN1B2a1BaWkphUG5xbnFDTnk5N0tZOGd4eFczT21LblNuOVFxYTFxYlZDQWFQbnowcjJhbkxta1hsQThtZUZyNEZwTUUw?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Fri, 16 Oct 2026 15:16:39 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "OCDE: Brasil reduz percentual de jovens nem-nem - Educa Mais Brasil",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOMjBFYk1KT2llbFpFQ2JlbElMOXptN1RlTzl5cWVEdlNLLUVEOTMyT3NPMEVzaVY0T0JITFpmcElXZ0Flcl93Y1htNFB0V0hqSUdlTjlzREFnYzI2eUx5N3d3bU1tNGRURVFmZzh4eklqT3lyWFF4bDA5dVlMd053X1FITHpTdmhoMVBqWTVfeTJwSWZjM184S1BmaEVFYnM?oc=5",
+          "trecho": "OCDE: Brasil reduz percentual de jovens nem-nem Educa Mais Brasil",
+          "origem": "google-news",
+          "tipo": "noticia",
+          "status": "encontrada",
+          "publicador": "Educa Mais Brasil",
+          "publisher_url": "https://www.educamaisbrasil.com.br",
+          "meta": {
+            "publicado_em": "Thu, 01 Oct 2026 16:18:03 GMT"
+          },
+          "content_scope": "feed_metadata",
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "google-news",
+          "url_canonica": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOMjBFYk1KT2llbFpFQ2JlbElMOXptN1RlTzl5cWVEdlNLLUVEOTMyT3NPMEVzaVY0T0JITFpmcElXZ0Flcl93Y1htNFB0V0hqSUdlTjlzREFnYzI2eUx5N3d3bU1tNGRURVFmZzh4eklqT3lyWFF4bDA5dVlMd053X1FITHpTdmhoMVBqWTVfeTJwSWZjM184S1BmaEVFYnM?oc=5",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "pagina_de_indice": true,
+          "relevancia": 4.7,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOMjBFYk1KT2llbFpFQ2JlbElMOXptN1RlTzl5cWVEdlNLLUVEOTMyT3NPMEVzaVY0T0JITFpmcElXZ0Flcl93Y1htNFB0V0hqSUdlTjlzREFnYzI2eUx5N3d3bU1tNGRURVFmZzh4eklqT3lyWFF4bDA5dVlMd053X1FITHpTdmhoMVBqWTVfeTJwSWZjM184S1BmaEVFYnM?oc=5",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "data": {
+              "published_at": "Thu, 01 Oct 2026 16:18:03 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"Brasil\" notícias educação",
+      "items": [
+        {
+          "titulo": "Brasil – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.m.wikipedia.org/wiki/Brasil",
+          "trecho": "Em 1548, a criação do Estado do Brasil por João III de Portugal consolidou oficialmente o uso do nome, que foi mantido nas denominações políticas subsequentes até a atual República Federativa do Brasil.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 10:38:00 GMT"
+          },
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.m.wikipedia.org/wiki/Brasil",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 5.8,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INTENT_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://pt.m.wikipedia.org/wiki/Brasil",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 10:38:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "g1 - O portal de notícias da Globo",
+          "url": "https://g1.globo.com/",
+          "trecho": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 14:56:00 GMT"
+          },
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://g1.globo.com/",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 5.8,
+          "relevance_reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://g1.globo.com/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 14:56:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Serviços e Informações do Brasil",
+          "url": "https://www.gov.br/pt-br/",
+          "trecho": "Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 02 nov. 2025 02:18:00 GMT"
+          },
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://gov.br/pt-br",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 5.8,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://www.gov.br/pt-br/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "dom., 02 nov. 2025 02:18:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Plataforma Brasil",
+          "url": "https://plataformabrasil.saude.gov.br/",
+          "trecho": "Plataforma Brasil Manuais da Plataforma Brasil Histórico de Versões Ensino a Distância do sistema CEP/INAEP Perguntas e Respostas Pesquisas Buscar Pesquisas Aprovadas Confirmar Aprovação pelo CAAE ou Parecer Contato E-mail Telefone Atendimento On-line Informações ao Participante da Pesquisa",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:10:00 GMT"
+          },
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://plataformabrasil.saude.gov.br/",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 5.8,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://plataformabrasil.saude.gov.br/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 05:10:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Brazil - Wikipedia",
+          "url": "https://en.m.wikipedia.org/wiki/Brazil",
+          "trecho": "↑ According to Article 13 of the Constitution: A língua portuguesa é o idioma oficial da República Federativa do Brasil (\"The Portuguese language is the official language of the Federative Republic of Brazil\").",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 23:11:00 GMT"
+          },
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.m.wikipedia.org/wiki/Brazil",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 5.8,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INTENT_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://en.m.wikipedia.org/wiki/Brazil",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "sáb., 24 out. 2026 23:11:00 GMT"
+            }
+          }
+        },
+        {
+          "titulo": "Portal Emprega Brasil",
+          "url": "https://empregabrasil.trabalho.gov.br/trabalhador/",
+          "trecho": "Portal Emprega Brasil - Governo Federal obter informações da sua Carteira de Trabalho Digital; consultar a situação do requerimento de Seguro-Desemprego e informações sobre o benefício; buscar emprego de acordo com o seu perfil profissional; obter informações sobre o Abono Salarial;",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 14:20:00 GMT"
+          },
+          "discovery_query": "\"Brasil\" notícias educação",
+          "discovery_provider": "bing",
+          "url_canonica": "https://empregabrasil.trabalho.gov.br/trabalhador",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 5.8,
+          "relevance_reasons": [
+            "TOPIC_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "vertical": {
+            "kind": "news",
+            "url": "https://empregabrasil.trabalho.gov.br/trabalhador/",
+            "eligible": false,
+            "verification": "UNVERIFIED",
+            "retrieval_state": "UNAVAILABLE",
+            "data_complete": false,
+            "required_data": [
+              "article_url",
+              "article_text",
+              "published_at",
+              "location",
+              "source"
+            ],
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "data": {
+              "published_at": "dom., 25 out. 2026 14:20:00 GMT"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "\"Quem vai ensinar o Brasil de amanhã?\" site:www.terra.com.br",
+      "items": [
+        {
+          "titulo": "Quem • As últimas notícias e principais entrevistas com famosos, além ...",
+          "url": "https://revistaquem.globo.com/",
+          "trecho": "Quem deu o que falar! Tá rolando? Atleta olímpico e irmão de ex-BBB: quem é o surfista apontado como affair de Paolla Oliveira? Acabou Gabriel Cardoso confirma término de namoro com Gracyanne ...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 15:10:00 GMT"
+          }
+        },
+        {
+          "titulo": "Quem • Últimas Notícias • Famosos",
+          "url": "https://revistaquem.globo.com/ultimas-noticias/",
+          "trecho": "Quem • Últimas Notícias • Famosos Leia as novidades sobre os famosos e celebridades do momento, como Bruna Marquezine, Paolla Oliveira, Deborah Secco, Neymar, entre outros.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 15:25:00 GMT"
+          }
+        },
+        {
+          "titulo": "Quem - YouTube",
+          "url": "https://www.youtube.com/@Quem",
+          "trecho": "A Quem é o seu canal direto para o mundo dos famosos nacionais e internacionais!Com uma cobertura abrangente de fotos, vídeos, entrevistas e conteúdo super e...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:17:00 GMT"
+          }
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.gov.br/pt-br/",
+      "result": {
+        "titulo": "GOV.BR",
+        "texto": "Ouvidoria e Acesso à Informação Você pode realizar manifestações nos seguintes canais Denúncia Solicitação Elogio Reclamações",
+        "final": "https://www.gov.br/pt-br/",
+        "trecho_usado": "Ouvidoria e Acesso à Informação Você pode realizar manifestações nos seguintes canais Denúncia Solicitação Elogio Reclamações",
+        "metadados": {
+          "titulo": "GOV.BR",
+          "descricao": "O gov.br reúne, em um só lugar, serviços para o cidadão e informações sobre a atuação de todas as áreas do governo.",
+          "canonica": "https://www.gov.br/pt-br",
+          "og": {
+            "og:title": "GOV.BR",
+            "og:description": "O gov.br reúne, em um só lugar, serviços para o cidadão e informações sobre a atuação de todas as áreas do governo.",
+            "og:type": "article",
+            "og:url": "https://www.gov.br/pt-br/pagina-inicial",
+            "og:image": "https://www.gov.br/logo.png",
+            "og:locale": "pt_BR",
+            "og:site_name": "Serviços e Informações do Brasil"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Serviços e Informações do Brasil",
+          "tipo": "Organization",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Você pode realizar manifestações nos seguintes canais",
+            "texto": ""
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.gov.br/",
+            "texto": "Ir para a Página Inicial 2",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br",
+            "texto": "Serviços e Informações do Brasil",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/servicos",
+            "texto": "Serviços",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/servicos/buscar-servicos-por",
+            "texto": "Buscar serviços por",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/categorias",
+            "texto": "Categorias",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/servicos/listar_orgaos",
+            "texto": "Órgãos",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/servicos-estaduais",
+            "texto": "Estados",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/servicos/servicos-por-publico-alvo",
+            "texto": "Serviços por público alvo",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/servicos/listar_servicos_segmento?segmento=publico_alvo_cidadaos",
+            "texto": "Cidadãos",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/servicos/listar_servicos_segmento?segmento=publico_alvo_empresas",
+            "texto": "Empresas",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/servicos/listar_servicos_segmento?segmento=publico_alvo_orgaos",
+            "texto": "Órgãos e Entidades Públicas",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/servicos/listar_servicos_segmento?segmento=publico_alvo_outros",
+            "texto": "Demais segmentos (ONGs, organizações sociais, etc)",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/servicos/listar_servicos_segmento?segmento=publico_alvo_servidor",
+            "texto": "Servidor Público",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas-em-destaque",
+            "texto": "Temas em Destaque",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/transparencia-fiscal-orcamento-nacional",
+            "texto": "Orçamento Nacional",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/redes-civis-de-unidades-de-atendimento-do-governo-federal",
+            "texto": "Redes de Atendimento da Administração Pública Federal",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/protecao-de-dados-pessoais",
+            "texto": "Proteção de Dados Pessoais",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/servicos-para-imigrantes",
+            "texto": "Serviços para Imigrantes",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/politica-e-orcamento-educacional",
+            "texto": "Política e Orçamento Educacionais",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/educacao-profissional-e-tecnologica-1",
+            "texto": "Educação Profissional e Tecnológica",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/habilidades-online-para-jovens-e-adultos",
+            "texto": "Educação Profissional para Jovens e Adultos",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/trabalho-emprego",
+            "texto": "Trabalho e Emprego",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/acesso-a-educacao-para-pessoas-com-deficiencia",
+            "texto": "Serviços para Pessoas com Deficiência",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/politica-e-legislacao-contra-a-discriminacao-racial",
+            "texto": "Combate à Discriminação Racial",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/politica-e-orcamento-de-protecao-social",
+            "texto": "Política de Proteção Social",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/politica-para-mulheres",
+            "texto": "Política para Mulheres",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/saude-reprodutiva-da-mulher",
+            "texto": "Saúde Reprodutiva da Mulher",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/desenvolvimento-cuidados-e-educacao-pre-escolar",
+            "texto": "Cuidados na Primeira Infância",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/habitacao-popular",
+            "texto": "Habitação Popular",
+            "interno": true
+          },
+          {
+            "url": "https://www.gov.br/pt-br/temas/controle-da-poluicao-e-outras-medidas-de-precaucao",
+            "texto": "Controle de Poluição e Resíduos Sólidos",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.gov.br/logo.png",
+          "https://www.gov.br/pt-br/perfil_usuario/agricultor/@@images/image",
+          "https://www.gov.br/pt-br/perfil_usuario/turista/@@images/image",
+          "https://www.gov.br/pt-br/perfil_usuario/aposentado/@@images/image",
+          "https://www.gov.br/pt-br/perfil_usuario/empreendedor/@@images/image",
+          "https://www.gov.br/pt-br/perfil_usuario/trabalhador/@@images/image",
+          "https://www.gov.br/pt-br/perfil_usuario/motorista/@@images/image",
+          "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/ff5bc798-cd45-4cc9-bb65-df6df299f4d7/@@images/28f0c0ef-327b-4d1a-a75a-60a87a353206.jpeg",
+          "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/bdcbeacd-00ee-44e7-b1e6-9682ba72a5a0/@@images/0096d76a-4eee-466e-b2fa-ad9552a1fb2d.png",
+          "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/a8ae6ce6-d7d6-43fa-aa0c-a3d7aee9ba58/@@images/9722fdf6-5487-47d2-bb68-e0b4dd8b3110.png"
+        ],
+        "midia": [
+          {
+            "id": "med-7d5aa17b7618",
+            "type": "image",
+            "title": "O gov.br reúne, em um só lugar, serviços para o cidadão e informações sobre a atuação de todas as áreas do governo.",
+            "url": "https://www.gov.br/logo.png",
+            "final_url": "https://www.gov.br/logo.png",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O gov.br reúne, em um só lugar, serviços para o cidadão e informações sobre a atuação de todas as áreas do governo.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f5b0f3e7dc90",
+            "type": "image",
+            "title": "Agricultor",
+            "url": "https://www.gov.br/pt-br/perfil_usuario/agricultor/@@images/image",
+            "final_url": "https://www.gov.br/pt-br/perfil_usuario/agricultor/@@images/image",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Agricultor",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3b80233cd345",
+            "type": "image",
+            "title": "Turista",
+            "url": "https://www.gov.br/pt-br/perfil_usuario/turista/@@images/image",
+            "final_url": "https://www.gov.br/pt-br/perfil_usuario/turista/@@images/image",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Turista",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f696bc8ceb8b",
+            "type": "image",
+            "title": "Aposentado",
+            "url": "https://www.gov.br/pt-br/perfil_usuario/aposentado/@@images/image",
+            "final_url": "https://www.gov.br/pt-br/perfil_usuario/aposentado/@@images/image",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Aposentado",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2f08d358b8a3",
+            "type": "image",
+            "title": "Empreendedor",
+            "url": "https://www.gov.br/pt-br/perfil_usuario/empreendedor/@@images/image",
+            "final_url": "https://www.gov.br/pt-br/perfil_usuario/empreendedor/@@images/image",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Empreendedor",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-33e535b1693b",
+            "type": "image",
+            "title": "Trabalhador",
+            "url": "https://www.gov.br/pt-br/perfil_usuario/trabalhador/@@images/image",
+            "final_url": "https://www.gov.br/pt-br/perfil_usuario/trabalhador/@@images/image",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Trabalhador",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-22f42b6f13e1",
+            "type": "image",
+            "title": "Motorista",
+            "url": "https://www.gov.br/pt-br/perfil_usuario/motorista/@@images/image",
+            "final_url": "https://www.gov.br/pt-br/perfil_usuario/motorista/@@images/image",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Motorista",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7a8f0e69ec1d",
+            "type": "image",
+            "title": "Brasil Unido pelo Rio grande do Sul",
+            "url": "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/ff5bc798-cd45-4cc9-bb65-df6df299f4d7/@@images/28f0c0ef-327b-4d1a-a75a-60a87a353206.jpeg",
+            "final_url": "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/ff5bc798-cd45-4cc9-bb65-df6df299f4d7/@@images/28f0c0ef-327b-4d1a-a75a-60a87a353206.jpeg",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Brasil Unido pelo Rio grande do Sul",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f5f1fd6783d9",
+            "type": "image",
+            "title": "Cartaz da campanha “Vacina Sempre Brasil”, com o slogan “Vacinar é cuidar de quem você ama”",
+            "url": "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/bdcbeacd-00ee-44e7-b1e6-9682ba72a5a0/@@images/0096d76a-4eee-466e-b2fa-ad9552a1fb2d.png",
+            "final_url": "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/bdcbeacd-00ee-44e7-b1e6-9682ba72a5a0/@@images/0096d76a-4eee-466e-b2fa-ad9552a1fb2d.png",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Cartaz da campanha “Vacina Sempre Brasil”, com o slogan “Vacinar é cuidar de quem você ama”",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0b9ec31fbdc5",
+            "type": "image",
+            "title": "Cartaz da campanha “Vacina Sempre Brasil”, com o slogan “Vacinar é cuidar de quem você ama”",
+            "url": "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/a8ae6ce6-d7d6-43fa-aa0c-a3d7aee9ba58/@@images/9722fdf6-5487-47d2-bb68-e0b4dd8b3110.png",
+            "final_url": "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/a8ae6ce6-d7d6-43fa-aa0c-a3d7aee9ba58/@@images/9722fdf6-5487-47d2-bb68-e0b4dd8b3110.png",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Cartaz da campanha “Vacina Sempre Brasil”, com o slogan “Vacinar é cuidar de quem você ama”",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bdf16424f654",
+            "type": "image",
+            "title": "Cartaz da campanha “Vacina Sempre Brasil”, com o slogan “Vacinar é cuidar de quem você ama”",
+            "url": "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/bdfadc83-59dc-4431-b49f-fad34640e6a7/@@images/674be705-47b4-4f7b-bb80-f4937c4fc0a0.png",
+            "final_url": "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/bdfadc83-59dc-4431-b49f-fad34640e6a7/@@images/674be705-47b4-4f7b-bb80-f4937c4fc0a0.png",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Cartaz da campanha “Vacina Sempre Brasil”, com o slogan “Vacinar é cuidar de quem você ama”",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8f8cf9bf3af9",
+            "type": "image",
+            "title": "Banner com link externo - Aplicativo celular seguro",
+            "url": "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/f51ad801-b9ba-414a-bf50-033924c20d97/@@images/e03cd282-3f7c-4395-813d-835c62e77173.jpeg",
+            "final_url": "https://www.gov.br/pt-br/pagina-inicial/@@collective.cover.banner/f51ad801-b9ba-414a-bf50-033924c20d97/@@images/e03cd282-3f7c-4395-813d-835c62e77173.jpeg",
+            "source_title": "GOV.BR",
+            "source_url": "https://www.gov.br/pt-br/",
+            "publisher": "www.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Banner com link externo - Aplicativo celular seguro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://empregabrasil.trabalho.gov.br/trabalhador/",
+      "result": {
+        "titulo": "Portal Emprega Brasil",
+        "texto": "",
+        "final": "https://empregabrasil.trabalho.gov.br/trabalhador/",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "Portal Emprega Brasil",
+          "descricao": "Portal Emprega Brasil - Governo Federal",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://plataformabrasil.saude.gov.br/",
+      "result": {
+        "titulo": "Plataforma Brasil",
+        "texto": "",
+        "final": "https://plataformabrasil.saude.gov.br/",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://pt.m.wikipedia.org/wiki/Brasil",
+      "result": {
+        "titulo": "país na América do Sul",
+        "texto": "Para outras definições de Brasil ou Brazil, veja . Nota: Brasil (desambiguação) República Federativa do Brasil Brasil Bandeira Brasão de Armas Lema: Ordem e Progresso Hino: Hino Nacional Brasileiro noicon Hino à Bandeira: Hino à Bandeira do Brasil noicon Selo Nacional Selo Nacional do Brasil Capital Brasília 15° 47'S 47° 52'O Maior cidade São Paulo 23° 33'S 46° 38'O Língua oficial Português a [ ] Línguas reconhecidas Ver línguas oficiais regionais (2022) Grupos étnicos 2 [ ] 3 [ ] Por cor ou raça: 4 [ ] 45,34% Pardos 43,46% Brancos 10,17% Pretos 0,60% Indígenas 0,42% Asiáticos b [ ] (2022) Religião 5 [ ] 83,6% Cristianismo 56,75% Catolicismo 26,85% Protestantismo 9,28% Sem religião 1,84% Espiritismo 1,05% e Umbanda candomblé 0,1% Tradições indígenas 0,11% Sem declaração 0,05% Não sabem 4,01% Outras religiosidades Gentílico Brasileiro Governo República federativa presidencialista • Presidente Luiz Inácio Lula da Silva • Vice-presidente Geraldo Alckmin • Presidente da Câmara dos Deputados Hugo Motta • Presidente do Senado Federal Davi Alcolumbre • Presidente do Supremo Tribunal Federal Edson Fachin Legislatura Congresso Nacional • Câmara alta Senado Federal • Câmara baixa Câmara dos Deputados Formação • Descobrimento de (526anos) 22 de abril 1500 • Instituição da Administração Colonial de (477anos) 17 de dezembro 1548 • Transferência da corte portuguesa para o Brasil de (218anos) 8 de março 1808 • Proclamação da Independência de (204anos) 7 de setembro 1822 • Reconhecimento da Independência de (201anos) 29 de agosto 1825 • Proclamação da República de (136anos) 15 de novembro 1889 • Constituição atual de (38anos) 5 de outubro 1988 Área Total • 8 510 417,771 () 6 [ ] km 2 5.º Água (%) • 0,65 Fronteira , , , (), , , , , e Argentina Bolívia Colômbia Guiana Francesa França Guiana Paraguai Peru Suriname Uruguai Venezuela População Estimativa para 2026 • 214 211 951 hab. () 7 [ ] 8 [ ] 7.º • Densidade 23,8 hab./km () 2 182.º () PIB PPC Estimativa para 2022 Total • US$ () 4,101 trilhões * 9 [ ] 8.º Per capita • US$20 685 () 9 [ ] 84.º (nominal) PIB Estimativa para2023 Total • US$ () 2,126 trilhões * 9 [ ] 9.º Per capita • US$10 673 () 9 [ ] 87.º (2023) IDH 0,786 () – 84.º alto 10 [ ] (2019) Gini 53,4 () 11 [ ] 10.º Moeda () Real BRL Fuso horário UTC −5 a UTC −2 (oficial: UTC −3) 12 [ ] Cód. ISO BRA Cód. Internet .br Cód. telef. +55 governamental Website gov.br (), oficialmente (), é o maior da e da região da , sendo o (equivalente a 47,3% do sul-americano), com cerca de 8,5 milhões de quilômetros quadrados, e o (com 214,2 milhões de habitantes, em julho de 2026). É o único país na onde se fala majoritariamente a e o maior país do planeta, além de ser uma das nações mais e , em decorrência da forte . Sua , promulgada em 1988, concebe o Brasil como uma , formada pela união de 26 , do e dos . Brasil localmente [bɾaˈziw] c [ ] República Federativa do Brasil escutar ⓘ 13 [ ] país América do Sul América Latina quinto maior do mundo em área territorial território 6 [ ] 14 [ ] 15 [ ] sétimo em população 16 [ ] 17 [ ] 18 [ ] América língua portuguesa lusófono 19 [ ] multiculturais etnicamente diversas imigração oriunda de variados locais do mundo atual constituição república federativa presidencialista 13 [ ] estados Distrito Federal 5 571 municípios 13 [ ] 20 [ ] nota 1 [ ] Banhado pelo , o Brasil tem um de e faz fronteira com todos os outros países sul-americanos, exceto e , sendo limitado a norte pela , , e pelo da ; a noroeste pela ; a oeste pela e ; a sudoeste pela e e ao sul pelo . Vários formam parte do território brasileiro, como , , , , e . O Brasil também é o lar de uma diversidade de , e de vastos em uma grande variedade de . Oceano Atlântico litoral 7 491 km 19 [ ] Chile Equador Venezuela Guiana Suriname departamento ultramarino francês Guiana Francesa Colômbia Bolívia Peru Argentina Paraguai Uruguai arquipélagos Alcatrazes Atol das Rocas Arquipélago de São Pedro e São Paulo Fernando de Noronha Ilhabela Trindade e Martim Vaz 19 [ ] animais selvagens ecossistemas recursos naturais protegidos habitats 19 [ ] O território que atualmente forma o Brasil foi oficialmente em 22 de abril de 1500, em expedição liderada pelo . Segundo alguns historiadores como e , europeus já teriam encontrado o território três meses antes, em 26 de janeiro, durante uma expedição comandada pelo . A região, então habitada por divididos entre milhares de e diferentes, cabia a pelo , e tornou-se uma do Império Português. Em 1532, ocorreu a fundação da , , na , que marcou o início da . O vínculo foi rompido, de fato, em 1808, quando a capital do reino foi de para a cidade do , depois de comandadas por invadirem o . Em 1815, o Brasil se torna parte de um . , o primeiro , proclamou a do país em 1822. Inicialmente independente como um , período no qual foi uma , o Brasil em 1889, em razão de um chefiado pelo marechal (o primeiro ), embora uma , agora chamada de , já existisse desde a ratificação da , em 1824. Desde o início do período republicano, a governança foi interrompida por longos períodos de , até um governo civil e eleito democraticamente , com o fim da . descoberto pelos portugueses navegador Pedro Álvares Cabral Antonio de Herrera Pietro d'Anghiera espanhol Vicente Yáñez Pinzón indígenas ameríndios grupos étnicos linguísticos Portugal Tratado de Tordesilhas colônia 22 [ ] primeira cidade do Brasil São Vicente capitania homônima colonização efetiva do território brasileiro 23 [ ] colonial transferida Lisboa Rio de Janeiro tropas francesas Napoleão Bonaparte território português 24 [ ] reino unido com Portugal Pedro I imperador independência política império monarquia constitucional parlamentarista tornou-se uma república golpe militar Deodoro da Fonseca presidente legislatura bicameral Congresso Nacional primeira Constituição 24 [ ] democrática regimes autoritários assumir o poder em 1985 ditadura militar 25 [ ] Como e , a nação tem reconhecimento e influência internacional, sendo que também é classificada como uma e como uma por vários analistas. O brasileiro é o e o por (PPC), sendo, em ambos, o maior da América Latina e do . O país é um dos principais celeiros do planeta, sendo o maior dos últimos 150 anos, além de ser classificado como uma economia de renda média-alta pelo e como um , que detém a e a da América do Sul. No entanto, o país ainda mantém níveis notáveis de , e . É membro fundador da (ONU), , , (CPLP), , (OEA), (OEI) e (Mercosul). potência regional média 26 [ ] potência global emergente 27 [ ] potencial superpotência 28 [ ] PIB nominal décimo maior do mundo 29 [ ] oitavo paridade do poder de compra Hemisfério Sul 30 [ ] produtor de café 31 [ ] Banco Mundial 32 [ ] país recentemente industrializado maior parcela de riqueza global economia mais complexa corrupção criminalidade desigualdade social Organização das Nações Unidas G20 BRICS Comunidade dos Países de Língua Portuguesa União Latina Organização dos Estados Americanos Organização dos Estados Ibero-americanos Mercado Comum do Sul Etimologia Ver artigo principal: Etimologia de Brasil O nome tem origem no termo medieval , empregado na Europa desde pelo menos o século XII para designar uma tintura vermelha de alto valor comercial, obtida inicialmente a partir de madeiras asiáticas, em especial a . Do ponto de vista etimológico, o vocábulo está associado ao latim vulgar , em alusão à coloração intensa do pigmento. Brasil brasile Caesalpinia sappan 33 [ ] 34 [ ] brasa 35 [ ] Com a chegada dos europeus à América no início do século XVI, o nome foi transferido para a árvore nativa , cuja madeira produzia tintura de qualidade semelhante. A exploração sistemática do pau-brasil tornou-se um dos eixos centrais da economia colonial inicial, favorecendo a progressiva aplicação do termo ao território. Caesalpinia echinata Brasil 36 [ ] 35 [ ] A partir do século XIX, difundiu-se a hipótese de que o nome do país derivaria da ilha mítica irlandesa conhecida como , representada em mapas medievais. Estudos historiográficos post",
+        "final": "https://pt.wikipedia.org/wiki/Brasil",
+        "trecho_usado": "como uma por vários analistas. O brasileiro é o e o por (PPC), sendo, em ambos, o maior da América Latina e do . O país é um dos principais celeiros do planeta, sendo o maior dos últimos 150 anos, além de ser classificado como uma economia de renda média-alta pelo e como um , que detém a e a da América do Sul. No entanto, o país ainda mantém níveis notáveis de , e . É membro fundador da (ONU), , ,",
+        "metadados": {
+          "titulo": "país na América do Sul",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Brasil",
+          "og": {
+            "og:image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "og:image:width": "1200",
+            "og:image:height": "840",
+            "og:title": "Brasil – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2003-08-31T18:29:19Z",
+          "atualizado_em": "2026-10-17T01:49:55Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2003-08-31T18:29:19Z",
+            "dateModified": "2026-10-17T01:49:55Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "país na América do Sul"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "República Federativa do Brasil Brasil\nHino: Hino Nacional Brasileiro Hino à Bandeira: Hino à Bandeira do Brasil\nSelo Nacional Selo Nacional do Brasil\nBrasília 15° 47'S 47° 52'O\nSão Paulo 23° 33'S 46° 38'O\nVer línguas oficiais regionais\n(2022) Grupos étnicos 2 [ ] 3 [ ]\n1,05% e Umbanda candomblé\n4,01% Outras religiosidades\nRepública federativa presidencialista\nLuiz Inácio Lula da Silva\n• Presidente da Câmara dos Deputados\n• Presidente do Senado Federal\n• Presidente do Supremo Tribunal Federal\nde (526anos) 22 de abril 1500\n• Instituição da Administração Colonial\nde (477anos) 17 de dezembro 1548\n• Transferência da corte portuguesa para o Brasil\nde (218anos) 8 de março 1808\n• Proclamação da Independência\nde (204anos) 7 de setembro 1822\n• Reconhecimento da Independência\nde (201anos) 29 de agosto 1825\n• Proclamação da República\nde (136anos) 15 de novembro 1889\nde (38anos) 5 de outubro 1988\n8 510 417,771 () 6 [ ] km 2 5.º\n, , , (), , , , , e Argentina Bolívia Colômbia Guiana Francesa França Guiana Paraguai Peru Suriname Uruguai Venezuela\n214 211 951 hab. () 7 [ ] 8 [ ] 7.º\nUS$ () 4,101 trilhões * 9 [ ] 8.º\nUS$ () 2,126 trilhões * 9 [ ] 9.º\n0,786 () – 84.º alto 10 [ ]\nUTC −5 a UTC −2 (oficial: UTC −3) 12 [ ]\n(), oficialmente (), é o maior da e da região da , sendo o (equivalente a 47,3% do sul-americano), com cerca de 8,5 milhões de quilômetros quadrados, e o (com 214,2 milhões de habitantes, em julho de 2026). É o único país na onde se fala majoritariamente a e o maior país do planeta, além de ser uma das nações mais e , em decorrência da forte . Sua , promulgada em 1988, concebe o Brasil como uma , formada pela união de 26 , do e dos . Brasil localmente [bɾaˈziw] c [ ] República Federativa do Brasil escutar ⓘ 13 [ ] país América do Sul América Latina quinto maior do mundo em área territorial território 6 [ ] 14 [ ] 15 [ ] sétimo em população 16 [ ] 17 [ ] 18 [ ] América língua portuguesa lusófono 19 [ ] multiculturais etnicamente diversas imigração oriunda de variados locais do mundo atual constituição república federativa presidencialista 13 [ ] estados Distrito Federal 5 571 municípios 13 [ ] 20 [ ] nota 1 [ ]\nBanhado pelo , o Brasil tem um de e faz fronteira com todos os outros países sul-americanos, exceto e , sendo limitado a norte pela , , e pelo da ; a noroeste pela ; a oeste pela e ; a sudoeste pela e e ao sul pelo . Vários formam parte do território brasileiro, como , , , , e . O Brasil também é o lar de uma diversidade de , e de vastos em uma grande variedade de . Oceano Atlântico litoral 7 491 km 19 [ ] Chile Equador Venezuela Guiana Suriname departamento ultramarino francês Guiana Francesa Colômbia Bolívia Peru Argentina Paraguai Uruguai arquipélagos Alcatrazes Atol das Rocas Arquipélago de São Pedro e São Paulo Fernando de Noronha Ilhabela Trindade e Martim Vaz 19 [ ] animais selvagens ecossistemas recursos naturais protegidos habitats 19 [ ]\nO território que atualmente forma o Brasil foi oficialmente em 22 de abril de 1500, em expedição liderada pelo . Segundo alguns historiadores como e , europeus já teriam encontrado o território três meses antes, em 26 de janeiro, durante uma expedição comandada pelo . A região, então habitada por divididos entre milhares de e diferentes, cabia a pelo , e tornou-se uma do Império Português. Em 1532, ocorreu a fundação da , , na , que marcou o início da . O vínculo foi rompido, de fato, em 1808, quando a capital do reino foi de para a cidade do , depois de comandadas por invadirem o . Em 1815, o Brasil se torna parte de um . , o primeiro , proclamou a do país em 1822. Inicialmente independente como um , período no qual foi uma , o Brasil em 1889, em razão de um chefiado pelo marechal (o primeiro ), embora uma , agora chamada de , já existisse desde a ratificação da , em 1824. Desde o início do período republicano, a governança foi interrompida por longos períodos de , até um governo civil e eleito democraticamente , com o fim da . descoberto pelos portugueses navegador Pedro Álvares "
+          },
+          {
+            "titulo": "Primeira República e Era Vargas",
+            "texto": "Com o início do governo , sendo pouco mais do que , a então nova previa diretas apenas para 1894 e, embora abolisse a restrição do período monárquico que estabelecia direito ao voto apenas aos que tivessem determinado nível de renda, mantinha o exercício do voto em caráter aberto (não secreto) e, entre outras restrições, circunscrito apenas aos homens, alfabetizados, numa época em que a população do país era majoritariamente analfabeta. Também foi instituído o , com uma considerável descentralização de poder do governo central para os estados. republicano uma ditadura militar constituição de 1891 97 [ ] eleições 98 [ ] federalismo no Brasil 99 [ ]\nTais características, junto à economia agrária do país, cujo principal produto era o , proporcionaram a ascensão do , estrutura de poder dominada por fazendeiros que a votar em seus candidatos; da , que garantia o apoio mútuo entre o governo federal e as oligarquias locais; e da , que manteve o predomínio das oligarquias de e na política nacional. café coronelismo oligárquica intimidavam a população 98 [ ] política dos governadores 100 [ ] política do café com leite São Paulo Minas Gerais 100 [ ]\nNeste primeiro período, o país republicano manteve um relativo equilíbrio em relação à , que só foi rompido pela (1899–1903) e pelo na (1914–1918). Internamente, a partir da e da em 1891, iniciou-se um ciclo prolongado de instabilidade , e que se estenderia até a década de 1920, mantendo o país assolado por , tanto civis, quanto militares. Pouco a pouco, estas rebeliões minaram o regime de tal forma que, em 1930, foi possível ao candidato presidencial derrotado nas , , na esteira do assassinato de , seu companheiro de chapa, liderar a , com o apoio dos militares, e . política externa questão acriana 101 [ ] envolvimento do país Primeira Guerra Mundial 102 [ ] 103 [ ] 104 [ ] crise do encilhamento 105 [ ] 106 [ ] 107 [ ] primeira Revolta da Armada 108 [ ] financeira política social diversas rebeliões 109 [ ] 110 [ ] 111 [ ] 112 [ ] 113 [ ] 114 [ ] eleições daquele ano Getúlio Vargas João Pessoa Revolução de 1930 assumir a presidência da república 115 [ ]\nVargas e os militares, que deveriam governar apenas temporariamente a fim de implementar reformas democráticas, fecharam o e seguiram governando sob , tendo feito em todos os estados, à exceção de Minas Gerais, substituindo os governadores por , que eram seus apoiadores políticos. Congresso Nacional estado de emergência intervenções federais 116 [ ] interventores federais 117 [ ]\nSob a justificativa de cobrar a implementação das promessas de reformas democráticas em uma nova constituição, em 1932 a oligarquia paulista tentou recuperar o poder através de uma e, em 1935, os comunistas se rebelaram na , tendo ambos os movimentos sido derrotados. No entanto, a serviu de pretexto tanto para impedir as eleições previamente estipuladas, como para que Vargas e os militares lançassem mão de outro , estabelecendo o e formalizando assim o status ditatorial do regime. Em maio de 1938, houve o , ainda outra tentativa fracassada de tomada de poder, desta vez por parte dos nacionalistas. 118 [ ] revolução armada 119 [ ] Intentona Comunista 120 [ ] ameaça comunista golpe de Estado em 1937 Estado Novo 121 [ ] Levante Integralista 122 [ ]\nInternamente, a Era Vargas foi marcada pelo , a instituição do e , a , processos de e , e extensos esforços de e . populismo voto feminino secreto expansão de direitos trabalhistas urbanização industrialização propaganda censura durante o Estado Novo 123 [ ] 124 [ ] 125 [ ]\nO Brasil manteve-se neutro durante os primeiros anos da (1939–1945), até os antecedentes que o levaram a postar-se ao lado dos durante a Conferência Interamericana de 1942, rompendo com as . Em represália, as marinhas de guerra da e estenderam sua campanha de guerra submarina ao Brasil e, após meses de contínuo afundamento de navios mercantes brasileiros e forte pressão popular, o em agosto daquele ano, tendo somente em 1944 enviado uma para combater na Eu"
+          },
+          {
+            "titulo": "Quarta República e ditadura militar",
+            "texto": "Vários governos provisórios breves sucederam-se após o suicídio de Vargas. Em 1955, através de , tornou-se presidente e assumiu uma postura em relação à , o que lhe permitiu governar sem grandes crises. A economia e o setor industrial cresceram consideravelmente, mas sua maior conquista foi a construção da nova capital, , inaugurada em 1960. 136 [ ] eleições diretas Juscelino Kubitschek conciliadora oposição política 137 [ ] 138 [ ] Brasília 139 [ ]\nO sucessor de Kubitschek, , , renunciou em 1961 menos de sete meses após assumir o cargo. Seu vice-presidente, , assumiu a presidência, mas suscitou forte oposição política e foi deposto pelo , que resultou na instauração de um . Jânio Quadros eleito em 1960 140 [ ] João Goulart 141 [ ] golpe de 1964 regime militar 142 [ ]\nO novo regime se destinava a ser transitório, mas, cada vez mais fechado em si mesmo, tornou-se uma plena com a promulgação do em 1968. A e a em todas as suas formas, incluindo a , não se restringiram aos políticos oposicionistas e militantes de . A sua ação alcançou a todos aqueles a quem o regime encarava como opositores, ou a eles ligados, o que abrangeu praticamente todos os setores sociais; entre eles , , , , , , , além dos próprios e que expressassem qualquer discordância ao regime e familiares de . 143 [ ] ditadura Ato Institucional n.º 5 144 [ ] censura repressão tortura esquerda artistas estudantes jornalistas clérigos sindicalistas professores intelectuais militares policiais 145 [ ] 146 [ ] presos políticos 147 [ ] 148 [ ]\nAtravés da , o governo brasileiro também participou na perseguição internacional a sul-americanos em geral. A exemplo de outros regimes ditatoriais na história, o regime militar brasileiro atingiu o auge de sua popularidade num momento de alto crescimento econômico, que ficou conhecido como \"\", momento este que coincidiu com o . Operação Condor dissidentes 149 [ ] milagre econômico auge da repressão 150 [ ]\nLentamente, no entanto, o desgaste natural de anos de poder ditatorial, que não abrandou a repressão mesmo após a derrota da de esquerda, somado à inabilidade em lidar com as do período, o crescimento da oposição política nas eleições regionais e ainda as pressões populares, tornou inevitável a do regime que, por seu lado, foi conduzida pelos generais e . Com a promulgação da em 1979, o Brasil lentamente iniciou a volta à democracia, que se completaria na década de 1980. guerrilha 151 [ ] 152 [ ] crises econômicas 153 [ ] abertura política Geisel Golbery 154 [ ] Lei da Anistia 155 [ ]\nApós o movimento popular das , os civis voltaram ao poder em 1985 inaugurando a chamada , com a eleição do oposicionista , que, entretanto, não assumiu o cargo devido à . Seu vice, , assumiu a presidência, tornando-se impopular ao longo de seu mandato por conta da piora da crise econômica e herdadas do regime militar, mesmo com uma breve euforia inicial do seu . Sarney deu continuidade ao programa de governo de Tancredo Neves instaurando, em 1987, uma , que promulgou a atual . No entanto, o fracasso do na área econômica e o consequente desgaste político permitiram a eleição, em , do quase desconhecido , que posteriormente pelo em 1992, com seu vice-presidente, , assumindo o cargo em decorrência. Diretas Já Nova República Tancredo Neves morte decorrente de uma grave doença 156 [ ] José Sarney 157 [ ] hiperinflação Plano Cruzado 158 [ ] Assembleia Nacional Constituinte 159 [ ] Constituição brasileira 160 [ ] Governo Sarney 1989 Fernando Collor sofreu processo de impeachment Congresso Nacional Itamar Franco 161 [ ]\nDo novo ministério nomeado por Itamar, com integrantes de praticamente todos os partidos que aprovaram o de Collor, destacou-se (FHC), como e coordenador do bem-sucedido , que trouxe estabilidade para a , após décadas de inúmeros planos econômicos de governos anteriores que haviam fracassado na tentativa de controlar a hiperinflação. Em consequência, FHC foi eleito presidente na e novamente em . A transição pacífica de poder para seu principa"
+          },
+          {
+            "titulo": "Biodiversidade e meio ambiente",
+            "texto": "A grande extensão territorial do Brasil abrange diferentes , como a , reconhecida como tendo a maior do mundo. Os rios amazônicos fornecem uma variedade de , incluindo pântanos e riachos, cada um abrigando diferentes tipos de vida selvagem. A e o , sustentam também grande biodiversidade, além da , fazendo do Brasil um . No sul, a cresce sob condições de . ecossistemas Floresta Amazônica diversidade biológica habitats 204 [ ] mata Atlântica cerrado 205 [ ] caatinga 198 [ ] país megadiverso floresta de araucárias clima temperado 205 [ ]\nA rica do Brasil reflete a variedade de naturais. Os estimam que o número total de espécies vegetais e animais no Brasil seja de aproximadamente de quatro milhões. Grandes incluem , , , raros , , , , , , e . são abundantes no sul e muitas espécies de são encontradas nas do norte. A preocupação com o meio ambiente tem crescido em resposta ao interesse mundial nas . vida selvagem habitats cientistas 205 [ ] mamíferos pumas onças jaguatiricas cachorros-vinagre raposas queixadas antas tamanduás preguiças gambás tatus Veados platyrrhini florestas tropicais 205 [ ] 206 [ ] questões ambientais 207 [ ]\nO patrimônio natural do Brasil pela pecuária e agricultura, exploração madeireira, mineração, reassentamento, , extração de petróleo e gás, a , comércio de espécies selvagens, barragens e infraestrutura, , fogo, e pelos . A construção de estradas em áreas de floresta, tais como a e a , abriu áreas anteriormente remotas para a agricultura e para o comércio; barragens inundaram vales e selvagens e minas criaram cicatrizes na terra e poluíram a paisagem. Em dezembro de 2016, conforme estudos da , a vegetação nativa preservada cobria 61% do território brasileiro. A agricultura ocupava 8% do território nacional enquanto as pastagens cobriam 19,7%. Em 2014, segundo o IBGE, o Brasil tinha 3 299 . está seriamente ameaçado desmatamento sobrepesca contaminação da água espécies invasoras efeitos do aquecimento global 204 [ ] 208 [ ] BR-230 BR-163 habitats 207 [ ] 209 [ ] Embrapa 210 [ ] espécies ameaçadas de extinção 211 [ ]\nMapa da do Brasil (2022) densidade populacional\nA , conforme realizado pelo (IBGE) em 2022, foi de habitantes, 87,41% destes vivendo em , com uma de 23,86 habitantes por e uma de 94,25:100. A população está fortemente concentrada nas (84,8 milhões de habitantes), (54,6 milhões) e (29,9 milhões), enquanto as duas regiões mais extensas, o e o , que formam quase dois terços do território nacional, contam com 17,3 e 16,2 milhões de habitantes, respectivamente. população do Brasil censo demográfico Instituto Brasileiro de Geografia e Estatística 203 080 756 áreas urbanas densidade quilômetro quadrado proporção de homens e mulheres regiões Sudeste Nordeste Sul Norte Centro-Oeste 212 [ ] 213 [ ]\nA população brasileira aumentou significativamente entre 1940 e 1970, devido a um declínio na , embora a também tenha passado por um ligeiro declínio no período. Na década de 1940 a taxa de foi de 2,4%, subindo para 3% em 1950 e permanecendo em 2,9% em 1960, com a subindo de 44 para 54 anos, atingindo 76,6 anos em 2024. A taxa de aumento populacional tem vindo a diminuir desde 1960, de 3,04% ao ano entre 1950–1960 para 1,05% em 2008 e deverá cair para um valor negativo, de -0,29%, em 2050, completando assim a . taxa de mortalidade taxa de natalidade crescimento anual da população expectativa de vida 214 [ ] 215 [ ] 216 [ ] transição demográfica 217 [ ]\nOs , de acordo com o censo do IBGE para 2022, são as de (com habitantes), (), (), () e (). Existem também grandes concentrações urbanas no interior do país. , com exceção de , capital do , e , a capital de . maiores aglomerados urbanos do Brasil conurbações São Paulo 20 673 280 Rio de Janeiro 11 760 550 Belo Horizonte 4 963 704 Brasília 3 858 760 Recife 3 783 639 218 [ ] Quase todas as capitais são as maiores cidades de seus estados Vitória Espírito Santo Florianópolis Santa Catarina 218 [ ]\nmais populosas do Concentrações urbanas Brasil do (IBGE) Censo de 2022 In"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal",
+            "texto": "Página principal",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Conte%C3%BAdo_destacado",
+            "texto": "Conteúdo destacado",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Eventos_atuais",
+            "texto": "Eventos atuais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Esplanada",
+            "texto": "Esplanada",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Aleat%C3%B3ria",
+            "texto": "Página aleatória",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:%C3%8Dndice",
+            "texto": "Portais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_especiais",
+            "texto": "Páginas especiais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Informe_um_erro",
+            "texto": "Informar um erro",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Boas-vindas",
+            "texto": "Boas-vindas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_principal",
+            "texto": "Ajuda",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_de_testes",
+            "texto": "Páginas de testes públicas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Portal_comunit%C3%A1rio",
+            "texto": "Portal comunitário",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Mudan%C3%A7as_recentes",
+            "texto": "Mudanças recentes",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Manuten%C3%A7%C3%A3o",
+            "texto": "Manutenção",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:Guia_de_edi%C3%A7%C3%A3o/Como_come%C3%A7ar_uma_p%C3%A1gina",
+            "texto": "Criar página",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_novas",
+            "texto": "Páginas novas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Contato",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Pesquisar",
+            "texto": "Busca",
+            "interno": true
+          },
+          {
+            "url": "https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=pt.wikipedia.org&amp;uselang=pt",
+            "texto": "Doar",
+            "interno": false
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Criar_conta&amp;returnto=Brasil",
+            "texto": "Criar conta",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Entrar&amp;returnto=Brasil",
+            "texto": "Iniciar sessão",
+            "interno": true
+          },
+          {
+            "url": "https://ab.wikipedia.org/wiki/%D0%91%D1%80%D0%B0%D0%B7%D0%B8%D0%BB%D0%B8%D0%B0",
+            "texto": "Аԥсшәа",
+            "interno": false
+          },
+          {
+            "url": "https://ace.wikipedia.org/wiki/Brasil",
+            "texto": "Acèh",
+            "interno": false
+          },
+          {
+            "url": "https://ady.wikipedia.org/wiki/%D0%91%D1%80%D0%B0%D0%B7%D0%B8%D0%BB%D0%B8%D0%B5",
+            "texto": "Адыгабзэ",
+            "interno": false
+          },
+          {
+            "url": "https://af.wikipedia.org/wiki/Brasili%C3%AB",
+            "texto": "Afrikaans",
+            "interno": false
+          },
+          {
+            "url": "https://als.wikipedia.org/wiki/Brasilien",
+            "texto": "Alemannisch",
+            "interno": false
+          },
+          {
+            "url": "https://am.wikipedia.org/wiki/%E1%89%A5%E1%88%AB%E1%8B%9A%E1%88%8D",
+            "texto": "አማርኛ",
+            "interno": false
+          },
+          {
+            "url": "https://ami.wikipedia.org/wiki/Brazil",
+            "texto": "Pangcah",
+            "interno": false
+          },
+          {
+            "url": "https://an.wikipedia.org/wiki/Brasil",
+            "texto": "Aragonés",
+            "interno": false
+          },
+          {
+            "url": "https://ang.wikipedia.org/wiki/Brasil",
+            "texto": "Ænglisc",
+            "interno": false
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "República Federativa do Brasil Brasil"
+            ],
+            [
+              "Bandeira Brasão de Armas"
+            ],
+            [
+              "Lema: Ordem e Progresso"
+            ],
+            [
+              "Hino: Hino Nacional Brasileiro noicon Hino à Bandeira: Hino à Bandeira do Brasil noicon"
+            ],
+            [
+              "Selo Nacional Selo Nacional do Brasil"
+            ],
+            [
+              "Capital",
+              "Brasília 15° 47' S 47° 52' O"
+            ],
+            [
+              "Maior cidade",
+              "São Paulo 23° 33' S 46° 38' O"
+            ],
+            [
+              "Língua oficial",
+              "Português [ a ]"
+            ],
+            [
+              "Línguas reconhecidas",
+              "Ver línguas oficiais regionais"
+            ],
+            [
+              "Grupos étnicos (2022) [ 2 ] [ 3 ]",
+              "Por cor ou raça: [ 4 ] .mw-parser-output .treeview ul{padding:0;margin:0}.mw-parser-output .treeview li{padding:0;margin:0;list-style-type:none;list-style-image"
+            ],
+            [
+              "Religião (2022) [ 5 ]",
+              "83,6% Cristianismo 56,75% Catolicismo 26,85% Protestantismo 9,28% Sem religião 1,84% Espiritismo 1,05% Umbanda e candomblé 0,1% Tradições indígenas 0,11% Sem de"
+            ],
+            [
+              "Gentílico",
+              "Brasileiro"
+            ],
+            [
+              "Governo",
+              "República federativa presidencialista"
+            ],
+            [
+              "• Presidente",
+              "Luiz Inácio Lula da Silva"
+            ],
+            [
+              "• Vice-presidente",
+              "Geraldo Alckmin"
+            ],
+            [
+              "• Presidente da Câmara dos Deputados",
+              "Hugo Motta"
+            ],
+            [
+              "• Presidente do Senado Federal",
+              "Davi Alcolumbre"
+            ],
+            [
+              "• Presidente do Supremo Tribunal Federal",
+              "Edson Fachin"
+            ],
+            [
+              "Legislatura",
+              "Congresso Nacional"
+            ],
+            [
+              "• Câmara alta",
+              "Senado Federal"
+            ],
+            [
+              "• Câmara baixa",
+              "Câmara dos Deputados"
+            ],
+            [
+              "Formação"
+            ],
+            [
+              "• Descobrimento",
+              "22 de abril de 1500 (526 anos)"
+            ],
+            [
+              "• Instituição da Administração Colonial",
+              "17 de dezembro de 1548 (477 anos)"
+            ],
+            [
+              "• Transferência da corte portuguesa para o Brasil",
+              "8 de março de 1808 (218 anos)"
+            ],
+            [
+              "• Proclamação da Independência",
+              "7 de setembro de 1822 (204 anos)"
+            ],
+            [
+              "• Reconhecimento da Independência",
+              "29 de agosto de 1825 (201 anos)"
+            ],
+            [
+              "• Proclamação da República",
+              "15 de novembro de 1889 (136 anos)"
+            ],
+            [
+              "• Constituição atual",
+              "5 de outubro de 1988 (38 anos)"
+            ],
+            [
+              "Área"
+            ],
+            [
+              "• Total",
+              "8 510 417,771 [ 6 ] km 2 ( 5.º )"
+            ],
+            [
+              "• Água (%)",
+              "0,65"
+            ],
+            [
+              "Fronteira",
+              "Argentina , Bolívia , Colômbia , Guiana Francesa ( França ), Guiana , Paraguai , Peru , Suriname , Uruguai e Venezuela"
+            ],
+            [
+              "População"
+            ],
+            [
+              "• Estimativa para 2026",
+              "214 211 951 [ 7 ] [ 8 ] hab. ( 7.º )"
+            ],
+            [
+              "• Densidade",
+              "23,8 hab./km 2 ( 182.º )"
+            ],
+            [
+              "PIB ( PPC )",
+              "Estimativa para 2022"
+            ],
+            [
+              "• Total",
+              "US$ .mw-parser-output .tooltip-dotted{border-bottom:1px dotted;cursor:help} 4 101 000 000 000 \"}]]}'>4,101 trilhões * [ 9 ] ( 8.º )"
+            ],
+            [
+              "• Per capita",
+              "US$ 20 685 [ 9 ] ( 84.º )"
+            ],
+            [
+              "PIB (nominal)",
+              "Estimativa para 2023"
+            ]
+          ],
+          [
+            [
+              ".mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,."
+            ],
+            [
+              "São Paulo Rio de Janeiro"
+            ],
+            [
+              "Posição",
+              "Localidade",
+              "Unidade federativa",
+              "Pop.",
+              "Posição",
+              "Localidade",
+              "Unidade federativa",
+              "Pop.",
+              ""
+            ],
+            [
+              "1",
+              "São Paulo",
+              "São Paulo",
+              "20 673 280",
+              "11",
+              "Campinas",
+              "São Paulo",
+              "2 093 118"
+            ],
+            [
+              "2",
+              "Rio de Janeiro",
+              "Rio de Janeiro",
+              "11 760 550",
+              "12",
+              "Manaus",
+              "Amazonas",
+              "2 063 689"
+            ],
+            [
+              "3",
+              "Belo Horizonte",
+              "Minas Gerais",
+              "4 963 704",
+              "13",
+              "Belém",
+              "Pará",
+              "1 957 533"
+            ],
+            [
+              "4",
+              "Brasília",
+              "Distrito Federal – Goiás",
+              "3 858 760",
+              "14",
+              "Vitória",
+              "Espírito Santo",
+              "1 756 172"
+            ],
+            [
+              "5",
+              "Recife",
+              "Pernambuco",
+              "3 783 639",
+              "15",
+              "Baixada Santista",
+              "São Paulo",
+              "1 672 991"
+            ],
+            [
+              "6",
+              "Porto Alegre",
+              "Rio Grande do Sul",
+              "3 679 298",
+              "16",
+              "S. J. dos Campos",
+              "São Paulo",
+              "1 589 875"
+            ],
+            [
+              "7",
+              "Fortaleza",
+              "Ceará",
+              "3 424 978",
+              "17",
+              "São Luís",
+              "Maranhão",
+              "1 458 836"
+            ],
+            [
+              "8",
+              "Curitiba",
+              "Paraná",
+              "3 382 210",
+              "18",
+              "Natal",
+              "Rio Grande do Norte",
+              "1 263 738"
+            ],
+            [
+              "9",
+              "Salvador",
+              "Bahia",
+              "3 320 568",
+              "19",
+              "Maceió",
+              "Alagoas",
+              "1 194 596"
+            ],
+            [
+              "10",
+              "Goiânia",
+              "Goiás",
+              "2 481 043",
+              "20",
+              "Florianópolis",
+              "Santa Catarina",
+              "1 183 874"
+            ]
+          ],
+          [
+            [
+              "Data",
+              "Nome",
+              "Observação [ 449 ] [ 450 ] [ nota 5 ]"
+            ],
+            [
+              "1º de janeiro",
+              "Confraternização Mundial",
+              "Início do calendário anual"
+            ],
+            [
+              "21 de abril",
+              "Tiradentes",
+              "Em homenagem ao mártir da Inconfidência Mineira Joaquim José da Silva Xavier, o Tiradentes ."
+            ],
+            [
+              "1º de maio",
+              "Dia do Trabalhador",
+              "Homenagem a todos os trabalhadores"
+            ],
+            [
+              "7 de setembro",
+              "Independência",
+              "Proclamação da Independência do domínio de Portugal"
+            ],
+            [
+              "12 de outubro",
+              "Nossa Senhora da Conceição Aparecida / Dia das Crianças",
+              "Padroeira do país/Homenagem às crianças"
+            ],
+            [
+              "2 de novembro",
+              "Finados",
+              "Dia de memória aos mortos"
+            ],
+            [
+              "15 de novembro",
+              "Proclamação da República",
+              "Transformação do Império em uma República"
+            ],
+            [
+              "20 de novembro",
+              "Dia Nacional de Zumbi e da Consciência Negra",
+              "Morte do líder quilombola Zumbi dos Palmares"
+            ],
+            [
+              "25 de dezembro",
+              "Natal",
+              "Celebração tradicional de natal"
+            ]
+          ],
+          [
+            [
+              "Ouça o artigo ( info ) noicon"
+            ],
+            [
+              "Este áudio foi criado a partir da revisão datada de 18 de setembro de 2010 e pode não refletir mudanças posteriores ao artigo ( ajuda )."
+            ],
+            [
+              "Mais artigos audíveis"
+            ]
+          ],
+          [
+            [
+              "Outros projetos Wikimedia também contêm material sobre Brasil:"
+            ],
+            [
+              "",
+              "Definições no Wikcionário"
+            ],
+            [
+              "",
+              "Livros e manuais no Wikilivros"
+            ],
+            [
+              "",
+              "Citações no Wikiquote"
+            ],
+            [
+              "",
+              "Textos originais no Wikisource"
+            ],
+            [
+              "",
+              "Imagens e media no Commons"
+            ],
+            [
+              "",
+              "Categoria no Commons"
+            ],
+            [
+              "",
+              "Notícias no Wikinotícias"
+            ],
+            [
+              "",
+              "Guia turístico no Wikivoyage"
+            ],
+            [
+              "",
+              "Base de dados no Wikidata"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/0/05/Flag_of_Brazil.svg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Cscr-featured1.svg/20px-Cscr-featured1.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Sound-icon.svg/20px-Sound-icon.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Disambig_grey.svg/20px-Disambig_grey.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/250px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/120px-Coat_of_arms_of_Brazil.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-799a0dd2c0e6",
+            "type": "image",
+            "title": "país na América do Sul",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/1280px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c6b42cbb00e6",
+            "type": "image",
+            "title": "Este é um artigo destacado. Clique aqui para mais informações.",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Cscr-featured1.svg/20px-Cscr-featured1.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/Cscr-featured1.svg/20px-Cscr-featured1.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Este é um artigo destacado. Clique aqui para mais informações.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-17d890711b1d",
+            "type": "image",
+            "title": "Esta é uma versão em áudio do artigo. Clique aqui para ouvi-lo.",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Sound-icon.svg/20px-Sound-icon.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Sound-icon.svg/20px-Sound-icon.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Esta é uma versão em áudio do artigo. Clique aqui para ouvi-lo.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1d5f7a522a3d",
+            "type": "image",
+            "title": "Bandeira do Brasil",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/250px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/05/Flag_of_Brazil.svg/250px-Flag_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bandeira do Brasil",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d137913f6998",
+            "type": "image",
+            "title": "Armas Nacionais",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/120px-Coat_of_arms_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bf/Coat_of_arms_of_Brazil.svg/120px-Coat_of_arms_of_Brazil.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Armas Nacionais",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-772265f31891",
+            "type": "image",
+            "title": "Aumento",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Aumento",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-333ed72d24f6",
+            "type": "image",
+            "title": "BaixaPositiva",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Decrease_Positive.svg/20px-Decrease_Positive.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Decrease_Positive.svg/20px-Decrease_Positive.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "BaixaPositiva",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-93a1fd15190b",
+            "type": "video",
+            "title": "país na América do Sul",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Hino-Nacional-Brasil-instrumental-mec.ogg?utm_source=pt.wikipedia.org&utm_campaign=rest&utm_content=original",
+            "final_url": "https://upload.wikimedia.org/wikipedia/commons/0/0d/Hino-Nacional-Brasil-instrumental-mec.ogg?utm_source=pt.wikipedia.org&utm_campaign=rest&utm_content=original",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "upload.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-6d31727111f8",
+            "type": "video",
+            "title": "país na América do Sul",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0d/Hino-Nacional-Brasil-instrumental-mec.ogg/Hino-Nacional-Brasil-instrumental-mec.ogg.mp3",
+            "final_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/0/0d/Hino-Nacional-Brasil-instrumental-mec.ogg/Hino-Nacional-Brasil-instrumental-mec.ogg.mp3",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "upload.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-f8002831df25",
+            "type": "video",
+            "title": "país na América do Sul",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg?utm_source=pt.wikipedia.org&utm_campaign=rest&utm_content=original",
+            "final_url": "https://upload.wikimedia.org/wikipedia/commons/8/84/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg?utm_source=pt.wikipedia.org&utm_campaign=rest&utm_content=original",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "upload.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-0495ed72c501",
+            "type": "video",
+            "title": "país na América do Sul",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/8/84/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg.mp3",
+            "final_url": "https://upload.wikimedia.org/wikipedia/commons/transcoded/8/84/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg/Brazilian_Flag_Anthem_%28Ministry_of_Education%29.ogg.mp3",
+            "source_title": "país na América do Sul",
+            "source_url": "https://pt.wikipedia.org/wiki/Brasil",
+            "publisher": "upload.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://g1.globo.com/",
+      "result": {
+        "titulo": "g1 - O portal de notícias da Globo",
+        "texto": "Editorias Editorias Agro Agro Primeira Página Agro de gente pra gente Globo Rural Carnaval 2026 Carnaval 2026 primeira página Rio de Janeiro São Paulo Pernambuco Minas Gerais Carros Carros primeira página Motos Dinheiro sobre rodas Ciência Ciência Primeira Página Viva Você Economia Economia Primeira Página Bitcoin Calculadoras Dólar Educação Financeira Imposto de Renda Mídia e Marketing Open banking Educação Educação Primeira Página Enem Guia de Carreiras Simulado Enem Teste Vocacional Universidades Empreendedorismo​ Empreendedorismo​ Primeira página pequenas empresas Menos 30 Fest Dia do Empreendedor Fato ou Fake Guia de compras Inovação Loterias Meio Ambiente Meio Ambiente Primeira Página Amazônia Globo Natureza Sustentabilidade​ Monitor da Violência Mundo Mundo Primeira página Guerra na Ucrânia Olha que legal Política Política Primeira Página Eleições 2026 Pop & Arte Pop & Arte Primeira Página Cinema Diversidade Games Música Tv e séries Circuito Sertanejo The Town Saúde Saúde Primeira página Bem Estar Coronavirus Tecnologia Tecnologia primeira página cibersegurança Trabalho e Carreira​ Trabalho e Carreira​ Primeira página Concursos Vagas de emprego Turismo e Viagem Turismo e Viagem Primeira Página Descubra o Brasil Jogos Jogos Todos os jogos Soletra Labirinto Combinado Dito Palavras cruzadas Palavras cruzadas mini Sudoku Caça-Palavras Assine Coquetel Eleições 2026 Guia de Compras Guia de Compras Primeira página Casa Celulares Lazer Moda e beleza Presentes Tecnologia Especial Vem Que Tem Especial Vem Que Tem Mercado Pago Carros Regiões Regiões centro-oeste centro-oeste Distrito Federal Distrito Federal Primeira página Bom Dia DF DF1 DF2 Globo Comunidade DF DF no campo O que fazer no DF Moto Week Goiás Goiás Primeira página Bom Dia GO Bom dia sábado JA 1ª Edição JA 2ª Edição Jornal do Campo Esporte Mercado Imobiliário Mato Grosso Mato Grosso Primeira Página Bom Dia MT MT TV 1ª Edição MT Rural MT TV 2ª Edição Esporte Mato Grosso do Sul Mato Grosso do Sul Primeira Página Bom Dia MS MS TV 1ª Edição MS TV 2ª Edição MS Rural Esporte nordeste nordeste Alagoas Alagoas Primeira Página Esporte Bahia Bahia Primeira Página Jornal da manhã Bahia Meio Dia BATV Bahia Rural Esporte Ceará Ceará Primeira Página Bom Dia CE CETV 1ª Edição CETV 2ª Edição NE Rural Esporte Maranhão Maranhão Primeira Página Bom Dia Mirante JMTV 1ª Edição JMTV 2ª edição Mirante Rural Esporte Daqui Repórter Mirante Paraíba Paraíba Primeira Página Bom Dia Paraíba JPB 1ª Edição JPB 2ª Edição Paraíba Comunidade Esporte Pernambuco Pernambuco Recife e região Recife e região Primeira página Bom Dia PE NE 1 NE 2 Espaço PE Globo Comunidade PE Nordeste Viver e Preservar Educação Esporte Praia Limpa São João 2025 Caruaru e região Caruaru e região Primeira Página Bom Dia PE ABTV 1ª Edição ABTV 2ª Edição Globo Comunidade Esporte Paixão de Cristo Petrolina e região Petrolina e região Primeira Página Bom Dia Pernambuco GRTV 1ª Edição GRTV 2ª edição Esporte Piauí Piauí Primeira Página Bom Dia Piauí Bom dia Sábado PI TV 1ª edição PI TV 2ª Edição Clube Rural Esporte Rio Grande do Norte Rio Grande do Norte Primeira Página Bom Dia RN RN TV 1ª Edição RN TV 2ª edição Inter TV Rural Esporte Sergipe Sergipe Primeira página Bom Dia SE SETV 1ª Edição SETV 2ª Edição Estação Agrícola Esporte norte norte Acre Acre Primeira Página Bom Dia Amazônia JAC 1ª Edição JAC 2ª Edição Globo Esporte Acre Amapá Amapá Primeira Página Bom Dia Amazônia JAP 1ª Edição JAP 2ª Edição Amazônia Rural Esporte Amazonas Amazonas Primeira Página Bom Dia Amazônia JAM 1ª Edição JAM 2ª Edição Amazônia rural Esporte Pará Pará Belém e região Belém e região Primeira Página Bom Dia Pará Jornal Liberal 1ª Edição Jornal Liberal 2ª Edição Liberal Comunidade É do Pará Esporte Santarém e região Santarém e região Primeira Página Bom Dia Santarém Jornal Tapajós 1ª Edição Jornal Tapajós 2ª Edição Esporte Rondônia Rondônia Primeira Página Bom Dia Amazônia JRO 1ª Edição JRO 2ª Edição Amazônia Rural Esporte Roraima Roraima Primeira Página Bom Dia Amazônia JRR 1ª Edição JRR 2ª Edição Amazônia Rural Esporte Tocantins Tocantins Primeira Página Bom Dia Tocantins JA 1ª Edição JA 2ª Edição Jornal do Campo Esporte sudeste sudeste Espírito Santo Espírito Santo Primeira Página Bom dia Espírito Santo Gazeta Meio Dia Boa Noite ES Jornal do Campo Agronégocios Educação Concursos Esporte Minas Gerais Minas Gerais Belo Horizonte e região Belo Horizonte e região Primeira Página Bom dia Minas MG1 MG2 Rolê nas Gerais Terra de Minas pelas cozinhas de minas Esporte Centro-Oeste Centro-Oeste Primeira Página Bom dia Minas MG TV 1ª Edição MG TV 2ª Edição MG Rural Integração notícia Esporte Grande Minas Grande Minas Primeira página Inter TV Notícia MG Inter TV 1ª Edição MG Inter TV 2ª Edição Inter TV Rural É o bicho Esporte Sul de Minas Sul de Minas Primeira Página Bom dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da gente Esporte Triângulo Mineiro Triângulo Mineiro Primeira Página Bom dia Minas Uberlândia Uberlândia MG TV 1ª Edição MGTV 2ª edição Uberaba Uberaba MGTV 1ª Edição MGTV 2ª Edição MG Rural Integração notícia Concursos Esporte Globo Esporte Vales de Minas Gerais Vales de Minas Gerais Primeira Página Inter TV notícia MG Inter TV 1ª Edição MG Inter TV 2ª Edição Inter TV Rural É o bicho Esporte Zona da Mata Zona da Mata Primeira Página Bom dia Minas MG TV 1ª Edição MG TV 2ª Edição MG Rural Integração notícia Esporte Globo Esporte Rio de Janeiro Rio de Janeiro Rio de Janeiro e região Rio de Janeiro e região Primeira Página Bom dia Rio RJ1 RJ2 Globo Comunidade RJ show da madonna guia rj Fora do ponto Esporte Rio Innovation Week Norte Fluminense Norte Fluminense Primeira Página Bom dia da inter Inter 1 Inter 2 Inter TV Rural Esporte Região dos Lagos Região dos Lagos Primeira Página Bom dia da Inter Inter 1 Inter 2 Inter TV Rural Esporte Região Serrana Região Serrana Primeira Página Bom dia da Inter Inter 1 Inter 2 Inter TV Rural Esporte Sul e Costa Verde Sul e Costa Verde Primeira Página Bom dia Rio RJ TV 1ª Edição RJ TV 2ª Edição Esporte bom dia sábado São Paulo São Paulo São Paulo e região São Paulo e região Primeira Página Bom Dia SP SP1 SP2 Antena Paulista Mistura Paulista O que fazer em SP Esporte Bauru e Marília Bauru e Marília Primeira Página Bom Dia SP Bom Dia Cidade Tem Notícias 1ª Edição Tem Notícias 2ª Edição Nosso Campo Esporte Campinas e região Campinas e região Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da Gente Concursos Esporte Itapetininga e região Itapetininga e região Primeira Página Bom Dia SP Bom Dia Cidade TEM Notícias 1ª Edição TEM Notícias 2ª Edição Antena Paulista Nosso Campo Resumo da Notícia Memória TEM Comunidade Esporte Mogi das Cruzes e Suzano Mogi das Cruzes e Suzano Primeira Página Bom Dia Diário Diário TV 1ª Edição Diário TV 2ª Edição Diário Comunidade Concursos Esporte Piracicaba e região Piracicaba e região Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da Gente Esporte Pres. Prudente e Região Ribeirão Preto e Franca Ribeirão Preto e Franca Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª Edição Terra da Gente Esporte Rio Preto e Araçatuba Rio Preto e Araçatuba Primeira Página Bom Dia SP Bom Dia Cidade TEM Notícias 1ª Edição TEM Notícias 2ª Edição Nosso Campo Esporte Santos e região Santos e região Primeira Página Bom Dia Região Jornal Tribuna 1ª Edição Jornal Tribuna 2ª Edição Antena Paulista G1 em um Minuto Santos Viver Bem O Que Fazer Em Santos Culinária #13 Por Dentro do Porto Esporte São Carlos e Araraquara São Carlos e Araraquara Primeira Página Bom Dia Cidade Jornal da EPTV 1ª Edição Jornal da EPTV 2ª edição Terra da Gente Sorocaba e Jundiaí Sorocaba e Jundiaí Primeira Página Bom Dia SP Bom Dia Cidade Tem Notícias 1ª Edição Tem notícias 2ª Edição Nosso Campo Esporte Vale do Paraíba e região Vale do Paraíba e região Primeira Página Bom Dia Vanguarda Link Vanguarda Jornal Vanguarda Vanguarda Comunidade Esporte ",
+        "final": "https://g1.globo.com/",
+        "trecho_usado": "página Motos Dinheiro sobre rodas Ciência Ciência Primeira Página Viva Você Economia Economia Primeira Página Bitcoin Calculadoras Dólar Educação Financeira Imposto de Renda Mídia e Marketing Open banking Educação Educação Primeira Página Enem Guia de Carreiras Simulado Enem Teste Vocacional Universidades Empreendedorismo​ Empreendedorismo​ Primeira página pequenas empresas Menos 30 Fest Dia do",
+        "metadados": {
+          "titulo": "g1 - O portal de notícias da Globo",
+          "descricao": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+          "canonica": "https://g1.globo.com/",
+          "og": {
+            "og:type": "website",
+            "og:description": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "og:title": "g1 - O portal de notícias da Globo",
+            "og:locale": "pt_BR",
+            "og:site_name": "G1",
+            "og:image": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+            "og:image:width": "1200",
+            "og:url": "https://g1.globo.com/"
+          },
+          "twitter": {
+            "twitter:description": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "twitter:card": "summary_large_image",
+            "twitter:title": "g1 - O portal de notícias da Globo",
+            "twitter:image": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "G1",
+          "tipo": "Organization",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Carnaval 2026 Carnaval 2026\nEmpreendedorismo​ Empreendedorismo​\nMeio Ambiente Meio Ambiente\nTrabalho e Carreira​ Trabalho e Carreira​\nTurismo e Viagem Turismo e Viagem\nGuia de Compras Guia de Compras\nEspecial Vem Que Tem Especial Vem Que Tem\ncentro-oeste centro-oeste\nDistrito Federal Distrito Federal\nMato Grosso do Sul Mato Grosso do Sul\nRecife e região Recife e região\nNordeste Viver e Preservar\nCaruaru e região Caruaru e região\nPetrolina e região Petrolina e região\nRio Grande do Norte Rio Grande do Norte\nBelém e região Belém e região\nSantarém e região Santarém e região\nEspírito Santo Espírito Santo\nMinas Gerais Minas Gerais\nBelo Horizonte e região Belo Horizonte e região\nCentro-Oeste Centro-Oeste\nGrande Minas Grande Minas\nSul de Minas Sul de Minas\nTriângulo Mineiro Triângulo Mineiro\nVales de Minas Gerais Vales de Minas Gerais\nZona da Mata Zona da Mata\nRio de Janeiro Rio de Janeiro\nRio de Janeiro e região Rio de Janeiro e região\nNorte Fluminense Norte Fluminense\nRegião dos Lagos Região dos Lagos\nRegião Serrana Região Serrana\nSul e Costa Verde Sul e Costa Verde\nSão Paulo e região São Paulo e região\nBauru e Marília Bauru e Marília\nCampinas e região Campinas e região\nItapetininga e região Itapetininga e região\nMogi das Cruzes e Suzano Mogi das Cruzes e Suzano\nPiracicaba e região Piracicaba e região\nRibeirão Preto e Franca Ribeirão Preto e Franca\nRio Preto e Araçatuba Rio Preto e Araçatuba\nSantos e região Santos e região\nSão Carlos e Araraquara São Carlos e Araraquara\nSorocaba e Jundiaí Sorocaba e Jundiaí\nVale do Paraíba e região Vale do Paraíba e região\nCuritiba e Região Curitiba e Região\nCampos Gerais e Sul Campos Gerais e Sul\nMeio Dia Paraná – Ponta Grossa\nNorte e Noroeste Norte e Noroeste\nMeio Dia Paraná – Maringá\nMeio Dia Paraná – Londrina\nMeio Dia Paraná - Noroeste\nOeste e Sudoeste Oeste e Sudoeste\nMeio Dia Paraná – Foz do Iguaçu\nMeio Dia Paraná – Cascavel\nRio Grande do Sul Rio Grande do Sul\nSanta Catarina Santa Catarina\nBom Dia Brasil Bom Dia Brasil\nquadros e séries quadros e séries\nGlobo Repórter Globo Repórter\nJornal da Globo Jornal da Globo\nJornal Nacional Jornal Nacional\nPequenas Empresas Pequenas Empresas\nProfissão Repórter Profissão Repórter\ndiálogos com mario sergio conti\nas histórias na globonews\nConverse com outras ideias\nredes sociais redes sociais\nMarília: O outro lado da sofrência\nDe onde vem o que eu como\nConteúdos publicitários Conteúdos publicitários\nAgenda de jogos do Flamengo\nAgenda de jogos do Corinthians\nAgenda de jogos do Grêmio\nAgenda de jogos do Palmeiras\nAgenda de jogos do Santos\nAgenda de jogos do São Paulo\nAgenda de jogos do Atlético MG\nAgenda de jogos do Fluminense\nAgenda de jogos do Botafogo\nAgenda de jogos do Cruzeiro\nInternacional Internacional\nAgenda de jogos do Internacional\nAthletico PR Athletico PR\nAgenda de jogos do Athletico PR\nAgenda de jogos do Fortaleza\nAgenda de jogos do América MG\nAgenda de jogos do Atlético GO\nAgenda de jogos do Juventude\nEntretenimento Entretenimento\nAcesse sua conta ou cadastre-se grátis"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://g1.globo.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/presidente.ghtml",
+            "texto": "Presidente Brasil",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/distrito-federal.ghtml",
+            "texto": "Governador Distrito Federal",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/espirito-santo.ghtml",
+            "texto": "Governador Espírito Santo",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/amazonas.ghtml",
+            "texto": "Governador Amazonas",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/rio-grande-do-norte.ghtml",
+            "texto": "Governador Rio Grande Do Norte",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/tocantins.ghtml",
+            "texto": "Governador Tocantins",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/acre.ghtml",
+            "texto": "Governador Acre",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/apuracao/pelo-brasil.ghtml",
+            "texto": "Apuração pelo Brasil Veja o panorama completo da votação",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/globonews/noticia/2026/10/25/eleicoes-2026-assista-a-globonews-ao-vivo-com-sinal-aberto-no-globoplay.ghtml",
+            "texto": "ASSISTA à repercussão da votação do 2º turno no sinal aberto da GloboNews",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/ba/bahia/eleicoes/2026/noticia/2026/10/25/justica-determina-que-policia-federal-prenda-secretario-municipal-de-mobilidade-de-salvador.ghtml",
+            "texto": "Ônibus impedidos de circular: TRE manda prender secretário de Salvador",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/ba/bahia/eleicoes/2026/noticia/2026/10/25/prefeitura-de-salvador-determina-retomada-de-onibus-apos-decisao-do-tre-ba.ghtml",
+            "texto": "Após decisão, prefeitura manda todos os ônibus serem liberados",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/sp/sao-paulo/eleicoes/2026/noticia/2026/10/25/pt-denuncia-a-justica-eleitoral-que-sp-opera-com-apenas-60percent-da-frota-de-onibus-no-dia-da-eleicao-passageiros-relatam-longas-esperas.ghtml",
+            "texto": "PT denuncia à Justiça Eleitoral que SP opera só com 60% da frota",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/ba/bahia/eleicoes/2026/noticia/2026/10/25/tse-prorroga-horario-de-votacao-em-salvador-feira-de-santana-e-lauro-de-freitas-apos-impedimento-na-saida-de-onibus-de-garagens.ghtml",
+            "texto": "PT pede ao TSE prorrogação do horário de votação em Salvador",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/ba/bahia/noticia/2026/10/25/onibus-sao-retidos-em-garagem-de-salvador-durante-o-2o-turno-das-eleicoes.ghtml",
+            "texto": "Ao menos 75 ônibus são impedidos de sair de garagens",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/mundo/noticia/2026/10/25/votacao-no-exterior-confira-os-resultados-do-2o-turno-entre-lula-e-flavio-bolsonaro.ghtml",
+            "texto": "Votação no exterior: Lula vence em 29 países; Flávio Bolsonaro, em 12",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/ao-vivo/apuracao-eleicoes-2026-resultados-segundo-turno.ghtml?postId=5c036c1d-c7a2-42f6-9bcb-a35682e13ca3",
+            "texto": "SIGA: PF apura 58 suspeitas de crime eleitoral; 900 urnas são trocadas",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/10/25/eleicoes-2026-o-que-acontece-se-lula-e-flavio-bolsonaro-empatarem-no-segundo-turno.ghtml",
+            "texto": "O que acontece se Flávio e Lula empatarem em votos?",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/10/25/presidente-do-tse-diz-que-eleicoes-estao-dentro-do-esperado-e-estima-resultado-ate-21h.ghtml",
+            "texto": "Nunes Marques estima que resultado da eleição saia até as 21h",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/10/25/mais-de-1-milhao-de-eleitores-justificam-ausencia-pelo-e-titulo-ate-as-9h-diz-tse.ghtml",
+            "texto": "2,6 milhões justificam ausência pelo e-Título até as 12h, diz TSE",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/10/25/sete-municipios-terao-eleicoes-suplementares-para-prefeito-e-vice-neste-domingo-veja-lista.ghtml",
+            "texto": "Sete cidades têm eleição para prefeito e vice; veja a lista",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/eleicoes/2026/noticia/2026/10/25/andre-mendonca-vota-em-brasilia-que-o-grande-vencedor-seja-o-eleitor-seja-o-pais.ghtml",
+            "texto": "'Início de um novo ciclo no país', diz André Mendonça após votar em Brasília",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/politica/noticia/2026/10/25/daniel-vorcaro-e-alessandro-stefanutto-votam-na-papuda-bolsonaro-nao-pode-votar.ghtml",
+            "texto": "Vorcaro vai votar na Papuda; Bolsonaro não pode votar",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/rj/rio-de-janeiro/eleicoes/2026/noticia/2026/10/25/garotinho-e-impedido-de-votar-no-2o-turno-das-eleicoes.ghtml",
+            "texto": "Entenda por que Garotinho, ex-candidato no RJ, não poderá votar",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/rj/rio-de-janeiro/eleicoes/2026/noticia/2026/10/25/video-eleitores-denunciam-mulher-fazendo-saudacao-nazista-apos-votar-no-rio.ghtml",
+            "texto": "VÍDEO: eleitores denunciam mulher fazendo saudação nazista após votar",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/pi/piaui/eleicoes/2026/noticia/2026/10/25/suspeita-de-injuria-racial-em-local-de-votacao-teresina.ghtml",
+            "texto": "Eleitora é detida suspeita de injúria racial contra guarda no Piauí",
+            "interno": true
+          },
+          {
+            "url": "http://g1.globo.com",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/ultimas-noticias.html",
+            "texto": "Últimas Notícias",
+            "interno": true
+          },
+          {
+            "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+            "texto": "princípios editoriais",
+            "interno": true
+          },
+          {
+            "url": "https://privacidade.globo.com/privacy-policy/",
+            "texto": "política de privacidade",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+          "https://s2-g1.glbimg.com/3SMxR6jIY-vtsz4X-Zi-yz-Pg84=/326x60:1545x746/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/h/N/Ot1GhiRbAASrlpB0q8Jg/captura-de-tela-2026-10-25-141829.png",
+          "https://s2-g1.glbimg.com/sdTbUYLZr53yIxQVFXovPZLApto=/0x109:1700x1065/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/n/L/jjs1TrSuyxQqxt5CBHLg/bg-red-19-.png",
+          "https://s2-g1.glbimg.com/WbHdqqSaEg-L6eK-YLQNSTs8aeo=/0x300:1600x1200/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/b/M/f5CH8ETiiUMBjwyActhg/whatsapp-image-2026-10-25-at-10.36.13.jpeg",
+          "https://s2-g1.glbimg.com/MrY2oV-xW0T_JcJr4zBqdyVC8hw=/0x0:565x318/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/s/m/dBfTuvRxKdBGBdVOVpdg/selohome-votacao-exterior.gif",
+          "https://s2-g1.glbimg.com/aKqEgDFtZfjIwttTkaaPq2zK8H8=/0x252:576x576/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/S/2/HW2dT6SAOPsGnZ5ryFTA/e48fc4f5-1243-422d-9240-1f51ec9524ec.jpeg",
+          "https://s2-g1.glbimg.com/3QcwEYVYFEFSd2yH5tlbAeJNr34=/0x350:1412x1145/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/m/f/srDbO6T0qBuqnpaSI7hw/55611264771-48fe8869fa-k.jpg",
+          "https://s2-g1.glbimg.com/l8vkTz-kRfnI0tXLPli0Bd2d2Dk=/174x3:617x252/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/o/Z/2RouakQi6RipfSBMkBnQ/captura-de-tela-2026-10-25-101953.png",
+          "https://s2-g1.glbimg.com/UkAfilZCvQV1S4JWW0NDYrYQK4g=/0x158:1321x901/540x304/smart/filters:max_age(3600)/https://i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2026/0/S/1jokNITHSTHmbYiZHzeg/25santoinacio-copiar.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-116632be447f",
+            "type": "image",
+            "title": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos tele",
+            "url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+            "final_url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "s.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e630729f6153",
+            "type": "document",
+            "title": "ultimas-noticias.html",
+            "url": "https://g1.globo.com/ultimas-noticias.html",
+            "final_url": "https://g1.globo.com/ultimas-noticias.html",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "g1.globo.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-9f139da7a3ab",
+            "type": "document",
+            "title": "principios-editoriais-do-grupo-globo.html",
+            "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+            "final_url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "g1.globo.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-ebe26ebbabdf",
+            "type": "document",
+            "title": "universidades.html",
+            "url": "https://g1.globo.com/educacao/universidades.html",
+            "final_url": "https://g1.globo.com/educacao/universidades.html",
+            "source_title": "g1 - O portal de notícias da Globo",
+            "source_url": "https://g1.globo.com/",
+            "publisher": "g1.globo.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros. Vídeos dos telejornais da TV Globo e da GloboNews.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "e193c6c126efac77dcae",
+            "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQRy1tVGliX19aUl9RNTBoeF80T19ZbV9uaFVfSjBPMjE1UTI5M3BxZHA3ZW1sNlRqbWJsYjBLQ1M5VXJ5LWhsR1Y1TVZBZUVQWW5XSUtBMFBZa3hSUFo3NG9nOFhVOFJieUtzZXIzVG9JZHVXZFdRX0lISHJtZlFYTkQxbzVkTDNKZ3JCM21pdW5NLWVNVXp5ekVoM3Q1LThfeWwxMXZSVjVRQXZPamZ3QXE4TTJLdmdhYURXdFRMQktJQQ?oc=5",
+            "title": "Quem vai ensinar o Brasil de amanhã? - Terra",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Quem vai ensinar o Brasil de amanhã? Terra"
+          },
+          {
+            "id": "f68bf8b27f914750686d",
+            "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPclhvbTZBODlQTTlZRFBSeUNIQUp0NHFDODdZaWUxcUM2ZGMtbEhad2VrbzhReVpLM250M2x2V2tpa1EtM2pvSXpPd3RHaE9uYmpWbFBxRm5NTG00dFc4YmZ0ZjZiWnNrdmhRTF8xZXA5ZmJFSXpvSF9RS1NpVkN4ZVZKYTlIM2M5Y0FuYTBtdXBJN21xYVNHQzcxZW03dlpPQktpdHVTMlVBVHpvOVZTNHhKclBROEU0ZXlhZg?oc=5",
+            "title": "Estudantes desenvolvem plataformas para combater a desinformação - Agência Brasil",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Estudantes desenvolvem plataformas para combater a desinformação Agência Brasil"
+          },
+          {
+            "id": "54f8eb1254166aafee35",
+            "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQNmx4U0FGRm1TV2YzUEZ0aEZ4cy1mcVpPVkdQd1VQclluUE1lSjg0ejlBN09uYlNLaURQMkpqdWoyei1BVk5HaGNVN3ItaWZIUWd4UjVLdzVnY18zdkpVVzJJWTFiZ0ZzQmRfd1huV1pfNkRtZzFkUFFWeV9nWTRoRzl4NENDRnB2blBXWG0tTVcwUGtLLTR0TTlXQWRnZWdHc1U5OHhLYkItS3fSAboBQVVfeXFMTTdnY2c0M2xyUGNFT19KNzZyMWRoNEZkNUlJdGw2UldVYlE5ZVZvNnpMb0ZTMV9HeDZWUmVwbkJnQUZkODlBZWQyc0xwbVNFWkRDMWhPMU1ES2I4ZWY4R2pZdExneWRHeWxQT3ZLM2tqVGZGVmxyY0loendjN3JqWXZSSXlyN3pGWmpyVmJ2OV9iaUpUX21ZQzVSOGR6N0pvZjZCeFlscDB",
+            "title": "No Brasil, jovens entram no ensino médio, mas 1 em cada 5 não conclui a etapa - G1",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "No Brasil, jovens entram no ensino médio, mas 1 em cada 5 não conclui a etapa G1"
+          },
+          {
+            "id": "73c67c62ac7f4d8d875f",
+            "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQeTZlSlFZMTBLb2tpcjJBWE5MSFhsZjdJV1ZMRHNwMUxFa0dXZEp1VWxWWl9jRmZtdDY4VVJMdEdkSEIzam5WeC1qN243eEpzek1wbXV2aGxmZHlOM3gzcm9Vd242TnpYRldoUWVFSm5IX1ZHVjBxY0VxbXN3VFc0RG5RdE9QczZFOE1uRHdOODhuZ2Q5di1adHY1MnV0UDN0Q2tVVXk5SHFnMFBya1NRdzNSdk5pWGlabzFlQU1n?oc=5",
+            "title": "Brasil tem mais de 2,4 milhões de docentes na educação básica — Ministério da Educação - Governo Federal",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Brasil tem mais de 2,4 milhões de docentes na educação básica — Ministério da Educação Governo Federal"
+          },
+          {
+            "id": "0d156ca0be9b457bd603",
+            "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQaFVtQkhtTW1vYWVEeDZnQ1p4SE1POXRsWktneU1oTzNENTRxajd2TEowbzFYaTVDTzF5OGZlc1oxU1RHOWoxdWdCRU5kdUlJT3hfMnVCNFExZDYwdHp4RTJSUzhQMjA5V3lhVm91eUtFdF9OTHg4MHNLVFIxYmFFaWZyN1B2a1BaWkphUG5xbnFDTnk5N0tZOGd4eFczT21LblNuOVFxYTFxYlZDQWFQbnowcjJhbkxta1hsQThtZUZyNEZwTUUw?oc=5",
+            "title": "Educadores e estudantes abordam rumos da Educação Superior no Brasil em debate na UFBA - ba.gov.br",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Educadores e estudantes abordam rumos da Educação Superior no Brasil em debate na UFBA ba.gov.br"
+          },
+          {
+            "id": "9befea2a6af7cdec4c3c",
+            "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOMjBFYk1KT2llbFpFQ2JlbElMOXptN1RlTzl5cWVEdlNLLUVEOTMyT3NPMEVzaVY0T0JITFpmcElXZ0Flcl93Y1htNFB0V0hqSUdlTjlzREFnYzI2eUx5N3d3bU1tNGRURVFmZzh4eklqT3lyWFF4bDA5dVlMd053X1FITHpTdmhoMVBqWTVfeTJwSWZjM184S1BmaEVFYnM?oc=5",
+            "title": "OCDE: Brasil reduz percentual de jovens nem-nem - Educa Mais Brasil",
+            "origin": "google-news",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "noticia",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "TEMPORAL_MISMATCH",
+              "INDEX_PAGE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "OCDE: Brasil reduz percentual de jovens nem-nem Educa Mais Brasil"
+          },
+          {
+            "id": "01770d5a5478e2c20594",
+            "url": "https://pt.m.wikipedia.org/wiki/Brasil",
+            "title": "Brasil – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Em 1548, a criação do Estado do Brasil por João III de Portugal consolidou oficialmente o uso do nome, que foi mantido nas denominações políticas subsequentes a"
+          },
+          {
+            "id": "159629efc4e40b660600",
+            "url": "https://g1.globo.com/",
+            "title": "g1 - O portal de notícias da Globo",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros."
+          },
+          {
+            "id": "8b161ad765938c8d36fe",
+            "url": "https://www.gov.br/pt-br/",
+            "title": "Serviços e Informações do Brasil",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Serviços relacionados a viagens e turismo, apoio a estrangeiros no Brasil e brasileiros no exterior."
+          },
+          {
+            "id": "1dad515a9f694df2f8f4",
+            "url": "https://plataformabrasil.saude.gov.br/",
+            "title": "Plataforma Brasil",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Plataforma Brasil Manuais da Plataforma Brasil Histórico de Versões Ensino a Distância do sistema CEP/INAEP Perguntas e Respostas Pesquisas Buscar Pesquisas Apr"
+          },
+          {
+            "id": "2817745aafde44522c26",
+            "url": "https://en.m.wikipedia.org/wiki/Brazil",
+            "title": "Brazil - Wikipedia",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INTENT_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "↑ According to Article 13 of the Constitution: A língua portuguesa é o idioma oficial da República Federativa do Brasil (\"The Portuguese language is the officia"
+          },
+          {
+            "id": "b2069550090473378134",
+            "url": "https://empregabrasil.trabalho.gov.br/trabalhador/",
+            "title": "Portal Emprega Brasil",
+            "origin": "bing",
+            "query": "\"Brasil\" notícias educação",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "TOPIC_MISMATCH",
+              "INCOMPLETE_EVIDENCE"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Portal Emprega Brasil - Governo Federal obter informações da sua Carteira de Trabalho Digital; consultar a situação do requerimento de Seguro-Desemprego e infor"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "google-news: 6 resultados (\"Brasil\" notícias educação)",
+        "google-news: RSS apenas para descoberta; procurando artigos originais",
+        "bing-news: sem resultados (\"Brasil\" notícias educação)",
+        "bing: 6 resultados (\"Brasil\" notícias educação)",
+        "RSS do publicador: 0 artigo(s) candidato(s), leitura pendente",
+        "bing: recuperação de manchete no publicador; 0 candidato(s), leitura pendente",
+        "RSS do publicador: 0 artigo(s) candidato(s), leitura pendente"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "\"Brasil\" notícias educação",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": null,
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": false,
+        "requirements": [],
+        "passages": [],
+        "complete": false,
+        "scope": "no explicit supported facet parsed; not proof of completeness"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://pt.m.wikipedia.org/wiki/Brasil",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S2",
+          "url": "https://g1.globo.com/",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S3",
+          "url": "https://www.gov.br/pt-br/",
+          "answerability": null,
+          "answer_passages": null
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Notícias do Brasil sobre educação nos últimos sete dias",
+      "adapter_query": "\"Brasil\" notícias educação",
+      "provider": "google-news",
+      "at": "2026-10-25T18:14:50.178230+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Quem vai ensinar o Brasil de amanhã? - Terra",
+          "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQRy1tVGliX19aUl9RNTBoeF80T19ZbV9uaFVfSjBPMjE1UTI5M3BxZHA3ZW1sNlRqbWJsYjBLQ1M5VXJ5LWhsR1Y1TVZBZUVQWW5XSUtBMFBZa3hSUFo3NG9nOFhVOFJieUtzZXIzVG9JZHVXZFdRX0lISHJtZlFYTkQxbzVkTDNKZ3JCM21pdW5NLWVNVXp5ekVoM3Q1LThfeWwxMXZSVjVRQXZPamZ3QXE4TTJLdmdhYURXdFRMQktJQQ"
+        },
+        {
+          "title": "Estudantes desenvolvem plataformas para combater a desinformação - Agência Brasil",
+          "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPclhvbTZBODlQTTlZRFBSeUNIQUp0NHFDODdZaWUxcUM2ZGMtbEhad2VrbzhReVpLM250M2x2V2tpa1EtM2pvSXpPd3RHaE9uYmpWbFBxRm5NTG00dFc4YmZ0ZjZiWnNrdmhRTF8xZXA5ZmJFSXpvSF9RS1NpVkN4ZVZKYTlIM2M5Y0FuYTBtdXBJN21xYVNHQzcxZW03dlpPQktpdHVTMlVBVHpvOVZTNHhKclBROEU0ZXlhZg"
+        },
+        {
+          "title": "No Brasil, jovens entram no ensino médio, mas 1 em cada 5 não conclui a etapa - G1",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQNmx4U0FGRm1TV2YzUEZ0aEZ4cy1mcVpPVkdQd1VQclluUE1lSjg0ejlBN09uYlNLaURQMkpqdWoyei1BVk5HaGNVN3ItaWZIUWd4UjVLdzVnY18zdkpVVzJJWTFiZ0ZzQmRfd1huV1pfNkRtZzFkUFFWeV9nWTRoRzl4NENDRnB2blBXWG0tTVcwUGtLLTR0TTlXQWRnZWdHc1U5OHhLYkItS3fSAboBQVVfeXFMTTdnY2c0M2xyUGNFT19KNzZyMWRoNEZkNUlJdGw2UldVYlE5ZVZvNnpMb0ZTMV9HeDZWUmVwbkJnQUZkODlBZWQyc0xwbVNFWkRDMWhPMU1ES2I4ZWY4R2pZdExneWRHeWxQT3ZLM2tqVGZGVmxyY0loendjN3JqWXZSSXlyN3pGWmpyVmJ2OV9iaUpUX21ZQzVSOGR6N0pvZjZCeFlscDB"
+        },
+        {
+          "title": "Brasil tem mais de 2,4 milhões de docentes na educação básica — Ministério da Educação - Governo Federal",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQeTZlSlFZMTBLb2tpcjJBWE5MSFhsZjdJV1ZMRHNwMUxFa0dXZEp1VWxWWl9jRmZtdDY4VVJMdEdkSEIzam5WeC1qN243eEpzek1wbXV2aGxmZHlOM3gzcm9Vd242TnpYRldoUWVFSm5IX1ZHVjBxY0VxbXN3VFc0RG5RdE9QczZFOE1uRHdOODhuZ2Q5di1adHY1MnV0UDN0Q2tVVXk5SHFnMFBya1NRdzNSdk5pWGlabzFlQU1n"
+        },
+        {
+          "title": "Educadores e estudantes abordam rumos da Educação Superior no Brasil em debate na UFBA - ba.gov.br",
+          "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxQaFVtQkhtTW1vYWVEeDZnQ1p4SE1POXRsWktneU1oTzNENTRxajd2TEowbzFYaTVDTzF5OGZlc1oxU1RHOWoxdWdCRU5kdUlJT3hfMnVCNFExZDYwdHp4RTJSUzhQMjA5V3lhVm91eUtFdF9OTHg4MHNLVFIxYmFFaWZyN1B2a1BaWkphUG5xbnFDTnk5N0tZOGd4eFczT21LblNuOVFxYTFxYlZDQWFQbnowcjJhbkxta1hsQThtZUZyNEZwTUUw"
+        },
+        {
+          "title": "OCDE: Brasil reduz percentual de jovens nem-nem - Educa Mais Brasil",
+          "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOMjBFYk1KT2llbFpFQ2JlbElMOXptN1RlTzl5cWVEdlNLLUVEOTMyT3NPMEVzaVY0T0JITFpmcElXZ0Flcl93Y1htNFB0V0hqSUdlTjlzREFnYzI2eUx5N3d3bU1tNGRURVFmZzh4eklqT3lyWFF4bDA5dVlMd053X1FITHpTdmhoMVBqWTVfeTJwSWZjM184S1BmaEVFYnM"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://news.google.com/rss/search",
+          "parameters": {
+            "q": "\"Brasil\" notícias educação",
+            "hl": "pt-BR",
+            "gl": "BR",
+            "ceid": "BR:pt-419"
+          },
+          "http_status": null,
+          "final_url": "https://news.google.com/rss/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 1241.19,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Notícias do Brasil sobre educação nos últimos sete dias",
+      "adapter_query": "\"Brasil\" notícias educação",
+      "provider": "bing-news",
+      "at": "2026-10-25T18:14:51.423584+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://www.bing.com/news/search",
+          "parameters": {
+            "q": "\"Brasil\" notícias educação",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/news/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 442.64,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Notícias do Brasil sobre educação nos últimos sete dias",
+      "adapter_query": "\"Brasil\" notícias educação",
+      "provider": "bing",
+      "at": "2026-10-25T18:14:51.866767+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Brasil – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.m.wikipedia.org/wiki/Brasil"
+        },
+        {
+          "title": "g1 - O portal de notícias da Globo",
+          "url": "https://g1.globo.com/"
+        },
+        {
+          "title": "Serviços e Informações do Brasil",
+          "url": "https://www.gov.br/pt-br/"
+        },
+        {
+          "title": "Plataforma Brasil",
+          "url": "https://plataformabrasil.saude.gov.br/"
+        },
+        {
+          "title": "Brazil - Wikipedia",
+          "url": "https://en.m.wikipedia.org/wiki/Brazil"
+        },
+        {
+          "title": "Portal Emprega Brasil",
+          "url": "https://empregabrasil.trabalho.gov.br/trabalhador/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "\"Brasil\" notícias educação",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 395.07,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Notícias do Brasil sobre educação nos últimos sete dias",
+      "adapter_query": "\"Quem vai ensinar o Brasil de amanhã?\" site:www.terra.com.br",
+      "provider": "bing",
+      "at": "2026-10-25T18:14:52.600047+00:00",
+      "limit": 3,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 3,
+      "results": [
+        {
+          "title": "Quem • As últimas notícias e principais entrevistas com famosos, além ...",
+          "url": "https://revistaquem.globo.com/"
+        },
+        {
+          "title": "Quem • Últimas Notícias • Famosos",
+          "url": "https://revistaquem.globo.com/ultimas-noticias/"
+        },
+        {
+          "title": "Quem - YouTube",
+          "url": "https://www.youtube.com/@Quem"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "\"Quem vai ensinar o Brasil de amanhã?\" site:www.terra.com.br",
+            "format": "rss",
+            "count": "3",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 378.39,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "beab3573022e0e52511357a0636e80f2e14478ed",
+  "dataset_sha256": "1b9ba6864cf3f895029dd846b476500873c16c7118669656e8163d12c498e3df"
+}

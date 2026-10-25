@@ -1,0 +1,3611 @@
+{
+  "id": "ord-04",
+  "category": "universal",
+  "query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.786,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Siemens",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Siemens",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "Siemens",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "quem fundou siemens ano produtos fabrica",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "quem fundou siemens ano produtos fabrica",
+      "candidates": 1
+    },
+    {
+      "provider": "wikipedia",
+      "query": "quem fundou siemens ano produtos fabrica",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Siemens&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Siemens&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4561
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Siemens",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Siemens",
+      "final": "https://old-search.marginalia.nu/search?query=Siemens",
+      "chars": 55581
+    },
+    {
+      "url": "https://www.bing.com/search?q=quem+fundou+siemens+ano+produtos+fabrica&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=quem+fundou+siemens+ano+produtos+fabrica&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5293
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=quem+fundou+siemens+ano+produtos+fabrica",
+      "final": "https://old-search.marginalia.nu/search?query=quem+fundou+siemens+ano+produtos+fabrica",
+      "chars": 16252
+    },
+    {
+      "url": "https://sieportal.siemens.com/pt-br/home",
+      "error": "rede"
+    },
+    {
+      "url": "https://www.siemens.com/pt-br/",
+      "final": "https://www.siemens.com/pt-br/",
+      "chars": 294252
+    },
+    {
+      "url": "https://www.siemens-energy.com/br/pt/home.html",
+      "final": "https://www.siemens-energy.com/br/pt/home.html",
+      "chars": 208610
+    },
+    {
+      "url": "https://www.siemens-energy.com/br/pt/home/careers/working-at-siemens-energy-.html",
+      "final": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+      "chars": 197414
+    },
+    {
+      "url": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+      "final": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+      "chars": 25965
+    },
+    {
+      "url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+      "final": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+      "chars": 222728
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+    "domain": "general",
+    "original_request": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+    "resolved_request": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:30:45.867879+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "9b3a5bc6b447ac36d2e6",
+        "url": "https://sieportal.siemens.com/pt-br/home",
+        "title": "Siemens SiePortal - Produtos, Serviços e Suporte",
+        "origin": "bing",
+        "query": "Siemens",
+        "date": "qua., 21 out. 2026 17:52:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O melhor exemplo: SiePortal – o nosso portal B2B inovador, intuitivo e poderoso para o portfólio de produtos, sistemas e serviços da Siemens Digital Industries ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "rede",
+        "losses": [
+          "FETCH_FAILED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "3d4e7f138e16104c526b",
+        "url": "https://www.siemens.com/pt-br/",
+        "title": "Página inicial da Siemens",
+        "origin": "bing",
+        "query": "Siemens",
+        "date": "sáb., 24 out. 2026 02:25:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Siemens Xcelerator Solução de dispositivos médicos Teamcenter O mais avançado módulo adicional de gestão do ciclo de vida do produto (PLM) para o Siemens Teamce",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 238,
+        "final_url": "https://www.siemens.com/pt-br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "a2e6c5b4ec9b508e98a4",
+        "url": "https://www.siemens-energy.com/br/pt/home.html",
+        "title": "Siemens Energy no Brasil – Líder global em tecnologia energética",
+        "origin": "bing",
+        "query": "Siemens",
+        "date": "sáb., 24 out. 2026 01:50:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "País. Atuando nos principais projetos de geração e transmissão de energia da história do Brasil, a Siemens Energy sempre foi referência em inovação e pioneirism",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1134,
+        "final_url": "https://www.siemens-energy.com/br/pt/home.html",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "2d0eae378228f83b24e2",
+        "url": "https://mall.industry.siemens.com/mall/",
+        "title": "Welcome - Industry Mall - Siemens WW",
+        "origin": "bing",
+        "query": "Siemens",
+        "date": "dom., 25 out. 2026 06:20:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "The integrated platform for your product selection, buying, and support workflow – bringing together Industry Mall and Online Support.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "f06318300a866b200443",
+        "url": "https://en.wikipedia.org/wiki/Siemens",
+        "title": "Siemens",
+        "origin": "marginalia",
+        "query": "Siemens",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "f6dda6dd6cf0258658b2",
+        "url": "https://www.corpwatch.org/company/siemens-energy",
+        "title": "Siemens Energy | corpwatch",
+        "origin": "marginalia",
+        "query": "Siemens",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "7bcc74648e18892a9a83",
+        "url": "https://www.siemens.com/",
+        "title": "Siemens home | Siemens",
+        "origin": "bing",
+        "query": "Siemens",
+        "date": "sáb., 24 out. 2026 08:09:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Siemens: A global technology leader driving innovation in industry, infrastructure and mobility through digital transformation.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "7d2bea1acd8ea0f24fac",
+        "url": "https://sieportal.siemens.com/en-ww/home",
+        "title": "Home - Siemens SiePortal",
+        "origin": "bing",
+        "query": "Siemens",
+        "date": "sáb., 24 out. 2026 11:15:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "General product approval/EU Declaration of Conformity, Manufacturer, Siemens (–) See all certificates Download",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "6748aa0cd8a565522e77",
+        "url": "https://en.wikipedia.org/wiki/Siemens_%28unit%29",
+        "title": "Siemens (unit)",
+        "origin": "marginalia",
+        "query": "Siemens",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "81c7395f9056132c06a1",
+        "url": "https://en.wikipedia.org/wiki/Siemens_%26_Halske",
+        "title": "Siemens & Halske",
+        "origin": "marginalia",
+        "query": "Siemens",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "80dfb73afd9277bb2f1e",
+        "url": "https://en.wikipedia.org/wiki/Siemens_Mobile",
+        "title": "Siemens Mobile",
+        "origin": "marginalia",
+        "query": "Siemens",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "a78dbe40fd8d1e6e3369",
+        "url": "https://en.wikipedia.org/wiki/Siemens_Healthineers",
+        "title": "Siemens Healthineers",
+        "origin": "marginalia",
+        "query": "Siemens",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "8f20d44f6e1f94c7ed08",
+        "url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+        "title": "Saiba mais",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "semicondutores, IC 3D e PCB Março de 2026 O Fuse EDA AI Agent orquestra de forma autônoma fluxos de trabalho multiagentes em todo o portfólio completo de automa",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1730,
+        "final_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "73f569cb33f4baf5c32f",
+        "url": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+        "title": "Avasis O parceiro Platinum que vai impulsionar seu sucesso com o software Siemens Saiba mais",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Skip to main content Esta página é exibida usando tradução automática. Prefere ver em inglês? Avasis",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 100,
+        "final_url": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "deb5276da458a038b03b",
+        "url": "https://www.siemens-energy.com/br/pt/home/careers/working-at-siemens-energy-.html",
+        "title": "Trabalhe Conosco",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "tenha o melhor ambiente de trabalho e as condições mais favoráveis para desenvolver suas habilidades e alavancar sua carreira. A Siemens Energy oferece uma gama",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 953,
+        "final_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      }
+    ],
+    "unique_candidates": 15,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-390b9da3b0c8",
+      "type": "image",
+      "title": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+      "url": "https://images.ctfassets.net/17si5cpawjzf/Y2FnRgpo3feg0cubFQRWa/9d48766d3e2bbecebd4b2476c1482014/audi-factory-floor-og-1200x630.jpg",
+      "final_url": "https://images.ctfassets.net/17si5cpawjzf/Y2FnRgpo3feg0cubFQRWa/9d48766d3e2bbecebd4b2476c1482014/audi-factory-floor-og-1200x630.jpg",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.ctfassets.net",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0243339b3986",
+      "type": "image",
+      "title": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+      "url": "https://images.ctfassets.net/17si5cpawjzf/3px7fbFNhCfap8w563AtI8/34d8acc08dfbf818370f2970fdd1a7c8/audi-factory-floor-tc-1200x600.jpg",
+      "final_url": "https://images.ctfassets.net/17si5cpawjzf/3px7fbFNhCfap8w563AtI8/34d8acc08dfbf818370f2970fdd1a7c8/audi-factory-floor-tc-1200x600.jpg",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.ctfassets.net",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-3712c83a5ef7",
+      "type": "image",
+      "title": "An automation engineer working in a high-tech facility, viewing a digital AI robot assistant overlay on a screen alongside technical code and 3D CAD models.",
+      "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2lN6tWAWKe4p63fkN5MvRU/en-US/EigenEngineeringAgentKeyVisualNew640x480.png?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+      "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2lN6tWAWKe4p63fkN5MvRU/en-US/EigenEngineeringAgentKeyVisualNew640x480.png?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.sw.cdn.siemens.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "An automation engineer working in a high-tech facility, viewing a digital AI robot assistant overlay on a screen alongside technical code and 3D CAD models.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5c82c98fe827",
+      "type": "image",
+      "title": "CES 2026: Roland Busch & Jensen Huang, Siemens & NVIDIA",
+      "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/74FVeCy02PvPznNfMCx8OR/en-US/opendocument.jpg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+      "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/74FVeCy02PvPznNfMCx8OR/en-US/opendocument.jpg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.sw.cdn.siemens.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "CES 2026: Roland Busch & Jensen Huang, Siemens & NVIDIA",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f7fbaa33b76d",
+      "type": "image",
+      "title": "bx-overview-panoramic-city-skyline-is485896260-xcelerator-shape-hero-2560x1440",
+      "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/1oJSZsMf5UqWmDFaZ2xcCr/en-US/bx-overview-panoramic-city-skyline-is485896260-xcelerator-shape-hero-2560x1440.jpg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+      "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/1oJSZsMf5UqWmDFaZ2xcCr/en-US/bx-overview-panoramic-city-skyline-is485896260-xcelerator-shape-hero-2560x1440.jpg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.sw.cdn.siemens.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "bx-overview-panoramic-city-skyline-is485896260-xcelerator-shape-hero-2560x1440",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ad3b8f1b982b",
+      "type": "image",
+      "title": "Amazonia rainforest",
+      "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2oZbGAau6oSDa92u1Iy8ZR/en-US/Amazonia3_original.jpeg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+      "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2oZbGAau6oSDa92u1Iy8ZR/en-US/Amazonia3_original.jpeg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.sw.cdn.siemens.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Amazonia rainforest",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-847c9232670a",
+      "type": "image",
+      "title": "Renata Campaign",
+      "url": "https://assets.new.siemens.com/dam-asset/b5e7a8e4-e1a6-41ff-88a7-59e3eeb13c46/KV-SemTexto-Espelhado.png?auto=format%2Ccompress&w=96&h=64&fit=crop&crop=faces%2Cedges&q=60",
+      "final_url": "https://assets.new.siemens.com/dam-asset/b5e7a8e4-e1a6-41ff-88a7-59e3eeb13c46/KV-SemTexto-Espelhado.png?auto=format%2Ccompress&w=96&h=64&fit=crop&crop=faces%2Cedges&q=60",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "assets.new.siemens.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Renata Campaign",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-36aba4be47e0",
+      "type": "image",
+      "title": "Farma Ráječek Jahody.",
+      "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2Zmv775Em9uLH1HD8BSM8E/en-US/297.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+      "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2Zmv775Em9uLH1HD8BSM8E/en-US/297.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.sw.cdn.siemens.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Farma Ráječek Jahody.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ded9acc7d05d",
+      "type": "image",
+      "title": "A person wearing a VR headset is looking at a water efficiency solution illustration.",
+      "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/3L70mqUfIYlV3fUncOKem7/en-US/water-efficiency-solutions-illustration-vr-headset-mhero-1280x720.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+      "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/3L70mqUfIYlV3fUncOKem7/en-US/water-efficiency-solutions-illustration-vr-headset-mhero-1280x720.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.sw.cdn.siemens.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A person wearing a VR headset is looking at a water efficiency solution illustration.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-abf2de38c074",
+      "type": "image",
+      "title": "A person stands in front of a large screen displaying a graph with a rising line, likely representing data or statistics.",
+      "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/yM9LzkqCvZqtYLk16nbuP/en-US/empower-feature-640x360.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+      "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/yM9LzkqCvZqtYLk16nbuP/en-US/empower-feature-640x360.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.sw.cdn.siemens.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A person stands in front of a large screen displaying a graph with a rising line, likely representing data or statistics.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-488a264794b1",
+      "type": "image",
+      "title": "Person using laptop with holographic display of data charts and graphs floating above",
+      "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2WnYDSkq1vOfGaQsfogiDc/en-US/ai-business-offerings-mhero-1280x720.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+      "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2WnYDSkq1vOfGaQsfogiDc/en-US/ai-business-offerings-mhero-1280x720.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.sw.cdn.siemens.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Person using laptop with holographic display of data charts and graphs floating above",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1d6afc4535e6",
+      "type": "image",
+      "title": "Horizonte panorâmico da cidade.",
+      "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6L9Gf2S0ySbNai9Rbl91vB/en-US/bx-overview-panoramic-city-skyline-is485896260-promo-640x480.jpg?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+      "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6L9Gf2S0ySbNai9Rbl91vB/en-US/bx-overview-panoramic-city-skyline-is485896260-promo-640x480.jpg?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+      "source_title": "Siemens",
+      "source_url": "https://www.siemens.com/pt-br/",
+      "publisher": "images.sw.cdn.siemens.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Horizonte panorâmico da cidade.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.siemens.com/pt-br/",
+      "titulo": "Siemens",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 02:25:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.siemens.com/pt-br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.siemens-energy.com/br/pt/home.html",
+      "titulo": "Siemens Energy - Líder global em tecnologia de energia",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 01:50:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.siemens-energy.com/br/pt/home.html",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+      "titulo": "Trazendo a IA para o mundo físico",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Siemens",
+      "items": [
+        {
+          "titulo": "Página inicial da Siemens",
+          "url": "https://www.siemens.com/pt-br/",
+          "trecho": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:25:00 GMT"
+          },
+          "discovery_query": "Siemens",
+          "discovery_provider": "bing",
+          "url_canonica": "https://siemens.com/pt-br",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Siemens SiePortal - Produtos, Serviços e Suporte",
+          "url": "https://sieportal.siemens.com/pt-br/home",
+          "trecho": "O melhor exemplo: SiePortal – o nosso portal B2B inovador, intuitivo e poderoso para o portfólio de produtos, sistemas e serviços da Siemens Digital Industries e Smart Infrastructure.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 17:52:00 GMT"
+          },
+          "discovery_query": "Siemens",
+          "discovery_provider": "bing",
+          "url_canonica": "https://sieportal.siemens.com/pt-br/home",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 14.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Siemens home | Siemens",
+          "url": "https://www.siemens.com/",
+          "trecho": "Siemens: A global technology leader driving innovation in industry, infrastructure and mobility through digital transformation.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 08:09:00 GMT"
+          },
+          "discovery_query": "Siemens",
+          "discovery_provider": "bing",
+          "url_canonica": "https://siemens.com/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Home - Siemens SiePortal",
+          "url": "https://sieportal.siemens.com/en-ww/home",
+          "trecho": "General product approval/EU Declaration of Conformity, Manufacturer, Siemens (–) See all certificates Download",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 11:15:00 GMT"
+          },
+          "discovery_query": "Siemens",
+          "discovery_provider": "bing",
+          "url_canonica": "https://sieportal.siemens.com/en-ww/home",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Welcome - Industry Mall - Siemens WW",
+          "url": "https://mall.industry.siemens.com/mall/",
+          "trecho": "The integrated platform for your product selection, buying, and support workflow – bringing together Industry Mall and Online Support.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 06:20:00 GMT"
+          },
+          "discovery_query": "Siemens",
+          "discovery_provider": "bing",
+          "url_canonica": "https://mall.industry.siemens.com/mall",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 8.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Siemens Energy no Brasil – Líder global em tecnologia energética",
+          "url": "https://www.siemens-energy.com/br/pt/home.html",
+          "trecho": "A Siemens Energy é líder em tecnologia energética, apoiando empresas e comunidades em todo o mundo na construção de sistemas de energia resilientes, acessíveis e sustentáveis dos quais a sociedade depende.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 01:50:00 GMT"
+          },
+          "discovery_query": "Siemens",
+          "discovery_provider": "bing",
+          "url_canonica": "https://siemens-energy.com/br/pt/home.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "Siemens",
+      "items": [
+        {
+          "titulo": "Siemens",
+          "url": "https://en.wikipedia.org/wiki/Siemens",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "Siemens",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Siemens",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 6.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Siemens (unit)",
+          "url": "https://en.wikipedia.org/wiki/Siemens_%28unit%29",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "Siemens",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Siemens_%28unit%29",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 5.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Siemens & Halske",
+          "url": "https://en.wikipedia.org/wiki/Siemens_%26_Halske",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "Siemens",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Siemens_%26_Halske",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 5.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Siemens Mobile",
+          "url": "https://en.wikipedia.org/wiki/Siemens_Mobile",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "Siemens",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Siemens_Mobile",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 5.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Siemens Healthineers",
+          "url": "https://en.wikipedia.org/wiki/Siemens_Healthineers",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "Siemens",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://en.wikipedia.org/wiki/Siemens_Healthineers",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 5.0,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Siemens Energy | corpwatch",
+          "url": "https://www.corpwatch.org/company/siemens-energy",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "Siemens",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://corpwatch.org/company/siemens-energy",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 6.0,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "quem fundou siemens ano produtos fabrica",
+      "items": [
+        {
+          "titulo": "MSC Cruzeiros, férias na América do Sul, Caribe e muito mais!",
+          "url": "https://www.msccruzeiros.com.br/",
+          "trecho": "A MSC Cruzeiros oferece cruzeiros na América do Sul, Mediterrâneo, Caribe e muitos outros destinos pelo mundo. Acesse nosso site para conferir mais informações sobre roteiros, cruzeiros e ofertas.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 06:28:00 GMT"
+          },
+          "discovery_query": "quem fundou siemens ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://msccruzeiros.com.br/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Buenos Aires, cruzeiros na Argentina | MSC Cruzeiros",
+          "url": "https://www.msccruzeiros.com.br/nossos-cruzeiros/destinos/america-do-sul/argentina/buenos-aires",
+          "trecho": "Viaje para Buenos Aires com a MSC Cruzeiros, descubra pacotes especiais e excursões para explorar lugares maravilhosos na Argentina.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:33:00 GMT"
+          },
+          "discovery_query": "quem fundou siemens ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://msccruzeiros.com.br/nossos-cruzeiros/destinos/america-do-sul/argentina/buenos-aires",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Caribe sem visto com Pacote completo| MSC Cruzeiros",
+          "url": "https://www.msccruzeiros.com.br/ofertas/pacote-completo-caribe-martinica",
+          "trecho": "Conheça o Caribe com a MSC Cruzeiros! Pacote completo com aéreo + traslado + cruzeiro e sem a necessidade de visto americano para brasileiros.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 04:27:00 GMT"
+          },
+          "discovery_query": "quem fundou siemens ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://msccruzeiros.com.br/ofertas/pacote-completo-caribe-martinica",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Cruzeiros transatlânticos: MSC Grand Voyages | MSC Cruzeiros",
+          "url": "https://www.msccruzeiros.com.br/nossos-cruzeiros/destinos/msc-grand-voyages",
+          "trecho": "MSC Grand Voyages: cruzeiros transatlânticos da Europa para a América do Norte e do Sul, África e Ásia. Descubra a sua viagem de sonho no nosso site.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 06:35:00 GMT"
+          },
+          "discovery_query": "quem fundou siemens ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://msccruzeiros.com.br/nossos-cruzeiros/destinos/msc-grand-voyages",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Cruzeiros no Caribe | MSC Cruzeiros",
+          "url": "https://www.msccruzeiros.com.br/nossos-cruzeiros/destinos/caribe-e-antilhas",
+          "trecho": "Escolha os melhores destinos de cruzeiro no Caribe para as suas férias. Viaje conosco para Bahamas, Jamaica, República Dominicana e México.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:29:00 GMT"
+          },
+          "discovery_query": "quem fundou siemens ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://msccruzeiros.com.br/nossos-cruzeiros/destinos/caribe-e-antilhas",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Cruzeiro pela América do Sul | MSC Cruzeiros",
+          "url": "https://www.msccruzeiros.com.br/nossos-cruzeiros/destinos/america-do-sul",
+          "trecho": "Embarque em um cruzeiro América do Sul e descubra destinos incríveis com uma viagem de cruzeiro pelo Brasil, cruzeiros para Argentina e Uruguai.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 06:20:00 GMT"
+          },
+          "discovery_query": "quem fundou siemens ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://msccruzeiros.com.br/nossos-cruzeiros/destinos/america-do-sul",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "quem fundou siemens ano produtos fabrica",
+      "items": [
+        {
+          "titulo": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "quem fundou siemens ano produtos fabrica",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://creativecommons.org/licenses/by-sa/4.0",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": []
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.siemens.com/pt-br/",
+      "result": {
+        "titulo": "Siemens",
+        "texto": "Siemens Xcelerator Solução de dispositivos médicos Teamcenter O mais avançado módulo adicional de gestão do ciclo de vida do produto (PLM) para o Siemens Teamcenter, projetado especificamente para empresas de tecnologia médica. Saiba mais",
+        "final": "https://www.siemens.com/pt-br/",
+        "trecho_usado": "Siemens Xcelerator Solução de dispositivos médicos Teamcenter O mais avançado módulo adicional de gestão do ciclo de vida do produto (PLM) para o Siemens Teamcenter, projetado especificamente para empresas de tecnologia médica. Saiba mais",
+        "metadados": {
+          "titulo": "Siemens",
+          "descricao": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+          "canonica": "https://www.siemens.com/pt-br/",
+          "og": {
+            "og:type": "website",
+            "og:url": "https://www.siemens.com/pt-br/",
+            "og:locale": "pt-BR",
+            "og:title": "Página inicial da Siemens",
+            "og:description": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+            "og:site_name": "Siemens",
+            "og:image": "//images.ctfassets.net/17si5cpawjzf/Y2FnRgpo3feg0cubFQRWa/9d48766d3e2bbecebd4b2476c1482014/audi-factory-floor-og-1200x630.jpg"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "Siemens",
+            "twitter:title": "Página inicial da Siemens",
+            "twitter:description": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+            "twitter:image": "//images.ctfassets.net/17si5cpawjzf/3px7fbFNhCfap8w563AtI8/34d8acc08dfbf818370f2970fdd1a7c8/audi-factory-floor-tc-1200x600.jpg",
+            "twitter:creator": "@siemens.com"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Siemens",
+          "tipo": "WebPage",
+          "ld": {
+            "publisher": {
+              "@type": "Organization",
+              "name": "Siemens"
+            }
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Solução de dispositivos médicos Teamcenter",
+            "texto": "O mais avançado módulo adicional de gestão do ciclo de vida do produto (PLM) para o Siemens Teamcenter, projetado especificamente para empresas de tecnologia médica."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "texto": "Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+            "texto": "Avasis O parceiro Platinum que vai impulsionar seu sucesso com o software Siemens Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/ecosystem/sig-software-improvement-group/",
+            "texto": "Software Improvement Group Oferta de garantia de software para o ecossistema da Siemens Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://press.siemens.com/global/en/pressrelease/siemens-and-humanoid-bring-physical-ai-factory-floor-deploying-humanoids-industrial",
+            "texto": "IA Industrial all Trazendo IA física para o chão de fábrica Estamos fazendo parceria com a Humanoid para implantar o robô HMND 01 Alpha em nossa fábrica de Erla",
+            "interno": false
+          },
+          {
+            "url": "https://press.siemens.com/global/en/pressrelease/siemens-digitalizes-new-york-citys-iconic-fulton-line-advanced-signaling-technology",
+            "texto": "Sinalização all Digitalizando a icônica Linha Fulton de Nova York Fomos contemplados com um contrato pela MTA para modernizar as Linhas Fulton-Liberty com tecno",
+            "interno": false
+          },
+          {
+            "url": "https://press.siemens.com/global/en/pressrelease/siemens-gridscale-x-redefines-system-operations-and-agentic-transmission-planning",
+            "texto": "Redes inteligentes all Gridscale X redefine operações de sistema A mais recente evolução de nossa plataforma Gridscale X traz capacidades agênticas alimentadas ",
+            "interno": false
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/",
+            "texto": "Home",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/products/tia-portal/eigen-engineering-agent/",
+            "texto": "Iniciar teste gratuito",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/company/insights/industrial-ai-changes-automation-engineers-work/",
+            "texto": "How AI transforms Engineering",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/products/building-x/",
+            "texto": "Explore o Building X",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/company/insights/success-stories/natura-digital-twin-amazon-agroindustry/",
+            "texto": "Leia a história",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/content/electrical-partners-brazil/",
+            "texto": "Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/company/insights/rajecek-fravebot-agriculture-monitoring-harvesting/",
+            "texto": "História do cliente all IA na fazenda da família ajuda robô a colher morangos Conheça o Fravebot. Ele monitora a saúde das plantas, identifica pragas cedo e pre",
+            "interno": true
+          },
+          {
+            "url": "https://resources.sw.siemens.com/en-US/brochure-industrial-ai-transform-entire-value-chain/",
+            "texto": "E-book all E-book: IA Industrial ao longo da cadeia de valor Como a IA Industrial está transformando cada etapa, desde o design e engenharia de produtos até a p",
+            "interno": false
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/company/artificial-intelligence/",
+            "texto": "Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/products/",
+            "texto": "Acesse o marketplace",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/products/electrification-x/",
+            "texto": "Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/products/simcenter/mechanical-simulation/femap/",
+            "texto": "Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/products/gridscale-x/",
+            "texto": "Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://xcelerator.siemens.com/global/en/all-offerings/solutions/m/movilitas-cloud.html",
+            "texto": "Saiba mais",
+            "interno": false
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/products/cad-cam-software/",
+            "texto": "Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://xcelerator.siemens.com/global/en/all-offerings/products/s/sigrid.html",
+            "texto": "Saiba mais",
+            "interno": false
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/products/designcenter/solid-edge/solid-edge-x/",
+            "texto": "Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/products/avasis-teamcenter-medical-device-solution-tc-mds/",
+            "texto": "Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/ecosystem/",
+            "texto": "Explore o ecossistema",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/ecosystem/engineering-group/",
+            "texto": "Engineering Group Soluções de ponta para o ciclo de vida industrial inteiro. Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/ecosystem/sustaira/",
+            "texto": "Sustaira Reduzindo a distância entre tecnologia e sustentabilidade Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/ecosystem/aerosophia/",
+            "texto": "Aerosophia Gestão de ativos com inteligência de drones Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/ecosystem/productive-machines/",
+            "texto": "Productive Machines Potencializar a produtividade de fabricação diretamente no NX CAM Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/ecosystem/moduleworks/",
+            "texto": "Module Works Software Toolpath para a manufatura moderna Saiba mais",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://images.ctfassets.net/17si5cpawjzf/Y2FnRgpo3feg0cubFQRWa/9d48766d3e2bbecebd4b2476c1482014/audi-factory-floor-og-1200x630.jpg",
+          "https://images.ctfassets.net/17si5cpawjzf/3px7fbFNhCfap8w563AtI8/34d8acc08dfbf818370f2970fdd1a7c8/audi-factory-floor-tc-1200x600.jpg",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2lN6tWAWKe4p63fkN5MvRU/en-US/EigenEngineeringAgentKeyVisualNew640x480.png?auto=format%2Ccompress&amp;w=2560&amp;h=1440&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/74FVeCy02PvPznNfMCx8OR/en-US/opendocument.jpg?auto=format%2Ccompress&amp;w=2560&amp;h=1440&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/1oJSZsMf5UqWmDFaZ2xcCr/en-US/bx-overview-panoramic-city-skyline-is485896260-xcelerator-shape-hero-2560x1440.jpg?auto=format%2Ccompress&amp;w=2560&amp;h=1440&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2oZbGAau6oSDa92u1Iy8ZR/en-US/Amazonia3_original.jpeg?auto=format%2Ccompress&amp;w=2560&amp;h=1440&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://assets.new.siemens.com/dam-asset/b5e7a8e4-e1a6-41ff-88a7-59e3eeb13c46/KV-SemTexto-Espelhado.png?auto=format%2Ccompress&amp;w=96&amp;h=64&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2Zmv775Em9uLH1HD8BSM8E/en-US/297.jpg?auto=format%2Ccompress&amp;w=640&amp;h=360&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/3L70mqUfIYlV3fUncOKem7/en-US/water-efficiency-solutions-illustration-vr-headset-mhero-1280x720.jpg?auto=format%2Ccompress&amp;w=640&amp;h=360&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/yM9LzkqCvZqtYLk16nbuP/en-US/empower-feature-640x360.jpg?auto=format%2Ccompress&amp;w=640&amp;h=360&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60"
+        ],
+        "midia": [
+          {
+            "id": "med-390b9da3b0c8",
+            "type": "image",
+            "title": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+            "url": "https://images.ctfassets.net/17si5cpawjzf/Y2FnRgpo3feg0cubFQRWa/9d48766d3e2bbecebd4b2476c1482014/audi-factory-floor-og-1200x630.jpg",
+            "final_url": "https://images.ctfassets.net/17si5cpawjzf/Y2FnRgpo3feg0cubFQRWa/9d48766d3e2bbecebd4b2476c1482014/audi-factory-floor-og-1200x630.jpg",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.ctfassets.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0243339b3986",
+            "type": "image",
+            "title": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+            "url": "https://images.ctfassets.net/17si5cpawjzf/3px7fbFNhCfap8w563AtI8/34d8acc08dfbf818370f2970fdd1a7c8/audi-factory-floor-tc-1200x600.jpg",
+            "final_url": "https://images.ctfassets.net/17si5cpawjzf/3px7fbFNhCfap8w563AtI8/34d8acc08dfbf818370f2970fdd1a7c8/audi-factory-floor-tc-1200x600.jpg",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.ctfassets.net",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3712c83a5ef7",
+            "type": "image",
+            "title": "An automation engineer working in a high-tech facility, viewing a digital AI robot assistant overlay on a screen alongside technical code and 3D CAD models.",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2lN6tWAWKe4p63fkN5MvRU/en-US/EigenEngineeringAgentKeyVisualNew640x480.png?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2lN6tWAWKe4p63fkN5MvRU/en-US/EigenEngineeringAgentKeyVisualNew640x480.png?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "An automation engineer working in a high-tech facility, viewing a digital AI robot assistant overlay on a screen alongside technical code and 3D CAD models.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5c82c98fe827",
+            "type": "image",
+            "title": "CES 2026: Roland Busch & Jensen Huang, Siemens & NVIDIA",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/74FVeCy02PvPznNfMCx8OR/en-US/opendocument.jpg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/74FVeCy02PvPznNfMCx8OR/en-US/opendocument.jpg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "CES 2026: Roland Busch & Jensen Huang, Siemens & NVIDIA",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f7fbaa33b76d",
+            "type": "image",
+            "title": "bx-overview-panoramic-city-skyline-is485896260-xcelerator-shape-hero-2560x1440",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/1oJSZsMf5UqWmDFaZ2xcCr/en-US/bx-overview-panoramic-city-skyline-is485896260-xcelerator-shape-hero-2560x1440.jpg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/1oJSZsMf5UqWmDFaZ2xcCr/en-US/bx-overview-panoramic-city-skyline-is485896260-xcelerator-shape-hero-2560x1440.jpg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "bx-overview-panoramic-city-skyline-is485896260-xcelerator-shape-hero-2560x1440",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ad3b8f1b982b",
+            "type": "image",
+            "title": "Amazonia rainforest",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2oZbGAau6oSDa92u1Iy8ZR/en-US/Amazonia3_original.jpeg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2oZbGAau6oSDa92u1Iy8ZR/en-US/Amazonia3_original.jpeg?auto=format%2Ccompress&w=2560&h=1440&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Amazonia rainforest",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-847c9232670a",
+            "type": "image",
+            "title": "Renata Campaign",
+            "url": "https://assets.new.siemens.com/dam-asset/b5e7a8e4-e1a6-41ff-88a7-59e3eeb13c46/KV-SemTexto-Espelhado.png?auto=format%2Ccompress&w=96&h=64&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://assets.new.siemens.com/dam-asset/b5e7a8e4-e1a6-41ff-88a7-59e3eeb13c46/KV-SemTexto-Espelhado.png?auto=format%2Ccompress&w=96&h=64&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "assets.new.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Renata Campaign",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-36aba4be47e0",
+            "type": "image",
+            "title": "Farma Ráječek Jahody.",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2Zmv775Em9uLH1HD8BSM8E/en-US/297.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2Zmv775Em9uLH1HD8BSM8E/en-US/297.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Farma Ráječek Jahody.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ded9acc7d05d",
+            "type": "image",
+            "title": "A person wearing a VR headset is looking at a water efficiency solution illustration.",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/3L70mqUfIYlV3fUncOKem7/en-US/water-efficiency-solutions-illustration-vr-headset-mhero-1280x720.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/3L70mqUfIYlV3fUncOKem7/en-US/water-efficiency-solutions-illustration-vr-headset-mhero-1280x720.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A person wearing a VR headset is looking at a water efficiency solution illustration.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-abf2de38c074",
+            "type": "image",
+            "title": "A person stands in front of a large screen displaying a graph with a rising line, likely representing data or statistics.",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/yM9LzkqCvZqtYLk16nbuP/en-US/empower-feature-640x360.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/yM9LzkqCvZqtYLk16nbuP/en-US/empower-feature-640x360.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A person stands in front of a large screen displaying a graph with a rising line, likely representing data or statistics.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-488a264794b1",
+            "type": "image",
+            "title": "Person using laptop with holographic display of data charts and graphs floating above",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2WnYDSkq1vOfGaQsfogiDc/en-US/ai-business-offerings-mhero-1280x720.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/2WnYDSkq1vOfGaQsfogiDc/en-US/ai-business-offerings-mhero-1280x720.jpg?auto=format%2Ccompress&w=640&h=360&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Person using laptop with holographic display of data charts and graphs floating above",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1d6afc4535e6",
+            "type": "image",
+            "title": "Horizonte panorâmico da cidade.",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6L9Gf2S0ySbNai9Rbl91vB/en-US/bx-overview-panoramic-city-skyline-is485896260-promo-640x480.jpg?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6L9Gf2S0ySbNai9Rbl91vB/en-US/bx-overview-panoramic-city-skyline-is485896260-promo-640x480.jpg?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Siemens",
+            "source_url": "https://www.siemens.com/pt-br/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Horizonte panorâmico da cidade.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.siemens-energy.com/br/pt/home.html",
+      "result": {
+        "titulo": "Siemens Energy - Líder global em tecnologia de energia",
+        "texto": "A Siemens Energy tem presença e trajetória significativa no Brasil desde o início do século 20, contribuindo para o desenvolvimento do setor energético e para a modernização da infraestrutura do País. Atuando nos principais projetos de geração e transmissão de energia da história do Brasil, a Siemens Energy sempre foi referência em inovação e pioneirismo. Ao longo do século 21, a Siemens Energy moldou seu portfólio para se tornar sinônimo de transição energética e descarbonização, promovendo tecnologias que favorecem a segurança energética e a incorporação de energias renováveis. Nosso objetivo é ajudar o Brasil a se tornar o protagonista global na geração e utilização de energias limpas, alinhando-se às metas de sustentabilidade do País. Parte de uma estrutura global com mais de 100 mil funcionários, presentes em 90 países,no Brasil a Siemens Energy conta com cerca de 4 mil colaboradores. Aqui é o local ideal para profissionais conectados com nossos valores de cuidado, agilidade, respeito e responsabilidade a desenvolverem suas carreiras, contribuindo para um sistema energético mais sustentável. Saiba mais sobre nós",
+        "final": "https://www.siemens-energy.com/br/pt/home.html",
+        "trecho_usado": "País. Atuando nos principais projetos de geração e transmissão de energia da história do Brasil, a Siemens Energy sempre foi referência em inovação e pioneirismo. Ao longo do século 21, a Siemens Energy moldou seu portfólio para se tornar sinônimo de transição energética e descarbonização, promovendo tecnologias que favorecem a segurança energética e a incorporação de energias renováveis. Nosso",
+        "metadados": {
+          "titulo": "Siemens Energy - Líder global em tecnologia de energia",
+          "descricao": "Apoiamos empresas e comunidades para aumentar a resiliência em todo o setor energético, criando um sistema energético mais confiável, acessível e sustentável.",
+          "canonica": "https://www.siemens-energy.com/br/pt/home.html",
+          "og": {
+            "og:title": "Siemens Energy - Líder global em tecnologia de energia",
+            "og:description": "Apoiamos empresas e países na redução de emissões em todo o cenário energético - para um sistema de energia mais confiável, acessível e sustentável.",
+            "og:image": "https://assets.siemens-energy.com/dam/eaeacbed-2ea4-40fb-87d6-b0b40090fa90/Haru-Oni-2023-%2865%29-jpg_Rendition1280.JPG"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "Siemens-Energy",
+            "twitter:title": "Siemens Energy - Líder global em tecnologia de energia",
+            "twitter:description": "Apoiamos empresas e países na redução de emissões em todo o cenário energético - para um sistema de energia mais confiável, acessível e sustentável.",
+            "twitter:image": "https://assets.siemens-energy.com/dam/eaeacbed-2ea4-40fb-87d6-b0b40090fa90/Haru-Oni-2023-%2865%29-jpg_Rendition1280.JPG"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "A Siemens Energy tem presença e trajetória significativa no Brasil desde o início do século 20, contribuindo para o desenvolvimento do setor energético e para a modernização da infraestrutura do País. Atuando nos principais projetos de geração e transmissão de energia da história do Brasil, a Siemens Energy sempre foi referência em inovação e pioneirismo.\nAo longo do século 21, a Siemens Energy moldou seu portfólio para se tornar sinônimo de transição energética e descarbonização, promovendo tecnologias que favorecem a segurança energética e a incorporação de energias renováveis. Nosso objetivo é ajudar o Brasil a se tornar o protagonista global na geração e utilização de energias limpas, alinhando-se às metas de sustentabilidade do País.\nParte de uma estrutura global com mais de 100 mil funcionários, presentes em 90 países,no Brasil a Siemens Energy conta com cerca de 4 mil colaboradores. Aqui é o local ideal para profissionais conectados com nossos valores de cuidado, agilidade, respeito e responsabilidade a desenvolverem suas carreiras, contribuindo para um sistema energético mais sustentável."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/careers/working-at-siemens-energy-.html",
+            "texto": "Trabalhe Conosco",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/careers/inclusion-diversity.html",
+            "texto": "Conheça as iniciativas de Diversidade & Inclusão da Siemens Energy Brasil",
+            "interno": true
+          },
+          {
+            "url": "https://linkedin.com/showcase/siemens-energy",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/stories.html",
+            "texto": "Histórias da Siemens Energy",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition.html",
+            "texto": "Transição Energética",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies.html",
+            "texto": "Cinco estratégias",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/expand-renewables.html",
+            "texto": "Expandir as energias renováveis",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/transform-conventional-power.html",
+            "texto": "Transforme a energia convencional",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/strengthen-electrical-grids.html",
+            "texto": "Fortalecer as redes elétricas",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/drive-industrial-decarbonization.html",
+            "texto": "Impulsionar a descarbonização da indústria",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/secure-energy-supply.html",
+            "texto": "Cadeias de suprimentos seguras",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services.html",
+            "texto": "Produtos e Serviços",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings.html",
+            "texto": "Produtos",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/circuit-breakers.html",
+            "texto": "Disjuntores",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/compression.html",
+            "texto": "Compressores",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product/omnivise-t3000.html",
+            "texto": "Sistemas de controle",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/disconnectors-earthing-switches.html",
+            "texto": "Seccionadoras",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/omnivise-digital-solutions/enhanced-solutions.html",
+            "texto": "Soluções elétricas",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/hydrogen-solutions.html",
+            "texto": "Eletrolisador",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/solutions-usecase/storage-solutions.html",
+            "texto": "Armazenamento de energia",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/flexible-ac-transmission-systems.html",
+            "texto": "FACTS",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/gas-insulated-switchgear.html",
+            "texto": "Aparelhagem isolada a gás",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/gas-turbines.html",
+            "texto": "Turbinas a gás",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/generators.html",
+            "texto": "Geradores",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/grid-automation.html",
+            "texto": "Automação de rede",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/high-voltage-direct-current-transmission-solutions.html",
+            "texto": "HVDC",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/substations.html",
+            "texto": "Subestações HV",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/offshore-grid-connections.html",
+            "texto": "Conexões de rede offshore",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/overheadline-solutions.html",
+            "texto": "Soluções de linhas aéreas",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/power-plants.html",
+            "texto": "Usinas",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://assets.siemens-energy.com/dam/eaeacbed-2ea4-40fb-87d6-b0b40090fa90/Haru-Oni-2023-%2865%29-jpg_Rendition1280.JPG",
+          "https://www.siemens-energy.com/content/dam/siemensenergy-aem/images/logo/SE_Logo_White.png",
+          "https://assets.siemens-energy.com/dam/fad590d8-b0fa-4bc0-bdd0-b38c010fa407/Danislei-Martins-Leonel-Alonso-jpg_Rendition1920.jpg?apr_optimization=false",
+          "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/buttons---links/arrow-right.svg",
+          "https://assets.siemens-energy.com/dam/c215f895-d94e-4b59-aff2-b48301130a16/omterra-flags-jpg_Rendition1920.jpg?apr_optimization=false",
+          "https://assets.siemens-energy.com/dam/682e010a-d79d-4930-bfe6-b117010eee5f/2023_SE_TeamPurple_EmployerBranding_03_Khormala-Power-Plant_392-jpg_Rendition480.JPG?apr_optimization=false",
+          "https://assets.siemens-energy.com/dam/129d05b3-8e42-4ad4-9b3b-b23a00e1925e/Zero_Harm_Sustainability_Alexandre-Costa_LFT5707-jpg_Rendition1280.JPG?apr_optimization=false",
+          "https://assets.siemens-energy.com/dam/cde81d1c-547c-4b59-9922-b2dd00bc3476/raissa-com-bandeira-br-jpg_Rendition1280.JPG?apr_optimization=false",
+          "https://assets.siemens-energy.com/dam/a348411a-decd-4c8f-8b1f-b2e4011fdf75/imagem-_7_-jpg_Rendition170.JPG?apr_optimization=false",
+          "https://assets.siemens-energy.com/dam/b838b5f8-f359-4b91-84eb-b2e4011ea738/imagem-_8_-jpg_Rendition1920.JPG?apr_optimization=false"
+        ],
+        "midia": [
+          {
+            "id": "med-3eab1527eff0",
+            "type": "image",
+            "title": "Apoiamos empresas e países na redução de emissões em todo o cenário energético - para um sistema de energia mais confiável, acessível e sustentável.",
+            "url": "https://assets.siemens-energy.com/dam/eaeacbed-2ea4-40fb-87d6-b0b40090fa90/Haru-Oni-2023-%2865%29-jpg_Rendition1280.JPG",
+            "final_url": "https://assets.siemens-energy.com/dam/eaeacbed-2ea4-40fb-87d6-b0b40090fa90/Haru-Oni-2023-%2865%29-jpg_Rendition1280.JPG",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Apoiamos empresas e países na redução de emissões em todo o cenário energético - para um sistema de energia mais confiável, acessível e sustentável.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2cde35ab1bec",
+            "type": "image",
+            "title": "Siemens Energy no Brasil – Líder global em tecnologia energética",
+            "url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/images/logo/SE_Logo_White.png",
+            "final_url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/images/logo/SE_Logo_White.png",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "www.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Siemens Energy no Brasil – Líder global em tecnologia energética",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3e0f6239706d",
+            "type": "image",
+            "title": "Um especialista da Siemens Energy olha para a câmera, incorporando a liderança da empresa em tecnologia de energia.",
+            "url": "https://assets.siemens-energy.com/dam/fad590d8-b0fa-4bc0-bdd0-b38c010fa407/Danislei-Martins-Leonel-Alonso-jpg_Rendition1920.jpg?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/fad590d8-b0fa-4bc0-bdd0-b38c010fa407/Danislei-Martins-Leonel-Alonso-jpg_Rendition1920.jpg?apr_optimization=false",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Um especialista da Siemens Energy olha para a câmera, incorporando a liderança da empresa em tecnologia de energia.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9f9252698abd",
+            "type": "image",
+            "title": "icon",
+            "url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/buttons---links/arrow-right.svg",
+            "final_url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/buttons---links/arrow-right.svg",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "www.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3c04ce3791ef",
+            "type": "image",
+            "title": "Omterra logo following the announcement of the rebrand from Siemens Energy and Siemens Gamesa",
+            "url": "https://assets.siemens-energy.com/dam/c215f895-d94e-4b59-aff2-b48301130a16/omterra-flags-jpg_Rendition1920.jpg?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/c215f895-d94e-4b59-aff2-b48301130a16/omterra-flags-jpg_Rendition1920.jpg?apr_optimization=false",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Omterra logo following the announcement of the rebrand from Siemens Energy and Siemens Gamesa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-19356ea4145a",
+            "type": "image",
+            "title": "Especialistas em serviços otimizando uma usina de energia a gás, apresentando esforços na estratégia de transição energética para melhorar a eficiência.",
+            "url": "https://assets.siemens-energy.com/dam/682e010a-d79d-4930-bfe6-b117010eee5f/2023_SE_TeamPurple_EmployerBranding_03_Khormala-Power-Plant_392-jpg_Rendition480.JPG?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/682e010a-d79d-4930-bfe6-b117010eee5f/2023_SE_TeamPurple_EmployerBranding_03_Khormala-Power-Plant_392-jpg_Rendition480.JPG?apr_optimization=false",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Especialistas em serviços otimizando uma usina de energia a gás, apresentando esforços na estratégia de transição energética para melhorar a eficiência.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-415e8c981cd1",
+            "type": "image",
+            "title": "Técnico da Siemens Energy apresentando oportunidades de carreira no setor de energia.",
+            "url": "https://assets.siemens-energy.com/dam/129d05b3-8e42-4ad4-9b3b-b23a00e1925e/Zero_Harm_Sustainability_Alexandre-Costa_LFT5707-jpg_Rendition1280.JPG?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/129d05b3-8e42-4ad4-9b3b-b23a00e1925e/Zero_Harm_Sustainability_Alexandre-Costa_LFT5707-jpg_Rendition1280.JPG?apr_optimization=false",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Técnico da Siemens Energy apresentando oportunidades de carreira no setor de energia.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-99ff5a40e34d",
+            "type": "image",
+            "title": "icon",
+            "url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/social-media/facebook.svg",
+            "final_url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/social-media/facebook.svg",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "www.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-51541a154f89",
+            "type": "image",
+            "title": "icon",
+            "url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/social-media/linked%20in.svg",
+            "final_url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/social-media/linked%20in.svg",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "www.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-23187c20f4f1",
+            "type": "document",
+            "title": "energy-transition.html",
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition.html",
+            "final_url": "https://www.siemens-energy.com/br/pt/home/energy-transition.html",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "www.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Apoiamos empresas e países na redução de emissões em todo o cenário energético - para um sistema de energia mais confiável, acessível e sustentável.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-6200ea93585c",
+            "type": "document",
+            "title": "strategies.html",
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies.html",
+            "final_url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies.html",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "www.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Apoiamos empresas e países na redução de emissões em todo o cenário energético - para um sistema de energia mais confiável, acessível e sustentável.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-e3f9e82d4fd6",
+            "type": "document",
+            "title": "expand-renewables.html",
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/expand-renewables.html",
+            "final_url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/expand-renewables.html",
+            "source_title": "Siemens Energy - Líder global em tecnologia de energia",
+            "source_url": "https://www.siemens-energy.com/br/pt/home.html",
+            "publisher": "www.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Apoiamos empresas e países na redução de emissões em todo o cenário energético - para um sistema de energia mais confiável, acessível e sustentável.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+      "result": {
+        "titulo": "Avasis",
+        "texto": "Skip to main content Esta página é exibida usando tradução automática. Prefere ver em inglês? Avasis",
+        "final": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+        "trecho_usado": "Skip to main content Esta página é exibida usando tradução automática. Prefere ver em inglês? Avasis",
+        "metadados": {
+          "titulo": "Avasis",
+          "descricao": "O grupo avasis é um parceiro platinum da Siemens na região DACH e é especializado nas vendas e implementação das soluções de software da Siemens Teamce...",
+          "canonica": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+          "og": {
+            "og:type": "website",
+            "og:url": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+            "og:locale": "pt-BR",
+            "og:title": "Avasis",
+            "og:description": "O grupo avasis é um parceiro platinum da Siemens na região DACH e é especializado nas vendas e implementação das soluções de software da Siemens Teamce...",
+            "og:site_name": "Siemens",
+            "og:image": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-og-1200x630.jpg"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "Siemens",
+            "twitter:title": "Avasis",
+            "twitter:description": "O grupo avasis é um parceiro platinum da Siemens na região DACH e é especializado nas vendas e implementação das soluções de software da Siemens Teamce...",
+            "twitter:image": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-tc-1200x600.jpg",
+            "twitter:creator": "@siemens.com"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Siemens",
+          "tipo": "WebPage",
+          "ld": {
+            "publisher": {
+              "@type": "Organization",
+              "name": "Siemens"
+            }
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [
+          {
+            "url": "https://www.siemens.com/en-us/ecosystem/avasis/",
+            "texto": "Prefere ver em inglês?",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/",
+            "texto": "Home",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/ecosystem/",
+            "texto": "Ecossistema",
+            "interno": true
+          },
+          {
+            "url": "http://beian.miit.gov.cn/",
+            "texto": "京ICP备06054295号",
+            "interno": false
+          },
+          {
+            "url": "http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010502040638",
+            "texto": "京公网安备 11010502040638号",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-og-1200x630.jpg",
+          "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-tc-1200x600.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-c3fa0f0e0c43",
+            "type": "image",
+            "title": "O grupo avasis é um parceiro platinum da Siemens na região DACH e é especializado nas vendas e implementação das soluções de software da Siemens Teamce...",
+            "url": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-og-1200x630.jpg",
+            "final_url": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-og-1200x630.jpg",
+            "source_title": "Avasis",
+            "source_url": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O grupo avasis é um parceiro platinum da Siemens na região DACH e é especializado nas vendas e implementação das soluções de software da Siemens Teamce...",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-37ef5871eafd",
+            "type": "image",
+            "title": "O grupo avasis é um parceiro platinum da Siemens na região DACH e é especializado nas vendas e implementação das soluções de software da Siemens Teamce...",
+            "url": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-tc-1200x600.jpg",
+            "final_url": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-tc-1200x600.jpg",
+            "source_title": "Avasis",
+            "source_url": "https://www.siemens.com/pt-br/ecosystem/avasis/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O grupo avasis é um parceiro platinum da Siemens na região DACH e é especializado nas vendas e implementação das soluções de software da Siemens Teamce...",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+      "result": {
+        "titulo": "Trazendo a IA para o mundo físico",
+        "texto": "A Siemens acelera a verificação de chips de IA para uma escala de trilhões de ciclos com a tecnologia NVIDIA Abril de 2026 Como parte de sua parceria estratégica de longa data, a NVIDIA e a Siemens dominaram uma tarefa antes considerada impossível, capturando dezenas de trilhões de ciclos em apenas alguns dias, aproveitando a arquitetura de hardware escalável e otimizada para desempenho Veloce ProFPGA CS da Siemens e combinando-a com a arquitetura de chip com desempenho otimizado da NVIDIA. Leia o anúncio Projetando a fábrica de IA com a Siemens e a NVIDIA Março de 2026 A Siemens anuncia um novo conjunto de arquiteturas de referência de data center de IA integradas ao blueprint NVIDIA Omniverse DSX, atendendo à necessidade urgente de uma nova geração de infraestrutura criada especificamente para IA. Leia o anúncio Siemens lança o Teamcenter Digital Reality Viewer e o Digital Twin Composer na Índia Março de 2026 O Digital Twin Composer integra dados gêmeos digitais abrangentes, simulação e sinais operacionais em tempo real em ambientes industriais gerenciados e de alta fidelidade. A Siemens também está promovendo a visualização imersiva do ciclo de vida por meio do software Teamcenter Visualization Digital Reality Viewer, alimentado pelas bibliotecas NVIDIA Omniverse. Leia o anúncio A Siemens lança o Fuse EDA AI Agent para automação em fluxos de trabalho de sistemas semicondutores, IC 3D e PCB Março de 2026 O Fuse EDA AI Agent orquestra de forma autônoma fluxos de trabalho multiagentes em todo o portfólio completo de automação de projeto eletrônico (EDA) da Siemens, desde a concepção do projeto até a aprovação da fabricação, aumentando a eficiência da engenharia e a qualidade do projeto. Leia o anúncio",
+        "final": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+        "trecho_usado": "semicondutores, IC 3D e PCB Março de 2026 O Fuse EDA AI Agent orquestra de forma autônoma fluxos de trabalho multiagentes em todo o portfólio completo de automação de projeto eletrônico (EDA) da Siemens, desde a concepção do projeto até a aprovação da fabricação, aumentando a eficiência da engenharia e a qualidade do projeto. Leia o anúncio",
+        "metadados": {
+          "titulo": "Trazendo a IA para o mundo físico",
+          "descricao": "Por meio de uma parceria estratégica em IA industrial e no metaverso industrial, aceleramos a forma como os produtos chegam ao mercado mais rapidamente e a inteligência é criada.",
+          "canonica": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+          "og": {
+            "og:type": "website",
+            "og:url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "og:locale": "pt-BR",
+            "og:title": "Trazendo a IA para o mundo físico",
+            "og:description": "Por meio de uma parceria estratégica em IA industrial e no metaverso industrial, aceleramos a forma como os produtos chegam ao mercado mais rapidamente e a inteligência é criada.",
+            "og:site_name": "Siemens",
+            "og:image": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-og-1200x630.jpg"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "Siemens",
+            "twitter:title": "Trazendo a IA para o mundo físico",
+            "twitter:description": "Por meio de uma parceria estratégica em IA industrial e no metaverso industrial, aceleramos a forma como os produtos chegam ao mercado mais rapidamente e a inteligência é criada.",
+            "twitter:image": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-tc-1200x600.jpg",
+            "twitter:creator": "@siemens.com"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Siemens",
+          "tipo": "WebPage",
+          "ld": {
+            "publisher": {
+              "@type": "Organization",
+              "name": "Siemens"
+            }
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "A Siemens acelera a verificação de chips de IA para uma escala de trilhões de ciclos com a tecnologia NVIDIA",
+            "texto": "Como parte de sua parceria estratégica de longa data, a NVIDIA e a Siemens dominaram uma tarefa antes considerada impossível, capturando dezenas de trilhões de ciclos em apenas alguns dias, aproveitando a arquitetura de hardware escalável e otimizada para desempenho Veloce ProFPGA CS da Siemens e combinando-a com a arquitetura de chip com desempenho otimizado da NVIDIA."
+          },
+          {
+            "titulo": "Projetando a fábrica de IA com a Siemens e a NVIDIA",
+            "texto": "A Siemens anuncia um novo conjunto de arquiteturas de referência de data center de IA integradas ao blueprint NVIDIA Omniverse DSX, atendendo à necessidade urgente de uma nova geração de infraestrutura criada especificamente para IA."
+          },
+          {
+            "titulo": "Siemens lança o Teamcenter Digital Reality Viewer e o Digital Twin Composer na Índia",
+            "texto": "O Digital Twin Composer integra dados gêmeos digitais abrangentes, simulação e sinais operacionais em tempo real em ambientes industriais gerenciados e de alta fidelidade. A Siemens também está promovendo a visualização imersiva do ciclo de vida por meio do software Teamcenter Visualization Digital Reality Viewer, alimentado pelas bibliotecas NVIDIA Omniverse."
+          },
+          {
+            "titulo": "A Siemens lança o Fuse EDA AI Agent para automação em fluxos de trabalho de sistemas semicondutores, IC 3D e PCB",
+            "texto": "O Fuse EDA AI Agent orquestra de forma autônoma fluxos de trabalho multiagentes em todo o portfólio completo de automação de projeto eletrônico (EDA) da Siemens, desde a concepção do projeto até a aprovação da fabricação, aumentando a eficiência da engenharia e a qualidade do projeto."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.siemens.com/en-us/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "texto": "Prefere ver em inglês?",
+            "interno": true
+          },
+          {
+            "url": "https://press.siemens.com/global/en/pressrelease/siemens-and-foxconn-team-optimize-forward-thinking-manufacturing",
+            "texto": "Leia mais",
+            "interno": false
+          },
+          {
+            "url": "https://news.siemens.com/en-us/hd-hyundai-selects-siemens-xcelerator/",
+            "texto": "Leia mais",
+            "interno": false
+          },
+          {
+            "url": "https://www.nvidia.com/en-us/case-studies/siemens-accelerates-product-development-and-innovation-with-industrial-ai/#nv-title-917f8f9e42",
+            "texto": "Leia mais",
+            "interno": false
+          },
+          {
+            "url": "https://assets.new.siemens.com/siemens/assets/api/uuid:f6a7c220-bc7e-4bb7-a348-aa2d07c21d77/S-P-Siemens-Industrial-Metaverse-Research-Study-Technology-2024.pdf",
+            "texto": "ampla adoção do metaverso industrial na inovação de P&D e no planejamento do processo de fabricação",
+            "interno": false
+          },
+          {
+            "url": "https://press.siemens.com/global/en/pressrelease/siemens-and-nvidia-are-advancing-industrial-ai",
+            "texto": "Leia o anúncio",
+            "interno": false
+          },
+          {
+            "url": "https://news.siemens.com/en-us/siemens-calibre-nvidia-culitho/",
+            "texto": "Leia o anúncio",
+            "interno": false
+          },
+          {
+            "url": "https://press.siemens.com/global/en/pressrelease/siemens-partners-nvidia-advance-ai-driven-autonomous-factories",
+            "texto": "Leia o anúncio",
+            "interno": false
+          },
+          {
+            "url": "https://news.siemens.co.uk/news/siemens-to-offer-industrial-ai-powered-simulation-software-for-the-uk-and-ireland",
+            "texto": "Leia o anúncio",
+            "interno": false
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/company/insights/us-stories/siemens-delivers-nvidia-dsx-infrastructure-ai-factory/",
+            "texto": "Leia o anúncio",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/",
+            "texto": "Home",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/company/",
+            "texto": "Empresa",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/company/artificial-intelligence/",
+            "texto": "Inteligência artificial",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/#54NFSIHolx1kyTUsMeGlgh",
+            "texto": "Veja nosso impacto no mundo real",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/company/electronic-design-automation/",
+            "texto": "Automação de Projeto Eletrônico (EDA)",
+            "interno": true
+          },
+          {
+            "url": "https://developer.nvidia.com/cuda/cuda-x-libraries",
+            "texto": "Bibliotecas CUDA-X",
+            "interno": false
+          },
+          {
+            "url": "https://developer.nvidia.com/physicsnemo",
+            "texto": "Física NeMo",
+            "interno": false
+          },
+          {
+            "url": "https://developer.nvidia.com/nemotron",
+            "texto": "Nemotron",
+            "interno": false
+          },
+          {
+            "url": "https://www.siemens.com/en-us/industries/data-centers/manage-infrastructure-for-ai-workloads/",
+            "texto": "Infraestrutura de IA",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/company/digital-transformation/industrial-metaverse/introducing-digital-twin-composer/",
+            "texto": "Conheça o Digital Twin Composer",
+            "interno": true
+          },
+          {
+            "url": "https://news.siemens.com/en-us/digital-twin-composer-ces-2026/",
+            "texto": "Leia mais",
+            "interno": false
+          },
+          {
+            "url": "https://resources.sw.siemens.com/en-US/brochure-data-center-100-mw-hyperscale-ai-blueprint/?bc=eyJwYWdlIjoiNjZVR0FLMU9KVFZQd3JrellqWERYbiIsInNpdGUiOiJvbmUiLCJsb2NhbGUiOiJlbi1VUyJ9)",
+            "texto": "Baixe a referência técnica",
+            "interno": false
+          },
+          {
+            "url": "https://blogs.sw.siemens.com/teamcenter/introducing-teamcenter-digital-reality-viewer/",
+            "texto": "Conheça o Teamcenter Digital Reality Viewer",
+            "interno": false
+          },
+          {
+            "url": "https://www.siemens.com/pt-br/partners/software/nvidia/",
+            "texto": "Explorar mais",
+            "interno": true
+          },
+          {
+            "url": "https://press.siemens.com/global/en/pressrelease/siemens-and-partners-develop-reference-architecture-purpose-built-nvidia-ai-data",
+            "texto": "Leia o anúncio",
+            "interno": false
+          },
+          {
+            "url": "https://news.siemens.com/en-us/siemens-nvidia-dac-2026/",
+            "texto": "Leia o anúncio",
+            "interno": false
+          },
+          {
+            "url": "https://press.siemens.com/global/en/pressrelease/siemens-and-humanoid-bring-physical-ai-factory-floor-deploying-humanoids-industrial",
+            "texto": "Leia o anúncio",
+            "interno": false
+          },
+          {
+            "url": "https://press.siemens.com/global/en/pressrelease/ai-ready-edge-siemens-industrial-automation-datacenter-accelerated-ai-computing-power",
+            "texto": "Leia o anúncio",
+            "interno": false
+          },
+          {
+            "url": "https://news.siemens.com/en-us/siemens-nvidia-veloce/",
+            "texto": "Leia o anúncio",
+            "interno": false
+          },
+          {
+            "url": "https://press.siemens.com/in/en/pressrelease/siemens-launches-teamcenter-digital-reality-viewer-and-digital-twin-composer-india",
+            "texto": "Leia o anúncio",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-og-1200x630.jpg",
+          "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-tc-1200x600.jpg",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6p7BAN3wJkclRgb0l7FWwE/en-US/B0012498_original_V2.jpg?auto=format%2Ccompress&amp;w=2560&amp;h=1440&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6MssjVYJJZjoSccgJmyqeK/en-US/DSC04815_original.jpg?auto=format%2Ccompress&amp;w=1280&amp;h=720&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/7yj8AkW5RuFaj7Dznhc660/en-US/c92adbc7-38ff-4d0d-a55a-b793ec8f1e6b%20-%20EDADigitalTwinCPUDeepBlue_original.png?auto=format%2Ccompress&amp;w=1280&amp;h=720&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/31KgXAShEICEFWFMxuPd7q/en-US/im2019040300gp_300dpi_original.jpg?auto=format%2Ccompress&amp;w=1280&amp;h=720&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/46dr5XueoeNyfDW0N7pvX6/en-US/Server-racks-in-server-room-data-center_original.jpg?auto=format%2Ccompress&amp;w=1280&amp;h=720&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/r4PrMBYZumpUrohBqdnjp/en-US/KeyVisualwalkcleanplate_original.jpg?auto=format%2Ccompress&amp;w=1280&amp;h=720&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/47DuSlSmujoDUE01UU0uHQ/en-US/siemens-digital-twin-composer-hero-image_original.png?auto=format%2Ccompress&amp;w=640&amp;h=480&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60",
+          "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6WhkODwqQP357qDd7ruEsY/en-US/em-pepsi-reference_original.jpg?auto=format%2Ccompress&amp;w=640&amp;h=480&amp;fit=crop&amp;crop=faces%2Cedges&amp;q=60"
+        ],
+        "midia": [
+          {
+            "id": "med-c3fa0f0e0c43",
+            "type": "image",
+            "title": "Por meio de uma parceria estratégica em IA industrial e no metaverso industrial, aceleramos a forma como os produtos chegam ao mercado mais rapidamente e a inte",
+            "url": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-og-1200x630.jpg",
+            "final_url": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-og-1200x630.jpg",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Por meio de uma parceria estratégica em IA industrial e no metaverso industrial, aceleramos a forma como os produtos chegam ao mercado mais rapidamente e a inteligência é criada.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-37ef5871eafd",
+            "type": "image",
+            "title": "Por meio de uma parceria estratégica em IA industrial e no metaverso industrial, aceleramos a forma como os produtos chegam ao mercado mais rapidamente e a inte",
+            "url": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-tc-1200x600.jpg",
+            "final_url": "https://images.sw.cdn.siemens.com/shared/siemens-logo-white-deepblue-placeholder-tc-1200x600.jpg",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Por meio de uma parceria estratégica em IA industrial e no metaverso industrial, aceleramos a forma como os produtos chegam ao mercado mais rapidamente e a inteligência é criada.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-873975eab733",
+            "type": "image",
+            "title": "CES 2026: Roland Busch",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6MssjVYJJZjoSccgJmyqeK/en-US/DSC04815_original.jpg?auto=format%2Ccompress&w=1280&h=720&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6MssjVYJJZjoSccgJmyqeK/en-US/DSC04815_original.jpg?auto=format%2Ccompress&w=1280&h=720&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "CES 2026: Roland Busch",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f19022fcee2b",
+            "type": "image",
+            "title": "Um gêmeo digital de uma CPU com fundo azul e uma renderização 3D da CPU.",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/7yj8AkW5RuFaj7Dznhc660/en-US/c92adbc7-38ff-4d0d-a55a-b793ec8f1e6b%20-%20EDADigitalTwinCPUDeepBlue_original.png?auto=format%2Ccompress&w=1280&h=720&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/7yj8AkW5RuFaj7Dznhc660/en-US/c92adbc7-38ff-4d0d-a55a-b793ec8f1e6b%20-%20EDADigitalTwinCPUDeepBlue_original.png?auto=format%2Ccompress&w=1280&h=720&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Um gêmeo digital de uma CPU com fundo azul e uma renderização 3D da CPU.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8bd2ed0b7aca",
+            "type": "image",
+            "title": "Os principais ativos da subestação são conectivos. Com a combinação dos transformadores Sensformer conectados digitalmente e do novo Sensgear, todos os ativos d",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/31KgXAShEICEFWFMxuPd7q/en-US/im2019040300gp_300dpi_original.jpg?auto=format%2Ccompress&w=1280&h=720&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/31KgXAShEICEFWFMxuPd7q/en-US/im2019040300gp_300dpi_original.jpg?auto=format%2Ccompress&w=1280&h=720&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Os principais ativos da subestação são conectivos. Com a combinação dos transformadores Sensformer conectados digitalmente e do novo Sensgear, todos os ativos de transmissão da subestação agora estão totalmente conectivos. Todos os disposit",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f29cad953002",
+            "type": "image",
+            "title": "Sala de servidores do data center",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/46dr5XueoeNyfDW0N7pvX6/en-US/Server-racks-in-server-room-data-center_original.jpg?auto=format%2Ccompress&w=1280&h=720&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/46dr5XueoeNyfDW0N7pvX6/en-US/Server-racks-in-server-room-data-center_original.jpg?auto=format%2Ccompress&w=1280&h=720&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Sala de servidores do data center",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4ef78272a333",
+            "type": "image",
+            "title": "Visual chave de fábrica autônoma",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/r4PrMBYZumpUrohBqdnjp/en-US/KeyVisualwalkcleanplate_original.jpg?auto=format%2Ccompress&w=1280&h=720&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/r4PrMBYZumpUrohBqdnjp/en-US/KeyVisualwalkcleanplate_original.jpg?auto=format%2Ccompress&w=1280&h=720&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Visual chave de fábrica autônoma",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8039e35ba791",
+            "type": "image",
+            "title": "Imagem de herói do Siemens Digital Twin Composer",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/47DuSlSmujoDUE01UU0uHQ/en-US/siemens-digital-twin-composer-hero-image_original.png?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/47DuSlSmujoDUE01UU0uHQ/en-US/siemens-digital-twin-composer-hero-image_original.png?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem de herói do Siemens Digital Twin Composer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-34e0c0f44f55",
+            "type": "image",
+            "title": "PepsiCo em 1971",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6WhkODwqQP357qDd7ruEsY/en-US/em-pepsi-reference_original.jpg?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/6WhkODwqQP357qDd7ruEsY/en-US/em-pepsi-reference_original.jpg?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "PepsiCo em 1971",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0de128274731",
+            "type": "image",
+            "title": "Digital Twin Composer - Ambiente fotorrealistaDigital Twin Composer - Crie e gerencie experiências 3D seguras e de alta fidelidade, aceleradas pelas bibliotecas",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/7xemCQZQg47i7rbzts6Ie6/en-US/digital-twin-composer-photorealistic-environment_original.png?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/7xemCQZQg47i7rbzts6Ie6/en-US/digital-twin-composer-photorealistic-environment_original.png?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Digital Twin Composer - Ambiente fotorrealistaDigital Twin Composer - Crie e gerencie experiências 3D seguras e de alta fidelidade, aceleradas pelas bibliotecas NVIDIA Omniverse.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-80ea15e16725",
+            "type": "image",
+            "title": "Siemens e NVIDIA demonstram Clay para renderizar",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/365WGvYdW3ujJGeipOwQBT/en-US/Siemens-and-NVIDIA-Demo-Clay-to-Render_original.png?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/365WGvYdW3ujJGeipOwQBT/en-US/Siemens-and-NVIDIA-Demo-Clay-to-Render_original.png?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Siemens e NVIDIA demonstram Clay para renderizar",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b53f4b4d4f9b",
+            "type": "image",
+            "title": "Agência de pesquisa de engenharia de gerenciamento do ciclo de vida de produtos automotivos realiza testes aerodinâmicos com um carro esportivo elétrico moderno",
+            "url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/3RPunepnVNCJ7gmIh20bzQ/en-US/plm-is1408904995-shero-2560x1440_original.jpg?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "final_url": "https://images.sw.cdn.siemens.com/siemens-disw-assets/public/3RPunepnVNCJ7gmIh20bzQ/en-US/plm-is1408904995-shero-2560x1440_original.jpg?auto=format%2Ccompress&w=640&h=480&fit=crop&crop=faces%2Cedges&q=60",
+            "source_title": "Trazendo a IA para o mundo físico",
+            "source_url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+            "publisher": "images.sw.cdn.siemens.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Agência de pesquisa de engenharia de gerenciamento do ciclo de vida de produtos automotivos realiza testes aerodinâmicos com um carro esportivo elétrico moderno e ecológico em um túnel de vento. Cientista profissional trabalha em um laptop ",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.siemens-energy.com/br/pt/home/careers/working-at-siemens-energy-.html",
+      "result": {
+        "titulo": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+        "texto": "Na Siemens Energy Brasil, os benefícios vão muito além das obrigações legais. Além Para nós, além de garantir qualidade de vida para você e para sua aqueles que você ama, também queremos que você tenha o melhor ambiente de trabalho e as condições mais favoráveis para desenvolver suas habilidades e alavancar sua carreira. A Siemens Energy oferece uma gama de benefícios que priorizam a saúde e a qualidade de vida de seus colaboradores. Entre os destaques, o seguro de vida é totalmente custeado pela empresa, proporcionando segurança financeira. Os benefícios relacionados à maternidade e paternidade incluem licença parental, auxílio creche e licença para eventos especiais, promovendo um ambiente familiar acolhedor. Além disso, a empresa oferece assistência médica, odontológica, previdência privada e programas de apoio psicológico, garantindo bem-estar integral. Transporte e alimentação também são contemplados, com auxílio e opções de refeição.",
+        "final": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+        "trecho_usado": "tenha o melhor ambiente de trabalho e as condições mais favoráveis para desenvolver suas habilidades e alavancar sua carreira. A Siemens Energy oferece uma gama de benefícios que priorizam a saúde e a qualidade de vida de seus colaboradores. Entre os destaques, o seguro de vida é totalmente custeado pela empresa, proporcionando segurança financeira. Os benefícios relacionados à maternidade e",
+        "metadados": {
+          "titulo": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+          "descricao": "Descubra as carreiras da Siemens Energy e saiba mais sobre nossa cultura, ambiente de trabalho e como nosso pessoal está impulsionando o futuro do setor de energia e energia sustentável.",
+          "canonica": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+          "og": {
+            "og:title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "og:description": "Junte-se a Siemens Energy para impulsionar a inovação e a sustentabilidade. Descubra diferentes caminhos de carreira e faça a diferença no setor de energia.",
+            "og:image": "https://assets.siemens-energy.com/dam/24d0d251-96de-48d8-a8d7-b2dd00bcb9c8/livia--luiz-e-henrique-jpg_Rendition1920.JPG"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "Siemens-Energy",
+            "twitter:title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "twitter:description": "Junte-se a Siemens Energy para impulsionar a inovação e a sustentabilidade. Descubra diferentes caminhos de carreira e faça a diferença no setor de energia.",
+            "twitter:image": "https://assets.siemens-energy.com/dam/24d0d251-96de-48d8-a8d7-b2dd00bcb9c8/livia--luiz-e-henrique-jpg_Rendition1920.JPG"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "FAQPage",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Na Siemens Energy Brasil, os benefícios vão muito além das obrigações legais. Além Para nós, além de garantir qualidade de vida para você e para sua aqueles que você ama, também queremos que você tenha o melhor ambiente de trabalho e as condições mais favoráveis para desenvolver suas habilidades e alavancar sua carreira. A Siemens Energy oferece uma gama de benefícios que priorizam a saúde e a qualidade de vida de seus colaboradores. Entre os destaques, o seguro de vida é totalmente custeado pela empresa, proporcionando segurança financeira. Os benefícios relacionados à maternidade e paternidade incluem licença parental, auxílio creche e licença para eventos especiais, promovendo um ambiente familiar acolhedor. Além disso, a empresa oferece assistência médica, odontológica, previdência privada e programas de apoio psicológico, garantindo bem-estar integral. Transporte e alimentação também são contemplados, com auxílio e opções de refeição."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/careers/working-at-siemens-energy-.html",
+            "texto": "Trabalhe Conosco",
+            "interno": true
+          },
+          {
+            "url": "https://www.glassdoor.com/api/api.htm?version&#61;1&amp;action&#61;employer-review&amp;t.s&#61;w-l&amp;t.a&#61;c&amp;format&#61;300x250&amp;employerId&#61;4393689",
+            "texto": "Glassdoor: Check Siemens Energy Reviews",
+            "interno": false
+          },
+          {
+            "url": "https://linkedin.com/showcase/siemens-energy",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/stories.html",
+            "texto": "Histórias da Siemens Energy",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition.html",
+            "texto": "Transição Energética",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies.html",
+            "texto": "Cinco estratégias",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/expand-renewables.html",
+            "texto": "Expandir as energias renováveis",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/transform-conventional-power.html",
+            "texto": "Transforme a energia convencional",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/strengthen-electrical-grids.html",
+            "texto": "Fortalecer as redes elétricas",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/drive-industrial-decarbonization.html",
+            "texto": "Impulsionar a descarbonização da indústria",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/energy-transition/strategies/secure-energy-supply.html",
+            "texto": "Cadeias de suprimentos seguras",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services.html",
+            "texto": "Produtos e Serviços",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings.html",
+            "texto": "Produtos",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/circuit-breakers.html",
+            "texto": "Disjuntores",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/compression.html",
+            "texto": "Compressores",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product/omnivise-t3000.html",
+            "texto": "Sistemas de controle",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/disconnectors-earthing-switches.html",
+            "texto": "Seccionadoras",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/omnivise-digital-solutions/enhanced-solutions.html",
+            "texto": "Soluções elétricas",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/hydrogen-solutions.html",
+            "texto": "Eletrolisador",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/solutions-usecase/storage-solutions.html",
+            "texto": "Armazenamento de energia",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/flexible-ac-transmission-systems.html",
+            "texto": "FACTS",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/gas-insulated-switchgear.html",
+            "texto": "Aparelhagem isolada a gás",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/gas-turbines.html",
+            "texto": "Turbinas a gás",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/generators.html",
+            "texto": "Geradores",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/grid-automation.html",
+            "texto": "Automação de rede",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/high-voltage-direct-current-transmission-solutions.html",
+            "texto": "HVDC",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/substations.html",
+            "texto": "Subestações HV",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/offshore-grid-connections.html",
+            "texto": "Conexões de rede offshore",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/overheadline-solutions.html",
+            "texto": "Soluções de linhas aéreas",
+            "interno": true
+          },
+          {
+            "url": "https://www.siemens-energy.com/br/pt/home/products-services/product-offerings/power-plants.html",
+            "texto": "Usinas",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://assets.siemens-energy.com/dam/24d0d251-96de-48d8-a8d7-b2dd00bcb9c8/livia--luiz-e-henrique-jpg_Rendition1920.JPG",
+          "https://www.siemens-energy.com/content/dam/siemensenergy-aem/images/logo/SE_Logo_White.png",
+          "https://assets.siemens-energy.com/dam/5bf452c3-18a7-4651-b844-b37000e57569/539A8140-jpg_Rendition1920.jpg?apr_optimization=false",
+          "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/buttons---links/link-extern.svg",
+          "https://assets.siemens-energy.com/dam/c215f895-d94e-4b59-aff2-b48301130a16/omterra-flags-jpg_Rendition480.jpg?apr_optimization=false",
+          "https://assets.siemens-energy.com/dam/cde81d1c-547c-4b59-9922-b2dd00bc3476/raissa-com-bandeira-br-jpg_Rendition480.JPG?apr_optimization=false",
+          "https://assets.siemens-energy.com/dam/eceac7c2-da92-4e41-807f-b4a900ff61db/20130421_16-44-02_2-%281%29-jpg_Rendition960.jpg?apr_optimization=false",
+          "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/buttons---links/ellipse2.svg",
+          "https://assets.siemens-energy.com/dam/9f1d1cf6-9564-4257-859c-b4c200d96ba7/BANNER_MarcelaOma%C3%B1a-%281%29-png_Rendition1280.png?apr_optimization=false",
+          "https://assets.siemens-energy.com/dam/8aadd61a-aca2-4217-8c01-b3de00d3b823/Employer-Branding-Engineering-Hungary-1-jpg_Rendition1920.jpg?apr_optimization=false"
+        ],
+        "midia": [
+          {
+            "id": "med-91418d279691",
+            "type": "image",
+            "title": "Junte-se a Siemens Energy para impulsionar a inovação e a sustentabilidade. Descubra diferentes caminhos de carreira e faça a diferença no setor de energia.",
+            "url": "https://assets.siemens-energy.com/dam/24d0d251-96de-48d8-a8d7-b2dd00bcb9c8/livia--luiz-e-henrique-jpg_Rendition1920.JPG",
+            "final_url": "https://assets.siemens-energy.com/dam/24d0d251-96de-48d8-a8d7-b2dd00bcb9c8/livia--luiz-e-henrique-jpg_Rendition1920.JPG",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Junte-se a Siemens Energy para impulsionar a inovação e a sustentabilidade. Descubra diferentes caminhos de carreira e faça a diferença no setor de energia.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2cde35ab1bec",
+            "type": "image",
+            "title": "Siemens Energy no Brasil – Líder global em tecnologia energética",
+            "url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/images/logo/SE_Logo_White.png",
+            "final_url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/images/logo/SE_Logo_White.png",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "www.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Siemens Energy no Brasil – Líder global em tecnologia energética",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-99f7cc727207",
+            "type": "image",
+            "title": "Trabalhando na Siemens Energy",
+            "url": "https://assets.siemens-energy.com/dam/5bf452c3-18a7-4651-b844-b37000e57569/539A8140-jpg_Rendition1920.jpg?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/5bf452c3-18a7-4651-b844-b37000e57569/539A8140-jpg_Rendition1920.jpg?apr_optimization=false",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Trabalhando na Siemens Energy",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c71d3f558cdd",
+            "type": "image",
+            "title": "icon",
+            "url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/buttons---links/link-extern.svg",
+            "final_url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/buttons---links/link-extern.svg",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "www.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b21e6e95ea26",
+            "type": "image",
+            "title": "Omterra flags",
+            "url": "https://assets.siemens-energy.com/dam/c215f895-d94e-4b59-aff2-b48301130a16/omterra-flags-jpg_Rendition480.jpg?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/c215f895-d94e-4b59-aff2-b48301130a16/omterra-flags-jpg_Rendition480.jpg?apr_optimization=false",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Omterra flags",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-74dda1b0335d",
+            "type": "image",
+            "title": "Raissa photo",
+            "url": "https://assets.siemens-energy.com/dam/cde81d1c-547c-4b59-9922-b2dd00bc3476/raissa-com-bandeira-br-jpg_Rendition480.JPG?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/cde81d1c-547c-4b59-9922-b2dd00bc3476/raissa-com-bandeira-br-jpg_Rendition480.JPG?apr_optimization=false",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Raissa photo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-599349c2ca8c",
+            "type": "image",
+            "title": "icon",
+            "url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/buttons---links/ellipse2.svg",
+            "final_url": "https://www.siemens-energy.com/content/dam/siemensenergy-aem/icons/buttons---links/ellipse2.svg",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "www.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1d849f757a90",
+            "type": "image",
+            "title": "Funcionários felizes mexendo no computador",
+            "url": "https://assets.siemens-energy.com/dam/5bf452c3-18a7-4651-b844-b37000e57569/539A8140-jpg_Rendition960.jpg?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/5bf452c3-18a7-4651-b844-b37000e57569/539A8140-jpg_Rendition960.jpg?apr_optimization=false",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Funcionários felizes mexendo no computador",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ab1025e9711f",
+            "type": "image",
+            "title": "Homem e mulher andando na natureza",
+            "url": "https://assets.siemens-energy.com/dam/c9bcdd71-aade-4662-97cd-b37000e51fe4/539A1479-Aprimorado-NR-jpg_Rendition1920.jpg?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/c9bcdd71-aade-4662-97cd-b37000e51fe4/539A1479-Aprimorado-NR-jpg_Rendition1920.jpg?apr_optimization=false",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Homem e mulher andando na natureza",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-47488b2d7290",
+            "type": "image",
+            "title": "Funcionários descendo as escadas",
+            "url": "https://assets.siemens-energy.com/dam/b7c5810a-9e2e-41b7-a016-b2dc00fd9d2f/renata-sentada-jpg_Rendition170.JPG?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/b7c5810a-9e2e-41b7-a016-b2dc00fd9d2f/renata-sentada-jpg_Rendition170.JPG?apr_optimization=false",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Funcionários descendo as escadas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e847e1662123",
+            "type": "image",
+            "title": "Homem e mulher andand e conversando",
+            "url": "https://assets.siemens-energy.com/dam/f3b17eb5-4823-41b1-aee3-b37000e4ec1c/539A0339-Aprimorado-NR-jpg_Rendition1920.jpg?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/f3b17eb5-4823-41b1-aee3-b37000e4ec1c/539A0339-Aprimorado-NR-jpg_Rendition1920.jpg?apr_optimization=false",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Homem e mulher andand e conversando",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a8b284dc90ef",
+            "type": "image",
+            "title": "Homem andando de bicicleta",
+            "url": "https://assets.siemens-energy.com/dam/eb596930-4457-49a0-b094-b07d00f0aec0/Siemens-06122021-GUSC0275-161-jpg_Rendition170.JPG?apr_optimization=false",
+            "final_url": "https://assets.siemens-energy.com/dam/eb596930-4457-49a0-b094-b07d00f0aec0/Siemens-06122021-GUSC0275-161-jpg_Rendition170.JPG?apr_optimization=false",
+            "source_title": "Trabalhando na Siemens Energy: Carreiras e Oportunidades de Emprego",
+            "source_url": "https://www.siemens-energy.com/br/pt/home/careers/working-with-us.html",
+            "publisher": "assets.siemens-energy.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Homem andando de bicicleta",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "3d4e7f138e16104c526b",
+            "url": "https://www.siemens.com/pt-br/",
+            "title": "Página inicial da Siemens",
+            "origin": "bing",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Siemens: líder global em tecnologia que impulsiona a inovação na indústria, infraestrutura e mobilidade por meio da transformação digital."
+          },
+          {
+            "id": "9b3a5bc6b447ac36d2e6",
+            "url": "https://sieportal.siemens.com/pt-br/home",
+            "title": "Siemens SiePortal - Produtos, Serviços e Suporte",
+            "origin": "bing",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "O melhor exemplo: SiePortal – o nosso portal B2B inovador, intuitivo e poderoso para o portfólio de produtos, sistemas e serviços da Siemens Digital Industries "
+          },
+          {
+            "id": "7bcc74648e18892a9a83",
+            "url": "https://www.siemens.com/",
+            "title": "Siemens home | Siemens",
+            "origin": "bing",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Siemens: A global technology leader driving innovation in industry, infrastructure and mobility through digital transformation."
+          },
+          {
+            "id": "7d2bea1acd8ea0f24fac",
+            "url": "https://sieportal.siemens.com/en-ww/home",
+            "title": "Home - Siemens SiePortal",
+            "origin": "bing",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "General product approval/EU Declaration of Conformity, Manufacturer, Siemens (–) See all certificates Download"
+          },
+          {
+            "id": "2d0eae378228f83b24e2",
+            "url": "https://mall.industry.siemens.com/mall/",
+            "title": "Welcome - Industry Mall - Siemens WW",
+            "origin": "bing",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "The integrated platform for your product selection, buying, and support workflow – bringing together Industry Mall and Online Support."
+          },
+          {
+            "id": "a2e6c5b4ec9b508e98a4",
+            "url": "https://www.siemens-energy.com/br/pt/home.html",
+            "title": "Siemens Energy no Brasil – Líder global em tecnologia energética",
+            "origin": "bing",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "A Siemens Energy é líder em tecnologia energética, apoiando empresas e comunidades em todo o mundo na construção de sistemas de energia resilientes, acessíveis "
+          },
+          {
+            "id": "f06318300a866b200443",
+            "url": "https://en.wikipedia.org/wiki/Siemens",
+            "title": "Siemens",
+            "origin": "marginalia",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "6748aa0cd8a565522e77",
+            "url": "https://en.wikipedia.org/wiki/Siemens_%28unit%29",
+            "title": "Siemens (unit)",
+            "origin": "marginalia",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "81c7395f9056132c06a1",
+            "url": "https://en.wikipedia.org/wiki/Siemens_%26_Halske",
+            "title": "Siemens & Halske",
+            "origin": "marginalia",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "80dfb73afd9277bb2f1e",
+            "url": "https://en.wikipedia.org/wiki/Siemens_Mobile",
+            "title": "Siemens Mobile",
+            "origin": "marginalia",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "a78dbe40fd8d1e6e3369",
+            "url": "https://en.wikipedia.org/wiki/Siemens_Healthineers",
+            "title": "Siemens Healthineers",
+            "origin": "marginalia",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "f6dda6dd6cf0258658b2",
+            "url": "https://www.corpwatch.org/company/siemens-energy",
+            "title": "Siemens Energy | corpwatch",
+            "origin": "marginalia",
+            "query": "Siemens",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (Siemens)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Siemens)",
+        "ddg: bloqueado (Siemens)",
+        "marginalia: 6 resultados (Siemens)",
+        "marginalia: sem correspondência com o pedido; tentando outro provedor (Siemens)",
+        "— recuperação por lacuna —",
+        "bing: 6 resultados (quem fundou siemens ano produtos fabrica)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (quem fundou siemens ano produtos fabrica)",
+        "marginalia: 1 resultados (quem fundou siemens ano produtos fabrica)",
+        "marginalia: sem correspondência com o pedido; tentando outro provedor (quem fundou siemens ano produtos fabrica)",
+        "wikipedia: sem resultados (quem fundou siemens ano produtos fabrica)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Siemens",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "datas/anos pedidos não aparecem nas fontes",
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-4630125f1e54",
+            "type": "explicit_attribute",
+            "description": "Fundadores",
+            "entity": "Siemens",
+            "attribute": "founders",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Fundadores",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-6bfe9fb74b48",
+            "type": "explicit_attribute",
+            "description": "Data de fundação",
+            "entity": "Siemens",
+            "attribute": "foundation_date",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Data de fundação",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-6636160123d6",
+            "type": "explicit_attribute",
+            "description": "Produtos",
+            "entity": "Siemens",
+            "attribute": "products",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Produtos",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://www.siemens.com/pt-br/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S2",
+          "url": "https://www.siemens-energy.com/br/pt/home.html",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://www.siemens.com/pt-br/company/artificial-intelligence/siemens-nvidia-partnership/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+      "adapter_query": "Siemens",
+      "provider": "bing",
+      "at": "2026-10-25T18:33:50.695593+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Página inicial da Siemens",
+          "url": "https://www.siemens.com/pt-br/"
+        },
+        {
+          "title": "Siemens SiePortal - Produtos, Serviços e Suporte",
+          "url": "https://sieportal.siemens.com/pt-br/home"
+        },
+        {
+          "title": "Siemens home | Siemens",
+          "url": "https://www.siemens.com/"
+        },
+        {
+          "title": "Home - Siemens SiePortal",
+          "url": "https://sieportal.siemens.com/en-ww/home"
+        },
+        {
+          "title": "Welcome - Industry Mall - Siemens WW",
+          "url": "https://mall.industry.siemens.com/mall/"
+        },
+        {
+          "title": "Siemens Energy no Brasil – Líder global em tecnologia energética",
+          "url": "https://www.siemens-energy.com/br/pt/home.html"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "Siemens",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 405.16,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+      "adapter_query": "Siemens",
+      "provider": "ddg",
+      "at": "2026-10-25T18:33:51.109821+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": 403,
+      "error_code": "bloqueado",
+      "result_count": 0,
+      "classification": "PROVIDER_BLOCKED",
+      "requests": [],
+      "latency_ms": 797.97,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+      "adapter_query": "Siemens",
+      "provider": "marginalia",
+      "at": "2026-10-25T18:33:51.907864+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Siemens",
+          "url": "https://en.wikipedia.org/wiki/Siemens"
+        },
+        {
+          "title": "Siemens (unit)",
+          "url": "https://en.wikipedia.org/wiki/Siemens_%28unit%29"
+        },
+        {
+          "title": "Siemens & Halske",
+          "url": "https://en.wikipedia.org/wiki/Siemens_%26_Halske"
+        },
+        {
+          "title": "Siemens Mobile",
+          "url": "https://en.wikipedia.org/wiki/Siemens_Mobile"
+        },
+        {
+          "title": "Siemens Healthineers",
+          "url": "https://en.wikipedia.org/wiki/Siemens_Healthineers"
+        },
+        {
+          "title": "Siemens Energy | corpwatch",
+          "url": "https://www.corpwatch.org/company/siemens-energy"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "Siemens"
+          },
+          "http_status": null,
+          "final_url": "https://old-search.marginalia.nu/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 1522.28,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+      "adapter_query": "quem fundou siemens ano produtos fabrica",
+      "provider": "bing",
+      "at": "2026-10-25T18:33:53.458835+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "MSC Cruzeiros, férias na América do Sul, Caribe e muito mais!",
+          "url": "https://www.msccruzeiros.com.br/"
+        },
+        {
+          "title": "Buenos Aires, cruzeiros na Argentina | MSC Cruzeiros",
+          "url": "https://www.msccruzeiros.com.br/nossos-cruzeiros/destinos/america-do-sul/argentina/buenos-aires"
+        },
+        {
+          "title": "Caribe sem visto com Pacote completo| MSC Cruzeiros",
+          "url": "https://www.msccruzeiros.com.br/ofertas/pacote-completo-caribe-martinica"
+        },
+        {
+          "title": "Cruzeiros transatlânticos: MSC Grand Voyages | MSC Cruzeiros",
+          "url": "https://www.msccruzeiros.com.br/nossos-cruzeiros/destinos/msc-grand-voyages"
+        },
+        {
+          "title": "Cruzeiros no Caribe | MSC Cruzeiros",
+          "url": "https://www.msccruzeiros.com.br/nossos-cruzeiros/destinos/caribe-e-antilhas"
+        },
+        {
+          "title": "Cruzeiro pela América do Sul | MSC Cruzeiros",
+          "url": "https://www.msccruzeiros.com.br/nossos-cruzeiros/destinos/america-do-sul"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "quem fundou siemens ano produtos fabrica",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 385.43,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+      "adapter_query": "quem fundou siemens ano produtos fabrica",
+      "provider": "marginalia",
+      "at": "2026-10-25T18:33:53.855144+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 1,
+      "results": [
+        {
+          "title": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "quem fundou siemens ano produtos fabrica"
+          },
+          "http_status": null,
+          "final_url": "https://old-search.marginalia.nu/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 1011.91,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Quem fundou a Siemens, em que ano e quais produtos fabrica?",
+      "adapter_query": "quem fundou siemens ano produtos fabrica",
+      "provider": "wikipedia",
+      "at": "2026-10-25T18:33:54.868640+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [],
+      "latency_ms": 263.23,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": "2026-10-25T18:30:45.867879+00:00",
+  "source_revision": "a91c113f70a8f067f83eb7e1f45c27e851374e96",
+  "dataset_sha256": "fb79939c1320f93670acede8c8846a00fdf78247bb5b4cae687554496f2e9e3a"
+}

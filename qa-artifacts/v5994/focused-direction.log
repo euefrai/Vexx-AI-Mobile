@@ -1,0 +1,19 @@
+.............F................................................           [100%]
+================================== FAILURES ===================================
+________ test_causal_direction_never_turns_antecedent_into_consequence ________
+
+    def test_causal_direction_never_turns_antecedent_into_consequence():
+        q='Quais foram as causas e consequências da Revolta do Porto?'
+        # Synthetic regression from the relation-direction failure observed in live QA.
+        text='Líderes da Revolta do Porto buscavam reformas. A campanha obrigatória levou à Revolta do Porto.'
+        result=states(q,text)
+>       assert result['causes']=='SUPPORTED'
+E       AssertionError: assert 'DISCOVERED' == 'SUPPORTED'
+E         
+E         - SUPPORTED
+E         + DISCOVERED
+
+tests\test_evidence_calibration_v5994.py:172: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_evidence_calibration_v5994.py::test_causal_direction_never_turns_antecedent_into_consequence
+1 failed, 61 passed in 3.97s

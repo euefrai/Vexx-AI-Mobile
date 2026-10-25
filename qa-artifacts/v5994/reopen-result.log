@@ -1,0 +1,18 @@
+### Result
+{"authenticated":true}
+### Ran Playwright code
+```js
+await (async page => {
+  if (!page.url().startsWith('http://127.0.0.1:')) throw Error('Disposable localhost QA only');
+  if (await page.locator('#loginOverlay').isVisible()) {
+    await page.getByRole('textbox',{name:'Usuário',exact:true}).fill('alice');
+    await page.getByRole('textbox',{name:'Senha',exact:true}).fill('qa-password-long-5981');
+    await page.getByRole('button',{name:'Entrar ↗',exact:true}).click();
+    await page.locator('#loginOverlay').waitFor({state:'hidden'});
+  }
+  const existing=page.getByRole('button',{name:'Pesquisa profunda sobre como usar WebAssembl',exact:true});
+  if (await existing.count())await existing.click();
+  return {authenticated:true};
+}
+)(page);
+```

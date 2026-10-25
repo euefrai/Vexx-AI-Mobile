@@ -1,0 +1,38 @@
+### Result
+{"scope":"REAL_CHROME_SEEDED_PUBLIC_SOURCE_DELIVERY","source_cards":2,"links":[{"text":"Array.prototype.toSorted() - JavaScript | MDN","url":"https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted","target":"_blank"},{"text":"Abrir fonte ↗","url":"https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted","target":"_blank"},{"text":"Array.prototype.toSorted() - JavaScript | MDN","url":"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted","target":"_blank"},{"text":"Abrir fonte ↗","url":"https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted","target":"_blank"}],"source_text":["Array.prototype.toSorted() - JavaScript | MDN\nTRECHO LIDO\nMDN Web Docs · Fonte\nAspectos com passagem: Sintaxe ou assinatura\nTexto recuperado · Trecho ligado a uma afirmação\nDieser Inhalt wurde automatisch aus dem Englischen übersetzt, und kann Fehler enthalten. Erfahre mehr über dieses Experiment. View in English Always switch to English Array.prototype.toSorted() Baseline Weitgehend verfügbar Diese Funktion ist gut etabliert und funktioniert auf vielen Geräten und in\nAbrir fonte ↗","Array.prototype.toSorted() - JavaScript | MDN\nTRECHO LIDO\nMDN Web Docs · Fonte\nAspectos com passagem: Sintaxe ou assinatura\nTexto recuperado · Trecho ligado a uma afirmação\nIt then collects all existing integer-keyed properties in the range of 0 to length - 1, sorts them, and writes them into a new array. js const arrayLike = { length: 3, unrelated: \"foo\", 0: 5, 2: 4, 3: 3, // ignored by toSorted() since length is 3 };\nAbrir fonte ↗"],"opened_url":"https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted","network_failure_observed":true,"health_after_reconnect":200,"composer_enabled_before_offline":true,"limits":["Fetch rejection is a transport negative test; no claim that every offline UI flow was exercised."]}
+### Ran Playwright code
+```js
+await (async page => {
+  if (!page.url().startsWith('http://127.0.0.1:')) throw Error('Disposable localhost QA only');
+  const message=page.locator('.message.ai').last();
+  const cards=message.locator('.jdui-srccard');
+  await cards.first().waitFor({state:'visible'});
+  const links=await cards.locator('a').evaluateAll(nodes=>nodes.map(a=>({text:a.innerText,url:a.href,target:a.target})));
+  const sourceText=await cards.allInnerTexts();
+  const expected=links.filter(l=>l.url.startsWith('https://developer.mozilla.org/'));
+  if (!expected.length)throw Error('Real source link missing');
+  const popup=page.waitForEvent('popup');
+  await cards.locator('a').filter({hasText:expected[0].text}).first().click();
+  const opened=await popup;await opened.waitForLoadState('domcontentloaded');
+  const openedUrl=opened.url();await opened.close();
+  if (!openedUrl.startsWith('https://developer.mozilla.org/'))throw Error('Unexpected source destination');
+  const connectionBefore=await page.getByRole('textbox',{name:'Mensagem',exact:true}).isEnabled();
+  await page.context().setOffline(true);
+  let offlineRejected=false;
+  try {
+    offlineRejected=await page.evaluate(async()=>{try {await fetch('/api/health');return false;}catch{return true;}});
+  } finally {await page.context().setOffline(false);}
+  const restored=await page.evaluate(async()=>(await fetch('/api/health')).status);
+  return {scope:'REAL_CHROME_SEEDED_PUBLIC_SOURCE_DELIVERY',source_cards:await cards.count(),
+    links,source_text:sourceText,opened_url:openedUrl,network_failure_observed:offlineRejected,
+    health_after_reconnect:restored,composer_enabled_before_offline:connectionBefore,
+    limits:['Fetch rejection is a transport negative test; no claim that every offline UI flow was exercised.']};
+}
+)(page);
+```
+### Page
+- Page URL: http://127.0.0.1:64222/
+- Page Title: Vexx AI
+- Console: 1 errors, 0 warnings
+### Events
+- New console entries: .playwright-cli\console-2026-10-25T18-34-23-472Z.log#L11

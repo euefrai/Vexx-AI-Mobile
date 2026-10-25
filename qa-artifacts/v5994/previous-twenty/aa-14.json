@@ -1,0 +1,2854 @@
+{
+  "id": "aa-14",
+  "category": "video_metadata",
+  "query": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 3.667,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "worldbank",
+      "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "candidates": 6
+    },
+    {
+      "provider": "worldbank",
+      "query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "candidates": 6
+    },
+    {
+      "provider": "bcb",
+      "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "error": "vazio"
+    },
+    {
+      "provider": "bcb",
+      "query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=um+v%C3%ADdeo+oficial+do+IBGE+explicando+o+Censo+Demogr%C3%A1fico+e+mostre+t%C3%ADtulo%2C+canal+e+link&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=um+v%C3%ADdeo+oficial+do+IBGE+explicando+o+Censo+Demogr%C3%A1fico+e+mostre+t%C3%ADtulo%2C+canal+e+link&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4465
+    },
+    {
+      "url": "https://www.bing.com/search?q=v%C3%ADdeo+oficial+do+IBGE+explicando+o+Censo+Demogr%C3%A1fico+e+mostre+t%C3%ADtulo%2C+canal+e+link&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=v%C3%ADdeo+oficial+do+IBGE+explicando+o+Censo+Demogr%C3%A1fico+e+mostre+t%C3%ADtulo%2C+canal+e+link&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4453
+    },
+    {
+      "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+      "final": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+      "chars": 219888
+    },
+    {
+      "url": "https://www.youtube.com/channel/UCUN9lhwfMJRxMVuet7Shg0w",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+      "final": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+      "chars": 374571
+    },
+    {
+      "url": "https://www.boafoda.com/",
+      "final": "https://www.boafoda.com/",
+      "chars": 408921
+    },
+    {
+      "url": "https://globoplay.globo.com/",
+      "final": "https://globoplay.globo.com/",
+      "chars": 42125
+    },
+    {
+      "url": "https://www.tiktok.com/pt-BR",
+      "final": "https://www.tiktok.com/pt-BR",
+      "chars": 463580
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+    "domain": "general",
+    "original_request": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+    "resolved_request": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:18:24.794948+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "f7ef5cf90fbe243f7930",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+        "title": "Poverty Headcount ($1.90 a day)",
+        "origin": "worldbank",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies w",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 231,
+        "final_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "96bb3ec7d9dcc6a475d9",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+        "title": "Poverty Headcount ($2.50 a day)",
+        "origin": "worldbank",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "d0a797af962f89cea20c",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+        "title": "Middle Class ($10-50 a day) Headcount",
+        "origin": "worldbank",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "7ec944b0ff90dc270e19",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+        "title": "Official Moderate Poverty Rate-National",
+        "origin": "worldbank",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "177e49e413fca7dcaa2c",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds",
+        "title": "Poverty Headcount ($4 a day)",
+        "origin": "worldbank",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "097c804e9fb3b663f6d0",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10",
+        "title": "Vulnerable ($4-10 a day) Headcount",
+        "origin": "worldbank",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "",
+        "type": "dados",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "ab41967ebed805bff5f8",
+        "url": "https://www.youtube.com/channel/UCUN9lhwfMJRxMVuet7Shg0w",
+        "title": "YouTube Brasil",
+        "origin": "bing",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "dom., 25 out. 2026 06:56:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "É canal oficial do YouTube Brasil que vocês querem? :D Se inscreve para descobrir as novidades e tendências da plataforma, conhecer novos criadores incríveis e ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "tamanho",
+        "losses": [
+          "FETCH_FAILED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "67e4582a46cc0fef2005",
+        "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+        "title": "Os 20 vídeos mais vistos no YouTube até hoje - Showmetech",
+        "origin": "bing",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "2024-07-29T09:01:41-03:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "internet começando a se instaurar no Brasil, rapidamente se tornou um dos lugares mais visitados da web. Pensando nesses quase 20 anos da plataforma, nós listar",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "32fb50cbc473d0f7d481",
+        "url": "https://www.boafoda.com/",
+        "title": "Videos de Sexo e Filme Porno Gratis no BoaFoda.com",
+        "origin": "bing",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "dom., 25 out. 2026 07:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Assista Vídeos de Sexo e Filme Porno Gratis no BoaFoda",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 54,
+        "final_url": "https://www.boafoda.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "e1d5e2c7a98d2acd129f",
+        "url": "https://www.youtube.com/",
+        "title": "YouTube",
+        "origin": "bing",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "dom., 25 out. 2026 09:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "189907129b78551a0638",
+        "url": "https://globoplay.globo.com/",
+        "title": "Globoplay | Assista online aos programas da Globo",
+        "origin": "bing",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "dom., 25 out. 2026 16:58:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "2026 Globo Comunicação e Participações S.A. © Todos os direitos reservados Termos e políticas Link externo - abre em uma nova janela",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 132,
+        "final_url": "https://globoplay.globo.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "d895fc66e459c7833ce2",
+        "url": "https://www.tiktok.com/pt-BR",
+        "title": "TikTok - Make Your Day",
+        "origin": "bing",
+        "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+        "date": "sáb., 24 out. 2026 10:47:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "TikTok - as tendências começam aqui. Em um dispositivo ou na web, os espectadores podem assistir e descobrir milhões de vídeos curtos personalizados. Baixe o ap",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://www.tiktok.com/pt-BR",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+      "titulo": "World Bank Open Data",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+      "titulo": "Os 20 vídeos mais vistos no YouTube até hoje",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2024-07-29T09:01:41-03:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.boafoda.com/",
+      "titulo": "Boafoda",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 07:11:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.boafoda.com/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "worldbank",
+      "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "items": [
+        {
+          "titulo": "Poverty Headcount ($1.90 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.1.90usd"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Poverty Headcount ($2.50 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.2.5usd"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Middle Class ($10-50 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Mid10to50"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Official Moderate Poverty Rate-National",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Ofcl"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Poverty Headcount ($4 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Poor4uds"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Vulnerable ($4-10 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Vul4to10"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank",
+          "url_canonica": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 6.5,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "worldbank",
+      "query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "items": [
+        {
+          "titulo": "Poverty Headcount ($1.90 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.1.90usd"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank"
+        },
+        {
+          "titulo": "Poverty Headcount ($2.50 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.2.5usd"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank"
+        },
+        {
+          "titulo": "Middle Class ($10-50 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Mid10to50"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank"
+        },
+        {
+          "titulo": "Official Moderate Poverty Rate-National",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Ofcl"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank"
+        },
+        {
+          "titulo": "Poverty Headcount ($4 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Poor4uds"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank"
+        },
+        {
+          "titulo": "Vulnerable ($4-10 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10",
+          "trecho": "",
+          "origem": "worldbank",
+          "tipo": "dados",
+          "meta": {
+            "indicador": "1.0.HCount.Vul4to10"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "worldbank"
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "items": [
+        {
+          "titulo": "YouTube",
+          "url": "https://www.youtube.com/",
+          "trecho": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 09:34:00 GMT"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing",
+          "url_canonica": "https://youtube.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "YouTube Brasil",
+          "url": "https://www.youtube.com/channel/UCUN9lhwfMJRxMVuet7Shg0w",
+          "trecho": "É canal oficial do YouTube Brasil que vocês querem? :D Se inscreve para descobrir as novidades e tendências da plataforma, conhecer novos criadores incríveis e claro, ficar mais perto daqueles ...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 06:56:00 GMT"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing",
+          "url_canonica": "https://youtube.com/channel/UCUN9lhwfMJRxMVuet7Shg0w",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.125,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Os 20 vídeos mais vistos no YouTube até hoje - Showmetech",
+          "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+          "trecho": "Diversas pessoas recriaram essa música de diferentes maneiras, mas o vídeo de Pinkfong obteve a liderança atual, com mais de 14 bilhões de visualizações em todo o mundo, tornando-o o vídeo mais assistido do YouTube.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 28 abr. 2026 12:46:00 GMT"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing",
+          "url_canonica": "https://showmetech.com.br/os-videos-mais-vistos-no-youtube",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.125,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Videos de Sexo e Filme Porno Gratis no BoaFoda.com",
+          "url": "https://www.boafoda.com/",
+          "trecho": "Filme Porno em HD 4K e Video de Sexo Gratis. Assista aqui Grátis, a XXX HD Porn Free de qualidade, com Videos de Sexo. No site N°1 do Brasil, BoaFoda.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:11:00 GMT"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing",
+          "url_canonica": "https://boafoda.com/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.125,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Globoplay | Assista online aos programas da Globo",
+          "url": "https://globoplay.globo.com/",
+          "trecho": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 16:58:00 GMT"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing",
+          "url_canonica": "https://globoplay.globo.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "TikTok - Make Your Day",
+          "url": "https://www.tiktok.com/pt-BR",
+          "trecho": "TikTok - as tendências começam aqui. Em um dispositivo ou na web, os espectadores podem assistir e descobrir milhões de vídeos curtos personalizados. Baixe o app e comece a usar.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 10:47:00 GMT"
+          },
+          "discovery_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tiktok.com/pt-BR",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "items": [
+        {
+          "titulo": "YouTube",
+          "url": "https://www.youtube.com/",
+          "trecho": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 09:34:00 GMT"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "YouTube Brasil",
+          "url": "https://www.youtube.com/channel/UCUN9lhwfMJRxMVuet7Shg0w",
+          "trecho": "É canal oficial do YouTube Brasil que vocês querem? :D Se inscreve para descobrir as novidades e tendências da plataforma, conhecer novos criadores incríveis e claro, ficar mais perto daqueles ...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 06:56:00 GMT"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Os 20 vídeos mais vistos no YouTube até hoje - Showmetech",
+          "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+          "trecho": "Diversas pessoas recriaram essa música de diferentes maneiras, mas o vídeo de Pinkfong obteve a liderança atual, com mais de 14 bilhões de visualizações em todo o mundo, tornando-o o vídeo mais assistido do YouTube.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 28 abr. 2026 12:46:00 GMT"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Videos de Sexo e Filme Porno Gratis no BoaFoda.com",
+          "url": "https://www.boafoda.com/",
+          "trecho": "Filme Porno em HD 4K e Video de Sexo Gratis. Assista aqui Grátis, a XXX HD Porn Free de qualidade, com Videos de Sexo. No site N°1 do Brasil, BoaFoda.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:11:00 GMT"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Globoplay | Assista online aos programas da Globo",
+          "url": "https://globoplay.globo.com/",
+          "trecho": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 16:58:00 GMT"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "TikTok - Make Your Day",
+          "url": "https://www.tiktok.com/pt-BR",
+          "trecho": "TikTok - as tendências começam aqui. Em um dispositivo ou na web, os espectadores podem assistir e descobrir milhões de vídeos curtos personalizados. Baixe o app e comece a usar.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 10:47:00 GMT"
+          },
+          "discovery_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "discovery_provider": "bing"
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+      "result": {
+        "titulo": "World Bank Open Data",
+        "texto": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies will be placed on your browser. To learn more about cookies, click here.",
+        "final": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+        "trecho_usado": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies will be placed on your browser. To learn more about cookies, click here.",
+        "metadados": {
+          "titulo": "World Bank Open Data",
+          "descricao": "Free and open access to global development data",
+          "canonica": "https://data.worldbank.org/indicator/&quot;1.0.HCOUNT.1.90USD&quot;",
+          "og": {
+            "og:title": "World Bank Open Data",
+            "og:description": "Free and open access to global development data",
+            "og:image": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "og:url": "https://data.worldbank.org",
+            "og:site_name": "World Bank Open Data"
+          },
+          "twitter": {
+            "twitter:title": "World Bank Open Data",
+            "twitter:description": "Free and open access to global development data",
+            "twitter:image": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "twitter:card": "@worldbankdata",
+            "twitter:creator": "@worldbankdata"
+          },
+          "idioma": "",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "World Bank Open Data",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "This site uses cookies to optimize functionality and give you the best possible experience. If you continue to navigate this website beyond this page, cookies will be placed on your browser. To learn more about cookies, click here."
+          }
+        ],
+        "links": [
+          {
+            "url": "http://www.worldbank.org",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/",
+            "texto": "Data",
+            "interno": true
+          },
+          {
+            "url": "https://data360.worldbank.org/en/economies",
+            "texto": "ECONOMIES",
+            "interno": false
+          },
+          {
+            "url": "https://data360.worldbank.org/en/search",
+            "texto": "DATA & RESOURCES",
+            "interno": false
+          },
+          {
+            "url": "https://data360.worldbank.org/en/about",
+            "texto": "ABOUT",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/country",
+            "texto": "Country",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/indicator",
+            "texto": "Indicator",
+            "interno": true
+          },
+          {
+            "url": "http://databank.worldbank.org/data/home.aspx",
+            "texto": "DataBank",
+            "interno": false
+          },
+          {
+            "url": "http://microdata.worldbank.org/index.php/home",
+            "texto": "Microdata",
+            "interno": false
+          },
+          {
+            "url": "https://datacatalog.worldbank.org",
+            "texto": "Data Catalog",
+            "interno": false
+          },
+          {
+            "url": "http://datacatalog.worldbank.org",
+            "texto": "Data Catalog",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/about",
+            "texto": "About Us",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/get-started",
+            "texto": "Get Started",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/faq",
+            "texto": "FAQ",
+            "interno": true
+          },
+          {
+            "url": "http://datahelpdesk.worldbank.org",
+            "texto": "Help Desk",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/about/contact",
+            "texto": "Contact",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs",
+            "texto": "Data Programs",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#statcap",
+            "texto": "Improving Statistical Capacity",
+            "interno": true
+          },
+          {
+            "url": "https://www.worldbank.org/en/programs/global-data-facility",
+            "texto": "Global Data Facility",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#icp",
+            "texto": "International Comparison Program & Purchasing Power Parity",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#ihsn",
+            "texto": "International Household Survey Network (IHSN)",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#jedh",
+            "texto": "Joint External Debt Hub",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#ogd-toolkit",
+            "texto": "Open Data Toolkit",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/about/data-programs#qeds",
+            "texto": "Quarterly External Debt Statistics",
+            "interno": true
+          },
+          {
+            "url": "https://data.worldbank.org/products",
+            "texto": "Products",
+            "interno": true
+          },
+          {
+            "url": "http://datatopics.worldbank.org/world-development-indicators",
+            "texto": "World Development Indicators",
+            "interno": false
+          },
+          {
+            "url": "https://www.worldbank.org/en/programs/debt-statistics/ids/products",
+            "texto": "International Debt Statistics",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/products/data-books",
+            "texto": "Other Books and Reports",
+            "interno": true
+          },
+          {
+            "url": "https://datahelpdesk.worldbank.org/knowledgebase/articles/906519",
+            "texto": "Country & Lending Groups",
+            "interno": false
+          },
+          {
+            "url": "https://data.worldbank.org/products/tools",
+            "texto": "Data Portals and Tools",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+          "https://data.worldbank.org/assets/images/icon-map-shaded.jpg",
+          "https://data.worldbank.org/assets/images/icon-map-points.jpg",
+          "https://data.worldbank.org/assets/images/placeholder.png",
+          "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+          "https://data.worldbank.org/media/social/facebook.svg",
+          "https://data.worldbank.org/media/social/twitter.svg",
+          "https://data.worldbank.org/media/social/github.svg",
+          "https://data.worldbank.org/media/social/linkedin.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-b9cdb0bb4d11",
+            "type": "image",
+            "title": "Free and open access to global development data",
+            "url": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "final_url": "https://data.worldbank.org/assets/images/logo-wb-header-en.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Free and open access to global development data",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7c11b6f282cb",
+            "type": "image",
+            "title": "The World Bank Working for a World Free of Poverty",
+            "url": "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+            "final_url": "https://data.worldbank.org/assets/images/logo-wbg-footer-en.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The World Bank Working for a World Free of Poverty",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6509580941e9",
+            "type": "image",
+            "title": "World Bank Facebook",
+            "url": "https://data.worldbank.org/media/social/facebook.svg",
+            "final_url": "https://data.worldbank.org/media/social/facebook.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Facebook",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b14ca0323f09",
+            "type": "image",
+            "title": "World Bank Twitter",
+            "url": "https://data.worldbank.org/media/social/twitter.svg",
+            "final_url": "https://data.worldbank.org/media/social/twitter.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Twitter",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f84873f6c27c",
+            "type": "image",
+            "title": "World Bank Github",
+            "url": "https://data.worldbank.org/media/social/github.svg",
+            "final_url": "https://data.worldbank.org/media/social/github.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Github",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-faa49500570b",
+            "type": "image",
+            "title": "World Bank Linkedin",
+            "url": "https://data.worldbank.org/media/social/linkedin.svg",
+            "final_url": "https://data.worldbank.org/media/social/linkedin.svg",
+            "source_title": "World Bank Open Data",
+            "source_url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "publisher": "data.worldbank.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "World Bank Linkedin",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+      "result": {
+        "titulo": "Os 20 vídeos mais vistos no YouTube até hoje",
+        "texto": "Índice Girls Like You – Maroon 5 ft. Cardi B: 3,7 bilhões de visualizações Thinking Out Loud – Ed Sheeran: 3,7 bilhões de visualizações Sorry – Justin Bieber: 3,8 bilhões de visualizações Roar – Katy Perry: 4,02 bilhões de visualizações Counting Stars – OneRepublic: 4,04 bilhões de visualizações Sugar – Maroon 5: 4,07 bilhões de visualizações Masha and the Bear – Recipe for Disaster – Get Movies: 4,5 bilhões de visualizações Axel F – Crazy Frog: 4,6 bilhões de visualizações Dame Tu Cosita – El Chombo ft. Cutty Ranks: 4,7 bilhões de visualizações Learning Colors – Colorful Eggs on a Farm – Miroshka TV: 5,1 bilhões de visualizações Gangnam Style – PSY: 5,22 bilhões de visualizações Uptown Funk – Mark Ronson ft. Bruno Mars: 5,28 bilhões de visualizações Phonics Song with Two Words – ChuChu TV: 5,8 bilhões de visualizações Shape of You – Ed Sheeran: 6,2 bilhões de visualizações Wheels on the Bus – Cocomelon – Nursery Rhymes: 6,325 bilhões de visualizações See You Again – Wiz Khalifa ft. Charlie Puth: 6,329 bilhões de visualizações Bath Song – Cocomelon – Nursery Rhymes: 6,7 bilhões de visualizações Johny Johny Yes Papa – LooLoo Kids: 6,9 bilhões de visualizações Despacito – Luis Fonsi ft. Daddy Yankee: 8,4 bilhões de visualizações Baby Shark Dance – Pinkfong Kids’ Songs & Stories: 14,8 bilhões de visualizações Assine a newsletter Em 2005, o surgiu em nossas vidas e, com o acesso à internet começando a se instaurar no Brasil, rapidamente se tornou um dos lugares mais visitados da web. Pensando nesses quase 20 anos da plataforma, nós listaremos os . A lista conta basicamente com clipes de músicas e outros conteúdos infantis. Preparado para uma possível sessão de nostalgia? A lista está em ordem decrescente, assim você consegue ver a evolução de cada vídeo. Vamos lá? YouTube 20 vídeos mais vistos no YouTube de todos os tempos , e . Leia também: YouTube sem anúncios como o YouTube surgiu baixar vídeo do YouTube Girls Like You – Maroon 5 ft. Cardi B: 3,7 bilhões de visualizações Na atualização de 2024, em vigésimo lugar temos o clipe da música , do com participação da cantora . Enviado à plataforma em 2018, temos aqui um clipe que celebra a diversidade e a força das mulheres. Ao longo do vídeo, (vocalista do Maroon 5) canta enquanto é rodeado por uma série de mulheres inspiradoras, incluindo celebridades, ativistas e figuras públicas, que aparecem ao seu redor. A inclusão de Cardi Bcom seu rap energético, fazem deste clipe um tributo poderoso e inspirador às mulheres em todo o mundo. Girls Like You Maroon 5 Cardi B Adam Levine Thinking Out Loud – Ed Sheeran: 3,7 bilhões de visualizações Tradução livre da descrição original do vídeo: “Retirado do álbum de estúdio X (multiply) lançado em 2014, que apresentava os singles de sucesso ‘Sing’, ‘Don’t’, ‘Thinking Out Loud’, ‘Bloodstream’ e ‘Photograph’.” Lançado em 2014, em 19º lugar temos o clipe da música , do cantor . Essa canção se tornou um grande sucesso no Top 40 do Reino Unido, firmando-se como uma das mais populares naquele ano — e reconhecida até hoje por muitas pessoas. O talento musical de Ed Sheeran e a emotiva melodia da canção cativaram o público, garantindo-lhe um lugar de destaque nas paradas musicais e demonstrando o seu enorme impacto como artista no cenário da música internacional. Thinking Out Loud Ed Sheeran Sorry – Justin Bieber: 3,8 bilhões de visualizações O 18º vídeo mais assistido no YouTube é o clipe da música . Lançado em 2015, esse single faz parte do 5º álbum de estúdio do artista. A música alcançou o topo das paradas no Canadá, mantendo-se como a mais tocada por duas semanas consecutivas. Além disso, globalmente, as pessoas compraram mais de 10 milhões de cópias dessa faixa, demonstrando o imenso sucesso e popularidade do hit. , de Sorry Justin Bieber se tornou uma das músicas mais memoráveis ​​da carreira de Justin Bieber, e seu videoclipe tem sido um dos favoritos dos espectadores no — mesmo que o próprio artista não apareça no vídeo — contribuindo para o impressionante número de visualizações que o vídeo recebeu na plataforma. Sorry YouTube Roar – Katy Perry: 4,02 bilhões de visualizações Essa música de 2013 conquistou as pessoas com a animação e pop envolvente que só sabe fazer, e devido a esse sucesso, o vídeo alcançou mais de 4,02 bilhões visualizações no YouTube. , conta uma história em que vemos a cantora no processo de domar um tigre após um acidente de avião. Essa narrativa, combinada com todo o ritmo da música, sempre atraiu um público amplo e diversificado, tornando o vídeo um verdadeiro fenômeno na plataforma. Katy Perry Roar Counting Stars – OneRepublic: 4,04 bilhões de visualizações Outro lançamento de 2013, a música também está presente na lista. O vídeo criou uma atmosfera mais sóbria, acompanhada de belas coreografias e luzes vibrantes. Outra curiosidade é que este vídeo se tornou o primeiro da banda a alcançar 1 bilhão de visualizações no YouTube. A batida cativante da música aliada à poderosa produção visual contribuíram para o sucesso estrondoso do vídeo na plataforma. da banda Counting Stars OneRepublic Sugar – Maroon 5: 4,07 bilhões de visualizações E vamos de mais um sucesso do ! O clipe da música ocupa a 15ª posição entre os vídeos mais assistidos na plataforma. Um sucesso que vai além do YouTube, a música alcançou a 2ª posição na parada dos Estados Unidos, consolidando-se como um grande sucesso. A canção, baseada no tema do casamento, apresenta uma abordagem um tanto quanto interessante, com a banda tentando desafiar e banir os estereótipos associados a casamentos. Maroon 5 Sugar Billboard Hot 100 Masha and the Bear – Recipe for Disaster – Get Movies: 4,5 bilhões de visualizações Saindo da categoria de clipes, o 14º vídeo mais assistido no YouTube é , uma animação que conta uma história folclórica russa. Conhecida originalmente como , em russo, ou , em português, temos aqui mais um vídeo infantil com bilhões de visualizações. O vídeo, publicado no ano de 2012, vem garantindo sua autenticidade e sucesso na plataforma até os dias de hoje. A adorável animação e sua história têm cativado o público infantil em todo o mundo, tornando esse desenho um fenômeno global no YouTube. Masha and the Bear – Recipe for Disaster Маша и Медведь Marsha e o Urso Axel F – Crazy Frog: 4,6 bilhões de visualizações é uma música que se tornou popular através do personagem , em 2005. Essa faixa é, na verdade, um remix techno do tema do filme (), lançado em 1984. O tema original foi composto por , sendo lançado pela primeira vez em 2004. A versão remixada do Crazy Frog fez grande sucesso na época, tornando-se um fenômeno cultural e alcançando altas posições nas paradas musicais em diversos países. A música cativou o público com sua batida animada e pegajosa, e o personagem Crazy Frog, com seu icônico “ring ding ding”, conquistou a atenção de muitos espectadores ao redor do mundo. Axel F Crazy Frog Um Tira da Pesada Beverly Hills Cop Harold Faltermeyer Dame Tu Cosita – El Chombo ft. Cutty Ranks: 4,7 bilhões de visualizações O vídeo de é dirigido por e animado por , tendo acumulado mais de 4,7 bilhões de visualizações no YouTube. Além do vídeo original, essa animação adicional apresenta um alienígena fazendo uma coreografia ao som do remix completo da música. Desde seu lançamento em 2018, a música e sua animação tornaram-se um fenômeno cultural, atraindo milhões de espectadores ao redor do mundo. Dame Tu Cosita Sihem Ouillani ArtNoux Learning Colors – Colorful Eggs on a Farm – Miroshka TV: 5,1 bilhões de visualizações , vídeo que também é de origem russa, foi enviado ao YouTube em 27 de fevereiro de 2018, e tem como foco principal um grupo de ovos. Desde então tornou-se uma sensação na internet entre as crianças, acumulando incríveis 5,1 bilhões de visualizações — e contando. Sua popularidade demonstra o poder do conteúdo direcionado para crianças na plataforma e como pode cativar um público amplo e fiel. Colorful Eggs on a Farm Gangnam Style – PSY: 5,22 bilhões de visualizações Chegamos",
+        "final": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+        "trecho_usado": "internet começando a se instaurar no Brasil, rapidamente se tornou um dos lugares mais visitados da web. Pensando nesses quase 20 anos da plataforma, nós listaremos os . A lista conta basicamente com clipes de músicas e outros conteúdos infantis. Preparado para uma possível sessão de nostalgia? A lista está em ordem decrescente, assim você consegue ver a evolução de cada vídeo. Vamos lá? YouTube",
+        "metadados": {
+          "titulo": "Os 20 vídeos mais vistos no YouTube até hoje",
+          "descricao": "Veja quais são os vídeos mais vistos do YouTube, como o ranking mudou ao longo dos anos e quais clipes dominam a plataforma.",
+          "canonica": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+          "og": {
+            "og:locale": "pt_BR",
+            "og:type": "article",
+            "og:title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "og:description": "Veja quais são os vídeos mais vistos do YouTube, como o ranking mudou ao longo dos anos e quais clipes dominam a plataforma.",
+            "og:url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "og:site_name": "Showmetech",
+            "og:updated_time": "2026-06-23T05:17:35-03:00",
+            "og:image": "https://www.showmetech.com.br/wp-content/uploads//2024/07/Design-sem-nome-2024-07-27T145521.455.png",
+            "og:image:secure_url": "https://www.showmetech.com.br/wp-content/uploads//2024/07/Design-sem-nome-2024-07-27T145521.455.png",
+            "og:image:width": "1600",
+            "og:image:height": "900",
+            "og:image:alt": "Capa de filme com personagem em ação, pessoas em festa e ilustração aquática com peixes coloridos.",
+            "og:image:type": "image/png",
+            "og:video": "https://www.youtube.com/embed/aJOTlE1K90k"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "twitter:description": "Veja quais são os vídeos mais vistos do YouTube, como o ranking mudou ao longo dos anos e quais clipes dominam a plataforma.",
+            "twitter:site": "@showmetech",
+            "twitter:creator": "@lucsgoms",
+            "twitter:image": "https://www.showmetech.com.br/wp-content/uploads//2024/07/Design-sem-nome-2024-07-27T145521.455.png",
+            "twitter:label1": "Escrito por",
+            "twitter:data1": "Lucas Gomes",
+            "twitter:label2": "Tempo para leitura",
+            "twitter:data2": "12 minutos"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "2024-07-29T09:01:41-03:00",
+          "atualizado_em": "2026-06-23T05:17:35-03:00",
+          "autor": "Lucas Gomes",
+          "site": "",
+          "tipo": "NewsArticle",
+          "ld": {
+            "datePublished": "2024-07-29T09:01:41-03:00",
+            "dateModified": "2026-06-23T05:17:35-03:00",
+            "author": {
+              "@id": "https://www.showmetech.com.br/autor/lucas-gomes/",
+              "name": "Lucas Gomes"
+            },
+            "publisher": {
+              "@id": "https://www.showmetech.com.br/#organization"
+            },
+            "headline": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "articleSection": "Cultura, Listas",
+            "keywords": "vídeos mais vistos do YouTube",
+            "description": "Veja quais são os vídeos mais vistos do YouTube, como o ranking mudou ao longo dos anos e quais clipes dominam a plataforma.",
+            "inLanguage": "pt-BR"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Girls Like You – Maroon 5 ft. Cardi B: 3,7 bilhões de visualizações\nThinking Out Loud – Ed Sheeran: 3,7 bilhões de visualizações\nSorry – Justin Bieber: 3,8 bilhões de visualizações\nRoar – Katy Perry: 4,02 bilhões de visualizações\nCounting Stars – OneRepublic: 4,04 bilhões de visualizações\nSugar – Maroon 5: 4,07 bilhões de visualizações\nMasha and the Bear – Recipe for Disaster – Get Movies: 4,5 bilhões de visualizações\nAxel F – Crazy Frog: 4,6 bilhões de visualizações\nDame Tu Cosita – El Chombo ft. Cutty Ranks: 4,7 bilhões de visualizações\nLearning Colors – Colorful Eggs on a Farm – Miroshka TV: 5,1 bilhões de visualizações\nGangnam Style – PSY: 5,22 bilhões de visualizações\nUptown Funk – Mark Ronson ft. Bruno Mars: 5,28 bilhões de visualizações\nPhonics Song with Two Words – ChuChu TV: 5,8 bilhões de visualizações\nShape of You – Ed Sheeran: 6,2 bilhões de visualizações\nWheels on the Bus – Cocomelon – Nursery Rhymes: 6,325 bilhões de visualizações\nSee You Again – Wiz Khalifa ft. Charlie Puth: 6,329 bilhões de visualizações\nBath Song – Cocomelon – Nursery Rhymes: 6,7 bilhões de visualizações\nJohny Johny Yes Papa – LooLoo Kids: 6,9 bilhões de visualizações\nDespacito – Luis Fonsi ft. Daddy Yankee: 8,4 bilhões de visualizações\nBaby Shark Dance – Pinkfong Kids’ Songs & Stories: 14,8 bilhões de visualizações\nEm 2005, o surgiu em nossas vidas e, com o acesso à internet começando a se instaurar no Brasil, rapidamente se tornou um dos lugares mais visitados da web. Pensando nesses quase 20 anos da plataforma, nós listaremos os . A lista conta basicamente com clipes de músicas e outros conteúdos infantis. Preparado para uma possível sessão de nostalgia? A lista está em ordem decrescente, assim você consegue ver a evolução de cada vídeo. Vamos lá? YouTube 20 vídeos mais vistos no YouTube de todos os tempos\n, e . Leia também: YouTube sem anúncios como o YouTube surgiu baixar vídeo do YouTube"
+          },
+          {
+            "titulo": "Girls Like You – Maroon 5 ft. Cardi B: 3,7 bilhões de visualizações",
+            "texto": "Na atualização de 2024, em vigésimo lugar temos o clipe da música , do com participação da cantora . Enviado à plataforma em 2018, temos aqui um clipe que celebra a diversidade e a força das mulheres. Ao longo do vídeo, (vocalista do Maroon 5) canta enquanto é rodeado por uma série de mulheres inspiradoras, incluindo celebridades, ativistas e figuras públicas, que aparecem ao seu redor. A inclusão de Cardi Bcom seu rap energético, fazem deste clipe um tributo poderoso e inspirador às mulheres em todo o mundo. Girls Like You Maroon 5 Cardi B Adam Levine"
+          },
+          {
+            "titulo": "Thinking Out Loud – Ed Sheeran: 3,7 bilhões de visualizações",
+            "texto": "Tradução livre da descrição original do vídeo: “Retirado do álbum de estúdio X (multiply) lançado em 2014, que apresentava os singles de sucesso ‘Sing’, ‘Don’t’, ‘Thinking Out Loud’, ‘Bloodstream’ e ‘Photograph’.”\nLançado em 2014, em 19º lugar temos o clipe da música , do cantor . Essa canção se tornou um grande sucesso no Top 40 do Reino Unido, firmando-se como uma das mais populares naquele ano — e reconhecida até hoje por muitas pessoas. O talento musical de Ed Sheeran e a emotiva melodia da canção cativaram o público, garantindo-lhe um lugar de destaque nas paradas musicais e demonstrando o seu enorme impacto como artista no cenário da música internacional. Thinking Out Loud Ed Sheeran"
+          },
+          {
+            "titulo": "Sorry – Justin Bieber: 3,8 bilhões de visualizações",
+            "texto": "O 18º vídeo mais assistido no YouTube é o clipe da música . Lançado em 2015, esse single faz parte do 5º álbum de estúdio do artista. A música alcançou o topo das paradas no Canadá, mantendo-se como a mais tocada por duas semanas consecutivas. Além disso, globalmente, as pessoas compraram mais de 10 milhões de cópias dessa faixa, demonstrando o imenso sucesso e popularidade do hit. , de Sorry Justin Bieber\nse tornou uma das músicas mais memoráveis ​​da carreira de Justin Bieber, e seu videoclipe tem sido um dos favoritos dos espectadores no — mesmo que o próprio artista não apareça no vídeo — contribuindo para o impressionante número de visualizações que o vídeo recebeu na plataforma. Sorry YouTube"
+          },
+          {
+            "titulo": "Roar – Katy Perry: 4,02 bilhões de visualizações",
+            "texto": "Essa música de 2013 conquistou as pessoas com a animação e pop envolvente que só sabe fazer, e devido a esse sucesso, o vídeo alcançou mais de 4,02 bilhões visualizações no YouTube. , conta uma história em que vemos a cantora no processo de domar um tigre após um acidente de avião. Essa narrativa, combinada com todo o ritmo da música, sempre atraiu um público amplo e diversificado, tornando o vídeo um verdadeiro fenômeno na plataforma. Katy Perry Roar"
+          },
+          {
+            "titulo": "Counting Stars – OneRepublic: 4,04 bilhões de visualizações",
+            "texto": "Outro lançamento de 2013, a música também está presente na lista. O vídeo criou uma atmosfera mais sóbria, acompanhada de belas coreografias e luzes vibrantes. Outra curiosidade é que este vídeo se tornou o primeiro da banda a alcançar 1 bilhão de visualizações no YouTube. A batida cativante da música aliada à poderosa produção visual contribuíram para o sucesso estrondoso do vídeo na plataforma. da banda Counting Stars OneRepublic"
+          },
+          {
+            "titulo": "Sugar – Maroon 5: 4,07 bilhões de visualizações",
+            "texto": "E vamos de mais um sucesso do ! O clipe da música ocupa a 15ª posição entre os vídeos mais assistidos na plataforma. Um sucesso que vai além do YouTube, a música alcançou a 2ª posição na parada dos Estados Unidos, consolidando-se como um grande sucesso. A canção, baseada no tema do casamento, apresenta uma abordagem um tanto quanto interessante, com a banda tentando desafiar e banir os estereótipos associados a casamentos. Maroon 5 Sugar Billboard Hot 100"
+          },
+          {
+            "titulo": "Masha and the Bear – Recipe for Disaster – Get Movies: 4,5 bilhões de visualizações",
+            "texto": "Saindo da categoria de clipes, o 14º vídeo mais assistido no YouTube é , uma animação que conta uma história folclórica russa. Conhecida originalmente como , em russo, ou , em português, temos aqui mais um vídeo infantil com bilhões de visualizações. O vídeo, publicado no ano de 2012, vem garantindo sua autenticidade e sucesso na plataforma até os dias de hoje. A adorável animação e sua história têm cativado o público infantil em todo o mundo, tornando esse desenho um fenômeno global no YouTube. Masha and the Bear – Recipe for Disaster Маша и Медведь Marsha e o Urso"
+          },
+          {
+            "titulo": "Axel F – Crazy Frog: 4,6 bilhões de visualizações",
+            "texto": "é uma música que se tornou popular através do personagem , em 2005. Essa faixa é, na verdade, um remix techno do tema do filme (), lançado em 1984. O tema original foi composto por , sendo lançado pela primeira vez em 2004. A versão remixada do Crazy Frog fez grande sucesso na época, tornando-se um fenômeno cultural e alcançando altas posições nas paradas musicais em diversos países. A música cativou o público com sua batida animada e pegajosa, e o personagem Crazy Frog, com seu icônico “ring ding ding”, conquistou a atenção de muitos espectadores ao redor do mundo. Axel F Crazy Frog Um Tira da Pesada Beverly Hills Cop Harold Faltermeyer"
+          },
+          {
+            "titulo": "Dame Tu Cosita – El Chombo ft. Cutty Ranks: 4,7 bilhões de visualizações",
+            "texto": "O vídeo de é dirigido por e animado por , tendo acumulado mais de 4,7 bilhões de visualizações no YouTube. Além do vídeo original, essa animação adicional apresenta um alienígena fazendo uma coreografia ao som do remix completo da música. Desde seu lançamento em 2018, a música e sua animação tornaram-se um fenômeno cultural, atraindo milhões de espectadores ao redor do mundo. Dame Tu Cosita Sihem Ouillani ArtNoux"
+          },
+          {
+            "titulo": "Learning Colors – Colorful Eggs on a Farm – Miroshka TV: 5,1 bilhões de visualizações",
+            "texto": ", vídeo que também é de origem russa, foi enviado ao YouTube em 27 de fevereiro de 2018, e tem como foco principal um grupo de ovos. Desde então tornou-se uma sensação na internet entre as crianças, acumulando incríveis 5,1 bilhões de visualizações — e contando. Sua popularidade demonstra o poder do conteúdo direcionado para crianças na plataforma e como pode cativar um público amplo e fiel. Colorful Eggs on a Farm"
+          },
+          {
+            "titulo": "Gangnam Style – PSY: 5,22 bilhões de visualizações",
+            "texto": "Chegamos no décimo lugar! O superhit de , foi o primeiro vídeo do YouTube a atingir 1 bilhão de visualizações. Lançado em 2012, o clipe alcançou 2 bilhões de visualizações em apenas 2 anos. Na época, quebrou o recorde de Justin Bieber como o vídeo mais visto no YouTube e, até 2016, também detinha o recorde de ser o vídeo com mais curtidas na plataforma. O sucesso avassalador de PSY com essa música demonstrou o poder da música e do vídeo para se tornarem fenômenos globais na era da internet, deixando uma marca importante na história do YouTube e da música pop em geral. PSY Gangnam Style Gangnam Style"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.showmetech.com.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/mais-recentes/",
+            "texto": "Mais Recentes",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/mais-lidas/",
+            "texto": "Mais Lidas",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/guias-de-compras/",
+            "texto": "Guias de Compras",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/aplicativos/",
+            "texto": "Aplicativos",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/ciencia-e-tecnologia/",
+            "texto": "Ciência e Tecnologia",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/comparativos/",
+            "texto": "Comparativos",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/criticas/",
+            "texto": "Críticas",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/cultura/",
+            "texto": "Cultura",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/cursos/",
+            "texto": "Cursos",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/economia/",
+            "texto": "Economia",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/eletronicos/",
+            "texto": "Eletrônicos",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/empresas/",
+            "texto": "Empresas",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/entrevistas/",
+            "texto": "Entrevistas",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/eventos/",
+            "texto": "Eventos",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/games/",
+            "texto": "Games",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/gastronomia/",
+            "texto": "Gastronomia",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/historia/",
+            "texto": "História",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/humor/",
+            "texto": "Humor",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/lifestyle/",
+            "texto": "Lifestyle",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/listas/",
+            "texto": "Listas",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/noticias/",
+            "texto": "Notícias",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/opiniao/",
+            "texto": "Opinião",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/podcasts/",
+            "texto": "Podcasts",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/politica-e-governo/",
+            "texto": "Política e Governo",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/publieditoriais/",
+            "texto": "Publieditoriais",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/reviews/",
+            "texto": "Reviews",
+            "interno": true
+          },
+          {
+            "url": "https://www.showmetech.com.br/saude/",
+            "texto": "Saúde",
+            "interno": true
+          },
+          {
+            "url": "https://www.terra.com.br/",
+            "texto": "Terra",
+            "interno": false
+          },
+          {
+            "url": "https://www.showmetech.com.br/tutoriais/",
+            "texto": "Tutoriais",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://secure.gravatar.com/avatar/e6e0f3862422eec41bb7af22e3f7ae2f355d0bd69a1ea4c77bc3d0f96e5dce64?s=96&amp;d=mm&amp;r=g",
+          "https://www.showmetech.com.br/wp-content/uploads//2024/07/Design-sem-nome-2024-07-27T145521.455.png",
+          "https://www.showmetech.com.br/wp-content/uploads//2025/07/Logo-Showmetech-2025-2@2x.png",
+          "https://www.showmetech.com.br/wp-content/uploads//2026/10/eleicoes-2026-lula-flavio-apuracao-pesquisas-800x500.jpg",
+          "https://www.showmetech.com.br/wp-content/uploads//2026/08/razr-fold-featured-800x500.webp",
+          "https://www.showmetech.com.br/wp-content/uploads//2026/10/redroad-linha-comercial-capa-1920x1080-v2-800x500.jpg",
+          "https://secure.gravatar.com/avatar/e6e0f3862422eec41bb7af22e3f7ae2f355d0bd69a1ea4c77bc3d0f96e5dce64?s=40&#038;d=mm&#038;r=g",
+          "https://www.showmetech.com.br/wp-content/uploads//2024/07/imagem_2024-07-27_145225404-1024x575.png",
+          "https://www.showmetech.com.br/wp-content/uploads//2026/10/felca-capa-grafite.aprovada-80x80.avif",
+          "https://www.showmetech.com.br/wp-content/uploads//2026/10/tesla-roadster-2026-cover-80x80.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-bfa22a46bbe1",
+            "type": "image",
+            "title": "Capa de filme com personagem em ação, pessoas em festa e ilustração aquática com peixes coloridos.",
+            "url": "https://www.showmetech.com.br/wp-content/uploads//2024/07/Design-sem-nome-2024-07-27T145521.455.png",
+            "final_url": "https://www.showmetech.com.br/wp-content/uploads//2024/07/Design-sem-nome-2024-07-27T145521.455.png",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.showmetech.com.br",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Capa de filme com personagem em ação, pessoas em festa e ilustração aquática com peixes coloridos.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8784bb86a93e",
+            "type": "image",
+            "title": "Showmetech",
+            "url": "https://www.showmetech.com.br/wp-content/uploads//2025/07/Logo-Showmetech-2025-2@2x.png",
+            "final_url": "https://www.showmetech.com.br/wp-content/uploads//2025/07/Logo-Showmetech-2025-2@2x.png",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.showmetech.com.br",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Showmetech",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-baf99cf73326",
+            "type": "image",
+            "title": "Ilustração de lula e flávio bolsonaro diante do mapa do brasil e gráficos eleitorais.",
+            "url": "https://www.showmetech.com.br/wp-content/uploads//2026/10/eleicoes-2026-lula-flavio-apuracao-pesquisas-800x500.jpg",
+            "final_url": "https://www.showmetech.com.br/wp-content/uploads//2026/10/eleicoes-2026-lula-flavio-apuracao-pesquisas-800x500.jpg",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.showmetech.com.br",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ilustração de lula e flávio bolsonaro diante do mapa do brasil e gráficos eleitorais.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f728a276c152",
+            "type": "image",
+            "title": "Motorola razr fold fechado e aberto, destacando a tela externa",
+            "url": "https://www.showmetech.com.br/wp-content/uploads//2026/08/razr-fold-featured-800x500.webp",
+            "final_url": "https://www.showmetech.com.br/wp-content/uploads//2026/08/razr-fold-featured-800x500.webp",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.showmetech.com.br",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Motorola razr fold fechado e aberto, destacando a tela externa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-99f117093a34",
+            "type": "image",
+            "title": "Dois robôs de limpeza da linha comercial redroad em imagem oficial da fabricante",
+            "url": "https://www.showmetech.com.br/wp-content/uploads//2026/10/redroad-linha-comercial-capa-1920x1080-v2-800x500.jpg",
+            "final_url": "https://www.showmetech.com.br/wp-content/uploads//2026/10/redroad-linha-comercial-capa-1920x1080-v2-800x500.jpg",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.showmetech.com.br",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dois robôs de limpeza da linha comercial redroad em imagem oficial da fabricante",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e7dfb37684e3",
+            "type": "image",
+            "title": "Avatar de lucas gomes",
+            "url": "https://secure.gravatar.com/avatar/e6e0f3862422eec41bb7af22e3f7ae2f355d0bd69a1ea4c77bc3d0f96e5dce64?s=40&d=mm&r=g",
+            "final_url": "https://secure.gravatar.com/avatar/e6e0f3862422eec41bb7af22e3f7ae2f355d0bd69a1ea4c77bc3d0f96e5dce64?s=40&d=mm&r=g",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "secure.gravatar.com",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Avatar de lucas gomes",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-eef243bbbd6e",
+            "type": "image",
+            "title": "Vídeos mais vistos no youtube",
+            "url": "https://www.showmetech.com.br/wp-content/uploads//2024/07/imagem_2024-07-27_145225404-1024x575.png",
+            "final_url": "https://www.showmetech.com.br/wp-content/uploads//2024/07/imagem_2024-07-27_145225404-1024x575.png",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.showmetech.com.br",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Vídeos mais vistos no youtube",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8b22ad802be5",
+            "type": "image",
+            "title": "Felca de frente para a câmera, com cabelo comprido e roupa preta, sobre fundo grafite",
+            "url": "https://www.showmetech.com.br/wp-content/uploads//2026/10/felca-capa-grafite.aprovada-80x80.avif",
+            "final_url": "https://www.showmetech.com.br/wp-content/uploads//2026/10/felca-capa-grafite.aprovada-80x80.avif",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.showmetech.com.br",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Felca de frente para a câmera, com cabelo comprido e roupa preta, sobre fundo grafite",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7991eb6a31bc",
+            "type": "image",
+            "title": "Tesla roadster de nova geração em imagem de divulgação",
+            "url": "https://www.showmetech.com.br/wp-content/uploads//2026/10/tesla-roadster-2026-cover-80x80.jpg",
+            "final_url": "https://www.showmetech.com.br/wp-content/uploads//2026/10/tesla-roadster-2026-cover-80x80.jpg",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.showmetech.com.br",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Tesla roadster de nova geração em imagem de divulgação",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-426cd0a32de0",
+            "type": "image",
+            "title": "Televisão exibe a marca netflix em uma sala com iluminação vermelha.",
+            "url": "https://www.showmetech.com.br/wp-content/uploads//2026/10/netflix-reajuste-2026-cover-80x80.jpg",
+            "final_url": "https://www.showmetech.com.br/wp-content/uploads//2026/10/netflix-reajuste-2026-cover-80x80.jpg",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.showmetech.com.br",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Televisão exibe a marca netflix em uma sala com iluminação vermelha.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-fcc3f30fcd5e",
+            "type": "video",
+            "title": "Maroon 5 - Girls Like You ft. Cardi B (Official Music Video)",
+            "url": "https://www.youtube.com/embed/aJOTlE1K90k?feature=oembed",
+            "final_url": "https://www.youtube.com/embed/aJOTlE1K90k?feature=oembed",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.youtube.com",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Veja quais são os vídeos mais vistos do YouTube, como o ranking mudou ao longo dos anos e quais clipes dominam a plataforma.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-1bce372865fa",
+            "type": "video",
+            "title": "Ed Sheeran - Thinking Out Loud (Official Music Video)",
+            "url": "https://www.youtube.com/embed/lp-EO5I60KA?feature=oembed",
+            "final_url": "https://www.youtube.com/embed/lp-EO5I60KA?feature=oembed",
+            "source_title": "Os 20 vídeos mais vistos no YouTube até hoje",
+            "source_url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "publisher": "www.youtube.com",
+            "date": "2024-07-29T09:01:41-03:00",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Veja quais são os vídeos mais vistos do YouTube, como o ranking mudou ao longo dos anos e quais clipes dominam a plataforma.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://globoplay.globo.com/",
+      "result": {
+        "titulo": "Globoplay | Assista online aos programas da Globo",
+        "texto": "2026 Globo Comunicação e Participações S.A. © Todos os direitos reservados Termos e políticas Link externo - abre em uma nova janela",
+        "final": "https://globoplay.globo.com/",
+        "trecho_usado": "2026 Globo Comunicação e Participações S.A. © Todos os direitos reservados Termos e políticas Link externo - abre em uma nova janela",
+        "metadados": {
+          "titulo": "Globoplay | Assista online aos programas da Globo",
+          "descricao": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser.",
+          "canonica": "https://globoplay.globo.com/",
+          "og": {
+            "og:title": "Globoplay | Assista online aos programas da Globo",
+            "og:url": "https://globoplay.globo.com/",
+            "og:description": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser.",
+            "og:image": "https://s3.glbimg.com/v1/AUTH_c7def7ff66fe4b13beac0810ffbf780f/secure/home-share-a0a4669.png",
+            "og:image:url": "https://s3.glbimg.com/v1/AUTH_c7def7ff66fe4b13beac0810ffbf780f/secure/home-share-a0a4669.png",
+            "og:image:type": "image/jpeg",
+            "og:image:secure_url": "https://s3.glbimg.com/v1/AUTH_c7def7ff66fe4b13beac0810ffbf780f/secure/home-share-a0a4669.png",
+            "og:image:width": "830",
+            "og:image:height": "558",
+            "og:image:alt": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser.",
+            "og:site_name": "Globoplay",
+            "og:type": "website"
+          },
+          "twitter": {
+            "twitter:title": "Globoplay | Assista online aos programas da Globo",
+            "twitter:description": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser.",
+            "twitter:image": "https://s3.glbimg.com/v1/AUTH_c7def7ff66fe4b13beac0810ffbf780f/secure/home-share-a0a4669.png",
+            "twitter:site": "@globoplay",
+            "twitter:card": "summary_large_image"
+          },
+          "idioma": "pt-br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Globoplay",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "2026 Globo Comunicação e Participações S.A. © Todos os direitos reservados"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://globoplay.globo.com/",
+            "texto": "Início",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/agora-na-tv/",
+            "texto": "Agora na TV",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/categorias/novelas/",
+            "texto": "Novelas",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/categorias/series/",
+            "texto": "Séries",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/categorias/esportes/",
+            "texto": "Esportes",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/categorias/filmes/",
+            "texto": "Filmes",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/catalogo/",
+            "texto": "Catálogo",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/assine/?origemId=93915&amp;f_area=menu&amp;f_cpnt=selecionou&amp;f_label=assine&amp;url=https%3A%2F%2Fgloboplay.globo.com",
+            "texto": "Assine",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/busca/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/assine/?origemId=91628&amp;f_area=home&amp;f_cpnt=banner_vendas&amp;f_label=assinatura.assine_ja&amp;url=https%3A%2F%2Fgloboplay.globo.com%2F",
+            "texto": "Assine já",
+            "interno": true
+          },
+          {
+            "url": "https://globoplay.globo.com/termosepoliticas/",
+            "texto": "Termos e políticas Link externo - abre em uma nova janela",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://s3.glbimg.com/v1/AUTH_c7def7ff66fe4b13beac0810ffbf780f/secure/home-share-a0a4669.png"
+        ],
+        "midia": [
+          {
+            "id": "med-b6b980b6527c",
+            "type": "image",
+            "title": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser.",
+            "url": "https://s3.glbimg.com/v1/AUTH_c7def7ff66fe4b13beac0810ffbf780f/secure/home-share-a0a4669.png",
+            "final_url": "https://s3.glbimg.com/v1/AUTH_c7def7ff66fe4b13beac0810ffbf780f/secure/home-share-a0a4669.png",
+            "source_title": "Globoplay | Assista online aos programas da Globo",
+            "source_url": "https://globoplay.globo.com/",
+            "publisher": "s3.glbimg.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.boafoda.com/",
+      "result": {
+        "titulo": "Boafoda",
+        "texto": "Assista Vídeos de Sexo e Filme Porno Gratis no BoaFoda",
+        "final": "https://www.boafoda.com/",
+        "trecho_usado": "Assista Vídeos de Sexo e Filme Porno Gratis no BoaFoda",
+        "metadados": {
+          "titulo": "Boafoda",
+          "descricao": "Filme Porno em HD 4K e Video de Sexo Gratis. Assista aqui Grátis, a XXX HD Porn Free de qualidade, com Videos de Sexo. No site N°1 do Brasil, BoaFoda.",
+          "canonica": "https://www.boafoda.com/",
+          "og": {},
+          "twitter": {},
+          "idioma": "",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Assista Vídeos de Sexo e Filme Porno Gratis no BoaFoda",
+            "texto": ""
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.boafoda.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/gay",
+            "texto": "Porno Gay",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/travesti",
+            "texto": "Porno Trans",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/amador",
+            "texto": "Porno Amador",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/tags/",
+            "texto": "Todos os Tags",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/videos/",
+            "texto": "Vídeos",
+            "interno": true
+          },
+          {
+            "url": "https://tik.porn",
+            "texto": "TikTok Porn",
+            "interno": false
+          },
+          {
+            "url": "https://www.boafoda.com/pornstars/",
+            "texto": "Pornstars",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/studios/",
+            "texto": "Estúdios",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/33/anal",
+            "texto": "Anal",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/877/anoes",
+            "texto": "Anões",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/91/arabe",
+            "texto": "Arabe",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/38/asiaticas",
+            "texto": "Asiáticas",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/879/atriz-porno",
+            "texto": "Atriz Porno",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/46/bbw-gordas",
+            "texto": "BBW Gordas",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/55/bondage-bdsm",
+            "texto": "Bondage (BDSM)",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/52/boquete",
+            "texto": "Boquete",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/856/brinquedos-sexuais",
+            "texto": "Brinquedos Sexuais",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/855/buceta-peluda",
+            "texto": "Buceta Peluda",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/59/bukkake",
+            "texto": "Bukkake",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/878/bundas-de-negras",
+            "texto": "Bundas de Negras",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/1226/cfnm",
+            "texto": "CFNM",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/87/casting-porno",
+            "texto": "Casting Porno",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/90/cenarios-xxx",
+            "texto": "Cenários XXX",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/1127/compilacao",
+            "texto": "Compilação",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/77/coroas-com-garotos",
+            "texto": "Coroas com Garotos",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/1233/cosplay",
+            "texto": "Cosplay",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/1198/cu-grande",
+            "texto": "Cu grande",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/1236/cuckold",
+            "texto": "Cuckold",
+            "interno": true
+          },
+          {
+            "url": "https://www.boafoda.com/channels/1173/cunilingua",
+            "texto": "Cunilíngua",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://mc.yandex.ru/watch/94227947",
+          "https://assets.boafoda.com/assets/boafoda/img/logo_dark/logo_desktop_1.png?ver=1653316134",
+          "https://assets.boafoda.com/assets/boafoda/img/logo_light/logo_desktop_1.png?ver=1653316134",
+          "https://assets.boafoda.com/assets/boafoda/img/logo_dark/logo_mobile_1.png?ver=1653316134",
+          "https://assets.boafoda.com/assets/boafoda/img/logo_light/logo_mobile_1.png?ver=1653316134",
+          "https://www.boafoda.com/assets/default/img/18plus.svg",
+          "https://image-cdn.boafoda.com/thumbs/2026/07/570001/320x180/18.jpg?prev=1",
+          "https://image-cdn.boafoda.com/thumbs/2026/07/570001/320x180/18.jpg",
+          "https://image-cdn.boafoda.com/thumbs/2026/08/570527/320x180/18.jpg?prev=1",
+          "https://image-cdn.boafoda.com/thumbs/2026/08/570527/320x180/18.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-70a93c6ce6b9",
+            "type": "image",
+            "title": "Videos de Sexo",
+            "url": "https://assets.boafoda.com/assets/boafoda/img/logo_dark/logo_desktop_1.png?ver=1653316134",
+            "final_url": "https://assets.boafoda.com/assets/boafoda/img/logo_dark/logo_desktop_1.png?ver=1653316134",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "assets.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Videos de Sexo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-befff0123b71",
+            "type": "image",
+            "title": "Videos de Sexo",
+            "url": "https://assets.boafoda.com/assets/boafoda/img/logo_light/logo_desktop_1.png?ver=1653316134",
+            "final_url": "https://assets.boafoda.com/assets/boafoda/img/logo_light/logo_desktop_1.png?ver=1653316134",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "assets.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Videos de Sexo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5ba4202aa028",
+            "type": "image",
+            "title": "Videos de Sexo",
+            "url": "https://assets.boafoda.com/assets/boafoda/img/logo_dark/logo_mobile_1.png?ver=1653316134",
+            "final_url": "https://assets.boafoda.com/assets/boafoda/img/logo_dark/logo_mobile_1.png?ver=1653316134",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "assets.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Videos de Sexo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d7a7da66ad32",
+            "type": "image",
+            "title": "Videos de Sexo",
+            "url": "https://assets.boafoda.com/assets/boafoda/img/logo_light/logo_mobile_1.png?ver=1653316134",
+            "final_url": "https://assets.boafoda.com/assets/boafoda/img/logo_light/logo_mobile_1.png?ver=1653316134",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "assets.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Videos de Sexo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a62c2fc74246",
+            "type": "image",
+            "title": "Verifique a sua idade",
+            "url": "https://www.boafoda.com/assets/default/img/18plus.svg",
+            "final_url": "https://www.boafoda.com/assets/default/img/18plus.svg",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "www.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Verifique a sua idade",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6bfef648589a",
+            "type": "image",
+            "title": "Kitty sabe que deverá nos mostrar sua buceta e se masturbar sozinha",
+            "url": "https://image-cdn.boafoda.com/thumbs/2026/07/570001/320x180/18.jpg?prev=1",
+            "final_url": "https://image-cdn.boafoda.com/thumbs/2026/07/570001/320x180/18.jpg?prev=1",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "image-cdn.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Kitty sabe que deverá nos mostrar sua buceta e se masturbar sozinha",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d13328adf91c",
+            "type": "image",
+            "title": "Ela sabe que o sogro dela é pervertido e deixa ele tirar fotos dela",
+            "url": "https://image-cdn.boafoda.com/thumbs/2026/08/570527/320x180/18.jpg?prev=1",
+            "final_url": "https://image-cdn.boafoda.com/thumbs/2026/08/570527/320x180/18.jpg?prev=1",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "image-cdn.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ela sabe que o sogro dela é pervertido e deixa ele tirar fotos dela",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1115887e9580",
+            "type": "image",
+            "title": "Esta moena foi convidada por John Luna para dar uma foda",
+            "url": "https://image-cdn.boafoda.com/thumbs/2024/10/530697/320x180/clips/1.jpg?prev=1",
+            "final_url": "https://image-cdn.boafoda.com/thumbs/2024/10/530697/320x180/clips/1.jpg?prev=1",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "image-cdn.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Esta moena foi convidada por John Luna para dar uma foda",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e609a3469927",
+            "type": "image",
+            "title": "Um vídeo muito erótico mostra o melhor dos seus órgãos sexuais",
+            "url": "https://image-cdn.boafoda.com/thumbs/2025/11/560923/320x180/4.jpg?prev=1",
+            "final_url": "https://image-cdn.boafoda.com/thumbs/2025/11/560923/320x180/4.jpg?prev=1",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "image-cdn.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Um vídeo muito erótico mostra o melhor dos seus órgãos sexuais",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e2aae3e83c3a",
+            "type": "image",
+            "title": "A profe MILF é a melhor na hora de mamar o pau do seu aluno",
+            "url": "https://image-cdn.boafoda.com/thumbs/2026/07/570420/320x180/17.jpg?prev=1",
+            "final_url": "https://image-cdn.boafoda.com/thumbs/2026/07/570420/320x180/17.jpg?prev=1",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "image-cdn.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A profe MILF é a melhor na hora de mamar o pau do seu aluno",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-fc9b08f81dde",
+            "type": "document",
+            "title": "brazzers.html",
+            "url": "https://www.boafoda.com/studios/1/brazzers.html",
+            "final_url": "https://www.boafoda.com/studios/1/brazzers.html",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "www.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Filme Porno em HD 4K e Video de Sexo Gratis. Assista aqui Grátis, a XXX HD Porn Free de qualidade, com Videos de Sexo. No site N°1 do Brasil, BoaFoda.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-8d3f45fd1b13",
+            "type": "document",
+            "title": "bangbros.html",
+            "url": "https://www.boafoda.com/studios/29/bangbros.html",
+            "final_url": "https://www.boafoda.com/studios/29/bangbros.html",
+            "source_title": "Boafoda",
+            "source_url": "https://www.boafoda.com/",
+            "publisher": "www.boafoda.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Filme Porno em HD 4K e Video de Sexo Gratis. Assista aqui Grátis, a XXX HD Porn Free de qualidade, com Videos de Sexo. No site N°1 do Brasil, BoaFoda.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.tiktok.com/pt-BR",
+      "result": {
+        "titulo": "TikTok - Make Your Day",
+        "texto": "",
+        "final": "https://www.tiktok.com/pt-BR",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "TikTok - Make Your Day",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "f7ef5cf90fbe243f7930",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+            "title": "Poverty Headcount ($1.90 a day)",
+            "origin": "worldbank",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "96bb3ec7d9dcc6a475d9",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+            "title": "Poverty Headcount ($2.50 a day)",
+            "origin": "worldbank",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "d0a797af962f89cea20c",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+            "title": "Middle Class ($10-50 a day) Headcount",
+            "origin": "worldbank",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "7ec944b0ff90dc270e19",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+            "title": "Official Moderate Poverty Rate-National",
+            "origin": "worldbank",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "177e49e413fca7dcaa2c",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds",
+            "title": "Poverty Headcount ($4 a day)",
+            "origin": "worldbank",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "097c804e9fb3b663f6d0",
+            "url": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10",
+            "title": "Vulnerable ($4-10 a day) Headcount",
+            "origin": "worldbank",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "dados",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": ""
+          },
+          {
+            "id": "e1d5e2c7a98d2acd129f",
+            "url": "https://www.youtube.com/",
+            "title": "YouTube",
+            "origin": "bing",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Enjoy the videos and music you love, upload original content, and share it all with friends, family, and the world on YouTube."
+          },
+          {
+            "id": "ab41967ebed805bff5f8",
+            "url": "https://www.youtube.com/channel/UCUN9lhwfMJRxMVuet7Shg0w",
+            "title": "YouTube Brasil",
+            "origin": "bing",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "É canal oficial do YouTube Brasil que vocês querem? :D Se inscreve para descobrir as novidades e tendências da plataforma, conhecer novos criadores incríveis e "
+          },
+          {
+            "id": "67e4582a46cc0fef2005",
+            "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+            "title": "Os 20 vídeos mais vistos no YouTube até hoje - Showmetech",
+            "origin": "bing",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Diversas pessoas recriaram essa música de diferentes maneiras, mas o vídeo de Pinkfong obteve a liderança atual, com mais de 14 bilhões de visualizações em todo"
+          },
+          {
+            "id": "32fb50cbc473d0f7d481",
+            "url": "https://www.boafoda.com/",
+            "title": "Videos de Sexo e Filme Porno Gratis no BoaFoda.com",
+            "origin": "bing",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Filme Porno em HD 4K e Video de Sexo Gratis. Assista aqui Grátis, a XXX HD Porn Free de qualidade, com Videos de Sexo. No site N°1 do Brasil, BoaFoda."
+          },
+          {
+            "id": "189907129b78551a0638",
+            "url": "https://globoplay.globo.com/",
+            "title": "Globoplay | Assista online aos programas da Globo",
+            "origin": "bing",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Assista aos melhores vídeos de entretenimento, esportes ao vivo, jornalismo e muito mais quando e onde quiser."
+          },
+          {
+            "id": "d895fc66e459c7833ce2",
+            "url": "https://www.tiktok.com/pt-BR",
+            "title": "TikTok - Make Your Day",
+            "origin": "bing",
+            "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "TikTok - as tendências começam aqui. Em um dispositivo ou na web, os espectadores podem assistir e descobrir milhões de vídeos curtos personalizados. Baixe o ap"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "worldbank: 6 resultados (um vídeo oficial do IBGE explicando o Ce)",
+        "worldbank (consulta reformulada 'vídeo oficial do IBGE explicando o Censo'): 6 resultados",
+        "worldbank: sem correspondência com o pedido; tentando outro provedor (um vídeo oficial do IBGE explicando o Ce)",
+        "bcb: sem resultados (um vídeo oficial do IBGE explicando o Ce)",
+        "bing: 6 resultados (um vídeo oficial do IBGE explicando o Ce)",
+        "bing (consulta reformulada 'vídeo oficial do IBGE explicando o Censo'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (um vídeo oficial do IBGE explicando o Ce)",
+        "— recuperação por lacuna —",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": false,
+        "requirements": [],
+        "passages": [],
+        "complete": false,
+        "scope": "no explicit supported facet parsed; not proof of completeness"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S2",
+          "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S3",
+          "url": "https://www.boafoda.com/",
+          "answerability": null,
+          "answer_passages": null
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+      "adapter_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "provider": "worldbank",
+      "at": "2026-10-25T18:18:24.846133+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Poverty Headcount ($1.90 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd"
+        },
+        {
+          "title": "Poverty Headcount ($2.50 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd"
+        },
+        {
+          "title": "Middle Class ($10-50 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50"
+        },
+        {
+          "title": "Official Moderate Poverty Rate-National",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl"
+        },
+        {
+          "title": "Poverty Headcount ($4 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds"
+        },
+        {
+          "title": "Vulnerable ($4-10 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://api.worldbank.org/v2/indicator",
+          "parameters": {
+            "format": "json",
+            "q": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 296.6,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+      "adapter_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "provider": "worldbank",
+      "at": "2026-10-25T18:18:25.148467+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Poverty Headcount ($1.90 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd"
+        },
+        {
+          "title": "Poverty Headcount ($2.50 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd"
+        },
+        {
+          "title": "Middle Class ($10-50 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50"
+        },
+        {
+          "title": "Official Moderate Poverty Rate-National",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl"
+        },
+        {
+          "title": "Poverty Headcount ($4 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Poor4uds"
+        },
+        {
+          "title": "Vulnerable ($4-10 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Vul4to10"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://api.worldbank.org/v2/indicator",
+          "parameters": {
+            "format": "json",
+            "q": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 262.81,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+      "adapter_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "provider": "bcb",
+      "at": "2026-10-25T18:18:25.415833+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [],
+      "latency_ms": 0.06,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+      "adapter_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "provider": "bcb",
+      "at": "2026-10-25T18:18:25.416104+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [],
+      "latency_ms": 0.03,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+      "adapter_query": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "provider": "bing",
+      "at": "2026-10-25T18:18:25.416170+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "YouTube",
+          "url": "https://www.youtube.com/"
+        },
+        {
+          "title": "YouTube Brasil",
+          "url": "https://www.youtube.com/channel/UCUN9lhwfMJRxMVuet7Shg0w"
+        },
+        {
+          "title": "Os 20 vídeos mais vistos no YouTube até hoje - Showmetech",
+          "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/"
+        },
+        {
+          "title": "Videos de Sexo e Filme Porno Gratis no BoaFoda.com",
+          "url": "https://www.boafoda.com/"
+        },
+        {
+          "title": "Globoplay | Assista online aos programas da Globo",
+          "url": "https://globoplay.globo.com/"
+        },
+        {
+          "title": "TikTok - Make Your Day",
+          "url": "https://www.tiktok.com/pt-BR"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 360.88,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Encontre um vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link.",
+      "adapter_query": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+      "provider": "bing",
+      "at": "2026-10-25T18:18:25.783030+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "YouTube",
+          "url": "https://www.youtube.com/"
+        },
+        {
+          "title": "YouTube Brasil",
+          "url": "https://www.youtube.com/channel/UCUN9lhwfMJRxMVuet7Shg0w"
+        },
+        {
+          "title": "Os 20 vídeos mais vistos no YouTube até hoje - Showmetech",
+          "url": "https://www.showmetech.com.br/os-videos-mais-vistos-no-youtube/"
+        },
+        {
+          "title": "Videos de Sexo e Filme Porno Gratis no BoaFoda.com",
+          "url": "https://www.boafoda.com/"
+        },
+        {
+          "title": "Globoplay | Assista online aos programas da Globo",
+          "url": "https://globoplay.globo.com/"
+        },
+        {
+          "title": "TikTok - Make Your Day",
+          "url": "https://www.tiktok.com/pt-BR"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "vídeo oficial do IBGE explicando o Censo Demográfico e mostre título, canal e link",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 368.55,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "beab3573022e0e52511357a0636e80f2e14478ed",
+  "dataset_sha256": "24d79cf7bd519c332a8c7c44952bfa7728e3703d14621aed15580621f63a0cef"
+}

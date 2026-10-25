@@ -1,0 +1,2897 @@
+{
+  "id": "ei-02",
+  "category": "universal",
+  "query": "Como funciona Python dict.get, qual a sintaxe e se altera o dicionário original?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 11.398,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "stackexchange",
+      "query": "Python dict.get",
+      "candidates": 6
+    },
+    {
+      "provider": "hn",
+      "query": "Python dict.get",
+      "candidates": 1
+    },
+    {
+      "provider": "bing",
+      "query": "Python dict.get",
+      "candidates": 6
+    },
+    {
+      "provider": "stackexchange",
+      "query": "python dict.get sintaxe altera dicionário original",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "python dict.get sintaxe altera dicionário original",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "python dict.get sintaxe altera dicionário original",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Python+dict.get&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Python+dict.get&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4787
+    },
+    {
+      "url": "https://www.bing.com/search?q=python+dict.get+sintaxe+altera+dicion%C3%A1rio+original&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=python+dict.get+sintaxe+altera+dicion%C3%A1rio+original&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4937
+    },
+    {
+      "url": "https://stackoverflow.com/questions/37786788/python-dict-get-method-apply-some-function-on-a-key",
+      "error": "bloqueado"
+    },
+    {
+      "url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+      "final": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+      "chars": 10378
+    },
+    {
+      "url": "https://www.python.org/",
+      "final": "https://www.python.org/",
+      "chars": 52785
+    },
+    {
+      "url": "https://sandrock.co.za/carl?b2w=http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+      "final": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/",
+      "chars": 171163
+    },
+    {
+      "url": "https://www.python.org/events/python-events/2172/",
+      "final": "https://www.python.org/events/python-events/2172/",
+      "chars": 37253
+    },
+    {
+      "url": "https://www.python.org/psf-landing/",
+      "final": "https://www.python.org/psf-landing/",
+      "chars": 50761
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Como funciona Python dict.get, qual a sintaxe e se altera o dicionário original?",
+    "domain": "general",
+    "original_request": "Como funciona Python dict.get, qual a sintaxe e se altera o dicionário original?",
+    "resolved_request": "Como funciona Python dict.get, qual a sintaxe e se altera o dicionário original?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T15:46:21.373392+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "3fe7e4a4d2da0e0509ae",
+        "url": "https://stackoverflow.com/questions/37786788/python-dict-get-method-apply-some-function-on-a-key",
+        "title": "Python dict.get method apply some function on a key",
+        "origin": "stackexchange",
+        "query": "Python dict.get",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Modified to make it more understandable. I am testing out the python's dict.get method and need some help on that. What I am trying to do is that I have a dicti",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "5ce6dd0af97f0b4861a4",
+        "url": "https://stackoverflow.com/questions/60158123/perplexing-python-dict-get-behavior-with-default-dict-index",
+        "title": "perplexing python dict.get() behavior with default dict index",
+        "origin": "stackexchange",
+        "query": "Python dict.get",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "so i've run into a perplexing issue when utilising the dict.get() method in python in conjunction with a default of a dict[index]: d = {1: 1} d2 = {2: 2} #throw",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "cf55b13576aa45b38e25",
+        "url": "https://stackoverflow.com/questions/37165403/python-dict-get-or-none-scenario",
+        "title": "Python dict.get() or None scenario",
+        "origin": "stackexchange",
+        "query": "Python dict.get",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "I am attempting to access a dictionary's values based on a list of keys I have. If the key is not present, I default to None. However, I am running into trouble",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "1dcfac622f221ca271dd",
+        "url": "https://stackoverflow.com/questions/54807568/raise-exception-in-python-dict-get",
+        "title": "Raise exception in python dict.get()",
+        "origin": "stackexchange",
+        "query": "Python dict.get",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "actually, I already know what I want to do is kind of strange, but I think it will fit good in my code, so I'm asking: is there a way to do something like this:",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "786d042a6376e8ce6eae",
+        "url": "https://stackoverflow.com/questions/46480925/python-dict-get-lock",
+        "title": "Python dict.get() Lock",
+        "origin": "stackexchange",
+        "query": "Python dict.get",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "When I use dictionary.get() function, is it locking the whole dictionary? I am developing a multiprocess and multithreading program. The dictionary is used to a",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "867b45e41b80370c3e8a",
+        "url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+        "title": "When to Use Dict.get in Python",
+        "origin": "hn",
+        "query": "Python dict.get",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Redirection provided by This Page has moved to a new address: Negative Feedback: When to use dict.get in python Sorry for the inconvenience… Blogger to WordPres",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 179,
+        "final_url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "65dc9ef388c210df356d",
+        "url": "https://www.python.org/",
+        "title": "Welcome to Python.org",
+        "origin": "bing",
+        "query": "Python dict.get",
+        "date": "sáb., 24 out. 2026 05:17:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "# Write Fibonacci series up to n >>> def fib ( n ): ... a , b = 0 , 1 ... while a < n : ... print ( a , end = ' ' ) ... a , b = b , a + b ... print () ... >>> f",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 2135,
+        "final_url": "https://www.python.org/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "be09ac332e2e59d8e874",
+        "url": "https://www.online-python.com/",
+        "title": "Online Python - IDE, Editor, Compiler, Interpreter",
+        "origin": "bing",
+        "query": "Python dict.get",
+        "date": "dom., 25 out. 2026 07:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Python, which was initially developed by Guido van Rossum and made available to the public in 1991, is currently one of the most widely used general-purpose pro",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "6a53bc8c438de495f099",
+        "url": "https://www.programiz.com/python-programming/online-compiler/",
+        "title": "Online Python Compiler (Editor) - Programiz",
+        "origin": "bing",
+        "query": "Python dict.get",
+        "date": "dom., 25 out. 2026 02:31:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "832829eeae99ee914a36",
+        "url": "https://www.w3schools.com/python/",
+        "title": "Python Tutorial - W3Schools",
+        "origin": "bing",
+        "query": "Python dict.get",
+        "date": "dom., 25 out. 2026 07:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Learn Python Python is a popular programming language. Python can be used on a server to create web applications. Python is easy to learn - You will enjoy it!",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "026b530f436455499f08",
+        "url": "https://www.python.org/downloads/",
+        "title": "Download Python | Python.org",
+        "origin": "bing",
+        "query": "Python dict.get",
+        "date": "dom., 25 out. 2026 04:26:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Python was created in the early 1990s by Guido van Rossum at Stichting Mathematisch Centrum in the Netherlands as a successor of a language called ABC. Guido re",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "393bf2f42fbf925b45d2",
+        "url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+        "title": "Python (programming language) - Wikipedia",
+        "origin": "bing",
+        "query": "Python dict.get",
+        "date": "dom., 25 out. 2026 08:08:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Python supports multiple programming paradigms but with an emphasis on object-oriented programming and dynamic typing. Guido van Rossum began working on Python ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "56c4fc47ba26881fdd42",
+        "url": "https://sandrock.co.za/carl?b2w=http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+        "title": "Negative Feedback: When to use dict.get in python",
+        "origin": "in_source_link",
+        "query": "Como funciona Python dict.get, qual a sintaxe e se altera o dicionário original?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "the ordering of the times. Might become an issue at even larger sizes, but I don’t often have 30 million-key dictionaries in my Python code. Deeper dive Let’s g",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "d64076b6023d8d8d6fcb",
+        "url": "https://www.python.org/events/python-events/2172/",
+        "title": "FastAPI Conf 2026",
+        "origin": "in_source_link",
+        "query": "Como funciona Python dict.get, qual a sintaxe e se altera o dicionário original?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "This page displays a fallback because interactive scripts did not run. Possible causes include disabled JavaScript or failure to load scripts or stylesheets. No",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 165,
+        "final_url": "https://www.python.org/events/python-events/2172/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "e34c1d7780b0e7bea20e",
+        "url": "https://www.python.org/psf-landing/",
+        "title": "Python Software Foundation",
+        "origin": "in_source_link",
+        "query": "Como funciona Python dict.get, qual a sintaxe e se altera o dicionário original?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Security notice: the emSign root CA has been removed from certifi. Upgrade certifi, pip, uv and sigstore now. See more We support the Python Community through..",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 2002,
+        "final_url": "https://www.python.org/psf-landing/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      }
+    ],
+    "unique_candidates": 15,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-ded181012909",
+      "type": "image",
+      "title": "Introduction ¶ Note 1: This is an edited version of a full Jupyter Notebook which you can use to follow along with the calculati...",
+      "url": "https://blogger.googleusercontent.com/img/a/AVvXsEhb8vaCwyCVLvS-o2VJg2BqMg9tBAohPQV8iVSTwfsgr7RzKr9Tbrzq1lBikovM9c0BKBdyQNmE1xqum9XDpH_tevIVfcfhxK6ORz6GUL2iY9TSRq3LLbaY7AIjDN-UPHD_F1iEjhegwtmUi_CLXKLk_QL_lf4ak8c2kZNi8tpV-6trJeGufOcJp6H8=w1200-h630-p-k-no-nu",
+      "final_url": "https://blogger.googleusercontent.com/img/a/AVvXsEhb8vaCwyCVLvS-o2VJg2BqMg9tBAohPQV8iVSTwfsgr7RzKr9Tbrzq1lBikovM9c0BKBdyQNmE1xqum9XDpH_tevIVfcfhxK6ORz6GUL2iY9TSRq3LLbaY7AIjDN-UPHD_F1iEjhegwtmUi_CLXKLk_QL_lf4ak8c2kZNi8tpV-6trJeGufOcJp6H8=w1200-h630-p-k-no-nu",
+      "source_title": "When to use dict.get in python",
+      "source_url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+      "publisher": "blogger.googleusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Introduction ¶ Note 1: This is an edited version of a full Jupyter Notebook which you can use to follow along with the calculati...",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0a05c6bfe54b",
+      "type": "image",
+      "title": "The official home of the Python Programming Language",
+      "url": "https://www.python.org/static/opengraph-icon-200x200.png",
+      "final_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "www.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8ebc72381245",
+      "type": "image",
+      "title": "python™",
+      "url": "https://www.python.org/static/img/python-logo.png",
+      "final_url": "https://www.python.org/static/img/python-logo.png",
+      "source_title": "FastAPI Conf 2026",
+      "source_url": "https://www.python.org/events/python-events/2172/",
+      "publisher": "www.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "python™",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d1b618401984",
+      "type": "document",
+      "title": "license.html",
+      "url": "https://docs.python.org/3/license.html",
+      "final_url": "https://docs.python.org/3/license.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "docs.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-b34b7eb709b8",
+      "type": "document",
+      "title": "BeginnersGuide.html",
+      "url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+      "final_url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "wiki.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-0f7050437571",
+      "type": "document",
+      "title": "controlflow.html",
+      "url": "https://docs.python.org/3/tutorial/controlflow.html",
+      "final_url": "https://docs.python.org/3/tutorial/controlflow.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/",
+      "publisher": "docs.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-8e5461c79cf7",
+      "type": "document",
+      "title": "introduction.html",
+      "url": "https://docs.python.org/3/tutorial/introduction.html",
+      "final_url": "https://docs.python.org/3/tutorial/introduction.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/",
+      "publisher": "docs.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-5a0616f33026",
+      "type": "document",
+      "title": "mark-your-calendars-psf-board-office.html",
+      "url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+      "final_url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "pyfound.blogspot.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-5424f25b9fd7",
+      "type": "document",
+      "title": "wikis-relaunched.html",
+      "url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+      "final_url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "pyfound.blogspot.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-8b5018a80469",
+      "type": "document",
+      "title": "announcing-python-software-foundation.html",
+      "url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+      "final_url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "pyfound.blogspot.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-a19ceb9c5fff",
+      "type": "image",
+      "title": "Negative Feedback",
+      "url": "https://sandrock.co.za/carl/wp-content/uploads/sites/2/2025/04/negative_feedback_logo.png",
+      "final_url": "https://sandrock.co.za/carl/wp-content/uploads/sites/2/2025/04/negative_feedback_logo.png",
+      "source_title": "When to use dict.get in python – Negative Feedback",
+      "source_url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/",
+      "publisher": "sandrock.co.za",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Negative Feedback",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-419e03182559",
+      "type": "video",
+      "title": "When to use dict.get in python – Negative Feedback",
+      "url": "https://youtu.be/qiZyDLEJHh0?t=792",
+      "final_url": "https://youtu.be/qiZyDLEJHh0?t=792",
+      "source_title": "When to use dict.get in python – Negative Feedback",
+      "source_url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/",
+      "publisher": "youtu.be",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+      "titulo": "When to use dict.get in python",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.python.org/",
+      "titulo": "Welcome to Python.org",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 05:17:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.python.org/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://sandrock.co.za/carl?b2w=http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+      "titulo": "When to use dict.get in python – Negative Feedback",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://sandrock.co.za/carl?b2w=http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "stackexchange",
+      "query": "Python dict.get",
+      "items": [
+        {
+          "titulo": "Return a default value if a dictionary key is not available",
+          "url": "https://stackoverflow.com/questions/6130768/return-a-default-value-if-a-dictionary-key-is-not-available",
+          "trecho": "I need a way to get a dictionary value if its key exists, or simply return None , if it does not. However, Python raises a KeyError exception if you search for a key that does not exist. I know that I can check for the k · respondida · python, dictionary, key, nonetype",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 804
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/6130768/return-a-default-value-if-a-dictionary-key-is-not-available",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 7.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Python dict.get() or None scenario",
+          "url": "https://stackoverflow.com/questions/37165403/python-dict-get-or-none-scenario",
+          "trecho": "I am attempting to access a dictionary's values based on a list of keys I have. If the key is not present, I default to None. However, I am running into trouble when the value is an empty string ''. Please see the code b · respondida · python, dictionary",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 9
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/37165403/python-dict-get-or-none-scenario",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 14.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Raise exception in python dict.get()",
+          "url": "https://stackoverflow.com/questions/54807568/raise-exception-in-python-dict-get",
+          "trecho": "actually, I already know what I want to do is kind of strange, but I think it will fit good in my code, so I'm asking: is there a way to do something like this: foo = { 'a':1, 'b':2, 'c':3 } bar = { 'd':4, 'f':5, 'g':6 } · respondida · python, dictionary, exception",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 8
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/54807568/raise-exception-in-python-dict-get",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 14.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Python dict.get method apply some function on a key",
+          "url": "https://stackoverflow.com/questions/37786788/python-dict-get-method-apply-some-function-on-a-key",
+          "trecho": "Modified to make it more understandable. I am testing out the python's dict.get method and need some help on that. What I am trying to do is that I have a dictionary with some values. I am trying to copy that one value t · sem resposta aceita · python, dictionary",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 0
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/37786788/python-dict-get-method-apply-some-function-on-a-key",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 16.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "perplexing python dict.get() behavior with default dict index",
+          "url": "https://stackoverflow.com/questions/60158123/perplexing-python-dict-get-behavior-with-default-dict-index",
+          "trecho": "so i've run into a perplexing issue when utilising the dict.get() method in python in conjunction with a default of a dict[index]: d = {1: 1} d2 = {2: 2} #throws KeyError d.get(1, d2[1]) i'm a little lost on why this hap · respondida · python, python-3.x, dictionary, indexing",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 0
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/60158123/perplexing-python-dict-get-behavior-with-default-dict-index",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 16.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Python dict.get() Lock",
+          "url": "https://stackoverflow.com/questions/46480925/python-dict-get-lock",
+          "trecho": "When I use dictionary.get() function, is it locking the whole dictionary? I am developing a multiprocess and multithreading program. The dictionary is used to act as a state table to keep track of data. I have to impose  · respondida · python, multithreading, dictionary, multiprocessing",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 2
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/46480925/python-dict-get-lock",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 14.8,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "hn",
+      "query": "Python dict.get",
+      "items": [
+        {
+          "titulo": "When to Use Dict.get in Python",
+          "url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+          "trecho": "HN: 1 pontos · 2 comentários",
+          "origem": "hn",
+          "tipo": "tecnico",
+          "meta": {
+            "pontos": 1,
+            "comentarios": 2
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "hn",
+          "url_canonica": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 13.3,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Python dict.get",
+      "items": [
+        {
+          "titulo": "Welcome to Python.org",
+          "url": "https://www.python.org/",
+          "trecho": "Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. Whet your appetite with our Python overview.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:17:00 GMT"
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "bing",
+          "url_canonica": "https://python.org/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Download Python | Python.org",
+          "url": "https://www.python.org/downloads/",
+          "trecho": "Python was created in the early 1990s by Guido van Rossum at Stichting Mathematisch Centrum in the Netherlands as a successor of a language called ABC. Guido remains Python’s principal author, although it includes many contributions from others.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 04:26:00 GMT"
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "bing",
+          "url_canonica": "https://python.org/downloads",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Online Python - IDE, Editor, Compiler, Interpreter",
+          "url": "https://www.online-python.com/",
+          "trecho": "Python, which was initially developed by Guido van Rossum and made available to the public in 1991, is currently one of the most widely used general-purpose programming languages.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:11:00 GMT"
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "bing",
+          "url_canonica": "https://online-python.com/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Online Python Compiler (Editor) - Programiz",
+          "url": "https://www.programiz.com/python-programming/online-compiler/",
+          "trecho": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:31:00 GMT"
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "bing",
+          "url_canonica": "https://programiz.com/python-programming/online-compiler",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Python Tutorial - W3Schools",
+          "url": "https://www.w3schools.com/python/",
+          "trecho": "Learn Python Python is a popular programming language. Python can be used on a server to create web applications. Python is easy to learn - You will enjoy it!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:11:00 GMT"
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "bing",
+          "url_canonica": "https://w3schools.com/python",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Python (programming language) - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+          "trecho": "Python supports multiple programming paradigms but with an emphasis on object-oriented programming and dynamic typing. Guido van Rossum began working on Python in the late 1980s as a successor to the ABC programming language. Python 3.0, released in 2008, was a major revision and not completely back",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 08:08:00 GMT"
+          },
+          "discovery_query": "Python dict.get",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 9.3,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "python dict.get sintaxe altera dicionário original",
+      "items": [
+        {
+          "titulo": "Welcome to Python.org",
+          "url": "https://www.python.org/",
+          "trecho": "Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. Whet your appetite with our Python overview.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:17:00 GMT"
+          },
+          "discovery_query": "python dict.get sintaxe altera dicionário original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://python.org/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Download Python | Python.org",
+          "url": "https://www.python.org/downloads/",
+          "trecho": "Python was created in the early 1990s by Guido van Rossum at Stichting Mathematisch Centrum in the Netherlands as a successor of a language called ABC. Guido remains Python’s principal author, although it includes many contributions from others.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 04:26:00 GMT"
+          },
+          "discovery_query": "python dict.get sintaxe altera dicionário original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://python.org/downloads",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Online Python - IDE, Editor, Compiler, Interpreter",
+          "url": "https://www.online-python.com/",
+          "trecho": "Python, which was initially developed by Guido van Rossum and made available to the public in 1991, is currently one of the most widely used general-purpose programming languages.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:11:00 GMT"
+          },
+          "discovery_query": "python dict.get sintaxe altera dicionário original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://online-python.com/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Online Python Compiler (Editor) - Programiz",
+          "url": "https://www.programiz.com/python-programming/online-compiler/",
+          "trecho": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:31:00 GMT"
+          },
+          "discovery_query": "python dict.get sintaxe altera dicionário original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://programiz.com/python-programming/online-compiler",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Python Tutorial - W3Schools",
+          "url": "https://www.w3schools.com/python/",
+          "trecho": "Learn Python Python is a popular programming language. Python can be used on a server to create web applications. Python is easy to learn - You will enjoy it!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:11:00 GMT"
+          },
+          "discovery_query": "python dict.get sintaxe altera dicionário original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://w3schools.com/python",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Python (programming language) - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+          "trecho": "Python supports multiple programming paradigms but with an emphasis on object-oriented programming and dynamic typing. Guido van Rossum began working on Python in the late 1980s as a successor to the ABC programming language. Python 3.0, released in 2008, was a major revision and not completely back",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 08:08:00 GMT"
+          },
+          "discovery_query": "python dict.get sintaxe altera dicionário original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 9.3,
+          "relevance_reasons": []
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.python.org/",
+      "result": {
+        "titulo": "Welcome to Python.org",
+        "texto": "# Write Fibonacci series up to n >>> def fib ( n ): ... a , b = 0 , 1 ... while a < n : ... print ( a , end = ' ' ) ... a , b = b , a + b ... print () ... >>> fib ( 1000 ) 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 Functions Defined The core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists. More about defining functions # For loop on a list >>> numbers = [ 2 , 4 , 6 , 8 ] >>> product = 1 >>> for number in numbers : ... product = product * number ... >>> print ( 'The product is:' , product ) The product is: 384 All the Flow You’d Expect Python knows the usual control flow statements that other languages speak — , , and — with some of its own twists, of course. if for while range More control flow tools # List comprehensions >>> fruits = [ 'Banana' , 'Apple' , 'Lime' ] >>> loud_fruits = [ fruit . upper () for fruit in fruits ] >>> print ( loud_fruits ) ['BANANA', 'APPLE', 'LIME'] # List and the enumerate function >>> list ( enumerate ( fruits )) [(0, 'Banana'), (1, 'Apple'), (2, 'Lime')] Compound Data Types Lists (known as arrays in other languages) are one of the compound data types that Python understands. Lists can be indexed, sliced and manipulated with other built-in functions. More about lists # Simple arithmetic >>> 1 / 2 0.5 >>> 2 ** 3 8 >>> 17 / 3 # true division returns a float 5.666666666666667 >>> 17 // 3 # floor division 5 Intuitive Interpretation Calculations are simple with Python, and expression syntax is straightforward: the operators , , and work as expected; parentheses can be used for grouping. . + - * / () More about simple math functions # Simple output (with Unicode) >>> print ( \"Hello, I'm Python!\" ) Hello, I'm Python! # Input, assignment >>> name = input ( 'What is your name? \\n ' ) >>> print ( f 'Hi, { name } .' ) What is your name? Python Hi, Python. Quick & Easy to Learn Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. with our Python overview. Whet your appetite",
+        "final": "https://www.python.org/",
+        "trecho_usado": "# Write Fibonacci series up to n >>> def fib ( n ): ... a , b = 0 , 1 ... while a < n : ... print ( a , end = ' ' ) ... a , b = b , a + b ... print () ... >>> fib ( 1000 ) 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 Functions Defined The core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists.",
+        "metadados": {
+          "titulo": "Welcome to Python.org",
+          "descricao": "The official home of the Python Programming Language",
+          "canonica": "",
+          "og": {
+            "og:type": "website",
+            "og:site_name": "Python.org",
+            "og:title": "Welcome to Python.org",
+            "og:description": "The official home of the Python Programming Language",
+            "og:image": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:image:secure_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:url": "https://www.python.org/"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Python.org",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "# Write Fibonacci series up to n >>> def fib ( n ): ... a , b = 0 , 1 ... while a < n : ... print ( a , end = ' ' ) ... a , b = b , a + b ... print () ... >>> fib ( 1000 ) 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987\nThe core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists. More about defining functions\n# For loop on a list >>> numbers = [ 2 , 4 , 6 , 8 ] >>> product = 1 >>> for number in numbers : ... product = product * number ... >>> print ( 'The product is:' , product ) The product is: 384"
+          },
+          {
+            "titulo": "All the Flow You’d Expect",
+            "texto": "Python knows the usual control flow statements that other languages speak — , , and — with some of its own twists, of course. if for while range More control flow tools\n# List comprehensions >>> fruits = [ 'Banana' , 'Apple' , 'Lime' ] >>> loud_fruits = [ fruit . upper () for fruit in fruits ] >>> print ( loud_fruits ) ['BANANA', 'APPLE', 'LIME'] # List and the enumerate function >>> list ( enumerate ( fruits )) [(0, 'Banana'), (1, 'Apple'), (2, 'Lime')]\nLists (known as arrays in other languages) are one of the compound data types that Python understands. Lists can be indexed, sliced and manipulated with other built-in functions. More about lists\n# Simple arithmetic >>> 1 / 2 0.5 >>> 2 ** 3 8 >>> 17 / 3 # true division returns a float 5.666666666666667 >>> 17 // 3 # floor division 5\nCalculations are simple with Python, and expression syntax is straightforward: the operators , , and work as expected; parentheses can be used for grouping. . + - * / () More about simple math functions\n# Simple output (with Unicode) >>> print ( \"Hello, I'm Python!\" ) Hello, I'm Python! # Input, assignment >>> name = input ( 'What is your name? \\n ' ) >>> print ( f 'Hi, { name } .' ) What is your name? Python Hi, Python.\nExperienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. with our Python overview. Whet your appetite"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.linkedin.com/company/python-software-foundation/",
+            "texto": "LinkedIn",
+            "interno": false
+          },
+          {
+            "url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "texto": "Announcing Python Software Foundation Fellow Members for Q3 2026! 🎉",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/events/python-events/2172/",
+            "texto": "FastAPI Conf 2026",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf-landing/",
+            "texto": "Python Software Foundation",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/",
+            "texto": "Python",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/",
+            "texto": "PSF",
+            "interno": true
+          },
+          {
+            "url": "https://docs.python.org",
+            "texto": "Docs",
+            "interno": false
+          },
+          {
+            "url": "https://pypi.org/",
+            "texto": "PyPI",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/jobs/",
+            "texto": "Jobs",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/community/",
+            "texto": "Community",
+            "interno": true
+          },
+          {
+            "url": "https://donate.python.org/",
+            "texto": "Donate",
+            "interno": false
+          },
+          {
+            "url": "https://fosstodon.org/@ThePSF",
+            "texto": "Mastodon",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/community/irc/",
+            "texto": "Chat on IRC",
+            "interno": true
+          },
+          {
+            "url": "https://twitter.com/ThePSF",
+            "texto": "Twitter",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/about/",
+            "texto": "About",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/apps/",
+            "texto": "Applications",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/quotes/",
+            "texto": "Quotes",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/gettingstarted/",
+            "texto": "Getting Started",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/help/",
+            "texto": "Help",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/",
+            "texto": "Downloads",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/source/",
+            "texto": "Source code",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/windows/",
+            "texto": "Windows",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/macos/",
+            "texto": "macOS",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/android/",
+            "texto": "Android",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/ios/",
+            "texto": "iOS",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/download/other/",
+            "texto": "Other Platforms",
+            "interno": true
+          },
+          {
+            "url": "https://docs.python.org/3/license.html",
+            "texto": "License",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/download/alternatives",
+            "texto": "Alternative Implementations",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/doc/",
+            "texto": "Documentation",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/doc/av",
+            "texto": "Audio/Visual Talks",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.python.org/static/opengraph-icon-200x200.png",
+          "https://www.python.org/static/img/python-logo.png"
+        ],
+        "midia": [
+          {
+            "id": "med-0a05c6bfe54b",
+            "type": "image",
+            "title": "The official home of the Python Programming Language",
+            "url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "final_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8ebc72381245",
+            "type": "image",
+            "title": "python™",
+            "url": "https://www.python.org/static/img/python-logo.png",
+            "final_url": "https://www.python.org/static/img/python-logo.png",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "python™",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d1b618401984",
+            "type": "document",
+            "title": "license.html",
+            "url": "https://docs.python.org/3/license.html",
+            "final_url": "https://docs.python.org/3/license.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "docs.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-b34b7eb709b8",
+            "type": "document",
+            "title": "BeginnersGuide.html",
+            "url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "final_url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "wiki.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-0f7050437571",
+            "type": "document",
+            "title": "controlflow.html",
+            "url": "https://docs.python.org/3/tutorial/controlflow.html",
+            "final_url": "https://docs.python.org/3/tutorial/controlflow.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "docs.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-8e5461c79cf7",
+            "type": "document",
+            "title": "introduction.html",
+            "url": "https://docs.python.org/3/tutorial/introduction.html",
+            "final_url": "https://docs.python.org/3/tutorial/introduction.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "docs.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-5a0616f33026",
+            "type": "document",
+            "title": "mark-your-calendars-psf-board-office.html",
+            "url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-5424f25b9fd7",
+            "type": "document",
+            "title": "wikis-relaunched.html",
+            "url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-8b5018a80469",
+            "type": "document",
+            "title": "announcing-python-software-foundation.html",
+            "url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+      "result": {
+        "titulo": "When to use dict.get in python",
+        "texto": "Redirection provided by This Page has moved to a new address: Negative Feedback: When to use dict.get in python Sorry for the inconvenience… Blogger to WordPress Migration Service",
+        "final": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+        "trecho_usado": "Redirection provided by This Page has moved to a new address: Negative Feedback: When to use dict.get in python Sorry for the inconvenience… Blogger to WordPress Migration Service",
+        "metadados": {
+          "titulo": "When to use dict.get in python",
+          "descricao": "Introduction ¶ Note 1: This is an edited version of a full Jupyter Notebook which you can use to follow along with the calculati...",
+          "canonica": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+          "og": {
+            "og:url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+            "og:title": "When to use dict.get in python",
+            "og:description": "Introduction ¶ Note 1: This is an edited version of a full Jupyter Notebook which you can use to follow along with the calculati...",
+            "og:image": "https://blogger.googleusercontent.com/img/a/AVvXsEhb8vaCwyCVLvS-o2VJg2BqMg9tBAohPQV8iVSTwfsgr7RzKr9Tbrzq1lBikovM9c0BKBdyQNmE1xqum9XDpH_tevIVfcfhxK6ORz6GUL2iY9TSRq3LLbaY7AIjDN-UPHD_F1iEjhegwtmUi_CLXKLk_QL_lf4ak8c2kZNi8tpV-6trJeGufOcJp6H8=w1200-h630-p-k-no-nu"
+          },
+          "twitter": {},
+          "idioma": "",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [
+          {
+            "url": "https://sandrock.co.za/carl?b2w=http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+            "texto": "Negative Feedback: When to use dict.get in python",
+            "interno": false
+          },
+          {
+            "url": "http://rtcamp.com/",
+            "texto": "Blogger to WordPress Migration Service",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://blogger.googleusercontent.com/img/a/AVvXsEhb8vaCwyCVLvS-o2VJg2BqMg9tBAohPQV8iVSTwfsgr7RzKr9Tbrzq1lBikovM9c0BKBdyQNmE1xqum9XDpH_tevIVfcfhxK6ORz6GUL2iY9TSRq3LLbaY7AIjDN-UPHD_F1iEjhegwtmUi_CLXKLk_QL_lf4ak8c2kZNi8tpV-6trJeGufOcJp6H8=w1200-h630-p-k-no-nu"
+        ],
+        "midia": [
+          {
+            "id": "med-ded181012909",
+            "type": "image",
+            "title": "Introduction ¶ Note 1: This is an edited version of a full Jupyter Notebook which you can use to follow along with the calculati...",
+            "url": "https://blogger.googleusercontent.com/img/a/AVvXsEhb8vaCwyCVLvS-o2VJg2BqMg9tBAohPQV8iVSTwfsgr7RzKr9Tbrzq1lBikovM9c0BKBdyQNmE1xqum9XDpH_tevIVfcfhxK6ORz6GUL2iY9TSRq3LLbaY7AIjDN-UPHD_F1iEjhegwtmUi_CLXKLk_QL_lf4ak8c2kZNi8tpV-6trJeGufOcJp6H8=w1200-h630-p-k-no-nu",
+            "final_url": "https://blogger.googleusercontent.com/img/a/AVvXsEhb8vaCwyCVLvS-o2VJg2BqMg9tBAohPQV8iVSTwfsgr7RzKr9Tbrzq1lBikovM9c0BKBdyQNmE1xqum9XDpH_tevIVfcfhxK6ORz6GUL2iY9TSRq3LLbaY7AIjDN-UPHD_F1iEjhegwtmUi_CLXKLk_QL_lf4ak8c2kZNi8tpV-6trJeGufOcJp6H8=w1200-h630-p-k-no-nu",
+            "source_title": "When to use dict.get in python",
+            "source_url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+            "publisher": "blogger.googleusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Introduction ¶ Note 1: This is an edited version of a full Jupyter Notebook which you can use to follow along with the calculati...",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.python.org/psf-landing/",
+      "result": {
+        "titulo": "Welcome to Python.org",
+        "texto": "Security notice: the emSign root CA has been removed from certifi. Upgrade certifi, pip, uv and sigstore now. See more We support the Python Community through... Grants In 2024, the PSF awarded $655,000 USD to 257 groups or individuals in 61 countries around the world. Infrastructure We support and maintain , , , and many other services the Python Community relies on. python.org The Python Package Index Python Documentation PyCon US We produce and underwrite the , the largest annual gathering for the Python community. Support from sponsors, attendees, PyLadies, and CPython enabled us to award more than $384,000 USD in travel grants to 254 attendees for PyCon US 2025. PyCon US Conference Mastodon Become a Member Help the PSF promote, protect, and advance the Python programming language and community! Membership FAQ Donate Assist the foundation's goals with a donation. The PSF is a recognized 501(c)(3) non-profit organization. How to Contribute Volunteer Learn how you can help the PSF and the greater Python community! How to Volunteer Sponsors Without our sponsors we wouldn't be able to help the Python community grow and prosper. Sponsorship Possibilities PSF Grants Program The Python Software Foundation welcomes grant proposals for projects related to the development of Python, Python-related technology, and educational resources. Proposal Guidelines, FAQ and Examples PSF News Mark Your Calendars! PSF Board Office Hours for the Year Ahead Wikis: Relaunched! Announcing Python Software Foundation Fellow Members for Q3 2026! 🎉 PSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security PSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security Python Language Summit 2026 blog posts are now available Announcing the 2026 PSF Board Election Results! Announcing the 2026 Python Packaging Council Election Results! Announcing the PSF Strategic Plan 2026 The 2026 PSF Board Election is Open!",
+        "final": "https://www.python.org/psf-landing/",
+        "trecho_usado": "Security notice: the emSign root CA has been removed from certifi. Upgrade certifi, pip, uv and sigstore now. See more We support the Python Community through... Grants In 2024, the PSF awarded $655,000 USD to 257 groups or individuals in 61 countries around the world. Infrastructure We support and maintain , , , and many other services the Python Community relies on. python.org The Python Package",
+        "metadados": {
+          "titulo": "Welcome to Python.org",
+          "descricao": "The official home of the Python Programming Language",
+          "canonica": "",
+          "og": {
+            "og:type": "website",
+            "og:site_name": "Python.org",
+            "og:title": "Welcome to Python.org",
+            "og:description": "The official home of the Python Programming Language",
+            "og:image": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:image:secure_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:url": "https://www.python.org/psf-landing/"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Python.org",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "We support the Python Community through...",
+            "texto": "In 2024, the PSF awarded $655,000 USD to 257 groups or individuals in 61 countries around the world.\nWe support and maintain , , , and many other services the Python Community relies on. python.org The Python Package Index Python Documentation\nWe produce and underwrite the , the largest annual gathering for the Python community. Support from sponsors, attendees, PyLadies, and CPython enabled us to award more than $384,000 USD in travel grants to 254 attendees for PyCon US 2025. PyCon US Conference\nHelp the PSF promote, protect, and advance the Python programming language and community!\nAssist the foundation's goals with a donation. The PSF is a recognized 501(c)(3) non-profit organization.\nLearn how you can help the PSF and the greater Python community!\nWithout our sponsors we wouldn't be able to help the Python community grow and prosper.\nSponsorship Possibilities\nThe Python Software Foundation welcomes grant proposals for projects related to the development of Python, Python-related technology, and educational resources.\nProposal Guidelines, FAQ and Examples\nMark Your Calendars! PSF Board Office Hours for the Year Ahead\nAnnouncing Python Software Foundation Fellow Members for Q3 2026! 🎉\nPSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security\nPSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security\nPython Language Summit 2026 blog posts are now available\nAnnouncing the 2026 PSF Board Election Results!\nAnnouncing the 2026 Python Packaging Council Election Results!\nAnnouncing the PSF Strategic Plan 2026\nThe 2026 PSF Board Election is Open!"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.linkedin.com/company/python-software-foundation/",
+            "texto": "LinkedIn",
+            "interno": false
+          },
+          {
+            "url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "texto": "Announcing Python Software Foundation Fellow Members for Q3 2026! 🎉",
+            "interno": false
+          },
+          {
+            "url": "https://mailchi.mp/python/python-software-foundation-july-2024-newsletter-19889969",
+            "texto": "PSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security",
+            "interno": false
+          },
+          {
+            "url": "https://mailchi.mp/python/python-software-foundation-july-2024-newsletter-19889889",
+            "texto": "PSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/",
+            "texto": "Python",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/",
+            "texto": "PSF",
+            "interno": true
+          },
+          {
+            "url": "https://docs.python.org",
+            "texto": "Docs",
+            "interno": false
+          },
+          {
+            "url": "https://pypi.org/",
+            "texto": "PyPI",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/jobs/",
+            "texto": "Jobs",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/community/",
+            "texto": "Community",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf-landing/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://donate.python.org/",
+            "texto": "Donate",
+            "interno": false
+          },
+          {
+            "url": "https://fosstodon.org/@ThePSF",
+            "texto": "Mastodon",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/community/irc/",
+            "texto": "Chat on IRC",
+            "interno": true
+          },
+          {
+            "url": "https://twitter.com/ThePSF",
+            "texto": "Twitter",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/psf/about/",
+            "texto": "About",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/mission/",
+            "texto": "Mission Statement",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/board/",
+            "texto": "Board of Directors & Officers",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/strategy/",
+            "texto": "PSF Strategy",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/records/staff/",
+            "texto": "PSF Staff",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/annual-report/2024/",
+            "texto": "Annual Impact Report",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/fiscal-sponsorees/",
+            "texto": "Fiscal Sponsorees",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/records/",
+            "texto": "Public Records",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/about/legal-and-policies/",
+            "texto": "Legal & Policies",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/faq/",
+            "texto": "PSF FAQ",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/developersinresidence/",
+            "texto": "Developers in Residence",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/sponsorship/",
+            "texto": "Sponsorship",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/sponsors/",
+            "texto": "PSF Sponsors",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/sponsors/application/",
+            "texto": "Apply to Sponsor",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/prospectus2026/",
+            "texto": "Sponsorship Prospectus 2025-26",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.python.org/static/opengraph-icon-200x200.png",
+          "https://www.python.org/static/img/psf-logo.png"
+        ],
+        "midia": [
+          {
+            "id": "med-0a05c6bfe54b",
+            "type": "image",
+            "title": "The official home of the Python Programming Language",
+            "url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "final_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2f50937eb393",
+            "type": "image",
+            "title": "Python Software Foundation",
+            "url": "https://www.python.org/static/img/psf-logo.png",
+            "final_url": "https://www.python.org/static/img/psf-logo.png",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Python Software Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5a0616f33026",
+            "type": "document",
+            "title": "mark-your-calendars-psf-board-office.html",
+            "url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-5424f25b9fd7",
+            "type": "document",
+            "title": "wikis-relaunched.html",
+            "url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-8b5018a80469",
+            "type": "document",
+            "title": "announcing-python-software-foundation.html",
+            "url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-8f986d581bdc",
+            "type": "document",
+            "title": "python-language-summit-2026.html",
+            "url": "https://pyfound.blogspot.com/2026/09/python-language-summit-2026.html",
+            "final_url": "https://pyfound.blogspot.com/2026/09/python-language-summit-2026.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-520308706f95",
+            "type": "document",
+            "title": "announcing-2026-psf-board-election.html",
+            "url": "https://pyfound.blogspot.com/2026/09/announcing-2026-psf-board-election.html",
+            "final_url": "https://pyfound.blogspot.com/2026/09/announcing-2026-psf-board-election.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-c2ac76fc4d6d",
+            "type": "document",
+            "title": "announcing-2026-python-packaging.html",
+            "url": "https://pyfound.blogspot.com/2026/09/announcing-2026-python-packaging.html",
+            "final_url": "https://pyfound.blogspot.com/2026/09/announcing-2026-python-packaging.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-bee73f39e2d5",
+            "type": "document",
+            "title": "announcing-psf-strategic-plan-2026.html",
+            "url": "https://pyfound.blogspot.com/2026/09/announcing-psf-strategic-plan-2026.html",
+            "final_url": "https://pyfound.blogspot.com/2026/09/announcing-psf-strategic-plan-2026.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-e32275e27c93",
+            "type": "document",
+            "title": "the-2026-psf-board-election-is-open.html",
+            "url": "https://pyfound.blogspot.com/2026/09/the-2026-psf-board-election-is-open.html",
+            "final_url": "https://pyfound.blogspot.com/2026/09/the-2026-psf-board-election-is-open.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-d1b618401984",
+            "type": "document",
+            "title": "license.html",
+            "url": "https://docs.python.org/3/license.html",
+            "final_url": "https://docs.python.org/3/license.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "docs.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-b34b7eb709b8",
+            "type": "document",
+            "title": "BeginnersGuide.html",
+            "url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "final_url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "wiki.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.python.org/events/python-events/2172/",
+      "result": {
+        "titulo": "FastAPI Conf 2026",
+        "texto": "This page displays a fallback because interactive scripts did not run. Possible causes include disabled JavaScript or failure to load scripts or stylesheets. Notice:",
+        "final": "https://www.python.org/events/python-events/2172/",
+        "trecho_usado": "This page displays a fallback because interactive scripts did not run. Possible causes include disabled JavaScript or failure to load scripts or stylesheets. Notice:",
+        "metadados": {
+          "titulo": "FastAPI Conf 2026",
+          "descricao": "The official home of the Python Programming Language",
+          "canonica": "",
+          "og": {
+            "og:type": "website",
+            "og:site_name": "Python.org",
+            "og:title": "FastAPI Conf 2026",
+            "og:description": "The official home of the Python Programming Language",
+            "og:image": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:image:secure_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:url": "https://www.python.org/events/python-events/2172/"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Python.org",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "This page displays a fallback because interactive scripts did not run. Possible causes include disabled JavaScript or failure to load scripts or stylesheets. Notice:"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.linkedin.com/company/python-software-foundation/",
+            "texto": "LinkedIn",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/psf-landing/",
+            "texto": "Python Software Foundation",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/",
+            "texto": "Python",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/",
+            "texto": "PSF",
+            "interno": true
+          },
+          {
+            "url": "https://docs.python.org",
+            "texto": "Docs",
+            "interno": false
+          },
+          {
+            "url": "https://pypi.org/",
+            "texto": "PyPI",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/jobs/",
+            "texto": "Jobs",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/community/",
+            "texto": "Community",
+            "interno": true
+          },
+          {
+            "url": "https://donate.python.org/",
+            "texto": "Donate",
+            "interno": false
+          },
+          {
+            "url": "https://fosstodon.org/@ThePSF",
+            "texto": "Mastodon",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/community/irc/",
+            "texto": "Chat on IRC",
+            "interno": true
+          },
+          {
+            "url": "https://twitter.com/ThePSF",
+            "texto": "Twitter",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/about/",
+            "texto": "About",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/apps/",
+            "texto": "Applications",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/quotes/",
+            "texto": "Quotes",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/gettingstarted/",
+            "texto": "Getting Started",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/help/",
+            "texto": "Help",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/",
+            "texto": "Downloads",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/source/",
+            "texto": "Source code",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/windows/",
+            "texto": "Windows",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/macos/",
+            "texto": "macOS",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/android/",
+            "texto": "Android",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/ios/",
+            "texto": "iOS",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/download/other/",
+            "texto": "Other Platforms",
+            "interno": true
+          },
+          {
+            "url": "https://docs.python.org/3/license.html",
+            "texto": "License",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/download/alternatives",
+            "texto": "Alternative Implementations",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/doc/",
+            "texto": "Documentation",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/doc/av",
+            "texto": "Audio/Visual Talks",
+            "interno": true
+          },
+          {
+            "url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "texto": "Beginner's Guide",
+            "interno": false
+          },
+          {
+            "url": "https://docs.python.org/3/faq/",
+            "texto": "FAQ",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.python.org/static/opengraph-icon-200x200.png",
+          "https://www.python.org/static/img/python-logo.png"
+        ],
+        "midia": [
+          {
+            "id": "med-0a05c6bfe54b",
+            "type": "image",
+            "title": "The official home of the Python Programming Language",
+            "url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "final_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "source_title": "FastAPI Conf 2026",
+            "source_url": "https://www.python.org/events/python-events/2172/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8ebc72381245",
+            "type": "image",
+            "title": "python™",
+            "url": "https://www.python.org/static/img/python-logo.png",
+            "final_url": "https://www.python.org/static/img/python-logo.png",
+            "source_title": "FastAPI Conf 2026",
+            "source_url": "https://www.python.org/events/python-events/2172/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "python™",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d1b618401984",
+            "type": "document",
+            "title": "license.html",
+            "url": "https://docs.python.org/3/license.html",
+            "final_url": "https://docs.python.org/3/license.html",
+            "source_title": "FastAPI Conf 2026",
+            "source_url": "https://www.python.org/events/python-events/2172/",
+            "publisher": "docs.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-b34b7eb709b8",
+            "type": "document",
+            "title": "BeginnersGuide.html",
+            "url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "final_url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "source_title": "FastAPI Conf 2026",
+            "source_url": "https://www.python.org/events/python-events/2172/",
+            "publisher": "wiki.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://sandrock.co.za/carl?b2w=http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+      "result": {
+        "titulo": "When to use dict.get in python – Negative Feedback",
+        "texto": "faster via which I usually choose try: ... except KeyError: ... I think he’s talking about this as a pattern def try_index_except (dictionary, key): try : return dictionary[key] except KeyError : pass # or return default %% timeit try_index_except(dictionary, \"known\" ) 91.3 ns ± 1.12 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each) %% timeit try_index_except(dictionary, \"unknown\" ) 265 ns ± 7.53 ns per loop (mean ± std. dev. of 7 runs, 1000000 loops each) It’s worth remembering that there is some overhead associated with calling a function in the first place, even if you just return def function_call (dictionary, key): return %% timeit function_call(dictionary, \"known\" ) 69.3 ns ± 0.68 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each) Basic benchmark plotted Let’s see what that looks like on a chart, where we can view the trade-offs of a known key vs an unknown key with the function call overhead We see that just doing (at the 0 chance part of ) is not that much slower than calling a function and returning. Let’s see what the timings look like with that function call overhead subtracted. I’d also like to insulate these results from differences on machines, so I’m going to normalise by that function call overhead. key in dictionary in_then_index From these simple results it seems like we can make the following preliminary observations: combined with the check is never faster than followed by indexing, even when you do both and indexing. get is None in in A straight is a bit better but still slower than in and indexing most of the time return dictionary.get(value) The cost of raising an exception is so high that you’ve got to be very sure that the key is almost always (more than 90%) in the dictionary, but if you are it is the fastest to try to index and then handle the exception if the key is not found. I will admit that testing this on a dictionary containing only one key is not the best benchmark. There probably aren’t key collisions here and we’re not checking for fill rate. Also, Python has a special case fast path for dictionaries which have only string keys (see ), so we expect string dictionaries to be faster than heterogenous ones, and both of those to be faster if the keys are built-in objects than if they are custom objects. See also about slow lookups for custom objects. here this stackoverflow question Non-string dictionary keys So, let’s try some other kinds of keys We know Python uses a super fast method for hashing ints – they just hash to themselves, so we expect this to be pretty quick too. Lastly, let’s try to create a new hashable class. To make a class hashable, you need to implement and __hash__ __eq__ class CustomHashable : def __init__ (self, v): self .v = v def __hash__ (self): return hash ( self .v) def __eq__ (self, other): return self .v == other.v def __repr__ (self): return f \"CustomHashable( { self .v !r } )\" known = CustomHashable( 'known' ) unknown = CustomHashable( 'unknown' ) df_cust = bench( dictionary = {known: 1 }, lookups = ((known, 1 ), (unknown, 0 )), ) So we have found a place where is better, even with that value check! We’re clearly paying the cost of calculating that hash twice in the method. get in_then_index What about defaultdict? Since I posted this, a few people have asked me to look at collections.defaultdict. I was totally blown away by the results. For string keys, defaultdict with just normal indexing is the clear winner. For the case with a custom class, there’s something weird going on: I’ve re-run this benchmark a couple of times and tried to understand why this is happening, but in this particular case it seems when using a defaultdict, it is somehow faster to do the access in a try block than just normally index. If you’re thinking (like I did at first) that somehow the data for try_index_except and only_index just got swopped, remember for the defaultdict we’re never raising an exception. Effect of dictionary size I tried to build dictionaries up to 30 million items in length with unique random strings of 20 character length. At least for string keys, none of the calls seem to be affected by the size of the dictionary in a way that changes the ordering of the times. Might become an issue at even larger sizes, but I don’t often have 30 million-key dictionaries in my Python code. Deeper dive Let’s get a bit more sophisticated about the dictionary and the keys. We’ll build a list of values to look up in a dictionary which has a given fraction of values that are in the dictionary. Note that we’re using strings here. There may be differences in timings due to key collision chances. def setup (dict_size, lookups, chance_of_dict_hit, string_length): dictionary = {random_string(string_length): 1 for _ in range (dict_size)} knowns = list (dictionary) n_known = int (lookups * chance_of_dict_hit) n_unknown = lookups - n_known lookup_list = random.choices(knowns, k = n_known) lookup_list += [random_string(string_length) for _ in range (n_unknown)] random.shuffle(lookup_list) return dictionary, lookup_list I’ve played around with most of the parameters here, and mostly the results later on are dependent of the chance of a dictionary hit. Time all the things I then went on a mission to time all the parts of the process which might be pertinent. You should check the notebook for the actual code. The basic setup is always the same – run through the lookup items and do some kind of operation. I’m doing more than one lookup in each function call to reduce the overhead of a function call on the timing. You can imagine that if the dictionary always contains the key, the + index method will be at its slowest due to the double lookup. Let’s see how the chance of a hit affects timing. in We see that in this more realistic test, the results are qualitatively the same. is never the best option and followed by indexing is the best for almost all cases, except when we are very sure that the key will be in the index (again it starts winning aroung 90%). I haven’t done it but I’d expect defaultdict to continue being better than all comers here. get in What is going on here? We are also now ready to understand why this is the case. The first thing to understand is that Python handles dictionaries with string indexes through dedicated code. Another thing to understand is that it takes quite a bit of time for Python to look up the name of in the dictionary’s namespace. .get In the following plot, is the time to do , while does outside the lookup loop and uses inside the loop. This name lookup effect explains part of the reason why is faster. I’ve also added the time it takes to do as . This shows that the name lookup is approximately the same as looking up a value in a dictionary, which is expected since object names are stored in dictionaries. Lastly, I’ve added the time it takes to call . get_name_lookup get = dictionary.get get_cached get = dictionary.get value = get(key) in key in dictionary in_only hash(key) A fascinating observation here is that it takes less time to do than it does to do . How can this be? The answer is that the string dictionary code calls hash on the C side. You can clearly see the effect of doing this hashing twice – the graph moves up and to the right, but the cost is much less than you’d imagine because and both have dedicated bytecodes, so the Python interpreter doesn’t pay the price of calling a Python function twice. This unpacks most of the mystery here. key in dictionary hash(key) key in dictionary dictionary[key] My final conclusions in the larger case are unchanged from the toy case: If you have control over the construction of your dictionaries and you’re thinking there’s a good chance that missing values will need to be handled, use defaultdict. If you are using string or int keys, it’s always faster to do followed by indexing than to do followed by checking if the default was returned. in .get() The only exception to this rule is if you are almost certain that",
+        "final": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/",
+        "trecho_usado": "the ordering of the times. Might become an issue at even larger sizes, but I don’t often have 30 million-key dictionaries in my Python code. Deeper dive Let’s get a bit more sophisticated about the dictionary and the keys. We’ll build a list of values to look up in a dictionary which has a given fraction of values that are in the dictionary. Note that we’re using strings here. There may be",
+        "metadados": {
+          "titulo": "When to use dict.get in python – Negative Feedback",
+          "descricao": "",
+          "canonica": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/",
+          "og": {},
+          "twitter": {},
+          "idioma": "en-US",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Note 1: This is an edited version of a which you can use to follow along with the calculations. full Jupyter Notebook\nNote 2: All the timings are for CPython 3.9.7 on Intel MacBook Pro (16-inch, 2019)\nThere are several ways to look up a value in a dictionary in Python.\ndictionary = { 'known' : 'value' }\nThe most obvious way is straight indexing:\nkey = 'known' value = dictionary[key]\nBut what if we don’t know if the dictionary contains the key, and we’d like to get a default value if it isn’t?\nkey = 'unknown' value = dictionary[key] # will cause an error\nif key in dictionary: value = dictionary[key] else : value = 'default'\nBut dictionaries also have a method which does basically the same thing. It will return if the dictionary doesn’t contain the key. If is not supplied, returns . .get() default default dictionary.get(key) None\ndictionary.get( 'known' , 'default' ) 'value'\ndictionary.get( 'unknown' , 'default' ) 'default'\ndictionary.get( 'unknown' ) is None True\nI have spotted a pattern where people start using all the time, instead of ever indexing. I think this might be because they feel it’s “safer” – it will never raise an exception. But once you start getting into that habit you forget about using to check if a key is in a dictionary and you start to do things like this: .get() in\ndef get_if_value_is_none (dictionary, key): value = dictionary.get(key) # assuming None wasn't in the dictionary to begin with if value is not None : # effectively check if key was in dictionary return value # expensive operation to perform if key was not in dictionary\nThe code above will only work as designed if the dictionary doesn’t actually contain a None. You might also check using , but this is even worse as it will also fail if the actual value you’re looking for is another falsey value (like or ), see for example where a pytest slowdown was caused by this exact problem. I’ve linked to the time where that code is on the screen. Note if value [] 0 this video\nI commented on that video about using the pattern instead and Anthony replied in “using is a common performance mistake — it forces you to use two lookups to retrieve the value rather than just one” in\nThis is pretty clear if you compare the code – you’re doing all the hashing and lookup just once with but with the check you might need to do it twice: .get() in\ndef in_then_index (dictionary, key): if key in dictionary: # first lookup return dictionary[key] # second possible lookup # expensive operation to perform if key was not in dictionary\nEven though the original version with the get and the check for None is really the thing I don’t like, I’ll also do a version with get only.\ndef only_get (dictionary, key): return dictionary.get(key)\nSo, I did a quick benchmark. Remember\ndictionary = { 'known' : 'value' }\n%% timeit get_if_value_is_none(dictionary, \"known\" ) 140 ns ± 1.3 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)\n%% timeit get_if_value_is_none(dictionary, \"unknown\" ) 130 ns ± 1.99 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)\n%% timeit only_get(dictionary, \"known\" ) 109 ns ± 5.8 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)\n%% timeit only_get(dictionary, \"unknown\" ) 108 ns ± 4.62 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)\n%% timeit in_then_index(dictionary, \"known\" ) 102 ns ± 2.01 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)\n%% timeit in_then_index(dictionary, \"unknown\" ) 83.2 ns ± 0.845 ns per loop (mean ± std. dev. of 7 runs, 10000000 loops each)\nI mentioned in the video comments that my benchmarks didn’t show to be faster. Anthony doubted the validity of my benchmaks: get\nI suspect your benchmarking is incorrect. also for caches the hot case is going to be hits (you tend to optimize for success rather than failure). I also suspect you’re not considering fill size or collision rate in your benchmark. there is a third approach which is even faster via which I usually choose try: ... except KeyErr"
+          },
+          {
+            "titulo": "Non-string dictionary keys",
+            "texto": "So, let’s try some other kinds of keys We know Python uses a super fast method for hashing ints – they just hash to themselves, so we expect this to be pretty quick too.\nLastly, let’s try to create a new hashable class. To make a class hashable, you need to implement and __hash__ __eq__\nclass CustomHashable : def __init__ (self, v): self .v = v def __hash__ (self): return hash ( self .v) def __eq__ (self, other): return self .v == other.v def __repr__ (self): return f \"CustomHashable( { self .v !r } )\"\nknown = CustomHashable( 'known' ) unknown = CustomHashable( 'unknown' ) df_cust = bench( dictionary = {known: 1 }, lookups = ((known, 1 ), (unknown, 0 )), )\nSo we have found a place where is better, even with that value check! We’re clearly paying the cost of calculating that hash twice in the method. get in_then_index\nSince I posted this, a few people have asked me to look at collections.defaultdict. I was totally blown away by the results. For string keys, defaultdict with just normal indexing is the clear winner.\nFor the case with a custom class, there’s something weird going on:\nI’ve re-run this benchmark a couple of times and tried to understand why this is happening, but in this particular case it seems when using a defaultdict, it is somehow faster to do the access in a try block than just normally index. If you’re thinking (like I did at first) that somehow the data for try_index_except and only_index just got swopped, remember for the defaultdict we’re never raising an exception."
+          },
+          {
+            "titulo": "Effect of dictionary size",
+            "texto": "I tried to build dictionaries up to 30 million items in length with unique random strings of 20 character length.\nAt least for string keys, none of the calls seem to be affected by the size of the dictionary in a way that changes the ordering of the times. Might become an issue at even larger sizes, but I don’t often have 30 million-key dictionaries in my Python code.\nLet’s get a bit more sophisticated about the dictionary and the keys. We’ll build a list of values to look up in a dictionary which has a given fraction of values that are in the dictionary. Note that we’re using strings here. There may be differences in timings due to key collision chances.\ndef setup (dict_size, lookups, chance_of_dict_hit, string_length): dictionary = {random_string(string_length): 1 for _ in range (dict_size)} knowns = list (dictionary) n_known = int (lookups * chance_of_dict_hit) n_unknown = lookups - n_known lookup_list = random.choices(knowns, k = n_known) lookup_list += [random_string(string_length) for _ in range (n_unknown)] random.shuffle(lookup_list) return dictionary, lookup_list\nI’ve played around with most of the parameters here, and mostly the results later on are dependent of the chance of a dictionary hit.\nI then went on a mission to time all the parts of the process which might be pertinent. You should check the notebook for the actual code. The basic setup is always the same – run through the lookup items and do some kind of operation. I’m doing more than one lookup in each function call to reduce the overhead of a function call on the timing.\nYou can imagine that if the dictionary always contains the key, the + index method will be at its slowest due to the double lookup. Let’s see how the chance of a hit affects timing. in\nWe see that in this more realistic test, the results are qualitatively the same. is never the best option and followed by indexing is the best for almost all cases, except when we are very sure that the key will be in the index (again it starts winning aroung 90%). I haven’t done it but I’d expect defaultdict to continue being better than all comers here. get in\nWe are also now ready to understand why this is the case. The first thing to understand is that Python handles dictionaries with string indexes through dedicated code. Another thing to understand is that it takes quite a bit of time for Python to look up the name of in the dictionary’s namespace. .get\nIn the following plot, is the time to do , while does outside the lookup loop and uses inside the loop. This name lookup effect explains part of the reason why is faster. I’ve also added the time it takes to do as . This shows that the name lookup is approximately the same as looking up a value in a dictionary, which is expected since object names are stored in dictionaries. Lastly, I’ve added the time it takes to call . get_name_lookup get = dictionary.get get_cached get = dictionary.get value = get(key) in key in dictionary in_only hash(key)\nA fascinating observation here is that it takes less time to do than it does to do . How can this be? The answer is that the string dictionary code calls hash on the C side. You can clearly see the effect of doing this hashing twice – the graph moves up and to the right, but the cost is much less than you’d imagine because and both have dedicated bytecodes, so the Python interpreter doesn’t pay the price of calling a Python function twice. This unpacks most of the mystery here. key in dictionary hash(key) key in dictionary dictionary[key]\nMy final conclusions in the larger case are unchanged from the toy case:\nIf you have control over the construction of your dictionaries and you’re thinking there’s a good chance that missing values will need to be handled, use defaultdict.\nIf you are using string or int keys, it’s always faster to do followed by indexing than to do followed by checking if the default was returned. in .get()\nThe only exception to this rule is if you are almost certain that the key will be in the "
+          }
+        ],
+        "links": [
+          {
+            "url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/?replytocom=4#respond",
+            "texto": "Reply",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/?replytocom=3#respond",
+            "texto": "Reply",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/?replytocom=2#respond",
+            "texto": "Reply",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl",
+            "texto": "Negative Feedback",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl/",
+            "texto": "About me",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl/blog/",
+            "texto": "Blog",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl/podcasts/",
+            "texto": "Podcasts",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl/author/alchemyst/",
+            "texto": "alchemyst",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl/category/python/",
+            "texto": "python",
+            "interno": true
+          },
+          {
+            "url": "https://nbviewer.ipython.org/github/alchemyst/performance_comparisons/blob/main/Get%20vs%20in.ipynb",
+            "texto": "full Jupyter Notebook",
+            "interno": false
+          },
+          {
+            "url": "https://youtu.be/qiZyDLEJHh0?t=792",
+            "texto": "this video",
+            "interno": false
+          },
+          {
+            "url": "https://blogger.googleusercontent.com/img/a/AVvXsEhb8vaCwyCVLvS-o2VJg2BqMg9tBAohPQV8iVSTwfsgr7RzKr9Tbrzq1lBikovM9c0BKBdyQNmE1xqum9XDpH_tevIVfcfhxK6ORz6GUL2iY9TSRq3LLbaY7AIjDN-UPHD_F1iEjhegwtmUi_CLXKLk_QL_lf4ak8c2kZNi8tpV-6trJeGufOcJp6H8=s900",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://blogger.googleusercontent.com/img/a/AVvXsEgP50HOhcKe0NuDn35eFwNEgU0xKzuPD8M1jHPEm8N6Cm9EuGRc6EunMDqhqYc1LmRkL4QRlYO6jPDKDVyaRvoTtcxJirrvYJ_VS8cp5TVmy5pox67fsVa387QC7WQQsLwoZVlg0XyUmxujYMqBqCefcbtggzBZfYU5dK47bcxiLTlHADxW7OF6tAXq=s900",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://wiki.python.org/moin/TimeComplexity",
+            "texto": "here",
+            "interno": false
+          },
+          {
+            "url": "https://stackoverflow.com/questions/52127854/why-is-dictionary-lookup-in-python-always-slower-when-using-user-defined-objects",
+            "texto": "this stackoverflow question",
+            "interno": false
+          },
+          {
+            "url": "https://blogger.googleusercontent.com/img/a/AVvXsEhFQk_oHPQfji-2hPiqeiNlZK-TRmi4W7rUli-6wfCQrPnbOr0T5OLBOnWwUQ1FKuydzwVRmYZ-g87tPN6NV8kH2GDjNtn5lxgH2SqBzbNiD75gFbYzJwzdszgrrB26HE0Pc06fhMHsCbg7UA1_YrdMlylOy_ZuZlmMeCqCgO0yq-Rc15fk3Z42nU-U=s1800",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://blogger.googleusercontent.com/img/a/AVvXsEjV1TcZgd9aRcdnSeiC7qLrpcCtqONvVr_ktdeRVBiPTRynChdXRtnauqk1Rd1_8RGUKwDdG4iY8acub52U6UkU7mrDPKvRkOFqGQ8B8-WeQH3PtxlpvirebrJhvdaFIQSFCzEGJPMvFMQSIo1Dcv08yplp1p-jwp6Tj4-Buea-Dltl96HQjQrxScWl=s1200",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://blogger.googleusercontent.com/img/a/AVvXsEhkImK0x_Mx2vnUtK93Me_f9SDcRswTO6V4tNknhmrEzr56ibsXRrB71IUF4f8rdWBZuurwC1uRMeyDnZTFTEuc0N6Mt-PzXSMc5a9-yxu5nfftPIcGgi6W_nbRY3ux0UGHqzeP0He9sSiWZ1MX24GT-KCt7YPSMeiAEAQQh4UWU10Tt_B7pVEZlxdp=s1200",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://sandrock.co.za/carl/2020/12/2020-wrap-up-of-south-african-covid-19-deaths/",
+            "texto": "2020 wrap-up of South African COVID-19 deaths",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl/2022/11/cost-of-gas-vs-electricity-in-south-africa/",
+            "texto": "Cost of gas vs electricity in South Africa",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/#comment-4",
+            "texto": "2022-01-19",
+            "interno": true
+          },
+          {
+            "url": "https://www.blogger.com/profile/08775151050915881997",
+            "texto": "Christo",
+            "interno": false
+          },
+          {
+            "url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/#comment-3",
+            "texto": "2022-01-19",
+            "interno": true
+          },
+          {
+            "url": "https://www.blogger.com/profile/17658569288670539815",
+            "texto": "Carl Sandrock",
+            "interno": false
+          },
+          {
+            "url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/#comment-2",
+            "texto": "2022-01-20",
+            "interno": true
+          },
+          {
+            "url": "https://www.blogger.com/profile/18026431567439722244",
+            "texto": "Daniel",
+            "interno": false
+          },
+          {
+            "url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/#respond",
+            "texto": "Cancel reply",
+            "interno": true
+          },
+          {
+            "url": "https://akismet.com/privacy/",
+            "texto": "Learn how your comment data is processed.",
+            "interno": false
+          },
+          {
+            "url": "https://sandrock.co.za/carl/2026/10/science-needs-more-than-vibes/",
+            "texto": "Science needs more than vibes",
+            "interno": true
+          },
+          {
+            "url": "https://sandrock.co.za/carl/2026/08/links-rot/",
+            "texto": "Links rot",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://sandrock.co.za/carl/wp-content/uploads/sites/2/2022/01/dictionary_size.png",
+          "https://blogger.googleusercontent.com/img/a/AVvXsEhb8vaCwyCVLvS-o2VJg2BqMg9tBAohPQV8iVSTwfsgr7RzKr9Tbrzq1lBikovM9c0BKBdyQNmE1xqum9XDpH_tevIVfcfhxK6ORz6GUL2iY9TSRq3LLbaY7AIjDN-UPHD_F1iEjhegwtmUi_CLXKLk_QL_lf4ak8c2kZNi8tpV-6trJeGufOcJp6H8=w640-h426",
+          "https://blogger.googleusercontent.com/img/a/AVvXsEgP50HOhcKe0NuDn35eFwNEgU0xKzuPD8M1jHPEm8N6Cm9EuGRc6EunMDqhqYc1LmRkL4QRlYO6jPDKDVyaRvoTtcxJirrvYJ_VS8cp5TVmy5pox67fsVa387QC7WQQsLwoZVlg0XyUmxujYMqBqCefcbtggzBZfYU5dK47bcxiLTlHADxW7OF6tAXq=w640-h426",
+          "https://blogger.googleusercontent.com/img/a/AVvXsEhFQk_oHPQfji-2hPiqeiNlZK-TRmi4W7rUli-6wfCQrPnbOr0T5OLBOnWwUQ1FKuydzwVRmYZ-g87tPN6NV8kH2GDjNtn5lxgH2SqBzbNiD75gFbYzJwzdszgrrB26HE0Pc06fhMHsCbg7UA1_YrdMlylOy_ZuZlmMeCqCgO0yq-Rc15fk3Z42nU-U=w640-h214",
+          "https://blogger.googleusercontent.com/img/a/AVvXsEjV1TcZgd9aRcdnSeiC7qLrpcCtqONvVr_ktdeRVBiPTRynChdXRtnauqk1Rd1_8RGUKwDdG4iY8acub52U6UkU7mrDPKvRkOFqGQ8B8-WeQH3PtxlpvirebrJhvdaFIQSFCzEGJPMvFMQSIo1Dcv08yplp1p-jwp6Tj4-Buea-Dltl96HQjQrxScWl=w640-h320",
+          "https://blogger.googleusercontent.com/img/a/AVvXsEhkImK0x_Mx2vnUtK93Me_f9SDcRswTO6V4tNknhmrEzr56ibsXRrB71IUF4f8rdWBZuurwC1uRMeyDnZTFTEuc0N6Mt-PzXSMc5a9-yxu5nfftPIcGgi6W_nbRY3ux0UGHqzeP0He9sSiWZ1MX24GT-KCt7YPSMeiAEAQQh4UWU10Tt_B7pVEZlxdp=w640-h320",
+          "https://sandrock.co.za/carl/wp-content/uploads/sites/2/2022/01/dictionary_size-1.png",
+          "https://sandrock.co.za/carl/wp-content/uploads/sites/2/2022/01/simple_sweep-1.png",
+          "https://sandrock.co.za/carl/wp-content/uploads/sites/2/2022/01/zoomed_sweep-1.png",
+          "https://secure.gravatar.com/avatar/7afe331ed18d7224b694992c6bea1ba99cfddae2f3395f423b8ee3843219b397?s=50&#038;d=mm&#038;r=g"
+        ],
+        "midia": [
+          {
+            "id": "med-a19ceb9c5fff",
+            "type": "image",
+            "title": "Negative Feedback",
+            "url": "https://sandrock.co.za/carl/wp-content/uploads/sites/2/2025/04/negative_feedback_logo.png",
+            "final_url": "https://sandrock.co.za/carl/wp-content/uploads/sites/2/2025/04/negative_feedback_logo.png",
+            "source_title": "When to use dict.get in python – Negative Feedback",
+            "source_url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/",
+            "publisher": "sandrock.co.za",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Negative Feedback",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-419e03182559",
+            "type": "video",
+            "title": "When to use dict.get in python – Negative Feedback",
+            "url": "https://youtu.be/qiZyDLEJHh0?t=792",
+            "final_url": "https://youtu.be/qiZyDLEJHh0?t=792",
+            "source_title": "When to use dict.get in python – Negative Feedback",
+            "source_url": "https://sandrock.co.za/carl/2022/01/when-to-use-dict-get-in-python/",
+            "publisher": "youtu.be",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "6b220ebd366c914f25cb",
+            "url": "https://stackoverflow.com/questions/6130768/return-a-default-value-if-a-dictionary-key-is-not-available",
+            "title": "Return a default value if a dictionary key is not available",
+            "origin": "stackexchange",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "I need a way to get a dictionary value if its key exists, or simply return None , if it does not. However, Python raises a KeyError exception if you search for "
+          },
+          {
+            "id": "cf55b13576aa45b38e25",
+            "url": "https://stackoverflow.com/questions/37165403/python-dict-get-or-none-scenario",
+            "title": "Python dict.get() or None scenario",
+            "origin": "stackexchange",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "I am attempting to access a dictionary's values based on a list of keys I have. If the key is not present, I default to None. However, I am running into trouble"
+          },
+          {
+            "id": "1dcfac622f221ca271dd",
+            "url": "https://stackoverflow.com/questions/54807568/raise-exception-in-python-dict-get",
+            "title": "Raise exception in python dict.get()",
+            "origin": "stackexchange",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "actually, I already know what I want to do is kind of strange, but I think it will fit good in my code, so I'm asking: is there a way to do something like this:"
+          },
+          {
+            "id": "3fe7e4a4d2da0e0509ae",
+            "url": "https://stackoverflow.com/questions/37786788/python-dict-get-method-apply-some-function-on-a-key",
+            "title": "Python dict.get method apply some function on a key",
+            "origin": "stackexchange",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Modified to make it more understandable. I am testing out the python's dict.get method and need some help on that. What I am trying to do is that I have a dicti"
+          },
+          {
+            "id": "5ce6dd0af97f0b4861a4",
+            "url": "https://stackoverflow.com/questions/60158123/perplexing-python-dict-get-behavior-with-default-dict-index",
+            "title": "perplexing python dict.get() behavior with default dict index",
+            "origin": "stackexchange",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "so i've run into a perplexing issue when utilising the dict.get() method in python in conjunction with a default of a dict[index]: d = {1: 1} d2 = {2: 2} #throw"
+          },
+          {
+            "id": "786d042a6376e8ce6eae",
+            "url": "https://stackoverflow.com/questions/46480925/python-dict-get-lock",
+            "title": "Python dict.get() Lock",
+            "origin": "stackexchange",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "When I use dictionary.get() function, is it locking the whole dictionary? I am developing a multiprocess and multithreading program. The dictionary is used to a"
+          },
+          {
+            "id": "867b45e41b80370c3e8a",
+            "url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+            "title": "When to Use Dict.get in Python",
+            "origin": "hn",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "HN: 1 pontos · 2 comentários"
+          },
+          {
+            "id": "65dc9ef388c210df356d",
+            "url": "https://www.python.org/",
+            "title": "Welcome to Python.org",
+            "origin": "bing",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. Whet"
+          },
+          {
+            "id": "026b530f436455499f08",
+            "url": "https://www.python.org/downloads/",
+            "title": "Download Python | Python.org",
+            "origin": "bing",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Python was created in the early 1990s by Guido van Rossum at Stichting Mathematisch Centrum in the Netherlands as a successor of a language called ABC. Guido re"
+          },
+          {
+            "id": "be09ac332e2e59d8e874",
+            "url": "https://www.online-python.com/",
+            "title": "Online Python - IDE, Editor, Compiler, Interpreter",
+            "origin": "bing",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Python, which was initially developed by Guido van Rossum and made available to the public in 1991, is currently one of the most widely used general-purpose pro"
+          },
+          {
+            "id": "6a53bc8c438de495f099",
+            "url": "https://www.programiz.com/python-programming/online-compiler/",
+            "title": "Online Python Compiler (Editor) - Programiz",
+            "origin": "bing",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization."
+          },
+          {
+            "id": "832829eeae99ee914a36",
+            "url": "https://www.w3schools.com/python/",
+            "title": "Python Tutorial - W3Schools",
+            "origin": "bing",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Learn Python Python is a popular programming language. Python can be used on a server to create web applications. Python is easy to learn - You will enjoy it!"
+          },
+          {
+            "id": "393bf2f42fbf925b45d2",
+            "url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+            "title": "Python (programming language) - Wikipedia",
+            "origin": "bing",
+            "query": "Python dict.get",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Python supports multiple programming paradigms but with an emphasis on object-oriented programming and dynamic typing. Guido van Rossum began working on Python "
+          }
+        ],
+        "unique_candidates": 13,
+        "omitted": 0
+      },
+      "etapas": [
+        "stackexchange: 6 resultados (Python dict.get)",
+        "stackexchange: sem correspondência com o pedido; tentando outro provedor (Python dict.get)",
+        "hn: 1 resultados (Python dict.get)",
+        "hn: sem correspondência com o pedido; tentando outro provedor (Python dict.get)",
+        "bing: 6 resultados (Python dict.get)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Python dict.get)",
+        "— recuperação por lacuna —",
+        "stackexchange: sem resultados (python dict.get sintaxe altera dicionári)",
+        "hn: sem resultados (python dict.get sintaxe altera dicionári)",
+        "bing: 6 resultados (python dict.get sintaxe altera dicionári)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (python dict.get sintaxe altera dicionári)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Python dict.get",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Como funciona Python dict.get, qual a sintaxe e se altera o dicionário original?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-256fbddd4150",
+            "type": "explicit_attribute",
+            "description": "Sintaxe ou assinatura",
+            "entity": "Python dict.get",
+            "attribute": "syntax",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Sintaxe ou assinatura",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-c219c9ff45d8",
+            "type": "explicit_attribute",
+            "description": "Comportamento da operação",
+            "entity": "Python dict.get",
+            "attribute": "behavior",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Comportamento da operação",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S2",
+          "url": "https://www.python.org/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://sandrock.co.za/carl?b2w=http://negfeedback.blogspot.com/2022/01/when-to-use-dictget-in-python.html",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "e8f9443b054d9ab8e9e91207038eb9f198ab1c85",
+  "dataset_sha256": "6f38b89f96367212ba5e68888f57bbb43e7ab7331047eaac7df6f13e1bf4dee2"
+}

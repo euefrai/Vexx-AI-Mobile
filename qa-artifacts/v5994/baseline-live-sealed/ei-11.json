@@ -1,0 +1,3138 @@
+{
+  "id": "ei-11",
+  "category": "universal",
+  "query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 10.908,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "stackexchange",
+      "query": "Python pathlib.Path.unlink e quais são suas limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "stackexchange",
+      "query": "Python pathlib.Path.unlink e quais são suas",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "Python pathlib.Path.unlink e quais são suas limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "Python pathlib.Path.unlink e quais são suas",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Python pathlib.Path.unlink e quais são suas limitações",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "Python pathlib.Path.unlink e quais são suas",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Python+pathlib.Path.unlink+e+quais+s%C3%A3o+suas+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Python+pathlib.Path.unlink+e+quais+s%C3%A3o+suas+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4973
+    },
+    {
+      "url": "https://www.bing.com/search?q=Python+pathlib.Path.unlink+e+quais+s%C3%A3o+suas&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Python+pathlib.Path.unlink+e+quais+s%C3%A3o+suas&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4909
+    },
+    {
+      "url": "https://www.python.org/",
+      "final": "https://www.python.org/",
+      "chars": 52785
+    },
+    {
+      "url": "https://www.online-python.com/",
+      "final": "https://www.online-python.com/",
+      "chars": 151453
+    },
+    {
+      "url": "https://www.programiz.com/python-programming/online-compiler/",
+      "final": "https://www.programiz.com/python-programming/online-compiler/",
+      "chars": 86732
+    },
+    {
+      "url": "https://www.python.org/psf-landing/",
+      "final": "https://www.python.org/psf-landing/",
+      "chars": 50761
+    },
+    {
+      "url": "https://www.w3schools.com/python/",
+      "final": "https://www.w3schools.com/python/",
+      "chars": 270855
+    },
+    {
+      "url": "https://www.python.org/events/python-events/2172/",
+      "final": "https://www.python.org/events/python-events/2172/",
+      "chars": 37253
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+    "domain": "general",
+    "original_request": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+    "resolved_request": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T15:47:48.033470+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "65dc9ef388c210df356d",
+        "url": "https://www.python.org/",
+        "title": "Welcome to Python.org",
+        "origin": "bing",
+        "query": "Python pathlib.Path.unlink e quais são suas limitações",
+        "date": "sáb., 24 out. 2026 05:17:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "# Write Fibonacci series up to n >>> def fib ( n ): ... a , b = 0 , 1 ... while a < n : ... print ( a , end = ' ' ) ... a , b = b , a + b ... print () ... >>> f",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 2135,
+        "final_url": "https://www.python.org/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "026b530f436455499f08",
+        "url": "https://www.python.org/downloads/",
+        "title": "Download Python | Python.org",
+        "origin": "bing",
+        "query": "Python pathlib.Path.unlink e quais são suas limitações",
+        "date": "dom., 25 out. 2026 04:26:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Python was created in the early 1990s by Guido van Rossum at Stichting Mathematisch Centrum in the Netherlands as a successor of a language called ABC. Guido re",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "be09ac332e2e59d8e874",
+        "url": "https://www.online-python.com/",
+        "title": "Online Python - IDE, Editor, Compiler, Interpreter",
+        "origin": "bing",
+        "query": "Python pathlib.Path.unlink e quais são suas limitações",
+        "date": "dom., 25 out. 2026 07:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "online compilers for the Python programming language. It is not necessary for you to bother about establishing a Python environment in your local. Now You can i",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 4025,
+        "final_url": "https://www.online-python.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "6a53bc8c438de495f099",
+        "url": "https://www.programiz.com/python-programming/online-compiler/",
+        "title": "Online Python Compiler (Editor) - Programiz",
+        "origin": "bing",
+        "query": "Python pathlib.Path.unlink e quais são suas limitações",
+        "date": "dom., 25 out. 2026 02:31:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Share your code Share code or share using Contact us Python Online Compiler Learn Python App Learn Python Visualize main.py # Online Python compiler (interprete",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 662,
+        "final_url": "https://www.programiz.com/python-programming/online-compiler/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "832829eeae99ee914a36",
+        "url": "https://www.w3schools.com/python/",
+        "title": "Python Tutorial - W3Schools",
+        "origin": "bing",
+        "query": "Python pathlib.Path.unlink e quais são suas limitações",
+        "date": "dom., 25 out. 2026 07:11:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Python Tutorial ❮ Home Next ❯ Learn Python Python is a popular programming language. Python can be used on a server to create web applications. Python is easy t",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 2375,
+        "final_url": "https://www.w3schools.com/python/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "393bf2f42fbf925b45d2",
+        "url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+        "title": "Python (programming language) - Wikipedia",
+        "origin": "bing",
+        "query": "Python pathlib.Path.unlink e quais são suas limitações",
+        "date": "dom., 25 out. 2026 08:08:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Python supports multiple programming paradigms but with an emphasis on object-oriented programming and dynamic typing. Guido van Rossum began working on Python ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "d64076b6023d8d8d6fcb",
+        "url": "https://www.python.org/events/python-events/2172/",
+        "title": "FastAPI Conf 2026",
+        "origin": "in_source_link",
+        "query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "This page displays a fallback because interactive scripts did not run. Possible causes include disabled JavaScript or failure to load scripts or stylesheets. No",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 165,
+        "final_url": "https://www.python.org/events/python-events/2172/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "e34c1d7780b0e7bea20e",
+        "url": "https://www.python.org/psf-landing/",
+        "title": "Python Software Foundation",
+        "origin": "in_source_link",
+        "query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Security notice: the emSign root CA has been removed from certifi. Upgrade certifi, pip, uv and sigstore now. See more We support the Python Community through..",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 2002,
+        "final_url": "https://www.python.org/psf-landing/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      }
+    ],
+    "unique_candidates": 8,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-0a05c6bfe54b",
+      "type": "image",
+      "title": "The official home of the Python Programming Language",
+      "url": "https://www.python.org/static/opengraph-icon-200x200.png",
+      "final_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "www.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8ebc72381245",
+      "type": "image",
+      "title": "python™",
+      "url": "https://www.python.org/static/img/python-logo.png",
+      "final_url": "https://www.python.org/static/img/python-logo.png",
+      "source_title": "FastAPI Conf 2026",
+      "source_url": "https://www.python.org/events/python-events/2172/",
+      "publisher": "www.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "python™",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d1b618401984",
+      "type": "document",
+      "title": "license.html",
+      "url": "https://docs.python.org/3/license.html",
+      "final_url": "https://docs.python.org/3/license.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "docs.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-b34b7eb709b8",
+      "type": "document",
+      "title": "BeginnersGuide.html",
+      "url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+      "final_url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "wiki.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-0f7050437571",
+      "type": "document",
+      "title": "controlflow.html",
+      "url": "https://docs.python.org/3/tutorial/controlflow.html",
+      "final_url": "https://docs.python.org/3/tutorial/controlflow.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/",
+      "publisher": "docs.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-8e5461c79cf7",
+      "type": "document",
+      "title": "introduction.html",
+      "url": "https://docs.python.org/3/tutorial/introduction.html",
+      "final_url": "https://docs.python.org/3/tutorial/introduction.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/",
+      "publisher": "docs.python.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-5a0616f33026",
+      "type": "document",
+      "title": "mark-your-calendars-psf-board-office.html",
+      "url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+      "final_url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "pyfound.blogspot.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-5424f25b9fd7",
+      "type": "document",
+      "title": "wikis-relaunched.html",
+      "url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+      "final_url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "pyfound.blogspot.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-8b5018a80469",
+      "type": "document",
+      "title": "announcing-python-software-foundation.html",
+      "url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+      "final_url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+      "source_title": "Welcome to Python.org",
+      "source_url": "https://www.python.org/psf-landing/",
+      "publisher": "pyfound.blogspot.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The official home of the Python Programming Language",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-c6bc672334e2",
+      "type": "image",
+      "title": "Online Python",
+      "url": "https://www.online-python.com//logo.png",
+      "final_url": "https://www.online-python.com//logo.png",
+      "source_title": "Online Python - IDE, Editor, Compiler, Interpreter",
+      "source_url": "https://www.online-python.com/",
+      "publisher": "www.online-python.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Online Python",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-3fad5a72806d",
+      "type": "document",
+      "title": "packages-in-pyodide.html",
+      "url": "https://pyodide.org/en/stable/usage/packages-in-pyodide.html",
+      "final_url": "https://pyodide.org/en/stable/usage/packages-in-pyodide.html",
+      "source_title": "Online Python - IDE, Editor, Compiler, Interpreter",
+      "source_url": "https://www.online-python.com/",
+      "publisher": "pyodide.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Build and Run your Python code instantly. Online-Python is a quick and easy tool that helps you to build, compile, test your python programs.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-fdd02c74bcd7",
+      "type": "image",
+      "title": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+      "url": "https://programiz.com/online-compiler/assets/logos/compiler_logo.png",
+      "final_url": "https://programiz.com/online-compiler/assets/logos/compiler_logo.png",
+      "source_title": "Online Python Compiler (Editor)",
+      "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+      "publisher": "programiz.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.python.org/",
+      "titulo": "Welcome to Python.org",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 05:17:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.python.org/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.online-python.com/",
+      "titulo": "Online Python - IDE, Editor, Compiler, Interpreter",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 07:11:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.online-python.com/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.programiz.com/python-programming/online-compiler/",
+      "titulo": "Online Python Compiler (Editor)",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 02:31:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.programiz.com/python-programming/online-compiler/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Python pathlib.Path.unlink e quais são suas limitações",
+      "items": [
+        {
+          "titulo": "Welcome to Python.org",
+          "url": "https://www.python.org/",
+          "trecho": "Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. Whet your appetite with our Python overview.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:17:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://python.org/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Download Python | Python.org",
+          "url": "https://www.python.org/downloads/",
+          "trecho": "Python was created in the early 1990s by Guido van Rossum at Stichting Mathematisch Centrum in the Netherlands as a successor of a language called ABC. Guido remains Python’s principal author, although it includes many contributions from others.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 04:26:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://python.org/downloads",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Online Python - IDE, Editor, Compiler, Interpreter",
+          "url": "https://www.online-python.com/",
+          "trecho": "Python, which was initially developed by Guido van Rossum and made available to the public in 1991, is currently one of the most widely used general-purpose programming languages.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:11:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://online-python.com/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Online Python Compiler (Editor) - Programiz",
+          "url": "https://www.programiz.com/python-programming/online-compiler/",
+          "trecho": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:31:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://programiz.com/python-programming/online-compiler",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Python Tutorial - W3Schools",
+          "url": "https://www.w3schools.com/python/",
+          "trecho": "Learn Python Python is a popular programming language. Python can be used on a server to create web applications. Python is easy to learn - You will enjoy it!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:11:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://w3schools.com/python",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Python (programming language) - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+          "trecho": "Python supports multiple programming paradigms but with an emphasis on object-oriented programming and dynamic typing. Guido van Rossum began working on Python in the late 1980s as a successor to the ABC programming language. Python 3.0, released in 2008, was a major revision and not completely back",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 08:08:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas limitações",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Python pathlib.Path.unlink e quais são suas",
+      "items": [
+        {
+          "titulo": "Welcome to Python.org",
+          "url": "https://www.python.org/",
+          "trecho": "Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. Whet your appetite with our Python overview.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:17:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Download Python | Python.org",
+          "url": "https://www.python.org/downloads/",
+          "trecho": "Python was created in the early 1990s by Guido van Rossum at Stichting Mathematisch Centrum in the Netherlands as a successor of a language called ABC. Guido remains Python’s principal author, although it includes many contributions from others.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 04:26:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Online Python - IDE, Editor, Compiler, Interpreter",
+          "url": "https://www.online-python.com/",
+          "trecho": "Python, which was initially developed by Guido van Rossum and made available to the public in 1991, is currently one of the most widely used general-purpose programming languages.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:11:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Online Python Compiler (Editor) - Programiz",
+          "url": "https://www.programiz.com/python-programming/online-compiler/",
+          "trecho": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:31:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Python Tutorial - W3Schools",
+          "url": "https://www.w3schools.com/python/",
+          "trecho": "Learn Python Python is a popular programming language. Python can be used on a server to create web applications. Python is easy to learn - You will enjoy it!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:11:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas",
+          "discovery_provider": "bing"
+        },
+        {
+          "titulo": "Python (programming language) - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+          "trecho": "Python supports multiple programming paradigms but with an emphasis on object-oriented programming and dynamic typing. Guido van Rossum began working on Python in the late 1980s as a successor to the ABC programming language. Python 3.0, released in 2008, was a major revision and not completely back",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 08:08:00 GMT"
+          },
+          "discovery_query": "Python pathlib.Path.unlink e quais são suas",
+          "discovery_provider": "bing"
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.online-python.com/",
+      "result": {
+        "titulo": "Online Python - IDE, Editor, Compiler, Interpreter",
+        "texto": "Online Python IDE Build, run, and share Python code online for free with the help of online-integrated python's development environment (IDE). It is one of the most efficient, dependable, and potent online compilers for the Python programming language. It is not necessary for you to bother about establishing a Python environment in your local. Now You can immediately execute the Python code in the web browser of your choice. Using this Python editor is simple and quick to get up and running with. Simply type in the programme, and then press the button! The code can be saved online by choosing the option, which also gives you the ability to access your code from any location providing you have internet access. RUN SHARE About Python Python, which was initially developed by Guido van Rossum and made available to the public in 1991, is currently one of the most widely used general-purpose programming languages. Python's source code is freely available to the public, and its usage and distribution are unrestricted, including for commercial purposes. It is widely used for web development, and using it, practically anything can be created, including mobile apps, online apps, tools, data analytics, machine learning, and so on. It is intended to be straightforward and uncomplicated, much like the English language. When compared to other programming languages such as C++, Java, and C#, it is a lot simpler to read and write Python programs. Because of its excellent productivity and efficiency, it has become a very popular choice for use as a programming language. To learn more about Python check out some of the following links. python.org Wikipedia - Python w3schools.com - Python Tutorial programiz.com - Python Tutorial Why Learn Python? Python is a simple language to pick up. It has a simple syntax, and the code is quite easy to read. Python is useful in a wide variety of contexts. It is put to use in the creation of quick application development, data science, Internet of Things, and web applications, among other things. When compared to most other programming languages, it enables you to develop applications using a smaller number of lines of code. It has a very huge community behind it, and there are active forums for users to participate in. The presence of Third Party Modules contributes to the increased power of the Python programming language. The user is able to easily solve difficult problems with the help of extensive support libraries (for example, NumPy, which is used for numerical computations and Pandas, which is used for data analytics). It includes extremely user-friendly data structures, which simplify both the design of the code and the reasoning behind it. The number of people using Python is constantly on the rise. It has quickly become one of the most widely used programming languages. Features of Online Python Compiler (Interpreter) Design that is Uncomplicated and Sparse, along with Being Lightweight, Easy, and Quick to Use of Python is supported for interactive program execution, which requires the user to provide inputs to the program in real time. Version 3.12 Options for a dark and light theme, as well as a customised code editor with additional themes, are helpful for novices learning and practising Python. Options to Undo or Redo Changes Made in the Code Editor Options to Copy or Download the Results of the Program Expandable Output Terminal Options to Undo or Redo Changes A hint for the frequently occurring problems in Python Interactive Python Shell Advanced Python module support relevant to Data Science, including Pandas and NumPy Coding sharing functionality allows you to save your code in the cloud, where it can be retrieved whenever and wherever there is internet connectivity. Learn Other Programming Language? Visit to learn and practice top programming languages - C, C++, Java, Ruby, PHP, R, GoLang online-ide.com Contact Us If you encounter a bug or have questions or suggestions for improvements, please send us an email at .",
+        "final": "https://www.online-python.com/",
+        "trecho_usado": "online compilers for the Python programming language. It is not necessary for you to bother about establishing a Python environment in your local. Now You can immediately execute the Python code in the web browser of your choice. Using this Python editor is simple and quick to get up and running with. Simply type in the programme, and then press the button! The code can be saved online by choosing",
+        "metadados": {
+          "titulo": "Online Python - IDE, Editor, Compiler, Interpreter",
+          "descricao": "Build and Run your Python code instantly. Online-Python is a quick and easy tool that helps you to build, compile, test your python programs.",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "online-python",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Build, run, and share Python code online for free with the help of online-integrated python's development environment (IDE). It is one of the most efficient, dependable, and potent online compilers for the Python programming language. It is not necessary for you to bother about establishing a Python environment in your local. Now You can immediately execute the Python code in the web browser of your choice. Using this Python editor is simple and quick to get up and running with. Simply type in the programme, and then press the button! The code can be saved online by choosing the option, which also gives you the ability to access your code from any location providing you have internet access. RUN SHARE\nPython, which was initially developed by Guido van Rossum and made available to the public in 1991, is currently one of the most widely used general-purpose programming languages. Python's source code is freely available to the public, and its usage and distribution are unrestricted, including for commercial purposes. It is widely used for web development, and using it, practically anything can be created, including mobile apps, online apps, tools, data analytics, machine learning, and so on. It is intended to be straightforward and uncomplicated, much like the English language. When compared to other programming languages such as C++, Java, and C#, it is a lot simpler to read and write Python programs. Because of its excellent productivity and efficiency, it has become a very popular choice for use as a programming language.\nTo learn more about Python check out some of the following links.\nw3schools.com - Python Tutorial\nprogramiz.com - Python Tutorial\nPython is a simple language to pick up. It has a simple syntax, and the code is quite easy to read.\nPython is useful in a wide variety of contexts. It is put to use in the creation of quick application development, data science, Internet of Things, and web applications, among other things.\nWhen compared to most other programming languages, it enables you to develop applications using a smaller number of lines of code.\nIt has a very huge community behind it, and there are active forums for users to participate in.\nThe presence of Third Party Modules contributes to the increased power of the Python programming language.\nThe user is able to easily solve difficult problems with the help of extensive support libraries (for example, NumPy, which is used for numerical computations and Pandas, which is used for data analytics).\nIt includes extremely user-friendly data structures, which simplify both the design of the code and the reasoning behind it.\nThe number of people using Python is constantly on the rise. It has quickly become one of the most widely used programming languages."
+          },
+          {
+            "titulo": "Features of Online Python Compiler (Interpreter)",
+            "texto": "Design that is Uncomplicated and Sparse, along with Being Lightweight, Easy, and Quick to Use\nof Python is supported for interactive program execution, which requires the user to provide inputs to the program in real time. Version 3.12\nOptions for a dark and light theme, as well as a customised code editor with additional themes, are helpful for novices learning and practising Python.\nOptions to Undo or Redo Changes Made in the Code Editor Options to Copy or Download the Results of the Program Expandable Output Terminal Options to Undo or Redo Changes\nA hint for the frequently occurring problems in Python\nInteractive Python Shell Advanced Python module support relevant to Data Science, including Pandas and NumPy Coding sharing functionality allows you to save your code in the cloud, where it can be retrieved whenever and wherever there is internet connectivity."
+          },
+          {
+            "titulo": "Learn Other Programming Language?",
+            "texto": "Visit to learn and practice top programming languages - C, C++, Java, Ruby, PHP, R, GoLang online-ide.com\nIf you encounter a bug or have questions or suggestions for improvements, please send us an email at ."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.online-python.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/pyodide",
+            "texto": "⚡ Run in Browser",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn",
+            "texto": "📚 Learn Python",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/hello-world",
+            "texto": "Start with Hello, World!",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/variables-and-types",
+            "texto": "2. Variables and Types",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/numbers-and-math",
+            "texto": "3. Numbers and Math",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/strings",
+            "texto": "4. Strings",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/string-methods",
+            "texto": "5. String Methods",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/user-input",
+            "texto": "6. User Input",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/booleans-and-comparisons",
+            "texto": "7. Booleans and Comparisons",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/if-elif-else",
+            "texto": "8. If / Elif / Else",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/lists",
+            "texto": "9. Lists",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/tuples",
+            "texto": "10. Tuples",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/dictionaries",
+            "texto": "11. Dictionaries",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/sets",
+            "texto": "12. Sets",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/for-loops",
+            "texto": "13. For Loops",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/while-loops",
+            "texto": "14. While Loops",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/list-comprehensions",
+            "texto": "15. List Comprehensions",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/functions",
+            "texto": "16. Functions",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/function-arguments",
+            "texto": "17. Function Arguments",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/scope",
+            "texto": "18. Scope",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/lambda-map-filter",
+            "texto": "19. Lambda, map and filter",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/recursion",
+            "texto": "20. Recursion",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/errors-and-exceptions",
+            "texto": "21. Errors and Exceptions",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/modules-and-imports",
+            "texto": "22. Modules and Imports",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/files",
+            "texto": "23. Reading and Writing Files",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/string-formatting",
+            "texto": "24. String Formatting Deep Dive",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/dates-and-times",
+            "texto": "25. Dates and Times",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/classes-and-objects",
+            "texto": "26. Classes and Objects",
+            "interno": true
+          },
+          {
+            "url": "https://www.online-python.com/learn/inheritance",
+            "texto": "27. Inheritance",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.online-python.com//logo.png",
+          "https://www.online-python.com/logo.png"
+        ],
+        "midia": [
+          {
+            "id": "med-c6bc672334e2",
+            "type": "image",
+            "title": "Online Python",
+            "url": "https://www.online-python.com//logo.png",
+            "final_url": "https://www.online-python.com//logo.png",
+            "source_title": "Online Python - IDE, Editor, Compiler, Interpreter",
+            "source_url": "https://www.online-python.com/",
+            "publisher": "www.online-python.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Online Python",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3fad5a72806d",
+            "type": "document",
+            "title": "packages-in-pyodide.html",
+            "url": "https://pyodide.org/en/stable/usage/packages-in-pyodide.html",
+            "final_url": "https://pyodide.org/en/stable/usage/packages-in-pyodide.html",
+            "source_title": "Online Python - IDE, Editor, Compiler, Interpreter",
+            "source_url": "https://www.online-python.com/",
+            "publisher": "pyodide.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Build and Run your Python code instantly. Online-Python is a quick and easy tool that helps you to build, compile, test your python programs.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.programiz.com/python-programming/online-compiler/",
+      "result": {
+        "titulo": "Online Python Compiler (Editor)",
+        "texto": "{ } Online Python Compiler Online R Compiler Online SQL Editor Online HTML/CSS Editor Online Java Compiler Online C Compiler Online C++ Compiler Online C# Compiler Online JavaScript Compiler Online Typescript Compiler Online GoLang Compiler Online Rust Compiler Scala Online Compiler Dart Online Compiler Ruby Online Compiler Online PHP Compiler Online Swift Compiler Generating Link Generating Link Share your code Share code or share using Contact us Python Online Compiler Learn Python App Learn Python Visualize main.py # Online Python compiler (interpreter) # Write and run Python online using this editor. print(\"What does the Visualize button do?\") Output",
+        "final": "https://www.programiz.com/python-programming/online-compiler/",
+        "trecho_usado": "Share your code Share code or share using Contact us Python Online Compiler Learn Python App Learn Python Visualize main.py # Online Python compiler (interpreter) # Write and run Python online using this editor. print(\"What does the Visualize button do?\") Output",
+        "metadados": {
+          "titulo": "Online Python Compiler (Editor)",
+          "descricao": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+          "canonica": "https://www.programiz.com/python-programming/online-compiler/",
+          "og": {
+            "og:type": "website",
+            "og:url": "https://programiz.com/python-programming/online-compiler/",
+            "og:title": "Online Python Compiler (Editor)",
+            "og:description": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+            "og:image": "https://programiz.com/online-compiler/assets/logos/compiler_logo.png"
+          },
+          "twitter": {
+            "twitter:card": "summary",
+            "twitter:url": "https://programiz.com/python-programming/online-compiler/",
+            "twitter:title": "Online Python Compiler (Editor)",
+            "twitter:description": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+            "twitter:image": "https://programiz.com/online-compiler/assets/logos/compiler_logo.png"
+          },
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [
+          {
+            "url": "https://www.programiz.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/python-programming/online-compiler/",
+            "texto": "Online Python Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/r/online-compiler/",
+            "texto": "Online R Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/sql/online-compiler/",
+            "texto": "Online SQL Editor",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/html/online-compiler/",
+            "texto": "Online HTML/CSS Editor",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/java-programming/online-compiler/",
+            "texto": "Online Java Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/c-programming/online-compiler/",
+            "texto": "Online C Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/cpp-programming/online-compiler/",
+            "texto": "Online C++ Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/csharp-programming/online-compiler/",
+            "texto": "Online C# Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/javascript/online-compiler/",
+            "texto": "Online JavaScript Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/typescript/online-compiler/",
+            "texto": "Online Typescript Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/golang/online-compiler/",
+            "texto": "Online GoLang Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/rust/online-compiler/",
+            "texto": "Online Rust Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/scala/online-compiler/",
+            "texto": "Scala Online Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/dart/online-compiler/",
+            "texto": "Dart Online Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/ruby/online-compiler/",
+            "texto": "Ruby Online Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/php/online-compiler/",
+            "texto": "Online PHP Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/swift/online-compiler/",
+            "texto": "Online Swift Compiler",
+            "interno": true
+          },
+          {
+            "url": "https://www.programiz.com/kotlin-programming/online-compiler/",
+            "texto": "",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://programiz.com/online-compiler/assets/logos/compiler_logo.png",
+          "https://cdn.playground-v2.programiz.com/assets/logos/logo-inverted.svg",
+          "https://cdn.playground-v2.programiz.com/assets/icons/close.svg",
+          "https://cdn.playground-v2.programiz.com/assets/icons/python.svg",
+          "https://cdn.playground-v2.programiz.com/assets/icons/r.svg",
+          "https://cdn.playground-v2.programiz.com/assets/icons/sql.svg",
+          "https://cdn.playground-v2.programiz.com/assets/icons/html.svg",
+          "https://cdn.playground-v2.programiz.com/assets/icons/java.svg",
+          "https://cdn.playground-v2.programiz.com/assets/icons/c.svg",
+          "https://cdn.playground-v2.programiz.com/assets/icons/cpp.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-fdd02c74bcd7",
+            "type": "image",
+            "title": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+            "url": "https://programiz.com/online-compiler/assets/logos/compiler_logo.png",
+            "final_url": "https://programiz.com/online-compiler/assets/logos/compiler_logo.png",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a58d149700e2",
+            "type": "image",
+            "title": "Programiz",
+            "url": "https://cdn.playground-v2.programiz.com/assets/logos/logo-inverted.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/logos/logo-inverted.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Programiz",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-fa35898694e1",
+            "type": "image",
+            "title": "Python Online",
+            "url": "https://cdn.playground-v2.programiz.com/assets/icons/python.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/icons/python.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Python Online",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bae947c55be2",
+            "type": "image",
+            "title": "R Programming Online",
+            "url": "https://cdn.playground-v2.programiz.com/assets/icons/r.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/icons/r.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "R Programming Online",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c98635cb2a53",
+            "type": "image",
+            "title": "SQL Online",
+            "url": "https://cdn.playground-v2.programiz.com/assets/icons/sql.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/icons/sql.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "SQL Online",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-58f2e49b8bfe",
+            "type": "image",
+            "title": "HTML/CSS Online",
+            "url": "https://cdn.playground-v2.programiz.com/assets/icons/html.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/icons/html.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "HTML/CSS Online",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1901f468ee62",
+            "type": "image",
+            "title": "Java Online",
+            "url": "https://cdn.playground-v2.programiz.com/assets/icons/java.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/icons/java.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Java Online",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-87e05fcc35b6",
+            "type": "image",
+            "title": "C Programming Online",
+            "url": "https://cdn.playground-v2.programiz.com/assets/icons/c.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/icons/c.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "C Programming Online",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-904d6e0e7bb1",
+            "type": "image",
+            "title": "C++ Online",
+            "url": "https://cdn.playground-v2.programiz.com/assets/icons/cpp.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/icons/cpp.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "C++ Online",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dcf8cea74420",
+            "type": "image",
+            "title": "C# Online",
+            "url": "https://cdn.playground-v2.programiz.com/assets/icons/csharp.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/icons/csharp.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "C# Online",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-776b6b453ccc",
+            "type": "image",
+            "title": "JavaScript Online",
+            "url": "https://cdn.playground-v2.programiz.com/assets/icons/javascript.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/icons/javascript.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "JavaScript Online",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d547205341c8",
+            "type": "image",
+            "title": "Typescript Online",
+            "url": "https://cdn.playground-v2.programiz.com/assets/icons/typescript.svg",
+            "final_url": "https://cdn.playground-v2.programiz.com/assets/icons/typescript.svg",
+            "source_title": "Online Python Compiler (Editor)",
+            "source_url": "https://www.programiz.com/python-programming/online-compiler/",
+            "publisher": "cdn.playground-v2.programiz.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Typescript Online",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.python.org/",
+      "result": {
+        "titulo": "Welcome to Python.org",
+        "texto": "# Write Fibonacci series up to n >>> def fib ( n ): ... a , b = 0 , 1 ... while a < n : ... print ( a , end = ' ' ) ... a , b = b , a + b ... print () ... >>> fib ( 1000 ) 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 Functions Defined The core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists. More about defining functions # For loop on a list >>> numbers = [ 2 , 4 , 6 , 8 ] >>> product = 1 >>> for number in numbers : ... product = product * number ... >>> print ( 'The product is:' , product ) The product is: 384 All the Flow You’d Expect Python knows the usual control flow statements that other languages speak — , , and — with some of its own twists, of course. if for while range More control flow tools # List comprehensions >>> fruits = [ 'Banana' , 'Apple' , 'Lime' ] >>> loud_fruits = [ fruit . upper () for fruit in fruits ] >>> print ( loud_fruits ) ['BANANA', 'APPLE', 'LIME'] # List and the enumerate function >>> list ( enumerate ( fruits )) [(0, 'Banana'), (1, 'Apple'), (2, 'Lime')] Compound Data Types Lists (known as arrays in other languages) are one of the compound data types that Python understands. Lists can be indexed, sliced and manipulated with other built-in functions. More about lists # Simple arithmetic >>> 1 / 2 0.5 >>> 2 ** 3 8 >>> 17 / 3 # true division returns a float 5.666666666666667 >>> 17 // 3 # floor division 5 Intuitive Interpretation Calculations are simple with Python, and expression syntax is straightforward: the operators , , and work as expected; parentheses can be used for grouping. . + - * / () More about simple math functions # Simple output (with Unicode) >>> print ( \"Hello, I'm Python!\" ) Hello, I'm Python! # Input, assignment >>> name = input ( 'What is your name? \\n ' ) >>> print ( f 'Hi, { name } .' ) What is your name? Python Hi, Python. Quick & Easy to Learn Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. with our Python overview. Whet your appetite",
+        "final": "https://www.python.org/",
+        "trecho_usado": "# Write Fibonacci series up to n >>> def fib ( n ): ... a , b = 0 , 1 ... while a < n : ... print ( a , end = ' ' ) ... a , b = b , a + b ... print () ... >>> fib ( 1000 ) 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987 Functions Defined The core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists.",
+        "metadados": {
+          "titulo": "Welcome to Python.org",
+          "descricao": "The official home of the Python Programming Language",
+          "canonica": "",
+          "og": {
+            "og:type": "website",
+            "og:site_name": "Python.org",
+            "og:title": "Welcome to Python.org",
+            "og:description": "The official home of the Python Programming Language",
+            "og:image": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:image:secure_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:url": "https://www.python.org/"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Python.org",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "# Write Fibonacci series up to n >>> def fib ( n ): ... a , b = 0 , 1 ... while a < n : ... print ( a , end = ' ' ) ... a , b = b , a + b ... print () ... >>> fib ( 1000 ) 0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610 987\nThe core of extensible programming is defining functions. Python allows mandatory and optional arguments, keyword arguments, and even arbitrary argument lists. More about defining functions\n# For loop on a list >>> numbers = [ 2 , 4 , 6 , 8 ] >>> product = 1 >>> for number in numbers : ... product = product * number ... >>> print ( 'The product is:' , product ) The product is: 384"
+          },
+          {
+            "titulo": "All the Flow You’d Expect",
+            "texto": "Python knows the usual control flow statements that other languages speak — , , and — with some of its own twists, of course. if for while range More control flow tools\n# List comprehensions >>> fruits = [ 'Banana' , 'Apple' , 'Lime' ] >>> loud_fruits = [ fruit . upper () for fruit in fruits ] >>> print ( loud_fruits ) ['BANANA', 'APPLE', 'LIME'] # List and the enumerate function >>> list ( enumerate ( fruits )) [(0, 'Banana'), (1, 'Apple'), (2, 'Lime')]\nLists (known as arrays in other languages) are one of the compound data types that Python understands. Lists can be indexed, sliced and manipulated with other built-in functions. More about lists\n# Simple arithmetic >>> 1 / 2 0.5 >>> 2 ** 3 8 >>> 17 / 3 # true division returns a float 5.666666666666667 >>> 17 // 3 # floor division 5\nCalculations are simple with Python, and expression syntax is straightforward: the operators , , and work as expected; parentheses can be used for grouping. . + - * / () More about simple math functions\n# Simple output (with Unicode) >>> print ( \"Hello, I'm Python!\" ) Hello, I'm Python! # Input, assignment >>> name = input ( 'What is your name? \\n ' ) >>> print ( f 'Hi, { name } .' ) What is your name? Python Hi, Python.\nExperienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. with our Python overview. Whet your appetite"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.linkedin.com/company/python-software-foundation/",
+            "texto": "LinkedIn",
+            "interno": false
+          },
+          {
+            "url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "texto": "Announcing Python Software Foundation Fellow Members for Q3 2026! 🎉",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/events/python-events/2172/",
+            "texto": "FastAPI Conf 2026",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf-landing/",
+            "texto": "Python Software Foundation",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/",
+            "texto": "Python",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/",
+            "texto": "PSF",
+            "interno": true
+          },
+          {
+            "url": "https://docs.python.org",
+            "texto": "Docs",
+            "interno": false
+          },
+          {
+            "url": "https://pypi.org/",
+            "texto": "PyPI",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/jobs/",
+            "texto": "Jobs",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/community/",
+            "texto": "Community",
+            "interno": true
+          },
+          {
+            "url": "https://donate.python.org/",
+            "texto": "Donate",
+            "interno": false
+          },
+          {
+            "url": "https://fosstodon.org/@ThePSF",
+            "texto": "Mastodon",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/community/irc/",
+            "texto": "Chat on IRC",
+            "interno": true
+          },
+          {
+            "url": "https://twitter.com/ThePSF",
+            "texto": "Twitter",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/about/",
+            "texto": "About",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/apps/",
+            "texto": "Applications",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/quotes/",
+            "texto": "Quotes",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/gettingstarted/",
+            "texto": "Getting Started",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/help/",
+            "texto": "Help",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/",
+            "texto": "Downloads",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/source/",
+            "texto": "Source code",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/windows/",
+            "texto": "Windows",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/macos/",
+            "texto": "macOS",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/android/",
+            "texto": "Android",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/ios/",
+            "texto": "iOS",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/download/other/",
+            "texto": "Other Platforms",
+            "interno": true
+          },
+          {
+            "url": "https://docs.python.org/3/license.html",
+            "texto": "License",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/download/alternatives",
+            "texto": "Alternative Implementations",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/doc/",
+            "texto": "Documentation",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/doc/av",
+            "texto": "Audio/Visual Talks",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.python.org/static/opengraph-icon-200x200.png",
+          "https://www.python.org/static/img/python-logo.png"
+        ],
+        "midia": [
+          {
+            "id": "med-0a05c6bfe54b",
+            "type": "image",
+            "title": "The official home of the Python Programming Language",
+            "url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "final_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8ebc72381245",
+            "type": "image",
+            "title": "python™",
+            "url": "https://www.python.org/static/img/python-logo.png",
+            "final_url": "https://www.python.org/static/img/python-logo.png",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "python™",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d1b618401984",
+            "type": "document",
+            "title": "license.html",
+            "url": "https://docs.python.org/3/license.html",
+            "final_url": "https://docs.python.org/3/license.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "docs.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-b34b7eb709b8",
+            "type": "document",
+            "title": "BeginnersGuide.html",
+            "url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "final_url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "wiki.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-0f7050437571",
+            "type": "document",
+            "title": "controlflow.html",
+            "url": "https://docs.python.org/3/tutorial/controlflow.html",
+            "final_url": "https://docs.python.org/3/tutorial/controlflow.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "docs.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-8e5461c79cf7",
+            "type": "document",
+            "title": "introduction.html",
+            "url": "https://docs.python.org/3/tutorial/introduction.html",
+            "final_url": "https://docs.python.org/3/tutorial/introduction.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "docs.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-5a0616f33026",
+            "type": "document",
+            "title": "mark-your-calendars-psf-board-office.html",
+            "url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-5424f25b9fd7",
+            "type": "document",
+            "title": "wikis-relaunched.html",
+            "url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-8b5018a80469",
+            "type": "document",
+            "title": "announcing-python-software-foundation.html",
+            "url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.python.org/events/python-events/2172/",
+      "result": {
+        "titulo": "FastAPI Conf 2026",
+        "texto": "This page displays a fallback because interactive scripts did not run. Possible causes include disabled JavaScript or failure to load scripts or stylesheets. Notice:",
+        "final": "https://www.python.org/events/python-events/2172/",
+        "trecho_usado": "This page displays a fallback because interactive scripts did not run. Possible causes include disabled JavaScript or failure to load scripts or stylesheets. Notice:",
+        "metadados": {
+          "titulo": "FastAPI Conf 2026",
+          "descricao": "The official home of the Python Programming Language",
+          "canonica": "",
+          "og": {
+            "og:type": "website",
+            "og:site_name": "Python.org",
+            "og:title": "FastAPI Conf 2026",
+            "og:description": "The official home of the Python Programming Language",
+            "og:image": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:image:secure_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:url": "https://www.python.org/events/python-events/2172/"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Python.org",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "This page displays a fallback because interactive scripts did not run. Possible causes include disabled JavaScript or failure to load scripts or stylesheets. Notice:"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.linkedin.com/company/python-software-foundation/",
+            "texto": "LinkedIn",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/psf-landing/",
+            "texto": "Python Software Foundation",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/",
+            "texto": "Python",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/",
+            "texto": "PSF",
+            "interno": true
+          },
+          {
+            "url": "https://docs.python.org",
+            "texto": "Docs",
+            "interno": false
+          },
+          {
+            "url": "https://pypi.org/",
+            "texto": "PyPI",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/jobs/",
+            "texto": "Jobs",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/community/",
+            "texto": "Community",
+            "interno": true
+          },
+          {
+            "url": "https://donate.python.org/",
+            "texto": "Donate",
+            "interno": false
+          },
+          {
+            "url": "https://fosstodon.org/@ThePSF",
+            "texto": "Mastodon",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/community/irc/",
+            "texto": "Chat on IRC",
+            "interno": true
+          },
+          {
+            "url": "https://twitter.com/ThePSF",
+            "texto": "Twitter",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/about/",
+            "texto": "About",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/apps/",
+            "texto": "Applications",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/quotes/",
+            "texto": "Quotes",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/gettingstarted/",
+            "texto": "Getting Started",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/about/help/",
+            "texto": "Help",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/",
+            "texto": "Downloads",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/source/",
+            "texto": "Source code",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/windows/",
+            "texto": "Windows",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/macos/",
+            "texto": "macOS",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/android/",
+            "texto": "Android",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/downloads/ios/",
+            "texto": "iOS",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/download/other/",
+            "texto": "Other Platforms",
+            "interno": true
+          },
+          {
+            "url": "https://docs.python.org/3/license.html",
+            "texto": "License",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/download/alternatives",
+            "texto": "Alternative Implementations",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/doc/",
+            "texto": "Documentation",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/doc/av",
+            "texto": "Audio/Visual Talks",
+            "interno": true
+          },
+          {
+            "url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "texto": "Beginner's Guide",
+            "interno": false
+          },
+          {
+            "url": "https://docs.python.org/3/faq/",
+            "texto": "FAQ",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.python.org/static/opengraph-icon-200x200.png",
+          "https://www.python.org/static/img/python-logo.png"
+        ],
+        "midia": [
+          {
+            "id": "med-0a05c6bfe54b",
+            "type": "image",
+            "title": "The official home of the Python Programming Language",
+            "url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "final_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "source_title": "FastAPI Conf 2026",
+            "source_url": "https://www.python.org/events/python-events/2172/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8ebc72381245",
+            "type": "image",
+            "title": "python™",
+            "url": "https://www.python.org/static/img/python-logo.png",
+            "final_url": "https://www.python.org/static/img/python-logo.png",
+            "source_title": "FastAPI Conf 2026",
+            "source_url": "https://www.python.org/events/python-events/2172/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "python™",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d1b618401984",
+            "type": "document",
+            "title": "license.html",
+            "url": "https://docs.python.org/3/license.html",
+            "final_url": "https://docs.python.org/3/license.html",
+            "source_title": "FastAPI Conf 2026",
+            "source_url": "https://www.python.org/events/python-events/2172/",
+            "publisher": "docs.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-b34b7eb709b8",
+            "type": "document",
+            "title": "BeginnersGuide.html",
+            "url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "final_url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "source_title": "FastAPI Conf 2026",
+            "source_url": "https://www.python.org/events/python-events/2172/",
+            "publisher": "wiki.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.w3schools.com/python/",
+      "result": {
+        "titulo": "Python Tutorial",
+        "texto": "Python Tutorial ❮ Home Next ❯ Learn Python Python is a popular programming language. Python can be used on a server to create web applications. Python is easy to learn - You will enjoy it! Learn Python now ❯ New · W3Schools Adventure App Adventure Mode Learn Python in bite-sized quests with XP and streaks. Your progress grows for each new adventure! Free on iOS and Android. Share Learning by Examples With our \"Try it Yourself\" editor, you can edit Python code and view the result. Example print(\"Hello, World!\") Try it Yourself » Click on the \"Try it Yourself\" button to see how it works. Python File Handling In our File Handling section you will learn how to open, read, write, and delete files. Python File Handling Python Database Handling In our database section you will learn how to access and work with MySQL and MongoDB databases: Python MySQL Tutorial Python MongoDB Tutorial Python Exercises Many chapters in this tutorial end with an exercise where you can check your level of knowledge. See all Python Exercises Python Examples Learn by examples! This tutorial supplements all explanations with clarifying examples. See All Python Examples Python Quiz Test your Python skills with a quiz. Python Quiz Track Your Progress Create a W3Schools account and get access to more features and learning materials: View your completed tutorials, exercises, and quizzes Keep an eye on your progress and daily streaks Join the leaderboard and compete with others Get your own avatar and unlock new skins Create your own personal website Sign Up » Note This is an optional feature. You can study at W3Schools without creating an account. Python Reference You will also find complete function and method references: Reference Overview Built-in Functions String Methods List / Array Methods Dictionary Methods Tuple Methods Set Methods File Methods Python Keywords Python Exceptions Python Glossary Random Module Requests Module Statistics Module Math Module CMath Module Download Python Download Python from the official Python web site: https://python.org Certification Course Get Certified in coding Complete the W3Schools coding course, strengthen your knowledge, and earn a certificate you can add to your CV, portfolio, and LinkedIn profile. Get Certified Today W3Schools Certificate Coding Learn it. Practice it. Prove it. ❮ Home Next ❯ ★ +1 Sign in to track progress",
+        "final": "https://www.w3schools.com/python/",
+        "trecho_usado": "Python Tutorial ❮ Home Next ❯ Learn Python Python is a popular programming language. Python can be used on a server to create web applications. Python is easy to learn - You will enjoy it! Learn Python now ❯ New · W3Schools Adventure App Adventure Mode Learn Python in bite-sized quests with XP and streaks. Your progress grows for each new adventure! Free on iOS and Android. Share Learning by",
+        "metadados": {
+          "titulo": "Python Tutorial",
+          "descricao": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+          "canonica": "",
+          "og": {
+            "og:title": "Python Tutorial",
+            "og:image": "https://www.w3schools.com/images/og/python/default.png",
+            "og:image:type": "image/png",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "og:description": "Python is a popular programming language.",
+            "og:url": "https://www.w3schools.com/python/default.asp",
+            "og:type": "website",
+            "og:site_name": "W3Schools"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@w3schools",
+            "twitter:title": "Python Tutorial",
+            "twitter:description": "Python is a popular programming language.",
+            "twitter:image": "https://www.w3schools.com/images/og/python/default.png"
+          },
+          "idioma": "en-US",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "W3Schools",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Python is a popular programming language.\nPython can be used on a server to create web applications.\nPython is easy to learn - You will enjoy it!\nLearn Python in bite-sized quests with XP and streaks. Your progress grows for each new adventure! Free on iOS and Android.\nWith our \"Try it Yourself\" editor, you can edit Python code and view the result.\nClick on the \"Try it Yourself\" button to see how it works.\nIn our File Handling section you will learn how to open, read, write, and delete files.\nIn our database section you will learn how to access and work with MySQL and MongoDB databases:\nMany chapters in this tutorial end with an exercise where you can check your level of knowledge.\nLearn by examples! This tutorial supplements all explanations with clarifying examples.\nTest your Python skills with a quiz.\nCreate a W3Schools account and get access to more features and learning materials:\nView your completed tutorials, exercises, and quizzes\nKeep an eye on your progress and daily streaks\nJoin the leaderboard and compete with others\nGet your own avatar and unlock new skins\nCreate your own personal website\nThis is an optional feature. You can study at W3Schools without creating an account.\nYou will also find complete function and method references:\nDownload Python from the official Python web site: https://python.org\nComplete the W3Schools coding course, strengthen your knowledge, and earn a certificate you can add to your CV, portfolio, and LinkedIn profile."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/python-course",
+            "texto": "Python",
+            "interno": false
+          },
+          {
+            "url": "https://www.w3schools.com",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.w3schools.com/adventure/index.php",
+            "texto": "NEW W3Schools app iOS & Android Start the adventure",
+            "interno": true
+          },
+          {
+            "url": "https://profile.w3schools.com/log-in",
+            "texto": "--> --> ★ +1",
+            "interno": false
+          },
+          {
+            "url": "https://pathfinder.w3schools.com",
+            "texto": "My W3Schools",
+            "interno": false
+          },
+          {
+            "url": "https://www.w3schools.com/spaces/index.php",
+            "texto": "Spaces",
+            "interno": true
+          },
+          {
+            "url": "https://order.w3schools.com/plans",
+            "texto": "Upgrade",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog",
+            "texto": "Paid Courses",
+            "interno": false
+          },
+          {
+            "url": "https://www.w3schools.com/academy/index.php",
+            "texto": "Academy",
+            "interno": true
+          },
+          {
+            "url": "https://www.w3schools.com/practice/index.php",
+            "texto": "Practice",
+            "interno": true
+          },
+          {
+            "url": "https://spaces.w3schools.com/",
+            "texto": "Spaces",
+            "interno": false
+          },
+          {
+            "url": "https://profile.w3schools.com/logout",
+            "texto": "Logout",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/@w3schools",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.linkedin.com/company/w3schools.com/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://discord.com/invite/w3schools",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.facebook.com/w3schoolscom/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/w3schools.com_official/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://profile.w3schools.com/signup",
+            "texto": "Sign in",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/html-course",
+            "texto": "HTML",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/css-course",
+            "texto": "CSS",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/javascript-course",
+            "texto": "JavaScript",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/sql-course",
+            "texto": "SQL",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/java-course",
+            "texto": "Java",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-c",
+            "texto": "C",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/cpp-course",
+            "texto": "C++",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/c-course",
+            "texto": "C#",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/php-course",
+            "texto": "PHP",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/react-js-course",
+            "texto": "React",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-mysql-1",
+            "texto": "MySQL",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-excel",
+            "texto": "Excel",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.w3schools.com/images/og/python/default.png",
+          "https://www.w3schools.com/adventure/img/mascot-lynx.png",
+          "https://www.w3schools.com/adventure/img/screen-map.png",
+          "https://www.w3schools.com/images/colorpicker2000.png",
+          "https://www.w3schools.com/signup/lynxlogo.svg",
+          "https://www.w3schools.com/spaces/files/check3.db67d31e.svg",
+          "https://www.w3schools.com/html/img_cert_html.jpg",
+          "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+          "https://www.w3schools.com/adventure/img/map/oakTree.webp",
+          "https://www.w3schools.com/adventure/img/map/birchTree.webp"
+        ],
+        "midia": [
+          {
+            "id": "med-9f5c2eec772d",
+            "type": "image",
+            "title": "Python is a popular programming language.",
+            "url": "https://www.w3schools.com/images/og/python/default.png",
+            "final_url": "https://www.w3schools.com/images/og/python/default.png",
+            "source_title": "Python Tutorial",
+            "source_url": "https://www.w3schools.com/python/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Python is a popular programming language.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ae0f6b9c5cf6",
+            "type": "image",
+            "title": "A circular color wheel showing the gradation of colors in the spectrum",
+            "url": "https://www.w3schools.com/images/colorpicker2000.png",
+            "final_url": "https://www.w3schools.com/images/colorpicker2000.png",
+            "source_title": "Python Tutorial",
+            "source_url": "https://www.w3schools.com/python/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A circular color wheel showing the gradation of colors in the spectrum",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-da64a54a3a6d",
+            "type": "image",
+            "title": "Lynx logo",
+            "url": "https://www.w3schools.com/signup/lynxlogo.svg",
+            "final_url": "https://www.w3schools.com/signup/lynxlogo.svg",
+            "source_title": "Python Tutorial",
+            "source_url": "https://www.w3schools.com/python/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lynx logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4ae8042882b9",
+            "type": "image",
+            "title": "Python adventure map in the W3Schools Adventure app",
+            "url": "https://www.w3schools.com/adventure/img/screen-map.png",
+            "final_url": "https://www.w3schools.com/adventure/img/screen-map.png",
+            "source_title": "Python Tutorial",
+            "source_url": "https://www.w3schools.com/python/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Python adventure map in the W3Schools Adventure app",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bc5f4a6e8804",
+            "type": "image",
+            "title": "Checkmark",
+            "url": "https://www.w3schools.com/spaces/files/check3.db67d31e.svg",
+            "final_url": "https://www.w3schools.com/spaces/files/check3.db67d31e.svg",
+            "source_title": "Python Tutorial",
+            "source_url": "https://www.w3schools.com/python/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Checkmark",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-39664b17022a",
+            "type": "image",
+            "title": "W3Schools HTML Certificate",
+            "url": "https://www.w3schools.com/html/img_cert_html.jpg",
+            "final_url": "https://www.w3schools.com/html/img_cert_html.jpg",
+            "source_title": "Python Tutorial",
+            "source_url": "https://www.w3schools.com/python/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "W3Schools HTML Certificate",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d49d074b82e1",
+            "type": "image",
+            "title": "W3Schools Full Access - your next career move",
+            "url": "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+            "final_url": "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+            "source_title": "Python Tutorial",
+            "source_url": "https://www.w3schools.com/python/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "W3Schools Full Access - your next career move",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-29be92cc0b6a",
+            "type": "document",
+            "title": "index.html",
+            "url": "https://www.w3schools.com/codegame/index.html",
+            "final_url": "https://www.w3schools.com/codegame/index.html",
+            "source_title": "Python Tutorial",
+            "source_url": "https://www.w3schools.com/python/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Python is a popular programming language.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.python.org/psf-landing/",
+      "result": {
+        "titulo": "Welcome to Python.org",
+        "texto": "Security notice: the emSign root CA has been removed from certifi. Upgrade certifi, pip, uv and sigstore now. See more We support the Python Community through... Grants In 2024, the PSF awarded $655,000 USD to 257 groups or individuals in 61 countries around the world. Infrastructure We support and maintain , , , and many other services the Python Community relies on. python.org The Python Package Index Python Documentation PyCon US We produce and underwrite the , the largest annual gathering for the Python community. Support from sponsors, attendees, PyLadies, and CPython enabled us to award more than $384,000 USD in travel grants to 254 attendees for PyCon US 2025. PyCon US Conference Mastodon Become a Member Help the PSF promote, protect, and advance the Python programming language and community! Membership FAQ Donate Assist the foundation's goals with a donation. The PSF is a recognized 501(c)(3) non-profit organization. How to Contribute Volunteer Learn how you can help the PSF and the greater Python community! How to Volunteer Sponsors Without our sponsors we wouldn't be able to help the Python community grow and prosper. Sponsorship Possibilities PSF Grants Program The Python Software Foundation welcomes grant proposals for projects related to the development of Python, Python-related technology, and educational resources. Proposal Guidelines, FAQ and Examples PSF News Mark Your Calendars! PSF Board Office Hours for the Year Ahead Wikis: Relaunched! Announcing Python Software Foundation Fellow Members for Q3 2026! 🎉 PSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security PSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security Python Language Summit 2026 blog posts are now available Announcing the 2026 PSF Board Election Results! Announcing the 2026 Python Packaging Council Election Results! Announcing the PSF Strategic Plan 2026 The 2026 PSF Board Election is Open!",
+        "final": "https://www.python.org/psf-landing/",
+        "trecho_usado": "Security notice: the emSign root CA has been removed from certifi. Upgrade certifi, pip, uv and sigstore now. See more We support the Python Community through... Grants In 2024, the PSF awarded $655,000 USD to 257 groups or individuals in 61 countries around the world. Infrastructure We support and maintain , , , and many other services the Python Community relies on. python.org The Python Package",
+        "metadados": {
+          "titulo": "Welcome to Python.org",
+          "descricao": "The official home of the Python Programming Language",
+          "canonica": "",
+          "og": {
+            "og:type": "website",
+            "og:site_name": "Python.org",
+            "og:title": "Welcome to Python.org",
+            "og:description": "The official home of the Python Programming Language",
+            "og:image": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:image:secure_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "og:url": "https://www.python.org/psf-landing/"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Python.org",
+          "tipo": "WebSite",
+          "ld": {},
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "We support the Python Community through...",
+            "texto": "In 2024, the PSF awarded $655,000 USD to 257 groups or individuals in 61 countries around the world.\nWe support and maintain , , , and many other services the Python Community relies on. python.org The Python Package Index Python Documentation\nWe produce and underwrite the , the largest annual gathering for the Python community. Support from sponsors, attendees, PyLadies, and CPython enabled us to award more than $384,000 USD in travel grants to 254 attendees for PyCon US 2025. PyCon US Conference\nHelp the PSF promote, protect, and advance the Python programming language and community!\nAssist the foundation's goals with a donation. The PSF is a recognized 501(c)(3) non-profit organization.\nLearn how you can help the PSF and the greater Python community!\nWithout our sponsors we wouldn't be able to help the Python community grow and prosper.\nSponsorship Possibilities\nThe Python Software Foundation welcomes grant proposals for projects related to the development of Python, Python-related technology, and educational resources.\nProposal Guidelines, FAQ and Examples\nMark Your Calendars! PSF Board Office Hours for the Year Ahead\nAnnouncing Python Software Foundation Fellow Members for Q3 2026! 🎉\nPSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security\nPSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security\nPython Language Summit 2026 blog posts are now available\nAnnouncing the 2026 PSF Board Election Results!\nAnnouncing the 2026 Python Packaging Council Election Results!\nAnnouncing the PSF Strategic Plan 2026\nThe 2026 PSF Board Election is Open!"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.linkedin.com/company/python-software-foundation/",
+            "texto": "LinkedIn",
+            "interno": false
+          },
+          {
+            "url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "texto": "Announcing Python Software Foundation Fellow Members for Q3 2026! 🎉",
+            "interno": false
+          },
+          {
+            "url": "https://mailchi.mp/python/python-software-foundation-july-2024-newsletter-19889969",
+            "texto": "PSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security",
+            "interno": false
+          },
+          {
+            "url": "https://mailchi.mp/python/python-software-foundation-july-2024-newsletter-19889889",
+            "texto": "PSF News: Board & Inaugural Python Packaging Council Election Results, Strategic Plan, and PyPI Security",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/",
+            "texto": "Python",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/",
+            "texto": "PSF",
+            "interno": true
+          },
+          {
+            "url": "https://docs.python.org",
+            "texto": "Docs",
+            "interno": false
+          },
+          {
+            "url": "https://pypi.org/",
+            "texto": "PyPI",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/jobs/",
+            "texto": "Jobs",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/community/",
+            "texto": "Community",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf-landing/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://donate.python.org/",
+            "texto": "Donate",
+            "interno": false
+          },
+          {
+            "url": "https://fosstodon.org/@ThePSF",
+            "texto": "Mastodon",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/community/irc/",
+            "texto": "Chat on IRC",
+            "interno": true
+          },
+          {
+            "url": "https://twitter.com/ThePSF",
+            "texto": "Twitter",
+            "interno": false
+          },
+          {
+            "url": "https://www.python.org/psf/about/",
+            "texto": "About",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/mission/",
+            "texto": "Mission Statement",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/board/",
+            "texto": "Board of Directors & Officers",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/strategy/",
+            "texto": "PSF Strategy",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/records/staff/",
+            "texto": "PSF Staff",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/annual-report/2024/",
+            "texto": "Annual Impact Report",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/fiscal-sponsorees/",
+            "texto": "Fiscal Sponsorees",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/records/",
+            "texto": "Public Records",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/about/legal-and-policies/",
+            "texto": "Legal & Policies",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/faq/",
+            "texto": "PSF FAQ",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/developersinresidence/",
+            "texto": "Developers in Residence",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/sponsorship/",
+            "texto": "Sponsorship",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/sponsors/",
+            "texto": "PSF Sponsors",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/sponsors/application/",
+            "texto": "Apply to Sponsor",
+            "interno": true
+          },
+          {
+            "url": "https://www.python.org/psf/prospectus2026/",
+            "texto": "Sponsorship Prospectus 2025-26",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.python.org/static/opengraph-icon-200x200.png",
+          "https://www.python.org/static/img/psf-logo.png"
+        ],
+        "midia": [
+          {
+            "id": "med-0a05c6bfe54b",
+            "type": "image",
+            "title": "The official home of the Python Programming Language",
+            "url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "final_url": "https://www.python.org/static/opengraph-icon-200x200.png",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2f50937eb393",
+            "type": "image",
+            "title": "Python Software Foundation",
+            "url": "https://www.python.org/static/img/psf-logo.png",
+            "final_url": "https://www.python.org/static/img/psf-logo.png",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "www.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Python Software Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5a0616f33026",
+            "type": "document",
+            "title": "mark-your-calendars-psf-board-office.html",
+            "url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/mark-your-calendars-psf-board-office.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-5424f25b9fd7",
+            "type": "document",
+            "title": "wikis-relaunched.html",
+            "url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/wikis-relaunched.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-8b5018a80469",
+            "type": "document",
+            "title": "announcing-python-software-foundation.html",
+            "url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "final_url": "https://pyfound.blogspot.com/2026/10/announcing-python-software-foundation.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-8f986d581bdc",
+            "type": "document",
+            "title": "python-language-summit-2026.html",
+            "url": "https://pyfound.blogspot.com/2026/09/python-language-summit-2026.html",
+            "final_url": "https://pyfound.blogspot.com/2026/09/python-language-summit-2026.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-520308706f95",
+            "type": "document",
+            "title": "announcing-2026-psf-board-election.html",
+            "url": "https://pyfound.blogspot.com/2026/09/announcing-2026-psf-board-election.html",
+            "final_url": "https://pyfound.blogspot.com/2026/09/announcing-2026-psf-board-election.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-c2ac76fc4d6d",
+            "type": "document",
+            "title": "announcing-2026-python-packaging.html",
+            "url": "https://pyfound.blogspot.com/2026/09/announcing-2026-python-packaging.html",
+            "final_url": "https://pyfound.blogspot.com/2026/09/announcing-2026-python-packaging.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-bee73f39e2d5",
+            "type": "document",
+            "title": "announcing-psf-strategic-plan-2026.html",
+            "url": "https://pyfound.blogspot.com/2026/09/announcing-psf-strategic-plan-2026.html",
+            "final_url": "https://pyfound.blogspot.com/2026/09/announcing-psf-strategic-plan-2026.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-e32275e27c93",
+            "type": "document",
+            "title": "the-2026-psf-board-election-is-open.html",
+            "url": "https://pyfound.blogspot.com/2026/09/the-2026-psf-board-election-is-open.html",
+            "final_url": "https://pyfound.blogspot.com/2026/09/the-2026-psf-board-election-is-open.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "pyfound.blogspot.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-d1b618401984",
+            "type": "document",
+            "title": "license.html",
+            "url": "https://docs.python.org/3/license.html",
+            "final_url": "https://docs.python.org/3/license.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "docs.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-b34b7eb709b8",
+            "type": "document",
+            "title": "BeginnersGuide.html",
+            "url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "final_url": "https://wiki.python.org/python/getting-started/BeginnersGuide.html",
+            "source_title": "Welcome to Python.org",
+            "source_url": "https://www.python.org/psf-landing/",
+            "publisher": "wiki.python.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The official home of the Python Programming Language",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "65dc9ef388c210df356d",
+            "url": "https://www.python.org/",
+            "title": "Welcome to Python.org",
+            "origin": "bing",
+            "query": "Python pathlib.Path.unlink e quais são suas limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Experienced programmers in any other language can pick up Python very quickly, and beginners find the clean syntax and indentation structure easy to learn. Whet"
+          },
+          {
+            "id": "026b530f436455499f08",
+            "url": "https://www.python.org/downloads/",
+            "title": "Download Python | Python.org",
+            "origin": "bing",
+            "query": "Python pathlib.Path.unlink e quais são suas limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Python was created in the early 1990s by Guido van Rossum at Stichting Mathematisch Centrum in the Netherlands as a successor of a language called ABC. Guido re"
+          },
+          {
+            "id": "be09ac332e2e59d8e874",
+            "url": "https://www.online-python.com/",
+            "title": "Online Python - IDE, Editor, Compiler, Interpreter",
+            "origin": "bing",
+            "query": "Python pathlib.Path.unlink e quais são suas limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Python, which was initially developed by Guido van Rossum and made available to the public in 1991, is currently one of the most widely used general-purpose pro"
+          },
+          {
+            "id": "6a53bc8c438de495f099",
+            "url": "https://www.programiz.com/python-programming/online-compiler/",
+            "title": "Online Python Compiler (Editor) - Programiz",
+            "origin": "bing",
+            "query": "Python pathlib.Path.unlink e quais são suas limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Write and run your code using our online Python compiler (editor). Enjoy additional features like code sharing, dark mode and code visualization."
+          },
+          {
+            "id": "832829eeae99ee914a36",
+            "url": "https://www.w3schools.com/python/",
+            "title": "Python Tutorial - W3Schools",
+            "origin": "bing",
+            "query": "Python pathlib.Path.unlink e quais são suas limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Learn Python Python is a popular programming language. Python can be used on a server to create web applications. Python is easy to learn - You will enjoy it!"
+          },
+          {
+            "id": "393bf2f42fbf925b45d2",
+            "url": "https://en.wikipedia.org/wiki/Python_(programming_language)",
+            "title": "Python (programming language) - Wikipedia",
+            "origin": "bing",
+            "query": "Python pathlib.Path.unlink e quais são suas limitações",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Python supports multiple programming paradigms but with an emphasis on object-oriented programming and dynamic typing. Guido van Rossum began working on Python "
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "stackexchange: sem resultados (Python pathlib.Path.unlink e quais são s)",
+        "hn: sem resultados (Python pathlib.Path.unlink e quais são s)",
+        "bing: 6 resultados (Python pathlib.Path.unlink e quais são s)",
+        "bing (consulta reformulada 'Python pathlib.Path.unlink e quais são s'): 6 resultados",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Python pathlib.Path.unlink e quais são s)",
+        "— recuperação por lacuna —",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Python pathlib.Path.unlink e quais são suas limitações",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Como funciona Python pathlib.Path.unlink e quais são suas limitações?",
+          "purpose": "pedido original sem condensação"
+        },
+        {
+          "type": "ENTITY_EXACT",
+          "query": "Python pathlib.Path.unlink e quais são suas",
+          "purpose": "resolver assunto explícito quando operações dominam os resultados; validar pelo pedido original"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhuma fonte utilizável"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-83a030853294",
+            "type": "explicit_attribute",
+            "description": "Comportamento da operação",
+            "entity": "Python pathlib.Path.unlink e quais são suas",
+            "attribute": "behavior",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Comportamento da operação",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-f9618341c49c",
+            "type": "explicit_attribute",
+            "description": "Limitações",
+            "entity": "Python pathlib.Path.unlink e quais são suas",
+            "attribute": "limitations",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Limitações",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://www.python.org/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S2",
+          "url": "https://www.online-python.com/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://www.programiz.com/python-programming/online-compiler/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "e8f9443b054d9ab8e9e91207038eb9f198ab1c85",
+  "dataset_sha256": "6f38b89f96367212ba5e68888f57bbb43e7ab7331047eaac7df6f13e1bf4dee2"
+}

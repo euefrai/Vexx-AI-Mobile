@@ -1,0 +1,2243 @@
+{
+  "scope": "DISPOSABLE_QA_ONLY",
+  "jobs": [
+    {
+      "id": "rj-86c93dce7865",
+      "objetivo": "quem fundou a Tramontina, em que ano e quais produtos ela fabrica, com evidências para cada aspecto",
+      "status": "interrompida",
+      "orcamento": {
+        "buscas": 8,
+        "paginas": 12,
+        "timeout_s": 120,
+        "subs": 4,
+        "profundidade": 2,
+        "midia": 16,
+        "concorrencia": 3,
+        "replans": 2,
+        "max_bytes_pagina": 2000000
+      },
+      "usados": {
+        "buscas": 4,
+        "paginas": 12,
+        "local_context_checked": true,
+        "replans": 0,
+        "consultas_etapas": {
+          "quem fundou tramontina": "p1",
+          "que ano": "p4",
+          "quais produtos ela fabrica": "p7",
+          "com evidencias cada aspecto": "p10"
+        },
+        "provedores": {
+          "ddg": {
+            "ok": 2,
+            "falhas": 0,
+            "ms": 2883
+          },
+          "web": {
+            "ok": 2,
+            "falhas": 0,
+            "ms": 10069
+          }
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 1.4807
+          },
+          {
+            "step_id": "p4",
+            "type": "busca",
+            "seconds": 1.4266
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 5.6162
+          },
+          {
+            "step_id": "p10",
+            "type": "busca",
+            "seconds": 4.4608
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 3.4542
+          },
+          {
+            "step_id": "p5",
+            "type": "ler",
+            "seconds": 2.7299
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0053
+          },
+          {
+            "step_id": "p6",
+            "type": "analisar",
+            "seconds": 0.0027
+          }
+        ],
+        "recuperacao_busca": [
+          "evidências cada aspecto",
+          "produtos ela fabrica"
+        ],
+        "lacunas_busca": [
+          "nenhum candidato confirma assunto e restrições do pedido"
+        ],
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-662329279526",
+              "type": "explicit_attribute",
+              "description": "Fundadores",
+              "entity": "Tramontina",
+              "attribute": "founders",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Fundadores",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-36f9f6d9eac8",
+              "type": "explicit_attribute",
+              "description": "Data de fundação",
+              "entity": "Tramontina",
+              "attribute": "foundation_date",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Data de fundação",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-62ac516f9608",
+              "type": "explicit_attribute",
+              "description": "Produtos",
+              "entity": "Tramontina",
+              "attribute": "products",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Produtos",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            }
+          ],
+          "passages": [],
+          "complete": false,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+        },
+        "research_gaps": [
+          {
+            "id": "R-662329279526",
+            "dimension": "founders",
+            "description": "Fundadores",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "Tramontina Fundadores",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-36f9f6d9eac8",
+            "dimension": "foundation_date",
+            "description": "Data de fundação",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "Tramontina Data de fundação",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-62ac516f9608",
+            "dimension": "products",
+            "description": "Produtos",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "Tramontina Produtos",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          }
+        ],
+        "controller_decisions": [
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p3",
+            "executed": false
+          },
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p6",
+            "executed": false
+          }
+        ],
+        "requirement_states": {
+          "R-662329279526": "NOT_SEARCHED",
+          "R-36f9f6d9eac8": "NOT_SEARCHED",
+          "R-62ac516f9608": "NOT_SEARCHED"
+        },
+        "adaptive_rounds": [
+          {
+            "step_id": "p3",
+            "new_evidence": 0,
+            "total_evidence": 0,
+            "remaining_searches": 4,
+            "decision": "no_new_evidence",
+            "requirement_changes": [
+              {
+                "id": "R-662329279526",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              },
+              {
+                "id": "R-36f9f6d9eac8",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              },
+              {
+                "id": "R-62ac516f9608",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              }
+            ]
+          },
+          {
+            "step_id": "p6",
+            "new_evidence": 0,
+            "total_evidence": 0,
+            "remaining_searches": 4,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          }
+        ],
+        "round_evidence_ids": [],
+        "synthesis_attempted": true,
+        "research_outcome": {
+          "state": "partial",
+          "unresolved_fronts": [
+            "Tramontina Fundadores",
+            "Tramontina Data de fundação",
+            "Tramontina Produtos"
+          ],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 0,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        },
+        "partial_delivery_ready": true
+      },
+      "pendencias": [
+        "p8: orçamento de páginas esgotado",
+        "p11: orçamento de páginas esgotado",
+        "p9: aguardando dependências explícitas concluírem",
+        "p12: aguardando dependências explícitas concluírem",
+        "p13: aguardando dependências explícitas concluírem",
+        "p14: aguardando dependências explícitas concluírem",
+        "p15: aguardando dependências explícitas concluírem"
+      ],
+      "erros": [],
+      "read_trace": [
+        {
+          "url": "https://global.tramontina.com/nossa-historia",
+          "final_url": "https://global.tramontina.com/nossa-historia",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 1153,
+          "read": true,
+          "published_at": "",
+          "excerpt": "entrou em uma nova fase de crescimento. Nas décadas seguintes, novas unidades foram inauguradas e a Tramontina passou a produzir, além de itens de cutelaria, ferramentas, produtos para cozinha, materiais elétricos e outras soluções. 1949 Ivo Tramontina Ruy J. Scomazzon A expansão também ultrapassou as fronteiras brasileiras. Em , a Tramontina realizou sua primeira exportação, para o , dando início"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Tramontina",
+          "final_url": "https://pt.wikipedia.org/wiki/Tramontina",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 6400,
+          "read": true,
+          "published_at": "2006-06-02T20:23:53Z",
+          "excerpt": "Dom Cabral Belo Horizonte INSEAD [ carecede fontes ] ? Em 2021, Clovis publicou a sua autobiografia, intitulada “Paixão, Força e Coragem”. 13 [ ] Em 2022, Eduardo Scomazzon, filho de Ruy J. Scomazzon, assumiu a presidência do Conselho de Administração da Tramontina. Em 2025, Marcos Tramontina, filho de Clovis Tramontina, assumiu como CEO do Grupo. Mercado [ editar | editar código ] No mercado"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Valentin_Tramontina",
+          "final_url": "https://pt.wikipedia.org/wiki/Valentin_Tramontina",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 1929,
+          "read": true,
+          "published_at": "2015-11-06T21:35:49Z",
+          "excerpt": "dificuldades nos anos seguintes, culminando com a morte de Valentin em 1939, que comandou a empresa por 28 anos. A partir daí a esposa de Valentin assumiu a ferraria. 3 [ ] Vida pessoal [ editar | editar código ] Em , casou-se com Elisa de Cecco. O casal teve três filhos, Ivo, Henrique e Nilo. 1920 3 [ ] Referências ↑ . Tramontina Garibaldi S/A. Google Books ↑ . (Setembro, 2013). I discendenti"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Discuss%C3%A3o:Tramontina",
+          "final_url": "https://pt.wikipedia.org/wiki/Discuss%C3%A3o:Tramontina",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 1354,
+          "read": true,
+          "published_at": "",
+          "excerpt": "e discussões em curso. WikiProjecto Empresas ainda não avaliada importância Se não tiver suas questões respondidas nesta página de discussão procure o(s) wikiprojeto(s) acima. Untitled [ editar código ] A Tramontina, fundada em 1911 por Valentin Tramontina, é uma empresa brasileira com dez fábricas no país, produzindo, atualmente, mais de 16 mil itens. Em unidades descentralizadas – oito no Estado"
+        },
+        {
+          "url": "https://books.google.com.br/books",
+          "final_url": "https://books.google.com.br/books",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 214,
+          "read": true,
+          "published_at": "",
+          "excerpt": "Nenhum e-book disponível EDIPUCRS » Todos os vendedores Comprar livros no Google Play Procure a maior eBookstore do mundo e comece a ler hoje na web, no tablet, no telefone ou eReader. Ir para o Google Play agora »"
+        },
+        {
+          "url": "https://www.facebook.com/Tramontina",
+          "final_url": "https://web.facebook.com/Tramontina",
+          "source_state": "FETCHED",
+          "stage": "no_readable_content",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 0,
+          "read": false,
+          "published_at": "",
+          "excerpt": ""
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Tramontina",
+          "final_url": "https://pt.wikipedia.org/wiki/Tramontina",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 6400,
+          "read": true,
+          "published_at": "2006-06-02T20:23:53Z",
+          "excerpt": "Dom Cabral Belo Horizonte INSEAD [ carecede fontes ] ? Em 2021, Clovis publicou a sua autobiografia, intitulada “Paixão, Força e Coragem”. 13 [ ] Em 2022, Eduardo Scomazzon, filho de Ruy J. Scomazzon, assumiu a presidência do Conselho de Administração da Tramontina. Em 2025, Marcos Tramontina, filho de Clovis Tramontina, assumiu como CEO do Grupo. Mercado [ editar | editar código ] No mercado"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Valentin_Tramontina",
+          "final_url": "https://pt.wikipedia.org/wiki/Valentin_Tramontina",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 1929,
+          "read": true,
+          "published_at": "2015-11-06T21:35:49Z",
+          "excerpt": "dificuldades nos anos seguintes, culminando com a morte de Valentin em 1939, que comandou a empresa por 28 anos. A partir daí a esposa de Valentin assumiu a ferraria. 3 [ ] Vida pessoal [ editar | editar código ] Em , casou-se com Elisa de Cecco. O casal teve três filhos, Ivo, Henrique e Nilo. 1920 3 [ ] Referências ↑ . Tramontina Garibaldi S/A. Google Books ↑ . (Setembro, 2013). I discendenti"
+        },
+        {
+          "url": "https://global.tramontina.com/nossa-historia",
+          "final_url": "https://global.tramontina.com/nossa-historia",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 1153,
+          "read": true,
+          "published_at": "",
+          "excerpt": "entrou em uma nova fase de crescimento. Nas décadas seguintes, novas unidades foram inauguradas e a Tramontina passou a produzir, além de itens de cutelaria, ferramentas, produtos para cozinha, materiais elétricos e outras soluções. 1949 Ivo Tramontina Ruy J. Scomazzon A expansão também ultrapassou as fronteiras brasileiras. Em , a Tramontina realizou sua primeira exportação, para o , dando início"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Discuss%C3%A3o:Tramontina",
+          "final_url": "https://pt.wikipedia.org/wiki/Discuss%C3%A3o:Tramontina",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 1354,
+          "read": true,
+          "published_at": "",
+          "excerpt": "e discussões em curso. WikiProjecto Empresas ainda não avaliada importância Se não tiver suas questões respondidas nesta página de discussão procure o(s) wikiprojeto(s) acima. Untitled [ editar código ] A Tramontina, fundada em 1911 por Valentin Tramontina, é uma empresa brasileira com dez fábricas no país, produzindo, atualmente, mais de 16 mil itens. Em unidades descentralizadas – oito no Estado"
+        },
+        {
+          "url": "https://books.google.com.br/books",
+          "final_url": "https://books.google.com.br/books",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 214,
+          "read": true,
+          "published_at": "",
+          "excerpt": "Nenhum e-book disponível EDIPUCRS » Todos os vendedores Comprar livros no Google Play Procure a maior eBookstore do mundo e comece a ler hoje na web, no tablet, no telefone ou eReader. Ir para o Google Play agora »"
+        },
+        {
+          "url": "https://todaysdatenow.com/es/tools/current-year/",
+          "final_url": "https://todaysdatenow.com/es/tools/current-year/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 172,
+          "read": true,
+          "published_at": "",
+          "excerpt": "Año Actual El año actual es el marcador de cuatro dígitos que guía planes fiscales, cálculos de edad y versiones de software. Descubre si el año actual es un . año bisiesto"
+        },
+        {
+          "url": "https://todosloshechos.es/que-ano-es-2025",
+          "final_url": "https://todosloshechos.es/que-ano-es-2025",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 6780,
+          "read": true,
+          "published_at": "2025-05-16T04:45:02+00:00",
+          "excerpt": "reconocimiento. ... Escorpio: Transformaciones positivas. ¿Cuál es la piedra del año 2025? Las piedras preciosas para cada signo en 2025 Aries: Rubí. Energía y pasión para alcanzar tus metas. Tauro: Esmeralda. Serenidad y equilibrio emocional. Géminis: Citrino. Optimismo y claridad mental. Cáncer: Perla. Protección y paz interior. Leo: Ojo de tigre. ... Virgo: Lapislázuli. ... Libra: Cuarzo rosa."
+        },
+        {
+          "url": "https://es.wikipedia.org/wiki/A%C3%B1o",
+          "final_url": "https://es.wikipedia.org/wiki/A%C3%B1o",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 7999,
+          "read": true,
+          "published_at": "2001-12-09T05:13:22Z",
+          "excerpt": "moderno, presenta su año natural como un de 365días o como un de 366días, al igual que los ; véase . Para el calendario gregoriano, la duración media del año civil (el año medio) a lo largo del ciclo bisiesto completo de 400años es de 365.2425días. La norma , Anexo C, admite el símbolo (del latín ) para representar un año de 365 o 366días. En inglés se suelen utilizar las abreviaturas y . año"
+        },
+        {
+          "url": "https://www.calendarr.com/mexico/dia-del-ano/",
+          "final_url": "https://www.calendarr.com/mexico/dia-del-ano/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 1223,
+          "read": true,
+          "published_at": "",
+          "excerpt": "fecha dentro del año. ¿Qué es el número de día del año? - Es la posición de una fecha dentro del año, del 1 al 365 en un año común o del 1 al 366 en un año bisiesto. El 1 de enero es siempre el día 1, y el 31 de diciembre es el día 365 (o 366). ¿Cuántos días van del año? - Esa cifra coincide con el número de día de hoy. Por ejemplo, el día 100 significa que ya han pasado 99 días y que el año se"
+        },
+        {
+          "url": "https://www.spanishdict.com/translate/qu%C3%A9%20a%C3%B1o%20es",
+          "final_url": "https://www.spanishdict.com/translate/qu%C3%A9%20a%C3%B1o%20es",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 647,
+          "read": true,
+          "published_at": "",
+          "excerpt": "French-English dictionary, translator, and learning English dictionary and learning for Spanish speakers English dictionary and learning for French speakers Comprehensive resource for word definitions and usage Essential reference for synonyms and antonyms Comprehensive K-12 personalized learning Adaptive learning for English vocabulary Immersive learning for 25 languages Marketplace for millions"
+        },
+        {
+          "url": "https://www.calendarr.com/brasil/dia-do-ano/",
+          "final_url": "https://www.calendarr.com/brasil/dia-do-ano/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 1121,
+          "read": true,
+          "published_at": "",
+          "excerpt": "encontra. Qual é o número do dia do ano? - É a posição de uma data dentro do ano, de 1 a 365 em um ano normal ou de 1 a 366 em um ano bissexto. 1º de janeiro é sempre o dia 1, e 31 de dezembro é o dia 365 (ou 366). Em que dia do ano estamos? - Isso corresponde ao número do dia de hoje. Por exemplo, o dia 100 significa que 99 dias já se passaram e o ano está no seu 100º dia. Como os anos bissextos"
+        },
+        {
+          "url": "https://todaysdatenow.com/es/tools/current-year/",
+          "final_url": "https://todaysdatenow.com/es/tools/current-year/",
+          "source_state": "DISCOVERED",
+          "stage": "topic_only",
+          "code": "NO_ANSWER_PASSAGE",
+          "scope": "page_text",
+          "extracted_chars": 172,
+          "read": true,
+          "published_at": "",
+          "excerpt": "Año Actual El año actual es el marcador de cuatro dígitos que guía planes fiscales, cálculos de edad y versiones de software. Descubre si el año actual es un . año bisiesto"
+        },
+        {
+          "url": "https://es.wikipedia.org/wiki/A%C3%B1o",
+          "final_url": "https://es.wikipedia.org/wiki/A%C3%B1o",
+          "source_state": "DISCOVERED",
+          "stage": "topic_only",
+          "code": "NO_ANSWER_PASSAGE",
+          "scope": "page_text",
+          "extracted_chars": 7999,
+          "read": true,
+          "published_at": "2001-12-09T05:13:22Z",
+          "excerpt": "moderno, presenta su año natural como un de 365días o como un de 366días, al igual que los ; véase . Para el calendario gregoriano, la duración media del año civil (el año medio) a lo largo del ciclo bisiesto completo de 400años es de 365.2425días. La norma , Anexo C, admite el símbolo (del latín ) para representar un año de 365 o 366días. En inglés se suelen utilizar las abreviaturas y . año"
+        },
+        {
+          "url": "https://todosloshechos.es/que-ano-es-2025",
+          "final_url": "https://todosloshechos.es/que-ano-es-2025",
+          "source_state": "DISCOVERED",
+          "stage": "topic_only",
+          "code": "NO_ANSWER_PASSAGE",
+          "scope": "page_text",
+          "extracted_chars": 6780,
+          "read": true,
+          "published_at": "2025-05-16T04:45:02+00:00",
+          "excerpt": "reconocimiento. ... Escorpio: Transformaciones positivas. ¿Cuál es la piedra del año 2025? Las piedras preciosas para cada signo en 2025 Aries: Rubí. Energía y pasión para alcanzar tus metas. Tauro: Esmeralda. Serenidad y equilibrio emocional. Géminis: Citrino. Optimismo y claridad mental. Cáncer: Perla. Protección y paz interior. Leo: Ojo de tigre. ... Virgo: Lapislázuli. ... Libra: Cuarzo rosa."
+        },
+        {
+          "url": "https://www.spanishdict.com/translate/qu%C3%A9%20a%C3%B1o%20es",
+          "final_url": "https://www.spanishdict.com/translate/qu%C3%A9%20a%C3%B1o%20es",
+          "source_state": "DISCOVERED",
+          "stage": "topic_only",
+          "code": "NO_ANSWER_PASSAGE",
+          "scope": "page_text",
+          "extracted_chars": 647,
+          "read": true,
+          "published_at": "",
+          "excerpt": "French-English dictionary, translator, and learning English dictionary and learning for Spanish speakers English dictionary and learning for French speakers Comprehensive resource for word definitions and usage Essential reference for synonyms and antonyms Comprehensive K-12 personalized learning Adaptive learning for English vocabulary Immersive learning for 25 languages Marketplace for millions"
+        },
+        {
+          "url": "https://www.calendarr.com/mexico/dia-del-ano/",
+          "final_url": "https://www.calendarr.com/mexico/dia-del-ano/",
+          "source_state": "DISCOVERED",
+          "stage": "topic_only",
+          "code": "NO_ANSWER_PASSAGE",
+          "scope": "page_text",
+          "extracted_chars": 1223,
+          "read": true,
+          "published_at": "",
+          "excerpt": "fecha dentro del año. ¿Qué es el número de día del año? - Es la posición de una fecha dentro del año, del 1 al 365 en un año común o del 1 al 366 en un año bisiesto. El 1 de enero es siempre el día 1, y el 31 de diciembre es el día 365 (o 366). ¿Cuántos días van del año? - Esa cifra coincide con el número de día de hoy. Por ejemplo, el día 100 significa que ya han pasado 99 días y que el año se"
+        },
+        {
+          "url": "https://www.calendarr.com/brasil/dia-do-ano/",
+          "final_url": "https://www.calendarr.com/brasil/dia-do-ano/",
+          "source_state": "DISCOVERED",
+          "stage": "topic_only",
+          "code": "NO_ANSWER_PASSAGE",
+          "scope": "page_text",
+          "extracted_chars": 1121,
+          "read": true,
+          "published_at": "",
+          "excerpt": "encontra. Qual é o número do dia do ano? - É a posição de uma data dentro do ano, de 1 a 365 em um ano normal ou de 1 a 366 em um ano bissexto. 1º de janeiro é sempre o dia 1, e 31 de dezembro é o dia 365 (ou 366). Em que dia do ano estamos? - Isso corresponde ao número do dia de hoje. Por exemplo, o dia 100 significa que 99 dias já se passaram e o ano está no seu 100º dia. Como os anos bissextos"
+        }
+      ]
+    },
+    {
+      "id": "rj-6a8b98b261de",
+      "objetivo": "as causas e as consequências da Revolta da Vacina, com fontes públicas e evidências para cada aspecto",
+      "status": "interrompida",
+      "orcamento": {
+        "buscas": 8,
+        "paginas": 12,
+        "timeout_s": 120,
+        "subs": 4,
+        "profundidade": 2,
+        "midia": 16,
+        "concorrencia": 3,
+        "replans": 2,
+        "max_bytes_pagina": 2000000
+      },
+      "usados": {
+        "buscas": 4,
+        "paginas": 12,
+        "local_context_checked": true,
+        "replans": 0,
+        "consultas_etapas": {
+          "causas": "p1",
+          "consequencias revolta vacina": "p4",
+          "com fontes publicas": "p7",
+          "evidencias cada aspecto": "p10"
+        },
+        "provedores": {
+          "wikipedia": {
+            "ok": 1,
+            "falhas": 0,
+            "ms": 391
+          },
+          "web": {
+            "ok": 3,
+            "falhas": 0,
+            "ms": 6022
+          }
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 0.3941
+          },
+          {
+            "step_id": "p4",
+            "type": "busca",
+            "seconds": 2.2892
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 1.8585
+          },
+          {
+            "step_id": "p10",
+            "type": "busca",
+            "seconds": 1.9022
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 4.3842
+          },
+          {
+            "step_id": "p5",
+            "type": "ler",
+            "seconds": 3.4555
+          },
+          {
+            "step_id": "p8",
+            "type": "ler",
+            "seconds": 1.0878
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0018
+          },
+          {
+            "step_id": "p6",
+            "type": "analisar",
+            "seconds": 0.0062
+          },
+          {
+            "step_id": "p9",
+            "type": "analisar",
+            "seconds": 0.0016
+          }
+        ],
+        "lacunas_busca": [
+          "nenhum candidato confirma assunto e restrições do pedido"
+        ],
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-ff530ce680c1",
+              "type": "explicit_attribute",
+              "description": "Causas",
+              "entity": "Revolta da Vacina",
+              "attribute": "causes",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Causas",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-5da03a0837d8",
+              "type": "explicit_attribute",
+              "description": "Consequências",
+              "entity": "Revolta da Vacina",
+              "attribute": "consequences",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Consequências",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            }
+          ],
+          "passages": [],
+          "complete": false,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+        },
+        "research_gaps": [
+          {
+            "id": "R-ff530ce680c1",
+            "dimension": "causes",
+            "description": "Causas",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "Revolta da Vacina Causas",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-5da03a0837d8",
+            "dimension": "consequences",
+            "description": "Consequências",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "Revolta da Vacina Consequências",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          }
+        ],
+        "controller_decisions": [
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p3",
+            "executed": false
+          },
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p6",
+            "executed": false
+          },
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p9",
+            "executed": false
+          }
+        ],
+        "requirement_states": {
+          "R-ff530ce680c1": "NOT_SEARCHED",
+          "R-5da03a0837d8": "NOT_SEARCHED"
+        },
+        "adaptive_rounds": [
+          {
+            "step_id": "p3",
+            "new_evidence": 0,
+            "total_evidence": 0,
+            "remaining_searches": 4,
+            "decision": "no_new_evidence",
+            "requirement_changes": [
+              {
+                "id": "R-ff530ce680c1",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              },
+              {
+                "id": "R-5da03a0837d8",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              }
+            ]
+          },
+          {
+            "step_id": "p6",
+            "new_evidence": 0,
+            "total_evidence": 0,
+            "remaining_searches": 4,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          },
+          {
+            "step_id": "p9",
+            "new_evidence": 0,
+            "total_evidence": 0,
+            "remaining_searches": 4,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          }
+        ],
+        "round_evidence_ids": [],
+        "synthesis_attempted": true,
+        "research_outcome": {
+          "state": "partial",
+          "unresolved_fronts": [
+            "Revolta da Vacina Causas",
+            "Revolta da Vacina Consequências"
+          ],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 0,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        },
+        "partial_delivery_ready": true
+      },
+      "pendencias": [
+        "p11: orçamento de páginas esgotado",
+        "p12: aguardando dependências explícitas concluírem",
+        "p13: aguardando dependências explícitas concluírem",
+        "p14: aguardando dependências explícitas concluírem",
+        "p15: aguardando dependências explícitas concluírem"
+      ],
+      "erros": [],
+      "read_trace": [
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_da_viol%C3%AAncia_sexual",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_da_viol%C3%AAncia_sexual",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 7992,
+          "read": true,
+          "published_at": "2020-08-31T00:45:46Z",
+          "excerpt": "systematic review and meta-analysis of the characteristics of multiple perpetrator sexual offences». . : 82–94. : Aggression and Violent Behavior 28 doi 10.1016/j.avb.2016.04.001 ↑ McDonald M, ed. Gender, drink and drugs. Oxford, Berg Publishers, 1994. ↑ Awasthi B (2017). . . . 338páginas. . . : «From Attire to Assault: Clothing, Objectification, and De-humanization – A Possible Prelude to Sexual"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_da_Segunda_Guerra_Mundial",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_da_Segunda_Guerra_Mundial",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 7999,
+          "read": true,
+          "published_at": "2006-02-27T23:06:54Z",
+          "excerpt": "and War in 1939\" , Number 122, February 1989 pp. 200–240. Overy, Richard Mason, Timothy Past and Present Sontag, Raymond J. \"The Last Months of Peace, 1939\". 35#3 (1957), pp. 507–524 Foreign Affairs JSTOR 20031246 Sontag, Raymond J. \"The Origins of the Second World War\" 25#4 (1963), pp. 497–508. . Review of Politics JSTOR 1405846 Steiner, Zara. (Oxford History of Modern Europe) (2011). 1236pp. The"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_do_aquecimento_global",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_do_aquecimento_global",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 7996,
+          "read": true,
+          "published_at": "2009-01-14T15:15:54Z",
+          "excerpt": "Pathak, A. Al Khourdajie, M. Belkacemi, R. van Diemen, A. Hasija, G. Lisboa, S. Luz, J. Malley, D. McCollum, S. Some, P. Vyas, (eds.)]. In: [P.R. Shukla, J. Skea, R. Slade, A. Al Khourdajie, R. van Diemen, D. McCollum, M. Pathak, S. Some, P. Vyas, R. Fradera, M. Belkacemi, A. Hasija, G. Lisboa, S. Luz, J. Malley, (eds.)]. Cambridge University Press, Cambridge, UK and New York, NY, USA. doi:"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_da_Primeira_Guerra_Mundial",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_da_Primeira_Guerra_Mundial",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 7999,
+          "read": true,
+          "published_at": "2005-10-30T23:21:16Z",
+          "excerpt": "Tuchman Nova York 1966 ↑ , The Rise and Fall of the Great Powers (: Random House, ), Capítulo. 5 Paul M. Kennedy Nova York 1987 1 2 3 Ruth B. Henig (2002). (em inglês). Londres: Routledge. The origins of the First World War ISBN 0-415-26205-4 1 2 3 David Fromkin (2004). (em inglês). Nova Iorque: [s.n.] pp.260–62. Europe's last summer: who started the Great War in 1914? ISBN 978-0-375-41156-4 ↑ F."
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_da_doen%C3%A7a_de_Parkinson",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_da_doen%C3%A7a_de_Parkinson",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 7996,
+          "read": true,
+          "published_at": "2025-02-01T01:17:30Z",
+          "excerpt": "indicators, and early diagnosis». Elsevier BV. . : 234–241. . . : Computers in Biology and Medicine 102 ISSN 0010-4825 PMID 30253869 doi 10.1016/j.compbiomed.2018.09.008 ↑ Oczkowska, Anna; Kozubski, Wojciech; Lianeri, Margarita; Dorszewska, Jolanta (2014). . Bentham Science Publishers Ltd. . (8): 502–517. . . . : «Mutations in PRKN and SNCA Genes Important for the Progress of Parkinson's Disease»"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_da_Guerra_do_Paraguai",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_da_Guerra_do_Paraguai",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 7994,
+          "read": true,
+          "published_at": "2008-12-18T20:49:48Z",
+          "excerpt": "SCHWARCZ, Lilia Moritz. As Barbas do Imperador: D. Pedro II, um monarca nos trópicos. 2. ed. São Paulo: Companhia das Letras, 2002, pg.298 1 2 SCHWARCZ, Lilia Moritz. As Barbas do Imperador: D. Pedro II, um monarca nos trópicos. 2. ed. São Paulo: Companhia das Letras, 2002, pg.301 ↑ PEDROSA, J. F. Maya.A Catástrofe dos Erros. Rio de Janeiro: Biblioteca do Exército, 2004, pg.15 ↑ , Maldita Guerra,"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_da_Segunda_Guerra_Mundial",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_da_Segunda_Guerra_Mundial",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 7999,
+          "read": true,
+          "published_at": "2006-02-27T23:06:54Z",
+          "excerpt": "and War in 1939\" , Number 122, February 1989 pp. 200–240. Overy, Richard Mason, Timothy Past and Present Sontag, Raymond J. \"The Last Months of Peace, 1939\". 35#3 (1957), pp. 507–524 Foreign Affairs JSTOR 20031246 Sontag, Raymond J. \"The Origins of the Second World War\" 25#4 (1963), pp. 497–508. . Review of Politics JSTOR 1405846 Steiner, Zara. (Oxford History of Modern Europe) (2011). 1236pp. The"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_do_aquecimento_global",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_do_aquecimento_global",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 7996,
+          "read": true,
+          "published_at": "2009-01-14T15:15:54Z",
+          "excerpt": "Pathak, A. Al Khourdajie, M. Belkacemi, R. van Diemen, A. Hasija, G. Lisboa, S. Luz, J. Malley, D. McCollum, S. Some, P. Vyas, (eds.)]. In: [P.R. Shukla, J. Skea, R. Slade, A. Al Khourdajie, R. van Diemen, D. McCollum, M. Pathak, S. Some, P. Vyas, R. Fradera, M. Belkacemi, A. Hasija, G. Lisboa, S. Luz, J. Malley, (eds.)]. Cambridge University Press, Cambridge, UK and New York, NY, USA. doi:"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_da_viol%C3%AAncia_sexual",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_da_viol%C3%AAncia_sexual",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 7992,
+          "read": true,
+          "published_at": "2020-08-31T00:45:46Z",
+          "excerpt": "systematic review and meta-analysis of the characteristics of multiple perpetrator sexual offences». . : 82–94. : Aggression and Violent Behavior 28 doi 10.1016/j.avb.2016.04.001 ↑ McDonald M, ed. Gender, drink and drugs. Oxford, Berg Publishers, 1994. ↑ Awasthi B (2017). . . . 338páginas. . . : «From Attire to Assault: Clothing, Objectification, and De-humanization – A Possible Prelude to Sexual"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_da_Primeira_Guerra_Mundial",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_da_Primeira_Guerra_Mundial",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 7999,
+          "read": true,
+          "published_at": "2005-10-30T23:21:16Z",
+          "excerpt": "Tuchman Nova York 1966 ↑ , The Rise and Fall of the Great Powers (: Random House, ), Capítulo. 5 Paul M. Kennedy Nova York 1987 1 2 3 Ruth B. Henig (2002). (em inglês). Londres: Routledge. The origins of the First World War ISBN 0-415-26205-4 1 2 3 David Fromkin (2004). (em inglês). Nova Iorque: [s.n.] pp.260–62. Europe's last summer: who started the Great War in 1914? ISBN 978-0-375-41156-4 ↑ F."
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_da_doen%C3%A7a_de_Parkinson",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_da_doen%C3%A7a_de_Parkinson",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 7996,
+          "read": true,
+          "published_at": "2025-02-01T01:17:30Z",
+          "excerpt": "indicators, and early diagnosis». Elsevier BV. . : 234–241. . . : Computers in Biology and Medicine 102 ISSN 0010-4825 PMID 30253869 doi 10.1016/j.compbiomed.2018.09.008 ↑ Oczkowska, Anna; Kozubski, Wojciech; Lianeri, Margarita; Dorszewska, Jolanta (2014). . Bentham Science Publishers Ltd. . (8): 502–517. . . . : «Mutations in PRKN and SNCA Genes Important for the Progress of Parkinson's Disease»"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Causas_da_Guerra_do_Paraguai",
+          "final_url": "https://pt.wikipedia.org/wiki/Causas_da_Guerra_do_Paraguai",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 7994,
+          "read": true,
+          "published_at": "2008-12-18T20:49:48Z",
+          "excerpt": "SCHWARCZ, Lilia Moritz. As Barbas do Imperador: D. Pedro II, um monarca nos trópicos. 2. ed. São Paulo: Companhia das Letras, 2002, pg.298 1 2 SCHWARCZ, Lilia Moritz. As Barbas do Imperador: D. Pedro II, um monarca nos trópicos. 2. ed. São Paulo: Companhia das Letras, 2002, pg.301 ↑ PEDROSA, J. F. Maya.A Catástrofe dos Erros. Rio de Janeiro: Biblioteca do Exército, 2004, pg.15 ↑ , Maldita Guerra,"
+        },
+        {
+          "url": "https://www.superlutas.com.br/noticias/379734/video-luta-assista-melhores-momentos-vitoria-petr-yan-sobre-merab-dvalishvili-ufc-333/",
+          "final_url": "https://www.superlutas.com.br/noticias/379734/video-luta-assista-melhores-momentos-vitoria-petr-yan-sobre-merab-dvalishvili-ufc-333/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 2832,
+          "read": true,
+          "published_at": "2026-10-24T17:53:43-03:00",
+          "excerpt": "unanime ds juízes. Merab Dvalishvili Petr Yan UFC 333 começou melhor, pressionando com golpes e sucessivas tentativas de queda. Apesar de converter apenas uma das oito investidas no primeiro round, o georgiano garantiu a parcial. Nos assaltos seguintes, o russo mostrou superioridade na trocação, resistiu às quedas e castigou o rival com golpes na linha de cintura. Merab Dvalishvili Petr Yan"
+        },
+        {
+          "url": "https://m.youtube.com/watch",
+          "final_url": "https://www.youtube.com/watch",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 206,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 07:18:00 GMT",
+          "excerpt": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC"
+        },
+        {
+          "url": "https://m.youtube.com/watch",
+          "final_url": "https://www.youtube.com/watch",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 206,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 11:14:00 GMT",
+          "excerpt": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC"
+        },
+        {
+          "url": "https://www.mmafighting.com/ufc/517530/petr-yan-vs-merab-dvalishvili-3-full-fight-video-highlights-ufc-333",
+          "final_url": "https://www.mmafighting.com/ufc/517530/petr-yan-vs-merab-dvalishvili-3-full-fight-video-highlights-ufc-333",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 5306,
+          "read": true,
+          "published_at": "2026-10-24T20:31:27+00:00",
+          "excerpt": "But He has Dvalishvili in trouble now with a liver kick. Kick to the body for Yan, and round comes to an end. MMA Fighting scores the round 10-9, Yan. Overall, 29-28 Dvalishvili. Round 4 Dvalishvili immediately goes for a takedown, but fails. They trade punches, and Dvalishvili’s takedowns are not working anymore. Yan with a solid jab. And another one. Yan rocks Dvalishvili with a right hand, and"
+        },
+        {
+          "url": "https://www.dailymotion.com/video/xbr4mxe",
+          "final_url": "https://www.dailymotion.com/video/xbr4mxe",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 44,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 13:44:00 GMT",
+          "excerpt": "Skip to player Skip to main content RingCage"
+        },
+        {
+          "url": "https://www.superlutas.com.br/noticias/379734/video-luta-assista-melhores-momentos-vitoria-petr-yan-sobre-merab-dvalishvili-ufc-333/",
+          "final_url": "https://www.superlutas.com.br/noticias/379734/video-luta-assista-melhores-momentos-vitoria-petr-yan-sobre-merab-dvalishvili-ufc-333/",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 2832,
+          "read": true,
+          "published_at": "2026-10-24T17:53:43-03:00",
+          "excerpt": "unanime ds juízes. Merab Dvalishvili Petr Yan UFC 333 começou melhor, pressionando com golpes e sucessivas tentativas de queda. Apesar de converter apenas uma das oito investidas no primeiro round, o georgiano garantiu a parcial. Nos assaltos seguintes, o russo mostrou superioridade na trocação, resistiu às quedas e castigou o rival com golpes na linha de cintura. Merab Dvalishvili Petr Yan"
+        },
+        {
+          "url": "https://m.youtube.com/watch",
+          "final_url": "https://www.youtube.com/watch",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 206,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 11:14:00 GMT",
+          "excerpt": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC"
+        },
+        {
+          "url": "https://m.youtube.com/watch",
+          "final_url": "https://www.youtube.com/watch",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 206,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 07:18:00 GMT",
+          "excerpt": "Sobre Imprensa Direitos autorais Entre em contato Criadores de conteúdo Publicidade Desenvolvedores Termos Privacidade Política e segurança Como funciona o YouTube Testar os novos recursos © 2026 Google LLC"
+        },
+        {
+          "url": "https://www.mmafighting.com/ufc/517530/petr-yan-vs-merab-dvalishvili-3-full-fight-video-highlights-ufc-333",
+          "final_url": "https://www.mmafighting.com/ufc/517530/petr-yan-vs-merab-dvalishvili-3-full-fight-video-highlights-ufc-333",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 5306,
+          "read": true,
+          "published_at": "2026-10-24T20:31:27+00:00",
+          "excerpt": "But He has Dvalishvili in trouble now with a liver kick. Kick to the body for Yan, and round comes to an end. MMA Fighting scores the round 10-9, Yan. Overall, 29-28 Dvalishvili. Round 4 Dvalishvili immediately goes for a takedown, but fails. They trade punches, and Dvalishvili’s takedowns are not working anymore. Yan with a solid jab. And another one. Yan rocks Dvalishvili with a right hand, and"
+        },
+        {
+          "url": "https://www.dailymotion.com/video/xbr4mxe",
+          "final_url": "https://www.dailymotion.com/video/xbr4mxe",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 44,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 13:44:00 GMT",
+          "excerpt": "Skip to player Skip to main content RingCage"
+        },
+        {
+          "url": "https://www.dafont.com/pt/",
+          "final_url": "https://www.dafont.com/pt/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 150,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 11:35:00 GMT",
+          "excerpt": "Boto direito nos arquivos de fonte > \"Instalar\" Windows 10/8/7/Vista: Duplo clique no arquivo de fonte > Boto \"Instalar fonte\". Mac OS X: Outros SO..."
+        },
+        {
+          "url": "https://www.dafont.com/pt/",
+          "final_url": "https://www.dafont.com/pt/",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 150,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 11:35:00 GMT",
+          "excerpt": "Boto direito nos arquivos de fonte > \"Instalar\" Windows 10/8/7/Vista: Duplo clique no arquivo de fonte > Boto \"Instalar fonte\". Mac OS X: Outros SO..."
+        }
+      ]
+    },
+    {
+      "id": "rj-811b5264a6e2",
+      "objetivo": "como usar WebAssembly.Memory.grow, sua sintaxe e limitações, na documentação oficial MDN",
+      "status": "interrompida",
+      "orcamento": {
+        "buscas": 8,
+        "paginas": 12,
+        "timeout_s": 120,
+        "subs": 4,
+        "profundidade": 2,
+        "midia": 16,
+        "concorrencia": 3,
+        "replans": 2,
+        "max_bytes_pagina": 2000000
+      },
+      "usados": {
+        "buscas": 5,
+        "paginas": 12,
+        "local_context_checked": true,
+        "replans": 0,
+        "consultas_etapas": {
+          "como usar webassembly memory grow": "p1",
+          "webassembly memory grow": "p1",
+          "sua sintaxe": "p4",
+          "limitacoes": "p7",
+          "documentacao oficial mdn": "p10"
+        },
+        "lacunas_busca": [
+          "nenhum candidato confirma assunto e restrições do pedido"
+        ],
+        "provedores": {
+          "web": {
+            "ok": 4,
+            "falhas": 0,
+            "ms": 8887
+          },
+          "wikipedia": {
+            "ok": 1,
+            "falhas": 0,
+            "ms": 440
+          }
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 5.9389
+          },
+          {
+            "step_id": "p4",
+            "type": "busca",
+            "seconds": 2.3598
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 0.4447
+          },
+          {
+            "step_id": "p10",
+            "type": "busca",
+            "seconds": 0.6165
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 3.0509
+          },
+          {
+            "step_id": "p5",
+            "type": "ler",
+            "seconds": 2.8952
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0033
+          },
+          {
+            "step_id": "p6",
+            "type": "analisar",
+            "seconds": 0.0027
+          }
+        ],
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-bc8977932968",
+              "type": "explicit_attribute",
+              "description": "Sintaxe ou assinatura",
+              "entity": "WebAssembly.Memory.grow",
+              "attribute": "syntax",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Sintaxe ou assinatura",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-0561fea0d2ee",
+              "type": "explicit_attribute",
+              "description": "Comportamento da operação",
+              "entity": "WebAssembly.Memory.grow",
+              "attribute": "behavior",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Comportamento da operação",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-862731f87cd6",
+              "type": "explicit_attribute",
+              "description": "Limitações",
+              "entity": "WebAssembly.Memory.grow",
+              "attribute": "limitations",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Limitações",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            }
+          ],
+          "passages": [],
+          "complete": false,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+        },
+        "research_gaps": [
+          {
+            "id": "R-bc8977932968",
+            "dimension": "syntax",
+            "description": "Sintaxe ou assinatura",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "WebAssembly.Memory.grow Sintaxe ou assinatura",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-0561fea0d2ee",
+            "dimension": "behavior",
+            "description": "Comportamento da operação",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "WebAssembly.Memory.grow Comportamento da operação",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-862731f87cd6",
+            "dimension": "limitations",
+            "description": "Limitações",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "WebAssembly.Memory.grow Limitações",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          }
+        ],
+        "controller_decisions": [
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p3",
+            "executed": false
+          },
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p6",
+            "executed": false
+          }
+        ],
+        "requirement_states": {
+          "R-bc8977932968": "NOT_SEARCHED",
+          "R-0561fea0d2ee": "NOT_SEARCHED",
+          "R-862731f87cd6": "NOT_SEARCHED"
+        },
+        "adaptive_rounds": [
+          {
+            "step_id": "p3",
+            "new_evidence": 0,
+            "total_evidence": 0,
+            "remaining_searches": 3,
+            "decision": "no_new_evidence",
+            "requirement_changes": [
+              {
+                "id": "R-bc8977932968",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              },
+              {
+                "id": "R-0561fea0d2ee",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              },
+              {
+                "id": "R-862731f87cd6",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              }
+            ]
+          },
+          {
+            "step_id": "p6",
+            "new_evidence": 0,
+            "total_evidence": 0,
+            "remaining_searches": 3,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          }
+        ],
+        "round_evidence_ids": [],
+        "synthesis_attempted": true,
+        "research_outcome": {
+          "state": "partial",
+          "unresolved_fronts": [
+            "WebAssembly.Memory.grow Sintaxe ou assinatura",
+            "WebAssembly.Memory.grow Comportamento da operação",
+            "WebAssembly.Memory.grow Limitações"
+          ],
+          "source_authority_unverified": true,
+          "provider_code": "",
+          "read_sources": 0,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        },
+        "partial_delivery_ready": true
+      },
+      "pendencias": [
+        "p8: orçamento de páginas esgotado",
+        "p11: orçamento de páginas esgotado",
+        "p9: aguardando dependências explícitas concluírem",
+        "p12: aguardando dependências explícitas concluírem",
+        "p13: aguardando dependências explícitas concluírem",
+        "p14: aguardando dependências explícitas concluírem",
+        "p15: aguardando dependências explícitas concluírem"
+      ],
+      "erros": [],
+      "read_trace": [
+        {
+          "url": "https://webassembly.org/getting-started/developers-guide/",
+          "final_url": "https://webassembly.org/getting-started/developers-guide/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 938,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 08:01:00 GMT",
+          "excerpt": "I want to… Compile a WebAssembly module from… (This list is in alphabetical order.) Ada AssemblyScript (a TypeScript-like syntax) C/C++ starting from scratch library that I want to port to the Web C# Cobol D Dart via Flutter F# Go with full language support targeting minimal size Grain Haskell GHC WebAssembly backend Asterius Java TeaVM j2wasm GraalVM Web Image Kotlin Lua Moonbit Pascal PHP Python"
+        },
+        {
+          "url": "https://webassembly.org/",
+          "final_url": "https://webassembly.org/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 1395,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 05:38:00 GMT",
+          "excerpt": "advantage of available on a wide range of platforms. stack machine binary format common hardware capabilities Safe WebAssembly describes a memory-safe, sandboxed that may even be implemented inside existing JavaScript virtual machines. When , WebAssembly will enforce the same-origin and permissions security policies of the browser. execution environment embedded in the web Open and debuggable"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/WebAssembly",
+          "final_url": "https://en.wikipedia.org/wiki/WebAssembly",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 8000,
+          "read": true,
+          "published_at": "2015-06-18T15:02:18Z",
+          "excerpt": ". Retrieved 2019 25 July ↑ . . August 2013. from the original on 7 December 2019. \"Staring at the Sun: Dalvik vs. ASM.js vs. Native\" blog.mozilla.org Archived . Retrieved 2019 7 December 1 2 3 Krill, Paul (6 March 2017). . . from the original on 1 April 2020. \"WebAssembly is now ready for browsers to use\" InfoWorld Archived . Retrieved 2017 23 December ↑ . W3C. 15 February 2018. from the original"
+        },
+        {
+          "url": "https://developer.mozilla.org/pt-BR/docs/WebAssembly",
+          "final_url": "https://developer.mozilla.org/pt-BR/docs/WebAssembly",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 4214,
+          "read": true,
+          "published_at": "qua., 21 out. 2026 00:27:00 GMT",
+          "excerpt": "Module instância WebAssembly.Memory() Em . O objeto é redimensionável que detém os bytes de memória invocados por uma de código. WebAssembly Memory ArrayBuffer instância WebAssembly.Table() Em . O objeto é uma matriz redimensionável de valores opacos, como referências de funções, acessadas por uma de código. WebAssembly Table instância WebAssembly.CompileError() Cria um novo objeto WebAssembly ."
+        },
+        {
+          "url": "https://codigofacil.com.br/o-que-e-webassembly/",
+          "final_url": "https://codigofacil.com.br/o-que-e-webassembly/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 7995,
+          "read": true,
+          "published_at": "2024-10-25T08:55:34-03:00",
+          "excerpt": "JavaScript, que precisa ser interpretado pelo navegador no momento da execução. Finalidade é ideal para manipulação de DOM, interatividade e controle de eventos na web. Já o WebAssembly foi projetado para tarefas que exigem um processamento intensivo, como gráficos 3D, cálculos complexos e jogos. Ele complementa o JavaScript em vez de competir diretamente com ele. JavaScript Linguagens de"
+        },
+        {
+          "url": "https://developer.mozilla.org/en-US/docs/WebAssembly",
+          "final_url": "https://developer.mozilla.org/en-US/docs/WebAssembly",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 1812,
+          "read": true,
+          "published_at": "qui., 22 out. 2026 16:25:00 GMT",
+          "excerpt": "namespace for all WebAssembly-related functionality. WebAssembly value types The different WebAssembly value types. WebAssembly definitions The top-level definitions available in Wasm for defining module features such as tables, types, memories, functions, etc. WebAssembly instructions The instructions available in Wasm for handling logic. Examples Our reference documentation has several live"
+        },
+        {
+          "url": "https://webassembly.org/",
+          "final_url": "https://webassembly.org/",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 1395,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 05:38:00 GMT",
+          "excerpt": "advantage of available on a wide range of platforms. stack machine binary format common hardware capabilities Safe WebAssembly describes a memory-safe, sandboxed that may even be implemented inside existing JavaScript virtual machines. When , WebAssembly will enforce the same-origin and permissions security policies of the browser. execution environment embedded in the web Open and debuggable"
+        },
+        {
+          "url": "https://webassembly.org/getting-started/developers-guide/",
+          "final_url": "https://webassembly.org/getting-started/developers-guide/",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 938,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 08:01:00 GMT",
+          "excerpt": "I want to… Compile a WebAssembly module from… (This list is in alphabetical order.) Ada AssemblyScript (a TypeScript-like syntax) C/C++ starting from scratch library that I want to port to the Web C# Cobol D Dart via Flutter F# Go with full language support targeting minimal size Grain Haskell GHC WebAssembly backend Asterius Java TeaVM j2wasm GraalVM Web Image Kotlin Lua Moonbit Pascal PHP Python"
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/WebAssembly",
+          "final_url": "https://en.wikipedia.org/wiki/WebAssembly",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 8000,
+          "read": true,
+          "published_at": "2015-06-18T15:02:18Z",
+          "excerpt": ". Retrieved 2019 25 July ↑ . . August 2013. from the original on 7 December 2019. \"Staring at the Sun: Dalvik vs. ASM.js vs. Native\" blog.mozilla.org Archived . Retrieved 2019 7 December 1 2 3 Krill, Paul (6 March 2017). . . from the original on 1 April 2020. \"WebAssembly is now ready for browsers to use\" InfoWorld Archived . Retrieved 2017 23 December ↑ . W3C. 15 February 2018. from the original"
+        },
+        {
+          "url": "https://developer.mozilla.org/pt-BR/docs/WebAssembly",
+          "final_url": "https://developer.mozilla.org/pt-BR/docs/WebAssembly",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 4214,
+          "read": true,
+          "published_at": "qua., 21 out. 2026 00:27:00 GMT",
+          "excerpt": "Module instância WebAssembly.Memory() Em . O objeto é redimensionável que detém os bytes de memória invocados por uma de código. WebAssembly Memory ArrayBuffer instância WebAssembly.Table() Em . O objeto é uma matriz redimensionável de valores opacos, como referências de funções, acessadas por uma de código. WebAssembly Table instância WebAssembly.CompileError() Cria um novo objeto WebAssembly ."
+        },
+        {
+          "url": "https://developer.mozilla.org/en-US/docs/WebAssembly",
+          "final_url": "https://developer.mozilla.org/en-US/docs/WebAssembly",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 1812,
+          "read": true,
+          "published_at": "qui., 22 out. 2026 16:25:00 GMT",
+          "excerpt": "namespace for all WebAssembly-related functionality. WebAssembly value types The different WebAssembly value types. WebAssembly definitions The top-level definitions available in Wasm for defining module features such as tables, types, memories, functions, etc. WebAssembly instructions The instructions available in Wasm for handling logic. Examples Our reference documentation has several live"
+        },
+        {
+          "url": "https://codigofacil.com.br/o-que-e-webassembly/",
+          "final_url": "https://codigofacil.com.br/o-que-e-webassembly/",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 7995,
+          "read": true,
+          "published_at": "2024-10-25T08:55:34-03:00",
+          "excerpt": "JavaScript, que precisa ser interpretado pelo navegador no momento da execução. Finalidade é ideal para manipulação de DOM, interatividade e controle de eventos na web. Já o WebAssembly foi projetado para tarefas que exigem um processamento intensivo, como gráficos 3D, cálculos complexos e jogos. Ele complementa o JavaScript em vez de competir diretamente com ele. JavaScript Linguagens de"
+        },
+        {
+          "url": "http://sua.adm.br/",
+          "final_url": "http://sua.adm.br/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 283,
+          "read": true,
+          "published_at": "qui., 22 out. 2026 18:48:00 GMT",
+          "excerpt": "Sua Conservadora Empresa com Sistema de Gestão de Qualidade certificada de acordo com a norma: NBR ISO 9001:2008 Á acumulando uma experiência preciosa em conservação de condomínios. Estamos organizados para atende-lo com competência. 17 anos Transparência. Responsabilidade. Solução."
+        },
+        {
+          "url": "https://blog.luraeditorial.com.br/seu-teu-sua-tua/",
+          "final_url": "https://blog.luraeditorial.com.br/seu-teu-sua-tua/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 7999,
+          "read": true,
+          "published_at": "2024-01-02T09:37:41-03:00",
+          "excerpt": "representada pelos pronomes “ele”, “ela”, “eles” e “elas”. Os pronomes possessivos que se referem à terceira pessoa do discurso são “seu” e “sua”. Teu livro é muito interessante. Tua casa é muito bonita. Exemplos da segunda pessoa do discurso: Seu carro está estacionado na rua. Sua irmã é muito inteligente. Exemplos da terceira pessoa do discurso: Quando Usar Seu, Teu, Sua ou Tua “Seu”, “sua”,"
+        },
+        {
+          "url": "https://www.dicio.com.br/sua/",
+          "final_url": "https://www.dicio.com.br/sua/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 2984,
+          "read": true,
+          "published_at": "seg., 05 out. 2026 01:15:00 GMT",
+          "excerpt": "fala. [Gramática] substantivo feminino Sua opinião, sua vontade, etc.: sempre ficou com a sua; venceu a sua. Forma elíptica de na sua, em sua. [Gramática] pronome Nome popular equivalente a senhora; dona. [Popular] Etimologia (origem da palavra ). A palavra sua tem sua origem no latim “sua”, como forma feminina de seu, do latim “suus,sua,suum”, com o mesmo sentido. sua Usando \"\" num texto? O ajuda"
+        },
+        {
+          "url": "https://suamusica.com.br/",
+          "final_url": "https://suamusica.com.br/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 1385,
+          "read": true,
+          "published_at": "sáb., 24 out. 2026 05:39:00 GMT",
+          "excerpt": "O que é o Sua Música? O Sua Música é a maior plataforma brasileira de streaming e download de música independente. Artistas publicam CDs, singles e playlists; ouvintes ouvem e baixam gratuitamente, com foco em Sertanejo, Forró, Piseiro, Arrocha e outros gêneros regionais. É gratuito ouvir e baixar músicas? Sim. Ouvir e baixar conteúdo na plataforma é gratuito para ouvintes. Artistas podem criar"
+        },
+        {
+          "url": "https://old.suamusica.com.br/central-de-ajuda/download-musicas",
+          "final_url": "https://old.suamusica.com.br/central-de-ajuda/download-musicas",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 908,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 04:55:00 GMT",
+          "excerpt": "Sim, é possível baixar mais de uma vez o mesmo arquivo no Sua Música. No entanto, esta prática só deve ser utilizada quando você efetivamente precisar baixá-lo mais de uma vez (por exemplo, se perdeu ou deletou o arquivo indesejadamente em seu computador). Observe que cliques e downloads repetidos de um mesmo arquivo NÃO SÃO COMPUTADOS E SÃO DESCONSIDERADOS POR NOSSOS ALGORÍTIMOS, que calculam seu"
+        },
+        {
+          "url": "https://suamusica.com.br/top/cds/ouvidas/mes/todos",
+          "final_url": "https://suamusica.com.br/top/cds/ouvidas/mes/todos",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 277,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 13:44:00 GMT",
+          "excerpt": "Sobre Carreiras Segurança e Privacidade Política de Privacidade Política de Cookies Termos de Uso Política de Proteção da Propriedade Intelectual Denúncia de Conteúdo Contato Anuncie Baixar Logotipo Baixar Mídia Kit Marcas Baixar Mídia Kit Artistas AHA Music - Music Identifier"
+        },
+        {
+          "url": "https://www.dicio.com.br/sua/",
+          "final_url": "https://www.dicio.com.br/sua/",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 2984,
+          "read": true,
+          "published_at": "seg., 05 out. 2026 01:15:00 GMT",
+          "excerpt": "fala. [Gramática] substantivo feminino Sua opinião, sua vontade, etc.: sempre ficou com a sua; venceu a sua. Forma elíptica de na sua, em sua. [Gramática] pronome Nome popular equivalente a senhora; dona. [Popular] Etimologia (origem da palavra ). A palavra sua tem sua origem no latim “sua”, como forma feminina de seu, do latim “suus,sua,suum”, com o mesmo sentido. sua Usando \"\" num texto? O ajuda"
+        },
+        {
+          "url": "http://sua.adm.br/",
+          "final_url": "http://sua.adm.br/",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 283,
+          "read": true,
+          "published_at": "qui., 22 out. 2026 18:48:00 GMT",
+          "excerpt": "Sua Conservadora Empresa com Sistema de Gestão de Qualidade certificada de acordo com a norma: NBR ISO 9001:2008 Á acumulando uma experiência preciosa em conservação de condomínios. Estamos organizados para atende-lo com competência. 17 anos Transparência. Responsabilidade. Solução."
+        },
+        {
+          "url": "https://blog.luraeditorial.com.br/seu-teu-sua-tua/",
+          "final_url": "https://blog.luraeditorial.com.br/seu-teu-sua-tua/",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 7999,
+          "read": true,
+          "published_at": "2024-01-02T09:37:41-03:00",
+          "excerpt": "representada pelos pronomes “ele”, “ela”, “eles” e “elas”. Os pronomes possessivos que se referem à terceira pessoa do discurso são “seu” e “sua”. Teu livro é muito interessante. Tua casa é muito bonita. Exemplos da segunda pessoa do discurso: Seu carro está estacionado na rua. Sua irmã é muito inteligente. Exemplos da terceira pessoa do discurso: Quando Usar Seu, Teu, Sua ou Tua “Seu”, “sua”,"
+        },
+        {
+          "url": "https://suamusica.com.br/",
+          "final_url": "https://suamusica.com.br/",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 1385,
+          "read": true,
+          "published_at": "sáb., 24 out. 2026 05:39:00 GMT",
+          "excerpt": "O que é o Sua Música? O Sua Música é a maior plataforma brasileira de streaming e download de música independente. Artistas publicam CDs, singles e playlists; ouvintes ouvem e baixam gratuitamente, com foco em Sertanejo, Forró, Piseiro, Arrocha e outros gêneros regionais. É gratuito ouvir e baixar músicas? Sim. Ouvir e baixar conteúdo na plataforma é gratuito para ouvintes. Artistas podem criar"
+        },
+        {
+          "url": "https://old.suamusica.com.br/central-de-ajuda/download-musicas",
+          "final_url": "https://old.suamusica.com.br/central-de-ajuda/download-musicas",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 908,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 04:55:00 GMT",
+          "excerpt": "Sim, é possível baixar mais de uma vez o mesmo arquivo no Sua Música. No entanto, esta prática só deve ser utilizada quando você efetivamente precisar baixá-lo mais de uma vez (por exemplo, se perdeu ou deletou o arquivo indesejadamente em seu computador). Observe que cliques e downloads repetidos de um mesmo arquivo NÃO SÃO COMPUTADOS E SÃO DESCONSIDERADOS POR NOSSOS ALGORÍTIMOS, que calculam seu"
+        },
+        {
+          "url": "https://suamusica.com.br/top/cds/ouvidas/mes/todos",
+          "final_url": "https://suamusica.com.br/top/cds/ouvidas/mes/todos",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "ENTITY_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 277,
+          "read": true,
+          "published_at": "dom., 25 out. 2026 13:44:00 GMT",
+          "excerpt": "Sobre Carreiras Segurança e Privacidade Política de Privacidade Política de Cookies Termos de Uso Política de Proteção da Propriedade Intelectual Denúncia de Conteúdo Contato Anuncie Baixar Logotipo Baixar Mídia Kit Marcas Baixar Mídia Kit Artistas AHA Music - Music Identifier"
+        }
+      ]
+    },
+    {
+      "id": "rj-9d0bef072264",
+      "objetivo": "Como funciona Array.prototype.toSorted, qual sua sintaxe e limitações?",
+      "status": "concluida",
+      "orcamento": {
+        "buscas": 8,
+        "paginas": 12,
+        "timeout_s": 120,
+        "subs": 4,
+        "profundidade": 2,
+        "midia": 16,
+        "concorrencia": 3,
+        "replans": 2,
+        "max_bytes_pagina": 2000000
+      },
+      "usados": {
+        "buscas": 5,
+        "paginas": 5,
+        "local_context_checked": true,
+        "replans": 1,
+        "consultas_etapas": {
+          "como funciona array prototype tosorted": "p1",
+          "qual sua sintaxe": "p4",
+          "limitacoes": "p7",
+          "array prototype tosorted comportamento da operacao": "p13",
+          "array prototype tosorted limitacoes": "p16"
+        },
+        "provedores": {
+          "fixture-explicit-public-url": {
+            "ok": 5,
+            "falhas": 0,
+            "ms": 0
+          }
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 0.0128
+          },
+          {
+            "step_id": "p4",
+            "type": "busca",
+            "seconds": 0.0007
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 0.0007
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 5.3925
+          },
+          {
+            "step_id": "p5",
+            "type": "ler",
+            "seconds": 0.0028
+          },
+          {
+            "step_id": "p8",
+            "type": "ler",
+            "seconds": 0.0034
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.023
+          },
+          {
+            "step_id": "p6",
+            "type": "analisar",
+            "seconds": 0.0157
+          },
+          {
+            "step_id": "p9",
+            "type": "analisar",
+            "seconds": 0.0186
+          },
+          {
+            "step_id": "p10",
+            "type": "verificar",
+            "seconds": 0.0828
+          },
+          {
+            "step_id": "p11",
+            "type": "sintetizar",
+            "seconds": 0.0028
+          },
+          {
+            "step_id": "p12",
+            "type": "auditar",
+            "seconds": 0.005
+          },
+          {
+            "step_id": "p13",
+            "type": "busca",
+            "seconds": 0.0025
+          },
+          {
+            "step_id": "p14",
+            "type": "ler",
+            "seconds": 0.0031
+          },
+          {
+            "step_id": "p15",
+            "type": "analisar",
+            "seconds": 0.018
+          },
+          {
+            "step_id": "p16",
+            "type": "busca",
+            "seconds": 0.0024
+          },
+          {
+            "step_id": "p17",
+            "type": "ler",
+            "seconds": 0.0025
+          },
+          {
+            "step_id": "p18",
+            "type": "analisar",
+            "seconds": 0.0166
+          },
+          {
+            "step_id": "p10",
+            "type": "verificar",
+            "seconds": 0.092
+          },
+          {
+            "step_id": "p11",
+            "type": "sintetizar",
+            "seconds": 0.0029
+          },
+          {
+            "step_id": "p12",
+            "type": "auditar",
+            "seconds": 0.0051
+          }
+        ],
+        "failed_source_reads": [
+          "94cb1ee350d46f1c2cdcf7868796441bb3968f6fa4b1823abd41e3eae2ddd6e7"
+        ],
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-e3ab9f882fc3",
+              "type": "explicit_attribute",
+              "description": "Sintaxe ou assinatura",
+              "entity": "Array.prototype.toSorted",
+              "attribute": "syntax",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Sintaxe ou assinatura",
+              "candidate_evidence_ids": [
+                "ev-5ebf5ec65440",
+                "ev-02c31afb86d8"
+              ],
+              "confirmed_evidence_ids": [
+                "ev-5ebf5ec65440",
+                "ev-02c31afb86d8"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-3fd252ed35b2e140",
+                "P-8856b4b6d090d616",
+                "P-4e7aa1553d30acb7"
+              ]
+            },
+            {
+              "id": "R-ceea65f6e835",
+              "type": "explicit_attribute",
+              "description": "Comportamento da operação",
+              "entity": "Array.prototype.toSorted",
+              "attribute": "behavior",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Comportamento da operação",
+              "candidate_evidence_ids": [
+                "ev-5ebf5ec65440",
+                "ev-02c31afb86d8"
+              ],
+              "confirmed_evidence_ids": [],
+              "state": "DISCOVERED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-b600633891f9",
+              "type": "explicit_attribute",
+              "description": "Limitações",
+              "entity": "Array.prototype.toSorted",
+              "attribute": "limitations",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Limitações",
+              "candidate_evidence_ids": [
+                "ev-5ebf5ec65440",
+                "ev-02c31afb86d8"
+              ],
+              "confirmed_evidence_ids": [],
+              "state": "DISCOVERED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            }
+          ],
+          "passages": [
+            {
+              "id": "P-3fd252ed35b2e140",
+              "source_id": "ev-5ebf5ec65440",
+              "requirement_id": "R-e3ab9f882fc3",
+              "text_span": {
+                "start": 1451,
+                "end": 2410,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-8856b4b6d090d616",
+              "source_id": "ev-02c31afb86d8",
+              "requirement_id": "R-e3ab9f882fc3",
+              "text_span": {
+                "start": 0,
+                "end": 1018,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-4e7aa1553d30acb7",
+              "source_id": "ev-02c31afb86d8",
+              "requirement_id": "R-e3ab9f882fc3",
+              "text_span": {
+                "start": 2119,
+                "end": 3218,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            }
+          ],
+          "complete": false,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+        },
+        "research_gaps": [
+          {
+            "id": "R-e3ab9f882fc3",
+            "dimension": "syntax",
+            "description": "Sintaxe ou assinatura",
+            "requirement_state": "SUPPORTED",
+            "status": "RESOLVED",
+            "query": "",
+            "evidence_ids": [
+              "ev-5ebf5ec65440",
+              "ev-02c31afb86d8"
+            ],
+            "candidate_sources": [],
+            "observed_publications": 2,
+            "required_publications": 1,
+            "reason": "",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-ceea65f6e835",
+            "dimension": "behavior",
+            "description": "Comportamento da operação",
+            "requirement_state": "DISCOVERED",
+            "status": "OPEN",
+            "query": "",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-b600633891f9",
+            "dimension": "limitations",
+            "description": "Limitações",
+            "requirement_state": "DISCOVERED",
+            "status": "OPEN",
+            "query": "",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          }
+        ],
+        "controller_decisions": [
+          {
+            "action": "REPLAN",
+            "reason": "required_data_missing",
+            "gap_ids": [
+              "R-ceea65f6e835",
+              "R-b600633891f9"
+            ],
+            "step_id": "p3",
+            "executed": false
+          },
+          {
+            "action": "REPLAN",
+            "reason": "required_data_missing",
+            "gap_ids": [
+              "R-ceea65f6e835",
+              "R-b600633891f9"
+            ],
+            "step_id": "p6",
+            "executed": false
+          },
+          {
+            "action": "REPLAN",
+            "reason": "required_data_missing",
+            "gap_ids": [
+              "R-ceea65f6e835",
+              "R-b600633891f9"
+            ],
+            "step_id": "p9",
+            "executed": true,
+            "new_searches": 2
+          },
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p15",
+            "executed": false
+          },
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p18",
+            "executed": false
+          }
+        ],
+        "requirement_states": {
+          "R-e3ab9f882fc3": "SUPPORTED",
+          "R-ceea65f6e835": "DISCOVERED",
+          "R-b600633891f9": "DISCOVERED"
+        },
+        "adaptive_rounds": [
+          {
+            "step_id": "p3",
+            "new_evidence": 2,
+            "total_evidence": 2,
+            "remaining_searches": 5,
+            "decision": "evidence_gained",
+            "requirement_changes": [
+              {
+                "id": "R-e3ab9f882fc3",
+                "before": "NOT_SEARCHED",
+                "after": "SUPPORTED"
+              },
+              {
+                "id": "R-ceea65f6e835",
+                "before": "NOT_SEARCHED",
+                "after": "DISCOVERED"
+              },
+              {
+                "id": "R-b600633891f9",
+                "before": "NOT_SEARCHED",
+                "after": "DISCOVERED"
+              }
+            ]
+          },
+          {
+            "step_id": "p6",
+            "new_evidence": 0,
+            "total_evidence": 2,
+            "remaining_searches": 5,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          },
+          {
+            "step_id": "p9",
+            "new_evidence": 0,
+            "total_evidence": 2,
+            "remaining_searches": 5,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          },
+          {
+            "step_id": "p15",
+            "new_evidence": 0,
+            "total_evidence": 2,
+            "remaining_searches": 4,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          },
+          {
+            "step_id": "p18",
+            "new_evidence": 0,
+            "total_evidence": 2,
+            "remaining_searches": 3,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          }
+        ],
+        "round_evidence_ids": [
+          "ev-02c31afb86d8",
+          "ev-5ebf5ec65440"
+        ],
+        "follow_ups": [],
+        "research_outcome": {
+          "state": "partial",
+          "unresolved_fronts": [],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 2,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        }
+      },
+      "pendencias": [],
+      "erros": [],
+      "read_trace": [
+        {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "final_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 2410,
+          "read": true,
+          "published_at": "",
+          "excerpt": "according to each character's Unicode code point value. See for more information. sort() Return value A new array with the elements sorted in ascending order. Description See for more information on the parameter. sort() compareFn When used on , the method iterates empty slots as if they have the value . sparse arrays toSorted() undefined The method is . It only expects the value to have a"
+        },
+        {
+          "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "final_url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 3218,
+          "read": true,
+          "published_at": "",
+          "excerpt": "Dieser Inhalt wurde automatisch aus dem Englischen übersetzt, und kann Fehler enthalten. Erfahre mehr über dieses Experiment. View in English Always switch to English Array.prototype.toSorted() Baseline Weitgehend verfügbar Diese Funktion ist gut etabliert und funktioniert auf vielen Geräten und in vielen Browserversionen. Sie ist seit Juli 2023 browserübergreifend verfügbar. Vollständige"
+        },
+        {
+          "url": "https://www.npmjs.com/package/array.prototype.tosorted",
+          "final_url": "",
+          "source_state": "BLOCKED",
+          "stage": "fetch_failed",
+          "code": "bloqueado",
+          "scope": "",
+          "extracted_chars": 0,
+          "read": false,
+          "published_at": "",
+          "excerpt": ""
+        },
+        {
+          "url": "https://tc39.es/ecma262/multipage/indexed-collections.html",
+          "final_url": "https://tc39.es/ecma262/multipage/indexed-collections.html",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "abstract_only",
+          "extracted_chars": 7995,
+          "read": true,
+          "published_at": "",
+          "excerpt": "seq-cst Let be (). length TypedArrayLength taRecord Let be .. byteOffset ta [[ByteOffset]] Let be a new empty . bytes List Let be 0. index Repeat, while < , index length Let be + . byteIndex byteOffset index Let be ((, , , , )). byte ℝ GetValueFromBuffer buffer byteIndex uint8 true unordered Append to . byte bytes Set to + 1. index index Return . bytes SetUint8ArrayBytes ( , ) 23.3.3.3 into bytes"
+        },
+        {
+          "url": "https://github.com/zloirock/core-js",
+          "final_url": "https://github.com/zloirock/core-js",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 1523,
+          "read": true,
+          "published_at": "",
+          "excerpt": "AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes Code Quality Enforce quality at merge APPLICATION SECURITY GitHub Advanced Security Find and fix"
+        },
+        {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "final_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "source_state": "EVIDENCE_ELIGIBLE",
+          "stage": "evidence_stored",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 2410,
+          "read": true,
+          "published_at": "",
+          "excerpt": "according to each character's Unicode code point value. See for more information. sort() Return value A new array with the elements sorted in ascending order. Description See for more information on the parameter. sort() compareFn When used on , the method iterates empty slots as if they have the value . sparse arrays toSorted() undefined The method is . It only expects the value to have a"
+        },
+        {
+          "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "final_url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "source_state": "EVIDENCE_ELIGIBLE",
+          "stage": "evidence_stored",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 3218,
+          "read": true,
+          "published_at": "",
+          "excerpt": "Dieser Inhalt wurde automatisch aus dem Englischen übersetzt, und kann Fehler enthalten. Erfahre mehr über dieses Experiment. View in English Always switch to English Array.prototype.toSorted() Baseline Weitgehend verfügbar Diese Funktion ist gut etabliert und funktioniert auf vielen Geräten und in vielen Browserversionen. Sie ist seit Juli 2023 browserübergreifend verfügbar. Vollständige"
+        },
+        {
+          "url": "https://tc39.es/ecma262/multipage/indexed-collections.html",
+          "final_url": "https://tc39.es/ecma262/multipage/indexed-collections.html",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "abstract_only",
+          "extracted_chars": 7995,
+          "read": true,
+          "published_at": "",
+          "excerpt": "seq-cst Let be (). length TypedArrayLength taRecord Let be .. byteOffset ta [[ByteOffset]] Let be a new empty . bytes List Let be 0. index Repeat, while < , index length Let be + . byteIndex byteOffset index Let be ((, , , , )). byte ℝ GetValueFromBuffer buffer byteIndex uint8 true unordered Append to . byte bytes Set to + 1. index index Return . bytes SetUint8ArrayBytes ( , ) 23.3.3.3 into bytes"
+        },
+        {
+          "url": "https://github.com/zloirock/core-js",
+          "final_url": "https://github.com/zloirock/core-js",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 1523,
+          "read": true,
+          "published_at": "",
+          "excerpt": "AI CODE CREATION GitHub Copilot Write better code with AI GitHub Copilot app Direct agents from issue to merge MCP Registry Integrate external tools DEVELOPER WORKFLOWS Actions Automate any workflow Codespaces Instant dev environments Issues Plan and track work Code Review Manage code changes Code Quality Enforce quality at merge APPLICATION SECURITY GitHub Advanced Security Find and fix"
+        }
+      ]
+    },
+    {
+      "id": "rj-41ef45d94eda",
+      "objetivo": "tecnologias de armazenamento de energia e limitações",
+      "status": "cancelada",
+      "orcamento": {
+        "buscas": 8,
+        "paginas": 12,
+        "timeout_s": 120,
+        "subs": 4,
+        "profundidade": 2,
+        "midia": 16,
+        "concorrencia": 3,
+        "replans": 2,
+        "max_bytes_pagina": 2000000
+      },
+      "usados": {
+        "buscas": 1,
+        "paginas": 0,
+        "local_context_checked": true,
+        "replans": 0,
+        "consultas_etapas": {
+          "tecnologias armazenamento energia": "p1"
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 0.8621
+          }
+        ]
+      },
+      "pendencias": [],
+      "erros": [],
+      "read_trace": []
+    }
+  ]
+}

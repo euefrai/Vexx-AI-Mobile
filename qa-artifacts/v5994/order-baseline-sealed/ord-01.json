@@ -1,0 +1,3376 @@
+{
+  "id": "ord-01",
+  "category": "universal",
+  "query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 15.223,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "stackexchange",
+      "query": "Array.prototype.toSpliced",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "Array.prototype.toSpliced",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Array.prototype.toSpliced",
+      "candidates": 6
+    },
+    {
+      "provider": "stackexchange",
+      "query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Array.prototype.toSpliced&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Array.prototype.toSpliced&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5271
+    },
+    {
+      "url": "https://www.bing.com/search?q=javascript+array.prototype.tospliced+sua+sintaxe+comportamento&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=javascript+array.prototype.tospliced+sua+sintaxe+comportamento&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5045
+    },
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+      "final": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+      "chars": 212491
+    },
+    {
+      "url": "https://www.enable-javascript.com/pt/",
+      "final": "https://www.enable-javascript.com/pt/",
+      "chars": 27477
+    },
+    {
+      "url": "https://www.w3schools.com/Js/",
+      "final": "https://www.w3schools.com/Js/",
+      "chars": 259134
+    },
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+      "final": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+      "chars": 186685
+    },
+    {
+      "url": "https://www.w3schools.com/Js/js_array_reference.asp",
+      "final": "https://www.w3schools.com/Js/js_array_reference.asp",
+      "chars": 237037
+    },
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/JavaScript/Reference/Global_Objects/Array/prototype",
+      "error": "http"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+    "domain": "general",
+    "original_request": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+    "resolved_request": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:30:04.461044+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "4063aa5e3470d92911b8",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+        "title": "Array - JavaScript | MDN - MDN Web Docs",
+        "origin": "bing",
+        "query": "Array.prototype.toSpliced",
+        "date": "qui., 22 out. 2026 00:19:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "sintaxe console.log(anos[0]); // funciona corretamente js renderer.3d.setTexture(model, 'personagem.png'); // um erro de sintaxe renderer['3d'].setTexture(model",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 7990,
+        "final_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "36806442b4fc132fb765",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+        "title": "JavaScript - MDN Web Docs",
+        "origin": "bing",
+        "query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+        "date": "sáb., 24 out. 2026 13:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "JavaScript® (às vezes abreviado para JS) é uma linguagem leve, interpretada e baseada em objetos com funções de primeira classe, mais conhecida como a linguagem",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "1f297cad465f26f9d20d",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        "title": "JavaScript - MDN",
+        "origin": "bing",
+        "query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+        "date": "dom., 25 out. 2026 11:21:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "JavaScript (JS) is a lightweight interpreted (or just-in-time compiled) programming language with first-class functions. While it is most well-known as the scri",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "829b57a2264c840d99df",
+        "url": "https://www.enable-javascript.com/pt/",
+        "title": "Como habilitar o JavaScript no seu navegador e por que",
+        "origin": "bing",
+        "query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+        "date": "sáb., 24 out. 2026 11:01:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "marque a caixa de seleção \"Ativar JavaScript\". Clique no botão \"Recarregar a página atual\" do navegador da Web para atualizar a página. 1. 2. 3. 4. Opera 1. Cli",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 2262,
+        "final_url": "https://www.enable-javascript.com/pt/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "905dddee462b85f651dd",
+        "url": "https://www.w3schools.com/Js/",
+        "title": "JavaScript Tutorial - W3Schools",
+        "origin": "bing",
+        "query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+        "date": "dom., 25 out. 2026 07:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "developers learn: 3 languages must to define the content of web pages HTML to specify the layout of web pages CSS to program the behavior of web pages JavaScrip",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3037,
+        "final_url": "https://www.w3schools.com/Js/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "c24a4bb1e5f5b1c9410f",
+        "url": "https://www.javascripttutorial.net/",
+        "title": "JavaScript Tutorial",
+        "origin": "bing",
+        "query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+        "date": "dom., 25 out. 2026 07:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "JavaScript Tutorial provides you with many practical tutorials that help you learn JavaScript from scratch quickly and effectively.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "2d9cd1d31b4db695bcb0",
+        "url": "https://www.alura.com.br/artigos/javascript-para-que-serve-array",
+        "title": "Array em JavaScript: o que é para que serve na programação",
+        "origin": "bing",
+        "query": "Array.prototype.toSpliced",
+        "date": "dom., 25 out. 2026 02:53:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Na programação, um array funciona como esse guarda-roupa: ele é uma estrutura que armazena diferentes dados em um único espaço organizado. Neste artigo, vamos e",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "b27e6cc55d526d30cb34",
+        "url": "https://pt.wikipedia.org/wiki/Javascript",
+        "title": "JavaScript – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+        "date": "sáb., 24 out. 2026 14:00:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "JavaScript permite páginas da Web interativas e, portanto, é uma parte essencial dos aplicativos da web. A grande maioria dos sites usa, e todos os principais n",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "a9370340c862a2b47f0f",
+        "url": "https://blog.betrybe.com/linguagem-de-programacao/o-que-e-array/",
+        "title": "O que é array, para que serve e como fazer? - Blog da Trybe",
+        "origin": "bing",
+        "query": "Array.prototype.toSpliced",
+        "date": "dom., 25 out. 2026 07:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Um array é uma estrutura de dados que consiste em uma coleção de elementos, onde cada elemento é identificado por índices que indicam a posição ao qual está ins",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "e1302b630523c4266177",
+        "url": "https://www.sciencedirect.com/journal/array",
+        "title": "Array | Journal | ScienceDirect.com by Elsevier",
+        "origin": "bing",
+        "query": "Array.prototype.toSpliced",
+        "date": "dom., 25 out. 2026 05:30:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Read the latest articles of Array at ScienceDirect.com, Elsevier’s leading platform of peer-reviewed scholarly literature",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "b02aa70191528de13582",
+        "url": "https://www.w3schools.com/programming/prog_arrays.php",
+        "title": "What is an Array? - W3Schools",
+        "origin": "bing",
+        "query": "Array.prototype.toSpliced",
+        "date": "sáb., 24 out. 2026 19:22:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "What is an Array? An array is a collection of values. The image below shows how we can think of an array named myFruits, with the values 'banana', 'apple', and ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "287d04f1112831e81537",
+        "url": "https://developer.mozilla.org/pt-BR/docs/JavaScript/Reference/Global_Objects/Array/prototype",
+        "title": "Array.prototype",
+        "origin": "in_source_link",
+        "query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+        "date": "",
+        "type": "page",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "http",
+        "losses": [
+          "FETCH_FAILED"
+        ]
+      },
+      {
+        "id": "01031b99edffba12608f",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+        "title": "Array .prototype .at()",
+        "origin": "in_source_link",
+        "query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "polyfill do método está disponível em Array.prototype.at core-js . Um polyfill para o método at() – retorna um valor baseado no teste fornecido. Array.prototype",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 3278,
+        "final_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "c444b9a06d8b9e34fe0e",
+        "url": "https://www.w3schools.com/Js/js_array_reference.asp",
+        "title": "JS Array Reference",
+        "origin": "in_source_link",
+        "query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Name Description [ ] Creates a new Array new Array() Creates a new Array at() Returns an indexed element of an array concat() Joins arrays and returns an array ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 2827,
+        "final_url": "https://www.w3schools.com/Js/js_array_reference.asp",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      }
+    ],
+    "unique_candidates": 14,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-d3b3ed584f75",
+      "type": "image",
+      "title": "The MDN logo",
+      "url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+      "final_url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+      "source_title": "Array.prototype.at() - JavaScript | MDN",
+      "source_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+      "publisher": "developer.mozilla.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The MDN logo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9e7a3e67c474",
+      "type": "image",
+      "title": "chrome 01",
+      "url": "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_s.jpg",
+      "final_url": "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm9.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 01",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-eb65ed9fa49d",
+      "type": "image",
+      "title": "chrome 02",
+      "url": "https://farm9.staticflickr.com/8442/7780404290_beb923884b_s.jpg",
+      "final_url": "https://farm9.staticflickr.com/8442/7780404290_beb923884b_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm9.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 02",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-11a60e24dbcf",
+      "type": "image",
+      "title": "chrome 03",
+      "url": "https://farm8.staticflickr.com/7124/7780404172_9207f67364_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7124/7780404172_9207f67364_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 03",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-98e4913c5845",
+      "type": "image",
+      "title": "chrome 04",
+      "url": "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_s.jpg",
+      "final_url": "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm9.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 04",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ae3169d5b5bb",
+      "type": "image",
+      "title": "chrome 05",
+      "url": "https://farm8.staticflickr.com/7126/7780403992_80d924480b_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7126/7780403992_80d924480b_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 05",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d2ab833092df",
+      "type": "image",
+      "title": "chrome 06",
+      "url": "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_s.jpg",
+      "final_url": "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm9.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 06",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-fc803c17d85a",
+      "type": "image",
+      "title": "chrome 07",
+      "url": "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 07",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-307fa6f662c0",
+      "type": "image",
+      "title": "ff 01",
+      "url": "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ff 01",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8d0887fbeae0",
+      "type": "image",
+      "title": "ff 02",
+      "url": "https://farm8.staticflickr.com/7362/16455844865_a2fea4d261_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7362/16455844865_a2fea4d261_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ff 02",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ae1ff53fdd5a",
+      "type": "image",
+      "title": "ff 03",
+      "url": "https://farm8.staticflickr.com/7301/16454099181_4900b2461a_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7301/16454099181_4900b2461a_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ff 03",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e8ad4af93002",
+      "type": "image",
+      "title": "ff 04",
+      "url": "https://farm9.staticflickr.com/8666/15833321544_70ea118cf4_s.jpg",
+      "final_url": "https://farm9.staticflickr.com/8666/15833321544_70ea118cf4_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm9.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ff 04",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+      "titulo": "Array - JavaScript | MDN",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "qui., 22 out. 2026 00:19:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.enable-javascript.com/pt/",
+      "titulo": "Como habilitar o JavaScript no seu navegador e por que",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 11:01:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.enable-javascript.com/pt/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.w3schools.com/Js/",
+      "titulo": "JavaScript Tutorial",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 07:03:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.w3schools.com/Js/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Array.prototype.toSpliced",
+      "items": [
+        {
+          "titulo": "O que é array, para que serve e como fazer? - Blog da Trybe",
+          "url": "https://blog.betrybe.com/linguagem-de-programacao/o-que-e-array/",
+          "trecho": "Um array é uma estrutura de dados que consiste em uma coleção de elementos, onde cada elemento é identificado por índices que indicam a posição ao qual está inserido.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:03:00 GMT"
+          },
+          "discovery_query": "Array.prototype.toSpliced",
+          "discovery_provider": "bing",
+          "url_canonica": "https://blog.betrybe.com/linguagem-de-programacao/o-que-e-array",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Array em JavaScript: o que é para que serve na programação",
+          "url": "https://www.alura.com.br/artigos/javascript-para-que-serve-array",
+          "trecho": "Na programação, um array funciona como esse guarda-roupa: ele é uma estrutura que armazena diferentes dados em um único espaço organizado. Neste artigo, vamos entender o que são arrays, para que servem e como utilizá-los no dia a dia do desenvolvimento.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:53:00 GMT"
+          },
+          "discovery_query": "Array.prototype.toSpliced",
+          "discovery_provider": "bing",
+          "url_canonica": "https://alura.com.br/artigos/javascript-para-que-serve-array",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 8.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Array - JavaScript | MDN - MDN Web Docs",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+          "trecho": "O objeto Array do JavaScript é um objeto global usado na construção de 'arrays': objetos de alto nível semelhantes a listas.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 00:19:00 GMT"
+          },
+          "discovery_query": "Array.prototype.toSpliced",
+          "discovery_provider": "bing",
+          "url_canonica": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+          "republicacoes": [
+            "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+          ],
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Array | Journal | ScienceDirect.com by Elsevier",
+          "url": "https://www.sciencedirect.com/journal/array",
+          "trecho": "Read the latest articles of Array at ScienceDirect.com, Elsevier’s leading platform of peer-reviewed scholarly literature",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 05:30:00 GMT"
+          },
+          "discovery_query": "Array.prototype.toSpliced",
+          "discovery_provider": "bing",
+          "url_canonica": "https://sciencedirect.com/journal/array",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "What is an Array? - W3Schools",
+          "url": "https://www.w3schools.com/programming/prog_arrays.php",
+          "trecho": "What is an Array? An array is a collection of values. The image below shows how we can think of an array named myFruits, with the values 'banana', 'apple', and 'orange' stored inside it.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 19:22:00 GMT"
+          },
+          "discovery_query": "Array.prototype.toSpliced",
+          "discovery_provider": "bing",
+          "url_canonica": "https://w3schools.com/programming/prog_arrays.php",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Array - JavaScript | MDN - MDN Web Docs",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+          "trecho": "The Array object, as with arrays in other programming languages, enables storing a collection of multiple items under a single variable name, and has members for performing common array operations.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 01:21:00 GMT"
+          },
+          "discovery_query": "Array.prototype.toSpliced",
+          "discovery_provider": "bing",
+          "url_canonica": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+      "items": [
+        {
+          "titulo": "JavaScript Tutorial - W3Schools",
+          "url": "https://www.w3schools.com/Js/",
+          "trecho": "W3Schools maintains a complete JavaScript reference, including all HTML and browser objects. The reference contains examples for all properties, methods and events, and is continuously updated according to the latest web standards.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:03:00 GMT"
+          },
+          "discovery_query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+          "discovery_provider": "bing",
+          "url_canonica": "https://w3schools.com/Js",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "JavaScript - MDN Web Docs",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+          "trecho": "JavaScript® (às vezes abreviado para JS) é uma linguagem leve, interpretada e baseada em objetos com funções de primeira classe, mais conhecida como a linguagem de script para páginas Web, mas usada também em vários outros ambientes sem browser, tais como node.js, Apache CouchDB e Adobe Acrobat.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 13:24:00 GMT"
+          },
+          "discovery_query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+          "discovery_provider": "bing",
+          "url_canonica": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "JavaScript Tutorial",
+          "url": "https://www.javascripttutorial.net/",
+          "trecho": "JavaScript Tutorial provides you with many practical tutorials that help you learn JavaScript from scratch quickly and effectively.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:03:00 GMT"
+          },
+          "discovery_query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+          "discovery_provider": "bing",
+          "url_canonica": "https://javascripttutorial.net/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "JavaScript – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Javascript",
+          "trecho": "JavaScript permite páginas da Web interativas e, portanto, é uma parte essencial dos aplicativos da web. A grande maioria dos sites usa, e todos os principais navegadores têm um mecanismo JavaScript dedicado para executá-lo.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 14:00:00 GMT"
+          },
+          "discovery_query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Javascript",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 8.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "JavaScript - MDN",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "trecho": "JavaScript (JS) is a lightweight interpreted (or just-in-time compiled) programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:21:00 GMT"
+          },
+          "discovery_query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+          "discovery_provider": "bing",
+          "url_canonica": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Como habilitar o JavaScript no seu navegador e por que",
+          "url": "https://www.enable-javascript.com/pt/",
+          "trecho": "O JavaScript está habilitado no seu navegador. Se você desabilitar o JavaScript, este texto mudará.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 11:01:00 GMT"
+          },
+          "discovery_query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+          "discovery_provider": "bing",
+          "url_canonica": "https://enable-javascript.com/pt",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.2,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.w3schools.com/Js/",
+      "result": {
+        "titulo": "JavaScript Tutorial",
+        "texto": "JavaScript Tutorial ❮ Home Next ❯ Learn JavaScript The Programming Language of the Web JavaScript is easy to learn. This tutorial covers everything from basic JavaScript up to the latest 2026 version. Start learning JavaScript now » Share Examples in Each Chapter With our editor, you can edit the source code and view the result. Try it Yourself Example My First JavaScript Try it Yourself » Use the Menu We recommend reading this tutorial, . in the sequence listed in the menu If you have a large screen, the menu will always be present on the left. If you have a small screen, open the menu by clicking the top menu sign . ☰ Learn by Examples Examples are better than 1000 words. Examples are often easier to understand than text explanations. This tutorial supplements all explanations with clarifying examples. Try it Yourself If you try all the examples, you will learn a lot about JavaScript, in a very short time! JavaScript Examples » Why Study JavaScript? JavaScript is one of the all web developers learn: 3 languages must to define the content of web pages HTML to specify the layout of web pages CSS to program the behavior of web pages JavaScript Learning Speed In this tutorial, the learning speed is your choice. Everything is up to you. If you are struggling, take a break, or re-read the material. make sure you understand the \"Try-it-Yourself\" examples. Always all The only way to become a clever programmer is to: Practice coding! Practice coding! Practice coding! Commonly Asked Questions How do I get JavaScript? Where can I download JavaScript? Is JavaScript Free? You don't have to get or download JavaScript. JavaScript is already running in your browser on your computer, on your tablet, and on your smart-phone. JavaScript is free to use for everyone. JavaScript Exercises Many chapters in this tutorial end with an exercise where you can check your level of knowledge. See all JavaScript Exercises JavaScript Quiz Test Test your JavaScript skills at W3Schools! Start JavaScript Quiz! Track Your Progress Create a W3Schools account and get access to more features and learning materials: View your completed tutorials, exercises, and quizzes Keep an eye on your progress and daily streaks Join the leaderboard and compete with others Get your own avatar and unlock new skins Create your own personal website Sign Up » Note This is an optional feature. You can study at W3Schools without creating an account. JavaScript References W3Schools maintains a complete JavaScript reference, including all HTML and browser objects. The reference contains examples for all properties, methods and events, and is continuously updated according to the latest web standards. Complete JavaScript Reference » Certification Course Get Certified in coding Complete the W3Schools coding course, strengthen your knowledge, and earn a certificate you can add to your CV, portfolio, and LinkedIn profile. Get Certified Today W3Schools Certificate Coding Learn it. Practice it. Prove it. ❮ Home Next ❯ ★ +1 Sign in to track progress",
+        "final": "https://www.w3schools.com/Js/",
+        "trecho_usado": "developers learn: 3 languages must to define the content of web pages HTML to specify the layout of web pages CSS to program the behavior of web pages JavaScript Learning Speed In this tutorial, the learning speed is your choice. Everything is up to you. If you are struggling, take a break, or re-read the material. make sure you understand the \"Try-it-Yourself\" examples. Always all The only way to",
+        "metadados": {
+          "titulo": "JavaScript Tutorial",
+          "descricao": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+          "canonica": "",
+          "og": {
+            "og:title": "JavaScript Tutorial",
+            "og:image": "https://www.w3schools.com/images/og/js/default.png",
+            "og:image:type": "image/png",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "og:description": "This tutorial covers everything from basic JavaScript up to the latest 2026 version.",
+            "og:url": "https://www.w3schools.com/Js/default.asp",
+            "og:type": "website",
+            "og:site_name": "W3Schools"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@w3schools",
+            "twitter:title": "JavaScript Tutorial",
+            "twitter:description": "This tutorial covers everything from basic JavaScript up to the latest 2026 version.",
+            "twitter:image": "https://www.w3schools.com/images/og/js/default.png"
+          },
+          "idioma": "en-US",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "W3Schools",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "The Programming Language of the Web",
+            "texto": "JavaScript is easy to learn.\nThis tutorial covers everything from basic JavaScript up to the latest 2026 version.\nStart learning JavaScript now »\nWith our editor, you can edit the source code and view the result. Try it Yourself\nWe recommend reading this tutorial, . in the sequence listed in the menu\nIf you have a large screen, the menu will always be present on the left.\nIf you have a small screen, open the menu by clicking the top menu sign . ☰\nExamples are better than 1000 words.\nExamples are often easier to understand than text explanations.\nThis tutorial supplements all explanations with clarifying examples. Try it Yourself\nIf you try all the examples, you will learn a lot about JavaScript, in a very short time!\nJavaScript is one of the all web developers learn: 3 languages must\nto define the content of web pages HTML\nto specify the layout of web pages CSS\nto program the behavior of web pages JavaScript\nIn this tutorial, the learning speed is your choice.\nIf you are struggling, take a break, or re-read the material.\nmake sure you understand the \"Try-it-Yourself\" examples. Always all\nThe only way to become a clever programmer is to:\nPractice coding! Practice coding! Practice coding!\nWhere can I download JavaScript?\nYou don't have to get or download JavaScript.\nJavaScript is already running in your browser on your computer, on your tablet, and on your smart-phone.\nJavaScript is free to use for everyone.\nMany chapters in this tutorial end with an exercise where you can check your level of knowledge.\nSee all JavaScript Exercises\nTest your JavaScript skills at W3Schools!\nCreate a W3Schools account and get access to more features and learning materials:\nView your completed tutorials, exercises, and quizzes\nKeep an eye on your progress and daily streaks\nJoin the leaderboard and compete with others\nGet your own avatar and unlock new skins\nCreate your own personal website\nThis is an optional feature. You can study at W3Schools without creating an account.\nW3Schools maintains a complete JavaScript reference, including all HTML and browser objects.\nThe reference contains examples for all properties, methods and events, and is continuously updated according to the latest web standards.\nComplete the W3Schools coding course, strengthen your knowledge, and earn a certificate you can add to your CV, portfolio, and LinkedIn profile."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.w3schools.com/Js/js_array_reference.asp",
+            "texto": "JS Array Reference",
+            "interno": true
+          },
+          {
+            "url": "https://www.w3schools.com",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.w3schools.com/adventure/index.php",
+            "texto": "NEW W3Schools app iOS & Android Start the adventure",
+            "interno": true
+          },
+          {
+            "url": "https://profile.w3schools.com/log-in",
+            "texto": "--> --> ★ +1",
+            "interno": false
+          },
+          {
+            "url": "https://pathfinder.w3schools.com",
+            "texto": "My W3Schools",
+            "interno": false
+          },
+          {
+            "url": "https://www.w3schools.com/spaces/index.php",
+            "texto": "Spaces",
+            "interno": true
+          },
+          {
+            "url": "https://order.w3schools.com/plans",
+            "texto": "Upgrade",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog",
+            "texto": "Paid Courses",
+            "interno": false
+          },
+          {
+            "url": "https://www.w3schools.com/academy/index.php",
+            "texto": "Academy",
+            "interno": true
+          },
+          {
+            "url": "https://www.w3schools.com/practice/index.php",
+            "texto": "Practice",
+            "interno": true
+          },
+          {
+            "url": "https://spaces.w3schools.com/",
+            "texto": "Spaces",
+            "interno": false
+          },
+          {
+            "url": "https://profile.w3schools.com/logout",
+            "texto": "Logout",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/@w3schools",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.linkedin.com/company/w3schools.com/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://discord.com/invite/w3schools",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.facebook.com/w3schoolscom/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/w3schools.com_official/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://profile.w3schools.com/signup",
+            "texto": "Sign in",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/html-course",
+            "texto": "HTML",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/css-course",
+            "texto": "CSS",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/javascript-course",
+            "texto": "JavaScript",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/sql-course",
+            "texto": "SQL",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/python-course",
+            "texto": "Python",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/java-course",
+            "texto": "Java",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-c",
+            "texto": "C",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/cpp-course",
+            "texto": "C++",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/c-course",
+            "texto": "C#",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/php-course",
+            "texto": "PHP",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/react-js-course",
+            "texto": "React",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-mysql-1",
+            "texto": "MySQL",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.w3schools.com/images/og/js/default.png",
+          "https://www.w3schools.com/adventure/img/mascot-lynx.png",
+          "https://www.w3schools.com/adventure/img/screen-map.png",
+          "https://www.w3schools.com/images/colorpicker2000.png",
+          "https://www.w3schools.com/signup/lynxlogo.svg",
+          "https://www.w3schools.com/Js/img_javascript_480.jpg",
+          "https://www.w3schools.com/spaces/files/check3.db67d31e.svg",
+          "https://www.w3schools.com/html/img_cert_html.jpg",
+          "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+          "https://www.w3schools.com/adventure/img/map/oakTree.webp"
+        ],
+        "midia": [
+          {
+            "id": "med-c08538222dd9",
+            "type": "image",
+            "title": "This tutorial covers everything from basic JavaScript up to the latest 2026 version.",
+            "url": "https://www.w3schools.com/images/og/js/default.png",
+            "final_url": "https://www.w3schools.com/images/og/js/default.png",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "This tutorial covers everything from basic JavaScript up to the latest 2026 version.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ae0f6b9c5cf6",
+            "type": "image",
+            "title": "A circular color wheel showing the gradation of colors in the spectrum",
+            "url": "https://www.w3schools.com/images/colorpicker2000.png",
+            "final_url": "https://www.w3schools.com/images/colorpicker2000.png",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A circular color wheel showing the gradation of colors in the spectrum",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-da64a54a3a6d",
+            "type": "image",
+            "title": "Lynx logo",
+            "url": "https://www.w3schools.com/signup/lynxlogo.svg",
+            "final_url": "https://www.w3schools.com/signup/lynxlogo.svg",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lynx logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7edfa968bdca",
+            "type": "image",
+            "title": "JS",
+            "url": "https://www.w3schools.com/Js/img_javascript_480.jpg",
+            "final_url": "https://www.w3schools.com/Js/img_javascript_480.jpg",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "JS",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bc5f4a6e8804",
+            "type": "image",
+            "title": "Checkmark",
+            "url": "https://www.w3schools.com/spaces/files/check3.db67d31e.svg",
+            "final_url": "https://www.w3schools.com/spaces/files/check3.db67d31e.svg",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Checkmark",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-39664b17022a",
+            "type": "image",
+            "title": "W3Schools HTML Certificate",
+            "url": "https://www.w3schools.com/html/img_cert_html.jpg",
+            "final_url": "https://www.w3schools.com/html/img_cert_html.jpg",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "W3Schools HTML Certificate",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d49d074b82e1",
+            "type": "image",
+            "title": "W3Schools Full Access - your next career move",
+            "url": "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+            "final_url": "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "W3Schools Full Access - your next career move",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-29be92cc0b6a",
+            "type": "document",
+            "title": "index.html",
+            "url": "https://www.w3schools.com/codegame/index.html",
+            "final_url": "https://www.w3schools.com/codegame/index.html",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "This tutorial covers everything from basic JavaScript up to the latest 2026 version.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+      "result": {
+        "titulo": "Array - JavaScript | MDN",
+        "texto": "Sintaxe [element0, element1, ..., elementN] new Array(element0, element1, ..., elementN) new Array(arrayLength) element0, element1, ..., elementN Um array JavaScript é inicializado com os elementos contém, exceto no caso onde um único argumento é passado para o construtor do e esse argumento é um número (veja o parâmetro arrayLength abaixo). Esse caso especial só se aplica para os arrays JavaScript criados com o construtor , e não para literais de array criados com a sintaxe de colchetes []. Array Array arrayLength Se o único argumento passado para o construtor do for um número inteiro entre 0 e 232-1 (inclusive), um novo array com o tamanho desse número é retornado. Se o argumento for qualquer outro número, uma exceção é lançada. Array RangeError Descrição Arrays são objetos semelhantes a listas que vêm com uma série de métodos embutidos para realizar operações de travessia e mutação. Nem o tamanho de um array JavaScript nem os tipos de elementos são fixos. Já que o tamanho de um array pode ser alterado a qualquer momento e os dados podem ser armazenados em posições não contíguas, arrays JavaScript não tem a garantia de serem densos; isso depende de como o programador escolhe usá-los. De uma maneira geral, essas são características convenientes, mas, se esses recursos não são desejáveis para o seu caso em particular, você pode considerar usar arrays tipados. Arrays não podem usar strings como índices (como em um ), devem ser usados números inteiros. Definir ou acessar não-inteiros usando não vai definir ou recuperar um elemento do array em si, mas sim definir ou acessar uma variável associada com a daquele array. As propriedades de objeto do array e a lista de elementos do array são separados, e as operações de travessia e mutação não podem ser aplicadas a essas propriedades nomeadas. array associativo notação de colchetes (ou notação de ponto) coleção de propriedades de objeto Accessando elementos de um array Arrays JavaScript começam com índice zero: o primeiro elemento de um array está na posição e o último elemento está na posição equivalente ao valor da propriedade (tamanho) menos 1. 0 length js var arr = [\"este é o primeiro elemento\", \"este é o segundo elemento\"]; console.log(arr[0]); // exibe 'este é o primeiro elemento' console.log(arr[1]); // exibe 'este é o segundo elemento' console.log(arr[arr.length - 1]); // exibe 'este é o segundo elemento' Elementos de um array são somente propriedades de objetos, da forma que é uma propriedade. Contudo, note que tentando acessar o primeiro elemento de um array da seguinte forma causará um erro de sintaxe, pois o nome da propriedade é inválido: toString js console.log(arr.0); // um erro de sintaxe Não há nada de especial a respeito de arrays JavaScript e suas propriedades que causam isso. As propriedades JavaScript que começam com um dígito não podem ser referenciadas com notação de ponto. Elas necesitam usar notação de colchetes para poderem ser acessadas. Por exemplo, se você tivesse um objeto com a propriedade \"3d\", também teria que ser referenciá-la usando notação de colchetes. Por exemplo: js var anos = [1950, 1960, 1970, 1980, 1990, 2000, 2010]; console.log(anos.0); // um erro de sintaxe console.log(anos[0]); // funciona corretamente js renderer.3d.setTexture(model, 'personagem.png'); // um erro de sintaxe renderer['3d'].setTexture(model, 'personagem.png'); //funciona corretamente Note que no exemplo , teve de ser colocado entre aspas. É possivel também colocar entre aspas os índices de arrays JavaScript (ou seja, ao invés de ), contudo isto não é necessário. O valor 2 em eventualmente será convertido a uma string pela engine do JavaScript através de uma conversão explicita com o método . E é por esta razão que e irão referenciar dois slots diferentes no objeto e o seguinte exemplo pode ser : 3d '3d' years['2'] years[2] years[2] toString '2' '02' anos true js console.log(anos[\"2\"] != anos[\"02\"]); De forma similar, propriedades de objeto que sejam palavras reservadas(!) só podem ser acessadas como strings em notação de colchetes: js var promessa = { var: \"texto\", array: [1, 2, 3, 4], }; console.log(promessa[\"var\"]); Relação entre e propriedades numéricas length As propriedades e numéricas de um array Javascript são conectadas. Varios dos métodos javascript pré-definidos (por exemplo, , , etc.) levam em conta o valor da propriedade de um array quando eles são chamados. Outros métodos (por exemplo, , etc.) também resultam em uma atualização na propriedade do array. length join slice indexOf length push splice length js var frutas = []; frutas.push(\"banana\", \"maça\", \"pêssego\"); console.log(frutas.length); // 3 Quando configurar uma propriedade num array Javascript em que a propriedade é um índice valido do array e este índice está fora do atual limite do array, o array irá crescer para um tamanho grande o suficiente para acomodar o elemento neste índice, e a engine irá atualizar a propriedade do array de acordo com isto: length js frutas[5] = \"manga\"; console.log(frutas[5]); // 'manga' console.log(Object.keys(frutas)); // ['0', '1', '2', '5'] console.log(frutas.length); // 6 Configurar a propriedade diretamente, também resulta em um comportamento especial: length js frutas.length = 10; console.log(Object.keys(frutas)); // ['0', '1', '2', '5'] console.log(frutas.length); // 10 Diminuir o valor de , entretanto, apaga elementos: length js frutas.length = 2; console.log(Object.keys(frutas)); // ['0', '1'] console.log(frutas.length); // 2 Criando um array usando o resultado de uma comparação O resultado de uma comparação entre uma e uma string pode criar um array Javascript. Este array tem propriedades e elementos que disponibilizam informações sobre a comparação. Esse array é o valor de retorno dos métodos , , e . Para explicar melhor sobre estas propriedades e elementos, veja o seguinte exemplo e então consulte a tabela abaixo: expressão regular RegExp.exec String.match String.replace js // Encontra um d seguido por um ou mais b's seguido por um d // Salva os b's encontrados e o d seguinte // Ignora caixa (maiúscula/minúscula) var minhaRegex = /d(b+)(d)/i; var meuArray = minhaRegex.exec(\"cdbBdbsbz\"); As propriedades e elementos retornados desta comparação são os seguintes: Propriedade/Elemento Descrição Exemplo input Uma propriedade somente-leitura que reflete a string original a qual a expressão regular foi comparada. cdbBdbsbz index Uma propriedade somente-leitura que é o índice baseado em zero da comparação na string. 1 [0] Um elemento somente-leitura que especifica os ultimos caracteres que foram encontrados. dbBd [1], ...[n] Elementos somente-leitura que especificam as de comparações entre parênteses encontradas, se incluidas na expressão regular. O número de possíveis entre parenteses é ilimitado. substrings substrings [1]: bB [2]: d Propriedades Array.length Propriedade comprimento do construtor , cujo valor é 1. Array get Array[@@species] A função de construtor que é utilizada para criar objetos derivados. Array Permite a adição de propriedades para todos os objetos array. Métodos Array.from() Cria uma nova instância de a partir de um objeto semelhante ou iterável. Array Array.isArray() Retorna se a variável é um array e caso contrário. true false Array.of() Cria uma nova instância de com um número variável de argumentos, independentemente do número ou tipo dos argumentos. Array Instâncias de Array Todas as instâncias de herdam de . O protótipo do construtor pode ser modificado de forma a afetar todas as instâncias de . Array Array.prototype Array Array Propriedades Métodos Métodos modificadores Métodos de acesso Métodos de iteração Métodos genéricos de Array Aviso: Métodos genéricos de arrays não seguem o padrão, são obsoletos e serão removidos em breve. Algumas vezes você poderá querer aplicar métodos de arrays para strings ou outros objetos parecidos com arrays (como em de funções). Ao fazer isto, você trata uma string como um array de caracteres (ou em outros casos onde trata-se",
+        "final": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+        "trecho_usado": "sintaxe console.log(anos[0]); // funciona corretamente js renderer.3d.setTexture(model, 'personagem.png'); // um erro de sintaxe renderer['3d'].setTexture(model, 'personagem.png'); //funciona corretamente Note que no exemplo , teve de ser colocado entre aspas. É possivel também colocar entre aspas os índices de arrays JavaScript (ou seja, ao invés de ), contudo isto não é necessário. O valor 2 em",
+        "metadados": {
+          "titulo": "Array - JavaScript | MDN",
+          "descricao": "O objeto Array do JavaScript é um objeto global usado na construção de 'arrays': objetos de alto nível semelhantes a listas.",
+          "canonica": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+          "og": {
+            "og:url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+            "og:title": "Array - JavaScript | MDN",
+            "og:locale": "pt_BR",
+            "og:description": "O objeto Array do JavaScript é um objeto global usado na construção de 'arrays': objetos de alto nível semelhantes a listas.",
+            "og:image": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "og:image:type": "image/png",
+            "og:image:height": "1024",
+            "og:image:width": "1024",
+            "og:image:alt": "The MDN logo",
+            "og:site_name": "MDN Web Docs"
+          },
+          "twitter": {
+            "twitter:card": "summary",
+            "twitter:creator": "MozDevNet"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "MDN Web Docs",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "[element0, element1, ..., elementN] new Array(element0, element1, ..., elementN) new Array(arrayLength)\nelement0, element1, ..., elementN\nUm array JavaScript é inicializado com os elementos contém, exceto no caso onde um único argumento é passado para o construtor do e esse argumento é um número (veja o parâmetro arrayLength abaixo). Esse caso especial só se aplica para os arrays JavaScript criados com o construtor , e não para literais de array criados com a sintaxe de colchetes []. Array Array\nSe o único argumento passado para o construtor do for um número inteiro entre 0 e 232-1 (inclusive), um novo array com o tamanho desse número é retornado. Se o argumento for qualquer outro número, uma exceção é lançada. Array RangeError\nArrays são objetos semelhantes a listas que vêm com uma série de métodos embutidos para realizar operações de travessia e mutação. Nem o tamanho de um array JavaScript nem os tipos de elementos são fixos. Já que o tamanho de um array pode ser alterado a qualquer momento e os dados podem ser armazenados em posições não contíguas, arrays JavaScript não tem a garantia de serem densos; isso depende de como o programador escolhe usá-los. De uma maneira geral, essas são características convenientes, mas, se esses recursos não são desejáveis para o seu caso em particular, você pode considerar usar arrays tipados.\nArrays não podem usar strings como índices (como em um ), devem ser usados números inteiros. Definir ou acessar não-inteiros usando não vai definir ou recuperar um elemento do array em si, mas sim definir ou acessar uma variável associada com a daquele array. As propriedades de objeto do array e a lista de elementos do array são separados, e as operações de travessia e mutação não podem ser aplicadas a essas propriedades nomeadas. array associativo notação de colchetes (ou notação de ponto) coleção de propriedades de objeto"
+          },
+          {
+            "titulo": "Accessando elementos de um array",
+            "texto": "Arrays JavaScript começam com índice zero: o primeiro elemento de um array está na posição e o último elemento está na posição equivalente ao valor da propriedade (tamanho) menos 1. 0 length\nvar arr = [\"este é o primeiro elemento\", \"este é o segundo elemento\"]; console.log(arr[0]); // exibe 'este é o primeiro elemento' console.log(arr[1]); // exibe 'este é o segundo elemento' console.log(arr[arr.length - 1]); // exibe 'este é o segundo elemento'\nElementos de um array são somente propriedades de objetos, da forma que é uma propriedade. Contudo, note que tentando acessar o primeiro elemento de um array da seguinte forma causará um erro de sintaxe, pois o nome da propriedade é inválido: toString\nconsole.log(arr.0); // um erro de sintaxe\nNão há nada de especial a respeito de arrays JavaScript e suas propriedades que causam isso. As propriedades JavaScript que começam com um dígito não podem ser referenciadas com notação de ponto. Elas necesitam usar notação de colchetes para poderem ser acessadas. Por exemplo, se você tivesse um objeto com a propriedade \"3d\", também teria que ser referenciá-la usando notação de colchetes. Por exemplo:\nvar anos = [1950, 1960, 1970, 1980, 1990, 2000, 2010]; console.log(anos.0); // um erro de sintaxe console.log(anos[0]); // funciona corretamente\nrenderer.3d.setTexture(model, 'personagem.png'); // um erro de sintaxe renderer['3d'].setTexture(model, 'personagem.png'); //funciona corretamente\nNote que no exemplo , teve de ser colocado entre aspas. É possivel também colocar entre aspas os índices de arrays JavaScript (ou seja, ao invés de ), contudo isto não é necessário. O valor 2 em eventualmente será convertido a uma string pela engine do JavaScript através de uma conversão explicita com o método . E é por esta razão que e irão referenciar dois slots diferentes no objeto e o seguinte exemplo pode ser : 3d '3d' years['2'] years[2] years[2] toString '2' '02' anos true\nconsole.log(anos[\"2\"] != anos[\"02\"]);\nDe forma similar, propriedades de objeto que sejam palavras reservadas(!) só podem ser acessadas como strings em notação de colchetes:\nvar promessa = { var: \"texto\", array: [1, 2, 3, 4], }; console.log(promessa[\"var\"]);"
+          },
+          {
+            "titulo": "Relação entre e propriedades numéricas length",
+            "texto": "As propriedades e numéricas de um array Javascript são conectadas. Varios dos métodos javascript pré-definidos (por exemplo, , , etc.) levam em conta o valor da propriedade de um array quando eles são chamados. Outros métodos (por exemplo, , etc.) também resultam em uma atualização na propriedade do array. length join slice indexOf length push splice length\nvar frutas = []; frutas.push(\"banana\", \"maça\", \"pêssego\"); console.log(frutas.length); // 3\nQuando configurar uma propriedade num array Javascript em que a propriedade é um índice valido do array e este índice está fora do atual limite do array, o array irá crescer para um tamanho grande o suficiente para acomodar o elemento neste índice, e a engine irá atualizar a propriedade do array de acordo com isto: length\nfrutas[5] = \"manga\"; console.log(frutas[5]); // 'manga' console.log(Object.keys(frutas)); // ['0', '1', '2', '5'] console.log(frutas.length); // 6\nConfigurar a propriedade diretamente, também resulta em um comportamento especial: length\nfrutas.length = 10; console.log(Object.keys(frutas)); // ['0', '1', '2', '5'] console.log(frutas.length); // 10\nDiminuir o valor de , entretanto, apaga elementos: length\nfrutas.length = 2; console.log(Object.keys(frutas)); // ['0', '1'] console.log(frutas.length); // 2"
+          },
+          {
+            "titulo": "Criando um array usando o resultado de uma comparação",
+            "texto": "O resultado de uma comparação entre uma e uma string pode criar um array Javascript. Este array tem propriedades e elementos que disponibilizam informações sobre a comparação. Esse array é o valor de retorno dos métodos , , e . Para explicar melhor sobre estas propriedades e elementos, veja o seguinte exemplo e então consulte a tabela abaixo: expressão regular RegExp.exec String.match String.replace\n// Encontra um d seguido por um ou mais b's seguido por um d // Salva os b's encontrados e o d seguinte // Ignora caixa (maiúscula/minúscula) var minhaRegex = /d(b+)(d)/i; var meuArray = minhaRegex.exec(\"cdbBdbsbz\");\nAs propriedades e elementos retornados desta comparação são os seguintes:\nUma propriedade somente-leitura que reflete a string original a qual a expressão regular foi comparada.\nUma propriedade somente-leitura que é o índice baseado em zero da comparação na string.\nUm elemento somente-leitura que especifica os ultimos caracteres que foram encontrados.\nElementos somente-leitura que especificam as de comparações entre parênteses encontradas, se incluidas na expressão regular. O número de possíveis entre parenteses é ilimitado. substrings substrings\nPropriedade comprimento do construtor , cujo valor é 1. Array\nA função de construtor que é utilizada para criar objetos derivados.\nPermite a adição de propriedades para todos os objetos array.\nCria uma nova instância de a partir de um objeto semelhante ou iterável. Array\nRetorna se a variável é um array e caso contrário. true false\nCria uma nova instância de com um número variável de argumentos, independentemente do número ou tipo dos argumentos. Array\nTodas as instâncias de herdam de . O protótipo do construtor pode ser modificado de forma a afetar todas as instâncias de . Array Array.prototype Array Array"
+          },
+          {
+            "titulo": "Métodos genéricos de Array",
+            "texto": "Aviso: Métodos genéricos de arrays não seguem o padrão, são obsoletos e serão removidos em breve.\nAlgumas vezes você poderá querer aplicar métodos de arrays para strings ou outros objetos parecidos com arrays (como em de funções). Ao fazer isto, você trata uma string como um array de caracteres (ou em outros casos onde trata-se não-arrays como um array). Por exemplo, para checar se cada caractere em uma varivável é uma letra, você poderia escrever: argumentos str\nfunction isLetter(character) { return character >= \"a\" && character <= \"z\"; } if (Array.prototype.every.call(str, isLetter)) alert(\"A string '\" + str + \"' contém somente letras!\");\nEsta notação é um pouco despendiosa e o JavaScript 1.6 introduziu a seguinte abreviação genérica:\nif (Array.every(isLetter, str)) alert(\"A string '\" + str + \"' contém somente letras!\");\ntambém estão disponíveis em . Generics String\nEstes não são atualmente parte dos padrões ECMAScript (através do ES2015 pode se conseguir isto). A seguir segue uma adaptação para permitir o uso em todos os navegadores: Array.from()\n/*globals define*/ // Assumes Array extras already present (one may use shims for these as well) (function () { \"use strict\"; var i, // We could also build the array of methods with the following, but the // getOwnPropertyNames() method is non-shimable: // Object.getOwnPropertyNames(Array).filter(function (methodName) {return typeof Array[methodName] === 'function'}); methods = [ \"join\", \"reverse\", \"sort\", \"push\", \"pop\", \"shift\", \"unshift\", \"splice\", \"concat\", \"slice\", \"indexOf\", \"lastIndexOf\", \"forEach\", \"map\", \"reduce\", \"reduceRight\", \"filter\", \"some\", \"every\", \"isArray\", ], methodCount = methods.length, assignArrayGeneric = function (methodName) { var method = Array.prototype[methodName]; Array[methodName] = function (arg1) { return method.apply(arg1, Array.prototype.slice.call(arguments, 1)); }; }; for (i = 0; i < methodCount; i++) { assignArrayGeneric(methods[i]); } })();"
+          },
+          {
+            "titulo": "Exemplo: Criando um array",
+            "texto": "O exemplo a seguir cria um array, , com 0, então atribui valores para e , trocando o do array para 100. msgArray length msgArray[0] msgArray[99] length\nvar msgArray = new Array(); msgArray[0] = \"Hello\"; msgArray[99] = \"world\"; if (msgArray.length == 100) console.log(\"O length é 100.\");\nvar frutas = [\"Maçã\", \"Banana\"]; console.log(frutas.length); // 2"
+          },
+          {
+            "titulo": "Acessar um item () do Array index",
+            "texto": "var primeiro = frutas[0]; // Maçã var ultimo = frutas[frutas.length - 1]; // Banana\nfrutas.forEach(function (item, indice, array) { console.log(item, indice); }); // Maçã 0 // Banana 1"
+          },
+          {
+            "titulo": "Adicionar um item ao final do Array",
+            "texto": "var adicionar = frutas.push(\"Laranja\"); // ['Maçã', 'Banana', 'Laranja']"
+          },
+          {
+            "titulo": "Remover um item do final do Array",
+            "texto": "var ultimo = frutas.pop(); // remove Laranja (do final) // ['Maçã', 'Banana'];"
+          },
+          {
+            "titulo": "Remover do início do Array",
+            "texto": "var primeiro = frutas.shift(); // remove Maçã do início // ['Banana'];"
+          },
+          {
+            "titulo": "Adicionar ao início do Array",
+            "texto": "var adicionar = frutas.unshift(\"Morango\"); // adiciona ao início // ['Morango', 'Banana'];"
+          },
+          {
+            "titulo": "Procurar o índice de um item na Array",
+            "texto": "frutas.push(\"Manga\"); // ['Morango', 'Banana', 'Manga'] var pos = frutas.indexOf(\"Banana\"); // 1"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/JavaScript/Reference/Global_Objects/Array/prototype",
+            "texto": "Array.prototype",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+            "texto": "Array .prototype .at()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/concat",
+            "texto": "Array .prototype .concat()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin",
+            "texto": "Array .prototype .copyWithin()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/entries",
+            "texto": "Array .prototype .entries()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every",
+            "texto": "Array .prototype .every()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/fill",
+            "texto": "Array .prototype .fill()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/filter",
+            "texto": "Array .prototype .filter()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/find",
+            "texto": "Array .prototype .find()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex",
+            "texto": "Array .prototype .findIndex()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTML",
+            "texto": "HTML: Markup language HTML reference /pt-BR/docs/Web/HTML/Reference/Elements\" >Elements /pt-BR/docs/Web/HTML/Reference/Global_attributes\" >Global attributes /pt",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array",
+            "texto": "Deutsch en-US\" > English (US) es\" > Español fr\" > Français ja\" > 日本語 ko\" > 한국어 pt-BR\" > Português (do Brasil) ru\" > Русский zh-CN\" > 中文 (简体) zh-TW\" > 正體中文 (繁體) ",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Glossary/Baseline/Compatibility",
+            "texto": "Learn more",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+            "texto": "RangeError",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Vetor_associativo",
+            "texto": "array associativo",
+            "interno": false
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Property_accessors",
+            "texto": "notação de colchetes (ou notação de ponto)",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Data_structures#propriedades",
+            "texto": "coleção de propriedades de objeto",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/length",
+            "texto": "length",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Date/toString",
+            "texto": "toString",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/join",
+            "texto": "join",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/slice",
+            "texto": "slice",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf",
+            "texto": "indexOf",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/push",
+            "texto": "push",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/splice",
+            "texto": "splice",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec",
+            "texto": "RegExp.exec",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/match",
+            "texto": "String.match",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String/replace",
+            "texto": "String.replace",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Symbol.species",
+            "texto": "get Array[@@species]",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+            "texto": "Array",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/from",
+            "texto": "Array.from()",
+            "interno": true
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Propriedade/Elemento",
+              "Descrição",
+              "Exemplo"
+            ],
+            [
+              "input",
+              "Uma propriedade somente-leitura que reflete a string original a qual a expressão regular foi comparada.",
+              "cdbBdbsbz"
+            ],
+            [
+              "index",
+              "Uma propriedade somente-leitura que é o índice baseado em zero da comparação na string.",
+              "1"
+            ],
+            [
+              "[0]",
+              "Um elemento somente-leitura que especifica os ultimos caracteres que foram encontrados.",
+              "dbBd"
+            ],
+            [
+              "[1], ...[n]",
+              "Elementos somente-leitura que especificam as substrings de comparações entre parênteses encontradas, se incluidas na expressão regular. O número de possíveis su",
+              "[1]: bB [2]: d"
+            ]
+          ],
+          [
+            [
+              "Specification"
+            ],
+            [
+              "ECMAScript® 2027 Language Specification # sec-array-objects"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://developer.mozilla.org/mdn-social-image.46ac2375.png"
+        ],
+        "midia": [
+          {
+            "id": "med-d3b3ed584f75",
+            "type": "image",
+            "title": "The MDN logo",
+            "url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "final_url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "source_title": "Array - JavaScript | MDN",
+            "source_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+            "publisher": "developer.mozilla.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The MDN logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.enable-javascript.com/pt/",
+      "result": {
+        "titulo": "Como habilitar o JavaScript no seu navegador e por que",
+        "texto": "Google Chrome No menu do navegador clique em \"Customize and control Google Chrome\" e selecione \"Settings\". Na seção \"Settings\" clique em \"Show advanced settings...\". Abaixo de \"Privacy\" clique em \"Content settings...\". Quando a janela de diálogo abrir, procure pela seção \"JavaScript\" e marque a opção \"Allow all sites to run JavaScript (recommended)\". Clique no botão de \"OK\" para fechá-lo. Feche a aba \"Settings\". Clique no botão \"Reload this page\" no navegador para atualizar a página. 1. 2. 3. 4. 5. 6. 7. Mozilla Firefox Na barra de endereços, digite: about:config e aperte Enter. Clique em \"Serei cuidadoso, prometo!\" se uma mensagem de alerta aparecer. Na barra de localização, procure por javascript.enabled. Inverta o valor da preferência javascript.enabled (clique com o botão direito e escolha \"Inverter valor\" ou dê um duplo clique sobre a preferência) para mudar o valor de \"false\" para \"true\". Clique no botão \"Recarregar a página atual\" no navegador para atualizar a página. 1. 2. 3. 4. 5. Apple Safari No menu do navegador da web, clique em \"Editar\" e selecione \"Preferências\". Na janela \"Preferências\", selecione a guia \"Segurança\". Na seção da guia \"Segurança\" \"Conteúdo da Web\", marque a caixa de seleção \"Ativar JavaScript\". Clique no botão \"Recarregar a página atual\" do navegador da Web para atualizar a página. 1. 2. 3. 4. Opera 1. Clique no ícone do Opera \"Menu\" e depois em \"Configurações\". 2. Clique em \"Sites\" e escolha \"Permitir que todos os sites executem JavaScript (recomendado)\" 3. Clique no botão \"Recarregar\" do navegador da Web para atualizar a página. 1. 2. 3. Internet Explorer No menu do navegador, clique em \"Ferramentas\" e escolha \"Opções da Internet\". Na janela \"Opções da Internet\", selecione a guia \"Segurança\". Na guia \"Segurança\", clique no botão \"Nível personalizado...\". Quando a janela \"Configurações de segurança - Zona da Internet\" abrir, procure pela seção \"Scripts\". No item \"Script ativo\", selecione \"Habilitar\". Quando a janela \"Aviso!\" aparecer perguntando \"Você tem certeza de que deseja alterar as configurações para esta zona?\", selecione \"Sim\". Na janela \"Opções da Internet\", clique no botão \"OK\" para fechá-la. Clique no botão \"Atualizar\" do navegador para recarregar a página. 1. 2. 3. 4. 5. 6. 7. 8.",
+        "final": "https://www.enable-javascript.com/pt/",
+        "trecho_usado": "marque a caixa de seleção \"Ativar JavaScript\". Clique no botão \"Recarregar a página atual\" do navegador da Web para atualizar a página. 1. 2. 3. 4. Opera 1. Clique no ícone do Opera \"Menu\" e depois em \"Configurações\". 2. Clique em \"Sites\" e escolha \"Permitir que todos os sites executem JavaScript (recomendado)\" 3. Clique no botão \"Recarregar\" do navegador da Web para atualizar a página. 1. 2. 3.",
+        "metadados": {
+          "titulo": "Como habilitar o JavaScript no seu navegador e por que",
+          "descricao": "Instruções de como habilitar (ativar) JavaScript no navegador e por que.",
+          "canonica": "https://www.enable-javascript.com/pt/",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "No menu do navegador clique em \"Customize and control Google Chrome\" e selecione \"Settings\".\nNa seção \"Settings\" clique em \"Show advanced settings...\".\nAbaixo de \"Privacy\" clique em \"Content settings...\".\nQuando a janela de diálogo abrir, procure pela seção \"JavaScript\" e marque a opção \"Allow all sites to run JavaScript (recommended)\".\nClique no botão de \"OK\" para fechá-lo.\nClique no botão \"Reload this page\" no navegador para atualizar a página.\nNa barra de endereços, digite: about:config e aperte Enter.\nClique em \"Serei cuidadoso, prometo!\" se uma mensagem de alerta aparecer.\nNa barra de localização, procure por javascript.enabled.\nInverta o valor da preferência javascript.enabled (clique com o botão direito e escolha \"Inverter valor\" ou dê um duplo clique sobre a preferência) para mudar o valor de \"false\" para \"true\".\nClique no botão \"Recarregar a página atual\" no navegador para atualizar a página.\nNo menu do navegador da web, clique em \"Editar\" e selecione \"Preferências\".\nNa janela \"Preferências\", selecione a guia \"Segurança\".\nNa seção da guia \"Segurança\" \"Conteúdo da Web\", marque a caixa de seleção \"Ativar JavaScript\".\nClique no botão \"Recarregar a página atual\" do navegador da Web para atualizar a página.\n1. Clique no ícone do Opera \"Menu\" e depois em \"Configurações\".\n2. Clique em \"Sites\" e escolha \"Permitir que todos os sites executem JavaScript (recomendado)\"\n3. Clique no botão \"Recarregar\" do navegador da Web para atualizar a página.\nNo menu do navegador, clique em \"Ferramentas\" e escolha \"Opções da Internet\".\nNa janela \"Opções da Internet\", selecione a guia \"Segurança\".\nNa guia \"Segurança\", clique no botão \"Nível personalizado...\".\nQuando a janela \"Configurações de segurança - Zona da Internet\" abrir, procure pela seção \"Scripts\".\nNo item \"Script ativo\", selecione \"Habilitar\".\nQuando a janela \"Aviso!\" aparecer perguntando \"Você tem certeza de que deseja alterar as configurações para esta zona?\", selecione \"Sim\".\nNa janela \"Opções da Internet\", clique no botão \"OK\" para fechá-la.\nClique no botão \"Atualizar\" do navegador para recarregar a página."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.enable-javascript.com/en/",
+            "texto": "EN",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/hr/",
+            "texto": "HR",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/de/",
+            "texto": "DE",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/nl/",
+            "texto": "NL",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/es/",
+            "texto": "ES",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/pt/",
+            "texto": "PT",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/it/",
+            "texto": "IT",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/no/",
+            "texto": "NO",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/ru/",
+            "texto": "RU",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/fr/",
+            "texto": "FR",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/cs/",
+            "texto": "CS",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/ja/",
+            "texto": "JA",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/ko/",
+            "texto": "KO",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/hu/",
+            "texto": "HU",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/th/",
+            "texto": "TH",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/tl/",
+            "texto": "TL",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/tr/",
+            "texto": "TR",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/id/",
+            "texto": "ID",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/sk/",
+            "texto": "SK",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/pl/",
+            "texto": "PL",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/ar/",
+            "texto": "AR",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/ur/",
+            "texto": "UR",
+            "interno": true
+          },
+          {
+            "url": "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm9.staticflickr.com/8442/7780404290_beb923884b_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm8.staticflickr.com/7124/7780404172_9207f67364_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm8.staticflickr.com/7126/7780403992_80d924480b_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_z.jpg",
+            "texto": "",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_s.jpg",
+          "https://farm9.staticflickr.com/8442/7780404290_beb923884b_s.jpg",
+          "https://farm8.staticflickr.com/7124/7780404172_9207f67364_s.jpg",
+          "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_s.jpg",
+          "https://farm8.staticflickr.com/7126/7780403992_80d924480b_s.jpg",
+          "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_s.jpg",
+          "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_s.jpg",
+          "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_s.jpg",
+          "https://farm8.staticflickr.com/7362/16455844865_a2fea4d261_s.jpg",
+          "https://farm8.staticflickr.com/7301/16454099181_4900b2461a_s.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-9e7a3e67c474",
+            "type": "image",
+            "title": "chrome 01",
+            "url": "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_s.jpg",
+            "final_url": "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm9.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 01",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-eb65ed9fa49d",
+            "type": "image",
+            "title": "chrome 02",
+            "url": "https://farm9.staticflickr.com/8442/7780404290_beb923884b_s.jpg",
+            "final_url": "https://farm9.staticflickr.com/8442/7780404290_beb923884b_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm9.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 02",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-11a60e24dbcf",
+            "type": "image",
+            "title": "chrome 03",
+            "url": "https://farm8.staticflickr.com/7124/7780404172_9207f67364_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7124/7780404172_9207f67364_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 03",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-98e4913c5845",
+            "type": "image",
+            "title": "chrome 04",
+            "url": "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_s.jpg",
+            "final_url": "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm9.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 04",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ae3169d5b5bb",
+            "type": "image",
+            "title": "chrome 05",
+            "url": "https://farm8.staticflickr.com/7126/7780403992_80d924480b_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7126/7780403992_80d924480b_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 05",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d2ab833092df",
+            "type": "image",
+            "title": "chrome 06",
+            "url": "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_s.jpg",
+            "final_url": "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm9.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 06",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-fc803c17d85a",
+            "type": "image",
+            "title": "chrome 07",
+            "url": "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 07",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-307fa6f662c0",
+            "type": "image",
+            "title": "ff 01",
+            "url": "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ff 01",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8d0887fbeae0",
+            "type": "image",
+            "title": "ff 02",
+            "url": "https://farm8.staticflickr.com/7362/16455844865_a2fea4d261_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7362/16455844865_a2fea4d261_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ff 02",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ae1ff53fdd5a",
+            "type": "image",
+            "title": "ff 03",
+            "url": "https://farm8.staticflickr.com/7301/16454099181_4900b2461a_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7301/16454099181_4900b2461a_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ff 03",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e8ad4af93002",
+            "type": "image",
+            "title": "ff 04",
+            "url": "https://farm9.staticflickr.com/8666/15833321544_70ea118cf4_s.jpg",
+            "final_url": "https://farm9.staticflickr.com/8666/15833321544_70ea118cf4_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm9.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ff 04",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-cdb5778b2a42",
+            "type": "image",
+            "title": "ff 05",
+            "url": "https://farm8.staticflickr.com/7329/16268413630_680393acd9_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7329/16268413630_680393acd9_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ff 05",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+      "result": {
+        "titulo": "Array.prototype.at() - JavaScript | MDN",
+        "texto": "Esta página foi traduzida do inglês pela comunidade. Saiba mais e junte-se à comunidade MDN Web Docs. View in English Always switch to English Array.prototype.at() Baseline Widely available This feature is well established and works across many devices and browser versions. It’s been available across browsers since março de 2022. See full compatibility Learn more O método recebe um valor inteiro e retorna o item referente ao index dele, permitindo valores positivos ou negativos. Valores negativos contam apartir do último item do array. at() Isto não quer dizer que exista alguma coisa errada em utilizar a notação com colchetes. Por exemplo retornaria o primeiro item. Porém ao invés de utilizar o para os últimos items; e.g para o último item, você pode utilizar o . array[0] array.length array[array.length-1] array.at(-1) (Veja os exemplos abaixo) Experimente const array1 = [5, 12, 8, 130, 44]; let index = 2; console.log(`An index of ${index} returns ${array1.at(index)}`); // Expected output: \"An index of 2 returns 8\" index = -2; console.log(`An index of ${index} returns ${array1.at(index)}`); // Expected output: \"An index of -2 returns 130\" Sintaxe js at(index); Parâmetros index O index (posição) do elemento do array que será retornado. Quando um valor negativo é passado como argumento a contagem dos elementos é feita de trás para frente. Valor retornado O elemento correspondente ao index passado como argumento. Retorna se o index passado não for encontrado. undefined Exemplos Retornando o último item de um array O exemplo a seguir exibe uma função que retorna o último elemento encontrado de um array específico. js // O array com items const cart = [\"apple\", \"banana\", \"pear\"]; // A função que retorna o último item do array passado como argumento function returnLast(arr) { return arr.at(-1); } // Pega o último item do array 'cart' const item1 = returnLast(cart); console.log(item1); // 'pear' // Adiciona um item ao array 'cart' cart.push(\"orange\"); const item2 = returnLast(cart); console.log(item2); // 'orange' Comparando métodos Este exemplo compara as diferentes maneiras de selecionar o penúltimo item de um . Todos os métodos abaixos são válidos, mas este exemplo destaca a sucintez e legibilidade do método . Array at() js // O array com items const colors = [\"red\", \"green\", \"blue\"]; // Usando a propriedade length const lengthWay = colors[colors.length - 2]; console.log(lengthWay); // 'green' // Usando o método slice(). Perceba que um array é retornado const sliceWay = colors.slice(-2, -1); console.log(sliceWay[0]); // 'green' // Usando o método at() const atWay = colors.at(-2); console.log(atWay); // 'green' Especificações Specification ECMAScript® 2027 Language Specification# sec-array.prototype.at Compatibilidade com navegadores Veja também Um polyfill do método está disponível em Array.prototype.at core-js . Um polyfill para o método at() – retorna um valor baseado no teste fornecido. Array.prototype.find() – verifica se um valor existe em um array. Array.prototype.includes() – retorna o index de um determinado elemento. Array.prototype.indexOf() Help improve MDN Learn how to contribute This page was last modified on by . 17 de fev. de 2025 MDN contributors • View this page on GitHub Report a problem with this content",
+        "final": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+        "trecho_usado": "polyfill do método está disponível em Array.prototype.at core-js . Um polyfill para o método at() – retorna um valor baseado no teste fornecido. Array.prototype.find() – verifica se um valor existe em um array. Array.prototype.includes() – retorna o index de um determinado elemento. Array.prototype.indexOf() Help improve MDN Learn how to contribute This page was last modified on by . 17 de fev. de",
+        "metadados": {
+          "titulo": "Array.prototype.at() - JavaScript | MDN",
+          "descricao": "O método at() recebe um valor inteiro e retorna o item referente ao index dele, permitindo valores positivos ou negativos. Valores negativos contam apartir do último item do array.",
+          "canonica": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+          "og": {
+            "og:url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+            "og:title": "Array.prototype.at() - JavaScript | MDN",
+            "og:locale": "pt_BR",
+            "og:description": "O método at() recebe um valor inteiro e retorna o item referente ao index dele, permitindo valores positivos ou negativos. Valores negativos contam apartir do último item do array.",
+            "og:image": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "og:image:type": "image/png",
+            "og:image:height": "1024",
+            "og:image:width": "1024",
+            "og:image:alt": "The MDN logo",
+            "og:site_name": "MDN Web Docs"
+          },
+          "twitter": {
+            "twitter:card": "summary",
+            "twitter:creator": "MozDevNet"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "MDN Web Docs",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Esta página foi traduzida do inglês pela comunidade. Saiba mais e junte-se à comunidade MDN Web Docs.\nView in English Always switch to English\nThis feature is well established and works across many devices and browser versions. It’s been available across browsers since março de 2022.\nO método recebe um valor inteiro e retorna o item referente ao index dele, permitindo valores positivos ou negativos. Valores negativos contam apartir do último item do array. at()\nIsto não quer dizer que exista alguma coisa errada em utilizar a notação com colchetes. Por exemplo retornaria o primeiro item. Porém ao invés de utilizar o para os últimos items; e.g para o último item, você pode utilizar o . array[0] array.length array[array.length-1] array.at(-1) (Veja os exemplos abaixo)\nconst array1 = [5, 12, 8, 130, 44]; let index = 2; console.log(`An index of ${index} returns ${array1.at(index)}`); // Expected output: \"An index of 2 returns 8\" index = -2; console.log(`An index of ${index} returns ${array1.at(index)}`); // Expected output: \"An index of -2 returns 130\"\nO index (posição) do elemento do array que será retornado. Quando um valor negativo é passado como argumento a contagem dos elementos é feita de trás para frente.\nO elemento correspondente ao index passado como argumento. Retorna se o index passado não for encontrado. undefined"
+          },
+          {
+            "titulo": "Retornando o último item de um array",
+            "texto": "O exemplo a seguir exibe uma função que retorna o último elemento encontrado de um array específico.\n// O array com items const cart = [\"apple\", \"banana\", \"pear\"]; // A função que retorna o último item do array passado como argumento function returnLast(arr) { return arr.at(-1); } // Pega o último item do array 'cart' const item1 = returnLast(cart); console.log(item1); // 'pear' // Adiciona um item ao array 'cart' cart.push(\"orange\"); const item2 = returnLast(cart); console.log(item2); // 'orange'\nEste exemplo compara as diferentes maneiras de selecionar o penúltimo item de um . Todos os métodos abaixos são válidos, mas este exemplo destaca a sucintez e legibilidade do método . Array at()\n// O array com items const colors = [\"red\", \"green\", \"blue\"]; // Usando a propriedade length const lengthWay = colors[colors.length - 2]; console.log(lengthWay); // 'green' // Usando o método slice(). Perceba que um array é retornado const sliceWay = colors.slice(-2, -1); console.log(sliceWay[0]); // 'green' // Usando o método at() const atWay = colors.at(-2); console.log(atWay); // 'green'\nECMAScript® 2027 Language Specification# sec-array.prototype.at"
+          },
+          {
+            "titulo": "Compatibilidade com navegadores",
+            "texto": "Um polyfill do método está disponível em Array.prototype.at core-js\n. Um polyfill para o método at()\n– retorna um valor baseado no teste fornecido. Array.prototype.find()\n– verifica se um valor existe em um array. Array.prototype.includes()\n– retorna o index de um determinado elemento. Array.prototype.indexOf()\nThis page was last modified on by . 17 de fev. de 2025 MDN contributors"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/find",
+            "texto": "Array.prototype.find()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/includes",
+            "texto": "Array.prototype.includes()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf",
+            "texto": "Array.prototype.indexOf()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/concat",
+            "texto": "Array .prototype .concat()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/copyWithin",
+            "texto": "Array .prototype .copyWithin()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/entries",
+            "texto": "Array .prototype .entries()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/every",
+            "texto": "Array .prototype .every()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/fill",
+            "texto": "Array .prototype .fill()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/filter",
+            "texto": "Array .prototype .filter()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex",
+            "texto": "Array .prototype .findIndex()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTML",
+            "texto": "HTML: Markup language HTML reference /pt-BR/docs/Web/HTML/Reference/Elements\" >Elements /pt-BR/docs/Web/HTML/Reference/Global_attributes\" >Global attributes /pt",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+            "texto": "Deutsch en-US\" > English (US) es\" > Español fr\" > Français ja\" > 日本語 ko\" > 한국어 pt-BR\" > Português (do Brasil) ru\" > Русский zh-CN\" > 中文 (简体) Esta página foi tra",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Glossary/Baseline/Compatibility",
+            "texto": "Learn more",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/length",
+            "texto": "array.length",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+            "texto": "undefined",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+            "texto": "Array",
+            "interno": true
+          },
+          {
+            "url": "https://tc39.es/ecma262/multipage/indexed-collections.html#sec-array.prototype.at",
+            "texto": "ECMAScript® 2027 Language Specification # sec-array.prototype.at Compatibilidade com navegadores",
+            "interno": false
+          },
+          {
+            "url": "https://github.com/zloirock/core-js#relative-indexing-method",
+            "texto": "core-js",
+            "interno": false
+          },
+          {
+            "url": "https://github.com/tc39/proposal-relative-indexing-method#polyfill",
+            "texto": "Um polyfill para o método at()",
+            "interno": false
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/MDN/Community/Getting_started",
+            "texto": "Learn how to contribute This page was last modified on 17 de fev. de 2025 by MDN contributors",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/mdn/translated-content/blob/main/files/pt-br/web/javascript/reference/global_objects/array/at/index.md?plain=1",
+            "texto": "View this page on GitHub • Report a problem with this content .visually-hidden{border:0!important;clip-path:inset(50%)!important;height:1px!important;margin:-1p",
+            "interno": false
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Array",
+            "texto": "Array()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/from",
+            "texto": "Array .from()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fromAsync",
+            "texto": "fromAsync()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/isArray",
+            "texto": "Array .isArray()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/of",
+            "texto": "Array .of()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Symbol.species",
+            "texto": "[Symbol .species]",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+            "texto": "Array .prototype .at()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast",
+            "texto": "findLast()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex",
+            "texto": "findLastIndex()",
+            "interno": true
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Specification"
+            ],
+            [
+              "ECMAScript® 2027 Language Specification # sec-array.prototype.at"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://developer.mozilla.org/mdn-social-image.46ac2375.png"
+        ],
+        "midia": [
+          {
+            "id": "med-d3b3ed584f75",
+            "type": "image",
+            "title": "The MDN logo",
+            "url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "final_url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "source_title": "Array.prototype.at() - JavaScript | MDN",
+            "source_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/at",
+            "publisher": "developer.mozilla.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The MDN logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.w3schools.com/Js/js_array_reference.asp",
+      "result": {
+        "titulo": "JavaScript Array Reference",
+        "texto": "Name Description [ ] Creates a new Array new Array() Creates a new Array at() Returns an indexed element of an array concat() Joins arrays and returns an array with the joined arrays constructor Returns the function that created the Array prototype copyWithin() Copies array elements within the array, to and from specified positions entries() Returns a key/value pair Array Iteration Object every() Checks if every element in an array pass a test fill() Fill the elements in an array with a static value filter() Creates a new array with every element in an array that pass a test find() Returns the value of the first element in an array that pass a test findIndex() Returns the index of the first element in an array that pass a test findLast() Returns the value of the last element in an array that pass a test findLastIndex() Returns the index of the last element in an array that pass a test flat() Concatenates sub-array elements flatMap() Maps all array elements and creates a new flat array forEach() Calls a function for each array element from() Creates an array from an object includes() Check if an array contains the specified element indexOf() Search the array for an element and returns its position isArray() Checks whether an object is an array join() Joins all elements of an array into a string keys() Returns a Array Iteration Object, containing the keys of the original array lastIndexOf() Search the array for an element, starting at the end, and returns its position length Sets or returns the number of elements in an array map() Creates a new array with the result of calling a function for each array element of() Creates an array from a number of arguments pop() Removes the last element of an array, and returns that element prototype Allows you to add properties and methods to an Array object push() Adds new elements to the end of an array, and returns the new length reduce() Reduce the values of an array to a single value (going left-to-right) reduceRight() Reduce the values of an array to a single value (going right-to-left) reverse() Reverses the order of the elements in an array shift() Removes the first element of an array, and returns that element slice() Selects a part of an array, and returns the new array some() Checks if any of the elements in an array pass a test sort() Sorts the elements of an array splice() Adds or Removes array elements toReversed() Reverses the order of array elements (to a new array) toSorted() Sorts the elements of an array (to a new array) toSpliced() Adds or Removes array elements (to a new array) toString() Converts an array to a string, and returns the result unshift() Adds new elements to the beginning of an array, and returns the new length valueOf() Returns the primitive value of an array with() Returns a new array with updated elements",
+        "final": "https://www.w3schools.com/Js/js_array_reference.asp",
+        "trecho_usado": "Name Description [ ] Creates a new Array new Array() Creates a new Array at() Returns an indexed element of an array concat() Joins arrays and returns an array with the joined arrays constructor Returns the function that created the Array prototype copyWithin() Copies array elements within the array, to and from specified positions entries() Returns a key/value pair Array Iteration Object every()",
+        "metadados": {
+          "titulo": "JavaScript Array Reference",
+          "descricao": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+          "canonica": "",
+          "og": {
+            "og:title": "JavaScript Array Reference",
+            "og:image": "https://www.w3schools.com/images/og/js/js_array_reference.png",
+            "og:image:type": "image/png",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "og:description": "Array Constructor.",
+            "og:url": "https://www.w3schools.com/Js/js_array_reference.asp",
+            "og:type": "article",
+            "og:site_name": "W3Schools"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@w3schools",
+            "twitter:title": "JavaScript Array Reference",
+            "twitter:description": "Array Constructor.",
+            "twitter:image": "https://www.w3schools.com/images/og/js/js_array_reference.png"
+          },
+          "idioma": "en-US",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "W3Schools",
+          "tipo": "article",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Returns an indexed element of an array\nJoins arrays and returns an array with the joined arrays\nReturns the function that created the Array prototype\nCopies array elements within the array, to and from specified positions\nReturns a key/value pair Array Iteration Object\nChecks if every element in an array pass a test\nFill the elements in an array with a static value\nCreates a new array with every element in an array that pass a test\nReturns the value of the first element in an array that pass a test\nReturns the index of the first element in an array that pass a test\nReturns the value of the last element in an array that pass a test\nReturns the index of the last element in an array that pass a test\nConcatenates sub-array elements\nMaps all array elements and creates a new flat array\nCalls a function for each array element\nCreates an array from an object\nCheck if an array contains the specified element\nSearch the array for an element and returns its position\nChecks whether an object is an array\nJoins all elements of an array into a string\nReturns a Array Iteration Object, containing the keys of the original array\nSearch the array for an element, starting at the end, and returns its position\nSets or returns the number of elements in an array\nCreates a new array with the result of calling a function for each array element\nCreates an array from a number of arguments\nRemoves the last element of an array, and returns that element\nAllows you to add properties and methods to an Array object\nAdds new elements to the end of an array, and returns the new length\nReduce the values of an array to a single value (going left-to-right)\nReduce the values of an array to a single value (going right-to-left)\nReverses the order of the elements in an array\nRemoves the first element of an array, and returns that element\nSelects a part of an array, and returns the new array\nChecks if any of the elements in an array pass a test\nSorts the elements of an array\nAdds or Removes array elements\nReverses the order of array elements (to a new array)\nSorts the elements of an array (to a new array)\nAdds or Removes array elements (to a new array)\nConverts an array to a string, and returns the result\nAdds new elements to the beginning of an array, and returns the new length\nReturns the primitive value of an array\nReturns a new array with updated elements"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.w3schools.com",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.w3schools.com/adventure/index.php",
+            "texto": "NEW W3Schools app iOS & Android Start the adventure",
+            "interno": true
+          },
+          {
+            "url": "https://profile.w3schools.com/log-in",
+            "texto": "--> --> ★ +1",
+            "interno": false
+          },
+          {
+            "url": "https://pathfinder.w3schools.com",
+            "texto": "My W3Schools",
+            "interno": false
+          },
+          {
+            "url": "https://www.w3schools.com/spaces/index.php",
+            "texto": "Spaces",
+            "interno": true
+          },
+          {
+            "url": "https://order.w3schools.com/plans",
+            "texto": "Upgrade",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog",
+            "texto": "Paid Courses",
+            "interno": false
+          },
+          {
+            "url": "https://www.w3schools.com/academy/index.php",
+            "texto": "Academy",
+            "interno": true
+          },
+          {
+            "url": "https://www.w3schools.com/practice/index.php",
+            "texto": "Practice",
+            "interno": true
+          },
+          {
+            "url": "https://spaces.w3schools.com/",
+            "texto": "Spaces",
+            "interno": false
+          },
+          {
+            "url": "https://profile.w3schools.com/logout",
+            "texto": "Logout",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/@w3schools",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.linkedin.com/company/w3schools.com/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://discord.com/invite/w3schools",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.facebook.com/w3schoolscom/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/w3schools.com_official/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://profile.w3schools.com/signup",
+            "texto": "Sign in",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/html-course",
+            "texto": "HTML",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/css-course",
+            "texto": "CSS",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/javascript-course",
+            "texto": "JavaScript",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/sql-course",
+            "texto": "SQL",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/python-course",
+            "texto": "Python",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/java-course",
+            "texto": "Java",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-c",
+            "texto": "C",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/cpp-course",
+            "texto": "C++",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/c-course",
+            "texto": "C#",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/php-course",
+            "texto": "PHP",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/react-js-course",
+            "texto": "React",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-mysql-1",
+            "texto": "MySQL",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-excel",
+            "texto": "Excel",
+            "interno": false
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Name",
+              "Description"
+            ],
+            [
+              "[ ]",
+              "Creates a new Array"
+            ],
+            [
+              "new Array()",
+              "Creates a new Array"
+            ],
+            [
+              "at()",
+              "Returns an indexed element of an array"
+            ],
+            [
+              "concat()",
+              "Joins arrays and returns an array with the joined arrays"
+            ],
+            [
+              "constructor",
+              "Returns the function that created the Array prototype"
+            ],
+            [
+              "copyWithin()",
+              "Copies array elements within the array, to and from specified positions"
+            ],
+            [
+              "entries()",
+              "Returns a key/value pair Array Iteration Object"
+            ],
+            [
+              "every()",
+              "Checks if every element in an array pass a test"
+            ],
+            [
+              "fill()",
+              "Fill the elements in an array with a static value"
+            ],
+            [
+              "filter()",
+              "Creates a new array with every element in an array that pass a test"
+            ],
+            [
+              "find()",
+              "Returns the value of the first element in an array that pass a test"
+            ],
+            [
+              "findIndex()",
+              "Returns the index of the first element in an array that pass a test"
+            ],
+            [
+              "findLast()",
+              "Returns the value of the last element in an array that pass a test"
+            ],
+            [
+              "findLastIndex()",
+              "Returns the index of the last element in an array that pass a test"
+            ],
+            [
+              "flat()",
+              "Concatenates sub-array elements"
+            ],
+            [
+              "flatMap()",
+              "Maps all array elements and creates a new flat array"
+            ],
+            [
+              "forEach()",
+              "Calls a function for each array element"
+            ],
+            [
+              "from()",
+              "Creates an array from an object"
+            ],
+            [
+              "includes()",
+              "Check if an array contains the specified element"
+            ],
+            [
+              "indexOf()",
+              "Search the array for an element and returns its position"
+            ],
+            [
+              "isArray()",
+              "Checks whether an object is an array"
+            ],
+            [
+              "join()",
+              "Joins all elements of an array into a string"
+            ],
+            [
+              "keys()",
+              "Returns a Array Iteration Object, containing the keys of the original array"
+            ],
+            [
+              "lastIndexOf()",
+              "Search the array for an element, starting at the end, and returns its position"
+            ],
+            [
+              "length",
+              "Sets or returns the number of elements in an array"
+            ],
+            [
+              "map()",
+              "Creates a new array with the result of calling a function for each array element"
+            ],
+            [
+              "of()",
+              "Creates an array from a number of arguments"
+            ],
+            [
+              "pop()",
+              "Removes the last element of an array, and returns that element"
+            ],
+            [
+              "prototype",
+              "Allows you to add properties and methods to an Array object"
+            ],
+            [
+              "push()",
+              "Adds new elements to the end of an array, and returns the new length"
+            ],
+            [
+              "reduce()",
+              "Reduce the values of an array to a single value (going left-to-right)"
+            ],
+            [
+              "reduceRight()",
+              "Reduce the values of an array to a single value (going right-to-left)"
+            ],
+            [
+              "reverse()",
+              "Reverses the order of the elements in an array"
+            ],
+            [
+              "shift()",
+              "Removes the first element of an array, and returns that element"
+            ],
+            [
+              "slice()",
+              "Selects a part of an array, and returns the new array"
+            ],
+            [
+              "some()",
+              "Checks if any of the elements in an array pass a test"
+            ],
+            [
+              "sort()",
+              "Sorts the elements of an array"
+            ],
+            [
+              "splice()",
+              "Adds or Removes array elements"
+            ],
+            [
+              "toReversed()",
+              "Reverses the order of array elements (to a new array)"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://www.w3schools.com/images/og/js/js_array_reference.png",
+          "https://www.w3schools.com/adventure/img/mascot-lynx.png",
+          "https://www.w3schools.com/adventure/img/screen-map.png",
+          "https://www.w3schools.com/images/colorpicker2000.png",
+          "https://www.w3schools.com/signup/lynxlogo.svg",
+          "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+          "https://www.w3schools.com/adventure/img/map/oakTree.webp",
+          "https://www.w3schools.com/adventure/img/map/birchTree.webp",
+          "https://www.w3schools.com/adventure/img/map/bush.webp",
+          "https://www.w3schools.com/adventure/img/map/leaf.png"
+        ],
+        "midia": [
+          {
+            "id": "med-44cd4e21f9b2",
+            "type": "image",
+            "title": "Array Constructor.",
+            "url": "https://www.w3schools.com/images/og/js/js_array_reference.png",
+            "final_url": "https://www.w3schools.com/images/og/js/js_array_reference.png",
+            "source_title": "JavaScript Array Reference",
+            "source_url": "https://www.w3schools.com/Js/js_array_reference.asp",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Array Constructor.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ae0f6b9c5cf6",
+            "type": "image",
+            "title": "A circular color wheel showing the gradation of colors in the spectrum",
+            "url": "https://www.w3schools.com/images/colorpicker2000.png",
+            "final_url": "https://www.w3schools.com/images/colorpicker2000.png",
+            "source_title": "JavaScript Array Reference",
+            "source_url": "https://www.w3schools.com/Js/js_array_reference.asp",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A circular color wheel showing the gradation of colors in the spectrum",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-da64a54a3a6d",
+            "type": "image",
+            "title": "Lynx logo",
+            "url": "https://www.w3schools.com/signup/lynxlogo.svg",
+            "final_url": "https://www.w3schools.com/signup/lynxlogo.svg",
+            "source_title": "JavaScript Array Reference",
+            "source_url": "https://www.w3schools.com/Js/js_array_reference.asp",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lynx logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d49d074b82e1",
+            "type": "image",
+            "title": "W3Schools Full Access - your next career move",
+            "url": "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+            "final_url": "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+            "source_title": "JavaScript Array Reference",
+            "source_url": "https://www.w3schools.com/Js/js_array_reference.asp",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "W3Schools Full Access - your next career move",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9079eb90800c",
+            "type": "image",
+            "title": "This way to the W3Schools Adventure app",
+            "url": "https://www.w3schools.com/adventure/img/map/adventure_sign.webp",
+            "final_url": "https://www.w3schools.com/adventure/img/map/adventure_sign.webp",
+            "source_title": "JavaScript Array Reference",
+            "source_url": "https://www.w3schools.com/Js/js_array_reference.asp",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "This way to the W3Schools Adventure app",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-29be92cc0b6a",
+            "type": "document",
+            "title": "index.html",
+            "url": "https://www.w3schools.com/codegame/index.html",
+            "final_url": "https://www.w3schools.com/codegame/index.html",
+            "source_title": "JavaScript Array Reference",
+            "source_url": "https://www.w3schools.com/Js/js_array_reference.asp",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Array Constructor.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "a9370340c862a2b47f0f",
+            "url": "https://blog.betrybe.com/linguagem-de-programacao/o-que-e-array/",
+            "title": "O que é array, para que serve e como fazer? - Blog da Trybe",
+            "origin": "bing",
+            "query": "Array.prototype.toSpliced",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Um array é uma estrutura de dados que consiste em uma coleção de elementos, onde cada elemento é identificado por índices que indicam a posição ao qual está ins"
+          },
+          {
+            "id": "2d9cd1d31b4db695bcb0",
+            "url": "https://www.alura.com.br/artigos/javascript-para-que-serve-array",
+            "title": "Array em JavaScript: o que é para que serve na programação",
+            "origin": "bing",
+            "query": "Array.prototype.toSpliced",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Na programação, um array funciona como esse guarda-roupa: ele é uma estrutura que armazena diferentes dados em um único espaço organizado. Neste artigo, vamos e"
+          },
+          {
+            "id": "4063aa5e3470d92911b8",
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+            "title": "Array - JavaScript | MDN - MDN Web Docs",
+            "origin": "bing",
+            "query": "Array.prototype.toSpliced",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "O objeto Array do JavaScript é um objeto global usado na construção de 'arrays': objetos de alto nível semelhantes a listas."
+          },
+          {
+            "id": "e1302b630523c4266177",
+            "url": "https://www.sciencedirect.com/journal/array",
+            "title": "Array | Journal | ScienceDirect.com by Elsevier",
+            "origin": "bing",
+            "query": "Array.prototype.toSpliced",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Read the latest articles of Array at ScienceDirect.com, Elsevier’s leading platform of peer-reviewed scholarly literature"
+          },
+          {
+            "id": "b02aa70191528de13582",
+            "url": "https://www.w3schools.com/programming/prog_arrays.php",
+            "title": "What is an Array? - W3Schools",
+            "origin": "bing",
+            "query": "Array.prototype.toSpliced",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "What is an Array? An array is a collection of values. The image below shows how we can think of an array named myFruits, with the values 'banana', 'apple', and "
+          },
+          {
+            "id": "f81a889fd09330d66400",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+            "title": "Array - JavaScript | MDN - MDN Web Docs",
+            "origin": "bing",
+            "query": "Array.prototype.toSpliced",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": ""
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "stackexchange: sem resultados (Array.prototype.toSpliced)",
+        "hn: sem resultados (Array.prototype.toSpliced)",
+        "bing: 6 resultados (Array.prototype.toSpliced)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Array.prototype.toSpliced)",
+        "— recuperação por lacuna —",
+        "stackexchange: sem resultados (javascript array.prototype.tospliced sua)",
+        "hn: sem resultados (javascript array.prototype.tospliced sua)",
+        "bing: 6 resultados (javascript array.prototype.tospliced sua)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (javascript array.prototype.tospliced sua)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Array.prototype.toSpliced",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-d55eb9989851",
+            "type": "explicit_attribute",
+            "description": "Sintaxe ou assinatura",
+            "entity": "Array.prototype.toSpliced",
+            "attribute": "syntax",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Sintaxe ou assinatura",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-8f360fa7c4b4",
+            "type": "explicit_attribute",
+            "description": "Comportamento da operação",
+            "entity": "Array.prototype.toSpliced",
+            "attribute": "behavior",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Comportamento da operação",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S2",
+          "url": "https://www.enable-javascript.com/pt/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://www.w3schools.com/Js/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+      "adapter_query": "Array.prototype.toSpliced",
+      "provider": "stackexchange",
+      "at": "2026-10-25T18:30:04.520437+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "Array.prototype.toSpliced"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "Array.prototype.toSpliced"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "Array.prototype.toSpliced"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "Array.prototype.toSpliced"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "Array.prototype.toSpliced"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 2273.67,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+      "adapter_query": "Array.prototype.toSpliced",
+      "provider": "hn",
+      "at": "2026-10-25T18:30:06.796517+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://hn.algolia.com/api/v1/search",
+          "parameters": {
+            "query": "Array.prototype.toSpliced"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 1158.41,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+      "adapter_query": "Array.prototype.toSpliced",
+      "provider": "bing",
+      "at": "2026-10-25T18:30:07.955404+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "O que é array, para que serve e como fazer? - Blog da Trybe",
+          "url": "https://blog.betrybe.com/linguagem-de-programacao/o-que-e-array/"
+        },
+        {
+          "title": "Array em JavaScript: o que é para que serve na programação",
+          "url": "https://www.alura.com.br/artigos/javascript-para-que-serve-array"
+        },
+        {
+          "title": "Array - JavaScript | MDN - MDN Web Docs",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array"
+        },
+        {
+          "title": "Array | Journal | ScienceDirect.com by Elsevier",
+          "url": "https://www.sciencedirect.com/journal/array"
+        },
+        {
+          "title": "What is an Array? - W3Schools",
+          "url": "https://www.w3schools.com/programming/prog_arrays.php"
+        },
+        {
+          "title": "Array - JavaScript | MDN - MDN Web Docs",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "Array.prototype.toSpliced",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 560.36,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+      "adapter_query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+      "provider": "stackexchange",
+      "at": "2026-10-25T18:30:08.592492+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "javascript array.prototype.tospliced sua sintaxe comportamento"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "javascript array.prototype.tospliced sua sintaxe comportamento"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "javascript array.prototype.tospliced sua sintaxe comportamento"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "javascript array.prototype.tospliced sua sintaxe comportamento"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "javascript array.prototype.tospliced sua sintaxe comportamento"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 3614.69,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+      "adapter_query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+      "provider": "hn",
+      "at": "2026-10-25T18:30:12.207996+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://hn.algolia.com/api/v1/search",
+          "parameters": {
+            "query": "javascript array.prototype.tospliced sua sintaxe comportamento"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 1991.67,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript Array.prototype.toSpliced, sua sintaxe e comportamento?",
+      "adapter_query": "javascript array.prototype.tospliced sua sintaxe comportamento",
+      "provider": "bing",
+      "at": "2026-10-25T18:30:14.200263+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "JavaScript Tutorial - W3Schools",
+          "url": "https://www.w3schools.com/Js/"
+        },
+        {
+          "title": "JavaScript - MDN Web Docs",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript"
+        },
+        {
+          "title": "JavaScript Tutorial",
+          "url": "https://www.javascripttutorial.net/"
+        },
+        {
+          "title": "JavaScript – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Javascript"
+        },
+        {
+          "title": "JavaScript - MDN",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+        },
+        {
+          "title": "Como habilitar o JavaScript no seu navegador e por que",
+          "url": "https://www.enable-javascript.com/pt/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "javascript array.prototype.tospliced sua sintaxe comportamento",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 594.52,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "76e6af3d0363b1a2a03db5d4009dfe376ac5d8fb",
+  "dataset_sha256": "fb79939c1320f93670acede8c8846a00fdf78247bb5b4cae687554496f2e9e3a"
+}

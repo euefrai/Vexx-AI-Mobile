@@ -1,0 +1,3338 @@
+{
+  "id": "dir-07",
+  "category": "universal",
+  "query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 12.572,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Bosch",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Bosch",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "Bosch",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "quem fundou bosch ano produtos fabrica",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "quem fundou bosch ano produtos fabrica",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "quem fundou bosch ano produtos fabrica",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Bosch&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Bosch&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4652
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Bosch",
+      "final": "https://html.duckduckgo.com/html/?q=Bosch",
+      "chars": 14226
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Bosch",
+      "final": "https://old-search.marginalia.nu/search?query=Bosch",
+      "chars": 985
+    },
+    {
+      "url": "https://www.bing.com/search?q=quem+fundou+bosch+ano+produtos+fabrica&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=quem+fundou+bosch+ano+produtos+fabrica&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5320
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=quem+fundou+bosch+ano+produtos+fabrica",
+      "final": "https://old-search.marginalia.nu/search?query=quem+fundou+bosch+ano+produtos+fabrica",
+      "chars": 1051
+    },
+    {
+      "url": "https://www.lojaboschferramentas.com.br/",
+      "final": "https://www.lojaboschferramentas.com.br/",
+      "chars": 939502
+    },
+    {
+      "url": "https://www.bosch.com.br/",
+      "final": "https://www.bosch.com.br/",
+      "chars": 119792
+    },
+    {
+      "url": "https://www.bosch-professional.com/br/pt/",
+      "final": "https://www.bosch-professional.com/br/pt/",
+      "chars": 537842
+    },
+    {
+      "url": "https://www.lojaboschferramentas.com.br/mes-verde-medicao-bosch",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+      "final": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+      "chars": 159917
+    },
+    {
+      "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+      "final": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+      "chars": 151913
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+    "domain": "general",
+    "original_request": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+    "resolved_request": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:22:21.170238+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "e64eeae8db2265e5efc4",
+        "url": "https://www.lojaboschferramentas.com.br/",
+        "title": "Bosch Ferramentas | Loja oficial",
+        "origin": "bing",
+        "query": "Bosch",
+        "date": "dom., 25 out. 2026 05:02:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Compre pelo WhatsApp Loja oficial Conte com a confiançae garantia BOSCH. Entrega Garantida Garantimos a entregapara todo o Brasil! Pagamento facilitado Parcele ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 248,
+        "final_url": "https://www.lojaboschferramentas.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "f1feb3c3a7724d4b8d13",
+        "url": "https://www.bosch.com.br/",
+        "title": "Página inicial | Bosch no Brasil",
+        "origin": "bing",
+        "query": "Bosch",
+        "date": "dom., 25 out. 2026 11:07:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Produtos e serviços Produtos e serviços Visão geral Agronegócio Mobilidade Indústria e comércio Em casa Notícias e histórias Notícias e histórias Visão geral Ag",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3762,
+        "final_url": "https://www.bosch.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "3e7188efcd7240c7d38f",
+        "url": "https://www.bosch-professional.com/br/pt/",
+        "title": "Ferramentas elétricas Bosch | Bosch Professional",
+        "origin": "bing",
+        "query": "Bosch",
+        "date": "dom., 25 out. 2026 04:04:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Marcenaria - De Pai pra Filho Este episódio teve um papo diferente! Fizemos uma edição especial para o Dia dos Pais com os \"Andrés\". Nele, trouxemos o André pai",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1474,
+        "final_url": "https://www.bosch-professional.com/br/pt/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "f6d0d6a90b191d0cdc73",
+        "url": "https://www.bosch.com.br/nossa-empresa/bosch-no-brasil/",
+        "title": "A nossa empresa | Bosch no Brasil",
+        "origin": "bing",
+        "query": "Bosch",
+        "date": "sáb., 24 out. 2026 05:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O Grupo Bosch é composto pela Robert Bosch GmbH e suas cerca de 500 subsidiárias e empresas regionais em mais de 60 países. Incluindo parceiros de vendas e serv",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "4524501da2639c76ccfc",
+        "url": "https://www.bosch-professional.com/br/pt/servicos/downloads/catalogos/",
+        "title": "Catálogos - Bosch Professional",
+        "origin": "bing",
+        "query": "Bosch",
+        "date": "sáb., 24 out. 2026 07:12:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Catálogos Abaixo você encontra todos os catálogos de Ferramentas elétricas e Acessórios Bosch atuais para consulta",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "ce67e6f67a9a862a708f",
+        "url": "https://catalogo.boschaftermarket.com.br/",
+        "title": "Catálogo",
+        "origin": "bing",
+        "query": "Bosch",
+        "date": "dom., 25 out. 2026 08:36:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Catálogo ... Catálogo",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "b9d0a17c756e785ddd8d",
+        "url": "https://www.iso.org/iso-4217-currency-codes.html",
+        "title": "ISO - ISO 4217 — Currency codes",
+        "origin": "bing",
+        "query": "quem fundou bosch ano produtos fabrica",
+        "date": "sáb., 24 out. 2026 21:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "People around the world rely on almost 300 different currencies to do business with each other, which is why it pays to use ISO 4217. This standard establishes ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "89f44ae5973f9172a5bb",
+        "url": "https://en.wikipedia.org/wiki/ISO_4217",
+        "title": "ISO 4217 - Wikipedia",
+        "origin": "bing",
+        "query": "quem fundou bosch ano produtos fabrica",
+        "date": "sex., 23 out. 2026 21:25:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "ISO 4217 is a standard published by the International Organization for Standardization (ISO) that defines alpha codes and numeric codes for the representation o",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "7384afe0b2e822663fd0",
+        "url": "https://pt.iban.com/currency-codes",
+        "title": "Lista de códigos de moeda por país (ISO 4217) - IBAN",
+        "origin": "bing",
+        "query": "quem fundou bosch ano produtos fabrica",
+        "date": "sáb., 24 out. 2026 21:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Lista atualizada de nomes de moedas. Códigos alfabéticos de 3 caracteres e ISO 4217 numéricos de 3 dígitos para cada país.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "15aea0153f65ec791127",
+        "url": "https://currencyconversion.org/guides/currency-codes-iso-4217",
+        "title": "ISO 4217 Currency Codes: Full List and Numeric Codes",
+        "origin": "bing",
+        "query": "quem fundou bosch ano produtos fabrica",
+        "date": "sex., 23 out. 2026 22:15:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Full ISO 4217 currency code list: three-letter codes, three-digit numeric codes and decimal places for 42 currencies, plus how each code is built.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "2978b9020ce963f8ae0d",
+        "url": "https://www.iban.com/currency-codes",
+        "title": "List of Currency Codes by Country (ISO 4217) - IBAN Checker",
+        "origin": "bing",
+        "query": "quem fundou bosch ano produtos fabrica",
+        "date": "sáb., 24 out. 2026 03:58:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "View today's currency exchange rates and use currency converter to calculate value of one currency to another. Updated list of currency names. 3 character alpha",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "f93744373957f9543a99",
+        "url": "https://pt.wikipedia.org/wiki/ISO_4217",
+        "title": "ISO 4217 – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "quem fundou bosch ano produtos fabrica",
+        "date": "qua., 21 out. 2026 08:41:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "A ISO 4217 é uma norma internacional que estabelece códigos de três letras e de três algarismos para identificar moedas. Ela também informa a relação entre a un",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "8cd337f729670d5a053c",
+        "url": "https://www.lojaboschferramentas.com.br/mes-verde-medicao-bosch",
+        "title": "",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+        "date": "",
+        "type": "page",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "tamanho",
+        "losses": [
+          "FETCH_FAILED"
+        ]
+      },
+      {
+        "id": "a3dd883bf462cfc24d4e",
+        "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+        "title": "Agricultura inteligente: como a Bosch transforma o agro brasileiro",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "ONE SMART SPRAY, que une a inteligência agronômica da BASF à tecnologia de hardware da Bosch, promovendo maior eficiência no uso de insumos e proteção das lavou",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 1523,
+        "final_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "e16ba567b6aa46ea4d42",
+        "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+        "title": "Bosch no Agro",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "tecnologia Pensando nisso, criamos a webserie “Bosch no Agro”, para que você possa entender como funcionam as soluções da Bosch para o campo, e como contribuem ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 865,
+        "final_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      }
+    ],
+    "unique_candidates": 15,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-54fd46f0e612",
+      "type": "image",
+      "title": "Bosch",
+      "url": "https://boschferramentasbrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/7a2b4c17-5df5-4db2-9739-1577af6045bc___c9e8d31eeb924edbbff4ad532752b1b2.svg",
+      "final_url": "https://boschferramentasbrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/7a2b4c17-5df5-4db2-9739-1577af6045bc___c9e8d31eeb924edbbff4ad532752b1b2.svg",
+      "source_title": "Bosch Ferramentas | Loja oficial",
+      "source_url": "https://www.lojaboschferramentas.com.br/",
+      "publisher": "boschferramentasbrasil.vtexassets.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Bosch",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2a66def272c2",
+      "type": "image",
+      "title": "wishlist icon",
+      "url": "https://boschferramentasbrasil.vtexassets.com/assets/vtex/assets-builder/boschferramentasbrasil.builderio/4.8.1/icons/wishlist/wishlist-not-checked___6573d2e26b0fe5b2eb31b2110138048e.svg",
+      "final_url": "https://boschferramentasbrasil.vtexassets.com/assets/vtex/assets-builder/boschferramentasbrasil.builderio/4.8.1/icons/wishlist/wishlist-not-checked___6573d2e26b0fe5b2eb31b2110138048e.svg",
+      "source_title": "Bosch Ferramentas | Loja oficial",
+      "source_url": "https://www.lojaboschferramentas.com.br/",
+      "publisher": "boschferramentasbrasil.vtexassets.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "wishlist icon",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0a211ac42ded",
+      "type": "image",
+      "title": "O que os clientes querem no futuro? Eles exigirão uma maior diversidade e produtos mais personalizados. Assim, a produção futura deve ser capaz de se adaptar ra",
+      "url": "https://assets.bosch.com/media/global/fallback/fallback-16x9.jpg",
+      "final_url": "https://assets.bosch.com/media/global/fallback/fallback-16x9.jpg",
+      "source_title": "Página inicial",
+      "source_url": "https://www.bosch.com.br/",
+      "publisher": "assets.bosch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "O que os clientes querem no futuro? Eles exigirão uma maior diversidade e produtos mais personalizados. Assim, a produção futura deve ser capaz de se adaptar rapidamente às novas exigências do mercado. Indústria 4.0 é a resposta para este d",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-867e8131405c",
+      "type": "image",
+      "title": "Conheça as tecnologias da Bosch para veículos comerciais na Fenatran 2026. Soluções em conectividade, segurança, eletrificação, telemetria e eficiência para o t",
+      "url": "https://www.bosch.com.br/media/home/template_grficos_para_site_res_800x450.webp",
+      "final_url": "https://www.bosch.com.br/media/home/template_grficos_para_site_res_800x450.webp",
+      "source_title": "Página inicial",
+      "source_url": "https://www.bosch.com.br/",
+      "publisher": "www.bosch.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Conheça as tecnologias da Bosch para veículos comerciais na Fenatran 2026. Soluções em conectividade, segurança, eletrificação, telemetria e eficiência para o transporte do presente e futuro.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1ca50f0942ab",
+      "type": "image",
+      "title": "Podcast Bosch Talks",
+      "url": "https://www.bosch.com.br/media/stories/podcast/banner_native_podcast_bosch_talks_res_800x450.webp",
+      "final_url": "https://www.bosch.com.br/media/stories/podcast/banner_native_podcast_bosch_talks_res_800x450.webp",
+      "source_title": "Página inicial",
+      "source_url": "https://www.bosch.com.br/",
+      "publisher": "www.bosch.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Podcast Bosch Talks",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-58ec78a9fa62",
+      "type": "image",
+      "title": "Soluções inovadoras que facilitam novas ofertas de mobilidade — da Bosch",
+      "url": "https://assets.bosch.com/media/global/products_and_solutions/mobility/mobility-solutions-web-portal_res_400x225.webp",
+      "final_url": "https://assets.bosch.com/media/global/products_and_solutions/mobility/mobility-solutions-web-portal_res_400x225.webp",
+      "source_title": "Página inicial",
+      "source_url": "https://www.bosch.com.br/",
+      "publisher": "assets.bosch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Soluções inovadoras que facilitam novas ofertas de mobilidade — da Bosch",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-3ea4c7316cad",
+      "type": "image",
+      "title": "Soluções individuais para a tua casa — da Bosch",
+      "url": "https://assets.bosch.com/media/global/bosch_group/bosch-at-home_res_400x225.webp",
+      "final_url": "https://assets.bosch.com/media/global/bosch_group/bosch-at-home_res_400x225.webp",
+      "source_title": "Página inicial",
+      "source_url": "https://www.bosch.com.br/",
+      "publisher": "assets.bosch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Soluções individuais para a tua casa — da Bosch",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4442f5a69fe1",
+      "type": "image",
+      "title": "Produtos e serviços inovadores para a industria e negócios — da Bosch",
+      "url": "https://assets.bosch.com/media/global/bosch_group/bosch-industry_res_400x225.webp",
+      "final_url": "https://assets.bosch.com/media/global/bosch_group/bosch-industry_res_400x225.webp",
+      "source_title": "Página inicial",
+      "source_url": "https://www.bosch.com.br/",
+      "publisher": "assets.bosch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Produtos e serviços inovadores para a industria e negócios — da Bosch",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4328ec93f899",
+      "type": "image",
+      "title": "Agronegócio",
+      "url": "https://www.bosch.com.br/media/products_and_services/agronegocio_1/foto_1_res_400x225.webp",
+      "final_url": "https://www.bosch.com.br/media/products_and_services/agronegocio_1/foto_1_res_400x225.webp",
+      "source_title": "Página inicial",
+      "source_url": "https://www.bosch.com.br/",
+      "publisher": "www.bosch.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Agronegócio",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-32bf6e895f4e",
+      "type": "image",
+      "title": "Nossa sala de impensa",
+      "url": "https://www.bosch.com.br/media/home/imprensa_res_640x360.webp",
+      "final_url": "https://www.bosch.com.br/media/home/imprensa_res_640x360.webp",
+      "source_title": "Página inicial",
+      "source_url": "https://www.bosch.com.br/",
+      "publisher": "www.bosch.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Nossa sala de impensa",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ef02ef2053ef",
+      "type": "image",
+      "title": "Um grupo diverso segura uma faixa que diz “Join the Team”. Uma pessoa acena para aqueles que estão assistindo se juntarem ao grupo.",
+      "url": "https://assets.bosch.com/media/global/internet_of_things/work_like_a_bosch/desk_res_640x360.webp",
+      "final_url": "https://assets.bosch.com/media/global/internet_of_things/work_like_a_bosch/desk_res_640x360.webp",
+      "source_title": "Página inicial",
+      "source_url": "https://www.bosch.com.br/",
+      "publisher": "assets.bosch.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Um grupo diverso segura uma faixa que diz “Join the Team”. Uma pessoa acena para aqueles que estão assistindo se juntarem ao grupo.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-99bf6f6f780e",
+      "type": "image",
+      "title": "Ferramentas elétricas Bosch – Comércio/indústria. As ferramentas elétricas profissionais Bosch da linha azul foram projetadas para excelência – atendendo aos ma",
+      "url": "https://www.bosch-professional.com/br/media/professional/central_assets/global_settings/tv_search_100x60.png",
+      "final_url": "https://www.bosch-professional.com/br/media/professional/central_assets/global_settings/tv_search_100x60.png",
+      "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+      "source_url": "https://www.bosch-professional.com/br/pt/",
+      "publisher": "www.bosch-professional.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ferramentas elétricas Bosch – Comércio/indústria. As ferramentas elétricas profissionais Bosch da linha azul foram projetadas para excelência – atendendo aos mais altos padrões em velocidade, precisão e robustez para ótimos resultados no tr",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.lojaboschferramentas.com.br/",
+      "titulo": "Bosch Ferramentas | Loja oficial",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 05:02:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.lojaboschferramentas.com.br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.bosch.com.br/",
+      "titulo": "Página inicial",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 11:07:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.bosch.com.br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.bosch-professional.com/br/pt/",
+      "titulo": "Ferramentas elétricas Bosch | Bosch Professional",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 04:04:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.bosch-professional.com/br/pt/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Bosch",
+      "items": [
+        {
+          "titulo": "Página inicial | Bosch no Brasil",
+          "url": "https://www.bosch.com.br/",
+          "trecho": "Siga-nos para um mundo conectado Saiba mais sobre IoT no nosso site global Explorar e vivenciar a Bosch – nossas histórias Visite o nosso site global",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:07:00 GMT"
+          },
+          "discovery_query": "Bosch",
+          "discovery_provider": "bing",
+          "url_canonica": "https://bosch.com.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Bosch Ferramentas | Loja oficial",
+          "url": "https://www.lojaboschferramentas.com.br/",
+          "trecho": "Conte com confiança da marca Bosch ao efetuar suas compras. Adquira seus produtos na loja online Bosch com condições especiais e receba de um de nossos parceiros!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 05:02:00 GMT"
+          },
+          "discovery_query": "Bosch",
+          "discovery_provider": "bing",
+          "url_canonica": "https://lojaboschferramentas.com.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 10.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Ferramentas elétricas Bosch | Bosch Professional",
+          "url": "https://www.bosch-professional.com/br/pt/",
+          "trecho": "As ferramentas elétricas profissionais Bosch da linha azul foram projetadas para excelência – atendendo aos mais altos padrões em velocidade, precisão e robustez para ótimos resultados no trabalho profissional.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 04:04:00 GMT"
+          },
+          "discovery_query": "Bosch",
+          "discovery_provider": "bing",
+          "url_canonica": "https://bosch-professional.com/br/pt",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "A nossa empresa | Bosch no Brasil",
+          "url": "https://www.bosch.com.br/nossa-empresa/bosch-no-brasil/",
+          "trecho": "O Grupo Bosch é composto pela Robert Bosch GmbH e suas cerca de 500 subsidiárias e empresas regionais em mais de 60 países. Incluindo parceiros de vendas e serviços, a rede global de produção, engenharia e vendas da Bosch abrange quase todos os países do mundo.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 05:24:00 GMT"
+          },
+          "discovery_query": "Bosch",
+          "discovery_provider": "bing",
+          "url_canonica": "https://bosch.com.br/nossa-empresa/bosch-no-brasil",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Catálogos - Bosch Professional",
+          "url": "https://www.bosch-professional.com/br/pt/servicos/downloads/catalogos/",
+          "trecho": "Catálogos Abaixo você encontra todos os catálogos de Ferramentas elétricas e Acessórios Bosch atuais para consulta",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 07:12:00 GMT"
+          },
+          "discovery_query": "Bosch",
+          "discovery_provider": "bing",
+          "url_canonica": "https://bosch-professional.com/br/pt/servicos/downloads/catalogos",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Catálogo",
+          "url": "https://catalogo.boschaftermarket.com.br/",
+          "trecho": "Catálogo ... Catálogo",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 08:36:00 GMT"
+          },
+          "discovery_query": "Bosch",
+          "discovery_provider": "bing",
+          "url_canonica": "https://catalogo.boschaftermarket.com.br/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "quem fundou bosch ano produtos fabrica",
+      "items": [
+        {
+          "titulo": "ISO - ISO 4217 — Currency codes",
+          "url": "https://www.iso.org/iso-4217-currency-codes.html",
+          "trecho": "People around the world rely on almost 300 different currencies to do business with each other, which is why it pays to use ISO 4217. This standard establishes internationally recognized codes for the representation of currencies that enable clarity and reduce errors.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:24:00 GMT"
+          },
+          "discovery_query": "quem fundou bosch ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://iso.org/iso-4217-currency-codes.html",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "ISO 4217 - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/ISO_4217",
+          "trecho": "ISO 4217 is a standard published by the International Organization for Standardization (ISO) that defines alpha codes and numeric codes for the representation of currencies, and provides information about the relationships between currencies and their minor units.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 21:25:00 GMT"
+          },
+          "discovery_query": "quem fundou bosch ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.wikipedia.org/wiki/ISO_4217",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "ISO 4217 – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/ISO_4217",
+          "trecho": "A ISO 4217 é uma norma internacional que estabelece códigos de três letras e de três algarismos para identificar moedas. Ela também informa a relação entre a unidade monetária e suas subdivisões e abrange fundos e metais preciosos.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 08:41:00 GMT"
+          },
+          "discovery_query": "quem fundou bosch ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/ISO_4217",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 3.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Lista de códigos de moeda por país (ISO 4217) - IBAN",
+          "url": "https://pt.iban.com/currency-codes",
+          "trecho": "Lista atualizada de nomes de moedas. Códigos alfabéticos de 3 caracteres e ISO 4217 numéricos de 3 dígitos para cada país.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 21:24:00 GMT"
+          },
+          "discovery_query": "quem fundou bosch ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.iban.com/currency-codes",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "ISO 4217 Currency Codes: Full List and Numeric Codes",
+          "url": "https://currencyconversion.org/guides/currency-codes-iso-4217",
+          "trecho": "Full ISO 4217 currency code list: three-letter codes, three-digit numeric codes and decimal places for 42 currencies, plus how each code is built.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 22:15:00 GMT"
+          },
+          "discovery_query": "quem fundou bosch ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://currencyconversion.org/guides/currency-codes-iso-4217",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "List of Currency Codes by Country (ISO 4217) - IBAN Checker",
+          "url": "https://www.iban.com/currency-codes",
+          "trecho": "View today's currency exchange rates and use currency converter to calculate value of one currency to another. Updated list of currency names. 3 character alphabetic and 3 digit numeric ISO 4217 codes for each country.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 03:58:00 GMT"
+          },
+          "discovery_query": "quem fundou bosch ano produtos fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://iban.com/currency-codes",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.lojaboschferramentas.com.br/",
+      "result": {
+        "titulo": "Bosch Ferramentas | Loja oficial",
+        "texto": "Compre pelo WhatsApp Loja oficial Conte com a confiançae garantia BOSCH. Entrega Garantida Garantimos a entregapara todo o Brasil! Pagamento facilitado Parcele em até 10 vezes Compra Segura Receba de nossosparceiros Bosch Ferramentas | Loja Oficial",
+        "final": "https://www.lojaboschferramentas.com.br/",
+        "trecho_usado": "Compre pelo WhatsApp Loja oficial Conte com a confiançae garantia BOSCH. Entrega Garantida Garantimos a entregapara todo o Brasil! Pagamento facilitado Parcele em até 10 vezes Compra Segura Receba de nossosparceiros Bosch Ferramentas | Loja Oficial",
+        "metadados": {
+          "titulo": "Bosch Ferramentas | Loja oficial",
+          "descricao": "Conte com confiança da marca Bosch ao efetuar suas compras. Adquira seus produtos na loja online Bosch com condições especiais e receba de um de nossos parceiros!",
+          "canonica": "https://www.lojaboschferramentas.com.br/",
+          "og": {
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "Bosch Ferramentas | Loja oficial",
+          "site": "",
+          "tipo": "WebSite",
+          "ld": {
+            "description": "Loja oficial Bosch de ferramentas elétricas, manuais, linha de medição e acessórios para profissionais.",
+            "publisher": {
+              "@id": "https://www.lojaboschferramentas.com.br/#organization"
+            },
+            "inLanguage": "pt-BR"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [
+          {
+            "url": "https://www.lojaboschferramentas.com.br/mes-verde-medicao-bosch",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://wa.me/5519999638119?text=Ol%C3%A1!%20Gostaria%20de%20ser%20atendido.",
+            "texto": "Compre pelo WhatsApp",
+            "interno": false
+          },
+          {
+            "url": "https://www.lojaboschferramentas.com.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/blog/",
+            "texto": "Blog",
+            "interno": false
+          },
+          {
+            "url": "https://api.whatsapp.com/send/?phone=5519999638119&amp;text&amp;type=phone_number&amp;app_absent=0",
+            "texto": "Compre pelo WhatsApp",
+            "interno": false
+          },
+          {
+            "url": "https://www.lojaboschferramentas.com.br/account#/wishlist",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.lojaboschferramentas.com.br/jardim-e-lavadoras",
+            "texto": "Jardim e Lavadoras",
+            "interno": true
+          },
+          {
+            "url": "https://www.lojaboschferramentas.com.br/ferramentas-manuais",
+            "texto": "Ferramentas Manuais",
+            "interno": true
+          },
+          {
+            "url": "https://www.lojaboschferramentas.com.br/linha-de-medicao?utmi_p=home&amp;utmi_pc=clique-Linha%20de%20Medição",
+            "texto": "Linha de Medição",
+            "interno": true
+          },
+          {
+            "url": "https://www.lojaboschferramentas.com.br/acessorios?utmi_p=home&amp;utmi_pc=clique-Acessórios",
+            "texto": "Acessórios",
+            "interno": true
+          },
+          {
+            "url": "https://www.lojaboschferramentas.com.br/combo",
+            "texto": "Combos",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.lojaboschferramentas.com.br/arquivos/banner-principal.jpg",
+          "https://boschferramentasbrasil.vtexassets.com/assets/vtex/assets-builder/boschferramentasbrasil.builderio/4.8.1/common/common-line___ae68905b672d64f2721afc9c6a22c616.jpg",
+          "https://boschferramentasbrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/7a2b4c17-5df5-4db2-9739-1577af6045bc___c9e8d31eeb924edbbff4ad532752b1b2.svg",
+          "https://boschferramentasbrasil.vtexassets.com/assets/vtex/assets-builder/boschferramentasbrasil.builderio/4.8.1/icons/wishlist/wishlist-not-checked___6573d2e26b0fe5b2eb31b2110138048e.svg",
+          "https://boschferramentasbrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/846d8c4a-4574-4ada-8791-d6551bd2bb62___ed99e7e37813f4c5e9223ac2578b018e.png",
+          "https://boschferramentasbrasil.vtexassets.com/assets/vtex/assets-builder/boschferramentasbrasil.builderio/4.8.1/icons/home/ico-tipbar-1___5022c2cc9610153ae529a95fd9dd9539.svg",
+          "https://boschferramentasbrasil.vtexassets.com/assets/vtex/assets-builder/boschferramentasbrasil.builderio/4.8.1/icons/home/ico-tipbar-2___9f0445c9e2fd1a6016b7c4d10c0f28d6.svg",
+          "https://boschferramentasbrasil.vtexassets.com/assets/vtex/assets-builder/boschferramentasbrasil.builderio/4.8.1/icons/home/ico-tipbar-3___5645277a2868c359d1469ebe4737dfe9.svg",
+          "https://boschferramentasbrasil.vtexassets.com/assets/vtex/assets-builder/boschferramentasbrasil.builderio/4.8.1/icons/home/ico-tipbar-4___fd8c58eef9b389a2e2fb75883d91a29d.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-54fd46f0e612",
+            "type": "image",
+            "title": "Bosch",
+            "url": "https://boschferramentasbrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/7a2b4c17-5df5-4db2-9739-1577af6045bc___c9e8d31eeb924edbbff4ad532752b1b2.svg",
+            "final_url": "https://boschferramentasbrasil.vtexassets.com/assets/vtex.file-manager-graphql/images/7a2b4c17-5df5-4db2-9739-1577af6045bc___c9e8d31eeb924edbbff4ad532752b1b2.svg",
+            "source_title": "Bosch Ferramentas | Loja oficial",
+            "source_url": "https://www.lojaboschferramentas.com.br/",
+            "publisher": "boschferramentasbrasil.vtexassets.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bosch",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2a66def272c2",
+            "type": "image",
+            "title": "wishlist icon",
+            "url": "https://boschferramentasbrasil.vtexassets.com/assets/vtex/assets-builder/boschferramentasbrasil.builderio/4.8.1/icons/wishlist/wishlist-not-checked___6573d2e26b0fe5b2eb31b2110138048e.svg",
+            "final_url": "https://boschferramentasbrasil.vtexassets.com/assets/vtex/assets-builder/boschferramentasbrasil.builderio/4.8.1/icons/wishlist/wishlist-not-checked___6573d2e26b0fe5b2eb31b2110138048e.svg",
+            "source_title": "Bosch Ferramentas | Loja oficial",
+            "source_url": "https://www.lojaboschferramentas.com.br/",
+            "publisher": "boschferramentasbrasil.vtexassets.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "wishlist icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.bosch.com.br/",
+      "result": {
+        "titulo": "Página inicial",
+        "texto": "Produtos e serviços Produtos e serviços Visão geral Agronegócio Mobilidade Indústria e comércio Em casa Notícias e histórias Notícias e histórias Visão geral Agronegócio Agronegócio Visão geral Agricultura inteligente: como a Bosch transforma o agro brasileiro A evolução do plantio no agronegócio Tecnologia no agronegócio Agricultura sustentável Os desafios do agronegócio Agricultura digital Soluções que transformam o campo Bosch no Agro Sustentabilidade Sustentabilidade Visão geral Mulheres na tecnologia Carbono Neutro ESG Economia circular Economia Circular Programa Recicla Auto Partes Centro de Memoria Relatório de transparência e igualdade salarial Diversidade equidade inclusão Reutilização de água Eficiência Energética Responsabilidade Ambiental Dia Nacional do Surdo Igualdade de gênero Saúde e bem estar Cidades do futuro Queimadas Importância da Educação Preservação e conservação ambiental Automação Lógica e Diversidade Trabalho Flexível Mobilidade Mobilidade Visão geral Transição energética: os caminhos para o futuro dos veículos comerciais Veículos comerciais Eletrificação ABS para motocicletas: mais segurança e controle na mobilidade sobre duas rodas O futuro dos combustíveis sustentáveis 7 décadas moldando a segurança no trânsito Veículos Híbridos Acidentes de trânsito, principais causas e soluções Transição energética Combustíveis Evolução que move a mobilidade O Futuro da Mobilidade Mobilidade Sustentável Mobilidade urbana sustentável Trânsito nas cidades O carro do Futuro e-bike Limpador de para-brisa Tecnologia para um trânsito mais seguro Telemetria para a gestão de frotas de caminhões Telemetria na Redução de Custos Como transformar os dados da sua frota de caminhões em eficiência operacional? Digitalização na Gestão de Frotas e Tendências de Telemetria Eficiência Operacional com Telemetria na Gestão de Frotas Flex Fuel 20 anos no Brasil Indústria 4.0 Indústria 4.0 Visão geral 5G Websérie Bosch na Indústria 4.0 AIoT AIoT Visão geral Inteligência artificial: os impactos da tecnologia que já está mudando o mundo Bosch Tech Compass 2026 Bosch Tech Compass 2025 Bosch Tech Compass 2024 Bosch Tech Compass 2023 A inteligência artificial esta transformando o mundo do trabalho Web3 DTA Academia de Talentos Digitais Como AIoT muda nossa realidade Cyber Security Parcerias Estratégicas AIoT AIoT na Medicina AIoT Mobilidade Urbana IA e o Trabalho IA e Diversidade Sensores em um Mundo Conectado Smart Cities Podcast Bosch Talks Bosch 70 anos Bosch 70 anos Visão geral Bosch Brasil 70 anos: Inovando para uma vida melhor Mineração Mineração Smart Lockout Motores de partida para caminhões fora de estrada Start Stop Ferramentas elétricas para mineração Sistema de monitoriamento para trituradores primários Sistema de monitoriamento para poços Soluções Bosch Rexroth para mineração Caldeiras Industriais Smart Conveyor Nossa empresa Nossa empresa Bosch no Brasil Responsabilidade Responsabilidade Visão geral Sustentabilidade Nossos valores Compliance Nossa história Nossa história Visão geral Uma viagem através da nossa história Grupo Bosch no mundo Grupo Bosch no mundo Visão geral A Bosch em resumo Nossos negócios Estrutura e organização Carreiras Carreiras Visão geral Oportunidades na Bosch Oportunidades na Bosch Visão geral Procura de emprego Dicas sobre aplicações Empregos a nível mundial Por que a Bosch? Por que a Bosch? Visão geral Colaboração e liderança Cultura e benefícios Crescimento e desenvolvimento Areas de trabalho Areas de trabalho Visão geral Áreas de foco Sobre nós Localizações Carreiras globais Estudantes e graduados Estudantes e graduados Visão geral Para graduados Para estudantes Contato Contato Visão geral Alerta Fraude Recall Eventos Eventos Fenatran 2026 Imprensa Proteção de Dados",
+        "final": "https://www.bosch.com.br/",
+        "trecho_usado": "Produtos e serviços Produtos e serviços Visão geral Agronegócio Mobilidade Indústria e comércio Em casa Notícias e histórias Notícias e histórias Visão geral Agronegócio Agronegócio Visão geral Agricultura inteligente: como a Bosch transforma o agro brasileiro A evolução do plantio no agronegócio Tecnologia no agronegócio Agricultura sustentável Os desafios do agronegócio Agricultura digital",
+        "metadados": {
+          "titulo": "Página inicial",
+          "descricao": "O que os clientes querem no futuro? Eles exigirão uma maior diversidade e produtos mais personalizados. Assim, a produção futura deve ser capaz de se adaptar rapidamente às novas exigências do mercado. Indústria 4.0 é a resposta para este desafio.",
+          "canonica": "https://www.bosch.com.br/",
+          "og": {
+            "og:title": "Página inicial",
+            "og:site_name": "Bosch no Brasil",
+            "og:url": "https://www.bosch.com.br/",
+            "og:description": "O que os clientes querem no futuro? Eles exigirão uma maior diversidade e produtos mais personalizados. Assim, a produção futura deve ser capaz de se adaptar rapidamente às novas exigências do mercado. Indústria 4.0 é a resposta para este desafio.",
+            "og:image": "https://assets.bosch.com/media/global/fallback/fallback-16x9.jpg",
+            "og:type": "website"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@Bosch_Brasil",
+            "twitter:creator": "@Bosch_Brasil",
+            "twitter:title": "Página inicial",
+            "twitter:description": "O que os clientes querem no futuro? Eles exigirão uma maior diversidade e produtos mais personalizados. Assim, a produção futura deve ser capaz de se adaptar rapidamente às novas exigências do mercado. Indústria 4.0 é a resposta para este desafio.",
+            "twitter:image": "https://assets.bosch.com/media/global/fallback/fallback-16x9.jpg"
+          },
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Bosch no Brasil",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Agricultura inteligente: como a Bosch transforma o agro brasileiro\nA evolução do plantio no agronegócio\nTecnologia no agronegócio\nOs desafios do agronegócio\nSoluções que transformam o campo\nEconomia Circular Programa Recicla Auto Partes\nRelatório de transparência e igualdade salarial\nDiversidade equidade inclusão\nResponsabilidade Ambiental\nPreservação e conservação ambiental\nAutomação Lógica e Diversidade\nTransição energética: os caminhos para o futuro dos veículos comerciais\nABS para motocicletas: mais segurança e controle na mobilidade sobre duas rodas\nO futuro dos combustíveis sustentáveis\n7 décadas moldando a segurança no trânsito\nAcidentes de trânsito, principais causas e soluções\nCombustíveis Evolução que move a mobilidade\nMobilidade urbana sustentável\nTecnologia para um trânsito mais seguro\nTelemetria para a gestão de frotas de caminhões\nTelemetria na Redução de Custos\nComo transformar os dados da sua frota de caminhões em eficiência operacional?\nDigitalização na Gestão de Frotas e Tendências de Telemetria\nEficiência Operacional com Telemetria na Gestão de Frotas\nFlex Fuel 20 anos no Brasil\nWebsérie Bosch na Indústria 4.0\nInteligência artificial: os impactos da tecnologia que já está mudando o mundo\nA inteligência artificial esta transformando o mundo do trabalho\nAcademia de Talentos Digitais\nComo AIoT muda nossa realidade\nParcerias Estratégicas AIoT\nSensores em um Mundo Conectado\nBosch Brasil 70 anos: Inovando para uma vida melhor\nMotores de partida para caminhões fora de estrada\nFerramentas elétricas para mineração\nSistema de monitoriamento para trituradores primários\nSistema de monitoriamento para poços\nSoluções Bosch Rexroth para mineração\nUma viagem através da nossa história\nCrescimento e desenvolvimento"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "texto": "Agricultura inteligente: como a Bosch transforma o agro brasileiro",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "texto": "Bosch no Agro",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/industria-4-0/webserie-bosch-na-industria-4-0/",
+            "texto": "Websérie Bosch na Indústria 4.0",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2026/",
+            "texto": "Bosch Tech Compass 2026",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2025/",
+            "texto": "Bosch Tech Compass 2025",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2024/",
+            "texto": "Bosch Tech Compass 2024",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2023/",
+            "texto": "Bosch Tech Compass 2023",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/podcast-bosch-talks/",
+            "texto": "Podcast Bosch Talks",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/bosch-70-anos/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/bosch-70-anos/bosch-brasil-70-anos-inovando-para-uma-vida-melhor/",
+            "texto": "Bosch Brasil 70 anos: Inovando para uma vida melhor",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/agronegocio/",
+            "texto": "Agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/mobilidade/",
+            "texto": "Mobilidade",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/industria-e-comercio/",
+            "texto": "Indústria e comércio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/em-casa/",
+            "texto": "Em casa",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/a-evolucao-do-plantio-no-agronegocio/",
+            "texto": "A evolução do plantio no agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/tecnologia-no-agronegocio/",
+            "texto": "Tecnologia no agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-sustentavel/",
+            "texto": "Agricultura sustentável",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/os-desafios-do-agonegocio/",
+            "texto": "Os desafios do agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-digital/",
+            "texto": "Agricultura digital",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/solucoes-que-transformam-o-campo/",
+            "texto": "Soluções que transformam o campo",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/mulheres-na-tecnologia/",
+            "texto": "Mulheres na tecnologia",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/carbono-neutro/",
+            "texto": "Carbono Neutro",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/esg/",
+            "texto": "ESG",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/economia-circular/",
+            "texto": "Economia circular",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/economia-circular-programa-recicla-auto-partes/",
+            "texto": "Economia Circular Programa Recicla Auto Partes",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://assets.bosch.com/media/global/fallback/fallback-16x9.jpg",
+          "https://www.bosch.com.br/media/home/template_grficos_para_site_res_800x450.webp",
+          "https://www.bosch.com.br/media/stories/podcast/banner_native_podcast_bosch_talks_res_800x450.webp",
+          "https://assets.bosch.com/media/global/products_and_solutions/mobility/mobility-solutions-web-portal_res_400x225.webp",
+          "https://assets.bosch.com/media/global/bosch_group/bosch-at-home_res_400x225.webp",
+          "https://assets.bosch.com/media/global/bosch_group/bosch-industry_res_400x225.webp",
+          "https://www.bosch.com.br/media/products_and_services/agronegocio_1/foto_1_res_400x225.webp",
+          "https://www.bosch.com.br/media/home/imprensa_res_640x360.webp",
+          "https://assets.bosch.com/media/global/internet_of_things/work_like_a_bosch/desk_res_640x360.webp"
+        ],
+        "midia": [
+          {
+            "id": "med-0a211ac42ded",
+            "type": "image",
+            "title": "O que os clientes querem no futuro? Eles exigirão uma maior diversidade e produtos mais personalizados. Assim, a produção futura deve ser capaz de se adaptar ra",
+            "url": "https://assets.bosch.com/media/global/fallback/fallback-16x9.jpg",
+            "final_url": "https://assets.bosch.com/media/global/fallback/fallback-16x9.jpg",
+            "source_title": "Página inicial",
+            "source_url": "https://www.bosch.com.br/",
+            "publisher": "assets.bosch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O que os clientes querem no futuro? Eles exigirão uma maior diversidade e produtos mais personalizados. Assim, a produção futura deve ser capaz de se adaptar rapidamente às novas exigências do mercado. Indústria 4.0 é a resposta para este d",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-867e8131405c",
+            "type": "image",
+            "title": "Conheça as tecnologias da Bosch para veículos comerciais na Fenatran 2026. Soluções em conectividade, segurança, eletrificação, telemetria e eficiência para o t",
+            "url": "https://www.bosch.com.br/media/home/template_grficos_para_site_res_800x450.webp",
+            "final_url": "https://www.bosch.com.br/media/home/template_grficos_para_site_res_800x450.webp",
+            "source_title": "Página inicial",
+            "source_url": "https://www.bosch.com.br/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Conheça as tecnologias da Bosch para veículos comerciais na Fenatran 2026. Soluções em conectividade, segurança, eletrificação, telemetria e eficiência para o transporte do presente e futuro.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1ca50f0942ab",
+            "type": "image",
+            "title": "Podcast Bosch Talks",
+            "url": "https://www.bosch.com.br/media/stories/podcast/banner_native_podcast_bosch_talks_res_800x450.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/podcast/banner_native_podcast_bosch_talks_res_800x450.webp",
+            "source_title": "Página inicial",
+            "source_url": "https://www.bosch.com.br/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Podcast Bosch Talks",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-58ec78a9fa62",
+            "type": "image",
+            "title": "Soluções inovadoras que facilitam novas ofertas de mobilidade — da Bosch",
+            "url": "https://assets.bosch.com/media/global/products_and_solutions/mobility/mobility-solutions-web-portal_res_400x225.webp",
+            "final_url": "https://assets.bosch.com/media/global/products_and_solutions/mobility/mobility-solutions-web-portal_res_400x225.webp",
+            "source_title": "Página inicial",
+            "source_url": "https://www.bosch.com.br/",
+            "publisher": "assets.bosch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Soluções inovadoras que facilitam novas ofertas de mobilidade — da Bosch",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3ea4c7316cad",
+            "type": "image",
+            "title": "Soluções individuais para a tua casa — da Bosch",
+            "url": "https://assets.bosch.com/media/global/bosch_group/bosch-at-home_res_400x225.webp",
+            "final_url": "https://assets.bosch.com/media/global/bosch_group/bosch-at-home_res_400x225.webp",
+            "source_title": "Página inicial",
+            "source_url": "https://www.bosch.com.br/",
+            "publisher": "assets.bosch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Soluções individuais para a tua casa — da Bosch",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4442f5a69fe1",
+            "type": "image",
+            "title": "Produtos e serviços inovadores para a industria e negócios — da Bosch",
+            "url": "https://assets.bosch.com/media/global/bosch_group/bosch-industry_res_400x225.webp",
+            "final_url": "https://assets.bosch.com/media/global/bosch_group/bosch-industry_res_400x225.webp",
+            "source_title": "Página inicial",
+            "source_url": "https://www.bosch.com.br/",
+            "publisher": "assets.bosch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Produtos e serviços inovadores para a industria e negócios — da Bosch",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4328ec93f899",
+            "type": "image",
+            "title": "Agronegócio",
+            "url": "https://www.bosch.com.br/media/products_and_services/agronegocio_1/foto_1_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/products_and_services/agronegocio_1/foto_1_res_400x225.webp",
+            "source_title": "Página inicial",
+            "source_url": "https://www.bosch.com.br/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Agronegócio",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-32bf6e895f4e",
+            "type": "image",
+            "title": "Nossa sala de impensa",
+            "url": "https://www.bosch.com.br/media/home/imprensa_res_640x360.webp",
+            "final_url": "https://www.bosch.com.br/media/home/imprensa_res_640x360.webp",
+            "source_title": "Página inicial",
+            "source_url": "https://www.bosch.com.br/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Nossa sala de impensa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ef02ef2053ef",
+            "type": "image",
+            "title": "Um grupo diverso segura uma faixa que diz “Join the Team”. Uma pessoa acena para aqueles que estão assistindo se juntarem ao grupo.",
+            "url": "https://assets.bosch.com/media/global/internet_of_things/work_like_a_bosch/desk_res_640x360.webp",
+            "final_url": "https://assets.bosch.com/media/global/internet_of_things/work_like_a_bosch/desk_res_640x360.webp",
+            "source_title": "Página inicial",
+            "source_url": "https://www.bosch.com.br/",
+            "publisher": "assets.bosch.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Um grupo diverso segura uma faixa que diz “Join the Team”. Uma pessoa acena para aqueles que estão assistindo se juntarem ao grupo.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.bosch-professional.com/br/pt/",
+      "result": {
+        "titulo": "Ferramentas elétricas Bosch | Bosch Professional",
+        "texto": "PAPO DE PRO - Os SEGREDOS da BLINDAGEM automotiva Quem nunca se perguntou como que FAZ a Blindagem automotiva? Falamos sobre isso no detalhe e rendeu muitoo papo! Mas claro que além de falar da blindagem, também conversamos bastante sobre a os processos de pintura automotiva e várias tecnologias incríveis que a Akzo Nobel e SIA tem! Assista agora PAPO DE PRO - Nível a Laser QUEBRADO, é LIXO ou tem conserto? Sabemos que muita gente teve problemas com seus níveis e não conseguiram consertar, então trouxemos um técnico especialista e o responsável pela Linha de Medição Bosch na América Latina para trazer essa resposta pra gente. Quem veio pra esse papo foi o Walker Rocha e o José Bortoli! Os caras entendem MUITO sobre ferramentas de medição. Assista agora Papo de Pro - EDIÇÃO ESPECIAL: Marcenaria - De Pai pra Filho Este episódio teve um papo diferente! Fizemos uma edição especial para o Dia dos Pais com os \"Andrés\". Nele, trouxemos o André pai e o André filho, que têm uma marcenaria há anos e usam ferramentas Bosch desde 1980. Essa é a tradição Bosch: passando de pais para filhos! Já são 70 anos de Bosch no Brasil, presente na vida de tantas famílias e profissionais. Assista agora Papo de Pro - Um Ex-Padre EXPERT em acessórios Bosch? É isso ai! Nesse papo rolou muita dica e informações importantes sobre acessórios. E pra esse EP acontecer trouxemos o Vanderson (mais conhecido como Padre) que é EXPERT em acessórios de ferramentas elétricas. Assista agora",
+        "final": "https://www.bosch-professional.com/br/pt/",
+        "trecho_usado": "Marcenaria - De Pai pra Filho Este episódio teve um papo diferente! Fizemos uma edição especial para o Dia dos Pais com os \"Andrés\". Nele, trouxemos o André pai e o André filho, que têm uma marcenaria há anos e usam ferramentas Bosch desde 1980. Essa é a tradição Bosch: passando de pais para filhos! Já são 70 anos de Bosch no Brasil, presente na vida de tantas famílias e profissionais. Assista",
+        "metadados": {
+          "titulo": "Ferramentas elétricas Bosch | Bosch Professional",
+          "descricao": "Ferramentas elétricas Bosch – Comércio/indústria. As ferramentas elétricas profissionais Bosch da linha azul foram projetadas para excelência – atendendo aos mais altos padrões em velocidade, precisão e robustez para ótimos resultados no trabalho profissional.",
+          "canonica": "https://www.bosch-professional.com/br/pt/",
+          "og": {
+            "og:url": "https://www.bosch-professional.com/br/pt/",
+            "og:title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "og:description": "Ferramentas elétricas Bosch – Comércio/indústria. As ferramentas elétricas profissionais Bosch da linha azul foram projetadas para excelência – atendendo aos mais altos padrões em velocidade, precisão e robustez para ótimos resultados no trabalho profissional.",
+            "og:image": "https://www.bosch-professional.com/br/media/professional/central_assets/global_settings/tv_search_100x60.png"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "Robert Bosch GmbH",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Quem nunca se perguntou como que FAZ a Blindagem automotiva? Falamos sobre isso no detalhe e rendeu muitoo papo! Mas claro que além de falar da blindagem, também conversamos bastante sobre a os processos de pintura automotiva e várias tecnologias incríveis que a Akzo Nobel e SIA tem!\nSabemos que muita gente teve problemas com seus níveis e não conseguiram consertar, então trouxemos um técnico especialista e o responsável pela Linha de Medição Bosch na América Latina para trazer essa resposta pra gente. Quem veio pra esse papo foi o Walker Rocha e o José Bortoli! Os caras entendem MUITO sobre ferramentas de medição.\nEste episódio teve um papo diferente! Fizemos uma edição especial para o Dia dos Pais com os \"Andrés\". Nele, trouxemos o André pai e o André filho, que têm uma marcenaria há anos e usam ferramentas Bosch desde 1980. Essa é a tradição Bosch: passando de pais para filhos! Já são 70 anos de Bosch no Brasil, presente na vida de tantas famílias e profissionais.\nÉ isso ai! Nesse papo rolou muita dica e informações importantes sobre acessórios. E pra esse EP acontecer trouxemos o Vanderson (mais conhecido como Padre) que é EXPERT em acessórios de ferramentas elétricas."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.bosch-professional.com/br/pt/sistema-mobility-da-bosch-213919-ocs-c/",
+            "texto": "Sistema Mobility da Bosch",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/conhecimento-e-inovacao/bosch-accessories-product-finder/",
+            "texto": "Bosch Accessories Product Finder",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/blog/measureon-aplicativo-bosch/",
+            "texto": "Measureon Aplicativo Bosch",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/blog/detector-bosch-d-tect-200c/",
+            "texto": "Detector Bosch D-TECT 200C",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/blog/bosch-e-sustentabilidade/",
+            "texto": "Bosch e sustentabilidade",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/blog/aplicativo-bosch-toolbox-ferramentas-digitais-gratuitas-para-profissionais-/",
+            "texto": "Aplicativo Bosch Toolbox: ferramentas digitais gratuitas para profissionais.",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/blog/ferramentas-eletricas-bosch-o-kit-dos-sonhos-pode-ser-seu!/",
+            "texto": "Ferramentas Elétricas Bosch: o kit dos sonhos pode ser seu!",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/blog/kickback-control-bosch-solucao-protection-para-tornar-seu-trabalho-mais-seguro/",
+            "texto": "KickBack Control Bosch: solução PROtection para tornar seu trabalho mais seguro",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/blog/disco-diamantado-de-metal-bosch-corta-ate-100x-mais-do-que-discos-abrasivos-comuns/",
+            "texto": "Disco Diamantado de Metal Bosch: corta até 100x mais do que discos abrasivos comuns",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/blog/para-que-serve-cada-broca-dos-kits-de-brocas-bosch-/",
+            "texto": "Para que serve cada broca dos kits de brocas Bosch?",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/dealers/",
+            "texto": "Onde Comprar / Locar / Reparar",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-pt.com/ww/gb/en/company/sustainability/",
+            "texto": "Sustentabilidade",
+            "interno": false
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/servicos/servico-pos-venda/contato/",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/ferramentas-eletricas-professional-131398-ocs-c/",
+            "texto": "Ferramentas elétricas",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/novas-ferramentas-131399-ocs-c/",
+            "texto": "Novas Ferramentas",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/promotion/overview.html",
+            "texto": "Promoções",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/heavy-duty-226567-ocs-c/",
+            "texto": "Heavy Duty",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/ferramentas-a-bateria-131400-ocs-c/",
+            "texto": "Ferramentas a bateria",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/ferramentas-com-conectividade-2756497-ocs-c/",
+            "texto": "Ferramentas com conectividade",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/furadeiras-com-e-sem-impacto-e-parafusadeiras-131402-ocs-c/",
+            "texto": "Furadeiras com e sem impacto e parafusadeiras",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/martelos-perfuradores-e-martelos-demolidores-131403-ocs-c/",
+            "texto": "Martelos perfuradores e martelos demolidores",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/perfuratriz-diamantada-131404-ocs-c/",
+            "texto": "Perfuratriz diamantada",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/esmerilhadeiras-e-trabalhos-em-metal-131405-ocs-c/",
+            "texto": "Esmerilhadeiras e trabalhos em metal",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/ferramentas-de-bancada-131406-ocs-c/",
+            "texto": "Ferramentas de bancada",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/lixadeiras-e-plainas-131407-ocs-c/",
+            "texto": "Lixadeiras e plainas",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/tupias-131483-ocs-c/",
+            "texto": "Tupias",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/serras-131408-ocs-c/",
+            "texto": "Serras",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/sopradores-e-sistemas-de-aspiracao-de-po-131409-ocs-c/",
+            "texto": "Sopradores e sistemas de aspiração de pó",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch-professional.com/br/pt/sopradores-de-ar-quente-e-pistolas-de-colagem-238405-ocs-c/",
+            "texto": "Sopradores de ar quente e pistolas de colagem",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.bosch-professional.com/br/media/professional/central_assets/global_settings/tv_search_100x60.png",
+          "https://www.bosch-professional.com/media/professional/central_assets/bosch_logo/bosch.svg",
+          "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/pcc131399pcta5252p1_novelities.png",
+          "https://www.bosch-professional.com/media/professional_bi/flyout_redesign/tools/kv_flyout_redesign_offers_137x77.png",
+          "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/pcc226567pcta5252p1_kv_category_heavy_duty.png",
+          "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o581376v54_GAS18V-6LS_Dyn.png",
+          "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/pcc2756497pcta5252p1_vernetzte_produkte_und_services_530x530.png",
+          "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o600122v54_GRS18V-330_4Ah_AMPShare_Ghost_Image_Dyn.png",
+          "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o265564v82_lv-92490-12-GBH_5-40_D_Dy1_Web.png",
+          "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o262718v82_lv-101096-12-GDB350WE_dyn_01.png"
+        ],
+        "midia": [
+          {
+            "id": "med-99bf6f6f780e",
+            "type": "image",
+            "title": "Ferramentas elétricas Bosch – Comércio/indústria. As ferramentas elétricas profissionais Bosch da linha azul foram projetadas para excelência – atendendo aos ma",
+            "url": "https://www.bosch-professional.com/br/media/professional/central_assets/global_settings/tv_search_100x60.png",
+            "final_url": "https://www.bosch-professional.com/br/media/professional/central_assets/global_settings/tv_search_100x60.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ferramentas elétricas Bosch – Comércio/indústria. As ferramentas elétricas profissionais Bosch da linha azul foram projetadas para excelência – atendendo aos mais altos padrões em velocidade, precisão e robustez para ótimos resultados no tr",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-132b95aaa640",
+            "type": "image",
+            "title": "Logotipo da Bosch em vermelho com letras pretas em fundo branco, moderno e claramente projetado.",
+            "url": "https://www.bosch-professional.com/media/professional/central_assets/bosch_logo/bosch.svg",
+            "final_url": "https://www.bosch-professional.com/media/professional/central_assets/bosch_logo/bosch.svg",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logotipo da Bosch em vermelho com letras pretas em fundo branco, moderno e claramente projetado.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d220a40e5200",
+            "type": "image",
+            "title": "Novas Ferramentas",
+            "url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/pcc131399pcta5252p1_novelities.png",
+            "final_url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/pcc131399pcta5252p1_novelities.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Novas Ferramentas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8135430061e6",
+            "type": "image",
+            "title": "Promoções",
+            "url": "https://www.bosch-professional.com/media/professional_bi/flyout_redesign/tools/kv_flyout_redesign_offers_137x77.png",
+            "final_url": "https://www.bosch-professional.com/media/professional_bi/flyout_redesign/tools/kv_flyout_redesign_offers_137x77.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Promoções",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a2b13af736eb",
+            "type": "image",
+            "title": "Heavy Duty",
+            "url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/pcc226567pcta5252p1_kv_category_heavy_duty.png",
+            "final_url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/pcc226567pcta5252p1_kv_category_heavy_duty.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Heavy Duty",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-83517b3485f6",
+            "type": "image",
+            "title": "Ferramentas a bateria",
+            "url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o581376v54_GAS18V-6LS_Dyn.png",
+            "final_url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o581376v54_GAS18V-6LS_Dyn.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ferramentas a bateria",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-2a3a3831dc1e",
+            "type": "image",
+            "title": "Ferramentas com conectividade",
+            "url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/pcc2756497pcta5252p1_vernetzte_produkte_und_services_530x530.png",
+            "final_url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/pcc2756497pcta5252p1_vernetzte_produkte_und_services_530x530.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ferramentas com conectividade",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-51431b859dfc",
+            "type": "image",
+            "title": "Furadeiras com e sem impacto e parafusadeiras",
+            "url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o600122v54_GRS18V-330_4Ah_AMPShare_Ghost_Image_Dyn.png",
+            "final_url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o600122v54_GRS18V-330_4Ah_AMPShare_Ghost_Image_Dyn.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Furadeiras com e sem impacto e parafusadeiras",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-25a45d798083",
+            "type": "image",
+            "title": "Martelos perfuradores e martelos demolidores",
+            "url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o265564v82_lv-92490-12-GBH_5-40_D_Dy1_Web.png",
+            "final_url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o265564v82_lv-92490-12-GBH_5-40_D_Dy1_Web.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Martelos perfuradores e martelos demolidores",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ad5a7454a983",
+            "type": "image",
+            "title": "Perfuratriz diamantada",
+            "url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o262718v82_lv-101096-12-GDB350WE_dyn_01.png",
+            "final_url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o262718v82_lv-101096-12-GDB350WE_dyn_01.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Perfuratriz diamantada",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7270159ec64a",
+            "type": "image",
+            "title": "Esmerilhadeiras e trabalhos em metal",
+            "url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o274702v54_lv-111030-12-lv-100387-12-GWS22-230GenericaDinamica.png",
+            "final_url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o274702v54_lv-111030-12-lv-100387-12-GWS22-230GenericaDinamica.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Esmerilhadeiras e trabalhos em metal",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f12be1e9088e",
+            "type": "image",
+            "title": "Ferramentas de bancada",
+            "url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o554070v54_GCM_340-305_D_Dyn.png",
+            "final_url": "https://www.bosch-professional.com/binary/ocsmedia/optimized/263x155/o554070v54_GCM_340-305_D_Dyn.png",
+            "source_title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "source_url": "https://www.bosch-professional.com/br/pt/",
+            "publisher": "www.bosch-professional.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ferramentas de bancada",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+      "result": {
+        "titulo": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+        "texto": "O brasileiro tem um papel-chave para atender à crescente necessidade do mundo. Para isso terá que investir ainda mais no uso de metodologias e inovações que aumentem à produção de alimentos e insumos agrícolas ao mesmo tempo que utiliza os recursos naturais, como água, energia e terra, de forma eficiente. agronegócio A base para alcançar isso necessariamente passa pela . A conectividade, a Inteligência Artificial (IA) e a Internet das Coisas (IoT) implementadas em máquinas, sistemas e plataformas estão entre as soluções que possibilitarão que o campo produza mais, melhor e com menos recursos. tecnologia Pensando nisso, criamos a webserie “Bosch no Agro”, para que você possa entender como funcionam as soluções da Bosch para o campo, e como contribuem para mais eficiência, economia e produtividade. Veja o vídeo abaixo e saiba mais. Websérie: Bosch no Agro",
+        "final": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+        "trecho_usado": "tecnologia Pensando nisso, criamos a webserie “Bosch no Agro”, para que você possa entender como funcionam as soluções da Bosch para o campo, e como contribuem para mais eficiência, economia e produtividade. Veja o vídeo abaixo e saiba mais. Websérie: Bosch no Agro",
+        "metadados": {
+          "titulo": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+          "descricao": "Você sabia que a tecnologia impulsiona o Agronegócio? Acompanhe a webserie e conheça todas as soluções da Bosch para o Agronegócio.",
+          "canonica": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+          "og": {
+            "og:title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "og:site_name": "Bosch no Brasil",
+            "og:url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "og:description": "Você sabia que a tecnologia impulsiona o Agronegócio? Acompanhe a webserie e conheça todas as soluções da Bosch para o Agronegócio.",
+            "og:image": "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1.png",
+            "og:type": "article"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@Bosch_Brasil",
+            "twitter:creator": "@Bosch_Brasil",
+            "twitter:title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "twitter:description": "Você sabia que a tecnologia impulsiona o Agronegócio? Acompanhe a webserie e conheça todas as soluções da Bosch para o Agronegócio.",
+            "twitter:image": "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1.png"
+          },
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "Bosch Global",
+          "site": "Bosch no Brasil",
+          "tipo": "article",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "O brasileiro tem um papel-chave para atender à crescente necessidade do mundo. Para isso terá que investir ainda mais no uso de metodologias e inovações que aumentem à produção de alimentos e insumos agrícolas ao mesmo tempo que utiliza os recursos naturais, como água, energia e terra, de forma eficiente. agronegócio\nA base para alcançar isso necessariamente passa pela . A conectividade, a Inteligência Artificial (IA) e a Internet das Coisas (IoT) implementadas em máquinas, sistemas e plataformas estão entre as soluções que possibilitarão que o campo produza mais, melhor e com menos recursos. tecnologia\nPensando nisso, criamos a webserie “Bosch no Agro”, para que você possa entender como funcionam as soluções da Bosch para o campo, e como contribuem para mais eficiência, economia e produtividade.\nVeja o vídeo abaixo e saiba mais."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "texto": "Agricultura inteligente: como a Bosch transforma o agro brasileiro",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/industria-4-0/webserie-bosch-na-industria-4-0/",
+            "texto": "Websérie Bosch na Indústria 4.0",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2026/",
+            "texto": "Bosch Tech Compass 2026",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2025/",
+            "texto": "Bosch Tech Compass 2025",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2024/",
+            "texto": "Bosch Tech Compass 2024",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2023/",
+            "texto": "Bosch Tech Compass 2023",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/podcast-bosch-talks/",
+            "texto": "Podcast Bosch Talks",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/bosch-70-anos/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/bosch-70-anos/bosch-brasil-70-anos-inovando-para-uma-vida-melhor/",
+            "texto": "Bosch Brasil 70 anos: Inovando para uma vida melhor",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/mineracao-na-era-digital/solucoes-rexroth-para-mineracao/",
+            "texto": "Soluções Bosch Rexroth para mineração",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/agronegocio/",
+            "texto": "Agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/mobilidade/",
+            "texto": "Mobilidade",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/industria-e-comercio/",
+            "texto": "Indústria e comércio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/em-casa/",
+            "texto": "Em casa",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/a-evolucao-do-plantio-no-agronegocio/",
+            "texto": "A evolução do plantio no agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/tecnologia-no-agronegocio/",
+            "texto": "Tecnologia no agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-sustentavel/",
+            "texto": "Agricultura sustentável",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/os-desafios-do-agonegocio/",
+            "texto": "Os desafios do agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-digital/",
+            "texto": "Agricultura digital",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/solucoes-que-transformam-o-campo/",
+            "texto": "Soluções que transformam o campo",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "texto": "Bosch no Agro",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/mulheres-na-tecnologia/",
+            "texto": "Mulheres na tecnologia",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/carbono-neutro/",
+            "texto": "Carbono Neutro",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/esg/",
+            "texto": "ESG",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/economia-circular/",
+            "texto": "Economia circular",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1.png",
+          "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_logo_16-9_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/mobilidade_1/podcast_mobilidade_e_inova_o_bosch/banner_website_podcast_bosch_talks_res_640x360.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/solucoes_bosch_campo_2x1_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/tecnologia_no_agronegocio/tecnologianoagro_bosch_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/agricultura_digital/agricultura_digital_bosch_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/comunicacao_no_campo/comunicao_no_agronegcio_bosch_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/equipamentos_agricolas/produtividade-no-campo-16x9_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/saude_do_rebanho_na_era_digital/saude-rebanho-vacina-16x9_res_400x225.webp"
+        ],
+        "midia": [
+          {
+            "id": "med-2357dd402b23",
+            "type": "image",
+            "title": "Você sabia que a tecnologia impulsiona o Agronegócio? Acompanhe a webserie e conheça todas as soluções da Bosch para o Agronegócio.",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1.png",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1.png",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Você sabia que a tecnologia impulsiona o Agronegócio? Acompanhe a webserie e conheça todas as soluções da Bosch para o Agronegócio.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0dd65d01ea85",
+            "type": "image",
+            "title": "tecnologia no agronegócio, tecnologia no campo",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1_res_400x225.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "tecnologia no agronegócio, tecnologia no campo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3b834a9622ec",
+            "type": "image",
+            "title": "Logo Bosch no Agro",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_logo_16-9_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_logo_16-9_res_400x225.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo Bosch no Agro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-230dfa818ee2",
+            "type": "image",
+            "title": "Bosch Talks",
+            "url": "https://www.bosch.com.br/media/stories/mobilidade_1/podcast_mobilidade_e_inova_o_bosch/banner_website_podcast_bosch_talks_res_640x360.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/mobilidade_1/podcast_mobilidade_e_inova_o_bosch/banner_website_podcast_bosch_talks_res_640x360.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bosch Talks",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-955b53f723e1",
+            "type": "image",
+            "title": "trator cultivando solo",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/solucoes_bosch_campo_2x1_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/solucoes_bosch_campo_2x1_res_400x225.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "trator cultivando solo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0d23039605cd",
+            "type": "image",
+            "title": "Plantação do agronegócio conectada com tecnologia",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/tecnologia_no_agronegocio/tecnologianoagro_bosch_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/tecnologia_no_agronegocio/tecnologianoagro_bosch_res_400x225.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Plantação do agronegócio conectada com tecnologia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a9aebdfd0663",
+            "type": "image",
+            "title": "Visão aerea de um trator cultivando solo com tecnologia avançada",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/agricultura_digital/agricultura_digital_bosch_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/agricultura_digital/agricultura_digital_bosch_res_400x225.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Visão aerea de um trator cultivando solo com tecnologia avançada",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d55c5a6f3f90",
+            "type": "image",
+            "title": "vista aerea de uma campo com uma estrada",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/comunicacao_no_campo/comunicao_no_agronegcio_bosch_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/comunicacao_no_campo/comunicao_no_agronegcio_bosch_res_400x225.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "vista aerea de uma campo com uma estrada",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-016f3f4bee17",
+            "type": "image",
+            "title": "Produtividade campo equipamentos agrícolas",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/equipamentos_agricolas/produtividade-no-campo-16x9_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/equipamentos_agricolas/produtividade-no-campo-16x9_res_400x225.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Produtividade campo equipamentos agrícolas",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-85008e284d20",
+            "type": "image",
+            "title": "Saude rebanho vacina tecnologia",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/saude_do_rebanho_na_era_digital/saude-rebanho-vacina-16x9_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/saude_do_rebanho_na_era_digital/saude-rebanho-vacina-16x9_res_400x225.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Saude rebanho vacina tecnologia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a19c8b1e0204",
+            "type": "image",
+            "title": "Campo aberto de agricultura",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/01_os_desafios_do_agronegcios_bosch_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/01_os_desafios_do_agronegcios_bosch_res_400x225.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Campo aberto de agricultura",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0a6ab5e6c3b8",
+            "type": "image",
+            "title": "Ferramenta produtividade maquinário plantação",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/pt_solu_es_que_transformam_o_campo/manutencao-preditiva-16x9_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/pt_solu_es_que_transformam_o_campo/manutencao-preditiva-16x9_res_400x225.webp",
+            "source_title": "Saiba como a tecnologia pode fazer diferença no Agronegócio",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ferramenta produtividade maquinário plantação",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+      "result": {
+        "titulo": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+        "texto": "Ao adotar tecnologias inteligentes, o produtor brasileiro obtém vantagens concretas que impactam diretamente na produtividade, e rentabilidade da fazenda: sustentabilidade : sementes, fertilizantes e defensivos aplicados na quantidade correta, evitando desperdício. De acordo com a a semeadura em taxa variável gerou ganhos de produtividade de até 8% no milho e 3% no algodão. Uso racional de insumos Embrapa, : ouso de tecnologias de plantio inteligente permite melhor aproveitamento do solo, maior uniformidade na semeadura e, consequentemente, aumento da produtividade por talhão. Eficiência e produtividade : monitoramento em tempo real, previsões precisas e planejamento estratégico de cada operação. O Bosch Digital Agro integra dados de mais de 2 máquinas e possibilita a análise precisa do desempenho da lavoura. Decisões baseadas em dados : o avanço de tecnologias de pulverização inteligente tem contribuído para tornar o manejo agrícola mais sustentável. Essas soluções permitem a aplicação precisa de defensivos agrícolas apenas onde é necessário, reduzindo o desperdício e os impactos ambientais. Sustentabilidade no agronegócio Um exemplo é o sistema desenvolvido pela joint venture ONE SMART SPRAY, que une a inteligência agronômica da BASF à tecnologia de hardware da Bosch, promovendo maior eficiência no uso de insumos e proteção das lavouras. A atua de forma estratégica para tornar essas práticas cada vez mais acessíveis. Saiba mais sobre como a Bosch promove a agricultura sustentável no Brasil. Bosch",
+        "final": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+        "trecho_usado": "ONE SMART SPRAY, que une a inteligência agronômica da BASF à tecnologia de hardware da Bosch, promovendo maior eficiência no uso de insumos e proteção das lavouras. A atua de forma estratégica para tornar essas práticas cada vez mais acessíveis. Saiba mais sobre como a Bosch promove a agricultura sustentável no Brasil. Bosch",
+        "metadados": {
+          "titulo": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+          "descricao": "Agricultura inteligente | Soluções Bosch para o agro do futuro",
+          "canonica": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+          "og": {
+            "og:title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "og:site_name": "Bosch no Brasil",
+            "og:url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "og:description": "Agricultura inteligente | Soluções Bosch para o agro do futuro",
+            "og:image": "https://www.bosch.com.br/media/stories/agronegocio/template_imagens_para_web_5.png",
+            "og:type": "article"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@Bosch_Brasil",
+            "twitter:creator": "@Bosch_Brasil",
+            "twitter:title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "twitter:description": "Agricultura inteligente | Soluções Bosch para o agro do futuro",
+            "twitter:image": "https://www.bosch.com.br/media/stories/agronegocio/template_imagens_para_web_5.png"
+          },
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "Bosch Global",
+          "site": "Bosch no Brasil",
+          "tipo": "article",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Ao adotar tecnologias inteligentes, o produtor brasileiro obtém vantagens concretas que impactam diretamente na produtividade, e rentabilidade da fazenda: sustentabilidade\n: sementes, fertilizantes e defensivos aplicados na quantidade correta, evitando desperdício. De acordo com a a semeadura em taxa variável gerou ganhos de produtividade de até 8% no milho e 3% no algodão. Uso racional de insumos Embrapa,\n: ouso de tecnologias de plantio inteligente permite melhor aproveitamento do solo, maior uniformidade na semeadura e, consequentemente, aumento da produtividade por talhão. Eficiência e produtividade\n: monitoramento em tempo real, previsões precisas e planejamento estratégico de cada operação. O Bosch Digital Agro integra dados de mais de 2 máquinas e possibilita a análise precisa do desempenho da lavoura. Decisões baseadas em dados\n: o avanço de tecnologias de pulverização inteligente tem contribuído para tornar o manejo agrícola mais sustentável. Essas soluções permitem a aplicação precisa de defensivos agrícolas apenas onde é necessário, reduzindo o desperdício e os impactos ambientais. Sustentabilidade no agronegócio\nUm exemplo é o sistema desenvolvido pela joint venture ONE SMART SPRAY, que une a inteligência agronômica da BASF à tecnologia de hardware da Bosch, promovendo maior eficiência no uso de insumos e proteção das lavouras.\nA atua de forma estratégica para tornar essas práticas cada vez mais acessíveis. Saiba mais sobre como a Bosch promove a agricultura sustentável no Brasil. Bosch"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/bosch-no-agro/",
+            "texto": "Bosch no Agro",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/industria-4-0/webserie-bosch-na-industria-4-0/",
+            "texto": "Websérie Bosch na Indústria 4.0",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2026/",
+            "texto": "Bosch Tech Compass 2026",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2025/",
+            "texto": "Bosch Tech Compass 2025",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2024/",
+            "texto": "Bosch Tech Compass 2024",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/aiot/bosch-tech-compass-2023/",
+            "texto": "Bosch Tech Compass 2023",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/podcast-bosch-talks/",
+            "texto": "Podcast Bosch Talks",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/bosch-70-anos/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/bosch-70-anos/bosch-brasil-70-anos-inovando-para-uma-vida-melhor/",
+            "texto": "Bosch Brasil 70 anos: Inovando para uma vida melhor",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/mineracao-na-era-digital/solucoes-rexroth-para-mineracao/",
+            "texto": "Soluções Bosch Rexroth para mineração",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/agronegocio/",
+            "texto": "Agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/mobilidade/",
+            "texto": "Mobilidade",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/industria-e-comercio/",
+            "texto": "Indústria e comércio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/produtos-e-servicos/em-casa/",
+            "texto": "Em casa",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "texto": "Agricultura inteligente: como a Bosch transforma o agro brasileiro",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/a-evolucao-do-plantio-no-agronegocio/",
+            "texto": "A evolução do plantio no agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/tecnologia-no-agronegocio/",
+            "texto": "Tecnologia no agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-sustentavel/",
+            "texto": "Agricultura sustentável",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/os-desafios-do-agonegocio/",
+            "texto": "Os desafios do agronegócio",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-digital/",
+            "texto": "Agricultura digital",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/solucoes-que-transformam-o-campo/",
+            "texto": "Soluções que transformam o campo",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/",
+            "texto": "Visão geral",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/mulheres-na-tecnologia/",
+            "texto": "Mulheres na tecnologia",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/carbono-neutro/",
+            "texto": "Carbono Neutro",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/esg/",
+            "texto": "ESG",
+            "interno": true
+          },
+          {
+            "url": "https://www.bosch.com.br/noticias-e-historias/sustentabilidade/economia-circular/",
+            "texto": "Economia circular",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.bosch.com.br/media/stories/agronegocio/template_imagens_para_web_5.png",
+          "https://www.bosch.com.br/media/stories/agronegocio/template_imagens_para_web_5_res_400x225.webp",
+          "https://www.bosch.com.br/media/products_and_services/agronegocio_1/ips_evo/ipsevo_boschbrasil_agro3_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/mobilidade_1/podcast_mobilidade_e_inova_o_bosch/banner_website_podcast_bosch_talks_res_640x360.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/solucoes_bosch_campo_2x1_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/tecnologia_no_agronegocio/tecnologianoagro_bosch_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/agricultura_digital/agricultura_digital_bosch_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/comunicacao_no_campo/comunicao_no_agronegcio_bosch_res_400x225.webp",
+          "https://www.bosch.com.br/media/stories/agronegocio/onde_ha_fuma_a_ha_fogo/incendios-no-campo-como-evitar-solucoes-bosch-16x9_res_400x225.webp"
+        ],
+        "midia": [
+          {
+            "id": "med-e966f4792aaf",
+            "type": "image",
+            "title": "Agricultura inteligente | Soluções Bosch para o agro do futuro",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/template_imagens_para_web_5.png",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/template_imagens_para_web_5.png",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Agricultura inteligente | Soluções Bosch para o agro do futuro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f34198c2deb8",
+            "type": "image",
+            "title": "Agricultura inteligente: como a Bosch transforma o agro brasileiro",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/template_imagens_para_web_5_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/template_imagens_para_web_5_res_400x225.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Agricultura inteligente: como a Bosch transforma o agro brasileiro",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d62c28bfea5d",
+            "type": "image",
+            "title": "O Bosch IPS Evo é o próximo passo da tecnologia Bosch para o plantio de precisão.",
+            "url": "https://www.bosch.com.br/media/products_and_services/agronegocio_1/ips_evo/ipsevo_boschbrasil_agro3_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/products_and_services/agronegocio_1/ips_evo/ipsevo_boschbrasil_agro3_res_400x225.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O Bosch IPS Evo é o próximo passo da tecnologia Bosch para o plantio de precisão.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-230dfa818ee2",
+            "type": "image",
+            "title": "Bosch Talks",
+            "url": "https://www.bosch.com.br/media/stories/mobilidade_1/podcast_mobilidade_e_inova_o_bosch/banner_website_podcast_bosch_talks_res_640x360.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/mobilidade_1/podcast_mobilidade_e_inova_o_bosch/banner_website_podcast_bosch_talks_res_640x360.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bosch Talks",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0dd65d01ea85",
+            "type": "image",
+            "title": "tecnologia no agronegócio, tecnologia no campo",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/webs_ries_bosch_no_agro/webserie_bosch_no_agro_1_res_400x225.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "tecnologia no agronegócio, tecnologia no campo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-955b53f723e1",
+            "type": "image",
+            "title": "Soluções para o campo",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/solucoes_bosch_campo_2x1_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/solucoes_bosch_campo_2x1_res_400x225.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Soluções para o campo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0d23039605cd",
+            "type": "image",
+            "title": "Plantação do agronegócio conectada com tecnologia",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/tecnologia_no_agronegocio/tecnologianoagro_bosch_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/tecnologia_no_agronegocio/tecnologianoagro_bosch_res_400x225.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Plantação do agronegócio conectada com tecnologia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a9aebdfd0663",
+            "type": "image",
+            "title": "Visão aerea de um trator cultivando solo com tecnologia avançada",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/agricultura_digital/agricultura_digital_bosch_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/agricultura_digital/agricultura_digital_bosch_res_400x225.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Visão aerea de um trator cultivando solo com tecnologia avançada",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d55c5a6f3f90",
+            "type": "image",
+            "title": "vista aerea de uma campo com uma estrada",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/comunicacao_no_campo/comunicao_no_agronegcio_bosch_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/comunicacao_no_campo/comunicao_no_agronegcio_bosch_res_400x225.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "vista aerea de uma campo com uma estrada",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-3a0e93cb6e40",
+            "type": "image",
+            "title": "Como evitar incendios campo queimadas plantações",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/onde_ha_fuma_a_ha_fogo/incendios-no-campo-como-evitar-solucoes-bosch-16x9_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/onde_ha_fuma_a_ha_fogo/incendios-no-campo-como-evitar-solucoes-bosch-16x9_res_400x225.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Como evitar incendios campo queimadas plantações",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-85008e284d20",
+            "type": "image",
+            "title": "Saude rebanho vacina tecnologia",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/saude_do_rebanho_na_era_digital/saude-rebanho-vacina-16x9_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/saude_do_rebanho_na_era_digital/saude-rebanho-vacina-16x9_res_400x225.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Saude rebanho vacina tecnologia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0a6ab5e6c3b8",
+            "type": "image",
+            "title": "Ferramenta produtividade maquinário plantação",
+            "url": "https://www.bosch.com.br/media/stories/agronegocio/pt_solu_es_que_transformam_o_campo/manutencao-preditiva-16x9_res_400x225.webp",
+            "final_url": "https://www.bosch.com.br/media/stories/agronegocio/pt_solu_es_que_transformam_o_campo/manutencao-preditiva-16x9_res_400x225.webp",
+            "source_title": "Agricultura Inteligente: como a Bosch transforma o agro brasileiro",
+            "source_url": "https://www.bosch.com.br/noticias-e-historias/agronegocio/agricultura-inteligente-como-a-bosch-transforma-o-agro-brasileiro/",
+            "publisher": "www.bosch.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Ferramenta produtividade maquinário plantação",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "f1feb3c3a7724d4b8d13",
+            "url": "https://www.bosch.com.br/",
+            "title": "Página inicial | Bosch no Brasil",
+            "origin": "bing",
+            "query": "Bosch",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Siga-nos para um mundo conectado Saiba mais sobre IoT no nosso site global Explorar e vivenciar a Bosch – nossas histórias Visite o nosso site global"
+          },
+          {
+            "id": "e64eeae8db2265e5efc4",
+            "url": "https://www.lojaboschferramentas.com.br/",
+            "title": "Bosch Ferramentas | Loja oficial",
+            "origin": "bing",
+            "query": "Bosch",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Conte com confiança da marca Bosch ao efetuar suas compras. Adquira seus produtos na loja online Bosch com condições especiais e receba de um de nossos parceiro"
+          },
+          {
+            "id": "3e7188efcd7240c7d38f",
+            "url": "https://www.bosch-professional.com/br/pt/",
+            "title": "Ferramentas elétricas Bosch | Bosch Professional",
+            "origin": "bing",
+            "query": "Bosch",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "As ferramentas elétricas profissionais Bosch da linha azul foram projetadas para excelência – atendendo aos mais altos padrões em velocidade, precisão e robuste"
+          },
+          {
+            "id": "f6d0d6a90b191d0cdc73",
+            "url": "https://www.bosch.com.br/nossa-empresa/bosch-no-brasil/",
+            "title": "A nossa empresa | Bosch no Brasil",
+            "origin": "bing",
+            "query": "Bosch",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "O Grupo Bosch é composto pela Robert Bosch GmbH e suas cerca de 500 subsidiárias e empresas regionais em mais de 60 países. Incluindo parceiros de vendas e serv"
+          },
+          {
+            "id": "4524501da2639c76ccfc",
+            "url": "https://www.bosch-professional.com/br/pt/servicos/downloads/catalogos/",
+            "title": "Catálogos - Bosch Professional",
+            "origin": "bing",
+            "query": "Bosch",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Catálogos Abaixo você encontra todos os catálogos de Ferramentas elétricas e Acessórios Bosch atuais para consulta"
+          },
+          {
+            "id": "ce67e6f67a9a862a708f",
+            "url": "https://catalogo.boschaftermarket.com.br/",
+            "title": "Catálogo",
+            "origin": "bing",
+            "query": "Bosch",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Catálogo ... Catálogo"
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (Bosch)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Bosch)",
+        "ddg: bloqueado (Bosch)",
+        "marginalia: sem resultados (Bosch)",
+        "— recuperação por lacuna —",
+        "bing: 6 resultados (quem fundou bosch ano produtos fabrica)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (quem fundou bosch ano produtos fabrica)",
+        "marginalia: sem resultados (quem fundou bosch ano produtos fabrica)",
+        "wikipedia: sem resultados (quem fundou bosch ano produtos fabrica)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Bosch",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "datas/anos pedidos não aparecem nas fontes",
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-20098247c12c",
+            "type": "explicit_attribute",
+            "description": "Fundadores",
+            "entity": "Bosch",
+            "attribute": "founders",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Fundadores",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-19d8c4b2aef2",
+            "type": "explicit_attribute",
+            "description": "Data de fundação",
+            "entity": "Bosch",
+            "attribute": "foundation_date",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Data de fundação",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-187d6ca81469",
+            "type": "explicit_attribute",
+            "description": "Produtos",
+            "entity": "Bosch",
+            "attribute": "products",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Produtos",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://www.lojaboschferramentas.com.br/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S2",
+          "url": "https://www.bosch.com.br/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://www.bosch-professional.com/br/pt/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+      "adapter_query": "Bosch",
+      "provider": "bing",
+      "at": "2026-10-25T18:24:46.685321+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Página inicial | Bosch no Brasil",
+          "url": "https://www.bosch.com.br/"
+        },
+        {
+          "title": "Bosch Ferramentas | Loja oficial",
+          "url": "https://www.lojaboschferramentas.com.br/"
+        },
+        {
+          "title": "Ferramentas elétricas Bosch | Bosch Professional",
+          "url": "https://www.bosch-professional.com/br/pt/"
+        },
+        {
+          "title": "A nossa empresa | Bosch no Brasil",
+          "url": "https://www.bosch.com.br/nossa-empresa/bosch-no-brasil/"
+        },
+        {
+          "title": "Catálogos - Bosch Professional",
+          "url": "https://www.bosch-professional.com/br/pt/servicos/downloads/catalogos/"
+        },
+        {
+          "title": "Catálogo",
+          "url": "https://catalogo.boschaftermarket.com.br/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "Bosch",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 415.87,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+      "adapter_query": "Bosch",
+      "provider": "ddg",
+      "at": "2026-10-25T18:24:47.120647+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "bloqueado",
+      "result_count": 0,
+      "classification": "PROVIDER_BLOCKED",
+      "requests": [],
+      "latency_ms": 330.92,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+      "adapter_query": "Bosch",
+      "provider": "marginalia",
+      "at": "2026-10-25T18:24:47.451635+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "Bosch"
+          },
+          "http_status": null,
+          "final_url": "https://old-search.marginalia.nu/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 824.41,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+      "adapter_query": "quem fundou bosch ano produtos fabrica",
+      "provider": "bing",
+      "at": "2026-10-25T18:24:48.314851+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "ISO - ISO 4217 — Currency codes",
+          "url": "https://www.iso.org/iso-4217-currency-codes.html"
+        },
+        {
+          "title": "ISO 4217 - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/ISO_4217"
+        },
+        {
+          "title": "ISO 4217 – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/ISO_4217"
+        },
+        {
+          "title": "Lista de códigos de moeda por país (ISO 4217) - IBAN",
+          "url": "https://pt.iban.com/currency-codes"
+        },
+        {
+          "title": "ISO 4217 Currency Codes: Full List and Numeric Codes",
+          "url": "https://currencyconversion.org/guides/currency-codes-iso-4217"
+        },
+        {
+          "title": "List of Currency Codes by Country (ISO 4217) - IBAN Checker",
+          "url": "https://www.iban.com/currency-codes"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "quem fundou bosch ano produtos fabrica",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 382.12,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+      "adapter_query": "quem fundou bosch ano produtos fabrica",
+      "provider": "marginalia",
+      "at": "2026-10-25T18:24:48.708263+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "quem fundou bosch ano produtos fabrica"
+          },
+          "http_status": null,
+          "final_url": "https://old-search.marginalia.nu/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 826.48,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?",
+      "adapter_query": "quem fundou bosch ano produtos fabrica",
+      "provider": "wikipedia",
+      "at": "2026-10-25T18:24:49.535246+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [],
+      "latency_ms": 365.85,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": "2026-10-25T18:22:21.170238+00:00",
+  "source_revision": "f5f1561f1989708671e03c835bdef6b4f8743dc6",
+  "dataset_sha256": "eb62dca76ab68ad34a4bf8240eb5dbd3ddf8fa26a9b5ba694e61ac30dde903fb"
+}

@@ -1,0 +1,1058 @@
+{
+  "scope": "DISPOSABLE_QA_FINAL_CANDIDATE",
+  "jobs": [
+    {
+      "id": "rj-c46e902348bd",
+      "objective": "quem fundou a Tramontina, em que ano e quais produtos ela fabrica, com evidências para cada aspecto",
+      "status": "interrompida",
+      "usage": {
+        "buscas": 4,
+        "paginas": 12,
+        "local_context_checked": true,
+        "replans": 0,
+        "consultas_etapas": {
+          "quem fundou tramontina": "p1",
+          "que ano": "p4",
+          "quais produtos ela fabrica": "p7",
+          "com evidencias cada aspecto": "p10"
+        },
+        "lacunas_busca": [
+          "nenhum candidato confirma assunto e restrições do pedido"
+        ],
+        "provedores": {
+          "web": {
+            "ok": 3,
+            "falhas": 0,
+            "ms": 8842
+          },
+          "wikipedia": {
+            "ok": 1,
+            "falhas": 0,
+            "ms": 412
+          }
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 3.3232
+          },
+          {
+            "step_id": "p4",
+            "type": "busca",
+            "seconds": 0.4157
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 2.7537
+          },
+          {
+            "step_id": "p10",
+            "type": "busca",
+            "seconds": 2.7978
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 3.4873
+          },
+          {
+            "step_id": "p5",
+            "type": "ler",
+            "seconds": 2.2119
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0052
+          },
+          {
+            "step_id": "p6",
+            "type": "analisar",
+            "seconds": 0.004
+          }
+        ],
+        "recuperacao_busca": [
+          "evidências cada aspecto",
+          "produtos ela fabrica"
+        ],
+        "failed_source_reads": [
+          "ecf00200605af4a0826981387aaddf7630d40d321f6a5a2ba3bf0430885d0e2f"
+        ],
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-662329279526",
+              "type": "explicit_attribute",
+              "description": "Fundadores",
+              "entity": "Tramontina",
+              "attribute": "founders",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Fundadores",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-36f9f6d9eac8",
+              "type": "explicit_attribute",
+              "description": "Data de fundação",
+              "entity": "Tramontina",
+              "attribute": "foundation_date",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Data de fundação",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-62ac516f9608",
+              "type": "explicit_attribute",
+              "description": "Produtos",
+              "entity": "Tramontina",
+              "attribute": "products",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Produtos",
+              "candidate_evidence_ids": [],
+              "confirmed_evidence_ids": [],
+              "state": "NOT_SEARCHED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            }
+          ],
+          "passages": [],
+          "complete": false,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+        },
+        "research_gaps": [
+          {
+            "id": "R-662329279526",
+            "dimension": "founders",
+            "description": "Fundadores",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "Tramontina Fundadores",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-36f9f6d9eac8",
+            "dimension": "foundation_date",
+            "description": "Data de fundação",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "Tramontina Data de fundação",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-62ac516f9608",
+            "dimension": "products",
+            "description": "Produtos",
+            "requirement_state": "NOT_SEARCHED",
+            "status": "OPEN",
+            "query": "Tramontina Produtos",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          }
+        ],
+        "controller_decisions": [
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p3",
+            "executed": false
+          },
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p6",
+            "executed": false
+          }
+        ],
+        "requirement_states": {
+          "R-662329279526": "NOT_SEARCHED",
+          "R-36f9f6d9eac8": "NOT_SEARCHED",
+          "R-62ac516f9608": "NOT_SEARCHED"
+        },
+        "adaptive_rounds": [
+          {
+            "step_id": "p3",
+            "new_evidence": 0,
+            "total_evidence": 0,
+            "remaining_searches": 4,
+            "decision": "no_new_evidence",
+            "requirement_changes": [
+              {
+                "id": "R-662329279526",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              },
+              {
+                "id": "R-36f9f6d9eac8",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              },
+              {
+                "id": "R-62ac516f9608",
+                "before": "NOT_SEARCHED",
+                "after": "NOT_SEARCHED"
+              }
+            ]
+          },
+          {
+            "step_id": "p6",
+            "new_evidence": 0,
+            "total_evidence": 0,
+            "remaining_searches": 4,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          }
+        ],
+        "round_evidence_ids": [],
+        "synthesis_attempted": true,
+        "research_outcome": {
+          "state": "partial",
+          "unresolved_fronts": [
+            "Tramontina Fundadores",
+            "Tramontina Data de fundação",
+            "Tramontina Produtos"
+          ],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 0,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        },
+        "partial_delivery_ready": true
+      },
+      "read_trace": [
+        {
+          "url": "https://global.tramontina.com/catalogos",
+          "final_url": "https://global.tramontina.com/catalogos",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 680,
+          "read": true,
+          "published_at": "sáb., 24 out. 2026 22:14:00 GMT",
+          "excerpt": "Catálogos Tramontina, o seu ponto de acesso aos materiais digitais Seja você um consumidor doméstico em busca de produtos para o dia a dia ou um profissional em busca de ferramentas, equipamentos ou acabamentos de alta performance, aqui encontrará os catálogos atualizados que reúnem linhas completas da marca. Com fácil navegação, basta escolher entre os perfis “Para Você” ou “Para Profissionais”"
+        },
+        {
+          "url": "https://global.tramontina.com/",
+          "final_url": "https://global.tramontina.com/",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 568,
+          "read": true,
+          "published_at": "sáb., 24 out. 2026 04:27:00 GMT",
+          "excerpt": "Tradição e inovação sem perder a essência Mais do que produtos, a Tramontina tem o prazer de tornar o dia a dia das pessoas cada vez melhor. Somos milhares de funcionários e um só propósito. Somos uma história com mais de 115 anos e um futuro de sustentabilidade pela frente. Tudo isso é traduzido no mix de produtos que carregam crenças e valores de uma marca única. São utensílios e equipamentos"
+        },
+        {
+          "url": "https://www.tramontina.com.br/",
+          "final_url": "",
+          "source_state": "REJECTED",
+          "stage": "fetch_failed",
+          "code": "tamanho",
+          "scope": "",
+          "extracted_chars": 0,
+          "read": false,
+          "published_at": "sáb., 24 out. 2026 19:22:00 GMT",
+          "excerpt": ""
+        },
+        {
+          "url": "https://www.facebook.com/Tramontina",
+          "final_url": "https://web.facebook.com/Tramontina",
+          "source_state": "FETCHED",
+          "stage": "no_readable_content",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 0,
+          "read": false,
+          "published_at": "",
+          "excerpt": ""
+        },
+        {
+          "url": "https://global.tramontina.com/sobre",
+          "final_url": "https://global.tramontina.com/sobre",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 681,
+          "read": true,
+          "published_at": "",
+          "excerpt": "Fazer bem feito para inspirar o dia a dia das pessoas e estimular experiências com significado, gerando valor e satisfação. Mais do que uma empresa, a Tramontina construiu ao longo de mais de um século uma história feita de trabalho, inovação, relações e compromisso com as pessoas. Tudo começou em 1911, com uma pequena ferraria fundada por Valentin e Elisa Tramontina, no sul do Brasil. Desde"
+        },
+        {
+          "url": "https://global.tramontina.com/desafio-tramontina/finalistas",
+          "final_url": "https://global.tramontina.com/desafio-tramontina/finalistas",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 517,
+          "read": true,
+          "published_at": "",
+          "excerpt": "espaço conta com uma bancada com área livre inferior para encaixe de cadeira de rodas, circulação fluida para giro de 360° e espelho angulado acima da bancada que amplia o campo de visão. A proposta também incorpora a automação e a tecnologia dos equipamentos Tramontina para tornar o espaço ainda mais acessível e prático."
+        },
+        {
+          "url": "https://global.tramontina.com/",
+          "final_url": "https://global.tramontina.com/",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 568,
+          "read": true,
+          "published_at": "sáb., 24 out. 2026 04:27:00 GMT",
+          "excerpt": "Tradição e inovação sem perder a essência Mais do que produtos, a Tramontina tem o prazer de tornar o dia a dia das pessoas cada vez melhor. Somos milhares de funcionários e um só propósito. Somos uma história com mais de 115 anos e um futuro de sustentabilidade pela frente. Tudo isso é traduzido no mix de produtos que carregam crenças e valores de uma marca única. São utensílios e equipamentos"
+        },
+        {
+          "url": "https://global.tramontina.com/catalogos",
+          "final_url": "https://global.tramontina.com/catalogos",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 680,
+          "read": true,
+          "published_at": "sáb., 24 out. 2026 22:14:00 GMT",
+          "excerpt": "Catálogos Tramontina, o seu ponto de acesso aos materiais digitais Seja você um consumidor doméstico em busca de produtos para o dia a dia ou um profissional em busca de ferramentas, equipamentos ou acabamentos de alta performance, aqui encontrará os catálogos atualizados que reúnem linhas completas da marca. Com fácil navegação, basta escolher entre os perfis “Para Você” ou “Para Profissionais”"
+        },
+        {
+          "url": "https://global.tramontina.com/desafio-tramontina/finalistas",
+          "final_url": "https://global.tramontina.com/desafio-tramontina/finalistas",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 517,
+          "read": true,
+          "published_at": "",
+          "excerpt": "espaço conta com uma bancada com área livre inferior para encaixe de cadeira de rodas, circulação fluida para giro de 360° e espelho angulado acima da bancada que amplia o campo de visão. A proposta também incorpora a automação e a tecnologia dos equipamentos Tramontina para tornar o espaço ainda mais acessível e prático."
+        },
+        {
+          "url": "https://global.tramontina.com/sobre",
+          "final_url": "https://global.tramontina.com/sobre",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 681,
+          "read": true,
+          "published_at": "",
+          "excerpt": "Fazer bem feito para inspirar o dia a dia das pessoas e estimular experiências com significado, gerando valor e satisfação. Mais do que uma empresa, a Tramontina construiu ao longo de mais de um século uma história feita de trabalho, inovação, relações e compromisso com as pessoas. Tudo começou em 1911, com uma pequena ferraria fundada por Valentin e Elisa Tramontina, no sul do Brasil. Desde"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Que_Bom_Te_Ver_Viva",
+          "final_url": "https://pt.wikipedia.org/wiki/Que_Bom_Te_Ver_Viva",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 7271,
+          "read": true,
+          "published_at": "2011-05-14T14:05:44Z",
+          "excerpt": "doi:10.4000/amerika.4054. Consultado em 29 de agosto de 2020 ↑ BEZERRA, Kátia da Costa. Que bom te ver viva: vozes femininas reivindicando uma outra história. Estud. Lit. Bras. Contemp., Brasília, n. 43, p. 35-48, Junho de 2014. Disponível em http://www.scielo.br/scielo.php?script=sci_arttext&pid=S2316-40182014000100003&lng=en&nrm=iso. Acessado em 29 de agosto de 2020."
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Que_Monstro_te_Mordeu%3F",
+          "final_url": "https://pt.wikipedia.org/wiki/Que_Monstro_te_Mordeu%3F",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 8000,
+          "read": true,
+          "published_at": "2015-01-14T12:35:11Z",
+          "excerpt": "Monstros, cada monstro desenhado por uma criança ganha vida provocando caos entre seus habitantes. Nesse lugar desordenado, cabe a Lali, uma metade humana e metade monstra, também imaginada por uma criança, e seus amigos monstruosos resolverem as confusões instaurada e extraírem um aprendizado das situações.[4] Elenco [editar | editar código] Principal Lali — Daphne Bozaski; Dr. Z — Paulo Henrique"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Que_Horas_Ela_Volta%3F",
+          "final_url": "https://pt.wikipedia.org/wiki/Que_Horas_Ela_Volta%3F",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 8000,
+          "read": true,
+          "published_at": "2015-06-24T02:14:30Z",
+          "excerpt": "alta onde ela cuida do filho dos patrões, Fabinho (Michel Joelsas). Treze anos depois, Val é economicamente estável, mas se sente culpada por ter deixado para trás Jéssica. De repente, sua filha decide ir a São Paulo para fazer um vestibular, na mesma época que o filho do casal, e pede apoio a mãe, esta acreditando em uma segunda chance para um melhor relacionamento entre as duas. Mesmo assim, a"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Que_comam_brioche",
+          "final_url": "https://pt.wikipedia.org/wiki/Que_comam_brioche",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 8000,
+          "read": true,
+          "published_at": "2016-12-07T12:40:31Z",
+          "excerpt": "pecados de cada dia. São Paulo: Edicoes Loyola. p. 49 ↑ Fraser, Antonia (2002). Marie Antoinette : the journey (em inglês). Bath: Thorndike Press. p. XVIII. ISBN 0754017664 1 2 Rousseau, Jean-Jacques (2000). Confessions (trans. Angela Scholar) (em inglês). New York: Oxford University Press. p. 262 |acessodata= requer |url= (ajuda) ↑ David, Case (1988), Intellectuals, ISBN 9781470887568 (em"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Quelato",
+          "final_url": "https://pt.wikipedia.org/wiki/Quelato",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 4822,
+          "read": true,
+          "published_at": "2006-07-13T14:22:01Z",
+          "excerpt": "polissacarídeos. O nome quelante provém da palavra grega chele, que significa garra ou pinça, referindo-se à forma pela qual os íons metálicos são “aprisionados” no composto. História [editar | editar código] O termo quelato foi primeiramente usado em 1920 por Sir Gilbert T. Morgan e H. D. K. Drew, que escreveram: “ Propomos o adjetivo \"chelant\", derivado do grego chele (grande garra da lagosta ou"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Que_Calor",
+          "final_url": "https://pt.wikipedia.org/wiki/Que_Calor",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 8000,
+          "read": true,
+          "published_at": "2019-11-11T03:07:55Z",
+          "excerpt": "Balvin e o rapper dominicano El Alfa. Foi lançado em 11 de setembro de 2019, através do selo Mad Decent, do Diplo. É o terceiro single do quarto álbum de estúdio do Major Lazer, Lazerism, que será lançado em 2019. Isso também marca a segunda colaboração entre Major Lazer e J Balvin, depois de \"Buscando Huellas\" em 2017.[2][3][4] Os artistas também divulgaram uma tradução lírica da faixa em"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Que_Horas_Ela_Volta%3F",
+          "final_url": "https://pt.wikipedia.org/wiki/Que_Horas_Ela_Volta%3F",
+          "source_state": "DISCOVERED",
+          "stage": "topic_only",
+          "code": "NO_ANSWER_PASSAGE",
+          "scope": "page_text",
+          "extracted_chars": 8000,
+          "read": true,
+          "published_at": "2015-06-24T02:14:30Z",
+          "excerpt": "alta onde ela cuida do filho dos patrões, Fabinho (Michel Joelsas). Treze anos depois, Val é economicamente estável, mas se sente culpada por ter deixado para trás Jéssica. De repente, sua filha decide ir a São Paulo para fazer um vestibular, na mesma época que o filho do casal, e pede apoio a mãe, esta acreditando em uma segunda chance para um melhor relacionamento entre as duas. Mesmo assim, a"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Que_Monstro_te_Mordeu%3F",
+          "final_url": "https://pt.wikipedia.org/wiki/Que_Monstro_te_Mordeu%3F",
+          "source_state": "DISCOVERED",
+          "stage": "topic_only",
+          "code": "NO_ANSWER_PASSAGE",
+          "scope": "page_text",
+          "extracted_chars": 8000,
+          "read": true,
+          "published_at": "2015-01-14T12:35:11Z",
+          "excerpt": "Monstros, cada monstro desenhado por uma criança ganha vida provocando caos entre seus habitantes. Nesse lugar desordenado, cabe a Lali, uma metade humana e metade monstra, também imaginada por uma criança, e seus amigos monstruosos resolverem as confusões instaurada e extraírem um aprendizado das situações.[4] Elenco [editar | editar código] Principal Lali — Daphne Bozaski; Dr. Z — Paulo Henrique"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Que_Bom_Te_Ver_Viva",
+          "final_url": "https://pt.wikipedia.org/wiki/Que_Bom_Te_Ver_Viva",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 7271,
+          "read": true,
+          "published_at": "2011-05-14T14:05:44Z",
+          "excerpt": "doi:10.4000/amerika.4054. Consultado em 29 de agosto de 2020 ↑ BEZERRA, Kátia da Costa. Que bom te ver viva: vozes femininas reivindicando uma outra história. Estud. Lit. Bras. Contemp., Brasília, n. 43, p. 35-48, Junho de 2014. Disponível em http://www.scielo.br/scielo.php?script=sci_arttext&pid=S2316-40182014000100003&lng=en&nrm=iso. Acessado em 29 de agosto de 2020."
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Que_comam_brioche",
+          "final_url": "https://pt.wikipedia.org/wiki/Que_comam_brioche",
+          "source_state": "DISCOVERED",
+          "stage": "topic_only",
+          "code": "NO_ANSWER_PASSAGE",
+          "scope": "page_text",
+          "extracted_chars": 8000,
+          "read": true,
+          "published_at": "2016-12-07T12:40:31Z",
+          "excerpt": "pecados de cada dia. São Paulo: Edicoes Loyola. p. 49 ↑ Fraser, Antonia (2002). Marie Antoinette : the journey (em inglês). Bath: Thorndike Press. p. XVIII. ISBN 0754017664 1 2 Rousseau, Jean-Jacques (2000). Confessions (trans. Angela Scholar) (em inglês). New York: Oxford University Press. p. 262 |acessodata= requer |url= (ajuda) ↑ David, Case (1988), Intellectuals, ISBN 9781470887568 (em"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Que_Calor",
+          "final_url": "https://pt.wikipedia.org/wiki/Que_Calor",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 8000,
+          "read": true,
+          "published_at": "2019-11-11T03:07:55Z",
+          "excerpt": "Balvin e o rapper dominicano El Alfa. Foi lançado em 11 de setembro de 2019, através do selo Mad Decent, do Diplo. É o terceiro single do quarto álbum de estúdio do Major Lazer, Lazerism, que será lançado em 2019. Isso também marca a segunda colaboração entre Major Lazer e J Balvin, depois de \"Buscando Huellas\" em 2017.[2][3][4] Os artistas também divulgaram uma tradução lírica da faixa em"
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Quelato",
+          "final_url": "https://pt.wikipedia.org/wiki/Quelato",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 4822,
+          "read": true,
+          "published_at": "2006-07-13T14:22:01Z",
+          "excerpt": "polissacarídeos. O nome quelante provém da palavra grega chele, que significa garra ou pinça, referindo-se à forma pela qual os íons metálicos são “aprisionados” no composto. História [editar | editar código] O termo quelato foi primeiramente usado em 1920 por Sir Gilbert T. Morgan e H. D. K. Drew, que escreveram: “ Propomos o adjetivo \"chelant\", derivado do grego chele (grande garra da lagosta ou"
+        }
+      ]
+    },
+    {
+      "id": "rj-c63d274a1e86",
+      "objective": "Como funciona Array.prototype.toSorted, qual sua sintaxe e limitações?",
+      "status": "concluida",
+      "usage": {
+        "buscas": 5,
+        "paginas": 5,
+        "local_context_checked": true,
+        "replans": 1,
+        "consultas_etapas": {
+          "como funciona array prototype tosorted": "p1",
+          "qual sua sintaxe": "p4",
+          "limitacoes": "p7",
+          "array prototype tosorted comportamento da operacao": "p13",
+          "array prototype tosorted limitacoes": "p16"
+        },
+        "provedores": {
+          "fixture-explicit-public-url": {
+            "ok": 5,
+            "falhas": 0,
+            "ms": 0
+          }
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 0.013
+          },
+          {
+            "step_id": "p4",
+            "type": "busca",
+            "seconds": 0.0008
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 0.0014
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 3.3862
+          },
+          {
+            "step_id": "p5",
+            "type": "ler",
+            "seconds": 0.0015
+          },
+          {
+            "step_id": "p8",
+            "type": "ler",
+            "seconds": 0.0016
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0106
+          },
+          {
+            "step_id": "p6",
+            "type": "analisar",
+            "seconds": 0.0082
+          },
+          {
+            "step_id": "p9",
+            "type": "analisar",
+            "seconds": 0.0099
+          },
+          {
+            "step_id": "p10",
+            "type": "verificar",
+            "seconds": 0.047
+          },
+          {
+            "step_id": "p11",
+            "type": "sintetizar",
+            "seconds": 0.0013
+          },
+          {
+            "step_id": "p12",
+            "type": "auditar",
+            "seconds": 0.0024
+          },
+          {
+            "step_id": "p13",
+            "type": "busca",
+            "seconds": 0.0011
+          },
+          {
+            "step_id": "p14",
+            "type": "ler",
+            "seconds": 0.0015
+          },
+          {
+            "step_id": "p15",
+            "type": "analisar",
+            "seconds": 0.0085
+          },
+          {
+            "step_id": "p16",
+            "type": "busca",
+            "seconds": 0.0017
+          },
+          {
+            "step_id": "p17",
+            "type": "ler",
+            "seconds": 0.0013
+          },
+          {
+            "step_id": "p18",
+            "type": "analisar",
+            "seconds": 0.0084
+          },
+          {
+            "step_id": "p10",
+            "type": "verificar",
+            "seconds": 0.0361
+          },
+          {
+            "step_id": "p11",
+            "type": "sintetizar",
+            "seconds": 0.0009
+          },
+          {
+            "step_id": "p12",
+            "type": "auditar",
+            "seconds": 0.0024
+          }
+        ],
+        "failed_source_reads": [
+          "94cb1ee350d46f1c2cdcf7868796441bb3968f6fa4b1823abd41e3eae2ddd6e7"
+        ],
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-e3ab9f882fc3",
+              "type": "explicit_attribute",
+              "description": "Sintaxe ou assinatura",
+              "entity": "Array.prototype.toSorted",
+              "attribute": "syntax",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Sintaxe ou assinatura",
+              "candidate_evidence_ids": [
+                "ev-e998ac809d4a",
+                "ev-3a7d6ef93a88"
+              ],
+              "confirmed_evidence_ids": [
+                "ev-e998ac809d4a",
+                "ev-3a7d6ef93a88"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-7d9c508cf6af1a62",
+                "P-5b98b21f55ad4a03",
+                "P-2f5940b7b14a4719"
+              ]
+            },
+            {
+              "id": "R-ceea65f6e835",
+              "type": "explicit_attribute",
+              "description": "Comportamento da operação",
+              "entity": "Array.prototype.toSorted",
+              "attribute": "behavior",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Comportamento da operação",
+              "candidate_evidence_ids": [
+                "ev-e998ac809d4a",
+                "ev-3a7d6ef93a88"
+              ],
+              "confirmed_evidence_ids": [],
+              "state": "DISCOVERED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-b600633891f9",
+              "type": "explicit_attribute",
+              "description": "Limitações",
+              "entity": "Array.prototype.toSorted",
+              "attribute": "limitations",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Limitações",
+              "candidate_evidence_ids": [
+                "ev-e998ac809d4a",
+                "ev-3a7d6ef93a88"
+              ],
+              "confirmed_evidence_ids": [],
+              "state": "DISCOVERED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            }
+          ],
+          "passages": [
+            {
+              "id": "P-7d9c508cf6af1a62",
+              "source_id": "ev-e998ac809d4a",
+              "requirement_id": "R-e3ab9f882fc3",
+              "text_span": {
+                "start": 1524,
+                "end": 2403,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-5b98b21f55ad4a03",
+              "source_id": "ev-3a7d6ef93a88",
+              "requirement_id": "R-e3ab9f882fc3",
+              "text_span": {
+                "start": 0,
+                "end": 1018,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-2f5940b7b14a4719",
+              "source_id": "ev-3a7d6ef93a88",
+              "requirement_id": "R-e3ab9f882fc3",
+              "text_span": {
+                "start": 2280,
+                "end": 3213,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            }
+          ],
+          "complete": false,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+        },
+        "research_gaps": [
+          {
+            "id": "R-e3ab9f882fc3",
+            "dimension": "syntax",
+            "description": "Sintaxe ou assinatura",
+            "requirement_state": "SUPPORTED",
+            "status": "RESOLVED",
+            "query": "",
+            "evidence_ids": [
+              "ev-e998ac809d4a",
+              "ev-3a7d6ef93a88"
+            ],
+            "candidate_sources": [],
+            "observed_publications": 2,
+            "required_publications": 1,
+            "reason": "",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-ceea65f6e835",
+            "dimension": "behavior",
+            "description": "Comportamento da operação",
+            "requirement_state": "DISCOVERED",
+            "status": "OPEN",
+            "query": "",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          {
+            "id": "R-b600633891f9",
+            "dimension": "limitations",
+            "description": "Limitações",
+            "requirement_state": "DISCOVERED",
+            "status": "OPEN",
+            "query": "",
+            "evidence_ids": [],
+            "candidate_sources": [],
+            "observed_publications": 0,
+            "required_publications": 1,
+            "reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          }
+        ],
+        "controller_decisions": [
+          {
+            "action": "REPLAN",
+            "reason": "required_data_missing",
+            "gap_ids": [
+              "R-ceea65f6e835",
+              "R-b600633891f9"
+            ],
+            "step_id": "p3",
+            "executed": false
+          },
+          {
+            "action": "REPLAN",
+            "reason": "required_data_missing",
+            "gap_ids": [
+              "R-ceea65f6e835",
+              "R-b600633891f9"
+            ],
+            "step_id": "p6",
+            "executed": false
+          },
+          {
+            "action": "REPLAN",
+            "reason": "required_data_missing",
+            "gap_ids": [
+              "R-ceea65f6e835",
+              "R-b600633891f9"
+            ],
+            "step_id": "p9",
+            "executed": true,
+            "new_searches": 2
+          },
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p15",
+            "executed": false
+          },
+          {
+            "action": "STOP_PARTIAL",
+            "reason": "budget_or_no_new_query",
+            "gap_ids": [],
+            "step_id": "p18",
+            "executed": false
+          }
+        ],
+        "requirement_states": {
+          "R-e3ab9f882fc3": "SUPPORTED",
+          "R-ceea65f6e835": "DISCOVERED",
+          "R-b600633891f9": "DISCOVERED"
+        },
+        "adaptive_rounds": [
+          {
+            "step_id": "p3",
+            "new_evidence": 2,
+            "total_evidence": 2,
+            "remaining_searches": 5,
+            "decision": "evidence_gained",
+            "requirement_changes": [
+              {
+                "id": "R-e3ab9f882fc3",
+                "before": "NOT_SEARCHED",
+                "after": "SUPPORTED"
+              },
+              {
+                "id": "R-ceea65f6e835",
+                "before": "NOT_SEARCHED",
+                "after": "DISCOVERED"
+              },
+              {
+                "id": "R-b600633891f9",
+                "before": "NOT_SEARCHED",
+                "after": "DISCOVERED"
+              }
+            ]
+          },
+          {
+            "step_id": "p6",
+            "new_evidence": 0,
+            "total_evidence": 2,
+            "remaining_searches": 5,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          },
+          {
+            "step_id": "p9",
+            "new_evidence": 0,
+            "total_evidence": 2,
+            "remaining_searches": 5,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          },
+          {
+            "step_id": "p15",
+            "new_evidence": 0,
+            "total_evidence": 2,
+            "remaining_searches": 4,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          },
+          {
+            "step_id": "p18",
+            "new_evidence": 0,
+            "total_evidence": 2,
+            "remaining_searches": 3,
+            "decision": "no_new_evidence",
+            "requirement_changes": []
+          }
+        ],
+        "round_evidence_ids": [
+          "ev-3a7d6ef93a88",
+          "ev-e998ac809d4a"
+        ],
+        "follow_ups": [],
+        "research_outcome": {
+          "state": "partial",
+          "unresolved_fronts": [],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 2,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        }
+      },
+      "read_trace": [
+        {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "final_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 2403,
+          "read": true,
+          "published_at": "",
+          "excerpt": "according to each character's Unicode code point value. See sort() for more information. Return value A new array with the elements sorted in ascending order. Description See sort() for more information on the compareFn parameter. When used on sparse arrays, the toSorted() method iterates empty slots as if they have the value undefined. The toSorted() method is generic. It only expects the this"
+        },
+        {
+          "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "final_url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 3213,
+          "read": true,
+          "published_at": "",
+          "excerpt": "Dieser Inhalt wurde automatisch aus dem Englischen übersetzt, und kann Fehler enthalten. Erfahre mehr über dieses Experiment. View in English Always switch to English Array.prototype.toSorted() Baseline Weitgehend verfügbar Diese Funktion ist gut etabliert und funktioniert auf vielen Geräten und in vielen Browserversionen. Sie ist seit Juli 2023 browserübergreifend verfügbar. Vollständige"
+        },
+        {
+          "url": "https://www.npmjs.com/package/array.prototype.tosorted",
+          "final_url": "",
+          "source_state": "BLOCKED",
+          "stage": "fetch_failed",
+          "code": "bloqueado",
+          "scope": "",
+          "extracted_chars": 0,
+          "read": false,
+          "published_at": "",
+          "excerpt": ""
+        },
+        {
+          "url": "https://tc39.es/ecma262/multipage/indexed-collections.html",
+          "final_url": "https://tc39.es/ecma262/multipage/indexed-collections.html",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "abstract_only",
+          "extracted_chars": 7998,
+          "read": true,
+          "published_at": "",
+          "excerpt": "length be TypedArrayLength(taRecord). Let byteOffset be ta.[[ByteOffset]]. Let bytes be a new empty List. Let index be 0. Repeat, while index < length,Let byteIndex be byteOffset + index. Let byte be ℝ(GetValueFromBuffer(buffer, byteIndex, uint8, true, unordered)). Append byte to bytes. Set index to index + 1. Return bytes. 23.3.3.3 SetUint8ArrayBytes ( into, bytes ) The abstract operation"
+        },
+        {
+          "url": "https://github.com/zloirock/core-js",
+          "final_url": "https://github.com/zloirock/core-js",
+          "source_state": "READABLE",
+          "stage": "extracted",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 1492,
+          "read": true,
+          "published_at": "",
+          "excerpt": "AI CODE CREATIONGitHub CopilotWrite better code with AI GitHub Copilot appDirect agents from issue to merge MCP RegistryIntegrate external tools DEVELOPER WORKFLOWSActionsAutomate any workflow CodespacesInstant dev environments IssuesPlan and track work Code ReviewManage code changes Code QualityEnforce quality at merge APPLICATION SECURITYGitHub Advanced SecurityFind and fix vulnerabilities Code"
+        },
+        {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "final_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "source_state": "EVIDENCE_ELIGIBLE",
+          "stage": "evidence_stored",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 2403,
+          "read": true,
+          "published_at": "",
+          "excerpt": "according to each character's Unicode code point value. See sort() for more information. Return value A new array with the elements sorted in ascending order. Description See sort() for more information on the compareFn parameter. When used on sparse arrays, the toSorted() method iterates empty slots as if they have the value undefined. The toSorted() method is generic. It only expects the this"
+        },
+        {
+          "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "final_url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+          "source_state": "EVIDENCE_ELIGIBLE",
+          "stage": "evidence_stored",
+          "code": "",
+          "scope": "page_text",
+          "extracted_chars": 3213,
+          "read": true,
+          "published_at": "",
+          "excerpt": "Dieser Inhalt wurde automatisch aus dem Englischen übersetzt, und kann Fehler enthalten. Erfahre mehr über dieses Experiment. View in English Always switch to English Array.prototype.toSorted() Baseline Weitgehend verfügbar Diese Funktion ist gut etabliert und funktioniert auf vielen Geräten und in vielen Browserversionen. Sie ist seit Juli 2023 browserübergreifend verfügbar. Vollständige"
+        },
+        {
+          "url": "https://tc39.es/ecma262/multipage/indexed-collections.html",
+          "final_url": "https://tc39.es/ecma262/multipage/indexed-collections.html",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "abstract_only",
+          "extracted_chars": 7998,
+          "read": true,
+          "published_at": "",
+          "excerpt": "length be TypedArrayLength(taRecord). Let byteOffset be ta.[[ByteOffset]]. Let bytes be a new empty List. Let index be 0. Repeat, while index < length,Let byteIndex be byteOffset + index. Let byte be ℝ(GetValueFromBuffer(buffer, byteIndex, uint8, true, unordered)). Append byte to bytes. Set index to index + 1. Return bytes. 23.3.3.3 SetUint8ArrayBytes ( into, bytes ) The abstract operation"
+        },
+        {
+          "url": "https://github.com/zloirock/core-js",
+          "final_url": "https://github.com/zloirock/core-js",
+          "source_state": "REJECTED",
+          "stage": "relevance_rejected",
+          "code": "TOPIC_MISMATCH",
+          "scope": "page_text",
+          "extracted_chars": 1492,
+          "read": true,
+          "published_at": "",
+          "excerpt": "AI CODE CREATIONGitHub CopilotWrite better code with AI GitHub Copilot appDirect agents from issue to merge MCP RegistryIntegrate external tools DEVELOPER WORKFLOWSActionsAutomate any workflow CodespacesInstant dev environments IssuesPlan and track work Code ReviewManage code changes Code QualityEnforce quality at merge APPLICATION SECURITYGitHub Advanced SecurityFind and fix vulnerabilities Code"
+        }
+      ]
+    }
+  ]
+}

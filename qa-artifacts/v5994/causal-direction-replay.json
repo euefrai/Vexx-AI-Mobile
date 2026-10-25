@@ -1,0 +1,25 @@
+{
+  "scope": "FROZEN_REPLAY_SAME_RETURNED_PUBLIC_BODY_NOT_NEW_DISCOVERY",
+  "prior_manual_judgment": "False positive: campaign led to revolt was incorrectly assigned to revolt consequences.",
+  "after": [
+    {
+      "url": "https://brasilescola.uol.com.br/historiab/revolta-vacina.htm",
+      "after_states": [
+        {
+          "attribute": "causes",
+          "state": "SUPPORTED"
+        },
+        {
+          "attribute": "consequences",
+          "state": "DISCOVERED"
+        }
+      ],
+      "passage_ids": [
+        "P-d17e4d442b4d103f"
+      ]
+    }
+  ],
+  "annotator": "agent_manual_not_independent_human",
+  "prior_holdout_status": "diagnostic_after_direction_bug_discovered",
+  "new_holdout": "evidence_direction_v5994_holdout.json"
+}

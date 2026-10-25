@@ -1,0 +1,25 @@
+{
+  "scope": "SYNTHETIC_MICROBENCHMARK_NOT_NETWORK_OR_PRODUCTION_PEAK",
+  "html_chars": 100013,
+  "paragraphs": 1000,
+  "runs": 5,
+  "results": [
+    {
+      "candidate": "before",
+      "average_ms": 62.77,
+      "peak_python_allocation_bytes": 1938094,
+      "expected_phrase_present": false
+    },
+    {
+      "candidate": "after",
+      "average_ms": 68.1,
+      "peak_python_allocation_bytes": 2677744,
+      "expected_phrase_present": true
+    }
+  ],
+  "limits": [
+    "Single process/order/machine; no confidence interval.",
+    "tracemalloc allocation peak measured separately from latency; not RSS.",
+    "DOM now keeps ordered fragment references; memory growth is not claimed away."
+  ]
+}

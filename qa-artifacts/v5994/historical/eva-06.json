@@ -1,0 +1,2188 @@
+{
+  "id": "eva-06",
+  "category": "places",
+  "query": "Parque Nacional de Brasília horários oficiais",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.826,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Parque Nacional de Brasília horários oficiais",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Parque Nacional de Brasília horários oficiais",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "Parque Nacional de Brasília horários oficiais",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "parque nacional brasília horários",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "parque nacional brasília horários",
+      "error": "vazio"
+    },
+    {
+      "provider": "wikipedia",
+      "query": "parque nacional brasília horários",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Parque+Nacional+de+Bras%C3%ADlia+hor%C3%A1rios+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Parque+Nacional+de+Bras%C3%ADlia+hor%C3%A1rios+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4802
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Parque%20Nacional%20de%20Bras%C3%ADlia%20hor%C3%A1rios%20oficiais",
+      "final": "https://html.duckduckgo.com/html/?q=Parque%20Nacional%20de%20Bras%C3%ADlia%20hor%C3%A1rios%20oficiais",
+      "chars": 14299
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Parque+Nacional+de+Bras%C3%ADlia+hor%C3%A1rios+oficiais",
+      "final": "https://old-search.marginalia.nu/search?query=Parque+Nacional+de+Bras%C3%ADlia+hor%C3%A1rios+oficiais",
+      "chars": 1085
+    },
+    {
+      "url": "https://www.bing.com/search?q=parque+nacional+bras%C3%ADlia+hor%C3%A1rios&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=parque+nacional+bras%C3%ADlia+hor%C3%A1rios&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4754
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=parque+nacional+bras%C3%ADlia+hor%C3%A1rios",
+      "final": "https://old-search.marginalia.nu/search?query=parque+nacional+bras%C3%ADlia+hor%C3%A1rios",
+      "chars": 1061
+    },
+    {
+      "url": "https://pt.m.wikipedia.org/wiki/Parque",
+      "final": "https://pt.wikipedia.org/wiki/Parque",
+      "chars": 328234
+    },
+    {
+      "url": "https://www.cascaneia.com.br/",
+      "final": "https://www.cascaneia.com.br/",
+      "chars": 26487
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g303570-Activities-c52-State_of_Santa_Catarina.html",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://lagoapark.com.br/",
+      "final": "https://lagoapark.com.br/",
+      "chars": 133933
+    },
+    {
+      "url": "https://www.instagram.com/ranchopark_/",
+      "final": "https://www.instagram.com/ranchopark_/",
+      "chars": 695434
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g1192094-Activities-c57-Imbituba_State_of_Santa_Catarina.html",
+      "error": "bloqueado"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Parque Nacional de Brasília horários oficiais",
+    "domain": "general",
+    "original_request": "Parque Nacional de Brasília horários oficiais",
+    "resolved_request": "Parque Nacional de Brasília horários oficiais",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:10:51.419189+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "09cedb52d12d3ffdc5c2",
+        "url": "https://pt.m.wikipedia.org/wiki/Parque",
+        "title": "Parque – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "2005-05-02T02:06:01Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Se procura parque de diversões, veja . Nota: Parque de diversão Esta página , mas que . cita fontes todo o conteúdo não cobrem Ajude a (). inserir referências E",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Parque",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "6e58fdc48537d8d15a78",
+        "url": "https://www.cascaneia.com.br/",
+        "title": "Parque Aquático Cascanéia",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "sáb., 24 out. 2026 19:36:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "você preparar a sua viagem para conhecer a Cascanéia, o melhor parque aquático do Sul do Brasil. Confira! Como escolher o destino ideal para viagem de formatura",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 882,
+        "final_url": "https://www.cascaneia.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "cfa397fdc1672f5c64f1",
+        "url": "https://www.tripadvisor.com.br/Attractions-g303570-Activities-c52-State_of_Santa_Catarina.html",
+        "title": "OS 15 MELHORES parques de diversões no Santa Catarina",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "dom., 25 out. 2026 11:07:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Muito bom o parque e os shows nota 10, escolha dois dias de visita em um curta todos os brinquedos e no outro os shows... 2. Parque Unipraias Camboriú. O passei",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "3e9eb33ea0760dfaa1ff",
+        "url": "https://www.tripadvisor.com.br/Attractions-g1192094-Activities-c57-Imbituba_State_of_Santa_Catarina.html",
+        "title": "OS 15 MELHORES parques em Imbituba (2026) - Tripadvisor",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "qui., 17 set. 2026 17:00:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pequena lagoa localizada no meio da praia do Rosa. Local bom para crianças.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "064bedb0fcf4f9680522",
+        "url": "https://lagoapark.com.br/",
+        "title": "Loteamento Lagoa Park – Imbituba",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "seg., 12 out. 2026 06:14:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "as crianças. Descubra o Loteamento Lagoa Park em Imbituba Lagoa de Imaruí 180 lotes 110,7 mil m² trilhas ecológicas ciclo faixa quadra poliesportiva pet place p",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 609,
+        "final_url": "https://lagoapark.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "18c86392d9570c17015e",
+        "url": "https://www.instagram.com/ranchopark_/",
+        "title": "FAZENDINHA RESTAURANTE CAFÉ (@ranchopark ... - Instagram",
+        "origin": "bing",
+        "query": "Parque Nacional de Brasília horários oficiais",
+        "date": "qua., 21 out. 2026 20:37:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Log In Sign Up",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 14,
+        "final_url": "https://www.instagram.com/ranchopark_/",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 6,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-8ccc5e3f0318",
+      "type": "image",
+      "title": "espaço aberto para recreação ou conservação",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Veale_Gardens.JPG/1280px-Veale_Gardens.JPG?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Veale_Gardens.JPG/1280px-Veale_Gardens.JPG?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "espaço aberto para recreação ou conservação",
+      "source_url": "https://pt.wikipedia.org/wiki/Parque",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "espaço aberto para recreação ou conservação",
+      "source_url": "https://pt.wikipedia.org/wiki/Parque",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7eb2487bedf5",
+      "type": "image",
+      "title": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "espaço aberto para recreação ou conservação",
+      "source_url": "https://pt.wikipedia.org/wiki/Parque",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a5238b77d69c",
+      "type": "image",
+      "title": "Wikcionário",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Wiktionary-logo-pt.png/40px-Wiktionary-logo-pt.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Wiktionary-logo-pt.png/40px-Wiktionary-logo-pt.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "espaço aberto para recreação ou conservação",
+      "source_url": "https://pt.wikipedia.org/wiki/Parque",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikcionário",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-acbae514a265",
+      "type": "image",
+      "title": "Bem-vindo ao melhor parque aquático do sul do Brasil! Acesse e conheça nossas atrações e a nossa estrutura com mais de 100.000 m² de pura diversão!",
+      "url": "https://www.cascaneia.com.br/img/img-para-facebook.jpg",
+      "final_url": "https://www.cascaneia.com.br/img/img-para-facebook.jpg",
+      "source_title": "Parque Aquático Cascanéia",
+      "source_url": "https://www.cascaneia.com.br/",
+      "publisher": "www.cascaneia.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Bem-vindo ao melhor parque aquático do sul do Brasil! Acesse e conheça nossas atrações e a nossa estrutura com mais de 100.000 m² de pura diversão!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d2539dfba81a",
+      "type": "image",
+      "title": "Sapinho",
+      "url": "https://www.cascaneia.com.br/img/frog-happy.svg",
+      "final_url": "https://www.cascaneia.com.br/img/frog-happy.svg",
+      "source_title": "Parque Aquático Cascanéia",
+      "source_url": "https://www.cascaneia.com.br/",
+      "publisher": "www.cascaneia.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Sapinho",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-fb72da9d4a85",
+      "type": "image",
+      "title": "Título Play na diversão",
+      "url": "https://www.cascaneia.com.br/img/play-diversao.png",
+      "final_url": "https://www.cascaneia.com.br/img/play-diversao.png",
+      "source_title": "Parque Aquático Cascanéia",
+      "source_url": "https://www.cascaneia.com.br/",
+      "publisher": "www.cascaneia.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Título Play na diversão",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c3ebb54c5421",
+      "type": "image",
+      "title": "Play",
+      "url": "https://www.cascaneia.com.br/img/play.svg",
+      "final_url": "https://www.cascaneia.com.br/img/play.svg",
+      "source_title": "Parque Aquático Cascanéia",
+      "source_url": "https://www.cascaneia.com.br/",
+      "publisher": "www.cascaneia.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Play",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1ee789295d2b",
+      "type": "image",
+      "title": "BLOG Cascanéia",
+      "url": "https://www.cascaneia.com.br/img/blog-header.png",
+      "final_url": "https://www.cascaneia.com.br/img/blog-header.png",
+      "source_title": "Parque Aquático Cascanéia",
+      "source_url": "https://www.cascaneia.com.br/",
+      "publisher": "www.cascaneia.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "BLOG Cascanéia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b8d6ef03b6f9",
+      "type": "image",
+      "title": "Excursão em parque aquático: tudo o que você precisa saber",
+      "url": "https://www.cascaneia.com.br/uploads/imagens/tb_60_3684280423175036.jpg",
+      "final_url": "https://www.cascaneia.com.br/uploads/imagens/tb_60_3684280423175036.jpg",
+      "source_title": "Parque Aquático Cascanéia",
+      "source_url": "https://www.cascaneia.com.br/",
+      "publisher": "www.cascaneia.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Excursão em parque aquático: tudo o que você precisa saber",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4e83cfa60415",
+      "type": "image",
+      "title": "Como escolher o destino ideal para viagem de formatura?",
+      "url": "https://www.cascaneia.com.br/uploads/imagens/tb_59_6279050423125310.jpg",
+      "final_url": "https://www.cascaneia.com.br/uploads/imagens/tb_59_6279050423125310.jpg",
+      "source_title": "Parque Aquático Cascanéia",
+      "source_url": "https://www.cascaneia.com.br/",
+      "publisher": "www.cascaneia.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Como escolher o destino ideal para viagem de formatura?",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6ce3a19ea4d3",
+      "type": "image",
+      "title": "O que fazer ao ar livre no Vale Europeu?",
+      "url": "https://www.cascaneia.com.br/uploads/imagens/tb_58_9594230323152300.jpg",
+      "final_url": "https://www.cascaneia.com.br/uploads/imagens/tb_58_9594230323152300.jpg",
+      "source_title": "Parque Aquático Cascanéia",
+      "source_url": "https://www.cascaneia.com.br/",
+      "publisher": "www.cascaneia.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "O que fazer ao ar livre no Vale Europeu?",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://pt.m.wikipedia.org/wiki/Parque",
+      "titulo": "espaço aberto para recreação ou conservação",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2005-05-02T02:06:01Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://pt.m.wikipedia.org/wiki/Parque",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.cascaneia.com.br/",
+      "titulo": "Parque Aquático Cascanéia",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 19:36:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.cascaneia.com.br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://lagoapark.com.br/",
+      "titulo": "Loteamento Lagoa Park – Imbituba",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "seg., 12 out. 2026 06:14:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://lagoapark.com.br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Parque Nacional de Brasília horários oficiais",
+      "items": [
+        {
+          "titulo": "Parque Aquático Cascanéia",
+          "url": "https://www.cascaneia.com.br/",
+          "trecho": "Bem-vindo ao melhor parque aquático do sul do Brasil! Acesse e conheça nossas atrações e a nossa estrutura com mais de 100.000 m² de pura diversão!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 19:36:00 GMT"
+          },
+          "discovery_query": "Parque Nacional de Brasília horários oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://cascaneia.com.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "OS 15 MELHORES parques em Imbituba (2026) - Tripadvisor",
+          "url": "https://www.tripadvisor.com.br/Attractions-g1192094-Activities-c57-Imbituba_State_of_Santa_Catarina.html",
+          "trecho": "Pequena lagoa localizada no meio da praia do Rosa. Local bom para crianças.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 17 set. 2026 17:00:00 GMT"
+          },
+          "discovery_query": "Parque Nacional de Brasília horários oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tripadvisor.com.br/Attractions-g1192094-Activities-c57-Imbituba_State_of_Santa_Catarina.html",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Parque – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.m.wikipedia.org/wiki/Parque",
+          "trecho": "Parque (do francês parc) é uma área territorial delimitada caracterizada por constituir unidades de conservação.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 19:37:00 GMT"
+          },
+          "discovery_query": "Parque Nacional de Brasília horários oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.m.wikipedia.org/wiki/Parque",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Loteamento Lagoa Park – Imbituba",
+          "url": "https://lagoapark.com.br/",
+          "trecho": "São 180 lotes distribuídos em 110,7 mil m², oferecendo o equilíbrio perfeito entre lazer, conforto e tranquilidade. Aproveite uma infraestrutura completa com trilhas ecológicas, ciclo faixa, quadra poliesportiva, pet place e playground para as crianças.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "seg., 12 out. 2026 06:14:00 GMT"
+          },
+          "discovery_query": "Parque Nacional de Brasília horários oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://lagoapark.com.br/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "FAZENDINHA RESTAURANTE CAFÉ (@ranchopark ... - Instagram",
+          "url": "https://www.instagram.com/ranchopark_/",
+          "trecho": "62K Followers, 4,192 Following, 625 Posts - 🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_) on Instagram: \"⏰Sáb, dom e feriado das 11h às 18h 📍Domingos Manoel Feliciano, Sambaqui FAZENDINHA, PESCARIA, PASSEIO A CAVALO RESTAURANTE & CAFÉ ⬇️Compre aqui\"",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 20:37:00 GMT"
+          },
+          "discovery_query": "Parque Nacional de Brasília horários oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://instagram.com/ranchopark_",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "OS 15 MELHORES parques de diversões no Santa Catarina",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303570-Activities-c52-State_of_Santa_Catarina.html",
+          "trecho": "Muito bom o parque e os shows nota 10, escolha dois dias de visita em um curta todos os brinquedos e no outro os shows... 2. Parque Unipraias Camboriú. O passeio de bondinho é muito legal, bem melhor que do Cristo do RJ. A visão é muito bonita tanto do Balneário Camboriú... 3. Aventura Pirata. Gosta",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:07:00 GMT"
+          },
+          "discovery_query": "Parque Nacional de Brasília horários oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tripadvisor.com.br/Attractions-g303570-Activities-c52-State_of_Santa_Catarina.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "parque nacional brasília horários",
+      "items": [
+        {
+          "titulo": "Parque Aquático Cascanéia",
+          "url": "https://www.cascaneia.com.br/",
+          "trecho": "Bem-vindo ao melhor parque aquático do sul do Brasil! Acesse e conheça nossas atrações e a nossa estrutura com mais de 100.000 m² de pura diversão!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 19:36:00 GMT"
+          },
+          "discovery_query": "parque nacional brasília horários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://cascaneia.com.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "OS 15 MELHORES parques em Imbituba (2026) - Tripadvisor",
+          "url": "https://www.tripadvisor.com.br/Attractions-g1192094-Activities-c57-Imbituba_State_of_Santa_Catarina.html",
+          "trecho": "Pequena lagoa localizada no meio da praia do Rosa. Local bom para crianças.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 17 set. 2026 17:00:00 GMT"
+          },
+          "discovery_query": "parque nacional brasília horários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tripadvisor.com.br/Attractions-g1192094-Activities-c57-Imbituba_State_of_Santa_Catarina.html",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Parque – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.m.wikipedia.org/wiki/Parque",
+          "trecho": "Parque (do francês parc) é uma área territorial delimitada caracterizada por constituir unidades de conservação.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 19:37:00 GMT"
+          },
+          "discovery_query": "parque nacional brasília horários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.m.wikipedia.org/wiki/Parque",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Loteamento Lagoa Park – Imbituba",
+          "url": "https://lagoapark.com.br/",
+          "trecho": "São 180 lotes distribuídos em 110,7 mil m², oferecendo o equilíbrio perfeito entre lazer, conforto e tranquilidade. Aproveite uma infraestrutura completa com trilhas ecológicas, ciclo faixa, quadra poliesportiva, pet place e playground para as crianças.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "seg., 12 out. 2026 06:14:00 GMT"
+          },
+          "discovery_query": "parque nacional brasília horários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://lagoapark.com.br/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "FAZENDINHA RESTAURANTE CAFÉ (@ranchopark ... - Instagram",
+          "url": "https://www.instagram.com/ranchopark_/",
+          "trecho": "62K Followers, 4,192 Following, 625 Posts - 🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_) on Instagram: \"⏰Sáb, dom e feriado das 11h às 18h 📍Domingos Manoel Feliciano, Sambaqui FAZENDINHA, PESCARIA, PASSEIO A CAVALO RESTAURANTE & CAFÉ ⬇️Compre aqui\"",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 20:37:00 GMT"
+          },
+          "discovery_query": "parque nacional brasília horários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://instagram.com/ranchopark_",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "OS 15 MELHORES parques de diversões no Santa Catarina",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303570-Activities-c52-State_of_Santa_Catarina.html",
+          "trecho": "Muito bom o parque e os shows nota 10, escolha dois dias de visita em um curta todos os brinquedos e no outro os shows... 2. Parque Unipraias Camboriú. O passeio de bondinho é muito legal, bem melhor que do Cristo do RJ. A visão é muito bonita tanto do Balneário Camboriú... 3. Aventura Pirata. Gosta",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:07:00 GMT"
+          },
+          "discovery_query": "parque nacional brasília horários",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tripadvisor.com.br/Attractions-g303570-Activities-c52-State_of_Santa_Catarina.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.25,
+          "relevancia": 6.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://www.cascaneia.com.br/",
+      "result": {
+        "titulo": "Parque Aquático Cascanéia",
+        "texto": "Excursão em parque aquático: tudo o que você precisa saber Planejar uma excursão em parque aquático é uma tarefa que demanda bastante atenção e organização. Mas, calma, reuni as melhores dicas para você preparar a sua viagem para conhecer a Cascanéia, o melhor parque aquático do Sul do Brasil. Confira! Como escolher o destino ideal para viagem de formatura? A viagem de formatura é um momento muito especial na vida dos estudantes. É a ocasião perfeita para realizar uma celebração inesquecível, em comemoração às etapas superadas. E também para celebrar a passagem para uma nova fase da vida. O que fazer ao ar livre no Vale Europeu? O Vale Europeu, também conhecido como Vale do Itajaí, fica no interior de Santa Catarina, em uma região rodeada por muita natureza. Berço da cultura alemã e italiana no estado, o Vale tem diversas atrações ao ar livre para você visitar. Confira!",
+        "final": "https://www.cascaneia.com.br/",
+        "trecho_usado": "você preparar a sua viagem para conhecer a Cascanéia, o melhor parque aquático do Sul do Brasil. Confira! Como escolher o destino ideal para viagem de formatura? A viagem de formatura é um momento muito especial na vida dos estudantes. É a ocasião perfeita para realizar uma celebração inesquecível, em comemoração às etapas superadas. E também para celebrar a passagem para uma nova fase da vida. O",
+        "metadados": {
+          "titulo": "Parque Aquático Cascanéia",
+          "descricao": "Bem-vindo ao melhor parque aquático do sul do Brasil! Acesse e conheça nossas atrações e a nossa estrutura com mais de 100.000 m² de pura diversão!",
+          "canonica": "",
+          "og": {
+            "og:site_name": "Parque Aquático Cascanéia",
+            "og:image": "https://www.cascaneia.com.br/img/img-para-facebook.jpg",
+            "og:image:type": "image/jpeg"
+          },
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "Quax - Sites & Sistemas (www.quax.com.br)",
+          "site": "Parque Aquático Cascanéia",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Excursão em parque aquático: tudo o que você precisa saber",
+            "texto": "Planejar uma excursão em parque aquático é uma tarefa que demanda bastante atenção e organização. Mas, calma, reuni as melhores dicas para você preparar a sua viagem para conhecer a Cascanéia, o melhor parque aquático do Sul do Brasil. Confira!"
+          },
+          {
+            "titulo": "Como escolher o destino ideal para viagem de formatura?",
+            "texto": "A viagem de formatura é um momento muito especial na vida dos estudantes. É a ocasião perfeita para realizar uma celebração inesquecível, em comemoração às etapas superadas. E também para celebrar a passagem para uma nova fase da vida."
+          },
+          {
+            "titulo": "O que fazer ao ar livre no Vale Europeu?",
+            "texto": "O Vale Europeu, também conhecido como Vale do Itajaí, fica no interior de Santa Catarina, em uma região rodeada por muita natureza. Berço da cultura alemã e italiana no estado, o Vale tem diversas atrações ao ar livre para você visitar. Confira!"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.cascaneia.com.br/",
+            "texto": "Parque Aquático Cascanéia",
+            "interno": true
+          },
+          {
+            "url": "https://www.facebook.com/parqueaquaticocascaneia/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/cascaneia/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.cascaneia.com.br/loja/?fbclid=IwAR37CZPpcOrbWpMrJqredltqLLAOKhTTR26sc8pLZDS2kNo6C7W50GuB1Ew",
+            "texto": "COMPRAR INGRESSO",
+            "interno": true
+          },
+          {
+            "url": "https://www.hotelvilladiacqua.com.br",
+            "texto": "RESERVAR HOTEL",
+            "interno": false
+          },
+          {
+            "url": "https://www.cascaneia.com.br/hotel",
+            "texto": "HOTÉIS",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/atracoes",
+            "texto": "ATRAÇÕES",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/programacao",
+            "texto": "PROGRAMAÇÃO",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/mapa-do-parque",
+            "texto": "MAPA E ESTRUTURA",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/blog",
+            "texto": "BLOG",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/perguntas",
+            "texto": "PERGUNTAS FREQUENTES",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/contato",
+            "texto": "CONTATO",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/quem-somos",
+            "texto": "QUEM SOMOS",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/politica-de-privacidade",
+            "texto": "POLITICA DE PRIVACIDADE",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/reembolso",
+            "texto": "REEMBOLSO",
+            "interno": true
+          },
+          {
+            "url": "http://ingressos.cascaneia.com.br/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://hbook.hsystem.com.br/Booking?companyId=60afd5e267595dde9ebffc00",
+            "texto": "--> RESERVAR HOTEL",
+            "interno": false
+          },
+          {
+            "url": "https://www.cascaneia.com.br/post/excursao-em-parque-aquatico-tudo-o-que-voce-precisa-saber",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/post/como-escolher-o-destino-ideal-para-viagem-de-formatura",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.cascaneia.com.br/post/o-que-fazer-ao-ar-livre-no-vale-europeu",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.tripadvisor.com.br/Attraction_Review-g2344316-d3893494-Reviews-Parque_Aquatico_Cascaneia-Gaspar_State_of_Santa_Catarina.html",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://g.page/parqueaquaticocascaneia?share",
+            "texto": "[ VER MAPA ]",
+            "interno": false
+          },
+          {
+            "url": "https://www.quax.com.br",
+            "texto": "",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.cascaneia.com.br/img/img-para-facebook.jpg",
+          "https://www.facebook.com/tr?id=920714316307942&ev=PageView&noscript=1",
+          "https://www.cascaneia.com.br/img/frog-happy.svg",
+          "https://www.cascaneia.com.br/img/icone-comprar-ingresso.png",
+          "https://www.cascaneia.com.br/img/play-diversao-det.png",
+          "https://www.cascaneia.com.br/img/icone-reservar-hotel.png",
+          "https://www.cascaneia.com.br/img/play-diversao.png",
+          "https://www.cascaneia.com.br/img/play.svg",
+          "https://www.cascaneia.com.br/img/home-zumm.jpg",
+          "https://www.cascaneia.com.br/img/blog-header.png"
+        ],
+        "midia": [
+          {
+            "id": "med-acbae514a265",
+            "type": "image",
+            "title": "Bem-vindo ao melhor parque aquático do sul do Brasil! Acesse e conheça nossas atrações e a nossa estrutura com mais de 100.000 m² de pura diversão!",
+            "url": "https://www.cascaneia.com.br/img/img-para-facebook.jpg",
+            "final_url": "https://www.cascaneia.com.br/img/img-para-facebook.jpg",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Bem-vindo ao melhor parque aquático do sul do Brasil! Acesse e conheça nossas atrações e a nossa estrutura com mais de 100.000 m² de pura diversão!",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d2539dfba81a",
+            "type": "image",
+            "title": "Sapinho",
+            "url": "https://www.cascaneia.com.br/img/frog-happy.svg",
+            "final_url": "https://www.cascaneia.com.br/img/frog-happy.svg",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Sapinho",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-fb72da9d4a85",
+            "type": "image",
+            "title": "Título Play na diversão",
+            "url": "https://www.cascaneia.com.br/img/play-diversao.png",
+            "final_url": "https://www.cascaneia.com.br/img/play-diversao.png",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Título Play na diversão",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c3ebb54c5421",
+            "type": "image",
+            "title": "Play",
+            "url": "https://www.cascaneia.com.br/img/play.svg",
+            "final_url": "https://www.cascaneia.com.br/img/play.svg",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Play",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1ee789295d2b",
+            "type": "image",
+            "title": "BLOG Cascanéia",
+            "url": "https://www.cascaneia.com.br/img/blog-header.png",
+            "final_url": "https://www.cascaneia.com.br/img/blog-header.png",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "BLOG Cascanéia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b8d6ef03b6f9",
+            "type": "image",
+            "title": "Excursão em parque aquático: tudo o que você precisa saber",
+            "url": "https://www.cascaneia.com.br/uploads/imagens/tb_60_3684280423175036.jpg",
+            "final_url": "https://www.cascaneia.com.br/uploads/imagens/tb_60_3684280423175036.jpg",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Excursão em parque aquático: tudo o que você precisa saber",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4e83cfa60415",
+            "type": "image",
+            "title": "Como escolher o destino ideal para viagem de formatura?",
+            "url": "https://www.cascaneia.com.br/uploads/imagens/tb_59_6279050423125310.jpg",
+            "final_url": "https://www.cascaneia.com.br/uploads/imagens/tb_59_6279050423125310.jpg",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Como escolher o destino ideal para viagem de formatura?",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6ce3a19ea4d3",
+            "type": "image",
+            "title": "O que fazer ao ar livre no Vale Europeu?",
+            "url": "https://www.cascaneia.com.br/uploads/imagens/tb_58_9594230323152300.jpg",
+            "final_url": "https://www.cascaneia.com.br/uploads/imagens/tb_58_9594230323152300.jpg",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "O que fazer ao ar livre no Vale Europeu?",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0f6727fac0a7",
+            "type": "image",
+            "title": "Dúvidas Frequentes",
+            "url": "https://www.cascaneia.com.br/img/duvidas-frequentes.webp",
+            "final_url": "https://www.cascaneia.com.br/img/duvidas-frequentes.webp",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dúvidas Frequentes",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f429e7687ddb",
+            "type": "image",
+            "title": "Curva",
+            "url": "https://www.cascaneia.com.br/img/bg-right.svg",
+            "final_url": "https://www.cascaneia.com.br/img/bg-right.svg",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Curva",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f6ef2e19b8f7",
+            "type": "image",
+            "title": "Toboagua",
+            "url": "https://www.cascaneia.com.br/img/toboga.svg",
+            "final_url": "https://www.cascaneia.com.br/img/toboga.svg",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Toboagua",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a5c8b05e11c5",
+            "type": "image",
+            "title": "Logo Cascaneia",
+            "url": "https://www.cascaneia.com.br/img/logo-white.svg",
+            "final_url": "https://www.cascaneia.com.br/img/logo-white.svg",
+            "source_title": "Parque Aquático Cascanéia",
+            "source_url": "https://www.cascaneia.com.br/",
+            "publisher": "www.cascaneia.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo Cascaneia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://lagoapark.com.br/",
+      "result": {
+        "titulo": "Loteamento Lagoa Park – Imbituba",
+        "texto": ", localizado em uma área privilegiada à beira da . São distribuídos em , oferecendo o equilíbrio perfeito entre lazer, conforto e tranquilidade. Aproveite uma infraestrutura completa com , , , e para as crianças. Descubra o Loteamento Lagoa Park em Imbituba Lagoa de Imaruí 180 lotes 110,7 mil m² trilhas ecológicas ciclo faixa quadra poliesportiva pet place playground Essa é a oportunidade ideal para você construir a casa dos seus sonhos, próximo às mais belas praias e à natureza exuberante da . Capital Nacional da Baleia-Franca Venha morar ou investir pertinho das de Santa Catarina. praias mais famosas",
+        "final": "https://lagoapark.com.br/",
+        "trecho_usado": "as crianças. Descubra o Loteamento Lagoa Park em Imbituba Lagoa de Imaruí 180 lotes 110,7 mil m² trilhas ecológicas ciclo faixa quadra poliesportiva pet place playground Essa é a oportunidade ideal para você construir a casa dos seus sonhos, próximo às mais belas praias e à natureza exuberante da . Capital Nacional da Baleia-Franca Venha morar ou investir pertinho das de Santa Catarina. praias",
+        "metadados": {
+          "titulo": "Loteamento Lagoa Park – Imbituba",
+          "descricao": "",
+          "canonica": "https://lagoapark.com.br/",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": ", localizado em uma área privilegiada à beira da . São distribuídos em , oferecendo o equilíbrio perfeito entre lazer, conforto e tranquilidade. Aproveite uma infraestrutura completa com , , , e para as crianças. Descubra o Loteamento Lagoa Park em Imbituba Lagoa de Imaruí 180 lotes 110,7 mil m² trilhas ecológicas ciclo faixa quadra poliesportiva pet place playground\nEssa é a oportunidade ideal para você construir a casa dos seus sonhos, próximo às mais belas praias e à natureza exuberante da . Capital Nacional da Baleia-Franca\nVenha morar ou investir pertinho das de Santa Catarina. praias mais famosas"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://api.whatsapp.com/send?phone=5548996096386&#038;text=Ol%C3%A1,%20vim%20pelo%20site%20e%20gostaria%20de%20mais%20informa%C3%A7%C3%B5es%20sobre%20o%20Loteamento%20Lagoa%20Park",
+            "texto": "ENTRE EM CONTATO",
+            "interno": false
+          },
+          {
+            "url": "https://lagoapark.com.br/wp-content/uploads/2023/11/distancias-oficiais-lagoa-park.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://lagoapark.com.br/wp-content/uploads/2023/11/LAGOA-PARK-IA-3.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://lagoapark.com.br/wp-content/uploads/2023/11/Lagoa-do-Mirim-IA-2-1.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://lagoapark.com.br/wp-content/uploads/2023/11/Lagoa-do-Mirim-IA-2.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://lagoapark.com.br/wp-content/uploads/2023/11/Lagoa-do-Mirim-IA.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://lagoapark.com.br/wp-content/uploads/2023/11/6.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://lagoapark.com.br/wp-content/uploads/2023/11/4.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://lagoapark.com.br/wp-content/uploads/2023/11/3.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://lagoapark.com.br/wp-content/uploads/2024/10/E-book-Lagoa-Park_Pagina_03.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://rotabaleiafranca.com.br/",
+            "texto": "",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.facebook.com/tr?id=1096283231247269&ev=PageView&noscript=1",
+          "https://www.facebook.com/tr?id=753341649856820&ev=PageView&noscript=1&cd%5Bpage_title%5D=Lagoa+Park&cd%5Bpost_type%5D=page&cd%5Bpost_id%5D=626&cd%5Bplugin%5D=PixelYourSite&cd%5Buser_role%5D=guest&cd%5Bevent_url%5D=lagoapark.com.br%2F"
+        ],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://pt.m.wikipedia.org/wiki/Parque",
+      "result": {
+        "titulo": "espaço aberto para recreação ou conservação",
+        "texto": "Se procura parque de diversões, veja . Nota: Parque de diversão Esta página , mas que . cita fontes todo o conteúdo não cobrem Ajude a (). inserir referências Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES () junho de 2022 Parque Veale Gardens em . Adelaide (Austrália) Parque Sad Janka Kráľa em , . Bratislava Eslováquia Parque de Gagel em , . Utrecht Países Baixos (do ) é uma área territorial delimitada caracterizada por constituir . Esses terrenos podem ser terrestres e/ou aquáticos, normalmente extensos, contendo de grande relevância ecológica, podendo conter sua importância na conservação de ecossistemas ameaçados, na presença de de interesse científico, em seu valor educacional, recreativo ou turístico. Podem ser definidas e conservadas pelo poder nacional, estadual ou municipal, podendo ser caracterizado como natural, urbano ou militar. Parque francês parc unidades de conservação ecossistemas naturais ou seminaturais sítios geológicos 1 [ ] O termo também é usado para descrever um tipo de . savana 2 [ ] História [ editar | editar código ] Os primeiros parques surgiram na Grécia Antiga, nas regiões das pólis, como espaços que combinavam áreas de socialização e vegetação nativa. Outras civilizações antigas também criaram parques, como a China, onde tinham simbolismo religioso, e o Egito, onde serviam para amenizar o calor intenso. 3 [ ] Na Idade Média, nobres ingleses mantinham jardins restritos em suas propriedades, conhecidos como , usados principalmente para a caça. Esses parques eram símbolo de poder e status. Parques de Veados Antes da Segunda Revolução Industrial, cidades contavam com áreas arborizadas para embelezamento, mas a criação de parques urbanos ainda não era uma prioridade, pois o êxodo rural e a industrialização estavam em andamento, e a necessidade de áreas verdes nas cidades ainda não era percebida. Após a Segunda Revolução Industrial, parques começaram a ser estabelecidos em áreas urbanas, oferecendo espaços para socialização e prática esportiva, similares aos das pólis. A preocupação com a preservação da biodiversidade ganhou força com a criação do , nos Estados Unidos, o primeiro do mundo a ser reconhecido como . Embora inicialmente focado na preservação da beleza natural, o parque marcou o início do uso das áreas naturais para a conservação ambiental. Parque Nacional de Yellowstone Unidade de Conservação No Brasil, o primeiro parque de conservação foi o , inaugurado em 1937 pelo presidente Getúlio Vargas. Localizado na , o parque ocupa 28.086 hectares e abrange parte da divisa entre Minas Gerais e Rio de Janeiro. Atualmente, o Brasil conta com cerca de 569 parques, entre parques urbanos e Parques Naturais, que integram o sistema de Unidades de Conservação. Parque Nacional do Itatiaia 4 [ ] 4 [ ] Mata Atlântica 5 [ ] Funcionalidades [ editar | editar código ] Parques na revitalização urbana [ editar | editar código ] A revitalização urbana é um processo essencial para melhorar a qualidade de vida das cidades, e os parques desempenham um papel fundamental nesse entorno. Eles não apenas oferecem espaços de lazer e recreação, mas também contribuem para a sustentabilidade ambiental e servem de ponto de encontro social. Com isso há vários benefícios que podem ser listados. 6 [ ] Benefícios ambientais [ editar | editar código ] Os parques urbanos são essenciais para a manutenção da qualidade do ar e a região ambiental nas cidades. Eles ajudam a melhorar, atuando como filtros naturais que absorvem poluentes e liberam oxigênio. Além disso, áreas verdes são fundamentais na mitigação das mudanças climáticas, pois contribuem para a absorção de carbono e ajudam a regular as temperaturas urbanas, que sem área verde tendem a ter um clima de deserto. 7 [ ] Os parques lineares, por exemplo, são intervenções urbanísticas que conectam áreas verdes ao longo de cursos d’água. Esses espaços não só protegem ecossistemas locais, mas também servem como corredores ecológicos que promovem a biodiversidade e protegem os rios de detritos e a cidade de possíveis enchentes com a mata ciliar, além disso oferecem alternativas de mobilidade não motorizada, como em Berna, na Suíça. A criação de parques em áreas anteriormente degradadas ou subutilizadas pode transformar esses locais em ambientes vibrantes e sustentáveis. 8 [ ] 7 [ ] 8 [ ] Qualidade de vida [ editar | editar código ] A qualidade de vida nas cidades é diretamente influenciada pela disponibilidade de espaços públicos que sejam viáveis de utilização. Parques bem planejados oferecem não apenas lazer, mas também segurança e conforto ambiental. A presença de vegetação diversificada e áreas sombreadas é essencial para criar ambientes agradáveis que incentivam o uso contínuo por parte da população. 8 [ ] 9 [ ] A revitalização urbana com foco em parques pode transformar áreas antes negligenciadas em locais atrativos para a sociedade. Isso não só melhora a estética urbana, mas também resgata o sentimento de pertencimento dos cidadãos aos seus espaços públicos, promovendo um ambiente mais inclusivo e saudável. 9 [ ] 10 [ ] 9 [ ] 11 [ ] Design [ editar | editar código ] O de parques públicos tem como objetivo contrastar com o ambiente urbano, proporcionando espaços tranquilos para e relaxamento. Mais do que um apelo estético, o design desempenha uma função prática essencial. design lazer 12 [ ] A é fundamental para garantir o uso contínuo dos parques. Um ambiente seguro atrai mais visitantes, proporcionando uma sensação de conforto. Estudos realizados em cidades dos EUA, como Albuquerque, Chapel Hill/Durham, Columbus e Filadélfia, com 3.815 participantes que viviam a menos de 800 metros de um parque, indicaram que, além da segurança, a qualidade das instalações aumenta o uso do parque, muitas vezes mais do que a simples percepção de segurança. Aspectos como boa iluminação, acessível, , facilidade de manutenção e orientação são cruciais para a segurança do espaço. segurança [ carecede fontes ] ? layout visibilidade 12 [ ] O deve ser intuitivo, permitindo que os visitantes compreendam facilmente a disposição do parque. Elementos como sinalizações, entradas e saídas claras, pontos de referência e caminhos bem conectados garantem uma experiência mais fluida e agradável. design 12 [ ] A variedade de é essencial para estimular a , o bem-estar e o interesse. Isso inclui , jogos, atividades comunitárias e de integração social e ambiental. Os parques podem ser divididos em: atividades socialização playgrounds 12 [ ] Recreação Ativa: Envolve atividades intensivas, como de equipe, playgrounds, e pistas de skate, com maior necessidade de manutenção e gestão. esportes piscinas Recreação Passiva: Focada em preservar o natural, com áreas de rústicas, trilhas e bancos, requerendo menos desenvolvimento. habitat piquenique Playgrounds são projetados para serem inclusivos e , utilizando materiais naturais e variados que estimulam as crianças. contemporâneos multissensoriais 13 [ ] 12 [ ] A integração de pessoas com e ou é crucial. Segundo o , 12,5 milhões de brasileiros apresentam deficiências severas, o que equivale a 6,7% da população. Com dificuldades menores, esse número sobe para quase 46 milhões (24%). Medidas como rampas, banheiros adaptados, pisos táteis, fácil acesso a e estacionamentos são indispensáveis para garantir a . mobilidade reduzida deficiências visuais auditivas Censo de 2010 14 [ ] transporte público inclusão 12 [ ] 15 [ ] Alguns exemplos de parques: : Design de , com ciclovias, lagos e espaços culturais. , São Paulo Parque Ibirapuera modernista Roberto Burle Marx 16 [ ] 17 [ ] 18 [ ] Parque Ibirapuera, São Paulo : de Piet Oudolf, com integração à antiga e áreas arborizadas. , Nova York High Line Paisagismo ferrovia 16 [ ] 17 [ ] High Line, Nova York : Design com árvores gigantes e estufas. , Singapura Gardens by the Bay futurista 17 [ ] Gardens by the Bay, Singapura : Primeiro parque construído sobre uma linha ferroviária desativada, com pontes, túneis e belas vistas. , Paris Coulée ",
+        "final": "https://pt.wikipedia.org/wiki/Parque",
+        "trecho_usado": "Se procura parque de diversões, veja . Nota: Parque de diversão Esta página , mas que . cita fontes todo o conteúdo não cobrem Ajude a (). inserir referências Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES () junho de 2022 Parque Veale Gardens em . Adelaide (Austrália) Parque Sad Janka Kráľa em , . Bratislava Eslováquia Parque de Gagel em , . Utrecht Países Baixos (do ) é uma",
+        "metadados": {
+          "titulo": "espaço aberto para recreação ou conservação",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Parque",
+          "og": {
+            "og:image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Veale_Gardens.JPG/1280px-Veale_Gardens.JPG?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "og:image:width": "1200",
+            "og:image:height": "900",
+            "og:title": "Parque – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2005-05-02T02:06:01Z",
+          "atualizado_em": "2026-08-12T11:24:24Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2005-05-02T02:06:01Z",
+            "dateModified": "2026-08-12T11:24:24Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "espaço aberto para recreação ou conservação"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Esta página , mas que . cita fontes todo o conteúdo não cobrem Ajude a (). inserir referências Encontre fontes: () Google N • L • A • I • WP refs • ABW • CAPES () junho de 2022\nParque Veale Gardens em . Adelaide (Austrália)\nParque Sad Janka Kráľa em , . Bratislava Eslováquia\nParque de Gagel em , . Utrecht Países Baixos\n(do ) é uma área territorial delimitada caracterizada por constituir . Esses terrenos podem ser terrestres e/ou aquáticos, normalmente extensos, contendo de grande relevância ecológica, podendo conter sua importância na conservação de ecossistemas ameaçados, na presença de de interesse científico, em seu valor educacional, recreativo ou turístico. Podem ser definidas e conservadas pelo poder nacional, estadual ou municipal, podendo ser caracterizado como natural, urbano ou militar. Parque francês parc unidades de conservação ecossistemas naturais ou seminaturais sítios geológicos 1 [ ]\nO termo também é usado para descrever um tipo de . savana 2 [ ]\nOs primeiros parques surgiram na Grécia Antiga, nas regiões das pólis, como espaços que combinavam áreas de socialização e vegetação nativa. Outras civilizações antigas também criaram parques, como a China, onde tinham simbolismo religioso, e o Egito, onde serviam para amenizar o calor intenso. 3 [ ]\nNa Idade Média, nobres ingleses mantinham jardins restritos em suas propriedades, conhecidos como , usados principalmente para a caça. Esses parques eram símbolo de poder e status. Parques de Veados\nAntes da Segunda Revolução Industrial, cidades contavam com áreas arborizadas para embelezamento, mas a criação de parques urbanos ainda não era uma prioridade, pois o êxodo rural e a industrialização estavam em andamento, e a necessidade de áreas verdes nas cidades ainda não era percebida.\nApós a Segunda Revolução Industrial, parques começaram a ser estabelecidos em áreas urbanas, oferecendo espaços para socialização e prática esportiva, similares aos das pólis. A preocupação com a preservação da biodiversidade ganhou força com a criação do , nos Estados Unidos, o primeiro do mundo a ser reconhecido como . Embora inicialmente focado na preservação da beleza natural, o parque marcou o início do uso das áreas naturais para a conservação ambiental. Parque Nacional de Yellowstone Unidade de Conservação\nNo Brasil, o primeiro parque de conservação foi o , inaugurado em 1937 pelo presidente Getúlio Vargas. Localizado na , o parque ocupa 28.086 hectares e abrange parte da divisa entre Minas Gerais e Rio de Janeiro. Atualmente, o Brasil conta com cerca de 569 parques, entre parques urbanos e Parques Naturais, que integram o sistema de Unidades de Conservação. Parque Nacional do Itatiaia 4 [ ] 4 [ ] Mata Atlântica 5 [ ]"
+          },
+          {
+            "titulo": "Parques na revitalização urbana",
+            "texto": "A revitalização urbana é um processo essencial para melhorar a qualidade de vida das cidades, e os parques desempenham um papel fundamental nesse entorno. Eles não apenas oferecem espaços de lazer e recreação, mas também contribuem para a sustentabilidade ambiental e servem de ponto de encontro social. Com isso há vários benefícios que podem ser listados. 6 [ ]\nOs parques urbanos são essenciais para a manutenção da qualidade do ar e a região ambiental nas cidades. Eles ajudam a melhorar, atuando como filtros naturais que absorvem poluentes e liberam oxigênio. Além disso, áreas verdes são fundamentais na mitigação das mudanças climáticas, pois contribuem para a absorção de carbono e ajudam a regular as temperaturas urbanas, que sem área verde tendem a ter um clima de deserto. 7 [ ]\nOs parques lineares, por exemplo, são intervenções urbanísticas que conectam áreas verdes ao longo de cursos d’água. Esses espaços não só protegem ecossistemas locais, mas também servem como corredores ecológicos que promovem a biodiversidade e protegem os rios de detritos e a cidade de possíveis enchentes com a mata ciliar, além disso oferecem alternativas de mobilidade não motorizada, como em Berna, na Suíça. A criação de parques em áreas anteriormente degradadas ou subutilizadas pode transformar esses locais em ambientes vibrantes e sustentáveis. 8 [ ] 7 [ ] 8 [ ]\nA qualidade de vida nas cidades é diretamente influenciada pela disponibilidade de espaços públicos que sejam viáveis de utilização. Parques bem planejados oferecem não apenas lazer, mas também segurança e conforto ambiental. A presença de vegetação diversificada e áreas sombreadas é essencial para criar ambientes agradáveis que incentivam o uso contínuo por parte da população. 8 [ ] 9 [ ]\nA revitalização urbana com foco em parques pode transformar áreas antes negligenciadas em locais atrativos para a sociedade. Isso não só melhora a estética urbana, mas também resgata o sentimento de pertencimento dos cidadãos aos seus espaços públicos, promovendo um ambiente mais inclusivo e saudável. 9 [ ] 10 [ ] 9 [ ] 11 [ ]\nO de parques públicos tem como objetivo contrastar com o ambiente urbano, proporcionando espaços tranquilos para e relaxamento. Mais do que um apelo estético, o design desempenha uma função prática essencial. design lazer 12 [ ]\nA é fundamental para garantir o uso contínuo dos parques. Um ambiente seguro atrai mais visitantes, proporcionando uma sensação de conforto. Estudos realizados em cidades dos EUA, como Albuquerque, Chapel Hill/Durham, Columbus e Filadélfia, com 3.815 participantes que viviam a menos de 800 metros de um parque, indicaram que, além da segurança, a qualidade das instalações aumenta o uso do parque, muitas vezes mais do que a simples percepção de segurança. Aspectos como boa iluminação, acessível, , facilidade de manutenção e orientação são cruciais para a segurança do espaço. segurança [ carecede fontes ] ? layout visibilidade 12 [ ]\nO deve ser intuitivo, permitindo que os visitantes compreendam facilmente a disposição do parque. Elementos como sinalizações, entradas e saídas claras, pontos de referência e caminhos bem conectados garantem uma experiência mais fluida e agradável. design 12 [ ]\nA variedade de é essencial para estimular a , o bem-estar e o interesse. Isso inclui , jogos, atividades comunitárias e de integração social e ambiental. Os parques podem ser divididos em: atividades socialização playgrounds 12 [ ]\nRecreação Ativa: Envolve atividades intensivas, como de equipe, playgrounds, e pistas de skate, com maior necessidade de manutenção e gestão. esportes piscinas\nRecreação Passiva: Focada em preservar o natural, com áreas de rústicas, trilhas e bancos, requerendo menos desenvolvimento. habitat piquenique\nPlaygrounds são projetados para serem inclusivos e , utilizando materiais naturais e variados que estimulam as crianças. contemporâneos multissensoriais 13 [ ] 12 [ ]\nA integração de pessoas com e ou é crucial. Segundo o , 12,5 milhões de brasi"
+          },
+          {
+            "titulo": "Desenvolvimento econômico",
+            "texto": "Os parques, por serem extensas, geram diversos gastos relacionados à criação e à manutenção de espaços de lazer. As melhorias na infraestrutura dessas áreas resultam em impactos econômicos significativos, decorrentes de despesas operacionais e investimentos de capital. Diante disso, é necessário adotar medidas que busquem equilibrar os custos com a renda gerada. áreas territoriais\nUma dessas medidas envolve ajustes na remuneração real paga aos funcionários do parque. Nos , por exemplo, esses modelos são amplamente utilizados para avaliar impactos econômicos, embora nem sempre apresentem resultados comparáveis a dados anteriores. Observou-se que os principais impactos nos parques estão relacionados à recreação. Esse setor, por sua vez, contribuiu com cerca de US$ 166 bilhões em atividades econômicas, evidenciando sua relevância para o desenvolvimento econômico. Estados Unidos\nNo Brasil, estudos do (BCG) apontam um grande potencial econômico relacionado aos parques nacionais. Segundo o BCG, esses espaços podem gerar benefícios consideráveis para a economia brasileira. Estima-se que o Brasil poderia atrair cerca de 56 milhões de visitantes anuais, resultando em uma receita de R$ 44 bilhões, o que aumentaria significativamente a participação dos parques na economia nacional. Boston Consulting Group\nEsse potencial de geração de renda permite implementar uma remuneração mais eficaz para os funcionários, ao mesmo tempo em que fomenta o desenvolvimento da dos , promovendo benefícios econômicos e sociais de longo prazo. infraestrutura parques nacionais"
+          },
+          {
+            "titulo": "Desenvolvimento de atividades físicas e culturais",
+            "texto": "Os parques são espaços versáteis que oferecem diversas atividades para pessoas de todas as idades. Essas atividades não apenas promovem a saúde e o bem-estar, mas também incentivam a socialização e a conexão com a natureza. Sua infraestrutura mostra-se extremamente importante para a realização, visto que lugares bem cuidados incentivam a visitação e, consequentemente, a realização dessas atividades. Além disso, a vista natural é atrativa, então sua preservação também está relacionada ao desenvolvimento de atividades. 9 [ ] 20 [ ]\nsão um ótimo exemplo disso. Por promoverem um contraste entre ambientes naturais e urbanos, extremamente modificados, eles são muito procurados como uma fuga da rotina e proporcionam um ótimo ambiente para socialização e desenvolvimento de atividades físicas, como caminhadas, passeios de bicicleta, exercícios, entre outros. Eles também são o cenário perfeito para atividades culturais, como festivais, apresentações de música, teatro ao ar livre e oficinas artísticas, promovendo assim uma mistura entre a socialização e o enriquecimento cultural. Parques em ambientes urbanos 10 [ ] 20 [ ] 20 [ ]\nIsso também é possível em , onde seu uso é permitido para propósitos recreativos, educacionais e científicos. Por se tratarem de , as atividades são monitoradas para permitir sua realização sem causar o menor dano possível ao ambiente, o que incentiva os visitantes a participar da conservação da ali presente e torna a uma das principais atividades realizadas no parque, que é realizada a partir de visitas guiadas, mas também ocorre de forma orgânica, devido à reaproximação do ser humano com a natureza. parques nacionais unidades de conservação biodiversidade educação ambiental 21 [ ]\nAs atividades recreativas também tem um papel nisso e incluem atividades como trilhas, , canoagem, passeios em embarcações náuticas, passeios de bicicletas, , , circuitos de arvorismo, , , , entre outros, além do , que promove a educação ecológica e cria uma forma de arrecadação financeira para os parques sem exigir um grande investimento e gera renda para comércios ao redor do parque. trekking rafting boia-cross rapel bungee jumping camping turismo ecológico 21 [ ]\nsão áreas com o intuito de serem recreacionais, normalmente comprados ou são mantidos pelo governo. Utilizam um tipo de paisagem que as pessoas acham relaxante. A grama é deixada curta para evitar pragas de insetos e permitir piqueniques. As árvores são escolhidas pelas suas belezas. Parques urbanos 22 [ ]\nOs parques são definidos por darem lazer as massas urbanas e são estruturados por vegetação, mas ainda há uma discordância na definição de parques. no geral são estruturados em torno de oito funções, sendo elas (ligados a formais e informais); papel estruturante da forma urbana; função estética; função de contemplação; planejador de opiniões; função social e cultural; uso educativo; função orgânica ou ecológica. Além disso os parques podem ter efeitos positivos à saúde, como reduzir a poluição do ar, sequestrar carbono, e aumentar a incidência solar de quem vai ao parque. 22 [ ] Parques urbanos recreação atividades esportivas 22 [ ] 23 [ ]\nA dos usuários, pode ocorrer tanto de forma passiva quanto ativa. A ativa exige algo que têm uma característica urbana e precisa de um desenvolvimento intensivo, cai nessas características os , quadras de jogos esportivos, áreas de skate, entre outros, eles têm um custo grande para serem mantidos. A recreação passiva utiliza do espaço aberto do parque para o lazer das pessoas no parque, além disso, essa técnica permite preservar o do parque, algumas atividades desse tipo seriam atividades físicas como correr pelo parque, também pode ser outras atividades menos ativas, como fotografar, fazer piqeniques, observar a natureza e mais. recreação 24 [ ] recreação parquinhos 24 [ ] ambiente natural 24 [ ]\nDependendo do seu tamanho, orçamento e da estrutura do terreno, o parque pode ter diferentes tipos de estruturas e áreas de , como , , pista"
+          },
+          {
+            "titulo": "Parques militares no Brasil",
+            "texto": "No Brasil, não existem parques militares devido à preferência pela preservação de fortes históricos, como o . Além disso, o país não enfrentou conflitos tão devastadores quanto em outras partes do mundo. Outros fatores incluem: Forte de Copacabana\nUrbanização e uso intensivo do solo, dificultando a preservação de áreas.\nPrioridade na criação de museus e memoriais em vez de campos de batalha.\nComemorações simbólicas focadas em exposições. 35 [ ]"
+          },
+          {
+            "titulo": "Atrações em parques militares",
+            "texto": "Estratégias e Equipamentos: Reencenações históricas, demonstrações de armas, navios e tanques.\nExposições Multimídia: Imagens, vídeos e textos sobre os eventos.\nObjetos Arqueológicos: Artefatos como balas de canhão e baionetas ajudam a reconstruir a história e são exibidos em museus dos próprios parques. 36 [ ]\nParques governamentais são , terrestres ou aquáticas, criadas para proteger e elementos naturais de grande relevância. Seu objetivo é preservar paisagens, fauna, flora e locais de interesse científico, educativo, recreativo ou turístico. Além de serem espaços de conservação, permitem atividades de pesquisa e lazer. Esses parques podem ser estabelecidos em âmbito federal, estadual ou municipal, utilizando terras públicas ou desapropriadas. Dependendo da esfera de criação, são denominados , ou Municipais. áreas de conservação ecossistemas Parques Nacionais Parques Estaduais Parques Naturais 1 [ ]\nOs parques governamentais desempenham um papel crucial na proteção da , e , contribuindo para a conservação de espécies ameaçadas e o . Além disso, incentivam o , gerando empregos e promovendo o desenvolvimento econômico das comunidades locais. fauna flora ecossistemas equilíbrio ambiental turismo sustentável 1 [ ]\n, o parque nacional mais antigo do , localizado entre os estados do e . Parque Nacional do Itatiaia Brasil Rio de Janeiro Minas Gerais\nsão e geridas pelo , com o propósito de preservar o , e para as futuras gerações. Esses parques simbolizam a identidade e a riqueza natural de uma nação e incentivam a pesquisa científica, a e o . Parques Nacionais áreas naturais protegidas Estado patrimônio ambiental cultural histórico educação ambiental turismo sustentável 37 [ ]\n, no estado da . Parque Nacional da Chapada Diamantina Bahia\nSegundo a (União Internacional para a Conservação da Natureza), pertencem à Categoria II de . Podem ser terrestres ou aquáticas e são fundamentais para garantir a preservação da natureza e o equilíbrio dos . O objetivo é proteger esses espaços para as próximas gerações, limitando atividades que possam causar danos. Nesses parques, os visitantes podem realizar atividades educativas, científicas e recreativas de maneira responsável, respeitando a natureza e a cultura local. IUCN Parques Nacionais áreas protegidas ecossistemas 37 [ ]\n, no estado de . Parque Estadual Campina do Encantado São Paulo\nsão pelo , destinadas à preservação do meio ambiente, da , da e dos . Esses parques também valorizam a cultura local e oferecem oportunidades para lazer e aprendizado sobre a natureza. Parques Estaduais áreas protegidas governo estadual fauna flora recursos naturais 38 [ ]\nEsses espaços abrangem diversos ambientes naturais, como , , , e , permitindo atividades ao ar livre, como , passeios de barco, observação de aves e . Além disso, muitos desses parques abrigam , áreas históricas e centros de pesquisa científica. florestas rios lagos montanhas praias trilhas camping sítios arqueológicos 38 [ ]"
+          },
+          {
+            "titulo": "Parques naturais municipais",
+            "texto": "Parque Natural Municipal Itaim, no extremo sul do . município de São Paulo\nOs PNMs (Parques Naturais Municipais) são criadas pelos , com o objetivo de preservar e recuperar importantes, além de valorizar suas paisagens naturais. Nesses parques, o uso dos é proibido, mas são permitidas pesquisas científicas, , atividades de lazer em contato com a natureza e . São compostas apenas por áreas públicas e buscam manter e restaurar as características originais dos . áreas de proteção municípios ecossistemas recursos naturais educação ambiental turismo ecológico ecossistemas 39 [ ] 40 [ ]\n1 2 3 . . «Parques – Conceito» Fundação Florestal . Consultado em 23 de novembro de 2024 Cópia arquivada em 30 de janeiro de 2026\n↑ IBGE. 2012. . 2a ed. Rio de Janeiro: IBGE. Disponível em: <>. Manual Técnico da Vegetação Brasileira http://www.ibge.gov.br/home/geociencias/recursosnaturais/vegetacao/manual_vegetacao.shtm\n↑ . . 5 de setembro de 2020. «Como surgiram os primeiros parques urbanos?» T&L . Consultado em 29 de novembro de 2024 Cópia arquivada em 3 de abril de 2025\n1 2 . . «ICMBio - Parque Nacional de Itatiaia - Quem Somos» www.icmbio.gov.br . Consultado em 30 de novembro de 2024 Cópia arquivada em 11 de fevereiro de 2025\n↑ governo, ministério do meio ambiente. «Pesquisa revela percepções da população sobre os parques brasileiros» . Consultado em 16 de outubro de 2024\n↑ Carasek, Mirian; Mascaró, Juan José (23 de agosto de 2019). . (48). . : «Avaliação da ambiência urbana: Estudo de caso em espaço urbano em Passo Fundo, RS» Revista Nacional de Gerenciamento de Cidades ISSN 2318-8472 doi 10.17271/2318847274820192103 . Consultado em 29 de novembro de 2024\n1 2 . . 3 de agosto de 2020. «A vida urbana nos espaços públicos e áreas verdes pós-pandemia» Jornal da USP . Consultado em 29 de novembro de 2024 Cópia arquivada em 4 de dezembro de 2024\n1 2 3 Politi Corsi, Henrique; Helena Sguizzardi Abascal, Eunice (21 de maio de 2024). . (2): 132–147. . : «PARQUES URBANOS e INDICADORES DE SUSTENTABILIDADE» Revista Projetar - Projeto e Percepção do Ambiente ISSN 2448-296X doi 10.21680/2448-296x.2024v9n2id33455 . Consultado em 29 de novembro de 2024\n1 2 3 4 Szeremeta, Bani; Zannin, Paulo Henrique Trombetta (6 de dezembro de 2013). . . 177páginas. . : «A IMPORTÂNCIA DOS PARQUES URBANOS E ÁREAS VERDES NA PROMOÇÃO DA QUALIDADE DE VIDA EM CIDADES» Raega - O Espaço Geográfico em Análise ISSN 2177-2738 doi 10.5380/raega.v29i0.30747 . Consultado em 29 de novembro de 2024\n1 2 Szeremeta, Bani; Zannin, Paulo Henrique Trombetta (6 de dezembro de 2013). . . 177páginas. . : «A IMPORTÂNCIA DOS PARQUES URBANOS E ÁREAS VERDES NA PROMOÇÃO DA QUALIDADE DE VIDA EM CIDADES» Raega - O Espaço Geográfico em Análise ISSN 2177-2738 doi 10.5380/raega.v29i0.30747 . Consultado em 29 de novembro de 2024\n↑ Castro, Alexandra (2002). . (5). . : «Espaços Públicos, Coexistência Social e Civilidade: Contributos para uma Reflexão sobre os Espaços Públicos Urbanos» CIDADES, Comunidades e Territórios ISSN 2182-3030 doi 10.7749/citiescommunitiesterritories.dez2002.005.art05 . Consultado em 29 de novembro de 2024\n1 2 3 4 5 6 . . 4 de julho de 2024. «Design em parques públicos? Sim, existe e é importante. Saiba mais! - Inovação - Sebrae» inovacaosebraeminas.com.br . Consultado em 30 de novembro de 2024 Cópia arquivada em 24 de janeiro de 2026 sem em Authors list () nome1= | sobrenome1= | ajuda\n↑ . . 3 de novembro de 2022. «Conquistando espaços públicos: a história dos parquinhos e playgrounds» ArchDaily Brasil . Consultado em 30 de novembro de 2024 Cópia arquivada em 3 de dezembro de 2024\n↑ Cadaris, T. I. (25 de maio de 2022). . . «Qual é a importância da acessibilidade?» Pimenta Associados . Consultado em 30 de novembro de 2024 Cópia arquivada em 15 de outubro de 2025\n↑ Nowill, Dorina (31 de março de 2020). . «Conheça 7 tipos de acessibilidade para tornar nossa sociedade mais inclusiva» Fundação Dorina Nowill para Cegos . Consultado em 30 de novembro de 2024\n1 2 . . «Conheça parques públicos com de"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal",
+            "texto": "Página principal",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Conte%C3%BAdo_destacado",
+            "texto": "Conteúdo destacado",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Eventos_atuais",
+            "texto": "Eventos atuais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Esplanada",
+            "texto": "Esplanada",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Aleat%C3%B3ria",
+            "texto": "Página aleatória",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:%C3%8Dndice",
+            "texto": "Portais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_especiais",
+            "texto": "Páginas especiais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Informe_um_erro",
+            "texto": "Informar um erro",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Boas-vindas",
+            "texto": "Boas-vindas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_principal",
+            "texto": "Ajuda",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_de_testes",
+            "texto": "Páginas de testes públicas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Portal_comunit%C3%A1rio",
+            "texto": "Portal comunitário",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Mudan%C3%A7as_recentes",
+            "texto": "Mudanças recentes",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Manuten%C3%A7%C3%A3o",
+            "texto": "Manutenção",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:Guia_de_edi%C3%A7%C3%A3o/Como_come%C3%A7ar_uma_p%C3%A1gina",
+            "texto": "Criar página",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_novas",
+            "texto": "Páginas novas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Contato",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Pesquisar",
+            "texto": "Busca",
+            "interno": true
+          },
+          {
+            "url": "https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=pt.wikipedia.org&amp;uselang=pt",
+            "texto": "Doar",
+            "interno": false
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Criar_conta&amp;returnto=Parque",
+            "texto": "Criar conta",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Entrar&amp;returnto=Parque",
+            "texto": "Iniciar sessão",
+            "interno": true
+          },
+          {
+            "url": "https://an.wikipedia.org/wiki/Parque",
+            "texto": "Aragonés",
+            "interno": false
+          },
+          {
+            "url": "https://ar.wikipedia.org/wiki/%D9%85%D8%AA%D9%86%D8%B2%D9%87",
+            "texto": "العربية",
+            "interno": false
+          },
+          {
+            "url": "https://ast.wikipedia.org/wiki/Parque",
+            "texto": "Asturianu",
+            "interno": false
+          },
+          {
+            "url": "https://az.wikipedia.org/wiki/Park",
+            "texto": "Azərbaycanca",
+            "interno": false
+          },
+          {
+            "url": "https://azb.wikipedia.org/wiki/%D9%BE%D8%A7%D8%B1%DA%A9",
+            "texto": "تۆرکجه",
+            "interno": false
+          },
+          {
+            "url": "https://be-tarask.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%BA",
+            "texto": "Беларуская (тарашкевіца)",
+            "interno": false
+          },
+          {
+            "url": "https://be.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%BA",
+            "texto": "Беларуская",
+            "interno": false
+          },
+          {
+            "url": "https://bg.wikipedia.org/wiki/%D0%9F%D0%B0%D1%80%D0%BA",
+            "texto": "Български",
+            "interno": false
+          },
+          {
+            "url": "https://bn.wikipedia.org/wiki/%E0%A6%89%E0%A6%A6%E0%A7%8D%E0%A6%AF%E0%A6%BE%E0%A6%A8",
+            "texto": "বাংলা",
+            "interno": false
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Outros projetos Wikimedia também contêm material sobre este tema:"
+            ],
+            [
+              "",
+              "Definições no Wikcionário"
+            ],
+            [
+              "",
+              "Imagens e media no Commons"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/b/b1/Veale_Gardens.JPG?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Veale_Gardens.JPG/1280px-Veale_Gardens.JPG?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Disambig_grey.svg/20px-Disambig_grey.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Veale_Gardens.JPG/250px-Veale_Gardens.JPG?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/98/Slovakia_Bratislava_947.jpg/250px-Slovakia_Bratislava_947.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/Sprankelplek_Jos_Spanbroek_Park_de_Gagel_Utrecht.JPG/250px-Sprankelplek_Jos_Spanbroek_Park_de_Gagel_Utrecht.JPG?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-8ccc5e3f0318",
+            "type": "image",
+            "title": "espaço aberto para recreação ou conservação",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Veale_Gardens.JPG/1280px-Veale_Gardens.JPG?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b1/Veale_Gardens.JPG/1280px-Veale_Gardens.JPG?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "source_title": "espaço aberto para recreação ou conservação",
+            "source_url": "https://pt.wikipedia.org/wiki/Parque",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "espaço aberto para recreação ou conservação",
+            "source_url": "https://pt.wikipedia.org/wiki/Parque",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7eb2487bedf5",
+            "type": "image",
+            "title": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "espaço aberto para recreação ou conservação",
+            "source_url": "https://pt.wikipedia.org/wiki/Parque",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a5238b77d69c",
+            "type": "image",
+            "title": "Wikcionário",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Wiktionary-logo-pt.png/40px-Wiktionary-logo-pt.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2b/Wiktionary-logo-pt.png/40px-Wiktionary-logo-pt.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "espaço aberto para recreação ou conservação",
+            "source_url": "https://pt.wikipedia.org/wiki/Parque",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikcionário",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.instagram.com/ranchopark_/",
+      "result": {
+        "titulo": "🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_) • Instagram photos and videos",
+        "texto": "Log In Sign Up",
+        "final": "https://www.instagram.com/ranchopark_/",
+        "trecho_usado": "Log In Sign Up",
+        "metadados": {
+          "titulo": "🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_) • Instagram photos and videos",
+          "descricao": "62K Followers, 4,189 Following, 628 Posts - 🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_) on Instagram: \"⏰Sáb, dom e feriado das 11h às 18h 📍Domingos Manoel Feliciano, Sambaqui ➖FAZENDINHA, PESCARIA, PASSEIO A CAVALO ➖RESTAURANTE & CAFÉ ⬇️Compre aqui\"",
+          "canonica": "https://www.instagram.com/ranchopark_/",
+          "og": {
+            "og:type": "profile",
+            "og:image": "https://scontent-gru2-2.cdninstagram.com/v/t51.82787-19/650324626_18031683794788535_3036320153576983963_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=105&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=ltjMQgwNgOQQ7kNvwGeC1sI&_nc_oc=AdrSRphZMvSTzJcF1F3wXyW94Hx1qVIU0w1w-DqN-7m8Kn9sHQvisGwk6VMzSlcw_7Q&_nc_zt=24&_nc_ht=scontent-gru2-2.cdninstagram.com&_nc_gid=oyLKOfNg783kzOoLYRGe1w&_nc_ss=7e60f&oh=00_AQP2XJdFWx8_xwiaegwZwjhvOlcp-0v7ytURBLxppf7XWw&oe=6AE4102D",
+            "og:title": "🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_) • Instagram photos and videos",
+            "og:url": "https://www.instagram.com/ranchopark_/",
+            "og:description": "62K Followers, 4,189 Following, 628 Posts - See Instagram photos and videos from 🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_)"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "profile",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [
+          {
+            "url": "https://www.instagram.com/",
+            "texto": "Instagram",
+            "interno": true
+          },
+          {
+            "url": "https://www.instagram.com/accounts/login/?next=%2Franchopark_%2F&amp;source=desktop_nav",
+            "texto": "Log In",
+            "interno": true
+          },
+          {
+            "url": "https://www.instagram.com/accounts/emailsignup/",
+            "texto": "Sign Up",
+            "interno": true
+          },
+          {
+            "url": "https://about.meta.com/",
+            "texto": "Meta",
+            "interno": false
+          },
+          {
+            "url": "https://about.instagram.com/",
+            "texto": "About",
+            "interno": false
+          },
+          {
+            "url": "https://about.instagram.com/blog/",
+            "texto": "Blog",
+            "interno": false
+          },
+          {
+            "url": "https://about.instagram.com/about-us/careers",
+            "texto": "Jobs",
+            "interno": false
+          },
+          {
+            "url": "https://help.instagram.com/",
+            "texto": "Help",
+            "interno": false
+          },
+          {
+            "url": "https://developers.facebook.com/docs/instagram",
+            "texto": "API",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/legal/privacy/",
+            "texto": "Privacy",
+            "interno": true
+          },
+          {
+            "url": "https://www.instagram.com/legal/terms/",
+            "texto": "Terms",
+            "interno": true
+          },
+          {
+            "url": "https://www.instagram.com/explore/locations/",
+            "texto": "Locations",
+            "interno": true
+          },
+          {
+            "url": "https://www.instagram.com/popular/",
+            "texto": "Popular",
+            "interno": true
+          },
+          {
+            "url": "https://www.instagram.com/web/lite/",
+            "texto": "Instagram Lite",
+            "interno": true
+          },
+          {
+            "url": "https://www.meta.ai/?utm_source=foa_web_footer",
+            "texto": "Meta AI",
+            "interno": false
+          },
+          {
+            "url": "https://muse.ai/",
+            "texto": "Muse",
+            "interno": false
+          },
+          {
+            "url": "https://www.threads.com/",
+            "texto": "Threads",
+            "interno": false
+          },
+          {
+            "url": "https://www.facebook.com/help/instagram/261704639352628",
+            "texto": "Contact Uploading & Non-Users",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/accounts/meta_verified/?entrypoint=web_footer",
+            "texto": "Meta Verified",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://scontent-gru2-2.cdninstagram.com/v/t51.82787-19/650324626_18031683794788535_3036320153576983963_n.jpg?stp=dst-jpg_s100x100_tt6&amp;_nc_cat=105&amp;ccb=7-5&amp;_nc_sid=bf7eb4&amp;efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&amp;_nc_ohc=ltjMQgwNgOQQ7kNvwGeC1sI&amp;_nc_oc=AdrSRphZMvSTzJcF1F3wXyW94Hx1qVIU0w1w-DqN-7m8Kn9sHQvisGwk6VMzSlcw_7Q&amp;_nc_zt=24&amp;_nc_ht=scontent-gru2-2.cdninstagram.com&amp;_nc_gid=oyLKOfNg783kzOoLYRGe1w&amp;_nc_ss=7e60f&amp;oh=00_AQP2XJdFWx8_xwia"
+        ],
+        "midia": [
+          {
+            "id": "med-2722c0a6bf46",
+            "type": "image",
+            "title": "62K Followers, 4,189 Following, 628 Posts - See Instagram photos and videos from 🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_)",
+            "url": "https://scontent-gru2-2.cdninstagram.com/v/t51.82787-19/650324626_18031683794788535_3036320153576983963_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=105&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=ltjMQgwNgOQQ7kNvwGeC1sI&_nc_oc=AdrSRphZMvSTzJcF1F3wXyW94Hx1qVIU0w1w-DqN-7m8Kn9sHQvisGwk6VMzSlcw_7Q&_nc_zt=24&_nc_ht=scontent-gru2-2.cdninstagram.com&_nc_gid=oyLKOfNg783kzOoLYRGe1w&_nc_ss=7e60f&oh=00_AQP2XJdFWx8_xwiaegwZwjhvOlcp-0v7ytURBLxppf7XWw&oe=6AE4102D",
+            "final_url": "https://scontent-gru2-2.cdninstagram.com/v/t51.82787-19/650324626_18031683794788535_3036320153576983963_n.jpg?stp=dst-jpg_s100x100_tt6&_nc_cat=105&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy4xMDgwLkMzIn0%3D&_nc_ohc=ltjMQgwNgOQQ7kNvwGeC1sI&_nc_oc=AdrSRphZMvSTzJcF1F3wXyW94Hx1qVIU0w1w-DqN-7m8Kn9sHQvisGwk6VMzSlcw_7Q&_nc_zt=24&_nc_ht=scontent-gru2-2.cdninstagram.com&_nc_gid=oyLKOfNg783kzOoLYRGe1w&_nc_ss=7e60f&oh=00_AQP2XJdFWx8_xwiaegwZwjhvOlcp-0v7ytURBLxppf7XWw&oe=6AE4102D",
+            "source_title": "🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_) • Instagram photos and videos",
+            "source_url": "https://www.instagram.com/ranchopark_/",
+            "publisher": "scontent-gru2-2.cdninstagram.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "62K Followers, 4,189 Following, 628 Posts - See Instagram photos and videos from 🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "6e58fdc48537d8d15a78",
+            "url": "https://www.cascaneia.com.br/",
+            "title": "Parque Aquático Cascanéia",
+            "origin": "bing",
+            "query": "Parque Nacional de Brasília horários oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Bem-vindo ao melhor parque aquático do sul do Brasil! Acesse e conheça nossas atrações e a nossa estrutura com mais de 100.000 m² de pura diversão!"
+          },
+          {
+            "id": "3e9eb33ea0760dfaa1ff",
+            "url": "https://www.tripadvisor.com.br/Attractions-g1192094-Activities-c57-Imbituba_State_of_Santa_Catarina.html",
+            "title": "OS 15 MELHORES parques em Imbituba (2026) - Tripadvisor",
+            "origin": "bing",
+            "query": "Parque Nacional de Brasília horários oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Pequena lagoa localizada no meio da praia do Rosa. Local bom para crianças."
+          },
+          {
+            "id": "09cedb52d12d3ffdc5c2",
+            "url": "https://pt.m.wikipedia.org/wiki/Parque",
+            "title": "Parque – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "Parque Nacional de Brasília horários oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Parque (do francês parc) é uma área territorial delimitada caracterizada por constituir unidades de conservação."
+          },
+          {
+            "id": "064bedb0fcf4f9680522",
+            "url": "https://lagoapark.com.br/",
+            "title": "Loteamento Lagoa Park – Imbituba",
+            "origin": "bing",
+            "query": "Parque Nacional de Brasília horários oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "São 180 lotes distribuídos em 110,7 mil m², oferecendo o equilíbrio perfeito entre lazer, conforto e tranquilidade. Aproveite uma infraestrutura completa com tr"
+          },
+          {
+            "id": "18c86392d9570c17015e",
+            "url": "https://www.instagram.com/ranchopark_/",
+            "title": "FAZENDINHA RESTAURANTE CAFÉ (@ranchopark ... - Instagram",
+            "origin": "bing",
+            "query": "Parque Nacional de Brasília horários oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "62K Followers, 4,192 Following, 625 Posts - 🇧🇷 🇺🇸 FAZENDINHA RESTAURANTE CAFÉ (@ranchopark_) on Instagram: \"⏰Sáb, dom e feriado das 11h às 18h 📍Domingos Manoel "
+          },
+          {
+            "id": "cfa397fdc1672f5c64f1",
+            "url": "https://www.tripadvisor.com.br/Attractions-g303570-Activities-c52-State_of_Santa_Catarina.html",
+            "title": "OS 15 MELHORES parques de diversões no Santa Catarina",
+            "origin": "bing",
+            "query": "Parque Nacional de Brasília horários oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Muito bom o parque e os shows nota 10, escolha dois dias de visita em um curta todos os brinquedos e no outro os shows... 2. Parque Unipraias Camboriú. O passei"
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (Parque Nacional de Brasília horários ofi)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Parque Nacional de Brasília horários ofi)",
+        "ddg: bloqueado (Parque Nacional de Brasília horários ofi)",
+        "marginalia: sem resultados (Parque Nacional de Brasília horários ofi)",
+        "— recuperação por lacuna —",
+        "bing: 6 resultados (parque nacional brasília horários)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (parque nacional brasília horários)",
+        "marginalia: sem resultados (parque nacional brasília horários)",
+        "wikipedia: sem resultados (parque nacional brasília horários)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Parque Nacional de Brasília horários oficiais",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": false,
+        "requirements": [],
+        "passages": [],
+        "complete": false,
+        "scope": "no explicit supported facet parsed; not proof of completeness"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://pt.m.wikipedia.org/wiki/Parque",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S2",
+          "url": "https://www.cascaneia.com.br/",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S3",
+          "url": "https://lagoapark.com.br/",
+          "answerability": null,
+          "answer_passages": null
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Parque Nacional de Brasília horários oficiais",
+      "adapter_query": "Parque Nacional de Brasília horários oficiais",
+      "provider": "bing",
+      "at": "2026-10-25T18:10:51.459119+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Parque Aquático Cascanéia",
+          "url": "https://www.cascaneia.com.br/"
+        },
+        {
+          "title": "OS 15 MELHORES parques em Imbituba (2026) - Tripadvisor",
+          "url": "https://www.tripadvisor.com.br/Attractions-g1192094-Activities-c57-Imbituba_State_of_Santa_Catarina.html"
+        },
+        {
+          "title": "Parque – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.m.wikipedia.org/wiki/Parque"
+        },
+        {
+          "title": "Loteamento Lagoa Park – Imbituba",
+          "url": "https://lagoapark.com.br/"
+        },
+        {
+          "title": "FAZENDINHA RESTAURANTE CAFÉ (@ranchopark ... - Instagram",
+          "url": "https://www.instagram.com/ranchopark_/"
+        },
+        {
+          "title": "OS 15 MELHORES parques de diversões no Santa Catarina",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303570-Activities-c52-State_of_Santa_Catarina.html"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "Parque Nacional de Brasília horários oficiais",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 443.37,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Parque Nacional de Brasília horários oficiais",
+      "adapter_query": "Parque Nacional de Brasília horários oficiais",
+      "provider": "ddg",
+      "at": "2026-10-25T18:10:51.918466+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "bloqueado",
+      "result_count": 0,
+      "classification": "PROVIDER_BLOCKED",
+      "requests": [],
+      "latency_ms": 302.74,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Parque Nacional de Brasília horários oficiais",
+      "adapter_query": "Parque Nacional de Brasília horários oficiais",
+      "provider": "marginalia",
+      "at": "2026-10-25T18:10:52.221355+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "Parque Nacional de Brasília horários oficiais"
+          },
+          "http_status": null,
+          "final_url": "https://old-search.marginalia.nu/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 815.38,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Parque Nacional de Brasília horários oficiais",
+      "adapter_query": "parque nacional brasília horários",
+      "provider": "bing",
+      "at": "2026-10-25T18:10:53.068520+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Parque Aquático Cascanéia",
+          "url": "https://www.cascaneia.com.br/"
+        },
+        {
+          "title": "OS 15 MELHORES parques em Imbituba (2026) - Tripadvisor",
+          "url": "https://www.tripadvisor.com.br/Attractions-g1192094-Activities-c57-Imbituba_State_of_Santa_Catarina.html"
+        },
+        {
+          "title": "Parque – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.m.wikipedia.org/wiki/Parque"
+        },
+        {
+          "title": "Loteamento Lagoa Park – Imbituba",
+          "url": "https://lagoapark.com.br/"
+        },
+        {
+          "title": "FAZENDINHA RESTAURANTE CAFÉ (@ranchopark ... - Instagram",
+          "url": "https://www.instagram.com/ranchopark_/"
+        },
+        {
+          "title": "OS 15 MELHORES parques de diversões no Santa Catarina",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303570-Activities-c52-State_of_Santa_Catarina.html"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "parque nacional brasília horários",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 372.71,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Parque Nacional de Brasília horários oficiais",
+      "adapter_query": "parque nacional brasília horários",
+      "provider": "marginalia",
+      "at": "2026-10-25T18:10:53.450427+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "parque nacional brasília horários"
+          },
+          "http_status": null,
+          "final_url": "https://old-search.marginalia.nu/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 827.98,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Parque Nacional de Brasília horários oficiais",
+      "adapter_query": "parque nacional brasília horários",
+      "provider": "wikipedia",
+      "at": "2026-10-25T18:10:54.278856+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [],
+      "latency_ms": 551.64,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "beab3573022e0e52511357a0636e80f2e14478ed",
+  "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1"
+}

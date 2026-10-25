@@ -1,0 +1,3635 @@
+{
+  "id": "ei-01",
+  "category": "universal",
+  "query": "Quem fundou a Embraer, em que ano e quais produtos ela fabrica?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.875,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Embraer",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Embraer",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "Embraer",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "quem fundou embraer ano produtos ela fabrica",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "quem fundou embraer ano produtos ela fabrica",
+      "candidates": 1
+    },
+    {
+      "provider": "wikipedia",
+      "query": "quem fundou embraer ano produtos ela fabrica",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Embraer&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Embraer&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4693
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Embraer",
+      "final": "https://html.duckduckgo.com/html/?q=Embraer",
+      "chars": 14242
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Embraer",
+      "final": "https://old-search.marginalia.nu/search?query=Embraer",
+      "chars": 989
+    },
+    {
+      "url": "https://www.bing.com/search?q=quem+fundou+embraer+ano+produtos+ela+fabrica&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=quem+fundou+embraer+ano+produtos+ela+fabrica&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4813
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=quem+fundou+embraer+ano+produtos+ela+fabrica",
+      "final": "https://old-search.marginalia.nu/search?query=quem+fundou+embraer+ano+produtos+ela+fabrica",
+      "chars": 16320
+    },
+    {
+      "url": "https://embraer.com/pt/",
+      "final": "https://embraer.com/pt/",
+      "chars": 161724
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Embraer",
+      "final": "https://en.wikipedia.org/wiki/Embraer",
+      "chars": 536253
+    },
+    {
+      "url": "https://aeroin.net/embraer/",
+      "error": "redirect"
+    },
+    {
+      "url": "https://embraer.com/ede/pt/",
+      "final": "https://embraer.com/ede/pt/",
+      "chars": 152334
+    },
+    {
+      "url": "https://aguasazuis.com.br",
+      "final": "https://www.aguasazuis.com.br:443/",
+      "chars": 318723
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+      "final": "https://en.wikipedia.org/wiki/Talk:Embraer",
+      "chars": 139248
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Quem fundou a Embraer, em que ano e quais produtos ela fabrica?",
+    "domain": "general",
+    "original_request": "Quem fundou a Embraer, em que ano e quais produtos ela fabrica?",
+    "resolved_request": "Quem fundou a Embraer, em que ano e quais produtos ela fabrica?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T15:46:12.961720+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "c787058192db503f3f71",
+        "url": "https://embraer.com/pt/",
+        "title": "Bem-vindo a Embraer",
+        "origin": "bing",
+        "query": "Embraer",
+        "date": "dom., 25 out. 2026 11:50:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Com mais de cinco décadas de expertise no desenvolvimento, fabricação, certificação e suporte de aeronaves de alto desempenho nos segmentos de aviação comercial",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 593,
+        "final_url": "https://embraer.com/pt/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "15eb1f17f06999cc538c",
+        "url": "https://embraer.com/en/",
+        "title": "Welcome to Embraer",
+        "origin": "bing",
+        "query": "Embraer",
+        "date": "sáb., 24 out. 2026 19:43:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "With more than five decades of expertise in designing, manufacturing, certifying and supporting high performance aircraft in commercial aviation, business aviat",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "e6ff1ac06020967c7fd9",
+        "url": "https://en.wikipedia.org/wiki/Embraer",
+        "title": "Embraer - Wikipedia",
+        "origin": "bing",
+        "query": "Embraer",
+        "date": "2003-02-11T22:32:41Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "(2024-05-01). . . . \"Exclusive | Brazil's Embraer Plots a New 737-Sized Jet to Rival Boeing\" Wall Street Journal ISSN 0099-9660 . Retrieved 2026-08-05 ↑ . . May",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://en.wikipedia.org/wiki/Embraer",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "a0702c212bcb8f57ecc2",
+        "url": "https://aeroin.net/embraer/",
+        "title": "Notícias da Embraer - AEROIN",
+        "origin": "bing",
+        "query": "Embraer",
+        "date": "qua., 21 out. 2026 18:00:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Informações da evolução da Embraer, com novos lançamentos, inovações, ESG, Sustentabilidade. Cobertura sobre os principais desenvolvimentos globais.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "redirect",
+        "losses": [
+          "FETCH_FAILED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "a257f341e1a0e60888cf",
+        "url": "https://pt.wikipedia.org/wiki/Embraer",
+        "title": "Embraer – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "Embraer",
+        "date": "dom., 25 out. 2026 10:45:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "A Embraer tornou-se a terceira maior fabricante de jatos comerciais do mundo e líder absoluta no segmento de até 130 assentos. Para atender demandas globais est",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "743f1c0c2ff7845b0af5",
+        "url": "https://embraer.izirh.io/",
+        "title": "izirh",
+        "origin": "bing",
+        "query": "Embraer",
+        "date": "dom., 25 out. 2026 07:25:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Acreditamos que um emprego é capaz de transformar um indivíduo e tudo à sua volta",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "8b6ca81fb4d11345ad02",
+        "url": "https://www.netflix.com/br/title/80217779",
+        "title": "Marianne - Netflix",
+        "origin": "bing",
+        "query": "quem fundou embraer ano produtos ela fabrica",
+        "date": "sáb., 24 out. 2026 19:58:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O padre toma uma medida extrema para acabar com Marianne. Emma fica presa entre dois mundos. Aurore busca uma maneira de salvar a amiga.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "697338a182394f09ba19",
+        "url": "https://www3.stage.netflix.com/br-en/title/80217779",
+        "title": "Watch Marianne | Netflix Official Site",
+        "origin": "bing",
+        "query": "quem fundou embraer ano produtos ela fabrica",
+        "date": "seg., 28 set. 2026 03:32:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "As the priest makes a desperate bid to banish Marianne, Emma finds herself torn between two worlds, and Aurore searches for a way to save her friend.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "d99555c78806c7e55cea",
+        "url": "https://en.wikipedia.org/wiki/Marianne_(TV_series)",
+        "title": "Marianne (TV series) - Wikipedia",
+        "origin": "bing",
+        "query": "quem fundou embraer ano produtos ela fabrica",
+        "date": "qui., 22 out. 2026 03:04:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Marianne is a French supernatural horror television series created and directed by Samuel Bodin, written by Bodin and Quoc Dang Tran and starring Victoire Du Bo",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "5799d719379adf138fe4",
+        "url": "https://www2.stage.netflix.com/br/title/80217779",
+        "title": "Confira Marianne | Site oficial da Netflix",
+        "origin": "bing",
+        "query": "quem fundou embraer ano produtos ela fabrica",
+        "date": "qua., 15 jul. 2026 09:26:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "De volta à cidade natal, uma famosa escritora de livros de terror descobre que o espírito que atormenta seus sonhos está provocando o caos no mundo real.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "68d05d880f1c52646832",
+        "url": "https://www.netflix.com/es/title/80217779",
+        "title": "Marianne - Netflix",
+        "origin": "bing",
+        "query": "quem fundou embraer ano produtos ela fabrica",
+        "date": "sáb., 24 out. 2026 11:01:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Mientras el cura recurre a medidas desesperadas para desterrar a Marianne, Emma se encuentra dividida entre dos mundos y Aurore busca la manera de salvarla. Est",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "4dde8ca5fbad97a231ac",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "CC-BY-SA 4.0",
+        "origin": "marginalia",
+        "query": "quem fundou embraer ano produtos ela fabrica",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "7348802ca7d378c531bb",
+        "url": "https://embraer.com/ede/pt/",
+        "title": "Embraer Divisão Equipamentos A Embraer Divisão Equipamentos (EDE) desenvolve e produz diversos produtos para aplicações aeronáuticas, como trens de pouso, atuad",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Embraer, em que ano e quais produtos ela fabrica?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "controladores, válvulas e outros equipamentos mecânicos, hidráulicos e eletromecânicos. Contando com mais de 40 anos de experiência no desenvolvimento, fabricaç",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1032,
+        "final_url": "https://embraer.com/ede/pt/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "0c53bd71496cc020f364",
+        "url": "https://aguasazuis.com.br",
+        "title": "Águas Azuis A Embraer e sua subsidiária Atech são parceiras da Águas Azuis, responsável pela construção do mais moderno e inovador projeto naval já realizado na",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Embraer, em que ano e quais produtos ela fabrica?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "fragatas. Com óculos especiais, os técnicos conseguem visualizar hologramas sobrepostos às peças físicas, permitindo validar o posicionamento de montagem, confe",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 1549,
+        "final_url": "https://www.aguasazuis.com.br:443/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "e5dfd894705940f4ce74",
+        "url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+        "title": "Talk",
+        "origin": "in_source_link",
+        "query": "Quem fundou a Embraer, em que ano e quais produtos ela fabrica?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "own language. háčeks () WendlingCrusader talk 13:21, 11 April 2026 (UTC) Reply A full month has elapsed, which is time enough for any further input. To add to t",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 4644,
+        "final_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      }
+    ],
+    "unique_candidates": 15,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-bc0426d2a9de",
+      "type": "image",
+      "title": "Embraer",
+      "url": "https://embraer.com/assets/images/Embraer-logo.svg",
+      "final_url": "https://embraer.com/assets/images/Embraer-logo.svg",
+      "source_title": "",
+      "source_url": "https://embraer.com/ede/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Embraer",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6bedc7cdd61a",
+      "type": "image",
+      "title": "Embraer",
+      "url": "https://embraer.com/assets/images/menu_BU.svg",
+      "final_url": "https://embraer.com/assets/images/menu_BU.svg",
+      "source_title": "",
+      "source_url": "https://embraer.com/ede/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Embraer",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-bc4b21b274a7",
+      "type": "image",
+      "title": "Embraer",
+      "url": "https://embraer.com/assets/images/menu_dark.svg",
+      "final_url": "https://embraer.com/assets/images/menu_dark.svg",
+      "source_title": "",
+      "source_url": "https://embraer.com/ede/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Embraer",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e960e8fe7473",
+      "type": "image",
+      "title": "Embraer",
+      "url": "https://embraer.com/assets/images/search.svg",
+      "final_url": "https://embraer.com/assets/images/search.svg",
+      "source_title": "",
+      "source_url": "https://embraer.com/ede/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Embraer",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a7a291f30810",
+      "type": "image",
+      "title": "Embraer",
+      "url": "https://embraer.com/assets/images/sitesearch.svg",
+      "final_url": "https://embraer.com/assets/images/sitesearch.svg",
+      "source_title": "",
+      "source_url": "https://embraer.com/ede/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Embraer",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-94d58ae134c7",
+      "type": "image",
+      "title": "Embraer",
+      "url": "https://embraer.com/assets/images/bannerArrow.svg",
+      "final_url": "https://embraer.com/assets/images/bannerArrow.svg",
+      "source_title": "",
+      "source_url": "https://embraer.com/ede/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Embraer",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-06a095957ee4",
+      "type": "image",
+      "title": "Embraer",
+      "url": "https://embraer.com/assets/images/Embraer-mark.svg",
+      "final_url": "https://embraer.com/assets/images/Embraer-mark.svg",
+      "source_title": "",
+      "source_url": "https://embraer.com/ede/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Embraer",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6950e0a29921",
+      "type": "image",
+      "title": "Embraer",
+      "url": "https://embraer.com/assets/images/close.svg",
+      "final_url": "https://embraer.com/assets/images/close.svg",
+      "source_title": "",
+      "source_url": "https://embraer.com/ede/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Embraer",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1064c0399298",
+      "type": "image",
+      "title": "Image",
+      "url": "https://embraer.com/media/cqopmdbu/commercial-jets-ejets-e2-1.jpg?v=1dd145c3f645670",
+      "final_url": "https://embraer.com/media/cqopmdbu/commercial-jets-ejets-e2-1.jpg?v=1dd145c3f645670",
+      "source_title": "Bem-vindo a Embraer",
+      "source_url": "https://embraer.com/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Image",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4d765d5068ba",
+      "type": "image",
+      "title": "Image",
+      "url": "https://embraer.com/media/sg0lm2vj/executivejets-phenom300e-inflight.jpg?v=1dd145c3ea4fe10",
+      "final_url": "https://embraer.com/media/sg0lm2vj/executivejets-phenom300e-inflight.jpg?v=1dd145c3ea4fe10",
+      "source_title": "Bem-vindo a Embraer",
+      "source_url": "https://embraer.com/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Image",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-afecf2d5056a",
+      "type": "video",
+      "title": "Bem-vindo a Embraer",
+      "url": "https://embraer.com/media/sbsdk3aq/eej-corporate-home-page-banner-video_final-version-1.mp4?rmode=pad&v=1dd145cd208ed10",
+      "final_url": "https://embraer.com/media/sbsdk3aq/eej-corporate-home-page-banner-video_final-version-1.mp4?rmode=pad&v=1dd145cd208ed10",
+      "source_title": "Bem-vindo a Embraer",
+      "source_url": "https://embraer.com/pt/",
+      "publisher": "embraer.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-c6b63d79152d",
+      "type": "image",
+      "title": "aircraft manufacturer in Brazil",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Sede-da-embraer.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+      "final_url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Sede-da-embraer.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+      "source_title": "aircraft manufacturer in Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Embraer",
+      "publisher": "upload.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://embraer.com/pt/",
+      "titulo": "Bem-vindo a Embraer",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "dom., 25 out. 2026 11:50:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://embraer.com/pt/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://en.wikipedia.org/wiki/Embraer",
+      "titulo": "aircraft manufacturer in Brazil",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2003-02-11T22:32:41Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://en.wikipedia.org/wiki/Embraer",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://embraer.com/ede/pt/",
+      "titulo": "Embraer Divisão Equipamentos A Embraer Divisão Equipamentos (EDE) desenvolve e produz diversos produtos para aplicações aeronáuticas, como trens de pouso, atuad",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://embraer.com/ede/pt/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Embraer",
+      "items": [
+        {
+          "titulo": "Bem-vindo a Embraer",
+          "url": "https://embraer.com/pt/",
+          "trecho": "A Embraer é uma das líderes mundiais da indústria aeroespacial, atuando nos segmentos de Aviação Comercial, Jatos Executivos, Defesa & Segurança e Serviços & Suporte.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:50:00 GMT"
+          },
+          "discovery_query": "Embraer",
+          "discovery_provider": "bing",
+          "url_canonica": "https://embraer.com/pt",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.143,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Welcome to Embraer",
+          "url": "https://embraer.com/en/",
+          "trecho": "With more than five decades of expertise in designing, manufacturing, certifying and supporting high performance aircraft in commercial aviation, business aviation and defense, Embraer became a global reference in the aeronautical industry.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 19:43:00 GMT"
+          },
+          "discovery_query": "Embraer",
+          "discovery_provider": "bing",
+          "url_canonica": "https://embraer.com/en",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.143,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Embraer – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Embraer",
+          "trecho": "A Embraer tornou-se a terceira maior fabricante de jatos comerciais do mundo e líder absoluta no segmento de até 130 assentos. Para atender demandas globais estabeleceu unidades industriais, escritórios e centros de distribuição de peças e serviços na América, África, Ásia e Europa.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 10:45:00 GMT"
+          },
+          "discovery_query": "Embraer",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Embraer",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.143,
+          "relevancia": 8.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Embraer - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Embraer",
+          "trecho": "In 2000, Embraer became a public limited company (Sociedade Anônima) with its shares traded in both the United States (NYSE) and Brazil (B3). Embraer has divisions for commercial, executive, military, and agricultural aviation; it also maintains an incubator for aerospace technologies and businesses",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 20:19:00 GMT"
+          },
+          "discovery_query": "Embraer",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.wikipedia.org/wiki/Embraer",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.143,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "izirh",
+          "url": "https://embraer.izirh.io/",
+          "trecho": "Acreditamos que um emprego é capaz de transformar um indivíduo e tudo à sua volta",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:25:00 GMT"
+          },
+          "discovery_query": "Embraer",
+          "discovery_provider": "bing",
+          "url_canonica": "https://embraer.izirh.io/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 5.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Notícias da Embraer - AEROIN",
+          "url": "https://aeroin.net/embraer/",
+          "trecho": "Informações da evolução da Embraer, com novos lançamentos, inovações, ESG, Sustentabilidade. Cobertura sobre os principais desenvolvimentos globais.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 18:00:00 GMT"
+          },
+          "discovery_query": "Embraer",
+          "discovery_provider": "bing",
+          "url_canonica": "https://aeroin.net/embraer",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.143,
+          "relevancia": 10.3,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "quem fundou embraer ano produtos ela fabrica",
+      "items": [
+        {
+          "titulo": "Marianne - Netflix",
+          "url": "https://www.netflix.com/br/title/80217779",
+          "trecho": "O padre toma uma medida extrema para acabar com Marianne. Emma fica presa entre dois mundos. Aurore busca uma maneira de salvar a amiga.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 19:58:00 GMT"
+          },
+          "discovery_query": "quem fundou embraer ano produtos ela fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://netflix.com/br/title/80217779",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Watch Marianne | Netflix Official Site",
+          "url": "https://www3.stage.netflix.com/br-en/title/80217779",
+          "trecho": "As the priest makes a desperate bid to banish Marianne, Emma finds herself torn between two worlds, and Aurore searches for a way to save her friend.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "seg., 28 set. 2026 03:32:00 GMT"
+          },
+          "discovery_query": "quem fundou embraer ano produtos ela fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://www3.stage.netflix.com/br-en/title/80217779",
+          "republicacoes": [
+            "https://www2.stage.netflix.com/aw/title/80217779"
+          ],
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Marianne (TV series) - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Marianne_(TV_series)",
+          "trecho": "Marianne is a French supernatural horror television series created and directed by Samuel Bodin, written by Bodin and Quoc Dang Tran and starring Victoire Du Bois, Lucie Boujenah, and Tiphaine Daviot.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 03:04:00 GMT"
+          },
+          "discovery_query": "quem fundou embraer ano produtos ela fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://en.wikipedia.org/wiki/Marianne_(TV_series)",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Confira Marianne | Site oficial da Netflix",
+          "url": "https://www2.stage.netflix.com/br/title/80217779",
+          "trecho": "De volta à cidade natal, uma famosa escritora de livros de terror descobre que o espírito que atormenta seus sonhos está provocando o caos no mundo real.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 15 jul. 2026 09:26:00 GMT"
+          },
+          "discovery_query": "quem fundou embraer ano produtos ela fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://www2.stage.netflix.com/br/title/80217779",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Marianne - Netflix",
+          "url": "https://www.netflix.com/es/title/80217779",
+          "trecho": "Mientras el cura recurre a medidas desesperadas para desterrar a Marianne, Emma se encuentra dividida entre dos mundos y Aurore busca la manera de salvarla. Esta serie es... Disfruta de Netflix, películas y series en streaming en tu smart TV, consola, PC, Mac, móvil, tableta y más dispositivos.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 11:01:00 GMT"
+          },
+          "discovery_query": "quem fundou embraer ano produtos ela fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://netflix.com/es/title/80217779",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Watch Marianne | Netflix Official Site",
+          "url": "https://www2.stage.netflix.com/aw/title/80217779",
+          "trecho": "Watch Netflix movies & TV shows online or stream right to your smart TV, game console, PC, Mac, mobile, tablet and more.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 20 out. 2026 00:14:00 GMT"
+          },
+          "discovery_query": "quem fundou embraer ano produtos ela fabrica",
+          "discovery_provider": "bing",
+          "url_canonica": "https://www2.stage.netflix.com/aw/title/80217779"
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "quem fundou embraer ano produtos ela fabrica",
+      "items": [
+        {
+          "titulo": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "trecho": "",
+          "origem": "marginalia",
+          "tipo": "pagina",
+          "meta": {},
+          "discovery_query": "quem fundou embraer ano produtos ela fabrica",
+          "discovery_provider": "marginalia",
+          "url_canonica": "https://creativecommons.org/licenses/by-sa/4.0",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 2.0,
+          "relevance_reasons": []
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://embraer.com/pt/",
+      "result": {
+        "titulo": "Bem-vindo a Embraer",
+        "texto": "Com mais de cinco décadas de expertise no desenvolvimento, fabricação, certificação e suporte de aeronaves de alto desempenho nos segmentos de aviação comercial, executiva e de defesa, a Embraer consolidou-se como uma referência global na indústria aeronáutica. Ao longo dessa trajetória, formamos gerações de talentos que contribuíram para posicionar a empresa como um ícone da aviação mundial. Nossa engenharia atua de forma integrada, promovendo o compartilhamento de conhecimento e inovação entre diferentes áreas, o que mantém a Embraer na vanguarda do desenvolvimento tecnológico global.",
+        "final": "https://embraer.com/pt/",
+        "trecho_usado": "Com mais de cinco décadas de expertise no desenvolvimento, fabricação, certificação e suporte de aeronaves de alto desempenho nos segmentos de aviação comercial, executiva e de defesa, a Embraer consolidou-se como uma referência global na indústria aeronáutica. Ao longo dessa trajetória, formamos gerações de talentos que contribuíram para posicionar a empresa como um ícone da aviação mundial.",
+        "metadados": {
+          "titulo": "Bem-vindo a Embraer",
+          "descricao": "",
+          "canonica": "http://embraer.com/pt/",
+          "og": {
+            "og:type": "article",
+            "og:site_name": "Embraer",
+            "og:title": "Bem-vindo a Embraer",
+            "og:url": "http://embraer.com/pt/",
+            "og:locale": "pt_BR"
+          },
+          "twitter": {
+            "twitter:title": "Bem-vindo a Embraer",
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@embraer"
+          },
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Embraer",
+          "tipo": "article",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Com mais de cinco décadas de expertise no desenvolvimento, fabricação, certificação e suporte de aeronaves de alto desempenho nos segmentos de aviação comercial, executiva e de defesa, a Embraer consolidou-se como uma referência global na indústria aeronáutica. Ao longo dessa trajetória, formamos gerações de talentos que contribuíram para posicionar a empresa como um ícone da aviação mundial. Nossa engenharia atua de forma integrada, promovendo o compartilhamento de conhecimento e inovação entre diferentes áreas, o que mantém a Embraer na vanguarda do desenvolvimento tecnológico global."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://embraer.com/ede/pt/",
+            "texto": "Embraer Divisão Equipamentos A Embraer Divisão Equipamentos (EDE) desenvolve e produz diversos produtos para aplicações aeronáuticas, como trens de pouso, atuad",
+            "interno": true
+          },
+          {
+            "url": "https://aguasazuis.com.br",
+            "texto": "Águas Azuis A Embraer e sua subsidiária Atech são parceiras da Águas Azuis, responsável pela construção do mais moderno e inovador projeto naval já realizado na",
+            "interno": false
+          },
+          {
+            "url": "https://www.nidec.com",
+            "texto": "NIDEC A Embraer e a Nidec Corporation anunciaram em 2023 um acordo para a criação de uma empresa para desenvolver motores elétricos para eVTOLs. A nova empresa,",
+            "interno": false
+          },
+          {
+            "url": "https://www.facebook.com/Embraer/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/embraer",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/embraer",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://br.linkedin.com/company/embraer",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://x.com/embraer",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://embraer.com/corporate-about/pt/",
+            "texto": "Sobre nós",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/corporate-careers/pt/",
+            "texto": "Carreiras",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/corporate-esg/overview/pt/",
+            "texto": "ESG",
+            "interno": true
+          },
+          {
+            "url": "https://ri.embraer.com.br/",
+            "texto": "Investidores",
+            "interno": false
+          },
+          {
+            "url": "https://embraer.com/media-center/pt/",
+            "texto": "Central de mídia",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/suppliers/pt",
+            "texto": "Fornecedores",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/more-businesses/pt/",
+            "texto": "OUTROS NEGÓCIOS",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/commercial-aviation/pt/",
+            "texto": "Aviação Comercial Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/executive-jets-overview/pt/",
+            "texto": "Aviação Executiva Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/defense-security-overview/pt/",
+            "texto": "Defesa & Segurança Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/services-and-support-overview/pt/",
+            "texto": "Serviços & Suporte Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/corporate-innovation/pt/",
+            "texto": "Saiba mais",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/pt/c/corporate-esg/",
+            "texto": "Nossos compromissos ESG",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/agriculture/pt/",
+            "texto": "Aviação Agrícola Considerado um símbolo tecnológico da agricultura brasileira, o Ipanema é o único do mercado certificado pela ANAC e produzido em série para vo",
+            "interno": true
+          },
+          {
+            "url": "https://www.eveairmobility.com/",
+            "texto": "Eve Air Mobility A Eve está dedicada em acelerar o ecossistema de Mobilidade Aérea Urbana (UAM). Beneficiando-se de uma mentalidade de start-up, apoiada pelos 5",
+            "interno": false
+          },
+          {
+            "url": "https://atech.com.br/",
+            "texto": "Atech Criamos soluções inovadoras que tenham um impacto positivo na vida das pessoas. Nossas áreas de especialização abrangem diversos setores, incluindo gestão",
+            "interno": false
+          },
+          {
+            "url": "https://visionaespacial.com/",
+            "texto": "Visiona Integradora brasileira de sistemas espaciais, resultante de uma iniciativa inédita do governo brasileiro para incentivar a criação de uma empresa integr",
+            "interno": false
+          },
+          {
+            "url": "https://www.ogma.pt/",
+            "texto": "OGMA Fundada em 1918, a OGMA é uma empresa especializada em serviços de MRO para aeronaves, motores e serviços de fabricação de aeroestruturas. A parceria, a ét",
+            "interno": false
+          },
+          {
+            "url": "https://ri.embraer.com.br",
+            "texto": "Investidores Veja nossa central de resultados",
+            "interno": false
+          },
+          {
+            "url": "https://embraer.com/corporate-innovation/",
+            "texto": "Inovação",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/corporate-careers/",
+            "texto": "Carreiras",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.facebook.com/tr?id=581051987468790&ev=PageView&noscript=1",
+          "https://www.facebook.com/tr?id=752146324071279&ev=PageView&noscript=1",
+          "https://embraer.com/assets/images/ol-close.svg",
+          "https://embraer.com/assets/images/ol-close-wh.svg",
+          "https://embraer.com/assets/images/Embraer-logo.svg",
+          "https://embraer.com/assets/images/Embraer-logo-blue.svg",
+          "https://embraer.com/assets/images/menu_BU.svg",
+          "https://embraer.com/assets/images/menu_dark.svg",
+          "https://embraer.com/assets/images/close-ico-white.svg",
+          "https://embraer.com/assets/images/search.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-bc0426d2a9de",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/Embraer-logo.svg",
+            "final_url": "https://embraer.com/assets/images/Embraer-logo.svg",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6bedc7cdd61a",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/menu_BU.svg",
+            "final_url": "https://embraer.com/assets/images/menu_BU.svg",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bc4b21b274a7",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/menu_dark.svg",
+            "final_url": "https://embraer.com/assets/images/menu_dark.svg",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e960e8fe7473",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/search.svg",
+            "final_url": "https://embraer.com/assets/images/search.svg",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a7a291f30810",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/sitesearch.svg",
+            "final_url": "https://embraer.com/assets/images/sitesearch.svg",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-94d58ae134c7",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/bannerArrow.svg",
+            "final_url": "https://embraer.com/assets/images/bannerArrow.svg",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-06a095957ee4",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/Embraer-mark.svg",
+            "final_url": "https://embraer.com/assets/images/Embraer-mark.svg",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6950e0a29921",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/close.svg",
+            "final_url": "https://embraer.com/assets/images/close.svg",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1064c0399298",
+            "type": "image",
+            "title": "Image",
+            "url": "https://embraer.com/media/cqopmdbu/commercial-jets-ejets-e2-1.jpg?v=1dd145c3f645670",
+            "final_url": "https://embraer.com/media/cqopmdbu/commercial-jets-ejets-e2-1.jpg?v=1dd145c3f645670",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Image",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4d765d5068ba",
+            "type": "image",
+            "title": "Image",
+            "url": "https://embraer.com/media/sg0lm2vj/executivejets-phenom300e-inflight.jpg?v=1dd145c3ea4fe10",
+            "final_url": "https://embraer.com/media/sg0lm2vj/executivejets-phenom300e-inflight.jpg?v=1dd145c3ea4fe10",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Image",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-afecf2d5056a",
+            "type": "video",
+            "title": "Bem-vindo a Embraer",
+            "url": "https://embraer.com/media/sbsdk3aq/eej-corporate-home-page-banner-video_final-version-1.mp4?rmode=pad&v=1dd145cd208ed10",
+            "final_url": "https://embraer.com/media/sbsdk3aq/eej-corporate-home-page-banner-video_final-version-1.mp4?rmode=pad&v=1dd145cd208ed10",
+            "source_title": "Bem-vindo a Embraer",
+            "source_url": "https://embraer.com/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Embraer",
+      "result": {
+        "titulo": "aircraft manufacturer in Brazil",
+        "texto": "Jet Traveler . Retrieved 2025-04-22 ↑ . . 17 May 2016. \"EBACE: Embraer caps 16-year run with 1,000th delivery\" Flightglobal ↑ . . 2018-10-17. \"Embraer Praetor 500/600 Make Public Debut at NBAA 2018\" Aviation Today 1 2 3 4 . . . \"Forget Airbus and Boeing. Embraer is soaring\" The Economist ISSN 0013-0613 . Retrieved 2026-08-05 ↑ (in Portuguese). Embraer. \"KC-390 Millennium\" ↑ (in Portuguese). Embraer. \"KC-390 Millennium Brochure\" (PDF) ↑ . Embraer. \"C-390 Millennium fleet operated by Brazilian Air Force completes 10,000 flight hours\" ↑ . . \"Portugal anuncia decisão de adquirir sexta aeronave KC-390 Millennium e inclusão de dez novas opções de compra\" Poder Aéreo ↑ . . \"Hungria assina contrato para aquisição de duas aeronaves multimissão KC-390 Millennium\" Cavok.com.br ↑ . . \"Áustria quer trocar frota de cargueiros Hércules por Embraer C-390\" Terra ↑ Finnerty, Ryan (Jun 13, 2026). . . \"Greece poised to become latest C-390 customer\" Flightglobal.com . Retrieved 2026 June 29, ↑ . . \"Greece set to buy Embraer C-390 aircraft, mini-submarines, sources say\" Reuters.com . Retrieved 2026-06-29 ↑ . . \"Embraer vende avião militar KC-390 para mais um país da Otan\" Folha de S.Paulo ↑ . . \"Embraer vence concorrência e irá fornecer cargueiro C-390 Millennium para Coreia do Sul\" Valor Econômico ↑ . . \"Suécia confirma aquisição de quatro C-390 Millennium\" Poder Aéreo ↑ . . \"Uzbekistan orders C-390 Millennium military transport aircraft\" UzDaily ↑ . . \"Lituânia escolhe o C-390 Millennium da Embraer\" Poder Aéreo ↑ (Press release). Boeing. July 5, 2018. \"Boeing and Embraer to Establish Strategic Aerospace Partnership to Accelerate Global Aerospace Growth\" ↑ . Bloomberg. 21 December 2017. \"Boeing Is in Talks for Combination With Regional-Jet Maker Embraer\" ↑ Hemmerdinger, Jon (11 Oct 2018). . . \"Embraer-Boeing agreement lays out terms of proposed joint venture\" Flightglobal ↑ Rochabrun, Marcelo (May 23, 2019). . . \"Boeing drops Embraer name from Brazil commercial jet division\" Reuters ↑ (Press release). Boeing. Nov 18, 2019. \"Boeing Embraer – Defense Joint Venture to Develop New Markets for the C-390 Millennium\" ↑ . (in Portuguese). \"Pressões políticas e Covid-19 fazem Boeing desistir da compra da Embraer\" Veja . Retrieved 2020 25 April ↑ . (in Portuguese). \"Boeing rescinde acordo de compra da área da aviação comercial da Embraer\" G1 . Retrieved 2020 25 April ↑ . . \"Boeing walks away from Embraer tie-up\" Flight global ↑ Rochabrun, Marcelo; Heavens, Louise; Evans, David (2020-11-10). . . \"Brazil's Embraer posts $121 million loss on coronavirus travel disruptions\" Reuters . Retrieved 2020-11-10 1 2 Garrett Reim (17 November 2020). . . \"Embraer shows images of new hybrid-electric short-takeoff transport\" Flightglobal 1 2 3 Buckley, Julia (2024-05-09). . . \"Why these Brazilian airplanes loved by passengers are conquering short-haul flying | CNN\" CNN . Retrieved 2026-08-05 1 2 Boeing vs. Embraer: Which Aerospace Stock is Ready for Takeoff? ↑ Tangel, Andrew; Katz, Benjamin (2024-05-01). . . . \"Exclusive | Brazil's Embraer Plots a New 737-Sized Jet to Rival Boeing\" Wall Street Journal ISSN 0099-9660 . Retrieved 2026-08-05 ↑ . . May 7, 2024. \"Embraer reaffirms 2024 outlook, says no plans for new narrowbody\" Reuters ↑ . . \"Embraer 20-F 2014-2018\" Sec.gov . Retrieved 2024-03-25 1 2 . . \"Embraer S.A. (ERJ) Financials - Income Statement\" Stock Analysis . Retrieved 2024-03-25 ↑ . . \"Embraer Number of Employees 2003-2022\" Stock Analysis . Retrieved 2024-03-25 ↑ . . \"Embraer-Empresa Brasileira De Aeronautica Number of Employees 2010-2023 | ERJ\" Macrotrends.net . Retrieved 2024-03-25 ↑ . . \"Embraer swung to $164m profit in 2023 as deliveries accelerated\" Flight Global . Retrieved 2024-03-25 ↑ . . \"Embraer annual report 2024\" (PDF) Embraer.com . Retrieved 2026-03-23 ↑ . Embraer. 2012. Archived from on 11 September 2014. \"Global presence\" the original . Retrieved 2013 24 Dec ↑ Trautvetter, Chad. \" , , 26 August 2014. Accessed 4 September 2014. Approval Imminent for Embraer Legacy 450/500 U.S. Plant\" Archived 2014-10-27 at the Wayback Machine AINonline ↑ , Embraer, September 11, 2012, archived from on 2010-12-15, Facilities the original Embraer Aircraft Holding, Inc. 276 SW 34th Street Fort Lauderdale, FL 33315 USA […] Embraer Aircraft Holding, Inc. 1700 Pennsylvania Ave. NW Suite 200 USA Washington, DC 20008 ↑ , , 20 September 2016 \"Embraer inaugura Centro de Produção de Assentos com 4.600m² na Flórida\" Mercado e Eventos , retrieved 2017 10 December ↑ . . Embraer. 2012. \"Presença global\" Centro histórico . Retrieved 2017 10 December ↑ . . \"Embraer ECC Leasing Company Lessor Profile – CAPA\" Centre for aviation . Retrieved 2017-09-07 ↑ Wildes, Michael (2022-04-18). . . \"Embraer's Eve Nears Merger With Zanite SPAC\" FLYING Magazine . Retrieved 2022-11-30 ↑ \"Emily McGarvey; \", BBC, 21 July 2023 (retrieved 22 July 2023). Brazil's Embraer plans to build electric flying taxi factory near Sao Paulo ↑ \"Embraer in China\". : 60. 14 October 2013. Aviation Week & Space Technology ↑ . , Boeing, 2018-07-05 Boeing & Embraer to establish strategic aerospace partnership to accelerate global aerospace growth ↑ . . 16 September 2024. \"Boeing to pay Embraer $150 mln for walking away from 2020 deal\" Reuters . Retrieved 2026 12 May ↑ . . 2026-01-08. . \"In a first, Adani, Embraer tie up to build commercial fixed-wing planes in India\" The Times of India ISSN 0971-8257 . Retrieved 2026-01-12 ↑ . . 2026-01-08. \"Adani Group, Embraer sign MoU to set up aircraft assembly line in India\" The Financial Express . Retrieved 2026-01-12 ↑ Bailey, Joanna (2026-01-09). . . \"Adani–Embraer deal could bring commercial aircraft assembly to India\" AGN . Retrieved 2026-01-12 ↑ (Press release). . 2026-01-27. \"Adani Defence & Aerospace and Embraer announce Strategic Partnership to Establish Regional Transport Aircraft Ecosystem in India\" Adani Group . Retrieved 2026-02-02 ↑ (Press release). Embraer. 2026-01-27. \"Embraer and Adani Defence & Aerospace announce strategic partnership to establish regional transport aircraft ecosystem in India\" . Retrieved 2026-02-02 ↑ . . 2026-01-27. . \"Embraer-Adani sign MoU on aviation manufacturing\" The Hindu ISSN 0971-751X . Retrieved 2026-02-02 ↑ (Press release). Embraer. 2026-02-21. \"Adani Defence & Aerospace and Embraer propose E175 Final Assembly Line in India\" . Retrieved 2026-02-22 ↑ . . 2026-02-21. . \"Embraer & Adani sign 'enhanced' pact for aircraft FAL in India\" The Times of India ISSN 0971-8257 . Retrieved 2026-02-22 ↑ . Embraer Defense & Security. 17 October 2025. \"Embraer and Mahindra Group Forge Strategic Alliance to Introduce the C-390 Millennium to India\" . Retrieved 2026 12 May ↑ Philip, Snehesh Alex (2026-02-20). . . \"Embraer moves full throttle in pursuit of IAF contract, ties up with Hindalco after Adani\" ThePrint . Retrieved 2026-02-22 ↑ . . 2026-02-20. \"Embraer, Hindalco ink pact to assess aerospace-grade aluminium production in India\" ETInfra.com . Retrieved 2026-02-22 ↑ (Press release). Embraer. Dec 18, 2018. \"Embraer Delivers its 1,500th E-Jet to Horizon Air\" ↑ Embraer Commercial Aviation E-JETS E2 ↑ . . 13 February 2019. \"The highlights of the Brazilian Gripen Programme in 2018\" Saab Group . Retrieved 2019 19 August ↑ . (in Portuguese). Archived from on 19 August 2019. \"A Embraer foi vendida? Não\" Embraer the original . Retrieved 2019 19 August ↑ . . Traders Huddle. January 18, 2011. Archived from on 2013-02-04. \"Embraer Closes Out 2010 With 246 Jets Delivered\" PR Newswire the original . Retrieved 2013-03-21 ↑ . (press release), BR: Embraer, archived from on 2016-07-29 Embraer delivers 105 commercial & 99 executive jets in 2011 (PDF) the original (PDF) , retrieved 2012-10-14 ↑ . (press release), BR: Embraer, archived from on 2013-04-05 Embraer Delivers 106 Commercial and 99 Executive Jets In 2012 (PDF) the original (PDF) , retrieved 2018-12-02 ↑ . . \"Embraer Deliveries for 2014 Aviation Week\" | Aviationweek.com . Retrieved 2026 June 29, ↑ . Archived from on 2016-03-12. \"EMBRAER",
+        "final": "https://en.wikipedia.org/wiki/Embraer",
+        "trecho_usado": "(2024-05-01). . . . \"Exclusive | Brazil's Embraer Plots a New 737-Sized Jet to Rival Boeing\" Wall Street Journal ISSN 0099-9660 . Retrieved 2026-08-05 ↑ . . May 7, 2024. \"Embraer reaffirms 2024 outlook, says no plans for new narrowbody\" Reuters ↑ . . \"Embraer 20-F 2014-2018\" Sec.gov . Retrieved 2024-03-25 1 2 . . \"Embraer S.A. (ERJ) Financials - Income Statement\" Stock Analysis . Retrieved",
+        "metadados": {
+          "titulo": "aircraft manufacturer in Brazil",
+          "descricao": "",
+          "canonica": "https://en.wikipedia.org/wiki/Embraer",
+          "og": {
+            "og:image": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Sede-da-embraer.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "og:image:width": "1200",
+            "og:image:height": "774",
+            "og:title": "Embraer - Wikipedia",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "2003-02-11T22:32:41Z",
+          "atualizado_em": "2026-10-13T10:37:17Z",
+          "autor": "Contributors to Wikimedia projects",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2003-02-11T22:32:41Z",
+            "dateModified": "2026-10-13T10:37:17Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contributors to Wikimedia projects"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "aircraft manufacturer in Brazil"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Hangar with Embraer jets at the company headquarters, in São José dos Campos.\nAugust19, 1969 57 years ago ; () 1969-08-19\n, , São Paulo São José dos Campos Brazil\nFrancisco Gomes Neto ( & ) Raul Calfat () president CEO chairman\nBusiness, commercial, and military . . Mission systems for air and ground operation aircraft Aircraft parts\nEMB, ERJ, Legacy, Lineage,LR, Phenom, Praetor\n(2023) 5.27 billion US$ 1 [ ]\n(2023) US$315 million 1 [ ]\n(2023) US$164 million 1 [ ]\n(2023) US$10.8 billion 1 [ ]\n(2023) US$3.04 billion 1 [ ]\nEmbraer Defense & Security\nEmbraer Commercial Aviation\n() is a Brazilian . It develops and manufactures aircraft and , and provides leasing, equipment, and technical support services. Embraer is the third largest producer of after and . The company also has a significant presence in , ranking among the top 100 . It is headquartered in , São Paulo, with offices and operations in China, the Netherlands, Portugal, Singapore, and the United States. Embraer S.A. Brazilian Portuguese pronunciation: ẽbɾaˈɛʁ [ ] multinational aerospace corporation aviation systems 2 [ ] civil aircraft Boeing Airbus 3 [ ] military aviation defense contractors 4 [ ] São José dos Campos 5 [ ]\nEmbraer was founded on August 19, 1969 by and funded by the with the aim of creating a for domestic aerospace technology. It initially focused on supplying military aircraft to the , but by the 1980s began producing a series of successful commuter and regional airliners for export. The company was privatized in 1994 and began expanding to the production of larger regional airliners and smaller . In 2000, Embraer became a () with its traded in both the United States () and Brazil (). Ozires Silva Brazilian government national champion Brazilian Air Force business jets public limited company Sociedade Anônima shares NYSE B3\nEmbraer has for commercial, executive, military, and agricultural aviation; it also maintains an for aerospace technologies and businesses. While the company continues producing aircraft for the defense sector, it is best known for the and families of short to medium range , and for its line of , including the market-leading . As of May 2024, Embraer has delivered more than 9,000 aircraft, including 1,800 E-Jet planes. divisions incubator ERJ E-Jet narrow-body airliners business jets Phenom 300 6 [ ] 7 [ ]\nSeeking to develop a domestic aircraft industry, the under then President ' made several investments in the aerospace industry during the 1940s and 1950s. However, it was not until 1969, following the establishment of the after the , that (Brazilian Aeronautics Corporation, shortened by to Embraer) was created as a . Its first president, , was a government appointee, and the company initially only produced a passenger aircraft, the . The city of São José dos Campos was chosen to host the company's headquarters because it had already hosted, since 1950, the , the first higher education institution in Brazil dedicated to the aerospace sector. Brazilian government Getúlio Vargas Estado Novo 8 [ ] Brazilian military dictatorship 1964 coup d'état Empresa Brasileira de Aeronáutica syllabic abbreviation government-owned corporation 9 [ ] 10 [ ] Ozires Silva turboprop Embraer EMB 110 Bandeirante 11 [ ] Technological Institute of Aeronautics (ITA) 12 [ ] 13 [ ]\nThe Brazilian government contributed to Embraer's early growth by providing production contracts. The company sold solely to the domestic market until 1975. 14 [ ]\nWhile military aircraft made up the majority of Embraer's products during the 1970s and early 1980s, including the and the , it debuted a , the , which made its first flight in 1968, and the , launched in 1985. Aimed at the export market, the EMB family was the first in a production series of small and regional airliners. Embraer AT-26 Xavante Embraer EMB 312 Tucano [ citation needed ] regional airliner Embraer EMB 110 Bandeirante 15 [ ] Embraer EMB 120 Brasilia 16 [ ] 17 [ ]\nIn addition to its own line of aircraft, begin"
+          },
+          {
+            "titulo": "Product line expansion: military, regional and executive",
+            "texto": "In the mid-1990s, the company pursued a product line focused on small commercial airplanes over the military aircraft that had previously made up the majority of its manufacturing. It soon expanded to the production of larger regional airliners in the 70–110 seat range, and smaller . 8 [ ] business jets 17 [ ]\nBy May 2019, Embraer considered developing a of turboprop in the 50–70 seat range, complementing the , so as to free engineering resources. It would compete against older and designs for 1.5 to 2h flights over . In August 2021, Embraer released a new configuration with quieter aft-mounted engines for a 70-90 seat aircraft, with the E-Jet cross-section, aiming for a 2022 launch and a 2027/2028 service entry. new family regional airliners E-Jet E2 22 [ ] 23 [ ] ATR Dash 8 500–700 nmi (930–1,300 km) 24 [ ] 25 [ ]\nIn March 2026, Embraer launched the first for the , result of technology transfer agreements signed between the Brazilian and Swedish governments in 2014, for the co-production and development of the fighter. JAS F-39 Gripen Brazilian Air Force 26 [ ] 27 [ ]\nAt the 2000 , Embraer introduced the , a variant of the , which entered service in 2002. was created as a dedicated subsidiary in 2005. That same year, the was envisioned as an similar to the , competing with and . It was introduced in 2008 and is the basis of the larger . The midsize and were jointly developed as clean sheet designs, while the is a VIP version of the . In 2016, Embraer delivered its 1,000th executive jet and had a market share of 17% by volume, though it lacked an ultra-long-range large cabin jet. In October 2018 Embraer announced two new business jets—the in the midsize cabin category—and the in the super midsize category. Farnborough Airshow Legacy 600 business jet Embraer Regional Jet 28 [ ] Embraer Executive Jets Phenom 100 air taxi Eclipse 500 Cessna Hawker Beechcraft Phenom 300 Legacy 450 Legacy 500 Lineage 1000 E190 29 [ ] Praetor 500 Praetor 600 30 [ ]\nAs of 2026, Embraer remains dominant in the market for small and medium-sized private jets, with the Phenom 300 remaining the best seller in its class for the 14th year. 31 [ ]\nOn April 19, 2007, Embraer announced it was considering the production of a twin-jet military transport. Work began in May 2009 with funding from the Brazilian Air Force. Correios, the Brazilian postal service, has shown interest in buying this aircraft. Using much of the technology developed for the Embraer 190, the C-390 would carry up to 23 tons of cargo and aims to replace Cold War-era cargo aircraft.\nAs a result, Embraer developed the C-390 Millennium, a medium-size, twin-engine, jet-powered military transport aircraft with multi-role capability adapted to various missions. Brazil has been operating 6 units since 2019. Initially, thirty aircraft (including two prototypes) were to be delivered to the Brazilian Air Force. In February 2022, a new agreement was reached to supply 22 aircraft, with deliveries scheduled until 2034. 32 [ ] 33 [ ] 34 [ ]\nThe KC-390, also known by its export name C-390 Millennium, has been an export success with several countries purchasing the aircraft or entering negotiations. Known orders and selections include:\n: 6 units. Portugal 35 [ ]\n: 2 units. Hungary 36 [ ]\n: 4 units. Austria 37 [ ]\n: 3 units. Greece 38 [ ] 39 [ ]\n: 2 units. Czech Republic 40 [ ]\n: 3 units delivered, with an undisclosed number of additional units closed. South Korea 41 [ ]\n: 2 units. Uzbekistan 43 [ ]\n: 3 units. Lithuania 44 [ ]\n: 10 units, with an option to expand to 20. United Arab Emirates"
+          },
+          {
+            "titulo": "Government subsidy controversy",
+            "texto": "Brazil and Canada engaged in an international, adjudicated trade dispute over government subsidies to domestic plane-makers in the late 1990s and early 2000s. The determined that both countries had provided illegal subsidies to what were supposed to be privately owned industries. Brazil ran an illegal subsidy program, Proex, benefiting its national aviation industry from at least 1999–2000, and Canada illegally subsidized its indigenous regional airliner industry including in export contracts, comprising . World Trade Organization Bombardier Aerospace"
+          },
+          {
+            "titulo": "Failed Boeing-Embraer joint venture",
+            "texto": "On July 5, 2018, a with Boeing was announced that would have resulted in Boeing owning 80% of Embraer's commercial aviation division. This was seen as a reaction to Airbus' acquisition of a majority stake in the competing the previous year. Under the 2018 plan, Embraer would retain its executive business jet and . The resulting division would be known as Boeing BrasilCommercial, though it was unclear whether the aircraft would be rebranded as Boeing models. joint venture 45 [ ] Bombardier CSeries 46 [ ] defence businesses 47 [ ] – 48 [ ]\nOn November 18, 2019, Boeing and Embraer announced another joint venture, at 49% and 51% respectively, to promote and develop new markets for the C-390 Millennium tactical transport aircraft; the resulting entity would be called and would begin operating after regulatory approvals and closing conditions. Boeing Embraer – Defense 49 [ ]\nIn April 2020, Boeing canceled its acquisition of Embraer's commercial operations after being heavily affected financially by the air crisis initiated by the and by the . In November 2020, Embraer announced that its loss for the third quarter of the year was $121 million due to the COVID-19 pandemic and the travel restrictions. COVID-19 pandemic 737 MAX groundings 50 [ ] 51 [ ] 52 [ ] 53 [ ]"
+          },
+          {
+            "titulo": "STOUT light military transport aircraft",
+            "texto": "In December 2019, Embraer and the Brazilian Air Force tackled the development of a light . The (STOUT) would replace its 64 Bandeirante (average age of 38.3 years) and 19 Brasilia (average age of 26.5 years) with similar dimensions. military transport aircraft 54 [ ] Short Take Off Utility Transport EMB-110 EMB-120 54 [ ]"
+          },
+          {
+            "titulo": "Growing demand and expansion",
+            "texto": "Since the COVID-19 pandemic, Embraer has experienced record growth driven by high demand for its smaller passenger planes, private jets, and military aircraft. In March 2024, announced that the Embraer E175 fleet of its regional airline , the world's largest operator of the E175, would be refurbished to increase storage space. The same month, announced the purchase of 90 E175 aircraft in March, which will result in its entire regional fleet comprising Embraer aircraft by the end of the decade. 31 [ ] United Airlines SkyWest American Airlines 55 [ ]\nOn May 2, 2024, Embraer delivered its 1,800th E-Jet aircraft, an E190-E2, to ; less than a week later, the company delivered its first aircraft, also an E190-E2, to . Royal Jordanian Airlines Singapore Airlines' low-cost carrier Scoot 55 [ ]\nIn 2026, Embraer reported that its order backlog had reached a record $34.5 billion; up to 255 planes are expected to be delivered by the end of the year, compared to 141 five years earlier, and an average of 90 every year before the pandemic. Much of the growth is led by the E2 line, due to increased travel on regional, short distance routes, as well as its relatively fast delivery time of less than two years. The company aims to expand production of E2 aircraft and enter the Turkish and Chinese markets before 2030. 31 [ ] 56 [ ] 31 [ ] 56 [ ]\nEmbraer's growth has prompted speculation that it may enter the narrow-body segment currently dominated by the Airbus A320neo and Boeing 737 Max. As of 2026, the company has made no formal commitment to expand beyond its current offerings. 57 [ ] 55 [ ]\nEmbraer is organized into four segments: Commercial Aviation, which manages the development, production, sale, and lease of commercial jets, as well as the provision of aviation support services; Defense & Security, which consists of research, development, production, modification, and support for military defense aircraft, and related products and services; Executive Aviation, which concerns the development, production, and sale of executive jets, and support services; and Other, which entails the production of structural parts, mechanical and hydraulic systems, agricultural , and customer training. crop-spraying aircraft 58 [ ]\nThe key trends of Embraer are (as at the financial year ending December 31): 59 [ ]\nNet income (US$ m) 60 [ ]"
+          },
+          {
+            "titulo": "Production bases and facilities",
+            "texto": "The company's headquarters and main production base are in , São Paulo, Brazil. It also has production bases in the State of at , Eugênio de Melo (a district of São José dos Campos) and . The company has offices in , , , , and São José dos Campos São Paulo Botucatu Gavião Peixoto Beijing Fort Lauderdale Amsterdam Singapore Washington, D.C. 65 [ ]"
+          },
+          {
+            "titulo": "Non-Brazilian main facilities",
+            "texto": "Production facilities for the Phenom 100EV and 300E, and Praetor 500 and 600 at in Florida. Melbourne Orlando International Airport 66 [ ]\nEAMS – Embraer Aircraft Maintenance Services Inc. (, , U.S.) – maintenance services site. Nashville TN\n– Indústria Aeronáutica de Portugal (, Portugal) – aircraft component maintenance, repair and manufacturing, plus aircraft maintenance services. OGMA Alverca do Ribatejo\nEmbraer Aircraft Holding, Inc. – Its U.S. headquarters are in , in a facility founded in 1979. Its external relations office is in Fort Lauderdale, Florida Washington, D.C. 67 [ ]\nEmbraer Aero Seating Technologies – Inaugurated in September 2016 in the city of , Embraer Aero Seating Technologies produces aircraft seats. Titusville, Florida 68 [ ]\nMesa Unit (Located in , U.S.) – Implemented in 2008, performs maintenance, repair and overhaul services on the Phenom and Legacy executive aircraft line. Mesa, Arizona 69 [ ]\nWindsor Locks Unit (Located in , U.S.) – Implemented in 2008, as well as the Mesa Unit, also performs maintenance, repair and revision services in Embraer's executive line. Windsor Locks, Connecticut\n– Subsidiary company specializing in the design and manufacture of landing gear systems and aircraft hydraulic and mechanical components. ELEB\nMelbourne Unit (Located in , U.S.) – Implemented in 2011, it is the first unit in the United States to carry out the final assembly of aircraft. It produces the line of executives and . In November 2012 work began on an Engineering and Technology Center at the Melbourne facility. Melbourne, Florida Phenom 100 Phenom 300\nECC Leasing – Embraer's in-house leasing division, based in , , managing and re-marketing the Embraer aircraft portfolio owned directly by the manufacturer. Dublin Ireland 70 [ ]\n- Subsidiary company that develops electric vertical take-off and landing (eVTOL) aircraft and urban air mobility infrastructure. It merged with a (SPAC), Zanite Acquisition Corp, in May 2022. The merging gave Eve an easier access to NYSE listing. Embraer have announced plans to build a new factory for the manufacturing of Eve's . Eve special-purpose acquisition company 71 [ ] electric air taxi 72 [ ]\n– Agreement between Embraer and Harbin Aircraft Corporation of China to build the aircraft for the . The program officially concluded in 2016 after delivering nearly 40 commercial and executive aircraft. Harbin Embraer ERJ family Chinese market 73 [ ]\n– Embraer's commercial airliner portfolio, as well as the , would be part of two separate joint ventures with . In the case of the civil aircraft line, Boeing would own an 80% stake in Embraer’s commercial aviation division. Boeing walked away from the deal in April 2020, citing the impact of the COVID-19 pandemic and claiming Embraer hadn't met certain closing conditions. In September 2024, the dispute finally ended after a legal arbitration when Boeing agreed to pay Embraer $150 million to settle all claims regarding the failed joint venture. Boeing KC-390 Boeing 74 [ ] 75 [ ]\n– Embraer and of India signed a (MoU) in December 2025 on setting up a in India for commercial aircraft having a seating capacity of 70–146 passengers. Adani Defence & Aerospace, the flagship company of the , signed an agreement with Embraer on 27 January at the to develop an integrated regional transport aircraft ecosystem in India. Firstly, an assembly line will be established followed by a phased increase in indigenisation to support India's Regional Transport Aircraft (RTA) program under the programme. On 21 February 2026 the firms signed an enhanced MoU to establish a production ecosystem for in India. Under the agreement, a (FAL) for the aircraft will be set up in India. Adani Defence & Aerospace Adani Group memorandum of understanding final assembly line 76 [ ] 77 [ ] 78 [ ] Adani Enterprises Wings India UDAN 79 [ ] 80 [ ] 81 [ ] E-175 final assembly line 82 [ ] 83 [ ]\n– On 17 October 2025, Embraer Defense & Security and Mahindra Group signed a strategic c"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://af.wikipedia.org/wiki/Embraer",
+            "texto": "Afrikaans",
+            "interno": false
+          },
+          {
+            "url": "https://ast.wikipedia.org/wiki/Embraer",
+            "texto": "Asturianu",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "texto": "Talk",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:WhatLinksHere/Embraer",
+            "texto": "What links here",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:RecentChangesLinked/Embraer",
+            "texto": "Related changes",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/File:Sede-da-embraer.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Embraer_EMB_110_Bandeirante",
+            "texto": "Embraer EMB 110 Bandeirante",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Embraer_AT-26_Xavante",
+            "texto": "Embraer AT-26 Xavante",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Embraer_EMB_312_Tucano",
+            "texto": "Embraer EMB 312 Tucano",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Embraer_EMB_120_Brasilia",
+            "texto": "Embraer EMB 120 Brasilia",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Main_Page",
+            "texto": "Main page",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents",
+            "texto": "Contents",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Portal:Current_events",
+            "texto": "Current events",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:Random",
+            "texto": "Random article",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:About",
+            "texto": "About Wikipedia",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us",
+            "texto": "Contact us",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Help:Contents",
+            "texto": "Help",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Help:Introduction",
+            "texto": "Learn to edit",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:Community_portal",
+            "texto": "Community portal",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:RecentChanges",
+            "texto": "Recent changes",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:File_upload_wizard",
+            "texto": "Upload file",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:SpecialPages",
+            "texto": "Special pages",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:Search",
+            "texto": "Search",
+            "interno": true
+          },
+          {
+            "url": "https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=en.wikipedia.org&amp;uselang=en",
+            "texto": "Donate",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&amp;returnto=Embraer",
+            "texto": "Create account",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&amp;returnto=Embraer",
+            "texto": "Log in",
+            "interno": true
+          },
+          {
+            "url": "https://ar.wikipedia.org/wiki/%D8%A5%D9%85%D8%A8%D8%B1%D8%A7%D9%8A%D8%B1",
+            "texto": "العربية",
+            "interno": false
+          },
+          {
+            "url": "https://arz.wikipedia.org/wiki/%D8%A7%D9%85%D8%A8%D8%B1%D8%A7%D9%8A%D8%B1",
+            "texto": "مصرى",
+            "interno": false
+          },
+          {
+            "url": "https://az.wikipedia.org/wiki/Embraer",
+            "texto": "Azərbaycanca",
+            "interno": false
+          },
+          {
+            "url": "https://be-tarask.wikipedia.org/wiki/%D0%AD%D0%BC%D0%B1%D1%80%D0%B0%D0%B5%D1%80",
+            "texto": "Беларуская (тарашкевіца)",
+            "interno": false
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Embraer S.A."
+            ],
+            [
+              "Hangar with Embraer jets at the company headquarters, in São José dos Campos."
+            ],
+            [
+              "Type",
+              "Sociedade Anônima"
+            ],
+            [
+              "Traded as",
+              ".mw-parser-output .plainlist ol,.mw-parser-output .plainlist ul{line-height:inherit;list-style:none;margin:0;padding:0}.mw-parser-output .plainlist ol li,.mw-pa"
+            ],
+            [
+              "Industry",
+              "Aerospace , defense"
+            ],
+            [
+              "Founded",
+              "August 19, 1969 ; 57 years ago ( 1969-08-19 )"
+            ],
+            [
+              "Founder",
+              "Ozires Silva"
+            ],
+            [
+              "Headquarters",
+              "São José dos Campos , São Paulo , Brazil"
+            ],
+            [
+              "Area served",
+              "Worldwide"
+            ],
+            [
+              "Key people",
+              "Francisco Gomes Neto ( president & CEO ) Raul Calfat ( chairman )"
+            ],
+            [
+              "Products",
+              "Business, commercial, and military aircraft . Aircraft parts . Mission systems for air and ground operation"
+            ],
+            [
+              "Brands",
+              "EMB, ERJ, Legacy, Lineage, LR, Phenom, Praetor"
+            ],
+            [
+              "Revenue",
+              "US$ 5.27 billion (2023) [ 1 ]"
+            ],
+            [
+              "Operating income",
+              "US$315 million (2023) [ 1 ]"
+            ],
+            [
+              "Net income",
+              "US$164 million (2023) [ 1 ]"
+            ],
+            [
+              "Total assets",
+              "US$10.8 billion (2023) [ 1 ]"
+            ],
+            [
+              "Total equity",
+              "US$3.04 billion (2023) [ 1 ]"
+            ],
+            [
+              "Number of employees",
+              "18,997 (2024) [ 1 ]"
+            ],
+            [
+              "Divisions",
+              "Embraer Defense & Security Embraer Commercial Aviation Embraer Executive Jets"
+            ],
+            [
+              "Subsidiaries",
+              "Neiva OGMA ELEB Eve Air Mobility Atech Bradar SAVIS"
+            ],
+            [
+              "Website",
+              "www .embraer .com"
+            ]
+          ],
+          [
+            [
+              "Year",
+              "Revenue (US$ b) [ 60 ]",
+              "Net income (US$ m) [ 60 ]",
+              "Employees [ 61 ] [ 62 ]",
+              "Refs"
+            ],
+            [
+              "2013",
+              "6.2",
+              "342",
+              "21,648",
+              ""
+            ],
+            [
+              "2014",
+              "6.2",
+              "334",
+              "22,301",
+              ""
+            ],
+            [
+              "2015",
+              "5.9",
+              "69.2",
+              "23,050",
+              ""
+            ],
+            [
+              "2016",
+              "6.2",
+              "178",
+              "20,348",
+              ""
+            ],
+            [
+              "2017",
+              "2.5",
+              "264",
+              "20,320",
+              ""
+            ],
+            [
+              "2018",
+              "5.0",
+              "–178",
+              "20,530",
+              ""
+            ],
+            [
+              "2019",
+              "5.4",
+              "–322",
+              "21,271",
+              ""
+            ],
+            [
+              "2020",
+              "3.7",
+              "–731",
+              "18,125",
+              ""
+            ],
+            [
+              "2021",
+              "4.1",
+              "–44.7",
+              "18,320",
+              ""
+            ],
+            [
+              "2022",
+              "4.5",
+              "–185",
+              "19,475",
+              ""
+            ],
+            [
+              "2023",
+              "5.3",
+              "164",
+              "",
+              "[ 63 ]"
+            ],
+            [
+              "2024",
+              "6.4",
+              "310.5",
+              "20,000+",
+              "[ 64 ]"
+            ]
+          ],
+          [
+            [
+              "Year",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "1996",
+              "1997",
+              "1998",
+              "1999"
+            ],
+            [
+              "Deliveries",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "",
+              "4",
+              "32",
+              "60",
+              "96"
+            ],
+            [
+              "Year",
+              "2000",
+              "2001",
+              "2002",
+              "2003",
+              "2004",
+              "2005",
+              "2006",
+              "2007",
+              "2008",
+              "2009"
+            ],
+            [
+              "Deliveries",
+              "160",
+              "161",
+              "131",
+              "101",
+              "148",
+              "141",
+              "130",
+              "169",
+              "204",
+              "244"
+            ],
+            [
+              "Year",
+              "2010",
+              "2011",
+              "2012",
+              "2013",
+              "2014",
+              "2015",
+              "2016",
+              "2017",
+              "2018",
+              "2019"
+            ],
+            [
+              "Deliveries",
+              "246 [ 91 ]",
+              "204 [ 92 ]",
+              "205 [ 93 ]",
+              "209",
+              "208 [ 94 ]",
+              "221 [ 95 ]",
+              "225 [ 96 ]",
+              "210 [ 97 ]",
+              "181",
+              "192 [ 98 ]"
+            ],
+            [
+              "Year",
+              "2020",
+              "2021",
+              "2022",
+              "2023",
+              "2024",
+              "2025",
+              "2026",
+              "2027",
+              "2028",
+              "2029"
+            ],
+            [
+              "Deliveries",
+              "130 [ 99 ]",
+              "141 [ 100 ]",
+              "159 [ 101 ]",
+              "181 [ 102 ]",
+              "206 [ 103 ]",
+              "244 [ 104 ]",
+              "–",
+              "–",
+              "–",
+              "–"
+            ]
+          ],
+          [
+            [
+              ".mw-parser-output .navbar{display:inline;font-size:88%;font-weight:normal}.mw-parser-output .navbar-collapse{float:left;text-align:left}.mw-parser-output .navba"
+            ],
+            [
+              "Subsidiaries",
+              "EmbraerX Indústria Aeronáutica Neiva Eve Air Mobility"
+            ],
+            [
+              "Joint ventures",
+              "AMX International Boeing–Embraer joint venture OGMA"
+            ],
+            [
+              "Facilities",
+              "Embraer Unidade Gavião Peixoto Airport"
+            ],
+            [
+              "Related",
+              "Bombardier Aerospace and Embraer S.A. government subsidy controversy Ozires Silva"
+            ]
+          ],
+          [
+            [
+              "v t e Embraer aircraft"
+            ],
+            [
+              "Model numbers",
+              "100 110 111 120 (I) 120 (II) 121 123 (I) 123 (II) 135 BJ 140 145 H/I/MP/RS/SA 170 190 -300/400/500 ECJ 200 201 202 203 312 314 326 390 400 500 505 545 550 710 7"
+            ],
+            [
+              "Agricultural",
+              "EMB 202 Ipanema"
+            ],
+            [
+              "Airliners",
+              "Regional jets",
+              "Embraer ERJ family (ERJ135 / ERJ140 / ERJ145) E-Jet family (E170 / E175 / E190 / E195) E-Jet E2 family (E175-E2 / E190-E2 / E195-E2)"
+            ],
+            [
+              "Turboprops",
+              "EMB 110 Bandeirante EMB 120 Brasilia EMB 121 Xingu"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/f/f4/Sede-da-embraer.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://upload.wikimedia.org/wikipedia/commons/f/f4/Sede-da-embraer.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail_unscaled",
+          "https://en.wikipedia.org/static/images/icons/enwiki-25.svg",
+          "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+          "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/54/Embraer_logo.svg/250px-Embraer_logo.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/Sede-da-embraer.jpg/250px-Sede-da-embraer.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/en/thumb/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg/20px-OOjs_UI_icon_edit-ltr-progressive.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Embraer_E195-E2_Side.jpg/250px-Embraer_E195-E2_Side.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-c6b63d79152d",
+            "type": "image",
+            "title": "aircraft manufacturer in Brazil",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Sede-da-embraer.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "final_url": "https://upload.wikimedia.org/wikipedia/commons/f/f4/Sede-da-embraer.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail_unscaled",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "upload.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1af776a0003e",
+            "type": "image",
+            "title": "Wikipedia",
+            "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+            "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipedia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0997b8b9c241",
+            "type": "image",
+            "title": "The Free Encyclopedia",
+            "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+            "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The Free Encyclopedia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b75b26965c71",
+            "type": "image",
+            "title": "Increase",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Increase2.svg/20px-Increase2.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Increase",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ec0a02062e25",
+            "type": "image",
+            "title": "Edit this at Wikidata",
+            "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg/20px-OOjs_UI_icon_edit-ltr-progressive.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/8/8a/OOjs_UI_icon_edit-ltr-progressive.svg/20px-OOjs_UI_icon_edit-ltr-progressive.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Edit this at Wikidata",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7b9fea2fd10f",
+            "type": "image",
+            "title": "Embraer EMB 110 Bandeirante",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/SKL_in_flight_cropped_%28105091729%29.jpg/250px-SKL_in_flight_cropped_%28105091729%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6b/SKL_in_flight_cropped_%28105091729%29.jpg/250px-SKL_in_flight_cropped_%28105091729%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer EMB 110 Bandeirante",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a43de6efeda1",
+            "type": "image",
+            "title": "Embraer EMB 120 Brasilia",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Embraer_EMB_120_%28Skywest%29_N579SW_%282522672545%29.jpg/250px-Embraer_EMB_120_%28Skywest%29_N579SW_%282522672545%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/52/Embraer_EMB_120_%28Skywest%29_N579SW_%282522672545%29.jpg/250px-Embraer_EMB_120_%28Skywest%29_N579SW_%282522672545%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer EMB 120 Brasilia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-c2e65f2c86f6",
+            "type": "image",
+            "title": "Embraer ERJ family (ERJ 145)",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/N693AE_to_BWI.jpg/250px-N693AE_to_BWI.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/12/N693AE_to_BWI.jpg/250px-N693AE_to_BWI.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer ERJ family (ERJ 145)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0f8bd2eb1b2f",
+            "type": "image",
+            "title": "Embraer E-Jet family (Embraer 190)",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/N247JB_KJFK_%2837103752403%29.jpg/250px-N247JB_KJFK_%2837103752403%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8f/N247JB_KJFK_%2837103752403%29.jpg/250px-N247JB_KJFK_%2837103752403%29.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer E-Jet family (Embraer 190)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-43f8207c55bc",
+            "type": "image",
+            "title": "Embraer E-Jet E2 family (Embraer 190-E2)",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Wider%C3%B8e%2C_LN-WEA%2C_Embraer_E190-E2_%40_HEL.jpg/250px-Wider%C3%B8e%2C_LN-WEA%2C_Embraer_E190-E2_%40_HEL.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Wider%C3%B8e%2C_LN-WEA%2C_Embraer_E190-E2_%40_HEL.jpg/250px-Wider%C3%B8e%2C_LN-WEA%2C_Embraer_E190-E2_%40_HEL.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer E-Jet E2 family (Embraer 190-E2)",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d2a3d16196ed",
+            "type": "image",
+            "title": "Embraer EMB 314 Super Tucano",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/A-29_Over_Afghanistan.jpg/250px-A-29_Over_Afghanistan.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/A-29_Over_Afghanistan.jpg/250px-A-29_Over_Afghanistan.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer EMB 314 Super Tucano",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ef999103793b",
+            "type": "image",
+            "title": "Embraer EMB 312 Tucano",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Iran_Revolutionary_Guard_Air_Force_Embraer_EMB-312_Tucano.jpg/250px-Iran_Revolutionary_Guard_Air_Force_Embraer_EMB-312_Tucano.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Iran_Revolutionary_Guard_Air_Force_Embraer_EMB-312_Tucano.jpg/250px-Iran_Revolutionary_Guard_Air_Force_Embraer_EMB-312_Tucano.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "aircraft manufacturer in Brazil",
+            "source_url": "https://en.wikipedia.org/wiki/Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer EMB 312 Tucano",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://embraer.com/ede/pt/",
+      "result": {
+        "titulo": "Embraer Divisão Equipamentos A Embraer Divisão Equipamentos (EDE) desenvolve e produz diversos produtos para aplicações aeronáuticas, como trens de pouso, atuad",
+        "texto": "A oficina de manutenção da EDE possui a estrutura e qualificação necessárias para oferecer os serviços de manutenção, reparo e overhaul de trens de pouso, atuadores, amortecedores, servo controladores, válvulas e outros equipamentos mecânicos, hidráulicos e eletromecânicos. Contando com mais de 40 anos de experiência no desenvolvimento, fabricação e suporte pós venda em equipamentos para aviação, a EDE possui diversas certificações nacionais e internacionais, incluindo ANAC, FAA, EASA, autoridade de aviação civil do Reino Unido (UK) e DIRMAB. A oficina de manutenção da EDE está integrada às unidades de desenvolvimento, manufatura e marketing da empresa, o que gera a vantagem de oferecer um serviço aos clientes que é apoiada na capacidade, experiência e tecnologia que somente aqueles que desenvolvem e fabricam equipamentos originais possuem. Abaixo estão algumas de nossas capabilidades: Oficina de reparo Testes funcionais Inspeção e testes não destrutivos Usinagem Tratamentos de superfície Tratamentos térmicos Pintura",
+        "final": "https://embraer.com/ede/pt/",
+        "trecho_usado": "controladores, válvulas e outros equipamentos mecânicos, hidráulicos e eletromecânicos. Contando com mais de 40 anos de experiência no desenvolvimento, fabricação e suporte pós venda em equipamentos para aviação, a EDE possui diversas certificações nacionais e internacionais, incluindo ANAC, FAA, EASA, autoridade de aviação civil do Reino Unido (UK) e DIRMAB. A oficina de manutenção da EDE está",
+        "metadados": {
+          "titulo": "",
+          "descricao": "",
+          "canonica": "http://embraer.com/ede/pt/",
+          "og": {
+            "og:type": "article",
+            "og:site_name": "Embraer",
+            "og:url": "http://embraer.com/ede/pt/",
+            "og:locale": "pt_BR"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@embraer"
+          },
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Embraer",
+          "tipo": "article",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "A oficina de manutenção da EDE possui a estrutura e qualificação necessárias para oferecer os serviços de manutenção, reparo e overhaul de trens de pouso, atuadores, amortecedores, servo controladores, válvulas e outros equipamentos mecânicos, hidráulicos e eletromecânicos.\nContando com mais de 40 anos de experiência no desenvolvimento, fabricação e suporte pós venda em equipamentos para aviação, a EDE possui diversas certificações nacionais e internacionais, incluindo ANAC, FAA, EASA, autoridade de aviação civil do Reino Unido (UK) e DIRMAB.\nA oficina de manutenção da EDE está integrada às unidades de desenvolvimento, manufatura e marketing da empresa, o que gera a vantagem de oferecer um serviço aos clientes que é apoiada na capacidade, experiência e tecnologia que somente aqueles que desenvolvem e fabricam equipamentos originais possuem. Abaixo estão algumas de nossas capabilidades:\nInspeção e testes não destrutivos\nTratamentos de superfície"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.facebook.com/Embraer/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/embraer",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/embraer",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://br.linkedin.com/company/embraer",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://x.com/embraer",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://embraer.com/corporate-about/pt/",
+            "texto": "Sobre nós",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/corporate-careers/pt/",
+            "texto": "Carreiras",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/corporate-esg/overview/pt/",
+            "texto": "ESG",
+            "interno": true
+          },
+          {
+            "url": "https://ri.embraer.com.br/",
+            "texto": "Investidores",
+            "interno": false
+          },
+          {
+            "url": "https://embraer.com/media-center/pt/",
+            "texto": "Central de mídia",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/suppliers/pt",
+            "texto": "Fornecedores",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/more-businesses/pt/",
+            "texto": "OUTROS NEGÓCIOS",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/cdn-cgi/l/email-protection#d5a6b4b9b0a6fbb0b1b095b0b8b7a7b4b0a7fbb6bab8fbb7a7",
+            "texto": "[email protected]",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/corporate-innovation/",
+            "texto": "Inovação",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/corporate-careers/",
+            "texto": "Carreiras",
+            "interno": true
+          },
+          {
+            "url": "https://www.embraer.com/corporate-esg/overview/pt/",
+            "texto": "ESG",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/zh",
+            "texto": "China",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/commercial-aviation/pt/",
+            "texto": "Aviação Comercial",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/defense-security-overview/pt/",
+            "texto": "Defesa e Segurança",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/executive-jets-overview/pt/",
+            "texto": "Aviação Executiva",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/services-and-support-overview/pt/",
+            "texto": "Serviços & Suporte",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/agriculture/pt/",
+            "texto": "Aviação Agrícola",
+            "interno": true
+          },
+          {
+            "url": "https://ri.embraer.com.br/en/?_gl=1*1hloh3q*_gcl_au*MTYzOTcxNDg5OC4xNzcxOTQzOTc4",
+            "texto": "Investors",
+            "interno": false
+          },
+          {
+            "url": "https://compliance.embraer.com.br/",
+            "texto": "Integridade",
+            "interno": false
+          },
+          {
+            "url": "https://canalconfidencial.com.br/embraerhelpline/",
+            "texto": "Canal de denúncias - Helpline",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/embraerexecutivejets/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://embraer.com/termos-de-uso/pt/",
+            "texto": "Termos de uso",
+            "interno": true
+          },
+          {
+            "url": "https://embraer.com/privacidade/pt/",
+            "texto": "Privacidade",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.facebook.com/tr?id=581051987468790&ev=PageView&noscript=1",
+          "https://www.facebook.com/tr?id=752146324071279&ev=PageView&noscript=1",
+          "https://embraer.com/assets/images/ol-close.svg",
+          "https://embraer.com/assets/images/ol-close-wh.svg",
+          "https://embraer.com/assets/images/Embraer-logo.svg",
+          "https://embraer.com/assets/images/Embraer-logo-blue.svg",
+          "https://embraer.com/assets/images/menu_BU.svg",
+          "https://embraer.com/assets/images/menu_dark.svg",
+          "https://embraer.com/assets/images/close-ico-white.svg",
+          "https://embraer.com/assets/images/search.svg"
+        ],
+        "midia": [
+          {
+            "id": "med-bc0426d2a9de",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/Embraer-logo.svg",
+            "final_url": "https://embraer.com/assets/images/Embraer-logo.svg",
+            "source_title": "",
+            "source_url": "https://embraer.com/ede/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6bedc7cdd61a",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/menu_BU.svg",
+            "final_url": "https://embraer.com/assets/images/menu_BU.svg",
+            "source_title": "",
+            "source_url": "https://embraer.com/ede/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bc4b21b274a7",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/menu_dark.svg",
+            "final_url": "https://embraer.com/assets/images/menu_dark.svg",
+            "source_title": "",
+            "source_url": "https://embraer.com/ede/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e960e8fe7473",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/search.svg",
+            "final_url": "https://embraer.com/assets/images/search.svg",
+            "source_title": "",
+            "source_url": "https://embraer.com/ede/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a7a291f30810",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/sitesearch.svg",
+            "final_url": "https://embraer.com/assets/images/sitesearch.svg",
+            "source_title": "",
+            "source_url": "https://embraer.com/ede/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-94d58ae134c7",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/bannerArrow.svg",
+            "final_url": "https://embraer.com/assets/images/bannerArrow.svg",
+            "source_title": "",
+            "source_url": "https://embraer.com/ede/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-06a095957ee4",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/Embraer-mark.svg",
+            "final_url": "https://embraer.com/assets/images/Embraer-mark.svg",
+            "source_title": "",
+            "source_url": "https://embraer.com/ede/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6950e0a29921",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/assets/images/close.svg",
+            "final_url": "https://embraer.com/assets/images/close.svg",
+            "source_title": "",
+            "source_url": "https://embraer.com/ede/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-767b2c3d254b",
+            "type": "image",
+            "title": "Embraer",
+            "url": "https://embraer.com/media/ogvlqe0z/e190-e2_gpx_adrien-daste-2.jpg?v=1dd145c3d9c8ec0",
+            "final_url": "https://embraer.com/media/ogvlqe0z/e190-e2_gpx_adrien-daste-2.jpg?v=1dd145c3d9c8ec0",
+            "source_title": "",
+            "source_url": "https://embraer.com/ede/pt/",
+            "publisher": "embraer.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Embraer",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://aguasazuis.com.br",
+      "result": {
+        "titulo": "Home",
+        "texto": "Em construção na TKMS Estaleiro Brasil Sul, o Programa Fragatas Classe Tamandaré marca uma abordagem inédita na indústria naval sul-americana com um processo totalmente digital, conhecido como \"Paperless\". Essa metodologia elimina o uso de documentos impressos, como desenhos e manuais técnicos, substituindo-os por soluções digitais acessíveis em dezenas de totens e tablets distribuídos pela área de produção. Os engenheiros da TKMS no Brasil e na Alemanha atualizam documentos em tempo real, assegurando maior controle, precisão e segurança das informações.A digitalização dos processos não só aumenta a segurança dos dados – um requisito essencial em projetos militares de alta confidencialidade – mas também reduz o impacto ambiental, economizando recursos que seriam utilizados para impressão e distribuição de papéis. Por meio de dispositivos conectados, os trabalhadores têm acesso imediato aos desenhos técnicos em 2D e 3D, check-lists, manuais e procedimentos operacionais atualizados em tempo real, o que otimiza etapas como apontamento de mão de obra, rastreabilidade de materiais e verificação de qualidade.Além disso, a realidade aumentada já está sendo utilizada na construção das fragatas. Com óculos especiais, os técnicos conseguem visualizar hologramas sobrepostos às peças físicas, permitindo validar o posicionamento de montagem, conferir interferências entre setores e realizar verificações de qualidade. Essa tecnologia permite também que especialistas na Alemanha ofereçam suporte remoto, orientando as equipes em tempo real.",
+        "final": "https://www.aguasazuis.com.br:443/",
+        "trecho_usado": "fragatas. Com óculos especiais, os técnicos conseguem visualizar hologramas sobrepostos às peças físicas, permitindo validar o posicionamento de montagem, conferir interferências entre setores e realizar verificações de qualidade. Essa tecnologia permite também que especialistas na Alemanha ofereçam suporte remoto, orientando as equipes em tempo real.",
+        "metadados": {
+          "titulo": "Home",
+          "descricao": "",
+          "canonica": "https://www.aguasazuis.com.br/",
+          "og": {
+            "og:site_name": "thyssenkrupp",
+            "og:title": "Home",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "br",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "thyssenkrupp",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Em construção na TKMS Estaleiro Brasil Sul, o Programa Fragatas Classe Tamandaré marca uma abordagem inédita na indústria naval sul-americana com um processo totalmente digital, conhecido como \"Paperless\". Essa metodologia elimina o uso de documentos impressos, como desenhos e manuais técnicos, substituindo-os por soluções digitais acessíveis em dezenas de totens e tablets distribuídos pela área de produção. Os engenheiros da TKMS no Brasil e na Alemanha atualizam documentos em tempo real, assegurando maior controle, precisão e segurança das informações.A digitalização dos processos não só aumenta a segurança dos dados – um requisito essencial em projetos militares de alta confidencialidade – mas também reduz o impacto ambiental, economizando recursos que seriam utilizados para impressão e distribuição de papéis. Por meio de dispositivos conectados, os trabalhadores têm acesso imediato aos desenhos técnicos em 2D e 3D, check-lists, manuais e procedimentos operacionais atualizados em tempo real, o que otimiza etapas como apontamento de mão de obra, rastreabilidade de materiais e verificação de qualidade.Além disso, a realidade aumentada já está sendo utilizada na construção das frag"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.aguasazuis.com.br:443/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.aguasazuis.com.br:443/br#229027",
+            "texto": "Empresa |",
+            "interno": true
+          },
+          {
+            "url": "https://www.aguasazuis.com.br:443/br/fotos-e-videos/fale-conosco",
+            "texto": "Fale Conosco |",
+            "interno": true
+          },
+          {
+            "url": "https://aguasazuis.gupy.io/",
+            "texto": "Vagas |",
+            "interno": false
+          },
+          {
+            "url": "https://www.aguasazuis.com.br:443/en",
+            "texto": "English",
+            "interno": true
+          },
+          {
+            "url": "https://www.aguasazuis.com.br:443/br/progress-report",
+            "texto": "Progress Report",
+            "interno": true
+          },
+          {
+            "url": "https://www.aguasazuis.com.br:443/br/media",
+            "texto": "Media",
+            "interno": true
+          },
+          {
+            "url": "https://www.aguasazuis.com.br:443/br/fotos-e-videos/fale-conosco/fornecedores",
+            "texto": "Fornecedores",
+            "interno": true
+          },
+          {
+            "url": "https://www.marinha.mil.br/",
+            "texto": "Marinha do Brasil",
+            "interno": false
+          },
+          {
+            "url": "https://www.thyssenkrupp-brazil.com/empresa/area-de-negocio/naval-technology/estaleiro-brasil-sul",
+            "texto": "TKMS Estaleiro Brasil Sul",
+            "interno": false
+          },
+          {
+            "url": "https://www.thyssenkrupp-brazil.com",
+            "texto": "Saiba mais",
+            "interno": false
+          },
+          {
+            "url": "https://www.embraer.com",
+            "texto": "Saiba mais",
+            "interno": false
+          },
+          {
+            "url": "https://www.atech.com.br",
+            "texto": "Saiba mais",
+            "interno": false
+          },
+          {
+            "url": "https://www.aguasazuis.com.br:443/br/privacy-statement",
+            "texto": "Privacidade",
+            "interno": true
+          },
+          {
+            "url": "https://www.aguasazuis.com.br:443/br/privacidade",
+            "texto": "Privacidade para fornecedores",
+            "interno": true
+          },
+          {
+            "url": "https://thyssenkruppebs.gupy.io/",
+            "texto": "Vagas - TKMS Estaleiro Brasil Sul",
+            "interno": false
+          },
+          {
+            "url": "https://www.aguasazuis.com.br:443/br/noticias",
+            "texto": "Notícias",
+            "interno": true
+          },
+          {
+            "url": "https://www.facebook.com/sharer/sharer.php?u=",
+            "texto": "Facebook",
+            "interno": false
+          },
+          {
+            "url": "https://www.linkedin.com/shareArticle?mini=true&amp;url=&amp;title=&amp;source=",
+            "texto": "LinkedIn",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://ucpcdn.thyssenkrupp.com/_media/eyJrZXkiOiJfbWVkaWEvQWd1YXNBenVpcy9kYzRkMWVkOC02NTBjLTRjN2YtYTYwYy1iMTYyZDBjOTExZmEvQWd1YXMtQXp1aXMtYmxhY2stYW5kLXdoaXRlLXBvc2l0aXZlLnBuZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTI4MH19fQ==",
+          "https://ucpcdn.thyssenkrupp.com/img/logos/thyssenkrupp/thyssenkrupp_logo_claim.svg",
+          "https://ucpcdn.thyssenkrupp.com/_media/eyJrZXkiOiJfbWVkaWEvQWd1YXNBenVpcy8zZTVjMTM0Yi03MTg0LTRmMzEtOTMyMi1kODYzYTZhZTYyMWUvQUF6X3ZpZGVvLnBuZyIsImVkaXRzIjp7InJlc2l6ZSI6eyJ3aWR0aCI6MTI4MH19fQ==",
+          "https://ucpcdn.thyssenkrupp.com/_media/eyJrZXkiOiJfbWVkaWEvQWd1YXNBenVpcy81MTk3MjViMC1mNThiLTQ5ZGQtOTgyOC0xYjYxODhlNTJlNzUvMS0tMi0ucG5nIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMjgwfX19",
+          "https://ucpcdn.thyssenkrupp.com/_media/eyJrZXkiOiJfbWVkaWEvQWd1YXNBenVpcy85ZjI3NDA1YS0wYzg4LTQyNGItODczYy0zMjJjY2U4MGViOWIvbWlzc2FvLUFBei5qcGciLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEyODB9fX0=",
+          "https://ucpcdn.thyssenkrupp.com/_binary/AguasAzuis/97af4efb-4d39-4307-aaab-e7635e3deef5/4.svg",
+          "https://ucpcdn.thyssenkrupp.com/_binary/AguasAzuis/3e1cbaab-fcdf-4c67-8f3a-fa3d7cedd758/7.svg",
+          "https://ucpcdn.thyssenkrupp.com/_media/eyJrZXkiOiJfbWVkaWEvQWd1YXNBenVpcy9hNDQ0MmUxYy1jYzNjLTQ2ZDQtYTFiYy1hYmMyMGEyMmRlNzIvVEtNUy53ZWJwIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMjgwfX19",
+          "https://ucpcdn.thyssenkrupp.com/_media/eyJrZXkiOiJfbWVkaWEvQWd1YXNBenVpcy83MWMzMzMzNC1jNWFiLTRiOWMtOTUxYi1lODgzZDFjNzUwMWYvZW1icmFlci1sb2dvLndlYnAiLCJlZGl0cyI6eyJyZXNpemUiOnsid2lkdGgiOjEyODB9fX0=",
+          "https://ucpcdn.thyssenkrupp.com/_media/eyJrZXkiOiJfbWVkaWEvQWd1YXNBenVpcy80MzZkMmQzZi05ZmE0LTQzM2MtODNhZS00YzAzYmJkNWM0NTQvYXRlY2gtbG9nby53ZWJwIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjoxMjgwfX19"
+        ],
+        "midia": [
+          {
+            "id": "med-ee6ff3765b48",
+            "type": "image",
+            "title": "Águas Azuis",
+            "url": "https://ucpcdn.thyssenkrupp.com/img/logos/thyssenkrupp/thyssenkrupp_logo_claim.svg",
+            "final_url": "https://ucpcdn.thyssenkrupp.com/img/logos/thyssenkrupp/thyssenkrupp_logo_claim.svg",
+            "source_title": "Home",
+            "source_url": "https://www.aguasazuis.com.br:443/",
+            "publisher": "ucpcdn.thyssenkrupp.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Águas Azuis",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9f7a8c418785",
+            "type": "video",
+            "title": "Home",
+            "url": "https://thyssenkrupp.canto.global/direct/video/drvr9q4i213ld7g8k2j8ehig5p/HpRg8AuTamJBJbs9tkij7l-Fr54/original?content-type=video%2Fmp4&name=Aguas_Azuis_Novo_Site.mp4",
+            "final_url": "https://thyssenkrupp.canto.global/direct/video/drvr9q4i213ld7g8k2j8ehig5p/HpRg8AuTamJBJbs9tkij7l-Fr54/original?content-type=video%2Fmp4&name=Aguas_Azuis_Novo_Site.mp4",
+            "source_title": "Home",
+            "source_url": "https://www.aguasazuis.com.br:443/",
+            "publisher": "thyssenkrupp.canto.global",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+      "result": {
+        "titulo": "Talk:Embraer - Wikipedia",
+        "texto": "Embraer 175 or Embraer E175? [ edit ] Latest comment: 5 months ago 5 comments 3 people in discussion @: Back in October 2021 you made removing the 'E' prefix from the entire E-jet range (E170 to E195). Has there been any discussion about this naming policy, either here or elsewhere? Do you still believe it to be correct? RickyCourtney this edit Just a heads-up, I am going to disagree, and I will bring plenty of examples, not least of which are the number of sources all talking about Finnair recently ordering up to 46 aircraft. One of those sources is Embraer's own Media Center! Other sources include United, KLM, Luxair, aviationinfo.org, skybrary.aero, simpleflying.com, and Embraer E195-E2 Aviation Week (not a perfect example, I should have used American Airlines, meh!) Embraer Media Center, March 23, 2026 - Finnair selects Embraer E195-E2 Embraer Press Release, February 28, 2018 - granted certification by ANAC, FAA and EASA Embraer E190-E2 Aviation Week - Marathon Airlines Adds Fourth Embraer E195 Aviation Week - South Africa's Airlink Expands Reach With New Fleet Embraer E195-E2 Aviation Week - Air Serbia Completes Fleet Modernization With Final Delivery Embraer E195-E1 United Airlines Embraer E-175 () WendlingCrusader talk 02:38, 6 April 2026 (UTC) Reply First off, I welcome this conversation and I want to make it clear that I’m open minded, I’m not dead set either way, but some consistency would be nice. Secondly, I think it’s going to be hard to establish a definitive common name because Embraer’s communications has been all over the place. I based my initial changes based on a few official Embraer sources: Airport Planning Manual Audited Financial Prospectus Q425 Backlog and Deliveries I would consider these sources more authoritative than the marketing materials, as the Airport Planning Manual is a long-standing official document, and financial statements are audited and tend to have more internal review, with more \"eyes\" checking every line. Pinging those involved prior discussions: , () User:Canterbury Tail User:Dfadden RickyCourtney talk 02:53, 6 April 2026 (UTC) Reply Thanks for the ping. As i mentioned previously, I consider financial reports and airport planning manuals pretty niche, except within the industry. But more importantly, these are primary sources published by Embraer. tells us that primary sources should be treated with care, supported by reliable secondary sources and not given undue weight. So my interpretation of policy is that those sources, at least in a wikipedia context are authoritative than secondary sources, including the articles mentioned above by @ from publications like Aviation Week. (I'd caution against Simple Flying sources though, there has been some debate on wikipedia about that particular outlet's reliability). () WP:PSTS less WendlingCrusader Dfadden talk 01:58, 8 April 2026 (UTC) Reply Returning to @'s list of sources; note that these are not pure English-language sources; they are in-house translations of Embraer's original Portuguese documents? For instance the Q425 Backlog and Deliveries PDF is marked \"ri.embraer.com.br/en\" RickyCourtney This is the Portuguese version; original CARTEIRA DE PEDIDOS & ENTREGAS 4T25 Maybe I am nit-picking, but just supposing Embraer had translated it in-house, how would we approach these documents? ? not WP:NONENG Yes, of course I accept that Embraer's preferred presentation is unlikely to change through translation; but could it be another nail in the coffin? Probably not... which sources do we prefer FWIW I am raising a similar issue regarding Czech manufacturer LET, who appear to have dropped the hyphen from , specifically in literature that is derived The Czech alphabet is full of and other diacritics, and they do not use Q, W and X. Maybe they don't use hyphens either? But English language media does, and invariably names the aircraft type as \"L-410\", regardless of LET's own preference. Sorry - I'm digressing! Let L-410 Turbolet from their own language. háčeks () WendlingCrusader talk 13:21, 11 April 2026 (UTC) Reply A full month has elapsed, which is time enough for any further input. To add to the comments above, I will note that there seems to be no problem with the & associated family (EMB 120, etc) where it is perfectly clear that \"EMB\" stands for Embraer. Likewise the Embraer is never identified as just the \"\" (except as a redirect here on Wikipedia!) Embraer EMB 110 Bandeirante Embraer EMB 312 Tucano Embraer 312 Hence I will now revert back to the designations in place up until October 2021, as described above. () WendlingCrusader talk 14:01, 17 May 2026 (UTC) Reply",
+        "final": "https://en.wikipedia.org/wiki/Talk:Embraer",
+        "trecho_usado": "own language. háčeks () WendlingCrusader talk 13:21, 11 April 2026 (UTC) Reply A full month has elapsed, which is time enough for any further input. To add to the comments above, I will note that there seems to be no problem with the & associated family (EMB 120, etc) where it is perfectly clear that \"EMB\" stands for Embraer. Likewise the Embraer is never identified as just the \"\" (except as a",
+        "metadados": {
+          "titulo": "Talk:Embraer - Wikipedia",
+          "descricao": "",
+          "canonica": "https://en.wikipedia.org/wiki/Talk:Embraer",
+          "og": {
+            "og:title": "Talk:Embraer - Wikipedia",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "en",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Embraer 175 or Embraer E175?",
+            "texto": "@: Back in October 2021 you made removing the 'E' prefix from the entire E-jet range (E170 to E195). Has there been any discussion about this naming policy, either here or elsewhere? Do you still believe it to be correct? RickyCourtney this edit\nJust a heads-up, I am going to disagree, and I will bring plenty of examples, not least of which are the number of sources all talking about Finnair recently ordering up to 46 aircraft. One of those sources is Embraer's own Media Center! Other sources include United, KLM, Luxair, aviationinfo.org, skybrary.aero, simpleflying.com, and Embraer E195-E2 Aviation Week\n(not a perfect example, I should have used American Airlines, meh!) Embraer Media Center, March 23, 2026 - Finnair selects Embraer E195-E2 Embraer Press Release, February 28, 2018 - granted certification by ANAC, FAA and EASA Embraer E190-E2 Aviation Week - Marathon Airlines Adds Fourth Embraer E195 Aviation Week - South Africa's Airlink Expands Reach With New Fleet Embraer E195-E2 Aviation Week - Air Serbia Completes Fleet Modernization With Final Delivery Embraer E195-E1 United Airlines Embraer E-175\n() WendlingCrusader talk 02:38, 6 April 2026 (UTC) Reply\nFirst off, I welcome this conversation and I want to make it clear that I’m open minded, I’m not dead set either way, but some consistency would be nice.\nSecondly, I think it’s going to be hard to establish a definitive common name because Embraer’s communications has been all over the place.\nI based my initial changes based on a few official Embraer sources:\nAudited Financial Prospectus\nQ425 Backlog and Deliveries\nI would consider these sources more authoritative than the marketing materials, as the Airport Planning Manual is a long-standing official document, and financial statements are audited and tend to have more internal review, with more \"eyes\" checking every line.\nPinging those involved prior discussions: , () User:Canterbury Tail User:Dfadden RickyCourtney talk 02:53, 6 April 2026 (UTC) Reply\nThanks for the ping. As i mentioned previously, I consider financial reports and airport planning manuals pretty niche, except within the industry. But more importantly, these are primary sources published by Embraer. tells us that primary sources should be treated with care, supported by reliable secondary sources and not given undue weight. So my interpretation of policy is that those sources, at least in a wikipedia context are authoritative than secondary sources, including the articles mentioned above by @ from publications like Aviation Week. (I'd caution against Simple Flying sources though, there has been some debate on wikipedia about that particular outlet's reliability). () WP:PSTS less WendlingCrusader Dfadden talk 01:58, 8 April 2026 (UTC) Reply\nReturning to @'s list of sources; note that these are not pure English-language sources; they are in-house translations of Embraer's original Portuguese documents? For instance the Q425 Backlog and Deliveries PDF is marked \"ri.embraer.com.br/en\" RickyCourtney\nThis is the Portuguese version; original CARTEIRA DE PEDIDOS & ENTREGAS 4T25\nMaybe I am nit-picking, but just supposing Embraer had translated it in-house, how would we approach these documents? ? not WP:NONENG\nYes, of course I accept that Embraer's preferred presentation is unlikely to change through translation; but could it be another nail in the coffin? Probably not... which sources do we prefer\nFWIW I am raising a similar issue regarding Czech manufacturer LET, who appear to have dropped the hyphen from , specifically in literature that is derived The Czech alphabet is full of and other diacritics, and they do not use Q, W and X. Maybe they don't use hyphens either? But English language media does, and invariably names the aircraft type as \"L-410\", regardless of LET's own preference. Sorry - I'm digressing! Let L-410 Turbolet from their own language. háčeks\n() WendlingCrusader talk 13:21, 11 April 2026 (UTC) Reply\nA full month has elapsed, which is time enough "
+          }
+        ],
+        "links": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Embraer",
+            "texto": "Article",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:WhatLinksHere/Talk:Embraer",
+            "texto": "What links here",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:RecentChangesLinked/Talk:Embraer",
+            "texto": "Related changes",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:NewSection/Talk:Embraer",
+            "texto": "Start a new topic",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Talk:Embraer/Archive_1",
+            "texto": "1",
+            "interno": true
+          },
+          {
+            "url": "https://www.embraer.com/media-center/en/?mediatype=News&amp;detail=24788-Finnair-selects-Embraer-E195-E2%2C-ordering-up-to-46-aircraft",
+            "texto": "Embraer Media Center, March 23, 2026 - Finnair selects Embraer E195-E2",
+            "interno": false
+          },
+          {
+            "url": "https://embraer.com/global/en/news#/7147-embraer-e190-e2-granted-certification-by-anac-faa-and-easa",
+            "texto": "Embraer Press Release, February 28, 2018 - Embraer E190-E2 granted certification by ANAC, FAA and EASA",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Embraer_EMB_110_Bandeirante",
+            "texto": "Embraer EMB 110 Bandeirante",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Embraer_EMB_312_Tucano",
+            "texto": "Embraer EMB 312 Tucano",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Embraer_312",
+            "texto": "Embraer 312",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Main_Page",
+            "texto": "Main page",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:Contents",
+            "texto": "Contents",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Portal:Current_events",
+            "texto": "Current events",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:Random",
+            "texto": "Random article",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:About",
+            "texto": "About Wikipedia",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:Contact_us",
+            "texto": "Contact us",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Help:Contents",
+            "texto": "Help",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Help:Introduction",
+            "texto": "Learn to edit",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:Community_portal",
+            "texto": "Community portal",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:RecentChanges",
+            "texto": "Recent changes",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Wikipedia:File_upload_wizard",
+            "texto": "Upload file",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:SpecialPages",
+            "texto": "Special pages",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Special:Search",
+            "texto": "Search",
+            "interno": true
+          },
+          {
+            "url": "https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=en.wikipedia.org&amp;uselang=en",
+            "texto": "Donate",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/w/index.php?title=Special:CreateAccount&amp;returnto=Talk%3AEmbraer",
+            "texto": "Create account",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/w/index.php?title=Special:UserLogin&amp;returnto=Talk%3AEmbraer",
+            "texto": "Log in",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/w/index.php?title=Talk:Embraer&amp;action=edit&amp;section=new",
+            "texto": "Add topic",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "texto": "Talk",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/w/index.php?title=Talk:Embraer&amp;action=edit",
+            "texto": "Edit",
+            "interno": true
+          },
+          {
+            "url": "https://en.wikipedia.org/w/index.php?title=Talk:Embraer&amp;action=history",
+            "texto": "View history",
+            "interno": true
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "This is the talk page for discussing improvements to the Embraer article. This is not a forum for general discussion of the subject of the article."
+            ],
+            [
+              "Add new text under old text. New to Wikipedia? Welcome! Learn to edit ; get help . Start a new topic Assume good faith Be polite and avoid personal attacks Be w"
+            ],
+            [
+              "Find sources: Google ( books · news · scholar · free images · WP refs ) · FENS · JSTOR · TWL"
+            ],
+            [
+              "Archives : 1"
+            ]
+          ],
+          [
+            [
+              "",
+              "This article is rated B-class on Wikipedia's content assessment scale. It is of interest to the following WikiProjects :"
+            ],
+            [
+              ".mw-parser-output .wpb-header,.mw-parser-output .wpb-metadata,.mw-parser-output .wpb-iefix{display:none}.mw-parser-output .wpb-header-name{text-align:right;padd",
+              "Brazil : Transportation High‑importance"
+            ],
+            [
+              "",
+              ".mw-parser-output .portalbox{padding:0;margin:0.5em 0;display:table;box-sizing:border-box;max-width:175px;list-style:none}.mw-parser-output .portalborder{border",
+              ""
+            ],
+            [
+              "High",
+              "This article has been rated as High-importance on the project's importance scale ."
+            ],
+            [
+              "",
+              "This article is supported by the Transportation in Brazil task force (assessed as High-importance )."
+            ]
+          ],
+          [
+            [
+              "",
+              "Aviation : Aircraft"
+            ],
+            [
+              "",
+              "Aviation portal This article is within the scope of the Aviation WikiProject . If you would like to participate, please visit the project page, where you can jo",
+              ""
+            ],
+            [
+              "",
+              "This article has been checked against the following criteria for B-class status:",
+              ""
+            ],
+            [
+              "Referencing and citation: criterion met Coverage and accuracy: criterion met Structure: criterion met Grammar and style: criterion met Supporting materials: cri",
+              ""
+            ]
+          ],
+          [
+            [
+              "",
+              "Companies High‑importance"
+            ],
+            [
+              "",
+              "Companies portal This article is within the scope of WikiProject Companies , a collaborative effort to improve the coverage of companies on Wikipedia. If you wo",
+              ""
+            ],
+            [
+              "High",
+              "This article has been rated as High-importance on the project's importance scale ."
+            ],
+            [
+              "WikiProject Companies To-do:"
+            ],
+            [
+              "\"}\">",
+              "Here are some tasks awaiting attention: Article requests : Wikipedia:Requested articles/Business and economics/Companies Assess : Category:Unassessed company ar"
+            ]
+          ],
+          [
+            [
+              "",
+              "Military history : Aviation"
+            ],
+            [
+              "",
+              "This article is within the scope of WikiProject Military history . If you would like to participate, please visit the project page, where you can join the proje",
+              ""
+            ],
+            [
+              "",
+              "This article has been checked against the following criteria for B-class status:",
+              ""
+            ],
+            [
+              "Referencing and citation: criterion met Coverage and accuracy: criterion met Structure: criterion met Grammar and style: criterion met Supporting materials: cri",
+              ""
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://en.wikipedia.org/static/images/icons/enwiki-25.svg",
+          "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+          "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+          "https://thumb.wikimedia.org/wikipedia/en/thumb/5/5f/Symbol_b_class.svg/40px-Symbol_b_class.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/120px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Road-substub.svg/40px-Road-substub.svg.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Wrightflyer_thumb2.jpg/40px-Wrightflyer_thumb2.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Wrightflyer_thumb2.jpg/120px-Wrightflyer_thumb2.jpg?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/68/Aviacionavion.png/40px-Aviacionavion.png?utm_source=en.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-1af776a0003e",
+            "type": "image",
+            "title": "Wikipedia",
+            "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+            "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipedia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0997b8b9c241",
+            "type": "image",
+            "title": "The Free Encyclopedia",
+            "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+            "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "en.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The Free Encyclopedia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a5e0f126b6d6",
+            "type": "image",
+            "title": "WikiProject icon",
+            "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/40px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WikiProject icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5d6ead6a421f",
+            "type": "image",
+            "title": "WikiProject icon",
+            "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/120px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/0/05/Flag_of_Brazil.svg/120px-Flag_of_Brazil.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WikiProject icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-038d1f6cc3df",
+            "type": "image",
+            "title": "Taskforce icon",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Road-substub.svg/40px-Road-substub.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/Road-substub.svg/40px-Road-substub.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Taskforce icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-6d7d66f4fac7",
+            "type": "image",
+            "title": "WikiProject icon",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Wrightflyer_thumb2.jpg/40px-Wrightflyer_thumb2.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Wrightflyer_thumb2.jpg/40px-Wrightflyer_thumb2.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WikiProject icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-b82a357f4ee4",
+            "type": "image",
+            "title": "WikiProject icon",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Wrightflyer_thumb2.jpg/120px-Wrightflyer_thumb2.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/62/Wrightflyer_thumb2.jpg/120px-Wrightflyer_thumb2.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WikiProject icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-9ed2f3319d9b",
+            "type": "image",
+            "title": "B checklist",
+            "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/2/25/Bclass-checklist.svg/20px-Bclass-checklist.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/2/25/Bclass-checklist.svg/20px-Bclass-checklist.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "B checklist",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0e10ddd56f6a",
+            "type": "image",
+            "title": "Taskforce icon",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Antonov_An-124_Ruslan_silhouette.svg/40px-Antonov_An-124_Ruslan_silhouette.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Antonov_An-124_Ruslan_silhouette.svg/40px-Antonov_An-124_Ruslan_silhouette.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Taskforce icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dd9bb62adb54",
+            "type": "image",
+            "title": "WikiProject icon",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Factory_1b.svg/40px-Factory_1b.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Factory_1b.svg/40px-Factory_1b.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WikiProject icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-042a27f30f2d",
+            "type": "image",
+            "title": "WikiProject icon",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Factory_1b.svg/120px-Factory_1b.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b6/Factory_1b.svg/120px-Factory_1b.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WikiProject icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ae38e040d5ad",
+            "type": "image",
+            "title": "WikiProject icon",
+            "url": "https://thumb.wikimedia.org/wikipedia/en/thumb/6/65/Waricon.svg/40px-Waricon.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/en/thumb/6/65/Waricon.svg/40px-Waricon.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "Talk:Embraer - Wikipedia",
+            "source_url": "https://en.wikipedia.org/wiki/Talk:Embraer",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "WikiProject icon",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "c787058192db503f3f71",
+            "url": "https://embraer.com/pt/",
+            "title": "Bem-vindo a Embraer",
+            "origin": "bing",
+            "query": "Embraer",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "A Embraer é uma das líderes mundiais da indústria aeroespacial, atuando nos segmentos de Aviação Comercial, Jatos Executivos, Defesa & Segurança e Serviços & Su"
+          },
+          {
+            "id": "15eb1f17f06999cc538c",
+            "url": "https://embraer.com/en/",
+            "title": "Welcome to Embraer",
+            "origin": "bing",
+            "query": "Embraer",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "With more than five decades of expertise in designing, manufacturing, certifying and supporting high performance aircraft in commercial aviation, business aviat"
+          },
+          {
+            "id": "a257f341e1a0e60888cf",
+            "url": "https://pt.wikipedia.org/wiki/Embraer",
+            "title": "Embraer – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "Embraer",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "A Embraer tornou-se a terceira maior fabricante de jatos comerciais do mundo e líder absoluta no segmento de até 130 assentos. Para atender demandas globais est"
+          },
+          {
+            "id": "e6ff1ac06020967c7fd9",
+            "url": "https://en.wikipedia.org/wiki/Embraer",
+            "title": "Embraer - Wikipedia",
+            "origin": "bing",
+            "query": "Embraer",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "In 2000, Embraer became a public limited company (Sociedade Anônima) with its shares traded in both the United States (NYSE) and Brazil (B3). Embraer has divisi"
+          },
+          {
+            "id": "743f1c0c2ff7845b0af5",
+            "url": "https://embraer.izirh.io/",
+            "title": "izirh",
+            "origin": "bing",
+            "query": "Embraer",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Acreditamos que um emprego é capaz de transformar um indivíduo e tudo à sua volta"
+          },
+          {
+            "id": "a0702c212bcb8f57ecc2",
+            "url": "https://aeroin.net/embraer/",
+            "title": "Notícias da Embraer - AEROIN",
+            "origin": "bing",
+            "query": "Embraer",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Informações da evolução da Embraer, com novos lançamentos, inovações, ESG, Sustentabilidade. Cobertura sobre os principais desenvolvimentos globais."
+          }
+        ],
+        "unique_candidates": 6,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (Embraer)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Embraer)",
+        "ddg: bloqueado (Embraer)",
+        "marginalia: sem resultados (Embraer)",
+        "— recuperação por lacuna —",
+        "bing: 6 resultados (quem fundou embraer ano produtos ela fab)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (quem fundou embraer ano produtos ela fab)",
+        "marginalia: 1 resultados (quem fundou embraer ano produtos ela fab)",
+        "marginalia: sem correspondência com o pedido; tentando outro provedor (quem fundou embraer ano produtos ela fab)",
+        "wikipedia: sem resultados (quem fundou embraer ano produtos ela fab)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Embraer",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Quem fundou a Embraer, em que ano e quais produtos ela fabrica?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "datas/anos pedidos não aparecem nas fontes",
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-676a8f7cc7e4",
+            "type": "explicit_attribute",
+            "description": "Fundadores",
+            "entity": "Embraer",
+            "attribute": "founders",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Fundadores",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-2339fdfa4c9c",
+            "type": "explicit_attribute",
+            "description": "Data de fundação",
+            "entity": "Embraer",
+            "attribute": "foundation_date",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Data de fundação",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-21836731885c",
+            "type": "explicit_attribute",
+            "description": "Produtos",
+            "entity": "Embraer",
+            "attribute": "products",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false
+            },
+            "expected_information": "Produtos",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://embraer.com/pt/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S2",
+          "url": "https://en.wikipedia.org/wiki/Embraer",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://embraer.com/ede/pt/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "921f27b4f3f82f5e400abff88858dd5761cc4c03",
+  "dataset_sha256": "6f38b89f96367212ba5e68888f57bbb43e7ab7331047eaac7df6f13e1bf4dee2"
+}

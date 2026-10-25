@@ -1,0 +1,195 @@
+{
+  "scope": "ANNOTATED_CORPUS_SYNTHETIC_AGENT_ANNOTATED_NOT_GLOBAL_PRECISION",
+  "milliseconds": 72.96,
+  "aggregate": {
+    "n": 17,
+    "tp": 5,
+    "fp": 0,
+    "fn": 0,
+    "tn": 12,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.0,
+    "partial_support_recall": 1.0,
+    "direct_support_precision": 1.0,
+    "incorrectly_promoted_partials": 0,
+    "requirement_coverage": 1.0,
+    "confusion": {
+      "DIRECT_SUPPORT -> DIRECT_SUPPORT": 4,
+      "WRONG_ATTRIBUTE -> REJECTED": 2,
+      "UNREAD -> REJECTED": 4,
+      "TOPIC_ONLY -> REJECTED": 4,
+      "WRONG_ENTITY -> REJECTED": 2,
+      "PARTIAL_SUPPORT -> PARTIAL_SUPPORT": 1
+    }
+  },
+  "categories": {
+    "sealed": {
+      "n": 17,
+      "tp": 5,
+      "fp": 0,
+      "fn": 0,
+      "tn": 12,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0,
+      "partial_support_recall": 1.0,
+      "direct_support_precision": 1.0,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": 1.0,
+      "confusion": {
+        "DIRECT_SUPPORT -> DIRECT_SUPPORT": 4,
+        "WRONG_ATTRIBUTE -> REJECTED": 2,
+        "UNREAD -> REJECTED": 4,
+        "TOPIC_ONLY -> REJECTED": 4,
+        "WRONG_ENTITY -> REJECTED": 2,
+        "PARTIAL_SUPPORT -> PARTIAL_SUPPORT": 1
+      }
+    }
+  },
+  "decisions": [
+    {
+      "id": "sealed-1-1",
+      "domain": "sealed",
+      "gold": "DIRECT_SUPPORT",
+      "prediction": "DIRECT_SUPPORT",
+      "retained": true,
+      "complete": true
+    },
+    {
+      "id": "sealed-1-2",
+      "domain": "sealed",
+      "gold": "WRONG_ATTRIBUTE",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-1-3",
+      "domain": "sealed",
+      "gold": "UNREAD",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-1-4",
+      "domain": "sealed",
+      "gold": "TOPIC_ONLY",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-2-1",
+      "domain": "sealed",
+      "gold": "DIRECT_SUPPORT",
+      "prediction": "DIRECT_SUPPORT",
+      "retained": true,
+      "complete": true
+    },
+    {
+      "id": "sealed-2-2",
+      "domain": "sealed",
+      "gold": "WRONG_ATTRIBUTE",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-2-3",
+      "domain": "sealed",
+      "gold": "UNREAD",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-2-4",
+      "domain": "sealed",
+      "gold": "TOPIC_ONLY",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-3-1",
+      "domain": "sealed",
+      "gold": "DIRECT_SUPPORT",
+      "prediction": "DIRECT_SUPPORT",
+      "retained": true,
+      "complete": true
+    },
+    {
+      "id": "sealed-3-2",
+      "domain": "sealed",
+      "gold": "WRONG_ENTITY",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-3-3",
+      "domain": "sealed",
+      "gold": "UNREAD",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-3-4",
+      "domain": "sealed",
+      "gold": "TOPIC_ONLY",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-3-5",
+      "domain": "sealed",
+      "gold": "PARTIAL_SUPPORT",
+      "prediction": "PARTIAL_SUPPORT",
+      "retained": true,
+      "complete": false
+    },
+    {
+      "id": "sealed-4-1",
+      "domain": "sealed",
+      "gold": "DIRECT_SUPPORT",
+      "prediction": "DIRECT_SUPPORT",
+      "retained": true,
+      "complete": true
+    },
+    {
+      "id": "sealed-4-2",
+      "domain": "sealed",
+      "gold": "WRONG_ENTITY",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-4-3",
+      "domain": "sealed",
+      "gold": "UNREAD",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "sealed-4-4",
+      "domain": "sealed",
+      "gold": "TOPIC_ONLY",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    }
+  ],
+  "corpus_sha256": "f406c5ec99c8df16f3368c6ff270c03ddfb1566d33820f17165f88a786201254",
+  "split": "all",
+  "revision": "f5f1561f1989708671e03c835bdef6b4f8743dc6"
+}

@@ -1,0 +1,20 @@
+.....F.......................                                            [100%]
+================================== FAILURES ===================================
+____________ test_local_antecedent_and_adjacent_operation_heading _____________
+
+    def test_local_antecedent_and_adjacent_operation_heading():
+        q='Companhia Boreal, produtos?'
+        cov=eg.requirement_coverage(q,[src('A Companhia Boreal foi fundada em 1952.\n\nEla fabrica motores e geradores.')])
+        assert cov['complete']
+        assert any('Ela fabrica' in p['text'] and 'Companhia Boreal' in p['text'] for p in cov['passages'])
+        assert not eg.requirement_coverage(q,[src('A Companhia Boreal vende peças. A Empresa Delta foi fundada em 1954.\n\nEla fabrica motores.')])['complete']
+>       assert states('Pacote.Array.copy comportamento?','Pacote.Array.copy()\nReturns a new array without modifying the original.')['behavior']=='SUPPORTED'
+E       AssertionError: assert 'DISCOVERED' == 'SUPPORTED'
+E         
+E         - SUPPORTED
+E         + DISCOVERED
+
+tests\test_evidence_calibration_v5994.py:68: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_evidence_calibration_v5994.py::test_local_antecedent_and_adjacent_operation_heading
+1 failed, 28 passed in 1.15s

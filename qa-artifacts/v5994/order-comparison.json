@@ -1,0 +1,34 @@
+{
+  "scope": "LIVE_EXTERNAL_FRESH_ORDER_ENGINE_COUNTERS_NOT_FACTUAL_GOLD",
+  "runs": {
+    "order-baseline-sealed": {
+      "cases": 6,
+      "eligible_reads": 1,
+      "cases_with_eligible_read": 1,
+      "opened": 18,
+      "calls": 26,
+      "fetches": 48,
+      "errors": 0,
+      "median_seconds": 10.5955,
+      "supported_requirement_flags": 1,
+      "partial_requirement_flags": 0
+    },
+    "order-after": {
+      "cases": 6,
+      "eligible_reads": 1,
+      "cases_with_eligible_read": 1,
+      "opened": 18,
+      "calls": 26,
+      "fetches": 48,
+      "errors": 0,
+      "median_seconds": 7.4205,
+      "supported_requirement_flags": 1,
+      "partial_requirement_flags": 0
+    }
+  },
+  "limits": [
+    "No model/chat or independent human judgments in retrieval probes.",
+    "Earlier 12-question set and 17-example sealed set are now diagnostics.",
+    "Do not tune from this new held-out output."
+  ]
+}

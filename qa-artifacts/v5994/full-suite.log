@@ -1,0 +1,71 @@
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 13%]
+........................................................................ [ 18%]
+......................................................s................. [ 22%]
+........................................................................ [ 27%]
+........................................................................ [ 31%]
+........................................................................ [ 36%]
+........................................................................ [ 40%]
+........................................................................ [ 45%]
+.............................F.......................................... [ 49%]
+.................................................................s...... [ 54%]
+........................................................................ [ 58%]
+........................................................................ [ 63%]
+........................................................................ [ 67%]
+.............................................................ss......... [ 72%]
+s....................................................................... [ 76%]
+........................................................................ [ 81%]
+...................................................F.................... [ 85%]
+........................................................................ [ 90%]
+........................................................................ [ 94%]
+........................................................................ [ 99%]
+........                                                                 [100%]
+================================== FAILURES ===================================
+___________________ test_http_202_sem_corpo_e_vazio_honesto ___________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000138F4296350>
+
+    def test_http_202_sem_corpo_e_vazio_honesto(monkeypatch):
+        _sem_ssrf(monkeypatch)
+        _abrir_http(monkeypatch, status=202, corpo=b"")
+        with pytest.raises(sp.ErroProvedor) as ei:
+            sp.buscar("bing", "abs freio")
+>       assert ei.value.codigo == "vazio"
+E       AssertionError: assert 'IndexError' == 'vazio'
+E         
+E         - vazio
+E         + IndexError
+
+tests\test_providers_v57.py:162: AssertionError
+_ test_deep_aspect_accepts_related_english_api_document_instead_of_dropping_it _
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-479/test_deep_aspect_accepts_relat0')
+
+    def test_deep_aspect_accepts_related_english_api_document_instead_of_dropping_it(tmp_path):
+        import pc_agent,research_agents
+        db=pc_agent.open_db(tmp_path/'qa.sqlite')
+        job=research_agents.criar_job(db,'local','asyncio.TaskGroup documentação oficial exemplos e limitações',conv='qa-chat',modo='profunda')
+        found=[{'titulo':'Task groups','url':'https://docs.example/taskgroup'}]
+        def read(url):
+            return {'titulo':'Task groups','texto':'class asyncio . TaskGroup(): Examples and limitations of structured concurrency. '*20,
+                    'final':url,'texto_lido':True}
+        result=research_agents.agente_analista(db,job,{'alvo':'limitações'},found,read,teto_paginas=1)
+>       assert result and db.execute('select count(*) from evidence').fetchone()[0]>0
+E       assert ([])
+
+tests\test_source_recovery_v5991.py:265: AssertionError
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_providers_v57.py::test_http_202_sem_corpo_e_vazio_honesto
+FAILED tests/test_source_recovery_v5991.py::test_deep_aspect_accepts_related_english_api_document_instead_of_dropping_it
+2 failed, 1585 passed, 5 skipped, 2 warnings in 249.49s (0:04:09)

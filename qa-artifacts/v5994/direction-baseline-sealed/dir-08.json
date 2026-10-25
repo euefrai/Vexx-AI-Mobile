@@ -1,0 +1,3373 @@
+{
+  "id": "dir-08",
+  "category": "universal",
+  "query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 10.705,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "stackexchange",
+      "query": "Map.prototype.set",
+      "candidates": 6
+    },
+    {
+      "provider": "hn",
+      "query": "Map.prototype.set",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Map.prototype.set",
+      "candidates": 6
+    },
+    {
+      "provider": "stackexchange",
+      "query": "javascript map.prototype.set sintaxe altera mapa original",
+      "error": "vazio"
+    },
+    {
+      "provider": "hn",
+      "query": "javascript map.prototype.set sintaxe altera mapa original",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "javascript map.prototype.set sintaxe altera mapa original",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Map.prototype.set&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Map.prototype.set&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 3894
+    },
+    {
+      "url": "https://www.bing.com/search?q=javascript+map.prototype.set+sintaxe+altera+mapa+original&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=javascript+map.prototype.set+sintaxe+altera+mapa+original&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5025
+    },
+    {
+      "url": "https://stackoverflow.com/questions/71181442/v8-how-to-debug-map-prototype-set-and-orderedhashtable",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+      "final": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+      "chars": 229294
+    },
+    {
+      "url": "https://www.enable-javascript.com/pt/",
+      "final": "https://www.enable-javascript.com/pt/",
+      "chars": 27477
+    },
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+      "final": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+      "chars": 202074
+    },
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+      "final": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+      "chars": 189190
+    },
+    {
+      "url": "https://www.w3schools.com/Js/",
+      "final": "https://www.w3schools.com/Js/",
+      "chars": 259134
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+    "domain": "general",
+    "original_request": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+    "resolved_request": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:22:35.492350+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "7b200288c3cdce709e73",
+        "url": "https://stackoverflow.com/questions/71181442/v8-how-to-debug-map-prototype-set-and-orderedhashtable",
+        "title": "v8 - how to debug Map.prototype.set and OrderedHashTable?",
+        "origin": "stackexchange",
+        "query": "Map.prototype.set",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "I'm learning more about v8 internals as a hobby project. For this example, I'm trying to debug and understand how Javascript Map.prototype.set actually works un",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "36806442b4fc132fb765",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+        "title": "JavaScript - MDN Web Docs",
+        "origin": "bing",
+        "query": "javascript map.prototype.set sintaxe altera mapa original",
+        "date": "sáb., 24 out. 2026 13:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "outros. Array Boolean Date Error Function JSON Math Number Object RegExp String Map Set WeakMap WeakSet Expressões e operadores Saiba mais sobre o comportamento",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 5674,
+        "final_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "829b57a2264c840d99df",
+        "url": "https://www.enable-javascript.com/pt/",
+        "title": "Como habilitar o JavaScript no seu navegador e por que",
+        "origin": "bing",
+        "query": "javascript map.prototype.set sintaxe altera mapa original",
+        "date": "sáb., 24 out. 2026 11:01:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "\"Content settings...\". Quando a janela de diálogo abrir, procure pela seção \"JavaScript\" e marque a opção \"Allow all sites to run JavaScript (recommended)\". Cli",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 2262,
+        "final_url": "https://www.enable-javascript.com/pt/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "905dddee462b85f651dd",
+        "url": "https://www.w3schools.com/Js/",
+        "title": "JavaScript Tutorial - W3Schools",
+        "origin": "bing",
+        "query": "javascript map.prototype.set sintaxe altera mapa original",
+        "date": "dom., 25 out. 2026 07:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "developers learn: 3 languages must to define the content of web pages HTML to specify the layout of web pages CSS to program the behavior of web pages JavaScrip",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 3037,
+        "final_url": "https://www.w3schools.com/Js/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "c24a4bb1e5f5b1c9410f",
+        "url": "https://www.javascripttutorial.net/",
+        "title": "JavaScript Tutorial",
+        "origin": "bing",
+        "query": "javascript map.prototype.set sintaxe altera mapa original",
+        "date": "dom., 25 out. 2026 07:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "JavaScript Tutorial provides you with many practical tutorials that help you learn JavaScript from scratch quickly and effectively.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "b27e6cc55d526d30cb34",
+        "url": "https://pt.wikipedia.org/wiki/Javascript",
+        "title": "JavaScript – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "javascript map.prototype.set sintaxe altera mapa original",
+        "date": "sáb., 24 out. 2026 14:00:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "JavaScript permite páginas da Web interativas e, portanto, é uma parte essencial dos aplicativos da web. A grande maioria dos sites usa, e todos os principais n",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "db86cdbb09de5cefbbf1",
+        "url": "https://stackoverflow.com/questions/38328736/map-prototype-set-returns-with-undefined-in-internet-explorer-11",
+        "title": "Map.prototype.set returns with undefined in internet explorer 11",
+        "origin": "stackexchange",
+        "query": "Map.prototype.set",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "I'm trying to build a react application, and use react-css-modules. Everything runs fine under FF and Chrome, but in IE11 I encounter the following issue, at pa",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "1f297cad465f26f9d20d",
+        "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+        "title": "JavaScript - MDN",
+        "origin": "bing",
+        "query": "javascript map.prototype.set sintaxe altera mapa original",
+        "date": "dom., 25 out. 2026 11:21:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "JavaScript (JS) is a lightweight interpreted (or just-in-time compiled) programming language with first-class functions. While it is most well-known as the scri",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "4ee37d4968810f680742",
+        "url": "https://stackoverflow.com/questions/35058791/cant-extend-es6-map",
+        "title": "Can't extend ES6 Map?",
+        "origin": "stackexchange",
+        "query": "Map.prototype.set",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Why can't I extend an ES6 Map? Here's my code: class M extends Map {} let m = new M(); m.set('key','val'); Running it on the Babel \"Try It Out\" page , I get thi",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "c0cda3141cc8df020afd",
+        "url": "https://stackoverflow.com/questions/48452885/observe-changes-to-a-map-using-a-proxy",
+        "title": "Observe changes to a Map using a Proxy",
+        "origin": "stackexchange",
+        "query": "Map.prototype.set",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "I use a Map javascript object. I'd like to observe changes to a Map instance using a Proxy object. However, whatever handler object I try to feed in to the prox",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "af8403863aa0d47a5155",
+        "url": "https://stackoverflow.com/questions/76623101/what-do-people-mean-when-they-say-map-is-not-susceptible-to-prototype-polluti",
+        "title": "What do people mean when they say `Map` is ‘not susceptible to prototype pollution’?",
+        "origin": "stackexchange",
+        "query": "Map.prototype.set",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Regarding the security of JavaScript Maps , there exist claims like these: The Map primitive was introduced in ES6. The Map data structure stores key/value pair",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "559ca9ac1c73ad8f74b9",
+        "url": "https://stackoverflow.com/questions/43415571/is-it-possible-to-create-a-map-without-hardcoding-the-class-name-map",
+        "title": "Is it possible to create a map without hardcoding the class name `Map`?",
+        "origin": "stackexchange",
+        "query": "Map.prototype.set",
+        "date": "",
+        "type": "tecnico",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "I tried to write a utility function which returns an object that is the same as its argument. The function works fine for most classes, except for ES6 collectio",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "f6bfdbb83eb7fffd060b",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+        "title": "Map",
+        "origin": "in_source_link",
+        "query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+        "date": "",
+        "type": "page",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "Map Map.prototype.set(, ) key value Define o para a no objeto . Retorna o objeto valor chave Map Map Métodos iterativos Map.prototype[@@iterator]() Retorna um n",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 7999,
+        "final_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "8eef3a08973b1e0b7c1a",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+        "title": "Set",
+        "origin": "in_source_link",
+        "query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+        "date": "",
+        "type": "page",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "propriedade comprimento é 0. Para contar o número de elementos de um , use . Set Set.prototype.size get Set[@@species] A função construtora usada para criar obj",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 5294,
+        "final_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      }
+    ],
+    "unique_candidates": 14,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-d3b3ed584f75",
+      "type": "image",
+      "title": "The MDN logo",
+      "url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+      "final_url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+      "source_title": "Set - JavaScript | MDN",
+      "source_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+      "publisher": "developer.mozilla.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The MDN logo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9e7a3e67c474",
+      "type": "image",
+      "title": "chrome 01",
+      "url": "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_s.jpg",
+      "final_url": "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm9.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 01",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-eb65ed9fa49d",
+      "type": "image",
+      "title": "chrome 02",
+      "url": "https://farm9.staticflickr.com/8442/7780404290_beb923884b_s.jpg",
+      "final_url": "https://farm9.staticflickr.com/8442/7780404290_beb923884b_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm9.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 02",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-11a60e24dbcf",
+      "type": "image",
+      "title": "chrome 03",
+      "url": "https://farm8.staticflickr.com/7124/7780404172_9207f67364_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7124/7780404172_9207f67364_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 03",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-98e4913c5845",
+      "type": "image",
+      "title": "chrome 04",
+      "url": "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_s.jpg",
+      "final_url": "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm9.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 04",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ae3169d5b5bb",
+      "type": "image",
+      "title": "chrome 05",
+      "url": "https://farm8.staticflickr.com/7126/7780403992_80d924480b_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7126/7780403992_80d924480b_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 05",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d2ab833092df",
+      "type": "image",
+      "title": "chrome 06",
+      "url": "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_s.jpg",
+      "final_url": "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm9.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 06",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-fc803c17d85a",
+      "type": "image",
+      "title": "chrome 07",
+      "url": "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "chrome 07",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-307fa6f662c0",
+      "type": "image",
+      "title": "ff 01",
+      "url": "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ff 01",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8d0887fbeae0",
+      "type": "image",
+      "title": "ff 02",
+      "url": "https://farm8.staticflickr.com/7362/16455844865_a2fea4d261_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7362/16455844865_a2fea4d261_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ff 02",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ae1ff53fdd5a",
+      "type": "image",
+      "title": "ff 03",
+      "url": "https://farm8.staticflickr.com/7301/16454099181_4900b2461a_s.jpg",
+      "final_url": "https://farm8.staticflickr.com/7301/16454099181_4900b2461a_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm8.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ff 03",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e8ad4af93002",
+      "type": "image",
+      "title": "ff 04",
+      "url": "https://farm9.staticflickr.com/8666/15833321544_70ea118cf4_s.jpg",
+      "final_url": "https://farm9.staticflickr.com/8666/15833321544_70ea118cf4_s.jpg",
+      "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+      "source_url": "https://www.enable-javascript.com/pt/",
+      "publisher": "farm9.staticflickr.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ff 04",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+      "titulo": "Map - JavaScript | MDN",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+      "titulo": "JavaScript | MDN",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 13:24:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.enable-javascript.com/pt/",
+      "titulo": "Como habilitar o JavaScript no seu navegador e por que",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 11:01:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.enable-javascript.com/pt/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 1,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "stackexchange",
+      "query": "Map.prototype.set",
+      "items": [
+        {
+          "titulo": "v8 - how to debug Map.prototype.set and OrderedHashTable?",
+          "url": "https://stackoverflow.com/questions/71181442/v8-how-to-debug-map-prototype-set-and-orderedhashtable",
+          "trecho": "I'm learning more about v8 internals as a hobby project. For this example, I'm trying to debug and understand how Javascript Map.prototype.set actually works under-the-hood. I'm using v8 tag 9.9.99 . I first create a new · respondida · javascript, c++, v8",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 0
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/71181442/v8-how-to-debug-map-prototype-set-and-orderedhashtable",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 12.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Map.prototype.set returns with undefined in internet explorer 11",
+          "url": "https://stackoverflow.com/questions/38328736/map-prototype-set-returns-with-undefined-in-internet-explorer-11",
+          "trecho": "I'm trying to build a react application, and use react-css-modules. Everything runs fine under FF and Chrome, but in IE11 I encounter the following issue, at page loading I get the following exception message: Unable to  · sem resposta aceita · javascript, react-css-modules",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 0
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/38328736/map-prototype-set-returns-with-undefined-in-internet-explorer-11",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 10.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Can't extend ES6 Map?",
+          "url": "https://stackoverflow.com/questions/35058791/cant-extend-es6-map",
+          "trecho": "Why can't I extend an ES6 Map? Here's my code: class M extends Map {} let m = new M(); m.set('key','val'); Running it on the Babel \"Try It Out\" page , I get this: Method Map.prototype.set called on incompatible receiver  · sem resposta aceita · javascript, ecmascript-6, babeljs",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 4
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/35058791/cant-extend-es6-map",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 9.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "What do people mean when they say `Map` is ‘not susceptible to prototype pollution’?",
+          "url": "https://stackoverflow.com/questions/76623101/what-do-people-mean-when-they-say-map-is-not-susceptible-to-prototype-polluti",
+          "trecho": "Regarding the security of JavaScript Maps , there exist claims like these: The Map primitive was introduced in ES6. The Map data structure stores key/value pairs, and it is not susceptible to prototype pollution. [1] It  · respondida · javascript, security, prototype",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 1
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/76623101/what-do-people-mean-when-they-say-map-is-not-susceptible-to-prototype-polluti",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 7.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Observe changes to a Map using a Proxy",
+          "url": "https://stackoverflow.com/questions/48452885/observe-changes-to-a-map-using-a-proxy",
+          "trecho": "I use a Map javascript object. I'd like to observe changes to a Map instance using a Proxy object. However, whatever handler object I try to feed in to the proxy, I consistently get the error Method Map.prototype.set cal · respondida · javascript, proxy, ecmascript-6",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 4
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/48452885/observe-changes-to-a-map-using-a-proxy",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 9.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Is it possible to create a map without hardcoding the class name `Map`?",
+          "url": "https://stackoverflow.com/questions/43415571/is-it-possible-to-create-a-map-without-hardcoding-the-class-name-map",
+          "trecho": "I tried to write a utility function which returns an object that is the same as its argument. The function works fine for most classes, except for ES6 collection types such as Map: function createInstanceOfSameClass(arg) · respondida · javascript, ecmascript-6",
+          "origem": "stackexchange",
+          "tipo": "tecnico",
+          "meta": {
+            "site": "stackoverflow",
+            "score": 0
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "stackexchange",
+          "url_canonica": "https://stackoverflow.com/questions/43415571/is-it-possible-to-create-a-map-without-hardcoding-the-class-name-map",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 7.8,
+          "relevance_reasons": []
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Map.prototype.set",
+      "items": [
+        {
+          "titulo": "Google Maps",
+          "url": "https://maps.google.com/",
+          "trecho": "Train Nearby places Restaurants Gas stations ATMs Shopping Map details Satellite Transit lines Traffic",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 06:00:00 GMT"
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "bing",
+          "url_canonica": "https://maps.google.com/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Google Maps",
+          "url": "https://www.google.com/maps/search/",
+          "trecho": "Train Nearby places Restaurants Gas stations ATMs Shopping Map details Satellite Transit lines Traffic",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 17:06:00 GMT"
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "bing",
+          "url_canonica": "https://google.com/maps/search",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Google Earth",
+          "url": "https://earth.google.com/web",
+          "trecho": "View a map over time with Timelapse and Historical Imagery. Manage your data and projects with enhanced collaboration features. Versions Google Earth for Web Google Earth for Android Google Earth...",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 06:42:00 GMT"
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "bing",
+          "url_canonica": "https://earth.google.com/web",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Google Maps",
+          "url": "https://maps.google.com.br/mapfiles/home3.html",
+          "trecho": "Explore Google Maps for Street View, 3D mapping, turn-by-turn directions, indoor maps and more on your devices.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 14:13:00 GMT"
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "bing",
+          "url_canonica": "https://maps.google.com.br/mapfiles/home3.html",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Get directions for driving, transit, walking, and more - Directions ...",
+          "url": "https://maps.google.com/maps/dir/",
+          "trecho": "Find local businesses, view maps and get driving directions in Google Maps.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:18:00 GMT"
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "bing",
+          "url_canonica": "https://maps.google.com/maps/dir",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "OpenStreetMap",
+          "url": "https://www.openstreetmap.org/",
+          "trecho": "OpenStreetMap is a map of the world, created by people like you and free to use under an open license.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 13:51:00 GMT"
+          },
+          "discovery_query": "Map.prototype.set",
+          "discovery_provider": "bing",
+          "url_canonica": "https://openstreetmap.org/",
+          "correspondencia_tipo": "IRRELEVANT",
+          "cobertura_pedido": 0.0,
+          "relevancia": 4.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "javascript map.prototype.set sintaxe altera mapa original",
+      "items": [
+        {
+          "titulo": "JavaScript Tutorial - W3Schools",
+          "url": "https://www.w3schools.com/Js/",
+          "trecho": "W3Schools maintains a complete JavaScript reference, including all HTML and browser objects. The reference contains examples for all properties, methods and events, and is continuously updated according to the latest web standards.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:03:00 GMT"
+          },
+          "discovery_query": "javascript map.prototype.set sintaxe altera mapa original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://w3schools.com/Js",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "JavaScript - MDN Web Docs",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+          "trecho": "JavaScript® (às vezes abreviado para JS) é uma linguagem leve, interpretada e baseada em objetos com funções de primeira classe, mais conhecida como a linguagem de script para páginas Web, mas usada também em vários outros ambientes sem browser, tais como node.js, Apache CouchDB e Adobe Acrobat.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 13:24:00 GMT"
+          },
+          "discovery_query": "javascript map.prototype.set sintaxe altera mapa original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "JavaScript Tutorial",
+          "url": "https://www.javascripttutorial.net/",
+          "trecho": "JavaScript Tutorial provides you with many practical tutorials that help you learn JavaScript from scratch quickly and effectively.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 07:03:00 GMT"
+          },
+          "discovery_query": "javascript map.prototype.set sintaxe altera mapa original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://javascripttutorial.net/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "JavaScript – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Javascript",
+          "trecho": "JavaScript permite páginas da Web interativas e, portanto, é uma parte essencial dos aplicativos da web. A grande maioria dos sites usa, e todos os principais navegadores têm um mecanismo JavaScript dedicado para executá-lo.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 14:00:00 GMT"
+          },
+          "discovery_query": "javascript map.prototype.set sintaxe altera mapa original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Javascript",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 8.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "JavaScript - MDN",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "trecho": "JavaScript (JS) is a lightweight interpreted (or just-in-time compiled) programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser environments also use it, such as Node.js, Apache CouchDB and Adobe Acrobat.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 11:21:00 GMT"
+          },
+          "discovery_query": "javascript map.prototype.set sintaxe altera mapa original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Como habilitar o JavaScript no seu navegador e por que",
+          "url": "https://www.enable-javascript.com/pt/",
+          "trecho": "O JavaScript está habilitado no seu navegador. Se você desabilitar o JavaScript, este texto mudará.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 11:01:00 GMT"
+          },
+          "discovery_query": "javascript map.prototype.set sintaxe altera mapa original",
+          "discovery_provider": "bing",
+          "url_canonica": "https://enable-javascript.com/pt",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.167,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+      "result": {
+        "titulo": "JavaScript | MDN",
+        "texto": "Esta página foi traduzida do inglês pela comunidade. Saiba mais e junte-se à comunidade MDN Web Docs. View in English Always switch to English JavaScript (às vezes abreviado para ) é uma linguagem leve, interpretada e baseada em objetos com mais conhecida como a linguagem de script para páginas Web, mas usada também em , tais como , e Adobe Acrobat. O JavaScript é uma linguagem , e dinâmica, suportando estilos de orientação a objetos, imperativos e declarativos (como por exemplo a programação funcional). Saiba mais . JavaScript® JS , funções de primeira classe vários outros ambientes sem browser node.js Apache CouchDB baseada em protótipos multi-paradigma sobre o JavaScript Essa seção do site é dedicada à linguagem JavaScript e não às partes que são específicas para páginas Web e outros ambientes. Para mais informações sobre as específicas para páginas Web, por favor consulte as seções e . APIs Web APIs DOM O padrão JavaScript é . Desde 2012, todos os possuem suporte total ao ECMAScript 5.1. Navegadores mais antigos suportam pelo menos ECMAScript 3. Em 17 de Junho de 2015, a publicou a sexta versão do ECMAScript, que é oficialmente chamado de ECMAScript 2015, e foi inicialmente conhecido como ECMAScript 6 ou ES6. Desde então, as especificações do ECMAScript são lançadas anualmente. Essa documentação faz referência à última versão de referência, que atualmente é a . ECMAScript navegadores modernos ECMA International ECMAScript 2018 Não se deve confundir o JavaScript com a . Tanto quanto são marcas registradas da Oracle nos Estados Unidos da América e em outros países. No entanto, as duas linguagens de programação possuem sintaxe, semânticas e usos muito diferentes. linguagem de programação Java Java JavaScript Tutoriais Aprenda a programar em JavaScript com guias e tutoriais. Para iniciantes Vá para a se você quer aprender JavaScript mas não tem experiência prévia com JavaScript ou programação. Os módulos completos que estão disponíveis lá são os seguintes: Área de aprendizado de JavaScript Primeiros passos em JavaScript Respostas para algumas perguntas básicas como , e , bem como funcionalidades importantes do JavaScript, tais como variáveis, strings, números e vetores. O que é JavaScript? Com o que se parece? O que se pode fazer? Elementos básicos do JavaScript Continuamos nossa cobertura das funcionalidades fundamentais do JavaScript, direcionando nossa atenção para tipos de blocos de código encontrados comumente, como expressões condicionais, laços, funções e eventos. Introduzindo objetos em JavaScript O entendimento da natureza da orientação à objetos do JavaScript é importante se você quiser levar o seu conhecimento da linguagem para o próximo nível e escrever códigos mais eficientes, por isso oferecemos esse módulo para te ajudar. Guia do JavaScript Guia do JavaScript Um guia muito mais detalhado sobre a linguagem JavaScript, para pessoas que possuem experiência prévia com JavaScript ou outra linguagem de programação. Intermediário Uma re-introdução ao JavaScript Uma visão geral para aqueles que que conhecem JavaScript. pensam Estruturas de dados do JavaScript Um resumo das estruturas de dados disponíveis em JavaScript. Comparações de igualdade e uniformidade O JavaScript fornece três operações diferentes para comparar valores: igualdade estrita utilizando , igualdade ampla usando e o método . === == Object.is() Avançado Herança e a cadeia de protótipos Explicação da herança baseada em protótipos, que costuma ser amplamente mal entendida e subestimada. Modo estrito O modo estrito define que você não pode usar nenhuma variável antes de inicializá-la. É uma variante restrita do ECMAScript 5, para um desempenho mais performático e uma depuração mais fácil. Vetores JavaScript tipados Vetores JavaScript tipados oferecem um mecanismo para acesso a dados binários brutos. Gerenciamento de memória Ciclo de vida da memória e coleta de lixo em JavaScript. Modelo de concorrência e o loop de eventos JavaScript tem um modelo de concorrência baseado em . loop de eventos Referência Navegue pela documentação completa da . Referência de JavaScript Objetos globais Conheça os objetos padrão nativos , , , , , , , , , , , , , e , entre outros. Array Boolean Date Error Function JSON Math Number Object RegExp String Map Set WeakMap WeakSet Expressões e operadores Saiba mais sobre o comportamento dos operadores de JavaScript , , , , a e muito mais. instanceof typeof new this precedência dos operadores Instruções e declarações Saiba como , , , , , , , , e outras instruções e palavras-chave do JavaScript funcionam. do-while for-in for-of try-catch let var const if-else switch Funções Aprenda como trabalhar com funções em JavaScript para desenvolver suas aplicações. Ferramentas & recursos Ferramentas úteis para escrever e depurar seu código . JavaScript Ferramentas do Firefox para desenvolvedores , , , e muito mais. Scratchpad Web Console JavaScript Profiler Debugger JavaScript Shells Um shell JavaScript permite que você teste rapidamente fragmentos de código JavaScript. TogetherJS Colaboração fácil. Ao adicionar o TogetherJS ao seu site, seus usuários podem ajudar uns aos outros em tempo real! Stack Overflow Perguntas do Stack Overflow com a tag . JavaScript Versões do JavaScript e notas de lançamento Navegue no histórico de funcionalidades do JavaScript e no status das implementações. JSFiddle Edite JavaScript, CSS e HTML e obtenha resultados em tempo real. Utilize recursos externos e colabore com sua equipe online. Help improve MDN Learn how to contribute This page was last modified on by . 22 de mai. de 2026 MDN contributors • View this page on GitHub Report a problem with this content",
+        "final": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+        "trecho_usado": "outros. Array Boolean Date Error Function JSON Math Number Object RegExp String Map Set WeakMap WeakSet Expressões e operadores Saiba mais sobre o comportamento dos operadores de JavaScript , , , , a e muito mais. instanceof typeof new this precedência dos operadores Instruções e declarações Saiba como , , , , , , , , e outras instruções e palavras-chave do JavaScript funcionam. do-while for-in",
+        "metadados": {
+          "titulo": "JavaScript | MDN",
+          "descricao": "JavaScript® (às vezes abreviado para JS) é uma linguagem leve, interpretada e baseada em objetos com funções de primeira classe, mais conhecida como a linguagem de script para páginas Web, mas usada também em vários outros ambientes sem browser, tais como node.js, Apache CouchDB e Adobe Acrobat. O JavaScript é uma linguagem baseada em protótipos, multi-paradigma e dinâmica, suportando estilos de o",
+          "canonica": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+          "og": {
+            "og:url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+            "og:title": "JavaScript | MDN",
+            "og:locale": "pt_BR",
+            "og:description": "JavaScript® (às vezes abreviado para JS) é uma linguagem leve, interpretada e baseada em objetos com funções de primeira classe, mais conhecida como a linguagem de script para páginas Web, mas usada também em vários outros ambientes sem browser, tais como node.js, Apache CouchDB e Adobe Acrobat. O JavaScript é uma linguagem baseada em protótipos, multi-paradigma e dinâmica, suportando estilos de orientação a objetos, imperativos e declarativos (como por exemplo a programação funcional). Saiba ma",
+            "og:image": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "og:image:type": "image/png",
+            "og:image:height": "1024",
+            "og:image:width": "1024",
+            "og:image:alt": "The MDN logo",
+            "og:site_name": "MDN Web Docs"
+          },
+          "twitter": {
+            "twitter:card": "summary",
+            "twitter:creator": "MozDevNet"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "MDN Web Docs",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Esta página foi traduzida do inglês pela comunidade. Saiba mais e junte-se à comunidade MDN Web Docs.\nView in English Always switch to English\n(às vezes abreviado para ) é uma linguagem leve, interpretada e baseada em objetos com mais conhecida como a linguagem de script para páginas Web, mas usada também em , tais como , e Adobe Acrobat. O JavaScript é uma linguagem , e dinâmica, suportando estilos de orientação a objetos, imperativos e declarativos (como por exemplo a programação funcional). Saiba mais . JavaScript® JS , funções de primeira classe vários outros ambientes sem browser node.js Apache CouchDB baseada em protótipos multi-paradigma sobre o JavaScript\nEssa seção do site é dedicada à linguagem JavaScript e não às partes que são específicas para páginas Web e outros ambientes. Para mais informações sobre as específicas para páginas Web, por favor consulte as seções e . APIs Web APIs DOM\nO padrão JavaScript é . Desde 2012, todos os possuem suporte total ao ECMAScript 5.1. Navegadores mais antigos suportam pelo menos ECMAScript 3. Em 17 de Junho de 2015, a publicou a sexta versão do ECMAScript, que é oficialmente chamado de ECMAScript 2015, e foi inicialmente conhecido como ECMAScript 6 ou ES6. Desde então, as especificações do ECMAScript são lançadas anualmente. Essa documentação faz referência à última versão de referência, que atualmente é a . ECMAScript navegadores modernos ECMA International ECMAScript 2018\nNão se deve confundir o JavaScript com a . Tanto quanto são marcas registradas da Oracle nos Estados Unidos da América e em outros países. No entanto, as duas linguagens de programação possuem sintaxe, semânticas e usos muito diferentes. linguagem de programação Java Java JavaScript\nAprenda a programar em JavaScript com guias e tutoriais.\nVá para a se você quer aprender JavaScript mas não tem experiência prévia com JavaScript ou programação. Os módulos completos que estão disponíveis lá são os seguintes: Área de aprendizado de JavaScript\nPrimeiros passos em JavaScript\nRespostas para algumas perguntas básicas como , e , bem como funcionalidades importantes do JavaScript, tais como variáveis, strings, números e vetores. O que é JavaScript? Com o que se parece? O que se pode fazer?\nElementos básicos do JavaScript\nContinuamos nossa cobertura das funcionalidades fundamentais do JavaScript, direcionando nossa atenção para tipos de blocos de código encontrados comumente, como expressões condicionais, laços, funções e eventos.\nIntroduzindo objetos em JavaScript\nO entendimento da natureza da orientação à objetos do JavaScript é importante se você quiser levar o seu conhecimento da linguagem para o próximo nível e escrever códigos mais eficientes, por isso oferecemos esse módulo para te ajudar.\nUm guia muito mais detalhado sobre a linguagem JavaScript, para pessoas que possuem experiência prévia com JavaScript ou outra linguagem de programação.\nUma re-introdução ao JavaScript\nUma visão geral para aqueles que que conhecem JavaScript. pensam\nEstruturas de dados do JavaScript\nUm resumo das estruturas de dados disponíveis em JavaScript.\nComparações de igualdade e uniformidade\nO JavaScript fornece três operações diferentes para comparar valores: igualdade estrita utilizando , igualdade ampla usando e o método . === == Object.is()\nHerança e a cadeia de protótipos\nExplicação da herança baseada em protótipos, que costuma ser amplamente mal entendida e subestimada.\nO modo estrito define que você não pode usar nenhuma variável antes de inicializá-la. É uma variante restrita do ECMAScript 5, para um desempenho mais performático e uma depuração mais fácil.\nVetores JavaScript tipados\nVetores JavaScript tipados oferecem um mecanismo para acesso a dados binários brutos.\nCiclo de vida da memória e coleta de lixo em JavaScript.\nModelo de concorrência e o loop de eventos\nJavaScript tem um modelo de concorrência baseado em . loop de eventos\nNavegue pela documentação completa da . Referência de JavaScript\nConheça os objetos padrão nativos ,"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+            "texto": "Map",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+            "texto": "Set",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTML",
+            "texto": "HTML: Markup language HTML reference /pt-BR/docs/Web/HTML/Reference/Elements\" >Elements /pt-BR/docs/Web/HTML/Reference/Global_attributes\" >Global attributes /pt",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/de/docs/Web/JavaScript",
+            "texto": "Deutsch en-US\" > English (US) es\" > Español fr\" > Français ja\" > 日本語 ko\" > 한국어 pt-BR\" > Português (do Brasil) ru\" > Русский zh-CN\" > 中文 (简体) zh-TW\" > 正體中文 (繁體) ",
+            "interno": true
+          },
+          {
+            "url": "http://en.wikipedia.org/wiki/First-class_function",
+            "texto": "funções de primeira classe",
+            "interno": false
+          },
+          {
+            "url": "http://en.wikipedia.org/wiki/JavaScript#Uses_outside_web_pages",
+            "texto": "vários outros ambientes sem browser",
+            "interno": false
+          },
+          {
+            "url": "https://nodejs.org/",
+            "texto": "node.js",
+            "interno": false
+          },
+          {
+            "url": "https://couchdb.apache.org/",
+            "texto": "Apache CouchDB",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Prototype-based",
+            "texto": "baseada em protótipos",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Programming_paradigm",
+            "texto": "multi-paradigma",
+            "interno": false
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/conflicting/Web/JavaScript",
+            "texto": "sobre o JavaScript",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Glossary/API",
+            "texto": "APIs",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/API",
+            "texto": "Web APIs",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Glossary/DOM",
+            "texto": "DOM",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/JavaScript_technologies_overview",
+            "texto": "ECMAScript",
+            "interno": true
+          },
+          {
+            "url": "http://kangax.github.io/compat-table/es5/",
+            "texto": "navegadores modernos",
+            "interno": false
+          },
+          {
+            "url": "https://www.ecma-international.org/",
+            "texto": "ECMA International",
+            "interno": false
+          },
+          {
+            "url": "https://tc39.github.io/ecma262/",
+            "texto": "ECMAScript 2018",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Java_(programming_language)",
+            "texto": "linguagem de programação Java",
+            "interno": false
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/conflicting/Learn_web_development/Core/Scripting_785964b4c0711553d2bf3130baef052c6d78a03b4ce249eeb9d1ce2be1e3c308",
+            "texto": "Área de aprendizado de JavaScript",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Core/Scripting",
+            "texto": "Primeiros passos em JavaScript",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/conflicting/Learn_web_development/Core/Scripting",
+            "texto": "Elementos básicos do JavaScript",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Extensions/Advanced_JavaScript_objects",
+            "texto": "Introduzindo objetos em JavaScript",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide",
+            "texto": "Guia do JavaScript",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Language_overview",
+            "texto": "Uma re-introdução ao JavaScript",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Data_structures",
+            "texto": "Estruturas de dados do JavaScript",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness",
+            "texto": "Comparações de igualdade e uniformidade",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/is",
+            "texto": "Object.is()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Inheritance_and_the_prototype_chain",
+            "texto": "Herança e a cadeia de protótipos",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Strict_mode",
+            "texto": "Modo estrito",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://developer.mozilla.org/mdn-social-image.46ac2375.png"
+        ],
+        "midia": [
+          {
+            "id": "med-d3b3ed584f75",
+            "type": "image",
+            "title": "The MDN logo",
+            "url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "final_url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "source_title": "JavaScript | MDN",
+            "source_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+            "publisher": "developer.mozilla.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The MDN logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.enable-javascript.com/pt/",
+      "result": {
+        "titulo": "Como habilitar o JavaScript no seu navegador e por que",
+        "texto": "Google Chrome No menu do navegador clique em \"Customize and control Google Chrome\" e selecione \"Settings\". Na seção \"Settings\" clique em \"Show advanced settings...\". Abaixo de \"Privacy\" clique em \"Content settings...\". Quando a janela de diálogo abrir, procure pela seção \"JavaScript\" e marque a opção \"Allow all sites to run JavaScript (recommended)\". Clique no botão de \"OK\" para fechá-lo. Feche a aba \"Settings\". Clique no botão \"Reload this page\" no navegador para atualizar a página. 1. 2. 3. 4. 5. 6. 7. Mozilla Firefox Na barra de endereços, digite: about:config e aperte Enter. Clique em \"Serei cuidadoso, prometo!\" se uma mensagem de alerta aparecer. Na barra de localização, procure por javascript.enabled. Inverta o valor da preferência javascript.enabled (clique com o botão direito e escolha \"Inverter valor\" ou dê um duplo clique sobre a preferência) para mudar o valor de \"false\" para \"true\". Clique no botão \"Recarregar a página atual\" no navegador para atualizar a página. 1. 2. 3. 4. 5. Apple Safari No menu do navegador da web, clique em \"Editar\" e selecione \"Preferências\". Na janela \"Preferências\", selecione a guia \"Segurança\". Na seção da guia \"Segurança\" \"Conteúdo da Web\", marque a caixa de seleção \"Ativar JavaScript\". Clique no botão \"Recarregar a página atual\" do navegador da Web para atualizar a página. 1. 2. 3. 4. Opera 1. Clique no ícone do Opera \"Menu\" e depois em \"Configurações\". 2. Clique em \"Sites\" e escolha \"Permitir que todos os sites executem JavaScript (recomendado)\" 3. Clique no botão \"Recarregar\" do navegador da Web para atualizar a página. 1. 2. 3. Internet Explorer No menu do navegador, clique em \"Ferramentas\" e escolha \"Opções da Internet\". Na janela \"Opções da Internet\", selecione a guia \"Segurança\". Na guia \"Segurança\", clique no botão \"Nível personalizado...\". Quando a janela \"Configurações de segurança - Zona da Internet\" abrir, procure pela seção \"Scripts\". No item \"Script ativo\", selecione \"Habilitar\". Quando a janela \"Aviso!\" aparecer perguntando \"Você tem certeza de que deseja alterar as configurações para esta zona?\", selecione \"Sim\". Na janela \"Opções da Internet\", clique no botão \"OK\" para fechá-la. Clique no botão \"Atualizar\" do navegador para recarregar a página. 1. 2. 3. 4. 5. 6. 7. 8.",
+        "final": "https://www.enable-javascript.com/pt/",
+        "trecho_usado": "\"Content settings...\". Quando a janela de diálogo abrir, procure pela seção \"JavaScript\" e marque a opção \"Allow all sites to run JavaScript (recommended)\". Clique no botão de \"OK\" para fechá-lo. Feche a aba \"Settings\". Clique no botão \"Reload this page\" no navegador para atualizar a página. 1. 2. 3. 4. 5. 6. 7. Mozilla Firefox Na barra de endereços, digite: about:config e aperte Enter. Clique em",
+        "metadados": {
+          "titulo": "Como habilitar o JavaScript no seu navegador e por que",
+          "descricao": "Instruções de como habilitar (ativar) JavaScript no navegador e por que.",
+          "canonica": "https://www.enable-javascript.com/pt/",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "No menu do navegador clique em \"Customize and control Google Chrome\" e selecione \"Settings\".\nNa seção \"Settings\" clique em \"Show advanced settings...\".\nAbaixo de \"Privacy\" clique em \"Content settings...\".\nQuando a janela de diálogo abrir, procure pela seção \"JavaScript\" e marque a opção \"Allow all sites to run JavaScript (recommended)\".\nClique no botão de \"OK\" para fechá-lo.\nClique no botão \"Reload this page\" no navegador para atualizar a página.\nNa barra de endereços, digite: about:config e aperte Enter.\nClique em \"Serei cuidadoso, prometo!\" se uma mensagem de alerta aparecer.\nNa barra de localização, procure por javascript.enabled.\nInverta o valor da preferência javascript.enabled (clique com o botão direito e escolha \"Inverter valor\" ou dê um duplo clique sobre a preferência) para mudar o valor de \"false\" para \"true\".\nClique no botão \"Recarregar a página atual\" no navegador para atualizar a página.\nNo menu do navegador da web, clique em \"Editar\" e selecione \"Preferências\".\nNa janela \"Preferências\", selecione a guia \"Segurança\".\nNa seção da guia \"Segurança\" \"Conteúdo da Web\", marque a caixa de seleção \"Ativar JavaScript\".\nClique no botão \"Recarregar a página atual\" do navegador da Web para atualizar a página.\n1. Clique no ícone do Opera \"Menu\" e depois em \"Configurações\".\n2. Clique em \"Sites\" e escolha \"Permitir que todos os sites executem JavaScript (recomendado)\"\n3. Clique no botão \"Recarregar\" do navegador da Web para atualizar a página.\nNo menu do navegador, clique em \"Ferramentas\" e escolha \"Opções da Internet\".\nNa janela \"Opções da Internet\", selecione a guia \"Segurança\".\nNa guia \"Segurança\", clique no botão \"Nível personalizado...\".\nQuando a janela \"Configurações de segurança - Zona da Internet\" abrir, procure pela seção \"Scripts\".\nNo item \"Script ativo\", selecione \"Habilitar\".\nQuando a janela \"Aviso!\" aparecer perguntando \"Você tem certeza de que deseja alterar as configurações para esta zona?\", selecione \"Sim\".\nNa janela \"Opções da Internet\", clique no botão \"OK\" para fechá-la.\nClique no botão \"Atualizar\" do navegador para recarregar a página."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.enable-javascript.com/en/",
+            "texto": "EN",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/hr/",
+            "texto": "HR",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/de/",
+            "texto": "DE",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/nl/",
+            "texto": "NL",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/es/",
+            "texto": "ES",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/pt/",
+            "texto": "PT",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/it/",
+            "texto": "IT",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/no/",
+            "texto": "NO",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/ru/",
+            "texto": "RU",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/fr/",
+            "texto": "FR",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/cs/",
+            "texto": "CS",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/ja/",
+            "texto": "JA",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/ko/",
+            "texto": "KO",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/hu/",
+            "texto": "HU",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/th/",
+            "texto": "TH",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/tl/",
+            "texto": "TL",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/tr/",
+            "texto": "TR",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/id/",
+            "texto": "ID",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/sk/",
+            "texto": "SK",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/pl/",
+            "texto": "PL",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/ar/",
+            "texto": "AR",
+            "interno": true
+          },
+          {
+            "url": "https://www.enable-javascript.com/ur/",
+            "texto": "UR",
+            "interno": true
+          },
+          {
+            "url": "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm9.staticflickr.com/8442/7780404290_beb923884b_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm8.staticflickr.com/7124/7780404172_9207f67364_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm8.staticflickr.com/7126/7780403992_80d924480b_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_z.jpg",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_z.jpg",
+            "texto": "",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_s.jpg",
+          "https://farm9.staticflickr.com/8442/7780404290_beb923884b_s.jpg",
+          "https://farm8.staticflickr.com/7124/7780404172_9207f67364_s.jpg",
+          "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_s.jpg",
+          "https://farm8.staticflickr.com/7126/7780403992_80d924480b_s.jpg",
+          "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_s.jpg",
+          "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_s.jpg",
+          "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_s.jpg",
+          "https://farm8.staticflickr.com/7362/16455844865_a2fea4d261_s.jpg",
+          "https://farm8.staticflickr.com/7301/16454099181_4900b2461a_s.jpg"
+        ],
+        "midia": [
+          {
+            "id": "med-9e7a3e67c474",
+            "type": "image",
+            "title": "chrome 01",
+            "url": "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_s.jpg",
+            "final_url": "https://farm9.staticflickr.com/8428/7780404404_29aa80e0e3_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm9.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 01",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-eb65ed9fa49d",
+            "type": "image",
+            "title": "chrome 02",
+            "url": "https://farm9.staticflickr.com/8442/7780404290_beb923884b_s.jpg",
+            "final_url": "https://farm9.staticflickr.com/8442/7780404290_beb923884b_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm9.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 02",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-11a60e24dbcf",
+            "type": "image",
+            "title": "chrome 03",
+            "url": "https://farm8.staticflickr.com/7124/7780404172_9207f67364_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7124/7780404172_9207f67364_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 03",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-98e4913c5845",
+            "type": "image",
+            "title": "chrome 04",
+            "url": "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_s.jpg",
+            "final_url": "https://farm9.staticflickr.com/8294/7780404068_92fc5b2396_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm9.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 04",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ae3169d5b5bb",
+            "type": "image",
+            "title": "chrome 05",
+            "url": "https://farm8.staticflickr.com/7126/7780403992_80d924480b_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7126/7780403992_80d924480b_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 05",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d2ab833092df",
+            "type": "image",
+            "title": "chrome 06",
+            "url": "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_s.jpg",
+            "final_url": "https://farm9.staticflickr.com/8426/7780403906_d3386e5877_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm9.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 06",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-fc803c17d85a",
+            "type": "image",
+            "title": "chrome 07",
+            "url": "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7277/7780403812_b765206cc6_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "chrome 07",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-307fa6f662c0",
+            "type": "image",
+            "title": "ff 01",
+            "url": "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7319/16454098951_d34e17241d_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ff 01",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8d0887fbeae0",
+            "type": "image",
+            "title": "ff 02",
+            "url": "https://farm8.staticflickr.com/7362/16455844865_a2fea4d261_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7362/16455844865_a2fea4d261_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ff 02",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ae1ff53fdd5a",
+            "type": "image",
+            "title": "ff 03",
+            "url": "https://farm8.staticflickr.com/7301/16454099181_4900b2461a_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7301/16454099181_4900b2461a_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ff 03",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-e8ad4af93002",
+            "type": "image",
+            "title": "ff 04",
+            "url": "https://farm9.staticflickr.com/8666/15833321544_70ea118cf4_s.jpg",
+            "final_url": "https://farm9.staticflickr.com/8666/15833321544_70ea118cf4_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm9.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ff 04",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-cdb5778b2a42",
+            "type": "image",
+            "title": "ff 05",
+            "url": "https://farm8.staticflickr.com/7329/16268413630_680393acd9_s.jpg",
+            "final_url": "https://farm8.staticflickr.com/7329/16268413630_680393acd9_s.jpg",
+            "source_title": "Como habilitar o JavaScript no seu navegador e por que",
+            "source_url": "https://www.enable-javascript.com/pt/",
+            "publisher": "farm8.staticflickr.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "ff 05",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+      "result": {
+        "titulo": "Map - JavaScript | MDN",
+        "texto": "Experimente const map1 = new Map(); map1.set(\"a\", 1); map1.set(\"b\", 2); map1.set(\"c\", 3); console.log(map1.get(\"a\")); // Expected output: 1 map1.set(\"a\", 97); console.log(map1.get(\"a\")); // Expected output: 97 console.log(map1.size); // Expected output: 3 map1.delete(\"b\"); console.log(map1.size); // Expected output: 2 Descrição Um objeto itera seus elementos na order da inserção - um loop retorna um array de para cada iteração Map for...of [key, value] Igualdade de chaves A igualdade de chaves é baseada no algoritimo . sameValueZero O é considerado o mesmo que o (apesar de ) e todos os outros valores são considerados de acordo com a semântica do operador . NaN NaN NaN !== NaN === Na especificação atual do ECMAScript, e são considerados iguais, embora não tenha sido nos esboços anteriores. Veja em para mais detalhes; -0 +0 \"Equivalência de valor entre -0 e 0\" Compatibilidade com navegadores Objetos vs. Maps Um é similar o - ambos permitem que valores sejam definidos a chaves, retornar esses valores, remover as chaves, e detectar se algo está armazenado na chave. Por esta razão (e porque não existem outras alternativas construídas), o tem sido usado como historicamente. Object Map Objeto Map Porém, existem diferenças importantes que fazem o ser preferido em alguns casos: Map Map Objeto Chaves acidentais O não contém nenhuma chave por padrão. Ele só contém o que é definido explicitamente nele. Map Um tem um prototype, então ele contém por padrão algumas chaves que podem conflitar com suas próprias chaves se você não for cuidadoso. Objeto Apartir do ES5, isso pode ser ignorado com o , mas isso raramente é feito. Nota: Object.create(null) Tipos das chaves As chaves do podem ser qualquer valor (incluindo funções, objetos, ou qualquer outro tipo primitivo). Map A chave de um deve ser uma ou um . Objeto String Symbol Ordem das chaves As chaves dentro do são ordenadas de forma simples, de maneira direta: O objeto itera suas entradas, chaves, e valor na ordem em que foram inseridas. Map Map Embora as chaves de um comum hoje sejam ordenadas, nem sempre esse foi o caso, e a ordem é complexa. Como resultado é melhor não confiar na ordem das propriedades. Objeto A ordem foi definida primeiramente para suas próprias propriedades apenas no ECMAScript 2015; no ECMAScript 2020 a ordem definida é por propriedades herdadas também. Veja o e operações de especificações abstraídas. Mas note que nenhum mecanismo itera as propriedades do objeto; cada um dos vários mecanismos incluem diferentes subconjuntos de propriedades. ( incluí apenas propriedades enumeráveis com chaves do tipo string inclui apenas chaves próprias e enumeráveis do tipo string; incluí o próprio, e propriedades com chaves do tipo string, mesmo que não enumeráveis faz o mesmo só que para propriedades como chave, etc.) OrdinaryOwnPropertyKeys numerateObjectProperties todas for-in Object.keys Object.getOwnPropertyNames Object.getOwnPropertySymbols Símbolos Tamanho O número de items dentro de um é facilmente retornado pela propriedade Map size O número de items dentro de um deve ser determinado manualmente Objeto Iteração Um é , então ele pode ser diretamente iterável Map iterável O não implementa o , e os objetos não podem ser iterados diretamente usando o (por padrão). Objeto protocolo de iteração for...of Nota: Um objeto pode implementar o protocolo de iteração, ou pode ser iterado usando o ou. Object.keys Object.entries A declaração permite que você itere pela propriedades enumeráveis de um objeto. for...in Performance Perfoma melhor em cenários envolvendo adições e remoções frequentes em pares chave-valor. Não é otimizado para adições e remoções frequentes de pares chave-valor. Serialização e análise sintática Não há suporte nativo para a serialização ou análise sintática. (Mas você pode construir sua própria serialização e conversão para o usando o como o argumento , e usando o com o argumento . Veja a questão no Stack Overflow ). Map JSON.stringify() replacer JSON.parse() reviver How do you JSON.stringify an ES6 Map? Suporte nativo para serialização de para JSON, usando . Objeto JSON.stringify() Suporte nativo para conversão de JSON para usando . Objeto JSON.parse() Definindo propriedades no objeto Definir propriedades no objeto também funciona em objetos , e pode causar um confusão considerável. Map Portanto, isso aparenta funcionar de certa forma: js const wrongMap = new Map(); wrongMap[\"bla\"] = \"blaa\"; wrongMap[\"bla2\"] = \"blaaa2\"; console.log(wrongMap); // Map { bla: 'blaa', bla2: 'blaaa2' } Mas esse jeito de definir propriedades não interage com a estrura de dados do . Dessa forma é usada a implementação genérica do objeto. O valor 'bla' não é armazenado no para queries. Outras operaçãoes nos dados irão falhar. Map Map js wrongMap.has(\"bla\"); // false wrongMap.delete(\"bla\"); // false console.log(wrongMap); // Map { bla: 'blaa', bla2: 'blaaa2' } A maneira correta para armazenar dados dentro do é através do Map set(key,value) js const contacts = new Map(); contacts.set(\"Jessie\", { phone: \"213-555-1234\", address: \"123 N 1st Ave\" }); contacts.has(\"Jessie\"); // true contacts.get(\"Hilary\"); // undefined contacts.set(\"Hilary\", { phone: \"617-555-4321\", address: \"321 S 2nd St\" }); contacts.get(\"Jessie\"); // {phone: \"213-555-1234\", address: \"123 N 1st Ave\"} contacts.delete(\"Raymond\"); // false contacts.delete(\"Jessie\"); // true console.log(contacts.size); // 1 Construtor Map() Cria um novo objeto . Map propriedades estáticas get Map[@@species] A função do construtor que é usada para criar apartir de objetos. propriedades da instância Map.prototype.size Retorna o número de pares chave/valor no objeto . Map Métodos da instância Map.prototype.clear() Remove todos os pares chave/valor do objeto . Map Map.prototype.delete() key Retorna se o elemento no objeto existia e tenha sido removido, ou se o elemento não existia. irá retornar após isso. true Map false Map.prototype.has(key) false Map.prototype.get() key Retorna o valor associado à chave, ou se não há nada. undefined Map.prototype.has() key Retorna uma asserção booleana se o valor tenha sido associado à chave no objeto ou não. Map Map.prototype.set(, ) key value Define o para a no objeto . Retorna o objeto valor chave Map Map Métodos iterativos Map.prototype[@@iterator]() Retorna um novo objeto iterador que contèm para cada elemento do objeto na ordem em que foram inseridos. um array de [chave, valor] Map Map.prototype.keys() Retorna um novo objeto iterador que contèm as de cada elemento do objeto na ordem em que foram inseridos. chaves Map Map.prototype.values() Retorna um novo objeto iterador que contém os para cada elemento do objeto na ordem em que foram inseridos. valores Map Map.prototype.entries() Retorna um novo objeto iterador que contèm para cada elemento no objeto na ordem em que foram inseridos. um array de [chave, valor] Map Map.prototype.forEach([, ]) callbackFn thisArg Invoca o uma vez para cada par chave-valor presente no objeto , na ordem em que foram inseridos. Se um parâmetro é provido para o , será usado o valor de para cada callback. callbackFn Map thisArg forEach this Exemplos Usando o objeto Map js const myMap = new Map(); const keyString = \"a string\"; const keyObj = {}; const keyFunc = function () {}; // setting the values myMap.set(keyString, \"value associated with 'a string'\"); myMap.set(keyObj, \"value associated with keyObj\"); myMap.set(keyFunc, \"value associated with keyFunc\"); myMap.size; // 3 // getting the values myMap.get(keyString); // \"valor associado a 'a string'\" myMap.get(keyObj); // \"valor associado a keyObj\" myMap.get(keyFunc); // \"valor associado a keyFunc\" myMap.get(\"a string\"); // \"valor associado a 'a string'\" // porque keyString === 'a string' myMap.get({}); // undefined, porque keyObj !== {} myMap.get(function () {}); // undefined, porque keyFunc !== function () {} Usando NaN como chaves de Map também pode ser usado como chave. Apesar de todo o não ser igual a ele mesmo (), o exemplo a seguir funciona porque não",
+        "final": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+        "trecho_usado": "objeto existia e tenha sido removido, ou se o elemento não existia. irá retornar após isso. true Map false Map.prototype.has(key) false Map.prototype.get() key Retorna o valor associado à chave, ou se não há nada. undefined Map.prototype.has() key Retorna uma asserção booleana se o valor tenha sido associado à chave no objeto ou não. Map Map.prototype.set(, ) key value Define o para a no objeto .",
+        "metadados": {
+          "titulo": "Map - JavaScript | MDN",
+          "descricao": "O objeto Map contém pares de chave-valor e lembra a ordem original da inserção das chaves. Qualquer valor (objetos e valores primitivos) podem ser usados como chave ou valor.",
+          "canonica": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+          "og": {
+            "og:url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+            "og:title": "Map - JavaScript | MDN",
+            "og:locale": "pt_BR",
+            "og:description": "O objeto Map contém pares de chave-valor e lembra a ordem original da inserção das chaves. Qualquer valor (objetos e valores primitivos) podem ser usados como chave ou valor.",
+            "og:image": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "og:image:type": "image/png",
+            "og:image:height": "1024",
+            "og:image:width": "1024",
+            "og:image:alt": "The MDN logo",
+            "og:site_name": "MDN Web Docs"
+          },
+          "twitter": {
+            "twitter:card": "summary",
+            "twitter:creator": "MozDevNet"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "MDN Web Docs",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "const map1 = new Map(); map1.set(\"a\", 1); map1.set(\"b\", 2); map1.set(\"c\", 3); console.log(map1.get(\"a\")); // Expected output: 1 map1.set(\"a\", 97); console.log(map1.get(\"a\")); // Expected output: 97 console.log(map1.size); // Expected output: 3 map1.delete(\"b\"); console.log(map1.size); // Expected output: 2\nUm objeto itera seus elementos na order da inserção - um loop retorna um array de para cada iteração Map for...of [key, value]\nA igualdade de chaves é baseada no algoritimo . sameValueZero\nO é considerado o mesmo que o (apesar de ) e todos os outros valores são considerados de acordo com a semântica do operador . NaN NaN NaN !== NaN ===\nNa especificação atual do ECMAScript, e são considerados iguais, embora não tenha sido nos esboços anteriores. Veja em para mais detalhes; -0 +0 \"Equivalência de valor entre -0 e 0\" Compatibilidade com navegadores\nUm é similar o - ambos permitem que valores sejam definidos a chaves, retornar esses valores, remover as chaves, e detectar se algo está armazenado na chave. Por esta razão (e porque não existem outras alternativas construídas), o tem sido usado como historicamente. Object Map Objeto Map\nPorém, existem diferenças importantes que fazem o ser preferido em alguns casos: Map\nO não contém nenhuma chave por padrão. Ele só contém o que é definido explicitamente nele. Map\nUm tem um prototype, então ele contém por padrão algumas chaves que podem conflitar com suas próprias chaves se você não for cuidadoso. Objeto\nApartir do ES5, isso pode ser ignorado com o , mas isso raramente é feito. Nota: Object.create(null)\nAs chaves do podem ser qualquer valor (incluindo funções, objetos, ou qualquer outro tipo primitivo). Map\nA chave de um deve ser uma ou um . Objeto String Symbol\nAs chaves dentro do são ordenadas de forma simples, de maneira direta: O objeto itera suas entradas, chaves, e valor na ordem em que foram inseridas. Map Map\nEmbora as chaves de um comum hoje sejam ordenadas, nem sempre esse foi o caso, e a ordem é complexa. Como resultado é melhor não confiar na ordem das propriedades. Objeto\nA ordem foi definida primeiramente para suas próprias propriedades apenas no ECMAScript 2015; no ECMAScript 2020 a ordem definida é por propriedades herdadas também. Veja o e operações de especificações abstraídas. Mas note que nenhum mecanismo itera as propriedades do objeto; cada um dos vários mecanismos incluem diferentes subconjuntos de propriedades. ( incluí apenas propriedades enumeráveis com chaves do tipo string inclui apenas chaves próprias e enumeráveis do tipo string; incluí o próprio, e propriedades com chaves do tipo string, mesmo que não enumeráveis faz o mesmo só que para propriedades como chave, etc.) OrdinaryOwnPropertyKeys numerateObjectProperties todas for-in Object.keys Object.getOwnPropertyNames Object.getOwnPropertySymbols Símbolos\nO número de items dentro de um é facilmente retornado pela propriedade Map size\nO número de items dentro de um deve ser determinado manualmente Objeto\nUm é , então ele pode ser diretamente iterável Map iterável\nO não implementa o , e os objetos não podem ser iterados diretamente usando o (por padrão). Objeto protocolo de iteração for...of\nUm objeto pode implementar o protocolo de iteração, ou pode ser iterado usando o ou. Object.keys Object.entries\nA declaração permite que você itere pela propriedades enumeráveis de um objeto. for...in\nPerfoma melhor em cenários envolvendo adições e remoções frequentes em pares chave-valor.\nNão é otimizado para adições e remoções frequentes de pares chave-valor.\nSerialização e análise sintática\nNão há suporte nativo para a serialização ou análise sintática.\n(Mas você pode construir sua própria serialização e conversão para o usando o como o argumento , e usando o com o argumento . Veja a questão no Stack Overflow ). Map JSON.stringify() replacer JSON.parse() reviver How do you JSON.stringify an ES6 Map?\nSuporte nativo para serialização de para JSON, usando . Objeto JSON.stringify()\nSuporte nativo para conversão de JSON "
+          },
+          {
+            "titulo": "Definindo propriedades no objeto",
+            "texto": "Definir propriedades no objeto também funciona em objetos , e pode causar um confusão considerável. Map\nPortanto, isso aparenta funcionar de certa forma:\nconst wrongMap = new Map(); wrongMap[\"bla\"] = \"blaa\"; wrongMap[\"bla2\"] = \"blaaa2\"; console.log(wrongMap); // Map { bla: 'blaa', bla2: 'blaaa2' }\nMas esse jeito de definir propriedades não interage com a estrura de dados do . Dessa forma é usada a implementação genérica do objeto. O valor 'bla' não é armazenado no para queries. Outras operaçãoes nos dados irão falhar. Map Map\nwrongMap.has(\"bla\"); // false wrongMap.delete(\"bla\"); // false console.log(wrongMap); // Map { bla: 'blaa', bla2: 'blaaa2' }\nA maneira correta para armazenar dados dentro do é através do Map set(key,value)\nconst contacts = new Map(); contacts.set(\"Jessie\", { phone: \"213-555-1234\", address: \"123 N 1st Ave\" }); contacts.has(\"Jessie\"); // true contacts.get(\"Hilary\"); // undefined contacts.set(\"Hilary\", { phone: \"617-555-4321\", address: \"321 S 2nd St\" }); contacts.get(\"Jessie\"); // {phone: \"213-555-1234\", address: \"123 N 1st Ave\"} contacts.delete(\"Raymond\"); // false contacts.delete(\"Jessie\"); // true console.log(contacts.size); // 1\nCria um novo objeto . Map\nA função do construtor que é usada para criar apartir de objetos."
+          },
+          {
+            "titulo": "propriedades da instância",
+            "texto": "Retorna o número de pares chave/valor no objeto . Map\nRemove todos os pares chave/valor do objeto . Map\nMap.prototype.delete() key\nRetorna se o elemento no objeto existia e tenha sido removido, ou se o elemento não existia. irá retornar após isso. true Map false Map.prototype.has(key) false\nRetorna o valor associado à chave, ou se não há nada. undefined\nRetorna uma asserção booleana se o valor tenha sido associado à chave no objeto ou não. Map\nMap.prototype.set(, ) key value\nDefine o para a no objeto . Retorna o objeto valor chave Map Map\nMap.prototype[@@iterator]()\nRetorna um novo objeto iterador que contèm para cada elemento do objeto na ordem em que foram inseridos. um array de [chave, valor] Map\nRetorna um novo objeto iterador que contèm as de cada elemento do objeto na ordem em que foram inseridos. chaves Map\nRetorna um novo objeto iterador que contém os para cada elemento do objeto na ordem em que foram inseridos. valores Map\nRetorna um novo objeto iterador que contèm para cada elemento no objeto na ordem em que foram inseridos. um array de [chave, valor] Map\nMap.prototype.forEach([, ]) callbackFn thisArg\nInvoca o uma vez para cada par chave-valor presente no objeto , na ordem em que foram inseridos. Se um parâmetro é provido para o , será usado o valor de para cada callback. callbackFn Map thisArg forEach this\nconst myMap = new Map(); const keyString = \"a string\"; const keyObj = {}; const keyFunc = function () {}; // setting the values myMap.set(keyString, \"value associated with 'a string'\"); myMap.set(keyObj, \"value associated with keyObj\"); myMap.set(keyFunc, \"value associated with keyFunc\"); myMap.size; // 3 // getting the values myMap.get(keyString); // \"valor associado a 'a string'\" myMap.get(keyObj); // \"valor associado a keyObj\" myMap.get(keyFunc); // \"valor associado a keyFunc\" myMap.get(\"a string\"); // \"valor associado a 'a string'\" // porque keyString === 'a string' myMap.get({}); // undefined, porque keyObj !== {} myMap.get(function () {}); // undefined, porque keyFunc !== function () {}"
+          },
+          {
+            "titulo": "Usando NaN como chaves de Map",
+            "texto": "também pode ser usado como chave. Apesar de todo o não ser igual a ele mesmo (), o exemplo a seguir funciona porque não é possível distinguir um de outros. NaN NaN NaN !== NaN NaN\nconst myMap = new Map(); myMap.set(NaN, \"not a number\"); myMap.get(NaN); // \"not a number\" const otherNaN = Number(\"foo\"); myMap.get(otherNaN); // \"not a number\""
+          },
+          {
+            "titulo": "Iterando o Map com for..of",
+            "texto": "podem ser iterados usando um loop : Maps for..of\nconst myMap = new Map(); myMap.set(0, \"zero\"); myMap.set(1, \"one\"); for (const [key, value] of myMap) { console.log(key + \" = \" + value); } // 0 = zero // 1 = um for (const key of myMap.keys()) { console.log(key); } // 0 // 1 for (const value of myMap.values()) { console.log(value); } // zero // one for (const [key, value] of myMap.entries()) { console.log(key + \" = \" + value); } // 0 = zero // 1 = one"
+          },
+          {
+            "titulo": "Iterando o Map com forEach()",
+            "texto": "podem ser iterados usando o método : Maps forEach()\nmyMap.forEach(function (value, key) { console.log(key + \" = \" + value); }); // 0 = zero // 1 = um\nconst kvArray = [ [\"key1\", \"value1\"], [\"key2\", \"value2\"], ]; // Use o construtor padrão do Map para transformar um array 2D chave-valor em um map const myMap = new Map(kvArray); myMap.get(\"key1\"); // retorna \"value1\" // Use o Array.from() para transformar um map em um Array bidimensional de chaves e valores console.log(Array.from(myMap)); // Irá exibir para você o mesmo Array como um Array chave-valor // Uma forma sucinta de fazer o mesmo, utilizando a sintaxe spread console.log([...myMap]); // Ou use os iteradores keys() ou values(), e os converta para um array console.log(Array.from(myMap.keys())); // [\"key1\", \"key2\"]"
+          },
+          {
+            "titulo": "Clonando e mesclando Maps",
+            "texto": "Assim como , o map também pode ser clonado: Arrays\nconst original = new Map([[1, \"um\"]]); const clone = new Map(original); console.log(clone.get(1)); // um console.log(original === clone); // false (Útil para comparações superficiais)\nTenha em mente que não é clonado. Nota: o dado em si\nMaps podem ser mesclados, mantendo as chaves únicas:\nconst first = new Map([ [1, \"one\"], [2, \"two\"], [3, \"three\"], ]); const second = new Map([ [1, \"uno\"], [2, \"dos\"], ]); // Mescla dois maps. A última chave a se repetir vence. // O operador spread essenciamente converte um Map para um Array const merged = new Map([...first, ...second]); console.log(merged.get(1)); // uno console.log(merged.get(2)); // dos console.log(merged.get(3)); // three\nMaps podem ser mesclados com array também:\nconst first = new Map([ [1, \"one\"], [2, \"two\"], [3, \"three\"], ]); const second = new Map([ [1, \"uno\"], [2, \"dos\"], ]); // Mescla maps com um array. A última chave a se repetir vence. const merged = new Map([...first, ...second, [1, \"eins\"]]); console.log(merged.get(1)); // eins console.log(merged.get(2)); // dos console.log(merged.get(3)); // three\nECMAScript® 2027 Language Specification# sec-map-objects"
+          },
+          {
+            "titulo": "Compatibilidade com navegadores",
+            "texto": "Um polyfill do está disponível em Map core-js\nThis page was last modified on by . 22 de mai. de 2026 MDN contributors"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/clear",
+            "texto": "Map.prototype.clear()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/delete",
+            "texto": "Map.prototype.delete( key )",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/get",
+            "texto": "Map.prototype.get( key )",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/has",
+            "texto": "Map.prototype.has( key )",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/set",
+            "texto": "Map.prototype.set( key , value )",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/Symbol.iterator",
+            "texto": "Map.prototype[@@iterator]()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/keys",
+            "texto": "Map.prototype.keys()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/values",
+            "texto": "Map.prototype.values()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/entries",
+            "texto": "Map.prototype.entries()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/forEach",
+            "texto": "Map.prototype.forEach( callbackFn [, thisArg ])",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTML",
+            "texto": "HTML: Markup language HTML reference /pt-BR/docs/Web/HTML/Reference/Elements\" >Elements /pt-BR/docs/Web/HTML/Reference/Global_attributes\" >Global attributes /pt",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Map",
+            "texto": "Deutsch en-US\" > English (US) es\" > Español fr\" > Français ja\" > 日本語 ko\" > 한국어 pt-BR\" > Português (do Brasil) zh-CN\" > 中文 (简体) zh-TW\" > 正體中文 (繁體) Esta página fo",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Glossary/Baseline/Compatibility",
+            "texto": "Learn more",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Glossary/Primitive",
+            "texto": "valores primitivos",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/for...of",
+            "texto": "for...of",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Guide/Equality_comparisons_and_sameness#same-value-zero_equality",
+            "texto": "sameValueZero",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+            "texto": "NaN",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object",
+            "texto": "Object",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/create",
+            "texto": "Object.create(null)",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/String",
+            "texto": "String",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+            "texto": "Symbol",
+            "interno": true
+          },
+          {
+            "url": "https://tc39.es/ecma262/#sec-ordinaryownpropertykeys",
+            "texto": "OrdinaryOwnPropertyKeys",
+            "interno": false
+          },
+          {
+            "url": "https://tc39.es/ecma262/#sec-enumerate-object-properties",
+            "texto": "numerateObjectProperties",
+            "interno": false
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/for...in",
+            "texto": "for-in",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/keys",
+            "texto": "Object.keys",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertyNames",
+            "texto": "Object.getOwnPropertyNames",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/getOwnPropertySymbols",
+            "texto": "Object.getOwnPropertySymbols",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map/size",
+            "texto": "size",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Iteration_protocols",
+            "texto": "iterável",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol",
+            "texto": "protocolo de iteração",
+            "interno": true
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "",
+              "Map",
+              "Objeto"
+            ],
+            [
+              "Chaves acidentais",
+              "O Map não contém nenhuma chave por padrão. Ele só contém o que é definido explicitamente nele.",
+              "Um Objeto tem um prototype, então ele contém por padrão algumas chaves que podem conflitar com suas próprias chaves se você não for cuidadoso. Nota: Apartir do "
+            ],
+            [
+              "Tipos das chaves",
+              "As chaves do Map podem ser qualquer valor (incluindo funções, objetos, ou qualquer outro tipo primitivo).",
+              "A chave de um Objeto deve ser uma String ou um Symbol ."
+            ],
+            [
+              "Ordem das chaves",
+              "As chaves dentro do Map são ordenadas de forma simples, de maneira direta: O objeto Map itera suas entradas, chaves, e valor na ordem em que foram inseridas.",
+              "Embora as chaves de um Objeto comum hoje sejam ordenadas, nem sempre esse foi o caso, e a ordem é complexa. Como resultado é melhor não confiar na ordem das pro"
+            ],
+            [
+              "Tamanho",
+              "O número de items dentro de um Map é facilmente retornado pela propriedade size",
+              "O número de items dentro de um Objeto deve ser determinado manualmente"
+            ],
+            [
+              "Iteração",
+              "Um Map é iterável , então ele pode ser diretamente iterável",
+              "O Objeto não implementa o protocolo de iteração , e os objetos não podem ser iterados diretamente usando o for...of (por padrão). Nota: Um objeto pode implement"
+            ],
+            [
+              "Performance",
+              "Perfoma melhor em cenários envolvendo adições e remoções frequentes em pares chave-valor.",
+              "Não é otimizado para adições e remoções frequentes de pares chave-valor."
+            ],
+            [
+              "Serialização e análise sintática",
+              "Não há suporte nativo para a serialização ou análise sintática. (Mas você pode construir sua própria serialização e conversão para o Map usando o JSON.stringify",
+              "Suporte nativo para serialização de Objeto para JSON, usando JSON.stringify() . Suporte nativo para conversão de JSON para Objeto usando JSON.parse() ."
+            ]
+          ],
+          [
+            [
+              "Specification"
+            ],
+            [
+              "ECMAScript® 2027 Language Specification # sec-map-objects"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://developer.mozilla.org/mdn-social-image.46ac2375.png"
+        ],
+        "midia": [
+          {
+            "id": "med-d3b3ed584f75",
+            "type": "image",
+            "title": "The MDN logo",
+            "url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "final_url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "source_title": "Map - JavaScript | MDN",
+            "source_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+            "publisher": "developer.mozilla.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The MDN logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+      "result": {
+        "titulo": "Set - JavaScript | MDN",
+        "texto": "Sintaxe new Set([iterable]); Parâmetros iterable Se um é passado, todos os seus elementos serão adicionados ao novo Set. Se tal parâmetro não for específicado, ou se seu valor for , o novo estará vazio. objeto iterável null Set Descrição Objetos são coleções de valores nas quais é possível iterar os elementos em ordem de inserção. Um valor no ; ele é único na coleção do . Set Set pode ocorrer apenas uma vez Set Igualdade de valores Como cada valor no Set deve ser único, a igualdade será checada e não é baseada no mesmo algoritmo que aquele usado no operador ===. Especificamente, para s, (que é exatamente igual a - 0) e são valores diferentes. No entanto, isto foi modificado na última especificação ECMAScript 2015. Iniciado com o Gecko 29.0 () e pelo , +0 e -0 são tratados com sendo o mesmo valor em objetos conjunto (Set). Também, e podem ser armazenados em um conjunto Set. Set +0 - 0 Erro do Firefox 952870 recent nightly Chrome NaN undefined Propriedades Set.length O valor da propriedade comprimento é 0. Para contar o número de elementos de um , use . Set Set.prototype.size get Set[@@species] A função construtora usada para criar objetos derivados. Set Representa o prototype do constructor do . Permite a adição de propriedades para todos os objetos do tipo . Set Set Instâncias Set Todas as instâncias de herdam de . Set Set Propriedades Métodos Exemplos Utilizando o objeto Set js var meuSet = new Set(); meuSet.add(1); // meuSet [1] meuSet.add(5); // meuSet [1, 5] meuSet.add(5); // 5 já foi adicionando, portanto, meuSet [1, 5] meuSet.add(\"texto\"); var o = { a: 1, b: 2 }; meuSet.add(o); meuSet.add({ a: 1, b: 2 }); // o está referenciando outro objeto meuSet.has(1); // true meuSet.has(3); // false, 3 não foi adicionado ao set (Conjunto) meuSet.has(5); // true meuSet.has(Math.sqrt(25)); // true meuSet.has(\"Texto\".toLowerCase()); // true meuSet.has(o); // true meuSet.size; // 5 meuSet.delete(5); // remove 5 do set meuSet.has(5); // false, 5 já foi removido meuSet.size; // 4, nós simplesmente removemos um valor console.log(meuSet); // Set { 1, 'texto', { a: 1, b: 2 }, { a: 1, b: 2 } } Iterando objetos Set js // iterar sobre os itens em set // loga os itens na ordem: 1, \"texto\" for (let item of meuSet) console.log(item); // loga os itens na ordem: 1, \"texto\" for (let item of meuSet.keys()) console.log(item); // loga os itens na ordem: 1, \"texto\" for (let item of meuSet.values()) console.log(item); // loga os itens na ordem: 1, \"texto\" //(key e value são os mesmos aqui) for (let [key, value] of meuSet.entries()) console.log(key); // converte Set para um Array var meuArr = [v for (v of mySet)]; // [1, \"some text\"] // o seguinte também funcionará se for executado em um documento HTML mySet.add(document.body); mySet.has(document.querySelector(\"body\")); // true // a conversão entre Set e Array mySet2 = Set([1,2,3,4]); mySet2.size; // 4 [...mySet2]; // [1,2,3,4] // intersecção pode ser simulado via var intersection = new Set([...set1].filter(x => set2.has(x))); // Iterar entradas set com forEach meuSet.forEach(function(value) { console.log(value); }); // 1 // 2 // 3 // 4 Implementando operações básicas entre conjuntos js function isSuperset(set, subset) { for (var elem of subset) { if (!set.has(elem)) { return false; } } return true; } function uniao(setA, setB) { var _uniao = new Set(setA); for (var elem of setB) { _uniao.add(elem); } return _uniao; } function interseccao(setA, setB) { var _interseccao = new Set(); for (var elem of setB) { if (setA.has(elem)) { _interseccao.add(elem); } } return _interseccao; } function diferencaSimetrica(setA, setB) { var _diferenca = new Set(setA); for (var elem of setB) { if (_diferenca.has(elem)) { _diferenca.delete(elem); } else { _diferenca.add(elem); } } return _diferenca; } function diferenca(setA, setB) { var _diferenca = new Set(setA); for (var elem of setB) { _diferenca.delete(elem); } return _diferenca; } //Exemplos var setA = new Set([1, 2, 3, 4]), setB = new Set([2, 3]), setC = new Set([3, 4, 5, 6]); isSuperset(setA, setB); // => true uniao(setA, setC); // => Set [1, 2, 3, 4, 5, 6] interseccao(setA, setC); // => Set [3, 4] diferencaSimetrica(setA, setC); // => Set [1, 2, 5, 6] diferenca(setA, setC); // => Set [1, 2] Relação com objetos Array js var myArray = [\"value1\", \"value2\", \"value3\"]; // Use o construtor regular de Set para transformar um array dentro de um Set var mySet = new Set(myArray); mySet.has(\"value1\"); // retorna true // Use o operador de propagação para transformar um Set em um Array. alert(uneval([...mySet])); // Irá mostrar-lhe exatamente o mesmo Array como myArray Removendo elementos duplicados de um Array js // Use para remover elementos duplicados de um Array const numeros = [2, 3, 4, 4, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 5, 32, 3, 4, 5]; console.log([...new Set(numeros)]); // [2, 3, 4, 5, 6, 7, 32] Relação com objetos String js var texto = \"India\"; var meuSet = new Set(texto); // Set ['I', 'n', 'd', 'i', 'a'] meuSet.size; // 5 Especificações Specification ECMAScript® 2027 Language Specification# sec-set-objects Compatibilidade com navegadores Veja também Map WeakMap WeakSet Help improve MDN Learn how to contribute This page was last modified on by . 22 de mai. de 2026 MDN contributors • View this page on GitHub Report a problem with this content",
+        "final": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+        "trecho_usado": "propriedade comprimento é 0. Para contar o número de elementos de um , use . Set Set.prototype.size get Set[@@species] A função construtora usada para criar objetos derivados. Set Representa o prototype do constructor do . Permite a adição de propriedades para todos os objetos do tipo . Set Set Instâncias Set Todas as instâncias de herdam de . Set Set Propriedades Métodos Exemplos Utilizando o",
+        "metadados": {
+          "titulo": "Set - JavaScript | MDN",
+          "descricao": "O objeto Set permite que você armazene valores únicos de qualquer tipo, desde valores primitivos a referências a objetos.",
+          "canonica": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+          "og": {
+            "og:url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+            "og:title": "Set - JavaScript | MDN",
+            "og:locale": "pt_BR",
+            "og:description": "O objeto Set permite que você armazene valores únicos de qualquer tipo, desde valores primitivos a referências a objetos.",
+            "og:image": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "og:image:type": "image/png",
+            "og:image:height": "1024",
+            "og:image:width": "1024",
+            "og:image:alt": "The MDN logo",
+            "og:site_name": "MDN Web Docs"
+          },
+          "twitter": {
+            "twitter:card": "summary",
+            "twitter:creator": "MozDevNet"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "MDN Web Docs",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Se um é passado, todos os seus elementos serão adicionados ao novo Set. Se tal parâmetro não for específicado, ou se seu valor for , o novo estará vazio. objeto iterável null Set\nObjetos são coleções de valores nas quais é possível iterar os elementos em ordem de inserção. Um valor no ; ele é único na coleção do . Set Set pode ocorrer apenas uma vez Set\nComo cada valor no Set deve ser único, a igualdade será checada e não é baseada no mesmo algoritmo que aquele usado no operador ===. Especificamente, para s, (que é exatamente igual a - 0) e são valores diferentes. No entanto, isto foi modificado na última especificação ECMAScript 2015. Iniciado com o Gecko 29.0 () e pelo , +0 e -0 são tratados com sendo o mesmo valor em objetos conjunto (Set). Também, e podem ser armazenados em um conjunto Set. Set +0 - 0 Erro do Firefox 952870 recent nightly Chrome NaN undefined\nO valor da propriedade comprimento é 0.\nPara contar o número de elementos de um , use . Set Set.prototype.size\nA função construtora usada para criar objetos derivados.\nRepresenta o prototype do constructor do . Permite a adição de propriedades para todos os objetos do tipo . Set Set\nTodas as instâncias de herdam de . Set Set\nvar meuSet = new Set(); meuSet.add(1); // meuSet [1] meuSet.add(5); // meuSet [1, 5] meuSet.add(5); // 5 já foi adicionando, portanto, meuSet [1, 5] meuSet.add(\"texto\"); var o = { a: 1, b: 2 }; meuSet.add(o); meuSet.add({ a: 1, b: 2 }); // o está referenciando outro objeto meuSet.has(1); // true meuSet.has(3); // false, 3 não foi adicionado ao set (Conjunto) meuSet.has(5); // true meuSet.has(Math.sqrt(25)); // true meuSet.has(\"Texto\".toLowerCase()); // true meuSet.has(o); // true meuSet.size; // 5 meuSet.delete(5); // remove 5 do set meuSet.has(5); // false, 5 já foi removido meuSet.size; // 4, nós simplesmente removemos um valor console.log(meuSet); // Set { 1, 'texto', { a: 1, b: 2 }, { a: 1, b: 2 } }\n// iterar sobre os itens em set // loga os itens na ordem: 1, \"texto\" for (let item of meuSet) console.log(item); // loga os itens na ordem: 1, \"texto\" for (let item of meuSet.keys()) console.log(item); // loga os itens na ordem: 1, \"texto\" for (let item of meuSet.values()) console.log(item); // loga os itens na ordem: 1, \"texto\" //(key e value são os mesmos aqui) for (let [key, value] of meuSet.entries()) console.log(key); // converte Set para um Array var meuArr = [v for (v of mySet)]; // [1, \"some text\"] // o seguinte também funcionará se for executado em um documento HTML mySet.add(document.body); mySet.has(document.querySelector(\"body\")); // true // a conversão entre Set e Array mySet2 = Set([1,2,3,4]); mySet2.size; // 4 [...mySet2]; // [1,2,3,4] // intersecção pode ser simulado via var intersection = new Set([...set1].filter(x => set2.has(x))); // Iterar entradas set com forEach meuSet.forEach(function(value) { console.log(value); }); // 1 // 2 // 3 // 4"
+          },
+          {
+            "titulo": "Implementando operações básicas entre conjuntos",
+            "texto": "function isSuperset(set, subset) { for (var elem of subset) { if (!set.has(elem)) { return false; } } return true; } function uniao(setA, setB) { var _uniao = new Set(setA); for (var elem of setB) { _uniao.add(elem); } return _uniao; } function interseccao(setA, setB) { var _interseccao = new Set(); for (var elem of setB) { if (setA.has(elem)) { _interseccao.add(elem); } } return _interseccao; } function diferencaSimetrica(setA, setB) { var _diferenca = new Set(setA); for (var elem of setB) { if (_diferenca.has(elem)) { _diferenca.delete(elem); } else { _diferenca.add(elem); } } return _diferenca; } function diferenca(setA, setB) { var _diferenca = new Set(setA); for (var elem of setB) { _diferenca.delete(elem); } return _diferenca; } //Exemplos var setA = new Set([1, 2, 3, 4]), setB = new Set([2, 3]), setC = new Set([3, 4, 5, 6]); isSuperset(setA, setB); // => true uniao(setA, setC); // => Set [1, 2, 3, 4, 5, 6] interseccao(setA, setC); // => Set [3, 4] diferencaSimetrica(setA, setC); // => Set [1, 2, 5, 6] diferenca(setA, setC); // => Set [1, 2]"
+          },
+          {
+            "titulo": "Relação com objetos Array",
+            "texto": "var myArray = [\"value1\", \"value2\", \"value3\"]; // Use o construtor regular de Set para transformar um array dentro de um Set var mySet = new Set(myArray); mySet.has(\"value1\"); // retorna true // Use o operador de propagação para transformar um Set em um Array. alert(uneval([...mySet])); // Irá mostrar-lhe exatamente o mesmo Array como myArray"
+          },
+          {
+            "titulo": "Removendo elementos duplicados de um Array",
+            "texto": "// Use para remover elementos duplicados de um Array const numeros = [2, 3, 4, 4, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 5, 32, 3, 4, 5]; console.log([...new Set(numeros)]); // [2, 3, 4, 5, 6, 7, 32]"
+          },
+          {
+            "titulo": "Relação com objetos String",
+            "texto": "var texto = \"India\"; var meuSet = new Set(texto); // Set ['I', 'n', 'd', 'i', 'a'] meuSet.size; // 5\nECMAScript® 2027 Language Specification# sec-set-objects"
+          },
+          {
+            "titulo": "Compatibilidade com navegadores",
+            "texto": "This page was last modified on by . 22 de mai. de 2026 MDN contributors"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Set",
+            "texto": "Deutsch en-US\" > English (US) es\" > Español fr\" > Français ja\" > 日本語 ko\" > 한국어 pt-BR\" > Português (do Brasil) ru\" > Русский zh-CN\" > 中文 (简体) zh-TW\" > 正體中文 (繁體) ",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/size",
+            "texto": "Set.prototype.size",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Symbol.species",
+            "texto": "get Set[@@species]",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+            "texto": "Map",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set/add",
+            "texto": "Set .prototype .add()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set/clear",
+            "texto": "Set .prototype .clear()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set/delete",
+            "texto": "Set .prototype .delete()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set/entries",
+            "texto": "Set .prototype .entries()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set/has",
+            "texto": "Set .prototype .has()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set/values",
+            "texto": "Set .prototype .values()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/HTML",
+            "texto": "HTML: Markup language HTML reference /pt-BR/docs/Web/HTML/Reference/Elements\" >Elements /pt-BR/docs/Web/HTML/Reference/Global_attributes\" >Global attributes /pt",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Glossary/Baseline/Compatibility",
+            "texto": "Learn more",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Glossary/Primitive",
+            "texto": "valores primitivos",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Statements/for...of",
+            "texto": "objeto iterável",
+            "interno": true
+          },
+          {
+            "url": "https://bugzil.la/952870",
+            "texto": "Erro do Firefox 952870",
+            "interno": false
+          },
+          {
+            "url": "https://code.google.com/p/v8/issues/detail?id=3069",
+            "texto": "recent nightly Chrome",
+            "interno": false
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+            "texto": "Set",
+            "interno": true
+          },
+          {
+            "url": "https://tc39.es/ecma262/multipage/keyed-collections.html#sec-set-objects",
+            "texto": "ECMAScript® 2027 Language Specification # sec-set-objects Compatibilidade com navegadores",
+            "interno": false
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+            "texto": "WeakMap",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+            "texto": "WeakSet",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/MDN/Community/Getting_started",
+            "texto": "Learn how to contribute This page was last modified on 22 de mai. de 2026 by MDN contributors",
+            "interno": true
+          },
+          {
+            "url": "https://github.com/mdn/translated-content/blob/main/files/pt-br/web/javascript/reference/global_objects/set/index.md?plain=1",
+            "texto": "View this page on GitHub • Report a problem with this content .visually-hidden{border:0!important;clip-path:inset(50%)!important;height:1px!important;margin:-1p",
+            "interno": false
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/Set",
+            "texto": "Set()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/difference",
+            "texto": "difference()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/forEach",
+            "texto": "forEach()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/intersection",
+            "texto": "intersection()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/isDisjointFrom",
+            "texto": "isDisjointFrom()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/isSubsetOf",
+            "texto": "isSubsetOf()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/isSupersetOf",
+            "texto": "isSupersetOf()",
+            "interno": true
+          },
+          {
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/keys",
+            "texto": "keys()",
+            "interno": true
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Specification"
+            ],
+            [
+              "ECMAScript® 2027 Language Specification # sec-set-objects"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://developer.mozilla.org/mdn-social-image.46ac2375.png"
+        ],
+        "midia": [
+          {
+            "id": "med-d3b3ed584f75",
+            "type": "image",
+            "title": "The MDN logo",
+            "url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "final_url": "https://developer.mozilla.org/mdn-social-image.46ac2375.png",
+            "source_title": "Set - JavaScript | MDN",
+            "source_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Set",
+            "publisher": "developer.mozilla.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "The MDN logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://www.w3schools.com/Js/",
+      "result": {
+        "titulo": "JavaScript Tutorial",
+        "texto": "JavaScript Tutorial ❮ Home Next ❯ Learn JavaScript The Programming Language of the Web JavaScript is easy to learn. This tutorial covers everything from basic JavaScript up to the latest 2026 version. Start learning JavaScript now » Share Examples in Each Chapter With our editor, you can edit the source code and view the result. Try it Yourself Example My First JavaScript Try it Yourself » Use the Menu We recommend reading this tutorial, . in the sequence listed in the menu If you have a large screen, the menu will always be present on the left. If you have a small screen, open the menu by clicking the top menu sign . ☰ Learn by Examples Examples are better than 1000 words. Examples are often easier to understand than text explanations. This tutorial supplements all explanations with clarifying examples. Try it Yourself If you try all the examples, you will learn a lot about JavaScript, in a very short time! JavaScript Examples » Why Study JavaScript? JavaScript is one of the all web developers learn: 3 languages must to define the content of web pages HTML to specify the layout of web pages CSS to program the behavior of web pages JavaScript Learning Speed In this tutorial, the learning speed is your choice. Everything is up to you. If you are struggling, take a break, or re-read the material. make sure you understand the \"Try-it-Yourself\" examples. Always all The only way to become a clever programmer is to: Practice coding! Practice coding! Practice coding! Commonly Asked Questions How do I get JavaScript? Where can I download JavaScript? Is JavaScript Free? You don't have to get or download JavaScript. JavaScript is already running in your browser on your computer, on your tablet, and on your smart-phone. JavaScript is free to use for everyone. JavaScript Exercises Many chapters in this tutorial end with an exercise where you can check your level of knowledge. See all JavaScript Exercises JavaScript Quiz Test Test your JavaScript skills at W3Schools! Start JavaScript Quiz! Track Your Progress Create a W3Schools account and get access to more features and learning materials: View your completed tutorials, exercises, and quizzes Keep an eye on your progress and daily streaks Join the leaderboard and compete with others Get your own avatar and unlock new skins Create your own personal website Sign Up » Note This is an optional feature. You can study at W3Schools without creating an account. JavaScript References W3Schools maintains a complete JavaScript reference, including all HTML and browser objects. The reference contains examples for all properties, methods and events, and is continuously updated according to the latest web standards. Complete JavaScript Reference » Certification Course Get Certified in coding Complete the W3Schools coding course, strengthen your knowledge, and earn a certificate you can add to your CV, portfolio, and LinkedIn profile. Get Certified Today W3Schools Certificate Coding Learn it. Practice it. Prove it. ❮ Home Next ❯ ★ +1 Sign in to track progress",
+        "final": "https://www.w3schools.com/Js/",
+        "trecho_usado": "developers learn: 3 languages must to define the content of web pages HTML to specify the layout of web pages CSS to program the behavior of web pages JavaScript Learning Speed In this tutorial, the learning speed is your choice. Everything is up to you. If you are struggling, take a break, or re-read the material. make sure you understand the \"Try-it-Yourself\" examples. Always all The only way to",
+        "metadados": {
+          "titulo": "JavaScript Tutorial",
+          "descricao": "Well organized and easy to understand Web building tutorials with lots of examples of how to use HTML, CSS, JavaScript, SQL, Python, PHP, Bootstrap, Java, XML and more.",
+          "canonica": "",
+          "og": {
+            "og:title": "JavaScript Tutorial",
+            "og:image": "https://www.w3schools.com/images/og/js/default.png",
+            "og:image:type": "image/png",
+            "og:image:width": "1200",
+            "og:image:height": "630",
+            "og:description": "This tutorial covers everything from basic JavaScript up to the latest 2026 version.",
+            "og:url": "https://www.w3schools.com/Js/default.asp",
+            "og:type": "website",
+            "og:site_name": "W3Schools"
+          },
+          "twitter": {
+            "twitter:card": "summary_large_image",
+            "twitter:site": "@w3schools",
+            "twitter:title": "JavaScript Tutorial",
+            "twitter:description": "This tutorial covers everything from basic JavaScript up to the latest 2026 version.",
+            "twitter:image": "https://www.w3schools.com/images/og/js/default.png"
+          },
+          "idioma": "en-US",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "W3Schools",
+          "tipo": "website",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "The Programming Language of the Web",
+            "texto": "JavaScript is easy to learn.\nThis tutorial covers everything from basic JavaScript up to the latest 2026 version.\nStart learning JavaScript now »\nWith our editor, you can edit the source code and view the result. Try it Yourself\nWe recommend reading this tutorial, . in the sequence listed in the menu\nIf you have a large screen, the menu will always be present on the left.\nIf you have a small screen, open the menu by clicking the top menu sign . ☰\nExamples are better than 1000 words.\nExamples are often easier to understand than text explanations.\nThis tutorial supplements all explanations with clarifying examples. Try it Yourself\nIf you try all the examples, you will learn a lot about JavaScript, in a very short time!\nJavaScript is one of the all web developers learn: 3 languages must\nto define the content of web pages HTML\nto specify the layout of web pages CSS\nto program the behavior of web pages JavaScript\nIn this tutorial, the learning speed is your choice.\nIf you are struggling, take a break, or re-read the material.\nmake sure you understand the \"Try-it-Yourself\" examples. Always all\nThe only way to become a clever programmer is to:\nPractice coding! Practice coding! Practice coding!\nWhere can I download JavaScript?\nYou don't have to get or download JavaScript.\nJavaScript is already running in your browser on your computer, on your tablet, and on your smart-phone.\nJavaScript is free to use for everyone.\nMany chapters in this tutorial end with an exercise where you can check your level of knowledge.\nSee all JavaScript Exercises\nTest your JavaScript skills at W3Schools!\nCreate a W3Schools account and get access to more features and learning materials:\nView your completed tutorials, exercises, and quizzes\nKeep an eye on your progress and daily streaks\nJoin the leaderboard and compete with others\nGet your own avatar and unlock new skins\nCreate your own personal website\nThis is an optional feature. You can study at W3Schools without creating an account.\nW3Schools maintains a complete JavaScript reference, including all HTML and browser objects.\nThe reference contains examples for all properties, methods and events, and is continuously updated according to the latest web standards.\nComplete the W3Schools coding course, strengthen your knowledge, and earn a certificate you can add to your CV, portfolio, and LinkedIn profile."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.w3schools.com",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.w3schools.com/adventure/index.php",
+            "texto": "NEW W3Schools app iOS & Android Start the adventure",
+            "interno": true
+          },
+          {
+            "url": "https://profile.w3schools.com/log-in",
+            "texto": "--> --> ★ +1",
+            "interno": false
+          },
+          {
+            "url": "https://pathfinder.w3schools.com",
+            "texto": "My W3Schools",
+            "interno": false
+          },
+          {
+            "url": "https://www.w3schools.com/spaces/index.php",
+            "texto": "Spaces",
+            "interno": true
+          },
+          {
+            "url": "https://order.w3schools.com/plans",
+            "texto": "Upgrade",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog",
+            "texto": "Paid Courses",
+            "interno": false
+          },
+          {
+            "url": "https://www.w3schools.com/academy/index.php",
+            "texto": "Academy",
+            "interno": true
+          },
+          {
+            "url": "https://www.w3schools.com/practice/index.php",
+            "texto": "Practice",
+            "interno": true
+          },
+          {
+            "url": "https://spaces.w3schools.com/",
+            "texto": "Spaces",
+            "interno": false
+          },
+          {
+            "url": "https://profile.w3schools.com/logout",
+            "texto": "Logout",
+            "interno": false
+          },
+          {
+            "url": "https://www.youtube.com/@w3schools",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.linkedin.com/company/w3schools.com/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://discord.com/invite/w3schools",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.facebook.com/w3schoolscom/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/w3schools.com_official/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://profile.w3schools.com/signup",
+            "texto": "Sign in",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/html-course",
+            "texto": "HTML",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/css-course",
+            "texto": "CSS",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/javascript-course",
+            "texto": "JavaScript",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/sql-course",
+            "texto": "SQL",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/python-course",
+            "texto": "Python",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/java-course",
+            "texto": "Java",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-c",
+            "texto": "C",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/cpp-course",
+            "texto": "C++",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/c-course",
+            "texto": "C#",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/php-course",
+            "texto": "PHP",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/react-js-course",
+            "texto": "React",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-mysql-1",
+            "texto": "MySQL",
+            "interno": false
+          },
+          {
+            "url": "https://campus.w3schools.com/collections/course-catalog/products/learn-excel",
+            "texto": "Excel",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://www.w3schools.com/images/og/js/default.png",
+          "https://www.w3schools.com/adventure/img/mascot-lynx.png",
+          "https://www.w3schools.com/adventure/img/screen-map.png",
+          "https://www.w3schools.com/images/colorpicker2000.png",
+          "https://www.w3schools.com/signup/lynxlogo.svg",
+          "https://www.w3schools.com/Js/img_javascript_480.jpg",
+          "https://www.w3schools.com/spaces/files/check3.db67d31e.svg",
+          "https://www.w3schools.com/html/img_cert_html.jpg",
+          "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+          "https://www.w3schools.com/adventure/img/map/oakTree.webp"
+        ],
+        "midia": [
+          {
+            "id": "med-c08538222dd9",
+            "type": "image",
+            "title": "This tutorial covers everything from basic JavaScript up to the latest 2026 version.",
+            "url": "https://www.w3schools.com/images/og/js/default.png",
+            "final_url": "https://www.w3schools.com/images/og/js/default.png",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "This tutorial covers everything from basic JavaScript up to the latest 2026 version.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-ae0f6b9c5cf6",
+            "type": "image",
+            "title": "A circular color wheel showing the gradation of colors in the spectrum",
+            "url": "https://www.w3schools.com/images/colorpicker2000.png",
+            "final_url": "https://www.w3schools.com/images/colorpicker2000.png",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "A circular color wheel showing the gradation of colors in the spectrum",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-da64a54a3a6d",
+            "type": "image",
+            "title": "Lynx logo",
+            "url": "https://www.w3schools.com/signup/lynxlogo.svg",
+            "final_url": "https://www.w3schools.com/signup/lynxlogo.svg",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Lynx logo",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-7edfa968bdca",
+            "type": "image",
+            "title": "JS",
+            "url": "https://www.w3schools.com/Js/img_javascript_480.jpg",
+            "final_url": "https://www.w3schools.com/Js/img_javascript_480.jpg",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "JS",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-bc5f4a6e8804",
+            "type": "image",
+            "title": "Checkmark",
+            "url": "https://www.w3schools.com/spaces/files/check3.db67d31e.svg",
+            "final_url": "https://www.w3schools.com/spaces/files/check3.db67d31e.svg",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Checkmark",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-39664b17022a",
+            "type": "image",
+            "title": "W3Schools HTML Certificate",
+            "url": "https://www.w3schools.com/html/img_cert_html.jpg",
+            "final_url": "https://www.w3schools.com/html/img_cert_html.jpg",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "W3Schools HTML Certificate",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-d49d074b82e1",
+            "type": "image",
+            "title": "W3Schools Full Access - your next career move",
+            "url": "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+            "final_url": "https://www.w3schools.com/images/img_fa_nextmove_300.png",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "W3Schools Full Access - your next career move",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-29be92cc0b6a",
+            "type": "document",
+            "title": "index.html",
+            "url": "https://www.w3schools.com/codegame/index.html",
+            "final_url": "https://www.w3schools.com/codegame/index.html",
+            "source_title": "JavaScript Tutorial",
+            "source_url": "https://www.w3schools.com/Js/",
+            "publisher": "www.w3schools.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "This tutorial covers everything from basic JavaScript up to the latest 2026 version.",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "7b200288c3cdce709e73",
+            "url": "https://stackoverflow.com/questions/71181442/v8-how-to-debug-map-prototype-set-and-orderedhashtable",
+            "title": "v8 - how to debug Map.prototype.set and OrderedHashTable?",
+            "origin": "stackexchange",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "I'm learning more about v8 internals as a hobby project. For this example, I'm trying to debug and understand how Javascript Map.prototype.set actually works un"
+          },
+          {
+            "id": "db86cdbb09de5cefbbf1",
+            "url": "https://stackoverflow.com/questions/38328736/map-prototype-set-returns-with-undefined-in-internet-explorer-11",
+            "title": "Map.prototype.set returns with undefined in internet explorer 11",
+            "origin": "stackexchange",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "I'm trying to build a react application, and use react-css-modules. Everything runs fine under FF and Chrome, but in IE11 I encounter the following issue, at pa"
+          },
+          {
+            "id": "4ee37d4968810f680742",
+            "url": "https://stackoverflow.com/questions/35058791/cant-extend-es6-map",
+            "title": "Can't extend ES6 Map?",
+            "origin": "stackexchange",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Why can't I extend an ES6 Map? Here's my code: class M extends Map {} let m = new M(); m.set('key','val'); Running it on the Babel \"Try It Out\" page , I get thi"
+          },
+          {
+            "id": "af8403863aa0d47a5155",
+            "url": "https://stackoverflow.com/questions/76623101/what-do-people-mean-when-they-say-map-is-not-susceptible-to-prototype-polluti",
+            "title": "What do people mean when they say `Map` is ‘not susceptible to prototype pollution’?",
+            "origin": "stackexchange",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Regarding the security of JavaScript Maps , there exist claims like these: The Map primitive was introduced in ES6. The Map data structure stores key/value pair"
+          },
+          {
+            "id": "c0cda3141cc8df020afd",
+            "url": "https://stackoverflow.com/questions/48452885/observe-changes-to-a-map-using-a-proxy",
+            "title": "Observe changes to a Map using a Proxy",
+            "origin": "stackexchange",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "I use a Map javascript object. I'd like to observe changes to a Map instance using a Proxy object. However, whatever handler object I try to feed in to the prox"
+          },
+          {
+            "id": "559ca9ac1c73ad8f74b9",
+            "url": "https://stackoverflow.com/questions/43415571/is-it-possible-to-create-a-map-without-hardcoding-the-class-name-map",
+            "title": "Is it possible to create a map without hardcoding the class name `Map`?",
+            "origin": "stackexchange",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "tecnico",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "I tried to write a utility function which returns an object that is the same as its argument. The function works fine for most classes, except for ES6 collectio"
+          },
+          {
+            "id": "cc76d54415c82e67c1ae",
+            "url": "https://maps.google.com/",
+            "title": "Google Maps",
+            "origin": "bing",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Train Nearby places Restaurants Gas stations ATMs Shopping Map details Satellite Transit lines Traffic"
+          },
+          {
+            "id": "d2fc6338e400b997d986",
+            "url": "https://www.google.com/maps/search/",
+            "title": "Google Maps",
+            "origin": "bing",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Train Nearby places Restaurants Gas stations ATMs Shopping Map details Satellite Transit lines Traffic"
+          },
+          {
+            "id": "4608b0b03cf45d351765",
+            "url": "https://earth.google.com/web",
+            "title": "Google Earth",
+            "origin": "bing",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "View a map over time with Timelapse and Historical Imagery. Manage your data and projects with enhanced collaboration features. Versions Google Earth for Web Go"
+          },
+          {
+            "id": "867870301ddddfcdde63",
+            "url": "https://maps.google.com.br/mapfiles/home3.html",
+            "title": "Google Maps",
+            "origin": "bing",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Explore Google Maps for Street View, 3D mapping, turn-by-turn directions, indoor maps and more on your devices."
+          },
+          {
+            "id": "996f46b076d5b9a2086b",
+            "url": "https://maps.google.com/maps/dir/",
+            "title": "Get directions for driving, transit, walking, and more - Directions ...",
+            "origin": "bing",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Find local businesses, view maps and get driving directions in Google Maps."
+          },
+          {
+            "id": "7c1ec638a816fb11c169",
+            "url": "https://www.openstreetmap.org/",
+            "title": "OpenStreetMap",
+            "origin": "bing",
+            "query": "Map.prototype.set",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "OpenStreetMap is a map of the world, created by people like you and free to use under an open license."
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "stackexchange: 6 resultados (Map.prototype.set)",
+        "stackexchange: sem correspondência com o pedido; tentando outro provedor (Map.prototype.set)",
+        "hn: sem resultados (Map.prototype.set)",
+        "bing: 6 resultados (Map.prototype.set)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (Map.prototype.set)",
+        "— recuperação por lacuna —",
+        "stackexchange: sem resultados (javascript map.prototype.set sintaxe alt)",
+        "hn: sem resultados (javascript map.prototype.set sintaxe alt)",
+        "bing: 6 resultados (javascript map.prototype.set sintaxe alt)",
+        "bing: sem correspondência com o pedido; tentando outro provedor (javascript map.prototype.set sintaxe alt)",
+        "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Map.prototype.set",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+          "purpose": "pedido original sem condensação"
+        }
+      ],
+      "ganho_informacao": {
+        "dominios_novos": [],
+        "temas_novos": [],
+        "ganho_real": false
+      },
+      "lacunas": [
+        "nenhum candidato confirma assunto e restrições do pedido"
+      ]
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-5809a228d919",
+            "type": "explicit_attribute",
+            "description": "Sintaxe ou assinatura",
+            "entity": "Map.prototype.set",
+            "attribute": "syntax",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Sintaxe ou assinatura",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [
+              "S1"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-893992513968f1f9"
+            ]
+          },
+          {
+            "id": "R-e0e83418906f",
+            "type": "explicit_attribute",
+            "description": "Comportamento da operação",
+            "entity": "Map.prototype.set",
+            "attribute": "behavior",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Comportamento da operação",
+            "candidate_evidence_ids": [
+              "S1",
+              "S2",
+              "S3"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [
+          {
+            "id": "P-893992513968f1f9",
+            "source_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+            "text": "Map Map.prototype.set(, ) key value Define o para a no objeto . Retorna o objeto valor chave Map Map Métodos iterativos Map.prototype[@@iterator]() Retorna um novo objeto iterador que contèm para cada elemento do objeto na ordem em que foram inseridos. um array de [chave, valor] Map Map.prototype.keys() Retorna um novo objeto iterador que contèm as de cada elemento do objeto na ordem em que foram inseridos. chaves Map Map.prototype.values() Retorna um novo objeto iterador que contém os para cada elemento do objeto na ordem em que foram inseridos. valores Map Map.prototype.entries() Retorna um novo objeto iterador que contèm para cada elemento no objeto na ordem em que foram inseridos. um array de [chave, valor] Map Map.prototype.forEach([, ]) callbackFn thisArg Invoca o uma vez para cada par chave-valor presente no objeto , na ordem em que foram inseridos.",
+            "text_span": {
+              "start": 6134,
+              "end": 7002,
+              "scope": "returned_extracted_text"
+            },
+            "section": "",
+            "requirement_id": "R-5809a228d919",
+            "source_id": "S1",
+            "evidence_id": "S1",
+            "support_label": "DIRECT_SUPPORT",
+            "answerability": "DIRECT_ANSWER",
+            "reason": "bounded_explicit_entity_attribute_relation",
+            "requirement_ids": [
+              "R-5809a228d919"
+            ],
+            "requirement_support": {
+              "R-5809a228d919": "DIRECT_SUPPORT"
+            }
+          }
+        ],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+          "answerability": {
+            "state": "PARTIAL_ANSWER",
+            "requirement_ids": [
+              "R-5809a228d919"
+            ],
+            "aspects": [
+              "Sintaxe ou assinatura"
+            ],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": [
+            {
+              "id": "P-893992513968f1f9",
+              "source_url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+              "text": "Map Map.prototype.set(, ) key value Define o para a no objeto . Retorna o objeto valor chave Map Map Métodos iterativos Map.prototype[@@iterator]() Retorna um novo objeto iterador que contèm para cada elemento do objeto na ordem em que foram inseridos. um array de [chave, valor] Map Map.prototype.keys() Retorna um novo objeto iterador que contèm as de cada elemento do objeto na ordem em que foram inseridos. chaves Map Map.prototype.values() Retorna um novo objeto iterador que contém os para cada elemento do objeto na ordem em que foram inseridos. valores Map Map.prototype.entries() Retorna um novo objeto iterador que contèm para cada elemento no objeto na ordem em que foram inseridos. um array de [chave, valor] Map Map.prototype.forEach([, ]) callbackFn thisArg Invoca o uma vez para cada par chave-valor presente no objeto , na ordem em que foram inseridos.",
+              "text_span": {
+                "start": 6134,
+                "end": 7002,
+                "scope": "returned_extracted_text"
+              },
+              "section": "",
+              "requirement_id": "R-5809a228d919",
+              "source_id": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Map",
+              "evidence_id": "",
+              "support_label": "DIRECT_SUPPORT",
+              "answerability": "DIRECT_ANSWER",
+              "reason": "bounded_explicit_entity_attribute_relation",
+              "requirement_ids": [
+                "R-5809a228d919"
+              ],
+              "requirement_support": {
+                "R-5809a228d919": "DIRECT_SUPPORT"
+              }
+            }
+          ]
+        },
+        {
+          "id": "S2",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        },
+        {
+          "id": "S3",
+          "url": "https://www.enable-javascript.com/pt/",
+          "answerability": {
+            "state": "TOPIC_ONLY",
+            "requirement_ids": [],
+            "aspects": [],
+            "partial_aspects": [],
+            "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+          },
+          "answer_passages": []
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+      "adapter_query": "Map.prototype.set",
+      "provider": "stackexchange",
+      "at": "2026-10-25T18:22:35.548462+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "v8 - how to debug Map.prototype.set and OrderedHashTable?",
+          "url": "https://stackoverflow.com/questions/71181442/v8-how-to-debug-map-prototype-set-and-orderedhashtable"
+        },
+        {
+          "title": "Map.prototype.set returns with undefined in internet explorer 11",
+          "url": "https://stackoverflow.com/questions/38328736/map-prototype-set-returns-with-undefined-in-internet-explorer-11"
+        },
+        {
+          "title": "Can't extend ES6 Map?",
+          "url": "https://stackoverflow.com/questions/35058791/cant-extend-es6-map"
+        },
+        {
+          "title": "What do people mean when they say `Map` is ‘not susceptible to prototype pollution’?",
+          "url": "https://stackoverflow.com/questions/76623101/what-do-people-mean-when-they-say-map-is-not-susceptible-to-prototype-polluti"
+        },
+        {
+          "title": "Observe changes to a Map using a Proxy",
+          "url": "https://stackoverflow.com/questions/48452885/observe-changes-to-a-map-using-a-proxy"
+        },
+        {
+          "title": "Is it possible to create a map without hardcoding the class name `Map`?",
+          "url": "https://stackoverflow.com/questions/43415571/is-it-possible-to-create-a-map-without-hardcoding-the-class-name-map"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "Map.prototype.set"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 484.65,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+      "adapter_query": "Map.prototype.set",
+      "provider": "hn",
+      "at": "2026-10-25T18:22:36.054401+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://hn.algolia.com/api/v1/search",
+          "parameters": {
+            "query": "Map.prototype.set"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 716.94,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+      "adapter_query": "Map.prototype.set",
+      "provider": "bing",
+      "at": "2026-10-25T18:22:36.771592+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Google Maps",
+          "url": "https://maps.google.com/"
+        },
+        {
+          "title": "Google Maps",
+          "url": "https://www.google.com/maps/search/"
+        },
+        {
+          "title": "Google Earth",
+          "url": "https://earth.google.com/web"
+        },
+        {
+          "title": "Google Maps",
+          "url": "https://maps.google.com.br/mapfiles/home3.html"
+        },
+        {
+          "title": "Get directions for driving, transit, walking, and more - Directions ...",
+          "url": "https://maps.google.com/maps/dir/"
+        },
+        {
+          "title": "OpenStreetMap",
+          "url": "https://www.openstreetmap.org/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "Map.prototype.set",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 396.1,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+      "adapter_query": "javascript map.prototype.set sintaxe altera mapa original",
+      "provider": "stackexchange",
+      "at": "2026-10-25T18:22:37.225310+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "javascript map.prototype.set sintaxe altera mapa original"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "javascript map.prototype.set sintaxe altera mapa original"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "javascript map.prototype.set sintaxe altera mapa original"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "javascript map.prototype.set sintaxe altera mapa original"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        },
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "q": "javascript map.prototype.set sintaxe altera mapa original"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 3284.22,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+      "adapter_query": "javascript map.prototype.set sintaxe altera mapa original",
+      "provider": "hn",
+      "at": "2026-10-25T18:22:40.510174+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "http_status": null,
+      "error_code": "vazio",
+      "result_count": 0,
+      "classification": "PROVIDER_EMPTY",
+      "requests": [
+        {
+          "url": "https://hn.algolia.com/api/v1/search",
+          "parameters": {
+            "query": "javascript map.prototype.set sintaxe altera mapa original"
+          },
+          "http_status": null,
+          "final_url": "",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 687.37,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "Como funciona JavaScript Map.prototype.set, qual a sintaxe e se altera o mapa original?",
+      "adapter_query": "javascript map.prototype.set sintaxe altera mapa original",
+      "provider": "bing",
+      "at": "2026-10-25T18:22:41.198022+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "JavaScript Tutorial - W3Schools",
+          "url": "https://www.w3schools.com/Js/"
+        },
+        {
+          "title": "JavaScript - MDN Web Docs",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript"
+        },
+        {
+          "title": "JavaScript Tutorial",
+          "url": "https://www.javascripttutorial.net/"
+        },
+        {
+          "title": "JavaScript – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Javascript"
+        },
+        {
+          "title": "JavaScript - MDN",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+        },
+        {
+          "title": "Como habilitar o JavaScript no seu navegador e por que",
+          "url": "https://www.enable-javascript.com/pt/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "javascript map.prototype.set sintaxe altera mapa original",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 561.44,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "13b3013ef88c92955e5f16df0ad88cc333d4af6d",
+  "dataset_sha256": "eb62dca76ab68ad34a4bf8240eb5dbd3ddf8fa26a9b5ba694e61ac30dde903fb"
+}

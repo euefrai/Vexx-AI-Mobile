@@ -1,0 +1,139 @@
+{
+  "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+  "name": "technical",
+  "query": "Pesquisa profunda sobre como usar WebAssembly.Memory.grow, sua sintaxe e limitações, na documentação oficial MDN.",
+  "seconds": 18.176,
+  "inference_policy": "single-authorized-free-model-attempt-no-paid-fallback",
+  "completed_flow": true,
+  "http_status": 200,
+  "content_type": "text/event-stream; charset=utf-8",
+  "job": "rj-811b5264a6e2",
+  "job_state": "interrompida",
+  "job_mode": "profunda",
+  "outcome": {
+    "state": "partial",
+    "unresolved_fronts": [
+      "WebAssembly.Memory.grow Sintaxe ou assinatura",
+      "WebAssembly.Memory.grow Comportamento da operação",
+      "WebAssembly.Memory.grow Limitações"
+    ],
+    "source_authority_unverified": true,
+    "provider_code": "",
+    "read_sources": 0,
+    "reason": "evidências insuficientes ou limitações remanescentes"
+  },
+  "synthesis_llm": false,
+  "chat_result_id": "rj-811b5264a6e2-result",
+  "answer_coverage": {
+    "applicable": true,
+    "requirements": [
+      {
+        "id": "R-bc8977932968",
+        "type": "explicit_attribute",
+        "description": "Sintaxe ou assinatura",
+        "entity": "WebAssembly.Memory.grow",
+        "attribute": "syntax",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Sintaxe ou assinatura",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      },
+      {
+        "id": "R-0561fea0d2ee",
+        "type": "explicit_attribute",
+        "description": "Comportamento da operação",
+        "entity": "WebAssembly.Memory.grow",
+        "attribute": "behavior",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Comportamento da operação",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      },
+      {
+        "id": "R-862731f87cd6",
+        "type": "explicit_attribute",
+        "description": "Limitações",
+        "entity": "WebAssembly.Memory.grow",
+        "attribute": "limitations",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Limitações",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      }
+    ],
+    "passages": [],
+    "complete": false,
+    "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+  },
+  "stage_timings": [
+    {
+      "step_id": "p1",
+      "type": "busca",
+      "seconds": 5.9389
+    },
+    {
+      "step_id": "p4",
+      "type": "busca",
+      "seconds": 2.3598
+    },
+    {
+      "step_id": "p7",
+      "type": "busca",
+      "seconds": 0.4447
+    },
+    {
+      "step_id": "p10",
+      "type": "busca",
+      "seconds": 0.6165
+    },
+    {
+      "step_id": "p2",
+      "type": "ler",
+      "seconds": 3.0509
+    },
+    {
+      "step_id": "p5",
+      "type": "ler",
+      "seconds": 2.8952
+    },
+    {
+      "step_id": "p3",
+      "type": "analisar",
+      "seconds": 0.0033
+    },
+    {
+      "step_id": "p6",
+      "type": "analisar",
+      "seconds": 0.0027
+    }
+  ],
+  "synthesis_budget": null,
+  "assistant_messages": 2,
+  "reload_preserved": true,
+  "source_cards": [],
+  "links": [],
+  "media_cards": 0,
+  "public_answer": "v.\nVexx\n\nResultado da pesquisa\n\nInvestigação: como usar WebAssembly.Memory.grow, sua sintaxe e limitações, na documentação oficial MDN\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.\n\nObjetivo: como usar WebAssembly.Memory.grow, sua sintaxe e limitações, na documentação oficial MDN\n\nStatus: interrompida · Modo: profunda · Evidências: 0\n\nCobertura dos dados: parcial; há dados pendentes\n\nMídia descoberta: 5 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n\nLimite epistêmico: a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas.\n\nAspectos da pergunta\nBaixar CSV\nAspecto\tEvidência recuperada\nSintaxe ou assinatura\tAinda não confirmado\nComportamento da operação\tAinda não confirmado\nLimitações\tAinda não confirmado\nFonte oficial ou primária\tAutoridade ainda não verificada\n13:04\n···",
+  "page_errors": []
+}

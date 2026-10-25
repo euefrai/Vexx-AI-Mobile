@@ -1,0 +1,2462 @@
+{
+  "id": "holdout-05",
+  "category": "culture_history",
+  "query": "História do Museu do Amanhã fontes oficiais",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 5.088,
+  "state": "ok",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "Museu do Amanhã História fontes oficiais",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "Museu do Amanhã",
+      "candidates": 6
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Museu+do+Amanh%C3%A3+Hist%C3%B3ria+fontes+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Museu+do+Amanh%C3%A3+Hist%C3%B3ria+fontes+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4461
+    },
+    {
+      "url": "https://www.bing.com/search?q=Museu+do+Amanh%C3%A3&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Museu+do+Amanh%C3%A3&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5152
+    },
+    {
+      "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "final": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "chars": 120573
+    },
+    {
+      "url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+      "final": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+      "chars": 378107
+    },
+    {
+      "url": "https://museudoamanha.org.br/",
+      "final": "https://museudoamanha.org.br/",
+      "chars": 2055
+    },
+    {
+      "url": "https://amanhateca.org.br/",
+      "final": "https://amanhateca.org.br/",
+      "chars": 312602
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+      "final": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+      "chars": 201459
+    },
+    {
+      "url": "https://museudoamanha.org.br/visite/horarios-e-ingressos",
+      "final": "https://museudoamanha.org.br/visite/horarios-e-ingressos",
+      "chars": 2055
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "História do Museu do Amanhã fontes oficiais",
+    "domain": "general",
+    "original_request": "História do Museu do Amanhã fontes oficiais",
+    "resolved_request": "História do Museu do Amanhã fontes oficiais",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-25T18:13:41.422501+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "c18f24112f203bcc20ed",
+        "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+        "title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "2025-12-12T15:09:00-08:00",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "O Museu do Amanhã é um dos principais ícones culturais e arquitetônicos do Rio de Janeiro. Localizado na zona portuária da cidade, às margens da Baía de Guanaba",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3577,
+        "final_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "23304a3019a8ba49fb9b",
+        "url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+        "title": "Museu do Amanhã – Visite Museus",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "ter., 06 out. 2026 10:25:00 GMT",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "de ensino e de universidades públicas; Pessoas com idade até 5 anos e a partir de 60 anos; Acompanhante necessário de pessoas com deficiência; Funcionários de m",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1103,
+        "final_url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "5409b23add007b91c51c",
+        "url": "https://museudoamanha.org.br/",
+        "title": "Museu do Amanhã",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "dom., 25 out. 2026 12:26:00 GMT",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "Um museu para explorar o presente e imaginar o futuro. Guiado pelos valores da sustentabilidade e da convivência, o Museu do Amanhã inspira novas perspectivas p",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://museudoamanha.org.br/",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY"
+        ]
+      },
+      {
+        "id": "516ac61f45dfe2c1b6f2",
+        "url": "https://amanhateca.org.br/",
+        "title": "Museu do Amanhã",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "dom., 25 out. 2026 06:06:00 GMT",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S3",
+        "excerpt": "Organismo O Museu é gerido pelo Instituto de Desenvolvimento e Gestão – IDG O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 289,
+        "final_url": "https://amanhateca.org.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "4f53fb37e8d4077cb44d",
+        "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+        "title": "Museu do Amanhã – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "2010-08-15T17:51:43Z",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "possibilidades futuras para a humanidade. É neste último conceito que se encaixa o museu . A intenção do museu é conscientizar o visitante da sua parcela de con",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "50ff7eeca2f98fc246f9",
+        "url": "https://museudoamanha.org.br/visite/horarios-e-ingressos",
+        "title": "Horários e Ingressos | Museu do Amanhã",
+        "origin": "bing",
+        "query": "Museu do Amanhã",
+        "date": "dom., 25 out. 2026 05:23:00 GMT",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "HOURS Thursday to Tuesday (closed on Wednesdays) 10 a.m. to 6 p.m. Last entry: 5 p.m. Tickets are valid for the scheduled day and time. Please arrive at the app",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://museudoamanha.org.br/visite/horarios-e-ingressos",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY"
+        ]
+      },
+      {
+        "id": "f20131113b23c76dc997",
+        "url": "https://pt.wikipedia.org/wiki/Museu",
+        "title": "Museu – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "qua., 21 out. 2026 09:24:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Na Grécia Antiga o museu era um templo das Musas, divindades que presidiam a poesia, a música, a oratória, a história, a tragédia, a comédia, a dança e a astron",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "e5e57c9eb015baa6cb48",
+        "url": "https://visite.museus.gov.br/instituicoes/museu-do-piaui-casa-de-odilon-nunes/",
+        "title": "Museu do Piauí – Casa de Odilon Nunes - Visite Museus",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "dom., 25 out. 2026 02:46:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Museu do Piauí - Casa de Odilon Nunes, é uma instituição estadual vinculada à SECULT, com o objetivo de preservar o patrimônio histórico e artístico do Estado d",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "85b59c68d10f949d20ee",
+        "url": "https://www.mapadacultura.pi.gov.br/espaco/28/",
+        "title": "Museu do Piauí - Mapas Culturais",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "sáb., 10 out. 2026 01:30:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Localizado no centro histórico de Teresina, o Museu do Piauí – Casa de Odilon Nunes é uma das instituições culturais mais importantes do estado. Fundado em 1934",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "5e1c92d24da504dfbb31",
+        "url": "https://museudomavelar.com.br/",
+        "title": "Museu Dom Avelar",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "qui., 22 out. 2026 17:51:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Estamos ansiosos para receber você no Museu Dom Avelar Brandão Vilela. Aqui está tudo o que você precisa saber antes da sua visita. Conheça os espaços que compõ",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "7328625d8bc323cecffc",
+        "url": "https://www.tripadvisor.com.br/Attractions-g303483-Activities-c49-Teresina_State_of_Piaui.html",
+        "title": "OS 15 MELHORES museus em Teresina (2026) - Tripadvisor",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "sáb., 24 out. 2026 02:47:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Atividades classificadas de acordo com os dados do Tripadvisor, incluindo avaliações, pontuações, número de visualizações da página e localização do usuário. 1.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      },
+      {
+        "id": "3598284590023f76ef9c",
+        "url": "https://visite.museus.gov.br/cidade-instituicoes/teresina/",
+        "title": "Teresina – Visite Museus",
+        "origin": "bing",
+        "query": "Museu do Amanhã História fontes oficiais",
+        "date": "sex., 23 out. 2026 08:25:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O Museu da Imagem e do Som de Teresina, se dedica à preservação da história, memória e valorização da cultura. Museu de Arqueologia e Paleontologia da Universid",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-19e164a16f39",
+      "type": "image",
+      "title": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRE2ZpB6kOk0gXrQP2h1Fc1kdSo_SkkiKrbN7z5waAURz7KjncZFR7hEP-EkieCSyeL-kV15orAJw1R_DBF1B5cKyZUoZOYszXcEN-jSI2g39VjwMqbP70b7F04m050NsVlkKFZ2Z2qr0OzpzNkr6kyyoerimcGjmK0CW5sMQmPLAvIQ_pdIlyqkaQvJRn/w1200-h630-p-k-no-nu/museu-do-amanh%C3%A3.png",
+      "final_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRE2ZpB6kOk0gXrQP2h1Fc1kdSo_SkkiKrbN7z5waAURz7KjncZFR7hEP-EkieCSyeL-kV15orAJw1R_DBF1B5cKyZUoZOYszXcEN-jSI2g39VjwMqbP70b7F04m050NsVlkKFZ2Z2qr0OzpzNkr6kyyoerimcGjmK0CW5sMQmPLAvIQ_pdIlyqkaQvJRn/w1200-h630-p-k-no-nu/museu-do-amanh%C3%A3.png",
+      "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+      "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "publisher": "blogger.googleusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-635c77c75eff",
+      "type": "image",
+      "title": "Imagem",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUt7pk2dN4s14aTvKpc0yQAxDeN5WnHngMRNCf_fNRJ0ZuyV4Ae5ygDYOcvFGb7bkNmwHkkXqNzC5VuPI4bY5wMGGuHU-zy1KLhBAxcbgB6_cmObt77avNx7XUYqGiGHPqUS4qL-_KXjFJ3dieKtKUZsDX-BYpQwyxwvH-W9GU-iMbQe5-RY5rxTKydFdY/w400-h225/leblon-o-blog-do-rio%20(5).png",
+      "final_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUt7pk2dN4s14aTvKpc0yQAxDeN5WnHngMRNCf_fNRJ0ZuyV4Ae5ygDYOcvFGb7bkNmwHkkXqNzC5VuPI4bY5wMGGuHU-zy1KLhBAxcbgB6_cmObt77avNx7XUYqGiGHPqUS4qL-_KXjFJ3dieKtKUZsDX-BYpQwyxwvH-W9GU-iMbQe5-RY5rxTKydFdY/w400-h225/leblon-o-blog-do-rio%20(5).png",
+      "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+      "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "publisher": "blogger.googleusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1d5cf192a5bc",
+      "type": "image",
+      "title": "Imagem",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-_krIBQ76qhiLjkvMckX05iMv-shs77Spn-mG_RquH_aoJ15-QFiRp15Z-aEwj3AmHufN_pCRWRRnLnoiquORz-0jRkjr_RAUA7kA29HPF3z1I3jdIwjHYmFap4anTUUSnNy5RVTsoFgSIL4720h3GYi4xATXz7M5H01UhnZEJbBiXyJuO9ndUE-742CY/w400-h225/o-descobrimento-do-rio-de-janeiro.png",
+      "final_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-_krIBQ76qhiLjkvMckX05iMv-shs77Spn-mG_RquH_aoJ15-QFiRp15Z-aEwj3AmHufN_pCRWRRnLnoiquORz-0jRkjr_RAUA7kA29HPF3z1I3jdIwjHYmFap4anTUUSnNy5RVTsoFgSIL4720h3GYi4xATXz7M5H01UhnZEJbBiXyJuO9ndUE-742CY/w400-h225/o-descobrimento-do-rio-de-janeiro.png",
+      "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+      "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "publisher": "blogger.googleusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0df80c022878",
+      "type": "image",
+      "title": "Imagem",
+      "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGW7CdZyOZAziVikdP6JGiBYroCpJMFi5lBxbttSHrtHEZkC9YR0A4B0CFvvPFJIcdZrd1wlkPe0jlKZSH99omp42tLJVKBzPgzUNOhM6w6qetbo9QFEseT4VP8d2VvKd9Phkdd195Q8zoMwM-yCpvcPY-0nJEgcRwxXQw_IkBu2osGc6OE1va1yUgr_4b/w400-h225/OBlogDoRio%20(10).png",
+      "final_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGW7CdZyOZAziVikdP6JGiBYroCpJMFi5lBxbttSHrtHEZkC9YR0A4B0CFvvPFJIcdZrd1wlkPe0jlKZSH99omp42tLJVKBzPgzUNOhM6w6qetbo9QFEseT4VP8d2VvKd9Phkdd195Q8zoMwM-yCpvcPY-0nJEgcRwxXQw_IkBu2osGc6OE1va1yUgr_4b/w400-h225/OBlogDoRio%20(10).png",
+      "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+      "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "publisher": "blogger.googleusercontent.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a7fe19dc9371",
+      "type": "document",
+      "title": "museu-do-amanha-historia-arquitetura.html",
+      "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "final_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+      "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "publisher": "www.oblogdorio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-0bac21b9df66",
+      "type": "document",
+      "title": "leblon-o-bairro-mais-elegante-do-rio.html",
+      "url": "https://www.oblogdorio.com.br/2025/11/leblon-o-bairro-mais-elegante-do-rio.html",
+      "final_url": "https://www.oblogdorio.com.br/2025/11/leblon-o-bairro-mais-elegante-do-rio.html",
+      "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+      "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "publisher": "www.oblogdorio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-0a9374d51f26",
+      "type": "document",
+      "title": "a-historia-do-rio-do-descobrimento.html",
+      "url": "https://www.oblogdorio.com.br/2025/11/a-historia-do-rio-do-descobrimento.html",
+      "final_url": "https://www.oblogdorio.com.br/2025/11/a-historia-do-rio-do-descobrimento.html",
+      "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+      "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "publisher": "www.oblogdorio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-23f392e9d4af",
+      "type": "document",
+      "title": "mirantes-para-visitar-no-rio-de-janeiro.html",
+      "url": "https://www.oblogdorio.com.br/2026/01/mirantes-para-visitar-no-rio-de-janeiro.html",
+      "final_url": "https://www.oblogdorio.com.br/2026/01/mirantes-para-visitar-no-rio-de-janeiro.html",
+      "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+      "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "publisher": "www.oblogdorio.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-8842ca0383bc",
+      "type": "image",
+      "title": "Dados geraisTipo da instituiçãoClássico/TradicionalTemática da instituiçãoCiências exatas, da terra, biológicas e da saúdeModelo de instituiçãoFísicoEndereçoReg",
+      "url": "https://visite.museus.gov.br/wp-content/uploads/tainacan-items/14/202952/2023-01-15-Museu-e-Baia-Albert-Andrade-16.jpg",
+      "final_url": "https://visite.museus.gov.br/wp-content/uploads/tainacan-items/14/202952/2023-01-15-Museu-e-Baia-Albert-Andrade-16.jpg",
+      "source_title": "Museu do Amanhã",
+      "source_url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+      "publisher": "visite.museus.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Dados geraisTipo da instituiçãoClássico/TradicionalTemática da instituiçãoCiências exatas, da terra, biológicas e da saúdeModelo de instituiçãoFísicoEndereçoRegiãoSudesteEstadoRJCidadeRio de JaneiroBairroCentroNúmero (endereço)1EndereçoPraç",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5a4f534e315f",
+      "type": "image",
+      "title": "Logo da Plataforma Viste Museus",
+      "url": "https://visite.museus.gov.br/wp-content/uploads/2024/06/LOGO-VISITE-MUSEUS-1.svg",
+      "final_url": "https://visite.museus.gov.br/wp-content/uploads/2024/06/LOGO-VISITE-MUSEUS-1.svg",
+      "source_title": "Museu do Amanhã",
+      "source_url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+      "publisher": "visite.museus.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo da Plataforma Viste Museus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5ac71f65ac46",
+      "type": "image",
+      "title": "museu de ciências no Rio de Janeiro",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "museu de ciências no Rio de Janeiro",
+      "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "museu de ciências no Rio de Janeiro",
+      "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "titulo": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2025-12-12T15:09:00-08:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+      "titulo": "Museu do Amanhã",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "ter., 06 out. 2026 10:25:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://amanhateca.org.br/",
+      "titulo": "Museu do Amanhã",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "dom., 25 out. 2026 06:06:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://amanhateca.org.br/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 3,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "provider_responses": [
+    {
+      "provider": "bing",
+      "query": "Museu do Amanhã História fontes oficiais",
+      "items": [
+        {
+          "titulo": "OS 15 MELHORES museus em Teresina (2026) - Tripadvisor",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303483-Activities-c49-Teresina_State_of_Piaui.html",
+          "trecho": "Atividades classificadas de acordo com os dados do Tripadvisor, incluindo avaliações, pontuações, número de visualizações da página e localização do usuário. 1. Museu do Piaui - Casa de Odilon Nunes. Mesmo assim, durante meu passeio, registrei a fachada desse local que conta a história do Piauí.... ",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 24 out. 2026 02:47:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://tripadvisor.com.br/Attractions-g303483-Activities-c49-Teresina_State_of_Piaui.html",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Museu do Piauí - Mapas Culturais",
+          "url": "https://www.mapadacultura.pi.gov.br/espaco/28/",
+          "trecho": "Localizado no centro histórico de Teresina, o Museu do Piauí – Casa de Odilon Nunes é uma das instituições culturais mais importantes do estado. Fundado em 1934 como uma seção do Arquivo Público, foi instalado em sua sede atual em 1980 e recebeu o nome atual em 1999, em homenagem ao historiador piau",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sáb., 10 out. 2026 01:30:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://mapadacultura.pi.gov.br/espaco/28",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Teresina – Visite Museus",
+          "url": "https://visite.museus.gov.br/cidade-instituicoes/teresina/",
+          "trecho": "O Museu da Imagem e do Som de Teresina, se dedica à preservação da história, memória e valorização da cultura. Museu de Arqueologia e Paleontologia da Universidade Federal do Piauí.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "sex., 23 out. 2026 08:25:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://visite.museus.gov.br/cidade-instituicoes/teresina",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 7.8,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Museu Dom Avelar",
+          "url": "https://museudomavelar.com.br/",
+          "trecho": "Estamos ansiosos para receber você no Museu Dom Avelar Brandão Vilela. Aqui está tudo o que você precisa saber antes da sua visita. Conheça os espaços que compõem o museu e como eles estão organizados para receber exposições, atividades educativas e o público em geral. Siga-nos nas redes sociais par",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 17:51:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://museudomavelar.com.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 9.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Museu – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Museu",
+          "trecho": "Na Grécia Antiga o museu era um templo das Musas, divindades que presidiam a poesia, a música, a oratória, a história, a tragédia, a comédia, a dança e a astronomia.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qua., 21 out. 2026 09:24:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Museu",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        },
+        {
+          "titulo": "Museu do Piauí – Casa de Odilon Nunes - Visite Museus",
+          "url": "https://visite.museus.gov.br/instituicoes/museu-do-piaui-casa-de-odilon-nunes/",
+          "trecho": "Museu do Piauí - Casa de Odilon Nunes, é uma instituição estadual vinculada à SECULT, com o objetivo de preservar o patrimônio histórico e artístico do Estado do Piauí e testemunhar o perfil cultural de um povo, onde são desenvolvidas atividades educativas e culturais com o intuito de atrair o públi",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 02:46:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã História fontes oficiais",
+          "discovery_provider": "bing",
+          "url_canonica": "https://visite.museus.gov.br/instituicoes/museu-do-piaui-casa-de-odilon-nunes",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.333,
+          "relevancia": 10.3,
+          "relevance_reasons": [
+            "ENTITY_MISMATCH"
+          ]
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Museu do Amanhã",
+      "items": [
+        {
+          "titulo": "Museu do Amanhã",
+          "url": "https://museudoamanha.org.br/",
+          "trecho": "Um museu para explorar o presente e imaginar o futuro. Guiado pelos valores da sustentabilidade e da convivência, o Museu do Amanhã inspira novas perspectivas para o mundo que queremos construir. A museum to explore the present and imagine the future.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 12:26:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://museudoamanha.org.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 13.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Horários e Ingressos | Museu do Amanhã",
+          "url": "https://museudoamanha.org.br/visite/horarios-e-ingressos",
+          "trecho": "HOURS Thursday to Tuesday (closed on Wednesdays) 10 a.m. to 6 p.m. Last entry: 5 p.m. Tickets are valid for the scheduled day and time. Please arrive at the appointed time to guarantee your entry.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 05:23:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://museudoamanha.org.br/visite/horarios-e-ingressos",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 10.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Museu do Amanhã – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+          "trecho": "O Museu do Amanhã é um museu construído no município do Rio de Janeiro, no Brasil. O prédio, projeto do arquiteto espanhol Santiago Calatrava, foi erguido ao lado da Praça Mauá, na zona portuária (mais precisamente no Píer Mauá).",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "qui., 22 out. 2026 16:04:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 12.3,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Museu do Amanhã",
+          "url": "https://amanhateca.org.br/",
+          "trecho": "O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os desafios que a humanidade terá de enfrentar nas próximas décadas a partir das perspectivas da sustentabilidade e da convivência.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "dom., 25 out. 2026 06:06:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://amanhateca.org.br/",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 13.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Museu do Amanhã – Visite Museus",
+          "url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+          "trecho": "O Museu do Amanhã é um museu de ciências diferente. Um ambiente de ideias, explorações e perguntas sobre a época de grandes mudanças em que vivemos e os diferentes caminhos que se abrem para o futuro.",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 06 out. 2026 10:25:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://visite.museus.gov.br/instituicoes/museu-do-amanha",
+          "correspondencia_tipo": "PARTIAL_MATCH",
+          "cobertura_pedido": 0.667,
+          "relevancia": 15.8,
+          "relevance_reasons": []
+        },
+        {
+          "titulo": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+          "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+          "trecho": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+          "origem": "bing",
+          "tipo": "pagina",
+          "meta": {
+            "publicado_em": "ter., 06 out. 2026 23:11:00 GMT"
+          },
+          "discovery_query": "Museu do Amanhã",
+          "discovery_provider": "bing",
+          "url_canonica": "https://oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+          "correspondencia_tipo": "EXACT_MATCH",
+          "cobertura_pedido": 1.0,
+          "relevancia": 19.8,
+          "relevance_reasons": []
+        }
+      ]
+    }
+  ],
+  "extractions": [
+    {
+      "url": "https://museudoamanha.org.br/",
+      "result": {
+        "titulo": "Museu do Amanhã",
+        "texto": "",
+        "final": "https://museudoamanha.org.br/",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+      "result": {
+        "titulo": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+        "texto": "O Museu do Amanhã é um dos principais ícones culturais e arquitetônicos do Rio de Janeiro. Localizado na zona portuária da cidade, às margens da Baía de Guanabara, o museu se destaca não apenas por sua forma futurista, mas principalmente por sua proposta inovadora: provocar reflexões profundas sobre os rumos da humanidade e do planeta. A história da construção do Museu do Amanhã O Museu do Amanhã foi inaugurado em dezembro de 2015 como parte do projeto de revitalização urbana da região portuária do Rio de Janeiro, conhecido como Porto Maravilha. A iniciativa buscava recuperar uma área historicamente ligada ao desenvolvimento econômico da cidade, mas que havia passado décadas de degradação. A construção do museu ocupou o antigo Píer Mauá, espaço antes utilizado para operações portuárias e que estava subutilizado. Com a demolição do Elevado da Perimetral e a requalificação da orla, o local foi transformado em um grande polo cultural e turístico. O arquiteto e o conceito arquitetônico O projeto arquitetônico do Museu do Amanhã é assinado pelo arquiteto espanhol , conhecido por obras de linguagem futurista e inspiração em formas da natureza. Santiago Calatrava A estrutura do museu lembra uma grande escultura branca voltada para o mar, com elementos móveis no teto que acompanham a posição do sol, contribuindo para a eficiência energética e o conforto térmico do edifício. Qual é a finalidade do Museu do Amanhã O Museu do Amanhã não é um museu tradicional de acervo histórico. Sua proposta é estimular o pensamento crítico sobre o futuro da humanidade, abordando temas como sustentabilidade, mudanças climáticas, avanços tecnológicos e responsabilidade social. O que existia no local antes do museu Antes da construção, o espaço era ocupado por estruturas portuárias antigas do Píer Mauá, que ficaram por anos subutilizadas. A transformação do local simboliza a reconexão do Rio de Janeiro com sua zona portuária. O que o Museu do Amanhã expõe A principal atração do museu é sua exposição permanente, totalmente interativa e imersiva, que combina ciência, tecnologia e arte. Exposição permanente origem do universo e da vida Cosmos: dinâmica do planeta Terra: impacto humano no meio ambiente Antropoceno: cenários futuros possíveis Amanhãs: reflexão sobre escolhas individuais e coletivas Nós: O museu também recebe exposições temporárias, oficinas educativas, palestras e eventos culturais ao longo do ano. Museu do Amanhã Ingressos, valores e gratuidade Os valores de ingresso praticados são: Inteira: R$ 40,00 Meia-entrada: R$ 20,00 Há gratuidade para públicos específicos e em algumas ações especiais. Recomenda-se sempre consultar o site oficial para informações atualizadas. Programação em dezembro e verão Durante dezembro e o verão, o Museu do Amanhã costuma oferecer uma programação especial, com exposições temporárias, atividades educativas e eventos voltados para turistas e famílias. Como comprar ingressos A compra de ingressos deve ser feita preferencialmente online, pelo site oficial do Museu do Amanhã, com escolha de data e horário. Acesse o site oficial do Museu do Amanhã Entre na seção de ingressos Escolha data e horário Finalize a compra Publicidade | Link de afiliado Amazon | Posso receber comissão por compras qualificadas. Por que visitar o Museu do Amanhã O Museu do Amanhã é uma experiência que vai além da visita tradicional. É um espaço de aprendizado, reflexão e inspiração, em um dos cenários mais bonitos do Rio de Janeiro. Onde fica? Praça Mauá, 1 Centro, Rio de Janeiro - RJ - VÁ DE UBER Por Alexandre Cunha - O Blog do Rio",
+        "final": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+        "trecho_usado": "O Museu do Amanhã é um dos principais ícones culturais e arquitetônicos do Rio de Janeiro. Localizado na zona portuária da cidade, às margens da Baía de Guanabara, o museu se destaca não apenas por sua forma futurista, mas principalmente por sua proposta inovadora: provocar reflexões profundas sobre os rumos da humanidade e do planeta. A história da construção do Museu do Amanhã O Museu do Amanhã",
+        "metadados": {
+          "titulo": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+          "descricao": "O Museu do Amanhã é um dos principais ícones culturais e arquitetônicos do Rio de Janeiro. Localizado na zona portuária da cidade, às mar...",
+          "canonica": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+          "og": {
+            "og:url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "og:title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "og:description": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+            "og:image": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRE2ZpB6kOk0gXrQP2h1Fc1kdSo_SkkiKrbN7z5waAURz7KjncZFR7hEP-EkieCSyeL-kV15orAJw1R_DBF1B5cKyZUoZOYszXcEN-jSI2g39VjwMqbP70b7F04m050NsVlkKFZ2Z2qr0OzpzNkr6kyyoerimcGjmK0CW5sMQmPLAvIQ_pdIlyqkaQvJRn/w1200-h630-p-k-no-nu/museu-do-amanh%C3%A3.png"
+          },
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "2025-12-12T15:09:00-08:00",
+          "atualizado_em": "2026-09-02T18:59:08-07:00",
+          "autor": "Alexandre Cunha",
+          "site": "Blogger",
+          "tipo": "BlogPosting",
+          "ld": {
+            "datePublished": "2025-12-12T15:09:00-08:00",
+            "dateModified": "2026-09-02T18:59:08-07:00",
+            "author": {
+              "@type": "Person",
+              "name": "Alexandre Cunha"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Blogger",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://blogger.googleusercontent.com/img/b/U2hvZWJveA/AVvXsEgfMvYAhAbdHksiBA24JKmb2Tav6K0GviwztID3Cq4VpV96HaJfy0viIu8z1SSw_G9n5FQHZWSRao61M3e58ImahqBtr7LiOUS6m_w59IvDYwjmMcbq3fKW4JSbacqkbxTo8B90dWp0Cese92xfLMPe_tg11g/h60/",
+                "width": 206,
+                "height": 60
+              }
+            },
+            "headline": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "description": "O Museu do Amanhã é um dos principais ícones culturais e arquitetônicos do Rio de Janeiro. Localizado na zona portuária da cidade, às mar..."
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "O Museu do Amanhã é um dos principais ícones culturais e arquitetônicos do Rio de Janeiro. Localizado na zona portuária da cidade, às margens da Baía de Guanabara, o museu se destaca não apenas por sua forma futurista, mas principalmente por sua proposta inovadora: provocar reflexões profundas sobre os rumos da humanidade e do planeta."
+          },
+          {
+            "titulo": "A história da construção do Museu do Amanhã",
+            "texto": "O Museu do Amanhã foi inaugurado em dezembro de 2015 como parte do projeto de revitalização urbana da região portuária do Rio de Janeiro, conhecido como Porto Maravilha. A iniciativa buscava recuperar uma área historicamente ligada ao desenvolvimento econômico da cidade, mas que havia passado décadas de degradação.\nA construção do museu ocupou o antigo Píer Mauá, espaço antes utilizado para operações portuárias e que estava subutilizado. Com a demolição do Elevado da Perimetral e a requalificação da orla, o local foi transformado em um grande polo cultural e turístico."
+          },
+          {
+            "titulo": "O arquiteto e o conceito arquitetônico",
+            "texto": "O projeto arquitetônico do Museu do Amanhã é assinado pelo arquiteto espanhol , conhecido por obras de linguagem futurista e inspiração em formas da natureza. Santiago Calatrava\nA estrutura do museu lembra uma grande escultura branca voltada para o mar, com elementos móveis no teto que acompanham a posição do sol, contribuindo para a eficiência energética e o conforto térmico do edifício."
+          },
+          {
+            "titulo": "Qual é a finalidade do Museu do Amanhã",
+            "texto": "O Museu do Amanhã não é um museu tradicional de acervo histórico. Sua proposta é estimular o pensamento crítico sobre o futuro da humanidade, abordando temas como sustentabilidade, mudanças climáticas, avanços tecnológicos e responsabilidade social."
+          },
+          {
+            "titulo": "O que existia no local antes do museu",
+            "texto": "Antes da construção, o espaço era ocupado por estruturas portuárias antigas do Píer Mauá, que ficaram por anos subutilizadas. A transformação do local simboliza a reconexão do Rio de Janeiro com sua zona portuária."
+          },
+          {
+            "titulo": "O que o Museu do Amanhã expõe",
+            "texto": "A principal atração do museu é sua exposição permanente, totalmente interativa e imersiva, que combina ciência, tecnologia e arte.\norigem do universo e da vida Cosmos:\ndinâmica do planeta Terra:\nimpacto humano no meio ambiente Antropoceno:\ncenários futuros possíveis Amanhãs:\nreflexão sobre escolhas individuais e coletivas Nós:\nO museu também recebe exposições temporárias, oficinas educativas, palestras e eventos culturais ao longo do ano."
+          },
+          {
+            "titulo": "Ingressos, valores e gratuidade",
+            "texto": "Os valores de ingresso praticados são:\nHá gratuidade para públicos específicos e em algumas ações especiais. Recomenda-se sempre consultar o site oficial para informações atualizadas."
+          },
+          {
+            "titulo": "Programação em dezembro e verão",
+            "texto": "Durante dezembro e o verão, o Museu do Amanhã costuma oferecer uma programação especial, com exposições temporárias, atividades educativas e eventos voltados para turistas e famílias.\nA compra de ingressos deve ser feita preferencialmente online, pelo site oficial do Museu do Amanhã, com escolha de data e horário.\nAcesse o site oficial do Museu do Amanhã\nEntre na seção de ingressos\nPublicidade | Link de afiliado Amazon | Posso receber comissão por compras qualificadas."
+          },
+          {
+            "titulo": "Por que visitar o Museu do Amanhã",
+            "texto": "O Museu do Amanhã é uma experiência que vai além da visita tradicional. É um espaço de aprendizado, reflexão e inspiração, em um dos cenários mais bonitos do Rio de Janeiro.\nPor Alexandre Cunha - O Blog do Rio"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://www.oblogdorio.com.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "texto": "dezembro 12, 2025",
+            "interno": true
+          },
+          {
+            "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRE2ZpB6kOk0gXrQP2h1Fc1kdSo_SkkiKrbN7z5waAURz7KjncZFR7hEP-EkieCSyeL-kV15orAJw1R_DBF1B5cKyZUoZOYszXcEN-jSI2g39VjwMqbP70b7F04m050NsVlkKFZ2Z2qr0OzpzNkr6kyyoerimcGjmK0CW5sMQmPLAvIQ_pdIlyqkaQvJRn/s2240/museu-do-amanh%C3%A3.png",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRqacP_FT_dLmq3UnroUF8kJpANk_MA-5PJ7F_2lYDVPNKXM7jwJUFk5Ah3eTa0zlsfZg_OuMkF6kTuE5ACsAz2UFjVVAYVzlfAifBMyhQKxn3qAzIyQbQcaQ9qk3HEL_4NegD74aL5gl0Gir8tiqADDMXaxKYlgZ0BEw2M8y3aExaaGYPtRKuIp4-2GP2/s2240/museu-do-amanh%C3%A3%20(1).png",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://amzn.to/3KZwoTZ",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEisdt9MsG6ZxbZbagdxPxRIDuUzbKBFp6I4R5_F-X7B0B47XdsX29cYTULJR98wFqc76X4tQA4a3U6RR1W83d77a8uRiZqPXAjwPvzBMAH9IRQUsbQo_A4wlvj4Mu0Zpmf4VHrz67f9XImdT-GM2vSBaUBMhPRq-7bSshUka4MRkxOYwtkdS9wv6nDRVDDo/s3780/Transpar%C3%AAncia%20Amazon%20Associates%20Post%20(7).png",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.oblogdorio.com.br/search/label/Atra%C3%A7%C3%B5es",
+            "texto": "Atrações",
+            "interno": true
+          },
+          {
+            "url": "https://www.oblogdorio.com.br/search/label/Rio",
+            "texto": "Rio",
+            "interno": true
+          },
+          {
+            "url": "https://www.oblogdorio.com.br/search/label/Turismo",
+            "texto": "Turismo",
+            "interno": true
+          },
+          {
+            "url": "https://maps.google.com/maps?q=Rio+de+Janeiro,+RJ,+Brasil@-22.9068467,-43.1728965&z=10",
+            "texto": "Rio de Janeiro, RJ, Brasil",
+            "interno": false
+          },
+          {
+            "url": "https://www.blogger.com/comment/frame/4442424953615055474?po=7666579891201244564&hl=pt-BR&saa=85391&origin=https://www.oblogdorio.com.br&skin=emporio",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/oblogdorio/",
+            "texto": "",
+            "interno": false
+          },
+          {
+            "url": "https://www.oblogdorio.com.br/2025/11/leblon-o-bairro-mais-elegante-do-rio.html",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.oblogdorio.com.br/2025/11/a-historia-do-rio-do-descobrimento.html",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.oblogdorio.com.br/2026/01/mirantes-para-visitar-no-rio-de-janeiro.html",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://www.blogger.com",
+            "texto": "Tecnologia do Blogger",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRE2ZpB6kOk0gXrQP2h1Fc1kdSo_SkkiKrbN7z5waAURz7KjncZFR7hEP-EkieCSyeL-kV15orAJw1R_DBF1B5cKyZUoZOYszXcEN-jSI2g39VjwMqbP70b7F04m050NsVlkKFZ2Z2qr0OzpzNkr6kyyoerimcGjmK0CW5sMQmPLAvIQ_pdIlyqkaQvJRn/w1200-h630-p-k-no-nu/museu-do-amanh%C3%A3.png",
+          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRE2ZpB6kOk0gXrQP2h1Fc1kdSo_SkkiKrbN7z5waAURz7KjncZFR7hEP-EkieCSyeL-kV15orAJw1R_DBF1B5cKyZUoZOYszXcEN-jSI2g39VjwMqbP70b7F04m050NsVlkKFZ2Z2qr0OzpzNkr6kyyoerimcGjmK0CW5sMQmPLAvIQ_pdIlyqkaQvJRn/w400-h225/museu-do-amanh%C3%A3.png",
+          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRqacP_FT_dLmq3UnroUF8kJpANk_MA-5PJ7F_2lYDVPNKXM7jwJUFk5Ah3eTa0zlsfZg_OuMkF6kTuE5ACsAz2UFjVVAYVzlfAifBMyhQKxn3qAzIyQbQcaQ9qk3HEL_4NegD74aL5gl0Gir8tiqADDMXaxKYlgZ0BEw2M8y3aExaaGYPtRKuIp4-2GP2/w400-h225/museu-do-amanh%C3%A3%20(1).png",
+          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiWpf3KHpmAQZF_M7RDMFxR-zcqmsD5oaK5VSkqOCIlRGlYbmBbZvxaoMkw0BD4dSunLJcAVP3d-kl9j3lkMlI6mC9-GxTTgjTFMVCeSccl3Wj9yn1O5CSym8M_5lxVrvzd9junLlE1yIargeYiCOnJcdEJ-mA2PvxDEw3OG4nLG6OuYtWHU9WvRT64-Uj7/w400-h225/REVOLU%C3%87%C3%83O%20SOLAR%20LEVE%20COMO%20O%20AR.png",
+          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEisdt9MsG6ZxbZbagdxPxRIDuUzbKBFp6I4R5_F-X7B0B47XdsX29cYTULJR98wFqc76X4tQA4a3U6RR1W83d77a8uRiZqPXAjwPvzBMAH9IRQUsbQo_A4wlvj4Mu0Zpmf4VHrz67f9XImdT-GM2vSBaUBMhPRq-7bSshUka4MRkxOYwtkdS9wv6nDRVDDo/w400-h200/Transpar%C3%AAncia%20Amazon%20Associates%20Post%20(7).png",
+          "https://blogger.googleusercontent.com/img/a/AVvXsEg7Bgkrs8aOmfmu6zcpcQtkZBQkp-FsE7ogU2M2hOnTf3NxKbsuyrU95lfx-Frglf6AjMZ2PZuXIkzFxZb-bi8LZaWDn4VfMz-8WZE6zJ_fMrn0d4Y6WJ7V1d3pDYTEJTX7cVzToTDMyj7ZjB8fvJM2InARgAda9J7QAkSKjGj22KK5H2iIj-6Tu6IX8mB2=s48",
+          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUt7pk2dN4s14aTvKpc0yQAxDeN5WnHngMRNCf_fNRJ0ZuyV4Ae5ygDYOcvFGb7bkNmwHkkXqNzC5VuPI4bY5wMGGuHU-zy1KLhBAxcbgB6_cmObt77avNx7XUYqGiGHPqUS4qL-_KXjFJ3dieKtKUZsDX-BYpQwyxwvH-W9GU-iMbQe5-RY5rxTKydFdY/w400-h225/leblon-o-blog-do-rio%20(5).png",
+          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-_krIBQ76qhiLjkvMckX05iMv-shs77Spn-mG_RquH_aoJ15-QFiRp15Z-aEwj3AmHufN_pCRWRRnLnoiquORz-0jRkjr_RAUA7kA29HPF3z1I3jdIwjHYmFap4anTUUSnNy5RVTsoFgSIL4720h3GYi4xATXz7M5H01UhnZEJbBiXyJuO9ndUE-742CY/w400-h225/o-descobrimento-do-rio-de-janeiro.png",
+          "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGW7CdZyOZAziVikdP6JGiBYroCpJMFi5lBxbttSHrtHEZkC9YR0A4B0CFvvPFJIcdZrd1wlkPe0jlKZSH99omp42tLJVKBzPgzUNOhM6w6qetbo9QFEseT4VP8d2VvKd9Phkdd195Q8zoMwM-yCpvcPY-0nJEgcRwxXQw_IkBu2osGc6OE1va1yUgr_4b/w400-h225/OBlogDoRio%20(10).png"
+        ],
+        "midia": [
+          {
+            "id": "med-19e164a16f39",
+            "type": "image",
+            "title": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+            "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRE2ZpB6kOk0gXrQP2h1Fc1kdSo_SkkiKrbN7z5waAURz7KjncZFR7hEP-EkieCSyeL-kV15orAJw1R_DBF1B5cKyZUoZOYszXcEN-jSI2g39VjwMqbP70b7F04m050NsVlkKFZ2Z2qr0OzpzNkr6kyyoerimcGjmK0CW5sMQmPLAvIQ_pdIlyqkaQvJRn/w1200-h630-p-k-no-nu/museu-do-amanh%C3%A3.png",
+            "final_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiRE2ZpB6kOk0gXrQP2h1Fc1kdSo_SkkiKrbN7z5waAURz7KjncZFR7hEP-EkieCSyeL-kV15orAJw1R_DBF1B5cKyZUoZOYszXcEN-jSI2g39VjwMqbP70b7F04m050NsVlkKFZ2Z2qr0OzpzNkr6kyyoerimcGjmK0CW5sMQmPLAvIQ_pdIlyqkaQvJRn/w1200-h630-p-k-no-nu/museu-do-amanh%C3%A3.png",
+            "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "publisher": "blogger.googleusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-635c77c75eff",
+            "type": "image",
+            "title": "Imagem",
+            "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUt7pk2dN4s14aTvKpc0yQAxDeN5WnHngMRNCf_fNRJ0ZuyV4Ae5ygDYOcvFGb7bkNmwHkkXqNzC5VuPI4bY5wMGGuHU-zy1KLhBAxcbgB6_cmObt77avNx7XUYqGiGHPqUS4qL-_KXjFJ3dieKtKUZsDX-BYpQwyxwvH-W9GU-iMbQe5-RY5rxTKydFdY/w400-h225/leblon-o-blog-do-rio%20(5).png",
+            "final_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhUt7pk2dN4s14aTvKpc0yQAxDeN5WnHngMRNCf_fNRJ0ZuyV4Ae5ygDYOcvFGb7bkNmwHkkXqNzC5VuPI4bY5wMGGuHU-zy1KLhBAxcbgB6_cmObt77avNx7XUYqGiGHPqUS4qL-_KXjFJ3dieKtKUZsDX-BYpQwyxwvH-W9GU-iMbQe5-RY5rxTKydFdY/w400-h225/leblon-o-blog-do-rio%20(5).png",
+            "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "publisher": "blogger.googleusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-1d5cf192a5bc",
+            "type": "image",
+            "title": "Imagem",
+            "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-_krIBQ76qhiLjkvMckX05iMv-shs77Spn-mG_RquH_aoJ15-QFiRp15Z-aEwj3AmHufN_pCRWRRnLnoiquORz-0jRkjr_RAUA7kA29HPF3z1I3jdIwjHYmFap4anTUUSnNy5RVTsoFgSIL4720h3GYi4xATXz7M5H01UhnZEJbBiXyJuO9ndUE-742CY/w400-h225/o-descobrimento-do-rio-de-janeiro.png",
+            "final_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEi-_krIBQ76qhiLjkvMckX05iMv-shs77Spn-mG_RquH_aoJ15-QFiRp15Z-aEwj3AmHufN_pCRWRRnLnoiquORz-0jRkjr_RAUA7kA29HPF3z1I3jdIwjHYmFap4anTUUSnNy5RVTsoFgSIL4720h3GYi4xATXz7M5H01UhnZEJbBiXyJuO9ndUE-742CY/w400-h225/o-descobrimento-do-rio-de-janeiro.png",
+            "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "publisher": "blogger.googleusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-0df80c022878",
+            "type": "image",
+            "title": "Imagem",
+            "url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGW7CdZyOZAziVikdP6JGiBYroCpJMFi5lBxbttSHrtHEZkC9YR0A4B0CFvvPFJIcdZrd1wlkPe0jlKZSH99omp42tLJVKBzPgzUNOhM6w6qetbo9QFEseT4VP8d2VvKd9Phkdd195Q8zoMwM-yCpvcPY-0nJEgcRwxXQw_IkBu2osGc6OE1va1yUgr_4b/w400-h225/OBlogDoRio%20(10).png",
+            "final_url": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhGW7CdZyOZAziVikdP6JGiBYroCpJMFi5lBxbttSHrtHEZkC9YR0A4B0CFvvPFJIcdZrd1wlkPe0jlKZSH99omp42tLJVKBzPgzUNOhM6w6qetbo9QFEseT4VP8d2VvKd9Phkdd195Q8zoMwM-yCpvcPY-0nJEgcRwxXQw_IkBu2osGc6OE1va1yUgr_4b/w400-h225/OBlogDoRio%20(10).png",
+            "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "publisher": "blogger.googleusercontent.com",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Imagem",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-a7fe19dc9371",
+            "type": "document",
+            "title": "museu-do-amanha-historia-arquitetura.html",
+            "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "final_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "publisher": "www.oblogdorio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-0bac21b9df66",
+            "type": "document",
+            "title": "leblon-o-bairro-mais-elegante-do-rio.html",
+            "url": "https://www.oblogdorio.com.br/2025/11/leblon-o-bairro-mais-elegante-do-rio.html",
+            "final_url": "https://www.oblogdorio.com.br/2025/11/leblon-o-bairro-mais-elegante-do-rio.html",
+            "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "publisher": "www.oblogdorio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-0a9374d51f26",
+            "type": "document",
+            "title": "a-historia-do-rio-do-descobrimento.html",
+            "url": "https://www.oblogdorio.com.br/2025/11/a-historia-do-rio-do-descobrimento.html",
+            "final_url": "https://www.oblogdorio.com.br/2025/11/a-historia-do-rio-do-descobrimento.html",
+            "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "publisher": "www.oblogdorio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          },
+          {
+            "id": "med-23f392e9d4af",
+            "type": "document",
+            "title": "mirantes-para-visitar-no-rio-de-janeiro.html",
+            "url": "https://www.oblogdorio.com.br/2026/01/mirantes-para-visitar-no-rio-de-janeiro.html",
+            "final_url": "https://www.oblogdorio.com.br/2026/01/mirantes-para-visitar-no-rio-de-janeiro.html",
+            "source_title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "source_url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "publisher": "www.oblogdorio.com.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "link_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html link"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://amanhateca.org.br/",
+      "result": {
+        "titulo": "Museu do Amanhã",
+        "texto": "Organismo O Museu é gerido pelo Instituto de Desenvolvimento e Gestão – IDG O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os desafios que a humanidade terá de enfrentar nas próximas décadas a partir das perspectivas da sustentabilidade e da convivência.",
+        "final": "https://amanhateca.org.br/",
+        "trecho_usado": "Organismo O Museu é gerido pelo Instituto de Desenvolvimento e Gestão – IDG O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os desafios que a humanidade terá de enfrentar nas próximas décadas a partir das perspectivas da sustentabilidade e da convivência.",
+        "metadados": {
+          "titulo": "Museu do Amanhã",
+          "descricao": "",
+          "canonica": "https://amanhateca.org.br/",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "O Museu é gerido pelo Instituto de Desenvolvimento e Gestão – IDG O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os desafios que a humanidade terá de enfrentar nas próximas décadas a partir das perspectivas da sustentabilidade e da convivência."
+          }
+        ],
+        "links": [
+          {
+            "url": "https://amanhateca.org.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://amanhateca.org.br/sobre/",
+            "texto": "Sobre",
+            "interno": true
+          },
+          {
+            "url": "https://amanhateca.org.br/repositorio/",
+            "texto": "Repositório",
+            "interno": true
+          },
+          {
+            "url": "https://amanhateca.org.br/organismo-home/",
+            "texto": "Organismo",
+            "interno": true
+          },
+          {
+            "url": "https://amanhateca.org.br/convivencia/",
+            "texto": "Convivência",
+            "interno": true
+          },
+          {
+            "url": "https://amanhateca.org.br/sustentabilidade-home/",
+            "texto": "Sustentabilidade",
+            "interno": true
+          },
+          {
+            "url": "https://amanhateca.org.br/conhecimento/",
+            "texto": "Conhecimento",
+            "interno": true
+          },
+          {
+            "url": "https://amanhateca.org.br/inovacao/",
+            "texto": "Inovação",
+            "interno": true
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://amanhateca.org.br/wp-content/uploads/2020/03/cropped-logo-1.jpg"
+        ],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://museudoamanha.org.br/visite/horarios-e-ingressos",
+      "result": {
+        "titulo": "Horários e Ingressos | Museu do Amanhã",
+        "texto": "",
+        "final": "https://museudoamanha.org.br/visite/horarios-e-ingressos",
+        "trecho_usado": "",
+        "metadados": {
+          "titulo": "",
+          "descricao": "",
+          "canonica": "",
+          "og": {},
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "",
+          "tipo": "",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [],
+        "links": [],
+        "tabelas": [],
+        "imagens": [],
+        "midia": [],
+        "extrator": "deterministico",
+        "ilegivel": true,
+        "lida": false
+      }
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+      "result": {
+        "titulo": "museu de ciências no Rio de Janeiro",
+        "texto": "Museu do Amanhã Vista externa Informações gerais Tipo Científico, artístico, histórico, memorial, expositório. Arquiteto(a) Santiago Calatrava Inauguração de (10anos) 17 de dezembro 2015 Capacidade 300 humano Curador Prefeitura do Rio de Janeiro Website museudoamanha.org.br Altura 20,85 metro Andares 3 Área 15 000m² Geografia País Brasil Localidade , no Rio de Janeiro Rio de Janeiro Coordenadas 22° 53′ 38″ S, 43° 10′ 45″ O Localização em mapa dinâmico O é um construído no do , no . O prédio, projeto do arquiteto espanhol , foi erguido ao lado da , na (mais precisamente no ). Sua construção teve o apoio da e teve o custo total de cerca de 230 milhões de . O edifício foi inaugurado em 17 de dezembro de 2015 com a presença da então e recebeu cerca de 25 mil visitantes em seu primeiro de funcionamento. Museu do Amanhã museu município Rio de Janeiro Brasil Santiago Calatrava Praça Mauá zona portuária Píer Mauá Fundação Roberto Marinho reais 1 [ ] presidente do Brasil Dilma Rousseff 2 [ ] fim de semana 3 [ ] O antigo desativado passou a abrigar uma construção , e que, atualmente, é um da local e cultural da cidade do Rio de Janeiro. A proposta da instituição é ser um museu de artes e ciências, além de contar com mostras que alertam sobre os perigos das , da e do colapso social. O edifício conta com espinhas solares que se movem ao longo da , projetadas para adaptar-se às mudanças das condições ambientais. A exposição principal é majoritariamente e foca em ao invés de . O museu tem parcerias com importantes e instituições científicas globais e coleta de dados em tempo real sobre o clima e a população de agências espaciais e das . A instituição também tem de várias áreas, como , e . píer pós-moderna orgânica sustentável ícone identidade 4 [ ] mudanças climáticas degradação ambiental claraboia digital ideias objetos 1 [ ] universidades brasileiras Nações Unidas consultores astronautas cientistas sociais climatologistas 1 [ ] Como uma das âncoras do projeto de urbana chamado , o museu recebeu, em 2015, como antes de sua inauguração, a escultura , do renomado artista norte-americano . O trabalho consiste de uma de vinte pontas e seis metros de que foi instalado no do museu, em frente à . A escultura metálica, antes da doação para acervo permanente a céu aberto do museu, esteve em exposição na cidade de . revitalização Porto Maravilha 5 [ ] doação Puffed Star II Frank Stella estrela diâmetro espelho d'água Baía de Guanabara 6 [ ] Nova York 7 [ ] Um dos objetivos da construção do museu foi fortalecer a identidade cultural e internacional da cidade do Rio de Janeiro. A cidade do sempre foi muito conhecida pelas suas praias e eventos, como o , mas havia a necessidade do fortalecimento da paradiplomacia cultural. Outras cidades, como e , também são muito conhecidas por seus acervos culturais. O Museu foi apresentado como um ícone da reurbanização da zona portuária. Cristo Redentor carnaval Londres Paris 4 [ ] 8 [ ] Conceito [ editar | editar código ] Interior do edifício Na parte inferior, a escultura de . Frank Stella O Museu do Amanhã foi erguido no , em meio a uma grande área verde. São cerca de 30 mil metros quadrados, com , espelhos d'água, e área de lazer. O prédio tem 15 mil metros quadrados e arquitetura sustentável, baseada nos elementos da natureza. O projeto arquitetônico, concebido por Calatrava, utiliza recursos naturais do local - como, por exemplo, a água da , utilizada na do interior do museu e reutilizada no espelho d'água. Calatrava disse que se inspirou nas do ao projetar o edifício. Píer Mauá jardins ciclovia 9 [ ] Baía de Guanabara climatização bromélias Jardim Botânico do Rio de Janeiro 1 [ ] O local reúne , e conhecimento dentro de sustentabilidade. ciência tecnologia 9 [ ] O projeto do Museu do Amanhã foi totalmente inspirado pela paisagem da zona portuária e da . Como parte integrante do , foi feita a demolição do no intuito de revitalizar a região portuária do Rio. No telhado da construção, grandes estruturas de , que se movimentam como asas, servem de base para placas de captação de . Com isso, o Museu do Amanhã busca a certificação (Liderança em Energia e Projeto Ambiental), concedida pelo (USGBC). Baía de Guanabara Projeto Porto Maravilha Elevado da Perimetral aço energia solar Leed Green Building Council 10 [ ] A pretensão do Museu do Amanhã é inaugurar uma nova geração de museus de ciências no mundo, sendo considerado \"de terceira geração\", com uma concepção que o posiciona como o primeiro museu global de \"terceira geração\". A \"primeira geração\" de museus é voltada para os vestígios do passado, como os museus de . A \"segunda geração\" busca difundir as evidências do presente, como os museus de ciência e tecnologia. A \"terceira geração\" destina-se a expor as mudanças, perguntas e a exploração de possibilidades futuras para a humanidade. É neste último conceito que se encaixa o museu . A intenção do museu é conscientizar o visitante da sua parcela de contribuição para a construção do futuro. Trata-se de uma experiência , feita por meio de tecnologias . história natural carioca 11 [ ] sensorial interativas 8 [ ] Exposição principal [ editar | editar código ] A exposição principal do Museu do Amanhã funciona no segundo andar do prédio, e foi idealizada pelo em junto a uma equipe de consultores que trabalharam na concepção do acervo. A seção convida o visitante a passar por uma experiência de cinco grandes narrativas que percorrem os pavilhões: Cosmos, Terra, Antropoceno, Amanhãs e Nós. Elas trazem a experiência da vida na terra com ângulos e recortes temporais distintos. Juntos, os materiais da exposição principal reúnem mais de 40 experiências diferentes realizadas em três : , e , e ganha novas peças a cada ano. Desde a inauguração do Museu até julho de 2017, o acervo fixo recebeu 234 atualizações, como o acréscimo de , ilustrações, informações e . doutor cosmologia Luiz Alberto Oliveira línguas português espanhol inglês 12 [ ] fotos vídeos 13 [ ] Cosmos [ editar | editar código ] O primeiro módulo de visitação da exposição principal é o Cosmos. Nesse pavilhão, um grupo de visitantes é formado para entrar em um revestido com painéis de reprodução de vídeo, onde eles assistem a uma obra de cerca de 8 minutos, em 360 graus, realizada pela produtora brasileira . O filme traça uma narrativa sobre a formação do universo e da vida na terra com sobreposições de animações digitais e imagens captadas em câmera que causam grande impacto sensorial ao público. O vídeo é transmitido conjuntamente a um texto narrado em português, sem , para que não seja desviada a atenção do visitante. domo audiovisual O2 Filmes 14 [ ] legenda 15 [ ] Terra [ editar | editar código ] Visitantes acompanhando a seção \"Terra\" da exposição principal do Museu do Amanhã. O objetivo dessa segunda etapa da exposição principal é fazer o visitante questionar sobre a pergunta \"Quem somos?\". Para essa seção, foram construídos três grandes de sete metros de altura. Um deles fala sobre a vida como matéria. Do lado de fora, é apresentado, por um painel luminoso, o planeta inteiro. Do lado de dentro, se expõe as movimentações que fazem o globo funcionar, como o fluxo dos ventos, dos oceanos e das cubos Terra placas tectônicas. 16 [ ] O segundo cubo, designado para representar a vida, mostra, na parede de fora, uma esquematização do dos seres vivos. Na parte de dentro, a segunda construção expõe imagens de diversos organismos que compõem um , como animais e plantas. DNA ecossistema 16 [ ] O terceiro e último cubo representa o e apresenta, na parte interna, imagens e ilustrações que retratam de diversos momentos, ações e da vida humana no planeta. pensamento sentimentos 16 [ ] Antropoceno [ editar | editar código ] Visitantes no centro dos painéis da seção \"Antropoceno\" da exposição principal do Museu do Amanhã. O terceiro recorte da exposição principal do Museu do Amanhã trata de como a ação do homem mudou a do planeta Terra, traçando um panorama atual e trazendo dados sobre os impacto",
+        "final": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+        "trecho_usado": "possibilidades futuras para a humanidade. É neste último conceito que se encaixa o museu . A intenção do museu é conscientizar o visitante da sua parcela de contribuição para a construção do futuro. Trata-se de uma experiência , feita por meio de tecnologias . história natural carioca 11 [ ] sensorial interativas 8 [ ] Exposição principal [ editar | editar código ] A exposição principal do Museu",
+        "metadados": {
+          "titulo": "museu de ciências no Rio de Janeiro",
+          "descricao": "",
+          "canonica": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+          "og": {
+            "og:image": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "og:image:width": "1200",
+            "og:image:height": "800",
+            "og:title": "Museu do Amanhã – Wikipédia, a enciclopédia livre",
+            "og:type": "website"
+          },
+          "twitter": {},
+          "idioma": "pt",
+          "publicado_em": "2010-08-15T17:51:43Z",
+          "atualizado_em": "2026-05-19T02:04:33Z",
+          "autor": "Contribuidores dos projetos da Wikimedia",
+          "site": "Wikimedia Foundation, Inc.",
+          "tipo": "Article",
+          "ld": {
+            "datePublished": "2010-08-15T17:51:43Z",
+            "dateModified": "2026-05-19T02:04:33Z",
+            "author": {
+              "@type": "Organization",
+              "name": "Contribuidores dos projetos da Wikimedia"
+            },
+            "publisher": {
+              "@type": "Organization",
+              "name": "Wikimedia Foundation, Inc.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.wikimedia.org/static/images/wmf-hor-googpub.png"
+              }
+            },
+            "headline": "museu de ciências no Rio de Janeiro"
+          },
+          "tem_ld": true,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "",
+            "texto": "Científico, artístico, histórico, memorial, expositório.\nde (10anos) 17 de dezembro 2015\nPrefeitura do Rio de Janeiro\n, no Rio de Janeiro Rio de Janeiro\n22° 53′ 38″ S, 43° 10′ 45″ O\nLocalização em mapa dinâmico\nO é um construído no do , no . O prédio, projeto do arquiteto espanhol , foi erguido ao lado da , na (mais precisamente no ). Sua construção teve o apoio da e teve o custo total de cerca de 230 milhões de . O edifício foi inaugurado em 17 de dezembro de 2015 com a presença da então e recebeu cerca de 25 mil visitantes em seu primeiro de funcionamento. Museu do Amanhã museu município Rio de Janeiro Brasil Santiago Calatrava Praça Mauá zona portuária Píer Mauá Fundação Roberto Marinho reais 1 [ ] presidente do Brasil Dilma Rousseff 2 [ ] fim de semana 3 [ ]\nO antigo desativado passou a abrigar uma construção , e que, atualmente, é um da local e cultural da cidade do Rio de Janeiro. A proposta da instituição é ser um museu de artes e ciências, além de contar com mostras que alertam sobre os perigos das , da e do colapso social. O edifício conta com espinhas solares que se movem ao longo da , projetadas para adaptar-se às mudanças das condições ambientais. A exposição principal é majoritariamente e foca em ao invés de . O museu tem parcerias com importantes e instituições científicas globais e coleta de dados em tempo real sobre o clima e a população de agências espaciais e das . A instituição também tem de várias áreas, como , e . píer pós-moderna orgânica sustentável ícone identidade 4 [ ] mudanças climáticas degradação ambiental claraboia digital ideias objetos 1 [ ] universidades brasileiras Nações Unidas consultores astronautas cientistas sociais climatologistas 1 [ ]\nComo uma das âncoras do projeto de urbana chamado , o museu recebeu, em 2015, como antes de sua inauguração, a escultura , do renomado artista norte-americano . O trabalho consiste de uma de vinte pontas e seis metros de que foi instalado no do museu, em frente à . A escultura metálica, antes da doação para acervo permanente a céu aberto do museu, esteve em exposição na cidade de . revitalização Porto Maravilha 5 [ ] doação Puffed Star II Frank Stella estrela diâmetro espelho d'água Baía de Guanabara 6 [ ] Nova York 7 [ ]\nUm dos objetivos da construção do museu foi fortalecer a identidade cultural e internacional da cidade do Rio de Janeiro. A cidade do sempre foi muito conhecida pelas suas praias e eventos, como o , mas havia a necessidade do fortalecimento da paradiplomacia cultural. Outras cidades, como e , também são muito conhecidas por seus acervos culturais. O Museu foi apresentado como um ícone da reurbanização da zona portuária. Cristo Redentor carnaval Londres Paris 4 [ ] 8 [ ]\nO Museu do Amanhã foi erguido no , em meio a uma grande área verde. São cerca de 30 mil metros quadrados, com , espelhos d'água, e área de lazer. O prédio tem 15 mil metros quadrados e arquitetura sustentável, baseada nos elementos da natureza. O projeto arquitetônico, concebido por Calatrava, utiliza recursos naturais do local - como, por exemplo, a água da , utilizada na do interior do museu e reutilizada no espelho d'água. Calatrava disse que se inspirou nas do ao projetar o edifício. Píer Mauá jardins ciclovia 9 [ ] Baía de Guanabara climatização bromélias Jardim Botânico do Rio de Janeiro 1 [ ]\nO local reúne , e conhecimento dentro de sustentabilidade. ciência tecnologia 9 [ ]\nO projeto do Museu do Amanhã foi totalmente inspirado pela paisagem da zona portuária e da . Como parte integrante do , foi feita a demolição do no intuito de revitalizar a região portuária do Rio. No telhado da construção, grandes estruturas de , que se movimentam como asas, servem de base para placas de captação de . Com isso, o Museu do Amanhã busca a certificação (Liderança em Energia e Projeto Ambiental), concedida pelo (USGBC). Baía de Guanabara Projeto Porto Maravilha Elevado da Perimetral aço energia solar Leed Green Building Council 10 [ ]\nA pretensão do Museu do Amanhã é inaugurar uma"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:P%C3%A1gina_principal",
+            "texto": "Página principal",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Conte%C3%BAdo_destacado",
+            "texto": "Conteúdo destacado",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:Eventos_atuais",
+            "texto": "Eventos atuais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Esplanada",
+            "texto": "Esplanada",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Aleat%C3%B3ria",
+            "texto": "Página aleatória",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Portal:%C3%8Dndice",
+            "texto": "Portais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_especiais",
+            "texto": "Páginas especiais",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Informe_um_erro",
+            "texto": "Informar um erro",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Boas-vindas",
+            "texto": "Boas-vindas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_principal",
+            "texto": "Ajuda",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:P%C3%A1gina_de_testes",
+            "texto": "Páginas de testes públicas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Portal_comunit%C3%A1rio",
+            "texto": "Portal comunitário",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Mudan%C3%A7as_recentes",
+            "texto": "Mudanças recentes",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Manuten%C3%A7%C3%A3o",
+            "texto": "Manutenção",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Ajuda:Guia_de_edi%C3%A7%C3%A3o/Como_come%C3%A7ar_uma_p%C3%A1gina",
+            "texto": "Criar página",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:P%C3%A1ginas_novas",
+            "texto": "Páginas novas",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Wikip%C3%A9dia:Contato",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Especial:Pesquisar",
+            "texto": "Busca",
+            "interno": true
+          },
+          {
+            "url": "https://donate.wikimedia.org/?wmf_source=donate&amp;wmf_medium=sidebar&amp;wmf_campaign=pt.wikipedia.org&amp;uselang=pt",
+            "texto": "Doar",
+            "interno": false
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Criar_conta&amp;returnto=Museu+do+Amanh%C3%A3",
+            "texto": "Criar conta",
+            "interno": true
+          },
+          {
+            "url": "https://pt.wikipedia.org/w/index.php?title=Especial:Entrar&amp;returnto=Museu+do+Amanh%C3%A3",
+            "texto": "Iniciar sessão",
+            "interno": true
+          },
+          {
+            "url": "https://ar.wikipedia.org/wiki/%D9%85%D8%AA%D8%AD%D9%81_%D8%A7%D9%84%D8%BA%D8%AF",
+            "texto": "العربية",
+            "interno": false
+          },
+          {
+            "url": "https://en.wikipedia.org/wiki/Museum_of_Tomorrow",
+            "texto": "English",
+            "interno": false
+          },
+          {
+            "url": "https://eo.wikipedia.org/wiki/Muzeo_de_Morga%C5%AD",
+            "texto": "Esperanto",
+            "interno": false
+          },
+          {
+            "url": "https://es.wikipedia.org/wiki/Museo_del_Ma%C3%B1ana",
+            "texto": "Español",
+            "interno": false
+          },
+          {
+            "url": "https://eu.wikipedia.org/wiki/Biharko_Egunaren_Museoa",
+            "texto": "Euskara",
+            "interno": false
+          },
+          {
+            "url": "https://fr.wikipedia.org/wiki/Mus%C3%A9e_de_Demain",
+            "texto": "Français",
+            "interno": false
+          },
+          {
+            "url": "https://it.wikipedia.org/wiki/Museo_del_domani",
+            "texto": "Italiano",
+            "interno": false
+          },
+          {
+            "url": "https://mr.wikipedia.org/wiki/%E0%A4%AE%E0%A5%8D%E0%A4%AF%E0%A5%81%E0%A4%9D%E0%A5%82_%E0%A4%A6%E0%A5%87_%E0%A4%85%E0%A4%AE%E0%A4%BE%E0%A4%A8%E0%A5%8D%E0%A4%AF%E0%A4%BE%E0%A4%B9",
+            "texto": "मराठी",
+            "interno": false
+          },
+          {
+            "url": "https://ru.wikipedia.org/wiki/%D0%9C%D1%83%D0%B7%D0%B5%D0%B9_%D0%B7%D0%B0%D0%B2%D1%82%D1%80%D0%B0%D1%88%D0%BD%D0%B5%D0%B3%D0%BE_%D0%B4%D0%BD%D1%8F",
+            "texto": "Русский",
+            "interno": false
+          }
+        ],
+        "tabelas": [
+          [
+            [
+              "Museu do Amanhã"
+            ],
+            [
+              "Vista externa"
+            ],
+            [
+              "Informações gerais"
+            ],
+            [
+              "Tipo",
+              "Científico, artístico, histórico, memorial, expositório."
+            ],
+            [
+              "Arquiteto(a)",
+              "Santiago Calatrava"
+            ],
+            [
+              "Inauguração",
+              "17 de dezembro de 2015 (10 anos)"
+            ],
+            [
+              "Capacidade",
+              "300 humano"
+            ],
+            [
+              "Curador",
+              "Prefeitura do Rio de Janeiro"
+            ],
+            [
+              "Website",
+              "museudoamanha.org.br"
+            ],
+            [
+              "Altura",
+              "20,85 metro"
+            ],
+            [
+              "Andares",
+              "3"
+            ],
+            [
+              "Área",
+              "15 000 m²"
+            ],
+            [
+              "Geografia"
+            ],
+            [
+              "País",
+              "Brasil"
+            ],
+            [
+              "Localidade",
+              "Rio de Janeiro , no Rio de Janeiro"
+            ],
+            [
+              "Coordenadas",
+              "22° 53′ 38″ S, 43° 10′ 45″ O"
+            ],
+            [
+              "Localização em mapa dinâmico"
+            ]
+          ],
+          [
+            [
+              ".mw-parser-output .hlist dl,.mw-parser-output .hlist ol,.mw-parser-output .hlist ul{margin:0;padding:0}.mw-parser-output .hlist dd,.mw-parser-output .hlist dt,."
+            ],
+            [
+              "Porto Maravilha Baía de Guanabara Elevado da Perimetral"
+            ],
+            [
+              "Edifícios",
+              "Edifício Touring Edifício Joseph Gire Edifício Rio Branco 1 Edifício Almirante Tamandaré Arco do Teles Convento do Carmo Paço Imperial Estação Praça XV Ancorama",
+              ""
+            ],
+            [
+              "Museus e espaços culturais",
+              "AquaRio Armazém da Utopia Casa França-Brasil Centro Cultural Banco do Brasil Centro Cultural dos Correios Espaço Cultural da Marinha Museu do Amanhã Museu de Ar"
+            ],
+            [
+              "Igrejas e mosteiros",
+              "Mosteiro de São Bento Igreja da Candelária Igreja da Ordem Terceira do Carmo Igreja de Nossa Senhora do Monte do Carmo"
+            ],
+            [
+              "Praças e largos",
+              "Praça Muhammad Ali Praça Mauá Píer Mauá Praça Barão de Ladário Largo da Candelária Praça XV Largo da Misericórdia Praça Marechal Âncora"
+            ],
+            [
+              "Escolas",
+              "Escola de Magistratura do Estado do Rio de Janeiro"
+            ],
+            [
+              "Outras atrações",
+              "Rio Star Mural Etnias Estação Marítima de Passageiros do Porto do Rio de Janeiro Bolsa de Valores do Rio de Janeiro"
+            ],
+            [
+              "Paradas do VLT Carioca",
+              "Parada Utopia AquaRio Parada dos Navios/Valongo Parada dos Museus Parada Praça XV"
+            ]
+          ]
+        ],
+        "imagens": [
+          "https://upload.wikimedia.org/wikipedia/commons/6/63/Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=original",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=index&amp;utm_content=thumbnail",
+          "https://pt.wikipedia.org/static/images/icons/wikipedia.png",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+          "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-pt.svg",
+          "https://thumb.wikimedia.org/wikipedia/pt/thumb/8/88/LogoMuseuDoAmanh%C3%A3.png/330px-LogoMuseuDoAmanh%C3%A3.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/330px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/73/Bandeira_do_estado_do_Rio_de_Janeiro.svg/20px-Bandeira_do_estado_do_Rio_de_Janeiro.svg.png?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail",
+          "https://maps.wikimedia.org/img/osm-intl,17,-22.893888888889,-43.179166666667,300x300.png?lang=pt&amp;domain=pt.wikipedia.org&amp;title=Museu_do_Amanh%C3%A3&amp;revid=72268483&amp;groups=_ec4c4238793b6c2d29ae49946418bbaa400b6a15&amp;parser=parsoid",
+          "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/82/Museu_do_Amanh%C3%A3_em_sua_inaugura%C3%A7%C3%A3o_01.jpg/250px-Museu_do_Amanh%C3%A3_em_sua_inaugura%C3%A7%C3%A3o_01.jpg?utm_source=pt.wikipedia.org&amp;utm_campaign=parser&amp;utm_content=thumbnail"
+        ],
+        "midia": [
+          {
+            "id": "med-5ac71f65ac46",
+            "type": "image",
+            "title": "museu de ciências no Rio de Janeiro",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/63/Museu_do_Amanh%C3%A3_rio.jpg/1280px-Museu_do_Amanh%C3%A3_rio.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-dee621472346",
+            "type": "image",
+            "title": "Wikipédia",
+            "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikipédia",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-f28ef2f7b3ea",
+            "type": "image",
+            "title": "Mapa",
+            "url": "https://maps.wikimedia.org/img/osm-intl,17,-22.893888888889,-43.179166666667,300x300.png?lang=pt&domain=pt.wikipedia.org&title=Museu_do_Amanh%C3%A3&revid=72268483&groups=_ec4c4238793b6c2d29ae49946418bbaa400b6a15&parser=parsoid",
+            "final_url": "https://maps.wikimedia.org/img/osm-intl,17,-22.893888888889,-43.179166666667,300x300.png?lang=pt&domain=pt.wikipedia.org&title=Museu_do_Amanh%C3%A3&revid=72268483&groups=_ec4c4238793b6c2d29ae49946418bbaa400b6a15&parser=parsoid",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "maps.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Mapa",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-355ea4f50b5f",
+            "type": "image",
+            "title": "Wd",
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/20px-Wikidata-logo.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/ff/Wikidata-logo.svg/20px-Wikidata-logo.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "thumb.wikimedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wd",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-8930cb3b5a58",
+            "type": "image",
+            "title": "Wikimedia Foundation",
+            "url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "final_url": "https://pt.wikipedia.org/static/images/footer/wikimedia.svg",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Wikimedia Foundation",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-4f63425d32e1",
+            "type": "image",
+            "title": "Powered by MediaWiki",
+            "url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "final_url": "https://pt.wikipedia.org/w/resources/assets/mediawiki_compact.svg",
+            "source_title": "museu de ciências no Rio de Janeiro",
+            "source_url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "publisher": "pt.wikipedia.org",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Powered by MediaWiki",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    },
+    {
+      "url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+      "result": {
+        "titulo": "Museu do Amanhã",
+        "texto": "Dias e Horários de Abertura para o Público De terça a domingo, de 10h às 18h (última entrada às 17h). Valor do Ingresso 30,00 Ingressos https://site.bileto.sympla.com.br/museudoamanha/ Política de gratuidade MEIA-ENTRADA: Pessoas com idade até 21 anos; Estudantes de escolas particulares; Estudantes de universidades particulares e públicas; Professores da rede privada de ensino; Pessoas com deficiência; Servidores públicos do município do Rio de Janeiro; Moradores ou naturais da cidade do Rio de Janeiro; Portadores da carteira de Identidade Jovem; Amigos EAV (Escola de Artes Visuais do Parque Lage); Clientes Santander (pagamento com o cartão Santander, válido somente para o titular do cartão; GRATUIDADE: Estudantes da rede pública de ensino fundamental e médio;Professores da rede pública de ensino e de universidades públicas; Pessoas com idade até 5 anos e a partir de 60 anos; Acompanhante necessário de pessoas com deficiência; Funcionários de museus ou associados do ICOM com selo da anuidade; Guias de turismo; Vizinhos do NOZ - Programa Amigos do Amanhã; Grupos em Vulnerabilidade Social",
+        "final": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+        "trecho_usado": "de ensino e de universidades públicas; Pessoas com idade até 5 anos e a partir de 60 anos; Acompanhante necessário de pessoas com deficiência; Funcionários de museus ou associados do ICOM com selo da anuidade; Guias de turismo; Vizinhos do NOZ - Programa Amigos do Amanhã; Grupos em Vulnerabilidade Social",
+        "metadados": {
+          "titulo": "Museu do Amanhã",
+          "descricao": "Dados geraisTipo da instituiçãoClássico/TradicionalTemática da instituiçãoCiências exatas, da terra, biológicas e da saúdeModelo de instituiçãoFísicoEndereçoRegiãoSudesteEstadoRJCidadeRio de JaneiroBairroCentroNúmero (endereço)1EndereçoPraça MauáCEP20081-240Geolocalização -22.8941053668762 , -43.1793808937073 FuncionamentoDias e Horários de Abertura para o PúblicoDe terça a domingo, de 10h às 18h ",
+          "canonica": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+          "og": {
+            "og:type": "article",
+            "og:title": "Museu do Amanhã",
+            "og:description": "Dados geraisTipo da instituiçãoClássico/TradicionalTemática da instituiçãoCiências exatas, da terra, biológicas e da saúdeModelo de instituiçãoFísicoEndereçoRegiãoSudesteEstadoRJCidadeRio de JaneiroBairroCentroNúmero (endereço)1EndereçoPraça MauáCEP20081-240Geolocalização -22.8941053668762 , -43.1793808937073 FuncionamentoDias e Horários de Abertura para o PúblicoDe terça a domingo, de 10h às 18h (última entrada às 17h).Valor do Ingresso30,00Ingressoshttps://site.bileto.sympla.com.br/museudoaman",
+            "og:image": "https://visite.museus.gov.br/wp-content/uploads/tainacan-items/14/202952/2023-01-15-Museu-e-Baia-Albert-Andrade-16.jpg",
+            "og:image:width": "1280",
+            "og:image:height": "1920",
+            "og:url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+            "og:site_name": "Visite Museus"
+          },
+          "twitter": {
+            "twitter:title": "Museu do Amanhã",
+            "twitter:description": "Dados geraisTipo da instituiçãoClássico/TradicionalTemática da instituiçãoCiências exatas, da terra, biológicas e da saúdeModelo de instituiçãoFísicoEndereçoRegiãoSudesteEstadoRJCidadeRio de JaneiroBairroCentroNúmero (endereço)1EndereçoPraça MauáCEP20081-240Geolocalização -22.8941053668762 , -43.1793808937073 FuncionamentoDias e Horários de Abertura para o PúblicoDe terça a domingo, de 10h às 18h (última entrada às 17h).Valor do Ingresso30,00Ingressoshttps://site.bileto.sympla.com.br/museudoaman",
+            "twitter:card": "summary_large_image",
+            "twitter:image": "https://visite.museus.gov.br/wp-content/uploads/tainacan-items/14/202952/2023-01-15-Museu-e-Baia-Albert-Andrade-16.jpg",
+            "twitter:site": "@IbramMuseu",
+            "twitter:creator": "@IbramMuseu"
+          },
+          "idioma": "pt-BR",
+          "publicado_em": "",
+          "atualizado_em": "",
+          "autor": "",
+          "site": "Visite Museus",
+          "tipo": "article",
+          "ld": {},
+          "tem_ld": false,
+          "structured": []
+        },
+        "content_scope": "page_text",
+        "secoes": [
+          {
+            "titulo": "Dias e Horários de Abertura para o Público",
+            "texto": "De terça a domingo, de 10h às 18h (última entrada às 17h).\nhttps://site.bileto.sympla.com.br/museudoamanha/\nMEIA-ENTRADA: Pessoas com idade até 21 anos; Estudantes de escolas particulares; Estudantes de universidades particulares e públicas; Professores da rede privada de ensino; Pessoas com deficiência; Servidores públicos do município do Rio de Janeiro; Moradores ou naturais da cidade do Rio de Janeiro; Portadores da carteira de Identidade Jovem; Amigos EAV (Escola de Artes Visuais do Parque Lage); Clientes Santander (pagamento com o cartão Santander, válido somente para o titular do cartão; GRATUIDADE: Estudantes da rede pública de ensino fundamental e médio;Professores da rede pública de ensino e de universidades públicas; Pessoas com idade até 5 anos e a partir de 60 anos; Acompanhante necessário de pessoas com deficiência; Funcionários de museus ou associados do ICOM com selo da anuidade; Guias de turismo; Vizinhos do NOZ - Programa Amigos do Amanhã; Grupos em Vulnerabilidade Social"
+          }
+        ],
+        "links": [
+          {
+            "url": "https://visite.museus.gov.br/",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/sobre/",
+            "texto": "Sobre",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/normativos/",
+            "texto": "Normativos",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/contato/",
+            "texto": "Contato",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/instituicoes/",
+            "texto": "Instituições",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/regiao-instituicoes/centro-oeste/?metaquery%5B0%5D%5Bkey%5D=collection_id&#038;metaquery%5B0%5D%5Bcompare%5D=IN&#038;metaquery%5B0%5D%5Bvalue%5D%5B0%5D=14",
+            "texto": "Centro-Oeste",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/regiao-instituicoes/nordeste/?metaquery%5B0%5D%5Bkey%5D=collection_id&#038;metaquery%5B0%5D%5Bcompare%5D=IN&#038;metaquery%5B0%5D%5Bvalue%5D%5B0%5D=14",
+            "texto": "Nordeste",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/regiao-instituicoes/norte/?metaquery%5B0%5D%5Bkey%5D=collection_id&#038;metaquery%5B0%5D%5Bcompare%5D=IN&#038;metaquery%5B0%5D%5Bvalue%5D%5B0%5D=14",
+            "texto": "Norte",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/regiao-instituicoes/sudeste/?metaquery%5B0%5D%5Bkey%5D=collection_id&#038;metaquery%5B0%5D%5Bcompare%5D=IN&#038;metaquery%5B0%5D%5Bvalue%5D%5B0%5D=14",
+            "texto": "Sudeste",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/regiao-instituicoes/sul/?metaquery%5B0%5D%5Bkey%5D=collection_id&#038;metaquery%5B0%5D%5Bcompare%5D=IN&#038;metaquery%5B0%5D%5Bvalue%5D%5B0%5D=14",
+            "texto": "Sul",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/primavera-dos-museus/",
+            "texto": "20ª Primavera dos Museus",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/eventos/20a-primavera-dos-museus/",
+            "texto": "Programação",
+            "interno": true
+          },
+          {
+            "url": "https://brasiliana.museus.gov.br/",
+            "texto": "Brasiliana",
+            "interno": false
+          },
+          {
+            "url": "https://artsandculture.google.com/project/instituto-brasileiro-de-museus-ibram",
+            "texto": "Google Arts & Culture",
+            "interno": false
+          },
+          {
+            "url": "https://visite.museus.gov.br/faca-parte/",
+            "texto": "Faça parte",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/wp-content/uploads/tainacan-items/14/202952/2023-01-15-Museu-e-Baia-Albert-Andrade-16.jpg",
+            "texto": "",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/colecoes/20a-primavera-dos-museus/?metaquery[0][key]=38430&metaquery[0][value][0]=202952&metaquery[0][compare]=IN",
+            "texto": "Ver todos os 9 itens relacionados",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/colecoes/24a-semana-nacional-de-museus/?metaquery[0][key]=38430&metaquery[0][value][0]=202952&metaquery[0][compare]=IN",
+            "texto": "Ver todos os 11 itens relacionados",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/colecoes/19a-primavera-dos-museus/?metaquery[0][key]=38430&metaquery[0][value][0]=202952&metaquery[0][compare]=IN",
+            "texto": "Ver todos os 10 itens relacionados",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/23-semana-nacional-de-museus/?metaquery[0][key]=38430&metaquery[0][value][0]=202952&metaquery[0][compare]=IN",
+            "texto": "Ver todos os 8 itens relacionados",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/tipo-de-instituicao/classico-tradicional/",
+            "texto": "Clássico/Tradicional",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/tematica-da-instituicao/ciencias-exatas-da-terra-biologicas-e-da-saude/",
+            "texto": "Ciências exatas, da terra, biológicas e da saúde",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/modelo-de-instituicao/fisico/",
+            "texto": "Físico",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/regiao-instituicoes/sudeste/?metaquery%5B0%5D%5Bkey%5D=collection_id&amp;metaquery%5B0%5D%5Bcompare%5D=IN&amp;metaquery%5B0%5D%5Bvalue%5D%5B0%5D=14",
+            "texto": "Sudeste",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/estado-instituicoes/rj/?metaquery%5B0%5D%5Bkey%5D=collection_id&amp;metaquery%5B0%5D%5Bcompare%5D=IN&amp;metaquery%5B0%5D%5Bvalue%5D%5B0%5D=14",
+            "texto": "RJ",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/cidade-instituicoes/rio-de-janeiro/?metaquery%5B0%5D%5Bkey%5D=collection_id&amp;metaquery%5B0%5D%5Bcompare%5D=IN&amp;metaquery%5B0%5D%5Bvalue%5D%5B0%5D=14",
+            "texto": "Rio de Janeiro",
+            "interno": true
+          },
+          {
+            "url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/-22.8941053668762, -43.1793808937073?q=-22.8941053668762, -43.1793808937073&amp;z=5",
+            "texto": "-22.8941053668762 , -43.1793808937073",
+            "interno": true
+          },
+          {
+            "url": "https://site.bileto.sympla.com.br/museudoamanha/",
+            "texto": "https://site.bileto.sympla.com.br/museudoamanha/",
+            "interno": false
+          },
+          {
+            "url": "http://museudoamanha.org.br/",
+            "texto": "http://museudoamanha.org.br/",
+            "interno": false
+          },
+          {
+            "url": "https://www.instagram.com/@museudoamanha/",
+            "texto": "https://www.instagram.com/@museudoamanha/",
+            "interno": false
+          }
+        ],
+        "tabelas": [],
+        "imagens": [
+          "https://visite.museus.gov.br/wp-content/uploads/tainacan-items/14/202952/2023-01-15-Museu-e-Baia-Albert-Andrade-16.jpg",
+          "https://visite.museus.gov.br/wp-content/uploads/2024/06/LOGO-VISITE-MUSEUS-1.svg",
+          "https://visite.museus.gov.br/wp-content/uploads/tainacan-items/14/202952/2023-01-15-Museu-e-Baia-Albert-Andrade-16-275x275.jpg",
+          "https://visite.museus.gov.br/wp-content/uploads/2026/07/Re╠ugua-IBRAM-Museus-Horizontal-RGB-Colorida.png"
+        ],
+        "midia": [
+          {
+            "id": "med-8842ca0383bc",
+            "type": "image",
+            "title": "Dados geraisTipo da instituiçãoClássico/TradicionalTemática da instituiçãoCiências exatas, da terra, biológicas e da saúdeModelo de instituiçãoFísicoEndereçoReg",
+            "url": "https://visite.museus.gov.br/wp-content/uploads/tainacan-items/14/202952/2023-01-15-Museu-e-Baia-Albert-Andrade-16.jpg",
+            "final_url": "https://visite.museus.gov.br/wp-content/uploads/tainacan-items/14/202952/2023-01-15-Museu-e-Baia-Albert-Andrade-16.jpg",
+            "source_title": "Museu do Amanhã",
+            "source_url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+            "publisher": "visite.museus.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Dados geraisTipo da instituiçãoClássico/TradicionalTemática da instituiçãoCiências exatas, da terra, biológicas e da saúdeModelo de instituiçãoFísicoEndereçoRegiãoSudesteEstadoRJCidadeRio de JaneiroBairroCentroNúmero (endereço)1EndereçoPraç",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          },
+          {
+            "id": "med-5a4f534e315f",
+            "type": "image",
+            "title": "Logo da Plataforma Viste Museus",
+            "url": "https://visite.museus.gov.br/wp-content/uploads/2024/06/LOGO-VISITE-MUSEUS-1.svg",
+            "final_url": "https://visite.museus.gov.br/wp-content/uploads/2024/06/LOGO-VISITE-MUSEUS-1.svg",
+            "source_title": "Museu do Amanhã",
+            "source_url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+            "publisher": "visite.museus.gov.br",
+            "date": "",
+            "rights": "não informado",
+            "access_state": "metadata_only",
+            "validation_state": "unverified",
+            "analysis_state": "not_analyzed",
+            "excerpt": "Logo da Plataforma Viste Museus",
+            "used_excerpt": "",
+            "evidence": false,
+            "provenance": "html metadata"
+          }
+        ],
+        "extrator": "deterministico",
+        "ilegivel": false,
+        "lida": true
+      }
+    }
+  ],
+  "orchestration": [
+    {
+      "candidate_reservoir": {
+        "items": [
+          {
+            "id": "7328625d8bc323cecffc",
+            "url": "https://www.tripadvisor.com.br/Attractions-g303483-Activities-c49-Teresina_State_of_Piaui.html",
+            "title": "OS 15 MELHORES museus em Teresina (2026) - Tripadvisor",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Atividades classificadas de acordo com os dados do Tripadvisor, incluindo avaliações, pontuações, número de visualizações da página e localização do usuário. 1."
+          },
+          {
+            "id": "85b59c68d10f949d20ee",
+            "url": "https://www.mapadacultura.pi.gov.br/espaco/28/",
+            "title": "Museu do Piauí - Mapas Culturais",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Localizado no centro histórico de Teresina, o Museu do Piauí – Casa de Odilon Nunes é uma das instituições culturais mais importantes do estado. Fundado em 1934"
+          },
+          {
+            "id": "3598284590023f76ef9c",
+            "url": "https://visite.museus.gov.br/cidade-instituicoes/teresina/",
+            "title": "Teresina – Visite Museus",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "O Museu da Imagem e do Som de Teresina, se dedica à preservação da história, memória e valorização da cultura. Museu de Arqueologia e Paleontologia da Universid"
+          },
+          {
+            "id": "5e1c92d24da504dfbb31",
+            "url": "https://museudomavelar.com.br/",
+            "title": "Museu Dom Avelar",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Estamos ansiosos para receber você no Museu Dom Avelar Brandão Vilela. Aqui está tudo o que você precisa saber antes da sua visita. Conheça os espaços que compõ"
+          },
+          {
+            "id": "f20131113b23c76dc997",
+            "url": "https://pt.wikipedia.org/wiki/Museu",
+            "title": "Museu – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Na Grécia Antiga o museu era um templo das Musas, divindades que presidiam a poesia, a música, a oratória, a história, a tragédia, a comédia, a dança e a astron"
+          },
+          {
+            "id": "e5e57c9eb015baa6cb48",
+            "url": "https://visite.museus.gov.br/instituicoes/museu-do-piaui-casa-de-odilon-nunes/",
+            "title": "Museu do Piauí – Casa de Odilon Nunes - Visite Museus",
+            "origin": "bing",
+            "query": "Museu do Amanhã História fontes oficiais",
+            "date": "",
+            "type": "pagina",
+            "state": "REJECTED",
+            "read": false,
+            "reasons": [
+              "ENTITY_MISMATCH"
+            ],
+            "evidence_ref": "",
+            "excerpt": "Museu do Piauí - Casa de Odilon Nunes, é uma instituição estadual vinculada à SECULT, com o objetivo de preservar o patrimônio histórico e artístico do Estado d"
+          },
+          {
+            "id": "5409b23add007b91c51c",
+            "url": "https://museudoamanha.org.br/",
+            "title": "Museu do Amanhã",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Um museu para explorar o presente e imaginar o futuro. Guiado pelos valores da sustentabilidade e da convivência, o Museu do Amanhã inspira novas perspectivas p"
+          },
+          {
+            "id": "50ff7eeca2f98fc246f9",
+            "url": "https://museudoamanha.org.br/visite/horarios-e-ingressos",
+            "title": "Horários e Ingressos | Museu do Amanhã",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "HOURS Thursday to Tuesday (closed on Wednesdays) 10 a.m. to 6 p.m. Last entry: 5 p.m. Tickets are valid for the scheduled day and time. Please arrive at the app"
+          },
+          {
+            "id": "4f53fb37e8d4077cb44d",
+            "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3",
+            "title": "Museu do Amanhã – Wikipédia, a enciclopédia livre",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "O Museu do Amanhã é um museu construído no município do Rio de Janeiro, no Brasil. O prédio, projeto do arquiteto espanhol Santiago Calatrava, foi erguido ao la"
+          },
+          {
+            "id": "516ac61f45dfe2c1b6f2",
+            "url": "https://amanhateca.org.br/",
+            "title": "Museu do Amanhã",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "O Museu do Amanhã é um museu de ciências aplicadas que explora as oportunidades e os desafios que a humanidade terá de enfrentar nas próximas décadas a partir d"
+          },
+          {
+            "id": "23304a3019a8ba49fb9b",
+            "url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+            "title": "Museu do Amanhã – Visite Museus",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "O Museu do Amanhã é um museu de ciências diferente. Um ambiente de ideias, explorações e perguntas sobre a época de grandes mudanças em que vivemos e os diferen"
+          },
+          {
+            "id": "c18f24112f203bcc20ed",
+            "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+            "title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+            "origin": "bing",
+            "query": "Museu do Amanhã",
+            "date": "",
+            "type": "pagina",
+            "state": "FOUND",
+            "read": false,
+            "reasons": [],
+            "evidence_ref": "",
+            "excerpt": "Conheça o Museu do Amanhã no Rio! Arquitetura futurista, exposições interativas e vista incrível. Planeje sua visita e garanta seu ingresso!"
+          }
+        ],
+        "unique_candidates": 12,
+        "omitted": 0
+      },
+      "etapas": [
+        "bing: 6 resultados (Museu do Amanhã História fontes oficiais)",
+        "bing (consulta reformulada 'Museu do Amanhã'): 6 resultados"
+      ],
+      "query_plan": [
+        {
+          "type": "TOPIC_FOCUSED",
+          "query": "Museu do Amanhã História fontes oficiais",
+          "purpose": "antepor assunto explícito e preservar informação requerida"
+        },
+        {
+          "type": "ORIGINAL_QUERY",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "purpose": "pedido original sem condensação"
+        },
+        {
+          "type": "ENTITY_EXACT",
+          "query": "Museu do Amanhã",
+          "purpose": "resolver assunto explícito quando operações dominam os resultados; validar pelo pedido original"
+        }
+      ],
+      "ganho_informacao": null,
+      "lacunas": []
+    }
+  ],
+  "answer_aware": [
+    {
+      "coverage": {
+        "applicable": false,
+        "requirements": [],
+        "passages": [],
+        "complete": false,
+        "scope": "no explicit supported facet parsed; not proof of completeness"
+      },
+      "sources": [
+        {
+          "id": "S1",
+          "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S2",
+          "url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/",
+          "answerability": null,
+          "answer_passages": null
+        },
+        {
+          "id": "S3",
+          "url": "https://amanhateca.org.br/",
+          "answerability": null,
+          "answer_passages": null
+        }
+      ]
+    }
+  ],
+  "provider_audit": [
+    {
+      "original_query": "História do Museu do Amanhã fontes oficiais",
+      "adapter_query": "Museu do Amanhã História fontes oficiais",
+      "provider": "bing",
+      "at": "2026-10-25T18:13:41.469583+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "OS 15 MELHORES museus em Teresina (2026) - Tripadvisor",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303483-Activities-c49-Teresina_State_of_Piaui.html"
+        },
+        {
+          "title": "Museu do Piauí - Mapas Culturais",
+          "url": "https://www.mapadacultura.pi.gov.br/espaco/28/"
+        },
+        {
+          "title": "Teresina – Visite Museus",
+          "url": "https://visite.museus.gov.br/cidade-instituicoes/teresina/"
+        },
+        {
+          "title": "Museu Dom Avelar",
+          "url": "https://museudomavelar.com.br/"
+        },
+        {
+          "title": "Museu – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Museu"
+        },
+        {
+          "title": "Museu do Piauí – Casa de Odilon Nunes - Visite Museus",
+          "url": "https://visite.museus.gov.br/instituicoes/museu-do-piaui-casa-de-odilon-nunes/"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "Museu do Amanhã História fontes oficiais",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 431.17,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    },
+    {
+      "original_query": "História do Museu do Amanhã fontes oficiais",
+      "adapter_query": "Museu do Amanhã",
+      "provider": "bing",
+      "at": "2026-10-25T18:13:41.914743+00:00",
+      "limit": 6,
+      "timeout_seconds": 4,
+      "classification": "UNJUDGED_DISCOVERY",
+      "result_count": 6,
+      "results": [
+        {
+          "title": "Museu do Amanhã",
+          "url": "https://museudoamanha.org.br/"
+        },
+        {
+          "title": "Horários e Ingressos | Museu do Amanhã",
+          "url": "https://museudoamanha.org.br/visite/horarios-e-ingressos"
+        },
+        {
+          "title": "Museu do Amanhã – Wikipédia, a enciclopédia livre",
+          "url": "https://pt.wikipedia.org/wiki/Museu_do_Amanh%C3%A3"
+        },
+        {
+          "title": "Museu do Amanhã",
+          "url": "https://amanhateca.org.br/"
+        },
+        {
+          "title": "Museu do Amanhã – Visite Museus",
+          "url": "https://visite.museus.gov.br/instituicoes/museu-do-amanha/"
+        },
+        {
+          "title": "Museu do Amanhã: história, arquitetura, exposições e visitação",
+          "url": "https://www.oblogdorio.com.br/2025/12/museu-do-amanha-historia-arquitetura.html"
+        }
+      ],
+      "requests": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "Museu do Amanhã",
+            "format": "rss",
+            "count": "6",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": null,
+          "final_url": "https://www.bing.com/search",
+          "redirected": false
+        }
+      ],
+      "latency_ms": 431.63,
+      "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+    }
+  ],
+  "request_clock_reference": null,
+  "source_revision": "beab3573022e0e52511357a0636e80f2e14478ed",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

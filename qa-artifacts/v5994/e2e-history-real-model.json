@@ -1,0 +1,130 @@
+{
+  "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+  "name": "history",
+  "query": "Pesquisa profunda sobre as causas e as consequências da Revolta da Vacina, com fontes públicas e evidências para cada aspecto.",
+  "seconds": 21.481,
+  "inference_policy": "single-authorized-free-model-attempt-no-paid-fallback",
+  "completed_flow": true,
+  "http_status": 200,
+  "content_type": "text/event-stream; charset=utf-8",
+  "job": "rj-6a8b98b261de",
+  "job_state": "interrompida",
+  "job_mode": "profunda",
+  "outcome": {
+    "state": "partial",
+    "unresolved_fronts": [
+      "Revolta da Vacina Causas",
+      "Revolta da Vacina Consequências"
+    ],
+    "source_authority_unverified": false,
+    "provider_code": "",
+    "read_sources": 0,
+    "reason": "evidências insuficientes ou limitações remanescentes"
+  },
+  "synthesis_llm": false,
+  "chat_result_id": "rj-6a8b98b261de-result",
+  "answer_coverage": {
+    "applicable": true,
+    "requirements": [
+      {
+        "id": "R-ff530ce680c1",
+        "type": "explicit_attribute",
+        "description": "Causas",
+        "entity": "Revolta da Vacina",
+        "attribute": "causes",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Causas",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      },
+      {
+        "id": "R-5da03a0837d8",
+        "type": "explicit_attribute",
+        "description": "Consequências",
+        "entity": "Revolta da Vacina",
+        "attribute": "consequences",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Consequências",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      }
+    ],
+    "passages": [],
+    "complete": false,
+    "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+  },
+  "stage_timings": [
+    {
+      "step_id": "p1",
+      "type": "busca",
+      "seconds": 0.3941
+    },
+    {
+      "step_id": "p4",
+      "type": "busca",
+      "seconds": 2.2892
+    },
+    {
+      "step_id": "p7",
+      "type": "busca",
+      "seconds": 1.8585
+    },
+    {
+      "step_id": "p10",
+      "type": "busca",
+      "seconds": 1.9022
+    },
+    {
+      "step_id": "p2",
+      "type": "ler",
+      "seconds": 4.3842
+    },
+    {
+      "step_id": "p5",
+      "type": "ler",
+      "seconds": 3.4555
+    },
+    {
+      "step_id": "p8",
+      "type": "ler",
+      "seconds": 1.0878
+    },
+    {
+      "step_id": "p3",
+      "type": "analisar",
+      "seconds": 0.0018
+    },
+    {
+      "step_id": "p6",
+      "type": "analisar",
+      "seconds": 0.0062
+    },
+    {
+      "step_id": "p9",
+      "type": "analisar",
+      "seconds": 0.0016
+    }
+  ],
+  "synthesis_budget": null,
+  "assistant_messages": 2,
+  "reload_preserved": true,
+  "source_cards": [],
+  "links": [],
+  "media_cards": 0,
+  "public_answer": "v.\nVexx\n\nResultado da pesquisa\n\nInvestigação: as causas e as consequências da Revolta da Vacina, com fontes públicas e evidências para cada aspecto\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.\n\nObjetivo: as causas e as consequências da Revolta da Vacina, com fontes públicas e evidências para cada aspecto\n\nStatus: interrompida · Modo: profunda · Evidências: 0\n\nCobertura dos dados: parcial; há dados pendentes\n\nMídia descoberta: 16 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n\nLimite epistêmico: a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas.\n\nAspectos da pergunta\nBaixar CSV\nAspecto\tEvidência recuperada\nCausas\tAinda não confirmado\nConsequências\tAinda não confirmado\n13:02\n···",
+  "page_errors": []
+}
