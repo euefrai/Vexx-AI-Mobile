@@ -84,11 +84,26 @@ class ReviewUnavailableError(ValueError):
         self.provider_code = provider_code if isinstance(provider_code, str) and provider_code in PROVIDER_CODES else None
 
 
+def _unsafe_direction(value):
+    if isinstance(value, str):
+        return any('\u202a' <= c <= '\u202e' or '\u2066' <= c <= '\u2069' for c in value)
+    if isinstance(value, list):
+        return any(_unsafe_direction(item) for item in value)
+    if isinstance(value, dict):
+        return any(_unsafe_direction(k) or _unsafe_direction(v) for k, v in value.items())
+    return False
+
+
 def _parse_json(raw, limit):
     if not isinstance(raw, str) or len(raw) > limit:
         raise ValueError('invalid synthesis size')
     fenced = re.fullmatch(r"\s*```(?:json)?\s*\n([\s\S]*?)\n```\s*", raw)
-    return json.loads(fenced.group(1) if fenced else raw)
+    value = json.loads(fenced.group(1) if fenced else raw)
+    # Check decoded values too: a JSON Unicode escape must not bypass this gate.
+    # Normal Arabic/Hebrew letters remain valid; hidden overrides are not prose.
+    if _unsafe_direction(value):
+        raise ValueError('unsafe directional controls')
+    return value
 
 
 _ABSENCE = re.compile(

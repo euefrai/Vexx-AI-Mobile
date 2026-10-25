@@ -105,6 +105,24 @@ def test_history_evidence_preserves_founding_information_instead_of_source_notic
     assert evidence[0]['trecho'] in text and len(evidence[0]['trecho']) <= 1500
 
 
+def test_generated_direction_override_is_rejected_and_evidence_survives(research_job):
+    import json
+    import research_agents as ra
+    from test_research_synthesis import answer, evidence, EXCERPT
+    db, job = research_job
+    reviews = []
+    result = ra.agente_sintetizador(db, job, [evidence()], [],
+        sintetizar_fn=lambda *args: answer(text=EXCERPT + '\u202e'),
+        verificar_fn=lambda *args: reviews.append(True))
+    assert not result['llm'] and not reviews
+    assert EXCERPT in result['texto'] and '\u202e' not in json.dumps(result, ensure_ascii=False)
+
+
+def test_natural_rtl_letters_are_not_direction_overrides():
+    import research_synthesis as synthesis
+    assert synthesis._parse_json('{"text":"مرحبا שלום"}', 500) == {'text': 'مرحبا שלום'}
+
+
 def test_recovered_original_after_twelve_survives_both_reservoir_cuts():
     db = sqlite3.connect(':memory:'); research.criar_tabelas(db)
     generic = [{'url': f'https://generic{i}.example/report', 'titulo': 'General overview', 'trecho': 'Unrelated text'} for i in range(14)]
