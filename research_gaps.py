@@ -35,6 +35,25 @@ def identify(job, evidence):
             r'analis|evidenc|compar|transcri', normalized(objective)):
         return []  # Retrieval/gallery intent does not require reading an article.
     evidence = [e for e in evidence[:80] if isinstance(e, dict)]
+    import evidence_graph
+    import query_intelligence
+    coverage = evidence_graph.requirement_coverage(objective, evidence)
+    if coverage['applicable']:
+        searches = [s for s in job.get('plano',[]) if s.get('tipo')=='busca']
+        planned = {key(s.get('alvo','')) for s in searches}
+        remaining = max(0,job.get('orcamento',{}).get('buscas',0)-job.get('usados',{}).get('buscas',0))
+        result=[]
+        for req in coverage['requirements']:
+            resolved = req['state']=='SUPPORTED'
+            query = query_intelligence.requirement_query(req,objective)
+            result.append({'id':req['id'],'dimension':req['attribute'],'description':req['description'],
+                'requirement_state':req['state'],'status':'RESOLVED' if resolved else 'OPEN',
+                'query':query if not resolved and key(query) not in planned and remaining else '',
+                'evidence_ids':req['confirmed_evidence_ids'],
+                'candidate_sources':[], 'observed_publications':len(req['confirmed_evidence_ids']),
+                'required_publications':1, 'reason':req['insufficiency_reason'],
+                'scope':coverage['scope']})
+        return result
     scientific = bool(re.search(r'estud|cientific|papers?|metod|estado solido', normalized(objective)))
     compare = bool(re.search(r'compar|diferenc', normalized(objective)))
     required = 2 if scientific and compare else 1

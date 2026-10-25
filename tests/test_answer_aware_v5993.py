@@ -1,0 +1,166 @@
+"""Explicit relations/passages, safe navigation and partial delivery; no network/model."""
+import evidence_graph as eg
+import query_intelligence as qi
+import research
+import research_agents as ra
+import research_gaps
+import web_extract
+
+QUESTION = 'Quem fundou a WEG, em que ano e quais são seus principais produtos?'
+FOUNDING = 'A WEG foi fundada em 1961 por Werner Ricardo Voigt, Eggon João da Silva e Geraldo Werninghaus.'
+PRODUCTS = 'A WEG fabrica motores elétricos, geradores, transformadores e equipamentos de automação industrial.'
+
+
+def source(text, ident='ev-one', **extra):
+    return dict(id=ident,url='https://example.org/'+ident,texto_lido=True,trecho=text,
+                titulo='Fonte de teste',dominio='example.org',**extra)
+
+
+def test_requirements_separate_entity_attributes_and_keep_stable_ids():
+    req=qi.answer_requirements(QUESTION)
+    assert {r['attribute'] for r in req}=={'founders','foundation_date','products'}
+    assert {r['entity'] for r in req}=={'WEG'}
+    assert [r['id'] for r in req]==[r['id'] for r in qi.answer_requirements(QUESTION)]
+    assert qi.topic_profile(QUESTION)['primary_topic']=='WEG'
+
+
+def test_topic_page_is_read_but_not_an_answer():
+    query='Documentação oficial WebAssembly memory grow limitações'
+    text='WebAssembly is a binary instruction format for a stack based virtual machine. Memory management and limitations are important topics.'
+    result=research._fonte_de({'texto':text,'lida':True},{'url':'https://example.org/wasm','titulo':'WebAssembly'},query)
+    assert result['status']=='aberta' and not result['relevante']
+    assert result['answerability']['state']=='TOPIC_ONLY'
+
+
+def test_multi_requirement_coverage_requires_each_relation():
+    partial=eg.requirement_coverage(QUESTION,[source(FOUNDING)])
+    assert not partial['complete']
+    assert {r['attribute'] for r in partial['requirements'] if r['state']=='SUPPORTED'}=={'founders','foundation_date'}
+    full=eg.requirement_coverage(QUESTION,[source(FOUNDING),source(PRODUCTS,'ev-two')])
+    assert full['complete']
+    assert next(r for r in full['requirements'] if r['attribute']=='products')['confirmed_evidence_ids']==['ev-two']
+
+
+def test_causes_do_not_support_consequences():
+    result=eg.requirement_coverage('Quais foram as causas e consequências da Revolta da Chibata?',
+        [source('A Revolta da Chibata foi motivada pelos castigos físicos impostos aos marinheiros.')])
+    assert not result['complete']
+    assert [r['state'] for r in result['requirements']]==['SUPPORTED','DISCOVERED']
+
+
+def test_snippets_wrong_entity_and_rejected_filters_never_support():
+    records=[source(FOUNDING,content_scope='feed_metadata'),source(FOUNDING,vertical={'eligible':False}),
+             source(FOUNDING,relevante=False),source(FOUNDING.replace('WEG','ACME'))]
+    unread=source(FOUNDING);unread['texto_lido']=False;records.append(unread)
+    for record in records:
+        assert not any(r['state']=='SUPPORTED' for r in eg.requirement_coverage(QUESTION,[record])['requirements'])
+
+
+def test_passage_offsets_are_literal_preserve_numbers_and_do_not_invent_pages():
+    text='Introdução sem números.\n\n'+FOUNDING+'\n\n'+PRODUCTS+' Peso: 200,5 kg.'
+    for p in web_extract.passage_candidates(text,'https://example.org/a'):
+        span=p['text_span'];assert text[span['start']:span['end']]==p['text']
+        assert 'page' not in p
+    assert '200,5 kg' in ' '.join(p['text'] for p in web_extract.passage_candidates(text))
+
+
+def test_conflicting_foundation_years_require_review():
+    result=eg.requirement_coverage(QUESTION,[source(FOUNDING),source(FOUNDING.replace('1961','1962'),'ev-two')])
+    assert next(r for r in result['requirements'] if r['attribute']=='foundation_date')['state']=='CONTRADICTED'
+    assert not result['complete']
+
+
+def test_another_company_and_negation_do_not_answer_founder_question():
+    for text in ['A WEG vende motores. A ACME foi fundada em 1990 por João Teste.',
+                 'A WEG informou que a ACME foi fundada em 1990 por João Teste.',
+                 'A WEG não foi fundada em 1990 por João Teste.']:
+        coverage=eg.requirement_coverage(QUESTION,[source(text)])
+        assert not any(r['state']=='SUPPORTED' for r in coverage['requirements'] if r['attribute'] in ('founders','foundation_date'))
+
+
+def test_follow_up_targets_only_missing_attribute_and_keeps_constraints():
+    gaps=research_gaps.identify({'objetivo':QUESTION,'plano':[],'orcamento':{'buscas':3},'usados':{}},[source(FOUNDING)])
+    assert next(g for g in gaps if g['dimension']=='products')['query']=='WEG Produtos'
+    assert all(not g['query'] for g in gaps if g['status']=='RESOLVED')
+    question='Notebook Lenovo com 16 GB por até R$ 3.000: quais produtos e preços?'
+    assert question in qi.requirement_query(qi.answer_requirements(question)[0],question)
+
+
+def test_navigation_is_declared_relevant_bounded_and_host_boundary_is_real():
+    parent='https://docs.example.org/'
+    links=[{'url':parent+'privacy','texto':'Privacy policy'},
+           {'url':parent+'memory/grow','texto':'WebAssembly Memory grow reference'},
+           {'url':'javascript:alert(1)','texto':'WebAssembly Memory grow'}]
+    query='Documentação oficial WebAssembly memory grow limitações'
+    assert [p['url'] for p in web_extract.navigation_candidates(links,query,parent)]==[parent+'memory/grow']
+    assert not web_extract.navigation_candidates(links,query,parent,depth=2)
+    assert not web_extract.extrair_links('<a href="https://evilexample.org/a">A</a>','https://example.org/')[0]['interno']
+
+
+def test_model_timeout_partial_is_delivered_once_cancel_never_posts(tmp_path):
+    import pc_agent
+    db=pc_agent.open_db(tmp_path/'qa.sqlite')
+    job=ra.criar_job(db,'local',QUESTION,conv='qa-chat')
+    ra.registrar_evidencia(db,job,{'id':'s-one','url':'https://example.org/founding','texto_lido':True},FOUNDING)
+    job['status']='interrompida';job['usados'].update(partial_delivery_ready=True,research_outcome={'state':'blocked'})
+    job['sintese']={'texto':'Resultado parcial; redação indisponível. '+FOUNDING,'llm':False}
+    ra.salvar_job(db,job)
+    result=pc_agent._persistir_resultado_pesquisa(db,job,'local')
+    assert result==job['id']+'-result'
+    assert pc_agent._persistir_resultado_pesquisa(db,job,'local')==result
+    assert db.execute('select count(*) from messages').fetchone()[0]==1
+    job['status']='cancelada'
+    assert not pc_agent._persistir_resultado_pesquisa(db,job,'local')
+    db.close()
+
+
+def test_quick_reader_follows_real_document_link_within_six_reads():
+    import sqlite3
+    db=sqlite3.connect(':memory:');research.criar_tabelas(db)
+    query='Como funciona WebAssembly.Memory.grow?'
+    home='https://docs.example.org/';specific=home+'memory/grow'
+    calls=[]
+    def read(url):
+        calls.append(url)
+        if url==home:
+            return {'titulo':'WebAssembly','texto':'WebAssembly describes a virtual machine and memory.',
+                    'links':[{'url':specific,'texto':'WebAssembly Memory grow reference'}]}
+        return {'titulo':'WebAssembly.Memory.grow','texto':'WebAssembly.Memory.grow increases the memory by the requested number of pages and returns its previous size.'}
+    result=research.pesquisa_rapida(db,'qa',query,buscar_fn=lambda q:[{'url':home,'titulo':'WebAssembly','trecho':'Memory'}],recuperar_fn=read)
+    assert calls==[home,specific] and len(calls)<=6
+    assert any(s['url']==specific and s['relevante'] for s in result['fontes'])
+    assert result['answer_coverage']['complete']
+    db.close()
+
+
+def test_coverage_table_cannot_be_edited_and_validates_in_backend():
+    import research_view,jdui
+    coverage=eg.compact_coverage(eg.requirement_coverage(QUESTION,[source(FOUNDING)]))
+    message=research_view.build_view({'objetivo':QUESTION,'usados':{'answer_coverage':coverage}})
+    table=next(b for b in message['blocks'] if b.get('component')=='table')
+    assert table['props']['read_only'] is True and len(table['props']['rows'])==3
+    assert jdui.validar_mensagem(message)[0]
+
+
+def test_quote_may_not_bridge_distant_passages():
+    import json,pytest,research_synthesis as rs
+    first=FOUNDING;second=PRODUCTS
+    excerpt=first+'\n\n'+second
+    crossed=first[-35:]+' '+second[:35]
+    sources=[{'id':'E1','evidence_id':'ev-one','url':'https://example.org/one','excerpt':excerpt,
+              'passage_ranges':[{'start':0,'end':len(first)},{'start':len(first)+2,'end':len(excerpt)}]}]
+    output=json.dumps({'points':[{'text':FOUNDING,'evidence':[{'id':'E1','quote':crossed}]}]})
+    with pytest.raises(ValueError,match='crosses'):
+        rs.generate(QUESTION,sources,[],lambda *a:output)
+
+
+def test_synthesis_omitting_an_explicit_requirement_is_not_complete(tmp_path):
+    import pc_agent
+    from test_research_synthesis import answer,approved_review
+    db=pc_agent.open_db(tmp_path/'qa.sqlite');job=ra.criar_job(db,'local',QUESTION)
+    evidence=[source(FOUNDING),source(PRODUCTS,'ev-two')]
+    result=ra.agente_sintetizador(db,job,evidence,[],lambda *a:answer(text=FOUNDING,quote=FOUNDING),verificar_fn=approved_review)
+    assert result['llm'] and not result['answer_coverage']['complete']
+    job['sintese']=result
+    assert ra._completion_outcome(job,evidence,[],True)['state']=='partial'
+    db.close()

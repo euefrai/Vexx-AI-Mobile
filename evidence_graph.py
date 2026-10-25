@@ -27,8 +27,107 @@ class GraphErro(ValueError):
         self.codigo = codigo
 
 
+_ANSWER_RELATIONS = {
+    'founders': r'(?:fundad[ao]s?|criad[ao]s?|founded|established).{0,100}\b(?:por|by)\s+\w+|fundadores?\s*[:—-]\s*\w+',
+    'foundation_date': r'(?:fundad[ao]|fundacao|founded|established|criad[ao]).{0,100}\b(?:1[5-9]|20)\d{2}\b|\b(?:1[5-9]|20)\d{2}\b.{0,80}(?:fundad[ao]|fundacao|founded)',
+    'products': r'\b(?:produz|fabrica|fabricam|produzem|manufactures?|products include|produtos incluem)\b.{4,}',
+    'causes': r'\b(?:causad[ao]|causas? (?:foram|incluem)|caused|porque|devido|motivada|motivado|desencadead[ao])\b.{8,}',
+    'consequences': r'\b(?:resultou|resultaram|consequencias? (?:foram|incluem)|resulted|levou a|levaram a|provocou)\b.{8,}',
+    'syntax': r'\w+\s*\([^)]*\)',
+    'behavior': r'\b(?:retorna|returns?|permite|allows?|cria|creates?|adiciona|adds?|aumenta|increases?|grows?|grow the|aumentar)\b.{8,}',
+    'examples': r'\w+\s*\([^)]*\)',
+    'limitations': r'\b(?:nao pode|cannot|must not|limitad[ao]|limite de|maximum|exceeds|exception|raises|restricao)\b.{4,}',
+    'weight': r'\b\d+(?:[.,]\d+)?\s*(?:g|kg|gramas?|kilograms?)\b',
+    'battery': r'\b(?:bateria|battery)\b.{0,60}\b[A-Za-z]+[ -]?[A-Za-z]*\d[\w-]*',
+    'price': r'(?:r\$|us\$|usd|eur|brl)\s*\d+[\d.,]*',
+}
+
+
+def requirement_coverage(query, sources):
+    """Traceable, conservative extraction checks; not a statistical truth score."""
+    import query_intelligence as qi
+    from web_extract import passage_candidates
+    requirements = qi.answer_requirements(query)
+    if not requirements:
+        return {'applicable': False, 'requirements': [], 'passages': [], 'complete': False,
+                'scope': 'no explicit supported facet parsed; not proof of completeness'}
+    matches = []
+    for source in sources[:80]:
+        if source.get('relevante') is False or (source.get('vertical') or {}).get('eligible') is False:
+            continue
+        text = source.get('texto') or source.get('texto_lido') or source.get('trecho') or ''
+        if not isinstance(text, str): text = str(source.get('trecho') or '')
+        read = source.get('status') == 'aberta' or source.get('texto_lido') is True or source.get('lida') is True
+        if not read or source.get('content_scope') in ('feed_metadata','metadata_only','abstract_only'):
+            continue
+        url = str(source.get('url_final') or source.get('final') or source.get('url') or '')
+        passages = source.get('answer_passages') or passage_candidates(text, url, source.get('secoes'))
+        for req in requirements:
+            stop = {'quem','como','quais','foram','sao','que','sobre','usar','utilizar','funciona','fontes','oficiais','oficial','documentacao','empresa','historia','principais','para','com','dos','das','uma'}
+            tokens = set(re.findall(r'[a-z0-9]{3,}', qi.normalized(req['entity']))) - stop
+            for p in passages[:40]:
+                span = qi.normalized(p['text'])
+                identity = False
+                relation = False
+                direct = False
+                for clause in re.split(r'(?<=\w[.!?;])\s+|\n+',p['text']):
+                    clause = qi.normalized(clause)
+                    named = bool(tokens) and all(re.search(r'(?<!\w)'+re.escape(t)+r'(?!\w)',clause) for t in tokens)
+                    predicate = re.search(_ANSWER_RELATIONS[req['attribute']],clause,re.S)
+                    identity = identity or named
+                    relation = relation or bool(predicate)
+                    if not named or not predicate: continue
+                    if re.search(r'\b(?:nao|nunca|not|never)\b',clause[max(0,predicate.start()-30):predicate.start()]):
+                        continue
+                    if req['attribute'] in ('founders','foundation_date','products'):
+                        anchor = re.escape(qi.normalized(req['entity']))
+                        # Entity must be the subject of this relation, not merely
+                        # mentioned elsewhere on a page about another company.
+                        if not re.search(anchor+r'\s+(?:(?:foi|was|is|e|a empresa|a companhia)\s+){0,3}'
+                            r'(?:fundad|founded|established|criad|produz|fabrica|manufactur|products)',clause):
+                            continue
+                    direct = True
+                state = 'DIRECT_ANSWER' if identity and relation else 'TOPIC_ONLY'
+                if not direct and state=='DIRECT_ANSWER': state='POSSIBLE_ANSWER'
+                if relation and not identity:
+                    state = 'POSSIBLE_ANSWER'
+                if state == 'DIRECT_ANSWER' and re.search(r'\b(?:nao se sabe|desconhecid|unknown|not known|nao foi confirmad)', span):
+                    state = 'POSSIBLE_ANSWER'
+                if state == 'DIRECT_ANSWER':
+                    matches.append({**p, 'requirement_id': req['id'], 'source_id': source.get('id') or source.get('fonte_id') or url,
+                                    'evidence_id': source.get('id') or '', 'answerability': state,
+                                    'reason': 'explicit_entity_and_attribute_relation_in_read_span'})
+    for req in requirements:
+        found = [p for p in matches if p['requirement_id'] == req['id']]
+        ids = list(dict.fromkeys(p['evidence_id'] or p['source_id'] for p in found))[:8]
+        req.update(state='SUPPORTED' if found else 'DISCOVERED' if sources else 'NOT_SEARCHED',
+                   candidate_evidence_ids=[str(s.get('id') or s.get('url') or '') for s in sources[:8]],
+                   confirmed_evidence_ids=ids, passage_ids=list(dict.fromkeys(p['id'] for p in found))[:8],
+                   insufficiency_reason='' if found else 'Nenhuma relação explícita com a entidade foi recuperada para este aspecto.')
+    # Conflicts are only flagged for explicit founding years, not arbitrary
+    # numbers/dates on the page. This is a request for review, never resolution.
+    for req in requirements:
+        if req['attribute'] != 'foundation_date': continue
+        found = [p for p in matches if p['requirement_id'] == req['id']]
+        values = set()
+        for p in found:
+            value = re.search(r'(?:fundad[ao]|fundacao|founded|established).{0,50}?\b((?:1[5-9]|20)\d{2})\b', qi.normalized(p['text']))
+            if value: values.add(value[1])
+        if len(values)>1:
+            req.update(state='CONTRADICTED', insufficiency_reason='Anos de fundação divergentes em passagens; exige verificação.')
+    return {'applicable': True, 'requirements': requirements, 'passages': matches[:32],
+            'complete': all(r['state']=='SUPPORTED' for r in requirements),
+            'scope': 'explicit relation patterns in bounded literal spans; not independent factual verification'}
+
+
 def agora_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
+
+
+def compact_coverage(coverage):
+    """Persist references once; literal passage text already lives with evidence."""
+    return {**coverage, 'passages': [{k:p[k] for k in ('id','source_id','requirement_id','text_span','answerability')}
+                                    for p in coverage.get('passages',[])[:32]]}
 
 
 def criar_tabelas(db) -> None:

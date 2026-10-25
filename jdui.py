@@ -218,7 +218,8 @@ def _v_table(p: dict) -> dict:
         if not isinstance(r, list):
             raise JduiErro("table.row deve ser lista")
         norm.append([_str(c, 200) for c in r[:len(cols)]])
-    return {"title": _str(p.get("title"), 160), "columns": cols, "rows": norm}
+    return {"title": _str(p.get("title"), 160), "columns": cols, "rows": norm,
+            **({'read_only': True} if p.get('read_only') is True else {})}
 
 
 def _v_form(p: dict) -> dict:

@@ -281,8 +281,11 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
     started = time.monotonic()
     if not sources or timeout < 4 or (should_stop and should_stop()):
         return None
+    import query_intelligence
+    requirements = query_intelligence.answer_requirements(objective)
     messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": json.dumps({
         "objective": objective[:500], "sources": sources,
+        **({'requirements':[{"id":r['id'],"aspect":r['description'],"entity":r['entity']} for r in requirements]} if requirements else {}),
         "verification": [{"claim": str(v.get("afirmacao", ""))[:400],
                           "state": v.get("estado", "UNVERIFIED")} for v in verdicts[:12]],
     }, ensure_ascii=False)}]
@@ -316,6 +319,9 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
             if (not isinstance(excerpt, str) or not 24 <= len(excerpt.strip()) <= 450
                     or normalized(excerpt) not in normalized(index[label]["excerpt"])):
                 raise ValueError("quote not found")
+            ranges = index[label].get('passage_ranges')
+            if ranges and not any(normalized(excerpt) in normalized(index[label]['excerpt'][p['start']:p['end']]) for p in ranges):
+                raise ValueError('quote crosses noncontiguous passages')
             pair = (label, normalized(excerpt))
             if pair in seen_quotes:
                 raise ValueError("unknown or duplicate reference")

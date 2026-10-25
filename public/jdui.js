@@ -164,6 +164,7 @@
       if (!Array.isArray(rows) || rows.length > 30) throw new JduiErro('table.rows max 30');
       return {
         title: S(p.title, 160), columns: cols,
+        ...(p.read_only === true ? {read_only: true} : {}),
         rows: rows.map(r => {
           if (!Array.isArray(r)) throw new JduiErro('table.row lista');
           return r.slice(0, cols.length).map(c => S(c, 200));
@@ -1336,6 +1337,12 @@
 
   R.table = function (root, props, st, save, ctx) {
     const box = el('div', 'jdui-tablewrap');
+    if (props.read_only) {
+      box.classList.add('jdui-readonly');
+      st.rows = props.rows.map(row => row.slice());
+      st.editing = false;
+      st.filtro = '';
+    }
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
     if (!Array.isArray(st.rows)) st.rows = props.rows.map(row => row.slice());
     st.rows = st.rows.slice(0, 30).map(row =>
@@ -1361,7 +1368,8 @@
       const filename = (props.title || 'tabela').replace(/[^\w\- ]+/g, '').trim().slice(0, 40) || 'tabela';
       ctx.download(filename + '.csv', 'text/csv', '\uFEFF' + csv);
     });
-    controls.append(edit, addRow, reset, exportCsv);
+    if (props.read_only) controls.append(exportCsv);
+    else controls.append(edit, addRow, reset, exportCsv);
     box.appendChild(controls);
     const wrap = el('div', 'jdui-scrollx');
     const t = document.createElement('table');
@@ -1374,7 +1382,7 @@
     filtro.setAttribute('aria-label', 'Filtrar linhas da tabela');
     filtro.value = typeof st.filtro === 'string' ? st.filtro : '';
     filtro.addEventListener('input', () => { st.filtro = filtro.value.slice(0, 80); save(st); paint(); });
-    box.appendChild(filtro);
+    if (!props.read_only) box.appendChild(filtro);
     const tbody = document.createElement('tbody');
     function rows() {
       let rs = st.rows.map((row, index) => ({ row, index }));

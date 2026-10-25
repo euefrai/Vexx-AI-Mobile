@@ -4621,20 +4621,20 @@ def rjob_start(db, req: dict, dono: str, websocket=None) -> dict:
 
 def _persistir_resultado_pesquisa(db, job, owner):
     """Deliver a terminal research view once; never turn a cancelled job into chat."""
-    if job.get('owner')!=owner or job.get('status')!='concluida' or not job.get('conv'):
+    partial = (job.get('status')=='interrompida' and job.get('usados',{}).get('partial_delivery_ready')
+               and job.get('usados',{}).get('research_outcome',{}).get('state')=='blocked')
+    if job.get('owner')!=owner or (job.get('status')!='concluida' and not partial) or not job.get('conv'):
         return ''
     reply_id=job['id']+'-result'
     if workspace_store.chat_deleted(db, owner, job['conv']):
         return ''
-    if db.execute("SELECT 1 FROM messages WHERE id=? AND owner_id=? AND origin='mobile'",
-                  (reply_id,owner)).fetchone():
-        return reply_id
     import research_view
     summary=research_agents._resumo(db,job)
     evidence=research_agents.listar_evidencias(db,owner,job['id'])
     view=research_view.build_view(summary,evidence)
     blocks=[block for block in view.get('blocks',[]) if block.get('type')=='text'
-            or block.get('component') in ('sources','media')]
+            or block.get('component') in ('sources','media')
+            or (block.get('component')=='table' and block.get('props',{}).get('title')=='Aspectos da pergunta')]
     while blocks:
         message={'version':jdui.VERSION,'blocks':blocks}
         valid,normalized,_=jdui.validar_mensagem(message)
@@ -4653,6 +4653,10 @@ def _persistir_resultado_pesquisa(db, job, owner):
             (id,conversation_id,origin,role,text,created_at,received_at,model,owner_id)
             VALUES (?,?,'mobile','assistant',?,?,?,?,?)""",
             (reply_id,job['conv'],text,agora_iso(),agora_iso(),'Pesquisa',owner))
+        # Explicit resume can improve a partial result, keeping one message ID.
+        db.execute("UPDATE messages SET text=?,received_at=? WHERE id=? AND owner_id=? "
+                   "AND origin='mobile' AND role='assistant' AND text<>?",
+                   (text,agora_iso(),reply_id,owner,text))
     return reply_id
 
 

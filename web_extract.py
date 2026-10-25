@@ -501,7 +501,7 @@ def extrair_links(pagina: str, base_url: str = "", *, limite: int = 30,
         vistos.add(url)
         host = (urllib.parse.urlsplit(url).hostname or "").lower()
         out.append({"url": url, "texto": texto,
-                    "interno": bool(dom_base and host.endswith(dom_base.lower()))})
+                    "interno": bool(dom_base and (host == dom_base.lower() or host.endswith('.' + dom_base.lower())))})
         if len(out) >= limite:
             break
     return out
@@ -630,6 +630,76 @@ def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
     return melhor or janela_literal(0)
 
 
+def passage_candidates(texto, source_url='', sections=None, limit=40):
+    """Literal spans in the returned extraction, never offsets in HTML/PDF bytes."""
+    import hashlib
+    text = str(texto or '')[:TETO_TEXTO]
+    out, start = [], 0
+    while start < len(text) and len(out) < limit:
+        end = min(len(text), start + 1100)
+        if end < len(text):
+            # Prefer complete paragraphs/sentences; never split decimal/unit tokens.
+            stops = list(re.finditer(r'\n\s*\n|(?<=\w[.!?])\s+(?=[A-ZÀ-Ý])', text[start:end]))
+            if stops and stops[-1].start() >= 280:
+                end = start + stops[-1].start()
+            else:
+                while end > start and not text[end].isspace():
+                    end -= 1
+        if end <= start:
+            break
+        lo, hi = start, end
+        while lo < hi and text[lo].isspace(): lo += 1
+        while hi > lo and text[hi-1].isspace(): hi -= 1
+        chunk = text[lo:hi]
+        if chunk:
+            section = next((s for s in (sections or [])[:12] if isinstance(s, dict)
+                            and str(s.get('texto') or '') and chunk in str(s['texto'])), {})
+            out.append({'id': 'P-' + hashlib.sha256((source_url+'|'+str(lo)+'|'+chunk).encode()).hexdigest()[:16],
+                        'source_url': source_url, 'text': chunk, 'text_span': {'start': lo, 'end': hi,
+                        'scope': 'returned_extracted_text'}, 'section': str(section.get('titulo') or '')[:160],
+                        **({'page': section['pagina']} if isinstance(section.get('pagina'), int) else {})})
+        start = end
+    return out
+
+
+def navigation_candidates(links, query, parent_url, depth=0, max_depth=2, limit=3):
+    """Rank only links actually extracted. Fetcher still enforces DNS/redirect SSRF."""
+    import query_intelligence as qi
+    if depth >= max_depth:
+        return []
+    requirements = qi.answer_requirements(query)
+    if not requirements:
+        return []
+    subject = qi.normalized(requirements[0]['entity'])
+    stop = {'como','usar','utilizar','funciona','sobre','oficial','documentacao','historia','empresa','fontes','limites'}
+    terms = set(re.findall(r'[a-z0-9]{3,}', subject)) - stop
+    ranked = []
+    parent = urllib.parse.urlsplit(parent_url)
+    for index, item in enumerate((links or [])[:200]):
+        url = str(item.get('url') or '')
+        try:
+            parsed = urllib.parse.urlsplit(url)
+        except ValueError:
+            continue
+        if parsed.scheme not in ('http','https') or not parsed.hostname or parsed.username or parsed.password:
+            continue
+        if (parsed.netloc, parsed.path, parsed.query) == (parent.netloc, parent.path, parent.query):
+            continue
+        label = qi.normalized(str(item.get('texto') or '') + ' ' + urllib.parse.unquote(parsed.path))
+        hits = sum(bool(re.search(r'(?<!\w)'+re.escape(t)+r'(?!\w)', label)) for t in terms)
+        facet = bool(re.search(r'histor|found|funda|produt|product|portfolio|catalog|reference|referencia|api', label))
+        # One exact operation/name anchor or several subject words, never a
+        # generic legal/login link just because it shares the host.
+        if not hits or (hits < min(2,len(terms)) and not facet):
+            continue
+        ranked.append((hits, parsed.hostname == parent.hostname, -index,
+                       {'url': url[:500], 'titulo': str(item.get('texto') or '')[:160],
+                        'trecho': '', '_navigation_depth': depth+1,
+                        '_navigation_parent': parent_url[:500], 'origem': 'in_source_link'}))
+    ranked.sort(key=lambda item: item[:3], reverse=True)
+    return [row[3] for row in ranked[:limit]]
+
+
 def ilegivel(texto: str) -> bool:
     """Conteúdo provavelmente ilegível (binário decodificado/página vazia)."""
     txt = texto or ""
@@ -704,13 +774,24 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
         # trafilatura devolveu menos que o extrator local: o local é mais útil
         texto_art, extrator = texto_det, "deterministico"
     texto_final = texto_art[:teto]
+    # Select a bounded window around the requested operation rather than lose
+    # late documentation sections. All offsets below refer to this returned text.
+    import query_intelligence as qi
+    requirements = qi.answer_requirements(consulta)
+    if requirements and len(texto_art)>teto:
+        texto_final = melhor_trecho(texto_art, requirements[0]['entity'], teto)
+    links = extrair_links(html_txt, base_url, limite=200)
+    preferred = navigation_candidates(links,consulta,base_url,limit=10)
+    preferred_urls = {item['url'] for item in preferred}
+    links = ([item for item in links if item['url'] in preferred_urls]
+             + [item for item in links if item['url'] not in preferred_urls])[:30]
     saida = {
         "titulo": metas["titulo"] or _limpar(parser.titulo, 200),
         "texto": texto_final,
         "paragrafos": paragrafos[:240],
         "secoes": secs,
         "metadados": metas,
-        "links": extrair_links(html_txt, base_url),
+        "links": links,
         "imagens": extrair_imagens(html_txt, base_url),
         "tabelas": extrair_tabelas(html_txt),
         "trecho_usado": melhor_trecho(texto_final, consulta, 400),

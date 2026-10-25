@@ -34,7 +34,7 @@ from html.parser import HTMLParser
 
 TTL_RAPIDA = 6 * 3600
 TTL_PROFUNDA = 24 * 3600
-RETRIEVAL_VERSION = '5.9.9.2'
+RETRIEVAL_VERSION = '5.9.9.3'
 MAX_REDIRECTS = 3
 MAX_PAGINA_BYTES = 2 * 1024 * 1024
 MAX_TEXTO_PAGINA = 8000
@@ -827,6 +827,7 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
                "metadados": art.get("metadados", {}),
                "content_scope": art.get("content_scope", "page_text"),
                "secoes": art.get("secoes", [])[:12],
+               "links": art.get("links", [])[:30],
                "tabelas": art.get("tabelas", [])[:5],
                "imagens": art.get("imagens", [])[:10],
                "midia": media_evidence.extrair_midia(pagina, final, art.get('titulo') or ''),
@@ -932,6 +933,20 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
         fonte["publicado_em"] = str(a.get("publicado_em") or a.get("year") or "")
         fonte["autor"] = ", ".join(a.get("authors") or [])[:400]
         fonte["access_state"] = 'read' if rec.get('full_text_fetched') else "abstract_metadata" if lida else "metadata_only"
+    import evidence_graph
+    from web_extract import melhor_trecho
+    coverage = evidence_graph.requirement_coverage(consulta, [{**rec, 'url': fonte['url_final'], 'lida': lida}])
+    if coverage['applicable']:
+        passages = list({p['id']: p for p in coverage['passages']}.values())[:3]
+        fonte['answer_passages'] = passages
+        fonte['answerability'] = {'state': ('DIRECT_ANSWER' if coverage['complete'] else 'PARTIAL_ANSWER') if passages else 'TOPIC_ONLY' if lida else 'UNREADABLE',
+                                 'requirement_ids': list(dict.fromkeys(p['requirement_id'] for p in coverage['passages'])),
+                                 'aspects':[r['description'] for r in coverage['requirements'] if r['state']=='SUPPORTED'],
+                                 'scope': coverage['scope']}
+        fonte['relevante'] = fonte['relevante'] and bool(passages)
+        if passages:
+            fonte['trecho'] = melhor_trecho(passages[0]['text'], '', 600)
+            fonte['texto_lido'] = passages[0]['text']
     return fonte
 
 
@@ -1166,9 +1181,11 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
     midia = media_evidence.discover_search_media(achados)
     recs: dict = {};read_outcomes={}
     candidates=selecionar_candidatos_leitura(achados,pedido)
+    answer_aware = bool(query_intelligence.answer_requirements(pedido))
+    initial = candidates[:3] if answer_aware else candidates
     with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliarq") as pool:
         futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina, pedido): a
-                for a in candidates}
+                for a in initial}
         for fut, a in futs.items():
             try:
                 recs[a["url"]] = fut.result()
@@ -1181,6 +1198,32 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
             except Exception as exc:
                 read_outcomes[a['url']]={'error':type(exc).__name__}
                 etapas.append(f"página ignorada ({type(exc).__name__}): {a['url'][:60]}")
+        if answer_aware:
+            from web_extract import navigation_candidates
+            import evidence_graph
+            visited = {a['url'] for a in initial}
+            next_reads = []
+            for a in initial:
+                rec = recs.get(a['url']) or {}
+                if evidence_graph.requirement_coverage(pedido,[{**rec,'url':a['url']}])['complete']:
+                    continue
+                for link in navigation_candidates(rec.get('links'), pedido, rec.get('final') or a['url'], limit=2):
+                    if link['url'] not in visited:
+                        visited.add(link['url']); next_reads.append(link)
+            next_reads = (next_reads + candidates[3:])[:max(0,6-len(initial))]
+            for link in next_reads:
+                if link not in achados: achados.append(link)
+            candidates = initial + next_reads
+            followups = {pool.submit(_recuperar_um,a,recuperar_fn,timeout_pagina,pedido):a for a in next_reads}
+            for fut,a in followups.items():
+                try:
+                    recs[a['url']] = fut.result()
+                    rec = recs[a['url']] or {}
+                    read_outcomes[a['url']]={'chars':len(rec.get('texto') or ''),'final':str(rec.get('final') or a['url'])[:500]}
+                    midia.extend(rec.get('midia') or [])
+                    if a.get('_navigation_parent'): etapas.append('FOLLOW_LINK: '+a['url'][:180])
+                except Exception as exc:
+                    read_outcomes[a['url']]={'error':getattr(exc,'codigo',type(exc).__name__)}
     normalized=[]
     for a in achados:
         rec = recs.get(a["url"])
@@ -1233,6 +1276,8 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
              "correspondencia": info_busca.get("correspondencia", 0.0),
              "tentativas_busca": info_busca.get("tentativas_busca", []),
              "segundos": info_busca.get("segundos", 0.0)}
+    import evidence_graph
+    saida['answer_coverage'] = evidence_graph.requirement_coverage(pedido, saida['fontes'])
     if fontes or saida['midia']:
         try:
             cache_put(db, owner, "web", cache_pedido, saida, ttl)

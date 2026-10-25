@@ -2,6 +2,7 @@
 from datetime import datetime, timedelta, timezone
 from decimal import Decimal, InvalidOperation
 import re
+import hashlib
 import unicodedata
 from zoneinfo import ZoneInfo
 
@@ -15,6 +16,65 @@ _NUMBERS = {'um': 1, 'uma': 1, 'dois': 2, 'duas': 2, 'sete': 7,
             'quinze': 15, 'trinta': 30}
 _CURRENCIES = {'USD': r'dolares?|dolar|usd', 'BRL': r'reais|real|brl',
                'EUR': r'euros?|eur', 'JPY': r'ienes?|jpy'}
+
+# Explicit facets only. These are retrieval requirements, not factual answers
+# or an assertion that arbitrary natural language has been fully understood.
+ANSWER_FACETS = {
+    'founders': ('Fundadores', r'quem fundou|fundadores?|fundador[ae]?|founded by'),
+    'foundation_date': ('Data de fundação', r'quando.*fundad|em que ano|data de funda|ano de funda'),
+    'products': ('Produtos', r'produtos|o que.*fabrica|products'),
+    'causes': ('Causas', r'causas?|causes?'),
+    'consequences': ('Consequências', r'consequencias?|consequences?'),
+    'syntax': ('Sintaxe ou assinatura', r'sintaxe|assinatura|syntax|signature'),
+    'behavior': ('Comportamento da operação', r'como (?:usar|utilizar|funciona)|comportamento|behavior'),
+    'examples': ('Exemplos documentados', r'exemplos?|examples?'),
+    'limitations': ('Limitações', r'limitacoes|restricoes|limitations?'),
+    'weight': ('Peso e unidade', r'\bpeso\b|\bweight\b'),
+    'battery': ('Bateria', r'\bbateria\b|\bbattery\b'),
+    'price': ('Preço e moeda', r'precos?|\br\$|\busd\b'),
+}
+
+
+def answer_requirements(text):
+    original = str(text or '')[:1000]
+    norm = normalized(original)
+    # Avoid inventing technical answer requirements for a gallery/search-only
+    # intent, or imposing general-purpose facets on scientific research.
+    if re.search(r'\b(imagens?|fotos?|videos?|cientific\w*|papers?|estudos|artigos cientificos)\b', norm):
+        return []
+    facets = [key for key, (_, rx) in ANSWER_FACETS.items() if re.search(rx, norm)]
+    if 'foundation_date' in facets and not re.search(r'fundad|fundou|fundacao|founded|empresa', norm):
+        facets.remove('foundation_date')
+    if not facets:
+        return []
+    subject = re.sub(r'^(?:pesquise|pesquisa profunda sobre|encontre)\s+', '', original, flags=re.I)
+    # Declarative topics and explicit interrogative relation patterns share the
+    # existing Query Intelligence parser; the original remains authoritative.
+    match = re.search(r'\bquem (?:fundou|criou)\s+(?:a |o )?([^,?]+)', subject, re.I)
+    if match:
+        subject = re.split(r'\s+(?:em que|quando|e quais)\b', match[1], flags=re.I)[0]
+    else:
+        subject = re.sub(r'^(?:quais (?:foram|sao) as?\s+)?(?:causas? e consequ[eê]ncias?)\s+(?:de|do|da)\s+', '', subject, flags=re.I)
+        subject = re.sub(r'^(?:como (?:usar|utilizar|funciona)|qual [eé] (?:o peso|a bateria) (?:de|do|da))\s+', '', subject, flags=re.I)
+        subject = re.sub(r'^(?:documenta[cç][aã]o\s+(?:oficial\s+)?|hist[oó]ria\s+(?:de|do|da)\s+(?:empresa\s+)?)', '', subject, flags=re.I)
+        subject = re.split(r'[,?]|\s+(?:causas?|consequ[eê]ncias?|limita[cç][oõ]es|documenta[cç][aã]o|exemplos?|sintaxe|peso|bateria|fontes?\s+oficiais)\b', subject, maxsplit=1, flags=re.I)[0]
+    subject = subject.strip(' .?!')[:180]
+    constraints = {'reference': 'original_request', 'must_preserve': bool(re.search(
+        r'\b(?:nao|sem|exceto|ate|depois|antes|ultimos)\b|\d|r\$', norm))}
+    return [{'id': 'R-' + hashlib.sha256((norm+'|'+facet).encode()).hexdigest()[:12],
+             'type': 'explicit_attribute', 'description': ANSWER_FACETS[facet][0],
+             'entity': subject, 'attribute': facet, 'constraints': constraints,
+             'expected_information': ANSWER_FACETS[facet][0], 'candidate_evidence_ids': [],
+             'confirmed_evidence_ids': [], 'state': 'NOT_SEARCHED',
+             'insufficiency_reason': 'Ainda não há passagem lida para este requisito.'}
+            for facet in facets[:8]]
+
+
+def requirement_query(requirement, original):
+    query = requirement['entity'] + ' ' + requirement['description']
+    if requirement.get('constraints', {}).get('must_preserve'):
+        return str(original)[:190] + ' ' + requirement['description']
+    return query[:240]
 
 
 def topic_profile(text):
@@ -60,6 +120,9 @@ def topic_profile(text):
         kind = ('product_model' if re.search(r'[A-Za-z]+-?\d', name) else
                 'organization' if re.search(r'\bempresa\b', normalized(original)) else 'unresolved_named_entity')
         entities.append({'name': name, 'kind': kind, 'resolution': 'explicit_text_not_verified'})
+    requirements = answer_requirements(original)
+    if requirements and requirements[0]['entity'] and re.search(r'quem fundou|quais foram as causas|como (?:usar|utilizar|funciona)', normalized(original)):
+        value = requirements[0]['entity']
     focused = ' '.join(x for x in (value, ' '.join(required[:1]), preference) if x).strip()
     # Discovery can reorder a noun phrase, but must not silently drop a
     # negative/budget/comparison suffix that this deterministic parser cannot model.
@@ -72,6 +135,7 @@ def topic_profile(text):
             'hard_constraints': {'unparsed_original_guard': original if guarded else ''},
             'soft_preferences': [preference] if preference else [],
             'presentation_preferences': presentation, 'focused_query': focused,
+            'answer_requirements': requirements,
             'scope': 'explicit syntax only; not universal entity disambiguation'}
 
 

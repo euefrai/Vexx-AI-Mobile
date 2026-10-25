@@ -350,4 +350,11 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media(prefers-reduced-motion:reduce){.jdui-slot .jdui-btn{transition:none}.jdui-slot .jdui-btn:active{transform:none}}
 .provider-top {flex-wrap:wrap}
 .provider-form {margin:0}
+.jdui-slot .jdui-readonly {border:1px solid var(--line);border-radius:14px;padding:14px;background:var(--surface-2)}
+.jdui-slot .jdui-readonly .jdui-table {min-width:0;font-size:12.5px;line-height:1.55}
+.jdui-slot .jdui-readonly .jdui-table th,.jdui-slot .jdui-readonly .jdui-table td {border:0;border-bottom:1px solid var(--line);padding:9px 6px;overflow-wrap:anywhere;white-space:normal;color:var(--text-2)}
+.jdui-slot .jdui-readonly .jdui-table th {background:transparent;font-weight:500;color:var(--text)}
+.jdui-slot .jdui-readonly .jdui-actions {justify-content:flex-end;margin:0 0 6px}
+.jdui-slot .jdui-readonly .jdui-btn {min-height:36px;font-size:12px}
+@media(max-width:480px){.jdui-slot .jdui-readonly{padding:10px}.jdui-slot .jdui-readonly .jdui-btn{min-height:44px}}
 @media(max-width:420px) {.provider-form {flex-wrap:wrap}.provider-form input {flex-basis:100%}.provider-form button {min-height:40px}.provider-top {gap:5px}}

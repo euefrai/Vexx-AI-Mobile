@@ -732,7 +732,7 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
                     "citation_count", "citation_count_kind", "doc_id", "chunk_id",
                     "section", "page", "content_hash", "version", "source",
                     "table_hint", "origem_declarada", "texto_lido", "trecho_usado",
-                    "access_state"):
+                    "access_state", "answer_passages", "answerability"):
             if key in metadata:
                 ev[key] = metadata[key]
         evidencias.append(ev)
@@ -925,6 +925,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
                     "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
                     "secoes": (rec.get('secoes') or [])[:12],
+                    "links": (rec.get('links') or [])[:30],
                     "content_scope": rec.get('content_scope') or 'page_text',
                     "midia": rec.get("midia") or [],
                     "texto_lido": bool(rec.get("texto_lido", bool((rec.get("texto") or "").strip()))),
@@ -959,6 +960,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 "content_scope": artigo.get("content_scope", "page_text"),
                 "metadados":artigo.get('metadados') or {},
                 "secoes": (artigo.get('secoes') or [])[:12],
+                "links": (artigo.get('links') or [])[:30],
                 "imagens":artigo.get('imagens') or [],
                 "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
                 "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
@@ -996,7 +998,9 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
 
     def _util(a, rec):
         texto = (rec.get('texto') or '').strip()
-        return bool(texto) and _evidencia_lida({**rec, 'trecho': texto}) and _corresponde(a, rec)
+        coverage = _eg.requirement_coverage(job['objetivo'], [{**rec,'url':a['url']}])
+        return (bool(texto) and _evidencia_lida({**rec, 'trecho': texto}) and _corresponde(a, rec)
+                and (not coverage['applicable'] or bool(coverage['passages'])))
 
     # Preserve ranking, but never spend a page slot on the same canonical URL twice.
     unicos, vistas = [], set()
@@ -1098,6 +1102,21 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                         baixados[a["url"]] = rec
                         read_trace(a,'extracted' if rec.get('texto') else 'no_readable_content',rec)
                         substituir = not _util(a, rec)
+                        coverage_read = _eg.requirement_coverage(job['objetivo'],[{**rec,'url':a['url']}])
+                        if rec.get('texto_lido') and coverage_read['applicable'] and not coverage_read['complete']:
+                            from web_extract import navigation_candidates
+                            links = navigation_candidates(rec.get('links'), job['objetivo'], rec.get('final') or a['url'],
+                                a.get('_navigation_depth',0), min(2,job['orcamento'].get('profundidade',1)))
+                            for link in reversed(links):
+                                canonical = orch.canonizar_url(link['url'])
+                                if canonical and canonical not in vistas:
+                                    vistas.add(canonical)
+                                    novas_paginas.insert(len(alvos),link)
+                                    substituir = True
+                                    emitir(db,job['id'],job['owner'],'analyst','navigation_candidate','ok',
+                                           'Link específico realmente encontrado; leitura sujeita ao mesmo orçamento.',
+                                           {'action':'FOLLOW_LINK','url':link['url'],'parent':a['url'],
+                                            'depth':link['_navigation_depth']})
                 except research.ResearchErro as exc:
                     if parar():
                         cancelado = True
@@ -1169,8 +1188,15 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                    "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.", {})
             continue
         trecho_fonte = str(rec.get("trecho_usado") or "").strip()
+        answer_coverage = _eg.requirement_coverage(job['objetivo'], [{**rec,'url':a['url']}])
+        answer_passages = list({p['id']:p for p in answer_coverage['passages']}.values())[:3]
+        if answer_coverage['applicable'] and not answer_passages:
+            read_trace(a,'topic_only',rec,code='NO_ANSWER_PASSAGE')
+            continue
+        if answer_passages:
+            trecho_fonte = answer_passages[0]['text']
         history_field = re.search(r'\b(funda[cç][aã]o|fundad[ao]|fundadores?|inaugura[cç][aã]o|inaugurad[ao]|founded)\b', texto, re.I)
-        if not academic and re.search(r'\bhist[oó]ria\b', job['objetivo'], re.I) and history_field:
+        if not answer_passages and not academic and re.search(r'\bhist[oó]ria\b', job['objetivo'], re.I) and history_field:
             # Generic source-request words can otherwise pick a maintenance
             # notice instead of the requested founding/history information.
             start = max(0, history_field.start() - 80)
@@ -1201,6 +1227,11 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         fonte['structured']=(candidate.get('structured') or [])[:2]
         fonte['publicador']=(rec.get('metadados') or {}).get('site') or a.get('publicador','')
         fonte['imagens'] = (rec.get('imagens') or [])[:2]
+        if answer_coverage['applicable']:
+            fonte['answer_passages'] = answer_passages
+            fonte['answerability'] = {'state':'DIRECT_ANSWER' if answer_coverage['complete'] else 'PARTIAL_ANSWER',
+                                     'scope':answer_coverage['scope'],
+                                     'aspects':[r['description'] for r in answer_coverage['requirements'] if r['state']=='SUPPORTED']}
         if a.get('source_recovery'):
             fonte['source_recovery'] = {**a['source_recovery'],
                 'state':'original_read' if fonte['texto_lido'] else 'original_unread',
@@ -1232,6 +1263,9 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         if not academic and re.fullmatch(r'10\.\d{4,9}/\S+', doi) and doi.casefold() in texto.casefold():
             fonte['doi'] = doi[:200]
         ev = registrar_evidencia(db, job, fonte, trecho_fonte)
+        if answer_coverage['applicable']:
+            ev['answer_passages'] = answer_passages
+            ev['answerability'] = fonte['answerability']
         if fonte.get('doi'):
             ev['doi'] = fonte['doi']
         if fonte.get('scientific_sections'):
@@ -1274,12 +1308,23 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                       "ingestao", "documento veio desta fonte")
             _eg.ligar(db, job["owner"], job["id"], nev, ndoc, "MENTIONS",
                       "ingestao", "trecho extraído deste documento")
+            for passage in answer_coverage['passages'][:8]:
+                req = next(r for r in answer_coverage['requirements'] if r['id']==passage['requirement_id'])
+                np = _eg.criar_no(db,job['owner'],job['id'],'evidence','passage:'+passage['id'],
+                    {'passage_id':passage['id'],'evidence_id':ev['id'],'text_span':passage['text_span'],
+                     'section':passage.get('section',''),'url':ev['url']})
+                nr = _eg.criar_no(db,job['owner'],job['id'],'claim','requirement:'+req['id'],
+                    {'requirement_id':req['id'],'description':req['description'],'entity':req['entity']})
+                _eg.ligar(db,job['owner'],job['id'],np,ndoc,'DERIVED_FROM','literal_extraction','Passagem do texto extraído, não do HTML bruto.')
+                _eg.ligar(db,job['owner'],job['id'],np,nr,'REQUIRES_VERIFICATION','explicit_relation_pattern',
+                          'Passagem candidata ao requisito; vínculo não comprova verdade factual.')
             emitir(db, job["id"], job["owner"], "analyst", "evidence_linked", "ok",
                    f"Evidência ligada ao documento ({ev['dominio']}).",
                    {"evidencia_id": ev["id"], "dominio": ev["dominio"],
                     "trecho": ev["trecho"][:300], "url": ev["url"][:200]})
-        except Exception:
-            pass
+        except Exception as exc:
+            emitir(db,job['id'],job['owner'],'analyst','evidence_graph_failed','alerta',
+                   'Evidência preservada; vínculo do grafo não concluído.',{'code':type(exc).__name__})
     return sorted(evidencias, key=lambda e: e.get("score", 0), reverse=True)
 
 
@@ -1505,10 +1550,33 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                     "scope": e.get('content_scope', 'retrieved_excerpt'),
                     "accessed_at": str(e.get('acessado_em', ''))[:40]}
                    for e in tops if str(e.get('trecho', '')).strip()]
+        # Distinct literal passages, never concatenate distant spans into a
+        # fabricated quote. Citation IDs still resolve to the stored evidence.
+        for source in sources:
+            evidence = next(e for e in tops if e['id']==source['evidence_id'])
+            passages = evidence.get('answer_passages') or []
+            if passages:
+                excerpt, ranges, seen = '', [], set()
+                for passage in passages:
+                    if passage['id'] in seen or len(excerpt)+len(passage['text'])+2>1800: continue
+                    seen.add(passage['id'])
+                    prefix = '\n\n' if excerpt else ''
+                    start = len(excerpt)+len(prefix)
+                    excerpt += prefix+passage['text']
+                    ranges.append({'id':passage['id'],'start':start,'end':len(excerpt)})
+                if excerpt:
+                    source.update(excerpt=excerpt,passage_ranges=ranges)
+        context_meta = {'source_count':len(sources),'context_chars':sum(len(s['excerpt']) for s in sources),
+                        'timeout_seconds':min(25,timeout),'attempts':1}
+        job.setdefault('usados',{})['synthesis_budget'] = context_meta
         try:
             candidate = research_synthesis.generate(job['objetivo'], sources, vereditos,
                                                     sintetizar_fn, timeout, deve_parar, verificar_fn)
             if candidate:
+                import evidence_graph
+                answer_coverage = evidence_graph.requirement_coverage(job['objetivo'], [
+                    {'id':'answer','url':'','texto_lido':True,'trecho':candidate['texto']}])
+                candidate['answer_coverage'] = evidence_graph.compact_coverage(answer_coverage)
                 notes = ["Redação assistida por IA; citações e trechos conferidos. "
                          "Suporte revisado automaticamente por parágrafo; essa revisão pode errar e não comprova a verdade."]
                 removed = sum(r['state'] != 'SUPPORTED' for r in candidate['semantic_review'])
@@ -1605,6 +1673,7 @@ def preparar_retomada(db, owner: str, job_id: str) -> dict:
     if job['status'] not in ('interrompida', 'cancelada', 'falhou'):
         raise AgentErro('pesquisa não pode ser retomada neste estado', 'estado')
     job['status'] = 'em_andamento'
+    job.get('usados',{}).pop('partial_delivery_ready',None)
     if job.get('usados', {}).get('research_outcome', {}).get('state') == 'blocked':
         job['usados'].pop('synthesis_attempted', None)
     salvar_job(db, job, forcar_status=True)
@@ -1612,11 +1681,17 @@ def preparar_retomada(db, owner: str, job_id: str) -> dict:
 
 
 def _completion_outcome(job, evidencias, lacunas, assisted=False):
+    import evidence_graph
+    coverage = evidence_graph.requirement_coverage(job.get('objetivo',''),evidencias)
+    job.setdefault('usados',{})['answer_coverage'] = evidence_graph.compact_coverage(coverage)
     sintese = job.get('sintese') or {}
     provider_code = sintese.get('fallback_provider_code', '')
     blocked = bool(provider_code)
     read = [e for e in evidencias if _evidencia_lida(e)]
     incomplete = (not read or bool(lacunas) or bool(job.get('pendencias'))
+                  or (coverage['applicable'] and not coverage['complete'])
+                  or (sintese.get('llm') and sintese.get('answer_coverage',{}).get('applicable')
+                      and not sintese['answer_coverage'].get('complete'))
                   or any(g.get('status') == 'OPEN' for g in job.get('usados', {}).get('research_gaps', []))
                   or (assisted and not sintese.get('llm'))
                   or job.get('auditoria', {}).get('ok') is False
@@ -1711,6 +1786,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             emitir(db, job["id"], owner, "orchestrator", "step_started", "ok",
                    f"Etapa {etapa['id']} ({etapa['tipo']}): {etapa['alvo'][:80]}", {})
             etapa["tentativas"] = etapa.get("tentativas", 0) + 1
+            step_started_at = time.monotonic()
             try:
                 if etapa["tipo"] == "busca":
                     etapa["_achados"] = agente_busca(db, job, etapa, provedores, vistas,
@@ -1771,6 +1847,10 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                 job["erros"].append(f"{etapa['id']}: {exc}")
                 emitir(db, job["id"], owner, "orchestrator", "step_started", "falha",
                        f"Etapa {etapa['id']} falhou ({getattr(exc, 'codigo', '?')}).", {})
+            timings = job['usados'].setdefault('stage_timings',[])
+            timings.append({'step_id':etapa['id'],'type':etapa['tipo'],
+                            'seconds':round(time.monotonic()-step_started_at,4)})
+            job['usados']['stage_timings'] = timings[-40:]
             salvar_job(db, job)
             _save_context_checkpoint(db, job)
             if job["status"] == "cancelada":
@@ -1817,6 +1897,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             job, todas_evid or _evidencias_job(db, job), lacunas, bool(sintetizar_fn))
         if job['usados']['research_outcome']['state'] == 'blocked':
             job['status'] = 'interrompida'
+            job['usados']['partial_delivery_ready'] = bool(todas_evid or _evidencias_job(db,job))
         _save_context_checkpoint(db, job, "Pesquisa encerrada; revisar resultados, hipóteses e limitações.")
         # V5.7.3: o estado terminal é persistido ANTES do evento: quem consultar
         # no instante do research_completed já enxerga o status final (sem
@@ -2409,6 +2490,9 @@ def _consulta_lacuna(job: dict, dimension: str, alvo: str = "") -> str:
 
 def _avaliar_rodada(db, job: dict, etapa: dict, evidencias: list) -> dict:
     import research_gaps
+    import evidence_graph
+    coverage = evidence_graph.requirement_coverage(job.get('objetivo',''),evidencias)
+    job['usados']['answer_coverage'] = evidence_graph.compact_coverage(coverage)
     current = {e["id"] for e in evidencias if e.get("id") and _evidencia_lida(e)}
     gaps = research_gaps.identify(job, evidencias)
     job['usados']['research_gaps'] = gaps
@@ -2422,6 +2506,12 @@ def _avaliar_rodada(db, job: dict, etapa: dict, evidencias: list) -> dict:
                 "total_evidence": len(current), "remaining_searches": max(0,
                 job["orcamento"].get("buscas", 0) - job["usados"].get("buscas", 0)),
                 "decision": "evidence_gained" if new else "no_new_evidence"}
+    if coverage['applicable']:
+        states = {r['id']:r['state'] for r in coverage['requirements']}
+        before = job['usados'].get('requirement_states',{})
+        decision['requirement_changes'] = [{'id':rid,'before':before.get(rid,'NOT_SEARCHED'),'after':state}
+                                          for rid,state in states.items() if before.get(rid)!=state]
+        job['usados']['requirement_states'] = states
     history = job["usados"].setdefault("adaptive_rounds", [])
     history.append(decision)
     job["usados"]["adaptive_rounds"] = history[-16:]
@@ -2455,6 +2545,8 @@ def _lacunas(job: dict) -> list:
             lacunas.append(q)
     structured = job.get('usados', {}).get('research_gaps', [])
     queries = [g['query'] for g in structured if g.get('status') == 'OPEN' and g.get('query')]
+    if (job.get('usados',{}).get('answer_coverage') or {}).get('applicable'):
+        return list(dict.fromkeys(queries))[:8]
     return list(dict.fromkeys(queries + lacunas))[:8]
 
 

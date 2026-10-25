@@ -18,9 +18,16 @@ def probe(case, reference=None):
     import query_intelligence as qi
     from datetime import datetime
     from tools.bench_universal_v599 import probe as existing_probe
-    responses, extracts, orchestration = [], [], []
+    responses, extracts, orchestration, answer_aware = [], [], [], []
     search, extract, orchestrate = sp.buscar, research._recuperar_um, orch.pesquisar_com_recuperacao
     analyze = qi.analyze
+    quick = research.pesquisa_rapida
+    def observe_quick(*args, **kwargs):
+        result = quick(*args, **kwargs)
+        answer_aware.append({'coverage':result.get('answer_coverage'),
+            'sources':[{k:s.get(k) for k in ('id','url','answerability','answer_passages')} for s in result.get('fontes',[])]})
+        return result
+    research.pesquisa_rapida = observe_quick
     if reference:
         if reference.get('query') != case['query']:
             raise ValueError('Reference question differs from frozen dataset')
@@ -47,12 +54,13 @@ def probe(case, reference=None):
     sp.buscar, research._recuperar_um, orch.pesquisar_com_recuperacao = observe_search, observe_extract, observe_orchestration
     try:
         row = existing_probe(case)
-        row.update(provider_responses=responses, extractions=extracts, orchestration=orchestration)
+        row.update(provider_responses=responses, extractions=extracts, orchestration=orchestration,answer_aware=answer_aware)
         row['request_clock_reference'] = (reference.get('request') or {}).get('resolved_at') if reference else None
         return row
     finally:
         sp.buscar, research._recuperar_um, orch.pesquisar_com_recuperacao = search, extract, orchestrate
         qi.analyze = analyze
+        research.pesquisa_rapida = quick
 
 
 def main():

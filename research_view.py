@@ -177,6 +177,9 @@ def source_card(item: dict, used=False) -> dict:
     vertical=item.get('vertical') or {}
     data=vertical.get('data') or {}
     details=['Disponibilidade atual não confirmada'] if vertical.get('kind') in ('air_travel','bus_travel') else []
+    aspects = (item.get('answerability') or {}).get('aspects') or []
+    if aspects:
+        details.append('Aspectos com passagem: '+', '.join(str(a) for a in aspects[:6]))
     labels={'location':'Local','organizer':'Organizador','provider':'Operadora','airline':'Companhia',
             'departureAirport':'Origem','departureBusStop':'Origem','arrivalAirport':'Destino','arrivalBusStop':'Destino',
             'departureTime':'Partida declarada','arrivalTime':'Chegada declarada'}
@@ -255,8 +258,18 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
     if source_items:
         candidatos.append(("sources", {"title": "Fontes e estado da leitura", "items": source_items}))
     gaps = (resumo.get('usados') or {}).get('research_gaps') or []
+    coverage = (resumo.get('usados') or {}).get('answer_coverage') or {}
+    if coverage.get('applicable'):
+        labels = {'SUPPORTED':'Trecho pertinente recuperado', 'PARTIALLY_SUPPORTED':'Parcial',
+                  'CONTRADICTED':'Fontes divergem; verificar', 'DISCOVERED':'Ainda não confirmado',
+                  'NOT_SEARCHED':'Ainda não confirmado', 'UNAVAILABLE':'Indisponível'}
+        rows = [[_text(r.get('description'),100),labels.get(r.get('state'),'Ainda não confirmado')]
+                for r in coverage.get('requirements',[])[:8]]
+        if rows:
+            candidatos.append(('table',{'title':'Aspectos da pergunta','columns':['Aspecto','Evidência recuperada'],
+                                        'rows':rows,'read_only':True}))
     open_gaps = [g for g in gaps[:6] if g.get('status') == 'OPEN']
-    if open_gaps:
+    if open_gaps and not coverage.get('applicable'):
         candidatos.append(('accordion', {'items': [{
             'title': 'O que ainda falta confirmar (' + str(len(open_gaps)) + ')',
             'markdown': '\n\n'.join('- ' + _text(g.get('description'), 120)

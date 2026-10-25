@@ -1,0 +1,7 @@
+# Requisitos: contrato e limites
+
+`query_intelligence.answer_requirements` integra o parser existente: IDs derivados da pergunta/atributo, entidade explícita, descrição, restrições referenciando o pedido original, evidências candidatas/confirmadas, passagens e estado. Preferências visuais não viram fatos. O conjunto inicial reconhece relações explícitas de fundação/produtos, causa/consequência, operação técnica e algumas especificações; **não é compreensão universal de linguagem**. Requisitos não reconhecidos não recebem métrica artificial de precisão.
+
+`evidence_graph.requirement_coverage` exige entidade e relação no mesmo contexto literal lido, recusa metadados não lidos, fontes já rejeitadas e negação. A palavra do assunto isolada não sustenta o requisito. Divergência explícita de anos de fundação vira CONTRADICTED para revisão; não há resolução automática de verdade. SUPPORTED significa passagem com relação explícita sob regras locais, não verificação factual independente. O rótulo público é “Trecho pertinente recuperado”.
+
+O Research Gaps usa requisitos não atendidos, evita consulta repetida e mantém restrições do original nas reformulações. O outcome final considera todos os requisitos reconhecidos e também o que a redação efetivamente incluiu. As passagens ficam no registro da evidência; o checkpoint guarda referências compactas para não replicar textos. Parser/gates conservadores podem perder paráfrases e antecedentes legítimos; os testes e o benchmark externo precisam medir isso separadamente.
