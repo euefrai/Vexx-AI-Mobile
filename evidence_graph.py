@@ -34,6 +34,7 @@ _ANSWER_RELATIONS = {
     'causes': r'\b(?:causad[ao]|causas? (?:foram|incluem)|caused|porque|devido|motivada|motivado|desencadead[ao])\b.{8,}',
     'consequences': r'\b(?:resultou|resultaram|consequencias? (?:foram|incluem)|resulted|levou a|levaram a|provocou)\b.{8,}',
     'syntax': r'\w+\s*\([^)]*\)',
+    'return_value': r'\b(?:retorna|returns?)\b.{8,}',
     'behavior': r'\b(?:retorna|returns?|permite|allows?|cria|creates?|adiciona|adds?|aumenta|increases?|grows?|grow the|aumentar)\b.{8,}',
     'examples': r'\w+\s*\([^)]*\)',
     'limitations': r'\b(?:nao pode|cannot|must not|limitad[ao]|limite de|maximum|exceeds|exception|raises|restricao)\b.{4,}',

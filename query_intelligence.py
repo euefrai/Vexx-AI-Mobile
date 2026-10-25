@@ -20,12 +20,13 @@ _CURRENCIES = {'USD': r'dolares?|dolar|usd', 'BRL': r'reais|real|brl',
 # Explicit facets only. These are retrieval requirements, not factual answers
 # or an assertion that arbitrary natural language has been fully understood.
 ANSWER_FACETS = {
-    'founders': ('Fundadores', r'quem fundou|fundadores?|fundador[ae]?|founded by'),
+    'founders': ('Fundadores', r'quem (?:a |o )?fundou|fundadores?|fundador[ae]?|founded by'),
     'foundation_date': ('Data de fundação', r'quando.*(?:fundad|criad)|em que ano|data de funda|ano de funda'),
     'products': ('Produtos', r'produtos|o que.*fabrica|products'),
     'causes': ('Causas', r'causas?|causes?'),
     'consequences': ('Consequências', r'consequencias?|consequences?'),
     'syntax': ('Sintaxe ou assinatura', r'sintaxe|assinatura|syntax|signature'),
+    'return_value': ('Valor retornado', r'o que retorna|valor retornado|return value'),
     'behavior': ('Comportamento da operação', r'como (?:usar|utilizar|funciona)|comportamento|behavior|modifica.*original|altera.*original'),
     'examples': ('Exemplos documentados', r'exemplos?|examples?'),
     'limitations': ('Limitações', r'limitacoes|restricoes|limitations?'),
@@ -50,6 +51,9 @@ def answer_requirements(text):
     if not facets:
         return []
     subject = re.sub(r'^(?:pesquise|pesquisa profunda sobre|encontre)\s+', '', original, flags=re.I)
+    company = re.match(r'^quando\s+(?:a |o )?(.+?)\s+foi\s+fundad[ao]\b', subject, re.I)
+    if company:
+        subject = company[1]
     subject = re.sub(r'^(?:em que ano|quando)\s+(?:foi|foram)\s+(?:fundad[ao]s?|criad[ao]s?)\s+', '', subject, flags=re.I)
     subject = re.sub(r'^qual [eé] a origem d[ao] (?:empresa\s+)?', '', subject, flags=re.I)
     # Declarative topics and explicit interrogative relation patterns share the
@@ -62,7 +66,7 @@ def answer_requirements(text):
         subject = re.sub(r'^(?:como (?:usar|utilizar|funciona)|qual [eé] (?:o peso|a bateria) (?:de|do|da))\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:documenta[cç][aã]o\s+(?:oficial\s+)?|hist[oó]ria\s+(?:de|do|da)\s+(?:empresa\s+)?)', '', subject, flags=re.I)
         subject = re.split(r'[,?]|\s+(?:causas?|consequ[eê]ncias?|limita[cç][oõ]es|documenta[cç][aã]o|exemplos?|sintaxe|comportamento|peso|bateria|fontes?\s+oficiais)\b', subject, maxsplit=1, flags=re.I)[0]
-    operations=re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+',original) if set(facets)&{'syntax','behavior','examples','limitations'} else []
+    operations=re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+',original) if set(facets)&{'syntax','behavior','examples','limitations','return_value'} else []
     operations=[op for op in operations if op[0].isupper() or re.search(re.escape(op)+r'\s*\(',original)]
     if len(set(operations))==1:
         subject=operations[0]
@@ -86,6 +90,52 @@ def requirement_query(requirement, original):
     if requirement.get('constraints', {}).get('must_preserve'):
         return str(original)[:190] + ' ' + requirement['description']
     return query[:240]
+
+
+def retrieval_context(original):
+    """Reuse topic/facet parsing; retain the full request when scope is uncertain.
+
+    This is a conservative context lock, not semantic entity recognition. Only
+    an explicit trailing presentation command is removed, never title words.
+    """
+    text = re.sub(r'\s+', ' ', str(original or '')).strip()
+    text = re.split(r'[;.!?]\s*(?:apresente|mostre|exiba|organize)\s+'
+                    r'(?:um\s+)?(?:resumo|os resultados|as informa[cç][oõ]es)\b',
+                    text, maxsplit=1, flags=re.I)[0].strip()
+    profile = topic_profile(text)
+    for presentation in profile['presentation_preferences']:
+        if text.endswith(presentation):
+            text = text[:-len(presentation)].strip()
+    requirements = answer_requirements(text)
+    # Numerical, negative, geographical and comparison scope stays verbatim.
+    # Do not guess how to translate a model identifier or a temporal interval.
+    guarded = bool(re.search(
+        r'\d|\b(?:sem|nao|exceto|exclu\w*|compare|comparar|versus|vs|'
+        r'ultim\w*|hoje|ontem|semana|noticias|eventos)\b', normalized(text)))
+    entity = requirements[0]['entity'] if requirements else ''
+    return {'original_request': str(original or ''), 'research_request': text,
+            'entity': entity, 'requirements': requirements, 'guarded': guarded,
+            'source_preference': 'documentação oficial' if re.search(
+                r'documentacao oficial', normalized(text)) else '',
+            'presentation_preferences': profile['presentation_preferences']}
+
+
+def context_subqueries(original, fallback, limit=4):
+    context = retrieval_context(original)
+    text = context['research_request']
+    if context['guarded']:
+        return [text]
+    requirements = context['requirements']
+    if requirements and context['entity']:
+        queries = [requirement_query(r, text) for r in requirements]
+        if context['source_preference']:
+            queries = [q + ' ' + context['source_preference'] for q in queries]
+        return list(dict.fromkeys(queries))[:max(1, limit)]
+    # Splitting unknown proper names or presentation tails is unsafe. The
+    # existing independent-topic split remains valid for e.g. café e chá.
+    if text != str(original).strip() or topic_profile(text)['entities']:
+        return [text]
+    return fallback[:max(1, limit)] or [text]
 
 
 def topic_profile(text):
@@ -295,8 +345,28 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
                             'soft': {}, 'optional': {}}}
 
 
-def constrain_discovery(query, request):
+def constrain_discovery(query, request, *, lock_context=False):
     """Reformulation may broaden vocabulary, never drop an explicit news place/topic."""
+    context = retrieval_context(request.get('original_request', ''))
+    original = context['research_request']
+    scientific_expansion = request.get('domain') == 'science' and not re.search(
+        r'\d|\b(?:sem|nao|exceto|exclu\w*|desde|antes|depois)\b', normalized(original))
+    if lock_context and context['guarded'] and original and not scientific_expansion:
+        # Keep the authoritative constraints together; providers can tokenize
+        # them, but the planner must not silently drop an exclusion or date.
+        if normalized(original).rstrip('.?!') not in normalized(query):
+            original_words = set(re.findall(r'\w+', normalized(original)))
+            # Preserve the new facet of a gap, too. Returning just the original
+            # would collapse a methodology/price retry into an already-run query.
+            extra = list(dict.fromkeys(word for word in re.findall(r'[\w.]+', str(query))
+                                      if len(word) > 2 and normalized(word) not in original_words))
+            query = ' '.join([original, *extra]).strip()
+    elif (context['entity'] and any(r['attribute'] not in ('price', 'weight', 'battery')
+                                   for r in context['requirements'])
+          and normalized(context['entity']) not in normalized(query)):
+        query = context['entity'] + ' ' + str(query)
+    if context['source_preference'] and 'oficial' not in normalized(query):
+        query = str(query) + ' ' + context['source_preference']
     if request.get('domain') != 'news': return query
     params=request.get('parameters') or {}
     missing=[]

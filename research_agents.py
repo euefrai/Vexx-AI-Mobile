@@ -30,6 +30,7 @@ import research
 import research_reports
 import research_synthesis
 import research_visualizations
+import retrieval_trace
 import structured_analysis
 
 MODOS = {
@@ -342,7 +343,7 @@ def _subconsultas_unicas(objetivo: str, limite: int) -> list:
     """Prevent the planner from spending budget on the same front twice."""
     import query_intelligence
     request=query_intelligence.analyze(objetivo)
-    if request['domain']=='science' and limite>1:
+    if request['domain']=='science' and limite>1 and not query_intelligence.retrieval_context(objetivo)['guarded']:
         import search_orchestrator
         import research_gaps
         # Discover the topic first. Methods/results expansion follows observed
@@ -360,18 +361,19 @@ def _subconsultas_unicas(objetivo: str, limite: int) -> list:
         if len(alvo) < 3 or not chave or chave in vistas:
             continue
         vistas.add(chave)
-        saida.append(alvo[:160])
+        saida.append(alvo)
         if len(saida) >= max(1, limite):
             break
-    if len(saida) <= 1:
-        return [re.sub(r"\s+", " ", objetivo).strip()[:240]]
     return saida or [objetivo[:240]]
 
 
 def montar_plano(db, job: dict) -> dict:
     """Etapas com dependências explícitas; preservar etapas e resultados feitos."""
     import query_intelligence
-    request_info = job["ajustes"].setdefault("request", query_intelligence.analyze(job["objetivo"]))
+    request_info = job["ajustes"].get("request") or {}
+    if request_info.get('original_request') != job['objetivo']:
+        request_info = query_intelligence.analyze(job['objetivo'])
+        job['ajustes']['request'] = request_info
     # Keep the original temporal expression for the discovery adapter. Re-parsing
     # a rendered date range loses hour windows and can absorb it into the city.
     request_text = job["objetivo"]
@@ -454,6 +456,10 @@ def montar_plano(db, job: dict) -> dict:
 
 def replanejar(db, job: dict, lacunas: list) -> dict:
     """Limited gap-driven round: new searches/readings without repeating fronts."""
+    import query_intelligence
+    request = (job.get('ajustes') or {}).get('request') or {}
+    if request.get('original_request') != job['objetivo']:
+        request = query_intelligence.analyze(job['objetivo'])
     max_replans = max(0, int(job["orcamento"].get("replans", 1) or 0))
     if job["usados"].get("replans", 0) >= max_replans:
         return job
@@ -471,7 +477,8 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
         for q in (inv.get("follow_up") or [])[:2]:
             if novas >= limite_novas:
                 break
-            alvo = re.sub(r"\s+", " ", str(q or "")).strip()[:240]
+            alvo = query_intelligence.constrain_discovery(
+                re.sub(r"\s+", " ", str(q or "")).strip(), request, lock_context=True)
             chave = _chave_consulta(alvo)
             if (not chave or ("busca", alvo) in feitas or alvo in feitos_fu
                     or chave in chaves_feitas):
@@ -500,7 +507,8 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
     for lac in (lacunas or [])[:4]:
         if novas >= limite_novas:
             break
-        alvo = re.sub(r"\s+", " ", str(lac or "")).strip()[:240]
+        alvo = query_intelligence.constrain_discovery(
+            re.sub(r"\s+", " ", str(lac or "")).strip(), request, lock_context=True)
         chave = _chave_consulta(alvo)
         if not chave or ("busca", alvo) in feitas or chave in chaves_feitas:
             continue
@@ -776,7 +784,10 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
     etapas_por_consulta = job["usados"].setdefault("consultas_etapas", {})
     for q in consultas[:2]:
         import query_intelligence
-        q=query_intelligence.constrain_discovery(q,(job.get('ajustes') or {}).get('request') or query_intelligence.analyze(job['objetivo']))
+        request = (job.get('ajustes') or {}).get('request') or {}
+        if request.get('original_request') != job['objetivo']:
+            request = query_intelligence.analyze(job['objetivo'])
+        q=query_intelligence.constrain_discovery(q, request, lock_context=True)
         useful = any(orch._util_para_pedido(a, orch._termos_correspondencia(base), base) for a in achados)
         if useful or job["usados"].get("buscas", 0) + buscas_realizadas >= job["orcamento"].get("buscas", 0):
             break
@@ -1015,9 +1026,13 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         if chave and chave not in vistas:
             vistas.add(chave)
             unicos.append(a)
+        elif chave:
+            retrieval_trace.record(job['id'], etapa.get('id', ''), a, 'SKIPPED_DUPLICATE')
     # RSS is discovery, not a network page read. It must not consume all three
     # quick-mode slots before an original candidate can even reach the reader.
     discovery_only = [a for a in unicos if a.get('content_scope')=='feed_metadata']
+    for a in discovery_only:
+        retrieval_trace.record(job['id'], etapa.get('id', ''), a, 'SKIPPED_AGGREGATOR')
     achados = [a for a in unicos if a.get('content_scope')!='feed_metadata']
     if request['domain']=='news':
         achados.sort(key=lambda a: not bool(a.get('source_recovery')))
@@ -1058,6 +1073,11 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
     baixados: dict = {}
     def read_trace(source, state, rec=None, code=''):
         rec=rec or {}
+        reason = {'extracted': 'CONTENT_EXTRACTED', 'no_readable_content': 'CONTENT_EMPTY',
+                  'relevance_rejected': 'RELEVANCE_REJECTED', 'topic_only': 'PASSAGE_NOT_FOUND',
+                  'evidence_stored': 'EVIDENCE_STORED', 'discovery_stored': 'DISCOVERY_ONLY',
+                  'reader_failed': 'EXTRACTION_FAILED', 'fetch_failed': 'FETCH_FAILED'}.get(state, state)
+        retrieval_trace.record(job['id'], etapa.get('id', ''), source, reason, rec=rec)
         def public_url(value):
             try:
                 parts=urllib.parse.urlsplit(value or '')
@@ -1081,6 +1101,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         return rec, time.monotonic()
 
     pool = ThreadPoolExecutor(max_workers=3, thread_name_prefix="julialer")
+    for source in alvos:
+        retrieval_trace.record(job['id'], etapa.get('id', ''), source, 'SELECTED', charged=True)
     futs = {pool.submit(_ler_cronometrado, a): a for a in alvos}
     pendentes = set(futs)
     cancelado = False
@@ -1143,6 +1165,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     proxima = novas_paginas[len(alvos)]
                     alvos.append(proxima)
                     job['usados']['paginas'] += 1
+                    retrieval_trace.record(job['id'], etapa.get('id', ''), proxima, 'SELECTED', charged=True)
                     novo_fut = pool.submit(_ler_cronometrado, proxima)
                     futs[novo_fut] = proxima
                     pendentes.add(novo_fut)

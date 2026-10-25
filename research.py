@@ -1316,7 +1316,8 @@ def dividir_subconsultas(texto: str, teto: int = 4) -> list:
     base = re.sub(r"\s+", " ", (texto or "")).strip()[:120]
     if not out and len(base) >= 3:
         out = [base.lower()]
-    return out[:max(1, teto)]
+    import query_intelligence
+    return query_intelligence.context_subqueries(texto, out, teto)
 
 
 def _tokens_topico(texto: str) -> set:
