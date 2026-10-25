@@ -35,6 +35,7 @@ def topic_profile(text):
     value = re.sub(r'^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda\s+)?(?:sobre\s+)?', '', value, flags=re.I)
     value = re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure)\s+(?:profundamente\s+|a fundo\s+)?', '', value, flags=re.I)
     value = re.sub(r'^(?:as?\s+)?(?:[uú]ltimas?\s+)?(?:novidades|informa[cç][oõ]es recentes)\s+sobre\s+', '', value, flags=re.I)
+    value = re.sub(r'^(?:a|as|o|os)\s+(?=hist[oó]ria|documenta[cç][aã]o|especifica[cç][oõ]es|relat[oó]rio)', '', value, flags=re.I)
     operation = ''
     prefix = re.match(r'^(hist[oó]ria\s+(?:de|do|da|dos|das)\s+(?:empresa\s+)?|'
                       r'documenta[cç][aã]o\s+(?:oficia(?:l|is)\s+)?|'
@@ -51,7 +52,7 @@ def topic_profile(text):
     required += [m[0] for m in re.finditer(r'\b(?:autonomia|limita[cç][oõ]es|processos|vantagens|custos|data de inaugura[cç][aã]o)\b', value, re.I)]
     entities = []
     for m in re.finditer(r'\b(?:[A-ZÀ-Ý][\w-]*)(?:(?:\s+(?:de|do|da|dos|das))?\s+[A-ZÀ-Ý][\w-]*)*', value):
-        name = m[0]
+        name = re.sub(r'^(?:Not[ií]cias|Compare|Pesquisa|Pesquise|Fontes|Documenta[cç][aã]o)\s+(?:(?:de|do|da|sobre|em)\s+)?', '', m[0])
         if name.upper() in ('PDF', 'API', 'GB', 'BRL', 'USD') or len(name) < 3:
             continue
         kind = ('product_model' if re.search(r'[A-Za-z]+-?\d', name) else
@@ -87,7 +88,7 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         domain = 'currency'
     elif re.search(r'\b(eventos?|shows?|concertos?|exposicoes)\b', t):
         domain = 'events'
-    elif re.search(r'\b(noticias?|manchetes|aconteceu|acontecimentos?)\b', t):
+    elif re.search(r'\b(noticias?|manchetes|aconteceu|acontecimentos?|novidades)\b', t):
         domain = 'news'
     elif re.search(r'\b(estudos?|cientific[oa]s?|papers?)\b', t) or re.search(r'\bartigo\b.*\b(doi|pesquisa)\b',t):
         domain = 'science'
@@ -179,6 +180,7 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         topic = re.search(r'\b(?:sobre|acerca de)\s+(.+?)(?=\s+(?:em|(?:nos|nas)\s+(?:ultimos?|ultimas?|proximos?|proximas?)|na ultima|hoje|ontem|anteontem)\b|' + presentation + r'|[,.!?]|$)', t)
         if topic and (not params.get('location') or not topic[1].strip().startswith(normalized(params['location']))):
             params['topic'] = str(text)[topic.start(1):topic.end(1)].strip()
+            params['topic'] = topic_profile(params['topic'])['primary_topic']
     search_query = resolved
     if domain in ('air_travel', 'bus_travel') and params.get('origin') and params.get('destination'):
         mode = 'voos' if domain == 'air_travel' else 'passagens de ônibus'

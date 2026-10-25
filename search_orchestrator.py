@@ -247,7 +247,7 @@ def _context_mismatch(a: dict, consulta: str) -> list:
     for entity in qi.topic_profile(consulta)['entities']:
         name = entity['name']
         tokens = _termos(name)
-        if len(tokens) >= 2 or entity['kind'] == 'organization' or re.fullmatch(r'[A-Z]{3,}', name):
+        if len(tokens) >= 2 or entity['kind'] == 'organization' or re.fullmatch(r'[A-Z]{3,}', name) or RX_COMPARACAO.search(consulta):
             named.append(all(_tem_termo(t, body) for t in tokens))
     if named and not (any(named) if RX_COMPARACAO.search(consulta) else all(named)):
         reasons.append('ENTITY_MISMATCH')
@@ -335,11 +335,16 @@ def query_plan(consulta: str) -> list:
     original = str(consulta or '').strip()
     focused = profile['focused_query']
     out = []
-    if focused and focused.casefold() != original.casefold():
+    if focused and focused.casefold().rstrip('.!?') != original.casefold().rstrip('.!?'):
         out.append({'type': 'TOPIC_FOCUSED', 'query': focused,
                     'purpose': 'antepor assunto explícito e preservar informação requerida'})
     if original:
         out.append({'type': 'ORIGINAL_QUERY', 'query': original, 'purpose': 'pedido original sem condensação'})
+    if profile['required_information'] or profile['soft_preferences']:
+        exact = profile['primary_topic']
+        if not profile['hard_constraints']['unparsed_original_guard'] and exact and all(exact.casefold() != p['query'].casefold() for p in out):
+            out.append({'type': 'ENTITY_EXACT', 'query': exact,
+                        'purpose': 'resolver assunto explícito quando operações dominam os resultados; validar pelo pedido original'})
     return out
 
 
@@ -1007,7 +1012,8 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
 
         True só quando a reformulada trouxe resultado que responde ao pedido.
         """
-        alt = consulta_conteudo(q_atual)
+        alt = next((p['query'] for p in plan if p['type'] == 'ENTITY_EXACT' and p['query'].casefold() != q_atual.casefold()
+                    and (nome, p['query'].casefold()) not in feitas), '') or consulta_conteudo(q_atual)
         if not alt or alt.lower() == (q_atual or "").strip().lower():
             return False
         q_prov = termos_para_provedor(alt, "tecnico" if info["tecnica"]
@@ -1191,7 +1197,15 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     if so_indice:
         lacunas.append("primeira rodada só com páginas de índice geral")
     estado = _estado_final(ranqueados, falhas, vazios, consultas_feitas, correspondencia)
+    sem_assunto = bool(ranqueados) and not any(_util_para_pedido(a, termos_c, consulta) for a in ranqueados)
+    if sem_assunto:
+        estado = 'sem_correspondencia'
+        lacunas.append('nenhum candidato confirma assunto e restrições do pedido')
     recuperacao = _consultas_recuperacao(consulta, info["classes"], info, lacunas)
+    if sem_assunto:
+        for p in reversed(plan):
+            if p['type'] == 'ENTITY_EXACT' and p['query'] not in recuperacao:
+                recuperacao.insert(0, p['query'])
     # V5.7: enxuta também quando a correspondência é fraca (não só quando é
     # nula) ou quando a rodada foi só de índices — cobre o caso em que só um
     # termo funcional ("funciona") casou.

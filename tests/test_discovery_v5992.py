@@ -59,6 +59,25 @@ def test_operation_words_cannot_replace_the_requested_organization():
                                       orch._termos_correspondencia(query), query)
 
 
+def test_entity_retry_follows_observed_mismatch_instead_of_collective_word_coverage(monkeypatch):
+    calls = []
+    def search(name, query, **kwargs):
+        calls.append(query)
+        if query == 'Museu do Amanhã':
+            return [{'titulo': 'História do Museu do Amanhã', 'trecho': 'Museu do Amanhã história institucional', 'url': 'https://museum.example/history'}]
+        return [{'titulo': 'História dos Museus de Geociências', 'trecho': 'História do Museu de Geociências', 'url': 'https://other.example/history'}]
+    monkeypatch.setattr(sp, 'buscar', search)
+    result = orch.pesquisar('História do Museu do Amanhã fontes oficiais', provedores=['bing'],
+        orcamento={'max_tentativas': 4, 'max_consultas': 2, 'timeout_total': 5})
+    assert 'Museu do Amanhã' in calls and len(calls) <= 4
+    assert result['achados'][0]['url'] == 'https://museum.example/history'
+
+
+def test_news_and_comparison_operations_are_not_part_of_entity_names():
+    assert qi.topic_profile('Notícias de Ubatã Bahia')['entities'][0]['name'] == 'Ubatã Bahia'
+    assert [e['name'] for e in qi.topic_profile('Compare FastAPI e Django')['entities']] == ['FastAPI', 'Django']
+
+
 def test_recovered_original_after_twelve_survives_both_reservoir_cuts():
     db = sqlite3.connect(':memory:'); research.criar_tabelas(db)
     generic = [{'url': f'https://generic{i}.example/report', 'titulo': 'General overview', 'trecho': 'Unrelated text'} for i in range(14)]
