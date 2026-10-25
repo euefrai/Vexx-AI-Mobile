@@ -1,0 +1,620 @@
+{
+  "id": "eva-11",
+  "category": "events",
+  "query": "Eventos em Fortaleza nos próximos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.396,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+      "candidates": 1
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=%22Fortaleza%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Fortaleza%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5012
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=%22Fortaleza%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "final": "https://html.duckduckgo.com/html/?q=%22Fortaleza%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "chars": 14360
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=%22Fortaleza%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "final": "https://old-search.marginalia.nu/search?query=%22Fortaleza%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "chars": 16703
+    },
+    {
+      "url": "https://www.dicasdeviagem.com/fortaleza/",
+      "final": "https://www.dicasdeviagem.com/fortaleza/",
+      "chars": 492191
+    },
+    {
+      "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "final": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "chars": 194509
+    },
+    {
+      "url": "https://visit-fortaleza.com/",
+      "final": "https://visit-fortaleza.com/",
+      "chars": 354116
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g303293-Activities-Fortaleza_State_of_Ceara.html",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Fortaleza",
+      "final": "https://pt.wikipedia.org/wiki/Fortaleza",
+      "chars": 1650176
+    },
+    {
+      "url": "https://www.fortaleza.ce.gov.br/",
+      "final": "https://www.fortaleza.ce.gov.br/",
+      "chars": 36434
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "name",
+      "location",
+      "event_date",
+      "organizer",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+    "domain": "events",
+    "original_request": "Eventos em Fortaleza nos próximos sete dias",
+    "resolved_request": "Eventos em Fortaleza entre 2026-10-24 e 2026-10-31",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-31",
+      "location": "Fortaleza"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T22:59:55.306531+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-31",
+        "location": "Fortaleza"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "bc924fbf46741a13566f",
+        "url": "https://www.dicasdeviagem.com/fortaleza/",
+        "title": "Fortaleza: Dicas imperdíveis para a sua viagem",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2026-10-09T23:00:20+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "para descansar ou para curtir o movimento da cidade. Uma boa alternativa, principalmente para aqueles que desejam estar próximos aos , é se hospedar na região d",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.dicasdeviagem.com/fortaleza/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "3e2d4b853960d4eee837",
+        "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+        "title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2021-05-31T12:50:37+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "pode render alguns dias ficando hospedado por lá mesmo. É uma cidade pequena, com um litoral extenso, que possui falésias no mar e boas barracas de praia. É uma",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "0d64a866eb628ef6c1b2",
+        "url": "https://visit-fortaleza.com/",
+        "title": "Visit Fortaleza - Site Oficial de Turismo",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2025-07-28T21:19:40+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "De sal e sol: viva fortaleza com vista para o mar",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 49,
+        "final_url": "https://visit-fortaleza.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "59d0aaa84ee2ae7e83db",
+        "url": "https://www.tripadvisor.com.br/Attractions-g303293-Activities-Fortaleza_State_of_Ceara.html",
+        "title": "AS 15 MELHORES coisas para fazer em Fortaleza (2026) - Tripadvisor",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sex., 23 out. 2026 02:12:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pretende visitar as belezas de Fortaleza e arredores?? Então me sinto a vontade para recomendar a todos que procurem a Valéria para o planejamento e dicas de pa",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "22670c25cee126f79945",
+        "url": "https://pt.wikipedia.org/wiki/Fortaleza",
+        "title": "Fortaleza – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2004-04-15T06:57:04Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "municipal da nação. No turismo, em 2012, a cidade alcançou as marcas de segundo destino mais desejado do Brasil e quarta cidade brasileira que mais recebeu turi",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Fortaleza",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "cd67d9b168aae6759e2e",
+        "url": "https://www.fortaleza.ce.gov.br/",
+        "title": "Fortaleza",
+        "origin": "bing",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sex., 23 out. 2026 04:14:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Prefeitura de Fortaleza entrega tablets e celulares para agentes de saúde e de combate às endemias e apresenta novos fardamentos O investimento foi de R$ 4,1 mi",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 356,
+        "final_url": "https://www.fortaleza.ce.gov.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "4dde8ca5fbad97a231ac",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "CC-BY-SA 4.0",
+        "origin": "marginalia",
+        "query": "\"Fortaleza\" eventos programação 2026-10-24 2026-10-31",
+        "date": "",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      }
+    ],
+    "unique_candidates": 7,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-33a9e6b08310",
+      "type": "image",
+      "title": "Guia completo para Fortaleza com dicas e sugestões de atrações culturais, praias, parques, onde comer e hospedagem.",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2020/03/fortaleza-orla.jpg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2020/03/fortaleza-orla.jpg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Guia completo para Fortaleza com dicas e sugestões de atrações culturais, praias, parques, onde comer e hospedagem.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6489b7691f58",
+      "type": "image",
+      "title": "Image",
+      "url": "https://www.dicasdeviagem.com/wp-content/themes/edition/images/loading-spin.svg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/themes/edition/images/loading-spin.svg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Image",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7b1985d9227d",
+      "type": "image",
+      "title": "Logo Dicas de Viagem",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2024/08/dicas-logo-1.png",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2024/08/dicas-logo-1.png",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo Dicas de Viagem",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e431f5e71bf2",
+      "type": "image",
+      "title": "Orla da praia de Iracema",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/02/praia-de-iracema-foto-jjandson-via-flickr-1024x576.jpg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/02/praia-de-iracema-foto-jjandson-via-flickr-1024x576.jpg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Orla da praia de Iracema",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0f4d5c820cee",
+      "type": "image",
+      "title": "Orla da Praia do Meireles em Fortaleza.",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/02/praia-do-meireles-fortaleza-foto-Benevaldo-lima-via-flickr-scaled.jpg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/02/praia-do-meireles-fortaleza-foto-Benevaldo-lima-via-flickr-scaled.jpg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Orla da Praia do Meireles em Fortaleza.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4121c7ce7a70",
+      "type": "image",
+      "title": "área externa do Gran Mareiro Hotel",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/02/gran-mareiro-hotel-fortaleza.jpg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/02/gran-mareiro-hotel-fortaleza.jpg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "área externa do Gran Mareiro Hotel",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-49767d00feff",
+      "type": "image",
+      "title": "quarto da pousada Fortal Villa Praia",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/01/pousada-frontal-vila-praia-fortaleza.jpg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/01/pousada-frontal-vila-praia-fortaleza.jpg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "quarto da pousada Fortal Villa Praia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-72ac9319b5ca",
+      "type": "image",
+      "title": "área da piscina do Carmel Cumbuco Resort",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/01/carmel-cumbuco-resort.jpg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/01/carmel-cumbuco-resort.jpg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "área da piscina do Carmel Cumbuco Resort",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-efdeeae5f449",
+      "type": "image",
+      "title": "Quarto do Modern Beachfront Apartment w. Magnificent Seaview. Uma cama de casal está ao lado da janela, que possui vista para o mar. Do outro lado da cama está ",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2023/12/modern-beachfront-apartament-quartoo.jpg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2023/12/modern-beachfront-apartament-quartoo.jpg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Quarto do Modern Beachfront Apartment w. Magnificent Seaview. Uma cama de casal está ao lado da janela, que possui vista para o mar. Do outro lado da cama está um armário com um grande espelho e uma cadeira. Este é um airbnb em Fortaleza.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-452dcae44a12",
+      "type": "image",
+      "title": "Tradicional sorveteria de Fortaleza",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/02/sorveteria-50-sabores-fortaleza-foto-por-afonsoccr-via-tripadvisor.jpg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2022/02/sorveteria-50-sabores-fortaleza-foto-por-afonsoccr-via-tripadvisor.jpg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Tradicional sorveteria de Fortaleza",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e627b51aaa1a",
+      "type": "image",
+      "title": "Avião voando em um céu com poucas núvens durante o dia. Foto de John McArthur via Unsplash",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2024/02/aviao-ceu-john-mcarthur-unsplash-1-edited-1024x576.jpg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2024/02/aviao-ceu-john-mcarthur-unsplash-1-edited-1024x576.jpg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Avião voando em um céu com poucas núvens durante o dia. Foto de John McArthur via Unsplash",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f4a5f8963a75",
+      "type": "image",
+      "title": "Globo do mundo em cima de uma mesa branca com um estetoscópio em volta. Foto de Marco Verch via Flickr",
+      "url": "https://www.dicasdeviagem.com/wp-content/uploads/2024/02/estetoscopio-mundo-seguro-viagem-edited.jpg",
+      "final_url": "https://www.dicasdeviagem.com/wp-content/uploads/2024/02/estetoscopio-mundo-seguro-viagem-edited.jpg",
+      "source_title": "Fortaleza: Guia de viagem",
+      "source_url": "https://www.dicasdeviagem.com/fortaleza/",
+      "publisher": "www.dicasdeviagem.com",
+      "date": "2026-10-09T23:00:20+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Globo do mundo em cima de uma mesa branca com um estetoscópio em volta. Foto de Marco Verch via Flickr",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.dicasdeviagem.com/fortaleza/",
+      "titulo": "Fortaleza: Guia de viagem",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2026-10-09T23:00:20+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://www.dicasdeviagem.com/fortaleza/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "titulo": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2021-05-31T12:50:37+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://visit-fortaleza.com/",
+      "titulo": "Visit Fortaleza - Site Oficial de Turismo",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2025-07-28T21:19:40+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://visit-fortaleza.com/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "378ae2a972a1d3e7da697fc94960e4a7f58dec90",
+  "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1"
+}

@@ -1,0 +1,12 @@
+### Result
+{"qa_cookies_cleared":true,"login_visible":true}
+### Ran Playwright code
+```js
+await (async page=>{if(await page.locator('#stopGen').isVisible())await page.locator('#stopGen').click();await page.context().clearCookies();await page.reload();await page.locator('#loginOverlay').waitFor({state:'visible'});return {qa_cookies_cleared:true,login_visible:true};})(page);
+```
+### Page
+- Page URL: http://127.0.0.1:56418/
+- Page Title: Vexx AI
+- Console: 1 errors, 0 warnings
+### Events
+- New console entries: .playwright-cli\console-2026-10-24T23-10-37-310Z.log#L31-L49

@@ -1,0 +1,830 @@
+{
+  "id": "holdout-02",
+  "category": "capital_news",
+  "query": "Notícias em Rio Branco, Acre, hoje",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.832,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Rio Branco\" \"acre\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Rio Branco\" \"acre\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Rio Branco\" \"acre\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Motociclista de 26 anos morre após bater contra poste em Rio Branco; VÍDEO\" site:g1.globo.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital\" site:acrenews.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 171648
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5775
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4918
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Motociclista+de+26+anos+morre+ap%C3%B3s+bater+contra+poste+em+Rio+Branco%3B+V%C3%8DDEO%22+site%3Ag1.globo.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Motociclista+de+26+anos+morre+ap%C3%B3s+bater+contra+poste+em+Rio+Branco%3B+V%C3%8DDEO%22+site%3Ag1.globo.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5921
+    },
+    {
+      "url": "https://g1.globo.com",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Mailza+arrasta+multid%C3%A3o+e+para+centro+de+Rio+Branco+em+ato+de+encerramento+da+campanha+na+capital%22+site%3Aacrenews.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Mailza+arrasta+multid%C3%A3o+e+para+centro+de+Rio+Branco+em+ato+de+encerramento+da+campanha+na+capital%22+site%3Aacrenews.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5033
+    },
+    {
+      "url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "final": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "chars": 793520
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Rio_de_Janeiro",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://www.imdb.com/title/tt1436562/",
+      "final": "https://www.imdb.com/title/tt1436562/",
+      "chars": 0
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Rio",
+      "final": "https://pt.wikipedia.org/wiki/Rio",
+      "chars": 933671
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/geografia/rios.htm",
+      "final": "https://brasilescola.uol.com.br/geografia/rios.htm",
+      "chars": 143429
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+      "final": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+      "chars": 1900546
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Rio Branco\" \"acre\" notícias",
+    "domain": "news",
+    "original_request": "Notícias em Rio Branco, Acre, hoje",
+    "resolved_request": "Notícias em Rio Branco, Acre, hoje",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "Rio Branco",
+      "region": "acre"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T23:37:32.049451+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "Rio Branco",
+        "region": "acre"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "d09e39b5ac434742a607",
+        "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQajV5RDROX21NNUZiYUZRMXZqdVlrbm5qSldUUFRHZVVrVHRMSi1VLW40NGdFUVRwbEprd2VOSFRHQzJzTlB3Ul9VWEo2OXktMjlaTmJEVTZ0VHg5MjV4WDNfRGN6bnhkXzdGa0tHX0RqeEtRb2FiOWdnYkpTT2M3cHFjUHB5VWNuenRYQWdaVXQwSElHdjJMWGVwNjJuNzl1SFBfRHFtakpYQldybXRZdl9TRzhNZ01iOFV6QldR0gHMAUFVX3lxTE1zdWRuYTZ1RzNodG1QU0lBQUNvSHdrMkVzUElRWlp3NnZNdG1jV1Mwb3RkbHFwbU5zMG1EeTc2VC1HRXRiVFl4Z2h0c2pxUVZWTC01a0FFaVJyaWVKLWN2c2dkQkFYR19odUgtWm1XTm52S1hyYmFqbUhSWnNaVHdZXzFqUXJHSzZJcU5TdDVneS10V1p",
+        "title": "Motociclista de 26 anos morre após bater contra poste em Rio Branco; VÍDEO - G1",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Sat, 24 Oct 2026 17:04:12 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Motociclista de 26 anos morre após bater contra poste em Rio Branco; VÍDEO G1",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "e035165adce9c1aa4d99",
+        "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOQzJTU0hhOHlIM1MtWTJLNkl5UkhYcktIUDEtX2VUWVp6RDBUUktkaHkzLWRUYmQ1MXRRVjdEejUySE91Z2NIQVpKUXNXS3lfMEN5YlpGNDNGbDIzT2c3R1VuS19tZGJrS2NYeUdVN3llQjZ4cG52UmFTa0tQeFQtOGRpUENwSTlRY01uSDFwMlV6UUtuR014dGI2ZGpob25fWkdpTEk1QVIxQXllYXFIbXo5amNqTUxsWWRTRkRQSQ?oc=5",
+        "title": "Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital - AcreNews",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Sat, 24 Oct 2026 20:41:35 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital AcreNews",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "770c9a4ecff36d51063b",
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMHdCSTJ2Y21BeEJBR3VkRnZTZnlTaENfQmNta2JpNmN1cUFnMFhOYkNDN3lfYTFha280WUlTakpKT0xVLXZsUWFDV0FQYlUzMjNMbE5NX1lMVER5Q3lOOE13LW9GZ3doQlpyeHFaaEZfT2hOek1DcWxBaE9UTU5GX0NMYnRTM3VIenhNQUV5alREWktxYWRJZEdSemFxdzdaU094dmNkNW1Xdw?oc=5",
+        "title": "Prefeitura de Rio Branco homenageia garis e margaridas com café da manhã especial - AcreNews",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Sat, 24 Oct 2026 02:57:06 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Prefeitura de Rio Branco homenageia garis e margaridas com café da manhã especial AcreNews",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "4ea76bebb723ee19dae7",
+        "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxOTWYyUDRfSWVlUXR2b0NIN1JLVjdJczdMZUlZcUNyaTZ6VFd4UnVYdGhwcEFCbmxmQ2xXdUNrZzFTZ0k5T3VVUGVCcUc5RmRYcFZRZmNlSkNyeGtNbjdXMVJtaE15b3o3ODIyU3JSSEJXUVVJOXV4eEE1X3pKMTc4eEJWSDJIQWphREVhNXd5cy1qenQ0QnBXUDBVVGw1WmpxM0xmSXRnS0R6YnhVTGNWdFdyQUxWV0FCaWM3T1o4WEVfM2VENkwxOENNQWdpcFFSallHeExTNmxWQXdvSU54dGdkUG02WFF2SUNrYWliX1hHbVnSAYICQVVfeXFMUGNQUFRMbGlqV05TSUc1LWIzRzNkNXRUbFhLZ05nYVpkSDBhMS0wNjFnUUh4VzZPWkJBVi10LVY4em5vU0lhdUVtM01pVWgzMVNTT0ExenV6SC1zeDNxdlM",
+        "title": "Professora de 44 anos morre após passar mal em frente à catedral de Rio Branco: 'Estava indo rezar', diz marido - G1",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Sat, 10 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Professora de 44 anos morre após passar mal em frente à catedral de Rio Branco: 'Estava indo rezar', diz marido G1",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "ca437829ea69658d9c25",
+        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPQmVYVlp4MHlfTW0wTjBkamhleEp3d1FOZTVOUDBNVlVrUW9CUUJtc1NJVHB4bF8yMU5lODlOZW9rd3dCM3FOWWJkVVZjODZFbHRfbW5qa1AwQWdVSWp2Q2VwWWYtYVFUeF9nck1DeU5CTkE3NUNMaHZWdTFyY2syUF9oaGpwZUtZTmZrUERPSjVXMzNqcUZXYmQtY0s0YWdlaUgwaXlqTlktYVpnR0lwdWtFSDVGT29XWE9aLUdUNUdYbHhubkhLcg?oc=5",
+        "title": "Tribunal de Justiça do Acre autoriza retomada de execução fiscal cobrada pela Prefeitura de Rio Branco - Acre Jornal",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Fri, 23 Oct 2026 11:10:03 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Tribunal de Justiça do Acre autoriza retomada de execução fiscal cobrada pela Prefeitura de Rio Branco Acre Jornal",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "d4637ee660c6ea8d4730",
+        "url": "https://g1.globo.com/rj/rio-de-janeiro/",
+        "title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "sáb., 24 out. 2026 21:38:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Candidatos focaram em capitais do Sudeste neste sábado (24), véspera da votação. Petista passou por Rio e seguiu para São Paulo. Flávio mobilizou apoiadores em ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 243,
+        "final_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "20e83da9895e48e156d8",
+        "url": "https://en.wikipedia.org/wiki/Rio_de_Janeiro",
+        "title": "Rio de Janeiro - Wikipedia",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "sex., 23 out. 2026 19:23:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Rio de Janeiro, [c] also known simply as Rio, [7] is the capital and largest city of the state of Rio de Janeiro. It is the second-largest city in Brazil after ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "tamanho",
+        "losses": [
+          "FETCH_FAILED",
+          "HARD_CONSTRAINT_MISMATCH",
+          "INTENT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "2b70aed9b3309e19ae61",
+        "url": "https://www.imdb.com/title/tt1436562/",
+        "title": "Rio (2011) - IMDb",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "qui., 22 out. 2026 22:59:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Rio: Directed by Carlos Saldanha. With Jesse Eisenberg, Anne Hathaway, George Lopez, Karen Disher. When Blu, a domesticated macaw from small-town Minnesota, mee",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://www.imdb.com/title/tt1436562/",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "178ff21e8a1c5336398c",
+        "url": "https://pt.wikipedia.org/wiki/Rio",
+        "title": "Rio – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "2004-06-18T17:25:38Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "próprio rio, e sua água escoa encosta abaixo em direção a ele. As de um rio compreendem os menores que o alimentam e constituem sua origem. Esses cursos podem s",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Rio",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "e0cebf2dfaa5ed86dfa2",
+        "url": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+        "title": "Rio de Janeiro – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "2004-03-23T00:36:18Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "simplesmente referido como , é a do do . Um dos maiores internacionais no , na e também do , é uma das . É a (depois de ), a da e a . Sua população segundo o do",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "43d21f4c79a225ff1cd9",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQeTgxZFBNT3ExZ3ZmcDJLb25zdEdPT2RHNEI5STNHa3A1MjF1QU96M2dmWk1hQ2JnSndJcERjM0lGYXJ6VDhDLUNvU2wyLWh1dXZMZnFTS2Zsb1Exa1BnVEplOS1sN2c1TmJ6cHRaYnVWSXdmZzF2c0FjdW1oS0RFVlhCZXhxVmhkUFRrRmxibS1CZm0xckdjeXJITkJqaFV5LTJwVG5mNHdxQ0k?oc=5",
+        "title": "Mailza cumpre agenda de campanha e realiza atos políticos na região do Alto Acre - Acre Jornal",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Fri, 23 Oct 2026 11:09:45 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Mailza cumpre agenda de campanha e realiza atos políticos na região do Alto Acre Acre Jornal",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "4f1ea9d41ba875c94d4d",
+        "url": "https://brasilescola.uol.com.br/geografia/rios.htm",
+        "title": "Rios: o que são, partes, tipos, importância - Brasil Escola",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "2007-04-17-0311:50:02",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "geração de energia, entre outras ações. Com isso, sabermos os componentes de um rio é fundamental para analisarmos a forma e o uso desse reservatório. Veja os c",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://brasilescola.uol.com.br/geografia/rios.htm",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-116632be447f",
+      "type": "image",
+      "title": "Últimas notícias da cidade do Rio de Janeiro, Baixada Fluminense e de todo o estado. Acompanhe também informações de trânsito, previsão do tempo, agenda cultura",
+      "url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "final_url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "source_title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "source_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "publisher": "s.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias da cidade do Rio de Janeiro, Baixada Fluminense e de todo o estado. Acompanhe também informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Globo.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-aa8af98fe7fb",
+      "type": "image",
+      "title": "Homem fica ferido após problemas na decolagem de asa-delta na Pedra Bonita, no Rio - Programa: G1 ao vivo",
+      "url": "https://s2-g1.glbimg.com/9EkRH3wUpKgZC-sb7YYAiTM9RPU=/540x304/top/smart/filters:max_age(3600)/https://s01.video.glbimg.com/deo/vi/55/20/992055",
+      "final_url": "https://s2-g1.glbimg.com/9EkRH3wUpKgZC-sb7YYAiTM9RPU=/540x304/top/smart/filters:max_age(3600)/https://s01.video.glbimg.com/deo/vi/55/20/992055",
+      "source_title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "source_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "publisher": "s2-g1.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Homem fica ferido após problemas na decolagem de asa-delta na Pedra Bonita, no Rio - Programa: G1 ao vivo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e630729f6153",
+      "type": "document",
+      "title": "ultimas-noticias.html",
+      "url": "https://g1.globo.com/ultimas-noticias.html",
+      "final_url": "https://g1.globo.com/ultimas-noticias.html",
+      "source_title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "source_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias da cidade do Rio de Janeiro, Baixada Fluminense e de todo o estado. Acompanhe também informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Globo.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-9f139da7a3ab",
+      "type": "document",
+      "title": "principios-editoriais-do-grupo-globo.html",
+      "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "final_url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "source_title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "source_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias da cidade do Rio de Janeiro, Baixada Fluminense e de todo o estado. Acompanhe também informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Globo.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-ebe26ebbabdf",
+      "type": "document",
+      "title": "universidades.html",
+      "url": "https://g1.globo.com/educacao/universidades.html",
+      "final_url": "https://g1.globo.com/educacao/universidades.html",
+      "source_title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "source_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias da cidade do Rio de Janeiro, Baixada Fluminense e de todo o estado. Acompanhe também informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Globo.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-bd30a4ba452d",
+      "type": "image",
+      "title": "grande curso de água natural",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Aerial_view_of_the_Amazon_Rainforest.jpg/1280px-Aerial_view_of_the_Amazon_Rainforest.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Aerial_view_of_the_Amazon_Rainforest.jpg/1280px-Aerial_view_of_the_Amazon_Rainforest.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "capital do estado brasileiro do Rio de Janeiro",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8794332afe12",
+      "type": "image",
+      "title": "Vista aérea do rio Solimões formando uma curva ampla em S entre a floresta amazônica.",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Aerial_view_of_the_Amazon_Rainforest.jpg/330px-Aerial_view_of_the_Amazon_Rainforest.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Aerial_view_of_the_Amazon_Rainforest.jpg/330px-Aerial_view_of_the_Amazon_Rainforest.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Vista aérea do rio Solimões formando uma curva ampla em S entre a floresta amazônica.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1336a176ef96",
+      "type": "image",
+      "title": "Esquema numerado de um rio que desce das montanhas e atravessa uma planície até chegar ao mar.",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/River_scheme.svg/330px-River_scheme.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/River_scheme.svg/330px-River_scheme.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Esquema numerado de um rio que desce das montanhas e atravessa uma planície até chegar ao mar.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f2831d23132a",
+      "type": "image",
+      "title": "Esquema em planta e em perfil de um sistema fluvial, com formas numeradas no vale.",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Fluvial_topography_sketch_numbered.svg/330px-Fluvial_topography_sketch_numbered.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Fluvial_topography_sketch_numbered.svg/330px-Fluvial_topography_sketch_numbered.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Esquema em planta e em perfil de um sistema fluvial, com formas numeradas no vale.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-fd22ea121d09",
+      "type": "image",
+      "title": "{\\displaystyle P=Q+ET+\\Delta S}",
+      "url": "https://wikimedia.org/api/rest_v1/media/math/render/svg/eec51b36ec5a933f5ac42bb4fe90646142a8f60c",
+      "final_url": "https://wikimedia.org/api/rest_v1/media/math/render/svg/eec51b36ec5a933f5ac42bb4fe90646142a8f60c",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "{\\displaystyle P=Q+ET+\\Delta S}",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9d02636b4c9b",
+      "type": "image",
+      "title": "{\\displaystyle P}",
+      "url": "https://wikimedia.org/api/rest_v1/media/math/render/svg/b4dc73bf40314945ff376bd363916a738548d40a",
+      "final_url": "https://wikimedia.org/api/rest_v1/media/math/render/svg/b4dc73bf40314945ff376bd363916a738548d40a",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "{\\displaystyle P}",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "titulo": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 21:38:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://g1.globo.com/rj/rio-de-janeiro/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sáb., 24 out. 2026 21:38:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://pt.wikipedia.org/wiki/Rio",
+      "titulo": "grande curso de água natural",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2004-06-18T17:25:38Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://pt.wikipedia.org/wiki/Rio",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2004-06-18T17:25:38Z"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+      "titulo": "capital do estado brasileiro do Rio de Janeiro",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2004-03-23T00:36:18Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2004-03-23T00:36:18Z"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "7011908287afe540bcb81ed4db751e833a3a8b32",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

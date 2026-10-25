@@ -1,0 +1,734 @@
+{
+  "id": "eva-10",
+  "category": "history",
+  "query": "História da fundação de Ouro Preto",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.255,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "História da fundação de Ouro Preto",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "História da fundação de Ouro Preto",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "História da fundação de Ouro Preto",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "história fundação ouro preto",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "história fundação ouro preto",
+      "candidates": 6
+    },
+    {
+      "provider": "wikipedia",
+      "query": "história fundação ouro preto",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Hist%C3%B3ria+da+funda%C3%A7%C3%A3o+de+Ouro+Preto&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Hist%C3%B3ria+da+funda%C3%A7%C3%A3o+de+Ouro+Preto&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4920
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Hist%C3%B3ria%20da%20funda%C3%A7%C3%A3o%20de%20Ouro%20Preto",
+      "final": "https://html.duckduckgo.com/html/?q=Hist%C3%B3ria%20da%20funda%C3%A7%C3%A3o%20de%20Ouro%20Preto",
+      "chars": 14296
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Hist%C3%B3ria+da+funda%C3%A7%C3%A3o+de+Ouro+Preto",
+      "final": "https://old-search.marginalia.nu/search?query=Hist%C3%B3ria+da+funda%C3%A7%C3%A3o+de+Ouro+Preto",
+      "chars": 50191
+    },
+    {
+      "url": "https://www.bing.com/search?q=hist%C3%B3ria+funda%C3%A7%C3%A3o+ouro+preto&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=hist%C3%B3ria+funda%C3%A7%C3%A3o+ouro+preto&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4896
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=hist%C3%B3ria+funda%C3%A7%C3%A3o+ouro+preto",
+      "final": "https://old-search.marginalia.nu/search?query=hist%C3%B3ria+funda%C3%A7%C3%A3o+ouro+preto",
+      "chars": 51302
+    },
+    {
+      "url": "https://m.brasilescola.uol.com.br/historia",
+      "final": "https://brasilescola.uol.com.br/historia",
+      "chars": 179973
+    },
+    {
+      "url": "https://www.todamateria.com.br/historia/",
+      "final": "https://www.todamateria.com.br/historia/",
+      "chars": 481221
+    },
+    {
+      "url": "https://humanidades.com/br/historia/",
+      "final": "https://humanidades.com/br/historia/",
+      "chars": 86010
+    },
+    {
+      "url": "https://pt.m.wikipedia.org/wiki/Hist%C3%B3ria",
+      "final": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+      "chars": 628954
+    },
+    {
+      "url": "https://www.cafehistoria.com.br/",
+      "final": "https://www.cafehistoria.com.br/",
+      "chars": 269479
+    },
+    {
+      "url": "https://www.historiadomundo.com.br/",
+      "final": "https://www.historiadomundo.com.br/",
+      "chars": 92680
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "História da fundação de Ouro Preto",
+    "domain": "general",
+    "original_request": "História da fundação de Ouro Preto",
+    "resolved_request": "História da fundação de Ouro Preto",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T22:59:48.634810+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "2881af89a364e527f8e5",
+        "url": "https://m.brasilescola.uol.com.br/historia",
+        "title": "História, estudo das ações do homem no tempo e espaço",
+        "origin": "bing",
+        "query": "História da fundação de Ouro Preto",
+        "date": "2007-04-13-0309:22:15",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "análise crítica do seu objeto de estudo a fim de racionalizar a conclusão sobre os acontecimentos investigados. A palavra “história” tem origem no idioma grego ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 6953,
+        "final_url": "https://brasilescola.uol.com.br/historia",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "c499cd23e7c9926d15d5",
+        "url": "https://www.todamateria.com.br/historia/",
+        "title": "História - Toda Matéria",
+        "origin": "bing",
+        "query": "História da fundação de Ouro Preto",
+        "date": "sáb., 24 out. 2026 08:31:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "uma religião afro-brasileira, surgida em 1908, fundada por Zélio Fernandino de Moraes. É marcada pela fusão de elementos de diferentes tradições espirituais e c",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.todamateria.com.br/historia/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "b4c39d330dec8ad20603",
+        "url": "https://humanidades.com/br/historia/",
+        "title": "História: início, final, ramos, divisão e características",
+        "origin": "bing",
+        "query": "História da fundação de Ouro Preto",
+        "date": "2023-06-27T06:15:11-06:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Pré-história. É o estudo dos períodos de formação da terra e das diferentes comunidades biológicas vegetais e animais, prévios ao aparecimento do homem. Históri",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://humanidades.com/br/historia/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "f4ddcacc3eab3c5d9f8a",
+        "url": "https://pt.m.wikipedia.org/wiki/Hist%C3%B3ria",
+        "title": "História – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "História da fundação de Ouro Preto",
+        "date": "2003-02-03T05:18:55Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Para outros significados, veja . Nota: História (desambiguação) ( a.C.) foi considerado o \"pai da história\" no mundo ocidental. Heródoto c. 484 (do ἱστορία, : ,",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "5fae989831262adb342d",
+        "url": "https://www.cafehistoria.com.br/",
+        "title": "Café História - um portal para quem gosta de história",
+        "origin": "bing",
+        "query": "História da fundação de Ouro Preto",
+        "date": "sáb., 24 out. 2026 04:13:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O Café História é um portal de divulgação científica criado pelo historiador Bruno Leal. Toda publicamos o nosso “especial da semana” (artigo, entrevista, bibli",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 388,
+        "final_url": "https://www.cafehistoria.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "08c239a51cbc6f0e7adf",
+        "url": "https://www.historiadomundo.com.br/",
+        "title": "História do mundo - A História da Humanidade a um Clique",
+        "origin": "bing",
+        "query": "História da fundação de Ouro Preto",
+        "date": "qua., 21 out. 2026 02:00:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Copyright © 2024 - Todos os Direitos Reservados Rede Omnia Proibida a reprodução total ou parcial sem autorização prévia da equipe (Inciso I do Artigo 29 Lei 9.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 240,
+        "final_url": "https://www.historiadomundo.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "5a1520c21188d009a9b4",
+        "url": "https://en.wikipedia.org/wiki/Jo%C3%A3o_Pinheiro",
+        "title": "João Pinheiro",
+        "origin": "marginalia",
+        "query": "História da fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "2d08c904fdca5b5684b4",
+        "url": "https://en.wikipedia.org/wiki/RedeTV%21_Recife",
+        "title": "RedeTV! Recife",
+        "origin": "marginalia",
+        "query": "História da fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "4c3edc5d35ba57f0e1c1",
+        "url": "https://en.wikipedia.org/wiki/Doce_River",
+        "title": "Doce River",
+        "origin": "marginalia",
+        "query": "História da fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "db63d35a1457350ee065",
+        "url": "https://papers.academic-conferences.org/index.php/ictr/issue/download/19/22",
+        "title": "Proceedings of the 6th International Conference on Tourism Research A Conference hosted by Neapolis University Pafos, Cyprus ...",
+        "origin": "marginalia",
+        "query": "História da fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "f07e16cc8425453a6013",
+        "url": "https://fmkjournals.fmk.edu.rs/index.php/AM/article/view/318",
+        "title": "Black Feminism and the Feeling of the Sublime in the Performance Merci Beaucoup, Blanco! | AM Journal of Art and Media...",
+        "origin": "marginalia",
+        "query": "História da fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "34a8e18da9f46c6b7292",
+        "url": "https://mapress.com/zt/article/view/zootaxa.5343.1.1",
+        "title": "Two centuries of ornithological exploration of the Rio Doce basin, southeastern Brazil. Part I—A history of the landscape, it...",
+        "origin": "marginalia",
+        "query": "História da fundação de Ouro Preto",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-fe910290d013",
+      "type": "image",
+      "title": "Clique neste link e acesse um texto sobre a definição de História. Entenda qual é a função dessa ciência ligada às humanidades e veja qual é o papel do historia",
+      "url": "https://s1.static.brasilescola.uol.com.br/be/conteudo/images/historia-ciencia-que-estuda-os-acontecimentos-passados-acao-homem-no-tempo-5c23497443dd8.jpg",
+      "final_url": "https://s1.static.brasilescola.uol.com.br/be/conteudo/images/historia-ciencia-que-estuda-os-acontecimentos-passados-acao-homem-no-tempo-5c23497443dd8.jpg",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s1.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Clique neste link e acesse um texto sobre a definição de História. Entenda qual é a função dessa ciência ligada às humanidades e veja qual é o papel do historiador. Saiba mais sobre a periodização da História e entenda as diferenças entre H",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-73eec5d5e5ac",
+      "type": "image",
+      "title": "Brasil Escola",
+      "url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brasil Escola",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a6ea55ff132a",
+      "type": "image",
+      "title": "Imagem auxiliar do conteúdo História",
+      "url": "https://s3.static.brasilescola.uol.com.br/be/2025/05/capa-historiawebp.webp",
+      "final_url": "https://s3.static.brasilescola.uol.com.br/be/2025/05/capa-historiawebp.webp",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s3.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem auxiliar do conteúdo História",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-3ec98f8592cb",
+      "type": "image",
+      "title": "\"Governo Rodrigues Alves (1902-1906)\" escrito sobre fundo verde ao lado da imagem da professora",
+      "url": "https://s4.static.brasilescola.uol.com.br/be/2022/01/governo-rodrigues-alves-1902-1906.jpg",
+      "final_url": "https://s4.static.brasilescola.uol.com.br/be/2022/01/governo-rodrigues-alves-1902-1906.jpg",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s4.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "\"Governo Rodrigues Alves (1902-1906)\" escrito sobre fundo verde ao lado da imagem da professora",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-303122f3e10f",
+      "type": "image",
+      "title": "\"Reinos africanos: Mali\" escrito sobre fundo verde ao lado da imagem da professora",
+      "url": "https://s4.static.brasilescola.uol.com.br/be/2022/01/reinos-africanos-mali.jpg",
+      "final_url": "https://s4.static.brasilescola.uol.com.br/be/2022/01/reinos-africanos-mali.jpg",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s4.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "\"Reinos africanos: Mali\" escrito sobre fundo verde ao lado da imagem da professora",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c87b72d34914",
+      "type": "image",
+      "title": "\"Quem foi Simón Bolívar?\" escrito sobre fundo verde ao lado da imagem da professora",
+      "url": "https://s4.static.brasilescola.uol.com.br/be/2021/12/quem-foi-simon-bolivar.jpg",
+      "final_url": "https://s4.static.brasilescola.uol.com.br/be/2021/12/quem-foi-simon-bolivar.jpg",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s4.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "\"Quem foi Simón Bolívar?\" escrito sobre fundo verde ao lado da imagem da professora",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-caf944800c28",
+      "type": "image",
+      "title": "Texto\"Zumbi dos Palmares\" próximo à ilustração do Zumbi dos Palmares.",
+      "url": "https://s5.static.brasilescola.uol.com.br/be/2021/10/zumbi-dos-palmares.jpg",
+      "final_url": "https://s5.static.brasilescola.uol.com.br/be/2021/10/zumbi-dos-palmares.jpg",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s5.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Texto\"Zumbi dos Palmares\" próximo à ilustração do Zumbi dos Palmares.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-257c62560b44",
+      "type": "image",
+      "title": "Professora ao lado do texto\"Independência da América Espanhola\".",
+      "url": "https://s4.static.brasilescola.uol.com.br/be/2021/10/independencia-da-america-espanhola.jpg",
+      "final_url": "https://s4.static.brasilescola.uol.com.br/be/2021/10/independencia-da-america-espanhola.jpg",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s4.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Professora ao lado do texto\"Independência da América Espanhola\".",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0e50c2985aa1",
+      "type": "image",
+      "title": "\"Quem foi Fidel Castro?\" escrito sobre fundo verde ao lado da imagem de Fidel Castro",
+      "url": "https://s2.static.brasilescola.uol.com.br/be/2021/07/quem-foi-fidel-castro.jpg",
+      "final_url": "https://s2.static.brasilescola.uol.com.br/be/2021/07/quem-foi-fidel-castro.jpg",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s2.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "\"Quem foi Fidel Castro?\" escrito sobre fundo verde ao lado da imagem de Fidel Castro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-adde793608a5",
+      "type": "image",
+      "title": "\"10 mulheres da história\" escrito sobre fundo verde ao lado da imagem da professora",
+      "url": "https://s2.static.brasilescola.uol.com.br/be/2020/09/10-mulheres-da-historia.jpg",
+      "final_url": "https://s2.static.brasilescola.uol.com.br/be/2020/09/10-mulheres-da-historia.jpg",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s2.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "\"10 mulheres da história\" escrito sobre fundo verde ao lado da imagem da professora",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b648503e2d50",
+      "type": "image",
+      "title": "Professora ao lado do texto\"Período entreguerras: O que estudar?\".",
+      "url": "https://s3.static.brasilescola.uol.com.br/be/2020/05/periodo-entreguerras-o-que-estudar.jpg",
+      "final_url": "https://s3.static.brasilescola.uol.com.br/be/2020/05/periodo-entreguerras-o-que-estudar.jpg",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s3.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Professora ao lado do texto\"Período entreguerras: O que estudar?\".",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9408e6c93a0d",
+      "type": "image",
+      "title": "\"Stalinismo\" escrito sobre fundo verde",
+      "url": "https://s5.static.brasilescola.uol.com.br/be/2021/10/stalinismo.jpg",
+      "final_url": "https://s5.static.brasilescola.uol.com.br/be/2021/10/stalinismo.jpg",
+      "source_title": "História, estudo das ações do homem no tempo e espaço",
+      "source_url": "https://brasilescola.uol.com.br/historia",
+      "publisher": "s5.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "\"Stalinismo\" escrito sobre fundo verde",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://m.brasilescola.uol.com.br/historia",
+      "titulo": "História, estudo das ações do homem no tempo e espaço",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2007-04-13-0309:22:15",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://m.brasilescola.uol.com.br/historia",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.todamateria.com.br/historia/",
+      "titulo": "História",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 08:31:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.todamateria.com.br/historia/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://humanidades.com/br/historia/",
+      "titulo": "História: início, final, ramos, divisão e características",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2023-06-27T06:15:11-06:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://humanidades.com/br/historia/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "378ae2a972a1d3e7da697fc94960e4a7f58dec90",
+  "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1"
+}

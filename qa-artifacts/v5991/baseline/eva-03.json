@@ -1,0 +1,660 @@
+{
+  "id": "eva-03",
+  "category": "international_news",
+  "query": "Notícias em Angola nos últimos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.037,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Angola\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Angola\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Angola\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Presidente do STF recebe autoridade responsável pela defesa dos direitos dos cidadãos em Angola\" site:noticias.stf.jus.br",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Missão acadêmica leva Ufal à conferência e pesquisa de campo em Angola\" site:noticias.ufal.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Angola%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Angola%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 130782
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Angola%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Angola%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5826
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Angola%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Angola%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4940
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Presidente+do+STF+recebe+autoridade+respons%C3%A1vel+pela+defesa+dos+direitos+dos+cidad%C3%A3os+em+Angola%22+site%3Anoticias.stf.jus.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Presidente+do+STF+recebe+autoridade+respons%C3%A1vel+pela+defesa+dos+direitos+dos+cidad%C3%A3os+em+Angola%22+site%3Anoticias.stf.jus.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 4344
+    },
+    {
+      "url": "https://noticias.stf.jus.br",
+      "final": "https://noticias.stf.jus.br",
+      "chars": 72633
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Miss%C3%A3o+acad%C3%AAmica+leva+Ufal+%C3%A0+confer%C3%AAncia+e+pesquisa+de+campo+em+Angola%22+site%3Anoticias.ufal.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Miss%C3%A3o+acad%C3%AAmica+leva+Ufal+%C3%A0+confer%C3%AAncia+e+pesquisa+de+campo+em+Angola%22+site%3Anoticias.ufal.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5767
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "final": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "chars": 150224
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Angola",
+      "final": "https://en.wikipedia.org/wiki/Angola",
+      "chars": 1269410
+    },
+    {
+      "url": "https://www.todadisciplina.com.br/angola/",
+      "final": "https://www.todadisciplina.com.br/angola/",
+      "chars": 245929
+    },
+    {
+      "url": "https://m.suapesquisa.com/paises/angola/",
+      "final": "https://www.suapesquisa.com/paises/angola/",
+      "chars": 29089
+    },
+    {
+      "url": "https://governo.gov.ao/",
+      "final": "https://governo.gov.ao/",
+      "chars": 49226
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Angola",
+      "final": "https://pt.wikipedia.org/wiki/Angola",
+      "chars": 1055839
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Angola\" notícias",
+    "domain": "news",
+    "original_request": "Notícias em Angola nos últimos sete dias",
+    "resolved_request": "Notícias em Angola entre 2026-10-17 e 2026-10-24",
+    "parameters": {
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-24",
+      "location": "Angola"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T22:42:23.504314+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-24",
+        "location": "Angola"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "5e1da3bc72192b0c13eb",
+        "url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+        "title": "Angola: história, cultura, economia, geografia - Brasil Escola",
+        "origin": "bing",
+        "query": "\"Angola\" notícias",
+        "date": "2009-03-04-0317:15:37",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "uma longa guerra civil que foi finalizada somente em 2002. O país enfrenta problemas estruturais que foram agravados com a guerra civil. Dados gerais sobre a An"
+      },
+      {
+        "id": "e42c8d06ab5bcd3b3f0d",
+        "url": "https://en.wikipedia.org/wiki/Angola",
+        "title": "Angola - Wikipedia",
+        "origin": "bing",
+        "query": "\"Angola\" notícias",
+        "date": "2001-03-26T13:35:27Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Angola. It extended northward to what are now the , the , and . It established with other city-states and civilisations up and down the coast of southwestern an"
+      },
+      {
+        "id": "2b2af36ae2919d198d2e",
+        "url": "https://www.todadisciplina.com.br/angola/",
+        "title": "Angola: capital, bandeira, cultura e mais - Toda Disciplina",
+        "origin": "bing",
+        "query": "\"Angola\" notícias",
+        "date": "2025-01-02T12:18:45+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "internacionais do preço do barril de petróleo. Cultura e sociedade A sociedade angolana é multiétnica e predominantemente de origem bantu. Os maiores grupos etn"
+      },
+      {
+        "id": "e16738db86c0272f7432",
+        "url": "https://m.suapesquisa.com/paises/angola/",
+        "title": "Angola: dados gerais, geografia, história, cultura, economia, população ...",
+        "origin": "bing",
+        "query": "\"Angola\" notícias",
+        "date": "qui., 15 out. 2026 08:05:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "agricultura.Apesar de sua riqueza natural, Angola enfrenta dificuldades para transformar seus recursos em desenvolvimento social amplo. A guerra civil deixou ma"
+      },
+      {
+        "id": "95ae6b6e519b9dba42f7",
+        "url": "https://governo.gov.ao/",
+        "title": "Portal Oficial do Governo de Angola",
+        "origin": "bing",
+        "query": "\"Angola\" notícias",
+        "date": "sáb., 24 out. 2026 01:50:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "DE 23 A 27 DE OUTUBRO Ministério da Saúde disponibiliza mais de 24 mil doses de vacinas para campanha nacional"
+      },
+      {
+        "id": "e271d462b8fe27c8f384",
+        "url": "https://pt.wikipedia.org/wiki/Angola",
+        "title": "Angola – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Angola\" notícias",
+        "date": "2003-01-18T22:37:09Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "estabeleceram o poderoso ), os Lunda-Chokwe, os Ovimbundos, e os Herero. A presença portuguesa iniciou-se no , com a chegada de em 1482, e intensificou-se com e"
+      },
+      {
+        "id": "75432f378a376b8a7a50",
+        "url": "https://noticias.stf.jus.br/postsnoticias/presidente-do-stf-recebe-autoridade-responsavel-pela-defesa-dos-direitos-dos-cidadaos-em-angola/",
+        "title": "Presidente do STF recebe autoridade responsável pela defesa dos direitos dos cidadãos em Angola",
+        "origin": "publisher-feed",
+        "query": "\"Presidente do STF recebe autoridade responsável pela defesa dos direitos dos cidadãos em Angola\" site:noticias.stf.jus.br",
+        "date": "",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": ""
+      },
+      {
+        "id": "552219ecd3359d2bf67d",
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPWFhRUGZzZE9tcGNSR2xRcGZKSmxZd2lVemdCUUQ5SWU5eE1QRHdFeVcwSVRnWmZsbUpHQVZWMEN4WEZXRm14RklvT3oxb0pOVVJxdGNlLVhjamt6TEdscWREMGxSMk0taENRclZ4bVl3NUo4VVFZRDZFN2huNW9lZmtJaEsySXNXU2p2Zk9uNmlQdnBlMi1UU002bUtDMVBrZlFoUFRyVFR6dXE4Zk11M3lJbXFWRXFn?oc=5",
+        "title": "Missão acadêmica leva Ufal à conferência e pesquisa de campo em Angola - Universidade Federal de Alagoas",
+        "origin": "google-news",
+        "query": "\"Angola\" notícias",
+        "date": "Mon, 05 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Missão acadêmica leva Ufal à conferência e pesquisa de campo em Angola Universidade Federal de Alagoas"
+      },
+      {
+        "id": "b4b38f60e570e691ab03",
+        "url": "https://news.google.com/rss/articles/CBMiV0FVX3lxTE4tb3drY3FCVFJCSzJkVnZjSXpqTGp2emFzUGs5Y1BSTXhwcnd3TU5WQzRYa2ktaHRYVmJIQjNMUVpxN2ZCOFRtMkRlSDhGLW96LThjNEE5Yw?oc=5",
+        "title": "Angola ressalta papel como mediadora da paz na África - UN News",
+        "origin": "google-news",
+        "query": "\"Angola\" notícias",
+        "date": "Tue, 22 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Angola ressalta papel como mediadora da paz na África UN News"
+      },
+      {
+        "id": "54fdea129f71631d5fa4",
+        "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxNX1FjTGNYd2V6YXp4aXhzYWswelFOWUlCR0pJMHRzSE5iTnpkQWltNUlDUG51WWZiQ3VyamdtakpyV1VUTEloSVJrbEdCZThkNmY0UVhfY3NaT0ZVbnUtMEw5U0JOWkdBUlpIcWtvSlRpUi10aF9sRjQzTHVDSF9ON0Y1R1Vtdk95SVFRY1ZWS1J0ZEVzcnYwYzdQMjBXcUx6TWdDc3hEcjdCd1IwUzJCZ3c3ZlQ1ajJjZ1ZKNkdmNXdUZDh5aEZB?oc=5",
+        "title": "Descargas atmosféricas provocaram quase 80 mortes desde agosto em Angola - SIC Notícias",
+        "origin": "google-news",
+        "query": "\"Angola\" notícias",
+        "date": "Fri, 23 Oct 2026 17:14:50 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Descargas atmosféricas provocaram quase 80 mortes desde agosto em Angola SIC Notícias"
+      },
+      {
+        "id": "6e1a2e782724b4f7c306",
+        "url": "https://news.google.com/rss/articles/CBMinwJBVV95cUxOOHFoZXY5YWhLaktoejVrRUpWVmJzYTBsRXlLQVJsbDh0aS1Qa0V6ckd1MV9zUV91ZGlnQWh1SkNrMXBoYm8xNTZDRy13UFA3X051cHotTi1wSUprWHJpMXBOTU55djlYQlZqZFpKOUpVd2FHU013bGVCLVg1QkpXampGMC1scHFyYjhuR2tsOHdZVVNzcVF2NU5mbHMwcFZlNHhaSmdRbDRnb2NNRE9udXc4MnJLUXRGc3I3dy1WdzItZV9SRlNZQ0VaQVR0ZjdnUm5xcHJJejEtd3M2dmxnY1NpdC1qVUZLcHdlcVRIdjRYX0dFVFdiWnpVWFF6MmxkUWo1emh2NFpwc0E2WlV0cTd4RVVZS29hbGdtYkNOQQ?oc=5",
+        "title": "STJ recebe delegação de Angola e debate cooperação judicial, sistema de precedentes e inteligência artificial - Superior Tribunal de Justiça",
+        "origin": "google-news",
+        "query": "\"Angola\" notícias",
+        "date": "Tue, 19 May 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "STJ recebe delegação de Angola e debate cooperação judicial, sistema de precedentes e inteligência artificial Superior Tribunal de Justiça"
+      },
+      {
+        "id": "2a7b0a4e88385624be23",
+        "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxOTWNWVDNsUGdzQVJld3JObDdWbWtPeVFaSXFVdm9EVlU3NTRhUlVJRlhpZE5rZlVfbTA3a1RMMDdOY096MFBHdjdsWUZ5SUFGMG9HVlhjVjB6dkoxY1U4R3NHUVRhLTZObnRxOXN3aVpDTUJLUk5ISGk3cjJ0M3NnOG5pRHdCMTB6ckExNmdHMXU5cEpPWWd2RUNFWFBveXJwZS1NWlVheGQxdTBWS3JfNFNSNVVTZGpqTThJcFdEaGJTOWZMNjFmMFhsZ2w2SkF1eHFrZUt5SFEySVhQ?oc=5",
+        "title": "Brasil marca presença no Festival Internacional de Teatro do Cazenga, em Angola — Funarte - www.gov.br",
+        "origin": "google-news",
+        "query": "\"Angola\" notícias",
+        "date": "Fri, 26 Jun 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Brasil marca presença no Festival Internacional de Teatro do Cazenga, em Angola — Funarte www.gov.br"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-caeb5cfd9332",
+      "type": "image",
+      "title": "Clique e conheça os principais aspectos geográficos da Angola. Leia também sobre sua história, cultura, população e economia.",
+      "url": "https://s2.static.brasilescola.uol.com.br/be/2022/05/bandeira-da-angola.jpg",
+      "final_url": "https://s2.static.brasilescola.uol.com.br/be/2022/05/bandeira-da-angola.jpg",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "s2.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Clique e conheça os principais aspectos geográficos da Angola. Leia também sobre sua história, cultura, população e economia.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-73eec5d5e5ac",
+      "type": "image",
+      "title": "Brasil Escola",
+      "url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brasil Escola",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-288d21f4049a",
+      "type": "image",
+      "title": "Imprimir",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imprimir",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2d8ccfc8347f",
+      "type": "image",
+      "title": "Escutar texto",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Escutar texto",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2ae2d2bf30c6",
+      "type": "image",
+      "title": "Compartilhar",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Compartilhar",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-19cd9c565dad",
+      "type": "image",
+      "title": "Política de IA",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-webp/selo-politica-ia.webp",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-webp/selo-politica-ia.webp",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Política de IA",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c95766303de4",
+      "type": "image",
+      "title": "Facebook",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/fb-white.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/fb-white.svg",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Facebook",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-00d0b51075a9",
+      "type": "image",
+      "title": "X",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/x-branco.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/x-branco.svg",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "X",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0e9c64723046",
+      "type": "image",
+      "title": "WhatsApp",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/wpp-branco.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/wpp-branco.svg",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "WhatsApp",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c0eef099a7a7",
+      "type": "image",
+      "title": "Copiar Link",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/copy-link.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/copy-link.svg",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Copiar Link",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-55970420ace4",
+      "type": "image",
+      "title": "Play",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio-verde.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio-verde.svg",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Play",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-290b24fb830d",
+      "type": "image",
+      "title": "Mapa da Angola.",
+      "url": "https://s5.static.brasilescola.uol.com.br/be/2022/05/mapa-angola.jpg",
+      "final_url": "https://s5.static.brasilescola.uol.com.br/be/2022/05/mapa-angola.jpg",
+      "source_title": "Angola: história, cultura, economia, geografia",
+      "source_url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "publisher": "s5.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Mapa da Angola.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+      "titulo": "Angola: história, cultura, economia, geografia",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2009-03-04-0317:15:37",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://brasilescola.uol.com.br/geografia/angola.htm",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "2009-03-04-0317:15:37"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://en.wikipedia.org/wiki/Angola",
+      "titulo": "country on the west coast of Southern Africa",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2001-03-26T13:35:27Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://en.wikipedia.org/wiki/Angola",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2001-03-26T13:35:27Z"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.todadisciplina.com.br/angola/",
+      "titulo": "Angola: capital, bandeira, cultura e mais",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2025-01-02T12:18:45+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.todadisciplina.com.br/angola/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2025-01-02T12:18:45+00:00"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

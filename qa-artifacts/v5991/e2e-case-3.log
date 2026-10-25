@@ -1,0 +1,68 @@
+### Result
+{"scope":"AUTHENTICATED_E2E_LOCAL_REAL_AGENT","name":"national","query":"Quais foram as principais notícias do Brasil hoje?","http_status":200,"seconds":12.076,"job":null,"job_timed_out":false,"job_state":null,"job_mode":null,"searches":0,"pages":0,"outcome":null,"synthesis_llm":false,"chat_result_id":null,"assistant_messages":1,"reload_preserved":true,"source_cards":0,"media_cards":0,"page_errors":[],"answer_excerpt":"v.\nVexx\n\nJanela pedida: 2026-10-24 a 2026-10-24. A data da reportagem não é a data do acontecimento. A cobertura das fontes disponíveis pode ser incompleta.\n\nPesquisei agora, mas nenhum provedor retornou fontes utilizáveis. Tente reformular ou mais tarde. 🔍\n\n20:15\n···"}
+### Ran Playwright code
+```js
+await (async page => {
+  const cases=[
+    ['short','Pesquise o que é fotossíntese.'],
+    ['long','Pesquise as principais novidades sobre inteligência artificial e compare os acontecimentos mais relevantes.'],
+    ['municipal','Notícias em Manaus nos últimos sete dias'],
+    ['national','Quais foram as principais notícias do Brasil hoje?'],
+    ['international','Notícias em Angola nos últimos sete dias'],
+    ['documentation','Encontre na documentação oficial como usar asyncio.TaskGroup.'],
+    ['product','Encontre notebooks Lenovo de 16 GB até R$ 3.000.'],
+    ['images','Pesquise imagens da Ponte Estaiada de São Paulo.'],
+    ['document','Pesquise o manual público PDF Raspberry Pi Pico.'],
+    ['multistep','Pesquisa profunda sobre SQLite e PostgreSQL: vantagens, custos e limitações para aplicações web.'],
+    ['contradictions','Pesquisa profunda sobre explicações divergentes para a extinção dos dinossauros.'],
+    ['scarce','Pesquisa profunda sobre a data de lançamento do dispositivo inexistente ZZUNIVERSAL999999.']
+  ];
+  const index=await page.evaluate(()=>Number(sessionStorage.getItem('v5991-next')||0));
+  if(index>=cases.length)return {complete:true};
+  const [name,query]=cases[index];const errors=[];const onError=e=>errors.push(e.message);
+  page.on('pageerror',onError);
+  try{
+    if(await page.locator('.message').count()){
+      if(!(await page.locator('#newChatCta').isVisible()))await page.locator('#drawerOpen').click();
+      await page.locator('#newChatCta').click();
+    }
+    const start=Date.now();
+    await page.getByRole('textbox',{name:'Mensagem',exact:true}).fill(query);
+    const responsePromise=page.waitForResponse(r=>r.url().includes('/api/ai/stream')&&r.request().method()==='POST',{timeout:30000});
+    await page.getByRole('button',{name:'Enviar',exact:true}).click();
+    const response=await responsePromise;
+    await page.locator('.message.ai').last().waitFor({state:'visible',timeout:15000});
+    await page.locator('#stopGen').waitFor({state:'hidden',timeout:110000});
+    const initial=await page.locator('.message.ai').last().innerText();
+    const job=(initial.match(/id (rj-[a-z0-9]+)/)||[])[1];let status=null,timedOut=false;
+    if(job){
+      try{await page.waitForFunction(async id=>{
+        const r=await(await fetch('/api/research/status?job_id='+encodeURIComponent(id))).json();
+        return ['concluida','cancelada','falhou','interrompida'].includes(r.resumo?.status);
+      },job,{timeout:140000,polling:3000});}catch(_){timedOut=true;}
+      status=await page.evaluate(async id=>(await(await fetch('/api/research/status?job_id='+encodeURIComponent(id))).json()).resumo,job);
+      if(status?.chat_result_id)await page.locator('.message.ai').getByText('Resultado da pesquisa',{exact:true}).last().waitFor({state:'visible',timeout:20000});
+    }
+    const before=await page.locator('.message.ai').allInnerTexts();
+    const sourceCards=await page.locator('.message.ai .jdui-srccard').count();
+    const mediaCards=await page.locator('.message.ai .jdui-media-grid .jdui-pcard').count();
+    await page.screenshot({path:`qa-artifacts/v5991/chat-${name}.png`,fullPage:true});
+    await page.reload();await page.locator('#loginOverlay').waitFor({state:'hidden'});
+    await page.locator('.message.ai').last().waitFor({state:'visible'});
+    const after=await page.locator('.message.ai').allInnerTexts();
+    await page.evaluate(n=>sessionStorage.setItem('v5991-next',String(n)),index+1);
+    return {scope:'AUTHENTICATED_E2E_LOCAL_REAL_AGENT',name,query,http_status:response.status(),
+      seconds:(Date.now()-start)/1000,job:job||null,job_timed_out:timedOut,
+      job_state:status?.status||null,job_mode:status?.modo||null,
+      searches:status?.usados?.buscas||0,pages:status?.usados?.paginas||0,
+      outcome:status?.usados?.research_outcome||null,synthesis_llm:status?.sintese?.llm||false,
+      chat_result_id:status?.chat_result_id||null,assistant_messages:after.length,
+      reload_preserved:JSON.stringify(before)===JSON.stringify(after),
+      source_cards:sourceCards,media_cards:mediaCards,page_errors:errors,
+      answer_excerpt:after.at(-1)?.slice(0,450)||''};
+  }finally{page.removeListener('pageerror',onError);}
+}
+)(page);
+```
+### Events
+- New console entries: .playwright-cli\console-2026-10-24T23-10-37-310Z.log#L62-L64

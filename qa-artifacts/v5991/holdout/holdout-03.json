@@ -1,0 +1,812 @@
+{
+  "id": "holdout-03",
+  "category": "ambiguous_city_news",
+  "query": "Notícias em Faro, Portugal, nos últimos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 9.675,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Faro\" \"portugal\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Faro\" \"portugal\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Faro\" \"portugal\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Algarve vai reconstruir bairro em Faro\" site:www.theportugalnews.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Incêndio em Faro deixa pelo menos 29 pessoas desalojadas\" site:sicnoticias.pt",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 140763
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4930
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5006
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Algarve+vai+reconstruir+bairro+em+Faro%22+site%3Awww.theportugalnews.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Algarve+vai+reconstruir+bairro+em+Faro%22+site%3Awww.theportugalnews.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5357
+    },
+    {
+      "url": "https://www.theportugalnews.com",
+      "final": "https://www.theportugalnews.com",
+      "chars": 232250
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Inc%C3%AAndio+em+Faro+deixa+pelo+menos+29+pessoas+desalojadas%22+site%3Asicnoticias.pt&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Inc%C3%AAndio+em+Faro+deixa+pelo+menos+29+pessoas+desalojadas%22+site%3Asicnoticias.pt&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5405
+    },
+    {
+      "url": "https://pt.m.wikipedia.org/wiki/Faro",
+      "final": "https://pt.wikipedia.org/wiki/Faro",
+      "chars": 523196
+    },
+    {
+      "url": "https://www.faro.com/pt-br/",
+      "final": "https://www.faro.com/pt-BR",
+      "chars": 169005
+    },
+    {
+      "url": "https://www.vagamundos.pt/roteiro-visitar-faro-e-praias/",
+      "final": "https://www.vagamundos.pt/roteiro-visitar-faro-e-praias/",
+      "chars": 421361
+    },
+    {
+      "url": "https://www.essemundoenosso.com.br/o-que-fazer-em-faro-portugal/",
+      "final": "https://www.essemundoenosso.com.br/o-que-fazer-em-faro-portugal/",
+      "chars": 173648
+    },
+    {
+      "url": "https://www.faro.com/pt-BR/Products",
+      "error": "redirect"
+    },
+    {
+      "url": "https://faro.edu.br/",
+      "final": "https://faro.edu.br/",
+      "chars": 159466
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Faro\" \"portugal\" notícias",
+    "domain": "news",
+    "original_request": "Notícias em Faro, Portugal, nos últimos sete dias",
+    "resolved_request": "Notícias em Faro, Portugal, entre 2026-10-17 e 2026-10-24",
+    "parameters": {
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-24",
+      "location": "Faro",
+      "region": "portugal"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T23:10:51.046626+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-24",
+        "location": "Faro",
+        "region": "portugal"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "9863783d6c21be645d64",
+        "url": "https://pt.m.wikipedia.org/wiki/Faro",
+        "title": "Faro – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "2004-03-25T22:03:13Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Portugal, e os seus sucessores iniciam a expansão do país para o sul, reconquistando os territórios ocupados pelos mouros. Depois da tomada da cidade por , em 1",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Faro",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "7c25783a4ee381f31d5b",
+        "url": "https://www.faro.com/pt-br/",
+        "title": "Soluções de medição em 3D e Geração de imagens | FARO",
+        "origin": "bing",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "qui., 22 out. 2026 10:20:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Biblioteca de recursos Mantenha-se informado. Inscreva-se FAROLive! Eventos virtuais Mantenha-se informado. Inscreva-se Workshops Conferências e feiras Inscreva",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 5728,
+        "final_url": "https://www.faro.com/pt-BR",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "c5e8cf6e6cdc24183eef",
+        "url": "https://www.vagamundos.pt/roteiro-visitar-faro-e-praias/",
+        "title": "Faro, o que visitar, ver e fazer | Roteiro e melhores praias",
+        "origin": "bing",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "2026-07-13T18:11:35+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "num roteiro de 1 dia? 5. Vila Adentro 5.1. Muralhas de Faro 5.2. Arco da Vila 5.3. Largo da Sé 5.4. Praça D. Afonso III 5.5. Museu Municipal de Faro 5.6. Arco d",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.vagamundos.pt/roteiro-visitar-faro-e-praias/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "94724bfc5869e599f032",
+        "url": "https://www.faro.com/pt-BR/Products",
+        "title": "Produtos | FARO",
+        "origin": "bing",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "sex., 23 out. 2026 19:09:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Encontre o hardware e o software ideais da FARO para atender às suas necessidades de medição, geração de imagens e realização em 3D.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "redirect",
+        "losses": [
+          "FETCH_FAILED",
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "b1c0f3dc827ff1d6cc0e",
+        "url": "https://www.essemundoenosso.com.br/o-que-fazer-em-faro-portugal/",
+        "title": "O que fazer em Faro, Portugal: Principais pontos turísticos",
+        "origin": "bing",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "2018-02-21T22:15:52-03:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Faro, por conta da ótima estrutura, tem fácil acesso pra quem chega ou sai de trem ou avião. Em um outro post, nós tiramos todas as dúvidas sobre . Lagos saiba ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 6587,
+        "final_url": "https://www.essemundoenosso.com.br/o-que-fazer-em-faro-portugal/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "INTENT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "c4c1b9d42775d98d30cd",
+        "url": "https://faro.edu.br/",
+        "title": "Faculdade FARO - Transformando sonhos em realidade",
+        "origin": "bing",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "2020-04-28T06:30:19+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Telefones BR-364 – km 6,5 s/n – Porto Velho/RO Campus BR (69) 3217-5102 | (69) 3217-5100 Av. Carlos Gomes, 1910 – Porto Velho/RO(69) 2182-5100 | (69) 3221-1060 ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 192,
+        "final_url": "https://faro.edu.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "32f2eff112c310fba987",
+        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNaGZ0bTlGdzdUbmJidDlaQXlZNkZhLXFjakZwek9IYTd5QUZCb3ZGUXV0U2JvLXJhX0s2ZEJSVDdlM01aZ2hUMVZGNFBGLS1icE1sTlZsa1ZQWmd3M2J5WXplWUFtYW9OTnJldERkZ3A2cjgzeW1XOTRJS0UtbFE4RF9IbWR4cm9kbEhrZ3VOWGRxWkRhZGlKRzA1NlFEdHlodkhn?oc=5",
+        "title": "Algarve vai reconstruir bairro em Faro - The Portugal News",
+        "origin": "google-news",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "Sat, 24 Oct 2026 16:41:15 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Algarve vai reconstruir bairro em Faro The Portugal News",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "327e227a35b17c281204",
+        "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQanM2NnJpUW9INTcxUmVPMUt2eTBOMmNhdnNzaERNcXU3UmZodEltVGt6cmt3TnZPd1lPaHE2ZGVlMFU2VTJ6WmVKU1FLNEplSFBveUU2TjVyaWZLWm5RbWhjWmpEOWVaQ3FUX2N4SF9ZU3I4OHdDS0RrLU5qNjlYR21xRmxfQVpyZU5INnRRWFRITGc5ZDFYZVNBYWZBbHJvOE5VUXdBbnNTSHd1N2t6bDgzM1ZBeFpDQUJtNE1abHBwcmJBUlZEand3?oc=5",
+        "title": "Incêndio em Faro deixa pelo menos 29 pessoas desalojadas - SIC Notícias",
+        "origin": "google-news",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "Tue, 13 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Incêndio em Faro deixa pelo menos 29 pessoas desalojadas SIC Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "7993c2c9ff342b4dcb83",
+        "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOamVmV1Bja2xiSl8wUEU2ZlR3MzhoLVRYdUViVXFOTzJ2eWd6M0FGS2hjR0FJV1ZnYURtTWpscDk5dlVfTDdZa0RjS1VuMWxFQTlMWFg2Tzc0OW5XOThsR2I0ek5HODZTNndvUXBUa3Z3a1hXVDlWczlGNHhnWlJXVDlWQnNNQmJqaUtkOS1UT21fSjVGWWNNb3d2cXNrZjNoR3pfeU41THp2eU4wOTVtcw?oc=5",
+        "title": "Faro e Beja sob aviso amarelo devido à previsão de trovoada - TV RECORD Europa",
+        "origin": "google-news",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "Mon, 19 Oct 2026 09:50:49 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Faro e Beja sob aviso amarelo devido à previsão de trovoada TV RECORD Europa",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "38b1aec4ae7d9f052b01",
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOVWJSYVRteTJWQ2pTRXg1TnhTdkVscDJsUlZmbURZQU5URi15UWZRTWt1SzhWalVlRkt1R3dmRU42WnlIYXUwZ3QxZVFGVHFPODRsRGNtelRpbG9vNjNZbDNHWHFsSTFsbFEtZ0pSU2k0N0N5ZHJ2NHRXVi01T0RXa0VPeEtiT21MeXRWZExMYnBvdXhtaEppR3lGYTJYNGhKQ3VEU1lad2QwWTRkbGYxRlZXNXc2SzY2bFNNa29pd3BJRHpvUkhkYkVOWFIzMWwycVZqY2JVQVotTHF0MFE?oc=5",
+        "title": "Três menores estiveram 44 dias retidos em Faro após verem negada a entrada em Portugal - TVI",
+        "origin": "google-news",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "Mon, 28 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Três menores estiveram 44 dias retidos em Faro após verem negada a entrada em Portugal TVI",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "14a0ba119eb541add981",
+        "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPcjJTZ2hZVmlnTWdNMnI3aWJZc2FzcF9VRDRvOGx1dGxQSVE1SF9iUFpzNGU4aEwycXpUaXZ4N1dtZUdzNWdwWTJMZ1RNdkFLQXl4ODFVV3hqVGFvY3RsLTFIZGVFZzZjc19JZVNYQ3UzNG9kc2xpRjBaY0RfUUF2TDRCUVktUkZzSVUzWkpleFNvR2w5U2x5T2kxQndER3U4b3FTY3c1REQ0TF9DemZCbmhoQQ?oc=5",
+        "title": "Marcelo Rebelo de Sousa transportado para o Hospital de Faro após indisposição - Euronews.com",
+        "origin": "google-news",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "Wed, 12 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Marcelo Rebelo de Sousa transportado para o Hospital de Faro após indisposição Euronews.com",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "b7dca4be7c154bf40117",
+        "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQVEpwQlpLcE1SVE9CN3plSHhVbmN1WEZPLWo1d0c1WmJoRElnNE5tVklfaWc0UThFUllhVTNnbGJ4bUVqXzhNRW4zcmU2R0VpTUtmMXVHLTI5WkhrYlZGQktpdzY0c1dkbjQ2dnZ6b01IR0tuM2JOQlVGVXdxVTBOY0pHVEx1NF9TRlI3bWZyQzdTa1p4V0VTcVBxaGRDMnR2b2lOZ24yVldZNFpZUG9BQTI2V2sxU2xZUVZIMHc4dw?oc=5",
+        "title": "Brasileiros votam em Faro sem problemas: “Até está bem organizado” – CNN Portugal - diariOnline Região Sul",
+        "origin": "google-news",
+        "query": "\"Faro\" \"portugal\" notícias",
+        "date": "Mon, 05 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Brasileiros votam em Faro sem problemas: “Até está bem organizado” – CNN Portugal diariOnline Região Sul",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-e60a0555f266",
+      "type": "image",
+      "title": "município de Portugal",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Vista_aerea_de_Faro%2C_Portugal_-_12.04.2023.jpg/1280px-Vista_aerea_de_Faro%2C_Portugal_-_12.04.2023.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Vista_aerea_de_Faro%2C_Portugal_-_12.04.2023.jpg/1280px-Vista_aerea_de_Faro%2C_Portugal_-_12.04.2023.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "município de Portugal",
+      "source_url": "https://pt.wikipedia.org/wiki/Faro",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "município de Portugal",
+      "source_url": "https://pt.wikipedia.org/wiki/Faro",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7eb2487bedf5",
+      "type": "image",
+      "title": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Question_book-new.svg/60px-Question_book-new.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "município de Portugal",
+      "source_url": "https://pt.wikipedia.org/wiki/Faro",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Esta página cita fontes, mas não cobrem todo o conteúdo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b64650b4907a",
+      "type": "image",
+      "title": "Brasão de Faro",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Faroarms.svg/120px-Faroarms.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/Faroarms.svg/120px-Faroarms.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "município de Portugal",
+      "source_url": "https://pt.wikipedia.org/wiki/Faro",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brasão de Faro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5c64cec264de",
+      "type": "image",
+      "title": "Bandeira de Faro",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Faroflag.svg/120px-Faroflag.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1e/Faroflag.svg/120px-Faroflag.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "município de Portugal",
+      "source_url": "https://pt.wikipedia.org/wiki/Faro",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Bandeira de Faro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ab23b1b83ae2",
+      "type": "image",
+      "title": "Localização de Faro",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/LocalFaro.svg/330px-LocalFaro.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/22/LocalFaro.svg/330px-LocalFaro.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "município de Portugal",
+      "source_url": "https://pt.wikipedia.org/wiki/Faro",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Localização de Faro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f6077d85c395",
+      "type": "image",
+      "title": "Portugal",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Portugal.svg/40px-Flag_of_Portugal.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5c/Flag_of_Portugal.svg/40px-Flag_of_Portugal.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "município de Portugal",
+      "source_url": "https://pt.wikipedia.org/wiki/Faro",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Portugal",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1f40554ab9ae",
+      "type": "image",
+      "title": "A FARO oferece as tecnologias de medição em 3D e a geração de imagens mais precisas para os setores de fabricação, construção e análises de segurança pública.",
+      "url": "https://media.faro.com/-/media/Project/FARO/FARO/FARO/Home/QMax_Hero_Video_Image.jpg?rev=91f5853952c44a38a7f15eecadf15e20",
+      "final_url": "https://media.faro.com/-/media/Project/FARO/FARO/FARO/Home/QMax_Hero_Video_Image.jpg?rev=91f5853952c44a38a7f15eecadf15e20",
+      "source_title": "Soluções de medição em 3D e Geração de imagens | FARO",
+      "source_url": "https://www.faro.com/pt-BR",
+      "publisher": "media.faro.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A FARO oferece as tecnologias de medição em 3D e a geração de imagens mais precisas para os setores de fabricação, construção e análises de segurança pública.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8c4a9eb77b9e",
+      "type": "image",
+      "title": "A FARO oferece as tecnologias de medição em 3D e a geração de imagens mais precisas para os setores de fabricação, construção e análises de segurança pública.",
+      "url": "https://media.faro.com/-/media/Project/FARO/FARO/FARO/hero-ambient-jpg.jpg?rev=7de9816f50564981bc6cefa320676005",
+      "final_url": "https://media.faro.com/-/media/Project/FARO/FARO/FARO/hero-ambient-jpg.jpg?rev=7de9816f50564981bc6cefa320676005",
+      "source_title": "Soluções de medição em 3D e Geração de imagens | FARO",
+      "source_url": "https://www.faro.com/pt-BR",
+      "publisher": "media.faro.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A FARO oferece as tecnologias de medição em 3D e a geração de imagens mais precisas para os setores de fabricação, construção e análises de segurança pública.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5bb7b676d725",
+      "type": "image",
+      "title": "Quantum X",
+      "url": "https://media.faro.com/-/media/Project/FARO/FARO/FARO/FARO-QuantumS_800x800.png?h=800&iar=0&w=800&rev=ad6fe86457ab4a769b6421ca66151492&hash=D4DD9C590975B9E85D5A5FD47AFEB328",
+      "final_url": "https://media.faro.com/-/media/Project/FARO/FARO/FARO/FARO-QuantumS_800x800.png?h=800&iar=0&w=800&rev=ad6fe86457ab4a769b6421ca66151492&hash=D4DD9C590975B9E85D5A5FD47AFEB328",
+      "source_title": "Soluções de medição em 3D e Geração de imagens | FARO",
+      "source_url": "https://www.faro.com/pt-BR",
+      "publisher": "media.faro.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Quantum X",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0c95b994d3fc",
+      "type": "image",
+      "title": "FARO Focus",
+      "url": "https://media.faro.com/-/media/Project/FARO/FARO/FARO/Home/bottom-slider/FAROINSIGHT_Focus.png?h=800&iar=0&w=800&rev=68e8e11417c64d339b70d4cdf523aac8&hash=2A8D8677A058A01DB8A68C96E230B811",
+      "final_url": "https://media.faro.com/-/media/Project/FARO/FARO/FARO/Home/bottom-slider/FAROINSIGHT_Focus.png?h=800&iar=0&w=800&rev=68e8e11417c64d339b70d4cdf523aac8&hash=2A8D8677A058A01DB8A68C96E230B811",
+      "source_title": "Soluções de medição em 3D e Geração de imagens | FARO",
+      "source_url": "https://www.faro.com/pt-BR",
+      "publisher": "media.faro.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "FARO Focus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a509b400da12",
+      "type": "video",
+      "title": "Soluções de medição em 3D e Geração de imagens | FARO",
+      "url": "https://media.faro.com/-/media/Project/FARO/FARO/FARO/Home/Apollo-LLP/home-banner-generic.mp4?rev=b966fbf13dae45b88d63e2f7cd2af058",
+      "final_url": "https://media.faro.com/-/media/Project/FARO/FARO/FARO/Home/Apollo-LLP/home-banner-generic.mp4?rev=b966fbf13dae45b88d63e2f7cd2af058",
+      "source_title": "Soluções de medição em 3D e Geração de imagens | FARO",
+      "source_url": "https://www.faro.com/pt-BR",
+      "publisher": "media.faro.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A FARO oferece as tecnologias de medição em 3D e a geração de imagens mais precisas para os setores de fabricação, construção e análises de segurança pública.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://pt.m.wikipedia.org/wiki/Faro",
+      "titulo": "município de Portugal",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2004-03-25T22:03:13Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://pt.m.wikipedia.org/wiki/Faro",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2004-03-25T22:03:13Z"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.faro.com/pt-br/",
+      "titulo": "Soluções de medição em 3D e Geração de imagens | FARO",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "qui., 22 out. 2026 10:20:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.faro.com/pt-br/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "qui., 22 out. 2026 10:20:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.vagamundos.pt/roteiro-visitar-faro-e-praias/",
+      "titulo": "Faro, o que visitar, ver e fazer | Roteiro e melhores praias",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2026-07-13T18:11:35+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.vagamundos.pt/roteiro-visitar-faro-e-praias/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2026-07-13T18:11:35+00:00"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "13cb9f50d5158b838c3da34ba146a3b13b249b6c",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

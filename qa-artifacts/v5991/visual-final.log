@@ -1,0 +1,61 @@
+### Result
+{"scope":"Real authenticated local chat, live retrieved Commons media; no fixture gallery","geometry":[{"viewport":1280,"root":1280,"cards":[245,245,245,245,245]},{"viewport":390,"root":390,"cards":[350,350,350,350,350]},{"viewport":320,"root":320,"cards":[288,288,288,288,288]}],"scale":{"viewport":320,"root":320},"next":true,"arrows":true,"escape":true,"modal_image_loaded":true,"focus_restored":true,"reload":true,"metadata_state_persisted":true,"reduced_motion_transition":"1e-06s","loaded_images":5,"errors":[]}
+### Ran Playwright code
+```js
+await (async page => {
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  await page.setViewportSize({width:1280,height:900});
+  if(!(await page.locator('#newChatCta').isVisible()))await page.locator('#drawerOpen').click();
+  await page.getByRole('button',{name:/^Pesquise imagens da Ponte/}).click();
+  const cards=page.locator('.message.ai .jdui-media-grid .jdui-pcard');
+  await cards.first().waitFor({state:'visible'});
+  const geometry=[];
+  for(const width of [1280,390,320]){
+    await page.setViewportSize({width,height:900});
+    if(width<900 && await page.locator('#drawer').getAttribute('aria-hidden')==='false')await page.locator('#drawerClose').click();
+    if(width<900)await page.waitForFunction(()=>document.querySelector('#drawer').getBoundingClientRect().right<=1,null,{timeout:3000});
+    await cards.first().scrollIntoViewIfNeeded();
+    const dimensions=await page.evaluate(()=>({viewport:innerWidth,root:document.documentElement.scrollWidth,
+      cards:[...document.querySelectorAll('.message.ai .jdui-media-grid .jdui-pcard')].map(c=>Math.round(c.getBoundingClientRect().width))}));
+    await page.screenshot({path:`qa-artifacts/v5991/research-${width}.png`});
+    if(dimensions.root>width)throw Error('Overflow '+JSON.stringify(dimensions));
+    geometry.push(dimensions);
+  }
+  const zoom=page.locator('.jdui-media-zoom:visible').first();await zoom.click();
+  await page.getByRole('dialog').waitFor({state:'visible'});
+  await page.waitForFunction(()=>{const image=document.querySelector('.jdui-image-dialog img');return image&&image.complete&&image.naturalWidth>0&&!image.hidden;},null,{timeout:20000});
+  const before=await page.locator('.jdui-image-caption').innerText();
+  await page.getByRole('button',{name:'Próxima imagem',exact:true}).click();
+  const after=await page.locator('.jdui-image-caption').innerText();
+  if(before===after)throw Error('Next image did not change selection');
+  await page.keyboard.press('ArrowLeft');
+  if(await page.locator('.jdui-image-caption').innerText()!==before)throw Error('Arrow navigation failed');
+  await page.waitForFunction(()=>{const image=document.querySelector('.jdui-image-dialog img');return image&&image.complete&&image.naturalWidth>0&&!image.hidden;},null,{timeout:20000});
+  await page.screenshot({path:'qa-artifacts/v5991/research-modal.png'});
+  await page.keyboard.press('Escape');await page.getByRole('dialog').waitFor({state:'detached'});
+  if(!(await zoom.evaluate(b=>b===document.activeElement)))throw Error('Focus was not restored');
+  await page.evaluate(()=>document.body.style.zoom='2');
+  const scale=await page.evaluate(()=>({viewport:innerWidth,root:document.documentElement.scrollWidth}));
+  await page.screenshot({path:'qa-artifacts/v5991/research-zoom-200.png'});
+  if(scale.root>scale.viewport)throw Error('Overflow at CSS 200%');
+  await page.evaluate(()=>document.body.style.zoom='');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  const transition=await zoom.evaluate(b=>getComputedStyle(b).transitionDuration);
+  await page.emulateMedia({reducedMotion:'no-preference'});
+  const metadata=page.locator('.jdui-media-details').first();
+  await metadata.locator('summary').click();
+  if(!(await metadata.evaluate(el=>el.open)))throw Error('Metadata did not open');
+  const mediaBefore=await cards.count();await page.reload();
+  await page.locator('#loginOverlay').waitFor({state:'hidden'});await cards.first().waitFor({state:'visible'});
+  if(await cards.count()!==mediaBefore)throw Error('Gallery changed after reload');
+  if(!(await metadata.evaluate(el=>el.open)))throw Error('Metadata state was not restored');
+  await metadata.locator('summary').click();
+  return {scope:'Real authenticated local chat, live retrieved Commons media; no fixture gallery',geometry,scale,
+    next:true,arrows:true,escape:true,modal_image_loaded:true,focus_restored:true,reload:true,metadata_state_persisted:true,reduced_motion_transition:transition,
+    loaded_images:await page.locator('.message.ai').last().evaluate(el=>[...el.querySelectorAll('img')].filter(i=>i.complete&&i.naturalWidth>0).length),
+    errors};
+}
+)(page);
+```
+### Events
+- New console entries: .playwright-cli\console-2026-10-24T23-10-37-310Z.log#L93-L94

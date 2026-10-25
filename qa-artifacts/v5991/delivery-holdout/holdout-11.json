@@ -1,0 +1,712 @@
+{
+  "id": "holdout-11",
+  "category": "events",
+  "query": "Eventos em Diamantina nos próximos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 5.611,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "diamantina eventos culturais",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "diamantina eventos culturais",
+      "candidates": 4
+    },
+    {
+      "provider": "wikipedia",
+      "query": "diamantina eventos culturais",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5358
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=%22Diamantina%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "final": "https://html.duckduckgo.com/html/?q=%22Diamantina%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+      "chars": 14344
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "final": "https://old-search.marginalia.nu/search?query=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+      "chars": 1111
+    },
+    {
+      "url": "https://www.bing.com/search?q=diamantina+eventos+culturais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=diamantina+eventos+culturais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5226
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=diamantina+eventos+culturais",
+      "final": "https://old-search.marginalia.nu/search?query=diamantina+eventos+culturais",
+      "chars": 18655
+    },
+    {
+      "url": "https://www.diamantina.mg.gov.br/",
+      "final": "https://www.diamantina.mg.gov.br/",
+      "chars": 297253
+    },
+    {
+      "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+      "final": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+      "chars": 82929
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://www.visitediamantina.com.br/",
+      "final": "https://www.visitediamantina.com.br/",
+      "chars": 106321
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Diamantina",
+      "final": "https://pt.wikipedia.org/wiki/Diamantina",
+      "chars": 651984
+    },
+    {
+      "url": "https://www.biotaneotropica.org.br/BN/issue/download/42/25",
+      "error": "tipo_bloqueado"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "name",
+      "location",
+      "event_date",
+      "organizer",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+    "domain": "events",
+    "original_request": "Eventos em Diamantina nos próximos sete dias",
+    "resolved_request": "Eventos em Diamantina entre 2026-10-24 e 2026-10-31",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-31",
+      "location": "Diamantina"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T23:38:28.593865+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-31",
+        "location": "Diamantina"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "7f92f2feb12f66308e96",
+        "url": "https://www.diamantina.mg.gov.br/",
+        "title": "Prefeitura Municipal de Diamantina",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sáb., 24 out. 2026 05:03:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "continuados de Pontos de Cultura. A... VER MAIS Prefeitura de Diamantina publica edital de subsídio a espaços culturais 21 set Cultura e... 636 visualizações Ed",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 4929,
+        "final_url": "https://www.diamantina.mg.gov.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "fe489434734c9c2fdea0",
+        "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+        "title": "O que fazer em Diamantina - Melhores atrações e passeios!",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2025-05-15T01:23:39-03:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "naturais maravilhosas na Serra da Espinhaço. Sem falar em eventos como a Vesperata, que atrai milhares de turistas para a cidade. Aproveite alguns dias de viage",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "5d13856f06e6b48c086a",
+        "url": "https://www.diamantina.mg.gov.br/portal",
+        "title": "Prefeitura Municipal de Diamantina",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sáb., 24 out. 2026 04:34:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica o Edital de Chamamento Público nº 003/2026, destinado ao fomento d",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "9813fa73813cdf707e89",
+        "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+        "title": "AS 15 MELHORES coisas para fazer em Diamantina (2026) - Tripadvisor",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "sex., 23 out. 2026 14:37:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "OS 15 MELHORES pontos turísticos em Diamantina, Brasil O que fazer: Diamantina Confira atrações e atividades imperdíveis: Museu do Diamante, Parque Estadual do ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "5c803b096670dfca3958",
+        "url": "https://www.visitediamantina.com.br/",
+        "title": "Prefeitura de Diamantina - MG",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "ter., 13 out. 2026 15:39:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "história brasileira. Estar naquele espaço e imaginar a vida dessa mulher que marcou a sociedade diamantinense foi fascinante. Outro ponto imperdível foi o Merca",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1842,
+        "final_url": "https://www.visitediamantina.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "d0845dc134c776eba296",
+        "url": "https://pt.wikipedia.org/wiki/Diamantina",
+        "title": "Diamantina – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "date": "2004-09-19T02:30:13Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "exuberante. O município tem um clima , com temperaturas amenas ao longo do ano e um período chuvoso concentrado nos meses de verão. Essas características tornam",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Diamantina",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "3727033174019233097d",
+        "url": "https://www.biotaneotropica.org.br/BN/issue/download/42/25",
+        "title": "Gall midges (Diptera, Cecidomyiidae) associated with Aldina heterophylla Spr. ex Benth. (Fabaceae) from Brazil Sheila Patrici...",
+        "origin": "marginalia",
+        "query": "diamantina eventos culturais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "tipo_bloqueado",
+        "losses": [
+          "FETCH_BLOCKED"
+        ]
+      },
+      {
+        "id": "d65399def7783c8058e2",
+        "url": "https://www.biotaneotropica.org.br/BN/issue/download/27/10",
+        "title": "FIRST RECORD OF PARAPHAENOCLADIUS EXAGITANS LONGIPES SÆTHER & WANG 1995 (DIPTERA: CHIRONOMIDAE: ORTHOCLADIINAE) FROM BRAZIL H...",
+        "origin": "marginalia",
+        "query": "diamantina eventos culturais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "67313484774307f5dda8",
+        "url": "https://www.workaway.info/en/host/828915285883",
+        "title": "Join a charity in a wide range of cultural projects near Brasilia de Minas, Brazil",
+        "origin": "marginalia",
+        "query": "diamantina eventos culturais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "4dde8ca5fbad97a231ac",
+        "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "title": "CC-BY-SA 4.0",
+        "origin": "marginalia",
+        "query": "diamantina eventos culturais",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      }
+    ],
+    "unique_candidates": 10,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-6e83dcbef934",
+      "type": "image",
+      "title": "Prefeitura Municipal de Diamantina - Portal",
+      "url": "https://www.diamantina.mg.gov.br/fotos/df26d825d189f255cb953a834737daeb.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/df26d825d189f255cb953a834737daeb.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Prefeitura Municipal de Diamantina - Portal",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e1dac61e896e",
+      "type": "image",
+      "title": "Logo",
+      "url": "https://www.diamantina.mg.gov.br/img/logo_mobile.svg?1719838965",
+      "final_url": "https://www.diamantina.mg.gov.br/img/logo_mobile.svg?1719838965",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0c38d2f98756",
+      "type": "image",
+      "title": "Logo branca",
+      "url": "https://www.diamantina.mg.gov.br/img/logo_branca.svg?1719838964",
+      "final_url": "https://www.diamantina.mg.gov.br/img/logo_branca.svg?1719838964",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Logo branca",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d2e8a4730825",
+      "type": "image",
+      "title": "Rede social instagram",
+      "url": "https://www.diamantina.mg.gov.br/fotos/3d3b54e9333877a337f5bd393ff577a9.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/3d3b54e9333877a337f5bd393ff577a9.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rede social instagram",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-6bd369e3985d",
+      "type": "image",
+      "title": "Rede social facebook",
+      "url": "https://www.diamantina.mg.gov.br/fotos/4a90415db756765de44017caaa0a1a30.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/4a90415db756765de44017caaa0a1a30.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rede social facebook",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dfc409356d9b",
+      "type": "image",
+      "title": "Banner Rotativo Banner Site Novo",
+      "url": "https://www.diamantina.mg.gov.br/fotos/dc97c3deb0c7ef8fad46a75f1234ddc3.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/dc97c3deb0c7ef8fad46a75f1234ddc3.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Banner Rotativo Banner Site Novo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2e163e173f35",
+      "type": "image",
+      "title": "Notícia carnaval-de-diamantina-2027-cadastro-e-selecao",
+      "url": "https://www.diamantina.mg.gov.br/fotos/ff5ccdf24524b84812ba8ab30155d03c.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/ff5ccdf24524b84812ba8ab30155d03c.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia carnaval-de-diamantina-2027-cadastro-e-selecao",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-5857343981f3",
+      "type": "image",
+      "title": "Notícia diamantina-lanca-edital-de-92-mil-reais-para",
+      "url": "https://www.diamantina.mg.gov.br/fotos/57b442901a675b0b77a89b24fc4a29d7.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/57b442901a675b0b77a89b24fc4a29d7.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia diamantina-lanca-edital-de-92-mil-reais-para",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-854170419eb2",
+      "type": "image",
+      "title": "Notícia prefeitura-de-diamantina-publica-edital-de",
+      "url": "https://www.diamantina.mg.gov.br/fotos/64706fe41aec11e57b44db9a18bb3333.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/64706fe41aec11e57b44db9a18bb3333.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia prefeitura-de-diamantina-publica-edital-de",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-801490dce03d",
+      "type": "image",
+      "title": "Notícia prefeitura-de-diamantina-abre-inscricoes-para",
+      "url": "https://www.diamantina.mg.gov.br/fotos/f645dd3001ea17cb35c8fbafffec3111.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/f645dd3001ea17cb35c8fbafffec3111.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia prefeitura-de-diamantina-abre-inscricoes-para",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-09306ae2b5e8",
+      "type": "image",
+      "title": "Notícia prefeitura-de-diamantina-abre-processos-seletivos",
+      "url": "https://www.diamantina.mg.gov.br/fotos/134c01b0f84eb7ad1c600232537540b0.png",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/134c01b0f84eb7ad1c600232537540b0.png",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia prefeitura-de-diamantina-abre-processos-seletivos",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-326aea4cb62d",
+      "type": "image",
+      "title": "Notícia cadastro-cultural-revela-diversidade-tradicao-e",
+      "url": "https://www.diamantina.mg.gov.br/fotos/e4aeb7fe583cbc77a86fc2ed35496014.jpg",
+      "final_url": "https://www.diamantina.mg.gov.br/fotos/e4aeb7fe583cbc77a86fc2ed35496014.jpg",
+      "source_title": "Portal",
+      "source_url": "https://www.diamantina.mg.gov.br/",
+      "publisher": "www.diamantina.mg.gov.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícia cadastro-cultural-revela-diversidade-tradicao-e",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.diamantina.mg.gov.br/",
+      "titulo": "Portal",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 05:03:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://www.diamantina.mg.gov.br/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+      "titulo": "Guia Melhores Destinos",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2025-05-15T01:23:39-03:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.visitediamantina.com.br/",
+      "titulo": "Prefeitura de Diamantina - MG",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "ter., 13 out. 2026 15:39:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "events",
+        "url": "https://www.visitediamantina.com.br/",
+        "eligible": false,
+        "verification": "CONTEXT_ONLY",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "7011908287afe540bcb81ed4db751e833a3a8b32",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

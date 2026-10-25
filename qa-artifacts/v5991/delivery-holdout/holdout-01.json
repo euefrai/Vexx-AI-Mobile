@@ -1,0 +1,798 @@
+{
+  "id": "holdout-01",
+  "category": "small_city_news",
+  "query": "Notícias em Juazeiro, Bahia, nos últimos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 12.654,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Juazeiro\" \"bahia\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Juazeiro\" \"bahia\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Juazeiro\" \"bahia\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Em Juazeiro, Lula diz que Flávio não vai aceitar quebrar o sigilo bancário \"porque a vida dele é podre\"\" site:www.bahianoticias.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 156035
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4541
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5057
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Em+Juazeiro%2C+Lula+diz+que+Fl%C3%A1vio+n%C3%A3o+vai+aceitar+quebrar+o+sigilo+banc%C3%A1rio+%22porque+a+vida+dele+%C3%A9+podre%22%22+site%3Awww.bahianoticias.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Em+Juazeiro%2C+Lula+diz+que+Fl%C3%A1vio+n%C3%A3o+vai+aceitar+quebrar+o+sigilo+banc%C3%A1rio+%22porque+a+vida+dele+%C3%A9+podre%22%22+site%3Awww.bahianoticias.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 4582
+    },
+    {
+      "url": "https://www.bahianoticias.com.br",
+      "final": "https://www.bahianoticias.com.br",
+      "chars": 484553
+    },
+    {
+      "url": "https://www.bahianoticias.com.br/principal/rss.xml",
+      "final": "https://cdn.bahianoticias.com.br/rss.xml",
+      "chars": 35690
+    },
+    {
+      "url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "final": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "chars": 315133
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Juazeiro",
+      "final": "https://en.wikipedia.org/wiki/Juazeiro",
+      "chars": 224389
+    },
+    {
+      "url": "https://www.juazeiro.ba.gov.br/a-prefeitura/",
+      "final": "https://www.juazeiro.ba.gov.br/a-prefeitura/",
+      "chars": 50894
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Juazeiro",
+      "final": "https://pt.wikipedia.org/wiki/Juazeiro",
+      "chars": 85848
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Juazeiro_(Bahia)",
+      "final": "https://pt.wikipedia.org/wiki/Juazeiro_(Bahia)",
+      "chars": 385199
+    },
+    {
+      "url": "https://www.juazeiro.ba.gov.br/",
+      "final": "https://www.juazeiro.ba.gov.br/",
+      "chars": 86614
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Juazeiro\" \"bahia\" notícias",
+    "domain": "news",
+    "original_request": "Notícias em Juazeiro, Bahia, nos últimos sete dias",
+    "resolved_request": "Notícias em Juazeiro, Bahia, entre 2026-10-17 e 2026-10-24",
+    "parameters": {
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-24",
+      "location": "Juazeiro",
+      "region": "bahia"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T23:37:18.941592+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-24",
+        "location": "Juazeiro",
+        "region": "bahia"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "55912d6da28c90988810",
+        "url": "https://www.juazeiro.ba.gov.br/",
+        "title": "Prefeitura Municipal de Juazeiro - BA | Portal Oficial da Gestão Municipal",
+        "origin": "bing",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "sex., 23 out. 2026 11:16:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "em alta Após sete anos, Festival Nacional de Teatro Wellington Monteclaro... Após sete anos sem realização, o Festival Wellington Monteclaro voltou a movimentar",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 297,
+        "final_url": "https://www.juazeiro.ba.gov.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "e8b339c50020d82d339a",
+        "url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+        "title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+        "origin": "bing",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "2024-09-12T17:31:58+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "km de e a 368 km de . Bahia Pernambuco Petrolina Salvador Paulo Afonso O Aeroporto Senador Ciro Coelho, localizado a 12 km, na cidade vizinha de Petrolina, serv",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "INTENT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "bfb04079b0b60637d511",
+        "url": "https://en.wikipedia.org/wiki/Juazeiro",
+        "title": "Juazeiro - Wikipedia",
+        "origin": "bing",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "2005-07-08T20:41:09Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "Area (in Portuguese). . 2002-10-10. \"Área territorial oficial\" [ ] Brazilian Institute of Geography and Statistics(IBGE) . Retrieved 2010-12-05 1 2 Brazilian In",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://en.wikipedia.org/wiki/Juazeiro",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "47397b0b4e9fbad719c5",
+        "url": "https://www.juazeiro.ba.gov.br/a-prefeitura/",
+        "title": "A Prefeitura – Prefeitura Municipal de Juazeiro - BA | Portal Oficial ...",
+        "origin": "bing",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "sex., 23 out. 2026 01:51:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Preferência de Cookies Usamos cookies e tecnologias semelhantes que são necessárias para operar o site. Você pode consentir com o nosso uso de cookies clicando ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 369,
+        "final_url": "https://www.juazeiro.ba.gov.br/a-prefeitura/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "d2434017d30361a1bc84",
+        "url": "https://pt.wikipedia.org/wiki/Juazeiro",
+        "title": "Juazeiro – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "2004-09-26T21:52:54Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "em (usada para fazer sabão e produtos de limpeza para os dentes). São também utilizados na alimentação do gado na época seca. cereja geleias saponina Flores do ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 2587,
+        "final_url": "https://pt.wikipedia.org/wiki/Juazeiro",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "5208c65a2fdbb0fae909",
+        "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQNXhyMFlCSzN6ZWd6dkQxSkdTTUxDTnd1N3RQU3VodkRROHBVLURja29GWkRNX3R4bHBtOUx5NzlkZnZWbVJIWG9hdDdsLTNPbmR1LXJfcFB5TDlEdUpSN1NwNVNweGJKZDc2MkxmSUZzYVQ4RUREd2VpcF9kV05WYlZ2YXRGUGFWblZFakZuaWJ2UWs2ZmdqUTh0ZUZ1dE9iVUdPVzVQTVBoRG5VZ1UzQVhFdjlFUzhnTFJlbkFMY1lpSEdiUjZmOVNEN0JaYjBtelk5YUU5SW5EajN3TnRQQUFR?oc=5",
+        "title": "Em Juazeiro, Lula diz que Flávio não vai aceitar quebrar o sigilo bancário \"porque a vida dele é podre\" - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "Wed, 21 Oct 2026 01:18:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Em Juazeiro, Lula diz que Flávio não vai aceitar quebrar o sigilo bancário \"porque a vida dele é podre\" Bahia Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "9fe0426eabc2555471c9",
+        "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPbFAtdEVuOVI4ODg4d3ZKeUpvUlBqU0M3OXVDTURCZXIzRDdQQVQxanlVaWZ5UkFIZkRZNjBPNUI5TEdVWjJnSkR2aEkwcVFyRmZnb0ZnMGdTY0laYkdnWG5SU2MyNDh6X3J5NFBCX1RwTlI1WGlwekI1a2dNLWFaLXpSQUtWNWxDZDJQWDNiYUpKT1BzbkhrSmdwdEpBYzlEcE1zSkd1TTd3d1VwZUdSMTRHcmJ1YlI1WWppZVB5SXA5SVRMZUVLWEJXYzFSNzFXWnZXUERpdWpfd05QcTRNYXp2RTVjTFlCWUJyRmN2M1VsX1NvNjVxUkZR?oc=5",
+        "title": "Diretor da Juazeirense, Randerson Leal projeta nova arena para 15 mil pessoas em Juazeiro: “É a nossa expectativa” - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "Wed, 21 Oct 2026 20:10:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Diretor da Juazeirense, Randerson Leal projeta nova arena para 15 mil pessoas em Juazeiro: “É a nossa expectativa” Bahia Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "07449f337e0cbef4acec",
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNTUVQc2wwT3pleTc3NW9JRm9wOVpVdVhFX1pONm5LVkNZRTVIYjJiTUtLd1BiWlpRRG92cVB5bVJkc3NtVWw1NjJuMk5WMUVBQlozbXpzaXRnTEp5aTZoU3V5Z1NXYTZPNC1rTlZmMTBSN2d2Nl9lUzk2bXZZbjZOa3pxcFgwYnYwZE9LMEloV2M0S1JUcEFVR2ZPM2VfOVFMS2lvUjF0c1lTMmd6TjVHMkN4Wmlhc1luYlVvSkQySzFHcWhnamQtVFRkUQ?oc=5",
+        "title": "Polícia prende suspeito de matar adolescente em Juazeiro - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "Fri, 16 Oct 2026 19:20:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Polícia prende suspeito de matar adolescente em Juazeiro Bahia Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "2e138f7ae1957b25fede",
+        "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9kY0M3N3Q2TWsyNWxieFE0WVhYc1hZWi1LZmYtaGRrajZXY0ZUb3FHand1T0g1Y0RzYVh5YzBYMU11UUI2VmdRM3cwd2hWbWhkOWhjS2kzanhsY0RuNW52aHdOa0JxZjFfM0dDMmlJdkJydw?oc=5",
+        "title": "NOTÍCIAS DE JUAZEIRO - BA - Relata Bahia",
+        "origin": "google-news",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "Tue, 20 Oct 2026 23:44:02 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "NOTÍCIAS DE JUAZEIRO - BA Relata Bahia",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "19383b26612d26492418",
+        "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQck9qcjRwSk9XTUhUV0syQkNIMjVkdHNkd0VlT2plN2xDN0dNd2tyQmxJVXBpWjQ4cVUxeWxKc3dkTWN5cUVXYVVMem9BZi1WLUE1OW5vaFhRbTJNNDFpdjVkUm9hVDZSNl9PRkFab1hCQVMwNDcxVTlPY3BKQXZxTmc4NnFjQmhTZmZYRXlEcU1hTHhqWVpMWm01TDJOdmdjLXFXWF9aY00tZVJUb0FSNEkzWFpiM0Zta09BSmpocnZRRlRU?oc=5",
+        "title": "ACM Neto e Jerônimo concentram agendas em Juazeiro no feriado da Independência - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "Tue, 08 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "ACM Neto e Jerônimo concentram agendas em Juazeiro no feriado da Independência Bahia Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "8f7a24fc0239c6b6372b",
+        "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPMm5aenZKMnR4ZW04Rk1pY2NmbS1STFAwWjJlQW0zUlJxV0lFeFZGa3JOSmozRDJIQ1lCRWVtOUktSm95TDJtUjlTeml5cEotS1ZiNVZ5U2Y5Q0xBbEFiRXE1RjFpb1FKV1VUdVZPSFFlQWdrRllTblFuUU9hUVk1MENkdFpTclU1UkJuYzM1cUtjLWZPcDd5Y0ZSd1ZLOUJ3Z0l5c2dMUlFuR05HZVkxaXo2cnhndUd1OEFsd2w4NkZDdHJ5N0FabDZ5ZEFTem1QZVpQd3FmSUg?oc=5",
+        "title": "Juazeiro e região terão quatro deputados na Assembleia Legislativa da Bahia em 2027 - Bahia Notícias",
+        "origin": "google-news",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "Mon, 05 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Juazeiro e região terão quatro deputados na Assembleia Legislativa da Bahia em 2027 Bahia Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "97fea1fc5afb9d2c8117",
+        "url": "https://pt.wikipedia.org/wiki/Juazeiro_(Bahia)",
+        "title": "Juazeiro (Bahia) – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Juazeiro\" \"bahia\" notícias",
+        "date": "2004-09-07T15:40:09Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "diários e partem da capital baiana e de outras cidades da Bahia e de outros estados, como , e . Partindo de Salvador a Juazeiro passaremos por Feira de Santana,",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Juazeiro_(Bahia)",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DATE_MISMATCH"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-c05869d285bc",
+      "type": "image",
+      "title": "Saiba o que fazer em Juazeiro, Bahia. Dicas de viagem e pontos turísticos da cidade que fica ás margens do Rio São Francisco.",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/juazeiro.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/juazeiro.jpg",
+      "source_title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2024-09-12T17:31:58+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Saiba o que fazer em Juazeiro, Bahia. Dicas de viagem e pontos turísticos da cidade que fica ás margens do Rio São Francisco.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d420076ab9f4",
+      "type": "image",
+      "title": "Juazeiro - Bahia",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/juazeiro-696x464.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/juazeiro-696x464.jpg",
+      "source_title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2024-09-12T17:31:58+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Juazeiro - Bahia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0ae75b0c2e45",
+      "type": "image",
+      "title": "Juazeiro - Bahia",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/juazeiro-bahia.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/juazeiro-bahia.jpg",
+      "source_title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2024-09-12T17:31:58+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Juazeiro - Bahia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f6a807cec9a8",
+      "type": "image",
+      "title": "Juazeiro BA",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/juazeiro-ba.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/juazeiro-ba.jpg",
+      "source_title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2024-09-12T17:31:58+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Juazeiro BA",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-27a2a39b7a42",
+      "type": "image",
+      "title": "Orla de Juazeiro - Bahia",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/orla-juazeiro-bahia.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/orla-juazeiro-bahia.jpg",
+      "source_title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2024-09-12T17:31:58+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Orla de Juazeiro - Bahia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-faa1ef1d750e",
+      "type": "image",
+      "title": "Orla de Juazeiro",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/orla-juazeiro.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/orla-juazeiro.jpg",
+      "source_title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2024-09-12T17:31:58+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Orla de Juazeiro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a619b57f022c",
+      "type": "image",
+      "title": "Ponte do Rio São Francisco entre Petrolina e Juazeiro",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/ponte-rio-sao-francisco-petrolina-juazeiro.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/ponte-rio-sao-francisco-petrolina-juazeiro.jpg",
+      "source_title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2024-09-12T17:31:58+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Ponte do Rio São Francisco entre Petrolina e Juazeiro",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9e6c83bcbf9b",
+      "type": "image",
+      "title": "Vaporzinho de Juazeiro - Bahia",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/vaporzinho-juazeiro-bahia.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/vaporzinho-juazeiro-bahia.jpg",
+      "source_title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2024-09-12T17:31:58+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Vaporzinho de Juazeiro - Bahia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c5e1df0e33ad",
+      "type": "image",
+      "title": "Monumento Nego d'Agua - Juazeiro Bahia",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/nego-dagua-juazeiro-bahia.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/nego-dagua-juazeiro-bahia.jpg",
+      "source_title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2024-09-12T17:31:58+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Monumento Nego d'Agua - Juazeiro Bahia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7ec2ebd564a6",
+      "type": "image",
+      "title": "Catedral de Juazeiro - Bahia",
+      "url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/catedral-juazeiro-bahia.jpg",
+      "final_url": "https://www.viagensecaminhos.com/wp-content/uploads/2024/09/catedral-juazeiro-bahia.jpg",
+      "source_title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "source_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "publisher": "www.viagensecaminhos.com",
+      "date": "2024-09-12T17:31:58+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Catedral de Juazeiro - Bahia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9b67727b25ad",
+      "type": "image",
+      "title": "municipality of Bahia State, Brazil",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Vista_a%C3%A9rea_de_Juazeiro.jpg/1280px-Vista_a%C3%A9rea_de_Juazeiro.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f6/Vista_a%C3%A9rea_de_Juazeiro.jpg/1280px-Vista_a%C3%A9rea_de_Juazeiro.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "municipality of Bahia State, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Juazeiro",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1af776a0003e",
+      "type": "image",
+      "title": "Wikipedia",
+      "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+      "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+      "source_title": "municipality of Bahia State, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Juazeiro",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipedia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.juazeiro.ba.gov.br/",
+      "titulo": "Home",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sex., 23 out. 2026 11:16:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.juazeiro.ba.gov.br/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sex., 23 out. 2026 11:16:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+      "titulo": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2024-09-12T17:31:58+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2024-09-12T17:31:58+00:00"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://en.wikipedia.org/wiki/Juazeiro",
+      "titulo": "municipality of Bahia State, Brazil",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2005-07-08T20:41:09Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://en.wikipedia.org/wiki/Juazeiro",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2005-07-08T20:41:09Z"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "7011908287afe540bcb81ed4db751e833a3a8b32",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

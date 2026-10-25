@@ -1,0 +1,35 @@
+{
+  "model": "poolside/laguna-s-2.1:free",
+  "state": "PARTIAL",
+  "stream_inference_executed": true,
+  "deep_research_approved": false,
+  "ui_tested": false,
+  "discovered_model_count": 424,
+  "configured_model_discovered": true,
+  "source_url": "https://docs.python.org/3/library/asyncio-task.html",
+  "source_read": true,
+  "chunks": 130,
+  "sequence_ordered": true,
+  "cited_literal_present": false,
+  "answer": "O `asyncio.TaskGroup` foi introduzido na versão **3.11** do Python, não 3.7. Seu uso em versões anteriores causará um erro. O código está correto a partir de 3.11:\n\n```python\nasync with asyncio.TaskGroup() as tg:\n    for i in range(10):\n        tg.create_task(some_coro(param=i))\n```\n\nPara versões mais antigas (ex: 3.7-3.10), use alternativas como `asyncio.create_task` + `asyncio.gather`.",
+  "max_tokens": 1800,
+  "transport": {
+    "http_status": 200,
+    "content_type": "text/event-stream",
+    "captured_bytes": 65536,
+    "json_sse_events": 165,
+    "capture_limit_bytes": 65536,
+    "captured_prefix_only": true,
+    "upstream_error_events": 0,
+    "nonempty_content_events": 0,
+    "delta_fields": [
+      "content",
+      "reasoning",
+      "reasoning_content",
+      "role"
+    ],
+    "reasoning_events": 165,
+    "finish_reasons": []
+  },
+  "elapsed_s": 12.721
+}

@@ -1,0 +1,12 @@
+### Result
+{"qa_login":true}
+### Ran Playwright code
+```js
+await (async page=>{await page.locator('#loginOverlay').waitFor({state:'visible'});await page.getByRole('textbox',{name:'Usuário',exact:true}).fill('alice');await page.getByRole('textbox',{name:'Senha',exact:true}).fill('qa-password-long-5981');await page.locator('#loginButton').click();await page.locator('#loginOverlay').waitFor({state:'hidden'});await page.evaluate(()=>sessionStorage.setItem('v5991-next','7'));return {qa_login:true};})(page);
+```
+### Page
+- Page URL: http://127.0.0.1:49671/
+- Page Title: Vexx AI
+- Console: 1 errors, 0 warnings
+### Events
+- New console entries: .playwright-cli\console-2026-10-24T23-24-10-406Z.log#L3

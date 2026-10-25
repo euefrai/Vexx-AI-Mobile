@@ -1,0 +1,831 @@
+{
+  "id": "holdout-02",
+  "category": "capital_news",
+  "query": "Notícias em Rio Branco, Acre, hoje",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.632,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Rio Branco\" \"acre\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Rio Branco\" \"acre\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Rio Branco\" \"acre\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital\" site:acrenews.com.br",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Morre Ayres Rocha, jornalista que apresentou o Jornal do Acre por 30 anos\" site:f5.folha.uol.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 149500
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 6367
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4918
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Mailza+arrasta+multid%C3%A3o+e+para+centro+de+Rio+Branco+em+ato+de+encerramento+da+campanha+na+capital%22+site%3Aacrenews.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Mailza+arrasta+multid%C3%A3o+e+para+centro+de+Rio+Branco+em+ato+de+encerramento+da+campanha+na+capital%22+site%3Aacrenews.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5278
+    },
+    {
+      "url": "https://acrenews.com.br",
+      "final": "https://acrenews.com.br",
+      "chars": 387167
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Morre+Ayres+Rocha%2C+jornalista+que+apresentou+o+Jornal+do+Acre+por+30+anos%22+site%3Af5.folha.uol.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Morre+Ayres+Rocha%2C+jornalista+que+apresentou+o+Jornal+do+Acre+por+30+anos%22+site%3Af5.folha.uol.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5409
+    },
+    {
+      "url": "https://acrenews.com.br/mailza-arrasta-multidao-e-para-centro-de-rio-branco-em-ato-de-encerramento-da-campanha-na-capital/",
+      "final": "https://acrenews.com.br/mailza-arrasta-multidao-e-para-centro-de-rio-branco-em-ato-de-encerramento-da-campanha-na-capital/",
+      "chars": 246245
+    },
+    {
+      "url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "final": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "chars": 796453
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Rio_de_Janeiro",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://www.imdb.com/title/tt1436562/",
+      "final": "https://www.imdb.com/title/tt1436562/",
+      "chars": 0
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Rio",
+      "final": "https://pt.wikipedia.org/wiki/Rio",
+      "chars": 933671
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/geografia/rios.htm",
+      "final": "https://brasilescola.uol.com.br/geografia/rios.htm",
+      "chars": 143429
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Rio Branco\" \"acre\" notícias",
+    "domain": "news",
+    "original_request": "Notícias em Rio Branco, Acre, hoje",
+    "resolved_request": "Notícias em Rio Branco, Acre, hoje",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "Rio Branco",
+      "region": "acre"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T23:10:43.895268+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "Rio Branco",
+        "region": "acre"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "770c9a4ecff36d51063b",
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMHdCSTJ2Y21BeEJBR3VkRnZTZnlTaENfQmNta2JpNmN1cUFnMFhOYkNDN3lfYTFha280WUlTakpKT0xVLXZsUWFDV0FQYlUzMjNMbE5NX1lMVER5Q3lOOE13LW9GZ3doQlpyeHFaaEZfT2hOek1DcWxBaE9UTU5GX0NMYnRTM3VIenhNQUV5alREWktxYWRJZEdSemFxdzdaU094dmNkNW1Xdw?oc=5",
+        "title": "Prefeitura de Rio Branco homenageia garis e margaridas com café da manhã especial - AcreNews",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Sat, 24 Oct 2026 02:57:06 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Prefeitura de Rio Branco homenageia garis e margaridas com café da manhã especial AcreNews",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "ca437829ea69658d9c25",
+        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPQmVYVlp4MHlfTW0wTjBkamhleEp3d1FOZTVOUDBNVlVrUW9CUUJtc1NJVHB4bF8yMU5lODlOZW9rd3dCM3FOWWJkVVZjODZFbHRfbW5qa1AwQWdVSWp2Q2VwWWYtYVFUeF9nck1DeU5CTkE3NUNMaHZWdTFyY2syUF9oaGpwZUtZTmZrUERPSjVXMzNqcUZXYmQtY0s0YWdlaUgwaXlqTlktYVpnR0lwdWtFSDVGT29XWE9aLUdUNUdYbHhubkhLcg?oc=5",
+        "title": "Tribunal de Justiça do Acre autoriza retomada de execução fiscal cobrada pela Prefeitura de Rio Branco - Acre Jornal",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Fri, 23 Oct 2026 11:10:03 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Tribunal de Justiça do Acre autoriza retomada de execução fiscal cobrada pela Prefeitura de Rio Branco Acre Jornal",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "9d6180ecb959235c185d",
+        "url": "https://acrenews.com.br/mailza-arrasta-multidao-e-para-centro-de-rio-branco-em-ato-de-encerramento-da-campanha-na-capital/",
+        "title": "Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital",
+        "origin": "publisher-feed",
+        "query": "\"Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital\" site:acrenews.com.br",
+        "date": "2026-10-24T15:33:44+00:00",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "Jéssica Sales, da coligação Avança Acre, disputam o governo do estado. Intitulada Abraça Mailza, a caminhada teve início na Praça da Revolução e seguiu pela Ave",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3650,
+        "final_url": "https://acrenews.com.br/mailza-arrasta-multidao-e-para-centro-de-rio-branco-em-ato-de-encerramento-da-campanha-na-capital/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "publisher_link",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "d4637ee660c6ea8d4730",
+        "url": "https://g1.globo.com/rj/rio-de-janeiro/",
+        "title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "sáb., 24 out. 2026 21:38:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Candidatos focaram em capitais do Sudeste neste sábado (24), véspera da votação. Petista passou por Rio e seguiu para São Paulo. Flávio mobilizou apoiadores em ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 243,
+        "final_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "20e83da9895e48e156d8",
+        "url": "https://en.wikipedia.org/wiki/Rio_de_Janeiro",
+        "title": "Rio de Janeiro - Wikipedia",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "sex., 23 out. 2026 19:23:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Rio de Janeiro, [c] also known simply as Rio, [7] is the capital and largest city of the state of Rio de Janeiro. It is the second-largest city in Brazil after ",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "tamanho",
+        "losses": [
+          "FETCH_FAILED",
+          "HARD_CONSTRAINT_MISMATCH",
+          "INTENT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "2b70aed9b3309e19ae61",
+        "url": "https://www.imdb.com/title/tt1436562/",
+        "title": "Rio (2011) - IMDb",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "qui., 22 out. 2026 22:59:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Rio: Directed by Carlos Saldanha. With Jesse Eisenberg, Anne Hathaway, George Lopez, Karen Disher. When Blu, a domesticated macaw from small-town Minnesota, mee",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "https://www.imdb.com/title/tt1436562/",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EXTRACTION_EMPTY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "178ff21e8a1c5336398c",
+        "url": "https://pt.wikipedia.org/wiki/Rio",
+        "title": "Rio – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "2004-06-18T17:25:38Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "próprio rio, e sua água escoa encosta abaixo em direção a ele. As de um rio compreendem os menores que o alimentam e constituem sua origem. Esses cursos podem s",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Rio",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "e0cebf2dfaa5ed86dfa2",
+        "url": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+        "title": "Rio de Janeiro – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "sáb., 24 out. 2026 00:52:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INTENT_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Naquele ano, o Rio foi transformado em uma cidade-estado com o nome de Guanabara e, somente em 1975, torna-se a capital do estado do Rio de Janeiro.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "HARD_CONSTRAINT_MISMATCH",
+          "INTENT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "0c3445caee914134adb7",
+        "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPYUVhaW10MUdRZ25aVmJNNkpORE42SjlTWkVBNFlQQ1U2SUN2VnBmYVB0ZXBnTE8xRWNCTDJMNTRRcFdTc3JZSTJzdjFjVFJCTkN0bG1COUZhb0NRQVI0Q1JRSGdRU2FCU1dBSC10U09SWVN0ZnFyNU1ZV0hjX19ENWM2Z3JJenNuYmxSaHYzdkZiVEc4aU1FVHJvdEtTLVdDcm5MZXdDSTRtbXZXVGVycjRBLW81aHpXSF9WNXV5T1FrUQ?oc=5",
+        "title": "Morre Ayres Rocha, jornalista que apresentou o Jornal do Acre por 30 anos - UOL",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Wed, 14 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Morre Ayres Rocha, jornalista que apresentou o Jornal do Acre por 30 anos UOL",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "43d21f4c79a225ff1cd9",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQeTgxZFBNT3ExZ3ZmcDJLb25zdEdPT2RHNEI5STNHa3A1MjF1QU96M2dmWk1hQ2JnSndJcERjM0lGYXJ6VDhDLUNvU2wyLWh1dXZMZnFTS2Zsb1Exa1BnVEplOS1sN2c1TmJ6cHRaYnVWSXdmZzF2c0FjdW1oS0RFVlhCZXhxVmhkUFRrRmxibS1CZm0xckdjeXJITkJqaFV5LTJwVG5mNHdxQ0k?oc=5",
+        "title": "Mailza cumpre agenda de campanha e realiza atos políticos na região do Alto Acre - Acre Jornal",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Fri, 23 Oct 2026 11:09:45 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Mailza cumpre agenda de campanha e realiza atos políticos na região do Alto Acre Acre Jornal",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "9e8f5cc7ca5485053e63",
+        "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPb1M3bUdNdUFBZmdLMnFLWWFqVG9ldV9qRE03NzExem5Vb3F0NWhOSGJ5ZUtCaFJRWUFOdFhOWmZqcVNlcXoyaFF1eUNvYURZOWxzZW45Z2dfOV9yY3hrb1FJM1E3RjJrUWJYU0d2RE5XTmYtX2NJeEFqZ3pJS05aV0U1dnBlc0M0T3Q5Uk5xSldfY3puNGU5bXRhaHp1SjJ2MUpILTRSYl9UMmxEWHlwV3hPREY2bUpQbTVVcTdB0gHMAUFVX3lxTE14MVFzZHQza2RBMFEtWEZNUElFY3BCaHVuNjRKVUY2ZEJ6VGlPWW1JMGp6bDNrbWlwRmtNWEhhaWk3djBvT0Y1ZUZSRktXWFdMdU9LdjYyY2I5VGFUZW9ack5JRnZKOTZWLU04MEtaUEVmeG1KbHhpNURZb3ROakx3bExGaVU0RjZFR3VBYzliS1FRa18",
+        "title": "Ptolomeu IV: Ex-governador Gladson Camelí é alvo de operação no Acre - G1",
+        "origin": "google-news",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "Tue, 22 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Ptolomeu IV: Ex-governador Gladson Camelí é alvo de operação no Acre G1",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "HARD_CONSTRAINT_MISMATCH",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "4f1ea9d41ba875c94d4d",
+        "url": "https://brasilescola.uol.com.br/geografia/rios.htm",
+        "title": "Rios: o que são, partes, tipos, importância - Brasil Escola",
+        "origin": "bing",
+        "query": "\"Rio Branco\" \"acre\" notícias",
+        "date": "2007-04-17-0311:50:02",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "geração de energia, entre outras ações. Com isso, sabermos os componentes de um rio é fundamental para analisarmos a forma e o uso desse reservatório. Veja os c",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://brasilescola.uol.com.br/geografia/rios.htm",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "HARD_CONSTRAINT_MISMATCH",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-8d3773a4afee",
+      "type": "image",
+      "title": "As cores azul e rosa tomaram conta do centro de Rio Branco na manhã deste sábado, 24, durante o último ato de campanha da candidata à reeleição ao governo do Ac",
+      "url": "https://acrenews.com.br/wp-content/uploads/2026/10/IMG-20261024-WA0009-1000x600.jpg",
+      "final_url": "https://acrenews.com.br/wp-content/uploads/2026/10/IMG-20261024-WA0009-1000x600.jpg",
+      "source_title": "Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital",
+      "source_url": "https://acrenews.com.br/mailza-arrasta-multidao-e-para-centro-de-rio-branco-em-ato-de-encerramento-da-campanha-na-capital/",
+      "publisher": "acrenews.com.br",
+      "date": "2026-10-24T15:33:44+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "As cores azul e rosa tomaram conta do centro de Rio Branco na manhã deste sábado, 24, durante o último ato de campanha da candidata à reeleição ao governo do Acre, Mailza Assis. A mobilização, realizada na Praça da Revolução, reuniu aproxim",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2cc379795af2",
+      "type": "image",
+      "title": "AcreNews",
+      "url": "https://acrenews.com.br/wp-content/uploads/2021/02/logo_350.svg",
+      "final_url": "https://acrenews.com.br/wp-content/uploads/2021/02/logo_350.svg",
+      "source_title": "Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital",
+      "source_url": "https://acrenews.com.br/mailza-arrasta-multidao-e-para-centro-de-rio-branco-em-ato-de-encerramento-da-campanha-na-capital/",
+      "publisher": "acrenews.com.br",
+      "date": "2026-10-24T15:33:44+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "AcreNews",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-116632be447f",
+      "type": "image",
+      "title": "Últimas notícias da cidade do Rio de Janeiro, Baixada Fluminense e de todo o estado. Acompanhe também informações de trânsito, previsão do tempo, agenda cultura",
+      "url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "final_url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "source_title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "source_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "publisher": "s.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias da cidade do Rio de Janeiro, Baixada Fluminense e de todo o estado. Acompanhe também informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Globo.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-aa8af98fe7fb",
+      "type": "image",
+      "title": "Homem fica ferido após problemas na decolagem de asa-delta na Pedra Bonita, no Rio - Programa: G1 ao vivo",
+      "url": "https://s2-g1.glbimg.com/9EkRH3wUpKgZC-sb7YYAiTM9RPU=/540x304/top/smart/filters:max_age(3600)/https://s01.video.glbimg.com/deo/vi/55/20/992055",
+      "final_url": "https://s2-g1.glbimg.com/9EkRH3wUpKgZC-sb7YYAiTM9RPU=/540x304/top/smart/filters:max_age(3600)/https://s01.video.glbimg.com/deo/vi/55/20/992055",
+      "source_title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "source_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "publisher": "s2-g1.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Homem fica ferido após problemas na decolagem de asa-delta na Pedra Bonita, no Rio - Programa: G1 ao vivo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e630729f6153",
+      "type": "document",
+      "title": "ultimas-noticias.html",
+      "url": "https://g1.globo.com/ultimas-noticias.html",
+      "final_url": "https://g1.globo.com/ultimas-noticias.html",
+      "source_title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "source_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias da cidade do Rio de Janeiro, Baixada Fluminense e de todo o estado. Acompanhe também informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Globo.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-9f139da7a3ab",
+      "type": "document",
+      "title": "principios-editoriais-do-grupo-globo.html",
+      "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "final_url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "source_title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "source_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias da cidade do Rio de Janeiro, Baixada Fluminense e de todo o estado. Acompanhe também informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Globo.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-ebe26ebbabdf",
+      "type": "document",
+      "title": "universidades.html",
+      "url": "https://g1.globo.com/educacao/universidades.html",
+      "final_url": "https://g1.globo.com/educacao/universidades.html",
+      "source_title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "source_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias da cidade do Rio de Janeiro, Baixada Fluminense e de todo o estado. Acompanhe também informações de trânsito, previsão do tempo, agenda cultural, telejornais e coberturas especiais da Globo.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-bd30a4ba452d",
+      "type": "image",
+      "title": "grande curso de água natural",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Aerial_view_of_the_Amazon_Rainforest.jpg/1280px-Aerial_view_of_the_Amazon_Rainforest.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Aerial_view_of_the_Amazon_Rainforest.jpg/1280px-Aerial_view_of_the_Amazon_Rainforest.jpg?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8794332afe12",
+      "type": "image",
+      "title": "Vista aérea do rio Solimões formando uma curva ampla em S entre a floresta amazônica.",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Aerial_view_of_the_Amazon_Rainforest.jpg/330px-Aerial_view_of_the_Amazon_Rainforest.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Aerial_view_of_the_Amazon_Rainforest.jpg/330px-Aerial_view_of_the_Amazon_Rainforest.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Vista aérea do rio Solimões formando uma curva ampla em S entre a floresta amazônica.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1336a176ef96",
+      "type": "image",
+      "title": "Esquema numerado de um rio que desce das montanhas e atravessa uma planície até chegar ao mar.",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/River_scheme.svg/330px-River_scheme.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/River_scheme.svg/330px-River_scheme.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Esquema numerado de um rio que desce das montanhas e atravessa uma planície até chegar ao mar.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f2831d23132a",
+      "type": "image",
+      "title": "Esquema em planta e em perfil de um sistema fluvial, com formas numeradas no vale.",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Fluvial_topography_sketch_numbered.svg/330px-Fluvial_topography_sketch_numbered.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/dd/Fluvial_topography_sketch_numbered.svg/330px-Fluvial_topography_sketch_numbered.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "grande curso de água natural",
+      "source_url": "https://pt.wikipedia.org/wiki/Rio",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Esquema em planta e em perfil de um sistema fluvial, com formas numeradas no vale.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://acrenews.com.br/mailza-arrasta-multidao-e-para-centro-de-rio-branco-em-ato-de-encerramento-da-campanha-na-capital/",
+      "titulo": "Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2026-10-24T15:33:44+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://acrenews.com.br/mailza-arrasta-multidao-e-para-centro-de-rio-branco-em-ato-de-encerramento-da-campanha-na-capital/",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": true,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "2026-10-24T15:33:44+00:00"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://g1.globo.com/rj/rio-de-janeiro/",
+      "titulo": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 21:38:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://g1.globo.com/rj/rio-de-janeiro/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sáb., 24 out. 2026 21:38:00 GMT"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://pt.wikipedia.org/wiki/Rio",
+      "titulo": "grande curso de água natural",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2004-06-18T17:25:38Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://pt.wikipedia.org/wiki/Rio",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "SOURCE_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2004-06-18T17:25:38Z"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 1,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "13cb9f50d5158b838c3da34ba146a3b13b249b6c",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

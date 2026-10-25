@@ -1,0 +1,12 @@
+### Result
+{"assistant_messages":1,"excerpt":"v.\nVexx\n···\n20:10\n···"}
+### Ran Playwright code
+```js
+await (async page=>{const id=await page.evaluate(()=>sessionStorage.getItem('v5991-job'));const s=await page.evaluate(async id=>(await(await fetch('/api/research/status?job_id='+id)).json()).resumo,id);return {status:s?.status,chat_result_id:s?.chat_result_id,assistant_messages:await page.locator('.message.ai').count(),excerpt:(await page.locator('.message.ai').last().innerText()).slice(0,250)};})(page);
+```
+### Page
+- Page URL: http://127.0.0.1:56418/
+- Page Title: Vexx AI
+- Console: 19 errors, 0 warnings
+### Events
+- New console entries: .playwright-cli\console-2026-10-24T23-10-37-310Z.log#L3-L21

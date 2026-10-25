@@ -1,0 +1,61 @@
+{
+  "scope": "AUTHENTICATED_QA_AFTER_ORIGINAL_ENTITY_FIX",
+  "jobs": [
+    {
+      "id": "rj-3702958dda2b",
+      "status": "concluida",
+      "used": {
+        "buscas": 4,
+        "paginas": 12,
+        "research_outcome": {
+          "state": "partial",
+          "unresolved_fronts": [
+            "asyncio.taskgroup exemplos fontes primárias texto completo",
+            "limitações fontes primárias texto completo",
+            "limitações primárias texto completo"
+          ],
+          "provider_code": "",
+          "read_sources": 1,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        }
+      },
+      "budget": {
+        "buscas": 8,
+        "paginas": 12,
+        "timeout_s": 120,
+        "subs": 4,
+        "profundidade": 2,
+        "midia": 16,
+        "concorrencia": 3,
+        "replans": 2,
+        "max_bytes_pagina": 2000000
+      }
+    }
+  ],
+  "messages": {
+    "assistant": 3,
+    "user": 2
+  },
+  "message_count": 5,
+  "unique_message_ids": 5,
+  "results": [
+    {
+      "id": "rj-3702958dda2b-result",
+      "chars": 2099
+    }
+  ],
+  "evidence": [
+    {
+      "id": "ev-193ebcbd26e9",
+      "url": "https://docs.python.org/3/library/asyncio-task.html",
+      "title": "Coroutines and tasks",
+      "status": "recuperada",
+      "excerpt_chars": 398
+    }
+  ],
+  "request_states": {
+    "completed": 2
+  },
+  "runtime_state": "RUNNING",
+  "active_operations": 0
+}

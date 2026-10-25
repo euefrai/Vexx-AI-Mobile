@@ -1,0 +1,585 @@
+{
+  "id": "holdout-08",
+  "category": "multiaspect",
+  "query": "Economia circular na indústria têxtil processos limitações",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 4.543,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "bing-news",
+      "query": "Economia circular na indústria têxtil processos limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "Economia circular na indústria têxtil processos limitações",
+      "candidates": 6
+    },
+    {
+      "provider": "hn",
+      "query": "Economia circular na indústria têxtil processos limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing-news",
+      "query": "economia circular indústria têxtil processos limitações",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "economia circular indústria têxtil processos limitações",
+      "candidates": 6
+    },
+    {
+      "provider": "hn",
+      "query": "economia circular indústria têxtil processos limitações",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/news/search?q=Economia+circular+na+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=Economia+circular+na+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 2983
+    },
+    {
+      "url": "https://www.bing.com/search?q=Economia+circular+na+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Economia+circular+na+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5040
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=economia+circular+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=economia+circular+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 3092
+    },
+    {
+      "url": "https://www.bing.com/search?q=economia+circular+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=economia+circular+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5028
+    },
+    {
+      "url": "https://www.infomoney.com.br/economia/",
+      "final": "https://www.infomoney.com.br/economia/",
+      "chars": 388350
+    },
+    {
+      "url": "https://economia.uol.com.br/",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://g1.globo.com/economia/",
+      "final": "https://g1.globo.com/economia/",
+      "chars": 938747
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Economia",
+      "final": "https://pt.wikipedia.org/wiki/Economia",
+      "chars": 755270
+    },
+    {
+      "url": "https://www.redeconomia.com.br/encartes/",
+      "final": "https://www.redeconomia.com.br/encartes/",
+      "chars": 123759
+    },
+    {
+      "url": "https://www.redeconomia.com.br/",
+      "final": "https://www.redeconomia.com.br/",
+      "chars": 119823
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Economia circular na indústria têxtil processos limitações",
+    "domain": "general",
+    "original_request": "Economia circular na indústria têxtil processos limitações",
+    "resolved_request": "Economia circular na indústria têxtil processos limitações",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T23:38:15.916702+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "da29eb86b52746d8cec5",
+        "url": "https://www.infomoney.com.br/economia/",
+        "title": "Economia - Últimas notícias | InfoMoney",
+        "origin": "bing",
+        "query": "Economia circular na indústria têxtil processos limitações",
+        "date": "qui., 06 jun. 2024 03:02:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "É hora de fugir dos riscos de uma recessão",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 42,
+        "final_url": "https://www.infomoney.com.br/economia/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "23b26164b9adc89e60a9",
+        "url": "https://economia.uol.com.br/",
+        "title": "UOL Economia: encontre orientações e notícias sobre economia",
+        "origin": "bing",
+        "query": "Economia circular na indústria têxtil processos limitações",
+        "date": "sáb., 24 out. 2026 22:35:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Encontre orientações e notícias sobre economia: investimentos, finanças, negócios, carreira, cotações de Bolsas, moedas, índices econômicos e mais...",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "02065f331a5b145051fc",
+        "url": "https://g1.globo.com/economia/",
+        "title": "g1 Economia – Educação financeira, a cotação do dólar e as notícias do ...",
+        "origin": "bing",
+        "query": "Economia circular na indústria têxtil processos limitações",
+        "date": "sáb., 24 out. 2026 22:42:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "Falhas graves na linguagem de programação PHP, usada em grande parte da internet, provocaram milhões de tentativas de invasão e levaram empresas e órgãos públic",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 243,
+        "final_url": "https://g1.globo.com/economia/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "7d29e7546b5ea3c4bb9e",
+        "url": "https://pt.wikipedia.org/wiki/Economia",
+        "title": "Economia – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "Economia circular na indústria têxtil processos limitações",
+        "date": "2003-02-19T12:41:07Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "tradicional. mercado (do : οικονομία , \"regras da casa\") (também chamada de ) é a que consiste na análise da , e de . Portanto, a economia é o estudo das escolh",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Economia",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "eec02664207fe919a52d",
+        "url": "https://www.redeconomia.com.br/encartes/",
+        "title": "Ofertas - Redeconomia",
+        "origin": "bing",
+        "query": "Economia circular na indústria têxtil processos limitações",
+        "date": "2025-08-20T18:00:27+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Confira o encarte completo com todas as ofertas! Folheie o encarte diretamente na tela e, se preferir, abra o PDF em tela cheia.",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 128,
+        "final_url": "https://www.redeconomia.com.br/encartes/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "2cf54198242f94c6540f",
+        "url": "https://www.redeconomia.com.br/",
+        "title": "Início - Redeconomia",
+        "origin": "bing",
+        "query": "Economia circular na indústria têxtil processos limitações",
+        "date": "2022-05-16T15:52:06+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "QUEM SOMOS Em agosto de 1998, foi fundada a REDERJ – Associação REDECONOMIA de Supermercados do Estado do Rio de Janeiro, formada pela união de 7 empresas super",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 253,
+        "final_url": "https://www.redeconomia.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      }
+    ],
+    "unique_candidates": 6,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-df280b630b68",
+      "type": "image",
+      "title": "Últimas notícias sobre Economia, PIB, Inflação e Juros. Acompanhe os principais setores; Indústria, Agro, Comércio e Serviços.",
+      "url": "https://www.infomoney.com.br/wp-content/uploads/2021/03/Site-thumb-de-materia.png?fit=1280%2C720&quality=70&strip=all",
+      "final_url": "https://www.infomoney.com.br/wp-content/uploads/2021/03/Site-thumb-de-materia.png?fit=1280%2C720&quality=70&strip=all",
+      "source_title": "InfoMoney",
+      "source_url": "https://www.infomoney.com.br/economia/",
+      "publisher": "www.infomoney.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Últimas notícias sobre Economia, PIB, Inflação e Juros. Acompanhe os principais setores; Indústria, Agro, Comércio e Serviços.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2d776835f14a",
+      "type": "image",
+      "title": "Imagem conceitual representando turbulência financeira global.",
+      "url": "https://www.infomoney.com.br/wp-content/uploads/2025/04/DALL·E-2025-04-05-13.31.29-Uma-imagem-conceitual-representando-turbulencia-financeira-global.-Elementos-visuais-devem-incluir-graficos-de-queda-setas-apontando-para-baixo-simb.jpg?resize=314%2C204&quality=70&strip=all",
+      "final_url": "https://www.infomoney.com.br/wp-content/uploads/2025/04/DALL·E-2025-04-05-13.31.29-Uma-imagem-conceitual-representando-turbulencia-financeira-global.-Elementos-visuais-devem-incluir-graficos-de-queda-setas-apontando-para-baixo-simb.jpg?resize=314%2C204&quality=70&strip=all",
+      "source_title": "InfoMoney",
+      "source_url": "https://www.infomoney.com.br/economia/",
+      "publisher": "www.infomoney.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imagem conceitual representando turbulência financeira global.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d1ccf65d4beb",
+      "type": "image",
+      "title": "Home Broker",
+      "url": "https://www.infomoney.com.br/wp-content/uploads/2024/05/stock-trading-6525081_1280.jpg?resize=314%2C204&quality=70&strip=all",
+      "final_url": "https://www.infomoney.com.br/wp-content/uploads/2024/05/stock-trading-6525081_1280.jpg?resize=314%2C204&quality=70&strip=all",
+      "source_title": "InfoMoney",
+      "source_url": "https://www.infomoney.com.br/economia/",
+      "publisher": "www.infomoney.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Home Broker",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-116632be447f",
+      "type": "image",
+      "title": "Notícias de economia, do mercado e das empresas do Brasil e do mundo, além de dicas e calculadoras para administrar suas finanças pessoais",
+      "url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "final_url": "https://s.glbimg.com/jo/g1/static/live/imagens/img_facebook.png?g1",
+      "source_title": "g1 Economia – Educação financeira, a cotação do dólar e as notícias do mercado",
+      "source_url": "https://g1.globo.com/economia/",
+      "publisher": "s.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícias de economia, do mercado e das empresas do Brasil e do mundo, além de dicas e calculadoras para administrar suas finanças pessoais",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d1f5a05fdf2e",
+      "type": "image",
+      "title": "As propostas de Lula e Flávio Bolsonaro sobre CLT e relações trabalhistas - Programa: g1 trabalho e carreira",
+      "url": "https://s2-g1.glbimg.com/DJyNzE6PFv8fVzxoCM0iW3z-y_M=/540x304/top/smart/filters:max_age(3600)/https://s01.video.glbimg.com/deo/vi/28/15/15061528",
+      "final_url": "https://s2-g1.glbimg.com/DJyNzE6PFv8fVzxoCM0iW3z-y_M=/540x304/top/smart/filters:max_age(3600)/https://s01.video.glbimg.com/deo/vi/28/15/15061528",
+      "source_title": "g1 Economia – Educação financeira, a cotação do dólar e as notícias do mercado",
+      "source_url": "https://g1.globo.com/economia/",
+      "publisher": "s2-g1.glbimg.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "As propostas de Lula e Flávio Bolsonaro sobre CLT e relações trabalhistas - Programa: g1 trabalho e carreira",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e630729f6153",
+      "type": "document",
+      "title": "ultimas-noticias.html",
+      "url": "https://g1.globo.com/ultimas-noticias.html",
+      "final_url": "https://g1.globo.com/ultimas-noticias.html",
+      "source_title": "g1 Economia – Educação financeira, a cotação do dólar e as notícias do mercado",
+      "source_url": "https://g1.globo.com/economia/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícias de economia, do mercado e das empresas do Brasil e do mundo, além de dicas e calculadoras para administrar suas finanças pessoais",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-9f139da7a3ab",
+      "type": "document",
+      "title": "principios-editoriais-do-grupo-globo.html",
+      "url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "final_url": "https://g1.globo.com/principios-editoriais-do-grupo-globo.html",
+      "source_title": "g1 Economia – Educação financeira, a cotação do dólar e as notícias do mercado",
+      "source_url": "https://g1.globo.com/economia/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícias de economia, do mercado e das empresas do Brasil e do mundo, além de dicas e calculadoras para administrar suas finanças pessoais",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-ebe26ebbabdf",
+      "type": "document",
+      "title": "universidades.html",
+      "url": "https://g1.globo.com/educacao/universidades.html",
+      "final_url": "https://g1.globo.com/educacao/universidades.html",
+      "source_title": "g1 Economia – Educação financeira, a cotação do dólar e as notícias do mercado",
+      "source_url": "https://g1.globo.com/economia/",
+      "publisher": "g1.globo.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Notícias de economia, do mercado e das empresas do Brasil e do mundo, além de dicas e calculadoras para administrar suas finanças pessoais",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-6939410b01b0",
+      "type": "image",
+      "title": "ciência social",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Supply-demand-equilibrium.svg/1280px-Supply-demand-equilibrium.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Supply-demand-equilibrium.svg/1280px-Supply-demand-equilibrium.svg.png?utm_source=pt.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "ciência social",
+      "source_url": "https://pt.wikipedia.org/wiki/Economia",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-dee621472346",
+      "type": "image",
+      "title": "Wikipédia",
+      "url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "final_url": "https://pt.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-fr.svg",
+      "source_title": "ciência social",
+      "source_url": "https://pt.wikipedia.org/wiki/Economia",
+      "publisher": "pt.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipédia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a2f7942b39bb",
+      "type": "image",
+      "title": "Equilíbrio entre as curvas de oferta e demanda",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Supply-demand-equilibrium.svg/langpt-120px-Supply-demand-equilibrium.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Supply-demand-equilibrium.svg/langpt-120px-Supply-demand-equilibrium.svg.png?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "ciência social",
+      "source_url": "https://pt.wikipedia.org/wiki/Economia",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Equilíbrio entre as curvas de oferta e demanda",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-44acb5365f29",
+      "type": "image",
+      "title": "Vendedora de vegetais num mercado.",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Ballard_Farmers%27_Market_-_vegetables.jpg/330px-Ballard_Farmers%27_Market_-_vegetables.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Ballard_Farmers%27_Market_-_vegetables.jpg/330px-Ballard_Farmers%27_Market_-_vegetables.jpg?utm_source=pt.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "ciência social",
+      "source_url": "https://pt.wikipedia.org/wiki/Economia",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Vendedora de vegetais num mercado.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.infomoney.com.br/economia/",
+      "titulo": "InfoMoney",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "qui., 06 jun. 2024 03:02:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.infomoney.com.br/economia/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://g1.globo.com/economia/",
+      "titulo": "g1 Economia – Educação financeira, a cotação do dólar e as notícias do mercado",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 22:42:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://g1.globo.com/economia/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://pt.wikipedia.org/wiki/Economia",
+      "titulo": "ciência social",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2003-02-19T12:41:07Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://pt.wikipedia.org/wiki/Economia",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "7011908287afe540bcb81ed4db751e833a3a8b32",
+  "dataset_sha256": "4d3eed1a5022d17eac15118f52b0433e470efeba57e24c5c66004ca3884b3458"
+}

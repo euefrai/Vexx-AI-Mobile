@@ -1,0 +1,733 @@
+{
+  "id": "eva-05",
+  "category": "companies",
+  "query": "História da empresa Embraer fontes oficiais",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 7.215,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "bing",
+      "query": "História da empresa Embraer fontes oficiais",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "História da empresa Embraer fontes oficiais",
+      "error": "bloqueado"
+    },
+    {
+      "provider": "marginalia",
+      "query": "História da empresa Embraer fontes oficiais",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "história empresa embraer",
+      "candidates": 6
+    },
+    {
+      "provider": "marginalia",
+      "query": "história empresa embraer",
+      "candidates": 6
+    },
+    {
+      "provider": "wikipedia",
+      "query": "História da empresa Embraer fontes oficiais",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Hist%C3%B3ria+da+empresa+Embraer+fontes+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Hist%C3%B3ria+da+empresa+Embraer+fontes+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4936
+    },
+    {
+      "url": "https://html.duckduckgo.com/html/?q=Hist%C3%B3ria%20da%20empresa%20Embraer%20fontes%20oficiais",
+      "final": "https://html.duckduckgo.com/html/?q=Hist%C3%B3ria%20da%20empresa%20Embraer%20fontes%20oficiais",
+      "chars": 14320
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=Hist%C3%B3ria+da+empresa+Embraer+fontes+oficiais",
+      "final": "https://old-search.marginalia.nu/search?query=Hist%C3%B3ria+da+empresa+Embraer+fontes+oficiais",
+      "chars": 1071
+    },
+    {
+      "url": "https://www.bing.com/search?q=hist%C3%B3ria+empresa+embraer&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=hist%C3%B3ria+empresa+embraer&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4860
+    },
+    {
+      "url": "https://old-search.marginalia.nu/search?query=hist%C3%B3ria+empresa+embraer",
+      "final": "https://old-search.marginalia.nu/search?query=hist%C3%B3ria+empresa+embraer",
+      "chars": 41625
+    },
+    {
+      "url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "final": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "chars": 46150
+    },
+    {
+      "url": "https://m.brasilescola.uol.com.br/historia",
+      "final": "https://brasilescola.uol.com.br/historia",
+      "chars": 179973
+    },
+    {
+      "url": "https://www.todamateria.com.br/historia/",
+      "final": "https://www.todamateria.com.br/historia/",
+      "chars": 481221
+    },
+    {
+      "url": "https://humanidades.com/br/historia/",
+      "final": "https://humanidades.com/br/historia/",
+      "chars": 86010
+    },
+    {
+      "url": "https://pt.m.wikipedia.org/wiki/Hist%C3%B3ria",
+      "final": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+      "chars": 628954
+    },
+    {
+      "url": "https://www.cafehistoria.com.br/",
+      "final": "https://www.cafehistoria.com.br/",
+      "chars": 269479
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "História da empresa Embraer fontes oficiais",
+    "domain": "general",
+    "original_request": "História da empresa Embraer fontes oficiais",
+    "resolved_request": "História da empresa Embraer fontes oficiais",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T23:35:26.909395+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "5b39953080f39396344d",
+        "url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+        "title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background In...",
+        "origin": "marginalia",
+        "query": "história empresa embraer",
+        "date": "",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "1998.U.S. Dept. of Commerce, International Trade Commission, by Ronald D. Green, Washington, D.C.: 1987.Wheatley, Jonathan, 'Embraer Gets Back on Course,' Bus. ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "2881af89a364e527f8e5",
+        "url": "https://m.brasilescola.uol.com.br/historia",
+        "title": "História, estudo das ações do homem no tempo e espaço",
+        "origin": "bing",
+        "query": "História da empresa Embraer fontes oficiais",
+        "date": "2007-04-13-0309:22:15",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "análise crítica do seu objeto de estudo a fim de racionalizar a conclusão sobre os acontecimentos investigados. A palavra “história” tem origem no idioma grego ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 6953,
+        "final_url": "https://brasilescola.uol.com.br/historia",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "c499cd23e7c9926d15d5",
+        "url": "https://www.todamateria.com.br/historia/",
+        "title": "História - Toda Matéria",
+        "origin": "bing",
+        "query": "História da empresa Embraer fontes oficiais",
+        "date": "sáb., 24 out. 2026 08:31:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "uma religião afro-brasileira, surgida em 1908, fundada por Zélio Fernandino de Moraes. É marcada pela fusão de elementos de diferentes tradições espirituais e c",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.todamateria.com.br/historia/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "b4c39d330dec8ad20603",
+        "url": "https://humanidades.com/br/historia/",
+        "title": "História: início, final, ramos, divisão e características",
+        "origin": "bing",
+        "query": "História da empresa Embraer fontes oficiais",
+        "date": "2023-06-27T06:15:11-06:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "perguntas do tema. Estas suposições, chamadas hipóteses, serão corroboradas ou descartadas com base na investigação. Formulação de hipóteses . Procura-se inform",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://humanidades.com/br/historia/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "f4ddcacc3eab3c5d9f8a",
+        "url": "https://pt.m.wikipedia.org/wiki/Hist%C3%B3ria",
+        "title": "História – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "História da empresa Embraer fontes oficiais",
+        "date": "2003-02-03T05:18:55Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "descobertas. As metodologias e abordagens da arqueologia são independentes do campo da história. A é um ramo específico da arqueologia que frequentemente contra",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "5fae989831262adb342d",
+        "url": "https://www.cafehistoria.com.br/",
+        "title": "Café História - um portal para quem gosta de história",
+        "origin": "bing",
+        "query": "História da empresa Embraer fontes oficiais",
+        "date": "sáb., 24 out. 2026 04:13:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O Café História é um portal de divulgação científica criado pelo historiador Bruno Leal. Toda publicamos o nosso “especial da semana” (artigo, entrevista, bibli",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 388,
+        "final_url": "https://www.cafehistoria.com.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "08c239a51cbc6f0e7adf",
+        "url": "https://www.historiadomundo.com.br/",
+        "title": "História do mundo - A História da Humanidade a um Clique",
+        "origin": "bing",
+        "query": "História da empresa Embraer fontes oficiais",
+        "date": "qua., 21 out. 2026 02:00:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Confira no História do Mundo todas as curiosidades e peculiaridades da História Geral, do Brasil, da América.",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED",
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "b1f5001ba621eb6747b8",
+        "url": "https://www.secretprojects.co.uk/threads/aerospace-outsourcing-in-mexico.44900/page-4",
+        "title": "Aerospace outsourcing in Mexico | Page 4 | Secret Projects Forum",
+        "origin": "marginalia",
+        "query": "história empresa embraer",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "925e9882bfc1e384df13",
+        "url": "https://en.wikipedia.org/wiki/TransBrasil_%28airline%29",
+        "title": "TransBrasil (airline)",
+        "origin": "marginalia",
+        "query": "história empresa embraer",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "1d86116e36c8154ba35b",
+        "url": "https://en.wikipedia.org/wiki/VASP",
+        "title": "VASP",
+        "origin": "marginalia",
+        "query": "história empresa embraer",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "e73580f3bf4979e81d30",
+        "url": "https://durval.com/politica/comparacoes_pertinentes.txt",
+        "title": "COMPARAÇÕES PERTINENTES",
+        "origin": "marginalia",
+        "query": "história empresa embraer",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      },
+      {
+        "id": "d599699a198f08421a42",
+        "url": "https://www.usafa.edu/app/uploads/Space_and_Defense_9_1.pdf",
+        "title": "SPACE and DEFENSE",
+        "origin": "marginalia",
+        "query": "história empresa embraer",
+        "date": "",
+        "type": "pagina",
+        "state": "FOUND",
+        "read": false,
+        "reasons": [],
+        "evidence_ref": "",
+        "excerpt": "",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "READ_BUDGET_NOT_SELECTED"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-76851ccae5f4",
+      "type": "document",
+      "title": "SPACE and DEFENSE",
+      "url": "https://www.usafa.edu/app/uploads/Space_and_Defense_9_1.pdf",
+      "final_url": "https://www.usafa.edu/app/uploads/Space_and_Defense_9_1.pdf",
+      "source_title": "SPACE and DEFENSE",
+      "source_url": "https://www.usafa.edu/app/uploads/Space_and_Defense_9_1.pdf",
+      "publisher": "www.usafa.edu",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "search metadata"
+    },
+    {
+      "id": "med-71ccca73ee6a",
+      "type": "image",
+      "title": "Reference for Business",
+      "url": "https://www.referenceforbusiness.com/bs/i/reference-for-business-sm.png",
+      "final_url": "https://www.referenceforbusiness.com/bs/i/reference-for-business-sm.png",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Reference for Business",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ab23f8bc2341",
+      "type": "document",
+      "title": "Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "final_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "History of Empresa Brasileira de Aeronáutica S.A. (Embraer)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-4c749550644c",
+      "type": "document",
+      "title": "index.html",
+      "url": "https://www.referenceforbusiness.com/small/index.html",
+      "final_url": "https://www.referenceforbusiness.com/small/index.html",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "History of Empresa Brasileira de Aeronáutica S.A. (Embraer)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-7d1b0893cf12",
+      "type": "document",
+      "title": "index.html",
+      "url": "https://www.referenceforbusiness.com/encyclopedia/index.html",
+      "final_url": "https://www.referenceforbusiness.com/encyclopedia/index.html",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "History of Empresa Brasileira de Aeronáutica S.A. (Embraer)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-cf71592c2550",
+      "type": "document",
+      "title": "index.html",
+      "url": "https://www.referenceforbusiness.com/industries/index.html",
+      "final_url": "https://www.referenceforbusiness.com/industries/index.html",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "History of Empresa Brasileira de Aeronáutica S.A. (Embraer)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-aaf69aaa98e4",
+      "type": "document",
+      "title": "index.html",
+      "url": "https://www.referenceforbusiness.com/management/index.html",
+      "final_url": "https://www.referenceforbusiness.com/management/index.html",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "History of Empresa Brasileira de Aeronáutica S.A. (Embraer)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-d062a64537ef",
+      "type": "document",
+      "title": "index.html",
+      "url": "https://www.referenceforbusiness.com/business-plans/index.html",
+      "final_url": "https://www.referenceforbusiness.com/business-plans/index.html",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "History of Empresa Brasileira de Aeronáutica S.A. (Embraer)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-ccb6c5ded1ba",
+      "type": "document",
+      "title": "index.html",
+      "url": "https://www.referenceforbusiness.com/biography/index.html",
+      "final_url": "https://www.referenceforbusiness.com/biography/index.html",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "History of Empresa Brasileira de Aeronáutica S.A. (Embraer)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-17c66f311027",
+      "type": "document",
+      "title": "index.html",
+      "url": "https://www.referenceforbusiness.com/history/index.html",
+      "final_url": "https://www.referenceforbusiness.com/history/index.html",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "History of Empresa Brasileira de Aeronáutica S.A. (Embraer)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-7b2a8f778b24",
+      "type": "document",
+      "title": "index.html",
+      "url": "https://www.referenceforbusiness.com/history2/index.html",
+      "final_url": "https://www.referenceforbusiness.com/history2/index.html",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "History of Empresa Brasileira de Aeronáutica S.A. (Embraer)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    },
+    {
+      "id": "med-ec874a3e9ea5",
+      "type": "document",
+      "title": "index.html",
+      "url": "https://www.referenceforbusiness.com/businesses/index.html",
+      "final_url": "https://www.referenceforbusiness.com/businesses/index.html",
+      "source_title": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de",
+      "source_url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "publisher": "www.referenceforbusiness.com",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "link_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "History of Empresa Brasileira de Aeronáutica S.A. (Embraer)",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html link"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+      "titulo": "Empresa Brasileira de Aeronáutica S.A. (Embraer) - Company Profile, Information, Business Description, History, Background Information on Empresa Brasileira de ",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.referenceforbusiness.com/history2/62/Empresa-Brasileira-de-Aeron-utica-S-A-Embraer.html",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://m.brasilescola.uol.com.br/historia",
+      "titulo": "História, estudo das ações do homem no tempo e espaço",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2007-04-13-0309:22:15",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://m.brasilescola.uol.com.br/historia",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.todamateria.com.br/historia/",
+      "titulo": "História",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 08:31:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.todamateria.com.br/historia/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 1,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "7011908287afe540bcb81ed4db751e833a3a8b32",
+  "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1"
+}

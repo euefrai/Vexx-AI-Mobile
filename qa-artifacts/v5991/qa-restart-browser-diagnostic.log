@@ -1,0 +1,12 @@
+### Result
+{"status":{"http":200,"pc_online":true},"login_visible":false,"messages":["Pesquisa profunda sobre notícias em Angola nos últimos sete dias\n\n20:10\n◷ No celular","v.\nVexx\n···\n20:10\n···"],"stop_visible":true}
+### Ran Playwright code
+```js
+await (async page=>{const s=await page.evaluate(async()=>{let r=await fetch('/api/status');let j=await r.json();return {http:r.status,pc_online:j.pc_online,authenticated:j.authenticated};});return {status:s,login_visible:await page.locator('#loginOverlay').isVisible(),messages:await page.locator('.message').allInnerTexts(),stop_visible:await page.locator('#stopGen').isVisible()};})(page);
+```
+### Page
+- Page URL: http://127.0.0.1:56418/
+- Page Title: Vexx AI
+- Console: 28 errors, 0 warnings
+### Events
+- New console entries: .playwright-cli\console-2026-10-24T23-10-37-310Z.log#L22-L30

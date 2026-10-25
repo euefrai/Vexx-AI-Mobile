@@ -1,0 +1,4529 @@
+{
+  "scope": "OFFLINE_ANALYSIS_OF_LIVE_EXTERNAL",
+  "input_folder": "qa-artifacts\\v5991\\delivery-holdout",
+  "cases": [
+    {
+      "id": "holdout-01",
+      "question": "Notícias em Juazeiro, Bahia, nos últimos sete dias",
+      "intent_category": "small_city_news",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "\"Juazeiro\" \"bahia\" notícias",
+        "domain": "news",
+        "original_request": "Notícias em Juazeiro, Bahia, nos últimos sete dias",
+        "resolved_request": "Notícias em Juazeiro, Bahia, entre 2026-10-17 e 2026-10-24",
+        "parameters": {
+          "start_date": "2026-10-17",
+          "end_date": "2026-10-24",
+          "location": "Juazeiro",
+          "region": "bahia"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-24T23:37:18.941592+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true,
+        "constraints": {
+          "hard": {
+            "start_date": "2026-10-17",
+            "end_date": "2026-10-24",
+            "location": "Juazeiro",
+            "region": "bahia"
+          },
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "google-news",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "candidates": 6
+        },
+        {
+          "provider": "bing-news",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "error": "vazio"
+        },
+        {
+          "provider": "bing",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "candidates": 6
+        },
+        {
+          "provider": "bing",
+          "query": "\"Em Juazeiro, Lula diz que Flávio não vai aceitar quebrar o sigilo bancário \"porque a vida dele é podre\"\" site:www.bahianoticias.com.br",
+          "candidates": 3
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://news.google.com/rss/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+          "final": "https://news.google.com/rss/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+          "chars": 156035
+        },
+        {
+          "url": "https://www.bing.com/news/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/news/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 4541
+        },
+        {
+          "url": "https://www.bing.com/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=%22Juazeiro%22+%22bahia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5057
+        },
+        {
+          "url": "https://www.bing.com/search?q=%22Em+Juazeiro%2C+Lula+diz+que+Fl%C3%A1vio+n%C3%A3o+vai+aceitar+quebrar+o+sigilo+banc%C3%A1rio+%22porque+a+vida+dele+%C3%A9+podre%22%22+site%3Awww.bahianoticias.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=%22Em+Juazeiro%2C+Lula+diz+que+Fl%C3%A1vio+n%C3%A3o+vai+aceitar+quebrar+o+sigilo+banc%C3%A1rio+%22porque+a+vida+dele+%C3%A9+podre%22%22+site%3Awww.bahianoticias.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+          "chars": 4582
+        },
+        {
+          "url": "https://www.bahianoticias.com.br",
+          "final": "https://www.bahianoticias.com.br",
+          "chars": 484553
+        },
+        {
+          "url": "https://www.bahianoticias.com.br/principal/rss.xml",
+          "final": "https://cdn.bahianoticias.com.br/rss.xml",
+          "chars": 35690
+        },
+        {
+          "url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+          "final": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+          "chars": 315133
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Juazeiro",
+          "final": "https://en.wikipedia.org/wiki/Juazeiro",
+          "chars": 224389
+        },
+        {
+          "url": "https://www.juazeiro.ba.gov.br/a-prefeitura/",
+          "final": "https://www.juazeiro.ba.gov.br/a-prefeitura/",
+          "chars": 50894
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Juazeiro",
+          "final": "https://pt.wikipedia.org/wiki/Juazeiro",
+          "chars": 85848
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Juazeiro_(Bahia)",
+          "final": "https://pt.wikipedia.org/wiki/Juazeiro_(Bahia)",
+          "chars": 385199
+        },
+        {
+          "url": "https://www.juazeiro.ba.gov.br/",
+          "final": "https://www.juazeiro.ba.gov.br/",
+          "chars": 86614
+        }
+      ],
+      "candidates": [
+        {
+          "id": "55912d6da28c90988810",
+          "url": "https://www.juazeiro.ba.gov.br/",
+          "title": "Prefeitura Municipal de Juazeiro - BA | Portal Oficial da Gestão Municipal",
+          "origin": "bing",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "sex., 23 out. 2026 11:16:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "em alta Após sete anos, Festival Nacional de Teatro Wellington Monteclaro... Após sete anos sem realização, o Festival Wellington Monteclaro voltou a movimentar",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 297,
+          "final_url": "https://www.juazeiro.ba.gov.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH",
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "e8b339c50020d82d339a",
+          "url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+          "title": "O que fazer em Juazeiro, Bahia: 14 pontos turísticos",
+          "origin": "bing",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "2024-09-12T17:31:58+00:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "INTENT_MISMATCH",
+            "TEMPORAL_MISMATCH"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "km de e a 368 km de . Bahia Pernambuco Petrolina Salvador Paulo Afonso O Aeroporto Senador Ciro Coelho, localizado a 12 km, na cidade vizinha de Petrolina, serv",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://www.viagensecaminhos.com/juazeiro-bahia/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "INTENT_MISMATCH",
+            "DATE_MISMATCH"
+          ]
+        },
+        {
+          "id": "bfb04079b0b60637d511",
+          "url": "https://en.wikipedia.org/wiki/Juazeiro",
+          "title": "Juazeiro - Wikipedia",
+          "origin": "bing",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "2005-07-08T20:41:09Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "TEMPORAL_MISMATCH"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "Area (in Portuguese). . 2002-10-10. \"Área territorial oficial\" [ ] Brazilian Institute of Geography and Statistics(IBGE) . Retrieved 2010-12-05 1 2 Brazilian In",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://en.wikipedia.org/wiki/Juazeiro",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DATE_MISMATCH"
+          ]
+        },
+        {
+          "id": "47397b0b4e9fbad719c5",
+          "url": "https://www.juazeiro.ba.gov.br/a-prefeitura/",
+          "title": "A Prefeitura – Prefeitura Municipal de Juazeiro - BA | Portal Oficial ...",
+          "origin": "bing",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "sex., 23 out. 2026 01:51:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH",
+            "SOURCE_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Preferência de Cookies Usamos cookies e tecnologias semelhantes que são necessárias para operar o site. Você pode consentir com o nosso uso de cookies clicando ",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 369,
+          "final_url": "https://www.juazeiro.ba.gov.br/a-prefeitura/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH",
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "d2434017d30361a1bc84",
+          "url": "https://pt.wikipedia.org/wiki/Juazeiro",
+          "title": "Juazeiro – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "2004-09-26T21:52:54Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "em (usada para fazer sabão e produtos de limpeza para os dentes). São também utilizados na alimentação do gado na época seca. cereja geleias saponina Flores do ",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 2587,
+          "final_url": "https://pt.wikipedia.org/wiki/Juazeiro",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH",
+            "DATE_MISMATCH"
+          ]
+        },
+        {
+          "id": "5208c65a2fdbb0fae909",
+          "url": "https://news.google.com/rss/articles/CBMi4gFBVV95cUxQNXhyMFlCSzN6ZWd6dkQxSkdTTUxDTnd1N3RQU3VodkRROHBVLURja29GWkRNX3R4bHBtOUx5NzlkZnZWbVJIWG9hdDdsLTNPbmR1LXJfcFB5TDlEdUpSN1NwNVNweGJKZDc2MkxmSUZzYVQ4RUREd2VpcF9kV05WYlZ2YXRGUGFWblZFakZuaWJ2UWs2ZmdqUTh0ZUZ1dE9iVUdPVzVQTVBoRG5VZ1UzQVhFdjlFUzhnTFJlbkFMY1lpSEdiUjZmOVNEN0JaYjBtelk5YUU5SW5EajN3TnRQQUFR?oc=5",
+          "title": "Em Juazeiro, Lula diz que Flávio não vai aceitar quebrar o sigilo bancário \"porque a vida dele é podre\" - Bahia Notícias",
+          "origin": "google-news",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "Wed, 21 Oct 2026 01:18:00 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Em Juazeiro, Lula diz que Flávio não vai aceitar quebrar o sigilo bancário \"porque a vida dele é podre\" Bahia Notícias",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "9fe0426eabc2555471c9",
+          "url": "https://news.google.com/rss/articles/CBMi-gFBVV95cUxPbFAtdEVuOVI4ODg4d3ZKeUpvUlBqU0M3OXVDTURCZXIzRDdQQVQxanlVaWZ5UkFIZkRZNjBPNUI5TEdVWjJnSkR2aEkwcVFyRmZnb0ZnMGdTY0laYkdnWG5SU2MyNDh6X3J5NFBCX1RwTlI1WGlwekI1a2dNLWFaLXpSQUtWNWxDZDJQWDNiYUpKT1BzbkhrSmdwdEpBYzlEcE1zSkd1TTd3d1VwZUdSMTRHcmJ1YlI1WWppZVB5SXA5SVRMZUVLWEJXYzFSNzFXWnZXUERpdWpfd05QcTRNYXp2RTVjTFlCWUJyRmN2M1VsX1NvNjVxUkZR?oc=5",
+          "title": "Diretor da Juazeirense, Randerson Leal projeta nova arena para 15 mil pessoas em Juazeiro: “É a nossa expectativa” - Bahia Notícias",
+          "origin": "google-news",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "Wed, 21 Oct 2026 20:10:00 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Diretor da Juazeirense, Randerson Leal projeta nova arena para 15 mil pessoas em Juazeiro: “É a nossa expectativa” Bahia Notícias",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "07449f337e0cbef4acec",
+          "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNTUVQc2wwT3pleTc3NW9JRm9wOVpVdVhFX1pONm5LVkNZRTVIYjJiTUtLd1BiWlpRRG92cVB5bVJkc3NtVWw1NjJuMk5WMUVBQlozbXpzaXRnTEp5aTZoU3V5Z1NXYTZPNC1rTlZmMTBSN2d2Nl9lUzk2bXZZbjZOa3pxcFgwYnYwZE9LMEloV2M0S1JUcEFVR2ZPM2VfOVFMS2lvUjF0c1lTMmd6TjVHMkN4Wmlhc1luYlVvSkQySzFHcWhnamQtVFRkUQ?oc=5",
+          "title": "Polícia prende suspeito de matar adolescente em Juazeiro - Bahia Notícias",
+          "origin": "google-news",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "Fri, 16 Oct 2026 19:20:00 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Polícia prende suspeito de matar adolescente em Juazeiro Bahia Notícias",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "2e138f7ae1957b25fede",
+          "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9kY0M3N3Q2TWsyNWxieFE0WVhYc1hZWi1LZmYtaGRrajZXY0ZUb3FHand1T0g1Y0RzYVh5YzBYMU11UUI2VmdRM3cwd2hWbWhkOWhjS2kzanhsY0RuNW52aHdOa0JxZjFfM0dDMmlJdkJydw?oc=5",
+          "title": "NOTÍCIAS DE JUAZEIRO - BA - Relata Bahia",
+          "origin": "google-news",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "Tue, 20 Oct 2026 23:44:02 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "NOTÍCIAS DE JUAZEIRO - BA Relata Bahia",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "19383b26612d26492418",
+          "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQck9qcjRwSk9XTUhUV0syQkNIMjVkdHNkd0VlT2plN2xDN0dNd2tyQmxJVXBpWjQ4cVUxeWxKc3dkTWN5cUVXYVVMem9BZi1WLUE1OW5vaFhRbTJNNDFpdjVkUm9hVDZSNl9PRkFab1hCQVMwNDcxVTlPY3BKQXZxTmc4NnFjQmhTZmZYRXlEcU1hTHhqWVpMWm01TDJOdmdjLXFXWF9aY00tZVJUb0FSNEkzWFpiM0Zta09BSmpocnZRRlRU?oc=5",
+          "title": "ACM Neto e Jerônimo concentram agendas em Juazeiro no feriado da Independência - Bahia Notícias",
+          "origin": "google-news",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "Tue, 08 Sep 2026 07:00:00 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "ACM Neto e Jerônimo concentram agendas em Juazeiro no feriado da Independência Bahia Notícias",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "8f7a24fc0239c6b6372b",
+          "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxPMm5aenZKMnR4ZW04Rk1pY2NmbS1STFAwWjJlQW0zUlJxV0lFeFZGa3JOSmozRDJIQ1lCRWVtOUktSm95TDJtUjlTeml5cEotS1ZiNVZ5U2Y5Q0xBbEFiRXE1RjFpb1FKV1VUdVZPSFFlQWdrRllTblFuUU9hUVk1MENkdFpTclU1UkJuYzM1cUtjLWZPcDd5Y0ZSd1ZLOUJ3Z0l5c2dMUlFuR05HZVkxaXo2cnhndUd1OEFsd2w4NkZDdHJ5N0FabDZ5ZEFTem1QZVpQd3FmSUg?oc=5",
+          "title": "Juazeiro e região terão quatro deputados na Assembleia Legislativa da Bahia em 2027 - Bahia Notícias",
+          "origin": "google-news",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "Mon, 05 Oct 2026 07:00:00 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Juazeiro e região terão quatro deputados na Assembleia Legislativa da Bahia em 2027 Bahia Notícias",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "97fea1fc5afb9d2c8117",
+          "url": "https://pt.wikipedia.org/wiki/Juazeiro_(Bahia)",
+          "title": "Juazeiro (Bahia) – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "\"Juazeiro\" \"bahia\" notícias",
+          "date": "2004-09-07T15:40:09Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "TEMPORAL_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "diários e partem da capital baiana e de outras cidades da Bahia e de outros estados, como , e . Partindo de Salvador a Juazeiro passaremos por Feira de Santana,",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 8000,
+          "final_url": "https://pt.wikipedia.org/wiki/Juazeiro_(Bahia)",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DATE_MISMATCH"
+          ]
+        }
+      ],
+      "unique_candidates": 12,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "HARD_CONSTRAINT_MISMATCH": 3,
+        "EVIDENCE_INSUFFICIENT": 2,
+        "INTENT_MISMATCH": 1,
+        "DATE_MISMATCH": 7,
+        "DISCOVERY_ONLY": 6,
+        "INDEX_PAGE": 6
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 12.654,
+      "read_in_candidate_pool": 6,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-02",
+      "question": "Notícias em Rio Branco, Acre, hoje",
+      "intent_category": "capital_news",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "\"Rio Branco\" \"acre\" notícias",
+        "domain": "news",
+        "original_request": "Notícias em Rio Branco, Acre, hoje",
+        "resolved_request": "Notícias em Rio Branco, Acre, hoje",
+        "parameters": {
+          "start_date": "2026-10-24",
+          "end_date": "2026-10-24",
+          "location": "Rio Branco",
+          "region": "acre"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-24T23:37:32.049451+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true,
+        "constraints": {
+          "hard": {
+            "start_date": "2026-10-24",
+            "end_date": "2026-10-24",
+            "location": "Rio Branco",
+            "region": "acre"
+          },
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "google-news",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "candidates": 6
+        },
+        {
+          "provider": "bing-news",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "error": "vazio"
+        },
+        {
+          "provider": "bing",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "candidates": 6
+        },
+        {
+          "provider": "bing",
+          "query": "\"Motociclista de 26 anos morre após bater contra poste em Rio Branco; VÍDEO\" site:g1.globo.com",
+          "candidates": 3
+        },
+        {
+          "provider": "bing",
+          "query": "\"Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital\" site:acrenews.com.br",
+          "candidates": 3
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://news.google.com/rss/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+          "final": "https://news.google.com/rss/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+          "chars": 171648
+        },
+        {
+          "url": "https://www.bing.com/news/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/news/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5775
+        },
+        {
+          "url": "https://www.bing.com/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=%22Rio+Branco%22+%22acre%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 4918
+        },
+        {
+          "url": "https://www.bing.com/search?q=%22Motociclista+de+26+anos+morre+ap%C3%B3s+bater+contra+poste+em+Rio+Branco%3B+V%C3%8DDEO%22+site%3Ag1.globo.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=%22Motociclista+de+26+anos+morre+ap%C3%B3s+bater+contra+poste+em+Rio+Branco%3B+V%C3%8DDEO%22+site%3Ag1.globo.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+          "chars": 5921
+        },
+        {
+          "url": "https://g1.globo.com",
+          "error": "tamanho"
+        },
+        {
+          "url": "https://www.bing.com/search?q=%22Mailza+arrasta+multid%C3%A3o+e+para+centro+de+Rio+Branco+em+ato+de+encerramento+da+campanha+na+capital%22+site%3Aacrenews.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=%22Mailza+arrasta+multid%C3%A3o+e+para+centro+de+Rio+Branco+em+ato+de+encerramento+da+campanha+na+capital%22+site%3Aacrenews.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+          "chars": 5033
+        },
+        {
+          "url": "https://g1.globo.com/rj/rio-de-janeiro/",
+          "final": "https://g1.globo.com/rj/rio-de-janeiro/",
+          "chars": 793520
+        },
+        {
+          "url": "https://en.wikipedia.org/wiki/Rio_de_Janeiro",
+          "error": "tamanho"
+        },
+        {
+          "url": "https://www.imdb.com/title/tt1436562/",
+          "final": "https://www.imdb.com/title/tt1436562/",
+          "chars": 0
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Rio",
+          "final": "https://pt.wikipedia.org/wiki/Rio",
+          "chars": 933671
+        },
+        {
+          "url": "https://brasilescola.uol.com.br/geografia/rios.htm",
+          "final": "https://brasilescola.uol.com.br/geografia/rios.htm",
+          "chars": 143429
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+          "final": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+          "chars": 1900546
+        }
+      ],
+      "candidates": [
+        {
+          "id": "d09e39b5ac434742a607",
+          "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQajV5RDROX21NNUZiYUZRMXZqdVlrbm5qSldUUFRHZVVrVHRMSi1VLW40NGdFUVRwbEprd2VOSFRHQzJzTlB3Ul9VWEo2OXktMjlaTmJEVTZ0VHg5MjV4WDNfRGN6bnhkXzdGa0tHX0RqeEtRb2FiOWdnYkpTT2M3cHFjUHB5VWNuenRYQWdaVXQwSElHdjJMWGVwNjJuNzl1SFBfRHFtakpYQldybXRZdl9TRzhNZ01iOFV6QldR0gHMAUFVX3lxTE1zdWRuYTZ1RzNodG1QU0lBQUNvSHdrMkVzUElRWlp3NnZNdG1jV1Mwb3RkbHFwbU5zMG1EeTc2VC1HRXRiVFl4Z2h0c2pxUVZWTC01a0FFaVJyaWVKLWN2c2dkQkFYR19odUgtWm1XTm52S1hyYmFqbUhSWnNaVHdZXzFqUXJHSzZJcU5TdDVneS10V1p",
+          "title": "Motociclista de 26 anos morre após bater contra poste em Rio Branco; VÍDEO - G1",
+          "origin": "google-news",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "Sat, 24 Oct 2026 17:04:12 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Motociclista de 26 anos morre após bater contra poste em Rio Branco; VÍDEO G1",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "HARD_CONSTRAINT_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "e035165adce9c1aa4d99",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxOQzJTU0hhOHlIM1MtWTJLNkl5UkhYcktIUDEtX2VUWVp6RDBUUktkaHkzLWRUYmQ1MXRRVjdEejUySE91Z2NIQVpKUXNXS3lfMEN5YlpGNDNGbDIzT2c3R1VuS19tZGJrS2NYeUdVN3llQjZ4cG52UmFTa0tQeFQtOGRpUENwSTlRY01uSDFwMlV6UUtuR014dGI2ZGpob25fWkdpTEk1QVIxQXllYXFIbXo5amNqTUxsWWRTRkRQSQ?oc=5",
+          "title": "Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital - AcreNews",
+          "origin": "google-news",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "Sat, 24 Oct 2026 20:41:35 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Mailza arrasta multidão e para centro de Rio Branco em ato de encerramento da campanha na capital AcreNews",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "HARD_CONSTRAINT_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "770c9a4ecff36d51063b",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQMHdCSTJ2Y21BeEJBR3VkRnZTZnlTaENfQmNta2JpNmN1cUFnMFhOYkNDN3lfYTFha280WUlTakpKT0xVLXZsUWFDV0FQYlUzMjNMbE5NX1lMVER5Q3lOOE13LW9GZ3doQlpyeHFaaEZfT2hOek1DcWxBaE9UTU5GX0NMYnRTM3VIenhNQUV5alREWktxYWRJZEdSemFxdzdaU094dmNkNW1Xdw?oc=5",
+          "title": "Prefeitura de Rio Branco homenageia garis e margaridas com café da manhã especial - AcreNews",
+          "origin": "google-news",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "Sat, 24 Oct 2026 02:57:06 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Prefeitura de Rio Branco homenageia garis e margaridas com café da manhã especial AcreNews",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "HARD_CONSTRAINT_MISMATCH",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "4ea76bebb723ee19dae7",
+          "url": "https://news.google.com/rss/articles/CBMi8wFBVV95cUxOTWYyUDRfSWVlUXR2b0NIN1JLVjdJczdMZUlZcUNyaTZ6VFd4UnVYdGhwcEFCbmxmQ2xXdUNrZzFTZ0k5T3VVUGVCcUc5RmRYcFZRZmNlSkNyeGtNbjdXMVJtaE15b3o3ODIyU3JSSEJXUVVJOXV4eEE1X3pKMTc4eEJWSDJIQWphREVhNXd5cy1qenQ0QnBXUDBVVGw1WmpxM0xmSXRnS0R6YnhVTGNWdFdyQUxWV0FCaWM3T1o4WEVfM2VENkwxOENNQWdpcFFSallHeExTNmxWQXdvSU54dGdkUG02WFF2SUNrYWliX1hHbVnSAYICQVVfeXFMUGNQUFRMbGlqV05TSUc1LWIzRzNkNXRUbFhLZ05nYVpkSDBhMS0wNjFnUUh4VzZPWkJBVi10LVY4em5vU0lhdUVtM01pVWgzMVNTT0ExenV6SC1zeDNxdlM",
+          "title": "Professora de 44 anos morre após passar mal em frente à catedral de Rio Branco: 'Estava indo rezar', diz marido - G1",
+          "origin": "google-news",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "Sat, 10 Oct 2026 07:00:00 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Professora de 44 anos morre após passar mal em frente à catedral de Rio Branco: 'Estava indo rezar', diz marido G1",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "HARD_CONSTRAINT_MISMATCH",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "ca437829ea69658d9c25",
+          "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPQmVYVlp4MHlfTW0wTjBkamhleEp3d1FOZTVOUDBNVlVrUW9CUUJtc1NJVHB4bF8yMU5lODlOZW9rd3dCM3FOWWJkVVZjODZFbHRfbW5qa1AwQWdVSWp2Q2VwWWYtYVFUeF9nck1DeU5CTkE3NUNMaHZWdTFyY2syUF9oaGpwZUtZTmZrUERPSjVXMzNqcUZXYmQtY0s0YWdlaUgwaXlqTlktYVpnR0lwdWtFSDVGT29XWE9aLUdUNUdYbHhubkhLcg?oc=5",
+          "title": "Tribunal de Justiça do Acre autoriza retomada de execução fiscal cobrada pela Prefeitura de Rio Branco - Acre Jornal",
+          "origin": "google-news",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "Fri, 23 Oct 2026 11:10:03 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Tribunal de Justiça do Acre autoriza retomada de execução fiscal cobrada pela Prefeitura de Rio Branco Acre Jornal",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "d4637ee660c6ea8d4730",
+          "url": "https://g1.globo.com/rj/rio-de-janeiro/",
+          "title": "g1 Rio de Janeiro: notícias e vídeos da Globo",
+          "origin": "bing",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "sáb., 24 out. 2026 21:38:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH",
+            "SOURCE_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "Candidatos focaram em capitais do Sudeste neste sábado (24), véspera da votação. Petista passou por Rio e seguiu para São Paulo. Flávio mobilizou apoiadores em ",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 243,
+          "final_url": "https://g1.globo.com/rj/rio-de-janeiro/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH",
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "20e83da9895e48e156d8",
+          "url": "https://en.wikipedia.org/wiki/Rio_de_Janeiro",
+          "title": "Rio de Janeiro - Wikipedia",
+          "origin": "bing",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "sex., 23 out. 2026 19:23:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "ENTITY_MISMATCH",
+            "SOURCE_MISMATCH",
+            "INTENT_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Rio de Janeiro, [c] also known simply as Rio, [7] is the capital and largest city of the state of Rio de Janeiro. It is the second-largest city in Brazil after ",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "tamanho",
+          "losses": [
+            "FETCH_FAILED",
+            "HARD_CONSTRAINT_MISMATCH",
+            "INTENT_MISMATCH",
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "2b70aed9b3309e19ae61",
+          "url": "https://www.imdb.com/title/tt1436562/",
+          "title": "Rio (2011) - IMDb",
+          "origin": "bing",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "qui., 22 out. 2026 22:59:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "ENTITY_MISMATCH",
+            "SOURCE_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Rio: Directed by Carlos Saldanha. With Jesse Eisenberg, Anne Hathaway, George Lopez, Karen Disher. When Blu, a domesticated macaw from small-town Minnesota, mee",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": "https://www.imdb.com/title/tt1436562/",
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "EXTRACTION_EMPTY",
+            "HARD_CONSTRAINT_MISMATCH",
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "178ff21e8a1c5336398c",
+          "url": "https://pt.wikipedia.org/wiki/Rio",
+          "title": "Rio – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "2004-06-18T17:25:38Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH",
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "próprio rio, e sua água escoa encosta abaixo em direção a ele. As de um rio compreendem os menores que o alimentam e constituem sua origem. Esses cursos podem s",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://pt.wikipedia.org/wiki/Rio",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH",
+            "DATE_MISMATCH"
+          ]
+        },
+        {
+          "id": "e0cebf2dfaa5ed86dfa2",
+          "url": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+          "title": "Rio de Janeiro – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "2004-03-23T00:36:18Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH",
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "simplesmente referido como , é a do do . Um dos maiores internacionais no , na e também do , é uma das . É a (depois de ), a da e a . Sua população segundo o do",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://pt.wikipedia.org/wiki/Rio_de_Janeiro",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH",
+            "DATE_MISMATCH"
+          ]
+        },
+        {
+          "id": "43d21f4c79a225ff1cd9",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQeTgxZFBNT3ExZ3ZmcDJLb25zdEdPT2RHNEI5STNHa3A1MjF1QU96M2dmWk1hQ2JnSndJcERjM0lGYXJ6VDhDLUNvU2wyLWh1dXZMZnFTS2Zsb1Exa1BnVEplOS1sN2c1TmJ6cHRaYnVWSXdmZzF2c0FjdW1oS0RFVlhCZXhxVmhkUFRrRmxibS1CZm0xckdjeXJITkJqaFV5LTJwVG5mNHdxQ0k?oc=5",
+          "title": "Mailza cumpre agenda de campanha e realiza atos políticos na região do Alto Acre - Acre Jornal",
+          "origin": "google-news",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "Fri, 23 Oct 2026 11:09:45 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "ENTITY_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Mailza cumpre agenda de campanha e realiza atos políticos na região do Alto Acre Acre Jornal",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "HARD_CONSTRAINT_MISMATCH",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "4f1ea9d41ba875c94d4d",
+          "url": "https://brasilescola.uol.com.br/geografia/rios.htm",
+          "title": "Rios: o que são, partes, tipos, importância - Brasil Escola",
+          "origin": "bing",
+          "query": "\"Rio Branco\" \"acre\" notícias",
+          "date": "2007-04-17-0311:50:02",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH",
+            "SOURCE_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "geração de energia, entre outras ações. Com isso, sabermos os componentes de um rio é fundamental para analisarmos a forma e o uso desse reservatório. Veja os c",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 8000,
+          "final_url": "https://brasilescola.uol.com.br/geografia/rios.htm",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH",
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        }
+      ],
+      "unique_candidates": 12,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "DISCOVERY_ONLY": 6,
+        "HARD_CONSTRAINT_MISMATCH": 11,
+        "INDEX_PAGE": 6,
+        "DATE_MISMATCH": 6,
+        "EVIDENCE_INSUFFICIENT": 4,
+        "FETCH_FAILED": 1,
+        "INTENT_MISMATCH": 1,
+        "EXTRACTION_EMPTY": 1
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 6.832,
+      "read_in_candidate_pool": 4,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-03",
+      "question": "Notícias em Faro, Portugal, nos últimos sete dias",
+      "intent_category": "ambiguous_city_news",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "\"Faro\" \"portugal\" notícias",
+        "domain": "news",
+        "original_request": "Notícias em Faro, Portugal, nos últimos sete dias",
+        "resolved_request": "Notícias em Faro, Portugal, entre 2026-10-17 e 2026-10-24",
+        "parameters": {
+          "start_date": "2026-10-17",
+          "end_date": "2026-10-24",
+          "location": "Faro",
+          "region": "portugal"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-24T23:37:40.414293+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true,
+        "constraints": {
+          "hard": {
+            "start_date": "2026-10-17",
+            "end_date": "2026-10-24",
+            "location": "Faro",
+            "region": "portugal"
+          },
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "google-news",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "candidates": 6
+        },
+        {
+          "provider": "bing-news",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "error": "vazio"
+        },
+        {
+          "provider": "bing",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "candidates": 6
+        },
+        {
+          "provider": "bing",
+          "query": "\"Algarve vai reconstruir bairro em Faro\" site:www.theportugalnews.com",
+          "candidates": 3
+        },
+        {
+          "provider": "bing",
+          "query": "\"Incêndio em Faro deixa pelo menos 29 pessoas desalojadas\" site:sicnoticias.pt",
+          "candidates": 3
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://news.google.com/rss/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+          "final": "https://news.google.com/rss/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+          "chars": 140763
+        },
+        {
+          "url": "https://www.bing.com/news/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/news/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 4930
+        },
+        {
+          "url": "https://www.bing.com/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=%22Faro%22+%22portugal%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5006
+        },
+        {
+          "url": "https://www.bing.com/search?q=%22Algarve+vai+reconstruir+bairro+em+Faro%22+site%3Awww.theportugalnews.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=%22Algarve+vai+reconstruir+bairro+em+Faro%22+site%3Awww.theportugalnews.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+          "chars": 5357
+        },
+        {
+          "url": "https://www.theportugalnews.com",
+          "final": "https://www.theportugalnews.com",
+          "chars": 232257
+        },
+        {
+          "url": "https://www.bing.com/search?q=%22Inc%C3%AAndio+em+Faro+deixa+pelo+menos+29+pessoas+desalojadas%22+site%3Asicnoticias.pt&format=rss&count=3&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=%22Inc%C3%AAndio+em+Faro+deixa+pelo+menos+29+pessoas+desalojadas%22+site%3Asicnoticias.pt&format=rss&count=3&setlang=pt-BR&cc=BR",
+          "chars": 5405
+        },
+        {
+          "url": "https://pt.m.wikipedia.org/wiki/Faro",
+          "final": "https://pt.wikipedia.org/wiki/Faro",
+          "chars": 523196
+        },
+        {
+          "url": "https://www.faro.com/pt-br/",
+          "final": "https://www.faro.com/pt-BR",
+          "chars": 168998
+        },
+        {
+          "url": "https://www.vagamundos.pt/roteiro-visitar-faro-e-praias/",
+          "final": "https://www.vagamundos.pt/roteiro-visitar-faro-e-praias/",
+          "chars": 421361
+        },
+        {
+          "url": "https://www.essemundoenosso.com.br/o-que-fazer-em-faro-portugal/",
+          "final": "https://www.essemundoenosso.com.br/o-que-fazer-em-faro-portugal/",
+          "chars": 173648
+        },
+        {
+          "url": "https://www.faro.com/pt-BR/Products",
+          "error": "redirect"
+        },
+        {
+          "url": "https://faro.edu.br/",
+          "final": "https://faro.edu.br/",
+          "chars": 159466
+        }
+      ],
+      "candidates": [
+        {
+          "id": "9863783d6c21be645d64",
+          "url": "https://pt.m.wikipedia.org/wiki/Faro",
+          "title": "Faro – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "2004-03-25T22:03:13Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "TEMPORAL_MISMATCH"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "Portugal, e os seus sucessores iniciam a expansão do país para o sul, reconquistando os territórios ocupados pelos mouros. Depois da tomada da cidade por , em 1",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://pt.wikipedia.org/wiki/Faro",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DATE_MISMATCH"
+          ]
+        },
+        {
+          "id": "7c25783a4ee381f31d5b",
+          "url": "https://www.faro.com/pt-br/",
+          "title": "Soluções de medição em 3D e Geração de imagens | FARO",
+          "origin": "bing",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "qui., 22 out. 2026 10:20:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "Biblioteca de recursos Mantenha-se informado. Inscreva-se FAROLive! Eventos virtuais Mantenha-se informado. Inscreva-se Workshops Conferências e feiras Inscreva",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 5728,
+          "final_url": "https://www.faro.com/pt-BR",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH",
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "c5e8cf6e6cdc24183eef",
+          "url": "https://www.vagamundos.pt/roteiro-visitar-faro-e-praias/",
+          "title": "Faro, o que visitar, ver e fazer | Roteiro e melhores praias",
+          "origin": "bing",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "2026-07-13T18:11:35+00:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "num roteiro de 1 dia? 5. Vila Adentro 5.1. Muralhas de Faro 5.2. Arco da Vila 5.3. Largo da Sé 5.4. Praça D. Afonso III 5.5. Museu Municipal de Faro 5.6. Arco d",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://www.vagamundos.pt/roteiro-visitar-faro-e-praias/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH",
+            "DATE_MISMATCH"
+          ]
+        },
+        {
+          "id": "94724bfc5869e599f032",
+          "url": "https://www.faro.com/pt-BR/Products",
+          "title": "Produtos | FARO",
+          "origin": "bing",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "sex., 23 out. 2026 19:09:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Encontre o hardware e o software ideais da FARO para atender às suas necessidades de medição, geração de imagens e realização em 3D.",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "redirect",
+          "losses": [
+            "FETCH_FAILED",
+            "HARD_CONSTRAINT_MISMATCH",
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "b1c0f3dc827ff1d6cc0e",
+          "url": "https://www.essemundoenosso.com.br/o-que-fazer-em-faro-portugal/",
+          "title": "O que fazer em Faro, Portugal: Principais pontos turísticos",
+          "origin": "bing",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "2018-02-21T22:15:52-03:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "INTENT_MISMATCH",
+            "TEMPORAL_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Faro, por conta da ótima estrutura, tem fácil acesso pra quem chega ou sai de trem ou avião. Em um outro post, nós tiramos todas as dúvidas sobre . Lagos saiba ",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 6587,
+          "final_url": "https://www.essemundoenosso.com.br/o-que-fazer-em-faro-portugal/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "INTENT_MISMATCH",
+            "DATE_MISMATCH"
+          ]
+        },
+        {
+          "id": "c4c1b9d42775d98d30cd",
+          "url": "https://faro.edu.br/",
+          "title": "Faculdade FARO - Transformando sonhos em realidade",
+          "origin": "bing",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "2020-04-28T06:30:19+00:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Telefones BR-364 – km 6,5 s/n – Porto Velho/RO Campus BR (69) 3217-5102 | (69) 3217-5100 Av. Carlos Gomes, 1910 – Porto Velho/RO(69) 2182-5100 | (69) 3221-1060 ",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 192,
+          "final_url": "https://faro.edu.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH",
+            "DATE_MISMATCH"
+          ]
+        },
+        {
+          "id": "32f2eff112c310fba987",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxNaGZ0bTlGdzdUbmJidDlaQXlZNkZhLXFjakZwek9IYTd5QUZCb3ZGUXV0U2JvLXJhX0s2ZEJSVDdlM01aZ2hUMVZGNFBGLS1icE1sTlZsa1ZQWmd3M2J5WXplWUFtYW9OTnJldERkZ3A2cjgzeW1XOTRJS0UtbFE4RF9IbWR4cm9kbEhrZ3VOWGRxWkRhZGlKRzA1NlFEdHlodkhn?oc=5",
+          "title": "Algarve vai reconstruir bairro em Faro - The Portugal News",
+          "origin": "google-news",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "Sat, 24 Oct 2026 16:41:15 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Algarve vai reconstruir bairro em Faro The Portugal News",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "327e227a35b17c281204",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQanM2NnJpUW9INTcxUmVPMUt2eTBOMmNhdnNzaERNcXU3UmZodEltVGt6cmt3TnZPd1lPaHE2ZGVlMFU2VTJ6WmVKU1FLNEplSFBveUU2TjVyaWZLWm5RbWhjWmpEOWVaQ3FUX2N4SF9ZU3I4OHdDS0RrLU5qNjlYR21xRmxfQVpyZU5INnRRWFRITGc5ZDFYZVNBYWZBbHJvOE5VUXdBbnNTSHd1N2t6bDgzM1ZBeFpDQUJtNE1abHBwcmJBUlZEand3?oc=5",
+          "title": "Incêndio em Faro deixa pelo menos 29 pessoas desalojadas - SIC Notícias",
+          "origin": "google-news",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "Tue, 13 Oct 2026 07:00:00 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Incêndio em Faro deixa pelo menos 29 pessoas desalojadas SIC Notícias",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "HARD_CONSTRAINT_MISMATCH",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "7993c2c9ff342b4dcb83",
+          "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxOamVmV1Bja2xiSl8wUEU2ZlR3MzhoLVRYdUViVXFOTzJ2eWd6M0FGS2hjR0FJV1ZnYURtTWpscDk5dlVfTDdZa0RjS1VuMWxFQTlMWFg2Tzc0OW5XOThsR2I0ek5HODZTNndvUXBUa3Z3a1hXVDlWczlGNHhnWlJXVDlWQnNNQmJqaUtkOS1UT21fSjVGWWNNb3d2cXNrZjNoR3pfeU41THp2eU4wOTVtcw?oc=5",
+          "title": "Faro e Beja sob aviso amarelo devido à previsão de trovoada - TV RECORD Europa",
+          "origin": "google-news",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "Mon, 19 Oct 2026 09:50:49 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Faro e Beja sob aviso amarelo devido à previsão de trovoada TV RECORD Europa",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "HARD_CONSTRAINT_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "38b1aec4ae7d9f052b01",
+          "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOVWJSYVRteTJWQ2pTRXg1TnhTdkVscDJsUlZmbURZQU5URi15UWZRTWt1SzhWalVlRkt1R3dmRU42WnlIYXUwZ3QxZVFGVHFPODRsRGNtelRpbG9vNjNZbDNHWHFsSTFsbFEtZ0pSU2k0N0N5ZHJ2NHRXVi01T0RXa0VPeEtiT21MeXRWZExMYnBvdXhtaEppR3lGYTJYNGhKQ3VEU1lad2QwWTRkbGYxRlZXNXc2SzY2bFNNa29pd3BJRHpvUkhkYkVOWFIzMWwycVZqY2JVQVotTHF0MFE?oc=5",
+          "title": "Três menores estiveram 44 dias retidos em Faro após verem negada a entrada em Portugal - TVI",
+          "origin": "google-news",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "Mon, 28 Sep 2026 07:00:00 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Três menores estiveram 44 dias retidos em Faro após verem negada a entrada em Portugal TVI",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "14a0ba119eb541add981",
+          "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPcjJTZ2hZVmlnTWdNMnI3aWJZc2FzcF9VRDRvOGx1dGxQSVE1SF9iUFpzNGU4aEwycXpUaXZ4N1dtZUdzNWdwWTJMZ1RNdkFLQXl4ODFVV3hqVGFvY3RsLTFIZGVFZzZjc19JZVNYQ3UzNG9kc2xpRjBaY0RfUUF2TDRCUVktUkZzSVUzWkpleFNvR2w5U2x5T2kxQndER3U4b3FTY3c1REQ0TF9DemZCbmhoQQ?oc=5",
+          "title": "Marcelo Rebelo de Sousa transportado para o Hospital de Faro após indisposição - Euronews.com",
+          "origin": "google-news",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "Wed, 12 Aug 2026 07:00:00 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "SOURCE_MISMATCH",
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Marcelo Rebelo de Sousa transportado para o Hospital de Faro após indisposição Euronews.com",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "HARD_CONSTRAINT_MISMATCH",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        },
+        {
+          "id": "b7dca4be7c154bf40117",
+          "url": "https://news.google.com/rss/articles/CBMivwFBVV95cUxQVEpwQlpLcE1SVE9CN3plSHhVbmN1WEZPLWo1d0c1WmJoRElnNE5tVklfaWc0UThFUllhVTNnbGJ4bUVqXzhNRW4zcmU2R0VpTUtmMXVHLTI5WkhrYlZGQktpdzY0c1dkbjQ2dnZ6b01IR0tuM2JOQlVGVXdxVTBOY0pHVEx1NF9TRlI3bWZyQzdTa1p4V0VTcVBxaGRDMnR2b2lOZ24yVldZNFpZUG9BQTI2V2sxU2xZUVZIMHc4dw?oc=5",
+          "title": "Brasileiros votam em Faro sem problemas: “Até está bem organizado” – CNN Portugal - diariOnline Região Sul",
+          "origin": "google-news",
+          "query": "\"Faro\" \"portugal\" notícias",
+          "date": "Mon, 05 Oct 2026 07:00:00 GMT",
+          "type": "noticia",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "TEMPORAL_MISMATCH",
+            "INDEX_PAGE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Brasileiros votam em Faro sem problemas: “Até está bem organizado” – CNN Portugal diariOnline Região Sul",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "DISCOVERY_ONLY",
+            "DATE_MISMATCH",
+            "INDEX_PAGE"
+          ]
+        }
+      ],
+      "unique_candidates": 12,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "DATE_MISMATCH": 8,
+        "HARD_CONSTRAINT_MISMATCH": 7,
+        "EVIDENCE_INSUFFICIENT": 2,
+        "FETCH_FAILED": 1,
+        "INTENT_MISMATCH": 1,
+        "DISCOVERY_ONLY": 6,
+        "INDEX_PAGE": 6
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 9.12,
+      "read_in_candidate_pool": 5,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-04",
+      "question": "Documentação oficial WebCrypto SubtleCrypto digest",
+      "intent_category": "technical_documentation",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Documentação oficial WebCrypto SubtleCrypto digest",
+        "domain": "documents",
+        "original_request": "Documentação oficial WebCrypto SubtleCrypto digest",
+        "resolved_request": "Documentação oficial WebCrypto SubtleCrypto digest",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-24T23:37:50.176577+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false,
+        "constraints": {
+          "hard": {},
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "bing",
+          "query": "Documentação oficial WebCrypto SubtleCrypto digest",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Documentação oficial WebCrypto SubtleCrypto digest",
+          "error": "bloqueado"
+        },
+        {
+          "provider": "marginalia",
+          "query": "Documentação oficial WebCrypto SubtleCrypto digest",
+          "candidates": 1
+        },
+        {
+          "provider": "bing",
+          "query": "webcrypto subtlecrypto digest",
+          "candidates": 1
+        },
+        {
+          "provider": "marginalia",
+          "query": "webcrypto subtlecrypto digest",
+          "error": "vazio"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "webcrypto subtlecrypto digest",
+          "error": "vazio"
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://www.bing.com/search?q=Documenta%C3%A7%C3%A3o+oficial+WebCrypto+SubtleCrypto+digest&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=Documenta%C3%A7%C3%A3o+oficial+WebCrypto+SubtleCrypto+digest&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5159
+        },
+        {
+          "url": "https://html.duckduckgo.com/html/?q=Documenta%C3%A7%C3%A3o%20oficial%20WebCrypto%20SubtleCrypto%20digest",
+          "final": "https://html.duckduckgo.com/html/?q=Documenta%C3%A7%C3%A3o%20oficial%20WebCrypto%20SubtleCrypto%20digest",
+          "chars": 14340
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=Documenta%C3%A7%C3%A3o+oficial+WebCrypto+SubtleCrypto+digest",
+          "final": "https://old-search.marginalia.nu/search?query=Documenta%C3%A7%C3%A3o+oficial+WebCrypto+SubtleCrypto+digest",
+          "chars": 16572
+        },
+        {
+          "url": "https://www.bing.com/search?q=webcrypto+subtlecrypto+digest&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=webcrypto+subtlecrypto+digest&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 1193
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=webcrypto+subtlecrypto+digest",
+          "final": "https://old-search.marginalia.nu/search?query=webcrypto+subtlecrypto+digest",
+          "chars": 1033
+        },
+        {
+          "url": "https://conceito.de/documentacao",
+          "final": "https://conceito.de/documentacao",
+          "chars": 14456
+        },
+        {
+          "url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+          "final": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+          "chars": 278338
+        },
+        {
+          "url": "https://www.dicio.com.br/documentacao/",
+          "final": "https://www.dicio.com.br/documentacao/",
+          "chars": 213750
+        },
+        {
+          "url": "https://asana.com/pt/resources/process-documentation",
+          "final": "https://asana.com/pt/resources/process-documentation",
+          "chars": 667834
+        },
+        {
+          "url": "https://www.produttivo.com.br/blog/documentacao-tecnica/",
+          "final": "https://www.produttivo.com.br/blog/documentacao-tecnica/",
+          "chars": 383244
+        },
+        {
+          "url": "http://www.ab.com/",
+          "final": "https://www.rockwellautomation.com/en-us/products/hardware/allen-bradley.html",
+          "chars": 133580
+        }
+      ],
+      "candidates": [
+        {
+          "id": "17067361510cf975c117",
+          "url": "https://conceito.de/documentacao",
+          "title": "Documentação - O que é, conceito e definição",
+          "origin": "bing",
+          "query": "Documentação oficial WebCrypto SubtleCrypto digest",
+          "date": "qua., 21 out. 2026 09:17:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "operar. Finalmente, a disciplina dedicada à coleta e organização de documentos é chamada de documentação. Seu objetivo é garantir e facilitar o armazenamento de",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 1855,
+          "final_url": "https://conceito.de/documentacao",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "93cc68636198e4d1d48b",
+          "url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+          "title": "O que é Documentação - Entenda sua Importância",
+          "origin": "bing",
+          "query": "Documentação oficial WebCrypto SubtleCrypto digest",
+          "date": "2024-08-21T00:09:34+00:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "leitor. Além disso, é essencial manter a documentação atualizada, refletindo quaisquer mudanças nos processos ou resultados. A de exemplos práticos e ilustraçõe",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 6891,
+          "final_url": "https://estatisticafacil.org/glossario/o-que-e-documentacao-importancia-e-tipologias/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "43def78e2fd7f1fbe1c5",
+          "url": "https://www.dicio.com.br/documentacao/",
+          "title": "Documentação - Dicio, Dicionário Online de Português",
+          "origin": "bing",
+          "query": "Documentação oficial WebCrypto SubtleCrypto digest",
+          "date": "ter., 22 set. 2026 08:18:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "documentação Significado de Documentação substantivo feminino Ato ou efeito de documentar. Conjunto de documentos para verificação de fatos históricos, identida",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 1385,
+          "final_url": "https://www.dicio.com.br/documentacao/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "40221ff67b06ddb11f3a",
+          "url": "https://asana.com/pt/resources/process-documentation",
+          "title": "Documentação de processos: o que é, tipos e como criar [2025 ... - Asana",
+          "origin": "bing",
+          "query": "Documentação oficial WebCrypto SubtleCrypto digest",
+          "date": "2025-10-26T11:00:00+0000",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "uma finalidade e nível de complexidade específicos. Conhecer os tipos disponíveis ajuda a escolher a abordagem mais eficaz para cada situação. Vejamos cinco exe",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 8000,
+          "final_url": "https://asana.com/pt/resources/process-documentation",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "8e630dc6deba6f7bd9f3",
+          "url": "https://www.produttivo.com.br/blog/documentacao-tecnica/",
+          "title": "Documentação técnica de serviços: exemplos e como fazer",
+          "origin": "bing",
+          "query": "Documentação oficial WebCrypto SubtleCrypto digest",
+          "date": "2025-09-10T16:10:52-03:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "para uma auditoria? Defina o objetivo e o público – a documentação técnica não precisa ser complicada. Frases curtas e termos claros ajudam todo mundo a entende",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 8000,
+          "final_url": "https://www.produttivo.com.br/blog/documentacao-tecnica/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "85c077ac9c578047b837",
+          "url": "http://www.ab.com/",
+          "title": "www.ab.com",
+          "origin": "bing",
+          "query": "webcrypto subtlecrypto digest",
+          "date": "sáb., 24 out. 2026 02:40:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Automation is our foundation. We are dedicated innovators delivering smarter, connected solutions to the world around us. Our future is propelled by our long le",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 613,
+          "final_url": "https://www.rockwellautomation.com/en-us/products/hardware/allen-bradley.html",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "edd3e64ecd0d6ae16774",
+          "url": "https://pt.wikipedia.org/wiki/Documenta%C3%A7%C3%A3o",
+          "title": "Documentação – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "Documentação oficial WebCrypto SubtleCrypto digest",
+          "date": "sex., 23 out. 2026 21:18:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Documentação é o conjunto de todos documentos, que são todas as fontes contendo informações que ajudem a tomar decisões, comuniquem decisões tomadas, registrem ",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED",
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "4dde8ca5fbad97a231ac",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "title": "CC-BY-SA 4.0",
+          "origin": "marginalia",
+          "query": "Documentação oficial WebCrypto SubtleCrypto digest",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        }
+      ],
+      "unique_candidates": 8,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "LOW_RELEVANCE": 7,
+        "READ_BUDGET_NOT_SELECTED": 2
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 5.859,
+      "read_in_candidate_pool": 6,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-05",
+      "question": "História do Museu do Amanhã fontes oficiais",
+      "intent_category": "culture_history",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "História do Museu do Amanhã fontes oficiais",
+        "domain": "general",
+        "original_request": "História do Museu do Amanhã fontes oficiais",
+        "resolved_request": "História do Museu do Amanhã fontes oficiais",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-24T23:37:56.503841+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false,
+        "constraints": {
+          "hard": {},
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "bing",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "error": "bloqueado"
+        },
+        {
+          "provider": "marginalia",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "error": "vazio"
+        },
+        {
+          "provider": "bing",
+          "query": "história museu amanhã",
+          "candidates": 6
+        },
+        {
+          "provider": "marginalia",
+          "query": "história museu amanhã",
+          "candidates": 6
+        },
+        {
+          "provider": "wikipedia",
+          "query": "história museu amanhã",
+          "error": "vazio"
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://www.bing.com/search?q=Hist%C3%B3ria+do+Museu+do+Amanh%C3%A3+fontes+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=Hist%C3%B3ria+do+Museu+do+Amanh%C3%A3+fontes+oficiais&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 4946
+        },
+        {
+          "url": "https://html.duckduckgo.com/html/?q=Hist%C3%B3ria%20do%20Museu%20do%20Amanh%C3%A3%20fontes%20oficiais",
+          "final": "https://html.duckduckgo.com/html/?q=Hist%C3%B3ria%20do%20Museu%20do%20Amanh%C3%A3%20fontes%20oficiais",
+          "chars": 14308
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=Hist%C3%B3ria+do+Museu+do+Amanh%C3%A3+fontes+oficiais",
+          "final": "https://old-search.marginalia.nu/search?query=Hist%C3%B3ria+do+Museu+do+Amanh%C3%A3+fontes+oficiais",
+          "chars": 1081
+        },
+        {
+          "url": "https://www.bing.com/search?q=hist%C3%B3ria+museu+amanh%C3%A3&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=hist%C3%B3ria+museu+amanh%C3%A3&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 4858
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=hist%C3%B3ria+museu+amanh%C3%A3",
+          "final": "https://old-search.marginalia.nu/search?query=hist%C3%B3ria+museu+amanh%C3%A3",
+          "chars": 50162
+        },
+        {
+          "url": "https://m.brasilescola.uol.com.br/historia",
+          "final": "https://brasilescola.uol.com.br/historia",
+          "chars": 179973
+        },
+        {
+          "url": "https://www.todamateria.com.br/historia/",
+          "final": "https://www.todamateria.com.br/historia/",
+          "chars": 481221
+        },
+        {
+          "url": "https://humanidades.com/br/historia/",
+          "final": "https://humanidades.com/br/historia/",
+          "chars": 86010
+        },
+        {
+          "url": "https://pt.m.wikipedia.org/wiki/Hist%C3%B3ria",
+          "final": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+          "chars": 628954
+        },
+        {
+          "url": "https://www.cafehistoria.com.br/",
+          "final": "https://www.cafehistoria.com.br/",
+          "chars": 269479
+        },
+        {
+          "url": "https://www.historiadomundo.com.br/",
+          "final": "https://www.historiadomundo.com.br/",
+          "chars": 92680
+        }
+      ],
+      "candidates": [
+        {
+          "id": "2881af89a364e527f8e5",
+          "url": "https://m.brasilescola.uol.com.br/historia",
+          "title": "História, estudo das ações do homem no tempo e espaço",
+          "origin": "bing",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "date": "2007-04-13-0309:22:15",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "análise crítica do seu objeto de estudo a fim de racionalizar a conclusão sobre os acontecimentos investigados. A palavra “história” tem origem no idioma grego ",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 6953,
+          "final_url": "https://brasilescola.uol.com.br/historia",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "c499cd23e7c9926d15d5",
+          "url": "https://www.todamateria.com.br/historia/",
+          "title": "História - Toda Matéria",
+          "origin": "bing",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "date": "sáb., 24 out. 2026 08:31:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "uma religião afro-brasileira, surgida em 1908, fundada por Zélio Fernandino de Moraes. É marcada pela fusão de elementos de diferentes tradições espirituais e c",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://www.todamateria.com.br/historia/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "b4c39d330dec8ad20603",
+          "url": "https://humanidades.com/br/historia/",
+          "title": "História: início, final, ramos, divisão e características",
+          "origin": "bing",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "date": "2023-06-27T06:15:11-06:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "perguntas do tema. Estas suposições, chamadas hipóteses, serão corroboradas ou descartadas com base na investigação. Formulação de hipóteses . Procura-se inform",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://humanidades.com/br/historia/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "f4ddcacc3eab3c5d9f8a",
+          "url": "https://pt.m.wikipedia.org/wiki/Hist%C3%B3ria",
+          "title": "História – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "date": "2003-02-03T05:18:55Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "descobertas. As metodologias e abordagens da arqueologia são independentes do campo da história. A é um ramo específico da arqueologia que frequentemente contra",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 8000,
+          "final_url": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "5fae989831262adb342d",
+          "url": "https://www.cafehistoria.com.br/",
+          "title": "Café História - um portal para quem gosta de história",
+          "origin": "bing",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "date": "sáb., 24 out. 2026 04:13:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "O Café História é um portal de divulgação científica criado pelo historiador Bruno Leal. Toda publicamos o nosso “especial da semana” (artigo, entrevista, bibli",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 388,
+          "final_url": "https://www.cafehistoria.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "08c239a51cbc6f0e7adf",
+          "url": "https://www.historiadomundo.com.br/",
+          "title": "História do mundo - A História da Humanidade a um Clique",
+          "origin": "bing",
+          "query": "História do Museu do Amanhã fontes oficiais",
+          "date": "qua., 21 out. 2026 02:00:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Copyright © 2024 - Todos os Direitos Reservados Rede Omnia Proibida a reprodução total ou parcial sem autorização prévia da equipe (Inciso I do Artigo 29 Lei 9.",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 240,
+          "final_url": "https://www.historiadomundo.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "873cde53e31003a8f896",
+          "url": "https://langsci-press.org/catalog/view/167/735/834-2",
+          "title": "On this and other worlds",
+          "origin": "marginalia",
+          "query": "história museu amanhã",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "6a11b93d96575ba977f3",
+          "url": "https://langsci-press.org/catalog/view/167/978/846-1",
+          "title": "Chapter 11 Aikanã",
+          "origin": "marginalia",
+          "query": "história museu amanhã",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "8846832ef022a7a61b97",
+          "url": "https://langsci-press.org/catalog/view/167/738/837-1",
+          "title": "Chapter 2 Kuikuro",
+          "origin": "marginalia",
+          "query": "história museu amanhã",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "05e00fe63d395c01790d",
+          "url": "https://journals.open.tudelft.nl/iphs/issue/download/466/VOLUME%202",
+          "title": "IPHS International Planning History Society I.T.U. Urban and Enviromental Planning and Research Center",
+          "origin": "marginalia",
+          "query": "história museu amanhã",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "b30943cb3eb1d68741a9",
+          "url": "https://en.wikipedia.org/wiki/List_of_Trof%C3%A9u_HQ_Mix_winners",
+          "title": "List of Troféu HQ Mix winners",
+          "origin": "marginalia",
+          "query": "história museu amanhã",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "67c093a9145c22539dbe",
+          "url": "https://en.wikipedia.org/wiki/Simone_Bittencourt_de_Oliveira",
+          "title": "Simone Bittencourt de Oliveira",
+          "origin": "marginalia",
+          "query": "história museu amanhã",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        }
+      ],
+      "unique_candidates": 12,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "LOW_RELEVANCE": 6,
+        "READ_BUDGET_NOT_SELECTED": 6
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 5.835,
+      "read_in_candidate_pool": 6,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-06",
+      "question": "Relatório público PDF desmatamento Amazônia INPE",
+      "intent_category": "public_document",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Relatório público PDF desmatamento Amazônia INPE",
+        "domain": "documents",
+        "original_request": "Relatório público PDF desmatamento Amazônia INPE",
+        "resolved_request": "Relatório público PDF desmatamento Amazônia INPE",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-24T23:38:02.842186+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false,
+        "constraints": {
+          "hard": {},
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "bing",
+          "query": "Relatório público PDF desmatamento Amazônia INPE",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Relatório público PDF desmatamento Amazônia INPE",
+          "error": "bloqueado"
+        },
+        {
+          "provider": "marginalia",
+          "query": "Relatório público PDF desmatamento Amazônia INPE",
+          "error": "vazio"
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://www.bing.com/search?q=Relat%C3%B3rio+p%C3%BAblico+PDF+desmatamento+Amaz%C3%B4nia+INPE&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=Relat%C3%B3rio+p%C3%BAblico+PDF+desmatamento+Amaz%C3%B4nia+INPE&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5398
+        },
+        {
+          "url": "https://html.duckduckgo.com/html/?q=Relat%C3%B3rio%20p%C3%BAblico%20PDF%20desmatamento%20Amaz%C3%B4nia%20INPE",
+          "final": "https://html.duckduckgo.com/html/?q=Relat%C3%B3rio%20p%C3%BAblico%20PDF%20desmatamento%20Amaz%C3%B4nia%20INPE",
+          "chars": 14318
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=Relat%C3%B3rio+p%C3%BAblico+PDF+desmatamento+Amaz%C3%B4nia+INPE",
+          "final": "https://old-search.marginalia.nu/search?query=Relat%C3%B3rio+p%C3%BAblico+PDF+desmatamento+Amaz%C3%B4nia+INPE",
+          "chars": 1101
+        },
+        {
+          "url": "https://mundoeducacao.uol.com.br/redacao/o-relatorio.htm",
+          "final": "https://mundoeducacao.uol.com.br/redacao/o-relatorio.htm",
+          "chars": 327754
+        },
+        {
+          "url": "https://www.todamateria.com.br/genero-textual-relatorio/",
+          "final": "https://www.todamateria.com.br/genero-textual-relatorio/",
+          "chars": 503035
+        },
+        {
+          "url": "https://pt.scribd.com/document/882115191/modelo-relatorio-abnt",
+          "final": "https://pt.scribd.com/document/882115191/modelo-relatorio-abnt",
+          "chars": 1235762
+        },
+        {
+          "url": "https://documentos-modelo.com/relatorio-modelo-pronto/",
+          "final": "https://documentos-modelo.com/relatorio-modelo-pronto/",
+          "chars": 204761
+        },
+        {
+          "url": "https://www.portugues.com.br/redacao/orelatorio.html",
+          "final": "https://www.portugues.com.br/redacao/orelatorio.html",
+          "chars": 124556
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Relat%C3%B3rio",
+          "final": "https://pt.wikipedia.org/wiki/Relat%C3%B3rio",
+          "chars": 104962
+        }
+      ],
+      "candidates": [
+        {
+          "id": "b368d9c35050ded428f3",
+          "url": "https://mundoeducacao.uol.com.br/redacao/o-relatorio.htm",
+          "title": "Relatório: o que é, como fazer, tipos, estrutura - Mundo Educação",
+          "origin": "bing",
+          "query": "Relatório público PDF desmatamento Amazônia INPE",
+          "date": "2010-04-01-0308:09:43",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "casos, sugestões. e se comunicar de modo objetivo e acessível, permitindo uma fácil e rápida compreensão dos pontos mais importantes. Além disso, o relatório po",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 6380,
+          "final_url": "https://mundoeducacao.uol.com.br/redacao/o-relatorio.htm",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "377f4c907838789f18c8",
+          "url": "https://www.todamateria.com.br/genero-textual-relatorio/",
+          "title": "Relatório: o que é, estrutura e como começar (com exemplo)",
+          "origin": "bing",
+          "query": "Relatório público PDF desmatamento Amazônia INPE",
+          "date": "2015-10-30T22:20:05+0000",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "diferentes situações cotidianas do ambiente laboral. Tipos de relatório Os relatórios podem ser simples ou complexos. Um relatório simples apresenta um relato s",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 5643,
+          "final_url": "https://www.todamateria.com.br/genero-textual-relatorio/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "4944e17cf49f339bf498",
+          "url": "https://pt.scribd.com/document/882115191/modelo-relatorio-abnt",
+          "title": "Modelo de Relatório ABNT Pronto",
+          "origin": "bing",
+          "query": "Relatório público PDF desmatamento Amazônia INPE",
+          "date": "sáb., 24 out. 2026 08:09:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "Este documento é um modelo de relatório acadêmico seguindo as normas da ABNT, incluindo seções como resumo, introdução, desenvolvimento e conclusão. O resumo de",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 342,
+          "final_url": "https://pt.scribd.com/document/882115191/modelo-relatorio-abnt",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "e72f6c267f7d2f5d7589",
+          "url": "https://documentos-modelo.com/relatorio-modelo-pronto/",
+          "title": "Relatório Modelo Pronto",
+          "origin": "bing",
+          "query": "Relatório público PDF desmatamento Amazônia INPE",
+          "date": "2025-05-10T20:03:37+00:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "devem ser preenchidos para assegurar a clareza e a completude do relatório. Fornecemos exemplos para orientá-lo em cada etapa do processo. Relatório Modelo Pron",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 3377,
+          "final_url": "https://documentos-modelo.com/relatorio-modelo-pronto/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "e1bc03e3396a95f18f4d",
+          "url": "https://www.portugues.com.br/redacao/orelatorio.html",
+          "title": "Relatório: funções, características, estrutura, exemplo",
+          "origin": "bing",
+          "query": "Relatório público PDF desmatamento Amazônia INPE",
+          "date": "2010-06-14UTC11:25:36",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "para tanto. Pode-se abordar teorias e autores que fundamentem as afirmações realizadas. Desenvolvimento : exposição dos resultados alcançados ou pretendidos e s",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 4743,
+          "final_url": "https://www.portugues.com.br/redacao/orelatorio.html",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "deba288bf56b5c453967",
+          "url": "https://pt.wikipedia.org/wiki/Relat%C3%B3rio",
+          "title": "Relatório – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "Relatório público PDF desmatamento Amazônia INPE",
+          "date": "2005-08-31T17:47:17Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "técnica, e com alto padrão de civilidade. Comunicar é fazer-se entender. Se atingir esse objetivo, você estará perto do sucesso. Características do relatório [ ",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 7864,
+          "final_url": "https://pt.wikipedia.org/wiki/Relat%C3%B3rio",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        }
+      ],
+      "unique_candidates": 6,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "LOW_RELEVANCE": 6
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 5.3,
+      "read_in_candidate_pool": 6,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-07",
+      "question": "Especificações oficiais Sony WH-CH520 autonomia",
+      "intent_category": "product_specification",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Especificações oficiais Sony WH-CH520 autonomia",
+        "domain": "general",
+        "original_request": "Especificações oficiais Sony WH-CH520 autonomia",
+        "resolved_request": "Especificações oficiais Sony WH-CH520 autonomia",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-24T23:38:08.575317+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false,
+        "constraints": {
+          "hard": {},
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "bing",
+          "query": "Especificações oficiais Sony WH-CH520 autonomia",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Especificações oficiais Sony WH-CH520 autonomia",
+          "error": "bloqueado"
+        },
+        {
+          "provider": "marginalia",
+          "query": "Especificações oficiais Sony WH-CH520 autonomia",
+          "error": "vazio"
+        },
+        {
+          "provider": "bing",
+          "query": "especificações sony wh-ch520 autonomia",
+          "candidates": 6
+        },
+        {
+          "provider": "marginalia",
+          "query": "especificações sony wh-ch520 autonomia",
+          "candidates": 1
+        },
+        {
+          "provider": "wikipedia",
+          "query": "especificações sony wh-ch520 autonomia",
+          "error": "vazio"
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://www.bing.com/search?q=Especifica%C3%A7%C3%B5es+oficiais+Sony+WH-CH520+autonomia&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=Especifica%C3%A7%C3%B5es+oficiais+Sony+WH-CH520+autonomia&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5200
+        },
+        {
+          "url": "https://html.duckduckgo.com/html/?q=Especifica%C3%A7%C3%B5es%20oficiais%20Sony%20WH-CH520%20autonomia",
+          "final": "https://html.duckduckgo.com/html/?q=Especifica%C3%A7%C3%B5es%20oficiais%20Sony%20WH-CH520%20autonomia",
+          "chars": 14310
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=Especifica%C3%A7%C3%B5es+oficiais+Sony+WH-CH520+autonomia",
+          "final": "https://old-search.marginalia.nu/search?query=Especifica%C3%A7%C3%B5es+oficiais+Sony+WH-CH520+autonomia",
+          "chars": 1089
+        },
+        {
+          "url": "https://www.bing.com/search?q=especifica%C3%A7%C3%B5es+sony+wh-ch520+autonomia&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=especifica%C3%A7%C3%B5es+sony+wh-ch520+autonomia&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5164
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=especifica%C3%A7%C3%B5es+sony+wh-ch520+autonomia",
+          "final": "https://old-search.marginalia.nu/search?query=especifica%C3%A7%C3%B5es+sony+wh-ch520+autonomia",
+          "chars": 16368
+        },
+        {
+          "url": "https://www.dicio.com.br/especificacoes/",
+          "final": "https://www.dicio.com.br/especificacoes/",
+          "chars": 207488
+        },
+        {
+          "url": "https://www.hp.com/br-pt/tech-takes/desktops/conceitos/como-verificar-especificacoes-do-pc.html",
+          "final": "https://www.hp.com/br-pt/tech-takes/desktops/conceitos/como-verificar-especificacoes-do-pc.html",
+          "chars": 214697
+        },
+        {
+          "url": "https://pt.wikihow.com/Verificar-as-Especifica%C3%A7%C3%B5es-do-Computador",
+          "final": "https://pt.wikihow.com/Verificar-as-Especifica%C3%A7%C3%B5es-do-Computador",
+          "chars": 3036
+        },
+        {
+          "url": "https://www.microsoft.com/pt-br/windows/windows-11-specifications",
+          "final": "https://www.microsoft.com/pt-br/windows/windows-11-specifications",
+          "chars": 232237
+        },
+        {
+          "url": "https://www.pchardwarepro.com/pt/Como-visualizar-as-especifica%C3%A7%C3%B5es-completas-do-seu-PC-nas-configura%C3%A7%C3%B5es-do-Windows/",
+          "final": "https://www.pchardwarepro.com/pt/Como-visualizar-as-especifica%C3%A7%C3%B5es-completas-do-seu-PC-nas-configura%C3%A7%C3%B5es-do-Windows/",
+          "chars": 236386
+        },
+        {
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "final": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "chars": 35264
+        }
+      ],
+      "candidates": [
+        {
+          "id": "abb9886dee0030ea6065",
+          "url": "https://www.dicio.com.br/especificacoes/",
+          "title": "Especificações - Dicio, Dicionário Online de Português",
+          "origin": "bing",
+          "query": "Especificações oficiais Sony WH-CH520 autonomia",
+          "date": "qui., 03 set. 2026 06:32:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "especificações Significado de Especificações é o plural de especificação. O mesmo que: descrições, discriminações, enumerações. Especificações Usando \"\" num tex",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 1203,
+          "final_url": "https://www.dicio.com.br/especificacoes/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH"
+          ]
+        },
+        {
+          "id": "2205ff54452e8d7d3853",
+          "url": "https://www.hp.com/br-pt/tech-takes/desktops/conceitos/como-verificar-especificacoes-do-pc.html",
+          "title": "Como verificar as especificações do seu PC | HP® Brasil",
+          "origin": "bing",
+          "query": "Especificações oficiais Sony WH-CH520 autonomia",
+          "date": "2026-09-09T18:10:58.735Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "Para verificar as especificações do seu PC no Windows 10 ou 11, acesse Configurações > Sistema > Sobre e veja um resumo rápido do processador, da memória RAM e ",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://www.hp.com/br-pt/tech-takes/desktops/conceitos/como-verificar-especificacoes-do-pc.html",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH"
+          ]
+        },
+        {
+          "id": "f0f278574a67a913200c",
+          "url": "https://pt.wikihow.com/Verificar-as-Especifica%C3%A7%C3%B5es-do-Computador",
+          "title": "3 Formas de Verificar as Especificações do Computador",
+          "origin": "bing",
+          "query": "Especificações oficiais Sony WH-CH520 autonomia",
+          "date": "sáb., 24 out. 2026 05:24:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "A required part of this site couldn’t load. This may be due to a browser extension, network issues, or browser settings. Please check your connection, disable a",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 209,
+          "final_url": "https://pt.wikihow.com/Verificar-as-Especifica%C3%A7%C3%B5es-do-Computador",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH"
+          ]
+        },
+        {
+          "id": "8245804840d97fbadc71",
+          "url": "https://www.microsoft.com/pt-br/windows/windows-11-specifications",
+          "title": "Requisitos de sistema e especificações do Windows 11 | Microsoft Windows",
+          "origin": "bing",
+          "query": "Especificações oficiais Sony WH-CH520 autonomia",
+          "date": "sáb., 15 jun. 2024 21:14:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "BIOS mais antiga e as especificações EFI (Extensible Firmware Interface) 1.10. Mais de 140 empresas líderes de tecnologia participam do Fórum EFI Unificado, inc",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 5810,
+          "final_url": "https://www.microsoft.com/pt-br/windows/windows-11-specifications",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH"
+          ]
+        },
+        {
+          "id": "9ea7129690956b2c34b5",
+          "url": "https://www.pchardwarepro.com/pt/Como-visualizar-as-especifica%C3%A7%C3%B5es-completas-do-seu-PC-nas-configura%C3%A7%C3%B5es-do-Windows/",
+          "title": "Como visualizar as especificações completas do seu PC no Windows",
+          "origin": "bing",
+          "query": "Especificações oficiais Sony WH-CH520 autonomia",
+          "date": "2025-12-09T19:55:26+01:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "leve. as especificações reais do seu PC Avalie o desempenho real da sua equipe. Também é útil conhecer os detalhes do seu hardware para determinar se o seu comp",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 8000,
+          "final_url": "https://www.pchardwarepro.com/pt/Como-visualizar-as-especifica%C3%A7%C3%B5es-completas-do-seu-PC-nas-configura%C3%A7%C3%B5es-do-Windows/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH"
+          ]
+        },
+        {
+          "id": "15b9020ceecf94e4f308",
+          "url": "https://www.dicio.com.br/especificacao/",
+          "title": "Especificação - Dicio, Dicionário Online de Português",
+          "origin": "bing",
+          "query": "Especificações oficiais Sony WH-CH520 autonomia",
+          "date": "qui., 23 jul. 2026 00:12:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "ENTITY_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Definição de Especificação Classe gramatical: substantivo feminino Separação silábica: es-pe-ci-fi-ca-ção Plural: especificações",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED",
+            "HARD_CONSTRAINT_MISMATCH"
+          ]
+        },
+        {
+          "id": "4dde8ca5fbad97a231ac",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "title": "CC-BY-SA 4.0",
+          "origin": "marginalia",
+          "query": "especificações sony wh-ch520 autonomia",
+          "date": "",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "ENTITY_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "your intended use. For example, other rights such as may limit how you use the material. publicity, privacy, or moral rights Notice This deed highlights only so",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 2088,
+          "final_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "HARD_CONSTRAINT_MISMATCH"
+          ]
+        }
+      ],
+      "unique_candidates": 7,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "HARD_CONSTRAINT_MISMATCH": 7,
+        "READ_BUDGET_NOT_SELECTED": 1
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 6.879,
+      "read_in_candidate_pool": 6,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-08",
+      "question": "Economia circular na indústria têxtil processos limitações",
+      "intent_category": "multiaspect",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Economia circular na indústria têxtil processos limitações",
+        "domain": "general",
+        "original_request": "Economia circular na indústria têxtil processos limitações",
+        "resolved_request": "Economia circular na indústria têxtil processos limitações",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-24T23:38:15.916702+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false,
+        "constraints": {
+          "hard": {},
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "bing-news",
+          "query": "Economia circular na indústria têxtil processos limitações",
+          "error": "vazio"
+        },
+        {
+          "provider": "bing",
+          "query": "Economia circular na indústria têxtil processos limitações",
+          "candidates": 6
+        },
+        {
+          "provider": "hn",
+          "query": "Economia circular na indústria têxtil processos limitações",
+          "error": "vazio"
+        },
+        {
+          "provider": "bing-news",
+          "query": "economia circular indústria têxtil processos limitações",
+          "error": "vazio"
+        },
+        {
+          "provider": "bing",
+          "query": "economia circular indústria têxtil processos limitações",
+          "candidates": 6
+        },
+        {
+          "provider": "hn",
+          "query": "economia circular indústria têxtil processos limitações",
+          "error": "vazio"
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://www.bing.com/news/search?q=Economia+circular+na+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/news/search?q=Economia+circular+na+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 2983
+        },
+        {
+          "url": "https://www.bing.com/search?q=Economia+circular+na+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=Economia+circular+na+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5040
+        },
+        {
+          "url": "https://www.bing.com/news/search?q=economia+circular+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/news/search?q=economia+circular+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 3092
+        },
+        {
+          "url": "https://www.bing.com/search?q=economia+circular+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=economia+circular+ind%C3%BAstria+t%C3%AAxtil+processos+limita%C3%A7%C3%B5es&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5028
+        },
+        {
+          "url": "https://www.infomoney.com.br/economia/",
+          "final": "https://www.infomoney.com.br/economia/",
+          "chars": 388350
+        },
+        {
+          "url": "https://economia.uol.com.br/",
+          "error": "bloqueado"
+        },
+        {
+          "url": "https://g1.globo.com/economia/",
+          "final": "https://g1.globo.com/economia/",
+          "chars": 938747
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Economia",
+          "final": "https://pt.wikipedia.org/wiki/Economia",
+          "chars": 755270
+        },
+        {
+          "url": "https://www.redeconomia.com.br/encartes/",
+          "final": "https://www.redeconomia.com.br/encartes/",
+          "chars": 123759
+        },
+        {
+          "url": "https://www.redeconomia.com.br/",
+          "final": "https://www.redeconomia.com.br/",
+          "chars": 119823
+        }
+      ],
+      "candidates": [
+        {
+          "id": "da29eb86b52746d8cec5",
+          "url": "https://www.infomoney.com.br/economia/",
+          "title": "Economia - Últimas notícias | InfoMoney",
+          "origin": "bing",
+          "query": "Economia circular na indústria têxtil processos limitações",
+          "date": "qui., 06 jun. 2024 03:02:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "É hora de fugir dos riscos de uma recessão",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 42,
+          "final_url": "https://www.infomoney.com.br/economia/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "23b26164b9adc89e60a9",
+          "url": "https://economia.uol.com.br/",
+          "title": "UOL Economia: encontre orientações e notícias sobre economia",
+          "origin": "bing",
+          "query": "Economia circular na indústria têxtil processos limitações",
+          "date": "sáb., 24 out. 2026 22:35:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Encontre orientações e notícias sobre economia: investimentos, finanças, negócios, carreira, cotações de Bolsas, moedas, índices econômicos e mais...",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "BLOCKED",
+          "recovery_method": "",
+          "fetch_error": "bloqueado",
+          "losses": [
+            "FETCH_BLOCKED",
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "02065f331a5b145051fc",
+          "url": "https://g1.globo.com/economia/",
+          "title": "g1 Economia – Educação financeira, a cotação do dólar e as notícias do ...",
+          "origin": "bing",
+          "query": "Economia circular na indústria têxtil processos limitações",
+          "date": "sáb., 24 out. 2026 22:42:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "Falhas graves na linguagem de programação PHP, usada em grande parte da internet, provocaram milhões de tentativas de invasão e levaram empresas e órgãos públic",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 243,
+          "final_url": "https://g1.globo.com/economia/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "7d29e7546b5ea3c4bb9e",
+          "url": "https://pt.wikipedia.org/wiki/Economia",
+          "title": "Economia – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "Economia circular na indústria têxtil processos limitações",
+          "date": "2003-02-19T12:41:07Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "tradicional. mercado (do : οικονομία , \"regras da casa\") (também chamada de ) é a que consiste na análise da , e de . Portanto, a economia é o estudo das escolh",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://pt.wikipedia.org/wiki/Economia",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "eec02664207fe919a52d",
+          "url": "https://www.redeconomia.com.br/encartes/",
+          "title": "Ofertas - Redeconomia",
+          "origin": "bing",
+          "query": "Economia circular na indústria têxtil processos limitações",
+          "date": "2025-08-20T18:00:27+00:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Confira o encarte completo com todas as ofertas! Folheie o encarte diretamente na tela e, se preferir, abra o PDF em tela cheia.",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 128,
+          "final_url": "https://www.redeconomia.com.br/encartes/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "2cf54198242f94c6540f",
+          "url": "https://www.redeconomia.com.br/",
+          "title": "Início - Redeconomia",
+          "origin": "bing",
+          "query": "Economia circular na indústria têxtil processos limitações",
+          "date": "2022-05-16T15:52:06+00:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "QUEM SOMOS Em agosto de 1998, foi fundada a REDERJ – Associação REDECONOMIA de Supermercados do Estado do Rio de Janeiro, formada pela união de 7 empresas super",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 253,
+          "final_url": "https://www.redeconomia.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        }
+      ],
+      "unique_candidates": 6,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "LOW_RELEVANCE": 6,
+        "FETCH_BLOCKED": 1
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 4.543,
+      "read_in_candidate_pool": 5,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-09",
+      "question": "Imagens licenciadas do Jardim Botânico de Curitiba",
+      "intent_category": "images",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Imagens licenciadas do Jardim Botânico de Curitiba",
+        "domain": "general",
+        "original_request": "Imagens licenciadas do Jardim Botânico de Curitiba",
+        "resolved_request": "Imagens licenciadas do Jardim Botânico de Curitiba",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-24T23:38:21.006980+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false,
+        "constraints": {
+          "hard": {},
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "commons",
+          "query": "Imagens licenciadas do Jardim Botânico de Curitiba",
+          "candidates": 6
+        }
+      ],
+      "network_fetches": [],
+      "candidates": [
+        {
+          "id": "18a105057507a9141cda",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Estufa_principal_do_Jardim_Bot%C3%A2nico_de_Curitiba_02.jpg/960px-Estufa_principal_do_Jardim_Bot%C3%A2nico_de_Curitiba_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Estufa principal do Jardim Botânico de Curitiba 02.jpg",
+          "origin": "commons",
+          "query": "Imagens licenciadas do Jardim Botânico de Curitiba",
+          "date": "",
+          "type": "imagem",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "S1",
+          "excerpt": "5039x3456 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Estufa_principal_do_Jardim_Bot%C3%A2nico_de_Curitiba_02.jpg",
+          "selected": false,
+          "returned": true,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "08decc87e9626fdd21c3",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_02.jpg/960px-Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Jardim Botânico Fanchette Rischbieter em Curitiba 02.jpg",
+          "origin": "commons",
+          "query": "Imagens licenciadas do Jardim Botânico de Curitiba",
+          "date": "",
+          "type": "imagem",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "S2",
+          "excerpt": "3768x2592 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_02.jpg",
+          "selected": false,
+          "returned": true,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "37d275f5e74ce409a4ea",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_09.jpg/960px-Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_09.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Jardim Botânico Fanchette Rischbieter em Curitiba 09.jpg",
+          "origin": "commons",
+          "query": "Imagens licenciadas do Jardim Botânico de Curitiba",
+          "date": "",
+          "type": "imagem",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "S3",
+          "excerpt": "4969x3456 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_09.jpg",
+          "selected": false,
+          "returned": true,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "0cb485b1653500edcbe8",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Jardim_Bot%C3%A2nico_de_Curitiba_%281%29.jpg/960px-Jardim_Bot%C3%A2nico_de_Curitiba_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Jardim Botânico de Curitiba (1).jpg",
+          "origin": "commons",
+          "query": "Imagens licenciadas do Jardim Botânico de Curitiba",
+          "date": "",
+          "type": "imagem",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "3264x1564 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Jardim_Bot%C3%A2nico_de_Curitiba_(1).jpg",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "9d869a8aedca835192c1",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Jardim_Bot%C3%A2nico_de_Curitiba_2323_01.jpg/960px-Jardim_Bot%C3%A2nico_de_Curitiba_2323_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Jardim Botânico de Curitiba 2323 01.jpg",
+          "origin": "commons",
+          "query": "Imagens licenciadas do Jardim Botânico de Curitiba",
+          "date": "",
+          "type": "imagem",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "8365x7303 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Jardim_Bot%C3%A2nico_de_Curitiba_2323_01.jpg",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "e2d97276099efbafb188",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/93/Jardim_Bot%C3%A2nico_de_Curitiba_2323_02.jpg/960px-Jardim_Bot%C3%A2nico_de_Curitiba_2323_02.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+          "title": "Jardim Botânico de Curitiba 2323 02.jpg",
+          "origin": "commons",
+          "query": "Imagens licenciadas do Jardim Botânico de Curitiba",
+          "date": "",
+          "type": "imagem",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "8256x5504 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Jardim_Bot%C3%A2nico_de_Curitiba_2323_02.jpg",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        }
+      ],
+      "unique_candidates": 6,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "READ_BUDGET_NOT_SELECTED": 6
+      },
+      "state": "paginas_ilegiveis",
+      "opened_returned": 0,
+      "eligible_read_returned": 0,
+      "seconds": 0.368,
+      "read_in_candidate_pool": 0,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-10",
+      "question": "História da empresa WEG fontes primárias",
+      "intent_category": "company",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "História da empresa WEG fontes primárias",
+        "domain": "general",
+        "original_request": "História da empresa WEG fontes primárias",
+        "resolved_request": "História da empresa WEG fontes primárias",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-24T23:38:21.834231+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false,
+        "constraints": {
+          "hard": {},
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "bing",
+          "query": "História da empresa WEG fontes primárias",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "História da empresa WEG fontes primárias",
+          "error": "bloqueado"
+        },
+        {
+          "provider": "marginalia",
+          "query": "História da empresa WEG fontes primárias",
+          "candidates": 1
+        },
+        {
+          "provider": "bing",
+          "query": "história empresa weg primárias",
+          "candidates": 6
+        },
+        {
+          "provider": "marginalia",
+          "query": "história empresa weg primárias",
+          "candidates": 1
+        },
+        {
+          "provider": "wikipedia",
+          "query": "história empresa weg primárias",
+          "error": "vazio"
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://www.bing.com/search?q=Hist%C3%B3ria+da+empresa+WEG+fontes+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=Hist%C3%B3ria+da+empresa+WEG+fontes+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 4934
+        },
+        {
+          "url": "https://html.duckduckgo.com/html/?q=Hist%C3%B3ria%20da%20empresa%20WEG%20fontes%20prim%C3%A1rias",
+          "final": "https://html.duckduckgo.com/html/?q=Hist%C3%B3ria%20da%20empresa%20WEG%20fontes%20prim%C3%A1rias",
+          "chars": 14308
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=Hist%C3%B3ria+da+empresa+WEG+fontes+prim%C3%A1rias",
+          "final": "https://old-search.marginalia.nu/search?query=Hist%C3%B3ria+da+empresa+WEG+fontes+prim%C3%A1rias",
+          "chars": 16402
+        },
+        {
+          "url": "https://www.bing.com/search?q=hist%C3%B3ria+empresa+weg+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=hist%C3%B3ria+empresa+weg+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 4894
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=hist%C3%B3ria+empresa+weg+prim%C3%A1rias",
+          "final": "https://old-search.marginalia.nu/search?query=hist%C3%B3ria+empresa+weg+prim%C3%A1rias",
+          "chars": 16232
+        },
+        {
+          "url": "https://m.brasilescola.uol.com.br/historia",
+          "final": "https://brasilescola.uol.com.br/historia",
+          "chars": 179973
+        },
+        {
+          "url": "https://www.todamateria.com.br/historia/",
+          "final": "https://www.todamateria.com.br/historia/",
+          "chars": 481221
+        },
+        {
+          "url": "https://humanidades.com/br/historia/",
+          "final": "https://humanidades.com/br/historia/",
+          "chars": 86010
+        },
+        {
+          "url": "https://pt.m.wikipedia.org/wiki/Hist%C3%B3ria",
+          "final": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+          "chars": 628954
+        },
+        {
+          "url": "https://www.cafehistoria.com.br/",
+          "final": "https://www.cafehistoria.com.br/",
+          "chars": 269479
+        },
+        {
+          "url": "https://www.historiadomundo.com.br/",
+          "final": "https://www.historiadomundo.com.br/",
+          "chars": 92680
+        }
+      ],
+      "candidates": [
+        {
+          "id": "2881af89a364e527f8e5",
+          "url": "https://m.brasilescola.uol.com.br/historia",
+          "title": "História, estudo das ações do homem no tempo e espaço",
+          "origin": "bing",
+          "query": "História da empresa WEG fontes primárias",
+          "date": "2007-04-13-0309:22:15",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "análise crítica do seu objeto de estudo a fim de racionalizar a conclusão sobre os acontecimentos investigados. A palavra “história” tem origem no idioma grego ",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 6953,
+          "final_url": "https://brasilescola.uol.com.br/historia",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "c499cd23e7c9926d15d5",
+          "url": "https://www.todamateria.com.br/historia/",
+          "title": "História - Toda Matéria",
+          "origin": "bing",
+          "query": "História da empresa WEG fontes primárias",
+          "date": "sáb., 24 out. 2026 08:31:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "uma religião afro-brasileira, surgida em 1908, fundada por Zélio Fernandino de Moraes. É marcada pela fusão de elementos de diferentes tradições espirituais e c",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://www.todamateria.com.br/historia/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "b4c39d330dec8ad20603",
+          "url": "https://humanidades.com/br/historia/",
+          "title": "História: início, final, ramos, divisão e características",
+          "origin": "bing",
+          "query": "História da empresa WEG fontes primárias",
+          "date": "2023-06-27T06:15:11-06:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "perguntas do tema. Estas suposições, chamadas hipóteses, serão corroboradas ou descartadas com base na investigação. Formulação de hipóteses . Procura-se inform",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://humanidades.com/br/historia/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "f4ddcacc3eab3c5d9f8a",
+          "url": "https://pt.m.wikipedia.org/wiki/Hist%C3%B3ria",
+          "title": "História – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "História da empresa WEG fontes primárias",
+          "date": "2003-02-03T05:18:55Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "descobertas. As metodologias e abordagens da arqueologia são independentes do campo da história. A é um ramo específico da arqueologia que frequentemente contra",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 8000,
+          "final_url": "https://pt.wikipedia.org/wiki/Hist%C3%B3ria",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "5fae989831262adb342d",
+          "url": "https://www.cafehistoria.com.br/",
+          "title": "Café História - um portal para quem gosta de história",
+          "origin": "bing",
+          "query": "História da empresa WEG fontes primárias",
+          "date": "sáb., 24 out. 2026 04:13:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "O Café História é um portal de divulgação científica criado pelo historiador Bruno Leal. Toda publicamos o nosso “especial da semana” (artigo, entrevista, bibli",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 388,
+          "final_url": "https://www.cafehistoria.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "08c239a51cbc6f0e7adf",
+          "url": "https://www.historiadomundo.com.br/",
+          "title": "História do mundo - A História da Humanidade a um Clique",
+          "origin": "bing",
+          "query": "História da empresa WEG fontes primárias",
+          "date": "qua., 21 out. 2026 02:00:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Copyright © 2024 - Todos os Direitos Reservados Rede Omnia Proibida a reprodução total ou parcial sem autorização prévia da equipe (Inciso I do Artigo 29 Lei 9.",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 240,
+          "final_url": "https://www.historiadomundo.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "4dde8ca5fbad97a231ac",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "title": "CC-BY-SA 4.0",
+          "origin": "marginalia",
+          "query": "História da empresa WEG fontes primárias",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        }
+      ],
+      "unique_candidates": 7,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "LOW_RELEVANCE": 6,
+        "READ_BUDGET_NOT_SELECTED": 1
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 6.266,
+      "read_in_candidate_pool": 6,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-11",
+      "question": "Eventos em Diamantina nos próximos sete dias",
+      "intent_category": "events",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "name",
+          "location",
+          "event_date",
+          "organizer",
+          "source"
+        ],
+        "missing_parameters": [],
+        "search_query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+        "domain": "events",
+        "original_request": "Eventos em Diamantina nos próximos sete dias",
+        "resolved_request": "Eventos em Diamantina entre 2026-10-24 e 2026-10-31",
+        "parameters": {
+          "start_date": "2026-10-24",
+          "end_date": "2026-10-31",
+          "location": "Diamantina"
+        },
+        "temporal": true,
+        "resolved_at": "2026-10-24T23:38:28.593865+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": true,
+        "constraints": {
+          "hard": {
+            "start_date": "2026-10-24",
+            "end_date": "2026-10-31",
+            "location": "Diamantina"
+          },
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "bing",
+          "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "error": "bloqueado"
+        },
+        {
+          "provider": "marginalia",
+          "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "error": "vazio"
+        },
+        {
+          "provider": "bing",
+          "query": "diamantina eventos culturais",
+          "candidates": 6
+        },
+        {
+          "provider": "marginalia",
+          "query": "diamantina eventos culturais",
+          "candidates": 4
+        },
+        {
+          "provider": "wikipedia",
+          "query": "diamantina eventos culturais",
+          "error": "vazio"
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://www.bing.com/search?q=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5358
+        },
+        {
+          "url": "https://html.duckduckgo.com/html/?q=%22Diamantina%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+          "final": "https://html.duckduckgo.com/html/?q=%22Diamantina%22%20eventos%20programa%C3%A7%C3%A3o%202026-10-24%202026-10-31",
+          "chars": 14344
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+          "final": "https://old-search.marginalia.nu/search?query=%22Diamantina%22+eventos+programa%C3%A7%C3%A3o+2026-10-24+2026-10-31",
+          "chars": 1111
+        },
+        {
+          "url": "https://www.bing.com/search?q=diamantina+eventos+culturais&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=diamantina+eventos+culturais&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5226
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=diamantina+eventos+culturais",
+          "final": "https://old-search.marginalia.nu/search?query=diamantina+eventos+culturais",
+          "chars": 18655
+        },
+        {
+          "url": "https://www.diamantina.mg.gov.br/",
+          "final": "https://www.diamantina.mg.gov.br/",
+          "chars": 297253
+        },
+        {
+          "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+          "final": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+          "chars": 82929
+        },
+        {
+          "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+          "error": "bloqueado"
+        },
+        {
+          "url": "https://www.visitediamantina.com.br/",
+          "final": "https://www.visitediamantina.com.br/",
+          "chars": 106321
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Diamantina",
+          "final": "https://pt.wikipedia.org/wiki/Diamantina",
+          "chars": 651984
+        },
+        {
+          "url": "https://www.biotaneotropica.org.br/BN/issue/download/42/25",
+          "error": "tipo_bloqueado"
+        }
+      ],
+      "candidates": [
+        {
+          "id": "7f92f2feb12f66308e96",
+          "url": "https://www.diamantina.mg.gov.br/",
+          "title": "Prefeitura Municipal de Diamantina",
+          "origin": "bing",
+          "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "date": "sáb., 24 out. 2026 05:03:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "continuados de Pontos de Cultura. A... VER MAIS Prefeitura de Diamantina publica edital de subsídio a espaços culturais 21 set Cultura e... 636 visualizações Ed",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 4929,
+          "final_url": "https://www.diamantina.mg.gov.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "fe489434734c9c2fdea0",
+          "url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+          "title": "O que fazer em Diamantina - Melhores atrações e passeios!",
+          "origin": "bing",
+          "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "date": "2025-05-15T01:23:39-03:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "naturais maravilhosas na Serra da Espinhaço. Sem falar em eventos como a Vesperata, que atrai milhares de turistas para a cidade. Aproveite alguns dias de viage",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 8000,
+          "final_url": "https://guia.melhoresdestinos.com.br/o-que-fazer-em-diamantina-204-2608-p.html",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "5d13856f06e6b48c086a",
+          "url": "https://www.diamantina.mg.gov.br/portal",
+          "title": "Prefeitura Municipal de Diamantina",
+          "origin": "bing",
+          "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "date": "sáb., 24 out. 2026 04:34:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "A Prefeitura de Diamantina, por meio da Secretaria Municipal de Cultura e Patrimônio, publica o Edital de Chamamento Público nº 003/2026, destinado ao fomento d",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED",
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "9813fa73813cdf707e89",
+          "url": "https://www.tripadvisor.com.br/Attractions-g303380-Activities-Diamantina_State_of_Minas_Gerais.html",
+          "title": "AS 15 MELHORES coisas para fazer em Diamantina (2026) - Tripadvisor",
+          "origin": "bing",
+          "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "date": "sex., 23 out. 2026 14:37:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "OS 15 MELHORES pontos turísticos em Diamantina, Brasil O que fazer: Diamantina Confira atrações e atividades imperdíveis: Museu do Diamante, Parque Estadual do ",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "BLOCKED",
+          "recovery_method": "",
+          "fetch_error": "bloqueado",
+          "losses": [
+            "FETCH_BLOCKED",
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "5c803b096670dfca3958",
+          "url": "https://www.visitediamantina.com.br/",
+          "title": "Prefeitura de Diamantina - MG",
+          "origin": "bing",
+          "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "date": "ter., 13 out. 2026 15:39:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "história brasileira. Estar naquele espaço e imaginar a vida dessa mulher que marcou a sociedade diamantinense foi fascinante. Outro ponto imperdível foi o Merca",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 1842,
+          "final_url": "https://www.visitediamantina.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "d0845dc134c776eba296",
+          "url": "https://pt.wikipedia.org/wiki/Diamantina",
+          "title": "Diamantina – Wikipédia, a enciclopédia livre",
+          "origin": "bing",
+          "query": "\"Diamantina\" eventos programação 2026-10-24 2026-10-31",
+          "date": "2004-09-19T02:30:13Z",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "INCOMPLETE_EVIDENCE"
+          ],
+          "evidence_ref": "",
+          "excerpt": "exuberante. O município tem um clima , com temperaturas amenas ao longo do ano e um período chuvoso concentrado nos meses de verão. Essas características tornam",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 8000,
+          "final_url": "https://pt.wikipedia.org/wiki/Diamantina",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "EVIDENCE_INSUFFICIENT"
+          ]
+        },
+        {
+          "id": "3727033174019233097d",
+          "url": "https://www.biotaneotropica.org.br/BN/issue/download/42/25",
+          "title": "Gall midges (Diptera, Cecidomyiidae) associated with Aldina heterophylla Spr. ex Benth. (Fabaceae) from Brazil Sheila Patrici...",
+          "origin": "marginalia",
+          "query": "diamantina eventos culturais",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "BLOCKED",
+          "recovery_method": "",
+          "fetch_error": "tipo_bloqueado",
+          "losses": [
+            "FETCH_BLOCKED"
+          ]
+        },
+        {
+          "id": "d65399def7783c8058e2",
+          "url": "https://www.biotaneotropica.org.br/BN/issue/download/27/10",
+          "title": "FIRST RECORD OF PARAPHAENOCLADIUS EXAGITANS LONGIPES SÆTHER & WANG 1995 (DIPTERA: CHIRONOMIDAE: ORTHOCLADIINAE) FROM BRAZIL H...",
+          "origin": "marginalia",
+          "query": "diamantina eventos culturais",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "67313484774307f5dda8",
+          "url": "https://www.workaway.info/en/host/828915285883",
+          "title": "Join a charity in a wide range of cultural projects near Brasilia de Minas, Brazil",
+          "origin": "marginalia",
+          "query": "diamantina eventos culturais",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        },
+        {
+          "id": "4dde8ca5fbad97a231ac",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "title": "CC-BY-SA 4.0",
+          "origin": "marginalia",
+          "query": "diamantina eventos culturais",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        }
+      ],
+      "unique_candidates": 10,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "EVIDENCE_INSUFFICIENT": 6,
+        "READ_BUDGET_NOT_SELECTED": 4,
+        "FETCH_BLOCKED": 2
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 5.611,
+      "read_in_candidate_pool": 4,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    },
+    {
+      "id": "holdout-12",
+      "question": "Novidades sobre baterias de estado sólido fontes originais",
+      "intent_category": "technology_news",
+      "request": {
+        "version": 1,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "missing_parameters": [],
+        "search_query": "Novidades sobre baterias de estado sólido fontes originais",
+        "domain": "general",
+        "original_request": "Novidades sobre baterias de estado sólido fontes originais",
+        "resolved_request": "Novidades sobre baterias de estado sólido fontes originais",
+        "parameters": {},
+        "temporal": false,
+        "resolved_at": "2026-10-24T23:38:34.712980+00:00",
+        "timezone": "America/Bahia",
+        "requires_live_data": false,
+        "constraints": {
+          "hard": {},
+          "soft": {},
+          "optional": {}
+        }
+      },
+      "queries": [
+        {
+          "provider": "bing",
+          "query": "Novidades sobre baterias de estado sólido fontes originais",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Novidades sobre baterias de estado sólido fontes originais",
+          "error": "bloqueado"
+        },
+        {
+          "provider": "marginalia",
+          "query": "Novidades sobre baterias de estado sólido fontes originais",
+          "candidates": 2
+        },
+        {
+          "provider": "bing",
+          "query": "baterias estado sólido originais",
+          "candidates": 6
+        },
+        {
+          "provider": "marginalia",
+          "query": "baterias estado sólido originais",
+          "candidates": 6
+        },
+        {
+          "provider": "wikipedia",
+          "query": "baterias estado sólido originais",
+          "error": "vazio"
+        }
+      ],
+      "network_fetches": [
+        {
+          "url": "https://www.bing.com/search?q=Novidades+sobre+baterias+de+estado+s%C3%B3lido+fontes+originais&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=Novidades+sobre+baterias+de+estado+s%C3%B3lido+fontes+originais&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5028
+        },
+        {
+          "url": "https://html.duckduckgo.com/html/?q=Novidades%20sobre%20baterias%20de%20estado%20s%C3%B3lido%20fontes%20originais",
+          "final": "https://html.duckduckgo.com/html/?q=Novidades%20sobre%20baterias%20de%20estado%20s%C3%B3lido%20fontes%20originais",
+          "chars": 14338
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=Novidades+sobre+baterias+de+estado+s%C3%B3lido+fontes+originais",
+          "final": "https://old-search.marginalia.nu/search?query=Novidades+sobre+baterias+de+estado+s%C3%B3lido+fontes+originais",
+          "chars": 17414
+        },
+        {
+          "url": "https://www.bing.com/search?q=baterias+estado+s%C3%B3lido+originais&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "final": "https://www.bing.com/search?q=baterias+estado+s%C3%B3lido+originais&format=rss&count=6&setlang=pt-BR&cc=BR",
+          "chars": 5083
+        },
+        {
+          "url": "https://old-search.marginalia.nu/search?query=baterias+estado+s%C3%B3lido+originais",
+          "final": "https://old-search.marginalia.nu/search?query=baterias+estado+s%C3%B3lido+originais",
+          "chars": 21596
+        },
+        {
+          "url": "https://www.reidasbateriascampinas.com.br/",
+          "final": "https://www.reidasbateriascampinas.com.br/",
+          "chars": 78708
+        },
+        {
+          "url": "https://bateriascampinas.com.br/",
+          "final": "https://bateriascampinas.com.br/",
+          "chars": 102045
+        },
+        {
+          "url": "http://www.campinasbaterias.com.br/site/",
+          "final": "http://www.campinasbaterias.com.br/site/",
+          "chars": 20064
+        },
+        {
+          "url": "https://bateriascondotta.com.br/",
+          "final": "https://bateriascondotta.com.br/",
+          "chars": 186285
+        },
+        {
+          "url": "https://www.codibac.com.br/",
+          "final": "https://www.codibac.com.br/",
+          "chars": 127349
+        },
+        {
+          "url": "https://gigantedasbaterias.com.br/",
+          "final": "https://gigantedasbaterias.com.br/",
+          "chars": 131206
+        }
+      ],
+      "candidates": [
+        {
+          "id": "89016c6b37c290d9c373",
+          "url": "https://www.reidasbateriascampinas.com.br/",
+          "title": "Rei das Baterias em Campinas | Entrega e Instalação Grátis",
+          "origin": "bing",
+          "query": "baterias estado sólido originais",
+          "date": "ter., 20 out. 2026 18:29:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S1",
+          "excerpt": "desconto! Muito bom mesmo. Já indiquei para amigos.\" RJ Roberto Junior Ford Ranger ★★★★★ \"Profissionalismo do início ao fim. A bateria está funcionando perfeita",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 828,
+          "final_url": "https://www.reidasbateriascampinas.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "20f88afd86403473c20b",
+          "url": "https://bateriascampinas.com.br/",
+          "title": "Baterias Campinas - Baterias Campinas",
+          "origin": "bing",
+          "query": "baterias estado sólido originais",
+          "date": "2025-06-30T16:57:18+00:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S2",
+          "excerpt": "Atendimento rápido e personalizado sempre Você é atendido por um especialista que orienta com clareza qual bateria é a ideal para seu caso, considerando o model",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 200,
+          "final_url": "https://bateriascampinas.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "3e07b9b6345cd82abe23",
+          "url": "http://www.campinasbaterias.com.br/site/",
+          "title": "Campinas Baterias",
+          "origin": "bing",
+          "query": "baterias estado sólido originais",
+          "date": "seg., 19 out. 2026 00:58:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "S3",
+          "excerpt": "A Campinas Baterias tem uma Central de Vendas pronta e preparada para auxiliar. Campinas: (19) 2101 - 3064",
+          "selected": true,
+          "returned": true,
+          "extracted_chars": 106,
+          "final_url": "http://www.campinasbaterias.com.br/site/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "b9a987a0896b9f65a83d",
+          "url": "https://bateriascondotta.com.br/",
+          "title": "Baterias Em Campinas -",
+          "origin": "bing",
+          "query": "baterias estado sólido originais",
+          "date": "2025-06-27T11:16:50-03:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "condições facilitadas. Além disso, garantimos entrega rápida, socorro imediato e instalação gratuita no local, levando praticidade e segurança até você. Porque ",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 667,
+          "final_url": "https://bateriascondotta.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "ed21e75c54de29b7c1e6",
+          "url": "https://www.codibac.com.br/",
+          "title": "Baterias em Campinas | Entrega em até 38 min | Codibac",
+          "origin": "bing",
+          "query": "baterias estado sólido originais",
+          "date": "qui., 22 out. 2026 07:00:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "vendedores. Sem entrega de varejo e sem o prazo de 38 minutos. Região Sul Aguaí, Andradas, Casa Branca, Espírito Santo do Pinhal, Estiva Gerbi, Jacutinga, São J",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 2167,
+          "final_url": "https://www.codibac.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "5b3a432f0037f0e43a06",
+          "url": "https://gigantedasbaterias.com.br/",
+          "title": "Home - Gigante das Baterias",
+          "origin": "bing",
+          "query": "baterias estado sólido originais",
+          "date": "2024-04-23T10:18:13+00:00",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": true,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "BATERIA PARA MOTO Oferecemos baterias compactas, potentes e seguras para todos os tipos de motos. Alta performance, partida rápida e durabilidade para você roda",
+          "selected": true,
+          "returned": false,
+          "extracted_chars": 1188,
+          "final_url": "https://gigantedasbaterias.com.br/",
+          "content_state": "READ_PARTIAL",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "c7c95592ea040e2b8234",
+          "url": "https://www.estadao.com.br/tecmundo/",
+          "title": "TecMundo: tecnologia, inovação e tendências digitais - Estadão",
+          "origin": "bing",
+          "query": "Novidades sobre baterias de estado sólido fontes originais",
+          "date": "sáb., 24 out. 2026 09:56:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "O NOVO RIVAL DO YOUTUBE?! TIM COOK: relembre a trajetória do ex-CEO da Apple Quanto custa consertar um Galaxy Z Fold quebrado? iOS 27 CHEGA HOJE: veja as princi",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED",
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "1f52675082e6788779f2",
+          "url": "https://noticias.uol.com.br/-/",
+          "title": "UOL Notícias | Notícias do Dia no Brasil e no Mundo",
+          "origin": "bing",
+          "query": "Novidades sobre baterias de estado sólido fontes originais",
+          "date": "sáb., 24 out. 2026 10:39:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Acompanhe as últimas notícias do Brasil e do mundo em áreas como política, economia, cotidiano, saúde, tecnologia, educação e mais. Veja ainda fotos, áudios, ví",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED",
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "63b2c72b28f5501a2f17",
+          "url": "https://www.cnnbrasil.com.br/",
+          "title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+          "origin": "bing",
+          "query": "Novidades sobre baterias de estado sólido fontes originais",
+          "date": "sáb., 24 out. 2026 11:01:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "BTS no Brasil: confira atrações gratuitas em São Paulo para os fãs do grupo Rota Ecológica dos Milagres: o que conhecer no paraíso do litoral alagoano Temporada",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED",
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "9764d668b73c2d391701",
+          "url": "https://www.noticiasaominuto.com.br/",
+          "title": "Notícias ao Minuto Brasil - Última hora",
+          "origin": "bing",
+          "query": "Novidades sobre baterias de estado sólido fontes originais",
+          "date": "sáb., 24 out. 2026 08:52:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Acompanhe todas as notícias de última hora do Brasil e do mundo. Fique por dentro da atualidade com nossa cobertura completa: notícias do dia, fotos e vídeos. S",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED",
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "a639b02f428545a56d6f",
+          "url": "https://www.bbc.com/portuguese",
+          "title": "Notícias, vídeos, análise e contexto em português - BBC News Brasil",
+          "origin": "bing",
+          "query": "Novidades sobre baterias de estado sólido fontes originais",
+          "date": "qui., 27 jun. 2013 19:17:00 GMT",
+          "type": "pagina",
+          "state": "REJECTED",
+          "read": false,
+          "reasons": [
+            "RELEVANCE_MISMATCH"
+          ],
+          "evidence_ref": "",
+          "excerpt": "Na BBC News Brasil você fica por dentro do que acontece no Brasil e no mundo. Com redações em Londres e São Paulo e mais de 200 repórteres internacionais, nossa",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED",
+            "LOW_RELEVANCE"
+          ]
+        },
+        {
+          "id": "2a588d93706b4e8cae8a",
+          "url": "https://pos-darwinista.blogspot.com/2009/10/",
+          "title": "Desafiando a Nomenklatura Científica: outubro 2009",
+          "origin": "marginalia",
+          "query": "Novidades sobre baterias de estado sólido fontes originais",
+          "date": "",
+          "type": "pagina",
+          "state": "FOUND",
+          "read": false,
+          "reasons": [],
+          "evidence_ref": "",
+          "excerpt": "",
+          "selected": false,
+          "returned": false,
+          "extracted_chars": 0,
+          "final_url": null,
+          "content_state": "DISCOVERED",
+          "recovery_method": "",
+          "fetch_error": "",
+          "losses": [
+            "READ_BUDGET_NOT_SELECTED"
+          ]
+        }
+      ],
+      "unique_candidates": 12,
+      "omitted_diagnostic_rows": 0,
+      "losses": {
+        "LOW_RELEVANCE": 11,
+        "READ_BUDGET_NOT_SELECTED": 6
+      },
+      "state": "sem_correspondencia",
+      "opened_returned": 3,
+      "eligible_read_returned": 0,
+      "seconds": 4.996,
+      "read_in_candidate_pool": 6,
+      "extraction_trace_available": true,
+      "synthesis": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "jdui": "NOT_EXECUTED_RETRIEVAL_PROBE",
+      "factual_precision": null,
+      "absolute_recall": null,
+      "judged_incorrect_rejections": null
+    }
+  ],
+  "summary": {
+    "cases": 12,
+    "states": {
+      "sem_correspondencia": 11,
+      "paginas_ilegiveis": 1
+    },
+    "opened_returned": 33,
+    "eligible_read_returned": 0,
+    "read_in_candidate_pool": 60,
+    "provider_calls": 60,
+    "network_fetches": 121,
+    "median_seconds": 5.847,
+    "losses": {
+      "HARD_CONSTRAINT_MISMATCH": 28,
+      "EVIDENCE_INSUFFICIENT": 14,
+      "INTENT_MISMATCH": 3,
+      "DATE_MISMATCH": 21,
+      "DISCOVERY_ONLY": 18,
+      "INDEX_PAGE": 18,
+      "FETCH_FAILED": 2,
+      "EXTRACTION_EMPTY": 1,
+      "LOW_RELEVANCE": 42,
+      "READ_BUDGET_NOT_SELECTED": 26,
+      "FETCH_BLOCKED": 3
+    }
+  },
+  "limits": [
+    "Read counters distinguish returned sources from the bounded candidate pool.",
+    "Missing historical traces remain unknown; provider blocks are not product defects.",
+    "No independent relevance denominator, factual or citation judgments."
+  ]
+}

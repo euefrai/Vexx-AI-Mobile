@@ -1,0 +1,12 @@
+### Result
+{"bar_hidden":true,"panel_hidden":true,"dialogs":0,"buttons":["Alice QA@alice","⏻"," Nova conversa","","","Pesquise imagens da Ponte Estaiada de São Pa","···","Pesquisa profunda sobre asyncio.TaskGroup do","···"," Documentos 0"," Pesquisas"," Meu PC"," Meus Estudos"," Memória"," Provedores de IA","","\n          PC conectado\n        ","Voltar às pesquisas","●Buscar: asyncio.taskgroup documentação oficial exemplosConcluída · busca","●Ler: asyncio.taskgroup documentação oficial exemplosConcluída · ler","●Analisar: asyncio.taskgroup documentação oficial exemplosConcluída · analisar","●Buscar: limitaçõesConcluída · busca","●Ler: limitaçõesConcluída · ler","●Analisar: limitaçõesConcluída · analisar","○VerificarPendente · verificar","○SintetizarPendente · sintetizar","○AuditarPendente · auditar","●Buscar: limitações fontes primárias texto completoConcluída · busca","●Ler: limitações fontes primárias texto completoConcluída · ler","●Analisar: limitações fontes primárias texto completoConcluída · analisar","●Buscar: asyncio.taskgroup exemplosConcluída · busca","○Ler: asyncio.taskgroup exemplosPendente · ler","○Analisar: asyncio.taskgroup exemplosPendente · analisar","Investigar se: create_task ( say_after ( 1 , 'hello' )) task2 = tg .","Investigar se: create_task ( say_after ( 2 , 'world' )) print ( f \"started at { time ."]}
+### Ran Playwright code
+```js
+await (async page=>{return {bar_hidden:await page.locator('#researchBar').isHidden(),panel_hidden:await page.locator('#researchPanel').isHidden(),dialogs:await page.getByRole('dialog').count(),buttons:await page.getByRole('button').allTextContents()};})(page);
+```
+### Page
+- Page URL: http://127.0.0.1:60953/
+- Page Title: Vexx AI
+- Console: 1 errors, 0 warnings
+### Events
+- New console entries: .playwright-cli\console-2026-10-24T23-34-53-755Z.log#L12

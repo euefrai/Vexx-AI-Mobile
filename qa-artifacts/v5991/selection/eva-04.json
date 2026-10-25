@@ -1,0 +1,559 @@
+{
+  "id": "eva-04",
+  "category": "public_people",
+  "query": "Biografia de Clarice Lispector fontes primárias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 12.835,
+  "state": "ok",
+  "calls": [
+    {
+      "provider": "openlibrary",
+      "query": "Biografia de Clarice Lispector fontes primárias",
+      "error": "rede"
+    },
+    {
+      "provider": "bing",
+      "query": "Biografia de Clarice Lispector fontes primárias",
+      "candidates": 6
+    },
+    {
+      "provider": "wikipedia",
+      "query": "Biografia de Clarice Lispector fontes primárias",
+      "error": "vazio"
+    },
+    {
+      "provider": "openlibrary",
+      "query": "biografia clarice lispector primárias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "biografia clarice lispector primárias",
+      "candidates": 6
+    },
+    {
+      "provider": "wikipedia",
+      "query": "biografia clarice lispector primárias",
+      "error": "vazio"
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://www.bing.com/search?q=Biografia+de+Clarice+Lispector+fontes+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=Biografia+de+Clarice+Lispector+fontes+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5093
+    },
+    {
+      "url": "https://www.bing.com/search?q=biografia+clarice+lispector+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=biografia+clarice+lispector+prim%C3%A1rias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5053
+    },
+    {
+      "url": "https://www.todamateria.com.br/biografia/",
+      "final": "https://www.todamateria.com.br/biografia/",
+      "chars": 503916
+    },
+    {
+      "url": "https://www.portugues.com.br/redacao/biografia.html",
+      "final": "https://www.portugues.com.br/redacao/biografia.html",
+      "chars": 126593
+    },
+    {
+      "url": "https://www.clubedoportugues.com.br/biografia/",
+      "final": "https://www.clubedoportugues.com.br/biografia/",
+      "chars": 240528
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/biografia",
+      "final": "https://brasilescola.uol.com.br/biografia",
+      "chars": 143886
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Biografia",
+      "final": "https://pt.wikipedia.org/wiki/Biografia",
+      "chars": 298117
+    },
+    {
+      "url": "https://www.ebiografia.com/",
+      "final": "https://www.ebiografia.com/",
+      "chars": 62487
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "source",
+      "content_scope"
+    ],
+    "missing_parameters": [],
+    "search_query": "Biografia de Clarice Lispector fontes primárias",
+    "domain": "general",
+    "original_request": "Biografia de Clarice Lispector fontes primárias",
+    "resolved_request": "Biografia de Clarice Lispector fontes primárias",
+    "parameters": {},
+    "temporal": false,
+    "resolved_at": "2026-10-24T22:48:43.343664+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": false,
+    "constraints": {
+      "hard": {},
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "5c4f87979861684d188e",
+        "url": "https://www.todamateria.com.br/biografia/",
+        "title": "Biografia: o que é e como fazer (com exemplo) - Toda Matéria",
+        "origin": "bing",
+        "query": "Biografia de Clarice Lispector fontes primárias",
+        "date": "2017-04-21T21:20:42+0100",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S1",
+        "excerpt": "terceira pessoa; sequência cronológica dos fatos; utilização de marcadores temporais (na infância, na adolescência, naquela época, etc.); predomínio de verbos n",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 6200,
+        "final_url": "https://www.todamateria.com.br/biografia/",
+        "content_state": "READ_PARTIAL",
+        "fetch_error": "",
+        "losses": []
+      },
+      {
+        "id": "0f213b975b058cd82839",
+        "url": "https://www.portugues.com.br/redacao/biografia.html",
+        "title": "Biografia: o que é, características, estrutura, tipos - Português",
+        "origin": "bing",
+        "query": "Biografia de Clarice Lispector fontes primárias",
+        "date": "2012-12-12UTC10:23:48",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "perfeito do indicativo ou presente histórico. apresenta recorrente uso de pronomes e substantivos verbos Não pare agora... Tem mais depois da publicidade ;) Por",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 7940,
+        "final_url": "https://www.portugues.com.br/redacao/biografia.html",
+        "content_state": "READ_PARTIAL",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "bc715b736970ef8ff64f",
+        "url": "https://www.clubedoportugues.com.br/biografia/",
+        "title": "Biografia: características, estrutura, tipos e exemplos",
+        "origin": "bing",
+        "query": "Biografia de Clarice Lispector fontes primárias",
+        "date": "2024-08-26T13:15:15+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "biografada. Se for falecida, o ideal é finalizar com a data e motivo da morte. Inclusive, não se esqueça de mencionar seus legados. Se ela está viva, é importan",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 6727,
+        "final_url": "https://www.clubedoportugues.com.br/biografia/",
+        "content_state": "READ_PARTIAL",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "bb7fe9b15eb61b5d4259",
+        "url": "https://brasilescola.uol.com.br/biografia",
+        "title": "Biografia: confira as melhores que o site separou para você",
+        "origin": "bing",
+        "query": "Biografia de Clarice Lispector fontes primárias",
+        "date": "2007-04-16-0316:57:42",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "época de uma determinada pessoa. Exemplo: Hitler, de Kershaw. Biografia : nela, o autor fala sobre si mesmo, narrando os acontecimentos mais marcantes de sua vi",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 4560,
+        "final_url": "https://brasilescola.uol.com.br/biografia",
+        "content_state": "READ_PARTIAL",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "a77581a909c114f912f7",
+        "url": "https://pt.wikipedia.org/wiki/Biografia",
+        "title": "Biografia – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "Biografia de Clarice Lispector fontes primárias",
+        "date": "2004-07-19T00:52:39Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "RELEVANCE_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Este artigo ou secção contém , mas as suas fontes não são claras porque , o que das informações. uma lista de referências no fim do texto não são citadas no cor",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Biografia",
+        "content_state": "READ_PARTIAL",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE"
+        ]
+      },
+      {
+        "id": "4fa1bebcc3f14631018d",
+        "url": "https://www.ebiografia.com/",
+        "title": "Biografias - eBiografia.com",
+        "origin": "bing",
+        "query": "Biografia de Clarice Lispector fontes primárias",
+        "date": "sáb., 24 out. 2026 19:29:00 GMT",
+        "type": "pagina",
+        "state": "READ",
+        "read": true,
+        "reasons": [],
+        "evidence_ref": "S2",
+        "excerpt": "Biografias Mais Lidas Monteiro Lobato Karl Marx Tarsila do Amaral Romero Britto Nelson Mandela Leonardo da Vinci Vincent van Gogh Isaac Newton José de Alencar V",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 1991,
+        "final_url": "https://www.ebiografia.com/",
+        "content_state": "READ_PARTIAL",
+        "fetch_error": "",
+        "losses": []
+      }
+    ],
+    "unique_candidates": 6,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-73e19b99e9f7",
+      "type": "image",
+      "title": "A biografia é um tipo de texto que conta a história da vida de alguém. Ela é escrita na terceira pessoa, ou seja, por um narrador que não participa dos fatos co",
+      "url": "https://static.todamateria.com.br/upload/bi/og/biografia-og.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/bi/og/biografia-og.jpg",
+      "source_title": "Biografia: o que é e como fazer (com exemplo)",
+      "source_url": "https://www.todamateria.com.br/biografia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A biografia é um tipo de texto que conta a história da vida de alguém. Ela é escrita na terceira pessoa, ou seja, por um narrador que não participa dos fatos contados. Os fatos seguem a ordem dos acontecimentos durante as fases da vida de a",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d8923179ab49",
+      "type": "image",
+      "title": "Toda Matéria",
+      "url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "final_url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "source_title": "Biografia: o que é e como fazer (com exemplo)",
+      "source_url": "https://www.todamateria.com.br/biografia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Toda Matéria",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-403fc7bd38aa",
+      "type": "image",
+      "title": "Márcia Fernandes",
+      "url": "https://static.todamateria.com.br/img/autor/ma/rc/marcia-fernandes_72.jpg",
+      "final_url": "https://static.todamateria.com.br/img/autor/ma/rc/marcia-fernandes_72.jpg",
+      "source_title": "Biografia: o que é e como fazer (com exemplo)",
+      "source_url": "https://www.todamateria.com.br/biografia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Márcia Fernandes",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7beac1d59fbd",
+      "type": "image",
+      "title": "Vamos criar a sua conta.",
+      "url": "https://static.todamateria.com.br/img/home/hero-cards/tmplus-hero/tmplus-hero-card.png",
+      "final_url": "https://static.todamateria.com.br/img/home/hero-cards/tmplus-hero/tmplus-hero-card.png",
+      "source_title": "Biografia: o que é e como fazer (com exemplo)",
+      "source_url": "https://www.todamateria.com.br/biografia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Vamos criar a sua conta.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1f24e6ef0f76",
+      "type": "image",
+      "title": "Elementos visuais do fundo",
+      "url": "https://static.todamateria.com.br/img/footer/footer-bg@2x.png",
+      "final_url": "https://static.todamateria.com.br/img/footer/footer-bg@2x.png",
+      "source_title": "Biografia: o que é e como fazer (com exemplo)",
+      "source_url": "https://www.todamateria.com.br/biografia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Elementos visuais do fundo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b4fa3fd5d2b0",
+      "type": "image",
+      "title": "Sabe a diferença entre biografia e autobiografia? Conheça os gêneros biográficos, suas características linguísticas e estruturais, além dos aspectos que os dife",
+      "url": "https://static.portugues.com.br/2021/03/biografia.jpg",
+      "final_url": "https://static.portugues.com.br/2021/03/biografia.jpg",
+      "source_title": "Biografia: o que é, características, estrutura, tipos",
+      "source_url": "https://www.portugues.com.br/redacao/biografia.html",
+      "publisher": "static.portugues.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Sabe a diferença entre biografia e autobiografia? Conheça os gêneros biográficos, suas características linguísticas e estruturais, além dos aspectos que os diferenciam.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8e4e53b85fe2",
+      "type": "image",
+      "title": "logo Português",
+      "url": "https://www.portugues.com.br/assets/images/logo-portugues.webp",
+      "final_url": "https://www.portugues.com.br/assets/images/logo-portugues.webp",
+      "source_title": "Biografia: o que é, características, estrutura, tipos",
+      "source_url": "https://www.portugues.com.br/redacao/biografia.html",
+      "publisher": "www.portugues.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "logo Português",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-4869043e4a90",
+      "type": "image",
+      "title": "Como todo gênero discursivo, o diário também se demarca por características linguísticas específicas",
+      "url": "https://static.portugues.com.br/conteudo/images/como-todo-genero-discursivo-diario-tambem-se-demarca-por-caracteristicas-linguisticas-especificas-4f96be6da7e1c.jpg",
+      "final_url": "https://static.portugues.com.br/conteudo/images/como-todo-genero-discursivo-diario-tambem-se-demarca-por-caracteristicas-linguisticas-especificas-4f96be6da7e1c.jpg",
+      "source_title": "Biografia: o que é, características, estrutura, tipos",
+      "source_url": "https://www.portugues.com.br/redacao/biografia.html",
+      "publisher": "static.portugues.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Como todo gênero discursivo, o diário também se demarca por características linguísticas específicas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-fefceff6b3e2",
+      "type": "image",
+      "title": "O documentário exibe uma visão da realidade por meio da tela",
+      "url": "https://static.portugues.com.br/conteudo/images/o-documentario-exibe-uma-visao-realidade-por-meio-tela-59f9c66fa346b.jpg",
+      "final_url": "https://static.portugues.com.br/conteudo/images/o-documentario-exibe-uma-visao-realidade-por-meio-tela-59f9c66fa346b.jpg",
+      "source_title": "Biografia: o que é, características, estrutura, tipos",
+      "source_url": "https://www.portugues.com.br/redacao/biografia.html",
+      "publisher": "static.portugues.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "O documentário exibe uma visão da realidade por meio da tela",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9d2ccaaa0a36",
+      "type": "image",
+      "title": "Miguel Torga.",
+      "url": "https://static.portugues.com.br/2024/04/miguel-torga.jpg",
+      "final_url": "https://static.portugues.com.br/2024/04/miguel-torga.jpg",
+      "source_title": "Biografia: o que é, características, estrutura, tipos",
+      "source_url": "https://www.portugues.com.br/redacao/biografia.html",
+      "publisher": "static.portugues.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Miguel Torga.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-02affab14006",
+      "type": "image",
+      "title": "O relatório traz informações pormenorizadas sobre fatos ou situações em andamento.",
+      "url": "https://static.portugues.com.br/2020/01/relatorio.jpg",
+      "final_url": "https://static.portugues.com.br/2020/01/relatorio.jpg",
+      "source_title": "Biografia: o que é, características, estrutura, tipos",
+      "source_url": "https://www.portugues.com.br/redacao/biografia.html",
+      "publisher": "static.portugues.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "O relatório traz informações pormenorizadas sobre fatos ou situações em andamento.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b072746ea3a3",
+      "type": "image",
+      "title": "A resenha é bastante cobrada em ambientes de produção de conhecimento.",
+      "url": "https://static.portugues.com.br/2019/06/resenha.jpg",
+      "final_url": "https://static.portugues.com.br/2019/06/resenha.jpg",
+      "source_title": "Biografia: o que é, características, estrutura, tipos",
+      "source_url": "https://www.portugues.com.br/redacao/biografia.html",
+      "publisher": "static.portugues.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "A resenha é bastante cobrada em ambientes de produção de conhecimento.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.todamateria.com.br/biografia/",
+      "titulo": "Biografia: o que é e como fazer (com exemplo)",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2017-04-21T21:20:42+0100",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.todamateria.com.br/biografia/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.ebiografia.com/",
+      "titulo": "Biografias",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "sáb., 24 out. 2026 19:29:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.ebiografia.com/",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.portugues.com.br/redacao/biografia.html",
+      "titulo": "Biografia: o que é, características, estrutura, tipos",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2012-12-12UTC10:23:48",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "general",
+        "url": "https://www.portugues.com.br/redacao/biografia.html",
+        "eligible": true,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": true,
+        "required_data": [
+          "source",
+          "content_scope"
+        ],
+        "reasons": [],
+        "data": {}
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 2,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

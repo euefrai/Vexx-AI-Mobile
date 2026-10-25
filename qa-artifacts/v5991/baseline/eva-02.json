@@ -1,0 +1,663 @@
+{
+  "id": "eva-02",
+  "category": "national_news",
+  "query": "Notícias do Canadá hoje",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 9.4,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Canadá\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Canadá\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Canadá\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país\" site:www.bbc.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Trump elimina algumas tarifas ao Canadá antes das eleições de meio de mandato\" site:noticias.uol.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Canad%C3%A1%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Canad%C3%A1%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 154206
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4636
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Canad%C3%A1%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5202
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22%27Alberta+mais+forte+em+Canad%C3%A1+unido%27%3A+prov%C3%ADncia+vota+para+seguir+sendo+parte+do+pa%C3%ADs%22+site%3Awww.bbc.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22%27Alberta+mais+forte+em+Canad%C3%A1+unido%27%3A+prov%C3%ADncia+vota+para+seguir+sendo+parte+do+pa%C3%ADs%22+site%3Awww.bbc.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5276
+    },
+    {
+      "url": "https://www.bbc.com",
+      "final": "https://www.bbc.com",
+      "chars": 656325
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Trump+elimina+algumas+tarifas+ao+Canad%C3%A1+antes+das+elei%C3%A7%C3%B5es+de+meio+de+mandato%22+site%3Anoticias.uol.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Trump+elimina+algumas+tarifas+ao+Canad%C3%A1+antes+das+elei%C3%A7%C3%B5es+de+meio+de+mandato%22+site%3Anoticias.uol.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5068
+    },
+    {
+      "url": "https://www.todamateria.com.br/canada/",
+      "final": "https://www.todamateria.com.br/canada/",
+      "chars": 520713
+    },
+    {
+      "url": "https://m.brasilescola.uol.com.br/geografia/canada.htm",
+      "final": "https://brasilescola.uol.com.br/geografia/canada.htm",
+      "chars": 137869
+    },
+    {
+      "url": "https://www.canada.ca/en.html",
+      "error": "rede"
+    },
+    {
+      "url": "https://m.suapesquisa.com/paises/canada/",
+      "final": "https://www.suapesquisa.com/paises/canada/",
+      "chars": 32964
+    },
+    {
+      "url": "https://www.maladeaventuras.com/canada/",
+      "final": "https://www.maladeaventuras.com/canada/",
+      "chars": 607861
+    },
+    {
+      "url": "https://pt.m.wikipedia.org/wiki/Canad%C3%A1",
+      "final": "https://pt.wikipedia.org/wiki/Canad%C3%A1",
+      "chars": 1559931
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Canadá\" notícias",
+    "domain": "news",
+    "original_request": "Notícias do Canadá hoje",
+    "resolved_request": "Notícias do Canadá hoje",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "Canadá"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T22:42:13.478868+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "Canadá"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "b26a0118f9f7137c23bf",
+        "url": "https://news.google.com/rss/articles/CBMiY0FVX3lxTFBHQWpCMi1xSFE1VXJoa09RYlhtZlQ1Q01SUTJacHg0azNUT3lqT3c0NlhYLTQyaS1XZkVtc3NZdmVsTjlITXNUWWxBMnBLMkhjaERMT3pPWWJNNEpDczJneWRONNIBaEFVX3lxTE9iWGRSZUJ5YXVLemx6TmxpSVVwVngxeDBtR2NmaTJTQ3pJY2ZJdFZRdzJ6ZXJUd21WQ1gteGNYaFRmSlNUNVRSZmFuWHdubHJyLUU5QTEydjdXcm9sV3ZidGVGRlpHak5Z?oc=5",
+        "title": "'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país - BBC",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Tue, 20 Oct 2026 10:00:43 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "'Alberta mais forte em Canadá unido': província vota para seguir sendo parte do país BBC"
+      },
+      {
+        "id": "808ec7b567562e88a67b",
+        "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxNRDVmOWV4YjJTZDFuT3pjNVpOME5fdGpxTFlIR1paR0Qxd0NVS2ZfdkJCRXU3Q3hVRGdaWjFwdEpIRkpXNTBPZXc1dXZGUG9VVzUtTnhZSk9wM3FrRWoyWHBXUF9DdXE0TUJlYWdldEJETDFYYXB6dHFUSWctMkszUUx2UlNpc0tMOFlTeEdXTEVJVmtodHhlUEZmUlF1ZlNBOUpTOGl4TEVfR2FucmhZZ200T3pEWGVKbG1ieUs2b0pKcnpTUnNwMWFxWnJkTnpBVGZMTTVhVHQ?oc=5",
+        "title": "Trump elimina algumas tarifas ao Canadá antes das eleições de meio de mandato - UOL Notícias",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Fri, 23 Oct 2026 21:24:17 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Trump elimina algumas tarifas ao Canadá antes das eleições de meio de mandato UOL Notícias"
+      },
+      {
+        "id": "6f5947ecfa5cd1a02641",
+        "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPLUVXT1YwZVZQY191a2MxZTAza2FVcXFyQXNkMUdWOFRzUl83ODBWd1BMREZWNzJDX1NvOEo2SzdkUGpvMmN3VTFERHNLZUU5aURoWjRQZTFnemVkbmlmcXJaQ1lrSkhXRmhnMTJjc2oyN0pPTWlVbFhvOVktM3Biczc2MWFYQU1QcE11LTZjMkQ0U3J3U2JJWmwtbHhCQQ?oc=5",
+        "title": "Canadá: 75% dos eleitores de Alberta rejeitam avanço do separatismo - Vero Notícias",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Tue, 20 Oct 2026 10:20:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Canadá: 75% dos eleitores de Alberta rejeitam avanço do separatismo Vero Notícias"
+      },
+      {
+        "id": "4f336ec2ff624fff1b55",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNa0dVOU5jc1ZYaC1HOFNkZmxOVFFVNExUTi1JVHlsY0UwS1ZOdDY0Q3NpWjQtUEdpRnNib0plb2M1Y0wxUjRMeUtxMEM2dGZUdUNESTNKcUNyNFdCT2N5U2hMdl9ObC04ZFloMkJlVUFGMzd3NlRJT1ZCYkxsdHJvUjhJS1ZFT1hPd3N2UUVEQy1tQUd1Mm1lTUFHMlZsRzN0V2p5Zk00cFVvT0E3d3A1ZnFudlBrWUNMVFdvetIBywFBVV95cUxQZU5UQUNuX3lfTGZxQXpIN28xbXQ4bTg3TUtFUjE1UWdwV1JrNGlpQS1BVE1kclNUVHpPcl9MREZoSkloNFFESDA2ZmZoWThWZ0ZhQjhsMlhmVlJFc2ZZOUJoMXEtOFVROXM4NGxMb1ZSTWpTSzE1TFMtdDhrR19XaV95aXhjNXh6QVRkZ1pJSlplLUo2aTF",
+        "title": "Província de Alberta rejeita separação e decide permanecer no Canadá; 'Escolha clara pela união', diz premiê - G1",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Tue, 20 Oct 2026 06:35:51 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Província de Alberta rejeita separação e decide permanecer no Canadá; 'Escolha clara pela união', diz premiê G1"
+      },
+      {
+        "id": "ea4f473af80fda7debe3",
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxNSVZmSUVheFJGa2JoUXhabW9aWDNJRDFGaVJ5ZGw3dXdRTjl0V0lqbmY1ZjRCMTFtbkpSc3JOUTNRV2ZtdGtsY0l6SGtvWW4xYlNzVmM0TmdvSU9QMUR6a0FPNzhDbzM3ejB1Z19WX2NOd0o3dm1mVTNGODVhdWdkcWZfbVdVM3BvOE5mSFdNYWhRbnhKVXpEVUZKSEFCMjZfSTRxVzNTek5zVm00YlJFV25FaFNBZFU4Q2NBRHFaVkx1T0lnalBIVXhvOA?oc=5",
+        "title": "Incêndio em base militar de Alberta deixa mortos e feridos no Canadá - Agência Brasil",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Sun, 18 Oct 2026 20:54:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Incêndio em base militar de Alberta deixa mortos e feridos no Canadá Agência Brasil"
+      },
+      {
+        "id": "d03e938cf697903af3d9",
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPbTdLMV9xcG8yelRfRS1FX1pQVzloZXRQZmRjdkotalJiZTJfcVlvQmJjT29HNU9Zb1g2enFRVXpNeE96cU9Qc0NBajhlLWg2OVhvOEVidlM0U1BacngxM29jalExcjQ5aUhmb0xkanJRVGVaemxUZjA5WHJzMHNGelpRTjR6elFiQXZmRWUyVFpvdGs5NEZZQ2NDSkxiNWhGcWxFbUxrS25Tb29ZXzQ5VWRWaDdmQ1FVTWRtTWlHLXJGUmM?oc=5",
+        "title": "Pedra com 255 runas no Canadá esconde oração sueca misteriosa - Aventuras na História",
+        "origin": "google-news",
+        "query": "\"Canadá\" notícias",
+        "date": "Thu, 22 Oct 2026 16:49:59 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pedra com 255 runas no Canadá esconde oração sueca misteriosa Aventuras na História"
+      },
+      {
+        "id": "2f8f6442ba3ea1afc646",
+        "url": "https://www.todamateria.com.br/canada/",
+        "title": "Canadá: mapa, bandeira, cidades, história e turismo",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "2016-07-06T01:52:23+0100",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "mas possuem um governo federal que as coordena e mantêm o soberano britânico como chefe de Estado. Aspectos Geográficos do Canadá O Canadá é tão grande quanto i"
+      },
+      {
+        "id": "656a778e28cd5dec6171",
+        "url": "https://m.brasilescola.uol.com.br/geografia/canada.htm",
+        "title": "Canadá: mapa, capital, cultura, clima, curiosidades - Brasil Escola",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "2007-04-24-0309:55:28",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "O é um país quefica na América do Norte e , ficando atrás apenas da Rússia. Possui um terreno acidentado e climas que variam do Temperado, mais ao sul, ao Ártic"
+      },
+      {
+        "id": "89e642b8486af598755d",
+        "url": "https://www.canada.ca/en.html",
+        "title": "Home - Canada.ca",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "ter., 24 nov. 2020 20:25:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "We are aware of a cyber security vulnerability affecting organizations around the world. As a precaution, some Government of Canada websites and online services"
+      },
+      {
+        "id": "5a3e882c7c1a8f0ef219",
+        "url": "https://m.suapesquisa.com/paises/canada/",
+        "title": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "sáb., 24 out. 2026 06:22:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "e lagos. Dados gerais: : 9.970.610 km² ÁREA : CAPITAL Ottawa : 36,8 milhões de habitantes (estimativa 2026). POPULAÇÃO dólar canadense MOEDA DO CANADÁ: : Canadá"
+      },
+      {
+        "id": "fda005b61734f03643f7",
+        "url": "https://www.maladeaventuras.com/canada/",
+        "title": "Canadá: tudo que você precisa saber antes de viajar para o país",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "dom., 18 out. 2026 22:57:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "línguas são faladas. A pluralidade se reflete também nas variadas experiências que o país proporciona para os turistas. Para os amantes da natureza, as majestos"
+      },
+      {
+        "id": "36e5bbd7660dedeb85aa",
+        "url": "https://pt.m.wikipedia.org/wiki/Canad%C3%A1",
+        "title": "Canadá – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Canadá\" notícias",
+        "date": "2003-12-16T14:34:59Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "alto 8 [ ] (2017) Gini 31.0 9 [ ] Moeda ($) () Dólar canadense CAD Fuso horário ­-3,5 a -­8 UTC Cód. ISO CA Cód. Internet .ca Cód. telef. +1 governamental Websi"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-dcf53a3cba08",
+      "type": "image",
+      "title": "O Canadá é um país localizado na América do Norte. É o segundo país do mundo em extensão territorial. Faz fronteira com os Estados Unidos ao sul e ao noroeste (",
+      "url": "https://static.todamateria.com.br/upload/ca/na/canada-og.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/ca/na/canada-og.jpg",
+      "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+      "source_url": "https://www.todamateria.com.br/canada/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "O Canadá é um país localizado na América do Norte. É o segundo país do mundo em extensão territorial. Faz fronteira com os Estados Unidos ao sul e ao noroeste (Alasca) e ao norte com o oceano Atlântico. A bandeira do Canadá retrata uma folh",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d8923179ab49",
+      "type": "image",
+      "title": "Toda Matéria",
+      "url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "final_url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+      "source_url": "https://www.todamateria.com.br/canada/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Toda Matéria",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d9c76f35a5fd",
+      "type": "image",
+      "title": "Juliana Bezerra",
+      "url": "https://static.todamateria.com.br/img/autor/ju/li/juliana-bezerra_72.jpg",
+      "final_url": "https://static.todamateria.com.br/img/autor/ju/li/juliana-bezerra_72.jpg",
+      "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+      "source_url": "https://www.todamateria.com.br/canada/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Juliana Bezerra",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-46c69c76461b",
+      "type": "image",
+      "title": "Bandeira do Canadá",
+      "url": "https://static.todamateria.com.br/upload/ba/nd/bandeiradocanada-0-cke.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/ba/nd/bandeiradocanada-0-cke.jpg",
+      "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+      "source_url": "https://www.todamateria.com.br/canada/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Bandeira do Canadá",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7cab825e81df",
+      "type": "image",
+      "title": "Mapa do Canadá",
+      "url": "https://static.todamateria.com.br/upload/ma/pa/mapadocanadaeseusestados-cke.jpg?width=50&blur=10",
+      "final_url": "https://static.todamateria.com.br/upload/ma/pa/mapadocanadaeseusestados-cke.jpg?width=50&blur=10",
+      "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+      "source_url": "https://www.todamateria.com.br/canada/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Mapa do Canadá",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-246f234eb2ca",
+      "type": "image",
+      "title": "Povos inuit",
+      "url": "https://static.todamateria.com.br/upload/me/mb/membrosdopovoinuit-cke.jpg?width=50&blur=10",
+      "final_url": "https://static.todamateria.com.br/upload/me/mb/membrosdopovoinuit-cke.jpg?width=50&blur=10",
+      "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+      "source_url": "https://www.todamateria.com.br/canada/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Povos inuit",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d6c2aac94132",
+      "type": "image",
+      "title": "Cataratas do Niágara no Canadá.",
+      "url": "https://static.todamateria.com.br/upload/ca/ta/cataratasdoniagaracanadaontario-cke.jpg?width=50&blur=10",
+      "final_url": "https://static.todamateria.com.br/upload/ca/ta/cataratasdoniagaracanadaontario-cke.jpg?width=50&blur=10",
+      "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+      "source_url": "https://www.todamateria.com.br/canada/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Cataratas do Niágara no Canadá.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7beac1d59fbd",
+      "type": "image",
+      "title": "Vamos criar a sua conta.",
+      "url": "https://static.todamateria.com.br/img/home/hero-cards/tmplus-hero/tmplus-hero-card.png",
+      "final_url": "https://static.todamateria.com.br/img/home/hero-cards/tmplus-hero/tmplus-hero-card.png",
+      "source_title": "Canadá: mapa, bandeira, cidades, história e turismo",
+      "source_url": "https://www.todamateria.com.br/canada/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Vamos criar a sua conta.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b87807d5af25",
+      "type": "image",
+      "title": "Leia nosso texto e conheça melhor o Canadá! Descubra os principais aspectos da sua geografia, história, economia, população e algumas particularidades desse paí",
+      "url": "https://s5.static.brasilescola.uol.com.br/be/2021/04/bandeira-do-canada.jpg",
+      "final_url": "https://s5.static.brasilescola.uol.com.br/be/2021/04/bandeira-do-canada.jpg",
+      "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+      "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+      "publisher": "s5.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Leia nosso texto e conheça melhor o Canadá! Descubra os principais aspectos da sua geografia, história, economia, população e algumas particularidades desse país.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-73eec5d5e5ac",
+      "type": "image",
+      "title": "Brasil Escola",
+      "url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+      "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brasil Escola",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-288d21f4049a",
+      "type": "image",
+      "title": "Imprimir",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+      "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+      "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imprimir",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2d8ccfc8347f",
+      "type": "image",
+      "title": "Escutar texto",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+      "source_title": "Canadá: mapa, capital, cultura, clima, curiosidades",
+      "source_url": "https://brasilescola.uol.com.br/geografia/canada.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Escutar texto",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.todamateria.com.br/canada/",
+      "titulo": "Canadá: mapa, bandeira, cidades, história e turismo",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2016-07-06T01:52:23+0100",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.todamateria.com.br/canada/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2016-07-06T01:52:23+0100"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://m.brasilescola.uol.com.br/geografia/canada.htm",
+      "titulo": "Canadá: mapa, capital, cultura, clima, curiosidades",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2007-04-24-0309:55:28",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://m.brasilescola.uol.com.br/geografia/canada.htm",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "2007-04-24-0309:55:28"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://m.suapesquisa.com/paises/canada/",
+      "titulo": "Canadá: dados gerais, geografia, história, economia, cultura e população",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "sáb., 24 out. 2026 06:22:00 GMT",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://m.suapesquisa.com/paises/canada/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "sáb., 24 out. 2026 06:22:00 GMT"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

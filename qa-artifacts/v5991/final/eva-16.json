@@ -1,0 +1,796 @@
+{
+  "id": "eva-16",
+  "category": "recent_news",
+  "query": "Notícias sobre energia hoje",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 4.655,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"energia\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"energia\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"energia\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"ONS prepara operação especial de energia para o segundo turno\" site:veronoticias.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"EUA anunciam acordo com Paraguai para usar energia de Itaipu em projeto de IA\" site:canalsolar.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22energia%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22energia%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 139985
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22energia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22energia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5480
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22energia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22energia%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4975
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22ONS+prepara+opera%C3%A7%C3%A3o+especial+de+energia+para+o+segundo+turno%22+site%3Averonoticias.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22ONS+prepara+opera%C3%A7%C3%A3o+especial+de+energia+para+o+segundo+turno%22+site%3Averonoticias.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5141
+    },
+    {
+      "url": "https://veronoticias.com",
+      "final": "https://veronoticias.com",
+      "chars": 208012
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22EUA+anunciam+acordo+com+Paraguai+para+usar+energia+de+Itaipu+em+projeto+de+IA%22+site%3Acanalsolar.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22EUA+anunciam+acordo+com+Paraguai+para+usar+energia+de+Itaipu+em+projeto+de+IA%22+site%3Acanalsolar.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 4958
+    },
+    {
+      "url": "https://www.todamateria.com.br/energia/",
+      "final": "https://www.todamateria.com.br/energia/",
+      "chars": 519843
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+      "final": "https://brasilescola.uol.com.br/fisica/energia.htm",
+      "chars": 133600
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Energia",
+      "final": "https://pt.wikipedia.org/wiki/Energia",
+      "chars": 975445
+    },
+    {
+      "url": "https://servicos.energisa.com.br/segunda-via",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "final": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "chars": 124144
+    },
+    {
+      "url": "https://www.energisa.com.br/",
+      "error": "bloqueado"
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"energia\" notícias",
+    "domain": "news",
+    "original_request": "Notícias sobre energia hoje",
+    "resolved_request": "Notícias sobre energia hoje",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "energia"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T23:00:29.185430+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "energia"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "29aa06f3375f561356b2",
+        "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNRlpYNzU4dHRpVXR2c3hQcG5WV2Y2NFh0T2dyTGNsai1ZbENNN0U0WTZKbGZpcndZaVc4UW5sLW90dlhXb3VnYlBGa1I4N2djbG4yX1hCclhpR3A2RmZwQ3BqYk5kakJhUzlnZ09RZlJlTkFaUVJmcXYzLWRzallqQk5XcnFXX3lwQzA4SEQzMHNaTXk5ckRLNWY0eW4?oc=5",
+        "title": "ONS prepara operação especial de energia para o segundo turno - Vero Notícias",
+        "origin": "google-news",
+        "query": "\"energia\" notícias",
+        "date": "Sat, 24 Oct 2026 00:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "ONS prepara operação especial de energia para o segundo turno Vero Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "a71576733d8f9136fb16",
+        "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9rbjZDTGY4cUdoLWlGNGVrXzRaYmV1WG9UTWRJbFhOOHA4VUNXVk9xVmJWQXZxYnY3aWJPQ013UVpwSFVfR3pPQXBHTlhhVUhDcFRXTEdsN2xzZDFobV9Xa3J6RF9WTFZnRU5mVEY4alFiUQ?oc=5",
+        "title": "EUA anunciam acordo com Paraguai para usar energia de Itaipu em projeto de IA - Canal Solar",
+        "origin": "google-news",
+        "query": "\"energia\" notícias",
+        "date": "Thu, 22 Oct 2026 15:37:27 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "EUA anunciam acordo com Paraguai para usar energia de Itaipu em projeto de IA Canal Solar",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "7a51d6803642617eaafc",
+        "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTFBLS3Q3dU5xWU5iYzY4Vy1XWlp5QmhQOXJVQUhoLU5pNkFMejR1SkE5Rnp5WldhRmVOdkdpenpIQU5iUDUwV2lLWDBBWVJ0VDZUc0NCbDNJUTR0OVJ2aHJBZUpiWXBtaFFhOEZmTjRnU1dCZ0xyaWNF?oc=5",
+        "title": "ONS fará operação especial para garantir energia no segundo turno - ICL Notícias",
+        "origin": "google-news",
+        "query": "\"energia\" notícias",
+        "date": "Fri, 23 Oct 2026 21:10:59 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "ONS fará operação especial para garantir energia no segundo turno ICL Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "e6632153cf6a4312a76d",
+        "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxNcjBMRUhuT3prSEdvTkZLeUxvdWZfaEFlRzd2OTJiVzhTZHFwNmlZX1g5Z3JyVmwyMEVHOW9VYmFoamxVNkRvalZURmhxOFMyVGFjWmlSamY2SVZtMzdXN2x6Qld0LV9qNGtEYWJrSnRuTE9vUkNhSGV3SGpqU3pDSFdPcGRDTVdtdE4zWGxzSGl6UHhOUGZCb19QOTRnejRhYUpRbUNSRkg0MVRCWjJDWjY5T1YtYXNqXzRBNGgwV20yVVkydGZ0d29CcWpURWNMdk50blEyZ1hQY1JFNVJZWU1qc1lvQQ?oc=5",
+        "title": "Governo Trump anuncia uso de energia de Itaipu para abastecer empresas - UOL Notícias",
+        "origin": "google-news",
+        "query": "\"energia\" notícias",
+        "date": "Wed, 21 Oct 2026 21:49:22 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Governo Trump anuncia uso de energia de Itaipu para abastecer empresas UOL Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "559dc2b6a57141287b15",
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOcjVoY2hfZ3VzOUVHR3hkdWdRbWdqREFhcDJTd25zUnRuWjZMNUxaOEFqamxFSmlYNHZGeGdzc3ZXWEtMVlQ1SFZLaElVdC01Y25qcWpwWTllbDV0YlYxbW9McGJubEg0Rk4td0dMWlRaOFdlei1IVEZaZC1zQlc2VEhnY0FQWHN3ZTdXMVlqbmcyRXg5VDNja3dYb1hOa1BvNm91Q2ZkajhhN2c?oc=5",
+        "title": "Prefeitura de Canoas entrega subestação de energia da EMEF Monteiro Lobato - Notícias da Aldeia",
+        "origin": "google-news",
+        "query": "\"energia\" notícias",
+        "date": "Fri, 23 Oct 2026 12:28:05 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Prefeitura de Canoas entrega subestação de energia da EMEF Monteiro Lobato Notícias da Aldeia",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "b4f85a187cc368a3d3fc",
+        "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPdTQzb1pPQ2ZzdmZpLXdhVEY3Nm1IWkI4UkdzNTBlX1dmdWdiV0RNOFBscnotV3g0c0NHN0pwQVhiYzZfV3REQjNIUlk1eTdpdERNTGJuRzZtOVhNU3NOWUJSQ0FGVzhiZlQyRWZOTmllWDR1MTBDZ1RxZWRjM09rdUE2LUhWVHUwMHBDWGJNRm5lemY0UkJaTHpSTWpJR2tpelozWW92MDhHVWh2bzZabWZpM0w0TTNkWnA4VjhnemFXS2JjR1NRcUZ0QTlKSUIxbGZrNtIB2gFBVV95cUxQUXJyeVdKX1ZGMTE1akxQSmlsc1l5Z0R0NmNvUG5OSUxkaVkxMmhuMUR0RFEyXy1RajA5U0ZFeTlFbWtVdnIxMWNEM3FqQzJmSk5XUDBhUnRITDg2T0E5Q2FQeUVzb1QwUlM2a25NZzYySkRtY3EwZGVWSzdJcjR",
+        "title": "El Niño pode pressionar preços da energia no Brasil, aponta StoneX - Notícias Agrícolas",
+        "origin": "google-news",
+        "query": "\"energia\" notícias",
+        "date": "Tue, 13 Oct 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "El Niño pode pressionar preços da energia no Brasil, aponta StoneX Notícias Agrícolas",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "0abbb674225ae6025982",
+        "url": "https://www.todamateria.com.br/energia/",
+        "title": "Energia: o que é, origem, conservação e tipos | Física",
+        "origin": "bing",
+        "query": "\"energia\" notícias",
+        "date": "2016-05-16T19:18:40+0100",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "subatômicas. As cargas ao se deslocarem geram corrente elétrica, criando o que chamamos de eletricidade. . Leia mais sobre a Energia Elétrica Energia Luminosa A",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 4428,
+        "final_url": "https://www.todamateria.com.br/energia/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "63f8204a57f91aa8c17f",
+        "url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+        "title": "Energia: o que é, tipos, fórmulas - Brasil Escola",
+        "origin": "bing",
+        "query": "\"energia\" notícias",
+        "date": "2020-04-15-0318:46:26",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "simplificada, o trabalho é toda ação que é feita contra uma , como a . energia trabalho. força força gravitacional O conhecimento sobre a energia é muito vasto ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 6110,
+        "final_url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "321e93e07ec4a213ea63",
+        "url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+        "title": "O que é energia? - Brasil Escola",
+        "origin": "bing",
+        "query": "\"energia\" notícias",
+        "date": "2016-04-22-0311:47:08",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "partir dos combustíveis fósseis, como o petróleo e o carvão. Já a energia gerada a partir de fontes que possuem capacidade de reposição natural são denominadas ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 3055,
+        "final_url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "35ac0e91388a011a3ad0",
+        "url": "https://pt.wikipedia.org/wiki/Energia",
+        "title": "Energia – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"energia\" notícias",
+        "date": "2004-07-16T00:19:12Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "objeto, aumenta-se a energia potencial do sistema formado por ele e pela Terra. O nível ao qual se atribui energia potencial nula pode ser escolhido por conveni",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Energia",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "e2ad9b9ab48a26bd447c",
+        "url": "https://www.energisa.com.br/",
+        "title": "Energisa",
+        "origin": "bing",
+        "query": "\"energia\" notícias",
+        "date": "sex., 23 out. 2026 14:15:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Descubra como a nossa energia gera impacto positivo onde atuamos, com soluções e serviços inovadores, promoção do desenvolvimento econômico e social e protagoni",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "509b2b382dae49fc54f5",
+        "url": "https://servicos.energisa.com.br/segunda-via",
+        "title": "Segunda Via de Conta - Energisa",
+        "origin": "bing",
+        "query": "\"energia\" notícias",
+        "date": "sáb., 24 out. 2026 19:36:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Onde encontro o código do cliente? O código do cliente está localizado no canto superior direito da conta de energia. Você precisa dessa informação para poder s",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-13b2b3f2be03",
+      "type": "image",
+      "title": "Energia, na Física, é um conceito essencial que representa a capacidade de realizar trabalho ou provocar mudanças no estado de um sistema. Trata-se de uma grand",
+      "url": "https://static.todamateria.com.br/upload/en/er/energia-og.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/en/er/energia-og.jpg",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Energia, na Física, é um conceito essencial que representa a capacidade de realizar trabalho ou provocar mudanças no estado de um sistema. Trata-se de uma grandeza fundamental presente em todos os fenômenos naturais, responsável por ações c",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d8923179ab49",
+      "type": "image",
+      "title": "Toda Matéria",
+      "url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "final_url": "https://static.todamateria.com.br/img/logo-tm-white.svg",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Toda Matéria",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0e3b07c26b60",
+      "type": "image",
+      "title": "Rafael C. Asth",
+      "url": "https://static.todamateria.com.br/img/autor/ra/fa/rafael-asth_72.jpg",
+      "final_url": "https://static.todamateria.com.br/img/autor/ra/fa/rafael-asth_72.jpg",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rafael C. Asth",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-c94c9038a329",
+      "type": "image",
+      "title": "Infográfico - Origem da energia que usamos na Terra",
+      "url": "https://static.todamateria.com.br/upload/en/er/energia3-0.jpg",
+      "final_url": "https://static.todamateria.com.br/upload/en/er/energia3-0.jpg",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Infográfico - Origem da energia que usamos na Terra",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-637f9b38b361",
+      "type": "image",
+      "title": "Rosimar Gouveia",
+      "url": "https://static.todamateria.com.br/img/autor/ro/si/rosimar-gouveia_72.jpg",
+      "final_url": "https://static.todamateria.com.br/img/autor/ro/si/rosimar-gouveia_72.jpg",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Rosimar Gouveia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-7beac1d59fbd",
+      "type": "image",
+      "title": "Vamos criar a sua conta.",
+      "url": "https://static.todamateria.com.br/img/home/hero-cards/tmplus-hero/tmplus-hero-card.png",
+      "final_url": "https://static.todamateria.com.br/img/home/hero-cards/tmplus-hero/tmplus-hero-card.png",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Vamos criar a sua conta.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1f24e6ef0f76",
+      "type": "image",
+      "title": "Elementos visuais do fundo",
+      "url": "https://static.todamateria.com.br/img/footer/footer-bg@2x.png",
+      "final_url": "https://static.todamateria.com.br/img/footer/footer-bg@2x.png",
+      "source_title": "Energia: o que é, origem, conservação e tipos | Física",
+      "source_url": "https://www.todamateria.com.br/energia/",
+      "publisher": "static.todamateria.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Elementos visuais do fundo",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-84c2cb10e27f",
+      "type": "image",
+      "title": "Você sabe o que é energia? Descubra qual é o significado de energia para a Física, conheça os diferentes tipos de energia e confira quais são as fórmulas para c",
+      "url": "https://s3.static.brasilescola.uol.com.br/be/2020/04/energia.jpg",
+      "final_url": "https://s3.static.brasilescola.uol.com.br/be/2020/04/energia.jpg",
+      "source_title": "Energia: o que é, tipos, fórmulas",
+      "source_url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+      "publisher": "s3.static.brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Você sabe o que é energia? Descubra qual é o significado de energia para a Física, conheça os diferentes tipos de energia e confira quais são as fórmulas para calculá-la!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-73eec5d5e5ac",
+      "type": "image",
+      "title": "Brasil Escola",
+      "url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/logos/logo-be.webp",
+      "source_title": "O que é energia?",
+      "source_url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Brasil Escola",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-288d21f4049a",
+      "type": "image",
+      "title": "Imprimir",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/print.svg",
+      "source_title": "O que é energia?",
+      "source_url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Imprimir",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2d8ccfc8347f",
+      "type": "image",
+      "title": "Escutar texto",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/play-audio.svg",
+      "source_title": "O que é energia?",
+      "source_url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Escutar texto",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2ae2d2bf30c6",
+      "type": "image",
+      "title": "Compartilhar",
+      "url": "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+      "final_url": "https://brasilescola.uol.com.br/assets/images/icons-svg/share.svg",
+      "source_title": "O que é energia?",
+      "source_url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "publisher": "brasilescola.uol.com.br",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Compartilhar",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.todamateria.com.br/energia/",
+      "titulo": "Energia: o que é, origem, conservação e tipos | Física",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2016-05-16T19:18:40+0100",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.todamateria.com.br/energia/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2016-05-16T19:18:40+0100"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+      "titulo": "Energia: o que é, tipos, fórmulas",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2020-04-15-0318:46:26",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "2020-04-15-0318:46:26"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+      "titulo": "O que é energia?",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2016-04-22-0311:47:08",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-energia.htm",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "data": {
+          "published_at": "2016-04-22-0311:47:08"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "c9e6fbb500383f1e3bda4353b4b12fe04af59f04",
+  "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1"
+}

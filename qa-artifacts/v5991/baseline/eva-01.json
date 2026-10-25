@@ -1,0 +1,656 @@
+{
+  "id": "eva-01",
+  "category": "municipal_news",
+  "query": "Notícias em Manaus nos últimos sete dias",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 8.437,
+  "state": "parcial",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Manaus\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Manaus\" notícias",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Manaus\" notícias",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027\" site:www.acritica.com",
+      "candidates": 3
+    },
+    {
+      "provider": "bing",
+      "query": "\"Manaus não terá Lei Seca no segundo turno das eleições neste domingo\" site:www.portaldoholanda.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Manaus%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Manaus%22+not%C3%ADcias&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 172386
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 6156
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Manaus%22+not%C3%ADcias&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4729
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Manaus+anuncia+zagueiro+com+passagem+pelo+Botafogo+e+chega+a+20+jogadores+confirmados+para+2027%22+site%3Awww.acritica.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Manaus+anuncia+zagueiro+com+passagem+pelo+Botafogo+e+chega+a+20+jogadores+confirmados+para+2027%22+site%3Awww.acritica.com&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5131
+    },
+    {
+      "url": "https://www.acritica.com",
+      "final": "https://www.acritica.com",
+      "chars": 108343
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Manaus+n%C3%A3o+ter%C3%A1+Lei+Seca+no+segundo+turno+das+elei%C3%A7%C3%B5es+neste+domingo%22+site%3Awww.portaldoholanda.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Manaus+n%C3%A3o+ter%C3%A1+Lei+Seca+no+segundo+turno+das+elei%C3%A7%C3%B5es+neste+domingo%22+site%3Awww.portaldoholanda.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5103
+    },
+    {
+      "url": "https://www.manaus.am.gov.br/",
+      "error": "tamanho"
+    },
+    {
+      "url": "https://en.wikipedia.org/wiki/Manaus",
+      "final": "https://en.wikipedia.org/wiki/Manaus",
+      "chars": 701062
+    },
+    {
+      "url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "final": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "chars": 684534
+    },
+    {
+      "url": "https://visitemanaus.com/",
+      "final": "https://visitemanaus.com/",
+      "chars": 306974
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Manaus",
+      "final": "https://pt.wikipedia.org/wiki/Manaus",
+      "chars": 1525464
+    },
+    {
+      "url": "https://www.acritica.com/esportes/manaus-anuncia-zagueiro-com-passagem-pelo-botafogo-e-chega-a-20-jogadores-confirmados-para-2027/",
+      "final": "https://www.acritica.com/esportes/manaus-anuncia-zagueiro-com-passagem-pelo-botafogo-e-chega-a-20-jogadores-confirmados-para-2027/",
+      "chars": 81645
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Manaus\" notícias",
+    "domain": "news",
+    "original_request": "Notícias em Manaus nos últimos sete dias",
+    "resolved_request": "Notícias em Manaus entre 2026-10-17 e 2026-10-24",
+    "parameters": {
+      "start_date": "2026-10-17",
+      "end_date": "2026-10-24",
+      "location": "Manaus"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T22:42:04.486652+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-17",
+        "end_date": "2026-10-24",
+        "location": "Manaus"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "0586e8e3fccc03428e01",
+        "url": "https://www.manaus.am.gov.br/",
+        "title": "Prefeitura de Manaus - Site oficial da Prefeitura de Manaus.",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "sáb., 24 out. 2026 09:06:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Portal da Prefeitura de Manaus. Serviços online, notícias, transparência, acesso a informação da Prefeitura de Manaus."
+      },
+      {
+        "id": "4bda345689f4664134d7",
+        "url": "https://en.wikipedia.org/wiki/Manaus",
+        "title": "Manaus - Wikipedia",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "2004-02-04T22:44:41Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "On October 24, 1848, under Law 145 of the Provincial Assembly of Para, it was renamed the City of Barra do Rio Negro. On September 4, 1856, the governor, Hercul"
+      },
+      {
+        "id": "c0818434b33351b5bb6d",
+        "url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+        "title": "O que fazer em Manaus: 20 pontos turísticos imperdíveis",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "2022-07-05T23:11:59+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "pode imaginar. E é claro que não podemos nos esquecer da culinária manauara com influência da cultura indígena. São tantas cores, texturas e sabores diferentes "
+      },
+      {
+        "id": "adb30c40eedd940a794a",
+        "url": "https://visitemanaus.com/",
+        "title": "Visite Manaus: Cultura, Natureza, Notícias, Roteiros e Eventos",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "2025-06-27T00:38:19+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "O Visite Manaus é um portal criado para oferecer informações úteis sobre os principais pontos de interesse da cidade, destacando sua história, cultura e experiê"
+      },
+      {
+        "id": "3af69a3c522dd6a1027d",
+        "url": "https://pt.wikipedia.org/wiki/Manaus",
+        "title": "Manaus – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "2004-04-06T14:45:48Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "tribo dos , habitante da região dos rios Negro e Solimões. Na grafia antiga, escrevia-se , preservando-se o e acentuando-se a vogal precedente. Na língua indíge"
+      },
+      {
+        "id": "bb8a008b7e92be1bda8d",
+        "url": "https://www.acritica.com/esportes/manaus-anuncia-zagueiro-com-passagem-pelo-botafogo-e-chega-a-20-jogadores-confirmados-para-2027/",
+        "title": "Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027",
+        "origin": "publisher-feed",
+        "query": "\"Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027\" site:www.acritica.com",
+        "date": "2026-10-23T13:51:30-04:00",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "para defender as cores do Gavião Real. “Podem ter certeza de que não vai faltar dedicação, trabalho e vontade de vencer. Estou muito feliz por fazer parte desse"
+      },
+      {
+        "id": "d4eb4f9404dcdefa17d4",
+        "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOS3NvQzlkZ21CZG92THdnbHdFVnpVOXp4UW9Dck1YcDlQbkRKMm13R190cjJjQ1lUdTQ1cFQ1RUYtMkZWTzZfZWRuNm94TE1Dek9zVFJMWVdYdGU0Vk8xS2tQeTkwNXRaRU44X1Q2b29jeDlMVWVZZEhwUk1qZkJlYk85cWRlU1dXQzlrS0FOU3BzYjFTakVFSDJBV282UGhjTXV4cmdUUVJtang5d19ySXhn?oc=5",
+        "title": "Manaus não terá Lei Seca no segundo turno das eleições neste domingo - Portal do Holanda",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 17:50:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Manaus não terá Lei Seca no segundo turno das eleições neste domingo Portal do Holanda"
+      },
+      {
+        "id": "e41b9626f94fecfa9849",
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPTl9rLVh2cmNUcXhtVTVlMTh1blBIRkdhMHkzVl9qV2J3N2pqRlR0OFNtNzhpdEQ4c3lJd01pRThkWUUzM2swWWJ6Wmt1aUdpaUdnMm1zMkdlRjVYZVF5Vk82emVTMXVydW5iYUdJd1lrRnpRaVh6a1RuSFBDQThpNEVKdEFseHpFTG4zTWV6bDVlMUkxLWxmczV2c3c3S0RZdzdjZ1hlWlZzV0VDT2pRem11MWI?oc=5",
+        "title": "Homem capota carro sobre casas em Manaus após derrota do Flamengo na Libertadores - A Crítica",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Fri, 23 Oct 2026 14:50:05 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Homem capota carro sobre casas em Manaus após derrota do Flamengo na Libertadores A Crítica"
+      },
+      {
+        "id": "68f7f68d819a0675ed6c",
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQVGhUMmdscG9XTlVRd0xKMUFITDZRX2VLd21VWHZaMzZQYU5CZndqcjR2SWR3QVFCT24yYUw4RHdvc3ZjQmlLS2JSM01vV3pPclRSUE85MzZxbExDXzNNaUpaRzdMYXRhbWVfVkhBSzhkb1cydTZONzhjeEZCeTJDZFpoeXhReVRvREx4cjVIOXVnU0lzcEZ5WEZvdmhpSXMtT0g3N294MVNqVFJkQWh5amtLTHF5UEphZmc?oc=5",
+        "title": "Homem suspeito de atacar jovens é morto a pauladas na Zona Leste de Manaus - Policial - Portal do Holanda",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Sat, 24 Oct 2026 10:42:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Homem suspeito de atacar jovens é morto a pauladas na Zona Leste de Manaus - Policial Portal do Holanda"
+      },
+      {
+        "id": "ee15680ea88b56df022f",
+        "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxQbEQ2Y3EyaVNUaVl0RTlXM3FpalAwYVlQaW1zbXppVXVnMTh0YWw0Y1RxMTdRbWtDYXFaRUp4akJfdUVmakNrb2FFVlk3R195V3BhdzJUSmY2MlpNSWtPZl9GOS1ncDhGSXZocE56em4yVHo0Q3FvMjBXNHZmejRrNXRJNU9YaGpFa3E1ajJraFNVQWtNYTlXSzlvMjdKckFwcXp4emZGYVBCenEtTnd4NlhPZTRNTGVORDJ4V3Bn?oc=5",
+        "title": "Vazamentos e esgoto a céu aberto: Ageman cobra providências da Águas de Manaus - Amazonas - Portal do Holanda",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Sat, 24 Oct 2026 00:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Vazamentos e esgoto a céu aberto: Ageman cobra providências da Águas de Manaus - Amazonas Portal do Holanda"
+      },
+      {
+        "id": "da3ac9958a9ccd7df1b6",
+        "url": "https://www.manausonline.com/",
+        "title": "MANAUSonline.com",
+        "origin": "bing",
+        "query": "\"Manaus\" notícias",
+        "date": "sáb., 24 out. 2026 07:26:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Informações sobre a cidade de Manaus. Eventos, cinema, história, imagens, classificados, serviços, gastronomia."
+      },
+      {
+        "id": "c4d35f38212a010dab94",
+        "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQMUxFUXRFdzNTQ0EyOW9GWjZ6UkV3aGhaQmo3Wkh0dy1rRnRVYUJyWU9meTJTb0hYMkRRWWloUjNTUi1wakFvenByWkxMNDh6LVFrV1JLRTFMUFJDU29TOHNSbmtrOHlLQk5qUkFaNF9LYi05dE5WWFYyeGdUSkl1VDZ2S0hUeFRXZnVXN2drazFJdWNwRDJsamFtY1FzeGRxZHJMNV9yX09EeFpoaXhRYnV2bW55U0g0NjFmaVdIRDdOTWk0?oc=5",
+        "title": "Pesquisa Pontual: Omar Aziz lidera com 60,6% dos votos válidos na véspera do 2º turno - Portal do Holanda",
+        "origin": "google-news",
+        "query": "\"Manaus\" notícias",
+        "date": "Sat, 24 Oct 2026 08:56:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "ENTITY_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pesquisa Pontual: Omar Aziz lidera com 60,6% dos votos válidos na véspera do 2º turno Portal do Holanda"
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-06f62278bb40",
+      "type": "image",
+      "title": "municipality of Amazonas state, Brazil",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Manaus_amazonas.jpg/1280px-Manaus_amazonas.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/Manaus_amazonas.jpg/1280px-Manaus_amazonas.jpg?utm_source=en.wikipedia.org&utm_campaign=index&utm_content=thumbnail",
+      "source_title": "municipality of Amazonas state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Manaus",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-1af776a0003e",
+      "type": "image",
+      "title": "Wikipedia",
+      "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+      "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-en-25.svg",
+      "source_title": "municipality of Amazonas state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Manaus",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Wikipedia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0997b8b9c241",
+      "type": "image",
+      "title": "The Free Encyclopedia",
+      "url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+      "final_url": "https://en.wikipedia.org/static/images/mobile/copyright/wikipedia-tagline-en-25.svg",
+      "source_title": "municipality of Amazonas state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Manaus",
+      "publisher": "en.wikipedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "The Free Encyclopedia",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-19a626825557",
+      "type": "image",
+      "title": "Flag of Manaus",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Bandeira_de_Manaus.svg/120px-Bandeira_de_Manaus.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Bandeira_de_Manaus.svg/120px-Bandeira_de_Manaus.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Amazonas state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Manaus",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Flag of Manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-70ed90f4889d",
+      "type": "image",
+      "title": "Coat of arms of Manaus",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Bras%C3%A3o_de_Manaus.svg/120px-Bras%C3%A3o_de_Manaus.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Bras%C3%A3o_de_Manaus.svg/120px-Bras%C3%A3o_de_Manaus.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Amazonas state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Manaus",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Coat of arms of Manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-43df69c00863",
+      "type": "image",
+      "title": "Map",
+      "url": "https://maps.wikimedia.org/img/osm-intl,a,a,a,250x200.png?lang=en&domain=en.wikipedia.org&title=Manaus&revid=1381374422&groups=_8d679e44a7adcaa6aae28aca36082a40739638a3&parser=parsoid",
+      "final_url": "https://maps.wikimedia.org/img/osm-intl,a,a,a,250x200.png?lang=en&domain=en.wikipedia.org&title=Manaus&revid=1381374422&groups=_8d679e44a7adcaa6aae28aca36082a40739638a3&parser=parsoid",
+      "source_title": "municipality of Amazonas state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Manaus",
+      "publisher": "maps.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Map",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f46fafc3609c",
+      "type": "image",
+      "title": "Manaus is located in Brazil",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Relief_Map_of_Brazil.jpg/250px-Relief_Map_of_Brazil.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a4/Relief_Map_of_Brazil.jpg/250px-Relief_Map_of_Brazil.jpg?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Amazonas state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Manaus",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Manaus is located in Brazil",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-e372fd6c3163",
+      "type": "image",
+      "title": "Manaus",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Red_pog.svg/20px-Red_pog.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "final_url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0c/Red_pog.svg/20px-Red_pog.svg.png?utm_source=en.wikipedia.org&utm_campaign=parser&utm_content=thumbnail",
+      "source_title": "municipality of Amazonas state, Brazil",
+      "source_url": "https://en.wikipedia.org/wiki/Manaus",
+      "publisher": "thumb.wikimedia.org",
+      "date": "",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-0ac06da739c3",
+      "type": "image",
+      "title": "Confira o que fazer em Manaus: Teatro Amazonas, MUSA, restaurantes... Veja os TOP passeios e experiências para incluir no roteiro.",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/floresta-em-manaus.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/floresta-em-manaus.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Confira o que fazer em Manaus: Teatro Amazonas, MUSA, restaurantes... Veja os TOP passeios e experiências para incluir no roteiro.",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-f9fa6c4f2729",
+      "type": "image",
+      "title": "dicas de manaus",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/dicas-de-manaus.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/dicas-de-manaus.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "dicas de manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-52fc9b4a42e3",
+      "type": "image",
+      "title": "pontos turísticos manaus",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/pontos-turisticos-manaus.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/pontos-turisticos-manaus.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "pontos turísticos manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-64afb5ccb116",
+      "type": "image",
+      "title": "teatro amazonas manaus",
+      "url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/teatro-amazonas-manaus.jpg",
+      "final_url": "https://www.maladeaventuras.com/wp-content/uploads/2022/07/teatro-amazonas-manaus.jpg",
+      "source_title": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "source_url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "publisher": "www.maladeaventuras.com",
+      "date": "2022-07-05T23:11:59+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "teatro amazonas manaus",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.acritica.com/esportes/manaus-anuncia-zagueiro-com-passagem-pelo-botafogo-e-chega-a-20-jogadores-confirmados-para-2027/",
+      "titulo": "Manaus anuncia zagueiro com passagem pelo Botafogo e chega a 20 jogadores confirmados para 2027",
+      "status": "aberta",
+      "relevante": true,
+      "publicado_em": "2026-10-23T13:51:30-04:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.acritica.com/esportes/manaus-anuncia-zagueiro-com-passagem-pelo-botafogo-e-chega-a-20-jogadores-confirmados-para-2027/",
+        "eligible": true,
+        "verification": "PUBLISHED_REPORT",
+        "retrieval_state": "ARTICLE_FOUND",
+        "data_complete": true,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [],
+        "data": {
+          "published_at": "2026-10-23T13:51:30-04:00"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://en.wikipedia.org/wiki/Manaus",
+      "titulo": "municipality of Amazonas state, Brazil",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2004-02-04T22:44:41Z",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://en.wikipedia.org/wiki/Manaus",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2004-02-04T22:44:41Z"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+      "titulo": "O que fazer em Manaus: 20 pontos turísticos e experiências imperdíveis para incluir no roteiro",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2022-07-05T23:11:59+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.maladeaventuras.com/o-que-fazer-em-manaus/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2022-07-05T23:11:59+00:00"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 1,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null
+}

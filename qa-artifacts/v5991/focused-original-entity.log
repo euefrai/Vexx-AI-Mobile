@@ -1,0 +1,25 @@
+...........................F............................................ [ 85%]
+............                                                             [100%]
+================================== FAILURES ===================================
+_____ test_deep_aspect_cannot_supply_evidence_without_original_api_entity _____
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-427/test_deep_aspect_cannot_supply0')
+
+    def test_deep_aspect_cannot_supply_evidence_without_original_api_entity(tmp_path):
+        import pc_agent,research_agents
+        db=pc_agent.open_db(tmp_path/'qa.sqlite')
+        job=research_agents.criar_job(db,'local','asyncio.TaskGroup documentação oficial exemplos e limitações',conv='qa-chat',modo='profunda')
+        found=[{'titulo':'Limitações aos direitos autorais','url':'https://example.org/copyright'}]
+        def read(url):
+            return {'titulo':found[0]['titulo'],'texto':'Limitações aos direitos autorais e exemplos de proteção de obras. '*25,
+                    'final':url,'texto_lido':True}
+        result=research_agents.agente_analista(db,job,{'alvo':'limitações'},found,read,teto_paginas=1)
+        assert not result
+>       assert db.execute('select count(*) from research_evidence').fetchone()[0]==0
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       sqlite3.OperationalError: no such table: research_evidence
+
+tests\test_source_recovery_v5991.py:252: OperationalError
+=========================== short test summary info ===========================
+FAILED tests/test_source_recovery_v5991.py::test_deep_aspect_cannot_supply_evidence_without_original_api_entity
+1 failed, 83 passed in 4.02s

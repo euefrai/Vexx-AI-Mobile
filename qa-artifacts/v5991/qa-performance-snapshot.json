@@ -1,0 +1,37 @@
+{
+  "scope": "QA_BACKEND_AND_LOCAL_RELAY_PROCESS_SNAPSHOT",
+  "observed_at_epoch": 1792884933.7246513,
+  "processes": [
+    {
+      "pid": 22516,
+      "rss_mb": 39.38,
+      "cpu_user_s": 1.859,
+      "cpu_system_s": 1.391
+    },
+    {
+      "pid": 32680,
+      "rss_mb": 3.96,
+      "cpu_user_s": 0.0,
+      "cpu_system_s": 0.016
+    },
+    {
+      "pid": 29960,
+      "rss_mb": 6.24,
+      "cpu_user_s": 0.0,
+      "cpu_system_s": 0.031
+    },
+    {
+      "pid": 31996,
+      "rss_mb": 102.56,
+      "cpu_user_s": 6.266,
+      "cpu_system_s": 1.578
+    }
+  ],
+  "sum_rss_mb": 152.14,
+  "not_included": [
+    "Chrome",
+    "production",
+    "peak over full lifetime",
+    "memory baseline delta"
+  ]
+}

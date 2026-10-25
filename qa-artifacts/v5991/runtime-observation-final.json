@@ -1,0 +1,50 @@
+{
+  "scope": "FINAL_READ_ONLY_PROCESS_SNAPSHOT",
+  "observed_at_epoch": 1792886125.368758,
+  "processes": [
+    {
+      "pid": 13712,
+      "ppid": 20492,
+      "process": "pythonw.exe",
+      "script_paths": [
+        "%USERPROFILE%\\.julia-mobile\\ops-v5981\\agent_runtime_v5981_final.py",
+        "%USERPROFILE%\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\pc_agent.py"
+      ],
+      "cwd": "%USERPROFILE%\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2",
+      "created_at_epoch": 1792857460.7691343,
+      "parent_scripts": [],
+      "role": "production",
+      "relay": "https://vexx-ai.onrender.com",
+      "sqlite_env": "%USERPROFILE%\\.julia-mobile\\memory.sqlite3",
+      "loaded_commit": "unknown_without_process_attestation",
+      "tcp_connections": []
+    },
+    {
+      "pid": 31456,
+      "ppid": 22572,
+      "process": "pythonw.exe",
+      "script_paths": [
+        "%USERPROFILE%\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2\\pc_agent.py"
+      ],
+      "cwd": "%USERPROFILE%\\Documents\\julia-mobile-v0.2-offline-sqlite\\julia-mobile-v0.2",
+      "created_at_epoch": 1792857909.4906564,
+      "parent_scripts": [
+        "studio\\controle.py"
+      ],
+      "role": "not_declared",
+      "relay": "https://vexx-ai.onrender.com",
+      "sqlite_env": "%USERPROFILE%\\.julia-mobile\\memory.sqlite3",
+      "loaded_commit": "unknown_without_process_attestation",
+      "tcp_connections": [
+        {
+          "status": "ESTABLISHED",
+          "remote_host": "216.24.57.16",
+          "remote_port": 443
+        }
+      ]
+    }
+  ],
+  "production_mutations": false,
+  "jobs_on_legacy": "unknown",
+  "consumer_competition": "not_proven_by_process_count"
+}

@@ -1,0 +1,815 @@
+{
+  "id": "eva-19",
+  "category": "multiple_requirements",
+  "query": "Notícias sobre educação em Fortaleza hoje",
+  "scope": "LIVE_EXTERNAL",
+  "real_model": false,
+  "seconds": 6.895,
+  "state": "sem_correspondencia",
+  "calls": [
+    {
+      "provider": "google-news",
+      "query": "\"Fortaleza\" notícias educação",
+      "candidates": 6
+    },
+    {
+      "provider": "bing-news",
+      "query": "\"Fortaleza\" notícias educação",
+      "error": "vazio"
+    },
+    {
+      "provider": "bing",
+      "query": "\"Fortaleza\" notícias educação",
+      "candidates": 6
+    },
+    {
+      "provider": "bing",
+      "query": "\"Formação de professores e transformação da educação mobilizam lideranças em encontro do Sebrae em Fortaleza\" site:agenciasebrae.com.br",
+      "candidates": 3
+    }
+  ],
+  "fetches": [
+    {
+      "url": "https://news.google.com/rss/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "final": "https://news.google.com/rss/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&hl=pt-BR&gl=BR&ceid=BR%3Apt-419",
+      "chars": 106185
+    },
+    {
+      "url": "https://www.bing.com/news/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/news/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 5595
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Fortaleza%22+not%C3%ADcias+educa%C3%A7%C3%A3o&format=rss&count=6&setlang=pt-BR&cc=BR",
+      "chars": 4926
+    },
+    {
+      "url": "https://www.bing.com/search?q=%22Forma%C3%A7%C3%A3o+de+professores+e+transforma%C3%A7%C3%A3o+da+educa%C3%A7%C3%A3o+mobilizam+lideran%C3%A7as+em+encontro+do+Sebrae+em+Fortaleza%22+site%3Aagenciasebrae.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "final": "https://www.bing.com/search?q=%22Forma%C3%A7%C3%A3o+de+professores+e+transforma%C3%A7%C3%A3o+da+educa%C3%A7%C3%A3o+mobilizam+lideran%C3%A7as+em+encontro+do+Sebrae+em+Fortaleza%22+site%3Aagenciasebrae.com.br&format=rss&count=3&setlang=pt-BR&cc=BR",
+      "chars": 5873
+    },
+    {
+      "url": "https://agenciasebrae.com.br",
+      "final": "https://agenciasebrae.com.br",
+      "chars": 130315
+    },
+    {
+      "url": "https://agenciasebrae.com.br/feed/",
+      "final": "https://agenciasebrae.com.br/feed/",
+      "chars": 60565
+    },
+    {
+      "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "final": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "chars": 194509
+    },
+    {
+      "url": "https://www.dicasdeviagem.com/fortaleza/",
+      "final": "https://www.dicasdeviagem.com/fortaleza/",
+      "chars": 492191
+    },
+    {
+      "url": "https://www.tripadvisor.com.br/Attractions-g303293-Activities-Fortaleza_State_of_Ceara.html",
+      "error": "bloqueado"
+    },
+    {
+      "url": "https://pt.wikipedia.org/wiki/Fortaleza",
+      "final": "https://pt.wikipedia.org/wiki/Fortaleza",
+      "chars": 1650176
+    },
+    {
+      "url": "https://visit-fortaleza.com/",
+      "final": "https://visit-fortaleza.com/",
+      "chars": 354116
+    },
+    {
+      "url": "https://www.fortaleza.ce.gov.br/",
+      "final": "https://www.fortaleza.ce.gov.br/",
+      "chars": 36434
+    }
+  ],
+  "request": {
+    "version": 1,
+    "required_data": [
+      "article_url",
+      "article_text",
+      "published_at",
+      "location",
+      "source"
+    ],
+    "missing_parameters": [],
+    "search_query": "\"Fortaleza\" notícias educação",
+    "domain": "news",
+    "original_request": "Notícias sobre educação em Fortaleza hoje",
+    "resolved_request": "Notícias sobre educação em Fortaleza hoje",
+    "parameters": {
+      "start_date": "2026-10-24",
+      "end_date": "2026-10-24",
+      "location": "Fortaleza",
+      "topic": "educação"
+    },
+    "temporal": true,
+    "resolved_at": "2026-10-24T23:00:48.217624+00:00",
+    "timezone": "America/Bahia",
+    "requires_live_data": true,
+    "constraints": {
+      "hard": {
+        "start_date": "2026-10-24",
+        "end_date": "2026-10-24",
+        "location": "Fortaleza",
+        "topic": "educação"
+      },
+      "soft": {},
+      "optional": {}
+    }
+  },
+  "reservoir": {
+    "items": [
+      {
+        "id": "a92de25454857589ab66",
+        "url": "https://news.google.com/rss/articles/CBMi8AFBVV95cUxPdkhOWHc1dWNHSndfbHRuekpZd2RkYThzUmJSRXdwNW1PS09SMXNQeWZmSENqOGZ1cXZ5MDBfWG0xMDlQNXl6T2xGSjhNTExLYmthZGwyZTdXTEY0TlozUkZYR2VFaFVweVBEcFNadmFqbE1BYkFrR2lhNkxpRk5Ec3ZJNklyS2JYeVU2M1BJNWpzenpvN294VHFLenQwM1RUWXhUWkctSWs4UmRxYmZ0LWlnalhxU1NtLTZRR2N3RGxNQTZxWHFyVkktemk5aFVabk5scnptU0JZWXV1SHk1eUhfZWxiamMyWE5LTWh0cXg?oc=5",
+        "title": "Formação de professores e transformação da educação mobilizam lideranças em encontro do Sebrae em Fortaleza - Agência Sebrae de Notícias",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Fri, 09 Oct 2026 18:46:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Formação de professores e transformação da educação mobilizam lideranças em encontro do Sebrae em Fortaleza Agência Sebrae de Notícias",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "82b72e5daebb1ec17d15",
+        "url": "https://news.google.com/rss/articles/CBMi4AFBVV95cUxNZFBKZExZc3JaV0dxU05wNXQ5WW0wTFItUFRFb0h5RW1SeWk4bDBpQWdZeVdzUy1MZWptSmplUktsb1NJYXA4Z0lXczdYTUlaMkxjZmp5aGNmR2E5aU84aUF5Ui1nTExDX0kxZm1CNlZfYzNWWEJwMzZXNm5VaGptbVBoTXRzTXBoT3ZSU2FKVl9XNVpQcXhzVldWRzRuMnhVd3pOUm5MLXdzQjI4VlNtci1aTHRfbzRRcEtjOG8xcUxZWTRhYTRrU1VkTUpQaHh0MWdtWFBNLTZXY2o3RlAybw?oc=5",
+        "title": "Formação em educação patrimonial reúne professores de Governador Celso Ramos na Fortaleza de Anhatomirim - Notícias da UFSC",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Fri, 25 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Formação em educação patrimonial reúne professores de Governador Celso Ramos na Fortaleza de Anhatomirim Notícias da UFSC",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "2a2626529368454b3805",
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQZ01NYmVkYjVURW1EQ1dyeUpCR1REazRtSGk2cjF3aFVSYS1vTW9rN3ZtVVZTX1pvUmE4cDhXV0NHeFBWNjk1ek1BSWFkWGpoSFhjX29yem9jejI0U3IzWG1QeG5MeXJ4LWpRYXJ5UEE3VG55NmlQNzJscnRPcVpaMGZOZXl5Q01FTUpnOXhBbXN1aTZkNE9UaVFUWktBTmRwOEI0ZVRBSzZPelkzMkphOF9UU0ptOS1RbmtacQ?oc=5",
+        "title": "Assistentes da Educação Infantil substitutas de Fortaleza iniciam greve por equiparação salarial - Fetamce",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Mon, 28 Sep 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Assistentes da Educação Infantil substitutas de Fortaleza iniciam greve por equiparação salarial Fetamce",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "3d774c671fe7ccdb36d9",
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxPMFdaVXpCZzZzbEtUNXM4ZGtWY2Yyb3BwYXRSZ1BrU1h3eXhyQmFQVUItblNmWUQwY1BaX3FXQmxybHdqTDhZNUZXM3l3RER3blRNdHZPMExyWW5WYlUwbGlGYVVrdVIyamNjazdNNnBpNm9WV2tFWk9VRXJkNXVYVzk2WGVsR25JX2wwNFk0QTc2U1JxLWZvVFBZQXNHOFVXM3o3cFF0TGgxeF85RG1td2g0cDR5aGpu?oc=5",
+        "title": "Prefeitura de Fortaleza leva 8 mil estudantes da Rede Municipal ao Sana 2026 - Prefeitura de Fortaleza",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Sat, 11 Jul 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Prefeitura de Fortaleza leva 8 mil estudantes da Rede Municipal ao Sana 2026 Prefeitura de Fortaleza",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "6d4dfcdb04c0d0949e56",
+        "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQZTBKWUFFMUNaTUVrMy1MUVVlVUpGSUdYTkRkb1dMRk9La05PVU9sNkdsWDN5ejEtY3A3YVJITFMtWW1GbzhZUVhnOEFpT0Z2UWdFcU5qd0hmMVA1TUFDYldUUk1fb01jZ05MOHRFY3R3RjFhQVJTV01MU2phdV9EQTdNTndTSnNGWkFOYU1Rb2tQM3piaWREdHZocF9WZGlDeHlNNzNnZDFYUWxhVlpoOW1zeXpXY0RuOXNERWZpZXg?oc=5",
+        "title": "Creaece Fortaleza abre inscrições para cursos em Educação Especial Inclusiva 2026.2 - Governo do Estado do Ceará",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Tue, 30 Jun 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Creaece Fortaleza abre inscrições para cursos em Educação Especial Inclusiva 2026.2 Governo do Estado do Ceará",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "dfe3278088ab63947ccc",
+        "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxOQXhWdXZYZlNZY0JWV0tnaGJfWWdWSkJPQ05FdE84NkFBNFNWSTdfZ3R5NU12RDRvcU5ETTR1MUp1djZRaDBZUm5xMmVaSHRHRVpvUzNCUG9Nc2x5ZDRldHl3X0NpTGtPdm5ZUmduME1zVmd1VkI3U3ljX2NYc0NMc2tmX2J0UGZnTElDUWtIV3J5Tks1RFdmQ1poc2hobEM1R2c5UXoyaXBoZjBheDhJZjVLVTRiS3N2VnNxcF9oNldqNTlhQ3pRTmtRNUtFQXdmZUt6QQ?oc=5",
+        "title": "Decisão da USP de levar Fuvest para Fortaleza é questionada na Assembleia Legislativa - Folha de S.Paulo",
+        "origin": "google-news",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "Thu, 27 Aug 2026 07:00:00 GMT",
+        "type": "noticia",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH",
+          "INDEX_PAGE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Decisão da USP de levar Fuvest para Fortaleza é questionada na Assembleia Legislativa Folha de S.Paulo",
+        "selected": false,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "DISCOVERED",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "DISCOVERY_ONLY",
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH",
+          "INDEX_PAGE"
+        ]
+      },
+      {
+        "id": "3e2d4b853960d4eee837",
+        "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+        "title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "2021-05-31T12:50:37+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S1",
+        "excerpt": "pode render alguns dias ficando hospedado por lá mesmo. É uma cidade pequena, com um litoral extenso, que possui falésias no mar e boas barracas de praia. É uma",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "bc924fbf46741a13566f",
+        "url": "https://www.dicasdeviagem.com/fortaleza/",
+        "title": "Fortaleza: Dicas imperdíveis para a sua viagem",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "2026-10-09T23:00:20+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S2",
+        "excerpt": "vibrante que oferece diversas opções de entretenimento em torno de sua cultura litorânea. Conhecida pelas praias paradisíacas, gastronomia especializada e seus ",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 8000,
+        "final_url": "https://www.dicasdeviagem.com/fortaleza/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "0d64a866eb628ef6c1b2",
+        "url": "https://visit-fortaleza.com/",
+        "title": "Visit Fortaleza - Site Oficial de Turismo",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "2025-07-28T21:19:40+00:00",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "S3",
+        "excerpt": "De sal e sol: viva fortaleza com vista para o mar",
+        "selected": true,
+        "returned": true,
+        "extracted_chars": 49,
+        "final_url": "https://visit-fortaleza.com/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "INTENT_MISMATCH",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "59d0aaa84ee2ae7e83db",
+        "url": "https://www.tripadvisor.com.br/Attractions-g303293-Activities-Fortaleza_State_of_Ceara.html",
+        "title": "AS 15 MELHORES coisas para fazer em Fortaleza (2026) - Tripadvisor",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "sex., 23 out. 2026 02:12:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": false,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Pretende visitar as belezas de Fortaleza e arredores?? Então me sinto a vontade para recomendar a todos que procurem a Valéria para o planejamento e dicas de pa",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 0,
+        "final_url": "",
+        "content_state": "BLOCKED",
+        "recovery_method": "",
+        "fetch_error": "bloqueado",
+        "losses": [
+          "FETCH_BLOCKED",
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      },
+      {
+        "id": "22670c25cee126f79945",
+        "url": "https://pt.wikipedia.org/wiki/Fortaleza",
+        "title": "Fortaleza – Wikipédia, a enciclopédia livre",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "2004-04-15T06:57:04Z",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "evidence_ref": "",
+        "excerpt": "esse território podem ter chegado há cerca de anos. Aproximadamente até o ano , a região era dominada pelos . Nessa época, tais índios foram expulsos para o int",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 8000,
+        "final_url": "https://pt.wikipedia.org/wiki/Fortaleza",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "DATE_MISMATCH"
+        ]
+      },
+      {
+        "id": "cd67d9b168aae6759e2e",
+        "url": "https://www.fortaleza.ce.gov.br/",
+        "title": "Fortaleza",
+        "origin": "bing",
+        "query": "\"Fortaleza\" notícias educação",
+        "date": "sex., 23 out. 2026 04:14:00 GMT",
+        "type": "pagina",
+        "state": "REJECTED",
+        "read": true,
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INCOMPLETE_EVIDENCE"
+        ],
+        "evidence_ref": "",
+        "excerpt": "Prefeitura de Fortaleza entrega tablets e celulares para agentes de saúde e de combate às endemias e apresenta novos fardamentos O investimento foi de R$ 4,1 mi",
+        "selected": true,
+        "returned": false,
+        "extracted_chars": 356,
+        "final_url": "https://www.fortaleza.ce.gov.br/",
+        "content_state": "READ_PARTIAL",
+        "recovery_method": "",
+        "fetch_error": "",
+        "losses": [
+          "LOW_RELEVANCE",
+          "EVIDENCE_INSUFFICIENT"
+        ]
+      }
+    ],
+    "unique_candidates": 12,
+    "omitted": 0
+  },
+  "media": [
+    {
+      "id": "med-e2d26b583921",
+      "type": "image",
+      "title": "Leia aqui tudo o que você precisa saber para fazer uma viagem perfeita, aproveitar muito e fugir das roubadas na capital do Ceará!",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/02/passagens-aereas-fortaleza-capa2019-01.jpg",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/02/passagens-aereas-fortaleza-capa2019-01.jpg",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Leia aqui tudo o que você precisa saber para fazer uma viagem perfeita, aproveitar muito e fugir das roubadas na capital do Ceará!",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-d1d5519f4989",
+      "type": "image",
+      "title": "logo Melhores Destinos",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/themes/md2023/img/logo-melhores-destinos-min.svg",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/themes/md2023/img/logo-melhores-destinos-min.svg",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "logo Melhores Destinos",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-95ad1f0d0e59",
+      "type": "image",
+      "title": "ícone newsletter",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/themes/md2023/img/mail-icon-min.png",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/themes/md2023/img/mail-icon-min.png",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "ícone newsletter",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-ea8e440892d2",
+      "type": "image",
+      "title": "tela do app do melhores destinos",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/themes/md2023/img/mockup-app-md-2022-270-2-min.jpg",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/themes/md2023/img/mockup-app-md-2022-270-2-min.jpg",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "tela do app do melhores destinos",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-48edbeb46d01",
+      "type": "image",
+      "title": "Aplicativo Melhores Destinos Android",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/themes/md2023/img/app-melhores-destinos-android-google-play.png",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/themes/md2023/img/app-melhores-destinos-android-google-play.png",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Aplicativo Melhores Destinos Android",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-8a7b4917911c",
+      "type": "image",
+      "title": "Aplicativo Melhores Destinos iPhone",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/themes/md2023/img/app-melhores-destinos-ios.svg",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/themes/md2023/img/app-melhores-destinos-ios.svg",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Aplicativo Melhores Destinos iPhone",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-a730a1f13125",
+      "type": "image",
+      "title": "Camille Panzera",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2023/10/camille-panzera-1-1-198x198.jpeg",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2023/10/camille-panzera-1-1-198x198.jpeg",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "Camille Panzera",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-9f1ef672a52f",
+      "type": "image",
+      "title": "fortaleza",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/05/fortaleza-ceara-.jpg",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/05/fortaleza-ceara-.jpg",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "fortaleza",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-450267d06b5c",
+      "type": "image",
+      "title": "fortaleza dicas",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/05/fortaleza-dicas-1-820x1093.jpg",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/05/fortaleza-dicas-1-820x1093.jpg",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "fortaleza dicas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-b08131852310",
+      "type": "image",
+      "title": "fortaleza dicas",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/05/fortaleza-dicas-2-820x1093.jpg",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/05/fortaleza-dicas-2-820x1093.jpg",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "fortaleza dicas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-2a7018e685e3",
+      "type": "image",
+      "title": "fortaleza dicas",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/05/fortaleza-dicas-3-820x1093.jpg",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/05/fortaleza-dicas-3-820x1093.jpg",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "fortaleza dicas",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    },
+    {
+      "id": "med-aabc4aec9e33",
+      "type": "image",
+      "title": "praia em fortaleza",
+      "url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/05/praia-fortaleza--820x615.jpg",
+      "final_url": "https://www.melhoresdestinos.com.br/wp-content/uploads/2019/05/praia-fortaleza--820x615.jpg",
+      "source_title": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "source_url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "publisher": "www.melhoresdestinos.com.br",
+      "date": "2021-05-31T12:50:37+00:00",
+      "rights": "não informado",
+      "access_state": "metadata_only",
+      "validation_state": "unverified",
+      "analysis_state": "not_analyzed",
+      "excerpt": "praia em fortaleza",
+      "used_excerpt": "",
+      "evidence": false,
+      "provenance": "html metadata"
+    }
+  ],
+  "sources": [
+    {
+      "id": "S1",
+      "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+      "titulo": "O que fazer em Fortaleza: praias, passeios, hotéis e dicas imperdíveis!",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2021-05-31T12:50:37+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.melhoresdestinos.com.br/o-que-fazer-fortaleza.html",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2021-05-31T12:50:37+00:00"
+        }
+      }
+    },
+    {
+      "id": "S2",
+      "url": "https://www.dicasdeviagem.com/fortaleza/",
+      "titulo": "Fortaleza: Guia de viagem",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2026-10-09T23:00:20+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://www.dicasdeviagem.com/fortaleza/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2026-10-09T23:00:20+00:00"
+        }
+      }
+    },
+    {
+      "id": "S3",
+      "url": "https://visit-fortaleza.com/",
+      "titulo": "Visit Fortaleza - Site Oficial de Turismo",
+      "status": "aberta",
+      "relevante": false,
+      "publicado_em": "2025-07-28T21:19:40+00:00",
+      "content_scope": "page_text",
+      "vertical": {
+        "kind": "news",
+        "url": "https://visit-fortaleza.com/",
+        "eligible": false,
+        "verification": "UNVERIFIED",
+        "retrieval_state": "UNAVAILABLE",
+        "data_complete": false,
+        "required_data": [
+          "article_url",
+          "article_text",
+          "published_at",
+          "location",
+          "source"
+        ],
+        "reasons": [
+          "TOPIC_MISMATCH",
+          "INTENT_MISMATCH",
+          "TEMPORAL_MISMATCH"
+        ],
+        "data": {
+          "published_at": "2025-07-28T21:19:40+00:00"
+        }
+      }
+    }
+  ],
+  "opened": 3,
+  "eligible_read": 0,
+  "verified_offers": 0,
+  "precision_and_recall": "not_measured_without_independent_judgments",
+  "cards_rendered": null,
+  "source_revision": "c9e6fbb500383f1e3bda4353b4b12fe04af59f04",
+  "dataset_sha256": "542806cddc709a505ed4963d1fdcf839ea243dd9ce6c30d0cce26009069fd4d1"
+}

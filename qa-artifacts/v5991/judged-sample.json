@@ -1,0 +1,30 @@
+{
+  "scope": "TRACEABLE_AGENT_REVIEW_NOT_INDEPENDENT_GOLD",
+  "reviewer": "Codex agent; not a human panel or factual oracle",
+  "samples": [
+    {
+      "case": "document",
+      "before": "e2e-case-8.log",
+      "after": "e2e-final-case-8.log",
+      "criterion": "A document request must not return image cards; no claim of successful PDF reading",
+      "observed": "12 unrelated image cards before; 0 media cards after; missing PDF remains explicit"
+    },
+    {
+      "case": "qualified API across aspects",
+      "before": "e2e-final-case-13.log",
+      "after": "e2e-entity-accepted.log",
+      "criterion": "Evidence must retain the original qualified API identity, not just the aspect word",
+      "observed": "Copyright excerpt replaced by official docs.python.org TaskGroup code; partial research outcome remains"
+    },
+    {
+      "case": "Angola original article",
+      "before": "baseline/eva-03.json",
+      "after": "selection/eva-03.json",
+      "criterion": "Actual selected-page extraction; not temporal or territorial validity",
+      "observed": "STF article 0 to 2782 extracted chars; publication and event location not independently verified"
+    }
+  ],
+  "absolute_recall": null,
+  "factual_precision": null,
+  "global_correct_rejections": null
+}

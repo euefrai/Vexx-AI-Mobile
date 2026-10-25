@@ -1,0 +1,6 @@
+### Result
+{"links":[{"text":"Baixar MD","href":"/api/research/export?job_id=rj-3702958dda2b&formato=md","download":true},{"text":"Baixar CSV","href":"/api/research/export?job_id=rj-3702958dda2b&formato=csv","download":true},{"text":"Baixar JSON","href":"/api/research/export?job_id=rj-3702958dda2b&formato=json","download":true},{"text":"E1","href":"https://docs.python.org/3/library/asyncio-task.html","download":false},{"text":"Coroutines and tasks","href":"https://docs.python.org/3/library/asyncio-task.html","download":false},{"text":"Abrir fonte ↗","href":"https://docs.python.org/3/library/asyncio-task.html","download":false},{"text":"Baixar/abrir arquivo ↗","href":"/api/research/export?job_id=rj-3702958dda2b&formato=md","download":true},{"text":"Baixar/abrir arquivo ↗","href":"/api/research/export?job_id=rj-3702958dda2b&formato=csv","download":true},{"text":"Baixar/abrir arquivo ↗","href":"/api/research/export?job_id=rj-3702958dda2b&formato=json","download":true}]}
+### Ran Playwright code
+```js
+await (async page=>{return {links:await page.getByRole('link').evaluateAll(nodes=>nodes.map(a=>({text:a.textContent?.trim(),href:a.getAttribute('href'),download:a.hasAttribute('download')})))};})(page);
+```
