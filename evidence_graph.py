@@ -52,6 +52,11 @@ def requirement_coverage(query, sources):
         return {'applicable': False, 'requirements': [], 'passages': [], 'complete': False,
                 'scope': 'no explicit supported facet parsed; not proof of completeness'}
     matches = []
+    operations = re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*){2,}',query)
+    def canonical_operation(text):
+        return re.sub(r'\s*\.\s*','.',qi.normalized(text)).replace('.prototype.','.')
+    operation_pattern = (re.compile(r'(?<![\w.])'+re.escape(canonical_operation(operations[0]))+r'(?![\w.])')
+                         if len(set(operations))==1 else None)
     for source in sources[:80]:
         if source.get('relevante') is False or (source.get('vertical') or {}).get('eligible') is False:
             continue
@@ -67,6 +72,10 @@ def requirement_coverage(query, sources):
             tokens = set(re.findall(r'[a-z0-9]{3,}', qi.normalized(req['entity']))) - stop
             for p in passages[:40]:
                 span = qi.normalized(p['text'])
+                if operation_pattern:
+                    context = canonical_operation(str(source.get('titulo') or '')+' '+str(p.get('section') or '')+' '+p['text'])
+                    if not operation_pattern.search(context):
+                        continue  # Same leaf name in another API/interface is not identity.
                 identity = False
                 relation = False
                 direct = False

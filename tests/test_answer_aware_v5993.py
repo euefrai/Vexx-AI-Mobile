@@ -210,3 +210,16 @@ def test_extractive_result_survives_skipped_final_steps_and_reload(tmp_path):
     restored=ra._resumo(db,ra.carregar_job(db,'local',job['id']))
     assert restored['sintese']['texto']==result['sintese']['texto']
     db.close()
+
+
+def test_qualified_operation_does_not_inherit_another_interfaces_behavior():
+    query='Como funciona Namespace.Buffer.resize?'
+    correct=source('Namespace.Buffer.resize increases the buffer and returns its previous size.')
+    wrong=source('Namespace Buffer resize instruction returns a different failure value in this virtual machine.')
+    assert eg.requirement_coverage(query,[correct])['complete']
+    assert not eg.requirement_coverage(query,[wrong])['passages']
+    alias=source('resize(delta) returns its previous size.')
+    alias['titulo']='Namespace.Buffer.prototype.resize'
+    # A title can establish the qualified page context, but never creates the
+    # missing entity/relation inside an otherwise unrelated extracted passage.
+    assert not eg.requirement_coverage(query,[alias])['complete']
