@@ -34,7 +34,7 @@ from html.parser import HTMLParser
 
 TTL_RAPIDA = 6 * 3600
 TTL_PROFUNDA = 24 * 3600
-RETRIEVAL_VERSION = '5.9.9.4'
+RETRIEVAL_VERSION = '5.9.9.5'
 MAX_REDIRECTS = 3
 MAX_PAGINA_BYTES = 2 * 1024 * 1024
 MAX_TEXTO_PAGINA = 8000
@@ -1112,8 +1112,8 @@ def selecionar_candidatos_leitura(achados, pedido, limite=6):
         if a.get('content_scope')=='feed_metadata' or (a.get('origem')=='commons' and a.get('tipo')=='imagem'):
             continue
         useful=orch._util_para_pedido(a,terms,pedido)
-        if a.get('metadata_source')=='academic_provider' and not useful:
-            continue
+        # Sparse academic metadata is a reading candidate too. Its title may
+        # omit an answer facet which only exists in the original document.
         try: path=urllib.parse.urlsplit(a.get('url') or '').path
         except ValueError: continue
         index=orch._pagina_de_indice(a) or (request['domain']=='news' and path in ('','/'))

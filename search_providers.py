@@ -69,7 +69,7 @@ _BLOQUEIO_RX = re.compile(
     r"(anomaly-modal|complete the following challenge|captcha|are you a robot|"
     r"making sure you'?re not a bot|cf-browser-verification|checking your browser|"
     r"attention required|just a moment|enable javascript and cookies|"
-    r"unusual traffic|access denied|request blocked)", re.I)
+    r"unusual traffic|access denied|request blocked|barraged by queries from bots)", re.I)
 
 
 class ErroProvedor(ValueError):
@@ -342,9 +342,25 @@ def buscar_marginalia(consulta: str, limite: int = 8, timeout: float = 12.0) -> 
     url = "https://old-search.marginalia.nu/search?" + urllib.parse.urlencode({"query": q})
     pagina = _baixar(url, timeout)[1]
     _verificar_bloqueio(pagina)
-    pares = re.findall(r'<a[^>]+href="(https?://[^"]+)"[^>]*>([\s\S]{0,300}?)</a>', pagina or "")
+    # A successful HTTP response may still contain navigation/licence links.
+    # Reuse the inert HTML parser; never follow challenge scripts or tokens.
+    import web_extract as wx
+    parser = wx._MiniDom()
+    parser.feed((pagina or '')[:MAX_BYTES])
     out, vistos = [], set()
-    for href, texto in pares:
+    for node in wx._descendentes(parser.raiz):
+        if node.tag != 'a':
+            continue
+        parent = node.pai
+        excluded = 'license' in str(node.attrs.get('rel') or '').lower().split()
+        while parent is not None and not excluded:
+            excluded = parent.tag in wx._IGNORAR
+            parent = parent.pai
+        if excluded:
+            continue
+        href, texto = node.attrs.get('href') or '', wx._texto_bloco(node)
+        if not href.startswith(('https://', 'http://')):
+            continue
         if _MARG_SKIP.search(href) or _MARG_SKIP.search(texto or ""):
             continue
         titulo = _limpar(texto, 200)
@@ -515,8 +531,18 @@ def buscar_worldbank(consulta: str, limite: int = 5, timeout: float = 12.0) -> l
     q = (consulta or "").strip()[:120]
     if not q:
         raise ErroProvedor("Consulta vazia.", "vazio")
-    dados = _json("https://api.worldbank.org/v2/indicator?" + urllib.parse.urlencode(
-        {"format": "json", "per_page": max(1, min(limite, 10)), "q": q}), timeout)
+    # The indicator catalogue does not implement free-text `q`. It otherwise
+    # returns its first page (poverty indicators) for unrelated population asks.
+    codes = re.findall(r'\b[A-Z][A-Z0-9]*(?:\.[A-Z0-9]+){2,}\b', q)
+    if len(set(codes)) == 1:
+        indicator = codes[0]
+    elif re.search(r'\b(?:population|popula[çc][aã]o)\b', q, re.I) and not re.search(
+            r'\b(?:growth|crescimento|urban[ao]?s?|rural|rurais|male|female|masculin[ao]|feminin[ao]|idade|age|densidade|density)\b', q, re.I):
+        indicator = 'SP.POP.TOTL'
+    else:
+        raise ErroProvedor("Banco Mundial: consulta sem código de indicador reconhecido.", "vazio")
+    dados = _json("https://api.worldbank.org/v2/indicator/" + indicator + '?' + urllib.parse.urlencode(
+        {"format": "json", "per_page": max(1, min(limite, 10))}), timeout)
     linhas = dados[1] if isinstance(dados, list) and len(dados) > 1 else []
     out = []
     for it in (linhas or [])[:limite]:
@@ -524,12 +550,12 @@ def buscar_worldbank(consulta: str, limite: int = 5, timeout: float = 12.0) -> l
             continue
         nome = _limpar(it.get("name"), 200)
         codigo = str(it.get("id") or "")
-        if not nome or not codigo:
+        if not nome or codigo != indicator:
             continue
         out.append({"titulo": nome,
                     "url": f"https://data.worldbank.org/indicator/{codigo}"[:500],
                     "trecho": _limpar(it.get("note"), 200),
-                    "origem": "worldbank", "tipo": "dados",
+                    "origem": "worldbank", "tipo": "dados", "content_scope": "metadata_only",
                     "meta": {"indicador": codigo}})
     if not out:
         raise ErroProvedor("Banco Mundial sem indicador correspondente.", "vazio")
