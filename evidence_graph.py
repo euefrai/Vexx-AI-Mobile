@@ -30,7 +30,7 @@ class GraphErro(ValueError):
 _ANSWER_RELATIONS = {
     'founders': r'(?:fundad[ao]s?|criad[ao]s?|founded|established).{0,100}\b(?:por|by)\s+\w+|fundadores?\s*[:—-]\s*\w+',
     'foundation_date': r'(?:fundad[ao]|fundacao|founded|established|criad[ao]).{0,100}\b(?:1[5-9]|20)\d{2}\b|\b(?:1[5-9]|20)\d{2}\b.{0,80}(?:fundad[ao]|fundacao|founded)',
-    'products': r'\b(?:produz|fabrica|fabricam|produzem|manufactures?|products include|produtos incluem)\b.{4,}',
+    'products': r'\b(?:produz|fabrica|fabricam|produzem|manufactures?|makes?|products include|produtos incluem)\b.{4,}',
     'causes': r'\b(?:causad[ao]|causas? (?:foram|incluem)|caused|porque|devido|motivada|motivado|desencadead[ao])\b.{8,}',
     'consequences': r'\b(?:resultou|resultaram|consequencias? (?:foram|incluem)|resulted|levou a|levaram a|provocou)\b.{8,}',
     'syntax': r'\w+\s*\([^)]*\)',
@@ -43,20 +43,103 @@ _ANSWER_RELATIONS = {
 }
 
 
-def requirement_coverage(query, sources):
+def _canonical_operation(text):
+    import query_intelligence as qi
+    return re.sub(r'\s*\.\s*','.',qi.normalized(text)).replace('.prototype.','.')
+
+
+def _passage_support(req, passage, source):
+    """One explicit entity/attribute relation; no title-only factual support.
+
+    Limited adjacent context is retained literally. This is not a universal NER
+    or semantic truth model, and an unresolved relation remains unconfirmed.
+    """
+    import query_intelligence as qi
+    entity=_canonical_operation(req['entity']).strip(' .?!')
+    anchor=re.compile(r'(?<![\w.])'+re.escape(entity)+r'(?![\w.])')
+    text=qi.normalized(passage['text'])
+    attribute=req['attribute']
+    relation_rx=_ANSWER_RELATIONS.get(attribute)
+    if not entity or not relation_rx:return None
+    # Do not split qualified names or turn prose on another method into evidence
+    # merely because the page title contains the desired API.
+    qualified=bool(re.fullmatch(r'\w+(?:\.\w+){1,}',qi.normalized(req['entity'])))
+    if qualified:
+        # Normalize only this API's dots; sentence punctuation stays intact.
+        parts=entity.split('.')
+        alias=r'\s*\.\s*'.join(re.escape(t) for t in parts[:-1])+r'(?:\s*\.\s*prototype)?\s*\.\s*'+re.escape(parts[-1])
+        text=re.sub(alias,lambda _:entity,text)
+    clauses=re.split(r'(?<=[!?;])\s+|(?<=[.])\s+(?=[a-z])|\n+',text)
+    previous=''; partial_found=False
+    for clause in clauses:
+        if not clause.strip():continue
+        named=anchor.search(clause)
+        predicate=re.search(relation_rx,clause,re.S)
+        if named and attribute in ('syntax','examples') and re.match(r'\s*\([^)]*\)',clause[named.end():]):
+            return 'DIRECT_SUPPORT'
+        context=False
+        if not named and previous and re.match(r'^(?:ela|ele|it|a empresa|a companhia)\s+',clause):
+            # Exactly the immediately preceding short sentence must start with
+            # the entity as its own subject. No other entity/sentence in between.
+            context=bool(re.fullmatch(r'(?:a |o )?'+re.escape(entity)+r'\s+(?:foi|was|is|e|produz|fabrica)\b[^.!?;]{0,220}[.!?]?',previous))
+        if qualified and not named and previous:
+            context=context or bool(re.fullmatch(re.escape(entity)+r'\s*\([^)]*\)',previous))
+        if predicate and (named or context):
+            # Entity must precede and own the predicate. A noun in the entity
+            # (e.g. Fábrica) must not itself be mistaken for a verb.
+            if named and predicate.start()<named.end():
+                predicate=re.search(relation_rx,clause[named.end():],re.S)
+                if predicate:
+                    offset=named.end()
+                else:
+                    previous=clause;continue
+            else:offset=0
+            pos=predicate.start()+offset
+            gap=clause[named.end():pos] if named else re.sub(r'^(?:ela|ele|it|a empresa|a companhia)\s+','',clause[:pos])
+            if attribute in ('founders','foundation_date','products'):
+                # Bounded copular/auxiliary modifiers only. Reported facts about
+                # another subject are not transferred to this entity.
+                allowed=r'\s*(?:(?:foi|was|is|e|a|o|uma|um|an?|the|empresa|companhia|company|public|service|vertically|integrated|que|no|na|brasil|brazil|in)\s+){0,12}'
+                if not re.fullmatch(allowed,gap):previous=clause;continue
+            if attribute in ('weight','battery','price'):
+                allowed=r'[\s:—-]*(?:(?:pesa|peso|weight|is|of|de|tem|has|bateria|battery|custa|preco|price|approximately|aproximadamente|com|with)\b[\s:—-]*){0,6}'
+                if not re.fullmatch(allowed,gap):previous=clause;continue
+            if re.search(r'\b(?:nao|nunca|not|never)\b',clause[max(0,pos-25):pos]):
+                previous=clause;continue
+            if re.search(r'\b(?:nao se sabe|desconhecid\w*|unknown|not known|nao foi confirmad\w*)\b',clause):
+                previous=clause;continue
+            conditions=(req.get('constraints') or {}).get('mandatory_conditions',[])
+            partial='battery_and_card' in conditions and not re.search(r'\b(?:com bateria e (?:o )?cartao|with battery and (?:memory )?card)\b',clause)
+            if not partial:return 'DIRECT_SUPPORT'
+            partial_found=True
+        previous=clause
+    return 'PARTIAL_SUPPORT' if partial_found else None
+
+
+def select_answer_passages(coverage, limit=3):
+    """Keep multi-requirement bindings and prefer aspect diversity, same budget."""
+    by_id={}
+    for passage in coverage.get('passages',[]):
+        saved=by_id.setdefault(passage['id'],{**passage,'requirement_ids':[], 'requirement_support':{}})
+        rid=passage['requirement_id']
+        if rid not in saved['requirement_ids']:saved['requirement_ids'].append(rid)
+        saved['requirement_support'][rid]=passage.get('support_label','DIRECT_SUPPORT')
+    selected=[];covered=set()
+    while by_id and len(selected)<limit:
+        key=max(by_id,key=lambda k:len(set(by_id[k]['requirement_ids'])-covered))
+        item=by_id.pop(key);selected.append(item);covered.update(item['requirement_ids'])
+    return selected
+
+
+def requirement_coverage(query, sources, *, requirements=None):
     """Traceable, conservative extraction checks; not a statistical truth score."""
     import query_intelligence as qi
     from web_extract import passage_candidates
-    requirements = qi.answer_requirements(query)
+    requirements = [dict(r) for r in (qi.answer_requirements(query) if requirements is None else requirements)]
     if not requirements:
         return {'applicable': False, 'requirements': [], 'passages': [], 'complete': False,
                 'scope': 'no explicit supported facet parsed; not proof of completeness'}
     matches = []
-    operations = re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*){2,}',query)
-    def canonical_operation(text):
-        return re.sub(r'\s*\.\s*','.',qi.normalized(text)).replace('.prototype.','.')
-    operation_pattern = (re.compile(r'(?<![\w.])'+re.escape(canonical_operation(operations[0]))+r'(?![\w.])')
-                         if len(set(operations))==1 else None)
     for source in sources[:80]:
         if source.get('relevante') is False or (source.get('vertical') or {}).get('eligible') is False:
             continue
@@ -68,51 +151,21 @@ def requirement_coverage(query, sources):
         url = str(source.get('url_final') or source.get('final') or source.get('url') or '')
         passages = source.get('answer_passages') or passage_candidates(text, url, source.get('secoes'))
         for req in requirements:
-            stop = {'quem','como','quais','foram','sao','que','sobre','usar','utilizar','funciona','fontes','oficiais','oficial','documentacao','empresa','historia','principais','para','com','dos','das','uma'}
-            tokens = set(re.findall(r'[a-z0-9]{3,}', qi.normalized(req['entity']))) - stop
             for p in passages[:40]:
-                span = qi.normalized(p['text'])
-                if operation_pattern:
-                    context = canonical_operation(str(source.get('titulo') or '')+' '+str(p.get('section') or '')+' '+p['text'])
-                    if not operation_pattern.search(context):
-                        continue  # Same leaf name in another API/interface is not identity.
-                identity = False
-                relation = False
-                direct = False
-                for clause in re.split(r'(?<=\w[.!?;])\s+|\n+',p['text']):
-                    clause = qi.normalized(clause)
-                    named = bool(tokens) and all(re.search(r'(?<!\w)'+re.escape(t)+r'(?!\w)',clause) for t in tokens)
-                    predicate = re.search(_ANSWER_RELATIONS[req['attribute']],clause,re.S)
-                    identity = identity or named
-                    relation = relation or bool(predicate)
-                    if not named or not predicate: continue
-                    if re.search(r'\b(?:nao|nunca|not|never)\b',clause[max(0,predicate.start()-30):predicate.start()]):
-                        continue
-                    if req['attribute'] in ('founders','foundation_date','products'):
-                        anchor = re.escape(qi.normalized(req['entity']))
-                        # Entity must be the subject of this relation, not merely
-                        # mentioned elsewhere on a page about another company.
-                        if not re.search(anchor+r'\s+(?:(?:foi|was|is|e|a empresa|a companhia)\s+){0,3}'
-                            r'(?:fundad|founded|established|criad|produz|fabrica|manufactur|products)',clause):
-                            continue
-                    direct = True
-                state = 'DIRECT_ANSWER' if identity and relation else 'TOPIC_ONLY'
-                if not direct and state=='DIRECT_ANSWER': state='POSSIBLE_ANSWER'
-                if relation and not identity:
-                    state = 'POSSIBLE_ANSWER'
-                if state == 'DIRECT_ANSWER' and re.search(r'\b(?:nao se sabe|desconhecid|unknown|not known|nao foi confirmad)', span):
-                    state = 'POSSIBLE_ANSWER'
-                if state == 'DIRECT_ANSWER':
+                label = _passage_support(req,p,source)
+                if label:
                     matches.append({**p, 'requirement_id': req['id'], 'source_id': source.get('id') or source.get('fonte_id') or url,
-                                    'evidence_id': source.get('id') or '', 'answerability': state,
-                                    'reason': 'explicit_entity_and_attribute_relation_in_read_span'})
+                                    'evidence_id': source.get('id') or '', 'support_label':label,
+                                    'answerability':'DIRECT_ANSWER' if label=='DIRECT_SUPPORT' else 'PARTIAL_ANSWER',
+                                    'reason':'bounded_explicit_entity_attribute_relation'})
     for req in requirements:
         found = [p for p in matches if p['requirement_id'] == req['id']]
-        ids = list(dict.fromkeys(p['evidence_id'] or p['source_id'] for p in found))[:8]
-        req.update(state='SUPPORTED' if found else 'DISCOVERED' if sources else 'NOT_SEARCHED',
+        direct = [p for p in found if p['support_label']=='DIRECT_SUPPORT']
+        ids = list(dict.fromkeys(p['evidence_id'] or p['source_id'] for p in direct))[:8]
+        req.update(state='SUPPORTED' if direct else 'PARTIALLY_SUPPORTED' if found else 'DISCOVERED' if sources else 'NOT_SEARCHED',
                    candidate_evidence_ids=[str(s.get('id') or s.get('url') or '') for s in sources[:8]],
                    confirmed_evidence_ids=ids, passage_ids=list(dict.fromkeys(p['id'] for p in found))[:8],
-                   insufficiency_reason='' if found else 'Nenhuma relação explícita com a entidade foi recuperada para este aspecto.')
+                   insufficiency_reason=('Condições obrigatórias ausentes no trecho.' if found and not direct else '') if found else 'Nenhuma relação explícita com a entidade foi recuperada para este aspecto.')
     # Conflicts are only flagged for explicit founding years, not arbitrary
     # numbers/dates on the page. This is a request for review, never resolution.
     for req in requirements:
@@ -135,7 +188,7 @@ def agora_iso() -> str:
 
 def compact_coverage(coverage):
     """Persist references once; literal passage text already lives with evidence."""
-    return {**coverage, 'passages': [{k:p[k] for k in ('id','source_id','requirement_id','text_span','answerability')}
+    return {**coverage, 'passages': [{k:p[k] for k in ('id','source_id','requirement_id','text_span','answerability','support_label')}
                                     for p in coverage.get('passages',[])[:32]]}
 
 

@@ -18,7 +18,7 @@ def probe(case, reference=None):
     import query_intelligence as qi
     from datetime import datetime
     from tools.bench_universal_v599 import probe as existing_probe
-    responses, extracts, orchestration, answer_aware = [], [], [], []
+    responses, extracts, orchestration, answer_aware, provider_audit = [], [], [], [], []
     search, extract, orchestrate = sp.buscar, research._recuperar_um, orch.pesquisar_com_recuperacao
     analyze = qi.analyze
     quick = research.pesquisa_rapida
@@ -37,7 +37,8 @@ def probe(case, reference=None):
             qi.analyze = lambda text, now=None, timezone_name='America/Bahia': analyze(text, now or clock, timezone_name)
 
     def observe_search(name, query, *args, **kwargs):
-        items = search(name, query, *args, **kwargs)
+        with sp.observe_searches(provider_audit.append,case['query']):
+            items = search(name, query, *args, **kwargs)
         responses.append({'provider': name, 'query': query, 'items': items})
         return items
 
@@ -54,7 +55,8 @@ def probe(case, reference=None):
     sp.buscar, research._recuperar_um, orch.pesquisar_com_recuperacao = observe_search, observe_extract, observe_orchestration
     try:
         row = existing_probe(case)
-        row.update(provider_responses=responses, extractions=extracts, orchestration=orchestration,answer_aware=answer_aware)
+        row.update(provider_responses=responses, extractions=extracts, orchestration=orchestration,answer_aware=answer_aware,
+                   provider_audit=provider_audit)
         row['request_clock_reference'] = (reference.get('request') or {}).get('resolved_at') if reference else None
         return row
     finally:

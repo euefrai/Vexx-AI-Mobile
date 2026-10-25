@@ -21,12 +21,12 @@ _CURRENCIES = {'USD': r'dolares?|dolar|usd', 'BRL': r'reais|real|brl',
 # or an assertion that arbitrary natural language has been fully understood.
 ANSWER_FACETS = {
     'founders': ('Fundadores', r'quem fundou|fundadores?|fundador[ae]?|founded by'),
-    'foundation_date': ('Data de fundação', r'quando.*fundad|em que ano|data de funda|ano de funda'),
+    'foundation_date': ('Data de fundação', r'quando.*(?:fundad|criad)|em que ano|data de funda|ano de funda'),
     'products': ('Produtos', r'produtos|o que.*fabrica|products'),
     'causes': ('Causas', r'causas?|causes?'),
     'consequences': ('Consequências', r'consequencias?|consequences?'),
     'syntax': ('Sintaxe ou assinatura', r'sintaxe|assinatura|syntax|signature'),
-    'behavior': ('Comportamento da operação', r'como (?:usar|utilizar|funciona)|comportamento|behavior'),
+    'behavior': ('Comportamento da operação', r'como (?:usar|utilizar|funciona)|comportamento|behavior|modifica.*original|altera.*original'),
     'examples': ('Exemplos documentados', r'exemplos?|examples?'),
     'limitations': ('Limitações', r'limitacoes|restricoes|limitations?'),
     'weight': ('Peso e unidade', r'\bpeso\b|\bweight\b'),
@@ -45,28 +45,35 @@ def answer_requirements(text):
     facets = [key for key, (_, rx) in ANSWER_FACETS.items() if re.search(rx, norm)]
     if 'battery' in facets and re.match(r'^(?:pesquisa profunda sobre\s+)?bateria\s+\w',norm):
         facets.remove('battery')  # Named subject "Bateria ZX" is not a request for a battery model.
-    if 'foundation_date' in facets and not re.search(r'fundad|fundou|fundacao|founded|empresa', norm):
+    if 'foundation_date' in facets and not re.search(r'fundad|fundou|fundacao|founded|empresa|criad[ao]', norm):
         facets.remove('foundation_date')
     if not facets:
         return []
     subject = re.sub(r'^(?:pesquise|pesquisa profunda sobre|encontre)\s+', '', original, flags=re.I)
+    subject = re.sub(r'^(?:em que ano|quando)\s+(?:foi|foram)\s+(?:fundad[ao]s?|criad[ao]s?)\s+', '', subject, flags=re.I)
+    subject = re.sub(r'^qual [eé] a origem d[ao] (?:empresa\s+)?', '', subject, flags=re.I)
     # Declarative topics and explicit interrogative relation patterns share the
     # existing Query Intelligence parser; the original remains authoritative.
     match = re.search(r'\bquem (?:fundou|criou)\s+(?:a |o )?([^,?]+)', subject, re.I)
     if match:
         subject = re.split(r'\s+(?:em que|quando|e quais)\b', match[1], flags=re.I)[0]
     else:
-        subject = re.sub(r'^(?:quais (?:foram|sao) as?\s+|as?\s+)?(?:causas? e consequ[eê]ncias?)\s+(?:de|do|da)\s+', '', subject, flags=re.I)
+        subject = re.sub(r'^(?:quais (?:foram|s[aã]o) as?\s+|as?\s+)?(?:causas? e (?:as?\s+)?consequ[eê]ncias?)\s+(?:de|do|da)\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:como (?:usar|utilizar|funciona)|qual [eé] (?:o peso|a bateria) (?:de|do|da))\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:documenta[cç][aã]o\s+(?:oficial\s+)?|hist[oó]ria\s+(?:de|do|da)\s+(?:empresa\s+)?)', '', subject, flags=re.I)
-        subject = re.split(r'[,?]|\s+(?:causas?|consequ[eê]ncias?|limita[cç][oõ]es|documenta[cç][aã]o|exemplos?|sintaxe|peso|bateria|fontes?\s+oficiais)\b', subject, maxsplit=1, flags=re.I)[0]
+        subject = re.split(r'[,?]|\s+(?:causas?|consequ[eê]ncias?|limita[cç][oõ]es|documenta[cç][aã]o|exemplos?|sintaxe|comportamento|peso|bateria|fontes?\s+oficiais)\b', subject, maxsplit=1, flags=re.I)[0]
+    operations=re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*){2,}',original)
+    if len(set(operations))==1:
+        subject=operations[0]
     subject = re.sub(r'^(?:o|a|os|as)\s+', '', subject.strip(' .?!'), flags=re.I)[:180]
+    subject = re.split(r'\s+e quem\b',subject,maxsplit=1,flags=re.I)[0]
     subject = re.sub(r'\s+(?:na|no|nas|nos|de|da|do|em|com)$','',subject,flags=re.I)
     constraints = {'reference': 'original_request', 'must_preserve': bool(re.search(
         r'\b(?:nao|sem|exceto|ate|depois|antes|ultimos)\b|\d|r\$', norm))}
     return [{'id': 'R-' + hashlib.sha256((norm+'|'+facet).encode()).hexdigest()[:12],
              'type': 'explicit_attribute', 'description': ANSWER_FACETS[facet][0],
-             'entity': subject, 'attribute': facet, 'constraints': constraints,
+             'entity': subject, 'attribute': facet, 'constraints': {**constraints,
+                 'mandatory_conditions': ['battery_and_card'] if facet=='weight' and re.search(r'com bateria e (?:o )?cartao',norm) else []},
              'expected_information': ANSWER_FACETS[facet][0], 'candidate_evidence_ids': [],
              'confirmed_evidence_ids': [], 'state': 'NOT_SEARCHED',
              'insufficiency_reason': 'Ainda não há passagem lida para este requisito.'}

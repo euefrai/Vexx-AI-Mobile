@@ -23,6 +23,45 @@ import json
 import re
 import time
 import urllib.parse
+from contextlib import contextmanager
+from contextvars import ContextVar
+from datetime import datetime, timezone
+
+_SEARCH_AUDIT = ContextVar('search_audit', default=None)
+_REQUEST_AUDIT = ContextVar('request_audit', default=None)
+
+
+def _audit_text(value, limit=240):
+    text = str(value or '')[:2000]
+    text = re.sub(r'(?i)(?:bearer\s+\S+|(?:api[_-]?key|token|secret|password)\s*[:=]\s*\S+)', '[REDACTED]', text)
+    return text[:limit]
+
+
+def _audit_url(value):
+    try:
+        u=urllib.parse.urlsplit(str(value or ''))
+        if u.scheme not in ('http','https') or not u.hostname:return ''
+        # No credentials, fragments, arbitrary query parameters or error bodies.
+        return urllib.parse.urlunsplit((u.scheme,u.hostname,u.path,'',''))[:500]
+    except ValueError:return ''
+
+
+@contextmanager
+def observe_searches(callback, original_query):
+    """Opt-in bounded diagnostics. No disk logging or global owner-shared trace."""
+    token=_SEARCH_AUDIT.set((callback,_audit_text(original_query)))
+    try:yield
+    finally:_SEARCH_AUDIT.reset(token)
+
+
+def _audit_request(url, *, final='', status=None):
+    current=_REQUEST_AUDIT.get()
+    if current is None or len(current)>=6:return
+    parts=urllib.parse.urlsplit(url)
+    allowed={'q','query','search','term','format','count','setlang','cc','hl','gl','ceid','action','list','srsearch','srlimit','limit'}
+    params={k:_audit_text(v) for k,v in urllib.parse.parse_qsl(parts.query) if k in allowed}
+    current.append({'url':_audit_url(url),'parameters':params,'http_status':status,
+                    'final_url':_audit_url(final),'redirected':bool(final and _audit_url(url)!=_audit_url(final))})
 
 MAX_BYTES = 768 * 1024
 UA_LEGIVEL = "Mozilla/5.0 (JuliaResearch/1.0; +research-intelligence)"
@@ -45,15 +84,23 @@ def _research():
 
 
 def _baixar(url: str, timeout: float, aceitar: str = "texto", max_bytes: int = MAX_BYTES):
-    return _research().baixar(url, timeout=timeout, max_bytes=max_bytes, aceitar=aceitar,
-                              user_agent=UA_LEGIVEL)
+    try:
+        result=_research().baixar(url, timeout=timeout, max_bytes=max_bytes, aceitar=aceitar,
+                                  user_agent=UA_LEGIVEL)
+    except Exception as exc:
+        _audit_request(url,status=getattr(exc,'http',None))
+        raise
+    _audit_request(url,final=result[0])
+    return result
 
 
 def _json(url: str, timeout: float):
     try:
         obj = _research()._baixar_json(url, timeout=timeout, user_agent=UA_LEGIVEL)
     except Exception as exc:
+        _audit_request(url,status=getattr(exc,'http',None))
         raise _traduzir(exc)
+    _audit_request(url)
     return obj
 
 
@@ -75,7 +122,9 @@ def _traduzir(exc: Exception) -> ErroProvedor:
     traduzido = mapa.get(codigo)
     if not traduzido and isinstance(exc, OSError):  # DNS/reset/pipe: rede ampla
         traduzido = "rede"
-    return ErroProvedor(str(exc)[:200], traduzido or codigo or "erro")
+    error=ErroProvedor(str(exc)[:200], traduzido or codigo or "erro")
+    if http:error.http=http
+    return error
 
 
 def _verificar_bloqueio(pagina: str) -> None:
@@ -685,6 +734,34 @@ def disponiveis(classes=None) -> list:
 
 
 def buscar(nome: str, consulta: str, limite: int = 6, timeout: float = 10.0) -> list:
+    audit=_SEARCH_AUDIT.get()
+    if audit is None:return _buscar_impl(nome,consulta,limite,timeout)
+    requests=[];token=_REQUEST_AUDIT.set(requests);started=time.monotonic()
+    row={'original_query':audit[1],'adapter_query':_audit_text(consulta),'provider':nome,
+         'at':datetime.now(timezone.utc).isoformat(),'limit':limite,'timeout_seconds':timeout}
+    try:
+        items=_buscar_impl(nome,consulta,limite,timeout)
+        row.update(classification='UNJUDGED_DISCOVERY' if items else 'PROVIDER_EMPTY',
+            result_count=len(items),results=[{'title':_audit_text(i.get('titulo'),160),'url':_audit_url(i.get('url'))} for i in items[:20]])
+        return items
+    except Exception as exc:
+        http=getattr(exc,'http',None);code=getattr(exc,'codigo','erro')
+        row.update(http_status=http,error_code=code,result_count=0,
+            classification='PROVIDER_RATE_LIMITED' if http==429 else
+            'PROVIDER_BLOCKED' if code=='bloqueado' else 'RESULT_PARSE_ERROR' if code=='formato' else
+            'PROVIDER_EMPTY' if code=='vazio' else 'PROVIDER_ERROR')
+        raise
+    finally:
+        _REQUEST_AUDIT.reset(token)
+        row.update(requests=requests,latency_ms=round((time.monotonic()-started)*1000,2),
+                   transport_scope='observed adapter helpers only; null HTTP status means not exposed, never assumed 200')
+        try:audit[0](row)
+        except Exception:
+            import warnings
+            warnings.warn('Search audit observer failed',RuntimeWarning,stacklevel=2)
+
+
+def _buscar_impl(nome: str, consulta: str, limite: int = 6, timeout: float = 10.0) -> list:
     """Executa um provedor; levanta ErroProvedor com código honesto.
 
     Cada execução alimenta as métricas cumulativas (`metricas()`).

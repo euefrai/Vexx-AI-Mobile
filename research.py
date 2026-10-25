@@ -34,7 +34,7 @@ from html.parser import HTMLParser
 
 TTL_RAPIDA = 6 * 3600
 TTL_PROFUNDA = 24 * 3600
-RETRIEVAL_VERSION = '5.9.9.3'
+RETRIEVAL_VERSION = '5.9.9.4'
 MAX_REDIRECTS = 3
 MAX_PAGINA_BYTES = 2 * 1024 * 1024
 MAX_TEXTO_PAGINA = 8000
@@ -937,11 +937,12 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
     from web_extract import melhor_trecho
     coverage = evidence_graph.requirement_coverage(consulta, [{**rec, 'url': fonte['url_final'], 'lida': lida}])
     if coverage['applicable']:
-        passages = list({p['id']: p for p in coverage['passages']}.values())[:3]
+        passages = evidence_graph.select_answer_passages(coverage)
         fonte['answer_passages'] = passages
         fonte['answerability'] = {'state': ('DIRECT_ANSWER' if coverage['complete'] else 'PARTIAL_ANSWER') if passages else 'TOPIC_ONLY' if lida else 'UNREADABLE',
                                  'requirement_ids': list(dict.fromkeys(p['requirement_id'] for p in coverage['passages'])),
                                  'aspects':[r['description'] for r in coverage['requirements'] if r['state']=='SUPPORTED'],
+                                 'partial_aspects':[r['description'] for r in coverage['requirements'] if r['state']=='PARTIALLY_SUPPORTED'],
                                  'scope': coverage['scope']}
         safe_relation = (bool(passages) and not orch._context_mismatch(evidence,consulta)
                          and not any(r['constraints']['must_preserve'] for r in coverage['requirements'])

@@ -1192,7 +1192,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             continue
         trecho_fonte = str(rec.get("trecho_usado") or "").strip()
         answer_coverage = _eg.requirement_coverage(job['objetivo'], [{**rec,'url':a['url']}])
-        answer_passages = list({p['id']:p for p in answer_coverage['passages']}.values())[:3]
+        answer_passages = _eg.select_answer_passages(answer_coverage)
         if answer_coverage['applicable'] and not answer_passages:
             read_trace(a,'topic_only',rec,code='NO_ANSWER_PASSAGE')
             continue
@@ -1234,7 +1234,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             fonte['answer_passages'] = answer_passages
             fonte['answerability'] = {'state':'DIRECT_ANSWER' if answer_coverage['complete'] else 'PARTIAL_ANSWER',
                                      'scope':answer_coverage['scope'],
-                                     'aspects':[r['description'] for r in answer_coverage['requirements'] if r['state']=='SUPPORTED']}
+                                     'aspects':[r['description'] for r in answer_coverage['requirements'] if r['state']=='SUPPORTED'],
+                                     'partial_aspects':[r['description'] for r in answer_coverage['requirements'] if r['state']=='PARTIALLY_SUPPORTED']}
         if a.get('source_recovery'):
             fonte['source_recovery'] = {**a['source_recovery'],
                 'state':'original_read' if fonte['texto_lido'] else 'original_unread',

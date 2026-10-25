@@ -180,6 +180,9 @@ def source_card(item: dict, used=False) -> dict:
     aspects = (item.get('answerability') or {}).get('aspects') or []
     if aspects:
         details.append('Aspectos com passagem: '+', '.join(str(a) for a in aspects[:6]))
+    partials = (item.get('answerability') or {}).get('partial_aspects') or []
+    if partials:
+        details.append('Suporte parcial: '+', '.join(str(a) for a in partials[:6]))
     labels={'location':'Local','organizer':'Organizador','provider':'Operadora','airline':'Companhia',
             'departureAirport':'Origem','departureBusStop':'Origem','arrivalAirport':'Destino','arrivalBusStop':'Destino',
             'departureTime':'Partida declarada','arrivalTime':'Chegada declarada'}
