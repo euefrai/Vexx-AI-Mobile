@@ -1,0 +1,35 @@
+{
+  "scope": "OWN_QA_PROCESS_TREE_SINGLE_SNAPSHOT_NOT_PROVIDER_OR_CHROME_NOT_P95",
+  "processes": [
+    {
+      "role": "pid",
+      "rss_mb": 34.36,
+      "peak_working_set_mb": 97.13,
+      "cpu_seconds_since_start": 7.844,
+      "threads": 3
+    },
+    {
+      "role": "pid-descendant",
+      "rss_mb": 3.68,
+      "peak_working_set_mb": 4.11,
+      "cpu_seconds_since_start": 0.031,
+      "threads": 1
+    },
+    {
+      "role": "pid-descendant",
+      "rss_mb": 6.72,
+      "peak_working_set_mb": 7.25,
+      "cpu_seconds_since_start": 0.062,
+      "threads": 2
+    },
+    {
+      "role": "pid-descendant",
+      "rss_mb": 29.32,
+      "peak_working_set_mb": 127.88,
+      "cpu_seconds_since_start": 16.953,
+      "threads": 6
+    }
+  ],
+  "rss_sum_mb": 74.08,
+  "note": "RSS summation can count shared pages; per-process peaks are not simultaneous peaks."
+}

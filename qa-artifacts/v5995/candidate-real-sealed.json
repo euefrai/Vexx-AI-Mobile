@@ -1,0 +1,118 @@
+{
+  "scope": "REAL_PUBLIC_SHORT_SAMPLES_MODEL_ANNOTATED_EXPLORATORY_NOT_HUMAN_GOLD",
+  "milliseconds": 70.19,
+  "aggregate": {
+    "n": 3,
+    "tp": 0,
+    "fp": 0,
+    "fn": 1,
+    "tn": 2,
+    "precision": null,
+    "recall": 0.0,
+    "f1": 0.0,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 1.0,
+    "partial_support_recall": 0.0,
+    "direct_support_precision": null,
+    "incorrectly_promoted_partials": 0,
+    "requirement_coverage": null,
+    "confusion": {
+      "WRONG_ENTITY -> REJECTED": 2,
+      "PARTIAL_SUPPORT -> REJECTED": 1
+    }
+  },
+  "categories": {
+    "products": {
+      "n": 1,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": null,
+      "partial_support_recall": null,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": null,
+      "confusion": {
+        "WRONG_ENTITY -> REJECTED": 1
+      }
+    },
+    "public_organizations": {
+      "n": 1,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": null,
+      "partial_support_recall": null,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": null,
+      "confusion": {
+        "WRONG_ENTITY -> REJECTED": 1
+      }
+    },
+    "technology": {
+      "n": 1,
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "tn": 0,
+      "precision": null,
+      "recall": 0.0,
+      "f1": 0.0,
+      "false_positive_rate": null,
+      "false_negative_rate": 1.0,
+      "partial_support_recall": 0.0,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": null,
+      "confusion": {
+        "PARTIAL_SUPPORT -> REJECTED": 1
+      }
+    }
+  },
+  "decisions": [
+    {
+      "id": "real-16",
+      "domain": "public_organizations",
+      "gold": "WRONG_ENTITY",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "real-17",
+      "domain": "products",
+      "gold": "WRONG_ENTITY",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "real-18",
+      "domain": "technology",
+      "gold": "PARTIAL_SUPPORT",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    }
+  ],
+  "split": "SEALED_HOLDOUT",
+  "annotation_states": [
+    "MODEL_PROPOSED"
+  ],
+  "limitations": [
+    "Same agent annotation/review; no independent human gold.",
+    "Requirement supplied explicitly: parsing/discovery are separate.",
+    "Binary retention metrics do not certify all rejection labels or population accuracy."
+  ]
+}

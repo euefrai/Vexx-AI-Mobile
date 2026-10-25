@@ -1,0 +1,247 @@
+{
+  "scope": "REAL_PUBLIC_SHORT_SAMPLES_MODEL_ANNOTATED_EXPLORATORY_NOT_HUMAN_GOLD",
+  "milliseconds": 106.63,
+  "aggregate": {
+    "n": 11,
+    "tp": 4,
+    "fp": 0,
+    "fn": 0,
+    "tn": 7,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 0.0,
+    "partial_support_recall": null,
+    "direct_support_precision": 1.0,
+    "incorrectly_promoted_partials": 0,
+    "requirement_coverage": 0.75,
+    "confusion": {
+      "DIRECT_SUPPORT -> DIRECT_SUPPORT": 3,
+      "WRONG_ATTRIBUTE -> REJECTED": 2,
+      "DIRECT_SUPPORT -> PARTIAL_SUPPORT": 1,
+      "INSUFFICIENT_CONTEXT -> REJECTED": 1,
+      "WRONG_RELATION -> REJECTED": 1,
+      "UNREAD -> REJECTED": 3
+    }
+  },
+  "categories": {
+    "companies": {
+      "n": 2,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0,
+      "partial_support_recall": null,
+      "direct_support_precision": 1.0,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": 1.0,
+      "confusion": {
+        "DIRECT_SUPPORT -> DIRECT_SUPPORT": 1,
+        "WRONG_ATTRIBUTE -> REJECTED": 1
+      }
+    },
+    "culture": {
+      "n": 2,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 2,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": null,
+      "partial_support_recall": null,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": null,
+      "confusion": {
+        "UNREAD -> REJECTED": 2
+      }
+    },
+    "documentation": {
+      "n": 2,
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0,
+      "partial_support_recall": null,
+      "direct_support_precision": 1.0,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": 1.0,
+      "confusion": {
+        "DIRECT_SUPPORT -> DIRECT_SUPPORT": 1,
+        "WRONG_ATTRIBUTE -> REJECTED": 1
+      }
+    },
+    "economy": {
+      "n": 1,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": null,
+      "partial_support_recall": null,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": null,
+      "confusion": {
+        "UNREAD -> REJECTED": 1
+      }
+    },
+    "education": {
+      "n": 1,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": null,
+      "partial_support_recall": null,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": null,
+      "confusion": {
+        "INSUFFICIENT_CONTEXT -> REJECTED": 1
+      }
+    },
+    "history": {
+      "n": 3,
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 0.0,
+      "partial_support_recall": null,
+      "direct_support_precision": 1.0,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": 0.5,
+      "confusion": {
+        "DIRECT_SUPPORT -> PARTIAL_SUPPORT": 1,
+        "DIRECT_SUPPORT -> DIRECT_SUPPORT": 1,
+        "WRONG_RELATION -> REJECTED": 1
+      }
+    }
+  },
+  "decisions": [
+    {
+      "id": "real-01",
+      "domain": "companies",
+      "gold": "DIRECT_SUPPORT",
+      "prediction": "DIRECT_SUPPORT",
+      "retained": true,
+      "complete": true
+    },
+    {
+      "id": "real-02",
+      "domain": "companies",
+      "gold": "WRONG_ATTRIBUTE",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "real-03",
+      "domain": "documentation",
+      "gold": "DIRECT_SUPPORT",
+      "prediction": "DIRECT_SUPPORT",
+      "retained": true,
+      "complete": true
+    },
+    {
+      "id": "real-04",
+      "domain": "documentation",
+      "gold": "WRONG_ATTRIBUTE",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "real-05",
+      "domain": "history",
+      "gold": "DIRECT_SUPPORT",
+      "prediction": "PARTIAL_SUPPORT",
+      "retained": true,
+      "complete": false
+    },
+    {
+      "id": "real-06",
+      "domain": "education",
+      "gold": "INSUFFICIENT_CONTEXT",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "real-08",
+      "domain": "history",
+      "gold": "DIRECT_SUPPORT",
+      "prediction": "DIRECT_SUPPORT",
+      "retained": true,
+      "complete": true
+    },
+    {
+      "id": "real-09",
+      "domain": "history",
+      "gold": "WRONG_RELATION",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "metadata-1",
+      "domain": "economy",
+      "gold": "UNREAD",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "metadata-2",
+      "domain": "culture",
+      "gold": "UNREAD",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "metadata-3",
+      "domain": "culture",
+      "gold": "UNREAD",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    }
+  ],
+  "split": "DEVELOPMENT",
+  "annotation_states": [
+    "MODEL_PROPOSED"
+  ],
+  "limitations": [
+    "Same agent annotation/review; no independent human gold.",
+    "Requirement supplied explicitly: parsing/discovery are separate.",
+    "Binary retention metrics do not certify all rejection labels or population accuracy."
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+  "name": "technical",
+  "query": "Pesquisa profunda sobre como funciona WebAssembly.Table.grow, qual a sintaxe, o valor retornado e as limitações. Use documentação original e diferencie o tamanho anterior do tamanho final.",
+  "seconds": 14.963,
+  "inference_policy": "configured-free-model-no-paid-fallback",
+  "completed_flow": true,
+  "http_status": 200,
+  "content_type": "text/event-stream; charset=utf-8",
+  "job": "rj-c90ad1f186e5",
+  "job_state": "interrompida",
+  "job_mode": "profunda",
+  "outcome": {
+    "state": "partial",
+    "unresolved_fronts": [
+      "WebAssembly.Table.grow Sintaxe ou assinatura",
+      "WebAssembly.Table.grow Comportamento da operação",
+      "WebAssembly.Table.grow Limitações"
+    ],
+    "source_authority_unverified": false,
+    "provider_code": "",
+    "read_sources": 0,
+    "reason": "evidências insuficientes ou limitações remanescentes"
+  },
+  "synthesis_llm": false,
+  "chat_result_id": "rj-c90ad1f186e5-result",
+  "answer_coverage": {
+    "applicable": true,
+    "requirements": [
+      {
+        "id": "R-981ea1704d1f",
+        "type": "explicit_attribute",
+        "description": "Sintaxe ou assinatura",
+        "entity": "WebAssembly.Table.grow",
+        "attribute": "syntax",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Sintaxe ou assinatura",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      },
+      {
+        "id": "R-e8d198e16a8b",
+        "type": "explicit_attribute",
+        "description": "Comportamento da operação",
+        "entity": "WebAssembly.Table.grow",
+        "attribute": "behavior",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Comportamento da operação",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      },
+      {
+        "id": "R-f8c49f427a83",
+        "type": "explicit_attribute",
+        "description": "Limitações",
+        "entity": "WebAssembly.Table.grow",
+        "attribute": "limitations",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Limitações",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      }
+    ],
+    "passages": [],
+    "complete": false,
+    "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+  },
+  "stage_timings": [
+    {
+      "step_id": "p1",
+      "type": "busca",
+      "seconds": 4.5254
+    },
+    {
+      "step_id": "p4",
+      "type": "busca",
+      "seconds": 0.9428
+    },
+    {
+      "step_id": "p7",
+      "type": "busca",
+      "seconds": 1.0565
+    },
+    {
+      "step_id": "p10",
+      "type": "busca",
+      "seconds": 1.4266
+    },
+    {
+      "step_id": "p2",
+      "type": "ler",
+      "seconds": 2.3845
+    },
+    {
+      "step_id": "p5",
+      "type": "ler",
+      "seconds": 1.6986
+    },
+    {
+      "step_id": "p3",
+      "type": "analisar",
+      "seconds": 0.0088
+    },
+    {
+      "step_id": "p6",
+      "type": "analisar",
+      "seconds": 0.0031
+    }
+  ],
+  "synthesis_budget": null,
+  "assistant_messages": 2,
+  "reload_preserved": true,
+  "source_cards": [],
+  "links": [],
+  "media_cards": 0,
+  "public_answer": "v.\nVexx\n\nResultado da pesquisa\n\nInvestigação: como funciona WebAssembly.Table.grow, qual a sintaxe, o valor retornado e as limitações. Use documentação original e diferencie o tamanho anterior do tamanho final\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.\n\nObjetivo: como funciona WebAssembly.Table.grow, qual a sintaxe, o valor retornado e as limitações. Use documentação original e diferencie o tamanho anterior do tamanho final\n\nStatus: interrompida · Modo: profunda · Evidências: 0\n\nCobertura dos dados: parcial; há dados pendentes\n\nMídia descoberta: 3 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n\nLimite epistêmico: a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas.\n\nAspectos da pergunta\nBaixar CSV\nAspecto\tEvidência recuperada\nSintaxe ou assinatura\tAinda não confirmado\nComportamento da operação\tAinda não confirmado\nLimitações\tAinda não confirmado\n17:52\n···",
+  "page_errors": []
+}

@@ -1,0 +1,139 @@
+{
+  "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+  "name": "company",
+  "query": "Pesquisa profunda sobre quem fundou a Intel, em que ano e quais produtos fabrica. Use fontes originais e indique aspectos não confirmados.",
+  "seconds": 15.824,
+  "inference_policy": "configured-free-model-no-paid-fallback",
+  "completed_flow": true,
+  "http_status": 200,
+  "content_type": "text/event-stream; charset=utf-8",
+  "job": "rj-0df983a2b11d",
+  "job_state": "interrompida",
+  "job_mode": "profunda",
+  "outcome": {
+    "state": "partial",
+    "unresolved_fronts": [
+      "quem fundou a Intel, em que ano e quais produtos fabrica. Use fontes originais e indique aspectos não confirmados Fundadores",
+      "quem fundou a Intel, em que ano e quais produtos fabrica. Use fontes originais e indique aspectos não confirmados Data de fundação",
+      "quem fundou a Intel, em que ano e quais produtos fabrica. Use fontes originais e indique aspectos não confirmados Produtos"
+    ],
+    "source_authority_unverified": false,
+    "provider_code": "",
+    "read_sources": 0,
+    "reason": "evidências insuficientes ou limitações remanescentes"
+  },
+  "synthesis_llm": false,
+  "chat_result_id": "rj-0df983a2b11d-result",
+  "answer_coverage": {
+    "applicable": true,
+    "requirements": [
+      {
+        "id": "R-f174661a5644",
+        "type": "explicit_attribute",
+        "description": "Fundadores",
+        "entity": "Intel",
+        "attribute": "founders",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": true,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Fundadores",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      },
+      {
+        "id": "R-868329e8381b",
+        "type": "explicit_attribute",
+        "description": "Data de fundação",
+        "entity": "Intel",
+        "attribute": "foundation_date",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": true,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Data de fundação",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      },
+      {
+        "id": "R-0306a130df5d",
+        "type": "explicit_attribute",
+        "description": "Produtos",
+        "entity": "Intel",
+        "attribute": "products",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": true,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Produtos",
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [],
+        "state": "NOT_SEARCHED",
+        "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+        "passage_ids": []
+      }
+    ],
+    "passages": [],
+    "complete": false,
+    "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+  },
+  "stage_timings": [
+    {
+      "step_id": "p1",
+      "type": "busca",
+      "seconds": 1.1446
+    },
+    {
+      "step_id": "p4",
+      "type": "busca",
+      "seconds": 0.2998
+    },
+    {
+      "step_id": "p7",
+      "type": "busca",
+      "seconds": 2.4325
+    },
+    {
+      "step_id": "p10",
+      "type": "busca",
+      "seconds": 2.1145
+    },
+    {
+      "step_id": "p2",
+      "type": "ler",
+      "seconds": 3.8563
+    },
+    {
+      "step_id": "p5",
+      "type": "ler",
+      "seconds": 2.4867
+    },
+    {
+      "step_id": "p3",
+      "type": "analisar",
+      "seconds": 0.0065
+    },
+    {
+      "step_id": "p6",
+      "type": "analisar",
+      "seconds": 0.0027
+    }
+  ],
+  "synthesis_budget": null,
+  "assistant_messages": 2,
+  "reload_preserved": true,
+  "source_cards": [],
+  "links": [],
+  "media_cards": 0,
+  "public_answer": "v.\nVexx\n\nResultado da pesquisa\n\nInvestigação: quem fundou a Intel, em que ano e quais produtos fabrica. Use fontes originais e indique aspectos não confirmados\n\nEvidências: 0; afirmações sustentadas: nenhuma afirmação verificável identificada.\n\nSíntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.\n\nObjetivo: quem fundou a Intel, em que ano e quais produtos fabrica. Use fontes originais e indique aspectos não confirmados\n\nStatus: interrompida · Modo: profunda · Evidências: 0\n\nCobertura dos dados: parcial; há dados pendentes\n\nMídia descoberta: 16 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n\nLimite epistêmico: a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas.\n\nAspectos da pergunta\nBaixar CSV\nAspecto\tEvidência recuperada\nFundadores\tAinda não confirmado\nData de fundação\tAinda não confirmado\nProdutos\tAinda não confirmado\n17:53\n···",
+  "page_errors": []
+}

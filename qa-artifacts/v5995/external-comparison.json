@@ -1,0 +1,610 @@
+{
+  "scope": "SMALL_NONRANDOM_LIVE_COMPARISON_AND_FROZEN_RECLASSIFICATION_NOT_HUMAN_GOLD",
+  "retrieval_candidate_revision": "d8157fdaaf857f9f2832bfe321a81d551744c225",
+  "final_replay_revision": "3335ab73cd85398cb5b6d274efe02a5c5df93d1c",
+  "live": {
+    "baseline": {
+      "cases": 16,
+      "eligible_read_flags": 0,
+      "questions_with_eligible_flags": 0,
+      "opened": 47,
+      "calls": 87,
+      "fetches": 173,
+      "median_seconds": 8.358
+    },
+    "candidate": {
+      "cases": 16,
+      "eligible_read_flags": 3,
+      "questions_with_eligible_flags": 1,
+      "opened": 44,
+      "calls": 84,
+      "fetches": 162,
+      "median_seconds": 7.061
+    }
+  },
+  "cases": [
+    {
+      "id": "rel-01",
+      "query": "Quem fundou a Natura, em que ano e quais produtos ela fabrica?",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-02",
+      "query": "Quais obras de Carolina Maria de Jesus foram publicadas durante sua vida?",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-03",
+      "query": "Como funciona Object.assign no JavaScript, sua sintaxe e se modifica o objeto de destino?",
+      "before": 0,
+      "after": 3
+    },
+    {
+      "id": "rel-04",
+      "query": "Compare git restore e git reset para desfazer mudanças em arquivos sem apagar commits.",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-05",
+      "query": "Qual o peso da Sony Alpha 7 IV com bateria e cartão e qual bateria utiliza?",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-06",
+      "query": "Notícias de saúde em Guanambi BA nos últimos sete dias",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-07",
+      "query": "Notícias de energia eólica no Brasil nos últimos sete dias",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-08",
+      "query": "Eventos culturais no Recife nos próximos sete dias com local e data",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-09",
+      "query": "Cursos gratuitos a distância do SENAI com inscrições abertas e requisitos públicos",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-10",
+      "query": "Horários oficiais de visitação do Jardim Botânico de Curitiba",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-11",
+      "query": "História da Jaguar fabricante de automóveis, excluindo informações sobre o animal",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-12",
+      "query": "Quais foram as causas e consequências da Revolução Farroupilha?",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-13",
+      "query": "Quem fundou a Troller, em que ano e quais veículos produzia antes do encerramento?",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-14",
+      "query": "Compare as diferenças documentadas de mutabilidade entre Array.prototype.sort e Array.prototype.toSorted.",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-15",
+      "query": "Qual foi o número de visitantes do Museu da Língua Portuguesa ontem, caso exista registro público?",
+      "before": 0,
+      "after": 0
+    },
+    {
+      "id": "rel-16",
+      "query": "Em que ano foi criado o Instituto Butantan e qual sua principal atividade?",
+      "before": 0,
+      "after": 0
+    }
+  ],
+  "frozen_replay": {
+    "scope": "ONLY_UNIQUE_RETURNED_BASELINE_READS_NO_NETWORK_NO_MODEL_NO_NEW_DISCOVERY",
+    "read_count": 47,
+    "before_flags": 0,
+    "after_flags": 2,
+    "cases": [
+      {
+        "id": "rel-01",
+        "sources": [
+          {
+            "url": "https://en.wikipedia.org/wiki/Natura_%26Co",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://www.youtube.com/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          }
+        ]
+      },
+      {
+        "id": "rel-02",
+        "sources": [
+          {
+            "url": "https://www.scge.pe.gov.br/obras-pe/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://transparencia.pe.gov.br/despesas/obras/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://arteref.com/arte/curiosidades/as-34-obras-mais-famosas-do-mundo-e-suas-localizacoes/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          }
+        ]
+      },
+      {
+        "id": "rel-03",
+        "sources": [
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object",
+            "before_flag": false,
+            "after_flag": true,
+            "answerability": {
+              "state": "PARTIAL_ANSWER",
+              "requirement_ids": [
+                "R-32b46281f60b"
+              ],
+              "aspects": [
+                "Sintaxe ou assinatura"
+              ],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://www.objectci.com/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign",
+            "before_flag": false,
+            "after_flag": true,
+            "answerability": {
+              "state": "PARTIAL_ANSWER",
+              "requirement_ids": [
+                "R-32b46281f60b"
+              ],
+              "aspects": [
+                "Sintaxe ou assinatura"
+              ],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          }
+        ]
+      },
+      {
+        "id": "rel-04",
+        "sources": [
+          {
+            "url": "https://www.diffchecker.com/pt/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.buscape.com.br/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.diffchecker.com/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          }
+        ]
+      },
+      {
+        "id": "rel-05",
+        "sources": [
+          {
+            "url": "https://www.tuasaude.com/peso-ideal/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://brasilescola.uol.com.br/o-que-e/fisica/o-que-e-peso.htm",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://www.calculadora.app/nutricao/peso-ideal",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          }
+        ]
+      },
+      {
+        "id": "rel-06",
+        "sources": [
+          {
+            "url": "https://guanambi.ba.gov.br/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "http://guanambi.ba.gov.br/a-cidade/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.cidade-brasil.com.br/municipio-guanambi.html",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          }
+        ]
+      },
+      {
+        "id": "rel-07",
+        "sources": [
+          {
+            "url": "https://www.todamateria.com.br/energia/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://brasilescola.uol.com.br/fisica/energia.htm",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/Energia",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          }
+        ]
+      },
+      {
+        "id": "rel-08",
+        "sources": [
+          {
+            "url": "https://www.locaisdobrasil.com.br/encontre/local-para-eventos/jaboatao-dos-guararapes-pe",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.even3.com.br/eventos/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.sympla.com.br/eventos",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          }
+        ]
+      },
+      {
+        "id": "rel-09",
+        "sources": [
+          {
+            "url": "https://loja.sebrae.com.br/cursos/cursos-online",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://es.senac.br/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.ev.org.br/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          }
+        ]
+      },
+      {
+        "id": "rel-10",
+        "sources": [
+          {
+            "url": "https://www.hollywoodreporter.com/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.hollywoodreporter.com/lists/sexiest-movies-ranked/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://es.hollywoodreporter.com/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          }
+        ]
+      },
+      {
+        "id": "rel-11",
+        "sources": [
+          {
+            "url": "https://www.jaguar.com/pt-br/jdx/jaguar-range/index.html",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.webmotors.com.br/carros/estoque/jaguar",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.todamateria.com.br/historia/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          }
+        ]
+      },
+      {
+        "id": "rel-12",
+        "sources": [
+          {
+            "url": "https://brasilescola.uol.com.br/guerras/guerra-dos-farrapos.htm",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://www.todamateria.com.br/guerra-dos-farrapos/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://mundoeducacao.uol.com.br/historiadobrasil/guerra-dos-farrapos.htm",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          }
+        ]
+      },
+      {
+        "id": "rel-13",
+        "sources": [
+          {
+            "url": "https://www.webmotors.com.br/carros/estoque/troller",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://www.troller.com.br/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://www.webmotors.com.br/carros/estoque/troller?tipoveiculo=carros&amp;marca1=troller&amp;Oportunidades=Vistoriado&amp;page=1",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          }
+        ]
+      },
+      {
+        "id": "rel-14",
+        "sources": [
+          {
+            "url": "https://diferencas.net/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.dicio.com.br/diferencas/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://www.diferenca.com/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          }
+        ]
+      },
+      {
+        "id": "rel-15",
+        "sources": [
+          {
+            "url": "https://dicionario.priberam.org/numero",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://buscafipe.com/consulta-numero-telefone/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          },
+          {
+            "url": "https://pt.wikipedia.org/wiki/N%C3%BAmero",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": null
+          }
+        ]
+      },
+      {
+        "id": "rel-16",
+        "sources": [
+          {
+            "url": "https://www.dicio.com.br/ano/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://www.calendarr.com/brasil/quantos-dias-tem-um-ano/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          },
+          {
+            "url": "https://www.calendarr.com/brasil/dia-do-ano/",
+            "before_flag": false,
+            "after_flag": false,
+            "answerability": {
+              "state": "TOPIC_ONLY",
+              "requirement_ids": [],
+              "aspects": [],
+              "partial_aspects": [],
+              "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "limitations": [
+    "Engine relevance flags are not independent source quality or answer verification.",
+    "Live network/index changes prevent attributing latency or discovery differences solely to code.",
+    "One question can contribute multiple reads; no population precision/recall without gold.",
+    "Final prompt and academic regression fixes occurred after retrieval freeze; sealed results apply to the recorded retrieval candidate.",
+    "No sealed examples were used to tune rules. Original question files and captured baseline are preserved."
+  ]
+}

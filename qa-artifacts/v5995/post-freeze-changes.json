@@ -1,0 +1,19 @@
+{
+  "sealed_candidate_revision": "d8157fdaaf857f9f2832bfe321a81d551744c225",
+  "final_application_revision": "3335ab7",
+  "changed_files": {
+    "research.py": {
+      "frozen": "720b11b3849a8aecc9a615219b38048f563afe1b2a794cd0e71c821a1b31e7ab",
+      "final": "ca6481e29149e784d13ad3e9192246a5218a7e025c7eb9276e58a944de557a3c"
+    },
+    "research_synthesis.py": {
+      "frozen": "aea93457156541acf8f1a300604922c93f363e512d55ed276a24aff03a2c7597",
+      "final": "f25498547bbf6f54b34614dafe71bc7e98cffd4afe950ce17d1bca6d4d666fdf"
+    }
+  },
+  "causes": [
+    "Actual public free-model probe exposed conflicting hard-coded source-ID example.",
+    "Full suite exposed unrelated academic download regression."
+  ],
+  "policy": "Changes did not use sealed examples; sealed comparisons remain diagnostics of the original recorded retrieval candidate, not a final independent acceptance."
+}

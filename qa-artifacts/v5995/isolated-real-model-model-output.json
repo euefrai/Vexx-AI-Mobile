@@ -1,0 +1,18 @@
+{
+  "scope": "PUBLIC_SOURCE_ISOLATED_MODEL_DIAGNOSTIC_NOT_SEARCH_E2E",
+  "calls": [
+    {
+      "finish_reason": "stop",
+      "usage": {
+        "prompt_tokens": 1623,
+        "completion_tokens": 575,
+        "total_tokens": 2198
+      },
+      "truncada": false,
+      "latencia_s": 9.62,
+      "model_usado": "poolside/laguna-s-2.1:free",
+      "text": "{\"points\":[{\"text\":\"Array.prototype.toSorted() é um método que retorna uma nova array com os elementos ordenados em ordem crescente, sem modificar a array original. Sua sintaxe é simples: pode ser chamado como toSorted() ou toSorted(compareFn), onde compareFn é uma função opcional que define a ordem dos elementos. Se compareFn for omitida, os elementos são convertidos para strings e ordenados conforme o valor do ponto de código Unicode de cada caractere.\",\"evidence\":[{\"id\":\"E1\",\"quote\":\"Syntax js toSorted() toSorted(compareFn) Parameters compareFn Optional A function that determines the order of the elements. If omitted, the array elements are converted to strings, then sorted according to each character's Unicode code point value.\"},{\"id\":\"E2\",\"quote\":\"Return value A new array with the elements sorted in ascending order.\"}]},{\"text\":\"O método toSorted() não altera a array original, diferentemente do método sort(), que modifica a array em si. Ele é considerado genérico, o que significa que pode ser aplicado a objetos semelhantes a arrays, desde que possuam uma propriedade length e propriedades com chaves inteiras. Por exemplo, ele pode ser usado com Array.prototype.call em objetos que imitam arrays.\",\"evidence\":[{\"id\":\"E3\",\"quote\":\"The toSorted() method is generic. It only expects the this value to have a length property and integer-keyed properties.\"},{\"id\":\"E4\",\"quote\":\"It then collects all existing integer-keyed properties in the range of 0 to length - 1, sorts them, and writes them into a new array.\"}]},{\"text\":\"Uma limitação do método toSorted() é seu comportamento com arrays esparsos (sparse arrays): os slots vazios são tratados como se tivessem o valor undefined. Além diso, embora o método retorne uma nova array ordenada, ele não oferece controle sobre a estabilidade da ordenação em todos os ambientes, dependendo da implementação do motor JavaScript. Outra limitação é que, como é um método recente (ES2024), pode não estar disponível em ambientes mais antigos ou em polyfill padrão.\",\"evidence\":[{\"id\":\"E5\",\"quote\":\"When used on sparse arrays, the toSorted() method iterates empty slots as if they have the value undefined.\"},{\"id\":\"E6\",\"quote\":\"Help improve MDN This page was last modified on Jul 10, 2025 by MDN contributors.\"}]}]}",
+      "output_capture_truncated": false
+    }
+  ]
+}

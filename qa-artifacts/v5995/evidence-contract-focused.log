@@ -1,0 +1,74 @@
+.F.F...............F.................................................... [ 62%]
+...........................................                              [100%]
+================================== FAILURES ===================================
+________ test_causal_heading_retains_partial_with_literal_context_only ________
+
+    def test_causal_heading_retains_partial_with_literal_context_only():
+        q='Quais as causas e consequências da Revolta do Vale?'
+        text='Principais consequências da Revolta do Vale: Reforma: o conflito resultou na alteração da legislação.'
+        cov=coverage(q,text)
+>       assert {r['attribute']:r['state'] for r in cov['requirements']}=={'causes':'DISCOVERED','consequences':'PARTIALLY_SUPPORTED'}
+E       AssertionError: assert {'causes': 'D... 'DISCOVERED'} == {'causes': 'D...LY_SUPPORTED'}
+E
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'consequences': 'DISCOVERED'} != {'consequences': 'PARTIALLY_SUPPORTED'}
+E         Use -v to get more diff
+
+tests\test_evidence_reliability_v5995.py:22: AssertionError
+________ test_explicit_explanation_survives_options_and_keeps_offsets _________
+
+    def test_explicit_explanation_survives_options_and_keeps_offsets():
+        q='Quais as causas e consequências da Revolta do Vale?'
+        text=('Assinale a alternativa correta. a) A Revolta do Vale foi causada por uma epidemia. '
+              'b) A Revolta do Vale foi causada pela mineração. '
+              'Explicação: A Revolta do Vale foi causada pela cobrança de novos impostos.')
+        passages=wx.passage_candidates(text)
+        assert [p['source_role'] for p in passages]==['ANSWER_OPTION','EXPLANATION']
+        for p in passages:
+            s=p['text_span'];assert text[s['start']:s['end']]==p['text']
+        cov=coverage(q,text)
+>       assert len(cov['passages'])==1 and cov['passages'][0]['source_role']=='EXPLANATION'
+E       assert (0 == 1)
+E        +  where 0 = len([])
+
+tests\test_evidence_reliability_v5995.py:47: AssertionError
+_______ test_research_writer_rejects_transport_truncation_without_retry _______
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000206311B9550>
+
+    def test_research_writer_rejects_transport_truncation_without_retry(monkeypatch):
+        calls=[]
+        def generate(cfg,messages,**kwargs):
+            calls.append(cfg)
+            return {'texto':'{"points":[]}', 'finish_reason':'length','usage':{'completion_tokens':1800}}
+        monkeypatch.setattr(pc_agent,'gerar_texto',generate)
+        writer=pc_agent._research_writer({'fallbacks':['paid-model']},threading.Event())
+>       with pytest.raises(rs.ModelOutputError) as exc:writer([{'role':'system','content':'fixture'}],20)
+                                                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_llm_contract_v5995.py:50:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+messages = [{'role': 'system', 'content': 'fixture\n\nIDENTIDADE CENTRAL DO ASSISTENTE\nSeu nome oficial é Luccas Trawman. Nas co...rguntas sobre você e sobre a Vexx AI; não bloqueia\npesquisas legítimas sobre outras empresas, marcas ou produtos.\n'}]
+timeout = 20
+
+    def write(messages, timeout):
+        if parar.is_set():
+            return ''
+        bounded = dict(cfg, fallbacks=[])
+        messages = [dict(m) for m in messages]
+        messages[0]['content'] = system_with_identity(messages[0]['content'])
+        result = gerar_texto(bounded, messages, max_tokens=1800, timeout=min(25, timeout))
+        write.last_metadata = {k:result[k] for k in ('finish_reason','usage','truncada','latencia_s') if k in result}
+        if result.get('truncada') or result.get('finish_reason') == 'length':
+>           raise research_synthesis.ModelOutputError('model_truncated')
+                  ^^^^^^^^^^^^^^^^^^
+E           NameError: name 'research_synthesis' is not defined
+
+pc_agent.py:4559: NameError
+=========================== short test summary info ===========================
+FAILED tests/test_evidence_reliability_v5995.py::test_causal_heading_retains_partial_with_literal_context_only
+FAILED tests/test_evidence_reliability_v5995.py::test_explicit_explanation_survives_options_and_keeps_offsets
+FAILED tests/test_llm_contract_v5995.py::test_research_writer_rejects_transport_truncation_without_retry
+3 failed, 112 passed in 25.82s

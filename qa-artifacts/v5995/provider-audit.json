@@ -1,0 +1,1547 @@
+{
+  "scope": "NONRANDOM_BOUNDED_COMPARISON_NOT_GLOBAL_PROVIDER_ACCURACY",
+  "rows": [
+    {
+      "provider": "ddg",
+      "query": "Natura fundadores produtos",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "state": "PROVIDER_ERROR",
+      "error_code": "bloqueado",
+      "seconds": 0.354,
+      "transport": [
+        {
+          "url": "https://html.duckduckgo.com/html/",
+          "parameters": {
+            "q": "Natura fundadores produtos"
+          },
+          "http_status": 202
+        }
+      ],
+      "body_hashes": [
+        {
+          "url": "https://html.duckduckgo.com/html/",
+          "chars": 14262,
+          "sha256": "6a21a0bd78c8fad1ba36a3463b71fec3b1549d5c2be4b50aaf4bec1430524294"
+        }
+      ],
+      "audit": [
+        {
+          "original_query": "Natura fundadores produtos",
+          "adapter_query": "Natura fundadores produtos",
+          "provider": "ddg",
+          "at": "2026-10-25T20:28:21.279772+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "http_status": null,
+          "error_code": "bloqueado",
+          "result_count": 0,
+          "classification": "PROVIDER_BLOCKED",
+          "requests": [],
+          "latency_ms": 353.63,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Natura fundadores produtos",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "Natura Brasil | Perfumaria, maquiagem e muito mais",
+          "url": "https://www.natura.com.br/",
+          "snippet": "NATURA &CO PAY SOCIEDADE DE CRÉDITO DIRETO S.A (CNPJ/MF nº 48.805.820/0001-87) atua em parceria com a Natura Cosméticos S.A. (CNPJ 50.190.316/0001-48), que figura como sua correspondente bancária no país, nos termos da Resolução CMN nº 4.935, de 29 de julho de 2021.",
+          "kind": "pagina",
+          "published_at": "sáb., 24 out. 2026 18:25:00 GMT"
+        },
+        {
+          "rank": 2,
+          "title": "Acesso Consultor | Natura Brasil",
+          "url": "https://www.natura.com.br/acesso-consultor",
+          "snippet": "Acesse nossa área exclusiva para consultores Natura. Aqui, você pode gerenciar seu negócio, fazer pedidos e obter acesso a recursos e suporte exclusivos.",
+          "kind": "pagina",
+          "published_at": "dom., 25 out. 2026 15:39:00 GMT"
+        },
+        {
+          "rank": 3,
+          "title": "Login",
+          "url": "https://pedidos.natura.net/captaweb/",
+          "snippet": "Access Natura services by logging in securely.",
+          "kind": "pagina",
+          "published_at": "sáb., 24 out. 2026 19:29:00 GMT"
+        },
+        {
+          "rank": 4,
+          "title": "Login - Natura",
+          "url": "https://accounts.natura.com/csc",
+          "snippet": "Página de carregamento da Natura para acesso a serviços e informações exclusivas.",
+          "kind": "pagina",
+          "published_at": "dom., 25 out. 2026 15:25:00 GMT"
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 0.42,
+      "transport": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "Natura fundadores produtos",
+            "format": "rss",
+            "count": "4",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [
+        {
+          "url": "https://www.bing.com/search",
+          "chars": 4606,
+          "sha256": "e4ce4067aebf5a227b75efcdbacef3ee1a57e65f97ba0dc784b196c4191e4d42"
+        }
+      ],
+      "audit": [
+        {
+          "original_query": "Natura fundadores produtos",
+          "adapter_query": "Natura fundadores produtos",
+          "provider": "bing",
+          "at": "2026-10-25T20:28:21.652954+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 4,
+          "results": [
+            {
+              "title": "Natura Brasil | Perfumaria, maquiagem e muito mais",
+              "url": "https://www.natura.com.br/"
+            },
+            {
+              "title": "Acesso Consultor | Natura Brasil",
+              "url": "https://www.natura.com.br/acesso-consultor"
+            },
+            {
+              "title": "Login",
+              "url": "https://pedidos.natura.net/captaweb/"
+            },
+            {
+              "title": "Login - Natura",
+              "url": "https://accounts.natura.com/csc"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://www.bing.com/search",
+              "parameters": {
+                "q": "Natura fundadores produtos",
+                "format": "rss",
+                "count": "4",
+                "setlang": "pt-BR",
+                "cc": "BR"
+              },
+              "http_status": null,
+              "final_url": "https://www.bing.com/search",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 419.92,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "Natura fundadores produtos",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "state": "PROVIDER_ERROR",
+      "error_code": "vazio",
+      "seconds": 0.926,
+      "transport": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "Natura fundadores produtos"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "chars": 1027,
+          "sha256": "c340f1cb0ad46c59c0f7e5f1c6e5a8114cac2ce7a212b48a819657a47c763296"
+        }
+      ],
+      "audit": [
+        {
+          "original_query": "Natura fundadores produtos",
+          "adapter_query": "Natura fundadores produtos",
+          "provider": "marginalia",
+          "at": "2026-10-25T20:28:22.073867+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "http_status": null,
+          "error_code": "vazio",
+          "result_count": 0,
+          "classification": "PROVIDER_EMPTY",
+          "requests": [
+            {
+              "url": "https://old-search.marginalia.nu/search",
+              "parameters": {
+                "query": "Natura fundadores produtos"
+              },
+              "http_status": null,
+              "final_url": "https://old-search.marginalia.nu/search",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 925.71,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "wikipedia",
+      "query": "Natura fundadores produtos",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "state": "PROVIDER_ERROR",
+      "error_code": "vazio",
+      "seconds": 0.542,
+      "transport": [
+        {
+          "url": "https://pt.wikipedia.org/w/api.php",
+          "parameters": {
+            "action": "opensearch",
+            "search": "Natura fundadores produtos",
+            "format": "json"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "Natura fundadores produtos",
+          "adapter_query": "Natura fundadores produtos",
+          "provider": "wikipedia",
+          "at": "2026-10-25T20:28:23.001688+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "http_status": null,
+          "error_code": "vazio",
+          "result_count": 0,
+          "classification": "PROVIDER_EMPTY",
+          "requests": [],
+          "latency_ms": 542.39,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "ddg",
+      "query": "Object.assign JavaScript reference",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "state": "PROVIDER_ERROR",
+      "error_code": "bloqueado",
+      "seconds": 0.0,
+      "transport": [],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "Object.assign JavaScript reference",
+          "adapter_query": "Object.assign JavaScript reference",
+          "provider": "ddg",
+          "at": "2026-10-25T20:28:23.546015+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "http_status": null,
+          "error_code": "bloqueado",
+          "result_count": 0,
+          "classification": "PROVIDER_BLOCKED",
+          "requests": [],
+          "latency_ms": 0.1,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "Object.assign JavaScript reference",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "Object - JavaScript | MDN - MDN Web Docs",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object",
+          "snippet": "Todos os objetos em JavaScript são descendentes do Object; todos os objetos herdam métodos e propriedades de Object, embora eles possam ser substituídos. Por exemplo, protótipos de outros construtores substituem a propriedade constructor e fornecer seus próprios métodos toString ",
+          "kind": "pagina",
+          "published_at": "sáb., 24 out. 2026 02:33:00 GMT"
+        },
+        {
+          "rank": 2,
+          "title": ".OBJECT® - Women's fashion | Official online shop",
+          "url": "https://www.objectci.com/",
+          "snippet": "Quality fashion for women at .OBJECT! Explore our latest collections and upgrade your wardrobe. Shop online Get 10% off your first order as a member",
+          "kind": "pagina",
+          "published_at": "dom., 25 out. 2026 11:43:00 GMT"
+        },
+        {
+          "rank": 3,
+          "title": "Object - JavaScript | MDN - MDN Web Docs",
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+          "snippet": "The Object type represents one of JavaScript's data types. It is used to store various keyed collections and more complex entities. Objects can be created using the Object () constructor or the object initializer / literal syntax.",
+          "kind": "pagina",
+          "published_at": "qua., 21 out. 2026 21:56:00 GMT"
+        },
+        {
+          "rank": 4,
+          "title": "OBJECT | tradução de inglês para português - Cambridge Dictionary",
+          "url": "https://dictionary.cambridge.org/pt/dicionario/ingles-portugues/object",
+          "snippet": "Some verbs (often called transitive verbs) need an object to complete their meaning. Some verbs (often called intransitive verbs) do not take an object. Some verbs need both a direct object and an indirect object. Some verbs can take a wh-clause or a that-clause as an object. …",
+          "kind": "pagina",
+          "published_at": "qui., 27 ago. 2026 22:47:00 GMT"
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 0.419,
+      "transport": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "Object.assign JavaScript reference",
+            "format": "rss",
+            "count": "4",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [
+        {
+          "url": "https://www.bing.com/search",
+          "chars": 5395,
+          "sha256": "aa787292440d4f71f2443fa966f1a578339c3b9f2dede65d5ea4db64883513ca"
+        }
+      ],
+      "audit": [
+        {
+          "original_query": "Object.assign JavaScript reference",
+          "adapter_query": "Object.assign JavaScript reference",
+          "provider": "bing",
+          "at": "2026-10-25T20:28:23.547666+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 4,
+          "results": [
+            {
+              "title": "Object - JavaScript | MDN - MDN Web Docs",
+              "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object"
+            },
+            {
+              "title": ".OBJECT® - Women's fashion | Official online shop",
+              "url": "https://www.objectci.com/"
+            },
+            {
+              "title": "Object - JavaScript | MDN - MDN Web Docs",
+              "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"
+            },
+            {
+              "title": "OBJECT | tradução de inglês para português - Cambridge Dictionary",
+              "url": "https://dictionary.cambridge.org/pt/dicionario/ingles-portugues/object"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://www.bing.com/search",
+              "parameters": {
+                "q": "Object.assign JavaScript reference",
+                "format": "rss",
+                "count": "4",
+                "setlang": "pt-BR",
+                "cc": "BR"
+              },
+              "http_status": null,
+              "final_url": "https://www.bing.com/search",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 419.06,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "Object.assign JavaScript reference",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "state": "PROVIDER_ERROR",
+      "error_code": "vazio",
+      "seconds": 1.002,
+      "transport": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "Object.assign JavaScript reference"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "chars": 1043,
+          "sha256": "d49e66b191816e6ea72260d68f639f0a1e9412b3d52904ee9c9b1d62644cae06"
+        }
+      ],
+      "audit": [
+        {
+          "original_query": "Object.assign JavaScript reference",
+          "adapter_query": "Object.assign JavaScript reference",
+          "provider": "marginalia",
+          "at": "2026-10-25T20:28:23.968498+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "http_status": null,
+          "error_code": "vazio",
+          "result_count": 0,
+          "classification": "PROVIDER_EMPTY",
+          "requests": [
+            {
+              "url": "https://old-search.marginalia.nu/search",
+              "parameters": {
+                "query": "Object.assign JavaScript reference"
+              },
+              "http_status": null,
+              "final_url": "https://old-search.marginalia.nu/search",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 1002.23,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "wikipedia",
+      "query": "Object.assign JavaScript reference",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "state": "PROVIDER_ERROR",
+      "error_code": "vazio",
+      "seconds": 0.714,
+      "transport": [
+        {
+          "url": "https://pt.wikipedia.org/w/api.php",
+          "parameters": {
+            "action": "opensearch",
+            "search": "Object.assign JavaScript reference",
+            "format": "json"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "Object.assign JavaScript reference",
+          "adapter_query": "Object.assign JavaScript reference",
+          "provider": "wikipedia",
+          "at": "2026-10-25T20:28:24.973059+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "http_status": null,
+          "error_code": "vazio",
+          "result_count": 0,
+          "classification": "PROVIDER_EMPTY",
+          "requests": [],
+          "latency_ms": 713.94,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "ddg",
+      "query": "notícias Guanambi Bahia saúde",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "state": "PROVIDER_ERROR",
+      "error_code": "bloqueado",
+      "seconds": 0.0,
+      "transport": [],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "notícias Guanambi Bahia saúde",
+          "adapter_query": "notícias Guanambi Bahia saúde",
+          "provider": "ddg",
+          "at": "2026-10-25T20:28:25.689129+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "http_status": null,
+          "error_code": "bloqueado",
+          "result_count": 0,
+          "classification": "PROVIDER_BLOCKED",
+          "requests": [],
+          "latency_ms": 0.08,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "bing",
+      "query": "notícias Guanambi Bahia saúde",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "g1 - O portal de notícias da Globo",
+          "url": "https://g1.globo.com/",
+          "snippet": "Últimas notícias do Brasil e do mundo, sobre política, economia, emprego, educação, saúde, meio ambiente, tecnologia, ciência, cultura e carros.",
+          "kind": "pagina",
+          "published_at": "dom., 25 out. 2026 16:58:00 GMT"
+        },
+        {
+          "rank": 2,
+          "title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+          "url": "https://www.cnnbrasil.com.br/",
+          "snippet": "Pense bem, pense CNN - Notícias ao vivo, fatos da política nacional e internacional no maior canal de notícias do mundo!",
+          "kind": "pagina",
+          "published_at": "dom., 25 out. 2026 15:32:00 GMT"
+        },
+        {
+          "rank": 3,
+          "title": "Google Notícias",
+          "url": "https://news.google.com/home",
+          "snippet": "Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias.",
+          "kind": "pagina",
+          "published_at": "dom., 25 out. 2026 16:50:00 GMT"
+        },
+        {
+          "rank": 4,
+          "title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+          "url": "https://www.terra.com.br/noticias/",
+          "snippet": "Acompanhe as últimas notícias e acontecimentos relevantes de cidades do Brasil e do mundo. Fique por dentro dos principais assuntos no Terra.",
+          "kind": "pagina",
+          "published_at": "dom., 25 out. 2026 16:36:00 GMT"
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 0.68,
+      "transport": [
+        {
+          "url": "https://www.bing.com/search",
+          "parameters": {
+            "q": "notícias Guanambi Bahia saúde",
+            "format": "rss",
+            "count": "4",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [
+        {
+          "url": "https://www.bing.com/search",
+          "chars": 3333,
+          "sha256": "6417dba13da1ea73a0d089ce0652b4351ddcbfdfe4ea3cb0ee2423ab9bc178dc"
+        }
+      ],
+      "audit": [
+        {
+          "original_query": "notícias Guanambi Bahia saúde",
+          "adapter_query": "notícias Guanambi Bahia saúde",
+          "provider": "bing",
+          "at": "2026-10-25T20:28:25.698656+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 4,
+          "results": [
+            {
+              "title": "g1 - O portal de notícias da Globo",
+              "url": "https://g1.globo.com/"
+            },
+            {
+              "title": "CNN Brasil | Notícias Ao Vivo do Brasil e do Mundo",
+              "url": "https://www.cnnbrasil.com.br/"
+            },
+            {
+              "title": "Google Notícias",
+              "url": "https://news.google.com/home"
+            },
+            {
+              "title": "Terra Notícias: Brasil, Mundo, Cidades, Política, Clima",
+              "url": "https://www.terra.com.br/noticias/"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://www.bing.com/search",
+              "parameters": {
+                "q": "notícias Guanambi Bahia saúde",
+                "format": "rss",
+                "count": "4",
+                "setlang": "pt-BR",
+                "cc": "BR"
+              },
+              "http_status": null,
+              "final_url": "https://www.bing.com/search",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 679.44,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "marginalia",
+      "query": "notícias Guanambi Bahia saúde",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "CC-BY-SA 4.0",
+          "url": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "snippet": "",
+          "kind": "pagina",
+          "published_at": null
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 1.304,
+      "transport": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "parameters": {
+            "query": "notícias Guanambi Bahia saúde"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [
+        {
+          "url": "https://old-search.marginalia.nu/search",
+          "chars": 16215,
+          "sha256": "4a6cff3ae8f0bd6c44598d58816ccc3c2016d1aebbbe60a3a7635013e33a8e4c"
+        }
+      ],
+      "audit": [
+        {
+          "original_query": "notícias Guanambi Bahia saúde",
+          "adapter_query": "notícias Guanambi Bahia saúde",
+          "provider": "marginalia",
+          "at": "2026-10-25T20:28:26.377443+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 1,
+          "results": [
+            {
+              "title": "CC-BY-SA 4.0",
+              "url": "https://creativecommons.org/licenses/by-sa/4.0/"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://old-search.marginalia.nu/search",
+              "parameters": {
+                "query": "notícias Guanambi Bahia saúde"
+              },
+              "http_status": null,
+              "final_url": "https://old-search.marginalia.nu/search",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 1302.94,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "wikipedia",
+      "query": "notícias Guanambi Bahia saúde",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "state": "PROVIDER_ERROR",
+      "error_code": "vazio",
+      "seconds": 0.732,
+      "transport": [
+        {
+          "url": "https://pt.wikipedia.org/w/api.php",
+          "parameters": {
+            "action": "opensearch",
+            "search": "notícias Guanambi Bahia saúde",
+            "format": "json"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "notícias Guanambi Bahia saúde",
+          "adapter_query": "notícias Guanambi Bahia saúde",
+          "provider": "wikipedia",
+          "at": "2026-10-25T20:28:27.684174+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "http_status": null,
+          "error_code": "vazio",
+          "result_count": 0,
+          "classification": "PROVIDER_EMPTY",
+          "requests": [],
+          "latency_ms": 732.1,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "bing-news",
+      "query": "notícias Guanambi Bahia saúde",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "state": "PROVIDER_ERROR",
+      "error_code": "vazio",
+      "seconds": 0.632,
+      "transport": [
+        {
+          "url": "https://www.bing.com/news/search",
+          "parameters": {
+            "q": "notícias Guanambi Bahia saúde",
+            "format": "rss",
+            "count": "4",
+            "setlang": "pt-BR",
+            "cc": "BR"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [
+        {
+          "url": "https://www.bing.com/news/search",
+          "chars": 2633,
+          "sha256": "834beab807568ee2bf9b9041765c0577caaf8ea176e2700af7da94b4948a7551"
+        }
+      ],
+      "audit": [
+        {
+          "original_query": "notícias Guanambi Bahia saúde",
+          "adapter_query": "notícias Guanambi Bahia saúde",
+          "provider": "bing-news",
+          "at": "2026-10-25T20:28:28.419061+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "http_status": null,
+          "error_code": "vazio",
+          "result_count": 0,
+          "classification": "PROVIDER_EMPTY",
+          "requests": [
+            {
+              "url": "https://www.bing.com/news/search",
+              "parameters": {
+                "q": "notícias Guanambi Bahia saúde",
+                "format": "rss",
+                "count": "4",
+                "setlang": "pt-BR",
+                "cc": "BR"
+              },
+              "http_status": null,
+              "final_url": "https://www.bing.com/news/search",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 632.16,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "google-news",
+      "query": "notícias Guanambi Bahia saúde",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "TCM concede 120 dias para Guanambi regularizar contratos temporários na saúde e educação - Achei Sudoeste",
+          "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQaGp5bWN2blZJR285OVJrNTlVdFBlYVY1RXloOG03TERiWlQ2OEgyck42d20wcDh4NlQweVRaODFmWC11THpMY2tWbmpTa1RBWXRRZkdaQ2kwLXBlYVIwQkc1bnRJTG1TdEwySFNrSVJNTHI1cTItT3k0cXg3Vk5XbjFDRF9iUnY4TUJ1S0RiMDNhdVZGb2ltODh4cWV5Q3EzcGNXOGJnQWh1b21EYlZ3djA3ZHptQXg5SUtKZDR5WW9iemNrM0NTZ05FaldrUldFZXZpMmF3",
+          "snippet": "TCM concede 120 dias para Guanambi regularizar contratos temporários na saúde e educação Achei Sudoeste",
+          "kind": "noticia",
+          "published_at": "Fri, 11 Sep 2026 07:00:00 GMT"
+        },
+        {
+          "rank": 2,
+          "title": "Guanambi receberá CAPS e Centro Especializado em Reabilitação com investimento de R$ 20 milhões - Sudoeste Bahia",
+          "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQNGx3ZmNBNlQtNXFfcHRVQ3NlWWRSWU5aUVhJZDNQSE1ZRkp5Wk9oNFFUaTVkdjJ1SWJUVk1FWHpndmNmUmRQMndNZmNvdTVPTXdaMmdJQ2hHNFZrRVpCenVpVG9oYTRwaHZEU3M4bnJ4LVZjOUV3NlAwbDhCd3MtZW5qcm5TWmRRX0tmXzBHa1NFYXBBN1pWeEx0LXdUeGdvRHFKNHFwTDd6V29yam5FbHd3UVlfcEY4TmxLbWpnb2ZxQk5na0xtNFRVT2ctcEpOV2RJUFdWS3h6Zw",
+          "snippet": "Guanambi receberá CAPS e Centro Especializado em Reabilitação com investimento de R$ 20 milhões Sudoeste Bahia",
+          "kind": "noticia",
+          "published_at": "Mon, 20 Jul 2026 07:00:00 GMT"
+        },
+        {
+          "rank": 3,
+          "title": "ACM Neto apresenta propostas para ampliar atendimento de saúde no interior da Bahia - G1",
+          "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQeW1kYktmcVVNNTctTWtBTk80aXF5a3VrNUF6UzhYdURWdXduVnNTUTNqVjZaeTNXdFZaTTIwT3hDVGdiSEhOSGNNZGJ4T0pXVF9PS3dQUktNRGhVd2Ribm41U0tnNlpfb1NlMmpzWlpITFN1dFBhTjR2Zk5ZQzFLNGRwMzBrLVpkRnRlWVJQRnVMQWYyYTV3alpOcmZkdklI0gGvAUFVX3lxTE9oNGdVXzlKb3pqM1pkR0J3SWF2Ulh3dTEwck1jcGMxcXlwTWN6VnFCOXdhWG1uSDFXQXVYWVdnSGtPa1g4WlNmM2R1WDU3eFlfR3BoYWRZTlNpc0RMdVdUZThrdXpNNURfdmIxWFZseU9rZWdCSjUyYXdGNVFrSENNVnBIbkFBWmg4dWRGc2tCUjNaNTRaV1JNeTRTU0JNN0xqd3JRSDFNc09GSUJoVVk",
+          "snippet": "ACM Neto apresenta propostas para ampliar atendimento de saúde no interior da Bahia G1",
+          "kind": "noticia",
+          "published_at": "Mon, 14 Sep 2026 07:00:00 GMT"
+        },
+        {
+          "rank": 4,
+          "title": "Governador Jerônimo amplia Hospital Geral de Guanambi e anuncia novos investimentos em saúde, água e infraestrutura - Jornal Grande Bahia",
+          "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPdnN3WVZnOF93cWJCUWhQV3luczI1MHpoNjRIY2JNVzYzVldWSHRmLXNmWVIyeEd5dkRrWGVPRVZ4TW5CM3Q1TkYxYlFRYmNDQTl2VVlXenJ4YklMMTFQYlkzLTYyMXc2RTdkZHUxM0tybmJURE5hWEdlRy1EWG5PY1FlZDQ4TmRySks3eDdhdzRDSndrSmxramY4N19DNDRzaUttSGtuNnNQdDFHYUNVSVYwQ2xtZm50UGJwUWxWUlFOQjAwQktBSnVYRDU3c3cyVV92TkYyQXZtcnpCOUJiTGhKWE90cjJOUFo5Vg",
+          "snippet": "Governador Jerônimo amplia Hospital Geral de Guanambi e anuncia novos investimentos em saúde, água e infraestrutura Jornal Grande Bahia",
+          "kind": "noticia",
+          "published_at": "Thu, 14 May 2026 07:00:00 GMT"
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 1.699,
+      "transport": [
+        {
+          "url": "https://news.google.com/rss/search",
+          "parameters": {
+            "q": "notícias Guanambi Bahia saúde",
+            "hl": "pt-BR",
+            "gl": "BR",
+            "ceid": "BR:pt-419"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [
+        {
+          "url": "https://news.google.com/rss/search",
+          "chars": 122016,
+          "sha256": "d45a31508dea06b53f2c93da295afc11a1b6ab2c4f6ff0cdaf48625c49580780"
+        }
+      ],
+      "audit": [
+        {
+          "original_query": "notícias Guanambi Bahia saúde",
+          "adapter_query": "notícias Guanambi Bahia saúde",
+          "provider": "google-news",
+          "at": "2026-10-25T20:28:29.053939+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 4,
+          "results": [
+            {
+              "title": "TCM concede 120 dias para Guanambi regularizar contratos temporários na saúde e educação - Achei Sudoeste",
+              "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQaGp5bWN2blZJR285OVJrNTlVdFBlYVY1RXloOG03TERiWlQ2OEgyck42d20wcDh4NlQweVRaODFmWC11THpMY2tWbmpTa1RBWXRRZkdaQ2kwLXBlYVIwQkc1bnRJTG1TdEwySFNrSVJNTHI1cTItT3k0cXg3Vk5XbjFDRF9iUnY4TUJ1S0RiMDNhdVZGb2ltODh4cWV5Q3EzcGNXOGJnQWh1b21EYlZ3djA3ZHptQXg5SUtKZDR5WW9iemNrM0NTZ05FaldrUldFZXZpMmF3"
+            },
+            {
+              "title": "Guanambi receberá CAPS e Centro Especializado em Reabilitação com investimento de R$ 20 milhões - Sudoeste Bahia",
+              "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQNGx3ZmNBNlQtNXFfcHRVQ3NlWWRSWU5aUVhJZDNQSE1ZRkp5Wk9oNFFUaTVkdjJ1SWJUVk1FWHpndmNmUmRQMndNZmNvdTVPTXdaMmdJQ2hHNFZrRVpCenVpVG9oYTRwaHZEU3M4bnJ4LVZjOUV3NlAwbDhCd3MtZW5qcm5TWmRRX0tmXzBHa1NFYXBBN1pWeEx0LXdUeGdvRHFKNHFwTDd6V29yam5FbHd3UVlfcEY4TmxLbWpnb2ZxQk5na0xtNFRVT2ctcEpOV2RJUFdWS3h6Zw"
+            },
+            {
+              "title": "ACM Neto apresenta propostas para ampliar atendimento de saúde no interior da Bahia - G1",
+              "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQeW1kYktmcVVNNTctTWtBTk80aXF5a3VrNUF6UzhYdURWdXduVnNTUTNqVjZaeTNXdFZaTTIwT3hDVGdiSEhOSGNNZGJ4T0pXVF9PS3dQUktNRGhVd2Ribm41U0tnNlpfb1NlMmpzWlpITFN1dFBhTjR2Zk5ZQzFLNGRwMzBrLVpkRnRlWVJQRnVMQWYyYTV3alpOcmZkdklI0gGvAUFVX3lxTE9oNGdVXzlKb3pqM1pkR0J3SWF2Ulh3dTEwck1jcGMxcXlwTWN6VnFCOXdhWG1uSDFXQXVYWVdnSGtPa1g4WlNmM2R1WDU3eFlfR3BoYWRZTlNpc0RMdVdUZThrdXpNNURfdmIxWFZseU9rZWdCSjUyYXdGNVFrSENNVnBIbkFBWmg4dWRGc2tCUjNaNTRaV1JNeTRTU0JNN0xqd3JRSDFNc09GSUJoVVk"
+            },
+            {
+              "title": "Governador Jerônimo amplia Hospital Geral de Guanambi e anuncia novos investimentos em saúde, água e infraestrutura - Jornal Grande Bahia",
+              "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxPdnN3WVZnOF93cWJCUWhQV3luczI1MHpoNjRIY2JNVzYzVldWSHRmLXNmWVIyeEd5dkRrWGVPRVZ4TW5CM3Q1TkYxYlFRYmNDQTl2VVlXenJ4YklMMTFQYlkzLTYyMXc2RTdkZHUxM0tybmJURE5hWEdlRy1EWG5PY1FlZDQ4TmRySks3eDdhdzRDSndrSmxramY4N19DNDRzaUttSGtuNnNQdDFHYUNVSVYwQ2xtZm50UGJwUWxWUlFOQjAwQktBSnVYRDU3c3cyVV92TkYyQXZtcnpCOUJiTGhKWE90cjJOUFo5Vg"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://news.google.com/rss/search",
+              "parameters": {
+                "q": "notícias Guanambi Bahia saúde",
+                "hl": "pt-BR",
+                "gl": "BR",
+                "ceid": "BR:pt-419"
+              },
+              "http_status": null,
+              "final_url": "https://news.google.com/rss/search",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 1698.95,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "stackexchange",
+      "query": "Object.assign JavaScript reference",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "Redux: why using Object.assign if it is not perform deep clone?",
+          "url": "https://stackoverflow.com/questions/46025555/redux-why-using-object-assign-if-it-is-not-perform-deep-clone",
+          "snippet": "One core concept in Redux is, states are immutable . However, I saw many examples, including in Redux docs using javascript Object.assign . Then, I saw this warning in MDN : For deep cloning, we need to use other alterna · respondida · javascript, redux, cloning",
+          "kind": "tecnico",
+          "published_at": null
+        },
+        {
+          "rank": 2,
+          "title": "How are static methods defined on constructor functions in javascript?",
+          "url": "https://stackoverflow.com/questions/68415190/how-are-static-methods-defined-on-constructor-functions-in-javascript",
+          "snippet": "Refer: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object So Object is a constructor function and here I see 2 types of methods defined - Static methods - Object.create(), Object.assi · respondida · javascript, static",
+          "kind": "tecnico",
+          "published_at": null
+        },
+        {
+          "rank": 3,
+          "title": "javascript objects are pushed into array as reference",
+          "url": "https://stackoverflow.com/questions/35282538/javascript-objects-are-pushed-into-array-as-reference",
+          "snippet": "EDIT: I forgot to add, this is for the NODE JS Server side, some answers has the Jquery cloning (does jquery cloning works on the server side, I tried it is throwing error as ReferenceError: jQuery is not defined ). So,  · sem resposta aceita · javascript, node.js, nodes",
+          "kind": "tecnico",
+          "published_at": null
+        },
+        {
+          "rank": 4,
+          "title": "Filter and combine two arrays, matching two fields/columns : Javascript",
+          "url": "https://stackoverflow.com/questions/58398544/filter-and-combine-two-arrays-matching-two-fields-columns-javascript",
+          "snippet": "Using childcare schools - I have two arrays that I need to match on 2 columns of each array: Attendance by Department: [date, dept, attended] 0: (3) [\"09-30-2019\", \"00_Infants\", 22] 1: (3) [\"09-30-2019\", \"01_Ones\", 38] 2 · respondida · javascript, arrays, json, d3.js",
+          "kind": "tecnico",
+          "published_at": null
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 0.847,
+      "transport": [
+        {
+          "url": "https://api.stackexchange.com/2.3/search/advanced",
+          "parameters": {
+            "sort": "relevance",
+            "q": "Object.assign JavaScript reference",
+            "filter": "withbody"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "Object.assign JavaScript reference",
+          "adapter_query": "Object.assign JavaScript reference",
+          "provider": "stackexchange",
+          "at": "2026-10-25T20:28:30.756513+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 4,
+          "results": [
+            {
+              "title": "Redux: why using Object.assign if it is not perform deep clone?",
+              "url": "https://stackoverflow.com/questions/46025555/redux-why-using-object-assign-if-it-is-not-perform-deep-clone"
+            },
+            {
+              "title": "How are static methods defined on constructor functions in javascript?",
+              "url": "https://stackoverflow.com/questions/68415190/how-are-static-methods-defined-on-constructor-functions-in-javascript"
+            },
+            {
+              "title": "javascript objects are pushed into array as reference",
+              "url": "https://stackoverflow.com/questions/35282538/javascript-objects-are-pushed-into-array-as-reference"
+            },
+            {
+              "title": "Filter and combine two arrays, matching two fields/columns : Javascript",
+              "url": "https://stackoverflow.com/questions/58398544/filter-and-combine-two-arrays-matching-two-fields-columns-javascript"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://api.stackexchange.com/2.3/search/advanced",
+              "parameters": {
+                "q": "Object.assign JavaScript reference"
+              },
+              "http_status": null,
+              "final_url": "",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 846.31,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "hn",
+      "query": "Object.assign JavaScript reference",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "state": "PROVIDER_ERROR",
+      "error_code": "vazio",
+      "seconds": 0.772,
+      "transport": [
+        {
+          "url": "https://hn.algolia.com/api/v1/search",
+          "parameters": {
+            "query": "Object.assign JavaScript reference"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "Object.assign JavaScript reference",
+          "adapter_query": "Object.assign JavaScript reference",
+          "provider": "hn",
+          "at": "2026-10-25T20:28:31.605796+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "http_status": null,
+          "error_code": "vazio",
+          "result_count": 0,
+          "classification": "PROVIDER_EMPTY",
+          "requests": [
+            {
+              "url": "https://hn.algolia.com/api/v1/search",
+              "parameters": {
+                "query": "Object.assign JavaScript reference"
+              },
+              "http_status": null,
+              "final_url": "",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 772.09,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "crossref",
+      "query": "photovoltaic energy",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "Effect of photovoltaic energy penetration on photovoltaic–wind renewable energy system",
+          "url": "https://doi.org/10.1680/jnaen.23.00052",
+          "snippet": "India is a tropical country that gets a significant amount of solar irradiation that is suitable for photovoltaic (PV) applications. The country is also endowed with wind energy in its large coastal areas. India is an agro-economic country that has a growing need for irrigation. ",
+          "kind": "academico",
+          "published_at": null
+        },
+        {
+          "rank": 2,
+          "title": "Recent Advances in Photovoltaic Energy Harvesting, Power Optimization, and IoT Technologies for Photovoltaic Systems: A Review",
+          "url": "https://doi.org/10.47191/etj/v11i06.33",
+          "snippet": "Photovoltaic (PV) systems have emerged as a key renewable energy technology due to their sustainability, scalability, and environmental benefits. Recent advances in PV energy harvesting, power electronic control, and Internet of Things (IoT) technologies have significantly enhanc",
+          "kind": "academico",
+          "published_at": null
+        },
+        {
+          "rank": 3,
+          "title": "Mismatch Loss Reduction in Photovoltaic Arrays as a Result of Sorting Photovoltaic Modules by Max-Power Parameters",
+          "url": "https://doi.org/10.1155/2013/327835",
+          "snippet": "Variations in photovoltaic (PV) module current-voltage curves result in a power loss in PV arrays often referred to as mismatch loss (MML). As a means of reducing MML, newly fabricated PV modules are sorted to meet a set tolerance for variation in overall maximum power output wit",
+          "kind": "academico",
+          "published_at": null
+        },
+        {
+          "rank": 4,
+          "title": "Photovoltaic anxiety? Sentiment analysis based on online comments in residential photovoltaic power generation",
+          "url": "https://doi.org/10.1177/29768632261424710",
+          "snippet": "With the advancement of the clean energy transition, residential photovoltaic (PV) power generation has become a key pathway for rural energy transformation and the promotion of rural revitalization. However, some members of the public have cognitive biases and a crisis of trust ",
+          "kind": "academico",
+          "published_at": null
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 1.01,
+      "transport": [
+        {
+          "url": "https://api.crossref.org/works",
+          "parameters": {
+            "filter": "type:journal-article,has-abstract:true"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "photovoltaic energy",
+          "adapter_query": "photovoltaic energy",
+          "provider": "crossref",
+          "at": "2026-10-25T20:28:32.380674+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 4,
+          "results": [
+            {
+              "title": "Effect of photovoltaic energy penetration on photovoltaic–wind renewable energy system",
+              "url": "https://doi.org/10.1680/jnaen.23.00052"
+            },
+            {
+              "title": "Recent Advances in Photovoltaic Energy Harvesting, Power Optimization, and IoT Technologies for Photovoltaic Systems: A Review",
+              "url": "https://doi.org/10.47191/etj/v11i06.33"
+            },
+            {
+              "title": "Mismatch Loss Reduction in Photovoltaic Arrays as a Result of Sorting Photovoltaic Modules by Max-Power Parameters",
+              "url": "https://doi.org/10.1155/2013/327835"
+            },
+            {
+              "title": "Photovoltaic anxiety? Sentiment analysis based on online comments in residential photovoltaic power generation",
+              "url": "https://doi.org/10.1177/29768632261424710"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://api.crossref.org/works",
+              "parameters": {},
+              "http_status": null,
+              "final_url": "",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 1008.58,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "pubmed",
+      "query": "influenza vaccine",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "A phase 3 randomized safety and immunogenicity trial of mRNA-1010 seasonal influenza vaccine in adults.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/39919447/",
+          "snippet": "Vaccine · 2025 Mar 19 · Soens M",
+          "kind": "saude",
+          "published_at": null
+        },
+        {
+          "rank": 2,
+          "title": "Influenza vaccine for 2019-2020.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/31770355/",
+          "snippet": "Med Lett Drugs Ther · 2019 Oct 21",
+          "kind": "saude",
+          "published_at": null
+        },
+        {
+          "rank": 3,
+          "title": "Influenza Vaccine Hesitancy: Scope, Influencing Factors, and Strategic Interventions.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/36841592/",
+          "snippet": "Pediatr Clin North Am · 2023 Apr · Stephens AB",
+          "kind": "saude",
+          "published_at": null
+        },
+        {
+          "rank": 4,
+          "title": "Influenza vaccine shake-up.",
+          "url": "https://pubmed.ncbi.nlm.nih.gov/38000878/",
+          "snippet": "Lancet Infect Dis · 2023 Dec · The Lancet Infectious Diseases",
+          "kind": "saude",
+          "published_at": null
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 1.809,
+      "transport": [
+        {
+          "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+          "parameters": {
+            "term": "influenza vaccine",
+            "sort": "relevance"
+          },
+          "http_status": 200
+        },
+        {
+          "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
+          "parameters": {},
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "influenza vaccine",
+          "adapter_query": "influenza vaccine",
+          "provider": "pubmed",
+          "at": "2026-10-25T20:28:33.394225+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 4,
+          "results": [
+            {
+              "title": "A phase 3 randomized safety and immunogenicity trial of mRNA-1010 seasonal influenza vaccine in adults.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/39919447/"
+            },
+            {
+              "title": "Influenza vaccine for 2019-2020.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/31770355/"
+            },
+            {
+              "title": "Influenza Vaccine Hesitancy: Scope, Influencing Factors, and Strategic Interventions.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/36841592/"
+            },
+            {
+              "title": "Influenza vaccine shake-up.",
+              "url": "https://pubmed.ncbi.nlm.nih.gov/38000878/"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi",
+              "parameters": {
+                "term": "influenza vaccine"
+              },
+              "http_status": null,
+              "final_url": "",
+              "redirected": false
+            },
+            {
+              "url": "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi",
+              "parameters": {},
+              "http_status": null,
+              "final_url": "",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 1808.78,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "openlibrary",
+      "query": "Carolina Maria de Jesus",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "Quarto de Despejo",
+          "url": "https://openlibrary.org/works/OL1810404W",
+          "snippet": "Carolina Maria de Jesus · 1960",
+          "kind": "livro",
+          "published_at": null
+        },
+        {
+          "rank": 2,
+          "title": "Child of the dark",
+          "url": "https://openlibrary.org/works/OL10623266W",
+          "snippet": "Carolina Maria de Jesus · 1962",
+          "kind": "livro",
+          "published_at": null
+        },
+        {
+          "rank": 3,
+          "title": "Casa de alvenaria",
+          "url": "https://openlibrary.org/works/OL32130065W",
+          "snippet": "Carolina Maria de Jesus · 2021",
+          "kind": "livro",
+          "published_at": null
+        },
+        {
+          "rank": 4,
+          "title": "The unedited diaries of Carolina Maria de Jesus",
+          "url": "https://openlibrary.org/works/OL1810401W",
+          "snippet": "Carolina Maria de Jesus · 1998",
+          "kind": "livro",
+          "published_at": null
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 1.205,
+      "transport": [
+        {
+          "url": "https://openlibrary.org/search.json",
+          "parameters": {
+            "q": "Carolina Maria de Jesus"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "Carolina Maria de Jesus",
+          "adapter_query": "Carolina Maria de Jesus",
+          "provider": "openlibrary",
+          "at": "2026-10-25T20:28:35.207008+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 4,
+          "results": [
+            {
+              "title": "Quarto de Despejo",
+              "url": "https://openlibrary.org/works/OL1810404W"
+            },
+            {
+              "title": "Child of the dark",
+              "url": "https://openlibrary.org/works/OL10623266W"
+            },
+            {
+              "title": "Casa de alvenaria",
+              "url": "https://openlibrary.org/works/OL32130065W"
+            },
+            {
+              "title": "The unedited diaries of Carolina Maria de Jesus",
+              "url": "https://openlibrary.org/works/OL1810401W"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://openlibrary.org/search.json",
+              "parameters": {
+                "q": "Carolina Maria de Jesus",
+                "limit": "4"
+              },
+              "http_status": null,
+              "final_url": "",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 1204.53,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "worldbank",
+      "query": "Brazil population",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "Poverty Headcount ($1.90 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd",
+          "snippet": "",
+          "kind": "dados",
+          "published_at": null
+        },
+        {
+          "rank": 2,
+          "title": "Poverty Headcount ($2.50 a day)",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd",
+          "snippet": "",
+          "kind": "dados",
+          "published_at": null
+        },
+        {
+          "rank": 3,
+          "title": "Middle Class ($10-50 a day) Headcount",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50",
+          "snippet": "",
+          "kind": "dados",
+          "published_at": null
+        },
+        {
+          "rank": 4,
+          "title": "Official Moderate Poverty Rate-National",
+          "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl",
+          "snippet": "",
+          "kind": "dados",
+          "published_at": null
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 0.941,
+      "transport": [
+        {
+          "url": "https://api.worldbank.org/v2/indicator",
+          "parameters": {
+            "format": "json",
+            "q": "Brazil population"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "Brazil population",
+          "adapter_query": "Brazil population",
+          "provider": "worldbank",
+          "at": "2026-10-25T20:28:36.418476+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 4,
+          "results": [
+            {
+              "title": "Poverty Headcount ($1.90 a day)",
+              "url": "https://data.worldbank.org/indicator/1.0.HCount.1.90usd"
+            },
+            {
+              "title": "Poverty Headcount ($2.50 a day)",
+              "url": "https://data.worldbank.org/indicator/1.0.HCount.2.5usd"
+            },
+            {
+              "title": "Middle Class ($10-50 a day) Headcount",
+              "url": "https://data.worldbank.org/indicator/1.0.HCount.Mid10to50"
+            },
+            {
+              "title": "Official Moderate Poverty Rate-National",
+              "url": "https://data.worldbank.org/indicator/1.0.HCount.Ofcl"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://api.worldbank.org/v2/indicator",
+              "parameters": {
+                "format": "json",
+                "q": "Brazil population"
+              },
+              "http_status": null,
+              "final_url": "",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 941.24,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "bcb",
+      "query": "cotação dólar real",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "Dólar comercial (PTAX venda) — série SGS 1",
+          "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados",
+          "snippet": "Valor oficial mais recente: 5.0377 em 23/10/2026 (API do Banco Central do Brasil)",
+          "kind": "dados",
+          "published_at": null
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 0.875,
+      "transport": [
+        {
+          "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados/ultimos/4",
+          "parameters": {},
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "cotação dólar real",
+          "adapter_query": "cotação dólar real",
+          "provider": "bcb",
+          "at": "2026-10-25T20:28:37.362793+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 1,
+          "results": [
+            {
+              "title": "Dólar comercial (PTAX venda) — série SGS 1",
+              "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://api.bcb.gov.br/dados/serie/bcdata.sgs.1/dados/ultimos/4",
+              "parameters": {},
+              "http_status": null,
+              "final_url": "",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 875.25,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    },
+    {
+      "provider": "commons",
+      "query": "Jardim Botânico Curitiba",
+      "scope": "LIVE_EXTERNAL_ADAPTER_DISCOVERY_NOT_READ_EVIDENCE",
+      "results": [
+        {
+          "rank": 1,
+          "title": "Estufa principal do Jardim Botânico de Curitiba 02.jpg",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Estufa_principal_do_Jardim_Bot%C3%A2nico_de_Curitiba_02.jpg/960px-Estufa_principal_do_Jardim_Bot%C3%A2nico_de_Curitiba_02.jpg",
+          "snippet": "5039x3456 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Estufa_principal_do_Jardim_Bot%C3%A2nico_de_Curitiba_02.jpg",
+          "kind": "imagem",
+          "published_at": null
+        },
+        {
+          "rank": 2,
+          "title": "Jardim Botânico Fanchette Rischbieter em Curitiba 02.jpg",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_02.jpg/960px-Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_02.jpg",
+          "snippet": "3768x2592 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_02.jpg",
+          "kind": "imagem",
+          "published_at": null
+        },
+        {
+          "rank": 3,
+          "title": "Jardim Botânico Fanchette Rischbieter em Curitiba 09.jpg",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_09.jpg/960px-Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_09.jpg",
+          "snippet": "4969x3456 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_09.jpg",
+          "kind": "imagem",
+          "published_at": null
+        },
+        {
+          "rank": 4,
+          "title": "Jardim Botânico de Curitiba 2323 01.jpg",
+          "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Jardim_Bot%C3%A2nico_de_Curitiba_2323_01.jpg/960px-Jardim_Bot%C3%A2nico_de_Curitiba_2323_01.jpg",
+          "snippet": "8365x7303 · image/jpeg · página: https://commons.wikimedia.org/wiki/File:Jardim_Bot%C3%A2nico_de_Curitiba_2323_01.jpg",
+          "kind": "imagem",
+          "published_at": null
+        }
+      ],
+      "state": "UNJUDGED_DISCOVERY",
+      "seconds": 1.071,
+      "transport": [
+        {
+          "url": "https://commons.wikimedia.org/w/api.php",
+          "parameters": {
+            "action": "query",
+            "format": "json"
+          },
+          "http_status": 200
+        }
+      ],
+      "body_hashes": [],
+      "audit": [
+        {
+          "original_query": "Jardim Botânico Curitiba",
+          "adapter_query": "Jardim Botânico Curitiba",
+          "provider": "commons",
+          "at": "2026-10-25T20:28:38.242030+00:00",
+          "limit": 4,
+          "timeout_seconds": 5,
+          "classification": "UNJUDGED_DISCOVERY",
+          "result_count": 4,
+          "results": [
+            {
+              "title": "Estufa principal do Jardim Botânico de Curitiba 02.jpg",
+              "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2f/Estufa_principal_do_Jardim_Bot%C3%A2nico_de_Curitiba_02.jpg/960px-Estufa_principal_do_Jardim_Bot%C3%A2nico_de_Curitiba_02.jpg"
+            },
+            {
+              "title": "Jardim Botânico Fanchette Rischbieter em Curitiba 02.jpg",
+              "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0b/Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_02.jpg/960px-Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_02.jpg"
+            },
+            {
+              "title": "Jardim Botânico Fanchette Rischbieter em Curitiba 09.jpg",
+              "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_09.jpg/960px-Jardim_Bot%C3%A2nico_Fanchette_Rischbieter_em_Curitiba_09.jpg"
+            },
+            {
+              "title": "Jardim Botânico de Curitiba 2323 01.jpg",
+              "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3f/Jardim_Bot%C3%A2nico_de_Curitiba_2323_01.jpg/960px-Jardim_Bot%C3%A2nico_de_Curitiba_2323_01.jpg"
+            }
+          ],
+          "requests": [
+            {
+              "url": "https://commons.wikimedia.org/w/api.php",
+              "parameters": {
+                "action": "query",
+                "format": "json"
+              },
+              "http_status": null,
+              "final_url": "",
+              "redirected": false
+            }
+          ],
+          "latency_ms": 1070.45,
+          "transport_scope": "observed adapter helpers only; null HTTP status means not exposed, never assumed 200"
+        }
+      ]
+    }
+  ]
+}

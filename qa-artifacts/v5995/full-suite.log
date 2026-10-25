@@ -1,0 +1,73 @@
+........................................................................ [  4%]
+........................................................................ [  8%]
+........................................................................ [ 13%]
+........................................................................ [ 17%]
+......................................................s................. [ 22%]
+........................................................................ [ 26%]
+........................................................................ [ 30%]
+........................................................................ [ 35%]
+........................................................................ [ 39%]
+........................................................................ [ 44%]
+...F.................................................................... [ 48%]
+........................................................................ [ 53%]
+......................s................................................. [ 57%]
+........................................................................ [ 61%]
+........................................................................ [ 66%]
+........................................................................ [ 70%]
+..........................s..........s.................................. [ 75%]
+........................................................................ [ 79%]
+........................................................................ [ 83%]
+........................................................................ [ 88%]
+........................................................................ [ 92%]
+........................................................................ [ 97%]
+.............................................                            [100%]
+================================== FAILURES ===================================
+_______ test_irrelevant_academic_metadata_does_not_trigger_pdf_download _______
+
+tmp_path = WindowsPath('C:/Users/efrai/AppData/Local/Temp/pytest-of-efrai/pytest-495/test_irrelevant_academic_metad0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000196E03BF230>
+
+    def test_irrelevant_academic_metadata_does_not_trigger_pdf_download(tmp_path,monkeypatch):
+        db=pc_agent.open_db(tmp_path/'pdf-filter.sqlite3')
+        monkeypatch.setattr(research,'_recuperar_um',lambda *a:pytest.fail('irrelevant PDF must not be downloaded'))
+>       r=research.pesquisa_rapida(db,'qa','Pesquise estudos científicos sobre Quantum optical methods',buscar_fn=lambda q:[{**paper(),'titulo':'História da jardinagem','abstract':'Jardins e flores','trecho':'Jardins e flores'}])
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_precision_v593.py:192:
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+research.py:1196: in pesquisa_rapida
+    recs[a["url"]] = fut.result()
+                     ^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:443: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\_base.py:395: in __get_result
+    raise self._exception
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py:86: in run
+    result = ctx.run(self.task)
+             ^^^^^^^^^^^^^^^^^^
+..\..\..\AppData\Local\Python\pythoncore-3.14-64\Lib\concurrent\futures\thread.py:73: in run
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+a = ({'title': 'Quantum optical test methods', 'titulo': 'História da jardinagem', 'url': 'https://example.org/paper', 'pdf_url': 'https://example.org/paper.pdf', ...}, None, 6.0, 'Pesquise estudos científicos sobre Quantum optical methods')
+
+>   monkeypatch.setattr(research,'_recuperar_um',lambda *a:pytest.fail('irrelevant PDF must not be downloaded'))
+                                                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: irrelevant PDF must not be downloaded
+
+tests\test_precision_v593.py:191: Failed
+============================== warnings summary ===============================
+tests/test_remoto.py::test_captura_jpeg_real
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\vexx-v598-dev\remoto.py:114: DeprecationWarning: mss.mss is deprecated and will be removed in a future release; use mss.MSS instead
+    with mss.mss() as s:
+
+tests/test_research_agents.py::test_sse_entrega_ordenada_com_replay_e_fechamento
+  C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\.venv\Lib\site-packages\httpx2\_client.py:1113: StarletteDeprecationWarning: You should not use the 'timeout' argument with the TestClient. See https://github.com/Kludex/starlette/issues/1108 for more information.
+    return self.request(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_precision_v593.py::test_irrelevant_academic_metadata_does_not_trigger_pdf_download
+1 failed, 1624 passed, 4 skipped, 2 warnings in 267.88s (0:04:27)
