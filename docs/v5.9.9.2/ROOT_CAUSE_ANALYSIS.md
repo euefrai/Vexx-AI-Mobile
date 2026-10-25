@@ -26,3 +26,7 @@ Primeira falha é a primeira causa demonstrável no trace, não uma hipótese so
 ## Limites e cortes
 
 O pool do orquestrador corta após ranking e a pesquisa rápida corta novamente em doze; feeds e resultados genéricos podem esconder candidatos posteriores. Seleção V5991 já prioriza originais entre os doze e não será reimplementada. A correção precisa preservar oportunidades antes desse corte e registrar IDs/omissões. Metadados ausentes não proíbem leitura; incompatibilidades confirmadas não viram evidência. Territorialidade do acontecimento, publicação versus atualização e ausência de evento continuam limites concretos, não justificativa para afrouxar validação.
+
+## Resultado após as correções
+
+Em `accepted-diagnostic`, os doze antigos passaram de zero para cinco flags de leitura elegível, distribuídos em três casos (Rio Branco, museu, WEG). O original do publicador foi recuperado no caso Acre. Isso não significa cinco respostas completas ou cinco fontes primárias. A janela histórica da WEG foi confirmada no card real, mas continua Wikipédia. O novo conjunto independente não demonstrou ganho consistente: ver `HOLDOUT_EVALUATION.md`. Esta matriz identifica causas diagnosticadas, não certifica resolução universal das doze classes.

@@ -1,8 +1,11 @@
-# V5.9.9.2 — andamento
+# V5.9.9.2 — fechamento local, 2026-10-25
 
-- Objetivo: fontes específicas realmente lidas e entregues ao chat; contagem de testes não decide publicação.
-- Base confirmada: `4d13807`, branch `codex/v598-autonomous-research`; código rastreado limpo. Artefatos antigos de CLI não pertencem à entrega.
-- Escopo: desenvolvimento isolado, sem push/deploy/reinício/alteração de dados reais. Identidade, Studio, VERY, extensão e 3D preservados.
-- Concluído: leitura do pedido, matriz causal histórica dos doze casos, congelamento de quinze consultas novas e instrumentação com trechos públicos. Baselines em execução antes de qualquer alteração do motor.
-- Próximo: corrigir planejamento temático e cortes de candidatos, testar restrições/negativos, congelar código; só então abrir resultados novos. Em seguida E2E autenticado com SQLite temporário, Chrome real e auditoria operacional somente leitura.
-- Aceitação: comparar mesmas perguntas e orçamentos; avaliar trechos independentemente dos flags do motor; distinguir mídia, descoberta, leitura e síntese; nenhuma promessa de cobertura universal.
+- **Não aprovada para publicar.** Correções implementadas e testadas; cobertura nova continua insuficiente. Sem push/deploy/reinício/alteração de produção.
+- Base `4d13807`, branch `codex/v598-autonomous-research`. Holdout de quinze congelado em `2c6a324`; motor final `ad16f21` antes da inspeção. Código final `1ce380a`, proteção de saída motivada pelo QA, sem ajuste posterior da recuperação usando o holdout aberto.
+- Antigos doze: flags elegíveis 0→5 em três casos. Históricos vinte: 13→12 em sete casos. Novos quinze: 2→2; leitura dos trechos encontrou 0→1 caso parcialmente útil. Metadados de mídia separados; sem recall absoluto, precisão global ou inferência completa aprovada.
+- Suíte final: **1556 passed, 4 skipped, 2 warnings**, 438,98 s; focados de proteção/síntese 53 passed. Search 34/34, Shopping 59/59, Experience 16/16. Falhas intermediárias e baseline original com uma falha preservados, não omitidos.
+- QA real: WEG com janela literal de fundação, documentação oficial, galeria Commons, SSE, cancelamento e persistência. Chrome 1280/390/320, CSS200%, modal/teclado/foco/reload, IndexedDB e downloads MD/CSV executados. Tabelas de resposta real e todos os estados vazios não foram verificados visualmente nesta rodada.
+- Modelo gratuito gerou texto parcial em execuções anteriores, uma saída com controles de direção/código malformado. Proteção implementada; tentativa real final terminou em timeout sem resposta final. O painel pós-timeout foi capturado cedo demais e não comprova persistência visual de suas evidências. Sem nova tentativa seletiva para obter um passe.
+- QA descartável encerrado e bancos temporários removidos, comprovados em `qa-cleanup-delivery.json` e `qa-cleanup-safety.json`. Produção apenas observada, sem stop. Um processo legado visto; revisão carregada/jobs/competição não atestados.
+- Relatório: `RELATORIO_VEXX_AI_V5.9.9.2_DISCOVERY_INTELLIGENCE.md`; índice de evidências em `qa-artifacts/v5992/README.md`. Logs privados de runtime, cookies e SQLite não serão versionados. Artefatos antigos de CLI não pertencem a esta entrega.
+- **Próximo passo exato:** usar o holdout aberto só como diagnóstico, congelar outro antes de otimizar, separar entidade/atributos em pedidos compostos, detectar resposta externa que ignora o assunto e recuperar links específicos legitimamente descobertos. Repetir comparação real e síntese pública completa mantendo filtros, limites e segurança. Não liberar como Research Ultra com base na contagem de testes.
