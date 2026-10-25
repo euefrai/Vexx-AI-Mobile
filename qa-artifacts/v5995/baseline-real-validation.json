@@ -1,0 +1,185 @@
+{
+  "scope": "REAL_PUBLIC_SHORT_SAMPLES_MODEL_ANNOTATED_EXPLORATORY_NOT_HUMAN_GOLD",
+  "milliseconds": 37.36,
+  "aggregate": {
+    "n": 6,
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "tn": 4,
+    "precision": null,
+    "recall": 0.0,
+    "f1": 0.0,
+    "false_positive_rate": 0.0,
+    "false_negative_rate": 1.0,
+    "partial_support_recall": 0.0,
+    "direct_support_precision": null,
+    "incorrectly_promoted_partials": 0,
+    "requirement_coverage": 0.0,
+    "confusion": {
+      "DIRECT_SUPPORT -> REJECTED": 1,
+      "WRONG_ATTRIBUTE -> REJECTED": 1,
+      "WRONG_ENTITY -> REJECTED": 1,
+      "TOPIC_ONLY -> REJECTED": 1,
+      "INSUFFICIENT_CONTEXT -> REJECTED": 1,
+      "PARTIAL_SUPPORT -> REJECTED": 1
+    }
+  },
+  "categories": {
+    "culture": {
+      "n": 2,
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "tn": 1,
+      "precision": null,
+      "recall": 0.0,
+      "f1": 0.0,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": 1.0,
+      "partial_support_recall": null,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": 0.0,
+      "confusion": {
+        "DIRECT_SUPPORT -> REJECTED": 1,
+        "WRONG_ATTRIBUTE -> REJECTED": 1
+      }
+    },
+    "events": {
+      "n": 1,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": null,
+      "partial_support_recall": null,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": null,
+      "confusion": {
+        "TOPIC_ONLY -> REJECTED": 1
+      }
+    },
+    "news": {
+      "n": 1,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": null,
+      "partial_support_recall": null,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": null,
+      "confusion": {
+        "INSUFFICIENT_CONTEXT -> REJECTED": 1
+      }
+    },
+    "places": {
+      "n": 1,
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "tn": 0,
+      "precision": null,
+      "recall": 0.0,
+      "f1": 0.0,
+      "false_positive_rate": null,
+      "false_negative_rate": 1.0,
+      "partial_support_recall": 0.0,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": null,
+      "confusion": {
+        "PARTIAL_SUPPORT -> REJECTED": 1
+      }
+    },
+    "services": {
+      "n": 1,
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "tn": 1,
+      "precision": null,
+      "recall": null,
+      "f1": null,
+      "false_positive_rate": 0.0,
+      "false_negative_rate": null,
+      "partial_support_recall": null,
+      "direct_support_precision": null,
+      "incorrectly_promoted_partials": 0,
+      "requirement_coverage": null,
+      "confusion": {
+        "WRONG_ENTITY -> REJECTED": 1
+      }
+    }
+  },
+  "decisions": [
+    {
+      "id": "real-10",
+      "domain": "culture",
+      "gold": "DIRECT_SUPPORT",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "real-11",
+      "domain": "culture",
+      "gold": "WRONG_ATTRIBUTE",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "real-12",
+      "domain": "services",
+      "gold": "WRONG_ENTITY",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "real-13",
+      "domain": "events",
+      "gold": "TOPIC_ONLY",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "real-14",
+      "domain": "news",
+      "gold": "INSUFFICIENT_CONTEXT",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    },
+    {
+      "id": "real-15",
+      "domain": "places",
+      "gold": "PARTIAL_SUPPORT",
+      "prediction": "REJECTED",
+      "retained": false,
+      "complete": false
+    }
+  ],
+  "split": "VALIDATION",
+  "annotation_states": [
+    "MODEL_PROPOSED"
+  ],
+  "limitations": [
+    "Same agent annotation/review; no independent human gold.",
+    "Requirement supplied explicitly: parsing/discovery are separate.",
+    "Binary retention metrics do not certify all rejection labels or population accuracy."
+  ]
+}
