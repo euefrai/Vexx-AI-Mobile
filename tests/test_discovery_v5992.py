@@ -7,6 +7,7 @@ import query_intelligence as qi
 import research
 import search_orchestrator as orch
 import search_providers as sp
+from test_research_parallel_reading import research_job
 
 
 def test_news_today_uses_request_calendar_at_utc_midnight_boundary():
@@ -76,6 +77,32 @@ def test_entity_retry_follows_observed_mismatch_instead_of_collective_word_cover
 def test_news_and_comparison_operations_are_not_part_of_entity_names():
     assert qi.topic_profile('Notícias de Ubatã Bahia')['entities'][0]['name'] == 'Ubatã Bahia'
     assert [e['name'] for e in qi.topic_profile('Compare FastAPI e Django')['entities']] == ['FastAPI', 'Django']
+    assert not qi.topic_profile('Compare autonomia dos modelos A e B')['entities']
+
+
+def test_deep_document_gate_uses_actual_read_content_scope(research_job):
+    import research_agents as ra
+    db, job = research_job
+    job['objetivo'] = 'Relatório público PDF desmatamento Amazônia INPE'
+    hit = {'url': 'https://publisher.example/index', 'titulo': job['objetivo']}
+    def read(url):
+        return {'titulo': job['objetivo'], 'texto': job['objetivo'] * 10, 'texto_lido': True, 'content_scope': 'page_text'}
+    assert not ra.agente_analista(db, job, {'alvo': job['objetivo']}, [hit], read, teto_paginas=1)
+
+
+def test_history_evidence_preserves_founding_information_instead_of_source_notice(research_job):
+    import research_agents as ra
+    db, job = research_job
+    job['objetivo'] = 'História da empresa Aurora fontes primárias'
+    notice = ('Aurora história empresa fontes primárias. Edite a página e inclua fontes. ' * 30)
+    fact = 'A empresa Aurora foi fundada em 1978. Sua fundação iniciou a produção industrial.'
+    text = notice + fact
+    def read(url):
+        return {'titulo': 'História da Aurora', 'texto': text, 'trecho_usado': notice[:300], 'texto_lido': True}
+    evidence = ra.agente_analista(db, job, {'alvo': job['objetivo']},
+        [{'url': 'https://publisher.example/history', 'titulo': 'História da Aurora'}], read, teto_paginas=1)
+    assert len(evidence) == 1 and '1978' in evidence[0]['trecho']
+    assert evidence[0]['trecho'] in text and len(evidence[0]['trecho']) <= 1500
 
 
 def test_recovered_original_after_twelve_survives_both_reservoir_cuts():

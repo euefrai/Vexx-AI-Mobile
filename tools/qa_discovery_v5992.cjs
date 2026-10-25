@@ -1,4 +1,11 @@
 async page => {
+  if (!page.url().startsWith('http://127.0.0.1:')) throw Error('Disposable localhost QA only');
+  if (await page.locator('#loginOverlay').isVisible()) {
+    await page.getByRole('textbox', {name: 'Usuário', exact: true}).fill('alice');
+    await page.getByRole('textbox', {name: 'Senha', exact: true}).fill('qa-password-long-5981');
+    await page.getByRole('button', {name: 'Entrar ↗', exact: true}).click();
+    await page.locator('#loginOverlay').waitFor({state: 'hidden'});
+  }
   const cases = [
     ['museum', 'Pesquisa profunda sobre a história do Museu do Amanhã fontes oficiais e data de inauguração.'],
     ['company', 'Pesquisa profunda sobre a história da empresa WEG fontes primárias.'],

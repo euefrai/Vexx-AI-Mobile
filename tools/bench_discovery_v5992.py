@@ -11,13 +11,23 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 
-def probe(case):
+def probe(case, reference=None):
     import research
     import search_providers as sp
     import search_orchestrator as orch
+    import query_intelligence as qi
+    from datetime import datetime
     from tools.bench_universal_v599 import probe as existing_probe
     responses, extracts, orchestration = [], [], []
     search, extract, orchestrate = sp.buscar, research._recuperar_um, orch.pesquisar_com_recuperacao
+    analyze = qi.analyze
+    if reference:
+        if reference.get('query') != case['query']:
+            raise ValueError('Reference question differs from frozen dataset')
+        anchor = (reference.get('request') or {}).get('resolved_at')
+        if anchor:
+            clock = datetime.fromisoformat(anchor)
+            qi.analyze = lambda text, now=None, timezone_name='America/Bahia': analyze(text, now or clock, timezone_name)
 
     def observe_search(name, query, *args, **kwargs):
         items = search(name, query, *args, **kwargs)
@@ -38,9 +48,11 @@ def probe(case):
     try:
         row = existing_probe(case)
         row.update(provider_responses=responses, extractions=extracts, orchestration=orchestration)
+        row['request_clock_reference'] = (reference.get('request') or {}).get('resolved_at') if reference else None
         return row
     finally:
         sp.buscar, research._recuperar_um, orch.pesquisar_com_recuperacao = search, extract, orchestrate
+        qi.analyze = analyze
 
 
 def main():
@@ -51,10 +63,12 @@ def main():
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--case')
     parser.add_argument('--sealed', action='store_true', help='Do not print individual results')
+    parser.add_argument('--reference-dir', type=Path, help='Use the baseline request clock, never alter frozen questions')
     args = parser.parse_args()
     cases = json.loads(args.dataset.read_text(encoding='utf-8'))[args.key]
     if args.case:
-        row = probe(next(c for c in cases if c['id'] == args.case))
+        reference = json.loads((args.reference_dir / (args.case + '.json')).read_text(encoding='utf-8')) if args.reference_dir else None
+        row = probe(next(c for c in cases if c['id'] == args.case), reference)
         row['source_revision'] = subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True, cwd=ROOT).strip()
         row['dataset_sha256'] = hashlib.sha256(args.dataset.read_bytes()).hexdigest()
         print(json.dumps(row, ensure_ascii=False))
@@ -64,6 +78,8 @@ def main():
     for case in cases:
         command = [sys.executable, __file__, '--live', '--dataset', str(args.dataset), '--key', args.key,
                    '--output', str(args.output), '--case', case['id']]
+        if args.reference_dir:
+            command += ['--reference-dir', str(args.reference_dir)]
         try:
             child = subprocess.run(command, capture_output=True, timeout=65, encoding='utf-8', cwd=ROOT,
                                    env={**os.environ, 'PYTHONIOENCODING': 'utf-8'})

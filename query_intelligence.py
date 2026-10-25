@@ -53,6 +53,8 @@ def topic_profile(text):
     entities = []
     for m in re.finditer(r'\b(?:[A-ZÀ-Ý][\w-]*)(?:(?:\s+(?:de|do|da|dos|das))?\s+[A-ZÀ-Ý][\w-]*)*', value):
         name = re.sub(r'^(?:Not[ií]cias|Compare|Pesquisa|Pesquise|Fontes|Documenta[cç][aã]o)\s+(?:(?:de|do|da|sobre|em)\s+)?', '', m[0])
+        if normalized(name) in ('compare', 'noticias', 'pesquisa', 'pesquise', 'fontes', 'documentacao'):
+            continue
         if name.upper() in ('PDF', 'API', 'GB', 'BRL', 'USD') or len(name) < 3:
             continue
         kind = ('product_model' if re.search(r'[A-Za-z]+-?\d', name) else

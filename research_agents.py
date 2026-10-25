@@ -979,6 +979,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
     def _candidato(a, rec):
         return {**a, 'titulo': rec.get('titulo') or a.get('titulo', ''),
                 'trecho': rec.get('texto') or '',
+                'content_scope': rec.get('content_scope') or a.get('content_scope', 'page_text'),
                 'texto_lido': bool(rec.get('texto_lido')),
                 'structured': (rec.get('metadados') or {}).get('structured', []),
                 'publicado_em': (rec.get('metadados') or {}).get('publicado_em')
@@ -988,7 +989,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         candidate = _candidato(a, rec)
         if orch._context_mismatch(candidate,job['objetivo']):
             return False
-        if request['domain'] in ('news', 'events', 'air_travel', 'bus_travel'):
+        if request['domain'] in ('news', 'events', 'air_travel', 'bus_travel', 'documents'):
             if not search_verticals.assess(request, candidate)['eligible']:
                 return False
         return not termos_pedido or orch._util_para_pedido(candidate, termos_pedido, subject)
@@ -1168,6 +1169,17 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                    "Fonte aberta sem correspondência demonstrável com o pedido; não usada como evidência.", {})
             continue
         trecho_fonte = str(rec.get("trecho_usado") or "").strip()
+        history_field = re.search(r'\b(funda[cç][aã]o|fundad[ao]|fundadores?|inaugura[cç][aã]o|inaugurad[ao]|founded)\b', texto, re.I)
+        if not academic and re.search(r'\bhist[oó]ria\b', job['objetivo'], re.I) and history_field:
+            # Generic source-request words can otherwise pick a maintenance
+            # notice instead of the requested founding/history information.
+            start = max(0, history_field.start() - 80)
+            while start and not texto[start - 1].isspace():
+                start -= 1
+            end = min(len(texto), start + 1500)
+            while end < len(texto) and end > start and not texto[end].isspace():
+                end -= 1
+            trecho_fonte = texto[start:end].strip()
         if not trecho_fonte:
             trecho_fonte = texto[:1500] or str(a.get("trecho") or "")
         fonte = {"id": a.get("id", ""), "url": a["url"],
