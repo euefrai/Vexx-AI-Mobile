@@ -182,3 +182,10 @@ def test_new_research_and_another_chat_cannot_intervene_in_previous_job(tmp_path
     assert 'rj-fixture' in response and captured[0]['objetivo'].endswith('sem preços históricos')
     assert len(captured[0]['objetivo'])>200
     db.close()
+
+
+def test_text_research_without_read_sources_does_not_present_metadata_as_gallery():
+    import research_view
+    view=research_view.build_view({'objetivo':QUESTION,'midia':[{'type':'image','url':'https://example.org/logo.jpg',
+        'title':'WEG logo','source_url':'https://example.org/','analysis_state':'not_analyzed'}]})
+    assert not any(b.get('component')=='media' for b in view['blocks'])

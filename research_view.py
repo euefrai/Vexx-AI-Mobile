@@ -299,7 +299,7 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
     # Promote actual result content before diagnostic/export controls. Different
     # intents use their existing components, without inventing empty cards.
     media_intent=bool(re.search(r'\b(imagens?|fotos?|v[ií]deos?)\b',resumo.get('objetivo',''),re.I))
-    if source_items and not media_intent:
+    if not media_intent:
         # Keep all discovery metadata in the job/export, but do not turn a
         # paper's navigation/references into a second gallery of unread files.
         candidatos=[entry for entry in candidatos if entry[0]!='media']
