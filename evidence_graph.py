@@ -55,9 +55,14 @@ def _passage_support(req, passage, source):
     or semantic truth model, and an unresolved relation remains unconfirmed.
     """
     import query_intelligence as qi
+    from web_extract import passage_role
+    # Re-evaluate the literal role; stored/model-supplied labels are not proof.
+    if passage_role(passage['text']) in ('QUESTION_TEXT','ANSWER_OPTION','UNKNOWN_CORRECTNESS'):
+        return None
     entity=_canonical_operation(req['entity']).strip(' .?!')
     anchor=re.compile(r'(?<![\w.])'+re.escape(entity)+r'(?!\w|\.\w)')
     text=qi.normalized(passage['text'])
+    text=re.sub(r'^(?:explicacao|comentario|justificativa|resposta correta|gabarito)\s*[:—-]\s*','',text)
     attribute=req['attribute']
     relation_rx=_ANSWER_RELATIONS.get(attribute)
     if not entity or not relation_rx:return None
@@ -71,6 +76,20 @@ def _passage_support(req, passage, source):
         text=re.sub(alias,lambda _:entity,text)
     clauses=re.split(r'(?<=[!?;])\s+|(?<=[.])\s+(?=[a-z])|\n+',text)
     previous=''; partial_found=False
+    if attribute in ('causes','consequences'):
+        heading = r'(?:principais\s+)?'+('causas?' if attribute=='causes' else 'consequencias?')
+        scoped = re.match(heading+r'\s+(?:de|da|do)\s+'+re.escape(entity)+r'\s*:\s*(.+)',text,re.S)
+        if scoped and re.search(relation_rx,scoped[1]) and not re.search(
+                r'\b(?:nao|nunca|not|never|talvez|hipotese)\b',scoped[1]):
+            # A heading supplies useful scope, but the local subject may still
+            # be implicit. Preserve as partial, never claim complete coverage.
+            partial_found=True
+    if qualified and anchor.search(_canonical_operation(source.get('titulo') or '')):
+        leaf=entity.split('.')[-1]
+        for clause in clauses:
+            if re.match(r'(?:the\s+)?'+re.escape(leaf)+r'\s*\([^)]*\)\s*(?:method\s+)?',clause) and re.search(relation_rx,clause):
+                if not re.search(r'\b\w+(?:\.\w+)+',clause) and not re.search(r'\b(?:not|never|nao|nunca)\b',clause):
+                    partial_found=True
     for clause in clauses:
         if not clause.strip():continue
         if attribute=='causes':

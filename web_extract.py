@@ -268,7 +268,7 @@ def _paragrafos(no: "_No") -> list:
         ignorar = dentro_ignorada or n.tag in _IGNORAR
         if not ignorar and n.tag in _BLOCO:
             txt = _texto_bloco_inline(n)
-            if len(txt) >= 25:
+            if len(txt) >= 25 or (n.tag in ('h1','h2','h3','h4','h5','h6') and txt):
                 saida.append((n.tag, txt[:1200]))
         for f in n.filhos:
             _anda(f, ignorar)
@@ -614,6 +614,26 @@ def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
     return melhor or janela_literal(0)
 
 
+_EXERCISE_BOUNDARY = re.compile(
+    r'(?<!\w)(?:resposta correta|gabarito|explica[çc][aã]o|coment[aá]rio|justificativa)\s*[:—-]'
+    r'|(?<!\w)(?:assinale|marque|escolha)\s+a\s+alternativa', re.I)
+
+
+def passage_role(text):
+    """Observable document role, never infer which multiple-choice option wins."""
+    value = str(text or '').strip()
+    options = re.search(r'(?:^|(?<=[\s.!?:]))[a-e]\s*[).]\s+', value, re.I)
+    if options:
+        return 'UNKNOWN_CORRECTNESS' if re.search(r'\bgabarito\b|resposta correta', value, re.I) else 'ANSWER_OPTION'
+    if re.match(r'(?:assinale|marque|escolha)\s+a\s+alternativa', value, re.I):
+        return 'QUESTION_TEXT'
+    if re.match(r'(?:resposta correta|gabarito)\s*[:—-]', value, re.I):
+        return 'CORRECT_ANSWER'
+    if re.match(r'(?:explica[çc][aã]o|coment[aá]rio|justificativa)\s*[:—-]', value, re.I):
+        return 'EXPLANATION'
+    return 'PROSE'
+
+
 def passage_candidates(texto, source_url='', sections=None, limit=40):
     """Literal spans in the returned extraction, never offsets in HTML/PDF bytes."""
     import hashlib
@@ -621,7 +641,13 @@ def passage_candidates(texto, source_url='', sections=None, limit=40):
     out, start = [], 0
     while start < len(text) and len(out) < limit:
         end = min(len(text), start + 1100)
-        if end < len(text):
+        # Separate answer explanations from unkeyed options, even when an HTML
+        # extractor flattened paragraph separators. Offsets remain literal.
+        boundary = next((m.start() for m in _EXERCISE_BOUNDARY.finditer(text,start,end)
+                         if m.start()>start and text[start:m.start()].strip()), None)
+        if boundary is not None:
+            end = boundary
+        elif end < len(text):
             # Prefer complete paragraphs/sentences; never split decimal/unit tokens.
             stops = list(re.finditer(r'\n\s*\n|(?<=\w[.!?])\s+(?=[A-ZÀ-Ý])', text[start:end]))
             if stops and stops[-1].start() >= 280:
@@ -639,7 +665,7 @@ def passage_candidates(texto, source_url='', sections=None, limit=40):
             section = next((s for s in (sections or [])[:12] if isinstance(s, dict)
                             and str(s.get('texto') or '') and chunk in str(s['texto'])), {})
             out.append({'id': 'P-' + hashlib.sha256((source_url+'|'+str(lo)+'|'+chunk).encode()).hexdigest()[:16],
-                        'source_url': source_url, 'text': chunk, 'text_span': {'start': lo, 'end': hi,
+                        'source_url': source_url, 'text': chunk, 'source_role': passage_role(chunk), 'text_span': {'start': lo, 'end': hi,
                         'scope': 'returned_extracted_text'}, 'section': str(section.get('titulo') or '')[:160],
                         **({'page': section['pagina']} if isinstance(section.get('pagina'), int) else {})})
         start = end

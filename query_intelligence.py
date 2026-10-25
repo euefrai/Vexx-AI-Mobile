@@ -58,11 +58,12 @@ def answer_requirements(text):
     if match:
         subject = re.split(r'\s+(?:em que|quando|e quais)\b', match[1], flags=re.I)[0]
     else:
-        subject = re.sub(r'^(?:quais (?:foram|s[aã]o) as?\s+|as?\s+)?(?:causas? e (?:as?\s+)?consequ[eê]ncias?)\s+(?:de|do|da)\s+', '', subject, flags=re.I)
+        subject = re.sub(r'^(?:quais\s+(?:(?:foram|s[aã]o)\s+)?as?\s+|as?\s+)?(?:causas? e (?:as?\s+)?consequ[eê]ncias?)\s+(?:de|do|da)\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:como (?:usar|utilizar|funciona)|qual [eé] (?:o peso|a bateria) (?:de|do|da))\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:documenta[cç][aã]o\s+(?:oficial\s+)?|hist[oó]ria\s+(?:de|do|da)\s+(?:empresa\s+)?)', '', subject, flags=re.I)
         subject = re.split(r'[,?]|\s+(?:causas?|consequ[eê]ncias?|limita[cç][oõ]es|documenta[cç][aã]o|exemplos?|sintaxe|comportamento|peso|bateria|fontes?\s+oficiais)\b', subject, maxsplit=1, flags=re.I)[0]
-    operations=re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*){2,}',original)
+    operations=re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+',original) if set(facets)&{'syntax','behavior','examples','limitations'} else []
+    operations=[op for op in operations if op[0].isupper() or re.search(re.escape(op)+r'\s*\(',original)]
     if len(set(operations))==1:
         subject=operations[0]
     subject = re.sub(r'^(?:o|a|os|as)\s+', '', subject.strip(' .?!'), flags=re.I)[:180]
