@@ -140,12 +140,28 @@ def test_gate_agente_permite_grant_e_local(tmp_path, monkeypatch):
     db.close()
 
 
-def test_screen_input_via_agente_fake():
+def test_screen_input_via_agente_fake(monkeypatch):
+    # Exercise the real revocation handshake even when the suite takes >60s.
+    # A fake agent must answer control messages before screen/input commands.
+    monkeypatch.setattr(server, 'revogados', {'sids': set(), 'ts': 0.0, 'suportado': True, 'falhas': 0})
     with TestClient(server.app) as client:
         csrf = _login(client)
         with client.websocket_connect("/api/agent/ws",
                                       headers={"Authorization": "Bearer " + os.environ["JULIA_AGENT_TOKEN"]}) as ws:
             out = {}
+            revocation_checks = []
+
+            def receber_comando(expected):
+                for _ in range(4):
+                    message = ws.receive_json()
+                    if message['type'] == 'sess_revogados':
+                        assert message.get('request_id')
+                        revocation_checks.append(message['request_id'])
+                        ws.send_json({'request_id': message['request_id'], 'type': 'sess_revogados', 'sids': []})
+                        continue
+                    assert message['type'] == expected
+                    return message
+                pytest.fail('Revocation control messages did not lead to the requested command')
 
             def tela():
                 out["s"] = client.get("/api/screen?max_w=800&q=50",
@@ -153,7 +169,7 @@ def test_screen_input_via_agente_fake():
 
             t = threading.Thread(target=tela)
             t.start()
-            req = ws.receive_json()
+            req = receber_comando('screen')
             assert req["type"] == "screen" and req["max_w"] == 800
             ws.send_json({"request_id": req["request_id"], "type": "screen",
                           "imagem": "abc", "largura": 800, "altura": 450,
@@ -167,7 +183,7 @@ def test_screen_input_via_agente_fake():
 
             t = threading.Thread(target=cmd)
             t.start()
-            req = ws.receive_json()
+            req = receber_comando('input')
             ws.send_json({"request_id": req["request_id"], "type": "input_done", "kind": "click"})
             t.join(timeout=8)
             assert out["i"].json() == {"ok": True, "kind": "click"}
@@ -178,8 +194,9 @@ def test_screen_input_via_agente_fake():
 
             t = threading.Thread(target=negado)
             t.start()
-            req = ws.receive_json()
+            req = receber_comando('input')
             ws.send_json({"request_id": req["request_id"], "type": "input_error",
                           "error": "Controle desativado", "codigo": "desativado"})
             t.join(timeout=8)
             assert out["n"].status_code == 503
+            assert revocation_checks

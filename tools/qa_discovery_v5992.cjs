@@ -11,7 +11,8 @@ async page => {
     ['company', 'Pesquisa profunda sobre a história da empresa WEG fontes primárias.'],
     ['technical', 'Pesquisa profunda sobre asyncio.TaskGroup documentação oficial exemplos e limitações.'],
     ['images', 'Pesquise imagens da Ponte Estaiada de São Paulo.'],
-    ['cancel', 'Pesquisa profunda sobre tecnologias de armazenamento de energia e limitações.']
+    ['cancel', 'Pesquisa profunda sobre tecnologias de armazenamento de energia e limitações.'],
+    ['focused-technical', 'Pesquisa profunda sobre como usar asyncio.TaskGroup na documentação oficial.']
   ];
   const index = await page.evaluate(() => Number(sessionStorage.getItem('v5992-next') || 0));
   if (index >= cases.length) return {complete: true};
