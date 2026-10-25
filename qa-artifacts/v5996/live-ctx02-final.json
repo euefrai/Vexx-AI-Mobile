@@ -1,0 +1,444 @@
+{
+  "scope": "LIVE_RETRIEVAL_NO_MODEL_NO_UI_NO_INDEPENDENT_GOLD",
+  "baseline_planner_modules": null,
+  "dataset_sha256": "2747ed5433901f080d0696657756144b458f792d6c707ab5bcb939333ec9b317",
+  "case": {
+    "id": "ctx-02",
+    "query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?"
+  },
+  "provider_calls": [
+    {
+      "provider": "ddg",
+      "query": "Bosch Fundadores",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Bosch Data de fundação",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "Bosch Produtos",
+      "candidates": 0
+    },
+    {
+      "provider": "searxng",
+      "query": "Bosch Produtos",
+      "candidates": 0
+    },
+    {
+      "provider": "wikipedia",
+      "query": "Bosch Produtos",
+      "candidates": 0
+    },
+    {
+      "provider": "web",
+      "query": "Bosch Produtos",
+      "candidates": 6
+    }
+  ],
+  "trace": [
+    {
+      "candidate_ref": "7bf3019b3ed29bfea779d06c84d837a1a39baaf1fd5eef246c4d5ff2a51d16c1",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "7401d2928279ffbb6ce744cde46ab6272f10afd2d11d9284c27200cf3e082bd8",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "b003e4796f72982d815106b8317e485ad2f047d10e5bd3daf07c90b725617862",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "b3dd8638c01af9296dbcadec68058e96fbd29ae7ed5e6e23196569400784b2ea",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "b003e4796f72982d815106b8317e485ad2f047d10e5bd3daf07c90b725617862",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 269,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "c1b8f880d21bae94dfb09da6b16548eea10b213ca53f6160c369a754526d2fc6",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "7bf3019b3ed29bfea779d06c84d837a1a39baaf1fd5eef246c4d5ff2a51d16c1",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 6082,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "4a4d0d0322733c67fa579916b9a5a63b2dda728f960ce39e4c90126572f870b2",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "7401d2928279ffbb6ce744cde46ab6272f10afd2d11d9284c27200cf3e082bd8",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 7307,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "783d3c3c3734e910fd8f7f8f1efb6a056a9fe3906910f50f394a0474398d7c3c",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "b3dd8638c01af9296dbcadec68058e96fbd29ae7ed5e6e23196569400784b2ea",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 7998,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "5c08384ac5a913bc00ae2d8861183701b114e9d0c744e327b234db0d22753e45",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "783d3c3c3734e910fd8f7f8f1efb6a056a9fe3906910f50f394a0474398d7c3c",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "FETCH_FAILED",
+      "slot_charged": false,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "c1b8f880d21bae94dfb09da6b16548eea10b213ca53f6160c369a754526d2fc6",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 1523,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "4a4d0d0322733c67fa579916b9a5a63b2dda728f960ce39e4c90126572f870b2",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 929,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "5c08384ac5a913bc00ae2d8861183701b114e9d0c744e327b234db0d22753e45",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 864,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "7bf3019b3ed29bfea779d06c84d837a1a39baaf1fd5eef246c4d5ff2a51d16c1",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "RELEVANCE_REJECTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 6082,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "7401d2928279ffbb6ce744cde46ab6272f10afd2d11d9284c27200cf3e082bd8",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "RELEVANCE_REJECTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 7307,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "b003e4796f72982d815106b8317e485ad2f047d10e5bd3daf07c90b725617862",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "RELEVANCE_REJECTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 269,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "b3dd8638c01af9296dbcadec68058e96fbd29ae7ed5e6e23196569400784b2ea",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "RELEVANCE_REJECTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 7998,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "c1b8f880d21bae94dfb09da6b16548eea10b213ca53f6160c369a754526d2fc6",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "RELEVANCE_REJECTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 1523,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "4a4d0d0322733c67fa579916b9a5a63b2dda728f960ce39e4c90126572f870b2",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "RELEVANCE_REJECTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 929,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "5c08384ac5a913bc00ae2d8861183701b114e9d0c744e327b234db0d22753e45",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+      "state": "RELEVANCE_REJECTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 864,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "7401d2928279ffbb6ce744cde46ab6272f10afd2d11d9284c27200cf3e082bd8",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "b003e4796f72982d815106b8317e485ad2f047d10e5bd3daf07c90b725617862",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "e97bf0d11f55b6b40aaf1b93f8f4faa5b8a4e9deb969ecdd415216619b21c132",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "ae3faf85c2141baa8db91982519d8c74ef9c3421cee7119b0ff969809a368e10",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "SELECTED",
+      "slot_charged": true,
+      "read": false,
+      "extracted_chars": 0,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "b003e4796f72982d815106b8317e485ad2f047d10e5bd3daf07c90b725617862",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 269,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "e97bf0d11f55b6b40aaf1b93f8f4faa5b8a4e9deb969ecdd415216619b21c132",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 6154,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "7401d2928279ffbb6ce744cde46ab6272f10afd2d11d9284c27200cf3e082bd8",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 7307,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "ae3faf85c2141baa8db91982519d8c74ef9c3421cee7119b0ff969809a368e10",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "CONTENT_EXTRACTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 327,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "7401d2928279ffbb6ce744cde46ab6272f10afd2d11d9284c27200cf3e082bd8",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "RELEVANCE_REJECTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 7307,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "b003e4796f72982d815106b8317e485ad2f047d10e5bd3daf07c90b725617862",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "PASSAGE_NOT_FOUND",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 269,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "e97bf0d11f55b6b40aaf1b93f8f4faa5b8a4e9deb969ecdd415216619b21c132",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "RELEVANCE_REJECTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 6154,
+      "http_status": null,
+      "response_bytes": null
+    },
+    {
+      "candidate_ref": "ae3faf85c2141baa8db91982519d8c74ef9c3421cee7119b0ff969809a368e10",
+      "job_ref": "de2ade07454128d573d925040f5c522a0e9fe2289d89019a5d6afe06479a8a6e",
+      "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+      "state": "RELEVANCE_REJECTED",
+      "slot_charged": false,
+      "read": true,
+      "extracted_chars": 327,
+      "http_status": null,
+      "response_bytes": null
+    }
+  ],
+  "budget_used": {
+    "buscas": 3,
+    "paginas": 12,
+    "replans": 0
+  },
+  "read_evidence_count": 0,
+  "evidence_count": 0,
+  "status": "interrompida",
+  "outcome": {
+    "state": "partial",
+    "unresolved_fronts": [],
+    "source_authority_unverified": false,
+    "provider_code": "",
+    "read_sources": 0,
+    "reason": "evidências insuficientes ou limitações remanescentes"
+  }
+}

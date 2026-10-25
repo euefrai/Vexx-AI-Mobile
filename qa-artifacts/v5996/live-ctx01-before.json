@@ -1,0 +1,58 @@
+{
+  "scope": "LIVE_RETRIEVAL_NO_MODEL_NO_UI_NO_INDEPENDENT_GOLD",
+  "baseline_planner_modules": "39644ca",
+  "dataset_sha256": "2747ed5433901f080d0696657756144b458f792d6c707ab5bcb939333ec9b317",
+  "case": {
+    "id": "ctx-01",
+    "query": "Como usar Math.hypot, qual a sintaxe e o valor retornado?"
+  },
+  "provider_calls": [
+    {
+      "provider": "ddg",
+      "query": "como usar math.hypot",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "qual sintaxe",
+      "candidates": 6
+    },
+    {
+      "provider": "ddg",
+      "query": "valor retornado",
+      "candidates": 0
+    },
+    {
+      "provider": "searxng",
+      "query": "valor retornado",
+      "candidates": 0
+    },
+    {
+      "provider": "wikipedia",
+      "query": "valor retornado",
+      "candidates": 0
+    },
+    {
+      "provider": "web",
+      "query": "valor retornado",
+      "candidates": 12
+    }
+  ],
+  "trace": [],
+  "budget_used": {
+    "buscas": 3,
+    "paginas": 12,
+    "replans": 0
+  },
+  "read_evidence_count": 4,
+  "evidence_count": 4,
+  "status": "concluida",
+  "outcome": {
+    "state": "partial",
+    "unresolved_fronts": [],
+    "source_authority_unverified": false,
+    "provider_code": "",
+    "read_sources": 4,
+    "reason": "evidências insuficientes ou limitações remanescentes"
+  }
+}
