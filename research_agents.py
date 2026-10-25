@@ -1895,6 +1895,12 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                 salvar_job(db, job)
                 _save_context_checkpoint(db, job)
                 return _resumo(db, job)
+        if not (job.get('sintese') or {}).get('texto'):
+            # Budget/dependency exits can skip planned final steps. A completed
+            # read still deserves an extractive, persisted result without an LLM.
+            durable = todas_evid or _evidencias_job(db,job)
+            job['sintese'] = agente_sintetizador(db,job,durable,vereditos)
+            job['auditoria'] = agente_auditor(db,job,job['sintese'],durable)
         job["status"] = "concluida" if not job["pendencias"] or todas_evid else \
             ("concluida" if todas_evid else "interrompida")
         if job["status"] == "interrompida" and not job["pendencias"]:

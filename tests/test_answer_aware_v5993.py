@@ -189,3 +189,19 @@ def test_text_research_without_read_sources_does_not_present_metadata_as_gallery
     view=research_view.build_view({'objetivo':QUESTION,'midia':[{'type':'image','url':'https://example.org/logo.jpg',
         'title':'WEG logo','source_url':'https://example.org/','analysis_state':'not_analyzed'}]})
     assert not any(b.get('component')=='media' for b in view['blocks'])
+
+
+def test_extractive_result_survives_skipped_final_steps_and_reload(tmp_path):
+    import pc_agent
+    db=pc_agent.open_db(tmp_path/'qa.sqlite');job=ra.criar_job(db,'local','Quem fundou a WEG?',conv='qa-chat')
+    ra.montar_plano(db,job)
+    job['plano']=[s for s in job['plano'] if s['tipo'] in ('busca','ler')]
+    job['orcamento']['replans']=0;ra.salvar_job(db,job)
+    class Provider:
+        nome='fixture'
+        def buscar(self,*args):return [{'id':'s','titulo':'WEG','url':'https://example.org/weg','trecho':FOUNDING}]
+    result=ra.executar(db,job['id'],'local',[Provider()],lambda url:{'titulo':'WEG','texto':FOUNDING,'texto_lido':True})
+    assert '1961' in result['sintese']['texto'] and not result['sintese']['llm']
+    restored=ra._resumo(db,ra.carregar_job(db,'local',job['id']))
+    assert restored['sintese']['texto']==result['sintese']['texto']
+    db.close()
