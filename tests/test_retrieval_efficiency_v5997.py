@@ -139,3 +139,15 @@ def test_deleting_job_removes_its_document_cache(job):
     assert db.execute('SELECT COUNT(*) FROM research_cache WHERE provedor=?',('document:'+j['id'],)).fetchone()[0]>0
     ra.excluir_job(db,j['owner'],j['id'])
     assert db.execute('SELECT COUNT(*) FROM research_cache WHERE provedor=?',('document:'+j['id'],)).fetchone()[0]==0
+
+
+def test_trace_does_not_label_requested_requirements_as_supported():
+    import retrieval_trace as trace
+    requested='R-'+'a'*12; supported='R-'+'b'*12
+    with trace.observe() as rows:
+        trace.record('job','step',{'url':'https://example.org','retrieval_provenance':{'requirement_ids':[requested]}},
+                     'EVIDENCE_PARTIAL',coverage={'requirements':[{'id':requested},{'id':supported}],
+                                                 'passages':[{'id':'P-'+'c'*16,'requirement_id':supported,'support_label':'PARTIAL_SUPPORT'}]})
+    assert rows[0]['requested_requirement_ids']==[requested]
+    assert rows[0]['requirement_ids']==[supported]
+    assert rows[0]['requirement_support']=={supported:'PARTIAL_SUPPORT'}

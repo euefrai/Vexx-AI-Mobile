@@ -1,7 +1,7 @@
 async page => {
   if (!page.url().startsWith('http://127.0.0.1:')) throw Error('Disposable localhost QA only');
   const version=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('research-qa-config')||'null')?.version);
-  const directory='qa-artifacts/'+(['v5994','v5995','v5996'].includes(version)?version:'v5994');
+  const directory='qa-artifacts/'+(['v5994','v5995','v5996','v5997'].includes(version)?version:'v5994');
   const errors=[];
   const onError=e=>errors.push(e.message);page.on('pageerror',onError);
   const out={scope:'REAL_CHROME_LOCAL_PARTIAL_RESULT_VISUAL_NOT_COMPLETE_RESEARCH',viewports:[]};
@@ -12,11 +12,16 @@ async page => {
     for (const width of [1280,390,320]) {
       await page.setViewportSize({width,height:900});
       await card.scrollIntoViewIfNeeded();
-      const geometry=await page.evaluate(()=>({viewport:innerWidth,root:document.documentElement.scrollWidth}));
+      await page.evaluate(async()=>{
+        await document.fonts.ready;
+        await Promise.all(document.getAnimations().filter(a=>Number.isFinite(a.effect?.getTiming().iterations)).map(a=>a.finished.catch(()=>{})));
+      });
+      const geometry=await card.evaluate(el=>{const r=el.getBoundingClientRect();return {viewport:innerWidth,root:document.documentElement.scrollWidth,card_left:r.left,card_right:r.right};});
       const box=await message.boundingBox();
       await card.screenshot({path:`${directory}/coverage-card-${width}.png`});
       out.viewports.push({...geometry,message_width:box.width});
       if (geometry.root>width)throw Error('Root overflow at '+width);
+      if (geometry.card_left<0||geometry.card_right>width)throw Error('Card outside viewport at '+width);
     }
     const table=message.locator('table');
     const before=await table.innerText();

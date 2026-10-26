@@ -36,6 +36,13 @@ def record(job_id, step_id, source, state, *, charged=False, rec=None,
         return
     rec = rec or {}
     provenance=source.get('retrieval_provenance') or {}
+    requested=[r for r in provenance.get('requirement_ids',[])[:16] if re.fullmatch(r'R-[a-f0-9]{12}',str(r))]
+    support={}
+    for passage in (coverage or {}).get('passages',[]):
+        bindings=passage.get('requirement_support') or {passage.get('requirement_id'):passage.get('support_label')}
+        for rid,label in bindings.items():
+            if re.fullmatch(r'R-[a-f0-9]{12}',str(rid)) and label in ('DIRECT_SUPPORT','PARTIAL_SUPPORT'):
+                if support.get(rid)!='DIRECT_SUPPORT':support[rid]=label
     events={'SELECTED':'READ_SLOT_CHARGED' if charged else 'CANDIDATE_SELECTED',
             'HTTP_RESPONSE':'HTTP_RESPONSE','BODY_RECEIVED':'FETCH_COMPLETED','REDIRECT_VALIDATED':'REDIRECT_RESOLVED',
             'CONTENT_EXTRACTED':'EXTRACTION_COMPLETED','CONTENT_EMPTY':'EXTRACTION_FAILED',
@@ -55,8 +62,9 @@ def record(job_id, step_id, source, state, *, charged=False, rec=None,
                     'provider':provenance.get('provider','') if re.fullmatch(r'[a-zA-Z0-9_-]{1,40}',str(provenance.get('provider',''))) else '',
                     'rank':provenance.get('rank') if type(provenance.get('rank')) is int and provenance['rank']>0 else None,
                     'document_id':rec.get('document_id','') if re.fullmatch(r'D-[a-f0-9]{24}',str(rec.get('document_id',''))) else '',
-                    'job_ref': hashlib.sha256(str(job_id).encode()).hexdigest(),
-                    'step_ref': hashlib.sha256(str(step_id).encode()).hexdigest(),
+                    'job_ref': hashlib.sha256(str(job_id).encode()).hexdigest() if job_id else '',
+                    'step_ref': hashlib.sha256(str(step_id).encode()).hexdigest() if step_id else '',
+                    'duplicate_of':rec.get('duplicate_of','') if re.fullmatch(r'[a-f0-9]{64}',str(rec.get('duplicate_of',''))) else '',
                     'state': state, 'slot_charged': bool(charged),
                     'reason_code': reason_code if re.fullmatch(r'[A-Z0-9_,]{1,120}',reason_code) else '',
                     'read': bool(rec.get('texto_lido')),
@@ -66,9 +74,9 @@ def record(job_id, step_id, source, state, *, charged=False, rec=None,
                     'content_type': content_type if re.fullmatch(r'[a-z0-9.+-]+/[a-z0-9.+-]+',content_type) else '',
                     'request_ref': hashlib.sha256(request_url.encode()).hexdigest() if request_url else '',
                     'useful_passages': len((coverage or {}).get('passages', [])),
-                    'requirement_ids': [r['id'] for r in (coverage or {}).get('requirements', [])
-                                        if re.fullmatch(r'R-[a-f0-9]{12}', str(r.get('id', '')))] or
-                                       [r for r in provenance.get('requirement_ids',[])[:16] if re.fullmatch(r'R-[a-f0-9]{12}',str(r))],
+                    'requested_requirement_ids':requested,
+                    'requirement_ids':list(support) if coverage is not None else requested,
+                    'requirement_support':support,
                     'passage_ids':list(dict.fromkeys(p['id'] for p in (coverage or {}).get('passages',[])
                                                     if re.fullmatch(r'P-[a-f0-9]{16}',str(p.get('id','')))))[:40]}
     with sink[2]:
@@ -87,6 +95,8 @@ def summarize(rows):
             'selected':len(candidates({'SELECTED'})), 'slots_charged':sum(bool(r['slot_charged']) for r in rows),
             'read':len({r['candidate_ref'] for r in rows if r.get('candidate_ref') and r.get('read')}),
             'cache_reused':len(candidates({'CACHE_REUSE'})), 'blocked':len(candidates({'FETCH_BLOCKED'})),
+            'cache_reuse_events':sum(r['state']=='CACHE_REUSE' for r in rows),
+            'duplicates':len(candidates({'SKIPPED_DUPLICATE','DOCUMENT_DEDUPLICATED'})),
             'partial':len(candidates({'EVIDENCE_PARTIAL'})), 'direct':len(candidates({'EVIDENCE_SUPPORTED'})),
             'chat_messages_persisted':sum(r['state']=='JDUI_DELIVERED' for r in rows),
             'loss_reasons':reasons,'scope':'OBSERVED_RETRIEVAL_NOT_FACTUAL_GOLD'}

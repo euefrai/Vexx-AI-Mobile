@@ -27,6 +27,7 @@ def main():
     p.add_argument('--case',required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--baseline',action='store_true')
+    p.add_argument('--bundle',help='Separate frozen capture; never overwrite an earlier bundle')
     args=p.parse_args()
     if args.output.exists():raise SystemExit('Refusing to overwrite results')
     import pc_agent,research,research_agents as ra,search_orchestrator as orch,retrieval_trace,evidence_graph as eg
@@ -36,12 +37,13 @@ def main():
             src=subprocess.check_output(['git','show','ff486ed:'+name+'.py'],cwd=ROOT).decode('utf-8')
             exec(compile(src,'<baseline:'+name+'>','exec'),module.__dict__)
     case=next(c for c in json.loads((ROOT/'benchmarks/retrieval_v5997_dev.json').read_text(encoding='utf-8'))['queries'] if c['id']==args.case)
-    private=ROOT/'qa-artifacts/v5997/raw'/args.case
+    if args.bundle and (not args.bundle.replace('-','').isalnum()):raise SystemExit('Invalid bundle name')
+    private=ROOT/'qa-artifacts/v5997/raw'/(args.bundle or args.case)
     queries=[];reads=[];lock=threading.Lock()
     if args.capture:
         private.mkdir(parents=True,exist_ok=False)
         providers=ra.provedores_reais(orquestrado=True)
-        responses=[];documents={}
+        responses=[];documents={};raw_pages={}
         for provider in providers:
             original=provider.buscar
             def observed(query,limite=6,original=original,provider=provider):
@@ -53,7 +55,10 @@ def main():
         aliases={}
         def fetch(url,*a,**kw):
             final,body=baixar(url,*a,**kw)
-            with lock:aliases[orch.canonizar_url(url)]=orch.canonizar_url(final)
+            with lock:
+                aliases[orch.canonizar_url(url)]=orch.canonizar_url(final)
+                if retrieval_trace._source.get() is not None and len(raw_pages)<20:
+                    raw_pages[orch.canonizar_url(final)]={'final':final,'body':body}
             return final,body
         def extraction(body,url,*a,**kw):
             rec=extract(body,url,*a,**kw)
@@ -79,6 +84,15 @@ def main():
             key=orch.canonizar_url(url);key=frozen['aliases'].get(key,key)
             if key not in frozen['documents']:raise research.ResearchErro('Missing frozen document','frozen_missing')
             return copy.deepcopy(frozen['documents'][key])
+        if frozen.get('raw_pages'):
+            def frozen_fetch(url,*a,**kw):
+                reads.append(url)
+                key=orch.canonizar_url(url);key=frozen['aliases'].get(key,key)
+                rec=frozen['raw_pages'].get(key)
+                if rec is None:raise research.ResearchErro('Missing frozen HTML','frozen_missing')
+                return rec['final'],rec['body']
+            research.baixar=frozen_fetch
+            recover=None
     start=time.monotonic()
     with tempfile.TemporaryDirectory(prefix='v5997-replay-') as directory:
         db=pc_agent.open_db(Path(directory)/'qa.sqlite3')
@@ -88,6 +102,8 @@ def main():
             stored=ra.carregar_job(db,job['owner'],job['id']);evidence=ra.listar_evidencias(db,job['owner'],job['id'])
             coverage=eg.requirement_coverage(case['query'],evidence)
             out={'scope':'LIVE_CAPTURE' if args.capture else 'CONTROLLED_REPLAY_IDENTICAL_CANDIDATE_POOL_AND_DOCUMENTS_NOT_QUERY_QUALITY',
+                 'extraction_executed':bool(not args.capture and frozen.get('raw_pages')),
+                 'frozen_input_sha256':None if args.capture else hashlib.sha256((private/'capture.json').read_bytes()).hexdigest(),
                  'baseline':args.baseline,'source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
                  'case':case,'queries':queries,'read_calls':len(reads),'distinct_urls':len(set(map(orch.canonizar_url,reads))),
                  'slots':stored['usados']['paginas'],'evidence_count':len(evidence),'coverage':eg.compact_coverage(coverage),
@@ -105,7 +121,7 @@ def main():
                 out['process_rss_sample_bytes']=psutil.Process().memory_info().rss
             except ImportError:out['process_rss_sample_bytes']=None
             if args.capture:
-                capture={'case':case,'responses':responses,'documents':documents,'aliases':aliases}
+                capture={'case':case,'responses':responses,'documents':documents,'aliases':aliases,'raw_pages':raw_pages}
                 (private/'capture.json').write_text(json.dumps(capture,ensure_ascii=False),encoding='utf-8')
             args.output.parent.mkdir(parents=True,exist_ok=True)
             args.output.write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')

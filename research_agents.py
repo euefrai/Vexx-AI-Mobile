@@ -1208,6 +1208,9 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     if not prazo or concluido_em <= prazo:
                         baixados[a["url"]] = rec
                         research.document_cache_put(db,cache_job,a['url'],rec)
+                        if rec.get('duplicate_of'):
+                            retrieval_trace.record(job['id'],etapa.get('id',''),a,'DOCUMENT_DEDUPLICATED',rec=rec,
+                                                   reason_code='IDENTICAL_BOUNDED_EXTRACTION')
                         read_trace(a,'extracted' if rec.get('texto') else 'no_readable_content',rec)
                         substituir = not _util(a, rec)
                         coverage_read = _eg.requirement_coverage(job['objetivo'],[{**rec,'url':a['url']}])
@@ -2688,6 +2691,9 @@ def _lacunas(job: dict) -> list:
             lacunas.append(q)
     structured = job.get('usados', {}).get('research_gaps', [])
     queries = [g['query'] for g in structured if g.get('status') == 'OPEN' and g.get('query')]
+    if queries or lacunas:
+        missing=[r['id'] for r in (job.get('usados',{}).get('answer_coverage') or {}).get('requirements',[]) if r.get('state')!='SUPPORTED']
+        retrieval_trace.record(job.get('id',''),'',{'retrieval_provenance':{'requirement_ids':missing}},'GAP_IDENTIFIED')
     if (job.get('usados',{}).get('answer_coverage') or {}).get('applicable'):
         return list(dict.fromkeys(queries))[:8]
     return list(dict.fromkeys(queries + lacunas))[:8]
