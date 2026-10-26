@@ -73,3 +73,15 @@ qa-artifacts/v5996/direct-delivery.json
 qa-artifacts/v5997/raw/
 qa-artifacts/v5997/qa-runtime-private.json
 qa-artifacts/v5997/qa-stop
+# Release evidence is compact; retain full captures/results locally only.
+qa-artifacts/v5997/*.json
+!qa-artifacts/v5997/replay-summary.json
+!qa-artifacts/v5997/external-summary.json
+!qa-artifacts/v5997/e2e-summary.json
+!qa-artifacts/v5997/ui-summary.json
+!qa-artifacts/v5997/validation-summary.json
+!qa-artifacts/v5997/trace-example.json
+!qa-artifacts/v5997/manifest.json
+!qa-artifacts/v5997/repro-390-normal.json
+!qa-artifacts/v5997/qa-process-sample.json
+!qa-artifacts/v5997/qa-shutdown.json

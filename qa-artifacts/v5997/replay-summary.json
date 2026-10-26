@@ -1,0 +1,715 @@
+{
+  "scope": "FIXED_INPUT_OPERATIONAL_COMPARISON_NOT_LIVE_RECALL",
+  "pairs": [
+    {
+      "case": "api-extracted",
+      "frozen_input_sha256": "e32a6f3be16947a4f0647f15adfc9f4011cdb6e6f6bc9f505263299f7079f16d",
+      "same_input": true,
+      "extraction_executed": false,
+      "before": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 12,
+        "slots": 12,
+        "distinct_urls": 10,
+        "evidence_count": 3,
+        "sqlite_bytes": 2211840,
+        "document_cache_chars": 0,
+        "elapsed_s": 0.5689,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-cd27a0ba87af",
+            "description": "Sintaxe ou assinatura",
+            "state": "SUPPORTED"
+          },
+          {
+            "id": "R-d5eaa1dc811a",
+            "description": "Valor retornado",
+            "state": "DISCOVERED"
+          },
+          {
+            "id": "R-72e4fad4e063",
+            "description": "Comportamento da operação",
+            "state": "DISCOVERED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "SELECTED": 12,
+            "CONTENT_EXTRACTED": 8,
+            "FETCH_FAILED": 4,
+            "SKIPPED_LOW_PRIORITY": 3,
+            "EVIDENCE_STORED": 3,
+            "RELEVANCE_REJECTED": 5,
+            "BUDGET_EXHAUSTED": 1
+          },
+          "reasons": {
+            "FROZEN_MISSING": 4,
+            "ENTITY_MISMATCH": 5
+          },
+          "charged": 12,
+          "read_source_refs": 0,
+          "legacy_support_bindings_not_verified": true
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "Object.assign Sintaxe ou assinatura",
+          "Object.assign Valor retornado",
+          "Object.assign Comportamento da operação"
+        ]
+      },
+      "after": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 8,
+        "slots": 8,
+        "distinct_urls": 8,
+        "evidence_count": 2,
+        "sqlite_bytes": 1667072,
+        "document_cache_chars": 52913,
+        "elapsed_s": 0.592,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-cd27a0ba87af",
+            "description": "Sintaxe ou assinatura",
+            "state": "SUPPORTED"
+          },
+          {
+            "id": "R-d5eaa1dc811a",
+            "description": "Valor retornado",
+            "state": "PARTIALLY_SUPPORTED"
+          },
+          {
+            "id": "R-72e4fad4e063",
+            "description": "Comportamento da operação",
+            "state": "DISCOVERED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "QUERY_CREATED": 3,
+            "QUERY_SENT": 3,
+            "PROVIDER_RESPONDED": 3,
+            "CANDIDATE_DISCOVERED": 15,
+            "CACHE_MISS": 9,
+            "READ_SLOT_CHARGED": 8,
+            "EXTRACTION_COMPLETED": 4,
+            "FETCH_FAILED": 4,
+            "CANDIDATE_SKIPPED": 4,
+            "EVIDENCE_SUPPORTED": 2,
+            "PASSAGE_SELECTED": 2,
+            "EVIDENCE_STORED": 2,
+            "EVIDENCE_REJECTED": 6,
+            "EVIDENCE_PARTIAL": 1,
+            "CACHE_HIT": 6,
+            "CACHE_REUSED": 6,
+            "DOCUMENT_ALREADY_READ": 6,
+            "SYNTHESIS_STARTED": 1,
+            "SYNTHESIS_COMPLETED": 1,
+            "JOB_TERMINAL": 1
+          },
+          "reasons": {
+            "FROZEN_MISSING": 4,
+            "ENTITY_MISMATCH": 6,
+            "EXTRACTIVE": 2,
+            "RESEARCH_COMPLETED": 1
+          },
+          "charged": 8,
+          "read_source_refs": 4,
+          "legacy_support_bindings_not_verified": false
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "Object.assign Sintaxe ou assinatura",
+          "Object.assign Valor retornado",
+          "Object.assign Comportamento da operação"
+        ]
+      }
+    },
+    {
+      "case": "company-extracted",
+      "frozen_input_sha256": "f4fb800d1b18f9dbc966b8f450d2a0a41e2a8f6dc13f31f6163f747f550f4c51",
+      "same_input": true,
+      "extraction_executed": false,
+      "before": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 12,
+        "slots": 12,
+        "distinct_urls": 9,
+        "evidence_count": 0,
+        "sqlite_bytes": 655360,
+        "document_cache_chars": 0,
+        "elapsed_s": 0.445,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-38de4617485b",
+            "description": "Fundadores",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-a2dfdf57ae47",
+            "description": "Data de fundação",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-4bcbc9263fc7",
+            "description": "Produtos",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "SELECTED": 12,
+            "FETCH_FAILED": 6,
+            "CONTENT_EXTRACTED": 6,
+            "SKIPPED_LOW_PRIORITY": 3,
+            "PASSAGE_NOT_FOUND": 2,
+            "RELEVANCE_REJECTED": 4,
+            "BUDGET_EXHAUSTED": 2
+          },
+          "reasons": {
+            "FROZEN_MISSING": 6,
+            "NO_ANSWER_PASSAGE": 2,
+            "TOPIC_MISMATCH": 4
+          },
+          "charged": 12,
+          "read_source_refs": 0,
+          "legacy_support_bindings_not_verified": true
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "WEG Fundadores",
+          "WEG Data de fundação",
+          "WEG Produtos"
+        ]
+      },
+      "after": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 8,
+        "slots": 8,
+        "distinct_urls": 8,
+        "evidence_count": 0,
+        "sqlite_bytes": 827392,
+        "document_cache_chars": 37371,
+        "elapsed_s": 0.5072,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-38de4617485b",
+            "description": "Fundadores",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-a2dfdf57ae47",
+            "description": "Data de fundação",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-4bcbc9263fc7",
+            "description": "Produtos",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "QUERY_CREATED": 3,
+            "QUERY_SENT": 3,
+            "PROVIDER_RESPONDED": 3,
+            "CANDIDATE_DISCOVERED": 18,
+            "CACHE_MISS": 16,
+            "READ_SLOT_CHARGED": 8,
+            "FETCH_FAILED": 6,
+            "EXTRACTION_COMPLETED": 2,
+            "CANDIDATE_SKIPPED": 3,
+            "PASSAGE_REJECTED": 2,
+            "CACHE_HIT": 2,
+            "CACHE_REUSED": 2,
+            "DOCUMENT_ALREADY_READ": 2,
+            "EVIDENCE_REJECTED": 2,
+            "SYNTHESIS_STARTED": 1,
+            "SYNTHESIS_COMPLETED": 1,
+            "GAP_IDENTIFIED": 1,
+            "JOB_TERMINAL": 1
+          },
+          "reasons": {
+            "FROZEN_MISSING": 6,
+            "NO_ANSWER_PASSAGE": 2,
+            "TOPIC_MISMATCH": 2,
+            "EXTRACTIVE": 2,
+            "RESEARCH_COMPLETED": 1
+          },
+          "charged": 8,
+          "read_source_refs": 2,
+          "legacy_support_bindings_not_verified": false
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "WEG Fundadores",
+          "WEG Data de fundação",
+          "WEG Produtos"
+        ]
+      }
+    },
+    {
+      "case": "api-html",
+      "frozen_input_sha256": "b069a1a92e56ff12b057969af37a561fc67b3b27dd5d01e4f69a077e035f6e8b",
+      "same_input": true,
+      "extraction_executed": true,
+      "before": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 12,
+        "slots": 12,
+        "distinct_urls": 6,
+        "evidence_count": 0,
+        "sqlite_bytes": 798720,
+        "document_cache_chars": 0,
+        "elapsed_s": 1.5429,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-cd27a0ba87af",
+            "description": "Sintaxe ou assinatura",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-d5eaa1dc811a",
+            "description": "Valor retornado",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-72e4fad4e063",
+            "description": "Comportamento da operação",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "SELECTED": 12,
+            "FETCH_FAILED": 2,
+            "CONTENT_EXTRACTED": 10,
+            "RELEVANCE_REJECTED": 10,
+            "BUDGET_EXHAUSTED": 2
+          },
+          "reasons": {
+            "FROZEN_MISSING": 2,
+            "ENTITY_MISMATCH": 10
+          },
+          "charged": 12,
+          "read_source_refs": 0,
+          "legacy_support_bindings_not_verified": true
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "Object.assign Sintaxe ou assinatura",
+          "Object.assign Valor retornado",
+          "Object.assign Comportamento da operação"
+        ]
+      },
+      "after": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 6,
+        "slots": 6,
+        "distinct_urls": 6,
+        "evidence_count": 0,
+        "sqlite_bytes": 942080,
+        "document_cache_chars": 103779,
+        "elapsed_s": 0.7715,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-cd27a0ba87af",
+            "description": "Sintaxe ou assinatura",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-d5eaa1dc811a",
+            "description": "Valor retornado",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-72e4fad4e063",
+            "description": "Comportamento da operação",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "QUERY_CREATED": 3,
+            "QUERY_SENT": 3,
+            "PROVIDER_RESPONDED": 3,
+            "CANDIDATE_DISCOVERED": 18,
+            "CACHE_MISS": 10,
+            "READ_SLOT_CHARGED": 6,
+            "FETCH_FAILED": 2,
+            "EXTRACTION_COMPLETED": 4,
+            "EVIDENCE_REJECTED": 12,
+            "CACHE_HIT": 8,
+            "CACHE_REUSED": 8,
+            "DOCUMENT_ALREADY_READ": 8,
+            "SYNTHESIS_STARTED": 1,
+            "SYNTHESIS_COMPLETED": 1,
+            "JOB_TERMINAL": 1
+          },
+          "reasons": {
+            "FROZEN_MISSING": 2,
+            "ENTITY_MISMATCH": 12,
+            "EXTRACTIVE": 2,
+            "RESEARCH_COMPLETED": 1
+          },
+          "charged": 6,
+          "read_source_refs": 4,
+          "legacy_support_bindings_not_verified": false
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "Object.assign Sintaxe ou assinatura",
+          "Object.assign Valor retornado",
+          "Object.assign Comportamento da operação"
+        ]
+      }
+    },
+    {
+      "case": "company-html",
+      "frozen_input_sha256": "266b9e0080091806b64c57bbcc5ad3d08f29b4ea27f495284a156503bd9454cf",
+      "same_input": true,
+      "extraction_executed": true,
+      "before": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 12,
+        "slots": 12,
+        "distinct_urls": 5,
+        "evidence_count": 0,
+        "sqlite_bytes": 765952,
+        "document_cache_chars": 0,
+        "elapsed_s": 0.7385,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-38de4617485b",
+            "description": "Fundadores",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-a2dfdf57ae47",
+            "description": "Data de fundação",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-4bcbc9263fc7",
+            "description": "Produtos",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "SELECTED": 12,
+            "CONTENT_EXTRACTED": 12,
+            "RELEVANCE_REJECTED": 12,
+            "BUDGET_EXHAUSTED": 3
+          },
+          "reasons": {
+            "ENTITY_MISMATCH": 12
+          },
+          "charged": 12,
+          "read_source_refs": 0,
+          "legacy_support_bindings_not_verified": true
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "WEG Fundadores",
+          "WEG Data de fundação",
+          "WEG Produtos"
+        ]
+      },
+      "after": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 5,
+        "slots": 5,
+        "distinct_urls": 5,
+        "evidence_count": 0,
+        "sqlite_bytes": 868352,
+        "document_cache_chars": 53872,
+        "elapsed_s": 0.465,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-38de4617485b",
+            "description": "Fundadores",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-a2dfdf57ae47",
+            "description": "Data de fundação",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-4bcbc9263fc7",
+            "description": "Produtos",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "QUERY_CREATED": 3,
+            "QUERY_SENT": 3,
+            "PROVIDER_RESPONDED": 3,
+            "CANDIDATE_DISCOVERED": 15,
+            "CACHE_MISS": 5,
+            "READ_SLOT_CHARGED": 5,
+            "EXTRACTION_COMPLETED": 5,
+            "EVIDENCE_REJECTED": 15,
+            "CACHE_HIT": 10,
+            "CACHE_REUSED": 10,
+            "DOCUMENT_ALREADY_READ": 10,
+            "SYNTHESIS_STARTED": 1,
+            "SYNTHESIS_COMPLETED": 1,
+            "JOB_TERMINAL": 1
+          },
+          "reasons": {
+            "ENTITY_MISMATCH": 15,
+            "EXTRACTIVE": 2,
+            "RESEARCH_COMPLETED": 1
+          },
+          "charged": 5,
+          "read_source_refs": 5,
+          "legacy_support_bindings_not_verified": false
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "WEG Fundadores",
+          "WEG Data de fundação",
+          "WEG Produtos"
+        ]
+      }
+    },
+    {
+      "case": "history-html",
+      "frozen_input_sha256": "e7a7deec5f7dfe61b7f8808d230de470f41dbc95507a7e241887c853953c0a63",
+      "same_input": true,
+      "extraction_executed": true,
+      "before": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 10,
+        "slots": 10,
+        "distinct_urls": 6,
+        "evidence_count": 0,
+        "sqlite_bytes": 663552,
+        "document_cache_chars": 0,
+        "elapsed_s": 0.7965,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-40abc69770f7",
+            "description": "Causas",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-b5174a7438ed",
+            "description": "Consequências",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "SELECTED": 10,
+            "FETCH_FAILED": 2,
+            "CONTENT_EMPTY": 2,
+            "CONTENT_EXTRACTED": 6,
+            "RELEVANCE_REJECTED": 6,
+            "PASSAGE_NOT_FOUND": 2
+          },
+          "reasons": {
+            "FROZEN_MISSING": 2,
+            "ENTITY_MISMATCH": 6,
+            "NO_ANSWER_PASSAGE": 2
+          },
+          "charged": 10,
+          "read_source_refs": 0,
+          "legacy_support_bindings_not_verified": true
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "Revolta da Chibata Causas",
+          "Revolta da Chibata Consequências"
+        ]
+      },
+      "after": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 7,
+        "slots": 7,
+        "distinct_urls": 6,
+        "evidence_count": 0,
+        "sqlite_bytes": 716800,
+        "document_cache_chars": 34584,
+        "elapsed_s": 0.6055,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-40abc69770f7",
+            "description": "Causas",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "id": "R-b5174a7438ed",
+            "description": "Consequências",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "QUERY_CREATED": 2,
+            "QUERY_SENT": 2,
+            "PROVIDER_RESPONDED": 2,
+            "CANDIDATE_DISCOVERED": 12,
+            "CACHE_MISS": 9,
+            "READ_SLOT_CHARGED": 7,
+            "FETCH_FAILED": 2,
+            "EXTRACTION_COMPLETED": 3,
+            "EXTRACTION_FAILED": 2,
+            "EVIDENCE_REJECTED": 6,
+            "PASSAGE_REJECTED": 2,
+            "CACHE_HIT": 3,
+            "CACHE_REUSED": 3,
+            "DOCUMENT_ALREADY_READ": 3,
+            "SYNTHESIS_STARTED": 1,
+            "SYNTHESIS_COMPLETED": 1,
+            "JOB_TERMINAL": 1
+          },
+          "reasons": {
+            "FROZEN_MISSING": 2,
+            "ENTITY_MISMATCH": 6,
+            "NO_ANSWER_PASSAGE": 2,
+            "EXTRACTIVE": 2,
+            "RESEARCH_COMPLETED": 1
+          },
+          "charged": 7,
+          "read_source_refs": 3,
+          "legacy_support_bindings_not_verified": false
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "Revolta da Chibata Causas",
+          "Revolta da Chibata Consequências"
+        ]
+      }
+    },
+    {
+      "case": "seeded-api-html",
+      "frozen_input_sha256": "12cc9b55a5a6b5badf0e65c97052f63da844d545f158df610cb746e1746f9414",
+      "same_input": true,
+      "extraction_executed": true,
+      "before": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 4,
+        "slots": 4,
+        "distinct_urls": 4,
+        "evidence_count": 1,
+        "sqlite_bytes": 1314816,
+        "document_cache_chars": 0,
+        "elapsed_s": 0.3631,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-cd27a0ba87af",
+            "description": "Sintaxe ou assinatura",
+            "state": "SUPPORTED"
+          },
+          {
+            "id": "R-d5eaa1dc811a",
+            "description": "Valor retornado",
+            "state": "DISCOVERED"
+          },
+          {
+            "id": "R-72e4fad4e063",
+            "description": "Comportamento da operação",
+            "state": "DISCOVERED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "SELECTED": 4,
+            "CONTENT_EXTRACTED": 1,
+            "FETCH_FAILED": 3,
+            "EVIDENCE_STORED": 1
+          },
+          "reasons": {
+            "FROZEN_MISSING": 3
+          },
+          "charged": 4,
+          "read_source_refs": 0,
+          "legacy_support_bindings_not_verified": true
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "Object.assign Sintaxe ou assinatura",
+          "Object.assign Valor retornado",
+          "Object.assign Comportamento da operação"
+        ]
+      },
+      "after": {
+        "source_head": "c98d4bee4263cd79e02b7a3f63da85579aa37960",
+        "read_calls": 4,
+        "slots": 4,
+        "distinct_urls": 4,
+        "evidence_count": 1,
+        "sqlite_bytes": 1228800,
+        "document_cache_chars": 18893,
+        "elapsed_s": 0.4,
+        "process_rss_sample_bytes": null,
+        "coverage": [
+          {
+            "id": "R-cd27a0ba87af",
+            "description": "Sintaxe ou assinatura",
+            "state": "SUPPORTED"
+          },
+          {
+            "id": "R-d5eaa1dc811a",
+            "description": "Valor retornado",
+            "state": "DISCOVERED"
+          },
+          {
+            "id": "R-72e4fad4e063",
+            "description": "Comportamento da operação",
+            "state": "DISCOVERED"
+          }
+        ],
+        "trace": {
+          "events": {
+            "QUERY_CREATED": 3,
+            "QUERY_SENT": 3,
+            "PROVIDER_RESPONDED": 3,
+            "CANDIDATE_DISCOVERED": 3,
+            "CACHE_MISS": 1,
+            "READ_SLOT_CHARGED": 4,
+            "EXTRACTION_COMPLETED": 1,
+            "FETCH_FAILED": 3,
+            "EVIDENCE_SUPPORTED": 1,
+            "PASSAGE_SELECTED": 1,
+            "EVIDENCE_STORED": 1,
+            "CACHE_HIT": 2,
+            "CACHE_REUSED": 2,
+            "DOCUMENT_ALREADY_READ": 2,
+            "SYNTHESIS_STARTED": 1,
+            "SYNTHESIS_COMPLETED": 1,
+            "JOB_TERMINAL": 1
+          },
+          "reasons": {
+            "FROZEN_MISSING": 3,
+            "EXTRACTIVE": 2,
+            "RESEARCH_COMPLETED": 1
+          },
+          "charged": 4,
+          "read_source_refs": 1,
+          "legacy_support_bindings_not_verified": false
+        },
+        "unresolved_query_refs": [],
+        "queries": [
+          "Object.assign Sintaxe ou assinatura",
+          "Object.assign Valor retornado",
+          "Object.assign Comportamento da operação"
+        ]
+      }
+    }
+  ]
+}

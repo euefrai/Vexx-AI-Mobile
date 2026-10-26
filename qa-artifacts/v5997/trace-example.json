@@ -1,0 +1,3114 @@
+{
+  "api-html": {
+    "scope": "CONTROLLED_REPLAY_IDENTICAL_CANDIDATE_POOL_AND_DOCUMENTS_NOT_QUERY_QUALITY",
+    "query_registry": {
+      "Q-01110bdcd3bbb2481bb6": {
+        "step_id": "p1",
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "query": "Object.assign Sintaxe ou assinatura",
+        "strategy": "initial",
+        "plan_version": 2
+      },
+      "Q-ef2f86c6856bfbf0be73": {
+        "step_id": "p4",
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "query": "Object.assign Valor retornado",
+        "strategy": "initial",
+        "plan_version": 2
+      },
+      "Q-4750d65fbdbce4468ecc": {
+        "step_id": "p7",
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "query": "Object.assign Comportamento da operação",
+        "strategy": "initial",
+        "plan_version": 2
+      }
+    },
+    "events": [
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:44.656587+00:00",
+        "event": "QUERY_CREATED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a",
+        "state": "QUERY_CREATED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:44.656810+00:00",
+        "event": "QUERY_SENT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a",
+        "state": "QUERY_SENT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:44.656914+00:00",
+        "event": "PROVIDER_RESPONDED",
+        "duration_s": 0.00046829995699226856,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a",
+        "state": "PROVIDER_RESPONDED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:44.656974+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "candidate_id": "C-5b11bed546f8548b22f9",
+        "source_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "timestamp": "2026-10-26T10:12:44.656993+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 2,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:44.657008+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:44.657023+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "candidate_id": "C-8d4174a0fde09aa074b6",
+        "source_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "timestamp": "2026-10-26T10:12:44.657036+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 5,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:44.657049+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "f64551fcd6f07823cb87971cfb91446425da18286b3ab1ef935e0cbd7a69f68a",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:44.661361+00:00",
+        "event": "QUERY_CREATED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "ab71fc4c8a1c4d62b9202b36ee7c07dd398a0907a37037bd8c3959d6af573608",
+        "state": "QUERY_CREATED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:44.661384+00:00",
+        "event": "QUERY_SENT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "ab71fc4c8a1c4d62b9202b36ee7c07dd398a0907a37037bd8c3959d6af573608",
+        "state": "QUERY_SENT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:44.661469+00:00",
+        "event": "PROVIDER_RESPONDED",
+        "duration_s": 0.00015839992556720972,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "ab71fc4c8a1c4d62b9202b36ee7c07dd398a0907a37037bd8c3959d6af573608",
+        "state": "PROVIDER_RESPONDED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:44.661516+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "ab71fc4c8a1c4d62b9202b36ee7c07dd398a0907a37037bd8c3959d6af573608",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "candidate_id": "C-5b11bed546f8548b22f9",
+        "source_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "timestamp": "2026-10-26T10:12:44.661533+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 2,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "ab71fc4c8a1c4d62b9202b36ee7c07dd398a0907a37037bd8c3959d6af573608",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:44.661547+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "ab71fc4c8a1c4d62b9202b36ee7c07dd398a0907a37037bd8c3959d6af573608",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:44.661565+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "ab71fc4c8a1c4d62b9202b36ee7c07dd398a0907a37037bd8c3959d6af573608",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "candidate_id": "C-8d4174a0fde09aa074b6",
+        "source_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "timestamp": "2026-10-26T10:12:44.661579+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 5,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "ab71fc4c8a1c4d62b9202b36ee7c07dd398a0907a37037bd8c3959d6af573608",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:44.661592+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "ab71fc4c8a1c4d62b9202b36ee7c07dd398a0907a37037bd8c3959d6af573608",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:44.665276+00:00",
+        "event": "QUERY_CREATED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "03fbd36c05856bca596b0bcb4466f4f30f0119a41be2b9fcebfa71d68178b116",
+        "state": "QUERY_CREATED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:44.665298+00:00",
+        "event": "QUERY_SENT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "03fbd36c05856bca596b0bcb4466f4f30f0119a41be2b9fcebfa71d68178b116",
+        "state": "QUERY_SENT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:44.665371+00:00",
+        "event": "PROVIDER_RESPONDED",
+        "duration_s": 0.00014469993766397238,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "03fbd36c05856bca596b0bcb4466f4f30f0119a41be2b9fcebfa71d68178b116",
+        "state": "PROVIDER_RESPONDED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:44.665419+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "03fbd36c05856bca596b0bcb4466f4f30f0119a41be2b9fcebfa71d68178b116",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "candidate_id": "C-5b11bed546f8548b22f9",
+        "source_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "timestamp": "2026-10-26T10:12:44.665435+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 2,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "03fbd36c05856bca596b0bcb4466f4f30f0119a41be2b9fcebfa71d68178b116",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:44.665448+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "03fbd36c05856bca596b0bcb4466f4f30f0119a41be2b9fcebfa71d68178b116",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:44.665462+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "03fbd36c05856bca596b0bcb4466f4f30f0119a41be2b9fcebfa71d68178b116",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "candidate_id": "C-8d4174a0fde09aa074b6",
+        "source_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "timestamp": "2026-10-26T10:12:44.665475+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 5,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "03fbd36c05856bca596b0bcb4466f4f30f0119a41be2b9fcebfa71d68178b116",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:44.665490+00:00",
+        "event": "CANDIDATE_DISCOVERED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "03fbd36c05856bca596b0bcb4466f4f30f0119a41be2b9fcebfa71d68178b116",
+        "state": "CANDIDATE_DISCOVERED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:44.671052+00:00",
+        "event": "CACHE_MISS",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "CACHE_MISS",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "candidate_id": "C-5b11bed546f8548b22f9",
+        "source_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "timestamp": "2026-10-26T10:12:44.671198+00:00",
+        "event": "CACHE_MISS",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 2,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "CACHE_MISS",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:44.671292+00:00",
+        "event": "CACHE_MISS",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "CACHE_MISS",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:44.671375+00:00",
+        "event": "CACHE_MISS",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "CACHE_MISS",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "candidate_id": "C-8d4174a0fde09aa074b6",
+        "source_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "timestamp": "2026-10-26T10:12:44.671454+00:00",
+        "event": "CACHE_MISS",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 5,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "CACHE_MISS",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:44.671537+00:00",
+        "event": "CACHE_MISS",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "CACHE_MISS",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:44.671784+00:00",
+        "event": "READ_SLOT_CHARGED",
+        "duration_s": null,
+        "budget_consumed": {
+          "buscas": 3,
+          "paginas": 4,
+          "replans": 0
+        },
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "SELECTED",
+        "slot_charged": true,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "candidate_id": "C-5b11bed546f8548b22f9",
+        "source_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "timestamp": "2026-10-26T10:12:44.671807+00:00",
+        "event": "READ_SLOT_CHARGED",
+        "duration_s": null,
+        "budget_consumed": {
+          "buscas": 3,
+          "paginas": 4,
+          "replans": 0
+        },
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 2,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "SELECTED",
+        "slot_charged": true,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:44.671824+00:00",
+        "event": "READ_SLOT_CHARGED",
+        "duration_s": null,
+        "budget_consumed": {
+          "buscas": 3,
+          "paginas": 4,
+          "replans": 0
+        },
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "SELECTED",
+        "slot_charged": true,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:44.671840+00:00",
+        "event": "READ_SLOT_CHARGED",
+        "duration_s": null,
+        "budget_consumed": {
+          "buscas": 3,
+          "paginas": 4,
+          "replans": 0
+        },
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "SELECTED",
+        "slot_charged": true,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "candidate_id": "C-5b11bed546f8548b22f9",
+        "source_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "timestamp": "2026-10-26T10:12:44.684331+00:00",
+        "event": "FETCH_FAILED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 2,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "FETCH_FAILED",
+        "slot_charged": false,
+        "reason_code": "FROZEN_MISSING",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "candidate_id": "C-8d4174a0fde09aa074b6",
+        "source_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "timestamp": "2026-10-26T10:12:44.730938+00:00",
+        "event": "READ_SLOT_CHARGED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 5,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "SELECTED",
+        "slot_charged": true,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "candidate_id": "C-8d4174a0fde09aa074b6",
+        "source_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "timestamp": "2026-10-26T10:12:45.011559+00:00",
+        "event": "FETCH_FAILED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 5,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "FETCH_FAILED",
+        "slot_charged": false,
+        "reason_code": "FROZEN_MISSING",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.029015+00:00",
+        "event": "READ_SLOT_CHARGED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "SELECTED",
+        "slot_charged": true,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:45.141651+00:00",
+        "event": "EXTRACTION_COMPLETED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "D-4cd16fbb3072b75173c27cb6",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "CONTENT_EXTRACTED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 7999,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:45.180325+00:00",
+        "event": "EXTRACTION_COMPLETED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "D-f41c8c1134a148bb6a775096",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "CONTENT_EXTRACTED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 279,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:45.183782+00:00",
+        "event": "EXTRACTION_COMPLETED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "D-4d93a746bdab3ad2f05db192",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "CONTENT_EXTRACTED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 1603,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.190216+00:00",
+        "event": "EXTRACTION_COMPLETED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "D-77d269089cd82b5525259d9b",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "CONTENT_EXTRACTED",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 586,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:45.196162+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "D-f41c8c1134a148bb6a775096",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 279,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:45.201563+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "D-4cd16fbb3072b75173c27cb6",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 7999,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:45.203581+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "D-4d93a746bdab3ad2f05db192",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 1603,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.205137+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-01110bdcd3bbb2481bb6"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "D-77d269089cd82b5525259d9b",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "3946ca64ff78d93ca61090a437cbb6b3d2ca0d488f5f9ccf3059608368b27693",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 586,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_ids": [
+          "R-cd27a0ba87af"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:45.210425+00:00",
+        "event": "CACHE_HIT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "CACHE_HIT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:45.210521+00:00",
+        "event": "CACHE_REUSED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "D-f41c8c1134a148bb6a775096",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "CACHE_REUSE",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 279,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:45.210591+00:00",
+        "event": "DOCUMENT_ALREADY_READ",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "D-f41c8c1134a148bb6a775096",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "DOCUMENT_ALREADY_READ",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 279,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "candidate_id": "C-5b11bed546f8548b22f9",
+        "source_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "timestamp": "2026-10-26T10:12:45.210821+00:00",
+        "event": "CACHE_MISS",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 2,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "CACHE_MISS",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:45.211222+00:00",
+        "event": "CACHE_HIT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "CACHE_HIT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:45.211246+00:00",
+        "event": "CACHE_REUSED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "D-4cd16fbb3072b75173c27cb6",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "CACHE_REUSE",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 7999,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:45.211265+00:00",
+        "event": "DOCUMENT_ALREADY_READ",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "D-4cd16fbb3072b75173c27cb6",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "DOCUMENT_ALREADY_READ",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 7999,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:45.211484+00:00",
+        "event": "CACHE_HIT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "CACHE_HIT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:45.211534+00:00",
+        "event": "CACHE_REUSED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "D-4d93a746bdab3ad2f05db192",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "CACHE_REUSE",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 1603,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:45.211554+00:00",
+        "event": "DOCUMENT_ALREADY_READ",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "D-4d93a746bdab3ad2f05db192",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "DOCUMENT_ALREADY_READ",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 1603,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "candidate_id": "C-8d4174a0fde09aa074b6",
+        "source_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "timestamp": "2026-10-26T10:12:45.211678+00:00",
+        "event": "CACHE_MISS",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 5,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "CACHE_MISS",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.211895+00:00",
+        "event": "CACHE_HIT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "CACHE_HIT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.211914+00:00",
+        "event": "CACHE_REUSED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "D-77d269089cd82b5525259d9b",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "CACHE_REUSE",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 586,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.211932+00:00",
+        "event": "DOCUMENT_ALREADY_READ",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "D-77d269089cd82b5525259d9b",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "DOCUMENT_ALREADY_READ",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 586,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:45.213286+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "D-f41c8c1134a148bb6a775096",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 279,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:45.218202+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "D-4cd16fbb3072b75173c27cb6",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 7999,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:45.220508+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "D-4d93a746bdab3ad2f05db192",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 1603,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.222148+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-ef2f86c6856bfbf0be73"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "D-77d269089cd82b5525259d9b",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "536c351ae15e5f5e3dc37bcc5dea8ab641e70fc0431a088a1d684aef2ebf3e5b",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 586,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_ids": [
+          "R-d5eaa1dc811a"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:45.227447+00:00",
+        "event": "CACHE_HIT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "CACHE_HIT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:45.227485+00:00",
+        "event": "CACHE_REUSED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "D-f41c8c1134a148bb6a775096",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "CACHE_REUSE",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 279,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:45.227503+00:00",
+        "event": "DOCUMENT_ALREADY_READ",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "D-f41c8c1134a148bb6a775096",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "DOCUMENT_ALREADY_READ",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 279,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "candidate_id": "C-5b11bed546f8548b22f9",
+        "source_ref": "cc3a469e204f98ef517d75bd19f921d0a47ce5d18f773d337b119ef6528f6ac5",
+        "timestamp": "2026-10-26T10:12:45.227648+00:00",
+        "event": "CACHE_MISS",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 2,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "CACHE_MISS",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:45.227974+00:00",
+        "event": "CACHE_HIT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "CACHE_HIT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:45.227993+00:00",
+        "event": "CACHE_REUSED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "D-4cd16fbb3072b75173c27cb6",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "CACHE_REUSE",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 7999,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:45.228009+00:00",
+        "event": "DOCUMENT_ALREADY_READ",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "D-4cd16fbb3072b75173c27cb6",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "DOCUMENT_ALREADY_READ",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 7999,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:45.228254+00:00",
+        "event": "CACHE_HIT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "CACHE_HIT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:45.228274+00:00",
+        "event": "CACHE_REUSED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "D-4d93a746bdab3ad2f05db192",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "CACHE_REUSE",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 1603,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:45.228289+00:00",
+        "event": "DOCUMENT_ALREADY_READ",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "D-4d93a746bdab3ad2f05db192",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "DOCUMENT_ALREADY_READ",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 1603,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "candidate_id": "C-8d4174a0fde09aa074b6",
+        "source_ref": "4af370d91435a7983a0f387a3895842881959e900d4fded857cd2ae750d4348b",
+        "timestamp": "2026-10-26T10:12:45.228387+00:00",
+        "event": "CACHE_MISS",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 5,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "CACHE_MISS",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.228595+00:00",
+        "event": "CACHE_HIT",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "CACHE_HIT",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.228614+00:00",
+        "event": "CACHE_REUSED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "D-77d269089cd82b5525259d9b",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "CACHE_REUSE",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 586,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.228629+00:00",
+        "event": "DOCUMENT_ALREADY_READ",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "D-77d269089cd82b5525259d9b",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "DOCUMENT_ALREADY_READ",
+        "slot_charged": false,
+        "reason_code": "",
+        "read": true,
+        "extracted_chars": 586,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "candidate_id": "C-3edb220fdc7c17b10269",
+        "source_ref": "9ec10b9430ce72bf2df7f4ad996c8380a53de8914068772ec076fc868f11c17a",
+        "timestamp": "2026-10-26T10:12:45.230018+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 1,
+        "document_id": "D-f41c8c1134a148bb6a775096",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 279,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "candidate_id": "C-27c31e0e62e2238c5de7",
+        "source_ref": "a2ce999f44189db8a78a25c57c257fa26ec0527f7ca1a19ebee420ec66d2331f",
+        "timestamp": "2026-10-26T10:12:45.234520+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 3,
+        "document_id": "D-4cd16fbb3072b75173c27cb6",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 7999,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "candidate_id": "C-1745c9b37b5582a71654",
+        "source_ref": "45aa2a8d91b5aaf8defa8324b845ada0f78b42be534c6a9433cfd2acb26ddc23",
+        "timestamp": "2026-10-26T10:12:45.236603+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 4,
+        "document_id": "D-4d93a746bdab3ad2f05db192",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 1603,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "candidate_id": "C-74a405522f107a08cdd6",
+        "source_ref": "10e03572468d5c3f8350bfdfa125dd32a12b9fb00d89b3bf595f60482bdcffe1",
+        "timestamp": "2026-10-26T10:12:45.238186+00:00",
+        "event": "EVIDENCE_REJECTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [
+          "Q-4750d65fbdbce4468ecc"
+        ],
+        "provider": "bing",
+        "rank": 6,
+        "document_id": "D-77d269089cd82b5525259d9b",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "9b85c0828dcfbc883726fc200c987baa9826da6ba6a358643a69a52d8698d72e",
+        "state": "RELEVANCE_REJECTED",
+        "slot_charged": false,
+        "reason_code": "ENTITY_MISMATCH",
+        "read": true,
+        "extracted_chars": 586,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_ids": [
+          "R-72e4fad4e063"
+        ],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:45.263128+00:00",
+        "event": "SYNTHESIS_STARTED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "state": "SYNTHESIS_STARTED",
+        "slot_charged": false,
+        "reason_code": "EXTRACTIVE",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [],
+        "requirement_ids": [],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:45.263574+00:00",
+        "event": "SYNTHESIS_COMPLETED",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "state": "SYNTHESIS_COMPLETED",
+        "slot_charged": false,
+        "reason_code": "EXTRACTIVE",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [],
+        "requirement_ids": [],
+        "requirement_support": {},
+        "passage_ids": []
+      },
+      {
+        "candidate_ref": "",
+        "candidate_id": "",
+        "source_ref": "",
+        "timestamp": "2026-10-26T10:12:45.273276+00:00",
+        "event": "JOB_TERMINAL",
+        "duration_s": null,
+        "budget_consumed": {},
+        "query_ids": [],
+        "provider": "",
+        "rank": null,
+        "document_id": "",
+        "job_ref": "dbd329a85587ebb459b50d5e41c2437b2a4f59029f0271641a5a8007527df6c6",
+        "step_ref": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "state": "JOB_TERMINAL",
+        "slot_charged": false,
+        "reason_code": "RESEARCH_COMPLETED",
+        "read": false,
+        "extracted_chars": 0,
+        "http_status": null,
+        "response_bytes": null,
+        "content_type": "",
+        "request_ref": "",
+        "useful_passages": 0,
+        "requested_requirement_ids": [],
+        "requirement_ids": [],
+        "requirement_support": {},
+        "passage_ids": []
+      }
+    ]
+  }
+}

@@ -1,0 +1,1340 @@
+{
+  "scope": "MODEL_AUTHORED_LIVE_NOT_HUMAN_GOLD_NO_PAIRED_NETWORK_BASELINE",
+  "cases": [
+    {
+      "case": {
+        "id": "eff-01",
+        "category": "documentation",
+        "query": "Como funciona pathlib.Path.relative_to no Python, o que retorna e quando levanta ValueError?"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "ddg",
+          "query": "pathlib.Path.relative_to no Python Valor retornado",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "pathlib.Path.relative_to no Python Comportamento da operação",
+          "candidates": 6
+        }
+      ],
+      "budget_used": {
+        "buscas": 2,
+        "paginas": 12,
+        "replans": 0
+      },
+      "read_evidence_count": 0,
+      "evidence_count": 0,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 2,
+          "QUERY_SENT": 2,
+          "PROVIDER_RESPONDED": 2,
+          "CANDIDATE_DISCOVERED": 12,
+          "CACHE_MISS": 9,
+          "READ_SLOT_CHARGED": 12,
+          "FETCH_STARTED": 12,
+          "HTTP_RESPONSE": 12,
+          "FETCH_BLOCKED": 3,
+          "FETCH_COMPLETED": 9,
+          "EXTRACTION_COMPLETED": 9,
+          "CANDIDATE_SKIPPED": 9,
+          "EVIDENCE_REJECTED": 12,
+          "CACHE_HIT": 3,
+          "CACHE_REUSED": 3,
+          "DOCUMENT_ALREADY_READ": 3,
+          "SYNTHESIS_STARTED": 1,
+          "SYNTHESIS_COMPLETED": 1,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "BLOQUEADO": 3,
+          "TOPIC_MISMATCH": 8,
+          "ENTITY_MISMATCH": 4,
+          "EXTRACTIVE": 2,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 12,
+        "read_source_refs": 9,
+        "legacy_support_bindings_not_verified": true
+      }
+    },
+    {
+      "case": {
+        "id": "eff-02",
+        "category": "company",
+        "query": "Quem fundou a Tramontina, em que ano e quais produtos fabrica?"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "ddg",
+          "query": "Tramontina Fundadores",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Tramontina Fundadores",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Tramontina Fundadores",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Tramontina Fundadores",
+          "candidates": 7
+        },
+        {
+          "provider": "ddg",
+          "query": "Tramontina Data de fundação",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Tramontina Data de fundação",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Tramontina Data de fundação",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Tramontina Data de fundação",
+          "candidates": 9
+        },
+        {
+          "provider": "ddg",
+          "query": "Tramontina Produtos",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Tramontina Produtos",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Tramontina Produtos",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Tramontina Produtos",
+          "candidates": 6
+        }
+      ],
+      "budget_used": {
+        "buscas": 3,
+        "paginas": 12,
+        "replans": 0
+      },
+      "read_evidence_count": 1,
+      "evidence_count": 1,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 3,
+          "QUERY_SENT": 3,
+          "PROVIDER_RESPONDED": 3,
+          "CANDIDATE_DISCOVERED": 22,
+          "CACHE_MISS": 16,
+          "READ_SLOT_CHARGED": 12,
+          "FETCH_STARTED": 13,
+          "HTTP_RESPONSE": 13,
+          "FETCH_COMPLETED": 11,
+          "EXTRACTION_COMPLETED": 7,
+          "FETCH_FAILED": 2,
+          "EXTRACTION_FAILED": 3,
+          "REDIRECT_RESOLVED": 1,
+          "CANDIDATE_SKIPPED": 15,
+          "EVIDENCE_REJECTED": 8,
+          "PASSAGE_REJECTED": 5,
+          "CACHE_HIT": 6,
+          "CACHE_REUSED": 6,
+          "DOCUMENT_ALREADY_READ": 6,
+          "EVIDENCE_SUPPORTED": 1,
+          "PASSAGE_SELECTED": 1,
+          "EVIDENCE_STORED": 1,
+          "SYNTHESIS_STARTED": 1,
+          "SYNTHESIS_COMPLETED": 1,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "TAMANHO": 1,
+          "TOPIC_MISMATCH": 8,
+          "NO_ANSWER_PASSAGE": 5,
+          "TIPO_BLOQUEADO": 1,
+          "EXTRACTIVE": 2,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 12,
+        "read_source_refs": 7,
+        "legacy_support_bindings_not_verified": true
+      }
+    },
+    {
+      "case": {
+        "id": "eff-03",
+        "category": "history",
+        "query": "Quais foram as causas e consequências da Cabanagem?"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "ddg",
+          "query": "Cabanagem Causas",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Cabanagem Causas",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Cabanagem Causas",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Cabanagem Causas",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Cabanagem Consequências",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Cabanagem Consequências",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Cabanagem Consequências",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Cabanagem Consequências",
+          "candidates": 6
+        }
+      ],
+      "budget_used": {
+        "buscas": 2,
+        "paginas": 12,
+        "replans": 0
+      },
+      "read_evidence_count": 0,
+      "evidence_count": 0,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 2,
+          "QUERY_SENT": 2,
+          "PROVIDER_RESPONDED": 2,
+          "CANDIDATE_DISCOVERED": 12,
+          "CACHE_MISS": 6,
+          "READ_SLOT_CHARGED": 12,
+          "FETCH_STARTED": 12,
+          "HTTP_RESPONSE": 12,
+          "FETCH_COMPLETED": 12,
+          "EXTRACTION_COMPLETED": 12,
+          "CANDIDATE_SKIPPED": 6,
+          "PASSAGE_REJECTED": 9,
+          "EVIDENCE_REJECTED": 9,
+          "CACHE_HIT": 6,
+          "CACHE_REUSED": 6,
+          "DOCUMENT_ALREADY_READ": 6,
+          "SYNTHESIS_STARTED": 1,
+          "SYNTHESIS_COMPLETED": 1,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "NO_ANSWER_PASSAGE": 9,
+          "TOPIC_MISMATCH": 9,
+          "EXTRACTIVE": 2,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 12,
+        "read_source_refs": 12,
+        "legacy_support_bindings_not_verified": true
+      }
+    },
+    {
+      "case": {
+        "id": "eff-04",
+        "category": "local_news",
+        "query": "Notícias de saúde em Irecê, Bahia, nos últimos sete dias"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "web",
+          "query": "Notícias de saúde em Irecê, Bahia, nos últimos sete dias",
+          "candidates": 11
+        },
+        {
+          "provider": "web",
+          "query": "\"Sebrae realiza evento Potência PCD em Seabra e Irecê - Agência Sebrae de Notícias\" Notícias de saúde em Irecê, Bahia, nos últimos sete dias primary source original text",
+          "candidates": 5
+        },
+        {
+          "provider": "web",
+          "query": "Notícias de saúde em Irecê, Bahia, nos últimos sete dias fontes primárias texto completo",
+          "candidates": 11
+        }
+      ],
+      "budget_used": {
+        "buscas": 3,
+        "paginas": 5,
+        "replans": 1
+      },
+      "read_evidence_count": 0,
+      "evidence_count": 6,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "\"Sebrae realiza evento Potência PCD em Seabra e Irecê - Agência Sebrae de Notícias\" Notícias de saúde em Irecê, Bahia, nos últimos sete dias primary source orig fontes primárias texto completo",
+          "Notícias de saúde em Irecê, Bahia, nos últimos sete dias fontes primárias texto completo",
+          "seabra irecê agência sebrae notícias notícias saúde irecê eventos culturais"
+        ],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 3,
+          "QUERY_SENT": 3,
+          "PROVIDER_RESPONDED": 3,
+          "CANDIDATE_DISCOVERED": 27,
+          "SKIPPED_AGGREGATOR": 12,
+          "CACHE_MISS": 7,
+          "READ_SLOT_CHARGED": 5,
+          "FETCH_STARTED": 6,
+          "HTTP_RESPONSE": 6,
+          "FETCH_BLOCKED": 1,
+          "FETCH_COMPLETED": 4,
+          "EXTRACTION_COMPLETED": 4,
+          "REDIRECT_RESOLVED": 1,
+          "EVIDENCE_REJECTED": 12,
+          "DISCOVERY_ONLY": 6,
+          "SYNTHESIS_STARTED": 2,
+          "SYNTHESIS_COMPLETED": 2,
+          "REPLAN_STARTED": 1,
+          "CACHE_HIT": 8,
+          "CACHE_REUSED": 8,
+          "DOCUMENT_ALREADY_READ": 8,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "BLOQUEADO": 1,
+          "ENTITY_MISMATCH,INCOMPLETE_EVIDENCE": 3,
+          "ENTITY_MISMATCH,SOURCE_MISMATCH,TEMPORAL_MISMATCH": 3,
+          "ENTITY_MISMATCH,SOURCE_MISMATCH,INCOMPLETE_EVIDENCE,INDEX_PAGE": 6,
+          "EXTRACTIVE": 4,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 5,
+        "read_source_refs": 4,
+        "legacy_support_bindings_not_verified": true
+      }
+    },
+    {
+      "case": {
+        "id": "eff-05",
+        "category": "place",
+        "query": "Quais são as regras oficiais de visitação do Parque Nacional da Chapada Diamantina?"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "ddg",
+          "query": "Quais são as regras oficiais de visitação do Parque Nacional da Chapada Diamantina",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Quais são as regras oficiais de visitação do Parque Nacional da Chapada Diamantina",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quais são as regras oficiais de visitação do Parque Nacional da Chapada Diamantina",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Quais são as regras oficiais de visitação do Parque Nacional da Chapada Diamantina",
+          "candidates": 12
+        },
+        {
+          "provider": "ddg",
+          "query": "regras oficiais de visitação do Parque Nacional da Chapada Diamantina",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "regras oficiais de visitação do Parque Nacional da Chapada Diamantina",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "regras oficiais de visitação do Parque Nacional da Chapada Diamantina",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "regras oficiais de visitação do Parque Nacional da Chapada Diamantina",
+          "candidates": 6
+        }
+      ],
+      "budget_used": {
+        "buscas": 2,
+        "paginas": 12,
+        "replans": 0
+      },
+      "read_evidence_count": 0,
+      "evidence_count": 0,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Quais são as regras oficiais de visitação do Parque Nacional da Chapada Diamantina? primary source original text",
+          "Quais são as regras oficiais de visitação do Parque Nacional da Chapada Diamantina fontes primárias texto completo",
+          "regras visitação parque nacional chapada diamantina"
+        ],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 2,
+          "QUERY_SENT": 2,
+          "PROVIDER_RESPONDED": 2,
+          "CANDIDATE_DISCOVERED": 18,
+          "CACHE_MISS": 12,
+          "READ_SLOT_CHARGED": 12,
+          "FETCH_STARTED": 13,
+          "HTTP_RESPONSE": 13,
+          "FETCH_COMPLETED": 11,
+          "EXTRACTION_COMPLETED": 11,
+          "FETCH_BLOCKED": 1,
+          "REDIRECT_RESOLVED": 1,
+          "EVIDENCE_REJECTED": 11,
+          "SYNTHESIS_STARTED": 1,
+          "SYNTHESIS_COMPLETED": 1,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "BLOQUEADO": 1,
+          "ENTITY_MISMATCH": 11,
+          "EXTRACTIVE": 2,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 12,
+        "read_source_refs": 11,
+        "legacy_support_bindings_not_verified": true
+      }
+    },
+    {
+      "case": {
+        "id": "eff-06",
+        "category": "product",
+        "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza?"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "ddg",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza?",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza?",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza?",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza?",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? Peso e unidade",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? Peso e unidade",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? Peso e unidade",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? Peso e unidade",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? unidade",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? unidade",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? unidade",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? unidade",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? Bateria",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? Bateria",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? Bateria",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Qual o peso da Nikon Z50II com bateria e cartão e qual bateria utiliza? Bateria",
+          "candidates": 6
+        }
+      ],
+      "budget_used": {
+        "buscas": 5,
+        "paginas": 7,
+        "replans": 1
+      },
+      "read_evidence_count": 0,
+      "evidence_count": 0,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 5,
+          "QUERY_SENT": 5,
+          "PROVIDER_RESPONDED": 5,
+          "CANDIDATE_DISCOVERED": 30,
+          "CACHE_MISS": 6,
+          "READ_SLOT_CHARGED": 7,
+          "FETCH_STARTED": 7,
+          "HTTP_RESPONSE": 7,
+          "FETCH_COMPLETED": 7,
+          "EXTRACTION_COMPLETED": 7,
+          "EVIDENCE_REJECTED": 19,
+          "SYNTHESIS_STARTED": 2,
+          "SYNTHESIS_COMPLETED": 2,
+          "REPLAN_STARTED": 1,
+          "CACHE_HIT": 12,
+          "CACHE_REUSED": 12,
+          "DOCUMENT_ALREADY_READ": 12,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "ENTITY_MISMATCH": 19,
+          "EXTRACTIVE": 4,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 7,
+        "read_source_refs": 7,
+        "legacy_support_bindings_not_verified": true
+      }
+    },
+    {
+      "case": {
+        "id": "eff-07",
+        "category": "event",
+        "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas?"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "ddg",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas?",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas?",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas?",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas?",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas? primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas? primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas? primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas? primary source original text",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas fontes primárias texto completo",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas? fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas? fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas? fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas? fontes primárias texto completo",
+          "candidates": 6
+        }
+      ],
+      "budget_used": {
+        "buscas": 5,
+        "paginas": 6,
+        "replans": 1
+      },
+      "read_evidence_count": 0,
+      "evidence_count": 0,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas fontes primárias texto completo",
+          "Qual a programação oficial da Festa Literária Internacional de Paraty em 2026 e suas datas? primary source original text fontes primárias texto completo",
+          "programação festa literária internacional paraty 2026 suas datas",
+          "programação festa literária internacional paraty 2026 suas datas primary source original text",
+          "programação festa literária internacional paraty 2026 suas datas primárias texto completo"
+        ],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 5,
+          "QUERY_SENT": 5,
+          "PROVIDER_RESPONDED": 5,
+          "CANDIDATE_DISCOVERED": 30,
+          "CACHE_MISS": 6,
+          "READ_SLOT_CHARGED": 6,
+          "FETCH_STARTED": 6,
+          "HTTP_RESPONSE": 6,
+          "FETCH_COMPLETED": 6,
+          "EXTRACTION_COMPLETED": 6,
+          "EVIDENCE_REJECTED": 18,
+          "SYNTHESIS_STARTED": 2,
+          "SYNTHESIS_COMPLETED": 2,
+          "REPLAN_STARTED": 1,
+          "CACHE_HIT": 12,
+          "CACHE_REUSED": 12,
+          "DOCUMENT_ALREADY_READ": 12,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "ENTITY_MISMATCH": 18,
+          "EXTRACTIVE": 4,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 6,
+        "read_source_refs": 6,
+        "legacy_support_bindings_not_verified": true
+      }
+    },
+    {
+      "case": {
+        "id": "eff-08",
+        "category": "comparison",
+        "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "ddg",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4 primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4 primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4 primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4 primary source original text",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4 fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4 fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4 fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4 fontes primárias texto completo",
+          "candidates": 6
+        }
+      ],
+      "budget_used": {
+        "buscas": 3,
+        "paginas": 6,
+        "replans": 1
+      },
+      "read_evidence_count": 0,
+      "evidence_count": 0,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4 fontes primárias texto completo",
+          "Compare os requisitos documentados de velocidade e compatibilidade de USB4 e Thunderbolt 4 primary source original text fontes primárias texto completo",
+          "requisitos documentados velocidade compatibilidade usb4 thunderbolt",
+          "requisitos documentados velocidade compatibilidade usb4 thunderbolt primary source original text",
+          "requisitos documentados velocidade compatibilidade usb4 thunderbolt primárias texto completo"
+        ],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 3,
+          "QUERY_SENT": 3,
+          "PROVIDER_RESPONDED": 3,
+          "CANDIDATE_DISCOVERED": 18,
+          "CACHE_MISS": 10,
+          "READ_SLOT_CHARGED": 6,
+          "FETCH_STARTED": 6,
+          "HTTP_RESPONSE": 6,
+          "FETCH_BLOCKED": 2,
+          "FETCH_COMPLETED": 4,
+          "EXTRACTION_COMPLETED": 4,
+          "EVIDENCE_REJECTED": 12,
+          "SYNTHESIS_STARTED": 2,
+          "SYNTHESIS_COMPLETED": 2,
+          "REPLAN_STARTED": 1,
+          "CACHE_HIT": 8,
+          "CACHE_REUSED": 8,
+          "DOCUMENT_ALREADY_READ": 8,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "BLOQUEADO": 2,
+          "ENTITY_MISMATCH": 12,
+          "EXTRACTIVE": 4,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 6,
+        "read_source_refs": 4,
+        "legacy_support_bindings_not_verified": true
+      }
+    },
+    {
+      "case": {
+        "id": "eff-09",
+        "category": "ambiguous_entity",
+        "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "ddg",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta primary source original text",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta fontes primárias texto completo",
+          "candidates": 6
+        }
+      ],
+      "budget_used": {
+        "buscas": 3,
+        "paginas": 6,
+        "replans": 1
+      },
+      "read_evidence_count": 0,
+      "evidence_count": 0,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta fontes primárias texto completo",
+          "História da Mercury fabricante de automóveis, excluindo informações sobre o planeta primary source original text fontes primárias texto completo",
+          "Mercury fabricante de automóveis, excluindo informações sobre o planeta",
+          "Mercury fabricante de automóveis, excluindo informações sobre o planeta fontes primárias texto completo",
+          "Mercury fabricante de automóveis, excluindo informações sobre o planeta primary source original text",
+          "história mercury fabricante automóveis excluindo informações planeta"
+        ],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 3,
+          "QUERY_SENT": 3,
+          "PROVIDER_RESPONDED": 3,
+          "CANDIDATE_DISCOVERED": 18,
+          "CACHE_MISS": 6,
+          "READ_SLOT_CHARGED": 6,
+          "FETCH_STARTED": 9,
+          "HTTP_RESPONSE": 9,
+          "REDIRECT_RESOLVED": 3,
+          "FETCH_COMPLETED": 6,
+          "EXTRACTION_COMPLETED": 6,
+          "EVIDENCE_REJECTED": 18,
+          "SYNTHESIS_STARTED": 2,
+          "SYNTHESIS_COMPLETED": 2,
+          "REPLAN_STARTED": 1,
+          "CACHE_HIT": 12,
+          "CACHE_REUSED": 12,
+          "DOCUMENT_ALREADY_READ": 12,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "TOPIC_MISMATCH": 18,
+          "EXTRACTIVE": 4,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 6,
+        "read_source_refs": 6,
+        "legacy_support_bindings_not_verified": true
+      }
+    },
+    {
+      "case": {
+        "id": "eff-10",
+        "category": "multiple_facets",
+        "query": "Como funciona asyncio.StreamReader.readline, qual sua sintaxe, retorno e limites na documentação oficial do Python?"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "web",
+          "query": "asyncio.StreamReader.readline Sintaxe ou assinatura documentação oficial",
+          "candidates": 13
+        },
+        {
+          "provider": "web",
+          "query": "asyncio.StreamReader.readline Comportamento da operação documentação oficial",
+          "candidates": 13
+        }
+      ],
+      "budget_used": {
+        "buscas": 2,
+        "paginas": 12,
+        "replans": 0
+      },
+      "read_evidence_count": 0,
+      "evidence_count": 0,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "asyncio.StreamReader.readline Sintaxe ou assinatura",
+          "asyncio.StreamReader.readline Comportamento da operação"
+        ],
+        "source_authority_unverified": true,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 2,
+          "QUERY_SENT": 2,
+          "PROVIDER_RESPONDED": 2,
+          "CANDIDATE_DISCOVERED": 26,
+          "CACHE_MISS": 25,
+          "READ_SLOT_CHARGED": 12,
+          "FETCH_STARTED": 13,
+          "HTTP_RESPONSE": 13,
+          "FETCH_COMPLETED": 11,
+          "EXTRACTION_COMPLETED": 11,
+          "FETCH_BLOCKED": 1,
+          "REDIRECT_RESOLVED": 1,
+          "CANDIDATE_SKIPPED": 18,
+          "EVIDENCE_REJECTED": 12,
+          "CACHE_HIT": 1,
+          "CACHE_REUSED": 1,
+          "DOCUMENT_ALREADY_READ": 1,
+          "SYNTHESIS_STARTED": 1,
+          "SYNTHESIS_COMPLETED": 1,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "BLOQUEADO": 1,
+          "ENTITY_MISMATCH": 11,
+          "TOPIC_MISMATCH": 1,
+          "EXTRACTIVE": 2,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 12,
+        "read_source_refs": 11,
+        "legacy_support_bindings_not_verified": true
+      }
+    },
+    {
+      "case": {
+        "id": "eff-11",
+        "category": "scarce",
+        "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público?"
+      },
+      "dataset_sha256": "3ad2f7d66a35889cfdc22d1ac65c10609c651de4f7a887e91a1873d152081949",
+      "source_revision": "ff486edbc8b06a5db297bd735abcb64323542fb7",
+      "source_sha256": {
+        "query_intelligence.py": "3166adafe363977e06622050dba094571b0f3bd1e06a151140530b398d6c76f7",
+        "research.py": "d062f3f074204a6e7b930dfd647deac6c309aa09149485ba733c710362493b3b",
+        "research_agents.py": "f7d1ea150ecaa93ea1ea829de41bfbb3f93fea2112d5506ac5950c2126c71a0f",
+        "retrieval_trace.py": "b14c326a719b98809935c3b27c6c41124a31cae82ccaddcd3764a4fabeba38f3"
+      },
+      "provider_calls": [
+        {
+          "provider": "ddg",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público? primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público? primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público? primary source original text",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público? primary source original text",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público fontes primárias texto completo",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público fontes primárias texto completo",
+          "candidates": 6
+        },
+        {
+          "provider": "ddg",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público 2026",
+          "candidates": 0
+        },
+        {
+          "provider": "searxng",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público 2026",
+          "candidates": 0
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público 2026",
+          "candidates": 0
+        },
+        {
+          "provider": "web",
+          "query": "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público 2026",
+          "candidates": 6
+        }
+      ],
+      "budget_used": {
+        "buscas": 4,
+        "paginas": 6,
+        "replans": 1
+      },
+      "read_evidence_count": 0,
+      "evidence_count": 0,
+      "status": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público fontes primárias texto completo",
+          "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público 2026 fontes primárias texto completo",
+          "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público? primary source original text fontes primárias texto completo",
+          "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público 2026 2026",
+          "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público fontes primárias texto completo 2026",
+          "Quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público? primary source original text 2026"
+        ],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "trace": {
+        "events": {
+          "QUERY_CREATED": 4,
+          "QUERY_SENT": 4,
+          "PROVIDER_RESPONDED": 4,
+          "CANDIDATE_DISCOVERED": 24,
+          "CACHE_MISS": 9,
+          "READ_SLOT_CHARGED": 6,
+          "FETCH_STARTED": 6,
+          "FETCH_FAILED": 2,
+          "HTTP_RESPONSE": 5,
+          "FETCH_COMPLETED": 5,
+          "EXTRACTION_COMPLETED": 5,
+          "EVIDENCE_REJECTED": 20,
+          "SYNTHESIS_STARTED": 2,
+          "SYNTHESIS_COMPLETED": 2,
+          "REPLAN_STARTED": 1,
+          "CACHE_HIT": 15,
+          "CACHE_REUSED": 15,
+          "DOCUMENT_ALREADY_READ": 15,
+          "JOB_TERMINAL": 1
+        },
+        "reasons": {
+          "REDE": 1,
+          "ENTITY_MISMATCH": 20,
+          "EXTRACTIVE": 4,
+          "RESEARCH_COMPLETED": 1
+        },
+        "charged": 6,
+        "read_source_refs": 5,
+        "legacy_support_bindings_not_verified": true
+      }
+    }
+  ]
+}

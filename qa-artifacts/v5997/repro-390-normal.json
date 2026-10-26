@@ -1,0 +1,49 @@
+{
+  "scope": "REAL_CHROME_RESPONSIVE_TRANSITION_DIAGNOSTIC",
+  "immediate": {
+    "viewport": 390,
+    "root": 390,
+    "card": {
+      "x": 20,
+      "right": 370,
+      "width": 350
+    },
+    "drawer": {
+      "x": -307.3134460449219,
+      "right": 12.686553955078125,
+      "width": 320
+    },
+    "animations": [
+      {
+        "target": "drawer",
+        "playState": "running",
+        "iterations": 1
+      },
+      {
+        "target": "send-button",
+        "playState": "running",
+        "iterations": 1
+      },
+      {
+        "target": "send-button",
+        "playState": "running",
+        "iterations": 1
+      }
+    ]
+  },
+  "stable": {
+    "viewport": 390,
+    "root": 390,
+    "card": {
+      "x": 20,
+      "right": 370,
+      "width": 350
+    },
+    "drawer": {
+      "x": -326.3999938964844,
+      "right": -6.399993896484375,
+      "width": 320
+    },
+    "animations": []
+  }
+}

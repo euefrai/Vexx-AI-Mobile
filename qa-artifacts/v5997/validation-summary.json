@@ -1,0 +1,53 @@
+{
+  "checks": {
+    "full-suite-final-verified.log": {
+      "sha256": "f03e132586e40bc13edc8619a293fed109e7fcf026ddb7d96f2b316ba164cf2d",
+      "summary": [
+        "1683 passed, 4 skipped, 2 warnings in 154.68s (0:02:34)"
+      ]
+    },
+    "trace-completion-focused.log": {
+      "sha256": "15fd2f0dec9893bcde77c87e05ea91672fa09f46d6b4408bbd2f5542df33df6f",
+      "summary": [
+        "81 passed in 3.79s"
+      ]
+    },
+    "baseline-search.log": {
+      "sha256": "93539a2b6b6a712e8bb2e167079648d2756e94ec9c36bb180442463a0ccebbde",
+      "summary": []
+    },
+    "baseline-shopping.log": {
+      "sha256": "0b19c961a591470341ca2dc08182886190274a8223c0054a74b30300b7d4bdaf",
+      "summary": []
+    },
+    "baseline-experience.log": {
+      "sha256": "6c4e14a14ae3eb54019d4ac18113ff5482875951d17b1c1d5fd1f1a2d7cccfb3",
+      "summary": [
+        "resultado: 16/16 checagens ok"
+      ]
+    },
+    "reproduction-before.log": {
+      "sha256": "974d2218445ae74890934c96e9644744320e6a911150211c70d0d101e42e0f51",
+      "summary": [
+        "3 failed, 1 passed in 0.83s"
+      ]
+    },
+    "retention-reproduction.log": {
+      "sha256": "a92852c5eeb5ce8518bef694989a0ab836fb3c0bf9718df8bdbf1bcb7d81c20a",
+      "summary": [
+        "1 failed, 7 passed in 0.95s"
+      ]
+    },
+    "full-suite.log": {
+      "sha256": "7e7a1212c50d21731240e66f037586cebcc383a75bb1547dfe0f7e88c271fed4",
+      "summary": [
+        "1 failed, 1679 passed, 4 skipped, 2 warnings in 163.77s (0:02:43)"
+      ]
+    }
+  },
+  "baselines": {
+    "search": "34/34",
+    "shopping": "59/59",
+    "experience": "16/16"
+  }
+}

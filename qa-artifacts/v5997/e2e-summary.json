@@ -1,0 +1,681 @@
+{
+  "scope": "AUTHENTICATED_REAL_AGENT_TEMPORARY_SQLITE",
+  "cases": [
+    {
+      "name": "technical",
+      "query": "Pesquisa profunda sobre como usar Object.assign, qual sua sintaxe, comportamento e valor retornado. Use documentação original.",
+      "seconds": 27.217,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-3a8232de35a4",
+      "job_state": "interrompida",
+      "outcome": {
+        "state": "blocked",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "timeout",
+        "read_sources": 3,
+        "reason": "redação ou revisão bloqueada pelo provedor; evidências preservadas"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-3a8232de35a4-result",
+      "synthesis_budget": {
+        "source_count": 3,
+        "context_chars": 2751,
+        "timeout_seconds": 25,
+        "attempts": 1
+      },
+      "stage_timings": [
+        {
+          "step_id": "p1",
+          "type": "busca",
+          "seconds": 3.7904
+        },
+        {
+          "step_id": "p4",
+          "type": "busca",
+          "seconds": 1.5894
+        },
+        {
+          "step_id": "p7",
+          "type": "busca",
+          "seconds": 1.6602
+        },
+        {
+          "step_id": "p2",
+          "type": "ler",
+          "seconds": 3.0681
+        },
+        {
+          "step_id": "p5",
+          "type": "ler",
+          "seconds": 0.0117
+        },
+        {
+          "step_id": "p8",
+          "type": "ler",
+          "seconds": 0.012
+        },
+        {
+          "step_id": "p3",
+          "type": "analisar",
+          "seconds": 0.0097
+        },
+        {
+          "step_id": "p6",
+          "type": "analisar",
+          "seconds": 0.0074
+        },
+        {
+          "step_id": "p9",
+          "type": "analisar",
+          "seconds": 0.0073
+        },
+        {
+          "step_id": "p10",
+          "type": "verificar",
+          "seconds": 0.0215
+        },
+        {
+          "step_id": "p11",
+          "type": "sintetizar",
+          "seconds": 0.0007
+        },
+        {
+          "step_id": "p12",
+          "type": "auditar",
+          "seconds": 0.0014
+        }
+      ],
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "source_card_count": 3,
+      "links": [
+        {
+          "text": "Object.assign() - JavaScript | MDN",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object/assign"
+        },
+        {
+          "text": "Object.assign() - JavaScript | MDN",
+          "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Object/assign"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Object/assign"
+        },
+        {
+          "text": "Object - JavaScript | MDN",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Object"
+        }
+      ],
+      "page_errors": [],
+      "coverage": [
+        {
+          "id": "R-5d1819fefc50",
+          "description": "Sintaxe ou assinatura",
+          "state": "SUPPORTED"
+        },
+        {
+          "id": "R-94b1ef2276c4",
+          "description": "Valor retornado",
+          "state": "PARTIALLY_SUPPORTED"
+        },
+        {
+          "id": "R-afd8b98f526b",
+          "description": "Comportamento da operação",
+          "state": "DISCOVERED"
+        }
+      ]
+    },
+    {
+      "name": "company",
+      "query": "Pesquisa profunda sobre quando a WEG foi fundada, quem a fundou e quais produtos fabrica.",
+      "seconds": 11.139,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-83f22783e90a",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-83f22783e90a-result",
+      "synthesis_budget": null,
+      "stage_timings": [
+        {
+          "step_id": "p1",
+          "type": "busca",
+          "seconds": 0.906
+        },
+        {
+          "step_id": "p4",
+          "type": "busca",
+          "seconds": 1.7364
+        },
+        {
+          "step_id": "p7",
+          "type": "busca",
+          "seconds": 0.8712
+        },
+        {
+          "step_id": "p2",
+          "type": "ler",
+          "seconds": 3.4085
+        },
+        {
+          "step_id": "p5",
+          "type": "ler",
+          "seconds": 0.5972
+        },
+        {
+          "step_id": "p8",
+          "type": "ler",
+          "seconds": 0.5986
+        },
+        {
+          "step_id": "p3",
+          "type": "analisar",
+          "seconds": 0.0017
+        },
+        {
+          "step_id": "p6",
+          "type": "analisar",
+          "seconds": 0.0018
+        },
+        {
+          "step_id": "p9",
+          "type": "analisar",
+          "seconds": 0.0017
+        },
+        {
+          "step_id": "p10",
+          "type": "verificar",
+          "seconds": 0.0033
+        },
+        {
+          "step_id": "p11",
+          "type": "sintetizar",
+          "seconds": 0.0016
+        },
+        {
+          "step_id": "p12",
+          "type": "auditar",
+          "seconds": 0.0045
+        }
+      ],
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "source_card_count": 0,
+      "links": [],
+      "page_errors": [],
+      "coverage": [
+        {
+          "id": "R-b0468e5f7eb9",
+          "description": "Fundadores",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "id": "R-688a96dd62f4",
+          "description": "Data de fundação",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "id": "R-8958eb618322",
+          "description": "Produtos",
+          "state": "NOT_SEARCHED"
+        }
+      ]
+    },
+    {
+      "name": "history",
+      "query": "Pesquisa profunda sobre as causas e consequências da Revolta da Chibata.",
+      "seconds": 15.747,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-2e1d2ddc160b",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-2e1d2ddc160b-result",
+      "synthesis_budget": null,
+      "stage_timings": [
+        {
+          "step_id": "p1",
+          "type": "busca",
+          "seconds": 1.9687
+        },
+        {
+          "step_id": "p4",
+          "type": "busca",
+          "seconds": 2.0222
+        },
+        {
+          "step_id": "p2",
+          "type": "ler",
+          "seconds": 3.938
+        },
+        {
+          "step_id": "p5",
+          "type": "ler",
+          "seconds": 2.6724
+        },
+        {
+          "step_id": "p3",
+          "type": "analisar",
+          "seconds": 0.0009
+        },
+        {
+          "step_id": "p6",
+          "type": "analisar",
+          "seconds": 0.0008
+        },
+        {
+          "step_id": "p7",
+          "type": "verificar",
+          "seconds": 0.0037
+        },
+        {
+          "step_id": "p8",
+          "type": "sintetizar",
+          "seconds": 0.0006
+        },
+        {
+          "step_id": "p9",
+          "type": "auditar",
+          "seconds": 0.0021
+        }
+      ],
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "source_card_count": 0,
+      "links": [],
+      "page_errors": [],
+      "coverage": [
+        {
+          "id": "R-f547f2d9e4b0",
+          "description": "Causas",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "id": "R-9eb291251d9e",
+          "description": "Consequências",
+          "state": "NOT_SEARCHED"
+        }
+      ]
+    },
+    {
+      "name": "local-news",
+      "query": "Pesquisa profunda sobre notícias de saúde em Irecê, Bahia, nos últimos sete dias.",
+      "seconds": 15.812,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-f379f747f948",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "\"Sebrae realiza evento Potência PCD em Seabra e Irecê - Agência Sebrae de Notícias\" notícias de saúde em Irecê, Bahia, nos últimos sete dias primary source orig fontes primárias texto completo",
+          "notícias de saúde em Irecê, Bahia, nos últimos sete dias fontes primárias texto completo",
+          "seabra irecê agência sebrae notícias notícias saúde irecê eventos culturais"
+        ],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-f379f747f948-result",
+      "synthesis_budget": null,
+      "stage_timings": [
+        {
+          "step_id": "p1",
+          "type": "busca",
+          "seconds": 2.6418
+        },
+        {
+          "step_id": "p2",
+          "type": "ler",
+          "seconds": 0.0237
+        },
+        {
+          "step_id": "p3",
+          "type": "analisar",
+          "seconds": 0.0011
+        },
+        {
+          "step_id": "p4",
+          "type": "verificar",
+          "seconds": 0.0036
+        },
+        {
+          "step_id": "p5",
+          "type": "sintetizar",
+          "seconds": 0.0004
+        },
+        {
+          "step_id": "p6",
+          "type": "auditar",
+          "seconds": 0.0012
+        },
+        {
+          "step_id": "p7",
+          "type": "busca",
+          "seconds": 3.4723
+        },
+        {
+          "step_id": "p8",
+          "type": "ler",
+          "seconds": 2.7634
+        },
+        {
+          "step_id": "p9",
+          "type": "analisar",
+          "seconds": 0.0015
+        },
+        {
+          "step_id": "p10",
+          "type": "busca",
+          "seconds": 1.9661
+        },
+        {
+          "step_id": "p11",
+          "type": "ler",
+          "seconds": 0.0342
+        },
+        {
+          "step_id": "p12",
+          "type": "analisar",
+          "seconds": 0.0011
+        },
+        {
+          "step_id": "p4",
+          "type": "verificar",
+          "seconds": 0.0027
+        },
+        {
+          "step_id": "p5",
+          "type": "sintetizar",
+          "seconds": 0.0004
+        },
+        {
+          "step_id": "p6",
+          "type": "auditar",
+          "seconds": 0.0011
+        }
+      ],
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "source_card_count": 6,
+      "links": [
+        {
+          "text": "95ª zona eleitoral de Irecê (BA): votos por local de votação no 2º turno - G1",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNZGR0bXlJRkd0RFhKVHpta1NEa3NoWnJhLURzRkVCRjZ3QzEzYzlGMERMbmkyMjJOeWRXMTk1N1M0SlRLQnU3bzVZQWtrYnA0LVdnQ0ZDSXY5UUZmeURJazlYbFRaSmMtVGZwZ0pFVWlDZFN4WHp0a1BUX2ZjOUNtaFBSVEVEN1J1UF9zUzZwZTAza0thWlNDUnhzSFprQzAyeGNfMngwNTViZVlocEdHUkJCd1lwaHJKUkYtUWpuaXFjUlJwMDBVaGdMOVVCaDdWM2dMadIB4wFBVV95cUxPUmN0T2F2bGpkeU1aLXVxejVaYmZzVGxOLUNFWi1WVE9VMHVoZzlYSVQyRE01REMtbkRxRXJ5dzNNUGoxbEgwaF9BcFlrb2NNQ19UekF1SEVUdDhFQVJRNzM0ZXlPTkljSWlZVS1rVkE5aEI0a3BNZzVCRk45a0d"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNZGR0bXlJRkd0RFhKVHpta1NEa3NoWnJhLURzRkVCRjZ3QzEzYzlGMERMbmkyMjJOeWRXMTk1N1M0SlRLQnU3bzVZQWtrYnA0LVdnQ0ZDSXY5UUZmeURJazlYbFRaSmMtVGZwZ0pFVWlDZFN4WHp0a1BUX2ZjOUNtaFBSVEVEN1J1UF9zUzZwZTAza0thWlNDUnhzSFprQzAyeGNfMngwNTViZVlocEdHUkJCd1lwaHJKUkYtUWpuaXFjUlJwMDBVaGdMOVVCaDdWM2dMadIB4wFBVV95cUxPUmN0T2F2bGpkeU1aLXVxejVaYmZzVGxOLUNFWi1WVE9VMHVoZzlYSVQyRE01REMtbkRxRXJ5dzNNUGoxbEgwaF9BcFlrb2NNQ19UekF1SEVUdDhFQVJRNzM0ZXlPTkljSWlZVS1rVkE5aEI0a3BNZzVCRk45a0d"
+        },
+        {
+          "text": "Irecê (BA): resultado do local de votação por zonas eleitorais no 2º turno - G1",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPM1hmWkJkTkgyS0RFLXdIa1NDbXJVeUxwZnlOV3A0VGtYUFZGZFVxX0M4dkw5bURoZ2pXb2Y3WWZWQnBoWUV5Y2VTdVpKdXRhMVAtWEs0TVA1VDNlRGVieTlLbzdtbkctclpKcUNrYkV4NnVvUFpEU3VTRnZsZkdKTGtadEZ1bnN3N0l5dFBVZV9sRWxmV1lOUVpscmVzRmdXaWpUb0tVZnJaVzE4ZzhvZDlQbFJ0bGpiOVpqUFFpbmFpV2dPNjdqM3ZuZWl1eVVmNHA0MDZkQdIB5gFBVV95cUxNUXROVlBseTZRVUZBa2F0OVE3aGV1cXQyck1mWl9qdEhucHBOaDIwVDVudWZBTXNQRFJ3YWZxRnBzdUlkeGxTOHowVm82anVKcHIwSTliTEFOOXFVdFUtelhEYUpUcHQ3STh0WWlERUNjUWluMzdoRjlQR04"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPM1hmWkJkTkgyS0RFLXdIa1NDbXJVeUxwZnlOV3A0VGtYUFZGZFVxX0M4dkw5bURoZ2pXb2Y3WWZWQnBoWUV5Y2VTdVpKdXRhMVAtWEs0TVA1VDNlRGVieTlLbzdtbkctclpKcUNrYkV4NnVvUFpEU3VTRnZsZkdKTGtadEZ1bnN3N0l5dFBVZV9sRWxmV1lOUVpscmVzRmdXaWpUb0tVZnJaVzE4ZzhvZDlQbFJ0bGpiOVpqUFFpbmFpV2dPNjdqM3ZuZWl1eVVmNHA0MDZkQdIB5gFBVV95cUxNUXROVlBseTZRVUZBa2F0OVE3aGV1cXQyck1mWl9qdEhucHBOaDIwVDVudWZBTXNQRFJ3YWZxRnBzdUlkeGxTOHowVm82anVKcHIwSTliTEFOOXFVdFUtelhEYUpUcHQ3STh0WWlERUNjUWluMzdoRjlQR04"
+        },
+        {
+          "text": "Sebrae realiza evento Potência PCD em Seabra e Irecê - Agência Sebrae de Notícias",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQLXJDQ2J5Snk4cVhUcmFSOTM1Z0tjZDdsZ2tpZC1NWnNBYnBlbmh4NTcyVlZrVy1uWjQzSUNGY2lua3ZQNFpfVGN3S1JzS25lTzE4NGhsN29XUzRHVWRxUElybTdSRGVJcVkyREthdUQ1Xzlra2FfY3RtZUdIUmZVczltUUtjYTJITy1hQjByZ1RLeTl4LUNxRXpsUm5UbDZxd3dyVWFGWWNQVkk?oc=5"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQLXJDQ2J5Snk4cVhUcmFSOTM1Z0tjZDdsZ2tpZC1NWnNBYnBlbmh4NTcyVlZrVy1uWjQzSUNGY2lua3ZQNFpfVGN3S1JzS25lTzE4NGhsN29XUzRHVWRxUElybTdSRGVJcVkyREthdUQ1Xzlra2FfY3RtZUdIUmZVczltUUtjYTJITy1hQjByZ1RLeTl4LUNxRXpsUm5UbDZxd3dyVWFGWWNQVkk?oc=5"
+        },
+        {
+          "text": "95ª zona eleitoral de Irecê (BA): votos por local de votação no 2º turno - G1",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNZGR0bXlJRkd0RFhKVHpta1NEa3NoWnJhLURzRkVCRjZ3QzEzYzlGMERMbmkyMjJOeWRXMTk1N1M0SlRLQnU3bzVZQWtrYnA0LVdnQ0ZDSXY5UUZmeURJazlYbFRaSmMtVGZwZ0pFVWlDZFN4WHp0a1BUX2ZjOUNtaFBSVEVEN1J1UF9zUzZwZTAza0thWlNDUnhzSFprQzAyeGNfMngwNTViZVlocEdHUkJCd1lwaHJKUkYtUWpuaXFjUlJwMDBVaGdMOVVCaDdWM2dMadIB4wFBVV95cUxPUmN0T2F2bGpkeU1aLXVxejVaYmZzVGxOLUNFWi1WVE9VMHVoZzlYSVQyRE01REMtbkRxRXJ5dzNNUGoxbEgwaF9BcFlrb2NNQ19UekF1SEVUdDhFQVJRNzM0ZXlPTkljSWlZVS1rVkE5aEI0a3BNZzVCRk45a0d"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNZGR0bXlJRkd0RFhKVHpta1NEa3NoWnJhLURzRkVCRjZ3QzEzYzlGMERMbmkyMjJOeWRXMTk1N1M0SlRLQnU3bzVZQWtrYnA0LVdnQ0ZDSXY5UUZmeURJazlYbFRaSmMtVGZwZ0pFVWlDZFN4WHp0a1BUX2ZjOUNtaFBSVEVEN1J1UF9zUzZwZTAza0thWlNDUnhzSFprQzAyeGNfMngwNTViZVlocEdHUkJCd1lwaHJKUkYtUWpuaXFjUlJwMDBVaGdMOVVCaDdWM2dMadIB4wFBVV95cUxPUmN0T2F2bGpkeU1aLXVxejVaYmZzVGxOLUNFWi1WVE9VMHVoZzlYSVQyRE01REMtbkRxRXJ5dzNNUGoxbEgwaF9BcFlrb2NNQ19UekF1SEVUdDhFQVJRNzM0ZXlPTkljSWlZVS1rVkE5aEI0a3BNZzVCRk45a0d"
+        },
+        {
+          "text": "Irecê (BA): resultado do local de votação por zonas eleitorais no 2º turno - G1",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPM1hmWkJkTkgyS0RFLXdIa1NDbXJVeUxwZnlOV3A0VGtYUFZGZFVxX0M4dkw5bURoZ2pXb2Y3WWZWQnBoWUV5Y2VTdVpKdXRhMVAtWEs0TVA1VDNlRGVieTlLbzdtbkctclpKcUNrYkV4NnVvUFpEU3VTRnZsZkdKTGtadEZ1bnN3N0l5dFBVZV9sRWxmV1lOUVpscmVzRmdXaWpUb0tVZnJaVzE4ZzhvZDlQbFJ0bGpiOVpqUFFpbmFpV2dPNjdqM3ZuZWl1eVVmNHA0MDZkQdIB5gFBVV95cUxNUXROVlBseTZRVUZBa2F0OVE3aGV1cXQyck1mWl9qdEhucHBOaDIwVDVudWZBTXNQRFJ3YWZxRnBzdUlkeGxTOHowVm82anVKcHIwSTliTEFOOXFVdFUtelhEYUpUcHQ3STh0WWlERUNjUWluMzdoRjlQR04"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxPM1hmWkJkTkgyS0RFLXdIa1NDbXJVeUxwZnlOV3A0VGtYUFZGZFVxX0M4dkw5bURoZ2pXb2Y3WWZWQnBoWUV5Y2VTdVpKdXRhMVAtWEs0TVA1VDNlRGVieTlLbzdtbkctclpKcUNrYkV4NnVvUFpEU3VTRnZsZkdKTGtadEZ1bnN3N0l5dFBVZV9sRWxmV1lOUVpscmVzRmdXaWpUb0tVZnJaVzE4ZzhvZDlQbFJ0bGpiOVpqUFFpbmFpV2dPNjdqM3ZuZWl1eVVmNHA0MDZkQdIB5gFBVV95cUxNUXROVlBseTZRVUZBa2F0OVE3aGV1cXQyck1mWl9qdEhucHBOaDIwVDVudWZBTXNQRFJ3YWZxRnBzdUlkeGxTOHowVm82anVKcHIwSTliTEFOOXFVdFUtelhEYUpUcHQ3STh0WWlERUNjUWluMzdoRjlQR04"
+        },
+        {
+          "text": "Sebrae realiza evento Potência PCD em Seabra e Irecê - Agência Sebrae de Notícias",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQLXJDQ2J5Snk4cVhUcmFSOTM1Z0tjZDdsZ2tpZC1NWnNBYnBlbmh4NTcyVlZrVy1uWjQzSUNGY2lua3ZQNFpfVGN3S1JzS25lTzE4NGhsN29XUzRHVWRxUElybTdSRGVJcVkyREthdUQ1Xzlra2FfY3RtZUdIUmZVczltUUtjYTJITy1hQjByZ1RLeTl4LUNxRXpsUm5UbDZxd3dyVWFGWWNQVkk?oc=5"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQLXJDQ2J5Snk4cVhUcmFSOTM1Z0tjZDdsZ2tpZC1NWnNBYnBlbmh4NTcyVlZrVy1uWjQzSUNGY2lua3ZQNFpfVGN3S1JzS25lTzE4NGhsN29XUzRHVWRxUElybTdSRGVJcVkyREthdUQ1Xzlra2FfY3RtZUdIUmZVczltUUtjYTJITy1hQjByZ1RLeTl4LUNxRXpsUm5UbDZxd3dyVWFGWWNQVkk?oc=5"
+        }
+      ],
+      "page_errors": [],
+      "coverage": []
+    },
+    {
+      "name": "scarce",
+      "query": "Pesquisa profunda sobre quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público.",
+      "seconds": 20.759,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-862b877a3748",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público fontes primárias texto completo",
+          "quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público 2026 fontes primárias texto completo",
+          "quantas pessoas visitaram o Museu Histórico de Jequié ontem, se existir registro público primary source original text fontes primárias texto completo",
+          "quantas pessoas visitaram museu histórico jequié ontem existir registro público",
+          "quantas pessoas visitaram museu histórico jequié ontem existir registro público 2026",
+          "quantas pessoas visitaram museu histórico jequié ontem existir registro público primary source original text",
+          "quantas pessoas visitaram museu histórico jequié ontem existir registro público primárias texto completo"
+        ],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-862b877a3748-result",
+      "synthesis_budget": null,
+      "stage_timings": [
+        {
+          "step_id": "p1",
+          "type": "busca",
+          "seconds": 2.2061
+        },
+        {
+          "step_id": "p2",
+          "type": "ler",
+          "seconds": 2.6
+        },
+        {
+          "step_id": "p3",
+          "type": "analisar",
+          "seconds": 0.0011
+        },
+        {
+          "step_id": "p4",
+          "type": "verificar",
+          "seconds": 0.0038
+        },
+        {
+          "step_id": "p5",
+          "type": "sintetizar",
+          "seconds": 0.0006
+        },
+        {
+          "step_id": "p6",
+          "type": "auditar",
+          "seconds": 0.0019
+        },
+        {
+          "step_id": "p7",
+          "type": "busca",
+          "seconds": 2.2422
+        },
+        {
+          "step_id": "p8",
+          "type": "ler",
+          "seconds": 2.7437
+        },
+        {
+          "step_id": "p9",
+          "type": "analisar",
+          "seconds": 0.001
+        },
+        {
+          "step_id": "p10",
+          "type": "busca",
+          "seconds": 3.6131
+        },
+        {
+          "step_id": "p11",
+          "type": "ler",
+          "seconds": 0.0013
+        },
+        {
+          "step_id": "p12",
+          "type": "analisar",
+          "seconds": 0.0011
+        },
+        {
+          "step_id": "p13",
+          "type": "busca",
+          "seconds": 1.9909
+        },
+        {
+          "step_id": "p14",
+          "type": "ler",
+          "seconds": 0.001
+        },
+        {
+          "step_id": "p15",
+          "type": "analisar",
+          "seconds": 0.0013
+        },
+        {
+          "step_id": "p4",
+          "type": "verificar",
+          "seconds": 0.0034
+        },
+        {
+          "step_id": "p5",
+          "type": "sintetizar",
+          "seconds": 0.0005
+        },
+        {
+          "step_id": "p6",
+          "type": "auditar",
+          "seconds": 0.0016
+        }
+      ],
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "source_card_count": 0,
+      "links": [],
+      "page_errors": [],
+      "coverage": []
+    },
+    {
+      "name": "multisource",
+      "query": "Pesquisa profunda sobre como Array.prototype.toSorted funciona, qual a sintaxe e como difere de Array.prototype.sort quanto à alteração do array original. Use documentação original e compare os comportamentos.",
+      "seconds": 10.737,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-b821339276a6",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "como Array.prototype.toSorted funciona Sintaxe ou assinatura",
+          "como Array.prototype.toSorted funciona Comportamento da operação"
+        ],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-b821339276a6-result",
+      "synthesis_budget": null,
+      "stage_timings": [
+        {
+          "step_id": "p1",
+          "type": "busca",
+          "seconds": 1.8243
+        },
+        {
+          "step_id": "p2",
+          "type": "ler",
+          "seconds": 6.2295
+        },
+        {
+          "step_id": "p3",
+          "type": "analisar",
+          "seconds": 0.0009
+        },
+        {
+          "step_id": "p4",
+          "type": "verificar",
+          "seconds": 0.0039
+        },
+        {
+          "step_id": "p5",
+          "type": "sintetizar",
+          "seconds": 0.0007
+        },
+        {
+          "step_id": "p6",
+          "type": "auditar",
+          "seconds": 0.0011
+        }
+      ],
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "source_card_count": 0,
+      "links": [],
+      "page_errors": [],
+      "coverage": [
+        {
+          "id": "R-a110c52115ba",
+          "description": "Sintaxe ou assinatura",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "id": "R-e6aefdb7b861",
+          "description": "Comportamento da operação",
+          "state": "NOT_SEARCHED"
+        }
+      ]
+    }
+  ]
+}
