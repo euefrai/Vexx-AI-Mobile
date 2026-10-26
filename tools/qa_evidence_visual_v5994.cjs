@@ -1,7 +1,7 @@
 async page => {
   if (!page.url().startsWith('http://127.0.0.1:')) throw Error('Disposable localhost QA only');
   const version=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('research-qa-config')||'null')?.version);
-  const directory='qa-artifacts/'+(['v5994','v5995','v5996','v5997'].includes(version)?version:'v5994');
+  const directory='qa-artifacts/'+(['v5994','v5995','v5996','v5997','v5998'].includes(version)?version:'v5994');
   const errors=[];
   const onError=e=>errors.push(e.message);page.on('pageerror',onError);
   const out={scope:'REAL_CHROME_LOCAL_PARTIAL_RESULT_VISUAL_NOT_COMPLETE_RESEARCH',viewports:[]};

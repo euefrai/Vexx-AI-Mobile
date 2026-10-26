@@ -27,6 +27,7 @@ def main():
     p.add_argument('--case',required=True)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--baseline',action='store_true')
+    p.add_argument('--baseline-ref',choices=['ff486ed','cc60042'],default='ff486ed')
     p.add_argument('--bundle',help='Separate frozen capture; never overwrite an earlier bundle')
     args=p.parse_args()
     if args.output.exists():raise SystemExit('Refusing to overwrite results')
@@ -34,7 +35,7 @@ def main():
     if args.baseline:
         import query_intelligence,web_extract,search_providers
         for name,module in [('query_intelligence',query_intelligence),('web_extract',web_extract),('evidence_graph',eg),('search_providers',search_providers),('search_orchestrator',orch),('research',research),('retrieval_trace',retrieval_trace),('research_agents',ra)]:
-            src=subprocess.check_output(['git','show','ff486ed:'+name+'.py'],cwd=ROOT).decode('utf-8')
+            src=subprocess.check_output(['git','show',args.baseline_ref+':'+name+'.py'],cwd=ROOT).decode('utf-8')
             exec(compile(src,'<baseline:'+name+'>','exec'),module.__dict__)
     case=next(c for c in json.loads((ROOT/'benchmarks/retrieval_v5997_dev.json').read_text(encoding='utf-8'))['queries'] if c['id']==args.case)
     if args.bundle and (not args.bundle.replace('-','').isalnum()):raise SystemExit('Invalid bundle name')
@@ -104,11 +105,15 @@ def main():
             out={'scope':'LIVE_CAPTURE' if args.capture else 'CONTROLLED_REPLAY_IDENTICAL_CANDIDATE_POOL_AND_DOCUMENTS_NOT_QUERY_QUALITY',
                  'extraction_executed':bool(not args.capture and frozen.get('raw_pages')),
                  'frozen_input_sha256':None if args.capture else hashlib.sha256((private/'capture.json').read_bytes()).hexdigest(),
-                 'baseline':args.baseline,'source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
+                 'baseline':args.baseline,'baseline_ref':args.baseline_ref if args.baseline else None,
+                 'source_head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
                  'case':case,'queries':queries,'read_calls':len(reads),'distinct_urls':len(set(map(orch.canonizar_url,reads))),
                  'slots':stored['usados']['paginas'],'evidence_count':len(evidence),'coverage':eg.compact_coverage(coverage),
                  'query_registry':stored.get('ajustes',{}).get('queries',{}),
                  'evidence':[{'id':e['id'],'url_ref':hashlib.sha256(str(e.get('url','')).encode()).hexdigest(),
+                              'excerpt_sha256':hashlib.sha256(str(e.get('trecho') or '').encode()).hexdigest(),
+                              'excerpt_chars':len(e.get('trecho') or ''),
+                              'retained_requirement_ids':list(dict.fromkeys(r for p in e.get('answer_passages',[]) for r in p.get('requirement_ids',[p.get('requirement_id')]) if r)),
                               'document_id':e.get('document_id'),'provenance':e.get('retrieval_provenance'),
                               'passage_ids':[p['id'] for p in e.get('answer_passages',[])]} for e in evidence],
                  'sqlite_bytes':db.execute('PRAGMA page_count').fetchone()[0]*db.execute('PRAGMA page_size').fetchone()[0],
