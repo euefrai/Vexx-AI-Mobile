@@ -2239,7 +2239,7 @@ def _apagar_todos_dados(db, owner: str) -> int:
                             ("documents", "owner_id"), ("doc_chunks", "owner_id"),
                             ("ui_state", "owner_id"), ("memory_events", "owner_id"),
                             ("shopping_consultas", "owner_id"),
-                            ("workspace_records", "owner_id")):
+                            ("workspace_records", "owner_id"), ("research_cache", "owner_id")):
             try:
                 cur = db.execute(f"DELETE FROM {tabela} WHERE {col}=?", (owner,))
                 total += cur.rowcount or 0
@@ -4670,6 +4670,8 @@ def _persistir_resultado_pesquisa(db, job, owner):
         db.execute("UPDATE messages SET text=?,received_at=? WHERE id=? AND owner_id=? "
                    "AND origin='mobile' AND role='assistant' AND text<>?",
                    (text,agora_iso(),reply_id,owner,text))
+    import retrieval_trace
+    retrieval_trace.record(job['id'],'',{},'JDUI_DELIVERED',reason_code='SQLITE_PERSISTED_FOR_SYNC')
     return reply_id
 
 

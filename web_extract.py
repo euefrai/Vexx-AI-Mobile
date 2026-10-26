@@ -639,6 +639,27 @@ def passage_candidates(texto, source_url='', sections=None, limit=40):
     import hashlib
     text = str(texto or '')[:TETO_TEXTO]
     out, start = [], 0
+    # Keep distinct literal sections before generic chunks can mix several
+    # headings into one span. No reconstructed text or synthetic API prefix.
+    for section in (sections or [])[:12]:
+        if not isinstance(section,dict):continue
+        title=str(section.get('titulo') or '')[:160]
+        body=str(section.get('texto') or '').strip()
+        if not title or len(body)<8:continue
+        match=re.search(re.escape(body).replace(r'\ ',r'\s+'),text)
+        if not match:continue
+        headings=list(re.finditer(re.escape(title).replace(r'\ ',r'\s+'),text[:match.start()],re.I))
+        if not headings:continue
+        heading=headings[-1]
+        if text[heading.end():match.start()].strip(' :\n\t'):continue
+        lo=heading.start();hi=min(match.end(),lo+1100)
+        while hi<match.end() and hi>lo and not text[hi-1].isspace():hi-=1
+        chunk=text[lo:hi].strip()
+        if not chunk:continue
+        out.append({'id':'P-'+hashlib.sha256((source_url+'|'+str(lo)+'|'+chunk).encode()).hexdigest()[:16],
+                    'source_url':source_url,'text':chunk,'source_role':passage_role(chunk),
+                    'text_span':{'start':lo,'end':lo+len(chunk),'scope':'returned_extracted_text'},'section':title})
+        if len(out)>=limit:return out
     while start < len(text) and len(out) < limit:
         end = min(len(text), start + 1100)
         # Separate answer explanations from unkeyed options, even when an HTML

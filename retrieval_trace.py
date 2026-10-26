@@ -8,6 +8,8 @@ from contextvars import ContextVar
 import hashlib
 import re
 import threading
+from datetime import datetime, timezone
+import math
 
 _active = ContextVar('retrieval_trace', default=None)
 _source = ContextVar('retrieval_trace_source', default=None)
@@ -27,15 +29,32 @@ def observe(limit=400):
 
 
 def record(job_id, step_id, source, state, *, charged=False, rec=None,
-           http_status=None, response_bytes=None, content_type='', request_url='', coverage=None, reason_code=''):
+           http_status=None, response_bytes=None, content_type='', request_url='', coverage=None, reason_code='',
+           duration_s=None,budget=None):
     sink = _active.get()
     if sink is None or len(sink[0]) >= sink[1]:
         return
     rec = rec or {}
+    provenance=source.get('retrieval_provenance') or {}
+    events={'SELECTED':'READ_SLOT_CHARGED' if charged else 'CANDIDATE_SELECTED',
+            'HTTP_RESPONSE':'HTTP_RESPONSE','BODY_RECEIVED':'FETCH_COMPLETED','REDIRECT_VALIDATED':'REDIRECT_RESOLVED',
+            'CONTENT_EXTRACTED':'EXTRACTION_COMPLETED','CONTENT_EMPTY':'EXTRACTION_FAILED',
+            'CACHE_REUSE':'CACHE_REUSED','SKIPPED_DUPLICATE':'DOCUMENT_DEDUPLICATED',
+            'SKIPPED_LOW_PRIORITY':'CANDIDATE_SKIPPED','BUDGET_EXHAUSTED':'CANDIDATE_SKIPPED',
+            'RELEVANCE_REJECTED':'EVIDENCE_REJECTED','PASSAGE_NOT_FOUND':'PASSAGE_REJECTED'}
     # Even path segments can contain credentials or private search terms.
     # A protected reference is sufficient for joining selection/read events.
     reference = hashlib.sha256(str(source.get('url') or '').encode()).hexdigest()
-    row = {'candidate_ref': reference,
+    row = {'candidate_ref': reference if source.get('url') else '',
+                    'candidate_id':provenance.get('candidate_id','') if re.fullmatch(r'C-[a-f0-9]{20}',str(provenance.get('candidate_id',''))) else '',
+                    'source_ref':reference if source.get('url') else '',
+                    'timestamp':datetime.now(timezone.utc).isoformat(), 'event':events.get(state,state),
+                    'duration_s':duration_s if type(duration_s) in (float,int) and math.isfinite(duration_s) and duration_s>=0 else None,
+                    'budget_consumed':{k:v for k,v in (budget or {}).items() if k in ('paginas','buscas','replans') and type(v) is int and v>=0},
+                    'query_ids':[q for q in provenance.get('query_ids',[])[:16] if re.fullmatch(r'Q-[a-f0-9]{20}',str(q))],
+                    'provider':provenance.get('provider','') if re.fullmatch(r'[a-zA-Z0-9_-]{1,40}',str(provenance.get('provider',''))) else '',
+                    'rank':provenance.get('rank') if type(provenance.get('rank')) is int and provenance['rank']>0 else None,
+                    'document_id':rec.get('document_id','') if re.fullmatch(r'D-[a-f0-9]{24}',str(rec.get('document_id',''))) else '',
                     'job_ref': hashlib.sha256(str(job_id).encode()).hexdigest(),
                     'step_ref': hashlib.sha256(str(step_id).encode()).hexdigest(),
                     'state': state, 'slot_charged': bool(charged),
@@ -48,10 +67,29 @@ def record(job_id, step_id, source, state, *, charged=False, rec=None,
                     'request_ref': hashlib.sha256(request_url.encode()).hexdigest() if request_url else '',
                     'useful_passages': len((coverage or {}).get('passages', [])),
                     'requirement_ids': [r['id'] for r in (coverage or {}).get('requirements', [])
-                                        if re.fullmatch(r'R-[a-f0-9]{12}', str(r.get('id', '')))]}
+                                        if re.fullmatch(r'R-[a-f0-9]{12}', str(r.get('id', '')))] or
+                                       [r for r in provenance.get('requirement_ids',[])[:16] if re.fullmatch(r'R-[a-f0-9]{12}',str(r))],
+                    'passage_ids':list(dict.fromkeys(p['id'] for p in (coverage or {}).get('passages',[])
+                                                    if re.fullmatch(r'P-[a-f0-9]{16}',str(p.get('id','')))))[:40]}
     with sink[2]:
         if not sink[3][0] and len(sink[0]) < sink[1]:
             sink[0].append(row)
+
+
+def summarize(rows):
+    """Only observations: no final-answer correctness or independent gold claim."""
+    def candidates(states):return {r['candidate_ref'] for r in rows if r.get('candidate_ref') and r['state'] in states}
+    reasons={}
+    for row in rows:
+        if row['event'] in ('EVIDENCE_REJECTED','PASSAGE_REJECTED','CANDIDATE_SKIPPED','FETCH_BLOCKED','EXTRACTION_FAILED'):
+            key=row.get('reason_code') or row['state'];reasons[key]=reasons.get(key,0)+1
+    return {'discovered':len(candidates({'CANDIDATE_DISCOVERED'})),
+            'selected':len(candidates({'SELECTED'})), 'slots_charged':sum(bool(r['slot_charged']) for r in rows),
+            'read':len({r['candidate_ref'] for r in rows if r.get('candidate_ref') and r.get('read')}),
+            'cache_reused':len(candidates({'CACHE_REUSE'})), 'blocked':len(candidates({'FETCH_BLOCKED'})),
+            'partial':len(candidates({'EVIDENCE_PARTIAL'})), 'direct':len(candidates({'EVIDENCE_SUPPORTED'})),
+            'chat_messages_persisted':sum(r['state']=='JDUI_DELIVERED' for r in rows),
+            'loss_reasons':reasons,'scope':'OBSERVED_RETRIEVAL_NOT_FACTUAL_GOLD'}
 
 
 @contextmanager

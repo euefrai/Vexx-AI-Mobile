@@ -77,6 +77,16 @@ def _passage_support(req, passage, source):
         text=re.sub(alias,lambda _:entity,text)
     clauses=re.split(r'(?<=[!?;])\s+|(?<=[.])\s+(?=[a-z])|\n+',text)
     previous=''; partial_found=False
+    section=qi.normalized(passage.get('section') or '')
+    section_facets={'return_value':('return value','valor retornado','valor de retorno'),
+                    'behavior':('description','descricao')}
+    if qualified and section in section_facets.get(attribute,()) and anchor.search(_canonical_operation(source.get('titulo') or '')):
+        # The heading is part of the literal span. A title supplies API scope,
+        # not the missing subject: this remains partial, never direct support.
+        body=re.sub(r'^'+re.escape(section)+r'\s*[:—-]?\s*','',text)
+        other_ops=[op for op in re.findall(r'\b\w+(?:\.\w+)+',body) if _canonical_operation(op)!=entity]
+        if text.startswith(section) and len(body)>=8 and not other_ops and not re.search(r'\b(?:unknown|desconhecid\w*|nao confirmad\w*)\b',body):
+            partial_found=True
     if attribute in ('causes','consequences'):
         heading = r'(?:principais\s+)?'+('causas?' if attribute=='causes' else 'consequencias?')
         scoped = re.match(heading+r'\s+(?:de|da|do)\s+'+re.escape(entity)+r'\s*:\s*(.+)',text,re.S)
@@ -145,8 +155,10 @@ def _passage_support(req, passage, source):
     return 'PARTIAL_SUPPORT' if partial_found else None
 
 
-def select_answer_passages(coverage, limit=3):
+def select_answer_passages(coverage, limit=None):
     """Keep multi-requirement bindings and prefer aspect diversity, same budget."""
+    if limit is None:
+        limit=min(8,max(3,len({p['requirement_id'] for p in coverage.get('passages',[])})))
     by_id={}
     for passage in coverage.get('passages',[]):
         saved=by_id.setdefault(passage['id'],{**passage,'requirement_ids':[], 'requirement_support':{}})
@@ -190,7 +202,14 @@ def requirement_coverage(query, sources, *, requirements=None):
     for req in requirements:
         found = [p for p in matches if p['requirement_id'] == req['id']]
         direct = [p for p in found if p['support_label']=='DIRECT_SUPPORT']
-        ids = list(dict.fromkeys(p['evidence_id'] or p['source_id'] for p in direct))[:8]
+        ids=[];seen_documents=set()
+        sources_by_id={str(s.get('id') or s.get('url') or ''):s for s in sources}
+        for p in direct:
+            evidence_id=p['evidence_id'] or p['source_id']
+            document=sources_by_id.get(str(evidence_id),{}).get('document_id') or evidence_id
+            if document not in seen_documents:
+                seen_documents.add(document);ids.append(evidence_id)
+        ids=ids[:8]
         req.update(state='SUPPORTED' if direct else 'PARTIALLY_SUPPORTED' if found else 'DISCOVERED' if sources else 'NOT_SEARCHED',
                    candidate_evidence_ids=[str(s.get('id') or s.get('url') or '') for s in sources[:8]],
                    confirmed_evidence_ids=ids, passage_ids=list(dict.fromkeys(p['id'] for p in found))[:8],

@@ -198,6 +198,9 @@ def emitir(db, job_id: str, owner: str, agente: str, tipo: str, status: str = "o
                    (job_id, owner, ev["seq"], ev["ts"], ev["agente"], ev["tipo"],
                     ev["status"], ev["descricao"],
                     json_store.encode(ev["meta"], 4000)))
+    terminal={'research_completed','research_failed'}
+    if tipo in terminal:
+        retrieval_trace.record(job_id,'',{},'JOB_TERMINAL',reason_code=tipo.upper())
     return ev
 
 
@@ -568,6 +571,7 @@ def replanejar(db, job: dict, lacunas: list) -> dict:
         job["sintese"] = {}
         job["auditoria"] = {}
         job["usados"]["replans"] = job["usados"].get("replans", 0) + 1
+        retrieval_trace.record(job['id'],'',{},'REPLAN_STARTED',budget=job['usados'])
         job["plano_versao"] += 1
         salvar_job(db, job)
         emitir(db, job["id"], job["owner"], "orchestrator", "plan_updated", "ok",
@@ -689,6 +693,27 @@ def buscar_com_fallback(provedores: list, consulta: str, limite: int = 6,
 
 
 # ── Evidence Store ──────────────────────────────────────────────────
+def _merge_provenance(first, second):
+    result={**(first or {}),**(second or {})}
+    for key in ('query_ids','requirement_ids'):
+        result[key]=list(dict.fromkeys((first or {}).get(key,[])+(second or {}).get(key,[])))[:16]
+    return result
+
+
+def _update_reused_provenance(db,job,evidence,candidate):
+    provenance=_merge_provenance(evidence.get('retrieval_provenance'),candidate.get('retrieval_provenance'))
+    if provenance==evidence.get('retrieval_provenance'):return
+    row=db.execute('SELECT original FROM evidence WHERE id=? AND owner_id=? AND job_id=?',
+                   (evidence['id'],job['owner'],job['id'])).fetchone()
+    if not row:return
+    original=json.loads(row[0] or '{}');original['retrieval_provenance']=provenance
+    try:serialized=json_store.encode(original,12000)
+    except json_store.JSONLimitError:return
+    with db:db.execute('UPDATE evidence SET original=? WHERE id=? AND owner_id=? AND job_id=?',
+                       (serialized,evidence['id'],job['owner'],job['id']))
+    evidence['retrieval_provenance']=provenance
+
+
 def registrar_evidencia(db, job: dict, fonte: dict, trecho: str, afirmacao: str = "",
                         relacao: str = "cita", status: str = "recuperada") -> dict:
     if status not in STATUS_EVIDENCIA:
@@ -741,7 +766,7 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
                     "citation_count", "citation_count_kind", "doc_id", "chunk_id",
                     "section", "page", "content_hash", "version", "source",
                     "table_hint", "origem_declarada", "texto_lido", "trecho_usado",
-                    "access_state", "answer_passages", "answerability"):
+                    "access_state", "answer_passages", "answerability", "retrieval_provenance", "document_id", "duplicate_of"):
             if key in metadata:
                 ev[key] = metadata[key]
         evidencias.append(ev)
@@ -773,6 +798,10 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
                  deve_parar=None, prazo: float = 0) -> list:
     """Search Agent: consultas adaptativas (original + variação sem stopwords)."""
     base = etapa["alvo"]
+    import query_intelligence as qi
+    requirements=qi.answer_requirements(job['objetivo'])
+    requested={r['attribute'] for r in qi.answer_requirements(base)}
+    requirement_ids=[r['id'] for r in requirements if not requested or r['attribute'] in requested]
     import search_orchestrator as orch
     variacao = orch.consulta_conteudo(base)
     if not variacao:
@@ -821,8 +850,26 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
         if query_intelligence.analyze(q)['domain'] in ('news', 'events', 'air_travel', 'bus_travel', 'science', 'documents'):
             specialized = [p for p in providers_for_query if isinstance(p, ProvedorOrquestrado)]
             providers_for_query = specialized + [p for p in providers_for_query if p not in specialized]
-        encontrados, info = buscar_com_fallback(providers_for_query, q, 6,
-                                                deve_parar=parar)
+        query_id='Q-'+hashlib.sha256((job['id']+'|'+etapa.get('id','')+'|'+q).encode()).hexdigest()[:20]
+        trace_query={'retrieval_provenance':{'query_ids':[query_id],'requirement_ids':requirement_ids}}
+        retrieval_trace.record(job['id'],etapa.get('id',''),trace_query,'QUERY_CREATED')
+        retrieval_trace.record(job['id'],etapa.get('id',''),trace_query,'QUERY_SENT')
+        queries=job.setdefault('ajustes',{}).setdefault('queries',{})
+        with query_intelligence.discovery_scope(request,registry=queries,job_id=job['id'],
+                                                step_id=etapa.get('id',''),requirement_ids=requirement_ids):
+            encontrados, info = buscar_com_fallback(providers_for_query, q, 6,
+                                                    deve_parar=parar)
+        retrieval_trace.record(job['id'],etapa.get('id',''),trace_query,'PROVIDER_RESPONDED',duration_s=time.monotonic()-t0)
+        if len(queries)<120:
+            queries[query_id]={**queries.get(query_id,{}),'step_id':etapa.get('id',''),'requirement_ids':requirement_ids,
+                               'query':q,'strategy':'replan' if etapa.get('replan_reason') else 'initial',
+                               'plan_version':job.get('plano_versao',1)}
+        encontrados=[{**a,'retrieval_provenance':_merge_provenance(a.get('retrieval_provenance'),{'query_ids':[query_id],'requirement_ids':requirement_ids,
+                        'provider':str(a.get('discovery_provider') or a.get('origem') or (a.get('retrieval_provenance') or {}).get('provider') or info.get('provedor') or '')[:40], 'rank':rank+1,
+                        'candidate_id':'C-'+hashlib.sha256((job['id']+'|'+str(a.get('url',''))).encode()).hexdigest()[:20]})}
+                      for rank,a in enumerate(encontrados)]
+        for candidate in encontrados:
+            retrieval_trace.record(job['id'],etapa.get('id',''),candidate,'CANDIDATE_DISCOVERED')
         if info.get("cancelado"):
             for a in encontrados:
                 if a["url"] not in {x["url"] for x in achados}:
@@ -858,6 +905,9 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
         for a in encontrados:
             if a["url"] not in {x["url"] for x in achados}:
                 achados.append(a)
+            else:
+                previous=next(x for x in achados if x['url']==a['url'])
+                previous['retrieval_provenance']=_merge_provenance(previous.get('retrieval_provenance'),a.get('retrieval_provenance'))
     job["usados"]["buscas"] = job["usados"].get("buscas", 0) + buscas_realizadas
     if len(etapas_por_consulta) > 120:
         job["usados"]["consultas_etapas"] = dict(list(etapas_por_consulta.items())[-120:])
@@ -920,7 +970,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             raise research.ResearchErro("Pesquisa cancelada.", "cancelada")
         if a.get("metadata_source") == "academic_provider":
             if recuperar_fn is None:
-                rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,etapa['alvo'])
+                rec=research._recuperar_um(a,None,max(0.5,min(8.0,prazo-time.monotonic())) if prazo else 8.0,job['objetivo'])
                 if rec.get('full_text_fetched'):
                     return {**rec,'texto_lido':True,'midia':[]}
             return {"titulo": a.get("titulo") or a.get("title") or "",
@@ -964,7 +1014,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             final, pagina = research.baixar(a["url"], timeout=limite_tempo)
         if research.pagina_bloqueada(pagina):
             raise research.ResearchErro("Página bloqueada; conteúdo não usado como evidência.", "bloqueado")
-        artigo = research.extrair_artigo(pagina, final, etapa["alvo"],
+        artigo = research.extrair_artigo(pagina, final, job['objetivo'],
                                          teto=research.MAX_TEXTO_PAGINA)
         texto = (artigo.get("texto") or "").strip()
         return {"titulo": artigo.get("titulo") or a["titulo"],
@@ -1052,10 +1102,34 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             falhas_leitura.add(_chave_fonte(a))
             job['usados']['failed_source_reads'] = sorted(falhas_leitura)
 
-    anteriores = {orch.canonizar_url(e.get("url", "")): e for e in _evidencias_job(db, job) if _evidencia_lida(e)}
+    reader_scope='network'
+    if recuperar_fn is not None:
+        reader_scope=getattr(recuperar_fn,'document_cache_identity','')
+        if not reader_scope:
+            reader_scope=_nid('reader')
+            try:setattr(recuperar_fn,'document_cache_identity',reader_scope)
+            except (AttributeError,TypeError):pass
+    cache_job={**job,'document_reader':reader_scope}
+    cached_pages, stale_urls = {}, set()
+    for candidate in achados:
+        state,rec=research.document_cache_get(db,cache_job,candidate['url'])
+        retrieval_trace.record(job['id'],etapa.get('id',''),candidate,state)
+        if rec is not None:
+            cached_pages[candidate['url']]=rec
+            retrieval_trace.record(job['id'],etapa.get('id',''),candidate,'CACHE_REUSE',rec=rec)
+            retrieval_trace.record(job['id'],etapa.get('id',''),candidate,'DOCUMENT_ALREADY_READ',rec=rec)
+        elif state=='CACHE_STALE':
+            stale_urls.add(orch.canonizar_url(candidate['url']))
+    anteriores = {orch.canonizar_url(e.get("url", "")): e for e in _evidencias_job(db, job)
+                  if _evidencia_lida(e) and orch.canonizar_url(e.get('url','')) not in stale_urls}
     reutilizadas = [anteriores[orch.canonizar_url(a.get("url", ""))] for a in achados
                     if orch.canonizar_url(a.get("url", "")) in anteriores][:teto_paginas]
+    for candidate in achados:
+        ev=anteriores.get(orch.canonizar_url(candidate.get('url','')))
+        if ev is not None:_update_reused_provenance(db,job,ev,candidate)
     novas_paginas = [a for a in achados if orch.canonizar_url(a.get("url", "")) not in anteriores]
+    cached_candidates=[a for a in novas_paginas if a['url'] in cached_pages]
+    novas_paginas=[a for a in novas_paginas if a['url'] not in cached_pages]
     ignoradas = sum(_chave_fonte(a) in falhas_leitura for a in novas_paginas)
     novas_paginas = [a for a in novas_paginas if _chave_fonte(a) not in falhas_leitura]
     if ignoradas:
@@ -1071,7 +1145,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
     if parar() or (prazo and time.monotonic() >= prazo):
         return reutilizadas
     job["usados"]["paginas"] = job["usados"].get("paginas", 0) + len(alvos)
-    baixados: dict = {}
+    baixados: dict = dict(cached_pages)
     def read_trace(source, state, rec=None, code='', coverage=None):
         rec=rec or {}
         reason = {'extracted': 'CONTENT_EXTRACTED', 'no_readable_content': 'CONTENT_EMPTY',
@@ -1110,7 +1184,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
 
     pool = ThreadPoolExecutor(max_workers=3, thread_name_prefix="julialer")
     for source in alvos:
-        retrieval_trace.record(job['id'], etapa.get('id', ''), source, 'SELECTED', charged=True)
+        retrieval_trace.record(job['id'], etapa.get('id', ''), source, 'SELECTED', charged=True,budget=job['usados'])
     futs = {pool.submit(copy_context().run, _ler_cronometrado, a): a for a in alvos}
     pendentes = set(futs)
     cancelado = False
@@ -1133,6 +1207,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     concluida = True
                     if not prazo or concluido_em <= prazo:
                         baixados[a["url"]] = rec
+                        research.document_cache_put(db,cache_job,a['url'],rec)
                         read_trace(a,'extracted' if rec.get('texto') else 'no_readable_content',rec)
                         substituir = not _util(a, rec)
                         coverage_read = _eg.requirement_coverage(job['objetivo'],[{**rec,'url':a['url']}])
@@ -1204,6 +1279,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             baixados[lead['url']]={'titulo':lead.get('titulo',''),'texto':'','final':lead['url'],
                 'texto_lido':False,'content_scope':'feed_metadata','access_state':'snippet_only'}
             alvos.append(lead)
+    alvos.extend(cached_candidates)
     evidencias = list(reutilizadas)
     for a in alvos:
         if cancelado or parar():
@@ -1234,6 +1310,10 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             read_trace(a,'topic_only',rec,code='NO_ANSWER_PASSAGE')
             continue
         if answer_passages:
+            for label,event in (('DIRECT_SUPPORT','EVIDENCE_SUPPORTED'),('PARTIAL_SUPPORT','EVIDENCE_PARTIAL')):
+                matching=[p for p in answer_passages if p.get('support_label')==label]
+                if matching:retrieval_trace.record(job['id'],etapa.get('id',''),a,event,rec=rec,coverage={**answer_coverage,'passages':matching})
+            retrieval_trace.record(job['id'],etapa.get('id',''),a,'PASSAGE_SELECTED',rec=rec,coverage={**answer_coverage,'passages':answer_passages})
             trecho_fonte = answer_passages[0]['text']
         history_field = re.search(r'\b(funda[cç][aã]o|fundad[ao]|fundadores?|inaugura[cç][aã]o|inaugurad[ao]|founded)\b', texto, re.I)
         if not answer_passages and not academic and re.search(r'\bhist[oó]ria\b', job['objetivo'], re.I) and history_field:
@@ -1258,7 +1338,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                  "access_state": rec.get("access_state") or (
                      "metadata_only" if academic else
                      ("read" if texto else "snippet_only")),
-                 "acessado_em": (a.get("fetched_at") if academic else None)
+                 "acessado_em": rec.get('fetched_at') or (a.get("fetched_at") if academic else None)
                  or research.agora_iso()}
         import query_intelligence
         import search_verticals
@@ -1267,6 +1347,10 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         fonte['structured']=(candidate.get('structured') or [])[:2]
         fonte['publicador']=(rec.get('metadados') or {}).get('site') or a.get('publicador','')
         fonte['imagens'] = (rec.get('imagens') or [])[:2]
+        for key in ('retrieval_provenance',):
+            if key in a:fonte[key]=a[key]
+        for key in ('content_hash','document_id','duplicate_of'):
+            if key in rec:fonte[key]=rec[key]
         if answer_coverage['applicable']:
             fonte['answer_passages'] = answer_passages
             fonte['answerability'] = {'state':'DIRECT_ANSWER' if answer_coverage['complete'] else 'PARTIAL_ANSWER',
@@ -1304,6 +1388,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         if not academic and re.fullmatch(r'10\.\d{4,9}/\S+', doi) and doi.casefold() in texto.casefold():
             fonte['doi'] = doi[:200]
         ev = registrar_evidencia(db, job, fonte, trecho_fonte)
+        for key in ('retrieval_provenance','content_hash','document_id','duplicate_of'):
+            if key in fonte:ev[key]=fonte[key]
         if answer_coverage['applicable']:
             ev['answer_passages'] = answer_passages
             ev['answerability'] = fonte['answerability']
@@ -1543,6 +1629,7 @@ def analisar_independencia_job(db, job: dict, evidencias: list) -> list:
 def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                        sintetizar_fn=None, timeout=25, deve_parar=None, verificar_fn=None) -> dict:
     """Optional assisted writing; extraction remains the fail-closed fallback."""
+    retrieval_trace.record(job['id'],'',{},'SYNTHESIS_STARTED',reason_code='ASSISTED' if sintetizar_fn else 'EXTRACTIVE')
     from web_extract import melhor_trecho
     tops = sorted([e for e in evidencias if _evidencia_lida(e)],
                   key=lambda e: e.get("score", 0), reverse=True)[:6]
@@ -1655,6 +1742,8 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
             "fallback_detail": sintese.get('fallback_detail', ''),
             "review_failure_cause": sintese.get('review_failure_cause', ''),
             "provider_code": sintese.get('fallback_provider_code', '')})
+    retrieval_trace.record(job['id'],'',{},'SYNTHESIS_COMPLETED' if sintese.get('llm') or not sintetizar_fn else 'SYNTHESIS_FAILED',
+                           reason_code='ASSISTED' if sintese.get('llm') else 'EXTRACTIVE')
     return sintese
 
 
@@ -1824,7 +1913,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                 job["pendencias"].append("tempo esgotado antes de " + etapa["id"])
                 break
             msg = _orcamento_etapa(job, etapa["tipo"])
-            if msg and etapa["tipo"] in ("busca", "ler"):
+            if msg and etapa["tipo"] == "busca":
                 job["pendencias"].append(f"{etapa['id']}: {msg}")
                 continue
             emitir(db, job["id"], owner, "orchestrator", "step_started", "ok",
@@ -2529,6 +2618,7 @@ def excluir_job(db, owner: str, job_id: str) -> dict:
         db.execute("DELETE FROM evidence WHERE owner_id=? AND job_id=?", (owner, job_id))
         db.execute("DELETE FROM research_events WHERE owner_id=? AND job_id=?", (owner, job_id))
         db.execute("DELETE FROM research_jobs WHERE owner_id=? AND id=?", (owner, job_id))
+        db.execute("DELETE FROM research_cache WHERE owner_id=? AND provedor=?",(owner,'document:'+job_id))
     hypothesis_engine.HypothesisStore(db).delete_for_job(owner, job_id)
     continuous_research.ResearchContextStore(db).delete_for_job(owner, job_id)
     return {"job_id": job_id, "deleted": True}
@@ -2752,6 +2842,7 @@ def cancelar(db, owner: str, job_id: str) -> dict:
         return _resumo(db, job)
     job["status"] = "cancelada"
     salvar_job(db, job)
+    retrieval_trace.record(job['id'],'',{},'JOB_TERMINAL',reason_code='CANCELLED')
     emitir(db, job["id"], owner, "orchestrator", "research_cancelled", "ok",
            "Cancelada; resultados parciais preservados.", {})
     return _resumo(db, job)

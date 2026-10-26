@@ -34,7 +34,7 @@ from html.parser import HTMLParser
 
 TTL_RAPIDA = 6 * 3600
 TTL_PROFUNDA = 24 * 3600
-RETRIEVAL_VERSION = '5.9.9.5'
+RETRIEVAL_VERSION = '5.9.9.7'
 MAX_REDIRECTS = 3
 MAX_PAGINA_BYTES = 2 * 1024 * 1024
 MAX_TEXTO_PAGINA = 8000
@@ -205,6 +205,7 @@ def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
     abrir = abrir or _abrir
     atual = url_segura(url)
     for _ in range(MAX_REDIRECTS + 1):
+        retrieval_trace.transport(atual, 'FETCH_STARTED')
         try:
             try:
                 resp = abrir(atual, timeout, user_agent)
@@ -762,6 +763,12 @@ def cache_put(db, owner: str, provedor: str, consulta: str, resposta: dict, ttl:
                    (chave_cache(owner, provedor, consulta), owner, provedor,
                     normalizar_consulta(consulta)[:200], json_store.encode(resposta, 60000),
                     agora_iso(), datetime.fromtimestamp(time.time() + ttl, timezone.utc).isoformat()))
+        if provedor.startswith('document:'):
+            # Bound housekeeping, owner-scoped, without touching messages or
+            # fresh cache rows. Expired documents must not grow indefinitely.
+            db.execute("DELETE FROM research_cache WHERE chave IN (SELECT chave FROM research_cache "
+                       "WHERE owner_id=? AND provedor LIKE 'document:%' AND expira_em<? LIMIT 100)",
+                       (owner,agora_iso()))
 
 
 def _dominio(url: str) -> str:
@@ -769,6 +776,65 @@ def _dominio(url: str) -> str:
         return (urllib.parse.urlsplit(url).hostname or "")[:120]
     except ValueError:
         return ""
+
+
+def document_cache_context(job):
+    """Owner is also enforced by research_cache; scope never crosses a job/chat."""
+    import query_intelligence as qi
+    context = '\x00'.join(str(job.get(k,'')) for k in ('id','owner','conv','objetivo'))
+    context+='\x00'+str(job.get('document_reader','network'))
+    digest = hashlib.sha256((RETRIEVAL_VERSION+'\x00'+context).encode()).hexdigest()
+    request = qi.analyze(job.get('objetivo',''))
+    return 'document:'+str(job.get('id','')), digest, 60 if request['temporal'] else TTL_RAPIDA
+
+
+def document_cache_get(db, job, url):
+    import search_orchestrator as orch
+    provider, scope, ttl = document_cache_context(job)
+    canonical = orch.canonizar_url(url)
+    key = scope+':'+hashlib.sha256(canonical.encode()).hexdigest()
+    value = cache_get(db,job['owner'],provider,key)
+    if isinstance(value,dict) and value.get('scope')==scope and isinstance(value.get('record'),dict):
+        rec=value['record']
+        if isinstance(rec.get('texto'),str) and rec.get('texto_lido') is True:
+            return 'CACHE_HIT',rec
+    row=db.execute('SELECT expira_em FROM research_cache WHERE chave=? AND owner_id=?',
+                   (chave_cache(job['owner'],provider,key),job['owner'])).fetchone()
+    return ('CACHE_STALE' if row and row[0]<agora_iso() else 'CACHE_MISS'),None
+
+
+def document_cache_put(db,job,url,rec):
+    """Cache bounded extraction, not a snippet, HTML dump or shared private page."""
+    if not rec.get('texto_lido') or not rec.get('texto') or rec.get('content_scope') in ('abstract_only','feed_metadata','metadata_only'):
+        return False
+    import search_orchestrator as orch
+    provider,scope,ttl=document_cache_context(job)
+    rec['fetched_at']=rec.get('fetched_at') or agora_iso()
+    rec['content_hash']=hashlib.sha256(str(rec['texto']).encode()).hexdigest()
+    parts=urllib.parse.urlsplit(rec.get('final') or url)
+    version_params=[(k,v) for k,v in urllib.parse.parse_qsl(parts.query,keep_blank_values=True)
+                    if k.casefold() in ('v','version','ver','release','lang','locale','id','product')]
+    version_path=re.findall(r'/(?:v\d[\w.-]*|\d+\.\d+(?:\.\d+)?)(?=/|$)',parts.path)
+    identity=[scope,rec['content_hash'],str(rec.get('titulo') or ''),version_params,version_path,
+              (rec.get('metadados') or {}).get('idioma','')]
+    rec['document_id']='D-'+hashlib.sha256(json.dumps(identity,ensure_ascii=False,sort_keys=True).encode()).hexdigest()[:24]
+    group_key=scope+':content:'+rec['document_id']
+    group=cache_get(db,job['owner'],provider,group_key)
+    source_ref=hashlib.sha256(orch.canonizar_url(url).encode()).hexdigest()
+    if isinstance(group,dict) and group.get('source_ref')!=source_ref:
+        rec['duplicate_of']=group['source_ref']
+    record={'scope':scope,'record':rec}
+    # Aliases are learned only from the actual validated network destination.
+    # An untrusted <link rel=canonical> is never used as a cache alias.
+    aliases={orch.canonizar_url(url),orch.canonizar_url(rec.get('final') or url)}
+    try:
+        if not group:cache_put(db,job['owner'],provider,group_key,{'source_ref':source_ref},ttl)
+        for canonical in aliases:
+            key=scope+':'+hashlib.sha256(canonical.encode()).hexdigest()
+            cache_put(db,job['owner'],provider,key,record,ttl)
+    except json_store.JSONLimitError:
+        return False  # Optional cache; keep the full valid evidence and budget.
+    return True
 
 
 def _numerar(fontes: list) -> list:

@@ -4,7 +4,37 @@ from decimal import Decimal, InvalidOperation
 import re
 import hashlib
 import unicodedata
+from contextlib import contextmanager
+from contextvars import ContextVar
 from zoneinfo import ZoneInfo
+
+_discovery_context = ContextVar('research_discovery_context', default=None)
+
+
+@contextmanager
+def discovery_scope(request, *, registry=None, job_id='', step_id='', requirement_ids=()):
+    token = _discovery_context.set({'request':request,'registry':registry,'job_id':job_id,
+                                   'step_id':step_id,'requirement_ids':list(requirement_ids)})
+    try:
+        yield
+    finally:
+        _discovery_context.reset(token)
+
+
+def constrain_provider_query(query):
+    scope = _discovery_context.get()
+    return constrain_discovery(query, scope['request'], lock_context=True) if scope else query
+
+
+def provider_provenance(query, provider=''):
+    scope=_discovery_context.get()
+    if not scope or not scope['job_id']:return {}
+    qid='Q-'+hashlib.sha256((scope['job_id']+'|'+scope['step_id']+'|'+query).encode()).hexdigest()[:20]
+    registry=scope.get('registry')
+    if registry is not None and (qid in registry or len(registry)<120):
+        registry[qid]={'query':query,'step_id':scope['step_id'],'requirement_ids':scope['requirement_ids'],
+                       'strategy':'provider','provider':provider}
+    return {'query_ids':[qid],'requirement_ids':scope['requirement_ids'],'provider':provider}
 
 
 def normalized(text):

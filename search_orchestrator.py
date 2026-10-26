@@ -989,9 +989,11 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         return True
     usados = {}
     def remember(items, name, query):
+        provenance=query_intelligence.provider_provenance(query,name)
         for item in items:
             item.setdefault('discovery_query', query[:240])
             item.setdefault('discovery_provider', name)
+            if provenance:item['retrieval_provenance']=provenance
         before = {canonizar_url(a.get('url', '')) for a in achados}
         achados.extend(items)
         attempt = next((a for a in reversed(tentativas) if a['provedor'] == name and a['consulta'] == query), None)
@@ -1018,6 +1020,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
             return False
         q_prov = termos_para_provedor(alt, "tecnico" if info["tecnica"]
                                       and nome in ("stackexchange", "hn") else "")
+        q_prov = query_intelligence.constrain_provider_query(q_prov)
         restante = float(orc["timeout_total"]) - (time.monotonic() - t0)
         if restante <= 0 or not _tentar(nome, q_prov):
             return False
@@ -1059,6 +1062,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
             nome = nomes[provedor_indice]
             consulta_prov = termos_para_provedor(q, "tecnico" if info["tecnica"]
                                                  and nome in ("stackexchange", "hn") else "")
+            consulta_prov = query_intelligence.constrain_provider_query(consulta_prov)
             if not _tentar(nome, consulta_prov):
                 provedor_indice += 1
                 tentativa_provedor += 1
@@ -1139,6 +1143,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
             if len(title) < 20 or not re.fullmatch(r'[a-zA-Z0-9.-]+', publisher):
                 continue
             q_original = f'"{title[:180]}" site:{publisher}'
+            q_original = query_intelligence.constrain_provider_query(q_original)
             # Spend the same attempt slots on declared publisher links/feeds
             # before another search response that may only repeat the aggregator.
             def fetch_publisher(url, kind):
