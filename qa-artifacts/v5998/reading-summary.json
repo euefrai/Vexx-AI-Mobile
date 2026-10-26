@@ -1,0 +1,381 @@
+{
+  "scope": "Seeded reading, agent annotation, not human gold",
+  "cases": [
+    {
+      "case": {
+        "id": "artemis",
+        "category": "news_event",
+        "query": "Quando a Artemis I foi lançada e quando retornou à Terra?"
+      },
+      "frozen_sha256": "b774fc9ef3b6d42f3533e5b9b15af9851ad7239743c6598dfc85b58b4829f243",
+      "same_frozen_input": true,
+      "before": {
+        "evidence": 0,
+        "states": []
+      },
+      "after": {
+        "evidence": 0,
+        "states": [],
+        "error": null
+      },
+      "documents": [
+        {
+          "url": "https://www.nasa.gov/centers-and-facilities/hq/splashdown-nasas-orion-returns-to-earth-after-historic-moon-mission/",
+          "extracted_chars": 5106,
+          "generated_passages": 6,
+          "matched_passages": 0,
+          "selected_passages": 0,
+          "answerability_status": "UNSUPPORTED_REQUIREMENT_SCHEMA"
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "assign",
+        "category": "documentation",
+        "query": "Como usar Object.assign, qual a sintaxe, comportamento e valor retornado?"
+      },
+      "frozen_sha256": "42a53d4bae0ee05774f9eda72db2d1eeb267e2f74414b4e1a3442765a520b2d3",
+      "same_frozen_input": true,
+      "before": {
+        "evidence": 1,
+        "states": [
+          {
+            "attribute": "syntax",
+            "state": "SUPPORTED"
+          },
+          {
+            "attribute": "return_value",
+            "state": "DISCOVERED"
+          },
+          {
+            "attribute": "behavior",
+            "state": "DISCOVERED"
+          }
+        ]
+      },
+      "after": {
+        "evidence": 1,
+        "states": [
+          {
+            "attribute": "syntax",
+            "state": "SUPPORTED"
+          },
+          {
+            "attribute": "return_value",
+            "state": "PARTIALLY_SUPPORTED"
+          },
+          {
+            "attribute": "behavior",
+            "state": "SUPPORTED"
+          }
+        ],
+        "error": null
+      },
+      "documents": [
+        {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign",
+          "extracted_chars": 6978,
+          "generated_passages": 11,
+          "matched_passages": 15,
+          "selected_passages": 3,
+          "answerability_status": "PARSED_FACETS_OBSERVED"
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "chibata",
+        "category": "history",
+        "query": "Quais foram as causas e consequências da Revolta da Chibata?"
+      },
+      "frozen_sha256": null,
+      "same_frozen_input": null,
+      "before": {
+        "evidence": 0,
+        "states": []
+      },
+      "after": {
+        "evidence": 0,
+        "states": [],
+        "error": "rede"
+      },
+      "documents": []
+    },
+    {
+      "case": {
+        "id": "hypot",
+        "category": "documentation",
+        "query": "Como usar Math.hypot, qual a sintaxe, comportamento e valor retornado?"
+      },
+      "frozen_sha256": "378873e35be8ec468465b22b3c24e03fb584deafede4121d67de882b8d961b23",
+      "same_frozen_input": true,
+      "before": {
+        "evidence": 1,
+        "states": [
+          {
+            "attribute": "syntax",
+            "state": "SUPPORTED"
+          },
+          {
+            "attribute": "return_value",
+            "state": "SUPPORTED"
+          },
+          {
+            "attribute": "behavior",
+            "state": "SUPPORTED"
+          }
+        ]
+      },
+      "after": {
+        "evidence": 1,
+        "states": [
+          {
+            "attribute": "syntax",
+            "state": "SUPPORTED"
+          },
+          {
+            "attribute": "return_value",
+            "state": "SUPPORTED"
+          },
+          {
+            "attribute": "behavior",
+            "state": "SUPPORTED"
+          }
+        ],
+        "error": null
+      },
+      "documents": [
+        {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+          "extracted_chars": 3260,
+          "generated_passages": 8,
+          "matched_passages": 8,
+          "selected_passages": 3,
+          "answerability_status": "PARSED_FACETS_OBSERVED"
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "nikon-zf",
+        "category": "product",
+        "query": "Qual o peso da Nikon Z f com bateria e cartão e qual bateria utiliza?"
+      },
+      "frozen_sha256": "2c3567c74664d4361d3709192a0b40dca10b7847d96e9be71887d127362968f9",
+      "same_frozen_input": true,
+      "before": {
+        "evidence": 0,
+        "states": [
+          {
+            "attribute": "weight",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "attribute": "battery",
+            "state": "NOT_SEARCHED"
+          }
+        ]
+      },
+      "after": {
+        "evidence": 0,
+        "states": [
+          {
+            "attribute": "weight",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "attribute": "battery",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "error": null
+      },
+      "documents": [
+        {
+          "url": "https://onlinemanual.nikonimglib.com/zf/en/specifications_350.html",
+          "extracted_chars": 7998,
+          "generated_passages": 9,
+          "matched_passages": 0,
+          "selected_passages": 0,
+          "answerability_status": "PARSED_FACETS_OBSERVED"
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "public-pdf",
+        "category": "public_document",
+        "query": "Quando a Artemis I foi lançada e quando retornou à Terra?"
+      },
+      "frozen_sha256": null,
+      "same_frozen_input": null,
+      "before": {
+        "evidence": 0,
+        "states": []
+      },
+      "after": {
+        "evidence": 0,
+        "states": [],
+        "error": "tamanho"
+      },
+      "documents": []
+    },
+    {
+      "case": {
+        "id": "sqlite",
+        "category": "comparison",
+        "query": "Quais as diferenças entre WAL e rollback journal no SQLite e suas limitações?"
+      },
+      "frozen_sha256": "2616a7b5abca3600dbd5c86e2d0176f8fcd5752c77a38f21b87eca770c317aa4",
+      "same_frozen_input": true,
+      "before": {
+        "evidence": 0,
+        "states": [
+          {
+            "attribute": "limitations",
+            "state": "NOT_SEARCHED"
+          }
+        ]
+      },
+      "after": {
+        "evidence": 0,
+        "states": [
+          {
+            "attribute": "limitations",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "error": null
+      },
+      "documents": [
+        {
+          "url": "https://www.sqlite.org/wal.html",
+          "extracted_chars": 8000,
+          "generated_passages": 11,
+          "matched_passages": 0,
+          "selected_passages": 0,
+          "answerability_status": "PARSED_FACETS_OBSERVED"
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "tramontina",
+        "category": "company",
+        "query": "Quem fundou a Tramontina, em que ano e quais produtos fabrica?"
+      },
+      "frozen_sha256": "83c5e6e44b7b1aab6fd58eadf89a00b6251befec6bb314d490bb3e2331310059",
+      "same_frozen_input": true,
+      "before": {
+        "evidence": 0,
+        "states": [
+          {
+            "attribute": "founders",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "attribute": "foundation_date",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "attribute": "products",
+            "state": "NOT_SEARCHED"
+          }
+        ]
+      },
+      "after": {
+        "evidence": 0,
+        "states": [
+          {
+            "attribute": "founders",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "attribute": "foundation_date",
+            "state": "NOT_SEARCHED"
+          },
+          {
+            "attribute": "products",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "error": null
+      },
+      "documents": [
+        {
+          "url": "https://global.tramontina.com/sobre",
+          "extracted_chars": 681,
+          "generated_passages": 2,
+          "matched_passages": 0,
+          "selected_passages": 0,
+          "answerability_status": "PARSED_FACETS_OBSERVED"
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "weg",
+        "category": "company",
+        "query": "Quem fundou a WEG, em que ano e quais produtos fabrica?"
+      },
+      "frozen_sha256": null,
+      "same_frozen_input": null,
+      "before": {
+        "evidence": 0,
+        "states": []
+      },
+      "after": {
+        "evidence": 0,
+        "states": [],
+        "error": "bloqueado"
+      },
+      "documents": []
+    },
+    {
+      "case": {
+        "id": "yellowstone",
+        "category": "place",
+        "query": "Qual o preço de entrada em Yellowstone por veículo particular e por quantos dias vale?"
+      },
+      "frozen_sha256": "a8f55887644f4f6f1159002e4553de2077ca793d8d9b75d1d75a776268d61f25",
+      "same_frozen_input": true,
+      "before": {
+        "evidence": 0,
+        "states": [
+          {
+            "attribute": "price",
+            "state": "NOT_SEARCHED"
+          }
+        ]
+      },
+      "after": {
+        "evidence": 0,
+        "states": [
+          {
+            "attribute": "price",
+            "state": "NOT_SEARCHED"
+          }
+        ],
+        "error": null
+      },
+      "documents": [
+        {
+          "url": "https://www.nps.gov/yell/planyourvisit/fees.htm?ftb_embed=true",
+          "extracted_chars": 7999,
+          "generated_passages": 17,
+          "matched_passages": 0,
+          "selected_passages": 0,
+          "answerability_status": "PARSED_FACETS_OBSERVED"
+        }
+      ]
+    }
+  ],
+  "nikon_full_snapshot_diagnostic": {
+    "default_chars": 8000,
+    "diagnostic_full_chars": 12375,
+    "battery_offset": 11510,
+    "weight_710_offset": 12128,
+    "production_limit_changed": false
+  }
+}

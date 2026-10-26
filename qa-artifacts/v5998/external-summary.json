@@ -1,0 +1,277 @@
+{
+  "freeze_commit": "8a6cfcc",
+  "cases": [
+    {
+      "case": {
+        "id": "sq-01",
+        "category": "documentation",
+        "query": "Como funciona Array.from, qual a sintaxe, o comportamento e o valor retornado?"
+      },
+      "seconds": 9.536,
+      "provider_calls": 12,
+      "document_attempts": 0,
+      "extracted_documents": 0,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [
+        {
+          "attribute": "syntax",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "return_value",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "behavior",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "parsed_requirements": 3,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-02",
+        "category": "company",
+        "query": "Quem fundou a Embraer, em que ano e quais produtos fabrica?"
+      },
+      "seconds": 11.422,
+      "provider_calls": 12,
+      "document_attempts": 11,
+      "extracted_documents": 10,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [
+        {
+          "attribute": "founders",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "foundation_date",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "products",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "parsed_requirements": 3,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-03",
+        "category": "history",
+        "query": "Quais foram as causas e consequências da Revolta da Vacina?"
+      },
+      "seconds": 13.604,
+      "provider_calls": 8,
+      "document_attempts": 12,
+      "extracted_documents": 12,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [
+        {
+          "attribute": "causes",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "consequences",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "parsed_requirements": 2,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-04",
+        "category": "news",
+        "query": "Notícias sobre abastecimento de água em Vitória da Conquista nos últimos sete dias, excluindo Salvador"
+      },
+      "seconds": 10.513,
+      "provider_calls": 3,
+      "document_attempts": 5,
+      "extracted_documents": 5,
+      "retained_evidence": 9,
+      "read_evidence": 0,
+      "states": [],
+      "parsed_requirements": 0,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-05",
+        "category": "product",
+        "query": "Qual o peso da Canon EOS R50 com bateria e cartão e qual bateria utiliza?"
+      },
+      "seconds": 15.141,
+      "provider_calls": 20,
+      "document_attempts": 7,
+      "extracted_documents": 7,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [
+        {
+          "attribute": "weight",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "battery",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "parsed_requirements": 2,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-06",
+        "category": "comparison",
+        "query": "Compare list.copy e copy.deepcopy no Python quanto ao comportamento e valor retornado"
+      },
+      "seconds": 21.511,
+      "provider_calls": 12,
+      "document_attempts": 3,
+      "extracted_documents": 3,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [
+        {
+          "attribute": "return_value",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "behavior",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "parsed_requirements": 2,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-07",
+        "category": "ambiguous_entity",
+        "query": "Em que ano foi fundada a Jaguar fabricante de automóveis e quais produtos fabrica, excluindo o animal?"
+      },
+      "seconds": 18.449,
+      "provider_calls": 8,
+      "document_attempts": 9,
+      "extracted_documents": 9,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [
+        {
+          "attribute": "foundation_date",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "products",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "parsed_requirements": 2,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-08",
+        "category": "multiple_facets",
+        "query": "Como funciona String.prototype.padStart, qual a sintaxe, comportamento e retorno?"
+      },
+      "seconds": 6.673,
+      "provider_calls": 8,
+      "document_attempts": 1,
+      "extracted_documents": 1,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [
+        {
+          "attribute": "syntax",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "behavior",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "parsed_requirements": 2,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-09",
+        "category": "negative_constraints",
+        "query": "Compare dois notebooks Acer com 16 GB de RAM, excluindo usados e recondicionados, com preço no Brasil"
+      },
+      "seconds": 8.168,
+      "provider_calls": 8,
+      "document_attempts": 3,
+      "extracted_documents": 3,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [
+        {
+          "attribute": "price",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "parsed_requirements": 1,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-10",
+        "category": "partial_document_public",
+        "query": "Quais são os direitos do titular e os limites da portabilidade previstos na Lei Geral de Proteção de Dados brasileira?"
+      },
+      "seconds": 8.463,
+      "provider_calls": 8,
+      "document_attempts": 12,
+      "extracted_documents": 12,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [],
+      "parsed_requirements": 0,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-11",
+        "category": "unavailable_record",
+        "query": "Quantas pessoas visitaram o Museu de Arte da Bahia ontem, se existir registro público?"
+      },
+      "seconds": 19.021,
+      "provider_calls": 16,
+      "document_attempts": 5,
+      "extracted_documents": 5,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [],
+      "parsed_requirements": 0,
+      "complete": false
+    },
+    {
+      "case": {
+        "id": "sq-12",
+        "category": "distributed_event_place",
+        "query": "Quais são as datas da Feira do Livro de Porto Alegre de 2026 e quais regras de acesso a Praça da Alfândega possui durante o evento?"
+      },
+      "seconds": 41.59,
+      "provider_calls": 5,
+      "document_attempts": 6,
+      "extracted_documents": 6,
+      "retained_evidence": 0,
+      "read_evidence": 0,
+      "states": [],
+      "parsed_requirements": 0,
+      "complete": false
+    }
+  ],
+  "read_evidence_total": 0,
+  "precision": null,
+  "recall": null,
+  "reason": "No independent human gold; nine feed references are not read documents. No tuning after opening holdout."
+}

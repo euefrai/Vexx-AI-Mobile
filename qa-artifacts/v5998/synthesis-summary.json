@@ -1,0 +1,529 @@
+{
+  "runs": [
+    {
+      "track": "C",
+      "scope": "VERIFIED_PUBLIC_SOURCE_INPUT_REAL_FREE_MODEL_NOT_DISCOVERY",
+      "model": "poolside/laguna-s-2.1:free",
+      "source_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+      "source_sha256": "378873e35be8ec468465b22b3c24e03fb584deafede4121d67de882b8d961b23",
+      "input_coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-a5665a9acf81",
+            "type": "explicit_attribute",
+            "description": "Sintaxe ou assinatura",
+            "entity": "Math.hypot",
+            "attribute": "syntax",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Sintaxe ou assinatura",
+            "candidate_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "confirmed_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-fe2173d2975b3aa2",
+              "P-34de514cfe444b9a",
+              "P-1711446caa3d2189",
+              "P-f6b581916775703d",
+              "P-67be0e62b4156c21"
+            ]
+          },
+          {
+            "id": "R-005b7b22056d",
+            "type": "explicit_attribute",
+            "description": "Valor retornado",
+            "entity": "Math.hypot",
+            "attribute": "return_value",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Valor retornado",
+            "candidate_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "confirmed_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-4d9218cb5097667a",
+              "P-1711446caa3d2189"
+            ]
+          },
+          {
+            "id": "R-4b3d5bb0eaa8",
+            "type": "explicit_attribute",
+            "description": "Comportamento da operação",
+            "entity": "Math.hypot",
+            "attribute": "behavior",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Comportamento da operação",
+            "candidate_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "confirmed_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-1711446caa3d2189"
+            ]
+          }
+        ],
+        "passages": [
+          {
+            "id": "P-fe2173d2975b3aa2",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-a5665a9acf81",
+            "text_span": {
+              "start": 484,
+              "end": 722,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-4d9218cb5097667a",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-005b7b22056d",
+            "text_span": {
+              "start": 874,
+              "end": 1148,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "PARTIAL_ANSWER",
+            "support_label": "PARTIAL_SUPPORT"
+          },
+          {
+            "id": "P-1711446caa3d2189",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-4b3d5bb0eaa8",
+            "text_span": {
+              "start": 0,
+              "end": 1087,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-34de514cfe444b9a",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-a5665a9acf81",
+            "text_span": {
+              "start": 1149,
+              "end": 2235,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-1711446caa3d2189",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-005b7b22056d",
+            "text_span": {
+              "start": 0,
+              "end": 1087,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-1711446caa3d2189",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-a5665a9acf81",
+            "text_span": {
+              "start": 0,
+              "end": 1087,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-f6b581916775703d",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-a5665a9acf81",
+            "text_span": {
+              "start": 1088,
+              "end": 2156,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-67be0e62b4156c21",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-a5665a9acf81",
+            "text_span": {
+              "start": 2157,
+              "end": 3198,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          }
+        ],
+        "diagnostics": {
+          "read_documents": 1,
+          "generated_passages": 8,
+          "matched_bindings": 8,
+          "retained_bindings": 8
+        },
+        "complete": true,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "calls": [
+        {
+          "phase": "writing",
+          "input_chars": 4607,
+          "timeout_s": 15,
+          "output_chars": 1882,
+          "metadata": {
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 2154,
+              "completion_tokens": 676,
+              "total_tokens": 2830
+            },
+            "truncada": false,
+            "latencia_s": 12.56
+          },
+          "elapsed_s": 12.565
+        },
+        {
+          "phase": "review",
+          "input_chars": 6448,
+          "timeout_s": 12,
+          "error_code": "timeout",
+          "elapsed_s": 12.025
+        }
+      ],
+      "transport": [
+        {
+          "phase": "writing",
+          "timeout_s": 15,
+          "http_status": 200,
+          "time_to_headers_or_error_s": 12.563
+        },
+        {
+          "phase": "review",
+          "timeout_s": 12,
+          "exception_type": "TimeoutError",
+          "time_to_headers_or_error_s": 12.025
+        }
+      ],
+      "first_token_s": null,
+      "job": "rj-edae200152b0",
+      "job_state": "interrompida",
+      "outcome": {
+        "state": "blocked",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "timeout",
+        "read_sources": 1,
+        "reason": "redação ou revisão bloqueada pelo provedor; evidências preservadas"
+      },
+      "synthesis_llm": false,
+      "fallback_detail": null,
+      "provider_code": null,
+      "synthesis_budget": {
+        "source_count": 1,
+        "context_chars": 1603,
+        "timeout_seconds": 25,
+        "attempts": 1
+      },
+      "semantic_review": null,
+      "elapsed_s": 24.831,
+      "limits": [
+        "Source input explicitly seeded; never autonomous discovery.",
+        "Nonstreaming writer has no first-token measurement.",
+        "HTTP headers timing does not identify internal provider queue or cold-start cause.",
+        "Model support review is not independent human gold."
+      ]
+    },
+    {
+      "track": "C",
+      "scope": "VERIFIED_PUBLIC_SOURCE_INPUT_REAL_FREE_MODEL_NOT_DISCOVERY",
+      "model": "poolside/laguna-s-2.1:free",
+      "source_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+      "source_sha256": "378873e35be8ec468465b22b3c24e03fb584deafede4121d67de882b8d961b23",
+      "input_coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-a5665a9acf81",
+            "type": "explicit_attribute",
+            "description": "Sintaxe ou assinatura",
+            "entity": "Math.hypot",
+            "attribute": "syntax",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Sintaxe ou assinatura",
+            "candidate_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "confirmed_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-fe2173d2975b3aa2",
+              "P-34de514cfe444b9a",
+              "P-1711446caa3d2189",
+              "P-f6b581916775703d",
+              "P-67be0e62b4156c21"
+            ]
+          },
+          {
+            "id": "R-005b7b22056d",
+            "type": "explicit_attribute",
+            "description": "Valor retornado",
+            "entity": "Math.hypot",
+            "attribute": "return_value",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Valor retornado",
+            "candidate_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "confirmed_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-4d9218cb5097667a",
+              "P-1711446caa3d2189"
+            ]
+          },
+          {
+            "id": "R-4b3d5bb0eaa8",
+            "type": "explicit_attribute",
+            "description": "Comportamento da operação",
+            "entity": "Math.hypot",
+            "attribute": "behavior",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Comportamento da operação",
+            "candidate_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "confirmed_evidence_ids": [
+              "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-1711446caa3d2189"
+            ]
+          }
+        ],
+        "passages": [
+          {
+            "id": "P-fe2173d2975b3aa2",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-a5665a9acf81",
+            "text_span": {
+              "start": 484,
+              "end": 722,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-4d9218cb5097667a",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-005b7b22056d",
+            "text_span": {
+              "start": 874,
+              "end": 1148,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "PARTIAL_ANSWER",
+            "support_label": "PARTIAL_SUPPORT"
+          },
+          {
+            "id": "P-1711446caa3d2189",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-4b3d5bb0eaa8",
+            "text_span": {
+              "start": 0,
+              "end": 1087,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-34de514cfe444b9a",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-a5665a9acf81",
+            "text_span": {
+              "start": 1149,
+              "end": 2235,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-1711446caa3d2189",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-005b7b22056d",
+            "text_span": {
+              "start": 0,
+              "end": 1087,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-1711446caa3d2189",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-a5665a9acf81",
+            "text_span": {
+              "start": 0,
+              "end": 1087,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-f6b581916775703d",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-a5665a9acf81",
+            "text_span": {
+              "start": 1088,
+              "end": 2156,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-67be0e62b4156c21",
+            "source_id": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+            "requirement_id": "R-a5665a9acf81",
+            "text_span": {
+              "start": 2157,
+              "end": 3198,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          }
+        ],
+        "diagnostics": {
+          "read_documents": 1,
+          "generated_passages": 8,
+          "matched_bindings": 8,
+          "retained_bindings": 8
+        },
+        "complete": true,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "calls": [
+        {
+          "phase": "writing",
+          "input_chars": 4607,
+          "timeout_s": 15,
+          "output_chars": 1736,
+          "metadata": {
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 2152,
+              "completion_tokens": 568,
+              "total_tokens": 2720
+            },
+            "truncada": false,
+            "latencia_s": 13.77
+          },
+          "elapsed_s": 13.769
+        }
+      ],
+      "transport": [
+        {
+          "phase": "writing",
+          "timeout_s": 15,
+          "http_status": 200,
+          "time_to_headers_or_error_s": 13.767
+        }
+      ],
+      "first_token_s": null,
+      "job": "rj-f3344012eaa4",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "fallback_detail": null,
+      "provider_code": null,
+      "synthesis_budget": {
+        "source_count": 1,
+        "context_chars": 1603,
+        "timeout_seconds": 25,
+        "attempts": 1
+      },
+      "semantic_review": null,
+      "elapsed_s": 14.0,
+      "chat_result_id": "rj-f3344012eaa4-result",
+      "limits": [
+        "Source input explicitly seeded; never autonomous discovery.",
+        "Nonstreaming writer has no first-token measurement.",
+        "HTTP headers timing does not identify internal provider queue or cold-start cause.",
+        "Model support review is not independent human gold."
+      ]
+    }
+  ],
+  "checkpoint_correction": {
+    "llm": false,
+    "fallback_detail": "quantity_mismatch",
+    "fallback_provider_code": null,
+    "semantic_review": null
+  },
+  "limits": [
+    "Original probe read compact job instead of terminal checkpoint: synthesis fields in first two files are not authoritative.",
+    "QA checkpoint confirms llm=false, quantity_mismatch. Isolated checkpoint already removed; review timeout proven by call and transport records.",
+    "Rejected writer text was not captured: cannot independently adjudicate numeric mismatch; no weakening of validator."
+  ]
+}

@@ -1,0 +1,484 @@
+{
+  "scope": "Authenticated disposable local Chrome + real free PC Agent; not production",
+  "runs": [
+    {
+      "artifact": "browser-B.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "technical",
+        "query": "Pesquisa profunda sobre como usar Math.hypot, qual a sintaxe, comportamento e valor retornado.",
+        "seconds": 12.548,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": "rj-c106c9a98a58",
+        "job_state": "concluida",
+        "job_mode": "profunda",
+        "outcome": {
+          "state": "partial",
+          "unresolved_fronts": [],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 0,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        },
+        "synthesis_llm": false,
+        "chat_result_id": "rj-c106c9a98a58-result",
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 4.4997
+          },
+          {
+            "step_id": "p4",
+            "type": "busca",
+            "seconds": 2.1915
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 1.2443
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 0.0024
+          },
+          {
+            "step_id": "p5",
+            "type": "ler",
+            "seconds": 0.0002
+          },
+          {
+            "step_id": "p8",
+            "type": "ler",
+            "seconds": 0.0001
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0035
+          },
+          {
+            "step_id": "p6",
+            "type": "analisar",
+            "seconds": 0.0011
+          },
+          {
+            "step_id": "p9",
+            "type": "analisar",
+            "seconds": 0.0009
+          },
+          {
+            "step_id": "p10",
+            "type": "verificar",
+            "seconds": 0.0061
+          },
+          {
+            "step_id": "p11",
+            "type": "sintetizar",
+            "seconds": 0.0004
+          },
+          {
+            "step_id": "p12",
+            "type": "auditar",
+            "seconds": 0.0016
+          }
+        ],
+        "synthesis_budget": null,
+        "assistant_messages": 2,
+        "reload_preserved": true,
+        "source_cards": [],
+        "links": [],
+        "media_cards": 0,
+        "page_errors": []
+      }
+    },
+    {
+      "artifact": "browser-full-new-resumed.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "full-new",
+        "query": "Pesquisa profunda sobre como funciona Array.prototype.flat, qual a sintaxe, comportamento, valor retornado e limitações.",
+        "seconds": 40.583,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": "rj-3aeab612ecfc",
+        "job_state": "interrompida",
+        "job_mode": "profunda",
+        "outcome": {
+          "state": "blocked",
+          "unresolved_fronts": [],
+          "source_authority_unverified": false,
+          "provider_code": "timeout",
+          "read_sources": 4,
+          "reason": "redação ou revisão bloqueada pelo provedor; evidências preservadas"
+        },
+        "synthesis_llm": false,
+        "chat_result_id": "rj-3aeab612ecfc-result",
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 1.608
+          },
+          {
+            "step_id": "p4",
+            "type": "busca",
+            "seconds": 1.6174
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 6.0426
+          },
+          {
+            "step_id": "p10",
+            "type": "busca",
+            "seconds": 1.1097
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 4.792
+          },
+          {
+            "step_id": "p5",
+            "type": "ler",
+            "seconds": 4.5187
+          },
+          {
+            "step_id": "p8",
+            "type": "ler",
+            "seconds": 0.0025
+          },
+          {
+            "step_id": "p11",
+            "type": "ler",
+            "seconds": 0.0021
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0394
+          },
+          {
+            "step_id": "p6",
+            "type": "analisar",
+            "seconds": 0.0359
+          },
+          {
+            "step_id": "p9",
+            "type": "analisar",
+            "seconds": 0.0385
+          },
+          {
+            "step_id": "p12",
+            "type": "analisar",
+            "seconds": 0.0441
+          },
+          {
+            "step_id": "p13",
+            "type": "verificar",
+            "seconds": 0.0791
+          },
+          {
+            "step_id": "p14",
+            "type": "sintetizar",
+            "seconds": 0.0023
+          },
+          {
+            "step_id": "p15",
+            "type": "auditar",
+            "seconds": 0.0035
+          }
+        ],
+        "synthesis_budget": {
+          "source_count": 4,
+          "context_chars": 5580,
+          "timeout_seconds": 25,
+          "attempts": 1
+        },
+        "assistant_messages": 2,
+        "reload_preserved": true,
+        "source_cards": [
+          "Array.prototype.flat() - JavaScript | MDN\nTRECHO LIDO\nMDN Web Docs · Fonte\nAspectos com passagem: Sintaxe ou assinatura\nTexto recuperado · Trecho ligado a uma afirmação\nExperimente const arr1 = [0, 1, 2, [3, 4]]; console.log(arr1.flat()); // expected output: Array [0, 1, 2, 3, 4] const arr2 = [0, 1, [2, [3, [4, 5]]]]; console.log(arr2.flat()); // expected output: Array [0, 1, 2, Array [3, Array [4, 5]]] console.log(arr2.flat(2)); // expected output: Array [0, 1, 2,\nAbrir fonte ↗",
+          "Array.prototype.flat() - JavaScript | MDN\nTRECHO LIDO\nMDN Web Docs · Fonte\nAspectos com passagem: Sintaxe ou assinatura\nSuporte parcial: Valor retornado, Comportamento da operação\nTexto recuperado · Trecho ligado a uma afirmação\nDescription The flat() method is a copying method. It does not alter this but instead returns a shallow copy that contains the same elements as the ones from the original array. The flat() method removes empty slots if the array being flattened is sparse. For example, if depth is 1, both empty slots\nAbrir fonte ↗",
+          "How Array.prototype.flat Handles Nested Arrays - javascript\nTRECHO LIDO\nsalivity.github.io · Fonte\nAspectos com passagem: Sintaxe ou assinatura\nTexto recuperado · Trecho ligado a uma afirmação\nHow Array.prototype.flat Handles Nested Arrays The Array.prototype.flat() method in JavaScript provides a built-in mechanism to concatenate sub-array elements into a single, new array. This article explains how the method processes nested arrays of various depths, how to completely flatten\nAbrir fonte ↗",
+          "Array.prototype.flatMap & Array.prototype.flat\nTRECHO LIDO\ntc39.github.io · Fonte\nAspectos com passagem: Valor retornado, Comportamento da operação\nTexto recuperado · Trecho ligado a uma afirmação\nIntroduction Array.prototype.flat returns a new array with all sub-array elements concatenated into it recursively up to the specified depth. Array.prototype.flatMap first maps each element using a mapping function, then flattens the result into a new array. It is identical to a map followed by a\nAbrir fonte ↗"
+        ],
+        "links": [
+          {
+            "text": "Array.prototype.flat() - JavaScript | MDN",
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/flat"
+          },
+          {
+            "text": "Abrir fonte ↗",
+            "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/flat"
+          },
+          {
+            "text": "Array.prototype.flat() - JavaScript | MDN",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat"
+          },
+          {
+            "text": "Abrir fonte ↗",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat"
+          },
+          {
+            "text": "How Array.prototype.flat Handles Nested Arrays - javascript",
+            "url": "https://salivity.github.io/javascript/article/how-array-prototype-flat-handles-nested-arrays"
+          },
+          {
+            "text": "Abrir fonte ↗",
+            "url": "https://salivity.github.io/javascript/article/how-array-prototype-flat-handles-nested-arrays"
+          },
+          {
+            "text": "Array.prototype.flatMap & Array.prototype.flat",
+            "url": "https://tc39.github.io/proposal-flatMap/#sec-Array.prototype.flat"
+          },
+          {
+            "text": "Abrir fonte ↗",
+            "url": "https://tc39.github.io/proposal-flatMap/#sec-Array.prototype.flat"
+          }
+        ],
+        "media_cards": 0,
+        "page_errors": []
+      }
+    },
+    {
+      "artifact": "browser-images.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "images",
+        "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+        "seconds": 6.694,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": null,
+        "job_state": null,
+        "job_mode": null,
+        "outcome": null,
+        "synthesis_llm": false,
+        "chat_result_id": null,
+        "stage_timings": null,
+        "synthesis_budget": null,
+        "assistant_messages": 1,
+        "reload_preserved": true,
+        "source_cards": [],
+        "links": [],
+        "media_cards": 5,
+        "page_errors": []
+      }
+    },
+    {
+      "artifact": "browser-cancel.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "cancel",
+        "query": "Pesquisa profunda sobre armazenamento de energia térmica e limitações.",
+        "seconds": 1.132,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": "rj-db73408ca5c7",
+        "job_state": "cancelada",
+        "job_mode": "profunda",
+        "outcome": null,
+        "synthesis_llm": false,
+        "chat_result_id": null,
+        "stage_timings": null,
+        "synthesis_budget": null,
+        "assistant_messages": 1,
+        "reload_preserved": true,
+        "source_cards": [],
+        "links": [],
+        "media_cards": 0,
+        "page_errors": []
+      }
+    },
+    {
+      "artifact": "browser-sources-A.log",
+      "result": {
+        "scope": "REAL_CHROME_SEEDED_PUBLIC_SOURCE_DELIVERY",
+        "source_cards": 2,
+        "links": [
+          {
+            "text": "Array.prototype.toSorted() - JavaScript | MDN",
+            "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+            "target": "_blank"
+          },
+          {
+            "text": "Abrir fonte ↗",
+            "url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+            "target": "_blank"
+          },
+          {
+            "text": "Array.prototype.toSorted() - JavaScript | MDN",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+            "target": "_blank"
+          },
+          {
+            "text": "Abrir fonte ↗",
+            "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+            "target": "_blank"
+          }
+        ],
+        "opened_url": "https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Global_Objects/Array/toSorted",
+        "network_failure_observed": true,
+        "health_after_reconnect": 200,
+        "composer_enabled_before_offline": true,
+        "limits": [
+          "Fetch rejection is a transport negative test; no claim that every offline UI flow was exercised."
+        ]
+      }
+    },
+    {
+      "artifact": "browser-extra.log",
+      "result": {
+        "scope": "AUTHENTICATED_QA; image failure is explicitly injected",
+        "image_error_visible": true,
+        "image_recovered": true,
+        "indexeddb": {
+          "database_count": 2,
+          "messages": 12,
+          "structured_assistant_messages": 5,
+          "result_messages": 4
+        },
+        "downloads": [
+          {
+            "format": "md",
+            "failure": null
+          },
+          {
+            "format": "csv",
+            "failure": null
+          }
+        ],
+        "result_cards": 6,
+        "page_errors": []
+      }
+    },
+    {
+      "artifact": "browser-gallery.log",
+      "result": {
+        "scope": "REAL_CHROME_GALLERY",
+        "images": [
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          }
+        ],
+        "keyboard_navigation": true,
+        "escape_closes": true,
+        "focus_restored": true,
+        "full_image_loaded": true
+      }
+    },
+    {
+      "artifact": "browser-visual-C.log",
+      "result": {
+        "scope": "REAL_CHROME_LOCAL_PARTIAL_RESULT_VISUAL_NOT_COMPLETE_RESEARCH",
+        "viewports": [
+          {
+            "viewport": 1280,
+            "root": 1280,
+            "card_left": 394,
+            "card_right": 1154,
+            "message_width": 760
+          },
+          {
+            "viewport": 390,
+            "root": 390,
+            "card_left": 20,
+            "card_right": 370,
+            "message_width": 350
+          },
+          {
+            "viewport": 320,
+            "root": 320,
+            "card_left": 16,
+            "card_right": 304,
+            "message_width": 288
+          }
+        ],
+        "keyboard_sort": true,
+        "csv": true,
+        "edit_buttons": 0,
+        "reduced_motion": true,
+        "zoom": {
+          "width": 110,
+          "scroll": 224,
+          "root": 320,
+          "viewport": 320,
+          "scroll_left": 114
+        },
+        "reload_table": true,
+        "indexeddb": [
+          {
+            "name": "julia-mobile-cache-v1",
+            "stores": []
+          },
+          {
+            "name": "julia-mobile-cache-v2",
+            "stores": [
+              {
+                "name": "messages",
+                "count": 4
+              },
+              {
+                "name": "meta",
+                "count": 3
+              },
+              {
+                "name": "saved_items",
+                "count": 0
+              },
+              {
+                "name": "sessions",
+                "count": 1
+              },
+              {
+                "name": "ui_state",
+                "count": 0
+              }
+            ]
+          }
+        ],
+        "page_errors": []
+      }
+    }
+  ]
+}
