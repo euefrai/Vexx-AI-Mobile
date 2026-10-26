@@ -268,7 +268,7 @@ def _paragrafos(no: "_No") -> list:
         ignorar = dentro_ignorada or n.tag in _IGNORAR
         if not ignorar and n.tag in _BLOCO:
             txt = _texto_bloco_inline(n)
-            if len(txt) >= 25 or (n.tag in ('h1','h2','h3','h4','h5','h6') and txt):
+            if len(txt) >= 25 or (n.tag == 'p' and len(txt) >= 8) or (n.tag in ('h1','h2','h3','h4','h5','h6') and txt):
                 saida.append((n.tag, txt[:1200]))
         for f in n.filhos:
             _anda(f, ignorar)
@@ -646,9 +646,9 @@ def passage_candidates(texto, source_url='', sections=None, limit=40):
         title=str(section.get('titulo') or '')[:160]
         body=str(section.get('texto') or '').strip()
         if not title or len(body)<8:continue
-        match=re.search(re.escape(body).replace(r'\ ',r'\s+'),text)
+        match=re.search(r'\s+'.join(re.escape(part) for part in body.split()),text)
         if not match:continue
-        headings=list(re.finditer(re.escape(title).replace(r'\ ',r'\s+'),text[:match.start()],re.I))
+        headings=list(re.finditer(r'\s+'.join(re.escape(part) for part in title.split()),text[:match.start()],re.I))
         if not headings:continue
         heading=headings[-1]
         if text[heading.end():match.start()].strip(' :\n\t'):continue

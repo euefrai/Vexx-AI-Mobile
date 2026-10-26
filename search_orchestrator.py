@@ -243,6 +243,25 @@ def _context_mismatch(a: dict, consulta: str) -> list:
     if matched_ids and not (any(matched_ids) if RX_COMPARACAO.search(consulta) else all(matched_ids)):
         reasons.append('ENTITY_MISMATCH')
     import query_intelligence as qi
+    operations={r['entity'] for r in qi.answer_requirements(consulta)
+                if re.fullmatch(r'\w+(?:\.\w+)+',r['entity'])}
+    if operations:
+        # A generic calculator/dictionary cannot answer a named API. Preserve
+        # sparse metadata when its actual path identifies the requested method.
+        raw_path=urllib.parse.unquote(urllib.parse.urlsplit(str(a.get('url') or '')).path)
+        path=_sem_acentos(raw_path).replace('/','.')
+        scoped=re.sub(r'\s*\.\s*','.',body+' '+path).replace('.prototype.','.')
+        def identifies(op):
+            op=_sem_acentos(op).replace('.prototype.','.')
+            if re.search(r'(?<!\w)'+re.escape(op)+r'(?!\w)',scoped):return True
+            # A real parent reference is a navigation lead, not direct evidence.
+            # Keep it for the existing bounded link reader; dictionaries and
+            # generic homepages do not acquire this exception.
+            return bool(re.search(r'/(?:docs?|reference|api|library)/',raw_path,re.I)
+                        and re.search(r'(?<!\w)'+re.escape(op.split('.')[0])+r'(?:[./_-]|$)',path))
+        present=[identifies(op) for op in operations]
+        if not (any(present) if RX_COMPARACAO.search(consulta) else all(present)):
+            reasons.append('ENTITY_MISMATCH')
     named = []
     for entity in qi.topic_profile(consulta)['entities']:
         name = entity['name']

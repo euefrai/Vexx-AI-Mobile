@@ -34,8 +34,8 @@ _ANSWER_RELATIONS = {
     'causes': r'\b(?:causad[ao]|causas? (?:foram|incluem)|caused|porque|devido|motivada|motivado|desencadead[ao])\b.{8,}',
     'consequences': r'\b(?:resultou|resultaram|consequencias? (?:foram|incluem)|resulted|levou a|levaram a|provocou)\b.{8,}',
     'syntax': r'\w+\s*\([^)]*\)',
-    'return_value': r'\b(?:retorna|returns?)\b.{8,}',
-    'behavior': r'\b(?:retorna|returns?|permite|allows?|cria|creates?|adiciona|adds?|aumenta|increases?|grows?|grow the|aumentar)\b.{8,}',
+    'return_value': r'\b(?:retorna|returns?(?!\s+value\b))\b.{8,}',
+    'behavior': r'\b(?:retorna|returns?(?!\s+value\b)|permite|allows?|cria|creates?|adiciona|adds?|copia|copies|aumenta|increases?|grows?|grow the|aumentar)\b.{8,}',
     'examples': r'\w+\s*\([^)]*\)',
     'limitations': r'\b(?:nao pode|cannot|must not|limitad[ao]|limite de|maximum|exceeds|exception|raises|restricao)\b.{4,}',
     'weight': r'\b\d+(?:[.,]\d+)?\s*(?:g|kg|gramas?|kilograms?)\b',
@@ -181,6 +181,7 @@ def requirement_coverage(query, sources, *, requirements=None):
         return {'applicable': False, 'requirements': [], 'passages': [], 'complete': False,
                 'scope': 'no explicit supported facet parsed; not proof of completeness'}
     matches = []
+    diagnostics={'read_documents':0,'generated_passages':0}
     for source in sources[:80]:
         if source.get('relevante') is False or (source.get('vertical') or {}).get('eligible') is False:
             continue
@@ -191,6 +192,8 @@ def requirement_coverage(query, sources, *, requirements=None):
             continue
         url = str(source.get('url_final') or source.get('final') or source.get('url') or '')
         passages = source.get('answer_passages') or passage_candidates(text, url, source.get('secoes'))
+        diagnostics['read_documents']+=1
+        diagnostics['generated_passages']+=len(passages[:40])
         for req in requirements:
             for p in passages[:40]:
                 label = _passage_support(req,p,source)
@@ -225,7 +228,16 @@ def requirement_coverage(query, sources, *, requirements=None):
             if value: values.add(value[1])
         if len(values)>1:
             req.update(state='CONTRADICTED', insufficiency_reason='Anos de fundação divergentes em passagens; exige verificação.')
-    return {'applicable': True, 'requirements': requirements, 'passages': matches[:32],
+    # Cap the public bindings fairly: a prolific syntax facet must not crowd
+    # out the only return/limitation passage before selection even runs.
+    groups=[[p for p in matches if p['requirement_id']==r['id']] for r in requirements]
+    retained=[]
+    for index in range(max((len(g) for g in groups),default=0)):
+        for group in groups:
+            if index<len(group) and len(retained)<32:retained.append(group[index])
+        if len(retained)>=32:break
+    diagnostics.update(matched_bindings=len(matches),retained_bindings=len(retained))
+    return {'applicable': True, 'requirements': requirements, 'passages': retained, 'diagnostics':diagnostics,
             'complete': all(r['state']=='SUPPORTED' for r in requirements),
             'scope': 'explicit relation patterns in bounded literal spans; not independent factual verification'}
 

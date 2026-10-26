@@ -74,6 +74,9 @@ def record(job_id, step_id, source, state, *, charged=False, rec=None,
                     'content_type': content_type if re.fullmatch(r'[a-z0-9.+-]+/[a-z0-9.+-]+',content_type) else '',
                     'request_ref': hashlib.sha256(request_url.encode()).hexdigest() if request_url else '',
                     'useful_passages': len((coverage or {}).get('passages', [])),
+                    'passage_yield':{k:v for k,v in ((coverage or {}).get('diagnostics') or {}).items()
+                                     if k in ('read_documents','generated_passages','matched_bindings','retained_bindings')
+                                     and type(v) is int and 0<=v<=100000},
                     'requested_requirement_ids':requested,
                     'requirement_ids':list(support) if coverage is not None else requested,
                     'requirement_support':support,

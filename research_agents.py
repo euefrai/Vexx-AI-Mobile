@@ -681,6 +681,15 @@ def buscar_com_fallback(provedores: list, consulta: str, limite: int = 6,
                           "codigo": getattr(exc, "codigo", type(exc).__name__)})
             continue
         if achados:
+            import query_intelligence as qi
+            import search_orchestrator as orch
+            if any(re.fullmatch(r'\w+(?:\.\w+)+',r['entity']) for r in qi.answer_requirements(consulta)):
+                usable=[a for a in achados if not orch._context_mismatch(a,consulta)]
+                if len(usable)!=len(achados):
+                    erros.append({'provedor':getattr(p,'nome','?'),'codigo':'context_mismatch',
+                                  'rejected_candidates':len(achados)-len(usable)})
+                achados=usable
+        if achados:
             out = {"provedor": p.nome, "erros": erros}
             detalhe = getattr(p, "info", None)
             if isinstance(detalhe, dict) and detalhe:
@@ -1438,16 +1447,17 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                       "ingestao", "documento veio desta fonte")
             _eg.ligar(db, job["owner"], job["id"], nev, ndoc, "MENTIONS",
                       "ingestao", "trecho extraído deste documento")
-            for passage in answer_coverage['passages'][:8]:
-                req = next(r for r in answer_coverage['requirements'] if r['id']==passage['requirement_id'])
+            for passage in answer_passages[:8]:
                 np = _eg.criar_no(db,job['owner'],job['id'],'evidence','passage:'+passage['id'],
                     {'passage_id':passage['id'],'evidence_id':ev['id'],'text_span':passage['text_span'],
                      'section':passage.get('section',''),'url':ev['url']})
-                nr = _eg.criar_no(db,job['owner'],job['id'],'claim','requirement:'+req['id'],
-                    {'requirement_id':req['id'],'description':req['description'],'entity':req['entity']})
                 _eg.ligar(db,job['owner'],job['id'],np,ndoc,'DERIVED_FROM','literal_extraction','Passagem do texto extraído, não do HTML bruto.')
-                _eg.ligar(db,job['owner'],job['id'],np,nr,'REQUIRES_VERIFICATION','explicit_relation_pattern',
-                          'Passagem candidata ao requisito; vínculo não comprova verdade factual.')
+                for rid in passage.get('requirement_ids') or [passage['requirement_id']]:
+                    req = next(r for r in answer_coverage['requirements'] if r['id']==rid)
+                    nr = _eg.criar_no(db,job['owner'],job['id'],'claim','requirement:'+req['id'],
+                        {'requirement_id':req['id'],'description':req['description'],'entity':req['entity']})
+                    _eg.ligar(db,job['owner'],job['id'],np,nr,'REQUIRES_VERIFICATION','explicit_relation_pattern',
+                              'Passagem candidata ao requisito; vínculo não comprova verdade factual.')
             emitir(db, job["id"], job["owner"], "analyst", "evidence_linked", "ok",
                    f"Evidência ligada ao documento ({ev['dominio']}).",
                    {"evidencia_id": ev["id"], "dominio": ev["dominio"],
