@@ -31,7 +31,7 @@ _ANSWER_RELATIONS = {
     'founders': r'(?:fundad[ao]s?|criad[ao]s?|founded|established).{0,100}\b(?:por|by)\s+\w+|fundadores?\s*[:—-]\s*\w+',
     'foundation_date': r'(?:fundad[ao]|fundacao|founded|established|criad[ao]).{0,100}\b(?:1[5-9]|20)\d{2}\b|\b(?:1[5-9]|20)\d{2}\b.{0,80}(?:fundad[ao]|fundacao|founded)',
     'creation_date': r'\b(?:criad[ao]|created|desenvolvid[ao])\s+(?:(?:em|in)\s+)?(?:1[5-9]|20)\d{2}\b',
-    'products': r'\b(?:produz|fabrica|fabricam|produzem|manufactures?|makes?|products include|produtos incluem)\b.{4,}',
+    'products': r'\b(?:produz|fabrica|fabricam|produzem|manufactures?|makes?|manufacturers? of|producers? of|products include|produtos incluem)\b.{4,}',
     'causes': r'\b(?:causad[ao]|causas? (?:foram|incluem)|caused|porque|devido|motivada|motivado|desencadead[ao])\b.{8,}',
     'consequences': r'\b(?:resultou|resultaram|consequencias? (?:foram|incluem)|resulted|levou a|levaram a|provocou)\b.{8,}',
     'syntax': r'\w+\s*\([^)]*\)',
@@ -94,6 +94,20 @@ def _passage_support(req, passage, source):
         # useful scope, but not a local explicit subject: retain PARTIAL only.
         if re.match(labels[attribute]+r'\b',text) and re.search(relation_rx,text) and not re.search(r'\b(?:unknown|not available|desconhecido)\b',text):
             partial_found=True
+    if attribute in ('founders','foundation_date','products') and passage.get('element_type')=='tr':
+        # An actual named DOM table owns its fields. This is stronger than a
+        # page title: both header and row retain offsets into the same extraction.
+        header=qi.normalized(passage.get('table_header',''))
+        header=re.sub(r'\s+(?:s\.?a\.?|corporation|inc\.?|ltd\.?)$','',header)
+        hs=passage.get('table_header_span') or {};rs=passage.get('source_span') or {}
+        verified=(header==entity and hs.get('sha256') and hs.get('sha256')==rs.get('sha256')
+                  and type(hs.get('start')) is int and type(hs.get('end')) is int and type(rs.get('start')) is int
+                  and 0<=hs['start']<hs['end']<=rs['start'])
+        fields={'founders':r'^(?:founder(?:s)?|fundador(?:es|\s*\(es\))?)\s+[^\d]{4,}',
+                'foundation_date':r'^(?:founded|funda[cç][aã]o)\s+.{0,90}\b(?:1[5-9]|20)\d{2}\b',
+                'products':r'^(?:products|produtos)\s+\w.{3,}'}
+        if verified and re.search(fields[attribute],text) and not re.search(r'\b(?:unknown|desconhecid\w*|nao confirmado|not known)\b',text):
+            return 'DIRECT_SUPPORT'
     if passage.get('element_type')=='tr' and scoped_entity and passage.get('table_field')==attribute:
         fields={'founders':r'^(?:fundador(?:es|\s*\(es\))?|criador(?:es)?|founder(?:s)?)\s+[^\d]{4,}',
                 'foundation_date':r'^(?:funda[cç][aã]o|founded)\s+.{0,90}\b(?:1[5-9]|20)\d{2}\b',
@@ -126,8 +140,18 @@ def _passage_support(req, passage, source):
             if re.match(r'(?:the\s+)?'+re.escape(leaf)+r'\s*\([^)]*\)\s*(?:method\s+)?',clause) and re.search(relation_rx,clause):
                 if not re.search(r'\b\w+(?:\.\w+)+',clause) and not re.search(r'\b(?:not|never|nao|nunca)\b',clause):
                     partial_found=True
+    company_context=False
     for clause in clauses:
         if not clause.strip():continue
+        inherited_company=company_context
+        subject_match=anchor.search(clause)
+        explicit_subject=bool(subject_match and clause[:subject_match.start()].strip() in ('','a','o','the')
+                              and re.match(r'\s+(?:was founded|was established|foi fundad[ao]|foi criad[ao]|is (?:a|an)|produz|fabrica)\b',clause[subject_match.end():]))
+        # At most one neutral bridge after an explicit entity subject. A new
+        # subject, reported speech, negation or arbitrary prose resets scope.
+        bridge=bool(re.fullmatch(r'(?:the company|a empresa|a companhia)\s+(?:has operations|operates|tem operacoes|atua)\s+(?:in|em)\s+[^.!?;]{1,100}[.!?]?',clause))
+        bridge=bridge and not re.search(r'\b(?:que|which|who|not|never|nao|nunca)\b',clause)
+        company_context=explicit_subject or (inherited_company and bridge and bool(anchor.search(previous)))
         if attribute=='causes':
             # Causal direction matters: an antecedent which "led to X" is a
             # cause of X, never a consequence of X. Keep the original span.
@@ -140,10 +164,11 @@ def _passage_support(req, passage, source):
         if named and attribute in ('syntax','examples') and re.match(r'\s*\([^)]*\)',clause[named.end():]):
             return 'DIRECT_SUPPORT'
         context=False
-        if not named and previous and re.match(r'^(?:ela|ele|it|a empresa|a companhia)\s+',clause):
+        if not named and previous and re.match(r"^(?:ela|ele|it(?:'s)?|a empresa|a companhia|the company)\s+",clause):
             # Exactly the immediately preceding short sentence must start with
             # the entity as its own subject. No other entity/sentence in between.
             context=bool(re.fullmatch(r'(?:a |o )?'+re.escape(entity)+r'\s+(?:foi|was|is|e|produz|fabrica)\b[^.!?;]{0,220}[.!?]?',previous))
+            context=context or inherited_company
         if qualified and not named and previous:
             context=context or bool(re.fullmatch(re.escape(entity)+r'\s*\([^)]*\)',previous))
         if predicate and (named or context):
@@ -157,12 +182,14 @@ def _passage_support(req, passage, source):
                     previous=clause;continue
             else:offset=0
             pos=predicate.start()+offset
-            gap=clause[named.end():pos] if named else re.sub(r'^(?:ela|ele|it|a empresa|a companhia)\s+','',clause[:pos])
+            gap=clause[named.end():pos] if named else re.sub(r"^(?:ela|ele|it(?:'s)?|a empresa|a companhia|the company)\s+",'',clause[:pos])
             if attribute in ('founders','foundation_date','creation_date','products','causes','consequences',
                              'river_source','river_mouth','course','location','population','definition','alternatives'):
                 # Bounded copular/auxiliary modifiers only. Reported facts about
                 # another subject are not transferred to this entity.
                 allowed=r'\s*(?:(?:foi|was|is|e|a|o|uma|um|an?|the|empresa|companhia|company|public|service|vertically|integrated|que|no|na|brasil|brazil|in)\s+){0,12}'
+                if attribute=='products':
+                    allowed=r'\s*(?:(?:is|e|a|an|the)\s+)*(?:(?:one of the|uma das|um dos)\s+)?(?:(?:largest|leading|biggest|maiores|principais)\s+)?'
                 if attribute in ('river_source','river_mouth','course'):
                     allowed=r'\s*'
                     if (attribute=='river_mouth' and re.fullmatch(r'\s*nasce\s+(?:em|na|no)\s+[^.!?;]{4,100}\s+e\s*',gap)

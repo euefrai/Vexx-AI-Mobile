@@ -69,6 +69,8 @@ aquele trecho: não recopie, altere, combine ou invente citações.
 Use 1 a 5 parágrafos de 20 a 500 caracteres e 1 a 3 referências por parágrafo.
 Cada afirmação deve estar nos trechos escolhidos. Preserve entidades, condições,
 datas, números, unidades e incertezas. Não acrescente aspectos sem evidência.
+Responda todos os aspectos sustentados do objetivo. Prefira uma afirmação curta
+por parágrafo, sem contexto adicional; nunca exceda três referências no parágrafo.
 Se só houver dados parciais, responda só essa parte. Sem suporte: {"points":[]}.
 """
 
@@ -90,7 +92,9 @@ def quote_options(source):
                 sentence=sentence[len(chunk):].lstrip()
                 if len(chunk.strip())<24:continue
                 if used+len(chunk)>1800:return options
-                options.append({'id':'Q'+str(len(options)+1),'text':chunk});used+=len(chunk)
+                option={'id':'Q'+str(len(options)+1),'text':chunk}
+                if span.get('table_header'):option['table_header']=str(span['table_header'])[:160]
+                options.append(option);used+=len(chunk)
     return options
 
 
@@ -366,14 +370,18 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
     # not fresh parser defaults or evidence omitted from its context.
     coverage=evidence_graph.requirement_coverage(objective,[{
         'id':s.get('evidence_id') or s['id'],'url':s.get('url',''),'titulo':s.get('title',''),
-        'trecho':s['excerpt'],'texto_lido':True,'content_scope':s.get('scope','retrieved_excerpt')}
+        'texto':s['excerpt'],'texto_lido':True,'content_scope':s.get('scope','retrieved_excerpt'),
+        'answer_passages':[{**p,'text':s['excerpt'][p['start']:p['end']],
+                            'text_span':{'start':p['start'],'end':p['end'],'scope':'returned_extracted_text'}}
+                           for p in s.get('passage_ranges',[])]}
         for s in sources])
     requirements = coverage['requirements']
     allowed_ids = json.dumps([s['id'] for s in sources],ensure_ascii=False)
     catalog_mode=bool(getattr(generate_fn,'literal_quote_ids',False))
-    catalogs={s['id']:{q['id']:q['text'] for q in quote_options(s)} for s in sources} if catalog_mode else {}
+    options={s['id']:quote_options(s) for s in sources} if catalog_mode else {}
+    catalogs={sid:{q['id']:q['text'] for q in quotes} for sid,quotes in options.items()}
     model_sources=[{**{k:v for k,v in s.items() if k not in ('excerpt','passage_ranges')},
-                    'quotes':[{'id':k,'text':v} for k,v in catalogs[s['id']].items()]} for s in sources] if catalog_mode else sources
+                    'quotes':options[s['id']]} for s in sources] if catalog_mode else sources
     messages = [{"role": "system", "content": (CATALOG_SYSTEM if catalog_mode else SYSTEM)+'\nIDs de fonte permitidos: '+allowed_ids}, {"role": "user", "content": json.dumps({
         "objective": objective[:500], "sources": model_sources,
         **({'requirements':[{"id":r['id'],"aspect":r['description'],"entity":r['entity'],

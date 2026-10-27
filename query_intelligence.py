@@ -105,6 +105,8 @@ def answer_requirements(text):
     else:
         causal=re.match(r'^por que (?:aconteceu|ocorreu|houve)\s+(.+?)(?:\s+e\s+o que\b|[?,]|$)',subject,re.I)
         if causal:subject=causal[1]
+        causal=re.match(r'^quais\s+(?:(?:foram|s[aã]o)\s+)?as?\s+(?:causas?|consequ[eê]ncias?)\s+(?:de|do|da)\s+(.+?)(?:\s+e\s+(?:quais|qual|o que)\b|[?,]|$)',subject,re.I)
+        if causal:subject=causal[1]
         subject = re.sub(r'^(?:quais\s+(?:(?:foram|s[aã]o)\s+)?as?\s+|as?\s+)?(?:causas? e (?:as?\s+)?consequ[eê]ncias?)\s+(?:de|do|da)\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:como (?:usar|utilizar|funciona)|qual (?:[eé] )?(?:o peso|a bateria) (?:de|do|da))\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:peso|bateria)\s+(?:de|do|da)\s+','',subject,flags=re.I)
@@ -183,7 +185,8 @@ def entity_alias_matches(entity,text):
 
 
 def requirement_query(requirement, original):
-    query = requirement['entity'] + ' ' + requirement['description']
+    # Facet labels are search terms, not part of a capitalized proper name.
+    query = requirement['entity'] + ' ' + requirement['description'].lower()
     if requirement.get('constraints', {}).get('must_preserve') and not _model_only_scope(original):
         return str(original)[:190] + ' ' + requirement['description']
     if re.search(r'com bateria e (?:o )?cartao',normalized(original)):

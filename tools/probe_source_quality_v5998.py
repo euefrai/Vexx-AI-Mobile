@@ -27,8 +27,9 @@ def main():
     parser.add_argument('--dataset',type=Path,default=ROOT/'benchmarks/source_quality_v5998_dev.json')
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--baseline',action='store_true')
-    parser.add_argument('--baseline-ref',choices=['cc60042','8ccbbe0','0959e8c'],default='cc60042')
-    parser.add_argument('--artifact-version',choices=['v5998','v5999','v5910','v5911'],default='v5998')
+    parser.add_argument('--baseline-ref',choices=['cc60042','8ccbbe0','0959e8c','40f9531'],default='cc60042')
+    parser.add_argument('--artifact-version',choices=['v5998','v5999','v5910','v5911','v5912'],default='v5998')
+    parser.add_argument('--capture-label',choices=['','before','after','evaluation'],default='')
     args=parser.parse_args()
     if args.output.exists():raise SystemExit('Refusing to overwrite evidence')
     import research,research_agents as ra,pc_agent,web_extract as we,evidence_graph as eg
@@ -40,7 +41,7 @@ def main():
             loaded_sha[mod.__name__]=hashlib.sha256(src.encode()).hexdigest()
             exec(compile(src,'<v5997:'+mod.__name__+'>','exec'),mod.__dict__)
     case=next(x for x in json.loads(args.dataset.read_text(encoding='utf-8'))['queries'] if x['id']==args.case)
-    safe=hashlib.sha256((args.track+'|'+case['id']).encode()).hexdigest()[:20]
+    safe=hashlib.sha256((args.track+'|'+case['id']+('|'+args.capture_label if args.capture_label else '')).encode()).hexdigest()[:20]
     raw=ROOT/'qa-artifacts'/args.artifact_version/'raw'/safe
     raw.mkdir(parents=True,exist_ok=True)
     out={'track':args.track,'case':{k:v for k,v in case.items() if k!='url'},'baseline':args.baseline_ref if args.baseline else None,

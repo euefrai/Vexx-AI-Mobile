@@ -818,11 +818,26 @@ def _document_windows(text, root, block, query, url, budget):
         if node.tag in _IGNORAR | _PULAR: return
         if node.tag == 'tr' or node.tag in _BLOCO:
             value = _normalizar(_texto_bloco(node))
-            if value: yield node.tag, value
+            if value: yield node, value
             return
         for child in node.filhos: yield from elements(child)
     pools = {rid:[] for rid,_ in terms}
-    cursor=0; section=''; section_start=0; scanned=0
+    cursor=0; section=''; section_start=0; section_end=0; scanned=0
+    table_headers={};row_scopes={}
+    def table_scope(node,pos):
+        table=node.pai
+        while table is not None and table.tag!='table':table=table.pai
+        if table is None:return {}
+        if table not in table_headers:
+            first=next((n for n in _descendentes(table) if n.tag=='tr'),None)
+            cells=[n for n in first.filhos if n.tag in ('th','td')] if first else []
+            header=_normalizar(_texto_bloco(cells[0])) if len(cells)==1 else ''
+            at=source.find(header) if 2<len(header)<=160 else -1
+            table_headers[table]=(header,at)
+        header,at=table_headers[table]
+        if at<0 or at+len(header)>pos:return {}
+        return {'table_header':header,'table_header_span':{'start':at,'end':at+len(header),
+                'scope':'normalized_available_extraction','sha256':digest}}
     def offer(lo,hi,tag,title,heading_start):
         if hi<=lo:return
         chunk=source[lo:hi]
@@ -845,13 +860,15 @@ def _document_windows(text, root, block, query, url, budget):
             offer(start,hi,'text','',start)
             start=hi
             while start<end and source[start].isspace():start+=1
-    for tag,value in elements(block or root):
+    for node,value in elements(block or root):
+        tag=node.tag
         pos=source.find(value,cursor)
         if pos<0:continue
         gap(cursor,pos)
         cursor=pos+len(value);scanned+=1
+        if tag=='tr':row_scopes[pos]=table_scope(node,pos)
         if re.fullmatch(r'h[1-6]',tag):
-            section=value[:160];section_start=pos
+            section=value[:160];section_start=pos;section_end=cursor
             continue
         # Long elements are scanned in bounded chunks, never cut before scan.
         lo=pos
@@ -859,7 +876,8 @@ def _document_windows(text, root, block, query, url, budget):
             hi=min(cursor,lo+1000)
             while hi<cursor and hi>lo and not source[hi].isspace():hi-=1
             if hi<=lo:break
-            start=section_start if section and 0<=lo-section_start<180 and hi-section_start<=1100 else lo
+            start=section_start if (tag!='tr' and section and not source[section_end:lo].strip()
+                                   and 0<=lo-section_start<180 and hi-section_start<=1100) else lo
             offer(start,hi,tag,section,section_start)
             lo=hi
             while lo<cursor and source[lo].isspace():lo+=1
@@ -888,6 +906,7 @@ def _document_windows(text, root, block, query, url, budget):
                          'source_role':passage_role(chunk),
                          'text_span':{'start':start,'end':len(output),'scope':'returned_extracted_text'},
                          'source_span':{'start':lo,'end':lo+len(chunk),'scope':'normalized_available_extraction','sha256':digest}})
+        if tag=='tr':passages[-1].update(row_scopes.get(lo,{}))
         if title:sections.append({'titulo':title,'texto':chunk,'id':sid})
     return {'texto':output,'answer_passages':passages,'secoes':sections,
             'document_context':{'heading':context,'basis':'preceding_heading'} if context else {},

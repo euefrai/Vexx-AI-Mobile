@@ -683,12 +683,11 @@ def buscar_com_fallback(provedores: list, consulta: str, limite: int = 6,
         if achados:
             import query_intelligence as qi
             import search_orchestrator as orch
-            if any(re.fullmatch(r'\w+(?:\.\w+)+',r['entity']) for r in qi.answer_requirements(consulta)):
-                usable=[a for a in achados if not orch._context_mismatch(a,consulta)]
-                if len(usable)!=len(achados):
-                    erros.append({'provedor':getattr(p,'nome','?'),'codigo':'context_mismatch',
-                                  'rejected_candidates':len(achados)-len(usable)})
-                achados=usable
+            usable=[a for a in achados if not orch._context_mismatch(a,consulta)]
+            if len(usable)!=len(achados):
+                erros.append({'provedor':getattr(p,'nome','?'),'codigo':'context_mismatch',
+                              'rejected_candidates':len(achados)-len(usable)})
+            achados=usable
         if achados:
             out = {"provedor": p.nome, "erros": erros}
             detalhe = getattr(p, "info", None)
@@ -1715,7 +1714,9 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                     prefix = '\n\n' if excerpt else ''
                     start = len(excerpt)+len(prefix)
                     excerpt += prefix+passage['text']
-                    ranges.append({'id':passage['id'],'start':start,'end':len(excerpt)})
+                    ranges.append({'id':passage['id'],'start':start,'end':len(excerpt),
+                                   **{k:passage[k] for k in ('element_type','section','context_heading',
+                                     'table_header','table_header_span','source_span') if k in passage}})
                 if excerpt:
                     source.update(excerpt=excerpt,passage_ranges=ranges)
         context_meta = {'source_count':len(sources),'context_chars':sum(len(s['excerpt']) for s in sources),
@@ -1727,7 +1728,8 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
             if candidate:
                 import evidence_graph
                 answer_coverage = evidence_graph.requirement_coverage(job['objetivo'], [
-                    {'id':'answer','url':'','texto_lido':True,'trecho':candidate['texto']}])
+                    {'id':'answer','url':'','texto_lido':True,
+                     'trecho':'\n\n'.join(f['text'] for f in candidate.get('findings',[])) or candidate['texto']}])
                 candidate['answer_coverage'] = evidence_graph.compact_coverage(answer_coverage)
                 notes = ["Redação assistida por IA; citações e trechos conferidos. "
                          "Suporte revisado automaticamente por parágrafo; essa revisão pode errar e não comprova a verdade."]
