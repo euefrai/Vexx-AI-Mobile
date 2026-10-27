@@ -1,0 +1,86 @@
+{
+  "scope": "FROZEN_BEFORE_OPTIMIZATION_AGENT_AUTHORED_NOT_HUMAN_GOLD",
+  "queries": [
+    {
+      "id": "ar-01",
+      "category": "technology",
+      "query": "Quais foram as principais novidades oficiais do PostgreSQL nos últimos trinta dias?"
+    },
+    {
+      "id": "ar-02",
+      "category": "science",
+      "query": "O que as fontes primárias dizem sobre o mecanismo e as limitações da vacinação com RNA mensageiro?"
+    },
+    {
+      "id": "ar-03",
+      "category": "history",
+      "query": "Por que aconteceu a Revolução de 1930 no Brasil e o que mudou depois?"
+    },
+    {
+      "id": "ar-04",
+      "category": "local_news",
+      "query": "Quais notícias sobre abastecimento de água em Ilhéus foram publicadas nos últimos sete dias, excluindo Salvador?"
+    },
+    {
+      "id": "ar-05",
+      "category": "company",
+      "query": "Quem criou a empresa Natura, quando ela foi fundada e quais produtos fabrica?"
+    },
+    {
+      "id": "ar-06",
+      "category": "product",
+      "query": "Qual é o peso da Canon EOS R8 com bateria e cartão e qual bateria utiliza?"
+    },
+    {
+      "id": "ar-07",
+      "category": "geography",
+      "query": "Quais são a nascente e a foz do rio Paraguaçu e por quais regiões passa?"
+    },
+    {
+      "id": "ar-08",
+      "category": "education",
+      "query": "Quais são as diferenças entre bacharelado, licenciatura e tecnólogo segundo fontes oficiais brasileiras?"
+    },
+    {
+      "id": "ar-09",
+      "category": "sports",
+      "query": "Qual foi o resultado mais recente da seleção brasileira feminina de vôlei e qual é seu próximo jogo anunciado?"
+    },
+    {
+      "id": "ar-10",
+      "category": "culture",
+      "query": "Quem escreveu Quarto de Despejo e quando ocorreu sua primeira publicação?"
+    },
+    {
+      "id": "ar-11",
+      "category": "documentation",
+      "query": "Como funciona pathlib.Path.glob, quais parâmetros aceita, o que retorna e quais limitações possui?"
+    },
+    {
+      "id": "ar-12",
+      "category": "comparison",
+      "query": "Compare Raspberry Pi 5 e Orange Pi 5 quanto a memória suportada, processador e consumo, sem misturar variantes Plus."
+    },
+    {
+      "id": "ar-13",
+      "category": "multifacet",
+      "query": "Pesquise as vantagens e limitações de usar um mini PC para inferência local de modelos de linguagem, considerando memória, consumo e possibilidades de upgrade."
+    },
+    {
+      "id": "ar-14",
+      "category": "ambiguous",
+      "query": "Quem fundou a empresa de computadores Apple, em que ano, excluindo a fruta?"
+    },
+    {
+      "id": "ar-15",
+      "category": "constraints",
+      "query": "Quais museus públicos em Recife divulgam entrada gratuita aos domingos, excluindo instituições em Olinda?"
+    },
+    {
+      "id": "ar-16",
+      "category": "scarce",
+      "query": "Quantas pessoas visitaram ontem a biblioteca municipal de Itaberaba, se existir contagem pública?"
+    }
+  ],
+  "acceptance": "Autonomous URL-free discovery, read useful passages, source identity and requested constraints; snippets/context alone do not pass. No algorithm tuning after opening. No global precision or recall without independent annotation."
+}
