@@ -34,7 +34,7 @@ from html.parser import HTMLParser
 
 TTL_RAPIDA = 6 * 3600
 TTL_PROFUNDA = 24 * 3600
-RETRIEVAL_VERSION = '5.9.9.7'
+RETRIEVAL_VERSION = '5.9.9.9'
 MAX_REDIRECTS = 3
 MAX_PAGINA_BYTES = 2 * 1024 * 1024
 MAX_TEXTO_PAGINA = 8000
@@ -904,6 +904,7 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
                "metadados": art.get("metadados", {}),
                "content_scope": art.get("content_scope", "page_text"),
                "secoes": art.get("secoes", [])[:12],
+               **{k:art[k] for k in ('answer_passages','document_context','document_scan') if k in art},
                "links": art.get("links", [])[:30],
                "tabelas": art.get("tabelas", [])[:5],
                "imagens": art.get("imagens", [])[:10],

@@ -183,6 +183,11 @@ def source_card(item: dict, used=False) -> dict:
     partials = (item.get('answerability') or {}).get('partial_aspects') or []
     if partials:
         details.append('Suporte parcial: '+', '.join(str(a) for a in partials[:6]))
+    sections=list(dict.fromkeys(_text(p.get('section') or p.get('context_heading'),100)
+                               for p in (item.get('answer_passages') or [])[:8]
+                               if p.get('section') or p.get('context_heading')))
+    if read and sections:
+        details.append('Contexto da seção: '+' · '.join(sections[:2]))
     labels={'location':'Local','organizer':'Organizador','provider':'Operadora','airline':'Companhia',
             'departureAirport':'Origem','departureBusStop':'Origem','arrivalAirport':'Destino','arrivalBusStop':'Destino',
             'departureTime':'Partida declarada','arrivalTime':'Chegada declarada'}

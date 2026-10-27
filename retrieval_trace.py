@@ -69,6 +69,9 @@ def record(job_id, step_id, source, state, *, charged=False, rec=None,
                     'reason_code': reason_code if re.fullmatch(r'[A-Z0-9_,]{1,120}',reason_code) else '',
                     'read': bool(rec.get('texto_lido')),
                     'extracted_chars': len(rec.get('texto') or ''),
+                    'document_scan':{k:v for k,v in (rec.get('document_scan') or {}).items()
+                                     if k in ('available_chars','scanned_elements','retained_chars','selected_passages','late_passages','output_budget')
+                                     and type(v) is int and 0<=v<=2*1024*1024},
                     'http_status': http_status if type(http_status) is int and 100 <= http_status <= 599 else None,
                     'response_bytes': response_bytes if type(response_bytes) is int and response_bytes >= 0 else None,
                     'content_type': content_type if re.fullmatch(r'[a-z0-9.+-]+/[a-z0-9.+-]+',content_type) else '',

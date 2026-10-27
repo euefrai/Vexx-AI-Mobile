@@ -97,3 +97,13 @@ qa-artifacts/v5998/*.json
 !qa-artifacts/v5998/validation-summary.json
 !qa-artifacts/v5998/manifest.json
 !qa-artifacts/v5998/qa-shutdown.json
+# V5.9.9.9 captures and private runtime are local evidence only.
+qa-artifacts/v5999/raw/
+qa-artifacts/v5999/qa-runtime-private.json
+qa-artifacts/v5999/qa-stop
+qa-artifacts/v5999/*.json
+!qa-artifacts/v5999/*-summary.json
+!qa-artifacts/v5999/replay-before.json
+!qa-artifacts/v5999/replay-after.json
+!qa-artifacts/v5999/manifest.json
+!qa-artifacts/v5999/qa-shutdown.json

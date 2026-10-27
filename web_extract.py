@@ -769,6 +769,130 @@ def _extruct(pagina: str, url: str = "") -> dict:
 
 
 # ── Entrada única ──────────────────────────────────────────────────
+_SECTION_TERMS = {
+    'syntax': r'syntax|sintaxe|signature|assinatura',
+    'return_value': r'return(?:s| value)?|retorn\w+',
+    'behavior': r'description|descri[cç][aã]o|behavior|comportamento',
+    'limitations': r'limitations?|restri\w+|cannot|must not|warning|caution',
+    'examples': r'examples?|exemplos?',
+    'weight': r'weight|peso', 'battery': r'batter(?:y|ies)|bateria',
+    'price': r'price|pre[cç]o|USD|BRL|EUR',
+    'founders': r'founder|founded|fundad\w+|fundou',
+    'foundation_date': r'founded|established|fundad\w+|funda[cç][aã]o',
+    'products': r'products?|produtos?|manufactur\w+|fabrica\w+',
+    'causes': r'causes?|causas?|caused|devido',
+    'consequences': r'consequences?|consequ[eê]ncias?|resulted|resultou',
+}
+
+
+def _document_windows(text, root, block, query, url, budget):
+    """Scan available extraction once; retain bounded, noncontiguous literals.
+
+    Source offsets reference whitespace-normalized extraction, never HTML.
+    Structural metadata is accepted only when its body aligns literally.
+    Ranking locates possible answers; it does not validate their support.
+    """
+    import hashlib
+    import heapq
+    import query_intelligence as qi
+    requirements = qi.answer_requirements(query)
+    terms = [(r['id'], re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+r')\b', re.I))
+             for r in requirements if r['attribute'] in _SECTION_TERMS]
+    if not terms or len(text) <= budget:
+        return None
+    source = _normalizar(text)
+    digest = hashlib.sha256(source.encode()).hexdigest()
+    headings = []
+    for node in _descendentes(root):
+        if node is block: break
+        if re.fullmatch(r'h[1-6]', node.tag):
+            level=int(node.tag[1]);headings=[h for h in headings if h['level']<level]
+            headings.append({'level':level,'text':_texto_bloco(node)[:160]})
+    context = headings[-1]['text'] if headings else ''
+    # Align element bodies monotonically. Table rows stay together, including
+    # short labels that the legacy paragraph collector deliberately omitted.
+    def elements(node):
+        if node.tag in _IGNORAR | _PULAR: return
+        if node.tag == 'tr' or node.tag in _BLOCO:
+            value = _normalizar(_texto_bloco(node))
+            if value: yield node.tag, value
+            return
+        for child in node.filhos: yield from elements(child)
+    pools = {rid:[] for rid,_ in terms}
+    cursor=0; section=''; section_start=0; scanned=0
+    def offer(lo,hi,tag,title,heading_start):
+        if hi<=lo:return
+        chunk=source[lo:hi]
+        for rid,rx in terms:
+            hits=list(rx.finditer(chunk))
+            if not hits:continue
+            # Actual leading labels outrank incidental mentions deep in prose.
+            score=4*(hits[0].start()<50)+min(3,len(hits))
+            item=(score,-lo,hi,tag,title,heading_start)
+            heap=pools[rid]
+            if len(heap)<8:heapq.heappush(heap,item)
+            elif item>heap[0]:heapq.heapreplace(heap,item)
+    def gap(start,end):
+        # Optional extractors and unwrapped text may not align to DOM blocks.
+        # Scan uncovered text too, with no invented element/section metadata.
+        while start<end:
+            hi=min(end,start+1000)
+            while hi<end and hi>start and not source[hi].isspace():hi-=1
+            if hi<=start:break
+            offer(start,hi,'text','',start)
+            start=hi
+            while start<end and source[start].isspace():start+=1
+    for tag,value in elements(block or root):
+        pos=source.find(value,cursor)
+        if pos<0:continue
+        gap(cursor,pos)
+        cursor=pos+len(value);scanned+=1
+        if re.fullmatch(r'h[1-6]',tag):
+            section=value[:160];section_start=pos
+            continue
+        # Long elements are scanned in bounded chunks, never cut before scan.
+        lo=pos
+        while lo<cursor:
+            hi=min(cursor,lo+1000)
+            while hi<cursor and hi>lo and not source[hi].isspace():hi-=1
+            if hi<=lo:break
+            start=section_start if section and 0<=lo-section_start<180 and hi-section_start<=1100 else lo
+            offer(start,hi,tag,section,section_start)
+            lo=hi
+            while lo<cursor and source[lo].isspace():lo+=1
+    gap(cursor,len(source))
+    ordered=[sorted(pool,reverse=True) for pool in pools.values()]
+    selected=[];used=0
+    for index in range(8):
+        for pool in ordered:
+            if index>=len(pool):continue
+            _,neglo,hi,tag,title,heading_start=pool[index];lo=-neglo
+            if any(lo<old[1] and hi>old[0] for old in selected):continue
+            if used+hi-lo+(2 if selected else 0)>budget:continue
+            selected.append((lo,hi,tag,title,heading_start));used+=hi-lo+(2 if len(selected)>1 else 0)
+            if len(selected)>=8:break
+        if len(selected)>=8:break
+    if not selected:return None
+    output='';passages=[];sections=[]
+    for lo,hi,tag,title,heading_start in sorted(selected):
+        chunk=source[lo:hi].strip();lo+=len(source[lo:hi])-len(source[lo:hi].lstrip())
+        if output:output+='\n\n'
+        start=len(output);output+=chunk
+        sid='S-'+hashlib.sha256((digest+'|'+str(heading_start)+'|'+title).encode()).hexdigest()[:16] if title else ''
+        passages.append({'id':'P-'+hashlib.sha256((url+'|'+digest+'|'+str(lo)+'|'+chunk).encode()).hexdigest()[:16],
+                         'source_url':url,'text':chunk,'section':title,'section_id':sid,'element_type':tag,
+                         'context_heading':title or context,
+                         'source_role':passage_role(chunk),
+                         'text_span':{'start':start,'end':len(output),'scope':'returned_extracted_text'},
+                         'source_span':{'start':lo,'end':lo+len(chunk),'scope':'normalized_available_extraction','sha256':digest}})
+        if title:sections.append({'titulo':title,'texto':chunk,'id':sid})
+    return {'texto':output,'answer_passages':passages,'secoes':sections,
+            'document_context':{'heading':context,'basis':'preceding_heading'} if context else {},
+            'document_scan':{'available_chars':len(source),'scanned_elements':scanned,'retained_chars':len(output),
+                             'selected_passages':len(passages),'late_passages':sum(p['source_span']['start']>=budget for p in passages),
+                             'output_budget':budget,'source_sha256':digest}}
+
+
 def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
                    *, teto: int = TETO_TEXTO, usar_trafilatura: bool = True) -> dict:
     """Extração completa e honesta de uma página HTML já baixada.
@@ -811,6 +935,7 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
     requirements = qi.answer_requirements(consulta)
     if requirements and len(texto_art)>teto:
         texto_final = melhor_trecho(texto_art, requirements[0]['entity'], teto)
+    windows = _document_windows(texto_art,parser.raiz,bloco,consulta,base_url,teto)
     links = extrair_links(html_txt, base_url, limite=200)
     preferred = navigation_candidates(links,consulta,base_url,limit=10)
     preferred_urls = {item['url'] for item in preferred}
@@ -831,6 +956,9 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
         "ilegivel": ilegivel(texto_art),
         "tamanho_html": len(html_txt),
     }
+    if windows:
+        saida.update(windows)
+        saida['trecho_usado']=melhor_trecho(windows['texto'],consulta,400)
     if usar_trafilatura:
         extra = _extruct(html_txt, base_url)
         if extra:

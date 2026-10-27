@@ -996,6 +996,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                     "texto": (rec.get("texto") or "").strip(), "final": rec.get("final", ""),
                     "metadados": rec.get('metadados') if isinstance(rec.get('metadados'), dict) else {},
                     "secoes": (rec.get('secoes') or [])[:12],
+                    **{k:rec[k] for k in ('answer_passages','document_context','document_scan') if k in rec},
                     "links": (rec.get('links') or [])[:30],
                     "content_scope": rec.get('content_scope') or 'page_text',
                     "midia": rec.get("midia") or [],
@@ -1031,6 +1032,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 "content_scope": artigo.get("content_scope", "page_text"),
                 "metadados":artigo.get('metadados') or {},
                 "secoes": (artigo.get('secoes') or [])[:12],
+                **{k:artigo[k] for k in ('answer_passages','document_context','document_scan') if k in artigo},
                 "links": (artigo.get('links') or [])[:30],
                 "imagens":artigo.get('imagens') or [],
                 "midia": media_evidence.extrair_midia(pagina, final, artigo.get("titulo") or ""),
@@ -1450,8 +1452,15 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             for passage in answer_passages[:8]:
                 np = _eg.criar_no(db,job['owner'],job['id'],'evidence','passage:'+passage['id'],
                     {'passage_id':passage['id'],'evidence_id':ev['id'],'text_span':passage['text_span'],
-                     'section':passage.get('section',''),'url':ev['url']})
+                     'section':passage.get('section',''),'url':ev['url'],
+                     **{k:passage[k] for k in ('section_id','source_span','element_type','context_heading') if k in passage}})
                 _eg.ligar(db,job['owner'],job['id'],np,ndoc,'DERIVED_FROM','literal_extraction','Passagem do texto extraído, não do HTML bruto.')
+                if passage.get('section_id') and passage.get('section'):
+                    ns=_eg.criar_no(db,job['owner'],job['id'],'document','section:'+passage['section_id'],
+                        {'type':'section','section_id':passage['section_id'],'title':passage['section'],
+                         'source_sha256':(passage.get('source_span') or {}).get('sha256','')})
+                    _eg.ligar(db,job['owner'],job['id'],ns,ndoc,'DERIVED_FROM','literal_extraction','Seção identificada no documento.')
+                    _eg.ligar(db,job['owner'],job['id'],np,ns,'DERIVED_FROM','literal_extraction','Passagem da seção identificada.')
                 for rid in passage.get('requirement_ids') or [passage['requirement_id']]:
                     req = next(r for r in answer_coverage['requirements'] if r['id']==rid)
                     nr = _eg.criar_no(db,job['owner'],job['id'],'claim','requirement:'+req['id'],

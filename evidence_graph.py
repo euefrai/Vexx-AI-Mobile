@@ -77,6 +77,15 @@ def _passage_support(req, passage, source):
         text=re.sub(alias,lambda _:entity,text)
     clauses=re.split(r'(?<=[!?;])\s+|(?<=[.])\s+(?=[a-z])|\n+',text)
     previous=''; partial_found=False
+    heading=passage.get('section') or passage.get('context_heading') or (source.get('document_context') or {}).get('heading','')
+    scoped_entity=re.fullmatch(r'\s*'.join(re.escape(c) for c in entity if not c.isspace())+
+                              r'(?:\s+(?:digital camera|camera|manual|specifications))?',qi.normalized(heading))
+    if attribute in ('weight','battery','price') and passage.get('element_type')=='tr' and scoped_entity:
+        labels={'weight':r'(?:weight|peso)', 'battery':r'(?:battery|bateria)', 'price':r'(?:price|preco)'}
+        # A literal table row plus its real preceding document heading supplies
+        # useful scope, but not a local explicit subject: retain PARTIAL only.
+        if re.match(labels[attribute]+r'\b',text) and re.search(relation_rx,text) and not re.search(r'\b(?:unknown|not available|desconhecido)\b',text):
+            partial_found=True
     section=qi.normalized(passage.get('section') or '')
     section_facets={'return_value':('return value','valor retornado','valor de retorno'),
                     'behavior':('description','descricao')}

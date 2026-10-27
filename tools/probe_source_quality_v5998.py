@@ -27,6 +27,8 @@ def main():
     parser.add_argument('--dataset',type=Path,default=ROOT/'benchmarks/source_quality_v5998_dev.json')
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--baseline',action='store_true')
+    parser.add_argument('--baseline-ref',choices=['cc60042','8ccbbe0'],default='cc60042')
+    parser.add_argument('--artifact-version',choices=['v5998','v5999'],default='v5998')
     args=parser.parse_args()
     if args.output.exists():raise SystemExit('Refusing to overwrite evidence')
     import research,research_agents as ra,pc_agent,web_extract as we,evidence_graph as eg
@@ -34,14 +36,14 @@ def main():
     loaded_sha={}
     if args.baseline:
         for mod in (qi,we,eg,search_providers,orch,research,trace,ra):
-            src=subprocess.check_output(['git','show','cc60042:'+mod.__name__+'.py'],cwd=ROOT).decode('utf-8')
+            src=subprocess.check_output(['git','show',args.baseline_ref+':'+mod.__name__+'.py'],cwd=ROOT).decode('utf-8')
             loaded_sha[mod.__name__]=hashlib.sha256(src.encode()).hexdigest()
             exec(compile(src,'<v5997:'+mod.__name__+'>','exec'),mod.__dict__)
     case=next(x for x in json.loads(args.dataset.read_text(encoding='utf-8'))['queries'] if x['id']==args.case)
     safe=hashlib.sha256((args.track+'|'+case['id']).encode()).hexdigest()[:20]
-    raw=ROOT/'qa-artifacts/v5998/raw'/safe
+    raw=ROOT/'qa-artifacts'/args.artifact_version/'raw'/safe
     raw.mkdir(parents=True,exist_ok=True)
-    out={'track':args.track,'case':{k:v for k,v in case.items() if k!='url'},'baseline':'cc60042' if args.baseline else None,
+    out={'track':args.track,'case':{k:v for k,v in case.items() if k!='url'},'baseline':args.baseline_ref if args.baseline else None,
          'head':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
          'code_sha256':{m.__name__:loaded_sha.get(m.__name__) or hashlib.sha256(Path(m.__file__).read_bytes()).hexdigest() for m in (we,eg,qi,orch,ra)},
          'annotation':'AGENT_OBSERVED_NOT_HUMAN_GOLD','provider_calls':[],'documents':[]}
@@ -56,15 +58,17 @@ def main():
     def inspect(rec,url):
         doc={**rec,'url':url,'texto_lido':bool(rec.get('texto')) and not rec.get('ilegivel')}
         coverage=eg.requirement_coverage(case['query'],[doc])
-        candidates=we.passage_candidates(rec.get('texto',''),url,rec.get('secoes'))
+        candidates=rec.get('answer_passages') or we.passage_candidates(rec.get('texto',''),url,rec.get('secoes'))
         selected=eg.select_answer_passages(coverage)
         out['documents'].append({'source_ref':hashlib.sha256(url.encode()).hexdigest(),'url':url,'title':rec.get('titulo'),
             'extractor':rec.get('extrator'),'content_scope':rec.get('content_scope'),'extracted_chars':len(rec.get('texto','')),
+            'document_scan':rec.get('document_scan'),
             'sections':[{ 'heading':s['titulo'],'chars':len(s['texto'])} for s in rec.get('secoes',[])],
             'generated_passages':len(candidates),'matched_passages':len(coverage['passages']),'selected_passages':len(selected),
             'requirements':[{'id':r['id'],'entity':r['entity'],'attribute':r['attribute'],'state':r['state']} for r in coverage['requirements']],
             'passages':[{'id':p['id'],'requirements':p.get('requirement_ids',[]),'support':p.get('requirement_support',{}),
-                         'span':p.get('text_span'),'literal':p['text'] in rec.get('texto',''),'excerpt':p['text'][:220]}
+                         'span':p.get('text_span'),'source_span':p.get('source_span'),'section':p.get('section'),
+                         'literal':p['text'] in rec.get('texto',''),'excerpt':p['text'][:220]}
                         for p in selected],
             'answerability_status':'PARSED_FACETS_OBSERVED' if coverage['applicable'] else 'UNSUPPORTED_REQUIREMENT_SCHEMA'})
         return doc
