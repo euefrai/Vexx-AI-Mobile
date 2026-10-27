@@ -24,7 +24,10 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--output',type=Path,required=True)
     p.add_argument('--qa',type=Path)
+    p.add_argument('--artifact-version',choices=['v5998','v5999'],default='v5998')
     args=p.parse_args()
+    raw=ROOT/'qa-artifacts'/args.artifact_version/'raw'
+    raw.mkdir(parents=True,exist_ok=True)
     if args.output.exists():raise SystemExit('Refusing to overwrite model evidence')
     import pc_agent,research,research_agents as ra,research_synthesis as rs,evidence_graph as eg
     case=next(x for x in json.loads((ROOT/'benchmarks/source_quality_v5998_dev.json').read_text(encoding='utf-8'))['queries'] if x['id']=='hypot')
@@ -46,6 +49,8 @@ def main():
              'timeout_s':timeout};out['calls'].append(row);start=time.monotonic()
         try:
             result=writer(messages,timeout)
+            (raw/(args.output.stem+'-'+row['phase']+'.json')).write_text(
+                json.dumps({'messages':messages,'response':result},ensure_ascii=False),encoding='utf-8')
             row.update(output_chars=len(result),metadata=writer.last_metadata)
             return result
         except Exception as exc:row['error_code']=rs.safe_provider_code(exc);raise
@@ -88,7 +93,7 @@ def main():
                        provider_code=synthesis.get('fallback_provider_code'),synthesis_budget=stored.get('usados',{}).get('synthesis_budget'),
                        semantic_review=synthesis.get('semantic_review'),elapsed_s=round(time.monotonic()-started,3))
             if args.qa:out['chat_result_id']=pc_agent._persistir_resultado_pesquisa(db,stored,owner)
-            (ROOT/'qa-artifacts/v5998/raw'/('C-'+args.output.stem+'.json')).write_text(json.dumps(synthesis,ensure_ascii=False),encoding='utf-8')
+            (raw/('C-'+args.output.stem+'.json')).write_text(json.dumps(synthesis,ensure_ascii=False),encoding='utf-8')
         finally:db.close()
     out['limits']=['Source input explicitly seeded; never autonomous discovery.','Nonstreaming writer has no first-token measurement.',
                    'HTTP headers timing does not identify internal provider queue or cold-start cause.','Model support review is not independent human gold.']

@@ -250,12 +250,35 @@ def support_summary(synthesis):
     return counts
 
 
+def _numeric_literal(value):
+    """Canonicalize unambiguous decimals only; 1,234 remains ambiguous."""
+    from decimal import Decimal
+    if re.fullmatch(r'[+-]?\d+[.,]\d{1,2}',value):
+        return format(Decimal(value.replace(',','.')).normalize(),'f')
+    if re.fullmatch(r'[+-]?\d{1,3}(?:\.\d{3})+,\d{1,2}',value):
+        return format(Decimal(value.replace('.','').replace(',','.')).normalize(),'f')
+    if re.fullmatch(r'[+-]?\d{1,3}(?:,\d{3})+\.\d{1,2}',value):
+        return format(Decimal(value.replace(',','')).normalize(),'f')
+    return value
+
+
+def numeric_values(text):
+    return {_numeric_literal(m.group()) for m in re.finditer(r'[+-]?\d+(?:[.,]\d+)*',text)}
+
+
 def quantities(text):
-    pattern = (r"(?:R\$|US\$|\$|€)?\s*[+-]?\d+(?:[.,]\d+)*(?:\s*(?:%|°C|km/h|"
+    pattern = (r"(?:R\$|US\$|\$|€|\bUSD\b|\bBRL\b|\bEUR\b)?\s*[+-]?\d+(?:[.,]\d+)*(?:\s*(?:%|°C|km/h|"
                r"(?:kWh|mWh|Wh)/(?:kg|g|cm3|L)|(?:mAh|Ah)/(?:kg|g)|MPa|kPa|Pa|"
-               r"kWh|mAh|GHz|MHz|GB|TB|MB|kg|mg|km|cm|mm|W|V|h|"
+               r"kWh|mAh|GHz|MHz|GB|TB|MB|kg|mg|g|km|cm|mm|W|V|h|"
                r"horas?|minutos?|segundos?|dias?|anos?)(?!\w))?")
-    return {re.sub(r"\s+", "", m.group()).casefold() for m in re.finditer(pattern, text, re.I)}
+    return {re.sub(r'\s+','',re.sub(r'[+-]?\d+(?:[.,]\d+)*',lambda n:_numeric_literal(n.group()),m.group())).casefold()
+            for m in re.finditer(pattern,text,re.I)}
+
+
+def technical_identifiers(text):
+    # Exact model suffixes matter even when numeric parts are identical.
+    return {re.sub('[‑–]','-',m.group()).casefold() for m in re.finditer(
+        r'\b(?:[A-Z]{1,8}[-‑–])+(?:[A-Za-z]*\d[A-Za-z0-9-]*)\b',text)}
 
 
 def failure_detail(exc):
@@ -355,11 +378,12 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
             quotes.append(excerpt)
             provenance.append({"label": label, "evidence_id": index[label]["evidence_id"],
                                "quote": excerpt, "paragraph": len(paragraphs)})
-        numbers = lambda s: set(re.findall(r"\d+(?:[.,]\d+)*", s))
-        if not numbers(text) <= numbers(" ".join(quotes)):
+        if not numeric_values(text) <= numeric_values(" ".join(quotes)):
             raise ValueError("unsupported number")
         if not quantities(text) <= quantities(" ".join(quotes)):
             raise ValueError("unsupported quantity or unit")
+        if not technical_identifiers(text) <= technical_identifiers(' '.join(quotes)):
+            raise ValueError('unsupported quantity or unit')
         paragraphs.append(text.strip() + " " + " ".join(source_link(k, index[k]["url"]) for k in labels))
         findings.append({"text": text.strip(), "evidence_ids": [index[k]["evidence_id"] for k in labels]})
     rendered = "\n\n".join(paragraphs)
