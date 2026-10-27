@@ -371,9 +371,12 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
     coverage=evidence_graph.requirement_coverage(objective,[{
         'id':s.get('evidence_id') or s['id'],'url':s.get('url',''),'titulo':s.get('title',''),
         'texto':s['excerpt'],'texto_lido':True,'content_scope':s.get('scope','retrieved_excerpt'),
-        'answer_passages':[{**p,'text':s['excerpt'][p['start']:p['end']],
+        'answer_passages':[{**p,'id':p.get('id') or f"P-{s['id']}-{p['start']}-{p['end']}",
+                            'text':s['excerpt'][p['start']:p['end']],
                             'text_span':{'start':p['start'],'end':p['end'],'scope':'returned_extracted_text'}}
-                           for p in s.get('passage_ranges',[])]}
+                           for p in s.get('passage_ranges',[])
+                           if type(p.get('start')) is int and type(p.get('end')) is int
+                           and 0<=p['start']<p['end']<=len(s['excerpt'])]}
         for s in sources])
     requirements = coverage['requirements']
     allowed_ids = json.dumps([s['id'] for s in sources],ensure_ascii=False)

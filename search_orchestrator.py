@@ -235,7 +235,8 @@ def _context_mismatch(a: dict, consulta: str) -> list:
     import research
     if research.is_search_ad_url(a.get('url','')):return ['SEARCH_ADVERTISEMENT']
     q=_sem_acentos(consulta);body=_sem_acentos(' '.join(str(a.get(k) or '') for k in ('titulo','trecho')))
-    models=set(re.findall(r'\b[a-z]{1,16}-?\d+[a-z0-9-]*\b',q))
+    model_query=re.sub(r'\b10\.\d{4,9}/[^\s\"]+','',q)
+    models=set(re.findall(r'\b[a-z]{1,16}-?\d+[a-z0-9-]*\b',model_query))
     matched=[_tem_termo(m,body) for m in models]
     reasons=[]
     if matched and not (any(matched) if RX_COMPARACAO.search(consulta) else all(matched)):

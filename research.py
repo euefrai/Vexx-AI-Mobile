@@ -546,6 +546,17 @@ def buscar_wikipedia(consulta: str, max_resultados: int = 4,
     q = (consulta or "").strip()[:120]
     if not q:
         return []
+    # OpenSearch matches article titles, not free-text answer facets. Preserve
+    # the original request for downstream eligibility; discover the named page.
+    import query_intelligence as qi
+    scope=qi._discovery_context.get()
+    original=((scope.get('request') or {}).get('original_request') if scope else '') or consulta
+    reqs=qi.answer_requirements(original)
+    entities=list(dict.fromkeys(r['entity'] for r in reqs))
+    title_facets={'founders','foundation_date','creation_date','products','causes','consequences',
+                  'river_source','river_mouth','course','location','population','definition'}
+    if len(entities)==1 and entities[0] and all(r['attribute'] in title_facets for r in reqs):
+        q=entities[0][:120]
     dados = _baixar_json(
         WIKI_OPENSEARCH.format(q=urllib.parse.quote(q), n=min(max(1, int(max_resultados)), 10)),
         timeout=timeout, abrir=abrir)
@@ -560,7 +571,8 @@ def buscar_wikipedia(consulta: str, max_resultados: int = 4,
         if link.startswith("http") and titulo:
             out.append({"titulo": titulo, "url": link[:500],
                         "trecho": str(desc or "").strip()[:280],
-                        "origem": "wikipedia", "tipo": "enciclopedia"})
+                        "origem": "wikipedia", "tipo": "enciclopedia",
+                        'discovery_query':q,'retrieval_provenance':qi.provider_provenance(q,'wikipedia')})
         if len(out) >= max_resultados:
             break
     registrar_status("wikipedia", resultados=len(out), vazio=not out)

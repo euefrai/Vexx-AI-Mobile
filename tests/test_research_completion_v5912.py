@@ -113,4 +113,31 @@ def test_answer_coverage_uses_accepted_plain_paragraphs_not_rendered_links(tmp_p
             return json.dumps({'reviews':[{'paragraph':i,'state':'SUPPORTED','reason':'none'} for i in range(2)]})
         result=ra.agente_sintetizador(db,job,[ev],[],sintetizar_fn=writer,verificar_fn=reviewer)
         assert result['llm'] and result['answer_coverage']['complete']
+        job['sintese']=result
+        job['achados']=[{'afirmacao':QUERY,'estado':'UNVERIFIED'}]
+        assert ra._completion_outcome(job,[ev],[],assisted=True)['state']=='complete'
+        job['achados'][0]['estado']='CONTRADICTED'
+        assert ra._completion_outcome(job,[ev],[],assisted=True)['state']=='partial'
+        job['achados'][0]['estado']='UNVERIFIED'
+        result.pop('semantic_review')
+        assert ra._completion_outcome(job,[ev],[],assisted=True)['state']=='partial'
     finally:db.close()
+
+
+def test_wikipedia_prefix_search_uses_entity_not_answer_facets(monkeypatch):
+    import research
+    from urllib.parse import parse_qs,urlsplit
+    calls=[]
+    def get(url,**kwargs):
+        calls.append(parse_qs(urlsplit(url).query)['search'][0]);return ['',[],[],[]]
+    monkeypatch.setattr(research,'_baixar_json',get)
+    query='Quais são a nascente e a foz do rio Azul?'
+    with qi.discovery_scope(qi.analyze(query),job_id='qa',step_id='qa'):
+        research.buscar_wikipedia('rio Azul nascente')
+    assert calls==['rio Azul']
+
+
+def test_doi_suffix_is_not_a_product_model():
+    row={'titulo':'Experimental methods for solid-state cells','url':'https://example.org/paper',
+         'doi':'10.1234/result-1','trecho':'Methods and experimental conditions.'}
+    assert not orch._context_mismatch(row,'papers "10.1234/result-1" methods sample experimental')

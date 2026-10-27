@@ -1844,6 +1844,16 @@ def _completion_outcome(job, evidencias, lacunas, assisted=False):
     provider_code = sintese.get('fallback_provider_code', '')
     blocked = bool(provider_code)
     read = [e for e in evidencias if _evidencia_lida(e)]
+    read_ids={e['id'] for e in read}
+    reviews=sintese.get('semantic_review') or []
+    findings=sintese.get('findings') or []
+    # Preliminary extraction also includes the user's question and unused
+    # context. Keep those verdicts intact; assess the published answer using
+    # its own validated citations, review and requirement coverage.
+    reviewed_answer=bool(sintese.get('llm') and findings and reviews
+        and len(reviews)==len(findings) and all(r.get('state')=='SUPPORTED' for r in reviews)
+        and all(set(f.get('evidence_ids',[])) & read_ids for f in findings)
+        and sintese.get('provenance') and sintese.get('answer_coverage',{}).get('complete'))
     provenance_unverified = bool(re.search(r'fontes? (?:oficiais|prim[aá]rias)|documenta[cç][aã]o oficial',
                                           job.get('objetivo',''),re.I))
     incomplete = (not read or bool(lacunas) or bool(job.get('pendencias'))
@@ -1854,7 +1864,8 @@ def _completion_outcome(job, evidencias, lacunas, assisted=False):
                   or any(g.get('status') == 'OPEN' for g in job.get('usados', {}).get('research_gaps', []))
                   or (assisted and not sintese.get('llm'))
                   or job.get('auditoria', {}).get('ok') is False
-                  or any(v.get('estado') != 'SUPPORTED' for v in job.get('achados', [])))
+                  or any(v.get('estado') == 'CONTRADICTED' for v in job.get('achados', []))
+                  or (not reviewed_answer and any(v.get('estado') != 'SUPPORTED' for v in job.get('achados', []))))
     state = 'blocked' if blocked else ('partial' if incomplete else 'complete')
     return {'state': state, 'unresolved_fronts': lacunas[:8], 'source_authority_unverified':provenance_unverified,
             'provider_code': provider_code, 'read_sources': len(read),

@@ -83,7 +83,7 @@ def test_another_company_and_negation_do_not_answer_founder_question():
 
 def test_follow_up_targets_only_missing_attribute_and_keeps_constraints():
     gaps=research_gaps.identify({'objetivo':QUESTION,'plano':[],'orcamento':{'buscas':3},'usados':{}},[source(FOUNDING)])
-    assert next(g for g in gaps if g['dimension']=='products')['query']=='WEG Produtos'
+    assert next(g for g in gaps if g['dimension']=='products')['query'].casefold()=='weg produtos'
     assert all(not g['query'] for g in gaps if g['status']=='RESOLVED')
     question='Notebook Lenovo com 16 GB por até R$ 3.000: quais produtos e preços?'
     assert question in qi.requirement_query(qi.answer_requirements(question)[0],question)

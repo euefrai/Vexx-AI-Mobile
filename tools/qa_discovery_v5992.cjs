@@ -7,7 +7,7 @@ async page => {
     await page.locator('#loginOverlay').waitFor({state: 'hidden'});
   }
   const configuration = await page.evaluate(() => JSON.parse(sessionStorage.getItem('research-qa-config') || 'null'));
-  const custom = ['v5993', 'v5994', 'v5995', 'v5996', 'v5997', 'v5998', 'v5999', 'v5910', 'v5911'].includes(configuration?.version);
+  const custom = ['v5993', 'v5994', 'v5995', 'v5996', 'v5997', 'v5998', 'v5999', 'v5910', 'v5911', 'v5912'].includes(configuration?.version);
   const directory = custom ? 'qa-artifacts/' + configuration.version : 'qa-artifacts/v5992';
   const cases = custom ? configuration.cases : [
     ['museum', 'Pesquisa profunda sobre a história do Museu do Amanhã fontes oficiais e data de inauguração.'],
@@ -21,7 +21,7 @@ async page => {
   if (!Array.isArray(cases) || cases.some(c => !Array.isArray(c) || c.length !== 2
       || typeof c[0] !== 'string' || !/^[a-z-]{1,32}$/.test(c[0])
       || typeof c[1] !== 'string' || c[1].length < 5 || c[1].length > 500
-      || (custom && !['v5910','v5911'].includes(configuration.version) && !/^(Pesquisa profunda sobre|Pesquise imagens) /.test(c[1])))) {
+      || (custom && !['v5910','v5911','v5912'].includes(configuration.version) && !/^(Pesquisa profunda sobre|Pesquise imagens) /.test(c[1])))) {
     throw Error('Malformed QA cases; refusing to send an unrelated chat message');
   }
   if (index >= cases.length) return {complete: true};
