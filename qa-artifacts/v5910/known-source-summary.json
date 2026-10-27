@@ -1,0 +1,174 @@
+{
+  "baseline": null,
+  "scope": "PAIRED_PUBLIC_HTML_EXTRACTION_NOT_DISCOVERY_OR_LLM",
+  "output_budget": 8000,
+  "model_budget_unchanged": 1800,
+  "memory_scope": "tracemalloc Python allocations, not process RSS; timings include instrumentation",
+  "cases": [
+    {
+      "case": "assign",
+      "snapshot_sha256": "42a53d4bae0ee05774f9eda72db2d1eeb267e2f74414b4e1a3442765a520b2d3",
+      "retained_chars": 6978,
+      "requirements": [
+        {
+          "attribute": "syntax",
+          "entity": "Object.assign",
+          "state": "SUPPORTED"
+        },
+        {
+          "attribute": "return_value",
+          "entity": "Object.assign",
+          "state": "PARTIALLY_SUPPORTED"
+        },
+        {
+          "attribute": "behavior",
+          "entity": "Object.assign",
+          "state": "SUPPORTED"
+        }
+      ],
+      "selected_passages": 3,
+      "literal_passages": true,
+      "source_spans": 0,
+      "scan": null
+    },
+    {
+      "case": "hypot",
+      "snapshot_sha256": "378873e35be8ec468465b22b3c24e03fb584deafede4121d67de882b8d961b23",
+      "retained_chars": 3260,
+      "requirements": [
+        {
+          "attribute": "syntax",
+          "entity": "Math.hypot",
+          "state": "SUPPORTED"
+        },
+        {
+          "attribute": "return_value",
+          "entity": "Math.hypot",
+          "state": "SUPPORTED"
+        },
+        {
+          "attribute": "behavior",
+          "entity": "Math.hypot",
+          "state": "SUPPORTED"
+        }
+      ],
+      "selected_passages": 3,
+      "literal_passages": true,
+      "source_spans": 0,
+      "scan": null
+    },
+    {
+      "case": "tramontina",
+      "snapshot_sha256": "83c5e6e44b7b1aab6fd58eadf89a00b6251befec6bb314d490bb3e2331310059",
+      "retained_chars": 681,
+      "requirements": [
+        {
+          "attribute": "founders",
+          "entity": "Tramontina",
+          "state": "DISCOVERED"
+        },
+        {
+          "attribute": "foundation_date",
+          "entity": "Tramontina",
+          "state": "DISCOVERED"
+        },
+        {
+          "attribute": "products",
+          "entity": "Tramontina",
+          "state": "DISCOVERED"
+        }
+      ],
+      "selected_passages": 0,
+      "literal_passages": true,
+      "source_spans": 0,
+      "scan": null
+    },
+    {
+      "case": "artemis",
+      "snapshot_sha256": "b774fc9ef3b6d42f3533e5b9b15af9851ad7239743c6598dfc85b58b4829f243",
+      "retained_chars": 5106,
+      "requirements": [],
+      "selected_passages": 0,
+      "literal_passages": true,
+      "source_spans": 0,
+      "scan": null
+    },
+    {
+      "case": "sqlite",
+      "snapshot_sha256": "2616a7b5abca3600dbd5c86e2d0176f8fcd5752c77a38f21b87eca770c317aa4",
+      "retained_chars": 2076,
+      "requirements": [
+        {
+          "attribute": "limitations",
+          "entity": "Quais as diferenças entre WAL e rollback journal no SQLite e suas",
+          "state": "DISCOVERED"
+        }
+      ],
+      "selected_passages": 0,
+      "literal_passages": true,
+      "source_spans": 0,
+      "scan": {
+        "available_chars": 31204,
+        "scanned_elements": 103,
+        "retained_chars": 2076,
+        "selected_passages": 3,
+        "late_passages": 2,
+        "output_budget": 8000,
+        "source_sha256": "683655133c295eccb400982bb092ca3ffc7c65e6ac277b4758890abd4bd2976f"
+      }
+    },
+    {
+      "case": "nikon-zf",
+      "snapshot_sha256": "2c3567c74664d4361d3709192a0b40dca10b7847d96e9be71887d127362968f9",
+      "retained_chars": 767,
+      "requirements": [
+        {
+          "attribute": "weight",
+          "entity": "Nikon Z f",
+          "state": "PARTIALLY_SUPPORTED"
+        },
+        {
+          "attribute": "battery",
+          "entity": "Nikon Z f",
+          "state": "PARTIALLY_SUPPORTED"
+        }
+      ],
+      "selected_passages": 2,
+      "literal_passages": true,
+      "source_spans": 2,
+      "scan": {
+        "available_chars": 12375,
+        "scanned_elements": 104,
+        "retained_chars": 767,
+        "selected_passages": 4,
+        "late_passages": 3,
+        "output_budget": 8000,
+        "source_sha256": "83b604a5c2776b232c515cef3df9f5dac2a97ae2ab4e2df95ed86021e4e3b1ee"
+      }
+    },
+    {
+      "case": "yellowstone",
+      "snapshot_sha256": "a8f55887644f4f6f1159002e4553de2077ca793d8d9b75d1d75a776268d61f25",
+      "retained_chars": 23,
+      "requirements": [
+        {
+          "attribute": "price",
+          "entity": "Qual o preço de entrada em Yellowstone por veículo particular e por quantos dias vale",
+          "state": "DISCOVERED"
+        }
+      ],
+      "selected_passages": 0,
+      "literal_passages": true,
+      "source_spans": 0,
+      "scan": {
+        "available_chars": 11112,
+        "scanned_elements": 133,
+        "retained_chars": 23,
+        "selected_passages": 1,
+        "late_passages": 1,
+        "output_budget": 8000,
+        "source_sha256": "b1adf93b43573dbb95c72780e04e41250a478cf94bdcb04eb89d28c8ce5ccaf2"
+      }
+    }
+  ]
+}

@@ -1,0 +1,300 @@
+{
+  "scope": "REAL_CHROME_AUTHENTICATED_FASTAPI_DEVELOPMENT_AGENT_TEMPORARY_SQLITE_NO_URL_SEEDS",
+  "cases": [
+    {
+      "name": "hello",
+      "query": "Oi, tudo bem?",
+      "seconds": 2.665,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": null,
+      "job_state": null,
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": []
+    },
+    {
+      "name": "normal",
+      "query": "Pesquise quem escreveu Vidas Secas e em que ano foi publicado.",
+      "seconds": 12.822,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": null,
+      "job_state": null,
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": []
+    },
+    {
+      "name": "company",
+      "query": "Pesquisa profunda sobre quem fundou a WEG, em que ano e quais produtos ela fabrica.",
+      "seconds": 27.208,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-b1067104af2b",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-b1067104af2b-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 1,
+      "source_links": [
+        {
+          "text": "company",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A."
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "WEG",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "products",
+          "state": "DISCOVERED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": "quantity_mismatch",
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "comparison",
+      "query": "Pesquisa profunda sobre compare Nikon Z f e Nikon Z8 quanto ao peso com bateria e cartão e bateria utilizada.",
+      "seconds": 17.607,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-7de11778474a",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-7de11778474a-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [
+        {
+          "entity": "compare Nikon Z f e Nikon Z8 quanto ao",
+          "attribute": "weight",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "compare Nikon Z f e Nikon Z8 quanto ao",
+          "attribute": "battery",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "news",
+      "query": "Pesquise notícias de Feira de Santana nos últimos sete dias, sem misturar Salvador.",
+      "seconds": 11.299,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": null,
+      "job_state": null,
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": []
+    },
+    {
+      "name": "scarce",
+      "query": "Pesquisa profunda sobre quantas pessoas entraram ontem na Biblioteca Pública do Estado da Bahia, segundo registro público.",
+      "seconds": 19.675,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-4438807a3acf",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [
+          "quantas pessoas entraram ontem na Biblioteca Pública do Estado da Bahia, segundo registro público primary source original text",
+          "quantas pessoas entraram ontem na Biblioteca Pública do Estado da Bahia, segundo registro público fontes primárias texto completo",
+          "quantas pessoas entraram ontem na Biblioteca Pública do Estado da Bahia, segundo registro público 2026"
+        ],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-4438807a3acf-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "full",
+      "query": "Pesquisa profunda sobre as causas e consequências da Revolução dos Cravos e divergências entre fontes históricas.",
+      "seconds": 19.819,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-caaa8d94b1cf",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-caaa8d94b1cf-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [
+        {
+          "entity": "Revolução dos Cravos e divergências entre fontes históricas",
+          "attribute": "causes",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Revolução dos Cravos e divergências entre fontes históricas",
+          "attribute": "consequences",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "images",
+      "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+      "seconds": 7.755,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": null,
+      "job_state": null,
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 5,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": []
+    },
+    {
+      "name": "cancel",
+      "query": "Pesquisa profunda sobre armazenamento de energia térmica e limitações.",
+      "seconds": 2.902,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-862bc4a20310",
+      "job_state": "cancelada",
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [],
+      "synthesis": {
+        "llm": null,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    }
+  ],
+  "messages": {
+    "assistant": 13,
+    "user": 9
+  },
+  "message_count": 22,
+  "distinct_message_ids": 22,
+  "models": [
+    "poolside/laguna-s-2.1:free"
+  ],
+  "quick_check": "ok",
+  "limits": [
+    "completed_flow in legacy harness means transport/job observed, not acceptance.",
+    "SQLite includes one failed stale QA session attempt, not counted as successful chat.",
+    "No case approved full autonomous LLM synthesis; extractive fallbacks are explicit."
+  ]
+}

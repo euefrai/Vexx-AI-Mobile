@@ -1,0 +1,180 @@
+{
+  "base": "6d73e48",
+  "retrieval_commit": "f0977ea",
+  "product_commit": "a03d67d",
+  "tools_commit": "7fd07e9",
+  "hash_scope": "Measured Windows working-file bytes; Git text line-ending normalization can differ.",
+  "holdout_sha256": "44746b4c3089c8f11f9e9220c470cad4568201a94a471b7a777f98408b63ec05",
+  "holdout_tuned_after_open": false,
+  "scope": "Public compact evidence plus hashes of ignored local logs/MD download; no raw corpus, model payloads, credentials or runtime secrets.",
+  "artifacts": [
+    {
+      "path": "qa-artifacts/v5910/authenticated-summary.json",
+      "bytes": 9589,
+      "sha256": "c126c7d1890c6eb81eaf2ca73037eb2c936241496f38f83bb091285b7486e71b",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/controlled-summary.json",
+      "bytes": 1880,
+      "sha256": "bcb5fc2526a37d2b42fa80a947583f721d6642562176cda0b92060296c5e2f99",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/holdout-summary.json",
+      "bytes": 19912,
+      "sha256": "1a9346bee1c14c228c90cad880e7bd75d56b6b8292fe8a6b715d276d13daf609",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/known-source-summary.json",
+      "bytes": 5141,
+      "sha256": "19e8b9cedb89958aeec4de847f7472a8244e705644b65977bd5f530de831b0e0",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/transport-summary.json",
+      "bytes": 2878,
+      "sha256": "f84a181106d13ff2275a2fce7581fa3ea53c531ce01ebcd164f0296164861a15",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/ui-summary.json",
+      "bytes": 2300,
+      "sha256": "5d47e8d08570e30fbe2ac66671f96dacb9c37879e6e68558c4f1a9e12d7d4d41",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/verification-summary.json",
+      "bytes": 709,
+      "sha256": "ec517c343e06ba9969dc25f886dc57f2ebef79ec65d1caf805073e3d6840057a",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/qa-shutdown.json",
+      "bytes": 812,
+      "sha256": "b24cca5ab5e730b68adc7ee24624fb07d959ed17493a742d09c50586021f838b",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/query-final.log",
+      "bytes": 182,
+      "sha256": "969d3062ad1de4a2c237a99f06c1cac76f440e1c7e59ee30efe85d544f8a0947",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/requirements-final.log",
+      "bytes": 101,
+      "sha256": "a7f00166f3182d88872cebfffa4248b036101ecc6ec9f312850c8ae157db8cef",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/reproduction-corrected.log",
+      "bytes": 5003,
+      "sha256": "fba1e760e30828106099f04158dc87e7c55f74f9ebf2b79a4a860a304e19ca13",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/transport-reproduction.log",
+      "bytes": 3839,
+      "sha256": "cfcc15f5b7c2d8457ba7ec02ff4fd9262e2ea349986549a6cf2c93795f26cdf1",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/transport-focused.log",
+      "bytes": 183,
+      "sha256": "238601f9a185221694a97f094fd691a11583580bc1dbf6a3a84754b2a3242e9c",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/stability-focused.log",
+      "bytes": 102,
+      "sha256": "17b126a44dde24fd2fceb485a1e98645eee6e87347a0b5681d9fecdfced31276",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/tailer-reproduction.log",
+      "bytes": 3397,
+      "sha256": "7431c60a1e191c75b44c47b20d8398f986297d2fc9c1bbba0ea15dc1989a10a1",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/tailer-focused.log",
+      "bytes": 652,
+      "sha256": "e4907c6098d32bce6ed55e1611acef9678019683e6c06403ceb2c71ee3dd9394",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/full-suite.log",
+      "bytes": 2888,
+      "sha256": "50174beb9db3549f7bd3397523472d35f844c5fb053ac22eef02aed370aa65c0",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/full-final.log",
+      "bytes": 2888,
+      "sha256": "a00834530f967fe4b4ae98b9ba7c93db78deed0e467c7df33c8a3b69128163e2",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/search-bench.log",
+      "bytes": 775,
+      "sha256": "c0ea0c583d8beb9ada5899f757cada0efd508cd124a51945562754abcd9418d5",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/shopping-bench.log",
+      "bytes": 138,
+      "sha256": "8238594ed580ada8ecdb77417085cd87b5306463113b0320fc484cea2c1deeb2",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/experience-bench.log",
+      "bytes": 2611,
+      "sha256": "d023308362f1615d07b58d318a1d817b5698db98ab77b78ca3189b24fe45a254",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/source-1280.png",
+      "bytes": 82819,
+      "sha256": "6c4cd6ac3720d1a50aa044e0a9d2436f0315fe347737005b88d2794f8e4622df",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/source-320.png",
+      "bytes": 38205,
+      "sha256": "395480f55d7555a84b113fc4d428919555506b082455f5a8560309aae090d5cd",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/gallery-390.png",
+      "bytes": 231180,
+      "sha256": "ec12830cff65b12b3a830da99b380738c77d3562abf67cd9291f659cd8c9633e",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/gallery-modal.png",
+      "bytes": 67883,
+      "sha256": "47a28907a8794ce4f57492a2c7a7b02350067a2a8c9706f6561bfe2145058ea6",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/zoom-200.png",
+      "bytes": 643764,
+      "sha256": "6bacbf3a80555376ce9cec22e77e893f846f46922b44088cd335b81f832882cf",
+      "storage": "tracked"
+    },
+    {
+      "path": "qa-artifacts/v5910/research-export.md",
+      "bytes": 8577,
+      "sha256": "ea333aa278a69d5ff29a554f0c8350039ddb0326e3bb611b5a28c40d99feb924",
+      "storage": "local_only"
+    },
+    {
+      "path": "qa-artifacts/v5910/research-export.csv",
+      "bytes": 8828,
+      "sha256": "259e1a2e2b1401e7d1086de3a96a98338c146ce82caea69869f67afe7f48c9b7",
+      "storage": "tracked"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "production_operations": false,
+  "sessions": {
+    "C": {
+      "temporary_database_removed": true,
+      "temporary_runtime_removed": true,
+      "qa_processes_matching_private_folder": 0,
+      "disposable_child_wait_timeout": true,
+      "limit": "C required disposal of its own QA launcher after tailer drain failure; no production agent was terminated."
+    },
+    "live": {
+      "temporary_database_removed": true,
+      "temporary_runtime_removed": true,
+      "qa_processes_matching_private_folder": 0,
+      "disposable_child_wait_timeout": false,
+      "limit": "Real live QA drained without child wait timeout; not a repeat of failed model synthesis."
+    }
+  },
+  "live_before_stop": {
+    "role": "development",
+    "state": "RUNNING",
+    "active_operations": 0
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "scope": "KNOWN_PUBLIC_SOURCE_TRANSPORT_NOT_DISCOVERY",
+  "A_B_exact_request_equal": true,
+  "B_C_system_equal": true,
+  "B_C_objective_equal": true,
+  "B_C_verification_equal": true,
+  "B_C_excerpts_equal": true,
+  "B_C_source_fields_differ": [
+    "accessed_at",
+    "evidence_id"
+  ],
+  "B_C_passage_ranges_equal": true,
+  "outcomes": {
+    "model": "poolside/laguna-s-2.1:free",
+    "scope": "KNOWN_PUBLIC_SOURCE_TRANSPORT_NOT_DISCOVERY",
+    "B": {
+      "llm": false,
+      "fallback_detail": "quote_mismatch",
+      "fallback_provider_code": null,
+      "semantic_review": null
+    },
+    "A": {
+      "llm": false,
+      "failure": "provider_failure",
+      "provider": "timeout"
+    }
+  },
+  "calls": {
+    "A": [
+      {
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "actual_model": null,
+        "max_tokens": 1800,
+        "stream": false,
+        "request_sha256": "3f1417af0c8b731bacd72795dc07c258c9650d3bcbffbb7af791daa8d6813856",
+        "http_status": null,
+        "elapsed_s": 15.015,
+        "error_type": "TimeoutError",
+        "finish_reasons": [],
+        "answer_characters": [],
+        "usage": {},
+        "reasoning_present": false
+      }
+    ],
+    "B": [
+      {
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "actual_model": "poolside/laguna-s-2.1:free",
+        "max_tokens": 1800,
+        "stream": false,
+        "request_sha256": "3f1417af0c8b731bacd72795dc07c258c9650d3bcbffbb7af791daa8d6813856",
+        "http_status": 200,
+        "elapsed_s": 4.371,
+        "error_type": null,
+        "finish_reasons": [
+          "stop"
+        ],
+        "answer_characters": [
+          414
+        ],
+        "usage": {
+          "prompt_tokens": 2154,
+          "completion_tokens": 175,
+          "total_tokens": 2329
+        },
+        "reasoning_present": false
+      }
+    ],
+    "C": [
+      {
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "actual_model": null,
+        "max_tokens": 1800,
+        "stream": false,
+        "request_sha256": "c265da0a986c2bbf55268b758baebbc0751c77c8c56ff00ec5106164f4c4c350",
+        "http_status": null,
+        "elapsed_s": 15.027,
+        "error_type": "TimeoutError",
+        "finish_reasons": [],
+        "answer_characters": [],
+        "usage": {},
+        "reasoning_present": false
+      }
+    ]
+  },
+  "C": "Real login + CSRF + /api/research/start + relay + development PC Agent + temporary SQLite; timeout; evidence preserved.",
+  "historical_empty_root_cause": "NOT_REPRODUCED; old raw body absent. Controlled text-part parsing and metadata loss fixed; no claim that old model cause is solved.",
+  "probe_limit": "First C polling harness used wrong terminal spelling and observed for 210s; this is not model or job latency. Poll spelling fixed."
+}

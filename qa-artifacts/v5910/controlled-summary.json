@@ -1,0 +1,74 @@
+{
+  "scope": "FROZEN_PROVIDER_POOL_AND_READ_RECORDS_NOT_LIVE_DISCOVERY",
+  "before": {
+    "base": "6d73e48",
+    "baseline": true,
+    "scope": "FROZEN_POOL_NEUTRALIZES_QUERY_NOT_AUTONOMOUS",
+    "extraction_reexecuted": false,
+    "input_sha256": "37322e0c339015cac0f6d2b34ac856fd4ca9ab4bd5ac9fcaa7d21e208a8eda86",
+    "pool_urls": 16,
+    "available_records": 12,
+    "read_attempts": 10,
+    "retained_read_evidence": 0,
+    "requirements": [
+      {
+        "attribute": "founders",
+        "state": "NOT_SEARCHED"
+      },
+      {
+        "attribute": "foundation_date",
+        "state": "NOT_SEARCHED"
+      },
+      {
+        "attribute": "products",
+        "state": "NOT_SEARCHED"
+      }
+    ],
+    "evidence": [],
+    "errors": [
+      "NO_ANSWER_PASSAGE",
+      "FROZEN_MISSING",
+      "RESEARCH_COMPLETED",
+      "TOPIC_MISMATCH",
+      "EXTRACTIVE"
+    ]
+  },
+  "after": {
+    "base": "6d73e48",
+    "baseline": false,
+    "scope": "FROZEN_POOL_NEUTRALIZES_QUERY_NOT_AUTONOMOUS",
+    "extraction_reexecuted": false,
+    "input_sha256": "37322e0c339015cac0f6d2b34ac856fd4ca9ab4bd5ac9fcaa7d21e208a8eda86",
+    "pool_urls": 16,
+    "available_records": 12,
+    "read_attempts": 10,
+    "retained_read_evidence": 1,
+    "requirements": [
+      {
+        "attribute": "founders",
+        "state": "PARTIALLY_SUPPORTED"
+      },
+      {
+        "attribute": "foundation_date",
+        "state": "PARTIALLY_SUPPORTED"
+      },
+      {
+        "attribute": "products",
+        "state": "PARTIALLY_SUPPORTED"
+      }
+    ],
+    "evidence": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Bosch_(empresa)",
+        "passages": 3
+      }
+    ],
+    "errors": [
+      "EXTRACTIVE",
+      "FROZEN_MISSING",
+      "NO_ANSWER_PASSAGE",
+      "TOPIC_MISMATCH",
+      "RESEARCH_COMPLETED"
+    ]
+  }
+}

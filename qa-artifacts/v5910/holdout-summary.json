@@ -1,0 +1,701 @@
+{
+  "annotation": "AGENT_OBSERVED_NOT_HUMAN_GOLD",
+  "retrieval_tuned_after_open": false,
+  "scope": "NEW_FROZEN_FULL_DISCOVERY_NO_URL_SEEDS_NO_MODEL",
+  "count": 16,
+  "with_retained_entries": 3,
+  "with_retained_answer_passages": 0,
+  "warning": "Entries can be snippets/context. No parsed schema is not complete coverage. Different holdouts are not a causal comparison.",
+  "cases": [
+    {
+      "case": {
+        "id": "ar-01",
+        "category": "technology",
+        "query": "Quais foram as principais novidades oficiais do PostgreSQL nos últimos trinta dias?"
+      },
+      "outer_provider_calls": 2,
+      "inner_provider_calls": 12,
+      "provider_result_entries": 18,
+      "candidate_rejections": {},
+      "read_attempts": 11,
+      "extracted_documents": 11,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [],
+      "schema_applicable": false,
+      "complete": false,
+      "trace_reasons": {
+        "TAMANHO": 1,
+        "INCOMPLETE_EVIDENCE": 8,
+        "TEMPORAL_MISMATCH": 2,
+        "INCOMPLETE_EVIDENCE,INDEX_PAGE": 1,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 20.235,
+      "budget": {
+        "buscas": 2,
+        "paginas": 12,
+        "replans": 0
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-02",
+        "category": "science",
+        "query": "O que as fontes primárias dizem sobre o mecanismo e as limitações da vacinação com RNA mensageiro?"
+      },
+      "outer_provider_calls": 1,
+      "inner_provider_calls": 0,
+      "provider_result_entries": 6,
+      "candidate_rejections": {
+        "ENTITY_MISMATCH": 6
+      },
+      "read_attempts": 6,
+      "extracted_documents": 6,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [
+        {
+          "attribute": "limitations",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "schema_applicable": true,
+      "complete": false,
+      "trace_reasons": {
+        "TAMANHO": 1,
+        "ENTITY_MISMATCH": 6,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 6.081,
+      "budget": {
+        "buscas": 1,
+        "paginas": 7,
+        "replans": 0
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-03",
+        "category": "history",
+        "query": "Por que aconteceu a Revolução de 1930 no Brasil e o que mudou depois?"
+      },
+      "outer_provider_calls": 2,
+      "inner_provider_calls": 10,
+      "provider_result_entries": 24,
+      "candidate_rejections": {},
+      "read_attempts": 10,
+      "extracted_documents": 10,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [
+        {
+          "attribute": "causes",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "consequences",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "schema_applicable": true,
+      "complete": false,
+      "trace_reasons": {
+        "BLOQUEADO": 1,
+        "HTTP": 1,
+        "TOPIC_MISMATCH": 10,
+        "NO_ANSWER_PASSAGE": 3,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 22.774,
+      "budget": {
+        "buscas": 2,
+        "paginas": 12,
+        "replans": 0
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-04",
+        "category": "local_news",
+        "query": "Quais notícias sobre abastecimento de água em Ilhéus foram publicadas nos últimos sete dias, excluindo Salvador?"
+      },
+      "outer_provider_calls": 4,
+      "inner_provider_calls": 16,
+      "provider_result_entries": 24,
+      "candidate_rejections": {},
+      "read_attempts": 6,
+      "extracted_documents": 6,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [],
+      "schema_applicable": false,
+      "complete": false,
+      "trace_reasons": {
+        "ENTITY_MISMATCH,TOPIC_MISMATCH,INCOMPLETE_EVIDENCE": 16,
+        "ENTITY_MISMATCH,TOPIC_MISMATCH,TEMPORAL_MISMATCH": 8,
+        "EXTRACTIVE": 4,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 17.29,
+      "budget": {
+        "buscas": 4,
+        "paginas": 6,
+        "replans": 1
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-05",
+        "category": "company",
+        "query": "Quem criou a empresa Natura, quando ela foi fundada e quais produtos fabrica?"
+      },
+      "outer_provider_calls": 3,
+      "inner_provider_calls": 0,
+      "provider_result_entries": 18,
+      "candidate_rejections": {},
+      "read_attempts": 10,
+      "extracted_documents": 10,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [
+        {
+          "attribute": "founders",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "foundation_date",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "products",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "schema_applicable": true,
+      "complete": false,
+      "trace_reasons": {
+        "TOPIC_MISMATCH": 13,
+        "BLOQUEADO": 2,
+        "NO_ANSWER_PASSAGE": 1,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 20.159,
+      "budget": {
+        "buscas": 3,
+        "paginas": 12,
+        "replans": 0
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-06",
+        "category": "product",
+        "query": "Qual é o peso da Canon EOS R8 com bateria e cartão e qual bateria utiliza?"
+      },
+      "outer_provider_calls": 2,
+      "inner_provider_calls": 0,
+      "provider_result_entries": 12,
+      "candidate_rejections": {
+        "ENTITY_MISMATCH": 1
+      },
+      "read_attempts": 9,
+      "extracted_documents": 9,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [
+        {
+          "attribute": "weight",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "battery",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "schema_applicable": true,
+      "complete": false,
+      "trace_reasons": {
+        "BLOQUEADO": 3,
+        "NO_ANSWER_PASSAGE": 2,
+        "ENTITY_MISMATCH": 6,
+        "TOPIC_MISMATCH": 1,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 14.315,
+      "budget": {
+        "buscas": 2,
+        "paginas": 12,
+        "replans": 0
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-07",
+        "category": "geography",
+        "query": "Quais são a nascente e a foz do rio Paraguaçu e por quais regiões passa?"
+      },
+      "outer_provider_calls": 1,
+      "inner_provider_calls": 0,
+      "provider_result_entries": 6,
+      "candidate_rejections": {},
+      "read_attempts": 5,
+      "extracted_documents": 4,
+      "selected_document_passages": 0,
+      "retained_entries": 4,
+      "retained_read_sources": 3,
+      "retained_answer_passage_ids": 0,
+      "requirements": [],
+      "schema_applicable": false,
+      "complete": false,
+      "trace_reasons": {
+        "TYPEERROR": 1,
+        "TOPIC_MISMATCH": 1,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 7.898,
+      "budget": {
+        "buscas": 1,
+        "paginas": 6,
+        "replans": 0
+      },
+      "sources": [
+        {
+          "url": "https://www.ba.gov.br/inema/iniciativas/estudos-sobre-recursos-hidricos",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Rio_Paragua%C3%A7u",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://wikimapia.org/3080405/pt/Foz-do-Rio-Paragua%C3%A7%C3%BA",
+          "read": false,
+          "passages": []
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Bacia_do_rio_Paragua%C3%A7u",
+          "read": true,
+          "passages": []
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "ar-08",
+        "category": "education",
+        "query": "Quais são as diferenças entre bacharelado, licenciatura e tecnólogo segundo fontes oficiais brasileiras?"
+      },
+      "outer_provider_calls": 6,
+      "inner_provider_calls": 3,
+      "provider_result_entries": 18,
+      "candidate_rejections": {},
+      "read_attempts": 11,
+      "extracted_documents": 11,
+      "selected_document_passages": 0,
+      "retained_entries": 8,
+      "retained_read_sources": 8,
+      "retained_answer_passage_ids": 0,
+      "requirements": [],
+      "schema_applicable": false,
+      "complete": false,
+      "trace_reasons": {
+        "REDE": 1,
+        "TOPIC_MISMATCH": 3,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 28.622,
+      "budget": {
+        "buscas": 3,
+        "paginas": 12,
+        "replans": 0
+      },
+      "sources": [
+        {
+          "url": "https://querobolsa.com.br/bacharelado",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://faculdade.grancursosonline.com.br/blog/bacharelado-licenciatura-ou-tecnologo/",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://pt.wikipedia.org/wiki/Licenciatura",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://www.guiadacarreira.com.br/blog/licenciatura",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://es.wikipedia.org/wiki/Licenciatura",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://querobolsa.com.br/revista/o-que-e-bacharelado",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://faculdade.grancursosonline.com.br/blog/bacharelado-licenciatura-diferenca/",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://querobolsa.com.br/cursos-e-faculdades/bahia--ubata/ciencias-sociais-segunda-licenciatura/todos",
+          "read": true,
+          "passages": []
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "ar-09",
+        "category": "sports",
+        "query": "Qual foi o resultado mais recente da seleção brasileira feminina de vôlei e qual é seu próximo jogo anunciado?"
+      },
+      "outer_provider_calls": 12,
+      "inner_provider_calls": 18,
+      "provider_result_entries": 29,
+      "candidate_rejections": {},
+      "read_attempts": 11,
+      "extracted_documents": 10,
+      "selected_document_passages": 0,
+      "retained_entries": 3,
+      "retained_read_sources": 2,
+      "retained_answer_passage_ids": 0,
+      "requirements": [],
+      "schema_applicable": false,
+      "complete": false,
+      "trace_reasons": {
+        "BLOQUEADO": 1,
+        "TOPIC_MISMATCH": 8,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 34.125,
+      "budget": {
+        "buscas": 3,
+        "paginas": 12,
+        "replans": 0
+      },
+      "sources": [
+        {
+          "url": "https://www.lance.com.br/selecao-brasileira",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://ge.globo.com/futebol/selecao-brasileira/agenda-de-jogos-da-selecao/",
+          "read": true,
+          "passages": []
+        },
+        {
+          "url": "https://resultados.tse.jus.br/oficial/app/index.html",
+          "read": false,
+          "passages": []
+        }
+      ]
+    },
+    {
+      "case": {
+        "id": "ar-10",
+        "category": "culture",
+        "query": "Quem escreveu Quarto de Despejo e quando ocorreu sua primeira publicação?"
+      },
+      "outer_provider_calls": 20,
+      "inner_provider_calls": 23,
+      "provider_result_entries": 30,
+      "candidate_rejections": {
+        "ENTITY_MISMATCH": 30
+      },
+      "read_attempts": 6,
+      "extracted_documents": 6,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [],
+      "schema_applicable": false,
+      "complete": false,
+      "trace_reasons": {
+        "ENTITY_MISMATCH": 30,
+        "EXTRACTIVE": 4,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 24.355,
+      "budget": {
+        "buscas": 5,
+        "paginas": 6,
+        "replans": 1
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-11",
+        "category": "documentation",
+        "query": "Como funciona pathlib.Path.glob, quais parâmetros aceita, o que retorna e quais limitações possui?"
+      },
+      "outer_provider_calls": 12,
+      "inner_provider_calls": 13,
+      "provider_result_entries": 28,
+      "candidate_rejections": {
+        "ENTITY_MISMATCH": 28
+      },
+      "read_attempts": 6,
+      "extracted_documents": 6,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [
+        {
+          "attribute": "return_value",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "behavior",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "limitations",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "schema_applicable": true,
+      "complete": false,
+      "trace_reasons": {
+        "BLOQUEADO": 2,
+        "ENTITY_MISMATCH": 6,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 21.397,
+      "budget": {
+        "buscas": 3,
+        "paginas": 8,
+        "replans": 0
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-12",
+        "category": "comparison",
+        "query": "Compare Raspberry Pi 5 e Orange Pi 5 quanto a memória suportada, processador e consumo, sem misturar variantes Plus."
+      },
+      "outer_provider_calls": 4,
+      "inner_provider_calls": 6,
+      "provider_result_entries": 12,
+      "candidate_rejections": {
+        "ENTITY_MISMATCH": 12
+      },
+      "read_attempts": 2,
+      "extracted_documents": 2,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [],
+      "schema_applicable": false,
+      "complete": false,
+      "trace_reasons": {
+        "BLOQUEADO": 4,
+        "REDE": 6,
+        "TOPIC_MISMATCH": 2,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 31.674,
+      "budget": {
+        "buscas": 1,
+        "paginas": 12,
+        "replans": 0
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-13",
+        "category": "multifacet",
+        "query": "Pesquise as vantagens e limitações de usar um mini PC para inferência local de modelos de linguagem, considerando memória, consumo e possibilidades de upgrade."
+      },
+      "outer_provider_calls": 4,
+      "inner_provider_calls": 3,
+      "provider_result_entries": 12,
+      "candidate_rejections": {},
+      "read_attempts": 10,
+      "extracted_documents": 8,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [
+        {
+          "attribute": "limitations",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "schema_applicable": true,
+      "complete": false,
+      "trace_reasons": {
+        "BLOQUEADO": 2,
+        "TOPIC_MISMATCH": 7,
+        "NO_ANSWER_PASSAGE": 3,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 14.55,
+      "budget": {
+        "buscas": 1,
+        "paginas": 12,
+        "replans": 0
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-14",
+        "category": "ambiguous",
+        "query": "Quem fundou a empresa de computadores Apple, em que ano, excluindo a fruta?"
+      },
+      "outer_provider_calls": 12,
+      "inner_provider_calls": 16,
+      "provider_result_entries": 29,
+      "candidate_rejections": {
+        "ENTITY_MISMATCH": 28
+      },
+      "read_attempts": 8,
+      "extracted_documents": 8,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [
+        {
+          "attribute": "founders",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "foundation_date",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "schema_applicable": true,
+      "complete": false,
+      "trace_reasons": {
+        "BLOQUEADO": 3,
+        "HTTP": 1,
+        "TOPIC_MISMATCH": 2,
+        "EXTRACTIVE": 4,
+        "ENTITY_MISMATCH": 6,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 28.405,
+      "budget": {
+        "buscas": 3,
+        "paginas": 12,
+        "replans": 1
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-15",
+        "category": "constraints",
+        "query": "Quais museus públicos em Recife divulgam entrada gratuita aos domingos, excluindo instituições em Olinda?"
+      },
+      "outer_provider_calls": 12,
+      "inner_provider_calls": 15,
+      "provider_result_entries": 18,
+      "candidate_rejections": {},
+      "read_attempts": 6,
+      "extracted_documents": 6,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [],
+      "schema_applicable": false,
+      "complete": false,
+      "trace_reasons": {
+        "TOPIC_MISMATCH": 18,
+        "EXTRACTIVE": 4,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 15.981,
+      "budget": {
+        "buscas": 3,
+        "paginas": 6,
+        "replans": 1
+      },
+      "sources": []
+    },
+    {
+      "case": {
+        "id": "ar-16",
+        "category": "scarce",
+        "query": "Quantas pessoas visitaram ontem a biblioteca municipal de Itaberaba, se existir contagem pública?"
+      },
+      "outer_provider_calls": 16,
+      "inner_provider_calls": 21,
+      "provider_result_entries": 24,
+      "candidate_rejections": {},
+      "read_attempts": 5,
+      "extracted_documents": 5,
+      "selected_document_passages": 0,
+      "retained_entries": 0,
+      "retained_read_sources": 0,
+      "retained_answer_passage_ids": 0,
+      "requirements": [],
+      "schema_applicable": false,
+      "complete": false,
+      "trace_reasons": {
+        "REDE": 1,
+        "TOPIC_MISMATCH": 20,
+        "EXTRACTIVE": 4,
+        "RESEARCH_COMPLETED": 1
+      },
+      "seconds": 32.585,
+      "budget": {
+        "buscas": 4,
+        "paginas": 6,
+        "replans": 1
+      },
+      "sources": []
+    }
+  ]
+}
