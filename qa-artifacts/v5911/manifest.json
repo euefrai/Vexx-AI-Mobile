@@ -1,0 +1,212 @@
+{
+  "version": "V5.9.11",
+  "date": "2026-10-27",
+  "decision": "NO_GO_RESEARCH_ULTRA",
+  "branch": "codex/v598-autonomous-research",
+  "initial_head": "0959e8c",
+  "implementation_qa_head": "17f9844023debfbf918e6d1297e0eedba6556113",
+  "holdout_candidate": "71fab67",
+  "final_logic_tested": "3de4932",
+  "last_change": "17f9844 composer copy only; 37 focused tests and Chrome repeated",
+  "full_suite": {
+    "passed": 1775,
+    "skipped": 4,
+    "warnings": 2,
+    "seconds": 476.95,
+    "exit": 0
+  },
+  "composer_focused": {
+    "passed": 37,
+    "seconds": 5.55,
+    "exit": 0
+  },
+  "benchmarks": {
+    "search": "34/34",
+    "shopping": "59/59",
+    "experience": "16/16",
+    "scope": "regression not fresh autonomous evaluation"
+  },
+  "public_files": [
+    {
+      "file": "qa-artifacts/v5911/authenticated-summary.json",
+      "bytes": 9742,
+      "sha256": "4806505349beb36260a29512e98179e0b769c8b4f1adb8729ed42253ff37bb08"
+    },
+    {
+      "file": "qa-artifacts/v5911/browser-summary.json",
+      "bytes": 2679,
+      "sha256": "e1704a8958883fa4eb9e3e2fe46130c395bde38cec4bab18e30d69a4c256272c"
+    },
+    {
+      "file": "qa-artifacts/v5911/holdout-summary.json",
+      "bytes": 60614,
+      "sha256": "147215950642cbd935e5429c2ec794b5344745c3931c46084870bf45f2f111ce"
+    },
+    {
+      "file": "qa-artifacts/v5911/live-synthesis-summary.json",
+      "bytes": 1743,
+      "sha256": "111e62b399c504680f0bbbe773dd27e792d86f2ba15dc6c4a52dcc9b58eaaa67"
+    },
+    {
+      "file": "qa-artifacts/v5911/previous-loss-summary.json",
+      "bytes": 2901,
+      "sha256": "8f02c8940bc7fb41b482bd7e177f4aae832fac14467a2f3cfb7e3b50679453c0"
+    },
+    {
+      "file": "qa-artifacts/v5911/provider-replay-after-summary.json",
+      "bytes": 1765,
+      "sha256": "99bef60463477c8834dbcab085feeea1ddc5fa205ab3ebf6e004d6fb13dd8504"
+    },
+    {
+      "file": "qa-artifacts/v5911/provider-replay-before-summary.json",
+      "bytes": 1649,
+      "sha256": "2fb8bfb09e21adba70215c0f702c129c5c297d1a67a229a94b37d9a8f2f93b83"
+    },
+    {
+      "file": "qa-artifacts/v5911/provider-trace-summary.json",
+      "bytes": 5910,
+      "sha256": "044a4d494a5f8580d5cc7900237b801ebfea1ef761b508897c63cccf5f1d6a0c"
+    },
+    {
+      "file": "qa-artifacts/v5911/read-after-summary.json",
+      "bytes": 4044,
+      "sha256": "19394d52aab1dbf0694492625b18cef3cc309d8c91626adc5c9360184de7fd40"
+    },
+    {
+      "file": "qa-artifacts/v5911/read-before-summary.json",
+      "bytes": 1547,
+      "sha256": "ef11a87d085ca00d65fe826c7fa633aa834c620bfa8ba58bef9564fce9b28b56"
+    },
+    {
+      "file": "qa-artifacts/v5911/transport-summary.json",
+      "bytes": 7628,
+      "sha256": "ddd3c1c7438557b0fbf24f8ff276021e9902303df823f29e76b43055516b311a"
+    },
+    {
+      "file": "qa-artifacts/v5911/qa-shutdown.json",
+      "bytes": 1130,
+      "sha256": "68a31f70af132b691fb7a416e5971d4a61c7a37834102e57a5e603eb6b7e4f1d"
+    },
+    {
+      "file": "qa-artifacts/v5911/research-export.csv",
+      "bytes": 8799,
+      "sha256": "af231eb56428edd8ec6e24f54bf44f6026d6882e9c33b5c7296d3a4627c3d92e"
+    },
+    {
+      "file": "qa-artifacts/v5911/source-320.png",
+      "bytes": 39541,
+      "sha256": "657017c67b6af263a3306a68f7bcacc0269c39b4211c8fd9bbc6cf8b97c709d4"
+    },
+    {
+      "file": "qa-artifacts/v5911/source-1280.png",
+      "bytes": 84136,
+      "sha256": "0fae8c76e0ee571ac5535acaa0a88a6a6141a6fa679198d31b1e5da8caeff44f"
+    },
+    {
+      "file": "qa-artifacts/v5911/gallery-390.png",
+      "bytes": 219237,
+      "sha256": "dcb38fd19f2ba422a316d7989b3c776a0a9517a25b9be862f5b183bf2d90abfa"
+    }
+  ],
+  "local_logs_not_committed": [
+    {
+      "file": "qa-artifacts/v5911/reproduction.log",
+      "bytes": 8496,
+      "sha256": "0ebf7aac2999feba389624427a0d2fe50afc21f79da7016222c742b7e9c9d3e5"
+    },
+    {
+      "file": "qa-artifacts/v5911/catalog-reproduction.log",
+      "bytes": 5418,
+      "sha256": "b25725924bb4b83994ff365dbeb4e27bb69ec5f37cabb6970d05e39f1e05d3c8"
+    },
+    {
+      "file": "qa-artifacts/v5911/cache-reproduction.log",
+      "bytes": 1113,
+      "sha256": "60f2a74992b004fa55745131ea028cbbabb31037400f30cc32d0175c8ffd2649"
+    },
+    {
+      "file": "qa-artifacts/v5911/synthesis-state-reproduction.log",
+      "bytes": 1760,
+      "sha256": "77db30828dff152a4cf21b3edc31f17361da049ab4ff8690f6f3e8b49550caab"
+    },
+    {
+      "file": "qa-artifacts/v5911/provider-boundary-reproduction.log",
+      "bytes": 2385,
+      "sha256": "dffb313cf315bb85ec876e037f138fc2cf72ed64d729fd5c77b79f59186dd43a"
+    },
+    {
+      "file": "qa-artifacts/v5911/budget-regression.log",
+      "bytes": 1171,
+      "sha256": "0091822a92bb0de94803c23f48dd515bb5dd054d6949098773d54391e5862baf"
+    },
+    {
+      "file": "qa-artifacts/v5911/full-suite.log",
+      "bytes": 2888,
+      "sha256": "6a7db8a03deb2e4c69be54a72cb7127ca266c7da893b537405d75d61ac37a58e"
+    },
+    {
+      "file": "qa-artifacts/v5911/full-final.log",
+      "bytes": 5240,
+      "sha256": "9d1ea987ec3f3a93451d91be6e4622df2e28f3e5a26554d82f69989b2635de3b"
+    },
+    {
+      "file": "qa-artifacts/v5911/full-release.log",
+      "bytes": 2888,
+      "sha256": "571ae528fee908f47dea50c21369c1471d57a4050c9539008f33e887b0387012"
+    },
+    {
+      "file": "qa-artifacts/v5911/last-focused.log",
+      "bytes": 182,
+      "sha256": "b84446d1fa84f166d923eb2cdbf30bdd120a408d3b9e03a7528df1eb888ad5bb"
+    },
+    {
+      "file": "qa-artifacts/v5911/composer-focused.log",
+      "bytes": 101,
+      "sha256": "6b9e68d55c48312b9b73f058e075f0ac1c92fd69087316daa423c93aa09eb728"
+    },
+    {
+      "file": "qa-artifacts/v5911/search-bench.log",
+      "bytes": 775,
+      "sha256": "6bfe48accb71e3d46ee64ed1674ec76604cf966bd5b64e381c94bab4d309595f"
+    },
+    {
+      "file": "qa-artifacts/v5911/shopping-bench.log",
+      "bytes": 138,
+      "sha256": "e704063a7406a3800d653beff20d379cd6bd57372d48fe2d99656db075a30396"
+    },
+    {
+      "file": "qa-artifacts/v5911/experience-bench.log",
+      "bytes": 2613,
+      "sha256": "b5b4e8d86ac2d3bd65cd71758f293a85245551c6a4977d062e040062c95565a7"
+    },
+    {
+      "file": "qa-artifacts/v5911/ui.log",
+      "bytes": 6596,
+      "sha256": "d76bcbe017e71114bd6960c6a4b6234b810a1efd8f518702fbb1674cfc09252a"
+    },
+    {
+      "file": "qa-artifacts/v5911/ui-final.log",
+      "bytes": 39,
+      "sha256": "92ef5a9be711a90559f7cfed838bd7327dd2f12b3adc4c3f9f08c0ec645b88dd"
+    },
+    {
+      "file": "qa-artifacts/v5911/ui-final-verified.log",
+      "bytes": 6642,
+      "sha256": "fba0130675fc7308295208ab653e183a417538e5073117ed3d45035897241305"
+    },
+    {
+      "file": "qa-artifacts/v5911/ui-extra.log",
+      "bytes": 2539,
+      "sha256": "7c9cff3244fd31398be3982e073291f153ea36690f27f84298df0da57ee6e895"
+    }
+  ],
+  "local_raw_json_count": 202,
+  "local_raw_json_bytes": 72864774,
+  "limits": [
+    "No push/deploy/production operations.",
+    "Four holdout cases retained entries; only one retained read source and one case with linked passage.",
+    "Partial WEG model integration success; no full research approved.",
+    "Raw captures, full logs, MD export and runtime details remain local and ignored.",
+    "Some historical untracked artifacts remain outside this delivery."
+  ]
+}

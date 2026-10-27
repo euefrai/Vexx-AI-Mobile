@@ -1,0 +1,92 @@
+{
+  "checks": {
+    "ui-final-verified": {
+      "scope": "REAL_CHROME_LIVE_PUBLIC_SOURCES_VIEWPORT_EMULATION_NOT_PHYSICAL_PHONE",
+      "geometry": [
+        {
+          "label": "source",
+          "viewport": 1280,
+          "root": 1280,
+          "left": 394,
+          "right": 1144
+        },
+        {
+          "label": "source",
+          "viewport": 390,
+          "root": 390,
+          "left": 20,
+          "right": 360
+        },
+        {
+          "label": "source",
+          "viewport": 320,
+          "root": 320,
+          "left": 16,
+          "right": 294
+        },
+        {
+          "label": "gallery",
+          "viewport": 1280,
+          "root": 1280,
+          "left": 394,
+          "right": 636
+        },
+        {
+          "label": "gallery",
+          "viewport": 390,
+          "root": 390,
+          "left": 20,
+          "right": 360
+        },
+        {
+          "label": "gallery",
+          "viewport": 320,
+          "root": 320,
+          "left": 16,
+          "right": 294
+        }
+      ],
+      "opened_source": "https://en.wikipedia.org/wiki/WEG_S.A.",
+      "table_text": "Aspecto\tEvidência recuperada\nFundadores\tTrecho pertinente recuperado\nData de fundação\tTrecho pertinente recuperado\nProdutos\tAinda não confirmado",
+      "gallery_loaded": true,
+      "keyboard": true,
+      "focus_restored": true,
+      "zoom": {
+        "viewport": 1280,
+        "root": 1280
+      },
+      "reduced_motion": "1e-06s",
+      "metadata_restored": true,
+      "media_cards": 5,
+      "offline_fetch_rejected": true,
+      "health_after_reconnect": 200,
+      "page_errors": []
+    },
+    "ui-extra": {
+      "scope": "REAL_QA_JOB_EXPORT_AND_INDEXEDDB",
+      "downloads": [
+        "md",
+        "csv"
+      ],
+      "storage": {
+        "messages": 22,
+        "unique_ids": 22,
+        "structured_assistant": 5,
+        "result_messages": 4
+      }
+    }
+  },
+  "console_network_errors": "Expected anonymous /api/session 401 before QA login and fetch failures during explicit offline test; no captured pageerror.",
+  "visual_inspection": [
+    "source-320.png",
+    "source-1280.png",
+    "gallery-390.png",
+    "gallery-modal.png"
+  ],
+  "limits": [
+    "Desktop Chrome viewport emulation, no physical phone.",
+    "First gallery image loaded; keyboard moved to second while screenshot still showed loading.",
+    "First repeated UI probe toggled previously open metadata closed; harness made idempotent, then passed.",
+    "Composer shortened again after visual inspection; 37 focused tests passed after final copy change."
+  ]
+}

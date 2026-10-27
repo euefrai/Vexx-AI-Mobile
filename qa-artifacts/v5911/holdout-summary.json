@@ -1,0 +1,1665 @@
+{
+  "scope": "LIVE_EXTERNAL_NO_URL_SEEDS_NO_MODEL_NOT_HUMAN_GOLD",
+  "candidate": "71fab67",
+  "later_correction": "Provider ad/snippet boundaries and synthesis-state propagation fixed later at 3de4932. This run is not a fresh evaluation of that later correction.",
+  "cases": [
+    {
+      "case": {
+        "id": "qc-01",
+        "category": "history",
+        "query": "Quais foram as causas da Revolução Praieira e quais consequências ela teve?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Quais foram as Causas"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quais foram as Consequências"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "Quais foram as",
+          "attribute": "causes",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "Quais foram as",
+          "attribute": "consequences",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": true,
+      "complete": false,
+      "provider_calls": 2,
+      "inner_calls": 0,
+      "candidate_entries": 12,
+      "rejections": {
+        "ENTITY_MISMATCH": 12
+      },
+      "read_attempts": 11,
+      "extracted_documents": 11,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 10.478,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-02",
+        "category": "science",
+        "query": "Como funciona a terapia CAR-T, quais evidências sustentam seu uso e quais limitações são documentadas?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "terapia CAR-T Comportamento da operação"
+        },
+        {
+          "provider": "ddg",
+          "query": "terapia CAR-T Limitações"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "terapia CAR-T",
+          "attribute": "behavior",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "terapia CAR-T",
+          "attribute": "limitations",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": false,
+      "complete": false,
+      "provider_calls": 2,
+      "inner_calls": 0,
+      "candidate_entries": 12,
+      "rejections": {},
+      "read_attempts": 6,
+      "extracted_documents": 6,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 9.335,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-03",
+        "category": "company",
+        "query": "Quem fundou a Embraer, em que ano foi fundada e quais são seus principais produtos?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Embraer Fundadores"
+        },
+        {
+          "provider": "ddg",
+          "query": "Embraer Data de fundação"
+        },
+        {
+          "provider": "ddg",
+          "query": "Embraer Produtos"
+        },
+        {
+          "provider": "searxng",
+          "query": "Embraer Produtos"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Embraer Produtos"
+        },
+        {
+          "provider": "web",
+          "query": "Embraer Produtos"
+        }
+      ],
+      "retained_sources": [
+        {
+          "id": "ev-4a6247f16f00",
+          "url": "https://en.wikipedia.org/wiki/Embraer",
+          "read": true,
+          "document_id": "D-badf8d4571644e40ad90b01c",
+          "provenance": {
+            "query_ids": [
+              "Q-eecc1e82ca676c740e0a"
+            ],
+            "requirement_ids": [
+              "R-22ccdfcbe199"
+            ],
+            "provider": "ddg",
+            "rank": 5,
+            "candidate_id": "C-43923f431f2d992ae487"
+          },
+          "passage_ids": [
+            "P-4fa2969ef87eb65c"
+          ]
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Embraer",
+          "attribute": "founders",
+          "type": "explicit_attribute",
+          "state": "SUPPORTED",
+          "passages": 1
+        },
+        {
+          "entity": "Embraer",
+          "attribute": "foundation_date",
+          "type": "explicit_attribute",
+          "state": "SUPPORTED",
+          "passages": 1
+        },
+        {
+          "entity": "Embraer",
+          "attribute": "products",
+          "type": "explicit_attribute",
+          "state": "DISCOVERED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": true,
+      "complete": false,
+      "provider_calls": 6,
+      "inner_calls": 3,
+      "candidate_entries": 18,
+      "rejections": {},
+      "read_attempts": 11,
+      "extracted_documents": 10,
+      "retained_entries": 1,
+      "read_retained": 1,
+      "linked_passage_ids": 1,
+      "links": 2,
+      "seconds": 21.48,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-04",
+        "category": "news",
+        "query": "O que aconteceu em Jequié nos últimos sete dias segundo notícias locais, sem misturar Salvador?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "web",
+          "query": "O que aconteceu em Jequié nos últimos sete dias segundo notícias locais, sem misturar Salvador"
+        },
+        {
+          "provider": "web",
+          "query": "O que aconteceu em Jequié nos últimos sete dias segundo notícias locais, sem misturar Salvador?"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": false,
+      "complete": false,
+      "provider_calls": 2,
+      "inner_calls": 12,
+      "candidate_entries": 24,
+      "rejections": {},
+      "read_attempts": 12,
+      "extracted_documents": 12,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 13.032,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-05",
+        "category": "technology",
+        "query": "Como funciona uma bomba de calor residencial, quais suas limitações e quais alternativas existem?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "uma bomba de calor residencial Comportamento da operação"
+        },
+        {
+          "provider": "searxng",
+          "query": "uma bomba de calor residencial Comportamento da operação"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "uma bomba de calor residencial Comportamento da operação"
+        },
+        {
+          "provider": "web",
+          "query": "uma bomba de calor residencial Comportamento da operação"
+        },
+        {
+          "provider": "ddg",
+          "query": "uma bomba de calor residencial bomba de calor residencial Comportamento da operação"
+        },
+        {
+          "provider": "searxng",
+          "query": "uma bomba de calor residencial bomba de calor residencial Comportamento da operação"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "uma bomba de calor residencial bomba de calor residencial Comportamento da operação"
+        },
+        {
+          "provider": "web",
+          "query": "uma bomba de calor residencial bomba de calor residencial Comportamento da operação"
+        },
+        {
+          "provider": "ddg",
+          "query": "uma bomba de calor residencial Limitações"
+        },
+        {
+          "provider": "searxng",
+          "query": "uma bomba de calor residencial Limitações"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "uma bomba de calor residencial Limitações"
+        },
+        {
+          "provider": "web",
+          "query": "uma bomba de calor residencial Limitações"
+        },
+        {
+          "provider": "ddg",
+          "query": "uma bomba de calor residencial bomba de calor residencial Limitações"
+        },
+        {
+          "provider": "searxng",
+          "query": "uma bomba de calor residencial bomba de calor residencial Limitações"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "uma bomba de calor residencial bomba de calor residencial Limitações"
+        },
+        {
+          "provider": "web",
+          "query": "uma bomba de calor residencial bomba de calor residencial Limitações"
+        },
+        {
+          "provider": "ddg",
+          "query": "uma bomba de calor residencial Alternativas"
+        },
+        {
+          "provider": "searxng",
+          "query": "uma bomba de calor residencial Alternativas"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "uma bomba de calor residencial Alternativas"
+        },
+        {
+          "provider": "web",
+          "query": "uma bomba de calor residencial Alternativas"
+        },
+        {
+          "provider": "ddg",
+          "query": "uma bomba de calor residencial bomba de calor residencial Alternativas"
+        },
+        {
+          "provider": "searxng",
+          "query": "uma bomba de calor residencial bomba de calor residencial Alternativas"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "uma bomba de calor residencial bomba de calor residencial Alternativas"
+        },
+        {
+          "provider": "web",
+          "query": "uma bomba de calor residencial bomba de calor residencial Alternativas"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "uma bomba de calor residencial",
+          "attribute": "behavior",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "uma bomba de calor residencial",
+          "attribute": "limitations",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "uma bomba de calor residencial",
+          "attribute": "alternatives",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": true,
+      "complete": false,
+      "provider_calls": 24,
+      "inner_calls": 36,
+      "candidate_entries": 39,
+      "rejections": {},
+      "read_attempts": 6,
+      "extracted_documents": 6,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 32.465,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-06",
+        "category": "product",
+        "query": "Qual é o peso da Canon EOS R50 com bateria e cartão e qual bateria ela utiliza?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Canon EOS R50 Peso e unidade com bateria e cartão"
+        },
+        {
+          "provider": "searxng",
+          "query": "Canon EOS R50 Peso e unidade com bateria e cartão"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Canon EOS R50 Peso e unidade com bateria e cartão"
+        },
+        {
+          "provider": "web",
+          "query": "Canon EOS R50 Peso e unidade com bateria e cartão"
+        },
+        {
+          "provider": "ddg",
+          "query": "Canon EOS R50 Bateria com bateria e cartão"
+        },
+        {
+          "provider": "searxng",
+          "query": "Canon EOS R50 Bateria com bateria e cartão"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Canon EOS R50 Bateria com bateria e cartão"
+        },
+        {
+          "provider": "web",
+          "query": "Canon EOS R50 Bateria com bateria e cartão"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "Canon EOS R50",
+          "attribute": "weight",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "Canon EOS R50",
+          "attribute": "battery",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": true,
+      "complete": false,
+      "provider_calls": 8,
+      "inner_calls": 10,
+      "candidate_entries": 24,
+      "rejections": {
+        "ENTITY_MISMATCH": 24
+      },
+      "read_attempts": 7,
+      "extracted_documents": 7,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 14.855,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-07",
+        "category": "economy",
+        "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere?"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere?"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere?"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere?"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere fontes primárias texto completo"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere? fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere? fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere? fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último IPCA divulgado pelo IBGE e a que período esse índice se refere? fontes primárias texto completo"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": false,
+      "complete": false,
+      "provider_calls": 20,
+      "inner_calls": 24,
+      "candidate_entries": 31,
+      "rejections": {
+        "ENTITY_MISMATCH": 31
+      },
+      "read_attempts": 10,
+      "extracted_documents": 10,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 27.052,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-08",
+        "category": "geography",
+        "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial"
+        },
+        {
+          "provider": "searxng",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial"
+        },
+        {
+          "provider": "web",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial"
+        },
+        {
+          "provider": "ddg",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial?"
+        },
+        {
+          "provider": "searxng",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial?"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial?"
+        },
+        {
+          "provider": "web",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial?"
+        },
+        {
+          "provider": "ddg",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial? Localização"
+        },
+        {
+          "provider": "searxng",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial? Localização"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial? Localização"
+        },
+        {
+          "provider": "web",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial? Localização"
+        },
+        {
+          "provider": "ddg",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial? referência"
+        },
+        {
+          "provider": "searxng",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial? referência"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial? referência"
+        },
+        {
+          "provider": "web",
+          "query": "Onde fica Lençóis na Bahia e qual sua população no último censo oficial? referência"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "Lençóis na Bahia",
+          "attribute": "location",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "Lençóis na Bahia",
+          "attribute": "population",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": true,
+      "complete": false,
+      "provider_calls": 16,
+      "inner_calls": 15,
+      "candidate_entries": 25,
+      "rejections": {},
+      "read_attempts": 9,
+      "extracted_documents": 9,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 21.673,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-09",
+        "category": "culture",
+        "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou"
+        },
+        {
+          "provider": "web",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Quem escreveu O Auto da Compadecida e quando a peça estreou fontes primárias texto completo"
+        },
+        {
+          "provider": "ddg",
+          "query": "quem escreveu auto compadecida peça estreou"
+        },
+        {
+          "provider": "searxng",
+          "query": "quem escreveu auto compadecida peça estreou"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "quem escreveu auto compadecida peça estreou"
+        },
+        {
+          "provider": "web",
+          "query": "quem escreveu auto compadecida peça estreou"
+        }
+      ],
+      "retained_sources": [
+        {
+          "id": "ev-951ef453292a",
+          "url": "https://www.facebook.com/360grafica/",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-6bc6e644d322425a2c0b",
+              "Q-c503fa85c5d52cb6125a"
+            ],
+            "requirement_ids": [
+              "R-edb8dd724920"
+            ],
+            "provider": "bing",
+            "rank": 5,
+            "candidate_id": "C-a66b0fd79037af51f8dc"
+          },
+          "passage_ids": []
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": false,
+      "complete": false,
+      "provider_calls": 16,
+      "inner_calls": 18,
+      "candidate_entries": 21,
+      "rejections": {
+        "ENTITY_MISMATCH": 21
+      },
+      "read_attempts": 9,
+      "extracted_documents": 8,
+      "retained_entries": 1,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 17.634,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-10",
+        "category": "sports",
+        "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo?"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo?"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo?"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo?"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo fontes primárias texto completo"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? fontes primárias texto completo"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo 2026"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo 2026"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo 2026"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo 2026"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? 2026"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? 2026"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? 2026"
+        },
+        {
+          "provider": "web",
+          "query": "Qual foi o último resultado do Flamengo no futebol masculino e quando será o próximo jogo? 2026"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": false,
+      "complete": false,
+      "provider_calls": 28,
+      "inner_calls": 34,
+      "candidate_entries": 56,
+      "rejections": {},
+      "read_attempts": 10,
+      "extracted_documents": 10,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 26.831,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-11",
+        "category": "documentation",
+        "query": "Como usar datetime.fromisoformat, qual a sintaxe, o valor retornado e suas limitações?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "datetime.fromisoformat Sintaxe ou assinatura"
+        },
+        {
+          "provider": "searxng",
+          "query": "datetime.fromisoformat Sintaxe ou assinatura"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "datetime.fromisoformat Sintaxe ou assinatura"
+        },
+        {
+          "provider": "web",
+          "query": "datetime.fromisoformat Sintaxe ou assinatura"
+        },
+        {
+          "provider": "ddg",
+          "query": "datetime.fromisoformat Valor retornado"
+        },
+        {
+          "provider": "searxng",
+          "query": "datetime.fromisoformat Valor retornado"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "datetime.fromisoformat Valor retornado"
+        },
+        {
+          "provider": "web",
+          "query": "datetime.fromisoformat Valor retornado"
+        },
+        {
+          "provider": "ddg",
+          "query": "datetime.fromisoformat Comportamento da operação"
+        },
+        {
+          "provider": "searxng",
+          "query": "datetime.fromisoformat Comportamento da operação"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "datetime.fromisoformat Comportamento da operação"
+        },
+        {
+          "provider": "web",
+          "query": "datetime.fromisoformat Comportamento da operação"
+        },
+        {
+          "provider": "ddg",
+          "query": "datetime.fromisoformat Limitações"
+        },
+        {
+          "provider": "searxng",
+          "query": "datetime.fromisoformat Limitações"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "datetime.fromisoformat Limitações"
+        },
+        {
+          "provider": "web",
+          "query": "datetime.fromisoformat Limitações"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "datetime.fromisoformat",
+          "attribute": "syntax",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "datetime.fromisoformat",
+          "attribute": "return_value",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "datetime.fromisoformat",
+          "attribute": "behavior",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "datetime.fromisoformat",
+          "attribute": "limitations",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": true,
+      "complete": false,
+      "provider_calls": 16,
+      "inner_calls": 19,
+      "candidate_entries": 18,
+      "rejections": {
+        "ENTITY_MISMATCH": 18
+      },
+      "read_attempts": 6,
+      "extracted_documents": 6,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 15.781,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-12",
+        "category": "comparison",
+        "query": "Entre Fujifilm X-S20 e Fujifilm X-T50, qual é mais leve com bateria e cartão e qual bateria cada uma utiliza?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Entre Fujifilm X-S20 e Fujifilm X-T50, qual é mais leve com bateria e cartão e qual bateria cada uma utiliza"
+        },
+        {
+          "provider": "searxng",
+          "query": "Entre Fujifilm X-S20 e Fujifilm X-T50, qual é mais leve com bateria e cartão e qual bateria cada uma utiliza"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Entre Fujifilm X-S20 e Fujifilm X-T50, qual é mais leve com bateria e cartão e qual bateria cada uma utiliza"
+        },
+        {
+          "provider": "web",
+          "query": "Entre Fujifilm X-S20 e Fujifilm X-T50, qual é mais leve com bateria e cartão e qual bateria cada uma utiliza"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "Fujifilm X-S20",
+          "attribute": "weight",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "Fujifilm X-S20",
+          "attribute": "battery",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "Fujifilm X-T50",
+          "attribute": "weight",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "Fujifilm X-T50",
+          "attribute": "battery",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": true,
+      "complete": false,
+      "provider_calls": 4,
+      "inner_calls": 5,
+      "candidate_entries": 12,
+      "rejections": {
+        "ENTITY_MISMATCH": 12
+      },
+      "read_attempts": 9,
+      "extracted_documents": 9,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 10.856,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-13",
+        "category": "ambiguous",
+        "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta"
+        },
+        {
+          "provider": "web",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta?"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta?"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta?"
+        },
+        {
+          "provider": "web",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta?"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta fontes primárias texto completo"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta? fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta? fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta? fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Quais são os usos e riscos do mercúrio como elemento químico, excluindo o planeta? fontes primárias texto completo"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": false,
+      "complete": false,
+      "provider_calls": 20,
+      "inner_calls": 24,
+      "candidate_entries": 29,
+      "rejections": {},
+      "read_attempts": 11,
+      "extracted_documents": 11,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 23.8,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-14",
+        "category": "scarce",
+        "query": "Quantas pessoas visitaram ontem o arquivo público municipal de Ipiaú, se houver contagem pública?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "web",
+          "query": "Quantas pessoas visitaram ontem o arquivo público municipal de Ipiaú, se houver contagem pública"
+        },
+        {
+          "provider": "web",
+          "query": "Quantas pessoas visitaram ontem o arquivo público municipal de Ipiaú, se houver contagem pública? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Quantas pessoas visitaram ontem o arquivo público municipal de Ipiaú, se houver contagem pública fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Quantas pessoas visitaram ontem o arquivo público municipal de Ipiaú, se houver contagem pública 2026"
+        }
+      ],
+      "retained_sources": [
+        {
+          "id": "ev-097ade13ede4",
+          "url": "https://www.reddit.com/r/RealDebrid/comments/1572yhe/new_which_package_is_right_for_me/",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-1158ffc24850881c1052"
+            ],
+            "requirement_ids": [
+              "R-aff760d91f6e"
+            ],
+            "provider": "bing",
+            "rank": 5,
+            "candidate_id": "C-51ff5c0e077ccccc37e7"
+          },
+          "passage_ids": []
+        },
+        {
+          "id": "ev-7697131b7e35",
+          "url": "https://www.reddit.com/r/RealDebrid/comments/14zd43h/how_does_real_debrid_work/",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-1158ffc24850881c1052"
+            ],
+            "requirement_ids": [
+              "R-aff760d91f6e"
+            ],
+            "provider": "bing",
+            "rank": 1,
+            "candidate_id": "C-f75f75e83e6c6ccf3ec4"
+          },
+          "passage_ids": []
+        },
+        {
+          "id": "ev-7ced32a4aa1f",
+          "url": "https://www.reddit.com/r/RealDebrid/comments/16317rq/what_is_the_best_real_debrid_subscription_in_your/",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-1158ffc24850881c1052"
+            ],
+            "requirement_ids": [
+              "R-aff760d91f6e"
+            ],
+            "provider": "bing",
+            "rank": 6,
+            "candidate_id": "C-4d00fc63845c8c7d5661"
+          },
+          "passage_ids": []
+        },
+        {
+          "id": "ev-c8999fdc1575",
+          "url": "https://www.reddit.com/r/RealDebrid/comments/11aub9l/real_debrid_legality/",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-1158ffc24850881c1052"
+            ],
+            "requirement_ids": [
+              "R-aff760d91f6e"
+            ],
+            "provider": "bing",
+            "rank": 2,
+            "candidate_id": "C-daafc3b8e1ba967e395e"
+          },
+          "passage_ids": []
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": false,
+      "complete": false,
+      "provider_calls": 4,
+      "inner_calls": 21,
+      "candidate_entries": 26,
+      "rejections": {},
+      "read_attempts": 11,
+      "extracted_documents": 7,
+      "retained_entries": 4,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 22.403,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-15",
+        "category": "implicit",
+        "query": "Quem criou o Blender, quando surgiu e para que ele serve?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Blender Fundadores"
+        },
+        {
+          "provider": "searxng",
+          "query": "Blender Fundadores"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Blender Fundadores"
+        },
+        {
+          "provider": "web",
+          "query": "Blender Fundadores"
+        },
+        {
+          "provider": "ddg",
+          "query": "Blender Data de criação"
+        },
+        {
+          "provider": "searxng",
+          "query": "Blender Data de criação"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Blender Data de criação"
+        },
+        {
+          "provider": "web",
+          "query": "Blender Data de criação"
+        }
+      ],
+      "retained_sources": [],
+      "requirements": [
+        {
+          "entity": "Blender",
+          "attribute": "founders",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "Blender",
+          "attribute": "creation_date",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        },
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": false,
+      "complete": false,
+      "provider_calls": 8,
+      "inner_calls": 8,
+      "candidate_entries": 12,
+      "rejections": {},
+      "read_attempts": 12,
+      "extracted_documents": 11,
+      "retained_entries": 0,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 13.824,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "qc-16",
+        "category": "constraints",
+        "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas?"
+      },
+      "code_sha256": {
+        "web_extract": "aad92add008bc01eef2eb713a5bc2119afca5760ce665803fb6e3e1d54d48a15",
+        "evidence_graph": "d3b14ef980133a68da33dcffe4c5b7eb54ab468c9e96de438a30c28c31b399f7",
+        "query_intelligence": "77051d461e9a9dc55d93c09fa0706172baf3a4d343e737d66115d55c294511f0",
+        "search_orchestrator": "5b8bc3cbbe572e95911e27f424d0c5b43ebdaf2ecddcd3d26aaa46adebec401e",
+        "research_agents": "f35042ad58999f407f2f3f6472e8c5aa67a0a55f1fe310a4da8c325ecc710642"
+      },
+      "queries_sent": [
+        {
+          "provider": "ddg",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas"
+        },
+        {
+          "provider": "web",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Quais trilhas públicas de até cinco quilômetros em Itacaré divulgam acesso gratuito, excluindo propriedades privadas fontes primárias texto completo"
+        }
+      ],
+      "retained_sources": [
+        {
+          "id": "ev-91c14cb35f78",
+          "url": "https://www.futebolexpert.com.br/post/onde-assistir-flamengo-hoje",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-5e6dd6395918d897256a"
+            ],
+            "requirement_ids": [
+              "R-b4f7482f5064"
+            ],
+            "provider": "bing",
+            "rank": 6,
+            "candidate_id": "C-239fca4c135898edbbba"
+          },
+          "passage_ids": []
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passages": 0
+        }
+      ],
+      "fully_decomposed": false,
+      "complete": false,
+      "provider_calls": 12,
+      "inner_calls": 14,
+      "candidate_entries": 21,
+      "rejections": {},
+      "read_attempts": 11,
+      "extracted_documents": 10,
+      "retained_entries": 1,
+      "read_retained": 0,
+      "linked_passage_ids": 0,
+      "links": 0,
+      "seconds": 16.941,
+      "error": null
+    }
+  ],
+  "with_links": 1,
+  "with_entries": 4
+}

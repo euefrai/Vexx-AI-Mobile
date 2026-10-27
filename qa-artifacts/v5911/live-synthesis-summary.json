@@ -1,0 +1,77 @@
+{
+  "scope": "REAL_UNSEEDED_CHROME_AUTHENTICATED_FREE_MODEL_PARTIAL_RESEARCH",
+  "candidate": "3de4932",
+  "case": "company",
+  "source_titles": [
+    "WEG S.A. - Wikipedia"
+  ],
+  "source_urls": [
+    "https://en.wikipedia.org/wiki/WEG_S.A."
+  ],
+  "writer_input_chars": 1650,
+  "review_input_chars": 1365,
+  "points": [
+    {
+      "source_quote_ids": [
+        {
+          "id": "E1",
+          "quote_id": "Q1"
+        }
+      ],
+      "literal_quotes_equal_review_input": true
+    },
+    {
+      "source_quote_ids": [
+        {
+          "id": "E1",
+          "quote_id": "Q3"
+        }
+      ],
+      "literal_quotes_equal_review_input": true
+    }
+  ],
+  "review": {
+    "reviews": [
+      {
+        "paragraph": 0,
+        "state": "SUPPORTED",
+        "reason": "none"
+      },
+      {
+        "paragraph": 1,
+        "state": "SUPPORTED",
+        "reason": "none"
+      }
+    ]
+  },
+  "calls": [
+    {
+      "model": "poolside/laguna-s-2.1:free",
+      "status": 200,
+      "seconds": 4.739,
+      "finish": [
+        "stop"
+      ],
+      "usage": {
+        "prompt_tokens": 1459,
+        "completion_tokens": 127,
+        "total_tokens": 1586
+      }
+    },
+    {
+      "model": "poolside/laguna-s-2.1:free",
+      "status": 200,
+      "seconds": 3.775,
+      "finish": [
+        "stop"
+      ],
+      "usage": {
+        "prompt_tokens": 1885,
+        "completion_tokens": 31,
+        "total_tokens": 1916
+      }
+    }
+  ],
+  "persisted": true,
+  "limit": "Literal grounding and semantic review passed locally; products relation still not recognized by coverage matrix. One partial integration success, no complete research or universal reliability."
+}

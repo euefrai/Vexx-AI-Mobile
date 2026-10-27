@@ -1,0 +1,65 @@
+{
+  "baseline": false,
+  "scope": "SAME_REAL_POOL_FIXED_RECORDS_NOT_QUERY_QUALITY_OR_LIVE_DISCOVERY",
+  "pool": 11,
+  "input_sha256": "a9691b8668f3f7f4dffbec95dc41b240d767ae673853cb45c4bbe93ddcfdbde5",
+  "records": 8,
+  "read_attempts": 7,
+  "read_urls": [
+    "https://duckduckgo.com/y.js",
+    "https://duckduckgo.com/duckduckgo-help-pages/company/ads-by-microsoft-on-duckduckgo-private-search/",
+    "https://duckduckgo.com/y.js",
+    "https://www.kabum.com.br/produto/1084555/camera-nikon-z8-mirrorless-corpo-",
+    "https://lista.mercadolivre.com.br/nikon-z8",
+    "https://lista.mercadolivre.com.br/c%C3%A2mera-nikon-z8",
+    "https://kabum.com.br/marcas/nikon"
+  ],
+  "retained_read": 0,
+  "requirements": [
+    {
+      "attribute": "weight",
+      "state": "NOT_SEARCHED"
+    },
+    {
+      "attribute": "battery",
+      "state": "NOT_SEARCHED"
+    }
+  ],
+  "candidate_rejections": [
+    {
+      "url": "https://duckduckgo.com/y.js",
+      "reasons": [
+        "SEARCH_ADVERTISEMENT"
+      ]
+    },
+    {
+      "url": "https://duckduckgo.com/duckduckgo-help-pages/company/ads-by-microsoft-on-duckduckgo-private-search/",
+      "reasons": [
+        "ENTITY_MISMATCH"
+      ]
+    },
+    {
+      "url": "https://duckduckgo.com/y.js",
+      "reasons": [
+        "SEARCH_ADVERTISEMENT"
+      ]
+    },
+    {
+      "url": "https://www.kabum.com.br/produto/1084555/camera-nikon-z8-mirrorless-corpo-",
+      "reasons": []
+    },
+    {
+      "url": "https://lista.mercadolivre.com.br/c%C3%A2mera-nikon-z8",
+      "reasons": []
+    },
+    {
+      "url": "https://lista.mercadolivre.com.br/nikon-z8",
+      "reasons": []
+    }
+  ],
+  "budget": {
+    "buscas": 2,
+    "paginas": 7,
+    "replans": 0
+  }
+}

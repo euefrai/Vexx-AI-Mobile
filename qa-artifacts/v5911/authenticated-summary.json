@@ -1,0 +1,332 @@
+{
+  "scope": "REAL_CHROME_AUTHENTICATED_FASTAPI_DEVELOPMENT_AGENT_TEMPORARY_SQLITE_NO_URL_SEEDS",
+  "cases": [
+    {
+      "name": "hello",
+      "query": "Oi, tudo bem?",
+      "seconds": 5.549,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": null,
+      "job_state": null,
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": []
+    },
+    {
+      "name": "factual",
+      "query": "Pesquise quem escreveu Capitães da Areia e em que ano foi publicado.",
+      "seconds": 11.499,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": null,
+      "job_state": null,
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": []
+    },
+    {
+      "name": "company",
+      "query": "Pesquisa profunda sobre quem fundou a WEG, em que ano e quais produtos ela fabrica.",
+      "seconds": 31.666,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-576bb7e76251",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": true,
+      "chat_result_id": "rj-576bb7e76251-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 1,
+      "source_links": [
+        {
+          "text": "WEG S.A. - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A."
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "WEG",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "products",
+          "state": "DISCOVERED"
+        }
+      ],
+      "synthesis": {
+        "llm": true,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": [
+          {
+            "paragraph": 0,
+            "state": "SUPPORTED",
+            "reason": "none"
+          },
+          {
+            "paragraph": 1,
+            "state": "SUPPORTED",
+            "reason": "none"
+          }
+        ]
+      }
+    },
+    {
+      "name": "history",
+      "query": "Pesquisa profunda sobre as causas e consequências da Revolta da Vacina.",
+      "seconds": 17.015,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-8d09d533e9d2",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-8d09d533e9d2-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [
+        {
+          "entity": "Revolta da Vacina",
+          "attribute": "causes",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Revolta da Vacina",
+          "attribute": "consequences",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "news",
+      "query": "Pesquise notícias de Teixeira de Freitas nos últimos sete dias.",
+      "seconds": 9.225,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": null,
+      "job_state": null,
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": []
+    },
+    {
+      "name": "comparison",
+      "query": "Pesquisa profunda sobre compare Nikon Z8 e Nikon Z f quanto ao peso com bateria e cartão e bateria utilizada.",
+      "seconds": 21.189,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-1fbe7f1b374e",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-1fbe7f1b374e-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [
+        {
+          "entity": "Nikon Z8",
+          "attribute": "weight",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Nikon Z8",
+          "attribute": "battery",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Nikon Z f",
+          "attribute": "weight",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Nikon Z f",
+          "attribute": "battery",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "full",
+      "query": "Pesquisa profunda sobre quem fundou a Adidas, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 9.779,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-71c2f90a0670",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-71c2f90a0670-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [
+        {
+          "entity": "Adidas",
+          "attribute": "founders",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Adidas",
+          "attribute": "foundation_date",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Adidas",
+          "attribute": "products",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "images",
+      "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+      "seconds": 5.826,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": null,
+      "job_state": null,
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 5,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": []
+    },
+    {
+      "name": "cancel",
+      "query": "Pesquisa profunda sobre armazenamento de energia térmica e limitações.",
+      "seconds": 1.274,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-bcbcfa1a43a6",
+      "job_state": "cancelada",
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [],
+      "synthesis": {
+        "llm": null,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    }
+  ],
+  "messages": {
+    "assistant": 13,
+    "user": 9
+  },
+  "message_count": 22,
+  "distinct_message_ids": 22,
+  "models": [
+    "poolside/laguna-s-2.1:free"
+  ],
+  "quick_check": "ok",
+  "limits": [
+    "completed_flow in legacy harness means transport/job observed, not acceptance.",
+    "LLM validation alone does not establish complete research; inspect outcome and requirement coverage."
+  ]
+}

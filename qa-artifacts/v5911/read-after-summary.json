@@ -1,0 +1,130 @@
+[
+  {
+    "case": "ar-07",
+    "question": "Quais são a nascente e a foz do rio Paraguaçu e por quais regiões passa?",
+    "input_sha256": "4f3158e723d60a0516bad739cfd7813e7c4a08619f5565f346cb5265b35aa326",
+    "records": 5,
+    "requirements": [
+      {
+        "attribute": "river_source",
+        "entity": "rio Paraguaçu",
+        "state": "DISCOVERED"
+      },
+      {
+        "attribute": "river_mouth",
+        "entity": "rio Paraguaçu",
+        "state": "PARTIALLY_SUPPORTED"
+      },
+      {
+        "attribute": "course",
+        "entity": "rio Paraguaçu",
+        "state": "DISCOVERED"
+      }
+    ],
+    "fully_decomposed": true,
+    "bindings": 1,
+    "selected": 1,
+    "complete": false,
+    "sources": [
+      {
+        "url": "https://pt.wikipedia.org/wiki/Rio_Paragua%C3%A7u",
+        "document_id": "D-c9d576258d94cada491eff24",
+        "passage": "P-5482cad0dfa5ee28",
+        "support": "PARTIAL_SUPPORT",
+        "text_span": {
+          "start": 307,
+          "end": 334,
+          "scope": "returned_extracted_text"
+        }
+      }
+    ],
+    "limits": "Same previously extracted source records, no ranking, discovery or model claim; not human gold."
+  },
+  {
+    "case": "ar-08",
+    "question": "Quais são as diferenças entre bacharelado, licenciatura e tecnólogo segundo fontes oficiais brasileiras?",
+    "input_sha256": "f0f2393fff33b2087e9b6d0d506003bd89178a51c92fd4587338f2a7cb3c02b5",
+    "records": 11,
+    "requirements": [
+      {
+        "attribute": "definition",
+        "entity": "bacharelado",
+        "state": "SUPPORTED"
+      },
+      {
+        "attribute": "definition",
+        "entity": "licenciatura",
+        "state": "SUPPORTED"
+      },
+      {
+        "attribute": "definition",
+        "entity": "tecnólogo",
+        "state": "SUPPORTED"
+      },
+      {
+        "attribute": "source_authority",
+        "entity": "",
+        "state": "NOT_SEARCHED"
+      }
+    ],
+    "fully_decomposed": true,
+    "bindings": 19,
+    "selected": 3,
+    "complete": false,
+    "sources": [
+      {
+        "url": "https://faculdade.grancursosonline.com.br/blog/bacharelado-licenciatura-diferenca/",
+        "document_id": "D-f5900cc825e3b2b59e5d6d1e",
+        "passage": "P-e920a193cb5fb91d",
+        "support": "DIRECT_SUPPORT",
+        "text_span": {
+          "start": 1057,
+          "end": 2147,
+          "scope": "returned_extracted_text"
+        }
+      },
+      {
+        "url": "https://blog.fmu.br/tecnologo-o-que-e-como-funciona-e-quem-pode-fazer/",
+        "document_id": "D-45bc3223b08981e6cfd23b58",
+        "passage": "P-a922bcb0bca1bced",
+        "support": "DIRECT_SUPPORT",
+        "text_span": {
+          "start": 1451,
+          "end": 1958,
+          "scope": "returned_extracted_text"
+        }
+      },
+      {
+        "url": "https://faculdade.grancursosonline.com.br/blog/bacharelado-licenciatura-ou-tecnologo/",
+        "document_id": "D-c36e28d08c9646766d4cfeef",
+        "passage": "P-289cddbbe8ea4a97",
+        "support": "DIRECT_SUPPORT",
+        "text_span": {
+          "start": 3275,
+          "end": 4032,
+          "scope": "returned_extracted_text"
+        }
+      }
+    ],
+    "limits": "Same previously extracted source records, no ranking, discovery or model claim; not human gold."
+  },
+  {
+    "case": "ar-09",
+    "question": "Qual foi o resultado mais recente da seleção brasileira feminina de vôlei e qual é seu próximo jogo anunciado?",
+    "input_sha256": "61f710a370ebed931c94b50f6af79b0353889c5a7e6c6222bf5280d63bbdf458",
+    "records": 11,
+    "requirements": [
+      {
+        "attribute": "original_objective",
+        "entity": "",
+        "state": "NOT_SEARCHED"
+      }
+    ],
+    "fully_decomposed": false,
+    "bindings": 0,
+    "selected": 0,
+    "complete": false,
+    "sources": [],
+    "limits": "Same previously extracted source records, no ranking, discovery or model claim; not human gold."
+  }
+]

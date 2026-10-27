@@ -1,0 +1,255 @@
+{
+  "scope": "REAL_MODEL_KNOWN_PUBLIC_SOURCE_SEEDED_NOT_DISCOVERY",
+  "candidate": "71fab67",
+  "A_B_requests_identical": true,
+  "B_C_system_identical": true,
+  "B_C_quotes_identical": true,
+  "B_C_objective_identical": true,
+  "outcomes": {
+    "model": "poolside/laguna-s-2.1:free",
+    "scope": "KNOWN_PUBLIC_SOURCE_TRANSPORT_NOT_DISCOVERY",
+    "B": {
+      "llm": false,
+      "fallback_detail": "invalid_paragraph",
+      "fallback_provider_code": null,
+      "semantic_review": null
+    },
+    "A": {
+      "llm": false,
+      "failure": "quantity_mismatch",
+      "provider": "unknown"
+    }
+  },
+  "C": {
+    "llm": false,
+    "failure": "quantity_mismatch",
+    "review": null,
+    "job_state": "concluida",
+    "chat_result_id": "rj-cfc9a58f86de-result",
+    "coverage": {
+      "applicable": true,
+      "requirements": [
+        {
+          "id": "R-a5665a9acf81",
+          "type": "explicit_attribute",
+          "description": "Sintaxe ou assinatura",
+          "entity": "Math.hypot",
+          "attribute": "syntax",
+          "constraints": {
+            "reference": "original_request",
+            "must_preserve": false,
+            "mandatory_conditions": []
+          },
+          "expected_information": "Sintaxe ou assinatura",
+          "candidate_evidence_ids": [
+            "ev-e0052650e9f0"
+          ],
+          "confirmed_evidence_ids": [
+            "ev-e0052650e9f0"
+          ],
+          "state": "SUPPORTED",
+          "insufficiency_reason": "",
+          "passage_ids": [
+            "P-1711446caa3d2189",
+            "P-fe2173d2975b3aa2"
+          ]
+        },
+        {
+          "id": "R-005b7b22056d",
+          "type": "explicit_attribute",
+          "description": "Valor retornado",
+          "entity": "Math.hypot",
+          "attribute": "return_value",
+          "constraints": {
+            "reference": "original_request",
+            "must_preserve": false,
+            "mandatory_conditions": []
+          },
+          "expected_information": "Valor retornado",
+          "candidate_evidence_ids": [
+            "ev-e0052650e9f0"
+          ],
+          "confirmed_evidence_ids": [
+            "ev-e0052650e9f0"
+          ],
+          "state": "SUPPORTED",
+          "insufficiency_reason": "",
+          "passage_ids": [
+            "P-1711446caa3d2189",
+            "P-4d9218cb5097667a"
+          ]
+        },
+        {
+          "id": "R-4b3d5bb0eaa8",
+          "type": "explicit_attribute",
+          "description": "Comportamento da operação",
+          "entity": "Math.hypot",
+          "attribute": "behavior",
+          "constraints": {
+            "reference": "original_request",
+            "must_preserve": false,
+            "mandatory_conditions": []
+          },
+          "expected_information": "Comportamento da operação",
+          "candidate_evidence_ids": [
+            "ev-e0052650e9f0"
+          ],
+          "confirmed_evidence_ids": [
+            "ev-e0052650e9f0"
+          ],
+          "state": "SUPPORTED",
+          "insufficiency_reason": "",
+          "passage_ids": [
+            "P-1711446caa3d2189"
+          ]
+        }
+      ],
+      "passages": [
+        {
+          "id": "P-1711446caa3d2189",
+          "source_id": "ev-e0052650e9f0",
+          "document_id": "D-8b451a593af4f19360e0ad6b",
+          "requirement_id": "R-a5665a9acf81",
+          "text_span": {
+            "start": 0,
+            "end": 1087,
+            "scope": "returned_extracted_text"
+          },
+          "answerability": "DIRECT_ANSWER",
+          "support_label": "DIRECT_SUPPORT"
+        },
+        {
+          "id": "P-1711446caa3d2189",
+          "source_id": "ev-e0052650e9f0",
+          "document_id": "D-8b451a593af4f19360e0ad6b",
+          "requirement_id": "R-005b7b22056d",
+          "text_span": {
+            "start": 0,
+            "end": 1087,
+            "scope": "returned_extracted_text"
+          },
+          "answerability": "DIRECT_ANSWER",
+          "support_label": "DIRECT_SUPPORT"
+        },
+        {
+          "id": "P-1711446caa3d2189",
+          "source_id": "ev-e0052650e9f0",
+          "document_id": "D-8b451a593af4f19360e0ad6b",
+          "requirement_id": "R-4b3d5bb0eaa8",
+          "text_span": {
+            "start": 0,
+            "end": 1087,
+            "scope": "returned_extracted_text"
+          },
+          "answerability": "DIRECT_ANSWER",
+          "support_label": "DIRECT_SUPPORT"
+        },
+        {
+          "id": "P-fe2173d2975b3aa2",
+          "source_id": "ev-e0052650e9f0",
+          "document_id": "D-8b451a593af4f19360e0ad6b",
+          "requirement_id": "R-a5665a9acf81",
+          "text_span": {
+            "start": 484,
+            "end": 722,
+            "scope": "returned_extracted_text"
+          },
+          "answerability": "DIRECT_ANSWER",
+          "support_label": "DIRECT_SUPPORT"
+        },
+        {
+          "id": "P-4d9218cb5097667a",
+          "source_id": "ev-e0052650e9f0",
+          "document_id": "D-8b451a593af4f19360e0ad6b",
+          "requirement_id": "R-005b7b22056d",
+          "text_span": {
+            "start": 874,
+            "end": 1148,
+            "scope": "returned_extracted_text"
+          },
+          "answerability": "PARTIAL_ANSWER",
+          "support_label": "PARTIAL_SUPPORT"
+        }
+      ],
+      "diagnostics": {
+        "read_documents": 1,
+        "generated_passages": 3,
+        "stale_passages_rejected": 0,
+        "matched_bindings": 5,
+        "retained_bindings": 5,
+        "recognized_requirements": 3,
+        "undecomposed_objectives": 0,
+        "direct_requirements": 3,
+        "partial_requirements": 0,
+        "pending_requirements": 0
+      },
+      "fully_decomposed": true,
+      "unparsed_demands": [],
+      "complete": true,
+      "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+    }
+  },
+  "calls": {
+    "A": [
+      {
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "actual_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "elapsed_s": 11.42,
+        "finish": [
+          "stop"
+        ],
+        "answer_chars": [
+          1336
+        ],
+        "usage": {
+          "prompt_tokens": 1954,
+          "completion_tokens": 469,
+          "total_tokens": 2423
+        },
+        "error": null
+      }
+    ],
+    "B": [
+      {
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "actual_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "elapsed_s": 11.129,
+        "finish": [
+          "stop"
+        ],
+        "answer_chars": [
+          925
+        ],
+        "usage": {
+          "prompt_tokens": 1954,
+          "completion_tokens": 342,
+          "total_tokens": 2296
+        },
+        "error": null
+      }
+    ],
+    "C": [
+      {
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "actual_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "elapsed_s": 9.746,
+        "finish": [
+          "stop"
+        ],
+        "answer_chars": [
+          1149
+        ],
+        "usage": {
+          "prompt_tokens": 1954,
+          "completion_tokens": 409,
+          "total_tokens": 2363
+        },
+        "error": null
+      }
+    ]
+  },
+  "limit": "No success; one attempt per path. Later propagation fix tested separately and in unseeded QA, no contrast retried until green."
+}

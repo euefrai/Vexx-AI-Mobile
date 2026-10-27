@@ -70,4 +70,25 @@ save('browser-summary.json',{'checks':{name:ui[name] for name in ['ui-final-veri
            'First gallery image loaded; keyboard moved to second while screenshot still showed loading.',
            'First repeated UI probe toggled previously open metadata closed; harness made idempotent, then passed.',
            'Composer shortened again after visual inspection; 37 focused tests passed after final copy change.']})
+writer=read(P/'raw/live/http-001.json');review=read(P/'raw/live/http-002.json')
+payload=json.loads(writer['request']['messages'][-1]['content'])
+answer=json.loads(writer['response']['choices'][0]['message']['content'])
+review_input=json.loads(review['request']['messages'][-1]['content'])
+catalog={(s['id'],q['id']):q['text'] for s in payload['sources'] for q in s['quotes']}
+resolved=[]
+for point,paragraph in zip(answer['points'],review_input['paragraphs'],strict=True):
+ quotes=[catalog[(ref['id'],ref['quote_id'])] for ref in point['evidence']]
+ assert quotes==[ref['quote'] for ref in paragraph['citations']]
+ resolved.append({'source_quote_ids':point['evidence'],'literal_quotes_equal_review_input':True})
+save('live-synthesis-summary.json',{'scope':'REAL_UNSEEDED_CHROME_AUTHENTICATED_FREE_MODEL_PARTIAL_RESEARCH',
+ 'candidate':'3de4932','case':'company','source_titles':[s['title'] for s in payload['sources']],
+ 'source_urls':[public_url(s['url']) for s in payload['sources']],
+ 'writer_input_chars':len(writer['request']['messages'][-1]['content']),
+ 'review_input_chars':len(review['request']['messages'][-1]['content']),
+ 'points':resolved,'review':json.loads(review['response']['choices'][0]['message']['content']),
+ 'calls':[{'model':d['response']['model'],'status':d['http_status'],'seconds':d['elapsed_s'],
+           'finish':[c['finish_reason'] for c in d['response']['choices']],
+           'usage':{k:v for k,v in d['response']['usage'].items() if k in ('prompt_tokens','completion_tokens','total_tokens')}} for d in (writer,review)],
+ 'persisted':next(c for c in ui['cases'] if c['name']=='company')['reload_preserved'],
+ 'limit':'Literal grounding and semantic review passed locally; products relation still not recognized by coverage matrix. One partial integration success, no complete research or universal reliability.'})
 print({'holdout_cases':len(cases),'with_links':sum(bool(c['linked_passage_ids']) for c in cases),'with_entries':sum(bool(c['retained_entries']) for c in cases)})
