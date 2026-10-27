@@ -1727,7 +1727,7 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                                                     sintetizar_fn, timeout, deve_parar, verificar_fn)
             if candidate:
                 import evidence_graph
-                answer_coverage = evidence_graph.requirement_coverage(job['objetivo'], [
+                answer_coverage = candidate.get('answer_coverage') or evidence_graph.requirement_coverage(job['objetivo'], [
                     {'id':'answer','url':'','texto_lido':True,
                      'trecho':'\n\n'.join(f['text'] for f in candidate.get('findings',[])) or candidate['texto']}])
                 candidate['answer_coverage'] = evidence_graph.compact_coverage(answer_coverage)

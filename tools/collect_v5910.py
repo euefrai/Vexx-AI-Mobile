@@ -22,7 +22,7 @@ for path in sorted(P.glob(args.log_prefix+'-?.log')):
         checkpoint=db.execute('SELECT state_json FROM research_context_checkpoints WHERE job_id=? ORDER BY sequence DESC LIMIT 1',(d['job'],)).fetchone()
         if checkpoint:
             synthesis=(json.loads(checkpoint[0])['state'].get('results') or {}).get('synthesis',{})
-            row['synthesis']={k:synthesis.get(k) for k in ('llm','fallback_detail','fallback_provider_code','semantic_review')}
+            row['synthesis']={k:synthesis.get(k) for k in ('llm','fallback_detail','fallback_provider_code','semantic_review','format_normalization','answer_coverage')}
     cases.append(row)
 out={'scope':'REAL_CHROME_AUTHENTICATED_FASTAPI_DEVELOPMENT_AGENT_TEMPORARY_SQLITE_NO_URL_SEEDS',
  'cases':cases,'messages':dict(db.execute('select role,count(*) from messages group by role')),

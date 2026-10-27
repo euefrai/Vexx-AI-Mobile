@@ -214,7 +214,7 @@ def _bind_counterevidence(review, point, sources):
                   counterevidence_status=status)
 
 
-def check_support(points, sources, verify_fn, timeout, should_stop=None):
+def check_support(points, sources, verify_fn, timeout, should_stop=None, *, requirements=None):
     if should_stop and should_stop():
         raise ReviewUnavailableError('cancelled')
     if timeout < 2:
@@ -224,8 +224,20 @@ def check_support(points, sources, verify_fn, timeout, should_stop=None):
     payload = {'task': 'verify_support', 'paragraphs': [
         {'paragraph': i, 'text': p['text'], 'citations': p['evidence']} for i, p in enumerate(points)],
         'sources': [{k: v for k, v in s.items() if k != 'url'} for s in sources if s['id'] in used]}
+    known={r['id']:r for r in (requirements or []) if r.get('type','explicit_attribute')=='explicit_attribute'}
+    system=REVIEW_SYSTEM
+    if requirements is not None:
+        payload['requirements']=[{'id':r['id'],'entity':r['entity'],'attribute':r['attribute'],
+                                  'aspect':r['description']} for r in known.values()]
+        system+='''\nNeste pedido, cada revisão SUPPORTED também deve incluir answers:
+"answers":[{"requirement_id":"ID_DO_REQUISITO","answer":"trecho literal do parágrafo que responde ao aspecto"}].
+Use somente IDs de requirements. Copie de 4 a 250 caracteres da resposta, não da fonte.
+Indique o valor que responde: ano/data para fundação, nome para fundador, produtos para produtos.
+Ter informação na fonte não significa que o parágrafo respondeu. Se omitiu o aspecto,
+não o inclua em answers. Não use conhecimento externo. Use [] se nenhum aspecto foi respondido.
+Nos estados diferentes de SUPPORTED, não inclua answers.'''
     try:
-        raw = verify_fn([{'role': 'system', 'content': REVIEW_SYSTEM},
+        raw = verify_fn([{'role': 'system', 'content': system},
                          {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)}], min(12, timeout))
     except Exception as exc:
         raise ReviewUnavailableError('provider_error', safe_provider_code(exc)) from None
@@ -244,6 +256,10 @@ def check_support(points, sources, verify_fn, timeout, should_stop=None):
         raise ValueError('invalid support review')
     seen = set()
     for review in reviews:
+        answers=None
+        if requirements is not None and isinstance(review,dict) and review.get('state')=='SUPPORTED':
+            answers=review.pop('answers',[])
+            if not isinstance(answers,list) or len(answers)>len(known):raise ValueError('invalid support review')
         # Some models attach exact flat excerpts to non-publishing verdicts.
         # Accept only this known variation, with source/claim binding; never
         # salvage SUPPORTED, unknown states, new links or arbitrary extra keys.
@@ -276,6 +292,22 @@ def check_support(points, sources, verify_fn, timeout, should_stop=None):
             raise ValueError('invalid support review')
         else:
             review.pop('counterevidence', None)
+        if answers is not None:
+            answer_ids=set()
+            for answer in answers:
+                if not isinstance(answer,dict) or set(answer)!={'requirement_id','answer'}:raise ValueError('invalid support review')
+                rid,span=answer['requirement_id'],answer['answer']
+                if (not isinstance(rid,str) or rid not in known or rid in answer_ids
+                        or not isinstance(span,str) or not 4<=len(span.strip())<=250
+                        or normalized(span) not in normalized(points[i]['text'])):
+                    raise ValueError('invalid support review')
+                attribute=known[rid]['attribute']
+                if attribute in ('foundation_date','creation_date') and not re.search(r'\b(?:1[5-9]|20)\d{2}\b',span):
+                    raise ValueError('invalid support review')
+                if attribute=='weight' and not re.search(r'\d[\d.,]*\s*(?:g|kg|gramas?|kilograms?)\b',span,re.I):
+                    raise ValueError('invalid support review')
+                answer_ids.add(rid)
+            review['answers']=answers
     return sorted(reviews, key=lambda r: r['paragraph'])
 
 
@@ -458,8 +490,9 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
     rendered = "\n\n".join(paragraphs)
     if len(rendered) > 3000:
         raise ValueError("synthesis exceeds presentation budget")
-    reviews = check_support(points, sources, verify_fn or generate_fn,
-                            timeout-(time.monotonic()-started), should_stop)
+    semantic_coverage=bool(getattr(generate_fn,'semantic_coverage',False))
+    review_args=(points,sources,verify_fn or generate_fn,timeout-(time.monotonic()-started),should_stop)
+    reviews=check_support(*review_args,requirements=requirements) if semantic_coverage else check_support(*review_args)
     kept = [r['paragraph'] for r in reviews if r['state'] == 'SUPPORTED']
     if not kept:
         raise SupportReviewError(reviews)
@@ -467,7 +500,31 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
     provenance = [{**p, 'original_paragraph': p['paragraph'], 'paragraph': positions[p['paragraph']]}
                   for p in provenance if p['paragraph'] in positions]
     rendered = '\n\n'.join(paragraphs[i] for i in kept)
+    answer_coverage=None
+    if semantic_coverage:
+        answered={};spans=[]
+        requirements_by_id={r['id']:r for r in requirements}
+        for review in reviews:
+            if review['paragraph'] not in kept:continue
+            cited={index[r['id']]['evidence_id'] for r in points[review['paragraph']]['evidence']}
+            for answer in review.get('answers',[]):
+                req=requirements_by_id[answer['requirement_id']]
+                linked=cited & set(req.get('confirmed_evidence_ids',[]))
+                if req['state']!='SUPPORTED' or not linked:continue
+                answered[req['id']]=True
+                spans.append({**answer,'paragraph':positions[review['paragraph']], 'evidence_ids':sorted(linked)})
+        result_requirements=[]
+        for req in requirements:
+            state=req['state']
+            if req.get('type','explicit_attribute')=='explicit_attribute' and state=='SUPPORTED' and req['id'] not in answered:
+                state='DISCOVERED'
+            result_requirements.append({**req,'state':state,
+                'insufficiency_reason':'' if state=='SUPPORTED' else 'Aspecto não confirmado na resposta aprovada.'})
+        answer_coverage=evidence_graph.compact_coverage({**coverage,'requirements':result_requirements,
+            'complete':all(r['state']=='SUPPORTED' for r in result_requirements),
+            'method':'literal_answer_spans_and_separate_support_review','answer_spans':spans})
     return {"texto": rendered, "llm": True,
+            **({'answer_coverage':answer_coverage} if answer_coverage is not None else {}),
             **({'format_normalization':normalization} if normalization else {}),
             "references": {k: index[k]["evidence_id"] for k in index},
             "provenance": provenance, "findings": [findings[i] for i in kept],

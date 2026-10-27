@@ -4573,6 +4573,7 @@ def _research_writer(cfg: dict, parar):
         return '' if parar.is_set() else result.get('texto', '')
     write.last_metadata = {}
     write.literal_quote_ids = True
+    write.semantic_coverage = True
     return write
 
 
