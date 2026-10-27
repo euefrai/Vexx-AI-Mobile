@@ -18,6 +18,7 @@ def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--output',type=Path,default=ROOT/'qa-artifacts/v5994/direct-delivery.json')
     parser.add_argument('--evidence-dir',type=Path,default=ROOT/'qa-artifacts/v5994')
+    parser.add_argument('--source-case',choices=['toSorted','nikon-zf'],default='toSorted')
     args=parser.parse_args()
     if args.output.exists():raise SystemExit('Refusing to overwrite previous delivery evidence')
     import pc_agent,research_agents as ra
@@ -35,8 +36,11 @@ def main():
         nome='fixture-explicit-public-url'
         def buscar(self,query,limite=6):return [dict(titulo='Array.prototype.toSorted',url=url,trecho='')]
     question='Como funciona Array.prototype.toSorted, qual sua sintaxe e limitações?'
+    if args.source_case=='nikon-zf':
+        case=next(c for c in json.loads((ROOT/'benchmarks/source_quality_v5998_dev.json').read_text(encoding='utf-8'))['queries'] if c['id']=='nikon-zf')
+        url=case['url'];question=case['query']
     job=ra.criar_job(db,owner,question,conv=conv,modo='profunda')
-    result=ra.executar(db,job['id'],owner,[DirectURLFixture()],ra.recuperar_real())
+    result=ra.executar(db,job['id'],owner,[DirectURLFixture()])
     stored=ra.carregar_job(db,owner,job['id'])
     reply=pc_agent._persistir_resultado_pesquisa(db,stored,owner)
     evidence=ra.listar_evidencias(db,owner,job['id'])

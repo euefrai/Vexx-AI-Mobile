@@ -123,3 +123,23 @@ def test_table_scope_survives_persistence_without_full_document():
     first=eg.requirement_coverage(query,[rec]);selected=eg.select_answer_passages(first)
     stored={'texto_lido':True,'trecho':selected[0]['text'],'answer_passages':selected}
     assert eg.requirement_coverage(query,[stored])['requirements'][0]['state']=='PARTIALLY_SUPPORTED'
+
+@pytest.mark.parametrize('query,answer,terms',[
+ ('Quem fundou a Acme, em que ano e quais produtos fabrica?',
+  '<h2>História</h2><p>Acme foi fundada em 1987 por Maria Silva. Acme fabrica motores e bombas industriais.</p>',
+  ['1987','Maria Silva','motores']),
+ ('Quais foram as causas e consequências da Revolta Aurora?',
+  '<h2>Causas</h2><p>Revolta Aurora foi causada pela crise econômica e pelas mudanças tributárias.</p>'+
+  '<h2>Consequências</h2><p>Revolta Aurora resultou em novas eleições e mudanças políticas.</p>',
+  ['crise econômica','novas eleições'])])
+def test_other_domains_recover_late_literal_sections(query,answer,terms):
+ rec=extract(FILLER*16+answer,query)
+ assert_spans(rec)
+ assert all(term in rec['texto'] for term in terms)
+ assert any(p['source_span']['start']>=8000 for p in rec['answer_passages'])
+
+
+def test_unrelated_long_source_is_not_promoted_by_selection():
+ rec=extract(FILLER*16,'Quem fundou a Acme, em que ano e quais produtos fabrica?')
+ rec['texto_lido']=True
+ assert not eg.requirement_coverage('Quem fundou a Acme, em que ano e quais produtos fabrica?',[rec])['passages']

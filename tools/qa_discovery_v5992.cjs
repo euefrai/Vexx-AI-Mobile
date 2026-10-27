@@ -7,7 +7,7 @@ async page => {
     await page.locator('#loginOverlay').waitFor({state: 'hidden'});
   }
   const configuration = await page.evaluate(() => JSON.parse(sessionStorage.getItem('research-qa-config') || 'null'));
-  const custom = ['v5993', 'v5994', 'v5995', 'v5996', 'v5997', 'v5998'].includes(configuration?.version);
+  const custom = ['v5993', 'v5994', 'v5995', 'v5996', 'v5997', 'v5998', 'v5999'].includes(configuration?.version);
   const directory = custom ? 'qa-artifacts/' + configuration.version : 'qa-artifacts/v5992';
   const cases = custom ? configuration.cases : [
     ['museum', 'Pesquisa profunda sobre a história do Museu do Amanhã fontes oficiais e data de inauguração.'],
