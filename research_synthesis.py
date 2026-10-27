@@ -143,7 +143,7 @@ class ModelOutputError(ValueError):
         super().__init__(self.reason)
 
 
-def _parse_json(raw, limit):
+def _parse_json(raw, limit, normalization=None):
     if not isinstance(raw, str) or len(raw) > limit:
         raise ValueError('invalid synthesis size')
     fenced = re.fullmatch(r"\s*```(?:json)?\s*([\s\S]*?)\s*```\s*", raw, re.I)
@@ -154,8 +154,15 @@ def _parse_json(raw, limit):
             result[key] = value
         return result
     def invalid_constant(_):raise ValueError('nonfinite JSON value')
-    value = json.loads(fenced.group(1) if fenced else raw,
-                       object_pairs_hook=unique_object, parse_constant=invalid_constant)
+    encoded=(fenced.group(1) if fenced else raw).strip()
+    try:
+        value=json.loads(encoded,object_pairs_hook=unique_object,parse_constant=invalid_constant)
+    except json.JSONDecodeError:
+        if normalization is None:raise
+        decoder=json.JSONDecoder(object_pairs_hook=unique_object,parse_constant=invalid_constant)
+        value,end=decoder.raw_decode(encoded)
+        if not isinstance(value,dict) or encoded[end:].strip() not in (']','}'):raise
+        normalization.append('single_trailing_delimiter')
     # Check decoded values too: a JSON Unicode escape must not bypass this gate.
     # Normal Arabic/Hebrew letters remain valid; hidden overrides are not prose.
     if _unsafe_direction(value):
@@ -396,7 +403,8 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
     raw = generate_fn(messages, min(15, timeout * .6))
     if should_stop and should_stop():
         return None
-    body = _parse_json(raw, 14000)
+    normalization=[]
+    body = _parse_json(raw, 14000, normalization)
     if not isinstance(body, dict) or set(body) != {"points"}:
         raise ValueError("invalid synthesis schema")
     points = body["points"]
@@ -460,6 +468,7 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
                   for p in provenance if p['paragraph'] in positions]
     rendered = '\n\n'.join(paragraphs[i] for i in kept)
     return {"texto": rendered, "llm": True,
+            **({'format_normalization':normalization} if normalization else {}),
             "references": {k: index[k]["evidence_id"] for k in index},
             "provenance": provenance, "findings": [findings[i] for i in kept],
             "semantic_review": reviews,

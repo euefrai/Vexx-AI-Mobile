@@ -894,6 +894,22 @@ def _document_windows(text, root, block, query, url, budget):
             if len(selected)>=8:break
         if len(selected)>=8:break
     if not selected:return None
+    # Adjacent rows from the same named DOM table form one real contiguous
+    # quote. Never bridge an omitted row or unrelated section to reach a
+    # minimum quote length. Preserve individual field boundaries as well.
+    row_groups={lo:[{'start':lo,'end':hi}] for lo,hi,tag,_,_ in selected if tag=='tr'}
+    merged=[]
+    for item in sorted(selected):
+        lo,hi,tag,title,heading_start=item
+        if merged and tag=='tr' and merged[-1][2]=='tr' and row_scopes.get(lo):
+            oldlo,oldhi,oldtag,oldtitle,oldheading=merged[-1]
+            if (row_scopes.get(lo)==row_scopes.get(oldlo) and not source[oldhi:lo].strip()
+                    and hi-oldlo<=450):
+                row_groups[oldlo].extend(row_groups[lo])
+                merged[-1]=(oldlo,hi,oldtag,oldtitle,oldheading)
+                continue
+        merged.append(item)
+    selected=merged
     output='';passages=[];sections=[]
     for lo,hi,tag,title,heading_start in sorted(selected):
         chunk=source[lo:hi].strip();lo+=len(source[lo:hi])-len(source[lo:hi].lstrip())
@@ -906,7 +922,9 @@ def _document_windows(text, root, block, query, url, budget):
                          'source_role':passage_role(chunk),
                          'text_span':{'start':start,'end':len(output),'scope':'returned_extracted_text'},
                          'source_span':{'start':lo,'end':lo+len(chunk),'scope':'normalized_available_extraction','sha256':digest}})
-        if tag=='tr':passages[-1].update(row_scopes.get(lo,{}))
+        if tag=='tr':
+            passages[-1].update(row_scopes.get(lo,{}))
+            passages[-1]['table_rows']=[{'start':r['start']-lo,'end':r['end']-lo} for r in row_groups.get(lo,[])]
         if title:sections.append({'titulo':title,'texto':chunk,'id':sid})
     return {'texto':output,'answer_passages':passages,'secoes':sections,
             'document_context':{'heading':context,'basis':'preceding_heading'} if context else {},

@@ -65,6 +65,14 @@ def test_same_dom_named_table_keeps_attribution_and_all_facets():
     assert all(p.get('table_header')=='Atlas Corporation' for p in cov['passages'])
 
 
+def test_short_fields_remain_citable_without_lowering_quote_minimum():
+    import research_synthesis as rs
+    rec=article();passages=eg.select_answer_passages(eg.requirement_coverage(QUERY,[rec]))
+    quotes=[q for p in passages for q in rs.quote_options({'excerpt':p['text']})]
+    assert any('Founded 1981' in q['text'] for q in quotes)
+    assert all(len(q['text'])>=24 and q['text'] in rec['texto'] for q in quotes)
+
+
 def test_other_table_cannot_inherit_page_heading():
     cov=eg.requirement_coverage(QUERY,[article('Orion Corporation')])
     assert not any(r['state']=='SUPPORTED' for r in cov['requirements'])
@@ -141,3 +149,22 @@ def test_doi_suffix_is_not_a_product_model():
     row={'titulo':'Experimental methods for solid-state cells','url':'https://example.org/paper',
          'doi':'10.1234/result-1','trecho':'Methods and experimental conditions.'}
     assert not orch._context_mismatch(row,'papers "10.1234/result-1" methods sample experimental')
+
+
+def test_single_extra_closing_delimiter_does_not_discard_valid_cited_data():
+    import research_synthesis as rs
+    text='Atlas fabrica motores elétricos e geradores.'
+    src={'id':'E1','evidence_id':'ev-atlas','url':'https://example.org/atlas','excerpt':text}
+    raw=json.dumps({'points':[{'text':text,'evidence':[{'id':'E1','quote':text}]}]})+']'
+    review=lambda *args:json.dumps({'reviews':[{'paragraph':0,'state':'SUPPORTED','reason':'none'}]})
+    result=rs.generate('Quais produtos a Atlas fabrica?',[src],[],lambda *args:raw,verify_fn=review)
+    assert result['llm'] and result['format_normalization']==['single_trailing_delimiter']
+
+
+@pytest.mark.parametrize('suffix',[' prose',' {}',' ] ]','; run()'])
+def test_json_repair_never_accepts_extra_payload_or_instructions(suffix):
+    import research_synthesis as rs
+    text='Atlas fabrica motores elétricos e geradores.'
+    src={'id':'E1','evidence_id':'ev-atlas','url':'https://example.org/atlas','excerpt':text}
+    raw=json.dumps({'points':[{'text':text,'evidence':[{'id':'E1','quote':text}]}]})+suffix
+    with pytest.raises(ValueError):rs.generate('Quais produtos a Atlas fabrica?',[src],[],lambda *args:raw)

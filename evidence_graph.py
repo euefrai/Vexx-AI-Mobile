@@ -106,8 +106,13 @@ def _passage_support(req, passage, source):
         fields={'founders':r'^(?:founder(?:s)?|fundador(?:es|\s*\(es\))?)\s+[^\d]{4,}',
                 'foundation_date':r'^(?:founded|funda[cç][aã]o)\s+.{0,90}\b(?:1[5-9]|20)\d{2}\b',
                 'products':r'^(?:products|produtos)\s+\w.{3,}'}
-        if verified and re.search(fields[attribute],text) and not re.search(r'\b(?:unknown|desconhecid\w*|nao confirmado|not known)\b',text):
-            return 'DIRECT_SUPPORT'
+        rows=passage.get('table_rows') or [{'start':0,'end':len(passage['text'])}]
+        for row in rows[:16]:
+            start,end=row.get('start'),row.get('end')
+            if type(start) is not int or type(end) is not int or not 0<=start<end<=len(passage['text']):continue
+            field_text=qi.normalized(passage['text'][start:end])
+            if verified and re.search(fields[attribute],field_text) and not re.search(r'\b(?:unknown|desconhecid\w*|nao confirmado|not known)\b',field_text):
+                return 'DIRECT_SUPPORT'
     if passage.get('element_type')=='tr' and scoped_entity and passage.get('table_field')==attribute:
         fields={'founders':r'^(?:fundador(?:es|\s*\(es\))?|criador(?:es)?|founder(?:s)?)\s+[^\d]{4,}',
                 'foundation_date':r'^(?:funda[cç][aã]o|founded)\s+.{0,90}\b(?:1[5-9]|20)\d{2}\b',

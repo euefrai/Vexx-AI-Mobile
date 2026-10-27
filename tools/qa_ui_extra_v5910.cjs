@@ -1,9 +1,9 @@
 async page => {
   if(!page.url().startsWith('http://127.0.0.1:'))throw Error('Loopback QA only');
   const version=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('research-qa-config')||'{}').version||'v5910');
-  if(!['v5910','v5911'].includes(version))throw Error('Unknown QA version');
+  if(!['v5910','v5911','v5912'].includes(version))throw Error('Unknown QA version');
   await page.setViewportSize({width:1280,height:900});
-  await page.getByRole('button',{name:/^Pesquisa profunda sobre quem fundou a WEG/}).click();
+  await page.getByRole('button',{name:version==='v5912'?/^Pesquisa profunda sobre quem fundou a Gerdau/:/^Pesquisa profunda sobre quem fundou a WEG/}).click();
   await page.getByRole('button',{name:'Ver pesquisa',exact:true}).first().click();
   const downloads=[];
   for(const [name,format] of [['Baixar MD','md'],['Baixar CSV','csv']]){

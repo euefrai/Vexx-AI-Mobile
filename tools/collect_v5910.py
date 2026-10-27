@@ -1,7 +1,8 @@
 """Allowlisted public summaries from disposable QA; read-only SQLite."""
 import argparse,json,sqlite3,tempfile
 from pathlib import Path
-parser=argparse.ArgumentParser();parser.add_argument('--artifact-version',choices=['v5910','v5911','v5912'],default='v5910');args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--artifact-version',choices=['v5910','v5911','v5912'],default='v5910')
+parser.add_argument('--log-prefix',choices=['live','release'],default='live');args=parser.parse_args()
 R=Path(__file__).resolve().parents[1];P=R/'qa-artifacts'/args.artifact_version
 private=json.loads((P/'qa-runtime-private.json').read_text())
 database=Path(private['database']).resolve()
@@ -9,7 +10,7 @@ assert database.name=='qa.sqlite' and database.parent.name.startswith('v5981-adm
 assert database.is_relative_to(Path(tempfile.gettempdir()).resolve())
 db=sqlite3.connect(database.as_uri()+'?mode=ro',uri=True)
 cases=[]
-for path in sorted(P.glob('live-?.log')):
+for path in sorted(P.glob(args.log_prefix+'-?.log')):
     lines=path.read_text(encoding='utf-8-sig').splitlines()
     if not lines or lines[0]!='### Result':continue
     d=json.loads(lines[1]);row={k:d.get(k) for k in ('name','query','seconds','http_status','content_type','job','job_state',

@@ -1716,7 +1716,7 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                     excerpt += prefix+passage['text']
                     ranges.append({'id':passage['id'],'start':start,'end':len(excerpt),
                                    **{k:passage[k] for k in ('element_type','section','context_heading',
-                                     'table_header','table_header_span','source_span') if k in passage}})
+                                     'table_header','table_header_span','table_rows','source_span') if k in passage}})
                 if excerpt:
                     source.update(excerpt=excerpt,passage_ranges=ranges)
         context_meta = {'source_count':len(sources),'context_chars':sum(len(s['excerpt']) for s in sources),
