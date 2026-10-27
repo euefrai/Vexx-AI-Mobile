@@ -30,6 +30,7 @@ class GraphErro(ValueError):
 _ANSWER_RELATIONS = {
     'founders': r'(?:fundad[ao]s?|criad[ao]s?|founded|established).{0,100}\b(?:por|by)\s+\w+|fundadores?\s*[:—-]\s*\w+',
     'foundation_date': r'(?:fundad[ao]|fundacao|founded|established|criad[ao]).{0,100}\b(?:1[5-9]|20)\d{2}\b|\b(?:1[5-9]|20)\d{2}\b.{0,80}(?:fundad[ao]|fundacao|founded)',
+    'creation_date': r'\b(?:criad[ao]|created|desenvolvid[ao])\s+(?:(?:em|in)\s+)?(?:1[5-9]|20)\d{2}\b',
     'products': r'\b(?:produz|fabrica|fabricam|produzem|manufactures?|makes?|products include|produtos incluem)\b.{4,}',
     'causes': r'\b(?:causad[ao]|causas? (?:foram|incluem)|caused|porque|devido|motivada|motivado|desencadead[ao])\b.{8,}',
     'consequences': r'\b(?:resultou|resultaram|consequencias? (?:foram|incluem)|resulted|levou a|levaram a|provocou)\b.{8,}',
@@ -85,6 +86,12 @@ def _passage_support(req, passage, source):
         # A literal table row plus its real preceding document heading supplies
         # useful scope, but not a local explicit subject: retain PARTIAL only.
         if re.match(labels[attribute]+r'\b',text) and re.search(relation_rx,text) and not re.search(r'\b(?:unknown|not available|desconhecido)\b',text):
+            partial_found=True
+    if passage.get('element_type')=='tr' and scoped_entity and passage.get('table_field')==attribute:
+        fields={'founders':r'^(?:fundador(?:es|\s*\(es\))?|criador(?:es)?|founder(?:s)?)\s+[^\d]{4,}',
+                'foundation_date':r'^(?:funda[cç][aã]o|founded)\s+.{0,90}\b(?:1[5-9]|20)\d{2}\b',
+                'products':r'^(?:produtos|products)\s+\w.{3,}'}
+        if attribute in fields and re.search(fields[attribute],text) and not re.search(r'\b(?:unknown|desconhecid\w*|nao confirmado)\b',text):
             partial_found=True
     section=qi.normalized(passage.get('section') or '')
     section_facets={'return_value':('return value','valor retornado','valor de retorno'),
@@ -142,7 +149,7 @@ def _passage_support(req, passage, source):
             else:offset=0
             pos=predicate.start()+offset
             gap=clause[named.end():pos] if named else re.sub(r'^(?:ela|ele|it|a empresa|a companhia)\s+','',clause[:pos])
-            if attribute in ('founders','foundation_date','products','causes','consequences'):
+            if attribute in ('founders','foundation_date','creation_date','products','causes','consequences'):
                 # Bounded copular/auxiliary modifiers only. Reported facts about
                 # another subject are not transferred to this entity.
                 allowed=r'\s*(?:(?:foi|was|is|e|a|o|uma|um|an?|the|empresa|companhia|company|public|service|vertically|integrated|que|no|na|brasil|brazil|in)\s+){0,12}'
@@ -181,6 +188,32 @@ def select_answer_passages(coverage, limit=None):
     return selected
 
 
+def _literal_table_passages(source,text,url,requirements):
+    """Only real table labels/values found in returned text, scoped by table head."""
+    import query_intelligence as qi
+    labels={'founders':r'fundador(?:es|\s*\(es\))?|criador(?:es)?|founder(?:s)?',
+            'foundation_date':r'funda[cç][aã]o|founded','products':r'produtos|products'}
+    entities={qi.normalized(r['entity']) for r in requirements}
+    out=[]
+    for table in (source.get('tabelas') or [])[:5]:
+        if not isinstance(table,list) or not table or not isinstance(table[0],list) or len(table[0])!=1:continue
+        heading=str(table[0][0])[:160]
+        if qi.normalized(heading) not in entities or heading.casefold() not in text.casefold():continue
+        for row in table[1:40]:
+            if not isinstance(row,list) or len(row)!=2:continue
+            label=str(row[0]).strip();value=re.split(r'[\[(|]',str(row[1]),maxsplit=1)[0].strip()
+            field=next((key for key,pattern in labels.items() if re.fullmatch(pattern,qi.normalized(label))),None)
+            if not field or len(value)<4:continue
+            literal=label+' '+value
+            match=re.search(r'\s+'.join(re.escape(p) for p in literal.split()),text,re.I)
+            if not match or match.end()-match.start()>1100:continue
+            chunk=text[match.start():match.end()]
+            out.append({'id':'P-'+hashlib.sha256((url+'|'+str(match.start())+'|'+chunk).encode()).hexdigest()[:16],
+                        'source_url':url,'text':chunk,'section':heading,'element_type':'tr','table_field':field,
+                        'text_span':{'start':match.start(),'end':match.end(),'scope':'returned_extracted_text'}})
+    return out[:12]
+
+
 def requirement_coverage(query, sources, *, requirements=None):
     """Traceable, conservative extraction checks; not a statistical truth score."""
     import query_intelligence as qi
@@ -200,7 +233,7 @@ def requirement_coverage(query, sources, *, requirements=None):
         if not read or source.get('content_scope') in ('feed_metadata','metadata_only','abstract_only'):
             continue
         url = str(source.get('url_final') or source.get('final') or source.get('url') or '')
-        passages = source.get('answer_passages') or passage_candidates(text, url, source.get('secoes'))
+        passages = source.get('answer_passages') or (_literal_table_passages(source,text,url,requirements)+passage_candidates(text, url, source.get('secoes')))[:40]
         diagnostics['read_documents']+=1
         diagnostics['generated_passages']+=len(passages[:40])
         for req in requirements:

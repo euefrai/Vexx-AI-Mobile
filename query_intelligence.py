@@ -50,13 +50,14 @@ _CURRENCIES = {'USD': r'dolares?|dolar|usd', 'BRL': r'reais|real|brl',
 # Explicit facets only. These are retrieval requirements, not factual answers
 # or an assertion that arbitrary natural language has been fully understood.
 ANSWER_FACETS = {
-    'founders': ('Fundadores', r'quem (?:a |o )?fundou|fundadores?|fundador[ae]?|founded by'),
+    'founders': ('Fundadores', r'quem (?:a |o )?(?:fundou|criou)|fundadores?|fundador[ae]?|founded by|who (?:created|founded)'),
     'foundation_date': ('Data de fundação', r'quando.*(?:fundad|criad)|em que ano|data de funda|ano de funda'),
     'products': ('Produtos', r'produtos|o que.*fabrica|products'),
-    'causes': ('Causas', r'causas?|causes?'),
-    'consequences': ('Consequências', r'consequencias?|consequences?'),
+    'creation_date': ('Data de criação', r'\bdata de criacao\b'),
+    'causes': ('Causas', r'causas?|causes?|por que (?:aconteceu|ocorreu|houve)|why did'),
+    'consequences': ('Consequências', r'consequencias?|consequences?|o que (?:mudou|aconteceu) depois|what changed afterward'),
     'syntax': ('Sintaxe ou assinatura', r'sintaxe|assinatura|syntax|signature'),
-    'return_value': ('Valor retornado', r'o que retorna|valor retornado|return value'),
+    'return_value': ('Valor retornado', r'o que retorna|valor retornado|return value|\bretorno\b'),
     'behavior': ('Comportamento da operação', r'como (?:usar|utilizar|funciona)|comportamento|behavior|modifica.*original|altera.*original'),
     'examples': ('Exemplos documentados', r'exemplos?|examples?'),
     'limitations': ('Limitações', r'limitacoes|restricoes|limitations?'),
@@ -78,6 +79,8 @@ def answer_requirements(text):
         facets.remove('battery')  # Named subject "Bateria ZX" is not a request for a battery model.
     if 'foundation_date' in facets and not re.search(r'fundad|fundou|fundacao|founded|empresa|criad[ao]', norm):
         facets.remove('foundation_date')
+    if re.search(r'quem criou|who created',norm) and re.search(r'\b(?:quando|when|em que ano)\b',norm) and 'foundation_date' not in facets:
+        if 'creation_date' not in facets:facets.append('creation_date')
     if not facets:
         return []
     subject = re.sub(r'^(?:pesquise|pesquisa profunda sobre|encontre)\s+', '', original, flags=re.I)
@@ -88,12 +91,15 @@ def answer_requirements(text):
     subject = re.sub(r'^qual [eé] a origem d[ao] (?:empresa\s+)?', '', subject, flags=re.I)
     # Declarative topics and explicit interrogative relation patterns share the
     # existing Query Intelligence parser; the original remains authoritative.
-    match = re.search(r'\bquem (?:fundou|criou)\s+(?:a |o )?([^,?]+)', subject, re.I)
+    match = re.search(r'\b(?:quem (?:fundou|criou)|who (?:created|founded))\s+(?:a |o |the )?([^,?]+)', subject, re.I)
     if match:
-        subject = re.split(r'\s+(?:em que|quando|e quais)\b', match[1], flags=re.I)[0]
+        subject = re.split(r'\s+(?:em que|e quando|and when|quando|e quais)\b', match[1], flags=re.I)[0]
     else:
+        causal=re.match(r'^por que (?:aconteceu|ocorreu|houve)\s+(.+?)(?:\s+e\s+o que\b|[?,]|$)',subject,re.I)
+        if causal:subject=causal[1]
         subject = re.sub(r'^(?:quais\s+(?:(?:foram|s[aã]o)\s+)?as?\s+|as?\s+)?(?:causas? e (?:as?\s+)?consequ[eê]ncias?)\s+(?:de|do|da)\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:como (?:usar|utilizar|funciona)|qual (?:[eé] )?(?:o peso|a bateria) (?:de|do|da))\s+', '', subject, flags=re.I)
+        subject = re.sub(r'^(?:peso|bateria)\s+(?:de|do|da)\s+','',subject,flags=re.I)
         subject = re.sub(r'^(?:documenta[cç][aã]o\s+(?:oficial\s+)?|hist[oó]ria\s+(?:de|do|da)\s+(?:empresa\s+)?)', '', subject, flags=re.I)
         subject = re.split(r'[,?]|\s+(?:causas?|consequ[eê]ncias?|limita[cç][oõ]es|documenta[cç][aã]o|exemplos?|sintaxe|comportamento|peso|bateria|fontes?\s+oficiais)\b', subject, maxsplit=1, flags=re.I)[0]
     operations=re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+',original) if set(facets)&{'syntax','behavior','examples','limitations','return_value'} else []
@@ -117,9 +123,21 @@ def answer_requirements(text):
 
 def requirement_query(requirement, original):
     query = requirement['entity'] + ' ' + requirement['description']
-    if requirement.get('constraints', {}).get('must_preserve'):
+    if requirement.get('constraints', {}).get('must_preserve') and not _model_only_scope(original):
         return str(original)[:190] + ' ' + requirement['description']
+    if re.search(r'com bateria e (?:o )?cartao',normalized(original)):
+        query+=' com bateria e cartão'
     return query[:240]
+
+
+def _model_only_scope(original):
+    """Only model digits can be compacted; unknown/negative/local scope stays."""
+    norm=normalized(original)
+    if re.search(r'\b(?:sem|nao|exceto|exclu\w*|ate|abaixo|acima|compare|comparar|dois|duas|versus|vs|hoje|ontem|ultim\w*|semana|em|no|na)\b|r\$|\b(?:gb|kg|km|usd|eur)\b',norm):return False
+    reqs=answer_requirements(original)
+    if not reqs or not all(r['attribute'] in ('weight','battery') for r in reqs):return False
+    entity=normalized(reqs[0]['entity'])
+    return bool(entity and set(re.findall(r'\d+',norm))<=set(re.findall(r'\d+',entity)))
 
 
 def retrieval_context(original):
@@ -153,7 +171,7 @@ def retrieval_context(original):
 def context_subqueries(original, fallback, limit=4):
     context = retrieval_context(original)
     text = context['research_request']
-    if context['guarded']:
+    if context['guarded'] and not _model_only_scope(text):
         return [text]
     requirements = context['requirements']
     if requirements and context['entity']:
@@ -381,7 +399,11 @@ def constrain_discovery(query, request, *, lock_context=False):
     original = context['research_request']
     scientific_expansion = request.get('domain') == 'science' and not re.search(
         r'\d|\b(?:sem|nao|exceto|exclu\w*|desde|antes|depois)\b', normalized(original))
-    if lock_context and context['guarded'] and original and not scientific_expansion:
+    compact_product=(_model_only_scope(original) and normalized(context['entity']) in normalized(query)
+                     and all('battery_and_card' not in r['constraints'].get('mandatory_conditions',[]) or
+                             r['attribute']!='weight' or 'com bateria e cartao' in normalized(query)
+                             for r in context['requirements']))
+    if lock_context and context['guarded'] and original and not scientific_expansion and not compact_product:
         # Keep the authoritative constraints together; providers can tokenize
         # them, but the planner must not silently drop an exclusion or date.
         if normalized(original).rstrip('.?!') not in normalized(query):

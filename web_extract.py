@@ -779,6 +779,7 @@ _SECTION_TERMS = {
     'price': r'price|pre[cç]o|USD|BRL|EUR',
     'founders': r'founder|founded|fundad\w+|fundou',
     'foundation_date': r'founded|established|fundad\w+|funda[cç][aã]o',
+    'creation_date': r'created|criad\w+|cria[cç][aã]o|desenvolvid\w+',
     'products': r'products?|produtos?|manufactur\w+|fabrica\w+',
     'causes': r'causes?|causas?|caused|devido',
     'consequences': r'consequences?|consequ[eê]ncias?|resulted|resultou',

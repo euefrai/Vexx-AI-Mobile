@@ -28,7 +28,7 @@ def main():
     parser.add_argument('--output',type=Path,required=True)
     parser.add_argument('--baseline',action='store_true')
     parser.add_argument('--baseline-ref',choices=['cc60042','8ccbbe0'],default='cc60042')
-    parser.add_argument('--artifact-version',choices=['v5998','v5999'],default='v5998')
+    parser.add_argument('--artifact-version',choices=['v5998','v5999','v5910'],default='v5998')
     args=parser.parse_args()
     if args.output.exists():raise SystemExit('Refusing to overwrite evidence')
     import research,research_agents as ra,pc_agent,web_extract as we,evidence_graph as eg
