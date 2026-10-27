@@ -411,6 +411,14 @@ _RX_SNIPPET = re.compile(
     r'''class=["']result(?:__snippet|-snippet)["'][^>]*>(.*?)</(?:a|div|td)>''', re.S)
 
 
+def is_search_ad_url(url):
+    try:
+        parsed=urllib.parse.urlsplit(str(url))
+        return (parsed.hostname or '').lower() in ('duckduckgo.com','www.duckduckgo.com') and parsed.path=='/y.js' and bool(
+            {'ad_domain','ad_provider','u3'} & set(urllib.parse.parse_qs(parsed.query)))
+    except ValueError:return False
+
+
 def buscar_ddg(consulta: str, base: str = DDG_HTML, max_resultados: int = 6,
                timeout: float = 8.0, abrir=None) -> list:
     q = (consulta or "").strip()[:200]
@@ -424,10 +432,12 @@ def buscar_ddg(consulta: str, base: str = DDG_HTML, max_resultados: int = 6,
                     max_bytes=512 * 1024, abrir=abrir)[1]
     out = []
     for rx in _RX_RESULTADOS:
-        for m in re.finditer(rx, pagina, re.S):
+        matches=list(re.finditer(rx, pagina, re.S))
+        for index,m in enumerate(matches):
             try:
                 link, titulo = m.group(1), m.group(2)
-                ms = _RX_SNIPPET.search(pagina[m.end():m.end() + 1500])
+                next_start=matches[index+1].start() if index+1<len(matches) else len(pagina)
+                ms = _RX_SNIPPET.search(pagina[m.end():min(m.end()+1500,next_start)])
                 trecho = ms.group(1) if ms else ""
                 titulo = _html.unescape(re.sub(r"<.*?>", "", titulo)).strip()[:160]
                 trecho = _html.unescape(re.sub(r"<.*?>", "", trecho or "")).strip()[:280]
@@ -436,6 +446,7 @@ def buscar_ddg(consulta: str, base: str = DDG_HTML, max_resultados: int = 6,
                 if "uddg=" in link:
                     link = urllib.parse.unquote(link.split("uddg=", 1)[1].split("&", 1)[0])
                 link = link.replace("&amp;", "&")
+                if is_search_ad_url(link):continue
                 if link.startswith("http") and titulo and all(f["url"] != link[:500] for f in out):
                     out.append({"titulo": titulo, "url": link[:500], "trecho": trecho})
                 if len(out) >= max_resultados:

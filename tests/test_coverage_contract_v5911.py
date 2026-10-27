@@ -104,3 +104,8 @@ def test_structured_type_is_not_a_source_title():
  import web_extract
  html='<title>Luma história</title><script type="application/ld+json">{"@type":"Organization","name":"company"}</script><p>Luma é uma empresa.</p>'
  assert web_extract.extrair_metadados(html)['titulo']=='Luma história'
+
+
+def test_budget_and_memory_are_not_a_product_model_alias():
+ q='Encontre notebooks Lenovo de 16 GB até R$ 3000'
+ assert 'ENTITY_MISMATCH' not in orch._context_mismatch({'titulo':'Notebook Lenovo 16 GB por R$ 2800','url':'https://example.org/lenovo'},q)

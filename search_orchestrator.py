@@ -232,6 +232,8 @@ def _util_para_pedido(a: dict, termos: list, consulta: str = "") -> bool:
 
 def _context_mismatch(a: dict, consulta: str) -> list:
     """Hard entity/context exclusions, separate from broad lexical coverage."""
+    import research
+    if research.is_search_ad_url(a.get('url','')):return ['SEARCH_ADVERTISEMENT']
     q=_sem_acentos(consulta);body=_sem_acentos(' '.join(str(a.get(k) or '') for k in ('titulo','trecho')))
     models=set(re.findall(r'\b[a-z]{1,16}-?\d+[a-z0-9-]*\b',q))
     matched=[_tem_termo(m,body) for m in models]
@@ -264,7 +266,7 @@ def _context_mismatch(a: dict, consulta: str) -> list:
             reasons.append('ENTITY_MISMATCH')
     named = []
     model_entities={r['entity'] for r in qi.answer_requirements(consulta)
-                    if r['attribute'] in ('weight','battery','price') and re.search(r'\d',r['entity'])}
+                    if r['attribute'] in ('weight','battery') and re.search(r'\d',r['entity']) and qi._model_only_scope(consulta)}
     named.extend(qi.entity_alias_matches(name,body) for name in model_entities)
     for entity in qi.topic_profile(consulta)['entities']:
         name = entity['name']

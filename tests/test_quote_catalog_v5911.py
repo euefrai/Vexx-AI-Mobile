@@ -10,6 +10,7 @@ def writer(ref='Q1',text='A fundadora da Luma é Ana Ribeiro.'):
  def generate(messages,timeout):
   payload=json.loads(messages[-1]['content'])
   assert 'quotes' in payload['sources'][0] and 'excerpt' not in payload['sources'][0]
+  assert payload['requirements'][0]['state']=='SUPPORTED'
   assert all(q['text'] in SOURCE['excerpt'] for q in payload['sources'][0]['quotes'])
   return json.dumps({'points':[{'text':text,'evidence':[{'id':'E1','quote_id':ref}]}]})
  generate.literal_quote_ids=True
