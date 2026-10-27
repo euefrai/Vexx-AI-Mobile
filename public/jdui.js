@@ -2754,9 +2754,23 @@
               });
             }
             show(active);dialog.append(controls,loading,full,unavailable,caption,origin);
-            dialog.addEventListener('close', () => { dialog.remove(); zoom.focus(); }, { once: true });
+            // Sync may remount this message while the modal is open. Restore
+            // only its equivalent image action, never another conversation.
+            const focusScope = root.dataset.jduiFocusScope;
+            dialog.addEventListener('close', () => {
+              dialog.remove();
+              let target = zoom.isConnected && !zoom.hidden ? zoom : null;
+              if (!target && focusScope) {
+                const replacement = Array.from(document.querySelectorAll('[data-jdui-focus-scope]'))
+                  .find(node => node.dataset.jduiFocusScope === focusScope);
+                target = replacement && Array.from(replacement.querySelectorAll('.jdui-media-zoom'))
+                  .find(button => button.dataset.mediaUrl === item.url && !button.hidden);
+              }
+              if (target) target.focus({ preventScroll: true });
+            }, { once: true });
             document.body.appendChild(dialog); dialog.showModal();
           });
+          zoom.dataset.mediaUrl = item.url;
           moldura.appendChild(zoom);
         }
       } else {
@@ -3008,6 +3022,8 @@
         if (!st || typeof st !== 'object') st = {};
         const save = s => { try { if (ctx.saveState) ctx.saveState(key, s || {}); } catch (_) {} };
         const slot = el('div', 'jdui-slot');
+        if (ctx.messageId) slot.dataset.jduiFocusScope = JSON.stringify([
+          ctx.ownerId || '', ctx.conversationId || '', ctx.messageId, key]);
         try { fn(slot, b.props, st, save, ctx); root.appendChild(slot); }
         catch (e) {
           slot.appendChild(el('div', 'jdui-fallback', 'Interface indisponível — veja o texto acima.'));

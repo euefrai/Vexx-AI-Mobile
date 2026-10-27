@@ -4533,7 +4533,9 @@ def _job_tailer(db_path: str, job_id: str, owner: str, websocket, parar, pronto)
                                  (job_id, owner)).fetchone()
             except Exception:
                 break
-            if row and row[0] in ("concluida", "cancelada", "falhou"):
+            # Interrupted/paused workers have also stopped. A later resume
+            # creates its own tailer; retaining this one blocks runtime drain.
+            if row and row[0] in ("concluida", "cancelada", "falhou", "interrompida", "pausada"):
                 break
             parar.wait(1.0)
     except Exception:
