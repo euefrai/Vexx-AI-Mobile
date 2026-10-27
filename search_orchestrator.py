@@ -263,11 +263,17 @@ def _context_mismatch(a: dict, consulta: str) -> list:
         if not (any(present) if RX_COMPARACAO.search(consulta) else all(present)):
             reasons.append('ENTITY_MISMATCH')
     named = []
+    model_entities={r['entity'] for r in qi.answer_requirements(consulta)
+                    if r['attribute'] in ('weight','battery','price') and re.search(r'\d',r['entity'])}
+    named.extend(qi.entity_alias_matches(name,body) for name in model_entities)
     for entity in qi.topic_profile(consulta)['entities']:
         name = entity['name']
         tokens = _termos(name)
         if len(tokens) >= 2 or entity['kind'] == 'organization' or re.fullmatch(r'[A-Z]{3,}', name) or RX_COMPARACAO.search(consulta):
-            named.append(all(_tem_termo(t, body) for t in tokens))
+            exact=all(_tem_termo(t, body) for t in tokens)
+            if re.search(r'\d',name):
+                exact=qi.entity_alias_matches(name,body)
+            named.append(exact)
     if named and not (any(named) if RX_COMPARACAO.search(consulta) else all(named)):
         reasons.append('ENTITY_MISMATCH')
     accessory=r'\b(capa|carregador|pelicula|bateria de reposicao|compativel com|acessorio|acessorios)\b'

@@ -4572,6 +4572,7 @@ def _research_writer(cfg: dict, parar):
             raise research_synthesis.ModelOutputError('model_filtered')
         return '' if parar.is_set() else result.get('texto', '')
     write.last_metadata = {}
+    write.literal_quote_ids = True
     return write
 
 

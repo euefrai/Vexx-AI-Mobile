@@ -42,6 +42,13 @@ _ANSWER_RELATIONS = {
     'weight': r'\b\d+(?:[.,]\d+)?\s*(?:g|kg|gramas?|kilograms?)\b',
     'battery': r'\b(?:bateria|battery)\b.{0,60}\b[A-Za-z]+[ -]?[A-Za-z]*\d[\w-]*',
     'price': r'(?:r\$|us\$|usd|eur|brl)\s*\d+[\d.,]*',
+    'river_source': r'\b(?:nasce|tem (?:a |sua )?nascente|has its source|rises)\s+(?:em|n[ao]s?|at|in)\s+\w.{4,}',
+    'river_mouth': r'\b(?:desagua|tem (?:a |sua )?foz|empties|flows)\s+(?:em|n[ao]s?|into)\s+\w.{4,}',
+    'course': r'\b(?:atravessa|percorre|atravessam|runs through|flows through)\s+\w.{4,}',
+    'location': r'\b(?:fica|localiza-se|esta localizad[ao]|is located)\s+(?:em|n[ao]s?|in)\s+\w.{4,}',
+    'population': r'\b(?:tem|possui|population of|populacao de)\s+(?:uma populacao de )?\d[\d., ]*\s*(?:habitantes|people|residents)\b',
+    'alternatives': r'\b(?:alternativas? (?:incluem|sao)|alternatives include)\s+\w.{4,}',
+    'definition': r'\b(?:e|is)\s+(?:um[a]?|a|an)\s+(?:tipo de |modalidade de )?(?:curso|graduacao|degree|programa|software|ferramenta)\b.{8,}',
 }
 
 
@@ -90,7 +97,9 @@ def _passage_support(req, passage, source):
     if passage.get('element_type')=='tr' and scoped_entity and passage.get('table_field')==attribute:
         fields={'founders':r'^(?:fundador(?:es|\s*\(es\))?|criador(?:es)?|founder(?:s)?)\s+[^\d]{4,}',
                 'foundation_date':r'^(?:funda[cç][aã]o|founded)\s+.{0,90}\b(?:1[5-9]|20)\d{2}\b',
-                'products':r'^(?:produtos|products)\s+\w.{3,}'}
+                'products':r'^(?:produtos|products)\s+\w.{3,}',
+                'river_source':r'^(?:nascente|source)\s+\w.{4,}',
+                'river_mouth':r'^(?:foz|mouth)\s+\w.{4,}'}
         if attribute in fields and re.search(fields[attribute],text) and not re.search(r'\b(?:unknown|desconhecid\w*|nao confirmado)\b',text):
             partial_found=True
     section=qi.normalized(passage.get('section') or '')
@@ -149,10 +158,16 @@ def _passage_support(req, passage, source):
             else:offset=0
             pos=predicate.start()+offset
             gap=clause[named.end():pos] if named else re.sub(r'^(?:ela|ele|it|a empresa|a companhia)\s+','',clause[:pos])
-            if attribute in ('founders','foundation_date','creation_date','products','causes','consequences'):
+            if attribute in ('founders','foundation_date','creation_date','products','causes','consequences',
+                             'river_source','river_mouth','course','location','population','definition','alternatives'):
                 # Bounded copular/auxiliary modifiers only. Reported facts about
                 # another subject are not transferred to this entity.
                 allowed=r'\s*(?:(?:foi|was|is|e|a|o|uma|um|an?|the|empresa|companhia|company|public|service|vertically|integrated|que|no|na|brasil|brazil|in)\s+){0,12}'
+                if attribute in ('river_source','river_mouth','course'):
+                    allowed=r'\s*'
+                    if (attribute=='river_mouth' and re.fullmatch(r'\s*nasce\s+(?:em|na|no)\s+[^.!?;]{4,100}\s+e\s*',gap)
+                            and not re.search(r'\b(?:que|rio|recebe|onde|cujo)\b',gap)):
+                        allowed=re.escape(gap)
                 if not re.fullmatch(allowed,gap):previous=clause;continue
                 if attribute in ('causes','consequences') and named and clause[:named.start()].strip() not in ('','a','o','as','os','the'):
                     previous=clause;continue
@@ -192,7 +207,8 @@ def _literal_table_passages(source,text,url,requirements):
     """Only real table labels/values found in returned text, scoped by table head."""
     import query_intelligence as qi
     labels={'founders':r'fundador(?:es|\s*\(es\))?|criador(?:es)?|founder(?:s)?',
-            'foundation_date':r'funda[cç][aã]o|founded','products':r'produtos|products'}
+            'foundation_date':r'funda[cç][aã]o|founded','products':r'produtos|products',
+            'river_source':r'nascente|source','river_mouth':r'foz|mouth'}
     entities={qi.normalized(r['entity']) for r in requirements}
     out=[]
     for table in (source.get('tabelas') or [])[:5]:
@@ -218,12 +234,15 @@ def requirement_coverage(query, sources, *, requirements=None):
     """Traceable, conservative extraction checks; not a statistical truth score."""
     import query_intelligence as qi
     from web_extract import passage_candidates
-    requirements = [dict(r) for r in (qi.answer_requirements(query) if requirements is None else requirements)]
-    if not requirements:
-        return {'applicable': False, 'requirements': [], 'passages': [], 'complete': False,
+    contract=qi.requirement_contract(query)
+    requirements = [dict(r) for r in (contract['requirements'] if requirements is None else requirements)]
+    applicable=any(r.get('type','explicit_attribute')=='explicit_attribute' for r in requirements)
+    if not applicable:
+        return {'applicable': False, 'requirements': requirements, 'passages': [], 'complete': False,
+                'fully_decomposed':False,'unparsed_demands':contract['unparsed_demands'],
                 'scope': 'no explicit supported facet parsed; not proof of completeness'}
     matches = []
-    diagnostics={'read_documents':0,'generated_passages':0}
+    diagnostics={'read_documents':0,'generated_passages':0,'stale_passages_rejected':0}
     for source in sources[:80]:
         if source.get('relevante') is False or (source.get('vertical') or {}).get('eligible') is False:
             continue
@@ -233,7 +252,16 @@ def requirement_coverage(query, sources, *, requirements=None):
         if not read or source.get('content_scope') in ('feed_metadata','metadata_only','abstract_only'):
             continue
         url = str(source.get('url_final') or source.get('final') or source.get('url') or '')
-        passages = source.get('answer_passages') or (_literal_table_passages(source,text,url,requirements)+passage_candidates(text, url, source.get('secoes')))[:40]
+        passages = source.get('answer_passages') or []
+        if isinstance(source.get('texto'),str) and source['texto']:
+            valid=[]
+            for passage in passages[:40]:
+                span=passage.get('text_span') or {};start,end=span.get('start'),span.get('end')
+                if (type(start) is int and type(end) is int and 0<=start<end<=len(text)
+                        and text[start:end]==passage.get('text')):valid.append(passage)
+                else:diagnostics['stale_passages_rejected']+=1
+            passages=valid
+        passages = passages or (_literal_table_passages(source,text,url,requirements)+passage_candidates(text, url, source.get('secoes')))[:40]
         diagnostics['read_documents']+=1
         diagnostics['generated_passages']+=len(passages[:40])
         for req in requirements:
@@ -241,10 +269,12 @@ def requirement_coverage(query, sources, *, requirements=None):
                 label = _passage_support(req,p,source)
                 if label:
                     matches.append({**p, 'requirement_id': req['id'], 'source_id': source.get('id') or source.get('fonte_id') or url,
+                                    'document_id':source.get('document_id') or 'D-'+hashlib.sha256((url+'|'+text).encode()).hexdigest()[:24],
                                     'evidence_id': source.get('id') or '', 'support_label':label,
                                     'answerability':'DIRECT_ANSWER' if label=='DIRECT_SUPPORT' else 'PARTIAL_ANSWER',
                                     'reason':'bounded_explicit_entity_attribute_relation'})
     for req in requirements:
+        if req.get('type') in ('original_objective','mandatory_constraint'):continue
         found = [p for p in matches if p['requirement_id'] == req['id']]
         direct = [p for p in found if p['support_label']=='DIRECT_SUPPORT']
         ids=[];seen_documents=set()
@@ -279,7 +309,13 @@ def requirement_coverage(query, sources, *, requirements=None):
             if index<len(group) and len(retained)<32:retained.append(group[index])
         if len(retained)>=32:break
     diagnostics.update(matched_bindings=len(matches),retained_bindings=len(retained))
+    diagnostics.update(recognized_requirements=sum(r.get('type','explicit_attribute')=='explicit_attribute' for r in requirements),
+                       undecomposed_objectives=sum(r.get('type')=='original_objective' for r in requirements),
+                       direct_requirements=sum(r['state']=='SUPPORTED' for r in requirements),
+                       partial_requirements=sum(r['state']=='PARTIALLY_SUPPORTED' for r in requirements),
+                       pending_requirements=sum(r['state']!='SUPPORTED' for r in requirements))
     return {'applicable': True, 'requirements': requirements, 'passages': retained, 'diagnostics':diagnostics,
+            'fully_decomposed':contract['fully_decomposed'],'unparsed_demands':contract['unparsed_demands'],
             'complete': all(r['state']=='SUPPORTED' for r in requirements),
             'scope': 'explicit relation patterns in bounded literal spans; not independent factual verification'}
 
@@ -290,7 +326,7 @@ def agora_iso() -> str:
 
 def compact_coverage(coverage):
     """Persist references once; literal passage text already lives with evidence."""
-    return {**coverage, 'passages': [{k:p[k] for k in ('id','source_id','requirement_id','text_span','answerability','support_label')}
+    return {**coverage, 'passages': [{k:p[k] for k in ('id','source_id','document_id','requirement_id','text_span','answerability','support_label') if k in p}
                                     for p in coverage.get('passages',[])[:32]]}
 
 

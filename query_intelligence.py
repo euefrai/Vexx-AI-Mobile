@@ -61,9 +61,16 @@ ANSWER_FACETS = {
     'behavior': ('Comportamento da operação', r'como (?:usar|utilizar|funciona)|comportamento|behavior|modifica.*original|altera.*original'),
     'examples': ('Exemplos documentados', r'exemplos?|examples?'),
     'limitations': ('Limitações', r'limitacoes|restricoes|limitations?'),
-    'weight': ('Peso e unidade', r'\bpeso\b|\bweight\b'),
+    'weight': ('Peso e unidade', r'\bpeso\b|\bweight\b|\bmais leve\b'),
     'battery': ('Bateria', r'\bbateria\b|\bbattery\b'),
     'price': ('Preço e moeda', r'precos?|\br\$|\busd\b'),
+    'river_source': ('Nascente', r'\bnascente\b'),
+    'river_mouth': ('Foz', r'\bfoz\b'),
+    'course': ('Regiões do percurso', r'por quais regioes|quais regioes.*(?:passa|atravessa)'),
+    'location': ('Localização', r'onde (?:fica|se localiza)'),
+    'population': ('População e referência', r'\bpopulacao\b'),
+    'alternatives': ('Alternativas', r'\balternativas\b'),
+    'definition': ('Definição e finalidade', r'\bo que e\b|\bpara que serve\b'),
 }
 
 
@@ -75,6 +82,7 @@ def answer_requirements(text):
     if re.search(r'\b(imagens?|fotos?|videos?|cientific\w*|papers?|estudos|artigos cientificos)\b', norm):
         return []
     facets = [key for key, (_, rx) in ANSWER_FACETS.items() if re.search(rx, norm)]
+    if not facets and re.search(r'diferencas entre',norm):facets=['definition']
     if 'battery' in facets and re.match(r'^(?:pesquisa profunda sobre\s+)?bateria\s+\w',norm):
         facets.remove('battery')  # Named subject "Bateria ZX" is not a request for a battery model.
     if 'foundation_date' in facets and not re.search(r'fundad|fundou|fundacao|founded|empresa|criad[ao]', norm):
@@ -109,16 +117,69 @@ def answer_requirements(text):
     subject = re.sub(r'^(?:o|a|os|as)\s+', '', subject.strip(' .?!'), flags=re.I)[:180]
     subject = re.split(r'\s+e quem\b',subject,maxsplit=1,flags=re.I)[0]
     subject = re.sub(r'\s+(?:na|no|nas|nos|de|da|do|em|com)$','',subject,flags=re.I)
+    river=re.search(r'(?:nascente.*?foz|foz.*?nascente)\s+d[oa]\s+(.+?)(?:\s+e\s+(?:por|quais|qual)\b|[?,]|$)',original,re.I)
+    if river:subject=river[1]
+    place=re.search(r'onde (?:fica|se localiza)\s+(.+?)(?:\s+e\s+(?:qual|quais)\b|[?,]|$)',original,re.I)
+    if place:subject=place[1]
+    subject=re.split(r'\s+e\s+(?:qual\b|quais\b|quando\b|onde\b|como\b|quant[oa]s?\b|compare\b|divergencias\b)',subject,maxsplit=1,flags=re.I)[0]
+    compare=re.search(r'^(?:pesquisa profunda sobre\s+)?(?:compare|entre|quais (?:s[aã]o )?as diferen[cç]as entre)\s+(.+?)(?:\s+(?:quanto|considerando|segundo|em rela[cç][aã]o)\b|[?]|$)',original,re.I)
+    entities=[subject]
+    if compare:
+        section=compare[1].split('?',1)[0]
+        section=re.split(r',\s*(?:qual|quais)\b',section,maxsplit=1,flags=re.I)[0]
+        entities=[e.strip(' ,.!?') for e in re.split(r',|\s+(?:e|versus|vs\.?)\s+',section,flags=re.I) if e.strip(' ,.!?')]
+        if not 2<=len(entities)<=4:entities=[subject]
     constraints = {'reference': 'original_request', 'must_preserve': bool(re.search(
         r'\b(?:nao|sem|exceto|ate|depois|antes|ultimos)\b|\d|r\$', norm))}
-    return [{'id': 'R-' + hashlib.sha256((norm+'|'+facet).encode()).hexdigest()[:12],
+    return [{'id': 'R-' + hashlib.sha256((norm+'|'+facet+('|'+normalized(entity) if len(entities)>1 else '')).encode()).hexdigest()[:12],
              'type': 'explicit_attribute', 'description': ANSWER_FACETS[facet][0],
-             'entity': subject, 'attribute': facet, 'constraints': {**constraints,
+             'entity': entity, 'attribute': facet, 'constraints': {**constraints,
                  'mandatory_conditions': ['battery_and_card'] if facet=='weight' and re.search(r'com bateria e (?:o )?cartao',norm) else []},
              'expected_information': ANSWER_FACETS[facet][0], 'candidate_evidence_ids': [],
              'confirmed_evidence_ids': [], 'state': 'NOT_SEARCHED',
              'insufficiency_reason': 'Ainda não há passagem lida para este requisito.'}
-            for facet in facets[:8]]
+            for entity in entities for facet in facets[:max(1,8//len(entities))]]
+
+
+def requirement_contract(text):
+    """Keep unparsed demands pending; they can never acquire factual support."""
+    original=str(text or '')[:1000]
+    requirements=answer_requirements(original)
+    factual=re.sub(r'\s+e\s+(?:apresente|mostre|organize|exiba)\b.*?\bem\s+(?:cards|tabelas?|cartoes)\b.*$','',normalized(original))
+    clauses=re.split(r'[,;?]|\s+e\s+(?=(?:qual|quais|onde|quando|como|quant[oa]s?|por que|o que)\b)',factual)
+    ignored=[c.strip() for c in clauses if re.match(r'^(?:qual|quais|onde|quando|como|quant[oa]s?|por que|o que|em que)\b',c.strip())
+             and not any(re.search(rx,c) for _,rx in ANSWER_FACETS.values())]
+    if re.search(r'\be compare (?:as )?fontes\b|\bdivergencias entre fontes\b',factual):
+        ignored.append('Comparação entre fontes ainda exige verificação.')
+    # Bare comparative definitions have an explicit per-entity requirement.
+    ignored=[c for c in ignored if not (c.startswith(('quais as diferencas','quais sao as diferencas')) and any(r['attribute']=='definition' for r in requirements))]
+    if not requirements or ignored:
+        requirements.append({'id':'R-'+hashlib.sha256((normalized(original)+'|original_objective').encode()).hexdigest()[:12],
+          'type':'original_objective','attribute':'original_objective','entity':'','description':original,
+          'expected_information':'Interpretação pendente do pedido original','state':'NOT_SEARCHED',
+          'constraints':{'reference':'original_request','must_preserve':True,'mandatory_conditions':[]},
+          'candidate_evidence_ids':[],'confirmed_evidence_ids':[],'passage_ids':[],
+          'insufficiency_reason':'Pedido não decomposto integralmente; texto temático não comprova resposta.'})
+    if re.search(r'fontes? oficiais|fontes? primarias|documentacao oficial',normalized(original)):
+        requirements.append({'id':'R-'+hashlib.sha256((normalized(original)+'|source_authority').encode()).hexdigest()[:12],
+          'type':'mandatory_constraint','attribute':'source_authority','entity':'','description':'Autoridade da fonte solicitada',
+          'expected_information':'Verificação da autoridade para a afirmação, além da pertinência do texto',
+          'state':'NOT_SEARCHED','constraints':{'reference':'original_request','must_preserve':True,'mandatory_conditions':[]},
+          'candidate_evidence_ids':[],'confirmed_evidence_ids':[],'passage_ids':[],
+          'insufficiency_reason':'Domínio ou título isolado não comprova autoridade para a afirmação.'})
+    return {'requirements':requirements,'fully_decomposed':not any(r['type']=='original_objective' for r in requirements),
+            'unparsed_demands':ignored[:8], 'original_request':original}
+
+
+def entity_alias_matches(entity,text):
+    """Formatting-only aliases; preserve model suffixes and variant identity."""
+    name=normalized(entity);body=normalized(text)
+    if not re.search(r'\d',name):return False
+    tokens=re.findall(r'[a-z]+|\d+',name)
+    pattern=r'(?<!\w)'+r'[\s-]*'.join(map(re.escape,tokens))+r'(?!\w)'
+    for match in re.finditer(pattern,body):
+        if not re.match(r'\s+(?:ii|iii|iv|pro|plus|ultra)\b',body[match.end():]):return True
+    return False
 
 
 def requirement_query(requirement, original):

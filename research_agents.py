@@ -808,7 +808,7 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
     """Search Agent: consultas adaptativas (original + variação sem stopwords)."""
     base = etapa["alvo"]
     import query_intelligence as qi
-    requirements=qi.answer_requirements(job['objetivo'])
+    requirements=qi.requirement_contract(job['objetivo'])['requirements']
     requested={r['attribute'] for r in qi.answer_requirements(base)}
     requirement_ids=[r['id'] for r in requirements if not requested or r['attribute'] in requested]
     import search_orchestrator as orch
@@ -1845,7 +1845,7 @@ def _completion_outcome(job, evidencias, lacunas, assisted=False):
     provenance_unverified = bool(re.search(r'fontes? (?:oficiais|prim[aá]rias)|documenta[cç][aã]o oficial',
                                           job.get('objetivo',''),re.I))
     incomplete = (not read or bool(lacunas) or bool(job.get('pendencias'))
-                  or (coverage['applicable'] and not coverage['complete'])
+                  or not coverage['complete']
                   or provenance_unverified
                   or (sintese.get('llm') and sintese.get('answer_coverage',{}).get('applicable')
                       and not sintese['answer_coverage'].get('complete'))

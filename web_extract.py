@@ -388,6 +388,8 @@ def _titulo_plausivel(titulo: str) -> bool:
     t = (titulo or "").strip()
     if len(t) < 3:
         return False
+    if t.casefold() in ('company','organization','organisation','article','webpage'):
+        return False  # Structured-data type labels are not document titles.
     if t[:1].islower() and t.endswith("."):
         return False
     return True

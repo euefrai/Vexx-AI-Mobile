@@ -5,7 +5,9 @@ os.environ['JULIA_ENV_FILE']=str(pathlib.Path(tempfile.gettempdir())/'v5910-none
 import search_providers as sp,query_intelligence as qi
 import probe_source_quality_v5998 as probe
 rows=[];lock=threading.Lock();original=sp.buscar
-output=pathlib.Path(sys.argv[sys.argv.index('--output')+1]);raw=ROOT/'qa-artifacts/v5910/raw';raw.mkdir(parents=True,exist_ok=True)
+output=pathlib.Path(sys.argv[sys.argv.index('--output')+1])
+version=sys.argv[sys.argv.index('--artifact-version')+1] if '--artifact-version' in sys.argv else 'v5910'
+raw=ROOT/'qa-artifacts'/version/'raw';raw.mkdir(parents=True,exist_ok=True)
 def observed(name,query,*args,**kwargs):
  row={'provider':name,'query':query,'candidates':[]};start=time.monotonic()
  try:

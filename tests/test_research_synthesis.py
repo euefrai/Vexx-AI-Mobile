@@ -86,7 +86,9 @@ def test_never_sends_unread_evidence_or_other_context(context):
     result = ra.agente_sintetizador(db, job, [evidence(), unread], [], writer, verificar_fn=approved_review)
     assert result['llm']
     assert [s['evidence_id'] for s in captured[0]['sources']] == ['ev-a']
-    assert set(captured[0]) == {'objective', 'sources', 'verification'}
+    assert set(captured[0]) == {'objective', 'sources', 'verification','requirements'}
+    assert captured[0]['requirements'][0]['type']=='original_objective'
+    assert captured[0]['requirements'][0]['state']=='NOT_SEARCHED'
 
 
 def test_no_model_call_without_read_evidence_or_time(context):
