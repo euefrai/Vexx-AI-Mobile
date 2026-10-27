@@ -1,0 +1,780 @@
+{
+  "freeze_commit": "bc3bc27",
+  "retrieval_commit": "51b8291",
+  "creation_reference_date": "2026-10-26",
+  "live_execution_date": "2026-10-27",
+  "scope": "New queries without seeded URLs; agent observed, not human gold",
+  "cases": [
+    {
+      "case": {
+        "id": "dd-01",
+        "category": "product_long",
+        "query": "Qual o peso da Sony Alpha 7 IV com bateria e cartão e qual bateria utiliza?"
+      },
+      "seconds": 14.456,
+      "provider_calls": 1,
+      "provider_results": 6,
+      "documents_attempted": 11,
+      "documents_with_text": 11,
+      "retained_records": 0,
+      "retained_read_records": 0,
+      "retained_unique_urls": 0,
+      "documents_with_selected_passages": 0,
+      "selected_passages": 0,
+      "retained_late_passages_observed": 2,
+      "states": [
+        {
+          "attribute": "weight",
+          "entity": "Sony Alpha 7 IV",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "battery",
+          "entity": "Sony Alpha 7 IV",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [],
+      "events": {
+        "QUERY_CREATED": 1,
+        "QUERY_SENT": 1,
+        "PROVIDER_RESPONDED": 1,
+        "CANDIDATE_DISCOVERED": 6,
+        "CACHE_MISS": 6,
+        "READ_SLOT_CHARGED": 12,
+        "FETCH_STARTED": 12,
+        "HTTP_RESPONSE": 12,
+        "FETCH_COMPLETED": 11,
+        "EXTRACTION_COMPLETED": 11,
+        "FETCH_BLOCKED": 1,
+        "CANDIDATE_SKIPPED": 7,
+        "PASSAGE_REJECTED": 2,
+        "EVIDENCE_REJECTED": 9,
+        "SYNTHESIS_STARTED": 1,
+        "SYNTHESIS_COMPLETED": 1,
+        "GAP_IDENTIFIED": 1,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "BLOQUEADO": 1,
+        "NO_ANSWER_PASSAGE": 2,
+        "ENTITY_MISMATCH": 6,
+        "TOPIC_MISMATCH": 3,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": false,
+      "context_only": false
+    },
+    {
+      "case": {
+        "id": "dd-02",
+        "category": "api",
+        "query": "Como funciona Array.prototype.reduceRight, qual a sintaxe, comportamento e valor retornado?"
+      },
+      "seconds": 21.321,
+      "provider_calls": 6,
+      "provider_results": 17,
+      "documents_attempted": 11,
+      "documents_with_text": 11,
+      "retained_records": 5,
+      "retained_read_records": 5,
+      "retained_unique_urls": 4,
+      "documents_with_selected_passages": 5,
+      "selected_passages": 14,
+      "retained_late_passages_observed": 4,
+      "states": [
+        {
+          "attribute": "syntax",
+          "entity": "Array.prototype.reduceRight",
+          "state": "SUPPORTED"
+        },
+        {
+          "attribute": "return_value",
+          "entity": "Array.prototype.reduceRight",
+          "state": "PARTIALLY_SUPPORTED"
+        },
+        {
+          "attribute": "behavior",
+          "entity": "Array.prototype.reduceRight",
+          "state": "PARTIALLY_SUPPORTED"
+        }
+      ],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [
+        {
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight",
+          "document_id": "D-0a3632c93878cf22a4c46bed",
+          "passages": 3
+        },
+        {
+          "url": "https://devdoc.net/web/developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight.html",
+          "document_id": "D-505887bcc2043c9eb1389e51",
+          "passages": 3
+        },
+        {
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight",
+          "document_id": "D-0a3632c93878cf22a4c46bed",
+          "passages": 3
+        },
+        {
+          "url": "https://www.cs.unb.ca/~bremner/teaching/cs2613/books/mdn/Reference/Global_Objects/Array/reduceRight/",
+          "document_id": "D-bff34102a0804638a27ba224",
+          "passages": 2
+        },
+        {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduceRight",
+          "document_id": "D-808938dafaa4dafcb2b9d680",
+          "passages": 3
+        }
+      ],
+      "events": {
+        "QUERY_CREATED": 3,
+        "QUERY_SENT": 3,
+        "PROVIDER_RESPONDED": 3,
+        "CANDIDATE_DISCOVERED": 10,
+        "CACHE_MISS": 6,
+        "READ_SLOT_CHARGED": 12,
+        "FETCH_STARTED": 12,
+        "FETCH_FAILED": 2,
+        "HTTP_RESPONSE": 11,
+        "FETCH_COMPLETED": 11,
+        "EXTRACTION_COMPLETED": 11,
+        "CANDIDATE_SKIPPED": 13,
+        "EVIDENCE_SUPPORTED": 4,
+        "EVIDENCE_PARTIAL": 3,
+        "PASSAGE_SELECTED": 5,
+        "EVIDENCE_STORED": 5,
+        "EVIDENCE_REJECTED": 6,
+        "CACHE_HIT": 4,
+        "CACHE_REUSED": 4,
+        "DOCUMENT_ALREADY_READ": 4,
+        "SYNTHESIS_STARTED": 1,
+        "SYNTHESIS_COMPLETED": 1,
+        "GAP_IDENTIFIED": 1,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "REDE": 1,
+        "TOPIC_MISMATCH": 4,
+        "ENTITY_MISMATCH": 2,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": true,
+      "context_only": false
+    },
+    {
+      "case": {
+        "id": "dd-03",
+        "category": "company",
+        "query": "Quem fundou a Bosch, em que ano e quais produtos fabrica?"
+      },
+      "seconds": 24.387,
+      "provider_calls": 12,
+      "provider_results": 18,
+      "documents_attempted": 11,
+      "documents_with_text": 9,
+      "retained_records": 0,
+      "retained_read_records": 0,
+      "retained_unique_urls": 0,
+      "documents_with_selected_passages": 0,
+      "selected_passages": 0,
+      "retained_late_passages_observed": 0,
+      "states": [
+        {
+          "attribute": "founders",
+          "entity": "Bosch",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "foundation_date",
+          "entity": "Bosch",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "products",
+          "entity": "Bosch",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [],
+      "events": {
+        "QUERY_CREATED": 3,
+        "QUERY_SENT": 3,
+        "PROVIDER_RESPONDED": 3,
+        "CANDIDATE_DISCOVERED": 18,
+        "CACHE_MISS": 9,
+        "READ_SLOT_CHARGED": 12,
+        "FETCH_STARTED": 12,
+        "HTTP_RESPONSE": 12,
+        "FETCH_COMPLETED": 12,
+        "EXTRACTION_COMPLETED": 9,
+        "CANDIDATE_SKIPPED": 6,
+        "EVIDENCE_REJECTED": 16,
+        "CACHE_HIT": 9,
+        "CACHE_REUSED": 9,
+        "DOCUMENT_ALREADY_READ": 9,
+        "EXTRACTION_FAILED": 2,
+        "FETCH_FAILED": 1,
+        "PASSAGE_REJECTED": 4,
+        "SYNTHESIS_STARTED": 1,
+        "SYNTHESIS_COMPLETED": 1,
+        "GAP_IDENTIFIED": 1,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "TOPIC_MISMATCH": 16,
+        "TAMANHO": 1,
+        "NO_ANSWER_PASSAGE": 4,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": false,
+      "context_only": false
+    },
+    {
+      "case": {
+        "id": "dd-04",
+        "category": "history",
+        "query": "Quais foram as causas e consequências da Revolução Praieira?"
+      },
+      "seconds": 16.927,
+      "provider_calls": 8,
+      "provider_results": 12,
+      "documents_attempted": 12,
+      "documents_with_text": 12,
+      "retained_records": 0,
+      "retained_read_records": 0,
+      "retained_unique_urls": 0,
+      "documents_with_selected_passages": 0,
+      "selected_passages": 0,
+      "retained_late_passages_observed": 20,
+      "states": [
+        {
+          "attribute": "causes",
+          "entity": "Revolução Praieira",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "consequences",
+          "entity": "Revolução Praieira",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [],
+      "events": {
+        "QUERY_CREATED": 2,
+        "QUERY_SENT": 2,
+        "PROVIDER_RESPONDED": 2,
+        "CANDIDATE_DISCOVERED": 12,
+        "CACHE_MISS": 6,
+        "READ_SLOT_CHARGED": 12,
+        "FETCH_STARTED": 12,
+        "HTTP_RESPONSE": 12,
+        "FETCH_COMPLETED": 12,
+        "EXTRACTION_COMPLETED": 12,
+        "CANDIDATE_SKIPPED": 3,
+        "EVIDENCE_REJECTED": 18,
+        "CACHE_HIT": 6,
+        "CACHE_REUSED": 6,
+        "DOCUMENT_ALREADY_READ": 6,
+        "SYNTHESIS_STARTED": 1,
+        "SYNTHESIS_COMPLETED": 1,
+        "GAP_IDENTIFIED": 1,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "ENTITY_MISMATCH": 18,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": false,
+      "context_only": false
+    },
+    {
+      "case": {
+        "id": "dd-05",
+        "category": "local_news",
+        "query": "Quais notícias sobre transporte público em Feira de Santana foram publicadas nos últimos sete dias, excluindo Salvador?"
+      },
+      "seconds": 20.193,
+      "provider_calls": 4,
+      "provider_results": 24,
+      "documents_attempted": 6,
+      "documents_with_text": 6,
+      "retained_records": 0,
+      "retained_read_records": 0,
+      "retained_unique_urls": 0,
+      "documents_with_selected_passages": 0,
+      "selected_passages": 0,
+      "retained_late_passages_observed": 0,
+      "states": [],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [],
+      "events": {
+        "QUERY_CREATED": 4,
+        "QUERY_SENT": 4,
+        "PROVIDER_RESPONDED": 4,
+        "CANDIDATE_DISCOVERED": 24,
+        "CACHE_MISS": 6,
+        "READ_SLOT_CHARGED": 6,
+        "FETCH_STARTED": 7,
+        "HTTP_RESPONSE": 7,
+        "FETCH_COMPLETED": 6,
+        "EXTRACTION_COMPLETED": 6,
+        "REDIRECT_RESOLVED": 1,
+        "EVIDENCE_REJECTED": 24,
+        "SYNTHESIS_STARTED": 2,
+        "SYNTHESIS_COMPLETED": 2,
+        "GAP_IDENTIFIED": 2,
+        "REPLAN_STARTED": 1,
+        "CACHE_HIT": 18,
+        "CACHE_REUSED": 18,
+        "DOCUMENT_ALREADY_READ": 18,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "ENTITY_MISMATCH,TOPIC_MISMATCH,INCOMPLETE_EVIDENCE": 16,
+        "ENTITY_MISMATCH,TOPIC_MISMATCH,TEMPORAL_MISMATCH": 8,
+        "EXTRACTIVE": 4,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": false,
+      "context_only": false
+    },
+    {
+      "case": {
+        "id": "dd-06",
+        "category": "national_news",
+        "query": "Quais anúncios oficiais recentes sobre o Enem 2026 ocorreram nos últimos sete dias?"
+      },
+      "seconds": 33.062,
+      "provider_calls": 16,
+      "provider_results": 24,
+      "documents_attempted": 6,
+      "documents_with_text": 6,
+      "retained_records": 0,
+      "retained_read_records": 0,
+      "retained_unique_urls": 0,
+      "documents_with_selected_passages": 0,
+      "selected_passages": 0,
+      "retained_late_passages_observed": 0,
+      "states": [],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [],
+      "events": {
+        "QUERY_CREATED": 4,
+        "QUERY_SENT": 4,
+        "PROVIDER_RESPONDED": 4,
+        "CANDIDATE_DISCOVERED": 24,
+        "CACHE_MISS": 6,
+        "READ_SLOT_CHARGED": 6,
+        "FETCH_STARTED": 7,
+        "HTTP_RESPONSE": 7,
+        "FETCH_COMPLETED": 6,
+        "EXTRACTION_COMPLETED": 6,
+        "REDIRECT_RESOLVED": 1,
+        "EVIDENCE_REJECTED": 24,
+        "SYNTHESIS_STARTED": 2,
+        "SYNTHESIS_COMPLETED": 2,
+        "GAP_IDENTIFIED": 2,
+        "REPLAN_STARTED": 1,
+        "CACHE_HIT": 18,
+        "CACHE_REUSED": 18,
+        "DOCUMENT_ALREADY_READ": 18,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "TOPIC_MISMATCH": 24,
+        "EXTRACTIVE": 4,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": false,
+      "context_only": false
+    },
+    {
+      "case": {
+        "id": "dd-07",
+        "category": "public_pdf",
+        "query": "Segundo o manual público do Raspberry Pi Pico 2, quais são a memória e a tensão de alimentação permitida?"
+      },
+      "seconds": 17.401,
+      "provider_calls": 12,
+      "provider_results": 18,
+      "documents_attempted": 5,
+      "documents_with_text": 5,
+      "retained_records": 0,
+      "retained_read_records": 0,
+      "retained_unique_urls": 0,
+      "documents_with_selected_passages": 0,
+      "selected_passages": 0,
+      "retained_late_passages_observed": 0,
+      "states": [],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [],
+      "events": {
+        "QUERY_CREATED": 3,
+        "QUERY_SENT": 3,
+        "PROVIDER_RESPONDED": 3,
+        "CANDIDATE_DISCOVERED": 18,
+        "CACHE_MISS": 8,
+        "READ_SLOT_CHARGED": 6,
+        "FETCH_STARTED": 6,
+        "HTTP_RESPONSE": 5,
+        "FETCH_FAILED": 2,
+        "FETCH_COMPLETED": 5,
+        "EXTRACTION_COMPLETED": 5,
+        "EVIDENCE_REJECTED": 15,
+        "SYNTHESIS_STARTED": 2,
+        "SYNTHESIS_COMPLETED": 2,
+        "GAP_IDENTIFIED": 2,
+        "REPLAN_STARTED": 1,
+        "CACHE_HIT": 10,
+        "CACHE_REUSED": 10,
+        "DOCUMENT_ALREADY_READ": 10,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "REDE": 1,
+        "ENTITY_MISMATCH": 15,
+        "EXTRACTIVE": 4,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": false,
+      "context_only": false
+    },
+    {
+      "case": {
+        "id": "dd-08",
+        "category": "table",
+        "query": "Quais são o peso e a bateria da Fujifilm X-T5, incluindo a condição usada na medição do peso?"
+      },
+      "seconds": 28.637,
+      "provider_calls": 20,
+      "provider_results": 30,
+      "documents_attempted": 6,
+      "documents_with_text": 6,
+      "retained_records": 0,
+      "retained_read_records": 0,
+      "retained_unique_urls": 0,
+      "documents_with_selected_passages": 0,
+      "selected_passages": 0,
+      "retained_late_passages_observed": 0,
+      "states": [
+        {
+          "attribute": "weight",
+          "entity": "Quais são o",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "battery",
+          "entity": "Quais são o",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [],
+      "events": {
+        "QUERY_CREATED": 5,
+        "QUERY_SENT": 5,
+        "PROVIDER_RESPONDED": 5,
+        "CANDIDATE_DISCOVERED": 30,
+        "CACHE_MISS": 6,
+        "READ_SLOT_CHARGED": 6,
+        "FETCH_STARTED": 7,
+        "HTTP_RESPONSE": 7,
+        "FETCH_COMPLETED": 6,
+        "EXTRACTION_COMPLETED": 6,
+        "REDIRECT_RESOLVED": 1,
+        "EVIDENCE_REJECTED": 18,
+        "SYNTHESIS_STARTED": 2,
+        "SYNTHESIS_COMPLETED": 2,
+        "GAP_IDENTIFIED": 2,
+        "REPLAN_STARTED": 1,
+        "CACHE_HIT": 12,
+        "CACHE_REUSED": 12,
+        "DOCUMENT_ALREADY_READ": 12,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "ENTITY_MISMATCH": 18,
+        "EXTRACTIVE": 4,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": false,
+      "context_only": false
+    },
+    {
+      "case": {
+        "id": "dd-09",
+        "category": "late_reference",
+        "query": "Na documentação de itertools.groupby, como funciona o compartilhamento do iterador e qual cuidado é necessário ao guardar os grupos?"
+      },
+      "seconds": 9.014,
+      "provider_calls": 1,
+      "provider_results": 6,
+      "documents_attempted": 4,
+      "documents_with_text": 4,
+      "retained_records": 0,
+      "retained_read_records": 0,
+      "retained_unique_urls": 0,
+      "documents_with_selected_passages": 0,
+      "selected_passages": 0,
+      "retained_late_passages_observed": 2,
+      "states": [
+        {
+          "attribute": "behavior",
+          "entity": "Na",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [],
+      "events": {
+        "QUERY_CREATED": 1,
+        "QUERY_SENT": 1,
+        "PROVIDER_RESPONDED": 1,
+        "CANDIDATE_DISCOVERED": 6,
+        "CACHE_MISS": 6,
+        "READ_SLOT_CHARGED": 6,
+        "FETCH_STARTED": 6,
+        "HTTP_RESPONSE": 6,
+        "FETCH_BLOCKED": 1,
+        "FETCH_FAILED": 1,
+        "FETCH_COMPLETED": 4,
+        "EXTRACTION_COMPLETED": 4,
+        "EVIDENCE_REJECTED": 3,
+        "PASSAGE_REJECTED": 1,
+        "SYNTHESIS_STARTED": 1,
+        "SYNTHESIS_COMPLETED": 1,
+        "GAP_IDENTIFIED": 1,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "BLOQUEADO": 1,
+        "HTTP": 1,
+        "TOPIC_MISMATCH": 3,
+        "NO_ANSWER_PASSAGE": 1,
+        "EXTRACTIVE": 2,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": false,
+      "context_only": false
+    },
+    {
+      "case": {
+        "id": "dd-10",
+        "category": "no_answer",
+        "query": "Quantas pessoas entraram ontem na Biblioteca Pública do Estado da Bahia, segundo registro público?"
+      },
+      "seconds": 17.197,
+      "provider_calls": 3,
+      "provider_results": 18,
+      "documents_attempted": 10,
+      "documents_with_text": 10,
+      "retained_records": 1,
+      "retained_read_records": 1,
+      "retained_unique_urls": 1,
+      "documents_with_selected_passages": 0,
+      "selected_passages": 0,
+      "retained_late_passages_observed": 0,
+      "states": [],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [
+        {
+          "url": "http://www.fpc.ba.gov.br/bibliotecas",
+          "document_id": "D-3720d84c7beb9b86c2c55714",
+          "passages": 0
+        }
+      ],
+      "events": {
+        "QUERY_CREATED": 3,
+        "QUERY_SENT": 3,
+        "PROVIDER_RESPONDED": 3,
+        "CANDIDATE_DISCOVERED": 18,
+        "CACHE_MISS": 16,
+        "READ_SLOT_CHARGED": 12,
+        "FETCH_STARTED": 16,
+        "HTTP_RESPONSE": 14,
+        "FETCH_COMPLETED": 10,
+        "EXTRACTION_COMPLETED": 10,
+        "FETCH_FAILED": 4,
+        "EVIDENCE_REJECTED": 11,
+        "SYNTHESIS_STARTED": 2,
+        "SYNTHESIS_COMPLETED": 2,
+        "GAP_IDENTIFIED": 2,
+        "REPLAN_STARTED": 1,
+        "CACHE_HIT": 2,
+        "CACHE_REUSED": 2,
+        "DOCUMENT_ALREADY_READ": 2,
+        "REDIRECT_RESOLVED": 4,
+        "DOCUMENT_DEDUPLICATED": 1,
+        "CANDIDATE_SKIPPED": 2,
+        "EVIDENCE_STORED": 1,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "REDE": 2,
+        "ENTITY_MISMATCH": 10,
+        "TOPIC_MISMATCH": 1,
+        "EXTRACTIVE": 4,
+        "IDENTICAL_BOUNDED_EXTRACTION": 1,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": false,
+      "context_only": true
+    },
+    {
+      "case": {
+        "id": "dd-11",
+        "category": "ambiguous",
+        "query": "Quem fundou a empresa de automóveis Lotus, em que ano, excluindo a planta?"
+      },
+      "seconds": 26.27,
+      "provider_calls": 3,
+      "provider_results": 18,
+      "documents_attempted": 11,
+      "documents_with_text": 8,
+      "retained_records": 0,
+      "retained_read_records": 0,
+      "retained_unique_urls": 0,
+      "documents_with_selected_passages": 0,
+      "selected_passages": 0,
+      "retained_late_passages_observed": 9,
+      "states": [
+        {
+          "attribute": "founders",
+          "entity": "empresa de automóveis Lotus",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "attribute": "foundation_date",
+          "entity": "empresa de automóveis Lotus",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "coverage_complete_parsed_facets_only": false,
+      "sources": [],
+      "events": {
+        "QUERY_CREATED": 3,
+        "QUERY_SENT": 3,
+        "PROVIDER_RESPONDED": 3,
+        "CANDIDATE_DISCOVERED": 18,
+        "CACHE_MISS": 8,
+        "READ_SLOT_CHARGED": 12,
+        "FETCH_STARTED": 18,
+        "HTTP_RESPONSE": 18,
+        "FETCH_COMPLETED": 11,
+        "EXTRACTION_COMPLETED": 8,
+        "FETCH_BLOCKED": 1,
+        "EVIDENCE_REJECTED": 18,
+        "SYNTHESIS_STARTED": 2,
+        "SYNTHESIS_COMPLETED": 2,
+        "GAP_IDENTIFIED": 2,
+        "REPLAN_STARTED": 1,
+        "CACHE_HIT": 10,
+        "CACHE_REUSED": 10,
+        "DOCUMENT_ALREADY_READ": 10,
+        "REDIRECT_RESOLVED": 6,
+        "EXTRACTION_FAILED": 3,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "BLOQUEADO": 1,
+        "TOPIC_MISMATCH": 16,
+        "ENTITY_MISMATCH": 2,
+        "EXTRACTIVE": 4,
+        "RESEARCH_COMPLETED": 1
+      },
+      "useful_case_agent_observation": false,
+      "context_only": false
+    },
+    {
+      "case": {
+        "id": "dd-12",
+        "category": "multifacet",
+        "query": "Como funciona Promise.allSettled, qual sua sintaxe, comportamento, retorno e diferenças de tratamento de rejeições em relação a Promise.all?"
+      },
+      "seconds": 18.199,
+      "provider_calls": 5,
+      "provider_results": 11,
+      "documents_attempted": 11,
+      "documents_with_text": 11,
+      "retained_records": 3,
+      "retained_read_records": 3,
+      "retained_unique_urls": 3,
+      "documents_with_selected_passages": 6,
+      "selected_passages": 18,
+      "retained_late_passages_observed": 0,
+      "states": [
+        {
+          "attribute": "syntax",
+          "entity": "Promise.allSettled",
+          "state": "SUPPORTED"
+        },
+        {
+          "attribute": "behavior",
+          "entity": "Promise.allSettled",
+          "state": "SUPPORTED"
+        }
+      ],
+      "coverage_complete_parsed_facets_only": true,
+      "sources": [
+        {
+          "url": "https://www.w3schools.com/jsref/jsref_promise_allsettled.asp",
+          "document_id": "D-73565bf3fb32489bfcdcc557",
+          "passages": 3
+        },
+        {
+          "url": "https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled",
+          "document_id": "D-3350233d87a09c74d5ab6df1",
+          "passages": 3
+        },
+        {
+          "url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/allSettled",
+          "document_id": "D-9be89e19b8d0742d03df549c",
+          "passages": 3
+        }
+      ],
+      "events": {
+        "QUERY_CREATED": 2,
+        "QUERY_SENT": 2,
+        "PROVIDER_RESPONDED": 2,
+        "CANDIDATE_DISCOVERED": 6,
+        "CACHE_MISS": 5,
+        "READ_SLOT_CHARGED": 12,
+        "FETCH_STARTED": 12,
+        "HTTP_RESPONSE": 12,
+        "FETCH_COMPLETED": 11,
+        "EXTRACTION_COMPLETED": 11,
+        "FETCH_BLOCKED": 1,
+        "CANDIDATE_SKIPPED": 6,
+        "EVIDENCE_SUPPORTED": 4,
+        "PASSAGE_SELECTED": 4,
+        "EVIDENCE_STORED": 3,
+        "JOB_TERMINAL": 1
+      },
+      "reason_codes": {
+        "BLOQUEADO": 1,
+        "RESEARCH_FAILED": 1
+      },
+      "useful_case_agent_observation": true,
+      "context_only": false
+    }
+  ],
+  "useful_cases_observed": 2,
+  "total_questions": 12,
+  "read_context_only_cases": 1,
+  "precision": null,
+  "recall": null,
+  "limits": [
+    "Different questions/network from V5998: not paired causal gain.",
+    "Mirrors and repeated URL evidence are not independent corroboration.",
+    "Coverage complete applies only to parsed facets; bare retorno/comparison may not be represented.",
+    "No tuning of retrieval after opening this holdout."
+  ]
+}

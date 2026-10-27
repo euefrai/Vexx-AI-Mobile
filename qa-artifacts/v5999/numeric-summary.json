@@ -1,0 +1,105 @@
+{
+  "model": "poolside/laguna-s-2.1:free",
+  "real_current_run": [
+    {
+      "claim_chars": 103,
+      "quote_chars": 94,
+      "numeric_values_supported": true,
+      "quantities_supported": true,
+      "identifiers_supported": true,
+      "claimed_values": [],
+      "quoted_values": []
+    },
+    {
+      "claim_chars": 138,
+      "quote_chars": 150,
+      "numeric_values_supported": true,
+      "quantities_supported": true,
+      "identifiers_supported": true,
+      "claimed_values": [
+        "1",
+        "2"
+      ],
+      "quoted_values": [
+        "1",
+        "2"
+      ]
+    },
+    {
+      "claim_chars": 138,
+      "quote_chars": 231,
+      "numeric_values_supported": true,
+      "quantities_supported": true,
+      "identifiers_supported": true,
+      "claimed_values": [
+        "12",
+        "13",
+        "3",
+        "4",
+        "5",
+        "7.0710678118654755"
+      ],
+      "quoted_values": [
+        "-5",
+        "12",
+        "13",
+        "3",
+        "4",
+        "5",
+        "7.0710678118654755"
+      ]
+    },
+    {
+      "claim_chars": 189,
+      "quote_chars": 274,
+      "numeric_values_supported": true,
+      "quantities_supported": true,
+      "identifiers_supported": true,
+      "claimed_values": [
+        "0"
+      ],
+      "quoted_values": [
+        "0"
+      ]
+    }
+  ],
+  "synthesis_llm": true,
+  "semantic_review": [
+    {
+      "paragraph": 0,
+      "state": "SUPPORTED",
+      "reason": "none"
+    },
+    {
+      "paragraph": 1,
+      "state": "SUPPORTED",
+      "reason": "none"
+    },
+    {
+      "paragraph": 2,
+      "state": "SUPPORTED",
+      "reason": "none"
+    },
+    {
+      "paragraph": 3,
+      "state": "SUPPORTED",
+      "reason": "none"
+    }
+  ],
+  "old_v5998_mismatch": "NOT_ADJUDICABLE: rejected output was not captured then",
+  "controlled_false_positive_fixed": "unambiguous decimal locale formatting; three-digit ambiguous separators stay rejected",
+  "stronger_guards": [
+    "grams",
+    "explicit USD/BRL/EUR",
+    "hyphenated model suffixes"
+  ],
+  "limitations": [
+    "Numeric identity is not entity/attribute grounding; independent review remains mandatory.",
+    "Approximation, dates, stale prices and attribute swaps still require contextual review."
+  ],
+  "captured_model_replay_through_current_validator": {
+    "llm": true,
+    "provenance_quotes": 4,
+    "scope": "Actual captured writer/reviewer outputs, replayed locally; zero new model calls"
+  }
+}

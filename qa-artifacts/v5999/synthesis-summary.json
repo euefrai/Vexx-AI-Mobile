@@ -1,0 +1,202 @@
+{
+  "runs": [
+    {
+      "track": "C",
+      "scope": "VERIFIED_PUBLIC_SOURCE_INPUT_REAL_FREE_MODEL_NOT_DISCOVERY",
+      "model": "poolside/laguna-s-2.1:free",
+      "source_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+      "source_sha256": "378873e35be8ec468465b22b3c24e03fb584deafede4121d67de882b8d961b23",
+      "input_coverage": {
+        "complete_parsed_facets": true,
+        "requirements": [
+          {
+            "id": "R-a5665a9acf81",
+            "entity": "Math.hypot",
+            "attribute": "syntax",
+            "state": "SUPPORTED"
+          },
+          {
+            "id": "R-005b7b22056d",
+            "entity": "Math.hypot",
+            "attribute": "return_value",
+            "state": "SUPPORTED"
+          },
+          {
+            "id": "R-4b3d5bb0eaa8",
+            "entity": "Math.hypot",
+            "attribute": "behavior",
+            "state": "SUPPORTED"
+          }
+        ]
+      },
+      "calls": [
+        {
+          "phase": "writing",
+          "input_chars": 4607,
+          "timeout_s": 15,
+          "output_chars": 1521,
+          "metadata": {
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 2156,
+              "completion_tokens": 486,
+              "total_tokens": 2642
+            },
+            "truncada": false,
+            "latencia_s": 13.04
+          },
+          "elapsed_s": 13.04
+        },
+        {
+          "phase": "review",
+          "input_chars": 6107,
+          "timeout_s": 11.956279900041409,
+          "output_chars": 221,
+          "metadata": {
+            "finish_reason": "stop",
+            "usage": {
+              "prompt_tokens": 2712,
+              "completion_tokens": 57,
+              "total_tokens": 2769
+            },
+            "truncada": false,
+            "latencia_s": 7.76
+          },
+          "elapsed_s": 7.761
+        }
+      ],
+      "transport": [
+        {
+          "phase": "writing",
+          "timeout_s": 15,
+          "http_status": 200,
+          "time_to_headers_or_error_s": 13.037
+        },
+        {
+          "phase": "review",
+          "timeout_s": 11.956279900041409,
+          "http_status": 200,
+          "time_to_headers_or_error_s": 7.758
+        }
+      ],
+      "first_token_s": null,
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": true,
+      "fallback_detail": null,
+      "provider_code": null,
+      "synthesis_budget": {
+        "source_count": 1,
+        "context_chars": 1603,
+        "timeout_seconds": 25,
+        "attempts": 1
+      },
+      "semantic_review": [
+        {
+          "paragraph": 0,
+          "state": "SUPPORTED",
+          "reason": "none"
+        },
+        {
+          "paragraph": 1,
+          "state": "SUPPORTED",
+          "reason": "none"
+        },
+        {
+          "paragraph": 2,
+          "state": "SUPPORTED",
+          "reason": "none"
+        },
+        {
+          "paragraph": 3,
+          "state": "SUPPORTED",
+          "reason": "none"
+        }
+      ],
+      "elapsed_s": 21.853,
+      "chat_result_id": null
+    },
+    {
+      "track": "C",
+      "scope": "VERIFIED_PUBLIC_SOURCE_INPUT_REAL_FREE_MODEL_NOT_DISCOVERY",
+      "model": "poolside/laguna-s-2.1:free",
+      "source_url": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/hypot",
+      "source_sha256": "378873e35be8ec468465b22b3c24e03fb584deafede4121d67de882b8d961b23",
+      "input_coverage": {
+        "complete_parsed_facets": true,
+        "requirements": [
+          {
+            "id": "R-a5665a9acf81",
+            "entity": "Math.hypot",
+            "attribute": "syntax",
+            "state": "SUPPORTED"
+          },
+          {
+            "id": "R-005b7b22056d",
+            "entity": "Math.hypot",
+            "attribute": "return_value",
+            "state": "SUPPORTED"
+          },
+          {
+            "id": "R-4b3d5bb0eaa8",
+            "entity": "Math.hypot",
+            "attribute": "behavior",
+            "state": "SUPPORTED"
+          }
+        ]
+      },
+      "calls": [
+        {
+          "phase": "writing",
+          "input_chars": 4607,
+          "timeout_s": 15,
+          "error_code": "vazia",
+          "elapsed_s": 15.043
+        }
+      ],
+      "transport": [
+        {
+          "phase": "writing",
+          "timeout_s": 15,
+          "http_status": 200,
+          "time_to_headers_or_error_s": 15.042
+        }
+      ],
+      "first_token_s": null,
+      "job_state": "interrompida",
+      "outcome": {
+        "state": "blocked",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "vazia",
+        "read_sources": 1,
+        "reason": "redação ou revisão bloqueada pelo provedor; evidências preservadas"
+      },
+      "synthesis_llm": false,
+      "fallback_detail": "provider_failure",
+      "provider_code": "vazia",
+      "synthesis_budget": {
+        "source_count": 1,
+        "context_chars": 1603,
+        "timeout_seconds": 25,
+        "attempts": 1
+      },
+      "semantic_review": null,
+      "elapsed_s": 18.12,
+      "chat_result_id": "rj-51a107396d3a-result"
+    }
+  ],
+  "scope": "Real free model; known evidence seeded, never autonomous discovery",
+  "limits": [
+    "HTTP 200 empty response is failure, not success.",
+    "No TTFT for this nonstreaming path; no queue/cold-start inference.",
+    "Captured first result replayed through current validator; second run remains blocked."
+  ]
+}

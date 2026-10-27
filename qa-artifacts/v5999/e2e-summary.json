@@ -1,0 +1,893 @@
+{
+  "scope": "Authenticated disposable local FastAPI/PC Agent/SQLite/Chrome, not production",
+  "runs": [
+    {
+      "log": "browser-B-verified.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "technical",
+        "query": "Pesquisa profunda sobre qual é o peso da Nikon Z f com bateria e cartão e qual bateria utiliza.",
+        "seconds": 17.406,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": "rj-d2c738a3e2f2",
+        "job_state": "concluida",
+        "job_mode": "profunda",
+        "outcome": {
+          "state": "partial",
+          "unresolved_fronts": [],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 0,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        },
+        "synthesis_llm": false,
+        "chat_result_id": "rj-d2c738a3e2f2-result",
+        "answer_coverage": {
+          "complete_parsed_facets": false,
+          "requirements": [
+            {
+              "id": "R-431b7e0f181b",
+              "entity": "Nikon Z f",
+              "attribute": "weight",
+              "state": "NOT_SEARCHED"
+            },
+            {
+              "id": "R-5670340963fb",
+              "entity": "Nikon Z f",
+              "attribute": "battery",
+              "state": "NOT_SEARCHED"
+            }
+          ]
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 3.0681
+          },
+          {
+            "step_id": "p4",
+            "type": "busca",
+            "seconds": 1.3263
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 8.9619
+          },
+          {
+            "step_id": "p5",
+            "type": "ler",
+            "seconds": 0.0785
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0028
+          },
+          {
+            "step_id": "p6",
+            "type": "analisar",
+            "seconds": 0.0045
+          },
+          {
+            "step_id": "p7",
+            "type": "verificar",
+            "seconds": 0.0215
+          },
+          {
+            "step_id": "p8",
+            "type": "sintetizar",
+            "seconds": 0.0093
+          },
+          {
+            "step_id": "p9",
+            "type": "auditar",
+            "seconds": 0.0215
+          }
+        ],
+        "synthesis_budget": null,
+        "assistant_messages": 2,
+        "reload_preserved": true,
+        "source_cards": [],
+        "links": [],
+        "media_cards": 0,
+        "page_errors": []
+      }
+    },
+    {
+      "log": "browser-multifacet.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "multifacet",
+        "query": "Pesquisa profunda sobre como usar Object.entries, qual a sintaxe, comportamento e valor retornado.",
+        "seconds": 11.714,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": "rj-04288eed4bce",
+        "job_state": "concluida",
+        "job_mode": "profunda",
+        "outcome": {
+          "state": "partial",
+          "unresolved_fronts": [],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 0,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        },
+        "synthesis_llm": false,
+        "chat_result_id": "rj-04288eed4bce-result",
+        "answer_coverage": {
+          "complete_parsed_facets": false,
+          "requirements": [
+            {
+              "id": "R-a338a6637d98",
+              "entity": "Object.entries",
+              "attribute": "syntax",
+              "state": "NOT_SEARCHED"
+            },
+            {
+              "id": "R-a5be43989ec8",
+              "entity": "Object.entries",
+              "attribute": "return_value",
+              "state": "NOT_SEARCHED"
+            },
+            {
+              "id": "R-baa0994b0102",
+              "entity": "Object.entries",
+              "attribute": "behavior",
+              "state": "NOT_SEARCHED"
+            }
+          ]
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 2.6572
+          },
+          {
+            "step_id": "p4",
+            "type": "busca",
+            "seconds": 2.124
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 2.6266
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 0.0099
+          },
+          {
+            "step_id": "p5",
+            "type": "ler",
+            "seconds": 0.0008
+          },
+          {
+            "step_id": "p8",
+            "type": "ler",
+            "seconds": 0.0007
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0201
+          },
+          {
+            "step_id": "p6",
+            "type": "analisar",
+            "seconds": 0.0105
+          },
+          {
+            "step_id": "p9",
+            "type": "analisar",
+            "seconds": 0.0038
+          },
+          {
+            "step_id": "p10",
+            "type": "verificar",
+            "seconds": 0.0512
+          },
+          {
+            "step_id": "p11",
+            "type": "sintetizar",
+            "seconds": 0.1083
+          },
+          {
+            "step_id": "p12",
+            "type": "auditar",
+            "seconds": 0.0307
+          }
+        ],
+        "synthesis_budget": null,
+        "assistant_messages": 2,
+        "reload_preserved": true,
+        "source_cards": [],
+        "links": [],
+        "media_cards": 0,
+        "page_errors": []
+      }
+    },
+    {
+      "log": "browser-table-numbers.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "table-numbers",
+        "query": "Pesquisa profunda sobre qual o peso da Nikon Z8 com bateria e cartão e qual bateria utiliza.",
+        "seconds": 17.005,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": "rj-bc2e4cae15d7",
+        "job_state": "concluida",
+        "job_mode": "profunda",
+        "outcome": {
+          "state": "partial",
+          "unresolved_fronts": [],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 0,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        },
+        "synthesis_llm": false,
+        "chat_result_id": "rj-bc2e4cae15d7-result",
+        "answer_coverage": {
+          "complete_parsed_facets": false,
+          "requirements": [
+            {
+              "id": "R-306905da841b",
+              "entity": "Nikon Z8",
+              "attribute": "weight",
+              "state": "NOT_SEARCHED"
+            },
+            {
+              "id": "R-9b1a4bc5a8c6",
+              "entity": "Nikon Z8",
+              "attribute": "battery",
+              "state": "NOT_SEARCHED"
+            }
+          ]
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 1.4628
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 3.1244
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0054
+          },
+          {
+            "step_id": "p4",
+            "type": "verificar",
+            "seconds": 0.011
+          },
+          {
+            "step_id": "p5",
+            "type": "sintetizar",
+            "seconds": 0.0054
+          },
+          {
+            "step_id": "p6",
+            "type": "auditar",
+            "seconds": 0.0071
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 3.2365
+          },
+          {
+            "step_id": "p8",
+            "type": "ler",
+            "seconds": 4.519
+          },
+          {
+            "step_id": "p9",
+            "type": "analisar",
+            "seconds": 0.0053
+          },
+          {
+            "step_id": "p10",
+            "type": "busca",
+            "seconds": 1.8704
+          },
+          {
+            "step_id": "p11",
+            "type": "ler",
+            "seconds": 0.0795
+          },
+          {
+            "step_id": "p12",
+            "type": "analisar",
+            "seconds": 0.0025
+          },
+          {
+            "step_id": "p4",
+            "type": "verificar",
+            "seconds": 0.0177
+          },
+          {
+            "step_id": "p5",
+            "type": "sintetizar",
+            "seconds": 0.0013
+          },
+          {
+            "step_id": "p6",
+            "type": "auditar",
+            "seconds": 0.0079
+          }
+        ],
+        "synthesis_budget": null,
+        "assistant_messages": 2,
+        "reload_preserved": true,
+        "source_cards": [],
+        "links": [],
+        "media_cards": 0,
+        "page_errors": []
+      }
+    },
+    {
+      "log": "browser-insufficient.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "insufficient",
+        "query": "Pesquisa profunda sobre quantas pessoas entraram ontem na Biblioteca Pública do Estado da Bahia, segundo registro público.",
+        "seconds": 14.561,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": "rj-624cf410831b",
+        "job_state": "concluida",
+        "job_mode": "profunda",
+        "outcome": {
+          "state": "partial",
+          "unresolved_fronts": [
+            "quantas pessoas entraram ontem na Biblioteca Pública do Estado da Bahia, segundo registro público primary source original text",
+            "quantas pessoas entraram ontem na Biblioteca Pública do Estado da Bahia, segundo registro público fontes primárias texto completo",
+            "quantas pessoas entraram ontem na Biblioteca Pública do Estado da Bahia, segundo registro público 2026"
+          ],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 0,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        },
+        "synthesis_llm": false,
+        "chat_result_id": "rj-624cf410831b-result",
+        "answer_coverage": {
+          "complete_parsed_facets": false,
+          "requirements": []
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 6.3816
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 5.4476
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0045
+          },
+          {
+            "step_id": "p4",
+            "type": "verificar",
+            "seconds": 0.0128
+          },
+          {
+            "step_id": "p5",
+            "type": "sintetizar",
+            "seconds": 0.0034
+          },
+          {
+            "step_id": "p6",
+            "type": "auditar",
+            "seconds": 0.0073
+          }
+        ],
+        "synthesis_budget": null,
+        "assistant_messages": 2,
+        "reload_preserved": true,
+        "source_cards": [],
+        "links": [],
+        "media_cards": 0,
+        "page_errors": []
+      }
+    },
+    {
+      "log": "browser-deep-flow.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "deep-flow",
+        "query": "Pesquisa profunda sobre como usar sqlite3.connect, qual a sintaxe, comportamento, valor retornado e limitações.",
+        "seconds": 28.229,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": "rj-cc0e35b30a86",
+        "job_state": "concluida",
+        "job_mode": "profunda",
+        "outcome": {
+          "state": "partial",
+          "unresolved_fronts": [],
+          "source_authority_unverified": false,
+          "provider_code": "",
+          "read_sources": 0,
+          "reason": "evidências insuficientes ou limitações remanescentes"
+        },
+        "synthesis_llm": false,
+        "chat_result_id": "rj-cc0e35b30a86-result",
+        "answer_coverage": {
+          "complete_parsed_facets": false,
+          "requirements": [
+            {
+              "id": "R-5beb2ef3d100",
+              "entity": "sqlite3.connect",
+              "attribute": "syntax",
+              "state": "NOT_SEARCHED"
+            },
+            {
+              "id": "R-8ff438bc40a0",
+              "entity": "sqlite3.connect",
+              "attribute": "return_value",
+              "state": "NOT_SEARCHED"
+            },
+            {
+              "id": "R-b94b53525638",
+              "entity": "sqlite3.connect",
+              "attribute": "behavior",
+              "state": "NOT_SEARCHED"
+            },
+            {
+              "id": "R-4fff8484b8df",
+              "entity": "sqlite3.connect",
+              "attribute": "limitations",
+              "state": "NOT_SEARCHED"
+            }
+          ]
+        },
+        "stage_timings": [
+          {
+            "step_id": "p1",
+            "type": "busca",
+            "seconds": 6.3745
+          },
+          {
+            "step_id": "p2",
+            "type": "ler",
+            "seconds": 0.0008
+          },
+          {
+            "step_id": "p3",
+            "type": "analisar",
+            "seconds": 0.0088
+          },
+          {
+            "step_id": "p4",
+            "type": "verificar",
+            "seconds": 0.019
+          },
+          {
+            "step_id": "p5",
+            "type": "sintetizar",
+            "seconds": 0.0034
+          },
+          {
+            "step_id": "p6",
+            "type": "auditar",
+            "seconds": 0.0164
+          },
+          {
+            "step_id": "p7",
+            "type": "busca",
+            "seconds": 5.7262
+          },
+          {
+            "step_id": "p8",
+            "type": "ler",
+            "seconds": 0.0005
+          },
+          {
+            "step_id": "p9",
+            "type": "analisar",
+            "seconds": 0.0043
+          },
+          {
+            "step_id": "p10",
+            "type": "busca",
+            "seconds": 1.5696
+          },
+          {
+            "step_id": "p11",
+            "type": "ler",
+            "seconds": 0.0006
+          },
+          {
+            "step_id": "p12",
+            "type": "analisar",
+            "seconds": 0.0049
+          },
+          {
+            "step_id": "p13",
+            "type": "busca",
+            "seconds": 4.5862
+          },
+          {
+            "step_id": "p14",
+            "type": "ler",
+            "seconds": 0.0006
+          },
+          {
+            "step_id": "p15",
+            "type": "analisar",
+            "seconds": 0.0035
+          },
+          {
+            "step_id": "p16",
+            "type": "busca",
+            "seconds": 2.0455
+          },
+          {
+            "step_id": "p17",
+            "type": "ler",
+            "seconds": 0.0008
+          },
+          {
+            "step_id": "p18",
+            "type": "analisar",
+            "seconds": 0.3123
+          },
+          {
+            "step_id": "p4",
+            "type": "verificar",
+            "seconds": 1.1045
+          },
+          {
+            "step_id": "p5",
+            "type": "sintetizar",
+            "seconds": 0.0048
+          },
+          {
+            "step_id": "p6",
+            "type": "auditar",
+            "seconds": 0.0727
+          }
+        ],
+        "synthesis_budget": null,
+        "assistant_messages": 2,
+        "reload_preserved": true,
+        "source_cards": [],
+        "links": [],
+        "media_cards": 0,
+        "page_errors": []
+      }
+    },
+    {
+      "log": "browser-images.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "images",
+        "query": "Pesquise imagens da Ponte Estaiada de São Paulo.",
+        "seconds": 10.107,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": null,
+        "job_state": null,
+        "job_mode": null,
+        "outcome": null,
+        "synthesis_llm": false,
+        "chat_result_id": null,
+        "answer_coverage": null,
+        "stage_timings": null,
+        "synthesis_budget": null,
+        "assistant_messages": 1,
+        "reload_preserved": true,
+        "source_cards": [],
+        "links": [],
+        "media_cards": 5,
+        "page_errors": []
+      }
+    },
+    {
+      "log": "browser-cancel.log",
+      "result": {
+        "scope": "AUTHENTICATED_E2E_LOCAL_REAL_AGENT",
+        "name": "cancel",
+        "query": "Pesquisa profunda sobre armazenamento de energia térmica e limitações.",
+        "seconds": 6.612,
+        "inference_policy": "configured-free-only-no-paid-fallback",
+        "completed_flow": true,
+        "http_status": 200,
+        "content_type": "text/event-stream; charset=utf-8",
+        "job": "rj-5d67aafb2ff8",
+        "job_state": "cancelada",
+        "job_mode": "profunda",
+        "outcome": null,
+        "synthesis_llm": false,
+        "chat_result_id": null,
+        "answer_coverage": null,
+        "stage_timings": null,
+        "synthesis_budget": null,
+        "assistant_messages": 1,
+        "reload_preserved": true,
+        "source_cards": [],
+        "links": [],
+        "media_cards": 0,
+        "page_errors": []
+      }
+    },
+    {
+      "log": "browser-A-visual-verified.log",
+      "result": {
+        "scope": "REAL_CHROME_LOCAL_PARTIAL_RESULT_VISUAL_NOT_COMPLETE_RESEARCH",
+        "viewports": [
+          {
+            "viewport": 1280,
+            "root": 1280,
+            "card_left": 394,
+            "card_right": 1144,
+            "message_width": 750
+          },
+          {
+            "viewport": 390,
+            "root": 390,
+            "card_left": 20,
+            "card_right": 360,
+            "message_width": 340
+          },
+          {
+            "viewport": 320,
+            "root": 320,
+            "card_left": 16,
+            "card_right": 294,
+            "message_width": 278
+          }
+        ],
+        "keyboard_sort": true,
+        "csv": true,
+        "edit_buttons": 0,
+        "reduced_motion": true,
+        "zoom": {
+          "width": 105,
+          "scroll": 224,
+          "root": 320,
+          "viewport": 320,
+          "scroll_left": 119
+        },
+        "reload_table": true,
+        "indexeddb": [
+          {
+            "name": "julia-mobile-cache-v1",
+            "stores": []
+          },
+          {
+            "name": "julia-mobile-cache-v2",
+            "stores": [
+              {
+                "name": "messages",
+                "count": 7
+              },
+              {
+                "name": "meta",
+                "count": 4
+              },
+              {
+                "name": "saved_items",
+                "count": 0
+              },
+              {
+                "name": "sessions",
+                "count": 2
+              },
+              {
+                "name": "ui_state",
+                "count": 0
+              }
+            ]
+          }
+        ],
+        "page_errors": []
+      }
+    },
+    {
+      "log": "browser-A-source.log",
+      "result": {
+        "scope": "REAL_CHROME_SEEDED_PUBLIC_SOURCE_DELIVERY",
+        "source_cards": 1,
+        "links": [
+          {
+            "text": "Specifications",
+            "url": "https://onlinemanual.nikonimglib.com/zf/en/specifications_350.html",
+            "target": "_blank"
+          },
+          {
+            "text": "Abrir fonte ↗",
+            "url": "https://onlinemanual.nikonimglib.com/zf/en/specifications_350.html",
+            "target": "_blank"
+          }
+        ],
+        "opened_url": "https://onlinemanual.nikonimglib.com/zf/en/specifications_350.html",
+        "network_failure_observed": true,
+        "health_after_reconnect": 200,
+        "composer_enabled_before_offline": true,
+        "limits": [
+          "Fetch rejection is a transport negative test; no claim that every offline UI flow was exercised."
+        ]
+      }
+    },
+    {
+      "log": "browser-source-visual-verified.log",
+      "result": {
+        "scope": "REAL_CHROME_LATE_SOURCE_CARD",
+        "viewports": [
+          {
+            "viewport": 1280,
+            "root": 1280,
+            "left": 394,
+            "right": 1144
+          },
+          {
+            "viewport": 390,
+            "root": 390,
+            "left": 20,
+            "right": 360
+          },
+          {
+            "viewport": 320,
+            "root": 320,
+            "left": 16,
+            "right": 294
+          }
+        ],
+        "reload_preserved": true
+      }
+    },
+    {
+      "log": "browser-extra.log",
+      "result": {
+        "scope": "AUTHENTICATED_QA; image failure is explicitly injected",
+        "image_error_visible": true,
+        "image_recovered": true,
+        "indexeddb": {
+          "database_count": 2,
+          "messages": 24,
+          "structured_assistant_messages": 9,
+          "result_messages": 8
+        },
+        "downloads": [
+          {
+            "format": "md",
+            "failure": null
+          },
+          {
+            "format": "csv",
+            "failure": null
+          }
+        ],
+        "result_cards": 0,
+        "page_errors": []
+      }
+    },
+    {
+      "log": "browser-gallery.log",
+      "result": {
+        "scope": "REAL_CHROME_GALLERY",
+        "images": [
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          }
+        ],
+        "keyboard_navigation": true,
+        "escape_closes": true,
+        "focus_restored": false,
+        "full_image_loaded": true
+      }
+    },
+    {
+      "log": "browser-gallery-focus.log",
+      "result": {
+        "scope": "REAL_CHROME_GALLERY",
+        "images": [
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg/960px-Ponte_Estaiada_-_S%C3%A3o_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/0e/Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg/960px-Ponte_estaiada_Octavio_Frias_-_Sao_Paulo.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/47/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266763267%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/99/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284266768515%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          },
+          {
+            "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg/960px-Ponte_Estaiada_Oct%C3%A1vio_Frias_de_Oliveira_%284267503980%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "complete": true,
+            "width": 960,
+            "loading": "lazy"
+          }
+        ],
+        "keyboard_navigation": true,
+        "escape_closes": true,
+        "focus_restored": true,
+        "focus_diagnostic": {
+          "connected": true,
+          "hidden": false,
+          "active_tag": "BUTTON",
+          "active_class": "jdui-btn ghost jdui-media-zoom",
+          "active_label": "Ampliar: Ponte Estaiada - São Paulo.jpg"
+        },
+        "full_image_loaded": true
+      }
+    }
+  ],
+  "limits": [
+    "Bootstrap navigation race excluded.",
+    "First focus check false, later instrumented check true; unresolved intermittent issue.",
+    "Partial extractive results are not validated LLM answers."
+  ]
+}

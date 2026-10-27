@@ -1,0 +1,366 @@
+{
+  "baseline": null,
+  "scope": "PAIRED_PUBLIC_HTML_EXTRACTION_NOT_DISCOVERY_OR_LLM",
+  "output_budget": 8000,
+  "model_budget_unchanged": 1800,
+  "memory_scope": "tracemalloc Python allocations, not process RSS; timings include instrumentation",
+  "cases": [
+    {
+      "case": "assign",
+      "query": "Como usar Object.assign, qual a sintaxe, comportamento e valor retornado?",
+      "snapshot_sha256": "42a53d4bae0ee05774f9eda72db2d1eeb267e2f74414b4e1a3442765a520b2d3",
+      "html_bytes": 175389,
+      "retained_chars": 6978,
+      "scan": null,
+      "extraction_s": 0.129572,
+      "selection_s": 0.01985,
+      "python_allocation_peak_bytes": 1519235,
+      "requirements": [
+        {
+          "attribute": "syntax",
+          "entity": "Object.assign",
+          "state": "SUPPORTED"
+        },
+        {
+          "attribute": "return_value",
+          "entity": "Object.assign",
+          "state": "PARTIALLY_SUPPORTED"
+        },
+        {
+          "attribute": "behavior",
+          "entity": "Object.assign",
+          "state": "SUPPORTED"
+        }
+      ],
+      "passages": [
+        {
+          "id": "P-8b9d90788980c4e6",
+          "section": "Description",
+          "context_heading": null,
+          "source_span": null,
+          "text_span": {
+            "start": 1015,
+            "end": 2018,
+            "scope": "returned_extracted_text"
+          },
+          "literal": true,
+          "characters": 1003,
+          "requirements": [
+            "R-a0925ea4b8f7",
+            "R-150e09577ec0"
+          ],
+          "support": {
+            "R-a0925ea4b8f7": "DIRECT_SUPPORT",
+            "R-150e09577ec0": "DIRECT_SUPPORT"
+          }
+        },
+        {
+          "id": "P-653d063089032dcd",
+          "section": "Return value",
+          "context_heading": null,
+          "source_span": null,
+          "text_span": {
+            "start": 717,
+            "end": 748,
+            "scope": "returned_extracted_text"
+          },
+          "literal": true,
+          "characters": 31,
+          "requirements": [
+            "R-54d9fb04a208"
+          ],
+          "support": {
+            "R-54d9fb04a208": "PARTIAL_SUPPORT"
+          }
+        },
+        {
+          "id": "P-bd94b4e722206678",
+          "section": "Try it",
+          "context_heading": null,
+          "source_span": null,
+          "text_span": {
+            "start": 0,
+            "end": 256,
+            "scope": "returned_extracted_text"
+          },
+          "literal": true,
+          "characters": 256,
+          "requirements": [
+            "R-150e09577ec0"
+          ],
+          "support": {
+            "R-150e09577ec0": "DIRECT_SUPPORT"
+          }
+        }
+      ]
+    },
+    {
+      "case": "hypot",
+      "query": "Como usar Math.hypot, qual a sintaxe, comportamento e valor retornado?",
+      "snapshot_sha256": "378873e35be8ec468465b22b3c24e03fb584deafede4121d67de882b8d961b23",
+      "html_bytes": 160116,
+      "retained_chars": 3260,
+      "scan": null,
+      "extraction_s": 0.115048,
+      "selection_s": 0.011674,
+      "python_allocation_peak_bytes": 1228069,
+      "requirements": [
+        {
+          "attribute": "syntax",
+          "entity": "Math.hypot",
+          "state": "SUPPORTED"
+        },
+        {
+          "attribute": "return_value",
+          "entity": "Math.hypot",
+          "state": "SUPPORTED"
+        },
+        {
+          "attribute": "behavior",
+          "entity": "Math.hypot",
+          "state": "SUPPORTED"
+        }
+      ],
+      "passages": [
+        {
+          "id": "P-dd0fa31b0bd9ad8f",
+          "section": "",
+          "context_heading": null,
+          "source_span": null,
+          "text_span": {
+            "start": 0,
+            "end": 1087,
+            "scope": "returned_extracted_text"
+          },
+          "literal": true,
+          "characters": 1087,
+          "requirements": [
+            "R-4b3d5bb0eaa8",
+            "R-005b7b22056d",
+            "R-a5665a9acf81"
+          ],
+          "support": {
+            "R-4b3d5bb0eaa8": "DIRECT_SUPPORT",
+            "R-005b7b22056d": "DIRECT_SUPPORT",
+            "R-a5665a9acf81": "DIRECT_SUPPORT"
+          }
+        },
+        {
+          "id": "P-06c48db2004f07c7",
+          "section": "Try it",
+          "context_heading": null,
+          "source_span": null,
+          "text_span": {
+            "start": 484,
+            "end": 722,
+            "scope": "returned_extracted_text"
+          },
+          "literal": true,
+          "characters": 238,
+          "requirements": [
+            "R-a5665a9acf81"
+          ],
+          "support": {
+            "R-a5665a9acf81": "DIRECT_SUPPORT"
+          }
+        },
+        {
+          "id": "P-173ee7166891b0be",
+          "section": "Return value",
+          "context_heading": null,
+          "source_span": null,
+          "text_span": {
+            "start": 874,
+            "end": 1148,
+            "scope": "returned_extracted_text"
+          },
+          "literal": true,
+          "characters": 274,
+          "requirements": [
+            "R-005b7b22056d"
+          ],
+          "support": {
+            "R-005b7b22056d": "PARTIAL_SUPPORT"
+          }
+        }
+      ]
+    },
+    {
+      "case": "tramontina",
+      "query": "Quem fundou a Tramontina, em que ano e quais produtos fabrica?",
+      "snapshot_sha256": "83c5e6e44b7b1aab6fd58eadf89a00b6251befec6bb314d490bb3e2331310059",
+      "html_bytes": 880010,
+      "retained_chars": 681,
+      "scan": null,
+      "extraction_s": 0.060108,
+      "selection_s": 0.004517,
+      "python_allocation_peak_bytes": 1903697,
+      "requirements": [
+        {
+          "attribute": "founders",
+          "entity": "Tramontina",
+          "state": "DISCOVERED"
+        },
+        {
+          "attribute": "foundation_date",
+          "entity": "Tramontina",
+          "state": "DISCOVERED"
+        },
+        {
+          "attribute": "products",
+          "entity": "Tramontina",
+          "state": "DISCOVERED"
+        }
+      ],
+      "passages": []
+    },
+    {
+      "case": "artemis",
+      "query": "Quando a Artemis I foi lançada e quando retornou à Terra?",
+      "snapshot_sha256": "b774fc9ef3b6d42f3533e5b9b15af9851ad7239743c6598dfc85b58b4829f243",
+      "html_bytes": 277286,
+      "retained_chars": 5106,
+      "scan": null,
+      "extraction_s": 0.211741,
+      "selection_s": 9.8e-05,
+      "python_allocation_peak_bytes": 1357135,
+      "requirements": [],
+      "passages": []
+    },
+    {
+      "case": "sqlite",
+      "query": "Quais as diferenças entre WAL e rollback journal no SQLite e suas limitações?",
+      "snapshot_sha256": "2616a7b5abca3600dbd5c86e2d0176f8fcd5752c77a38f21b87eca770c317aa4",
+      "html_bytes": 42143,
+      "retained_chars": 2076,
+      "scan": {
+        "available_chars": 31204,
+        "scanned_elements": 103,
+        "retained_chars": 2076,
+        "selected_passages": 3,
+        "late_passages": 2,
+        "output_budget": 8000,
+        "source_sha256": "683655133c295eccb400982bb092ca3ffc7c65e6ac277b4758890abd4bd2976f"
+      },
+      "extraction_s": 0.157939,
+      "selection_s": 0.001616,
+      "python_allocation_peak_bytes": 928122,
+      "requirements": [
+        {
+          "attribute": "limitations",
+          "entity": "Quais as diferenças entre WAL e rollback journal no SQLite e suas",
+          "state": "DISCOVERED"
+        }
+      ],
+      "passages": []
+    },
+    {
+      "case": "nikon-zf",
+      "query": "Qual o peso da Nikon Z f com bateria e cartão e qual bateria utiliza?",
+      "snapshot_sha256": "2c3567c74664d4361d3709192a0b40dca10b7847d96e9be71887d127362968f9",
+      "html_bytes": 121920,
+      "retained_chars": 767,
+      "scan": {
+        "available_chars": 12375,
+        "scanned_elements": 104,
+        "retained_chars": 767,
+        "selected_passages": 4,
+        "late_passages": 3,
+        "output_budget": 8000,
+        "source_sha256": "83b604a5c2776b232c515cef3df9f5dac2a97ae2ab4e2df95ed86021e4e3b1ee"
+      },
+      "extraction_s": 0.248028,
+      "selection_s": 0.001657,
+      "python_allocation_peak_bytes": 2494604,
+      "requirements": [
+        {
+          "attribute": "weight",
+          "entity": "Nikon Z f",
+          "state": "PARTIALLY_SUPPORTED"
+        },
+        {
+          "attribute": "battery",
+          "entity": "Nikon Z f",
+          "state": "PARTIALLY_SUPPORTED"
+        }
+      ],
+      "passages": [
+        {
+          "id": "P-f438329fcbdd690d",
+          "section": "",
+          "context_heading": "Nikon Z f Digital Camera",
+          "source_span": {
+            "start": 12113,
+            "end": 12272,
+            "scope": "normalized_available_extraction",
+            "sha256": "83b604a5c2776b232c515cef3df9f5dac2a97ae2ab4e2df95ed86021e4e3b1ee"
+          },
+          "text_span": {
+            "start": 608,
+            "end": 767,
+            "scope": "returned_extracted_text"
+          },
+          "literal": true,
+          "characters": 159,
+          "requirements": [
+            "R-4cb8e93b77e4"
+          ],
+          "support": {
+            "R-4cb8e93b77e4": "PARTIAL_SUPPORT"
+          }
+        },
+        {
+          "id": "P-dad10738ddc88f82",
+          "section": "",
+          "context_heading": "Nikon Z f Digital Camera",
+          "source_span": {
+            "start": 11510,
+            "end": 11799,
+            "scope": "normalized_available_extraction",
+            "sha256": "83b604a5c2776b232c515cef3df9f5dac2a97ae2ab4e2df95ed86021e4e3b1ee"
+          },
+          "text_span": {
+            "start": 298,
+            "end": 587,
+            "scope": "returned_extracted_text"
+          },
+          "literal": true,
+          "characters": 289,
+          "requirements": [
+            "R-ae046bbf2b26"
+          ],
+          "support": {
+            "R-ae046bbf2b26": "PARTIAL_SUPPORT"
+          }
+        }
+      ]
+    },
+    {
+      "case": "yellowstone",
+      "query": "Qual o preço de entrada em Yellowstone por veículo particular e por quantos dias vale?",
+      "snapshot_sha256": "a8f55887644f4f6f1159002e4553de2077ca793d8d9b75d1d75a776268d61f25",
+      "html_bytes": 69733,
+      "retained_chars": 23,
+      "scan": {
+        "available_chars": 11112,
+        "scanned_elements": 133,
+        "retained_chars": 23,
+        "selected_passages": 1,
+        "late_passages": 1,
+        "output_budget": 8000,
+        "source_sha256": "b1adf93b43573dbb95c72780e04e41250a478cf94bdcb04eb89d28c8ce5ccaf2"
+      },
+      "extraction_s": 0.132166,
+      "selection_s": 0.001098,
+      "python_allocation_peak_bytes": 1265298,
+      "requirements": [
+        {
+          "attribute": "price",
+          "entity": "Qual o preço de entrada em Yellowstone por veículo particular e por quantos dias vale",
+          "state": "DISCOVERED"
+        }
+      ],
+      "passages": []
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "pytest_runs": {
+    "full-suite.log": "1707 passed, 4 skipped, 2 warnings in 274.93s (0:04:34)",
+    "full-suite-final.log": "1731 passed, 4 skipped, 2 warnings in 475.74s (0:07:55)",
+    "full-suite-release.log": "1 failed, 1733 passed, 4 skipped, 2 warnings in 339.17s (0:05:39)",
+    "full-suite-quiet.log": "1734 passed, 4 skipped, 2 warnings in 550.47s (0:09:10)",
+    "runtime-recheck.log": "1 passed in 14.71s",
+    "domain-focused.log": "18 passed in 6.90s",
+    "numeric-final.log": "57 passed in 22.78s"
+  },
+  "search": {
+    "taxa_global": 1.0,
+    "casos": 34,
+    "aprovados": 34
+  },
+  "shopping": {
+    "casos": 59,
+    "aprovados": 59
+  },
+  "experience": "16/16 checks",
+  "no_tests_removed": true,
+  "numeric_original_v5998": "unresolved; old rejected output missing",
+  "publication": "NO_GO",
+  "limits": [
+    "Final full-suite release failed runtime reconnect 15s; isolated recheck passed; preserved regardless of later outcome.",
+    "Full suite before last three tests: 1731 passed. Last three focused passed; quiet full run is authoritative for full current count."
+  ]
+}
