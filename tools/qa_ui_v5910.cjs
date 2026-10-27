@@ -1,5 +1,8 @@
 async page => {
   if(!page.url().startsWith('http://127.0.0.1:'))throw Error('Loopback QA only');
+  const version=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('research-qa-config')||'{}').version||'v5910');
+  if(!['v5910','v5911'].includes(version))throw Error('Unknown QA version');
+  const output='qa-artifacts/'+version;
   const errors=[];const onError=e=>errors.push(e.message);page.on('pageerror',onError);
   const geometry=[];
   async function choose(name){
@@ -15,7 +18,7 @@ async page => {
       // Playwright's stability wait. Do not suppress the application's sync.
       await page.locator(selector).first().evaluate(n=>n.scrollIntoView({block:'center'}));
       const g=await page.locator(selector).first().evaluate(n=>{const r=n.getBoundingClientRect();return {viewport:innerWidth,root:document.documentElement.scrollWidth,left:r.left,right:r.right};});
-      await page.screenshot({path:`qa-artifacts/v5910/${label}-${width}.png`});
+      await page.screenshot({path:`${output}/${label}-${width}.png`});
       if(g.root>width||g.left<-.5||g.right>width+.5)throw Error('Overflow '+JSON.stringify(g));
       geometry.push({label,...g});
     }
@@ -38,16 +41,17 @@ async page => {
     await page.waitForFunction(()=>{const img=document.querySelector('.jdui-image-dialog img');return img&&img.complete&&img.naturalWidth>0&&!img.hidden;},null,{timeout:20000});
     const before=await dialog.locator('.jdui-image-caption').innerText();await page.keyboard.press('ArrowRight');
     const after=await dialog.locator('.jdui-image-caption').innerText();if(before===after)throw Error('Gallery keyboard failed');
-    await page.screenshot({path:'qa-artifacts/v5910/gallery-modal.png'});
+    await page.screenshot({path:output+'/gallery-modal.png'});
     await page.keyboard.press('Escape');await dialog.waitFor({state:'detached'});
     const focus=await zoom.evaluate(n=>n===document.activeElement);if(!focus)throw Error('Focus not restored');
     await page.setViewportSize({width:1280,height:900});await page.evaluate(()=>document.body.style.zoom='2');
     const scale=await page.evaluate(()=>({viewport:innerWidth,root:document.documentElement.scrollWidth}));
-    await page.screenshot({path:'qa-artifacts/v5910/zoom-200.png'});
+    await page.screenshot({path:output+'/zoom-200.png'});
     await page.evaluate(()=>document.body.style.zoom='');if(scale.root>scale.viewport)throw Error('Zoom overflow');
     await page.emulateMedia({reducedMotion:'reduce'});
     const motion=await zoom.evaluate(n=>getComputedStyle(n).transitionDuration);await page.emulateMedia({reducedMotion:'no-preference'});
-    const details=page.locator('.jdui-media-details').first();await details.locator('summary').click();
+    const details=page.locator('.jdui-media-details').first();
+    if(!await details.evaluate(n=>n.open))await details.locator('summary').click();
     const media=await page.locator('.jdui-media-grid .jdui-pcard').count();await page.reload();
     await page.locator('#loginOverlay').waitFor({state:'hidden'});await details.waitFor({state:'visible'});
     if(!await details.evaluate(n=>n.open))throw Error('Metadata state lost');

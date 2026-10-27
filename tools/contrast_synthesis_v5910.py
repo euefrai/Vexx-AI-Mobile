@@ -1,5 +1,5 @@
 """B agent then A direct adapter with identical source and verdict arguments."""
-import copy,json,os
+import argparse,copy,json,os
 from pathlib import Path
 import sys,tempfile,threading
 ROOT=Path(__file__).resolve().parents[1];sys.path.insert(0,str(ROOT))
@@ -9,7 +9,10 @@ import pc_agent,research_agents as ra,research_synthesis as rs
 
 
 def main():
-    directory=ROOT/'qa-artifacts/v5910/raw/contrast'
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--artifact-version',choices=['v5910','v5911'],default='v5910')
+    args=parser.parse_args()
+    directory=ROOT/'qa-artifacts'/args.artifact_version/'raw/contrast'
     directory.mkdir(parents=True,exist_ok=True)
     if (directory/'result.json').exists():raise SystemExit('Refusing repeat of real model contrast')
     cfg=pc_agent.ai_config();cfg['fallbacks']=[]

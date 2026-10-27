@@ -1,7 +1,8 @@
 """Allowlisted public summaries from disposable QA; read-only SQLite."""
-import json,sqlite3,tempfile
+import argparse,json,sqlite3,tempfile
 from pathlib import Path
-R=Path(__file__).resolve().parents[1];P=R/'qa-artifacts/v5910'
+parser=argparse.ArgumentParser();parser.add_argument('--artifact-version',choices=['v5910','v5911'],default='v5910');args=parser.parse_args()
+R=Path(__file__).resolve().parents[1];P=R/'qa-artifacts'/args.artifact_version
 private=json.loads((P/'qa-runtime-private.json').read_text())
 database=Path(private['database']).resolve()
 assert database.name=='qa.sqlite' and database.parent.name.startswith('v5981-admin-qa-')
@@ -29,8 +30,8 @@ out={'scope':'REAL_CHROME_AUTHENTICATED_FASTAPI_DEVELOPMENT_AGENT_TEMPORARY_SQLI
  'models':[r[0] for r in db.execute('select distinct model from ai_requests')],
  'quick_check':db.execute('pragma quick_check').fetchone()[0],
  'limits':['completed_flow in legacy harness means transport/job observed, not acceptance.',
-           'SQLite includes one failed stale QA session attempt, not counted as successful chat.',
-           'No case approved full autonomous LLM synthesis; extractive fallbacks are explicit.']}
+           *(['SQLite includes one failed stale QA session attempt, not counted as successful chat.'] if args.artifact_version=='v5910' else []),
+           'LLM validation alone does not establish complete research; inspect outcome and requirement coverage.']}
 db.close()
 (P/'authenticated-summary.json').write_text(json.dumps(out,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print([(r['name'],r.get('synthesis')) for r in cases])

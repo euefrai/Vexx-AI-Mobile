@@ -18,8 +18,8 @@ for cid,terms in [('ar-07',['nasce','nascente','foz','desagua']),('ar-08',['bach
         for term in terms:
             pos=qi.normalized(text).find(qi.normalized(term))
             if pos>=0:snippets.append(text[max(0,pos-80):pos+300])
-        sources.append({'url':source['url'],'text_chars':len(text),'snippets':snippets[:3]})
-    out.append({'case':cid,'question':data['case']['query'],'requirements':qi.answer_requirements(data['case']['query']),
+        sources.append({'url':source['url'],'text_chars':len(text),'matched_terms':len(snippets)})
+    out.append({'case':cid,'question':data['case']['query'],'requirements':data['coverage']['requirements'],
         'first_loss':'REQUIREMENT_NOT_RECOGNIZED','retained_read':sources,'old_linked_passages':len(data['coverage']['passages'])})
 (P/'previous-loss-summary.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')
-print(json.dumps(out,ensure_ascii=False,indent=2))
+print([(r['case'],r['first_loss'],len(r['retained_read'])) for r in out])

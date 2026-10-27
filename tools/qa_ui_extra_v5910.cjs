@@ -1,12 +1,14 @@
 async page => {
   if(!page.url().startsWith('http://127.0.0.1:'))throw Error('Loopback QA only');
+  const version=await page.evaluate(()=>JSON.parse(sessionStorage.getItem('research-qa-config')||'{}').version||'v5910');
+  if(!['v5910','v5911'].includes(version))throw Error('Unknown QA version');
   await page.setViewportSize({width:1280,height:900});
   await page.getByRole('button',{name:/^Pesquisa profunda sobre quem fundou a WEG/}).click();
   await page.getByRole('button',{name:'Ver pesquisa',exact:true}).first().click();
   const downloads=[];
   for(const [name,format] of [['Baixar MD','md'],['Baixar CSV','csv']]){
     const pending=page.waitForEvent('download');await page.getByRole('link',{name,exact:true}).click();
-    const file=await pending;await file.saveAs('qa-artifacts/v5910/research-export.'+format);
+    const file=await pending;await file.saveAs('qa-artifacts/'+version+'/research-export.'+format);
     const failure=await file.failure();if(failure)throw Error(failure);downloads.push(format);
   }
   const storage=await page.evaluate(async()=>{
