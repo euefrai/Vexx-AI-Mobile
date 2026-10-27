@@ -4554,7 +4554,15 @@ def _research_writer(cfg: dict, parar):
         bounded = dict(cfg, fallbacks=[])
         messages = [dict(m) for m in messages]
         messages[0]['content'] = system_with_identity(messages[0]['content'])
-        result = gerar_texto(bounded, messages, max_tokens=1800, timeout=min(25, timeout))
+        try:
+            result = gerar_texto(bounded, messages, max_tokens=1800, timeout=min(25, timeout))
+        except hermes_bridge.BridgeErro as exc:
+            write.last_metadata=getattr(exc,'response_metadata',{})
+            if write.last_metadata.get('finish_reason')=='length':
+                raise research_synthesis.ModelOutputError('model_truncated') from exc
+            if write.last_metadata.get('finish_reason')=='content_filter':
+                raise research_synthesis.ModelOutputError('model_filtered') from exc
+            raise
         write.last_metadata = {k:result[k] for k in ('finish_reason','usage','truncada','latencia_s') if k in result}
         if result.get('truncada') or result.get('finish_reason') == 'length':
             raise research_synthesis.ModelOutputError('model_truncated')

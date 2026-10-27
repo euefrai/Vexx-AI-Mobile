@@ -133,9 +133,17 @@ def listar_modelos(base: str, timeout: float = 10.0, api_key: str = "",
     return ids
 
 
+def _content_text(content):
+    if content is None:return ''
+    if isinstance(content,str):return content
+    if isinstance(content,list):
+        return ''.join(p['text'] for p in content if isinstance(p,dict) and p.get('type')=='text' and isinstance(p.get('text'),str))
+    raise BridgeErro('Conteúdo do modelo em formato inesperado.','formato')
+
+
 def extrair_texto(dados: dict) -> str:
     try:
-        return str(dados["choices"][0]["message"]["content"] or "")
+        return _content_text(dados["choices"][0]["message"]["content"])
     except (KeyError, IndexError, TypeError, AttributeError):
         raise BridgeErro("Resposta do modelo em formato inesperado.", "formato") from None
 
@@ -146,8 +154,8 @@ def extrair_delta(dados: dict) -> str:
         if escolhas and isinstance(escolhas[0], dict):
             delta = escolhas[0].get("delta") or {}
             if isinstance(delta, dict) and delta.get("content"):
-                return str(delta["content"])
-    except (AttributeError, TypeError, IndexError):
+                return _content_text(delta["content"])
+    except (AttributeError, TypeError, IndexError, BridgeErro):
         pass
     return ""
 
@@ -210,6 +218,12 @@ def chat_complete(base: str, model: str, messages: list,
                          else "indisponivel") from None
     except ValueError as exc:
         raise BridgeErro("Resposta do proxy em formato inesperado.", "formato") from None
+    choices = dados.get('choices') if isinstance(dados, dict) else None
+    finish = choices[0].get('finish_reason') if isinstance(choices, list) and choices and isinstance(choices[0], dict) else None
+    finish = finish if finish in ('stop','length','tool_calls','function_call','content_filter') else None
+    usage = dados.get('usage') if isinstance(dados, dict) else None
+    usage = {k:v for k,v in (usage.items() if isinstance(usage, dict) else [])
+             if k in ('prompt_tokens','completion_tokens','total_tokens') and type(v) is int and 0<=v<=10**9}
     texto, erros = tool_protocol.sanitizar_texto(extrair_texto(dados))
     for erro in erros:
         log.warning("TOOL_PROTOCOL %s ferramenta=%s: %s", erro.get("codigo"),
@@ -218,13 +232,9 @@ def chat_complete(base: str, model: str, messages: list,
         if erros:
             raise BridgeErro("O modelo emitiu apenas uma chamada interna de ferramenta; "
                              "nada foi executado nem exibido.", "protocolo_ferramenta")
-        raise BridgeErro("Modelo devolveu resposta vazia.", "vazia")
-    choices = dados.get('choices') if isinstance(dados, dict) else None
-    finish = choices[0].get('finish_reason') if isinstance(choices, list) and choices and isinstance(choices[0], dict) else None
-    finish = finish if finish in ('stop','length','tool_calls','function_call','content_filter') else None
-    usage = dados.get('usage') if isinstance(dados, dict) else None
-    usage = {k:v for k,v in (usage.items() if isinstance(usage, dict) else [])
-             if k in ('prompt_tokens','completion_tokens','total_tokens') and type(v) is int and 0<=v<=10**9}
+        exc=BridgeErro("Modelo devolveu resposta vazia.", "vazia")
+        exc.response_metadata={'finish_reason':finish,'usage':usage,'answer_chars':0}
+        raise exc
     return {"texto": texto[:MAX_TEXTO],
             "truncada": len(texto) > MAX_TEXTO or finish == 'length',
             "finish_reason": finish, "usage": usage,
