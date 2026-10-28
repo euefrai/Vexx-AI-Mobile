@@ -16,10 +16,10 @@ import sys
 import time
 from collections import deque
 
-MAX_W = 960
-QUALIDADE = 55
+MAX_W = 1920
+QUALIDADE = 78
 MIN_INTERVALO = 0.05
-MAX_POR_MINUTO = 120
+MAX_POR_MINUTO = 720
 
 TECLAS_NOMEADAS = {"enter", "backspace", "tab", "esc", "escape", "space",
                    "left", "right", "up", "down", "home", "end",
@@ -75,6 +75,14 @@ def validar_comando(cmd: dict) -> dict:
     tipo = cmd.get("kind")
     if tipo in ("move", "click", "double", "right"):
         return {"kind": tipo, "x": _num(cmd.get("x"), "x"), "y": _num(cmd.get("y"), "y")}
+    if tipo == "drag":
+        points = cmd.get("points")
+        if not isinstance(points, list) or not 2 <= len(points) <= 32:
+            raise RemotoErro("Arrasto exige 2 a 32 pontos.", "invalido")
+        if any(not isinstance(p, dict) for p in points):
+            raise RemotoErro("Ponto inválido.", "invalido")
+        return {"kind": tipo, "points": [{"x": _num(p.get("x"), "x"),
+                                         "y": _num(p.get("y"), "y")} for p in points]}
     if tipo == "scroll":
         try:
             dx, dy = int(cmd.get("dx", 0)), int(cmd.get("dy", 0))
@@ -106,7 +114,7 @@ def capturar(max_w: int = MAX_W, qualidade: int = QUALIDADE) -> dict:
     if sys.platform != "win32":
         raise RemotoErro("Captura só no Windows.", "plataforma")
     max_w = max(320, min(int(max_w or MAX_W), MAX_W))
-    qualidade = max(30, min(int(qualidade or QUALIDADE), 80))
+    qualidade = max(30, min(int(qualidade or QUALIDADE), 85))
     inicio = time.monotonic()
     rgb = tamanho = None
     try:
@@ -210,8 +218,22 @@ def executar(valido: dict, *, autorizado: bool = False) -> dict:
             u.mouse_event(up, 0, 0, 0, 0)
             if n == 2:
                 time.sleep(0.05)
+    elif tipo == "drag":
+        points = valido["points"]
+        u.SetCursorPos(*_para_px(points[0]["x"], points[0]["y"]))
+        try:
+            u.mouse_event(0x0002, 0, 0, 0, 0)
+            for point in points[1:]:
+                u.SetCursorPos(*_para_px(point["x"], point["y"]))
+                time.sleep(0.008)
+        finally:
+            # One bounded command: disconnects cannot leave a mouse button held.
+            u.mouse_event(0x0004, 0, 0, 0, 0)
     elif tipo == "scroll":
-        u.mouse_event(0x0800, 0, 0, valido["dy"] * 120, 0)
+        if valido["dy"]:
+            u.mouse_event(0x0800, 0, 0, valido["dy"] * 120, 0)
+        if valido.get("dx"):
+            u.mouse_event(0x1000, 0, 0, valido["dx"] * 120, 0)
     elif tipo == "key":
         t = valido["key"]
         vk = VK.get(t, 0)

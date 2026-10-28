@@ -20,6 +20,9 @@
     let state = null, connected = false, screenBusy = false, statusBusy = false;
     let commandBusy = false, version = 0, identity = '', lastStatus = 0;
     let screenAbort, statusAbort, gesture = null, longTimer, lastMove = 0;
+    let screenTimer, frameLatency = 450, screenFailures = 0, tapTimer, pendingTap;
+    const touches = new Map();
+    let scrollPoint = null;
     let inputBusy = false, inputAbort, inputTimer, lastInputAt = 0;
     const inputQueue = [];
     const frame = $('remoteFrame'), image = $('screenImg');
@@ -27,8 +30,10 @@
     const online = () => ctx.authenticated() && ctx.online() && navigator.onLine;
     const valid = (v, id) => v === version && id === ctx.identity() && online() && pageActive();
     function stop() {
-      connected = false;
-      screenAbort?.abort();
+      connected = false; version++;
+      clearTimeout(screenTimer); clearTimeout(tapTimer); pendingTap = null;
+      touches.clear(); scrollPoint = null;
+      screenAbort?.abort(); screenAbort = null; screenBusy = false;
       inputAbort?.abort(); clearTimeout(inputTimer);
       for (const item of inputQueue.splice(0)) item.resolve.forEach(done => done(false));
       $('remoteKeys').value = '';
@@ -112,23 +117,44 @@
     async function pullScreen() {
       if (!connected || !mobile || !online() || !pageActive() || screenBusy) return;
       const v = version, id = ctx.identity();
+      clearTimeout(screenTimer);
+      const started = performance.now();
       const abort = new AbortController(); screenAbort = abort;
       screenBusy = true;
       try {
-        const r = await ctx.api('/api/screen?max_w=960&q=55', { headers: ctx.headers(), signal: abort.signal });
+        const width = frameLatency > 1400 ? 960 : frameLatency > 650 ? 1280 : 1920;
+        const quality = frameLatency > 1400 ? 62 : 78;
+        const r = await ctx.api('/api/screen?max_w=' + width + '&q=' + quality, { headers: ctx.headers(), signal: abort.signal });
         if (!valid(v, id) || !connected) return;
-        image.src = 'data:image/jpeg;base64,' + r.imagem;
+        const next = new Image();
+        next.src = 'data:image/jpeg;base64,' + r.imagem;
+        await next.decode();
+        if (!valid(v, id) || !connected) return;
+        image.src = next.src;
+        frameLatency = frameLatency * .7 + (performance.now() - started) * .3;
+        screenFailures = 0;
         frame.style.aspectRatio = r.largura + ' / ' + r.altura;
         if (state) state.control_allowed = r.remote_enabled === true;
         $('screenLabel').textContent = 'CONECTADO';
-        $('screenNote').textContent = r.remote_enabled ? 'Toque para clicar. Segure para o botão direito. Arraste para mover o ponteiro.' : 'Somente visualização. Permita o controle no computador.';
+        $('screenNote').textContent = r.remote_enabled ? 'Toque para clicar; dois toques para abrir. Arraste para selecionar ou mover. Dois dedos para rolar; segure para o botão direito.' : 'Somente visualização. Permita o controle no computador.';
         render();
       } catch (err) {
         if (err.name !== 'AbortError' && valid(v, id)) {
-          stop(); state = null; render(err.message || 'Conexão interrompida. Conecte novamente.');
-          lastStatus = 0;
+          screenFailures++;
+          if (err.status === 401 || err.status === 403 || screenFailures >= 3) {
+            stop(); state = null; render(err.message || 'Conexão interrompida. Conecte novamente.');
+            lastStatus = 0;
+          } else $('screenLabel').textContent = 'RECONECTANDO…';
         }
-      } finally { if (screenAbort === abort) screenBusy = false; }
+      } finally {
+        if (screenAbort === abort) {
+          screenBusy = false;
+          if (valid(v, id) && connected) {
+            const delay = screenFailures ? 1000 * screenFailures : Math.max(30, 250 - (performance.now() - started));
+            screenTimer = setTimeout(pullScreen, delay);
+          }
+        }
+      }
     }
     function send(cmd) {
       if (!connected || !online() || !pageActive() || !state?.control_allowed || state.confirmation_open) return Promise.resolve(false);
@@ -136,6 +162,10 @@
         const tail = inputQueue.at(-1);
         if (cmd.kind === 'move' && tail?.cmd.kind === 'move') {
           tail.resolve.forEach(done => done(false)); tail.cmd = cmd; tail.resolve = [resolve];
+        } else if (cmd.kind === 'scroll' && tail?.cmd.kind === 'scroll') {
+          tail.cmd.dx = Math.max(-10, Math.min(10, (tail.cmd.dx || 0) + (cmd.dx || 0)));
+          tail.cmd.dy = Math.max(-10, Math.min(10, (tail.cmd.dy || 0) + (cmd.dy || 0)));
+          tail.resolve.forEach(done => done(false)); tail.resolve = [resolve];
         } else if (cmd.kind === 'text' && tail?.cmd.kind === 'text' && tail.cmd.text.length + cmd.text.length <= 200) {
           tail.cmd.text += cmd.text; tail.resolve.push(resolve);
         } else if (inputQueue.length < 24) {
@@ -147,7 +177,7 @@
     async function pumpInput() {
       if (inputBusy || !inputQueue.length) return;
       clearTimeout(inputTimer);
-      const wait = 550 - (Date.now() - lastInputAt);
+      const wait = 100 - (Date.now() - lastInputAt);
       if (wait > 0) { inputTimer = setTimeout(pumpInput, wait); return; }
       const item = inputQueue.shift();
       if (!valid(item.version, item.identity) || !connected || !state?.control_allowed || state.confirmation_open) {
@@ -167,33 +197,72 @@
     function position(ev) {
       return imagePosition(frame.getBoundingClientRect(), image.naturalWidth, image.naturalHeight, ev.clientX, ev.clientY);
     }
+    const cancelGesture = () => { clearTimeout(longTimer); gesture = null; touches.clear(); scrollPoint = null; };
+    const center = () => {
+      const values = [...touches.values()];
+      return {x: values.reduce((n,p)=>n+p.x,0)/values.length, y:values.reduce((n,p)=>n+p.y,0)/values.length};
+    };
     frame.addEventListener('pointerdown', ev => {
-      if (ev.target.closest('button') || !connected || !state?.control_allowed || !ev.isPrimary) return;
+      if (ev.target.closest('button') || !connected || !state?.control_allowed) return;
       const p = position(ev); if (!p) return;
       ev.preventDefault(); frame.setPointerCapture(ev.pointerId);
-      gesture = { start: p, point: p, moved: false, long: false, id: ev.pointerId };
+      touches.set(ev.pointerId, {x:ev.clientX, y:ev.clientY});
+      if (touches.size > 1) {
+        clearTimeout(longTimer); clearTimeout(tapTimer); pendingTap = null;
+        gesture = null; scrollPoint = center(); return;
+      }
+      gesture = { start: p, point: p, points:[p], moved: false, long: false, id: ev.pointerId };
       if (ev.pointerType !== 'mouse') {
         longTimer = setTimeout(() => { if (gesture && !gesture.moved) { gesture.long = true; send({ kind: 'right', ...gesture.point }); } }, 600);
       }
     });
     frame.addEventListener('pointermove', ev => {
-      if (!gesture || ev.pointerId !== gesture.id) return;
+      if (!touches.has(ev.pointerId)) return;
+      touches.set(ev.pointerId, {x:ev.clientX, y:ev.clientY});
+      if (scrollPoint && touches.size > 1) {
+        const c = center(), dx = Math.trunc((scrollPoint.x-c.x)/24), dy = Math.trunc((c.y-scrollPoint.y)/24);
+        if ((dx || dy) && Date.now()-lastMove >= 100) {
+          lastMove = Date.now(); scrollPoint = c;
+          send({kind:'scroll',dx:Math.max(-10,Math.min(10,dx)),dy:Math.max(-10,Math.min(10,dy))});
+        }
+        return;
+      }
+      if (!gesture || ev.pointerId !== gesture.id || gesture.long) return;
       const p = position(ev); if (!p) return;
       gesture.point = p;
       const rect = frame.getBoundingClientRect();
-      if (Math.hypot((p.x - gesture.start.x) * rect.width, (p.y - gesture.start.y) * rect.height) > 12) {
+      if (Math.hypot((p.x - gesture.start.x) * rect.width, (p.y - gesture.start.y) * rect.height) > 8) {
         gesture.moved = true; clearTimeout(longTimer);
-        if (Date.now() - lastMove > 150) { lastMove = Date.now(); send({kind: 'move', ...p}); }
+        if (gesture.points.length >= 31) gesture.points = gesture.points.filter((_,i)=>i%2===0);
+        gesture.points.push(p);
       }
     });
     frame.addEventListener('pointerup', ev => {
+      touches.delete(ev.pointerId);
+      if (!touches.size) scrollPoint = null;
       if (!gesture || ev.pointerId !== gesture.id) return;
       const g = gesture; gesture = null; clearTimeout(longTimer);
-      if (!g.moved && !g.long) send({kind: ev.button === 2 ? 'right' : 'click', ...g.point});
+      const end = position(ev) || g.point;
+      if (g.long) return;
+      if (g.moved) { send({kind:'drag',points:[...g.points,end]}); return; }
+      if (ev.button === 2) { send({kind:'right',...end}); return; }
+      if (pendingTap && Math.hypot(pendingTap.x-end.x,pendingTap.y-end.y)<.04) {
+        clearTimeout(tapTimer); pendingTap = null; send({kind:'double',...end});
+      } else {
+        if (pendingTap) { clearTimeout(tapTimer); send({kind:'click',...pendingTap}); }
+        pendingTap = end;
+        tapTimer = setTimeout(()=>{ const p=pendingTap; pendingTap=null; if(p)send({kind:'click',...p}); },250);
+      }
     });
-    const cancelGesture = () => { clearTimeout(longTimer); gesture = null; };
     frame.addEventListener('pointercancel', cancelGesture);
-    frame.addEventListener('lostpointercapture', cancelGesture);
+    frame.addEventListener('lostpointercapture', ev => { if(touches.has(ev.pointerId)) cancelGesture(); });
+    frame.addEventListener('wheel', ev => {
+      if (!connected || !state?.control_allowed) return;
+      ev.preventDefault();
+      if(Date.now()-lastMove<100)return;
+      lastMove=Date.now();
+      send({kind:'scroll',dx:Math.sign(ev.deltaX)*3,dy:-Math.sign(ev.deltaY)*3});
+    }, {passive:false});
     frame.addEventListener('contextmenu', ev => ev.preventDefault());
     $('remoteConnect').addEventListener('click', () => {
       if (!mobile || !state?.view_allowed || state.confirmation_open) return;
@@ -203,7 +272,7 @@
     $('remotePermit').addEventListener('click', () => action('request'));
     $('remoteRevoke').addEventListener('click', () => action('revoke'));
     $('refreshButton').addEventListener('click', pullScreen);
-    $('touchMode').addEventListener('click', () => ctx.notify('Toque para clicar; segure para o botão direito.'));
+    $('touchMode').addEventListener('click', () => ctx.notify('Toque: clique. Dois toques: abrir. Arraste: mover/selecionar ao soltar. Dois dedos: rolar. Segure: botão direito.'));
     $('remoteScrollUp').addEventListener('click', () => send({kind:'scroll', dy:3}));
     $('remoteScrollDown').addEventListener('click', () => send({kind:'scroll', dy:-3}));
     $('remoteEnter').addEventListener('click', () => send({kind:'key', key:'enter'}));
@@ -240,7 +309,7 @@
     document.addEventListener('visibilitychange', update);
     window.addEventListener('offline', update);
     window.addEventListener('pagehide', () => { version++; stop(); });
-    setInterval(() => { if (pageActive()) { refresh(); pullScreen(); } }, 1600);
+    setInterval(() => { if (pageActive()) refresh(); }, 1600);
     render();
     return { update };
   }

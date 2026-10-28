@@ -256,14 +256,20 @@ class XlsxExport(BaseModel):
     messages: list[ExportMessage] = Field(min_length=1, max_length=500)
 
 
+class RemotePoint(BaseModel):
+    x: float = Field(ge=0.0, le=1.0)
+    y: float = Field(ge=0.0, le=1.0)
+
+
 class InputBody(BaseModel):
-    kind: str = Field(pattern=r"^(move|click|double|right|scroll|key|text)$")
+    kind: str = Field(pattern=r"^(move|click|double|right|scroll|key|text|drag)$")
     x: float | None = Field(default=None, ge=0.0, le=1.0)
     y: float | None = Field(default=None, ge=0.0, le=1.0)
     dx: int = Field(default=0, ge=-10, le=10)
     dy: int = Field(default=0, ge=-10, le=10)
     key: str = Field(default="", max_length=20)
     text: str = Field(default="", max_length=200)
+    points: list[RemotePoint] | None = Field(default=None, min_length=2, max_length=32)
 
 
 # Single Render instance / single paired PC. All values intentionally volatile.
@@ -340,14 +346,14 @@ RATE_RULES = {
               "JULIA_RATE_ADMIN_GLOBAL", 240, 60),
     "admin_quality": ("JULIA_RATE_ADMIN_QUALITY_USER", 5, 60,
                       "JULIA_RATE_ADMIN_QUALITY_GLOBAL", 10, 60),
-    "screen": ("JULIA_RATE_SCREEN_USER", 60, 60,
-               "JULIA_RATE_SCREEN_GLOBAL", 180, 60),
+    "screen": ("JULIA_RATE_SCREEN_USER", 300, 60,
+               "JULIA_RATE_SCREEN_GLOBAL", 900, 60),
     "remote_request": ("JULIA_RATE_REMOTE_REQUEST_USER", 3, 600,
                        "JULIA_RATE_REMOTE_REQUEST_GLOBAL", 6, 600),
     "remote_status": ("JULIA_RATE_REMOTE_STATUS_USER", 30, 60,
                       "JULIA_RATE_REMOTE_STATUS_GLOBAL", 120, 60),
-    "input": ("JULIA_RATE_INPUT_USER", 120, 60,
-              "JULIA_RATE_INPUT_GLOBAL", 360, 60),
+    "input": ("JULIA_RATE_INPUT_USER", 720, 60,
+              "JULIA_RATE_INPUT_GLOBAL", 2160, 60),
 }
 
 
@@ -1489,8 +1495,8 @@ async def screen(request: Request, max_w: int = 800, q: int = 55):
     dono = await revogacao_ok(request)
     _rate_limit(request, "screen", dono)
     result = await relay.exchange({"type": "screen", "owner": dono,
-                                   "max_w": max(320, min(max_w, 960)),
-                                   "q": max(30, min(q, 80))}, timeout=20.0)
+                                   "max_w": max(320, min(max_w, 1920)),
+                                   "q": max(30, min(q, 85))}, timeout=20.0)
     if result.get("type") != "screen":
         if result.get("codigo") == "sem_permissao":
             raise HTTPException(403, result.get("error", "Sem autorização."))
