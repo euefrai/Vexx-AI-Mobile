@@ -75,27 +75,70 @@ Se só houver dados parciais, responda só essa parte. Sem suporte: {"points":[]
 """
 
 
-def quote_options(source):
+def quote_options(source, *, include_ranges=False):
     """Bounded literal selections inside existing, contiguous passage ranges."""
     excerpt=str(source.get('excerpt') or '')[:1800]
     ranges=source.get('passage_ranges') or [{'start':0,'end':len(excerpt)}]
-    options=[];used=0
+    pools=[]
     for span in ranges[:8]:
         start,end=span.get('start'),span.get('end')
         if type(start) is not int or type(end) is not int or not 0<=start<end<=len(excerpt):continue
+        pool=[];cursor=start
         for sentence in re.split(r'(?<=[.!?;])\s+|\n\n+',excerpt[start:end]):
-            while sentence and len(options)<12:
+            offset=excerpt.find(sentence,cursor,end);cursor=offset+len(sentence)
+            while sentence:
                 chunk=sentence[:450]
                 if len(sentence)>450:
                     cut=chunk.rfind(' ')
                     if cut>=24:chunk=chunk[:cut]
-                sentence=sentence[len(chunk):].lstrip()
-                if len(chunk.strip())<24:continue
-                if used+len(chunk)>1800:return options
-                option={'id':'Q'+str(len(options)+1),'text':chunk}
-                if span.get('table_header'):option['table_header']=str(span['table_header'])[:160]
-                options.append(option);used+=len(chunk)
+                if len(chunk.strip())>=24:
+                    item={'text':chunk,'_range':span,'_offset':offset}
+                    if span.get('table_header'):item['table_header']=str(span['table_header'])[:160]
+                    pool.append(item)
+                rest=sentence[len(chunk):]
+                offset+=len(chunk)+len(rest)-len(rest.lstrip());sentence=rest.lstrip()
+        pools.append(pool)
+    # Give each real passage a slot before filling another with repetitions.
+    options=[];used=0
+    for index in range(max((len(pool) for pool in pools),default=0)):
+        for pool in pools:
+            if index>=len(pool):continue
+            item=pool[index]
+            if used+len(item['text'])>1800:continue
+            option={'id':'Q'+str(len(options)+1),**item}
+            if not include_ranges:option={k:v for k,v in option.items() if not k.startswith('_')}
+            options.append(option);used+=len(item['text'])
+            if len(options)==12:return options
     return options
+
+
+def _catalog_source(source, options):
+    """Coverage view of only offered quotes, keeping their real attribution."""
+    groups=[]
+    for option in sorted(options,key=lambda q:q['_offset']):
+        lo=option['_offset'];hi=lo+len(option['text'])
+        if (groups and groups[-1]['range']==option['_range'] and groups[-1]['end']<=lo
+                and not source['excerpt'][groups[-1]['end']:lo].strip()):
+            groups[-1]['end']=hi
+        else:
+            groups.append({'id':option['id'],'range':option['_range'],'start':lo,'end':hi})
+    excerpt='';ranges=[]
+    for group in groups:
+        original=group['range'];local=group['start']-original['start']
+        text=source['excerpt'][group['start']:group['end']]
+        start=len(excerpt)+(2 if excerpt else 0)
+        excerpt+=('\n\n' if excerpt else '')+text
+        span={**original,'id':group['id'],'start':start,'end':len(excerpt)}
+        origin=original.get('source_span') or {}
+        if type(origin.get('start')) is int:
+            lo=origin['start']+local
+            span['source_span']={**origin,'start':lo,'end':lo+len(text)}
+        if 'table_rows' in original:
+            span['table_rows']=[{'start':r['start']-local,'end':r['end']-local}
+                for r in original['table_rows'] if type(r.get('start')) is int and type(r.get('end')) is int
+                and local<=r['start']<r['end']<=local+len(text)]
+        ranges.append(span)
+    return {**source,'excerpt':excerpt,'passage_ranges':ranges}
 
 
 class SupportReviewError(ValueError):
@@ -422,14 +465,17 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
     import evidence_graph
     # Derive state from exactly the bounded source text offered to this writer,
     # not fresh parser defaults or evidence omitted from its context.
-    coverage=source_coverage(objective,sources)
-    requirements = coverage['requirements']
     allowed_ids = json.dumps([s['id'] for s in sources],ensure_ascii=False)
     catalog_mode=bool(getattr(generate_fn,'literal_quote_ids',False))
-    options={s['id']:quote_options(s) for s in sources} if catalog_mode else {}
+    options={s['id']:quote_options(s,include_ranges=True) for s in sources} if catalog_mode else {}
+    if catalog_mode and not any(options.values()):return None
+    coverage=source_coverage(objective,[_catalog_source(s,options[s['id']]) for s in sources]
+                             if catalog_mode else sources)
+    requirements = coverage['requirements']
     catalogs={sid:{q['id']:q['text'] for q in quotes} for sid,quotes in options.items()}
     model_sources=[{**{k:v for k,v in s.items() if k not in ('excerpt','passage_ranges')},
-                    'quotes':options[s['id']]} for s in sources] if catalog_mode else sources
+                    'quotes':[{k:v for k,v in q.items() if not k.startswith('_')}
+                              for q in options[s['id']]]} for s in sources] if catalog_mode else sources
     messages = [{"role": "system", "content": (CATALOG_SYSTEM if catalog_mode else SYSTEM)+'\nIDs de fonte permitidos: '+allowed_ids}, {"role": "user", "content": json.dumps({
         "objective": objective[:500], "sources": model_sources,
         **({'requirements':[{"id":r['id'],"aspect":r['description'],"entity":r['entity'],
@@ -460,7 +506,9 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
             raise ValueError("invalid paragraph")
         quotes, labels, seen_quotes = [], [], set()
         for ref in refs:
-            if catalog_mode and isinstance(ref,dict) and set(ref)=={'id','quote_id'}:
+            if catalog_mode:
+                if not isinstance(ref,dict) or set(ref)!={'id','quote_id'}:
+                    raise ValueError('invalid reference')
                 sid,qid=ref['id'],ref['quote_id']
                 if not isinstance(sid,str) or not isinstance(qid,str) or qid not in catalogs.get(sid,{}):
                     raise ValueError('unknown or duplicate reference')

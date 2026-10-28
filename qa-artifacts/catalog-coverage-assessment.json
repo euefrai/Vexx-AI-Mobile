@@ -1,0 +1,102 @@
+{
+  "scope": "Controlled catalog transport replay; no live discovery, provider or browser",
+  "baseline": "a0ba29e",
+  "cases": {
+    "separate_passages": {
+      "before": {
+        "quote_count": 12,
+        "quote_chars": 680,
+        "products_offered": false,
+        "requirements": [
+          {
+            "aspect": "Fundadores",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Data de fundação",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Produtos",
+            "state": "SUPPORTED"
+          }
+        ]
+      },
+      "after": {
+        "quote_count": 12,
+        "quote_chars": 665,
+        "products_offered": true,
+        "requirements": [
+          {
+            "aspect": "Fundadores",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Data de fundação",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Produtos",
+            "state": "SUPPORTED"
+          }
+        ]
+      }
+    },
+    "single_passage_cutoff": {
+      "before": {
+        "quote_count": 12,
+        "quote_chars": 680,
+        "products_offered": false,
+        "requirements": [
+          {
+            "aspect": "Fundadores",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Data de fundação",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Produtos",
+            "state": "SUPPORTED"
+          }
+        ]
+      },
+      "after": {
+        "quote_count": 12,
+        "quote_chars": 680,
+        "products_offered": false,
+        "requirements": [
+          {
+            "aspect": "Fundadores",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Data de fundação",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Produtos",
+            "state": "DISCOVERED"
+          }
+        ]
+      }
+    }
+  },
+  "empty_catalog": {
+    "before": {
+      "writer_calls": 1
+    },
+    "after": {
+      "writer_calls": 0
+    }
+  },
+  "raw_catalog_bypass": {
+    "before": {
+      "accepted": true
+    },
+    "after": {
+      "accepted": false
+    }
+  }
+}
