@@ -33,6 +33,7 @@ import tool_protocol
 import julia_auth as JULIA_auth
 import learning
 import remoto
+import remote_access
 import research
 import research_agents
 import shopping
@@ -278,6 +279,7 @@ def open_db(path: Path):
     _migrar_memories_por_dono(db)
     _memoria_v41(db)
     JULIA_auth.criar_tabelas(db)
+    remote_access.create_tables(db)
     JULIA_auth.migrar_legado(db)
     learning.criar_tabelas(db)
     research.criar_tabelas(db)
@@ -2343,10 +2345,10 @@ def remover_chave_provedor(req: dict) -> dict:
 def resposta_screen(db, req: dict, dono: str, request_id: str) -> dict:
     """Foto da tela: observar E controlar exigem grant explícito (V4.2 §2).
 
-    Conta comum sem ``remote_ok`` recebe ``sem_permissao`` (o relay traduz
-    para 403) — nunca a imagem. Dono 'local' sempre autorizado.
+    Exige grant legado ou pareamento confirmado localmente. Revogação explícita
+    do pareamento bloqueia também o grant legado, inclusive do dono 'local'.
     """
-    if not JULIA_auth.pode_remoto(db, dono):
+    if not remote_access.allowed(db, dono):
         log.warning("remoto negado (screen) para %s", dono)
         return {"request_id": request_id, "type": "screen_error",
                 "error": "Sem autorização para ver a tela.",
@@ -2354,22 +2356,32 @@ def resposta_screen(db, req: dict, dono: str, request_id: str) -> dict:
     try:
         img = remoto.capturar(req.get("max_w", 800), req.get("q", 55))
         return {"request_id": request_id, "type": "screen", **img,
-                "remote_enabled": remoto.entrada_ativada()}
+                "remote_enabled": not remote_access.input_blocked() and
+                    (remote_access.binding(db, dono) is True or remoto.entrada_ativada())}
     except remoto.RemotoErro as exc:
         return {"request_id": request_id, "type": "screen_error",
                 "error": str(exc), "codigo": exc.codigo}
 
 
 def resposta_input(db, req: dict, dono: str, request_id: str) -> dict:
+    # Serialize against consent creation: no remotely queued click can approve it.
+    with remote_access.guard:
+        return _resposta_input_locked(db, req, dono, request_id)
+
+
+def _resposta_input_locked(db, req: dict, dono: str, request_id: str) -> dict:
     """Mouse/teclado: exige o mesmo grant explícito da tela (V4.2 §2)."""
-    if not JULIA_auth.pode_remoto(db, dono):
+    if not remote_access.allowed(db, dono) or remote_access.input_blocked():
         log.warning("remoto negado (input) para %s", dono)
         return {"request_id": request_id, "type": "input_error",
                 "error": "Sem autorização para controlar o PC.",
                 "codigo": "sem_permissao"}
     try:
         cmd = remoto.validar_comando(req.get("cmd", {}))
-        res = remoto.executar(cmd)
+        if remote_access.binding(db, dono) is True:
+            res = remoto.executar(cmd, autorizado=True)
+        else:
+            res = remoto.executar(cmd)
         log.info("remoto: %s executado", res["kind"])
         return {"request_id": request_id, "type": "input_done", **res}
     except remoto.RemotoErro as exc:
@@ -5552,6 +5564,12 @@ def run():
                         if sessao is not None:
                             sessao.parar.set()
                         continue
+                    elif req.get("type") == "remote_status":
+                        reply = {"request_id": request_id, **remote_access.status(db, dono)}
+                    elif req.get("type") == "remote_request":
+                        reply = {"request_id": request_id, **remote_access.request_access(db, dono)}
+                    elif req.get("type") == "remote_revoke":
+                        reply = {"request_id": request_id, **remote_access.revoke(db, dono)}
                     elif req.get("type") == "screen":
                         reply = resposta_screen(db, req, dono, request_id)
                     elif req.get("type") == "input":

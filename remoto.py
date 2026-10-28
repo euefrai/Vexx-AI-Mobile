@@ -4,7 +4,7 @@ Somente Windows. Captura tenta mss, depois PIL ImageGrab (dependências
 opcionais — o relay nunca importa este módulo). Entrada usa ctypes (stdlib).
 
 SEGURANÇA:
-- Entrada (mouse/teclado) exige JULIA_REMOTE=1 no ambiente do agente.
+- Entrada exige JULIA_REMOTE=1 ou autorização local validada pelo PC Agent.
   Sem isso, tudo é recusado com codigo "desativado" (modo só-visualização).
 - Comandos validados (tipos, faixas, tamanhos) + rate limit em memória.
 - Nenhuma execução de terminal/arquivos — só eventos de mouse/teclado.
@@ -169,18 +169,27 @@ def _digitar_unicode(texto: str) -> None:
     class INPUT(ctypes.Structure):
         _fields_ = [("type", wintypes.DWORD), ("u", UNION)]
 
+    try:
+        encoded = texto.encode('utf-16-le')
+    except UnicodeEncodeError:
+        raise RemotoErro('Texto Unicode inválido.', 'invalido') from None
     n = []
-    for ch in texto:
+    for offset in range(0, len(encoded), 2):
+        code_unit = int.from_bytes(encoded[offset:offset + 2], 'little')
         for flags in (0x0004, 0x0004 | 0x0002):  # UNICODE down/up
-            ki = KBDINPUT(0, ord(ch), flags, 0, None)
+            ki = KBDINPUT(0, code_unit, flags, 0, None)
             n.append(INPUT(1, UNION(ki=ki)))
     arr = (INPUT * len(n))(*n)
-    ctypes.windll.user32.SendInput(len(n), arr, ctypes.sizeof(INPUT))
+    send_input = ctypes.windll.user32.SendInput
+    send_input.argtypes = [wintypes.UINT, ctypes.POINTER(INPUT), ctypes.c_int]
+    send_input.restype = wintypes.UINT
+    if send_input(len(n), arr, ctypes.sizeof(INPUT)) != len(n):
+        raise RemotoErro('O Windows não aceitou a digitação. Verifique a sessão e as permissões da janela.', 'entrada')
 
 
-def executar(valido: dict) -> dict:
-    """Executa evento validado. Exige entrada ativada + ritmo. Só Windows."""
-    if not entrada_ativada():
+def executar(valido: dict, *, autorizado: bool = False) -> dict:
+    """Evento validado. Consentimento por conta é conferido pelo chamador agente."""
+    if not entrada_ativada() and not autorizado:
         raise RemotoErro("Controle desativado no PC (JULIA_REMOTE=1 para ativar).",
                          "desativado")
     if sys.platform != "win32":
@@ -194,7 +203,7 @@ def executar(valido: dict) -> dict:
     elif tipo in ("click", "double", "right"):
         x, y = _para_px(valido["x"], valido["y"])
         u.SetCursorPos(x, y)
-        down, up = (0x0008, 0x0010) if tipo != "right" else (0x0002, 0x0004)
+        down, up = (0x0008, 0x0010) if tipo == "right" else (0x0002, 0x0004)
         n = 2 if tipo == "double" else 1
         for _ in range(n):
             u.mouse_event(down, 0, 0, 0, 0)

@@ -212,24 +212,47 @@
       <section class="page" id="page-desktop" aria-label="PC" hidden>
         <div class="section-header">
           <p class="eyebrow">SEU PC</p>
-          <h1>Controle remoto<span class="brand-dot">.</span></h1>
-          <p class="intro-copy">Tela ao vivo e controle do seu computador.</p>
+          <h1 id="remoteTitle">Meu computador<span class="brand-dot">.</span></h1>
+          <p class="intro-copy" id="remoteIntro">Prepare o acesso seguro entre seu computador e seu celular.</p>
         </div>
 
         <div class="device-card">
           <div class="device-icon"><svg class="icon"><use href="#i-monitor"/></svg></div>
-          <div class="device-name"><strong>Meu computador</strong><span id="deviceDetail">Aguardando conexão</span></div>
+          <div class="device-name"><strong id="remoteDeviceName">Meu computador</strong><span id="deviceDetail">Aguardando conexão</span></div>
           <span class="offline-pill" id="deviceStatus"><i></i> Offline</span>
         </div>
 
+        <div class="pc-setup" id="pcSetup">
+          <p class="eyebrow">SEU COMPUTADOR, COM VOCÊ</p>
+          <h2 id="remoteSetupTitle">Acesse pelo celular</h2>
+          <p id="remoteSetupCopy">Autorize este PC uma vez. Depois, entre na mesma conta no celular para ver a tela e usar mouse e teclado.</p>
+          <ol class="pc-steps" id="remoteSteps">
+            <li><span>1</span><div><strong>Conecte o PC Agent</strong><p>O agente deve estar aberto neste computador Windows.</p></div></li>
+            <li><span>2</span><div><strong>Permita o acesso neste PC</strong><p>Confira a conta e o código na janela do Windows antes de confirmar.</p></div></li>
+            <li><span>3</span><div><strong>Abra Meu PC no celular</strong><p>Entre na mesma conta e toque em Conectar.</p></div></li>
+          </ol>
+          <button class="primary-button" id="remotePermit" type="button" disabled>Permitir acesso pelo celular</button>
+          <a class="pc-guide" href="/remote-setup.html" target="_blank" rel="noopener">Como instalar ou atualizar o PC Agent ↗</a>
+        </div>
+
+        <div class="pc-connect" id="pcConnect" hidden>
+          <h2>Seu computador, aqui</h2>
+          <p>Prepare o acesso em Meu PC no computador e entre nesta mesma conta nos dois aparelhos.</p>
+          <button class="primary-button" id="remoteConnect" type="button" disabled>Conectar</button>
+        </div>
+
+        <p class="pc-access-status" id="remoteAccessStatus" role="status" aria-live="polite">Verificando acesso…</p>
+        <div id="remoteViewer" hidden>
         <div class="screen-top">
           <span><span class="tiny-dot"></span> <span id="screenLabel">AGUARDANDO PC</span></span>
           <button class="mini-tool" id="fullscreen" type="button" title="Tela cheia"><svg class="icon"><use href="#i-maximize"/></svg></button>
+          <button class="subtle-button" id="remoteDisconnect" type="button">Desconectar</button>
         </div>
 
         <div class="remote-frame live" id="remoteFrame" role="img" aria-label="Tela do PC">
           <img id="screenImg" alt="" />
           <div class="remote-pointer" id="remotePointer"></div>
+          <button class="remote-exit-fullscreen" id="remoteExitFullscreen" type="button">Sair da tela cheia</button>
         </div>
 
         <div class="screen-disclaimer">
@@ -241,13 +264,19 @@
           <button class="action-pill selected" type="button" id="touchMode"><svg class="icon"><use href="#i-mouse"/></svg> Toque</button>
           <button class="action-pill" type="button" id="keyboardButton"><svg class="icon"><use href="#i-keyboard"/></svg> Teclado</button>
           <button class="action-pill" type="button" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg> Atualizar</button>
+          <button class="action-pill" type="button" id="remoteScrollUp" aria-label="Rolar para cima">↑ Rolar</button>
+          <button class="action-pill" type="button" id="remoteScrollDown" aria-label="Rolar para baixo">↓ Rolar</button>
+          <button class="action-pill" type="button" id="remoteEnter">Enter</button>
+          <button class="action-pill" type="button" id="remoteBackspace" aria-label="Apagar caractere">⌫ Apagar</button>
         </div>
 
-        <input id="remoteKeys" class="remote-keys" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Digitar" placeholder="" />
+        <input id="remoteKeys" class="remote-keys" type="text" maxlength="200" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Digitar no computador" placeholder="" />
+        </div>
 
         <div class="access-card">
           <div class="access-icon"><svg class="icon"><use href="#i-shield"/></svg></div>
-          <div><strong>Controle protegido</strong><span id="accessNote">Ative o controle remoto no agente do computador para usar toque e teclado.</span></div>
+          <div><strong>Acesso da sua conta</strong><span id="accessNote">A tela inteira e o controle ficam disponíveis aos aparelhos conectados à conta autorizada. Revogue quando quiser.</span></div>
+          <button class="subtle-button danger-link" id="remoteRevoke" type="button" hidden>Revogar acesso</button>
         </div>
       </section>
 
@@ -534,6 +563,7 @@
   <script src="/organize.js" defer></script>
   <script src="/model3d-schema.js" defer></script>
   <script src="/jdui.js" defer></script>
+  <script src="/remote.js" defer></script>
   <script src="/app.js" defer></script>
 </body>
 </html>

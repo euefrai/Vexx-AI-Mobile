@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="pt-BR"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Preparar meu computador · Vexx AI</title>
+<link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/interface.css">
+<body class="remote-guide-page">
+<main><a href="/">← Vexx AI</a><h1>Prepare seu computador.</h1>
+<p>O PC Agent conecta um computador Windows ao Vexx AI e mantém os dados no SQLite local. O navegador sozinho não controla o mouse ou o teclado do Windows.</p>
+<h2>Se o agente já está instalado</h2><ol>
+<li>Atualize a instalação existente do PC Agent com a versão deste site. Preserve o banco SQLite, as chaves e a configuração local.</li>
+<li>No terminal da instalação, usando o mesmo Python do agente, instale a captura se ela estiver ausente:</li></ol>
+<pre><code>python -m pip install "mss&gt;=9,&lt;11" "pillow&gt;=10,&lt;13"</code></pre>
+<p>Se o agente usa um ambiente virtual, execute o Python desse ambiente. Encerre e reabra o agente pelo procedimento da sua instalação, após concluir as tarefas em andamento.</p>
+<h2>Se ainda não tem o agente</h2>
+<p>Esta versão usa um PC Agent por instalação do servidor. Peça ao responsável pela sua instalação a configuração do agente e o acesso ao computador. Entrar na conta em um novo PC não o cadastra automaticamente como outro agente.</p>
+<p>O código está no <a href="https://github.com/euefrai/Vexx-AI-Mobile" target="_blank" rel="noopener">repositório oficial</a>. A instalação exige Python e as dependências de <code>requirements.txt</code>, além de relay, banco local e segredo do agente configurados pelo responsável. Não compartilhe o segredo do agente nem cole essas credenciais no chat.</p>
+<h2>Permitir e conectar</h2><ol>
+<li>No computador Windows conectado ao agente, entre na sua conta e abra <strong>Meu PC</strong>.</li>
+<li>Toque em <strong>Permitir acesso pelo celular</strong>. Confira o nome do PC, a conta e o código. Confirme na janela que aparece no Windows em até dois minutos.</li>
+<li>No celular, entre na <strong>mesma conta</strong>, abra <strong>Meu PC</strong> e toque em <strong>Conectar</strong>. O computador precisa permanecer ligado, conectado e com a sessão do Windows aberta.</li>
+<li>Use <strong>Desconectar</strong> para fechar a visualização neste aparelho ou <strong>Revogar acesso</strong> para retirar a autorização da conta. Enquanto uma confirmação local estiver aberta, o controle remoto fica pausado.</li></ol>
+<p>A autorização permite ver a tela inteira e usar o mouse e o teclado em todos os aparelhos conectados à conta autorizada. Não há instalação silenciosa, acesso a UAC/tela bloqueada ou transmissão de áudio. A transmissão atual usa imagens periódicas, não vídeo contínuo.</p>
+</main></html>
