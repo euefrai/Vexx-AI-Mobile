@@ -42,6 +42,17 @@ def test_url_exibivel_rejeita_home_busca_e_credenciais():
     assert not shopping.url_exibivel("/produto/x")
 
 
+def test_verified_product_url_does_not_authorize_other_origins_or_credentials():
+    result = {'produtos': [{'url_item': 'https://loja.com/produto/x'}]}
+    for changed in ('http://loja.com/produto/x', 'https://loja.com:8443/produto/x',
+                    'https://loja.com:0/produto/x',
+                    'https://user:password@loja.com/produto/x'):
+        answer = shopping.sanitizar_links_resposta('[Produto](' + changed + ')', result)
+        assert '](' not in answer
+        assert 'link não verificado' in answer
+    assert shopping.sanitizar_links_resposta('[Produto](https://loja.com:443/produto/x)', result).startswith('[Produto](')
+
+
 # ── Card: link do item ───────────────────────────────────────────────────────
 
 def test_montar_produto_prefere_item_mesmo_com_home_declarada():

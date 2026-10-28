@@ -95,10 +95,10 @@ t('source-url-not-markdown', !sources.includes('href="https://example.com/prova)
 t('heading-levels', renderMarkdown('# Título\n## Seção\n### Detalhe').includes('<h2>Título</h2><h3>Seção</h3><h4>Detalhe</h4>'));
 t('responsive-table-wrapper', renderMarkdown('| a | b |\n|---|---|\n| 1 | 2 |').includes('<div class="table-wrap"><table>'));
 const hb = renderMarkdown('[busca](https://loja.com/busca?q=x) e [produto](https://loja.com/produto/x)');
-t('link-busca-bloqueado', hb.includes('link-blocked') && !hb.includes('href="https://loja.com/busca'));
+t('pesquisa-link-busca-preservado', hb.includes('href="https://loja.com/busca?q=x"'));
 t('link-produto-ok', hb.includes('href="https://loja.com/produto/x"'));
 const hh = renderMarkdown('https://loja.com/');
-t('link-home-bloqueado', hh.includes('link-blocked') && !hh.includes('<a href="https://loja.com/"'));
+t('pesquisa-link-home-preservado', hh.includes('<a href="https://loja.com/"'));
 const hfStart = src.indexOf('function formatarTamanhoAnexo');
 const hfEnd = src.indexOf('function renderAttachmentTray');
 if (hfStart < 0 || hfEnd < hfStart) { console.error('helpers de anexo ausentes'); process.exit(2); }

@@ -27,6 +27,8 @@ from pathlib import Path
 RAIZ = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(RAIZ))
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+_isolated_env = tempfile.TemporaryDirectory(prefix='vexx-attachments-env-')
+os.environ['JULIA_ENV_FILE'] = str(Path(_isolated_env.name) / 'disabled.env')
 
 import shopping  # noqa: E402
 from argon2 import PasswordHasher  # noqa: E402
@@ -91,7 +93,8 @@ class Processo:
         self.log = Path(log)
         self._fh = self.log.open("wb")
         self.proc = subprocess.Popen(cmd, cwd=str(cwd), env=env,
-                                     stdout=self._fh, stderr=subprocess.STDOUT)
+                                     stdout=self._fh, stderr=subprocess.STDOUT,
+                                     creationflags=getattr(subprocess, 'CREATE_NO_WINDOW', 0))
 
     def parar(self):
         try:
@@ -205,11 +208,11 @@ def _checar_links(info, viewport, exige_sem_overflow=True):
     assert "página de busca/categoria" in san["text"], san["text"][:400]
     assert "link não verificado" in san["text"], san["text"][:400]
     assert san["visible"], f"bolha sanitizada invisível no {viewport}"
-    # Defesa do renderizer: link cru de busca/home nunca vira <a>.
-    assert raw["anchors"] == [], raw["anchors"]
-    assert len(raw["blocked"]) >= 2, raw["blocked"]
-    assert all(b["visible"] for b in raw["blocked"]), raw["blocked"]
-    assert any("página de busca/categoria" in b["text"] for b in raw["blocked"]), raw["blocked"]
+    # Markdown geral continua aceitando links de pesquisa/home. A regra de
+    # produto pertence ao sanitizador de compras e aos cards JDUI, acima.
+    assert {a['href'] for a in raw['anchors']} == {
+        'https://loja.com/busca?q=placa', 'https://loja.com/'}, raw['anchors']
+    assert raw['blocked'] == [], raw['blocked']
     assert raw["visible"], f"bolha crua invisível no {viewport}"
     for b in (san, raw):
         assert b["rect"]["left"] >= -1, b["rect"]
@@ -256,7 +259,15 @@ def main():
             "JULIA_SQLITE_PATH": str(db_path),
             "HERMES_PROXY_URL": "http://127.0.0.1:9/v1",
             "JULIA_AI_MODEL": "unused/local",
+            "JULIA_ENV": "development",
+            "JULIA_ENV_FILE": str(tmp / 'disabled.env'),
+            "VEXX_AGENT_ROLE": "development",
+            "VEXX_AGENT_INSTANCE": "attachments-" + str(porta_relay),
+            "VEXX_AGENT_RUNTIME_DIR": str(tmp / 'runtime'),
         })
+        for key in ('OPENAI_API_KEY', 'GEMINI_API_KEY', 'ANTHROPIC_API_KEY',
+                    'DEEPSEEK_API_KEY', 'GROQ_API_KEY', 'MISTRAL_API_KEY', 'OPENROUTER_API_KEY'):
+            env.pop(key, None)
         env.pop("JULIA_AI_FALLBACKS", None)
         resultado["ambiente"].update({
             "app": base, "sqlite": str(db_path), "documento": str(doc_path),

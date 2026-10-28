@@ -846,12 +846,13 @@ def url_exibivel(url: str) -> bool:
 
 
 def _url_chave(url: str) -> str:
-    """Chave estável para comparar links (host sem www + caminho + query)."""
+    """Compara origem, caminho e query sem aceitar downgrade ou outra porta."""
     u = _limpa(url, 700)
     if not _RX_URL_HTTP.match(u):
         return ""
     try:
         partes = urllib.parse.urlsplit(u)
+        port = partes.port
     except ValueError:
         return ""
     host = (partes.hostname or "").lower()
@@ -860,7 +861,10 @@ def _url_chave(url: str) -> str:
     if not host:
         return ""
     caminho = partes.path.rstrip("/") or "/"
-    return host + caminho + (("?" + partes.query) if partes.query else "")
+    scheme = partes.scheme.lower()
+    default_port = 443 if scheme == 'https' else 80
+    origin = scheme + '://' + host + (':' + str(port) if port is not None and port != default_port else '')
+    return origin + caminho + (("?" + partes.query) if partes.query else "")
 
 
 def _url_de_item_fallback(url: str, veredito: str) -> bool:
@@ -3151,6 +3155,8 @@ def _so_params_de_rastreio(query: str) -> bool:
 
 
 def _url_na_allowlist(url: str, chaves: set) -> bool:
+    if not url_exibivel(url):
+        return False
     k = _url_chave(url)
     if not k:
         return False

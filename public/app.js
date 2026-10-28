@@ -436,17 +436,6 @@ function rotuloUrl(u) {
     return p.hostname.replace(/^www\./, '') + curto;
   } catch (_) { return String(u).length > 44 ? String(u).slice(0, 41) + '...' : String(u); }
 }
-function urlDeListagem(u) {
-  // Espelho de source_check.url_de_listagem: home/busca/categoria nunca é
-  // página de produto. Defesa extra no renderer, além do contrato do backend.
-  try {
-    const p = new URL(String(u), location.href);
-    if (p.protocol !== 'http:' && p.protocol !== 'https:') return false;
-    const path = p.pathname || '';
-    if (path === '' || path === '/') return true;
-    return /\/(busca|buscar|search|pesquisa|pesquisar|categoria|category|resultados?|lists?|lista|listas|listagem)(\/|$|s)/i.test(path);
-  } catch (_) { return false; }
-}
 function inlineFmt(s, sources = {}) {
   const tokens = [];
   const keep = html => '\u0001INLINE' + (tokens.push(html) - 1) + '\u0001';
@@ -461,7 +450,6 @@ function inlineFmt(s, sources = {}) {
     return keep('<img class="chat-img" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="' + alt + '" src="' + esc(u.replace(/&amp;/g, '&')) + '" />');
   });
   s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (m, t, u) => {
-    if (urlDeListagem(u)) return t + ' <span class="link-blocked" title="Link bloqueado: página de busca/categoria, não é o produto">página de busca/categoria — não é o produto</span>';
     return keep('<a href="' + esc(u.replace(/&amp;/g, '&')) + '" target="_blank" rel="noopener noreferrer">' + t + '</a>');
   });
   s = s.replace(/\[(S\d+)\]/gi, (m, id) => sources[id.toUpperCase()]
@@ -476,7 +464,6 @@ function inlineFmt(s, sources = {}) {
     let u = url, suf = '';
     if (e) { u = url.slice(0, -e[0].length); suf = e[0]; }
     if (!u) return m;
-    if (urlDeListagem(u)) return pre + '<span class="link-blocked" title="Link bloqueado: página de busca/categoria, não é o produto">' + esc(rotuloUrl(u)) + ' (página de busca/categoria — não é o produto)</span>' + suf;
     return pre + '<a href="' + u + '" title="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(rotuloUrl(u)) + '</a>' + suf;
   });
   return s.replace(/\u0001INLINE(\d+)\u0001/g, (_, n) => tokens[Number(n)] || '');
