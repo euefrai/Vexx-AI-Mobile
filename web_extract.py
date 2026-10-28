@@ -787,6 +787,12 @@ _SECTION_TERMS = {
     'consequences': r'consequences?|consequ[eê]ncias?|resulted|resultou',
 }
 
+# These labels locate possible evidence; they are not causal predicates.
+_SECTION_HEADINGS = {
+    'causes': r'antecedentes|background|origens|origins',
+    'consequences': r'desdobramentos|aftermath|outcomes',
+}
+
 
 def _document_windows(text, root, block, query, url, budget):
     """Scan available extraction once; retain bounded, noncontiguous literals.
@@ -799,16 +805,36 @@ def _document_windows(text, root, block, query, url, budget):
     import heapq
     import query_intelligence as qi
     requirements = qi.answer_requirements(query)
-    terms = [(r['id'], re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+r')\b', re.I))
+    terms = [(r['id'], re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+r')\b', re.I),
+              re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+'|'+
+                         _SECTION_HEADINGS.get(r['attribute'], r'(?!)')+r')\b', re.I))
              for r in requirements if r['attribute'] in _SECTION_TERMS]
     if not terms or len(text) <= budget:
         return None
     source = _normalizar(text)
     digest = hashlib.sha256(source.encode()).hexdigest()
+    article=block
+    while article is not None and article.tag not in ('main','article'):
+        article=article.pai
     headings = []
     for node in _descendentes(root):
         if node is block: break
         if re.fullmatch(r'h[1-6]', node.tag):
+            owner=node.pai
+            while owner is not None and owner.tag not in ('main','article'):owner=owner.pai
+            ancestor=block
+            while ancestor is not None and ancestor is not owner:ancestor=ancestor.pai
+            if owner is not None and ancestor is None:continue
+            ancestor=node.pai
+            while ancestor is not None:
+                if ancestor.tag in _IGNORAR | _PULAR:
+                    # The article's own header can own its H1. Site headers,
+                    # navigation and sidebars cannot provide document scope.
+                    parent=ancestor.pai
+                    while parent is not None and parent is not article:parent=parent.pai
+                    if not (node.tag=='h1' and ancestor.tag=='header' and article is not None and parent is article):break
+                ancestor=ancestor.pai
+            if ancestor is not None:continue
             level=int(node.tag[1]);headings=[h for h in headings if h['level']<level]
             headings.append({'level':level,'text':_texto_bloco(node)[:160]})
     context = headings[-1]['text'] if headings else ''
@@ -821,8 +847,17 @@ def _document_windows(text, root, block, query, url, budget):
             if value: yield node, value
             return
         for child in node.filhos: yield from elements(child)
-    pools = {rid:[] for rid,_ in terms}
+    pools = {rid:[] for rid,_,_ in terms}
     cursor=0; section=''; section_start=0; section_end=0; scanned=0
+    section_paths={}; active_headings=[]
+    if len(headings)==1 and headings[0]['level']==1 and headings[0]['text']:
+        # A real H1 can sit outside the chosen article container. Its offsets
+        # address the heading's own normalized DOM text, never the body or HTML.
+        heading=headings[0]
+        active_headings=[{**heading,'extraction_sha256':digest,
+            'source_span':{'start':0,'end':len(heading['text']),
+                           'scope':'normalized_dom_heading',
+                           'sha256':hashlib.sha256(heading['text'].encode()).hexdigest()}}]
     table_headers={};row_scopes={}
     def table_scope(node,pos):
         table=node.pai
@@ -841,11 +876,13 @@ def _document_windows(text, root, block, query, url, budget):
     def offer(lo,hi,tag,title,heading_start):
         if hi<=lo:return
         chunk=source[lo:hi]
-        for rid,rx in terms:
+        path=section_paths.get(heading_start,[]) if title else []
+        for rid,rx,heading_rx in terms:
             hits=list(rx.finditer(chunk))
-            if not hits:continue
+            heading_match=any(heading_rx.search(h['text']) for h in path)
+            if not hits and not heading_match:continue
             # Actual leading labels outrank incidental mentions deep in prose.
-            score=4*(hits[0].start()<50)+min(3,len(hits))
+            score=8*heading_match+4*bool(hits and hits[0].start()<50)+min(3,len(hits))
             item=(score,-lo,hi,tag,title,heading_start)
             heap=pools[rid]
             if len(heap)<8:heapq.heappush(heap,item)
@@ -869,6 +906,12 @@ def _document_windows(text, root, block, query, url, budget):
         if tag=='tr':row_scopes[pos]=table_scope(node,pos)
         if re.fullmatch(r'h[1-6]',tag):
             section=value[:160];section_start=pos;section_end=cursor
+            level=int(tag[1])
+            active_headings=[h for h in active_headings if h['level']<level]
+            active_headings.append({'level':level,'text':section,
+                'source_span':{'start':pos,'end':pos+len(section),
+                               'scope':'normalized_available_extraction','sha256':digest}})
+            section_paths[pos]=list(active_headings)
             continue
         # Long elements are scanned in bounded chunks, never cut before scan.
         lo=pos
@@ -919,6 +962,7 @@ def _document_windows(text, root, block, query, url, budget):
         passages.append({'id':'P-'+hashlib.sha256((url+'|'+digest+'|'+str(lo)+'|'+chunk).encode()).hexdigest()[:16],
                          'source_url':url,'text':chunk,'section':title,'section_id':sid,'element_type':tag,
                          'context_heading':title or context,
+                         'section_path':section_paths.get(heading_start,[]) if title else [],
                          'source_role':passage_role(chunk),
                          'text_span':{'start':start,'end':len(output),'scope':'returned_extracted_text'},
                          'source_span':{'start':lo,'end':lo+len(chunk),'scope':'normalized_available_extraction','sha256':digest}})

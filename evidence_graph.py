@@ -132,6 +132,34 @@ def _passage_support(req, passage, source):
         if text.startswith(section) and len(body)>=8 and not other_ops and not re.search(r'\b(?:unknown|desconhecid\w*|nao confirmad\w*)\b',body):
             partial_found=True
     if attribute in ('causes','consequences'):
+        # A literal document subject followed by a pertinent section is useful
+        # context, not proof of a causal relation. Never promote it to DIRECT.
+        path=passage.get('section_path') or []
+        if len(path)==2:
+            subject,facet=path
+            rs=passage.get('source_span') or {}
+            previous_end=0;previous_level=0;aligned=bool(rs.get('sha256'))
+            for h in path:
+                hs=h.get('source_span') or {}
+                start,end,level=hs.get('start'),hs.get('end'),h.get('level')
+                external=(previous_level==0 and level==1 and hs.get('scope')=='normalized_dom_heading'
+                          and h.get('extraction_sha256')==rs.get('sha256') and start==0
+                          and hs.get('sha256')==hashlib.sha256(h.get('text','').encode()).hexdigest())
+                aligned=aligned and (type(start) is int and type(end) is int and type(level) is int
+                    and previous_end<=start<end and 1<=level<=6 and previous_level<level
+                    and end-start==len(h.get('text','')) and (external or
+                        (hs.get('scope')=='normalized_available_extraction' and hs.get('sha256')==rs.get('sha256'))))
+                if not aligned:break
+                previous_end=0 if external else end;previous_level=level
+            labels={'causes':r'(?:causas?|antecedentes|background|origens|origins)',
+                    'consequences':r'(?:consequencias?|desdobramentos|aftermath|outcomes)'}
+            body=re.sub(r'^'+re.escape(qi.normalized(facet.get('text','')))+r'\s*','',text)
+            if (aligned and type(rs.get('start')) is int and subject.get('level')==1
+                    and (previous_end<=rs['start'] or (facet.get('source_span') or {}).get('start')==rs['start'])
+                    and qi.normalized(subject.get('text',''))==entity
+                    and re.fullmatch(labels[attribute],qi.normalized(facet.get('text','')))
+                    and len(body)>=24):
+                partial_found=True
         heading = r'(?:principais\s+)?'+('causas?' if attribute=='causes' else 'consequencias?')
         scoped = re.match(heading+r'\s+(?:de|da|do)\s+'+re.escape(entity)+r'\s*:\s*(.+)',text,re.S)
         if scoped and re.search(relation_rx,scoped[1]) and not re.search(

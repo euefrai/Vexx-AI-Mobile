@@ -722,6 +722,56 @@ def _update_reused_provenance(db,job,evidence,candidate):
     evidence['retrieval_provenance']=provenance
 
 
+def _encode_evidence_metadata(source):
+    """Deduplicate exact repeated section data, keeping the existing 12k cap."""
+    try:
+        return json_store.encode(source, 12000)
+    except json_store.JSONLimitError:
+        if not source.get('answer_passages'):
+            raise
+    metadata=dict(source)
+    passages=[dict(p) for p in source['answer_passages']]
+    paths={}
+    for p in passages:
+        sid=p.get('section_id')
+        path=p.get('section_path')
+        if sid and path and (sid not in paths or paths[sid]==path):
+            paths[sid]=path
+            del p['section_path']
+            p['section_path_ref']=sid
+    metadata['answer_passages']=passages
+    if paths:metadata['section_paths']=paths
+    by_text={p['text']:p['id'] for p in passages}
+    for key in ('scientific_sections','sections'):
+        if key not in source:continue
+        metadata[key]=[]
+        for section in source[key]:
+            section=dict(section)
+            if section.get('text') in by_text:
+                section['text_from_passage']=by_text[section.pop('text')]
+            metadata[key].append(section)
+    if source.get('trecho_usado') in by_text:
+        metadata['trecho_usado_from_passage']=by_text[metadata.pop('trecho_usado')]
+    # No truncation, dropped evidence, compression or larger storage budget.
+    return json_store.encode(metadata, 12000)
+
+
+def _restore_evidence_metadata(metadata):
+    paths=metadata.pop('section_paths',{})
+    passages=metadata.get('answer_passages') or []
+    for p in passages:
+        ref=p.pop('section_path_ref',None)
+        if ref in paths:p['section_path']=paths[ref]
+    by_id={p['id']:p['text'] for p in passages}
+    for key in ('scientific_sections','sections'):
+        for section in metadata.get(key) or []:
+            ref=section.pop('text_from_passage',None)
+            if ref in by_id:section['text']=by_id[ref]
+    ref=metadata.pop('trecho_usado_from_passage',None)
+    if ref in by_id:metadata['trecho_usado']=by_id[ref]
+    return metadata
+
+
 def registrar_evidencia(db, job: dict, fonte: dict, trecho: str, afirmacao: str = "",
                         relacao: str = "cita", status: str = "recuperada") -> dict:
     if status not in STATUS_EVIDENCIA:
@@ -735,7 +785,7 @@ def registrar_evidencia(db, job: dict, fonte: dict, trecho: str, afirmacao: str 
            "trecho": (trecho or "")[:2000],
            "localizacao": (fonte.get("localizacao") or "")[:120],
            "afirmacao": (afirmacao or "")[:500], "relacao": relacao[:20], "status": status,
-           "original": json_store.encode(fonte, 12000)}
+           "original": _encode_evidence_metadata(fonte)}
     with db:
         db.execute("INSERT INTO evidence (id, job_id, owner_id, fonte_id, url, titulo, dominio,"
                    " acessado_em, publicado_em, trecho, localizacao, afirmacao, relacao,"
@@ -762,7 +812,7 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
               "acessado_em": r[5], "publicado_em": r[6] or "", "trecho": r[7],
               "afirmacao": r[8], "relacao": r[9], "status": r[10]}
         try:
-            metadata = json.loads(r[11] or "{}")
+            metadata = _restore_evidence_metadata(json.loads(r[11] or "{}"))
         except (TypeError, ValueError):
             metadata = {}
         for key in ("doi", "authors", "year", "journal", "repository", "abstract",
@@ -1454,7 +1504,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 np = _eg.criar_no(db,job['owner'],job['id'],'evidence','passage:'+passage['id'],
                     {'passage_id':passage['id'],'evidence_id':ev['id'],'text_span':passage['text_span'],
                      'section':passage.get('section',''),'url':ev['url'],
-                     **{k:passage[k] for k in ('section_id','source_span','element_type','context_heading') if k in passage}})
+                     **{k:passage[k] for k in ('section_id','source_span','element_type','context_heading','section_path') if k in passage}})
                 _eg.ligar(db,job['owner'],job['id'],np,ndoc,'DERIVED_FROM','literal_extraction','Passagem do texto extraído, não do HTML bruto.')
                 if passage.get('section_id') and passage.get('section'):
                     ns=_eg.criar_no(db,job['owner'],job['id'],'document','section:'+passage['section_id'],
@@ -1715,7 +1765,7 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                     start = len(excerpt)+len(prefix)
                     excerpt += prefix+passage['text']
                     ranges.append({'id':passage['id'],'start':start,'end':len(excerpt),
-                                   **{k:passage[k] for k in ('element_type','section','context_heading',
+                                   **{k:passage[k] for k in ('element_type','section','context_heading','section_path',
                                      'table_header','table_header_span','table_rows','source_span') if k in passage}})
                 if excerpt:
                     source.update(excerpt=excerpt,passage_ranges=ranges)
