@@ -341,7 +341,7 @@ def test_envia_para_ia_sem_aguardar_sincronizacao_completa():
     assert "await syncAndRefresh()" not in envio
     assert "const fromComposer = !!(options && options.fromComposer);" in envio
     assert "const anexos = fromComposer ? pendingAttachments.slice() : [];" in envio
-    assert "await uploadAnexoPendente(anexos[i], conversa)" in envio
+    assert "await uploadAnexoPendente(anexos[i], conversa, send)" in envio
     assert envio.index("await uploadAnexoPendente(") < envio.index("await storeMessages([row])")
     assert "text: value" in envio
     assert "if (textoBase === '/admin' && !anexos.length)" in envio

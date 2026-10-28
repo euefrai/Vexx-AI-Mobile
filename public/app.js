@@ -38,6 +38,7 @@ let activeConversation = null;
 let pendingAttachments = [];
 const sendingMessages = new Set();
 const attachmentUploadCache = new Map();
+const attachmentSends = new Map();
 try { activeConversation = localStorage.getItem('julia-active-conversation') || newId(); } catch (_) { activeConversation = newId(); }
 try { localStorage.setItem('julia-active-conversation', activeConversation); } catch (_) {}
 
@@ -275,6 +276,7 @@ async function deleteMessagesOf(conv) {
 }
 async function clearStorage() {
   storageGeneration++;
+  resetAttachmentSends();
   clearTimeout(jduiSyncTimer);
   jduiSyncTimer = null;
   jduiDirty = {};
@@ -365,6 +367,7 @@ function setActiveConversation(id) {
   // Anexos pertencem à mensagem em composição nesta conversa; trocar de
   // conversa não pode enviar (nem ler) o arquivo no chat errado.
   if (trocou && pendingAttachments.length) limparAnexosPendentes();
+  paintAttachmentUpload();
 }
 async function resolveActiveConversation() {
   // 1) localStorage, se ainda apontar para sessão existente (e não excluída)
@@ -1643,6 +1646,7 @@ function pintarPerfil(display, username, role, online) {
 function aplicarSessao(s) {
   // Troca de conta: recarrega para isolar caches (nunca mistura dados).
   const uid = s.uid || 'local';
+  if (uid !== currentUid) resetAttachmentSends();
   if (lsGet('julia-uid') && lsGet('julia-uid') !== uid) {
     lsSet('julia-uid', uid);
     location.reload();
@@ -1704,9 +1708,11 @@ $('loginForm').addEventListener('submit', async e => {
   finally { authBusy = false; btn.disabled = false; }
 });
 $('logoutButton').addEventListener('click', async () => {
+  abortAttachmentSends();
   stopAI();
   try { await api('/api/logout', { method: 'POST' }); } catch (_) { showToast('O PC não confirmou a saída. Reconecte e tente novamente.'); return; }
   ++authEpoch;
+  resetAttachmentSends();
   researchStop();
   authenticated = false; csrf = ''; pcOnline = false; $('loginOverlay').hidden = false;
   $('loginPassword').value = ''; $('regPassword').value = ''; $('regPassword2').value = '';
@@ -1849,7 +1855,7 @@ async function checkStatus() {
     }
   } catch (err) {
     pcOnline = false;
-    if (err.status === 401) { authenticated = false; $('loginOverlay').hidden = false; }
+    if (err.status === 401) { authenticated = false; resetAttachmentSends(); $('loginOverlay').hidden = false; }
     else marcaErroSync(err.status ? 'HTTP ' + err.status : 'rede?');
     updateConnection();
   }
@@ -1912,7 +1918,7 @@ async function syncAndRefresh() {
     return conf;
   } catch (err) {
     if (err.status === 503) pcOnline = false;
-    if (err.status === 401) { authenticated = false; $('loginOverlay').hidden = false; }
+    if (err.status === 401) { authenticated = false; resetAttachmentSends(); $('loginOverlay').hidden = false; }
     if (err.status && err.status !== 401) marcaErroSync('HTTP ' + err.status + ': ' + (err.message || ''));
     updateConnection();
     return conf;
@@ -2635,6 +2641,8 @@ function renderAttachmentTray() {
     remover.dataset.attachmentId = att.id;
     remover.setAttribute('aria-label', 'Remover anexo ' + att.name);
     remover.textContent = '×';
+    const send = attachmentSends.get(activeConversation);
+    remover.disabled = !!send && attachmentSessionMatches(send) && !send.controller.signal.aborted;
     chip.append(icon, name, size, remover);
     tray.appendChild(chip);
   }
@@ -2642,6 +2650,38 @@ function renderAttachmentTray() {
 function limparAnexosPendentes() {
   pendingAttachments = [];
   renderAttachmentTray();
+}
+function attachmentSessionMatches(send) {
+  return currentUid === send.owner && authEpoch === send.epoch
+    && storageGeneration === send.generation && (authenticated || PREVIEW_MODE);
+}
+function checkAttachmentSend(send) {
+  if (!attachmentSessionMatches(send) || send.controller.signal.aborted) {
+    throw new DOMException('Envio interrompido.', 'AbortError');
+  }
+}
+function paintAttachmentUpload() {
+  const send = attachmentSends.get(activeConversation);
+  const active = !!send && attachmentSessionMatches(send) && !send.controller.signal.aborted;
+  $('uploadStatus').hidden = !active;
+  $('uploadLabel').textContent = active ? send.label : '';
+  $('cancelAttachmentUpload').hidden = !active || send.phase !== 'uploading';
+  $('attachButton').disabled = active;
+}
+function cancelAttachmentSend() {
+  const send = attachmentSends.get(activeConversation);
+  if (send && send.phase === 'uploading') send.controller.abort();
+  paintAttachmentUpload();
+}
+function resetAttachmentSends() {
+  abortAttachmentSends();
+  attachmentUploadCache.clear();
+  limparAnexosPendentes();
+  paintAttachmentUpload();
+}
+function abortAttachmentSends() {
+  for (const send of attachmentSends.values()) send.controller.abort();
+  paintAttachmentUpload();
 }
 function removerAnexoPendente(id) {
   pendingAttachments = pendingAttachments.filter(a => a.id !== id);
@@ -2659,7 +2699,8 @@ function adicionarAnexoPendente(file) {
   renderAttachmentTray();
   return true;
 }
-async function uploadAnexoPendente(att, conversa) {
+async function uploadAnexoPendente(att, conversa, send) {
+  checkAttachmentSend(send);
   if (att.doc) return att.doc;
   const conv = att.docConversation || conversa || activeConversation;
   const chave = conv + '|' + att.id;
@@ -2671,9 +2712,18 @@ async function uploadAnexoPendente(att, conversa) {
   const fd = new FormData();
   fd.append('file', att.file, att.name);
   fd.append('conversation_id', conv);
-  const res = await fetch('/api/docs/upload', { method: 'POST', body: fd, headers: { 'X-CSRF-Token': csrf }, credentials: 'same-origin' });
+  const res = await fetch('/api/docs/upload', { method: 'POST', body: fd, headers: { 'X-CSRF-Token': send.csrf }, credentials: 'same-origin', signal: send.controller.signal });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) throw new Error(data.detail || ('Erro ' + res.status));
+  checkAttachmentSend(send);
+  if (!res.ok) {
+    if (res.status === 401) {
+      authenticated = false;
+      resetAttachmentSends();
+      $('loginOverlay').hidden = false;
+      updateConnection();
+    }
+    throw new Error(data.detail || ('Erro ' + res.status));
+  }
   attachmentUploadCache.set(chave, data);
   att.doc = data;
   att.docConversation = conv;
@@ -2693,22 +2743,31 @@ async function sendMessage(raw, options = {}) {
   const conversa = activeConversation;
   if (sendingMessages.has(conversa)) return;  // duplo clique/Enter não envia 2x
   sendingMessages.add(conversa);
+  const owner = currentUid, epoch = authEpoch, generation = storageGeneration;
+  const sameSession = () => owner === currentUid && epoch === authEpoch && generation === storageGeneration;
+  const send = anexos.length ? { owner, epoch, generation, csrf, controller: new AbortController(),
+    phase: 'uploading', label: '' } : null;
+  if (send) attachmentSends.set(conversa, send);
   const sentAt = performance.now();
   let uploadsOk = false;
   try {
     if (anexos.length) {
-      $('attachButton').disabled = true;
-      $('uploadStatus').hidden = false;
+      renderAttachmentTray();
       for (let i = 0; i < anexos.length; i++) {
-        $('uploadStatus').textContent = 'Enviando e lendo ' + anexos[i].name + '…' +
+        send.label = 'Enviando e lendo ' + anexos[i].name + '…' +
           (anexos.length > 1 ? ' (' + (i + 1) + '/' + anexos.length + ')' : '');
-        await uploadAnexoPendente(anexos[i], conversa);
+        paintAttachmentUpload();
+        await uploadAnexoPendente(anexos[i], conversa, send);
         renderAttachmentTray();
       }
       uploadsOk = true;
+      checkAttachmentSend(send);
+      send.phase = 'saving'; send.label = 'Salvando mensagem…';
+      paintAttachmentUpload();
     }
-    const row = { id: newId(), conversation_id: conversa, origin: 'mobile', role: 'user', text: value, created_at: new Date().toISOString(), status: 'pending', want_ai: true };
+    const row = { id: newId(), conversation_id: conversa, origin: 'mobile', role: 'user', text: value, created_at: new Date().toISOString(), status: 'pending', want_ai: true, owner };
     await storeMessages([row]);
+    if (!sameSession() || (send && !attachmentSessionMatches(send))) return;
     if (anexos.length) {
       const enviados = new Set(anexos.map(a => a.id));
       for (const a of anexos) attachmentUploadCache.delete(conversa + '|' + a.id);
@@ -2722,21 +2781,28 @@ async function sendMessage(raw, options = {}) {
         .catch(err => showToast('IA falhou: ' + (err.message || 'tente de novo')));
     } else showToast('Salvo no celular');
     await touchSession(row.conversation_id, titleFrom(value));
+    if (!sameSession()) return;
     if (activeConversation === row.conversation_id && messageInput.value.trim() === textoBase) {
       messageInput.value = ''; autoresize(); $('charCount').textContent = '';
     }
     await renderSessions($('sessionSearch').value);
-    await renderMessages();
-    scrollChat(true);
+    if (sameSession() && activeConversation === conversa) {
+      await renderMessages();
+      if (sameSession() && activeConversation === conversa) scrollChat(true);
+    }
     if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
   } catch (err) {
     const detalhe = (err && err.message) ? err.message : '';
-    showToast(anexos.length && !uploadsOk ? 'Falha no upload: ' + detalhe : 'Não foi possível salvar');
+    if (sameSession() && (authenticated || PREVIEW_MODE) && activeConversation === conversa) {
+      showToast(err?.name === 'AbortError' ? 'Envio cancelado. Os anexos foram mantidos.'
+        : anexos.length && !uploadsOk ? 'Falha no upload: ' + detalhe : 'Não foi possível salvar');
+    }
   } finally {
     sendingMessages.delete(conversa);
-    if (anexos.length) {
-      $('attachButton').disabled = false;
-      $('uploadStatus').hidden = true;
+    if (send && attachmentSends.get(conversa) === send) {
+      attachmentSends.delete(conversa);
+      paintAttachmentUpload();
+      renderAttachmentTray();
     }
   }
 }
@@ -2745,6 +2811,7 @@ composer.addEventListener('submit', e => {
   if (authenticated || PREVIEW_MODE) sendMessage(messageInput.value, { fromComposer: true });
   else showToast('Faça login');
 });
+$('cancelAttachmentUpload').addEventListener('click', cancelAttachmentSend);
 document.querySelectorAll('.suggestion').forEach(b => b.addEventListener('click', () => { messageInput.value = b.dataset.message; autoresize(); messageInput.focus(); }));
 async function newChat(projectId = '') {
   if (!db) { showToast('Armazenamento local indisponível'); return; }

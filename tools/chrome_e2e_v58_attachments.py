@@ -416,7 +416,53 @@ def main():
             ensure_ascii=False))
         cdp.screenshot("02-mobile-anexo-pendente.png")
 
-        # 4) enviar (com duplo clique) -> UM upload, UMA mensagem, chip some
+        # Browser-level cancellation: hold transport before sending any bytes;
+        # the actual button must abort its signal and preserve the draft.
+        cdp.js("""
+          (() => {
+            window.__beforeCancelFetch = window.fetch;
+            window.__heldCancelSeen = false;
+            window.fetch = (...args) => {
+              if (String(args[0]).includes('/api/docs/upload')) {
+                const signal = args[1].signal;
+                window.__cancelSignal = signal;
+                window.__heldCancelSeen = true;
+                return new Promise((resolve, reject) => signal.addEventListener('abort',
+                  () => reject(new DOMException('Aborted', 'AbortError')), {once:true}));
+              }
+              return window.__beforeCancelFetch(...args);
+            };
+            document.getElementById('composer').requestSubmit();
+            return true;
+          })()
+        """)
+        cdp.esperar_js("window.__heldCancelSeen && !document.getElementById('cancelAttachmentUpload').hidden",
+                       lambda v: v is True, 10, 'botão cancelar upload')
+        cancel_rect = cdp.js("""
+          (() => {const b=document.getElementById('cancelAttachmentUpload');
+            const r=b.getBoundingClientRect();return {left:r.left,right:r.right,
+              top:r.top,bottom:r.bottom,height:r.height,width:innerWidth};})()
+        """)
+        assert cancel_rect['height'] >= 44 and cancel_rect['left'] >= 0
+        assert cancel_rect['right'] <= cancel_rect['width']
+        assert cancel_rect['top'] >= 0 and cancel_rect['bottom'] <= 844
+        cdp.screenshot('00-mobile-upload-cancel.png')
+        cdp.js("document.getElementById('cancelAttachmentUpload').click(); true")
+        cdp.esperar_js("!sendingMessages.has(activeConversation)", lambda v:v is True, 10, 'envio cancelado')
+        cancellation = cdp.js("""
+          (async () => ({aborted:window.__cancelSignal.aborted,
+            chips:document.querySelectorAll('.attachment-chip').length,
+            uploads:window.__uploadCount,
+            messages:(await allMessages()).filter(m=>m.role==='user').length,
+            progressHidden:document.getElementById('uploadStatus').hidden}))()
+        """)
+        assert cancellation == {'aborted':True,'chips':1,'uploads':0,'messages':0,'progressHidden':True}, cancellation
+        resultado['cancelamento'] = {**cancellation,'button_geometry':cancel_rect,
+            'scope':'real Chrome button/signal; transport held before request, not server rollback'}
+        etapa('cancelamento_mobile_ok', json.dumps(cancellation))
+        cdp.js("window.fetch=window.__beforeCancelFetch; true")
+
+        # 4) retry/send (with double click): ONE real upload and ONE message.
         cdp.js("""
           (() => {
             const b = document.querySelector('.send-button');

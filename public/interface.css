@@ -175,6 +175,10 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 #messageInput:not(:placeholder-shown)+.send-button,.send-button:hover {color:var(--bg);background:var(--purple)}
 .composer-hint {font-size:11px;min-height:16px;justify-content:center;margin:8px 0 0;color:var(--muted)}
 .upload-status {font-size:13px;color:var(--text-2);padding:8px 4px 12px;overflow-wrap:anywhere}
+.upload-status {display:flex;gap:12px;align-items:center;justify-content:space-between}
+.upload-status[hidden] {display:none}
+#uploadLabel {min-width:0}
+#cancelAttachmentUpload {flex-shrink:0;min-height:44px;font-size:12px}
 .gen-bar {border:0;background:transparent;font-size:13px;padding:4px 0 12px;margin:0}
 .stream-placeholder {color:var(--muted);letter-spacing:3px}
 .citation {display:inline-block;font-size:.8em;padding:0 5px;border-radius:5px;background:var(--surface-3);text-decoration:none}
