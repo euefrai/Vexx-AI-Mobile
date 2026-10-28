@@ -1,0 +1,158 @@
+{
+  "scope": "Controlled source selection replay; no live discovery, inference or browser",
+  "baseline": "5accdda",
+  "cases": {
+    "complementary_source": {
+      "before": {
+        "evidence_ids": [
+          "founder-0",
+          "founder-1",
+          "founder-2",
+          "founder-3",
+          "founder-4",
+          "founder-5"
+        ],
+        "excerpt_chars": 246,
+        "products_in_offered_text": false,
+        "requirements": [
+          {
+            "aspect": "Fundadores",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Data de fundação",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Produtos",
+            "state": "DISCOVERED"
+          }
+        ]
+      },
+      "after": {
+        "evidence_ids": [
+          "founder-0",
+          "products",
+          "founder-1",
+          "founder-2",
+          "founder-3",
+          "founder-4"
+        ],
+        "excerpt_chars": 249,
+        "products_in_offered_text": true,
+        "requirements": [
+          {
+            "aspect": "Fundadores",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Data de fundação",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Produtos",
+            "state": "SUPPORTED"
+          }
+        ]
+      }
+    },
+    "complementary_passage": {
+      "before": {
+        "evidence_ids": [
+          "multi-section"
+        ],
+        "excerpt_chars": 1609,
+        "products_in_offered_text": false,
+        "requirements": [
+          {
+            "aspect": "Fundadores",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Data de fundação",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Produtos",
+            "state": "DISCOVERED"
+          }
+        ]
+      },
+      "after": {
+        "evidence_ids": [
+          "multi-section"
+        ],
+        "excerpt_chars": 1117,
+        "products_in_offered_text": true,
+        "requirements": [
+          {
+            "aspect": "Fundadores",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Data de fundação",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Produtos",
+            "state": "SUPPORTED"
+          }
+        ]
+      }
+    },
+    "stale_passage": {
+      "before": {
+        "evidence_ids": [
+          "stale"
+        ],
+        "excerpt_chars": 44,
+        "products_in_offered_text": true,
+        "requirements": [
+          {
+            "aspect": "Fundadores",
+            "state": "DISCOVERED"
+          },
+          {
+            "aspect": "Data de fundação",
+            "state": "DISCOVERED"
+          },
+          {
+            "aspect": "Produtos",
+            "state": "SUPPORTED"
+          }
+        ]
+      },
+      "after": {
+        "evidence_ids": [
+          "stale"
+        ],
+        "excerpt_chars": 41,
+        "products_in_offered_text": false,
+        "requirements": [
+          {
+            "aspect": "Fundadores",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Data de fundação",
+            "state": "SUPPORTED"
+          },
+          {
+            "aspect": "Produtos",
+            "state": "DISCOVERED"
+          }
+        ]
+      }
+    }
+  },
+  "preparation_measurement": {
+    "candidate_records": 80,
+    "iterations": 12,
+    "median_ms": 10.26,
+    "max_ms": 11.923,
+    "selected_sources": 6,
+    "selected_chars": 249,
+    "complementary_source_selected": true,
+    "note": "Local CPU observation, not end-to-end latency or universal quality"
+  }
+}

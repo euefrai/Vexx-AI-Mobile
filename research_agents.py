@@ -1699,14 +1699,74 @@ def analisar_independencia_job(db, job: dict, evidencias: list) -> list:
     return laudos
 
 
+def _synthesis_context(objective, evidence, labels):
+    """Prefer complementary, literal support within the existing 6 x 1800 cap."""
+    import evidence_graph as eg
+    eligible=sorted([e for e in evidence if _evidencia_lida(e) and e.get('relevante') is not False
+                     and (e.get('vertical') or {}).get('eligible') is not False],
+                    key=lambda e:e.get('score',0),reverse=True)[:80]
+    sources=[]
+    for e in eligible:
+        source={'id':labels[e['id']], 'evidence_id':e['id'],
+                'title':str(e.get('titulo',''))[:160], 'url':e.get('url',''),
+                'excerpt':str(e.get('trecho',''))[:1800],
+                'scope':e.get('content_scope','retrieved_excerpt'),
+                'accessed_at':str(e.get('acessado_em',''))[:40]}
+        passages=e.get('answer_passages') or []
+        full=e.get('texto')
+        if isinstance(full,str) and full:
+            valid=[]
+            for p in passages:
+                span=p.get('text_span') or {};start,end=span.get('start'),span.get('end')
+                if (type(start) is int and type(end) is int and 0<=start<end<=len(full)
+                        and full[start:end]==p.get('text')):valid.append(p)
+            passages=valid
+        if passages:
+            # Derive priorities again; persisted/model-supplied requirement
+            # labels cannot certify the literal text's support.
+            coverage=eg.requirement_coverage(objective,[{**e,'answer_passages':passages}])
+            priority=eg.select_answer_passages(coverage,limit=8)
+            positions={p['id']:i for i,p in enumerate(priority)}
+            passages=sorted(passages,key=lambda p:positions.get(p['id'],len(priority)))
+            excerpt,ranges,seen='',[],set()
+            for p in passages:
+                if p['id'] in seen or len(excerpt)+len(p['text'])+(2 if excerpt else 0)>1800:continue
+                seen.add(p['id'])
+                prefix='\n\n' if excerpt else ''
+                start=len(excerpt)+len(prefix);excerpt+=prefix+p['text']
+                ranges.append({'id':p['id'],'start':start,'end':len(excerpt),
+                    **{k:p[k] for k in ('element_type','section','context_heading','section_path',
+                        'table_header','table_header_span','table_rows','source_span') if k in p}})
+            if excerpt:source.update(excerpt=excerpt,passage_ranges=ranges)
+        if source['excerpt'].strip():sources.append(source)
+    # Rank on the bounded offered text, not facts cut out of the prompt.
+    coverage=research_synthesis.source_coverage(objective,sources)
+    support={s['evidence_id']:{} for s in sources}
+    for p in coverage['passages']:
+        ident=p['evidence_id'] or p['source_id']
+        if ident in support:
+            rid=p['requirement_id'];strength=2 if p['support_label']=='DIRECT_SUPPORT' else 1
+            support[ident][rid]=max(support[ident].get(rid,0),strength)
+    selected=[];covered={};remaining=list(sources)
+    scores={e['id']:e.get('score',0) for e in eligible}
+    while remaining and len(selected)<6:
+        def rank(s):
+            gains=[(value-covered.get(rid,0),value) for rid,value in support[s['evidence_id']].items()
+                   if value>covered.get(rid,0)]
+            return (sum(g for g,_ in gains),sum(v==2 for _,v in gains),scores[s['evidence_id']])
+        best=max(remaining,key=rank);remaining.remove(best);selected.append(best)
+        for rid,value in support[best['evidence_id']].items():covered[rid]=max(covered.get(rid,0),value)
+    by_id={e['id']:e for e in eligible}
+    return [by_id[s['evidence_id']] for s in selected],selected
+
+
 def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                        sintetizar_fn=None, timeout=25, deve_parar=None, verificar_fn=None) -> dict:
     """Optional assisted writing; extraction remains the fail-closed fallback."""
     retrieval_trace.record(job['id'],'',{},'SYNTHESIS_STARTED',reason_code='ASSISTED' if sintetizar_fn else 'EXTRACTIVE')
     from web_extract import melhor_trecho
-    tops = sorted([e for e in evidencias if _evidencia_lida(e)],
-                  key=lambda e: e.get("score", 0), reverse=True)[:6]
     labels = {e["id"]: f"E{i + 1}" for i, e in enumerate(evidencias)}
+    tops,sources = _synthesis_context(job['objetivo'],evidencias,labels)
     resposta = [f"Investigação: {job['objetivo']}"]
     if any(e.get("provider_metadata_untrusted")
            or e.get("content_scope") in ("abstract_only", "metadata_only") for e in tops):
@@ -1745,30 +1805,6 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
         if timeout >= 2 and not (deve_parar and deve_parar()):
             emitir(db, job['id'], job['owner'], 'synthesizer', 'answer_started', 'ok',
                    'Redigindo resposta a partir das evidências recuperadas.', {})
-        sources = [{"id": labels[e['id']], "evidence_id": e['id'],
-                    "title": str(e.get('titulo', ''))[:160], "url": e.get('url', ''),
-                    "excerpt": str(e.get('trecho', ''))[:1800],
-                    "scope": e.get('content_scope', 'retrieved_excerpt'),
-                    "accessed_at": str(e.get('acessado_em', ''))[:40]}
-                   for e in tops if str(e.get('trecho', '')).strip()]
-        # Distinct literal passages, never concatenate distant spans into a
-        # fabricated quote. Citation IDs still resolve to the stored evidence.
-        for source in sources:
-            evidence = next(e for e in tops if e['id']==source['evidence_id'])
-            passages = evidence.get('answer_passages') or []
-            if passages:
-                excerpt, ranges, seen = '', [], set()
-                for passage in passages:
-                    if passage['id'] in seen or len(excerpt)+len(passage['text'])+2>1800: continue
-                    seen.add(passage['id'])
-                    prefix = '\n\n' if excerpt else ''
-                    start = len(excerpt)+len(prefix)
-                    excerpt += prefix+passage['text']
-                    ranges.append({'id':passage['id'],'start':start,'end':len(excerpt),
-                                   **{k:passage[k] for k in ('element_type','section','context_heading','section_path',
-                                     'table_header','table_header_span','table_rows','source_span') if k in passage}})
-                if excerpt:
-                    source.update(excerpt=excerpt,passage_ranges=ranges)
         context_meta = {'source_count':len(sources),'context_chars':sum(len(s['excerpt']) for s in sources),
                         'timeout_seconds':min(25,timeout),'attempts':1}
         job.setdefault('usados',{})['synthesis_budget'] = context_meta

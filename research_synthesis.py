@@ -394,6 +394,21 @@ def source_link(label, url):
     return f"[{label}]({quote(url, safe=':/?=&%+#@;,-._~')})"
 
 
+def source_coverage(objective, sources):
+    """Assess exactly the literal text/ranges offered to synthesis."""
+    import evidence_graph
+    return evidence_graph.requirement_coverage(objective,[{
+        'id':s.get('evidence_id') or s['id'],'url':s.get('url',''),'titulo':s.get('title',''),
+        'texto':s['excerpt'],'texto_lido':True,'content_scope':s.get('scope','retrieved_excerpt'),
+        'answer_passages':[{**p,'id':p.get('id') or f"P-{s['id']}-{p['start']}-{p['end']}",
+                            'text':s['excerpt'][p['start']:p['end']],
+                            'text_span':{'start':p['start'],'end':p['end'],'scope':'returned_extracted_text'}}
+                           for p in s.get('passage_ranges',[])
+                           if type(p.get('start')) is int and type(p.get('end')) is int
+                           and 0<=p['start']<p['end']<=len(s['excerpt'])]}
+        for s in sources])
+
+
 def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=None, verify_fn=None):
     """Validate structure, citation identity, exact quotes and numeric provenance.
 
@@ -407,16 +422,7 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
     import evidence_graph
     # Derive state from exactly the bounded source text offered to this writer,
     # not fresh parser defaults or evidence omitted from its context.
-    coverage=evidence_graph.requirement_coverage(objective,[{
-        'id':s.get('evidence_id') or s['id'],'url':s.get('url',''),'titulo':s.get('title',''),
-        'texto':s['excerpt'],'texto_lido':True,'content_scope':s.get('scope','retrieved_excerpt'),
-        'answer_passages':[{**p,'id':p.get('id') or f"P-{s['id']}-{p['start']}-{p['end']}",
-                            'text':s['excerpt'][p['start']:p['end']],
-                            'text_span':{'start':p['start'],'end':p['end'],'scope':'returned_extracted_text'}}
-                           for p in s.get('passage_ranges',[])
-                           if type(p.get('start')) is int and type(p.get('end')) is int
-                           and 0<=p['start']<p['end']<=len(s['excerpt'])]}
-        for s in sources])
+    coverage=source_coverage(objective,sources)
     requirements = coverage['requirements']
     allowed_ids = json.dumps([s['id'] for s in sources],ensure_ascii=False)
     catalog_mode=bool(getattr(generate_fn,'literal_quote_ids',False))
