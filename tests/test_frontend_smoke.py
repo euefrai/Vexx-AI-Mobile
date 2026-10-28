@@ -94,6 +94,22 @@ t('real-citation', sources.includes('class="citation" href="https://example.com/
 t('source-url-not-markdown', !sources.includes('href="https://example.com/prova)'));
 t('heading-levels', renderMarkdown('# Título\n## Seção\n### Detalhe').includes('<h2>Título</h2><h3>Seção</h3><h4>Detalhe</h4>'));
 t('responsive-table-wrapper', renderMarkdown('| a | b |\n|---|---|\n| 1 | 2 |').includes('<div class="table-wrap"><table>'));
+const hb = renderMarkdown('[busca](https://loja.com/busca?q=x) e [produto](https://loja.com/produto/x)');
+t('link-busca-bloqueado', hb.includes('link-blocked') && !hb.includes('href="https://loja.com/busca'));
+t('link-produto-ok', hb.includes('href="https://loja.com/produto/x"'));
+const hh = renderMarkdown('https://loja.com/');
+t('link-home-bloqueado', hh.includes('link-blocked') && !hh.includes('<a href="https://loja.com/"'));
+const hfStart = src.indexOf('function formatarTamanhoAnexo');
+const hfEnd = src.indexOf('function renderAttachmentTray');
+if (hfStart < 0 || hfEnd < hfStart) { console.error('helpers de anexo ausentes'); process.exit(2); }
+eval(src.slice(hfStart, hfEnd));
+const anexo = textoComAnexos('', [{ name: 'contrato.pdf' }]);
+t('anexo-sem-texto', anexo.startsWith('Analise o documento anexado.\n\n') &&
+  anexo.includes('Documento anexado: "contrato.pdf"'));
+const anexoTxt = textoComAnexos('resuma', [{ name: 'a.pdf' }, { name: 'b.pdf' }]);
+t('anexo-com-texto', anexoTxt.startsWith('resuma\n\n') &&
+  anexoTxt.includes('"a.pdf"') && anexoTxt.includes('"b.pdf"'));
+t('anexo-vazio', textoComAnexos('oi', []) === 'oi');
 """
 
 
@@ -316,13 +332,19 @@ def test_streaming_sem_sucesso_vazio():
 
 def test_envia_para_ia_sem_aguardar_sincronizacao_completa():
     js = APP_JS.read_text(encoding="utf-8")
-    inicio = js.index("async function sendMessage(raw)")
+    inicio = js.index("async function sendMessage(raw, options = {})")
     fim = js.index("\ncomposer.addEventListener('submit'", inicio)
     envio = js[inicio:fim]
     assert "requestAI(row, { immediate: true, onStarted: syncAndRefresh, sentAt, storedAt })" in envio
     assert envio.index("await storeMessages([row])") < envio.index("requestAI(row,")
     assert envio.index("requestAI(row,") < envio.index("await touchSession(")
     assert "await syncAndRefresh()" not in envio
+    assert "const fromComposer = !!(options && options.fromComposer);" in envio
+    assert "const anexos = fromComposer ? pendingAttachments.slice() : [];" in envio
+    assert "await uploadAnexoPendente(anexos[i], conversa)" in envio
+    assert envio.index("await uploadAnexoPendente(") < envio.index("await storeMessages([row])")
+    assert "text: value" in envio
+    assert "if (textoBase === '/admin' && !anexos.length)" in envio
     assert "text: userRow.text" in js  # IA persiste o texto piggyback no PC
     assert "const aiQueue = []" in js and "aiQueue.push(" in js and "pumpAIQueue()" in js
     ai_inicio = js.index("function requestAI(userRow, options = {})")
@@ -338,6 +360,45 @@ def test_envia_para_ia_sem_aguardar_sincronizacao_completa():
     assert "messageById(replyId)" in preflight and "await allMessages()" not in preflight
     assert "await renderMessages()" not in preflight
     assert "'[chat-timing]'" in pedido
+
+
+def test_anexos_ficam_no_composer_ate_enviar():
+    """V5.8: escolher arquivo s? prepara a mensagem; upload/send no submit.
+
+    Antes o `change` do input j? subia o documento e criava uma mensagem
+    `want_ai:false`, impedindo anexar + digitar e enviar numa ?nica mensagem.
+    """
+    js = APP_JS.read_text(encoding="utf-8")
+    html = (RAIZ / "public" / "index.html").read_text(encoding="utf-8")
+    css = (RAIZ / "public" / "styles.css").read_text(encoding="utf-8")
+    assert 'id="attachmentTray"' in html and 'class="attachment-tray"' in html
+    for sym in ("pendingAttachments", "renderAttachmentTray", "limparAnexosPendentes",
+                "textoComAnexos", "attachmentUploadCache", "uploadAnexoPendente"):
+        assert sym in js, sym
+    assert "let pendingAttachments = [];" in js
+    assert "const sendingMessages = new Set();" in js
+    assert "if (sendingMessages.has(conversa)) return;" in js  # duplo clique não envia 2x
+    assert "attachmentUploadCache.has(chave)" in js  # retry não sobe de novo
+    assert "attachmentUploadCache.delete(conversa + '|' + a.id)" in js
+    inicio = js.index("$('fileInput').addEventListener('change'")
+    fim = js.index("$('attachmentTray').addEventListener('click'", inicio)
+    troca = js[inicio:fim]
+    assert "adicionarAnexoPendente(f)" in troca
+    assert "/api/docs/upload" not in troca and "fetch(" not in troca
+    assert "want_ai: false" not in troca and "storeMessages(" not in troca
+    upload_ini = js.index("async function uploadAnexoPendente(")
+    upload_fim = js.index("async function sendMessage(", upload_ini)
+    upload = js[upload_ini:upload_fim]
+    assert "/api/docs/upload" in upload
+    assert "credentials: 'same-origin'" in upload
+    assert "fd.append('conversation_id', conv)" in upload
+    # S? o submit do composer consome os anexos pendentes.
+    assert "sendMessage(messageInput.value, { fromComposer: true })" in js
+    assert "onChat: (text) => sendMessage(text)" in js
+    assert "sendMessage('Mostra o resultado da pesquisa')" in js
+    assert "pendingAttachments.slice()" in js
+    assert ".attachment-tray" in css and ".attachment-chip" in css
+    assert ".attachment-remove" in css and ".link-blocked" in css
 
 
 def test_estudos_ligado_e_com_cache_offline():

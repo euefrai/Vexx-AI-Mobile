@@ -106,6 +106,12 @@ function mount(component, props) {
   JDUI.mount(root, [{ blocks: [{ type: 'ui', component, props }] }], {});
   return root;
 }
+function mountValida(component, props) {
+  const r = JDUI.validateMessage({ version: V, blocks: [{ type: 'ui', component, props }] });
+  const root = new Element('main');
+  JDUI.mount(root, [r.msg], {});
+  return root;
+}
 function walk(e, pred) {
   if (pred(e)) return e;
   for (const c of (e.children || [])) { const f = walk(c, pred); if (f) return f; }
@@ -141,6 +147,15 @@ const seloEl = walk(listagem, e => (e.className || '').indexOf('jdui-pver') >= 0
 t('card-selo-titulo', !!seloEl && !!seloEl.attrs.title);
 const legado = mount('productcard', { produto: { nome: 'N', preco: 'R$ 1,00' } });
 t('card-legado-sem-selo', !walk(legado, e => (e.className || '').indexOf('jdui-pver') >= 0));
+const home = mountValida('productcard', { produto: Object.assign({}, P,
+  { url: 'https://loja.com/' }) });
+t('card-home-sem-link', !walk(home, e => e.tag === 'a'));
+const busca = mountValida('productcard', { produto: Object.assign({}, P,
+  { url: 'https://loja.com/busca?q=placa' }) });
+t('card-busca-sem-link', !walk(busca, e => e.tag === 'a'));
+const ofertaLista = mountValida('productcard', { produto: Object.assign({}, P,
+  { url: '', ofertas: [{ loja: 'Loja', preco: 'R$ 1,00', url: 'https://loja.com/categoria/gpu' }] }) });
+t('card-oferta-listagem-sem-link', !walk(ofertaLista, e => e.tag === 'a'));
 """
 
 

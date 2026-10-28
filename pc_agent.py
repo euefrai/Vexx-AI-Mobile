@@ -1381,14 +1381,26 @@ def doc_mencionado(db, texto: str, conversation_id: str, owner=DONO_PADRAO) -> s
     t = (texto or "").lower()
     if re.search(r'\b(n[aã]o (leia|abra|consulte)|sem (ler|abrir|consultar))\b',t):
         return ''
-    pedido=bool(re.search(r'\b(resum\w*|leia|abra|analis\w*|compare|consulte|mostre|explique|qual|quais|quanto\w*|conte[uú]do)\b',t))
-    if not pedido:
-        return ''
-    doc_hint=bool(re.search(r'\b(documento|arquivo|pdf|contrato|relat[óo]rio|planilha|resum\w*|leia|abra|consulte)\b',t))
+    # Marcador do composer ("📎 Documento anexado: \"nome\"") é pedido explícito:
+    # o usuário acabou de enviar o arquivo, mesmo sem palavras de comando.
+    anexo = re.search(r'documento anexado\s*:\s*["“]?([^"\n”]+)', t)
     try:
         docs = docs_agent.listar_documentos(db, 50, owner, conversation_id=conversation_id)
     except Exception:
         return ""
+    if anexo:
+        alvo = anexo.group(1).strip()
+        for d in docs:
+            nome = (d.get("name") or "").lower().strip()
+            base = re.sub(r"\.[a-z0-9]+$", "", nome)
+            if alvo and (alvo == nome or alvo == base or
+                         (len(base) >= 4 and (base in alvo or alvo in nome))):
+                return d["doc_id"]
+        return docs[0]["doc_id"] if docs else ""
+    pedido=bool(re.search(r'\b(resum\w*|leia|abra|analis\w*|compare|consulte|mostre|explique|qual|quais|quanto\w*|conte[uú]do)\b',t))
+    if not pedido:
+        return ''
+    doc_hint=bool(re.search(r'\b(documento|arquivo|pdf|contrato|relat[óo]rio|planilha|resum\w*|leia|abra|consulte)\b',t))
     for d in docs:
         nome = (d["name"] or "").lower()
         base = re.sub(r"\.[a-z0-9]+$", "", nome)
@@ -2961,15 +2973,21 @@ def _shopping_executar(db, owner: str, conv: str, user_text: str, extras: dict,
     return shop_res
 
 
-def _shopping_aplicar(texto: str, shop_res: dict | None) -> str:
+def _shopping_aplicar(texto: str, shop_res: dict | None,
+                      extras: dict | None = None) -> str:
     """Cards/nota reais no texto final + bane fence de produto do MODELO.
 
     V5.7: fences de produto emitidos pelo modelo nunca entram — card de
     produto só vem da ferramenta (dados verificados); roda mesmo quando a
     busca não executou (antes só era chamado com `shop_res` não-nulo).
+    V5.8: links do modelo só permanecem clicáveis quando comprovados pela
+    ferramenta/fonte; home/busca/categoria viram texto rotulado.
     """
     texto = shopping.remover_fences_produto(texto or "")
     if shop_res is None:
+        if (extras or {}).get("shop"):
+            return shopping.sanitizar_links_resposta(
+                texto, None, (extras or {}).get("fontes"))
         return texto
     fence_shop = ""
     if shop_res.get("produtos"):
@@ -2987,6 +3005,9 @@ def _shopping_aplicar(texto: str, shop_res: dict | None) -> str:
         # Imagens primeiro: cards com as fotos reais abrem a mensagem. Fences
         # alheios (gráfico/aula) NÃO escondem ofertas verificadas da ferramenta.
         texto = imagens_primeiro(fence_shop, texto)
+    if shop_res is not None or (extras or {}).get("shop"):
+        texto = shopping.sanitizar_links_resposta(
+            texto, shop_res, (extras or {}).get("fontes"))
     return texto
 
 
@@ -3982,7 +4003,7 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     if prep.get("pergunta_memoria") and prep["pergunta_memoria"] not in (texto or ""):
         texto = (texto or "") + "\n\n" + prep["pergunta_memoria"]
     # V5.7: cards reais (ou nota honesta) + banimento de fence de produto do modelo.
-    texto = _shopping_aplicar(texto, shop_res)
+    texto = _shopping_aplicar(texto, shop_res, extras)
     # V5.7.3: comparação sem evidência não vira fato (com laudo por afirmação).
     texto, extras["afirmacoes"] = _validar_comparacoes(
         texto, extras.get("fontes"), (shop_res or {}).get("produtos"), mid=mid)
@@ -4366,7 +4387,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         texto_final = anexar_fontes(resposta_modelo, extras["fontes"], intencao_imagem(prep.get("user_text", "")), extras.get('midia'), extras.get('pesquisa_executada',False), consulta=prep.get('user_text',''))
         if prep.get("pergunta_memoria") and prep["pergunta_memoria"] not in (texto_final or ""):
             texto_final = (texto_final or "") + "\n\n" + prep["pergunta_memoria"]
-        texto_final = _shopping_aplicar(texto_final, shop_res)
+        texto_final = _shopping_aplicar(texto_final, shop_res, extras)
         texto_final, extras["afirmacoes"] = _validar_comparacoes(
             texto_final, extras.get("fontes"),
             (shop_res or {}).get("produtos"), mid=mid)

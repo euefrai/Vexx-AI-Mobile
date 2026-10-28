@@ -720,6 +720,14 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   text-decoration:underline;
   word-break:break-all;
 }
+.bubble .link-blocked{
+  display:inline;
+  color:var(--soft);
+  font-size:.88em;
+  border-bottom:1px dashed rgba(255,255,255,.25);
+  cursor:help;
+  overflow-wrap:anywhere;
+}
 .bubble code{
   background:rgba(0,0,0,.35);
   padding:2px 6px;
@@ -825,6 +833,47 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   border-radius:var(--radius-lg);
   padding:8px 12px;
 }
+.attachment-tray{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  padding:0 2px 8px;
+}
+.attachment-tray[hidden]{display:none}
+.attachment-chip{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  min-width:0;
+  max-width:100%;
+  padding:6px 8px;
+  border:1px solid var(--line);
+  border-radius:10px;
+  background:var(--bg-elev-2);
+  color:var(--text);
+  font-size:11.5px;
+}
+.attachment-chip.uploaded{border-color:rgba(167,139,250,.45)}
+.attachment-icon{flex-shrink:0;font-size:13px}
+.attachment-name{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+  max-width:min(220px,60vw);
+}
+.attachment-size{flex-shrink:0;color:var(--soft);font-size:10px}
+.attachment-remove{
+  width:20px;
+  height:20px;
+  display:grid;
+  place-items:center;
+  flex-shrink:0;
+  border-radius:50%;
+  color:var(--muted);
+  font-size:14px;
+  line-height:1;
+}
+.attachment-remove:hover{background:rgba(255,255,255,.08);color:var(--text)}
 .composer-plus{
   width:32px;
   height:32px;

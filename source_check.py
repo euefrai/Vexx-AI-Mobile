@@ -259,6 +259,22 @@ _RX_URL_BUSCA_RAIZ = re.compile(
     r"resultados?|lists?|lista|listas|listagem)(/|\?|$|s)", re.I)
 
 
+def url_parece_produto(url: str) -> bool:
+    """URL com cara de página de item (nunca home/busca/categoria).
+
+    Só um sinal de caminho: não valida conteúdo nem autoriza sozinho um card.
+    Serve para aceitar como link a página analisada quando o caminho é de item
+    e existe dado estruturado real por trás.
+    """
+    try:
+        partes = urllib.parse.urlsplit(url or "")
+    except ValueError:
+        return False
+    if not partes.netloc or url_de_listagem(url):
+        return False
+    return bool(_RX_URL_PRODUTO.search((partes.path or "") + "/"))
+
+
 def url_de_listagem(url: str) -> bool:
     """URL com cara de home/busca/categoria? (heurística conservadora)
 

@@ -413,10 +413,12 @@ def test_montar_prefere_link_de_item_a_home_declarada():
                           "loja": "", "valido_ate": ""}]}
     p = shopping.montar_produto(ex, "https://loja.com/", "https://loja.com/", "t")
     assert p["url_item"] == "https://loja.com/produto/x"
-    # sem alternativa melhor, a URL declarada é mantida (nunca inventa)
+    # V5.8: só sobra home na declaração -> card SEM link (nunca inventa,
+    # nunca apresenta a home como se fosse a página do produto).
     ex2 = {**ex, "ofertas_ld": []}
     p2 = shopping.montar_produto(ex2, "https://loja.com/", "https://loja.com/", "t")
-    assert p2["url_item"] == "https://loja.com/"
+    assert p2["url_item"] == ""
+    assert p2["link_codigo"] == "sem_link_item"
 
 
 def test_selo_explica_item_nao_aberto():

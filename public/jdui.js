@@ -23,6 +23,19 @@
     }
     catch (_) { return ''; }
   }
+  function URL_ITEM(u) {
+    // URL de produto nunca pode ser home/busca/categoria (espelho de
+    // source_check.url_de_listagem). Card sem link honesto > link errado.
+    const ok = URL_OK(u);
+    if (!ok) return '';
+    try {
+      const p = new URL(ok);
+      const path = p.pathname || '';
+      if (path === '' || path === '/') return '';
+      if (/\/(busca|buscar|search|pesquisa|pesquisar|categoria|category|resultados?|lists?|lista|listas|listagem)(\/|$|s)/i.test(path)) return '';
+      return ok;
+    } catch (_) { return ''; }
+  }
   function URL_RECURSO(u) {
     const remote = URL_OK(u);
     if (remote) return remote;
@@ -343,7 +356,7 @@
       }
       const ofertas = (Array.isArray(o.ofertas) ? o.ofertas : []).slice(0, 6).map(item => {
         if (!item || typeof item !== 'object') return null;
-        return { loja: S(item.loja, 80), preco: S(item.preco, 40), url: URL_OK(item.url) };
+        return { loja: S(item.loja, 80), preco: S(item.preco, 40), url: URL_ITEM(item.url) };
       }).filter(Boolean);
       const lv = String(o.link_veredito || '').toLowerCase();
       const iv = String(o.imagem_veredito || '').toLowerCase();
@@ -352,7 +365,7 @@
         modelo: S(o.modelo || o.model, 80), variante: S(o.variante, 80),
         imagem: URL_OK(o.imagem || o.image), preco: S(o.preco, 40), preco_valor: pv,
         moeda: (S(o.moeda, 3).toUpperCase() || 'BRL'), loja: S(o.loja || o.store, 80),
-        url: URL_OK(o.url), specs, avaliacao: av, n_avaliacoes: nv,
+        url: URL_ITEM(o.url), specs, avaliacao: av, n_avaliacoes: nv,
         disponibilidade: ['em_estoque', 'sem_estoque', 'estoque_limitado', 'pre_venda'].indexOf(disp) >= 0 ? disp : 'desconhecida',
         verificado_em: S(o.verificado_em, 48), ofertas,
         link_veredito: VER_LINK.indexOf(lv) >= 0 ? lv : '',

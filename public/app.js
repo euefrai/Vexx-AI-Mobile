@@ -35,6 +35,9 @@ let streamDraft = null;
 let messagesRenderVersion = 0;
 let sessionsCache = [];
 let activeConversation = null;
+let pendingAttachments = [];
+const sendingMessages = new Set();
+const attachmentUploadCache = new Map();
 try { activeConversation = localStorage.getItem('julia-active-conversation') || newId(); } catch (_) { activeConversation = newId(); }
 try { localStorage.setItem('julia-active-conversation', activeConversation); } catch (_) {}
 
@@ -354,9 +357,13 @@ async function tombstone(convId) {
   await metaSet('deleted:' + convId, new Date().toISOString());
 }
 function setActiveConversation(id) {
+  const trocou = activeConversation !== id;
   activeConversation = id;
   lsSet('julia-active-conversation', id);
   metaSet('active-conversation', id);
+  // Anexos pertencem à mensagem em composição nesta conversa; trocar de
+  // conversa não pode enviar (nem ler) o arquivo no chat errado.
+  if (trocou && pendingAttachments.length) limparAnexosPendentes();
 }
 async function resolveActiveConversation() {
   // 1) localStorage, se ainda apontar para sessão existente (e não excluída)
@@ -428,6 +435,17 @@ function rotuloUrl(u) {
     return p.hostname.replace(/^www\./, '') + curto;
   } catch (_) { return String(u).length > 44 ? String(u).slice(0, 41) + '...' : String(u); }
 }
+function urlDeListagem(u) {
+  // Espelho de source_check.url_de_listagem: home/busca/categoria nunca é
+  // página de produto. Defesa extra no renderer, além do contrato do backend.
+  try {
+    const p = new URL(String(u), location.href);
+    if (p.protocol !== 'http:' && p.protocol !== 'https:') return false;
+    const path = p.pathname || '';
+    if (path === '' || path === '/') return true;
+    return /\/(busca|buscar|search|pesquisa|pesquisar|categoria|category|resultados?|lists?|lista|listas|listagem)(\/|$|s)/i.test(path);
+  } catch (_) { return false; }
+}
 function inlineFmt(s, sources = {}) {
   const tokens = [];
   const keep = html => '\u0001INLINE' + (tokens.push(html) - 1) + '\u0001';
@@ -441,7 +459,10 @@ function inlineFmt(s, sources = {}) {
     if (/^(?:www\.)?loremflickr\.com$/i.test(new URL(u).hostname)) return '';
     return keep('<img class="chat-img" loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="' + alt + '" src="' + esc(u.replace(/&amp;/g, '&')) + '" />');
   });
-  s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (m, t, u) => keep('<a href="' + esc(u.replace(/&amp;/g, '&')) + '" target="_blank" rel="noopener noreferrer">' + t + '</a>'));
+  s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (m, t, u) => {
+    if (urlDeListagem(u)) return t + ' <span class="link-blocked" title="Link bloqueado: página de busca/categoria, não é o produto">página de busca/categoria — não é o produto</span>';
+    return keep('<a href="' + esc(u.replace(/&amp;/g, '&')) + '" target="_blank" rel="noopener noreferrer">' + t + '</a>');
+  });
   s = s.replace(/\[(S\d+)\]/gi, (m, id) => sources[id.toUpperCase()]
     ? keep('<a class="citation" href="' + esc(sources[id.toUpperCase()]) + '" target="_blank" rel="noopener noreferrer" aria-label="Fonte ' + id.toUpperCase() + '">' + m + '</a>') : m);
   s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
@@ -454,6 +475,7 @@ function inlineFmt(s, sources = {}) {
     let u = url, suf = '';
     if (e) { u = url.slice(0, -e[0].length); suf = e[0]; }
     if (!u) return m;
+    if (urlDeListagem(u)) return pre + '<span class="link-blocked" title="Link bloqueado: página de busca/categoria, não é o produto">' + esc(rotuloUrl(u)) + ' (página de busca/categoria — não é o produto)</span>' + suf;
     return pre + '<a href="' + u + '" title="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(rotuloUrl(u)) + '</a>' + suf;
   });
   return s.replace(/\u0001INLINE(\d+)\u0001/g, (_, n) => tokens[Number(n)] || '');
@@ -2582,32 +2604,159 @@ messageInput.addEventListener('input', () => {
   $('charCount').textContent = n > 9000 ? n + ' / 10000' : '';
 });
 messageInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && !window.matchMedia('(pointer: coarse)').matches) { e.preventDefault(); composer.requestSubmit(); } });
-async function sendMessage(raw) {
-  const value = String(raw || '').trim();
-  if (!value) return;
-  if (value === '/admin') { messageInput.value = ''; window.location.assign('/admin'); return; }
+function formatarTamanhoAnexo(bytes) {
+  const n = Number(bytes) || 0;
+  if (n >= 1024 * 1024) return (n / (1024 * 1024)).toFixed(1).replace('.', ',') + ' MB';
+  if (n >= 1024) return Math.round(n / 1024) + ' KB';
+  return n + ' B';
+}
+function textoComAnexos(texto, anexos = []) {
+  const base = String(texto || '').trim();
+  const nomes = (Array.isArray(anexos) ? anexos : [])
+    .map(a => String((a && (a.name || (a.file && a.file.name))) || '').replace(/[\r\n"]/g, ' ').trim())
+    .filter(Boolean);
+  if (!nomes.length) return base;
+  const marcadores = nomes.map(n => '📎 Documento anexado: "' + n + '"').join('\n');
+  return (base || 'Analise o documento anexado.') + '\n\n' + marcadores;
+}
+function renderAttachmentTray() {
+  const tray = $('attachmentTray');
+  if (!tray) return;
+  tray.replaceChildren();
+  tray.hidden = !pendingAttachments.length;
+  if (!pendingAttachments.length) return;
+  for (const att of pendingAttachments) {
+    const chip = document.createElement('span');
+    chip.className = 'attachment-chip' + (att.doc ? ' uploaded' : '');
+    chip.dataset.attachmentId = att.id;
+    chip.setAttribute('role', 'listitem');
+    const icon = document.createElement('span');
+    icon.className = 'attachment-icon';
+    icon.setAttribute('aria-hidden', 'true');
+    icon.textContent = '📎';
+    const name = document.createElement('span');
+    name.className = 'attachment-name';
+    name.textContent = att.name;
+    name.title = att.name;
+    const size = document.createElement('span');
+    size.className = 'attachment-size';
+    size.textContent = att.doc ? 'Anexado' : formatarTamanhoAnexo(att.size);
+    const remover = document.createElement('button');
+    remover.type = 'button';
+    remover.className = 'attachment-remove';
+    remover.dataset.attachmentId = att.id;
+    remover.setAttribute('aria-label', 'Remover anexo ' + att.name);
+    remover.textContent = '×';
+    chip.append(icon, name, size, remover);
+    tray.appendChild(chip);
+  }
+}
+function limparAnexosPendentes() {
+  pendingAttachments = [];
+  renderAttachmentTray();
+}
+function removerAnexoPendente(id) {
+  pendingAttachments = pendingAttachments.filter(a => a.id !== id);
+  renderAttachmentTray();
+  messageInput.focus();
+}
+function adicionarAnexoPendente(file) {
+  const nome = file.name || 'documento';
+  const repetido = pendingAttachments.some(a => a.name === nome && a.size === file.size &&
+    a.file && a.file.lastModified === file.lastModified);
+  if (repetido) { showToast('Este documento já está anexado'); return false; }
+  if (pendingAttachments.length >= 5) { showToast('Máximo de 5 documentos por mensagem'); return false; }
+  pendingAttachments.push({ id: newId(), file, name: nome, size: file.size,
+    doc: null, docConversation: activeConversation });
+  renderAttachmentTray();
+  return true;
+}
+async function uploadAnexoPendente(att, conversa) {
+  if (att.doc) return att.doc;
+  const conv = att.docConversation || conversa || activeConversation;
+  const chave = conv + '|' + att.id;
+  if (attachmentUploadCache.has(chave)) {
+    att.doc = attachmentUploadCache.get(chave);
+    att.docConversation = conv;
+    return att.doc;
+  }
+  const fd = new FormData();
+  fd.append('file', att.file, att.name);
+  fd.append('conversation_id', conv);
+  const res = await fetch('/api/docs/upload', { method: 'POST', body: fd, headers: { 'X-CSRF-Token': csrf }, credentials: 'same-origin' });
+  const data = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(data.detail || ('Erro ' + res.status));
+  attachmentUploadCache.set(chave, data);
+  att.doc = data;
+  att.docConversation = conv;
+  return data;
+}
+async function sendMessage(raw, options = {}) {
+  const fromComposer = !!(options && options.fromComposer);
+  const anexos = fromComposer ? pendingAttachments.slice() : [];
+  const textoBase = String(raw || '').trim();
+  if (!textoBase && !anexos.length) return;
+  if (textoBase === '/admin' && !anexos.length) { messageInput.value = ''; window.location.assign('/admin'); return; }
   if (!db) { showToast('Cache local indisponível'); return; }
+  if (anexos.length && !authenticated && !PREVIEW_MODE) { showToast('Faça login'); return; }
+  const value = textoComAnexos(textoBase, anexos);
   if (value.length > 10000) { showToast('Mensagem muito longa'); return; }
+  if (anexos.length && !pcOnline) { showToast('PC desconectado — anexe quando online'); return; }
+  const conversa = activeConversation;
+  if (sendingMessages.has(conversa)) return;  // duplo clique/Enter não envia 2x
+  sendingMessages.add(conversa);
   const sentAt = performance.now();
-  const row = { id: newId(), conversation_id: activeConversation, origin: 'mobile', role: 'user', text: value, created_at: new Date().toISOString(), status: 'pending', want_ai: true };
+  let uploadsOk = false;
   try {
+    if (anexos.length) {
+      $('attachButton').disabled = true;
+      $('uploadStatus').hidden = false;
+      for (let i = 0; i < anexos.length; i++) {
+        $('uploadStatus').textContent = 'Enviando e lendo ' + anexos[i].name + '…' +
+          (anexos.length > 1 ? ' (' + (i + 1) + '/' + anexos.length + ')' : '');
+        await uploadAnexoPendente(anexos[i], conversa);
+        renderAttachmentTray();
+      }
+      uploadsOk = true;
+    }
+    const row = { id: newId(), conversation_id: conversa, origin: 'mobile', role: 'user', text: value, created_at: new Date().toISOString(), status: 'pending', want_ai: true };
     await storeMessages([row]);
+    if (anexos.length) {
+      const enviados = new Set(anexos.map(a => a.id));
+      for (const a of anexos) attachmentUploadCache.delete(conversa + '|' + a.id);
+      pendingAttachments = pendingAttachments.filter(a => !enviados.has(a.id));
+      renderAttachmentTray();
+      renderDocs();
+    }
     const storedAt = performance.now();
     if (authenticated && navigator.onLine) {
       requestAI(row, { immediate: true, onStarted: syncAndRefresh, sentAt, storedAt })
         .catch(err => showToast('IA falhou: ' + (err.message || 'tente de novo')));
     } else showToast('Salvo no celular');
     await touchSession(row.conversation_id, titleFrom(value));
-    if (activeConversation === row.conversation_id && messageInput.value.trim() === value) {
+    if (activeConversation === row.conversation_id && messageInput.value.trim() === textoBase) {
       messageInput.value = ''; autoresize(); $('charCount').textContent = '';
     }
     await renderSessions($('sessionSearch').value);
     await renderMessages();
     scrollChat(true);
     if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(() => {});
-  } catch (_) { showToast('Não foi possível salvar'); }
+  } catch (err) {
+    const detalhe = (err && err.message) ? err.message : '';
+    showToast(anexos.length && !uploadsOk ? 'Falha no upload: ' + detalhe : 'Não foi possível salvar');
+  } finally {
+    sendingMessages.delete(conversa);
+    if (anexos.length) {
+      $('attachButton').disabled = false;
+      $('uploadStatus').hidden = true;
+    }
+  }
 }
-composer.addEventListener('submit', e => { e.preventDefault(); if (authenticated || PREVIEW_MODE) sendMessage(messageInput.value); else showToast('Faça login'); });
+composer.addEventListener('submit', e => {
+  e.preventDefault();
+  if (authenticated || PREVIEW_MODE) sendMessage(messageInput.value, { fromComposer: true });
+  else showToast('Faça login');
+});
 document.querySelectorAll('.suggestion').forEach(b => b.addEventListener('click', () => { messageInput.value = b.dataset.message; autoresize(); messageInput.focus(); }));
 async function newChat(projectId = '') {
   if (!db) { showToast('Armazenamento local indisponível'); return; }
@@ -2809,34 +2958,22 @@ $('attachButton').addEventListener('click', () => {
   if (!pcOnline) { showToast('PC desconectado — anexe quando online'); return; }
   $('fileInput').click();
 });
-$('fileInput').addEventListener('change', async e => {
+$('fileInput').addEventListener('change', e => {
   const f = e.target.files && e.target.files[0];
   e.target.value = '';
   if (!f) return;
   if (f.size > 15 * 1024 * 1024) { showToast('Arquivo maior que 15MB'); return; }
-  const uploadConversation = activeConversation;
-  $('attachButton').disabled = true;
-  $('uploadStatus').hidden = false;
-  $('uploadStatus').textContent = 'Enviando e lendo ' + f.name + '…';
-  try {
-    const fd = new FormData();
-    fd.append('file', f, f.name);
-    fd.append('conversation_id', uploadConversation);
-    const res = await fetch('/api/docs/upload', { method: 'POST', body: fd, headers: { 'X-CSRF-Token': csrf }, credentials: 'same-origin' });
-    const data = await res.json().catch(() => ({}));
-    if (!res.ok) throw new Error(data.detail || ('Erro ' + res.status));
-    const row = { id: newId(), conversation_id: uploadConversation, origin: 'mobile', role: 'user', text: '📎 Anexei o documento "' + data.name + '" (' + data.chars + ' caracteres em ' + data.chunks + ' trechos).', created_at: new Date().toISOString(), status: 'pending', want_ai: false };
-    await storeMessages([row]);
-    await touchSession(uploadConversation, titleFrom(f.name));
-    await syncAndRefresh();
-    await renderSessions($('sessionSearch').value);
-    await renderMessages();
-    await renderDocs();
-    scrollChat(true);
-    showToast('Documento lido. Peça resumo, tópicos ou pergunte sobre ele.');
-  } catch (err) { showToast('Falha no upload: ' + (err.message || '')); }
-  finally { $('attachButton').disabled = false; $('uploadStatus').hidden = true; }
+  if (!f.size) { showToast('Arquivo vazio'); return; }
+  if (!adicionarAnexoPendente(f)) return;
+  showToast('Documento anexado. Envie a mensagem para ler o arquivo.');
+  messageInput.focus();
 });
+$('attachmentTray').addEventListener('click', e => {
+  const btn = e.target.closest('.attachment-remove');
+  if (!btn) return;
+  removerAnexoPendente(btn.dataset.attachmentId || '');
+});
+renderAttachmentTray();
 
 /* ----- Documentos ----- */
 async function renderDocs() {

@@ -823,6 +823,59 @@ def _dominio(url: str) -> str:
         return ""
 
 
+_RX_URL_HTTP = re.compile(r"^https?://", re.I)
+
+
+def url_exibivel(url: str) -> bool:
+    """URL http(s) que pode ser exibida como página do item.
+
+    Home, busca e categoria NUNCA são página de produto — mesmo quando a
+    loja as declara no dado estruturado. Não valida conteúdo; só barra o que
+    comprovadamente não é um item.
+    """
+    u = _limpa(url, 500)
+    if not _RX_URL_HTTP.match(u):
+        return False
+    try:
+        partes = urllib.parse.urlsplit(u)
+    except ValueError:
+        return False
+    if not partes.netloc or partes.username or partes.password:
+        return False
+    return not source_check.url_de_listagem(u)
+
+
+def _url_chave(url: str) -> str:
+    """Chave estável para comparar links (host sem www + caminho + query)."""
+    u = _limpa(url, 700)
+    if not _RX_URL_HTTP.match(u):
+        return ""
+    try:
+        partes = urllib.parse.urlsplit(u)
+    except ValueError:
+        return ""
+    host = (partes.hostname or "").lower()
+    if host.startswith("www."):
+        host = host[4:]
+    if not host:
+        return ""
+    caminho = partes.path.rstrip("/") or "/"
+    return host + caminho + (("?" + partes.query) if partes.query else "")
+
+
+def _url_de_item_fallback(url: str, veredito: str) -> bool:
+    """Página analisada só vira link do item com evidência de produto/item.
+
+    `veredito` é o da página ABERTA (verificado/parcial). Sem essa evidência,
+    aceita apenas caminho com cara de item — nunca home/busca/categoria.
+    """
+    if not url_exibivel(url):
+        return False
+    if veredito in ("verificado", "parcial"):
+        return True
+    return source_check.url_parece_produto(url)
+
+
 def montar_produto(extraido: dict, url: str, url_final: str,
                    titulo_fonte: str, validacao: dict = None,
                    url_item: str = "") -> dict:
@@ -855,25 +908,30 @@ def montar_produto(extraido: dict, url: str, url_final: str,
     agora = agora_iso()
     specs = extraido.get("specs") if isinstance(extraido.get("specs"), dict) else {}
     # Link do ITEM (página do produto em si): URL declarada no dado
-    # estruturado > URL da 1ª oferta > página analisada. Nunca inventado.
-    # FASE 4: home/busca declarada não vence um link de produto real; se
-    # for o único dado, é mantida mesmo assim (não inventamos outro).
-    candidatos = []
-    for cand in (url_item or extraido.get("url_produto") or "",
-                 *[o.get("url_oferta") for o in ofertas],
-                 url_final or url):
-        cand = _limpa(cand, 500)
-        if cand:
-            candidatos.append(cand)
-    item = next((c for c in candidatos
-                 if not source_check.url_de_listagem(c)), "")
-    if not item and candidatos:
-        item = candidatos[0]
+    # estruturado (produto/ofertas) > página analisada. Nunca inventado.
+    # V5.8: home/busca/categoria declarada NÃO vira link do produto. A página
+    # analisada só é usada como fallback quando há evidência de produto/item;
+    # caso contrário o card fica sem link (`sem_link_item`), honestamente.
     val = validacao if isinstance(validacao, dict) else {}
     val_codigo = _limpa(val.get("codigo"), 40)
     val_veredito = _limpa(val.get("veredito"), 24)
     if val_veredito not in source_check.VEREDITOS:
         val_veredito = ""
+    item = ""
+    for cand in (url_item or extraido.get("url_produto") or "",
+                 *[o.get("url_oferta") for o in ofertas]):
+        cand = _limpa(cand, 500)
+        if cand and url_exibivel(cand):
+            item = cand
+            break
+    if not item:
+        pagina = _limpa(url_final or url, 500)
+        if _url_de_item_fallback(pagina, val_veredito):
+            item = pagina
+    if not item:
+        val_codigo = "sem_link_item"
+        if val_veredito in ("verificado", "parcial"):
+            val_veredito = "nao_verificado"
     return {
         "id": chave_dedupe({"nome": extraido.get("nome", ""),
                              "marca": extraido.get("marca", ""),
@@ -924,11 +982,15 @@ def deduplicar(produtos: list) -> list:
             por_chave[pid] = p
             por_chave[pid]["ofertas"] = []
         dest = por_chave[pid]
+        url_oferta = p.get("url_item") or p.get("url_final") or p.get("url", "")
+        # Oferta nunca aponta para home/busca/categoria — melhor sem link.
+        if not url_exibivel(url_oferta):
+            url_oferta = ""
         dest["ofertas"].append({
             "loja": p.get("loja", ""), "preco": p.get("preco"),
             "moeda": p.get("moeda", "BRL"),
             "preco_texto": p.get("preco_texto", PRECO_NAO_CONFIRMADO),
-            "url": p.get("url_item") or p.get("url_final") or p.get("url", ""),
+            "url": url_oferta,
             "disponibilidade": p.get("disponibilidade", "desconhecida"),
             "verificado_em": p.get("verificado_em", ""),
         })
@@ -2519,12 +2581,14 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     fontes = []
     fontes_vistas = set()
     usadas = [{"titulo": p.get("fonte_titulo") or p.get("nome", ""),
-               "url": p.get("url_final") or p.get("url", "")}
+               "url": _link_do_produto(p)}
               for p in produtos + alternativas]
     for a in usadas + consultadas + achados:
         url_fonte = a.get("url", "")[:500]
         if not url_fonte or url_fonte in fontes_vistas:
             continue
+        if source_check.url_de_listagem(url_fonte):
+            continue  # home/busca/categoria não é fonte da página do item
         fontes_vistas.add(url_fonte)
         fontes.append({"id": f"S{len(fontes) + 1}",
                        "titulo": (a.get("titulo") or "")[:160], "url": url_fonte})
@@ -2644,7 +2708,12 @@ def comparar(produtos: list) -> list:
 # ── Grounding para o LLM (texto; cards vão no fence determinístico) ───
 
 def _link_do_produto(p: dict) -> str:
-    return p.get("url_item") or p.get("url_final") or p.get("url", "") or ""
+    """Link exibível do item; NUNCA cai para home/busca/categoria."""
+    for campo in ("url_verificada", "url_item", "url_final", "url"):
+        u = _limpa(p.get(campo), 500)
+        if u and url_exibivel(u):
+            return u
+    return ""
 
 
 def _selo_verificacao(p: dict) -> str:
@@ -2890,9 +2959,12 @@ def _data_br_curta(iso: str) -> str:
 def _sources_de(fontes: list) -> list:
     out = []
     for i, f in enumerate(fontes or []):
+        url = (f.get("url", "") or "")[:500]
+        if not url or source_check.url_de_listagem(url):
+            continue  # fonte não pode ser apresentada como página de produto
         fid = f.get("id") or f"S{i + 1}"
         out.append({"id": str(fid)[:100], "title": (f.get("titulo", "") or "")[:160],
-                    "url": (f.get("url", "") or "")[:500]})
+                    "url": url})
         if len(out) >= 20:
             break
     return out
@@ -3036,6 +3108,126 @@ def remover_fences_produto(texto: str) -> str:
         return m.group(0)
     limpo = _RX_FENCE.sub(_trocar, texto or "")
     return re.sub(r"\n{3,}", "\n\n", limpo).strip()
+
+
+# ── Sanitização de links na resposta do modelo ───────────────
+# O modelo pode inventar URL, repetir a home da loja ou chamar uma busca de
+# "página do produto". Só links de produto/fonte comprovados permanecem
+# clicáveis; o resto é deslinkado e rotulado — sem esconder a limitação.
+
+_LABEL_LINK_LISTA = "página de busca/categoria — não é o produto"
+_LABEL_LINK_NAO_VERIFICADO = ("link não verificado — não foi confirmado "
+                              "como página do produto")
+_RX_LINK_RESPOSTA = re.compile(
+    r"(!\[[^\]\n]{0,120}\]\([^)\s]+\))"          # imagem: não é link de produto
+    r"|\[([^\]\n]{1,200})\]\(\s*(https?://[^)\s]+)\s*\)"
+    r"|(https?://[^\s<>()\[\]\"']+)", re.I)
+
+
+def _rotulo_url_curto(url: str) -> str:
+    try:
+        partes = urllib.parse.urlsplit(url or "")
+        host = (partes.hostname or "").lower()
+        if host.startswith("www."):
+            host = host[4:]
+        caminho = (partes.path or "").rstrip("/")
+        if len(caminho) > 32:
+            caminho = caminho[:29] + "..."
+        return (host + caminho) or host or (url or "")[:48]
+    except ValueError:
+        return (url or "")[:48]
+
+
+_RX_PARAM_RASTREIO = re.compile(
+    r"^(utm_[a-z_]+|gclid|fbclid|msclkid|igshid|yclid|twclid|"
+    r"ref|ref_|tag|aff|affiliate|src|source|campaign)$", re.I)
+
+
+def _so_params_de_rastreio(query: str) -> bool:
+    for par in (query or "").split("&"):
+        if par and not _RX_PARAM_RASTREIO.match(par.split("=", 1)[0]):
+            return False
+    return True
+
+
+def _url_na_allowlist(url: str, chaves: set) -> bool:
+    k = _url_chave(url)
+    if not k:
+        return False
+    if k in chaves:
+        return True
+    base, _, query = k.partition("?")
+    # Mesmo caminho só com parâmetros de rastreio é o mesmo link; qualquer
+    # query que possa identificar OUTRO item (?id=...) não é aceita.
+    if not query or not _so_params_de_rastreio(query):
+        return False
+    return any(c == base for c in chaves)
+
+
+def _sanitizar_link(m, chaves: set) -> str:
+    if m.group(1):
+        return m.group(1)  # imagem segue o fluxo normal do renderizador
+    if m.group(2) is not None:
+        rotulo, url = m.group(2), m.group(3)
+        if _url_na_allowlist(url, chaves):
+            return m.group(0)
+        if source_check.url_de_listagem(url):
+            return f"{rotulo} ({_LABEL_LINK_LISTA})"
+        return f"{rotulo} ({_LABEL_LINK_NAO_VERIFICADO})"
+    url = m.group(4)
+    sufixo = ""
+    limpo = url
+    achado = re.search(r"[.,;:!?]+$", limpo)
+    if achado:
+        sufixo = achado.group(0)
+        limpo = limpo[:-len(sufixo)]
+    if _url_na_allowlist(limpo, chaves):
+        return m.group(0)
+    rotulo = _rotulo_url_curto(limpo)
+    if source_check.url_de_listagem(limpo):
+        return f"{rotulo} ({_LABEL_LINK_LISTA}){sufixo}"
+    return f"{rotulo} ({_LABEL_LINK_NAO_VERIFICADO}){sufixo}"
+
+
+def sanitizar_links_resposta(texto: str, resultado: dict | None = None,
+                             fontes: list | None = None) -> str:
+    """Mantém clicáveis só links de produto/fonte reais; rotula os demais.
+
+    Nunca inventa URL nem reescreve link suspeito para outra página: ou o
+    link já foi comprovado pela ferramenta, ou vira texto com o motivo. Blocos
+    de código (inclusive os cards JDUI determinísticos) não são tocados.
+    """
+    permitidas: list = []
+    resultado = resultado if isinstance(resultado, dict) else {}
+
+    def _add(u):
+        u = _limpa(u, 500)
+        if u and url_exibivel(u):
+            permitidas.append(u)
+
+    for p in (resultado.get("produtos") or []) + (resultado.get("alternativas") or []):
+        if not isinstance(p, dict):
+            continue
+        for campo in ("url_verificada", "url_item", "url_final", "url"):
+            _add(p.get(campo))
+        for o in p.get("ofertas") or []:
+            if isinstance(o, dict):
+                _add(o.get("url"))
+    for r in resultado.get("encontrados") or []:
+        if isinstance(r, dict):
+            _add(r.get("url"))
+    for f in (resultado.get("fontes") or []) + (fontes or []):
+        if isinstance(f, dict):
+            _add(f.get("url"))
+    chaves = {_url_chave(u) for u in permitidas}
+    chaves.discard("")
+    if not texto:
+        return texto or ""
+    partes = re.split(r"(```[\s\S]*?(?:```|$)|`[^`\n]+`)", texto)
+    for i in range(0, len(partes), 2):
+        partes[i] = _RX_LINK_RESPOSTA.sub(
+            lambda m: _sanitizar_link(m, chaves), partes[i])
+    return "".join(partes)
 
 
 # ── Follow-ups (reusam última consulta; sem nova busca) ─────────────────

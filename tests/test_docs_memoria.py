@@ -467,6 +467,9 @@ def test_doc_mencionado_e_intencoes(tmp_path):
     assert pc_agent.doc_mencionado(db, 'qual a multa no contrato-aluguel?', 'conv-d') == m['doc_id']
     assert pc_agent.doc_mencionado(db, 'resuma o documento pra mim', 'conv-d') == m['doc_id']
     assert pc_agent.doc_mencionado(db, 'qual a capital do Peru?', 'conv-d') == ''
+    # V5.8: anexo do composer é pedido explícito mesmo sem verbo ("Analise…")
+    anexo = 'Analise o documento anexado.\n\n📎 Documento anexado: "contrato-aluguel.txt"'
+    assert pc_agent.doc_mencionado(db, anexo, 'conv-d') == m['doc_id']
     assert pc_agent.intencao_pesquisa('pesquise o preço do dólar hoje com fontes')
     assert not pc_agent.intencao_pesquisa('me conta uma piada')
     assert pc_agent.intencao_imagem('mostre uma imagem de um gato astronauta')
