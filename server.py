@@ -342,6 +342,10 @@ RATE_RULES = {
                       "JULIA_RATE_ADMIN_QUALITY_GLOBAL", 10, 60),
     "screen": ("JULIA_RATE_SCREEN_USER", 60, 60,
                "JULIA_RATE_SCREEN_GLOBAL", 180, 60),
+    "remote_request": ("JULIA_RATE_REMOTE_REQUEST_USER", 3, 600,
+                       "JULIA_RATE_REMOTE_REQUEST_GLOBAL", 6, 600),
+    "remote_status": ("JULIA_RATE_REMOTE_STATUS_USER", 30, 60,
+                      "JULIA_RATE_REMOTE_STATUS_GLOBAL", 120, 60),
     "input": ("JULIA_RATE_INPUT_USER", 120, 60,
               "JULIA_RATE_INPUT_GLOBAL", 360, 60),
 }
@@ -1448,6 +1452,34 @@ async def provider_key(request: Request, body: ProviderKey):
     return {"ok": True, "provider": result.get("provider", body.provider),
             "configured": bool(result.get("configured")),
             "source": result.get("source", "")}
+
+
+async def _remote_access_exchange(request: Request, action: str):
+    require_csrf(request)
+    owner = await revogacao_ok(request)
+    _rate_limit(request, 'remote_request' if action == 'remote_request' else 'remote_status', owner)
+    result = await relay.exchange({'type': action, 'owner': owner}, timeout=8.0)
+    if result.get('type') != 'remote_status':
+        code = result.get('codigo')
+        raise HTTPException(403 if code == 'sem_permissao' else 429 if code == 'ritmo' else 503,
+                            result.get('error', 'Atualize e reinicie o PC Agent para preparar o acesso.'))
+    return {key: value for key, value in result.items() if key not in ('type', 'request_id')}
+
+
+@app.get('/api/remote/status')
+async def remote_access_status(request: Request):
+    return await _remote_access_exchange(request, 'remote_status')
+
+
+@app.post('/api/remote/request')
+async def remote_access_request(request: Request):
+    # No owner/approved/device flag is accepted from the browser.
+    return await _remote_access_exchange(request, 'remote_request')
+
+
+@app.post('/api/remote/revoke')
+async def remote_access_revoke(request: Request):
+    return await _remote_access_exchange(request, 'remote_revoke')
 
 
 @app.get("/api/screen")

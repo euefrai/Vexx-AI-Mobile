@@ -171,10 +171,18 @@ versão — não compartilhe o aparelho desbloqueado.
 
 ## Tela ao vivo e controle (Meu PC)
 
-A aba Meu PC exibe a tela real (~2 fps) e envia toque/teclado de verdade
-(`GET /api/screen`, `POST /api/input`, ambos com login + CSRF). Controle
-exige `JULIA_REMOTE=1` no PC — sem isso, somente visualização. Detalhes,
-gestos e limites em `docs/REMOTO_ANYDESK.md`.
+A aba Meu PC detecta o tipo de aparelho: no computador, prepara o acesso;
+no celular, oferece Conectar e os controles. O botão Permitir abre uma
+confirmação local no Windows, vinculando a autorização à conta no SQLite.
+Após confirmar, os aparelhos conectados à mesma conta podem acessar esse PC;
+Revogar acesso bloqueia a tela e os comandos da conta. O bloqueio do
+administrador continua valendo. O agente precisa estar atualizado.
+
+A transmissão usa JPEG periódico (intervalo de 1,6 s, até 960 px), sem áudio.
+Login, CSRF e autorização no agente são exigidos. O modo legado com grant
+administrativo e `JULIA_REMOTE=1` permanece compatível. Há um PC Agent por
+instalação, sem cadastro automático de vários computadores. Veja
+`docs/REMOTO_ANYDESK.md` e o guia `/remote-setup.html`.
 
 ## Resposta da IA (Hermes Proxy local)
 

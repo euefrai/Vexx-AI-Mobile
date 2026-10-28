@@ -97,6 +97,7 @@ function navigate(tab) {
   if (!chat) { $('chatTitle').textContent = {desktop:'Meu PC',activity:'Atividades',estudos:'Estudos',settings:'Ajustes e conta',documents:'Documentos',research:'Pesquisas'}[tab] || 'Vexx AI'; $('chatSubtitle').textContent = 'Seu espaço pessoal'; }
   $('suggestions').style.display = chat ? 'flex' : 'none';
   document.querySelector('.composer-hint').style.display = chat ? 'flex' : 'none';
+  remoteUI.update();
   if (tab === 'activity') renderTimeline();
   if (tab === 'estudos') renderEstudos();
   if (tab === 'research') renderPesquisas();
@@ -1588,6 +1589,7 @@ $('memoryToggle').addEventListener('change', e => { localStorage.setItem('julia-
 if (localStorage.getItem('julia-memory') === '0') $('memoryToggle').checked = false;
 
 function updateConnection() {
+  remoteUI.update();
   const msg = PREVIEW_MODE ? 'Prévia local' : (!navigator.onLine ? 'Sem internet' : pcOnline ? 'PC conectado' : 'PC desconectado');
   $('connectionLabel').textContent = msg;
   $('connectionShort').textContent = pcOnline && navigator.onLine ? 'PC conectado' : 'Offline';
@@ -1605,7 +1607,6 @@ function updateConnection() {
   const dot = $('drawerDot'); if (dot) { dot.style.background = pcOnline ? '#ff2bd6' : '#5a5972'; }
   $('deviceStatus').textContent = pcOnline ? 'Online' : 'Offline';
   $('deviceStatus').classList.toggle('connected', pcOnline);
-  $('deviceDetail').textContent = pcOnline ? 'Windows · Conectado' : 'Aguardando agente';
   $('memoryStatus').textContent = memoryOn() ? 'Ativada neste aparelho' : 'Pausada neste aparelho';
   $('syncStatusText').textContent = pcOnline ? 'PC disponível. Pendências serão sincronizadas.'
     : 'PC desconectado. Mensagens ficam no celular.' + (lastSyncErr ? ' ' + lastSyncErr : '');
@@ -3265,89 +3266,13 @@ $('learningToggle').addEventListener('change', async e => {
 });
 
 
-/* ----- Remoto ----- */
-let remoteEnabled = false, screenBusy = false, touchStart = null, touchMoved = false, longPressed = false, longTimer = null, lastMove = 0;
-const desktopAtivo = () => !$('page-desktop').hidden;
-async function pullScreen() {
-  if (!authenticated || !pcOnline || !desktopAtivo() || !navigator.onLine || screenBusy) return;
-  screenBusy = true;
-  try {
-    const r = await api('/api/screen?max_w=800&q=50');
-    $('screenImg').src = 'data:image/jpeg;base64,' + r.imagem;
-    remoteEnabled = r.remote_enabled === true;
-    $('screenLabel').textContent = 'AO VIVO · ' + (r.ms || 0) + 'ms';
-    $('screenNote').textContent = remoteEnabled ? 'Toque = clique, segurar = direito, arrastar = mover.' : 'Somente visualização. Ative JULIA_REMOTE=1 no PC.';
-  } catch (err) {
-    $('screenLabel').textContent = 'TELA INDISPONÍVEL';
-    $('screenNote').textContent = err.status === 403 ? 'Sem autorização. Peça acesso ao administrador.'
-      : err.status === 503 ? 'Agente sem suporte a tela: reinicie o agente.' : 'Falha ao buscar: ' + (err.message || 'Atualizar.');
-  } finally { screenBusy = false; }
-}
-setInterval(pullScreen, 1500);
-async function sendInput(cmd) {
-  if (!remoteEnabled) { showToast('Controle desativado no PC (JULIA_REMOTE=1).'); return; }
-  try { await api('/api/input', { method: 'POST', body: JSON.stringify(cmd) }); }
-  catch (err) { showToast(err.message || 'Comando recusado'); }
-}
-function normPos(ev) {
-  const r = $('remoteFrame').getBoundingClientRect();
-  const t = ev.touches && ev.touches[0] ? ev.touches[0] : ev;
-  return { x: Math.min(1, Math.max(0, (t.clientX - r.left) / r.width)), y: Math.min(1, Math.max(0, (t.clientY - r.top) / r.height)) };
-}
-function mostraPonteiro(p) {
-  const f = $('remoteFrame').getBoundingClientRect();
-  const el = $('remotePointer');
-  el.style.display = 'block'; el.style.left = (p.x * f.width) + 'px'; el.style.top = (p.y * f.height) + 'px';
-}
-const frame = $('remoteFrame');
-frame.addEventListener('touchstart', ev => {
-  if (!desktopAtivo()) return;
-  ev.preventDefault();
-  const p = normPos(ev);
-  touchStart = p; touchMoved = false; longPressed = false;
-  mostraPonteiro(p); clearTimeout(longTimer);
-  longTimer = setTimeout(() => { longPressed = true; sendInput(Object.assign({ kind: 'right' }, p)); }, 600);
-}, { passive: false });
-frame.addEventListener('touchmove', ev => {
-  if (!touchStart) return;
-  ev.preventDefault();
-  const p = normPos(ev);
-  mostraPonteiro(p);
-  const rc = frame.getBoundingClientRect();
-  const dx = (p.x - touchStart.x) * rc.width, dy = (p.y - touchStart.y) * rc.height;
-  if (Math.hypot(dx, dy) > 12) {
-    touchMoved = true; clearTimeout(longTimer);
-    const agora = Date.now();
-    if (agora - lastMove > 90) { lastMove = agora; sendInput(Object.assign({ kind: 'move' }, p)); }
-  }
-}, { passive: false });
-frame.addEventListener('touchend', ev => {
-  if (!touchStart) return;
-  ev.preventDefault(); clearTimeout(longTimer);
-  const p = touchStart; touchStart = null;
-  if (!touchMoved && !longPressed) sendInput(Object.assign({ kind: 'click' }, p));
-});
-frame.addEventListener('click', ev => {
-  if (!desktopAtivo() || ev.detail === 0) return;
-  const p = normPos(ev); mostraPonteiro(p); sendInput(Object.assign({ kind: 'click' }, p));
-});
-$('keyboardButton').addEventListener('click', () => { const c = $('remoteKeys'); c.value = ''; c.focus(); showToast(remoteEnabled ? 'Digite: as teclas vão para o PC.' : 'Teclado desativado.'); });
-$('remoteKeys').addEventListener('input', ev => {
-  const v = ev.target.value;
-  if (v.length > (ev.target._last || '').length && v.length) sendInput({ kind: 'text', text: v.slice(ev.target._last ? ev.target._last.length : 0) });
-  ev.target._last = v;
-});
-$('remoteKeys').addEventListener('keydown', ev => {
-  if (ev.key === 'Enter') { sendInput({ kind: 'key', key: 'enter' }); ev.target.value = ''; ev.target._last = ''; }
-  else if (ev.key === 'Backspace' && !ev.target.value) sendInput({ kind: 'key', key: 'backspace' });
-});
-$('refreshButton').addEventListener('click', pullScreen);
-$('touchMode').addEventListener('click', () => showToast('Toque, segurar, arrastar.'));
-$('fullscreen').addEventListener('click', async () => {
-  const el = $('remoteFrame');
-  if (!document.fullscreenEnabled) { showToast('Tela cheia indisponível'); return; }
-  try { if (document.fullscreenElement) await document.exitFullscreen(); else await el.requestFullscreen(); }
-  catch (_) { showToast('Tela cheia não autorizada'); }
+/* ----- Remoto: consentimento no PC, controles no celular ----- */
+const remoteUI = VexxRemote.mount({
+  api, authenticated: () => authenticated && !PREVIEW_MODE,
+  online: () => pcOnline,
+  identity: () => authEpoch + ':' + currentUid,
+  headers: () => ({ 'X-CSRF-Token': csrf }),
+  notify: showToast
 });
 window.addEventListener('online', checkStatus);
 window.addEventListener('offline', () => { pcOnline = false; updateConnection(); });
