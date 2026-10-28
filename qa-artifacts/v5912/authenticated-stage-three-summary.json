@@ -1,0 +1,640 @@
+{
+  "scope": "REAL_CHROME_AUTHENTICATED_FASTAPI_DEVELOPMENT_AGENT_TEMPORARY_SQLITE_NO_URL_SEEDS",
+  "cases": [
+    {
+      "name": "gerdau",
+      "query": "Pesquisa profunda sobre quem fundou a Gerdau, quando foi fundada e quais produtos fabrica.",
+      "seconds": 62.689,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-41c383d01554",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 2,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": true,
+      "chat_result_id": "rj-41c383d01554-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 2,
+      "source_links": [
+        {
+          "text": "empresa siderúrgica brasileira",
+          "url": "https://pt.wikipedia.org/wiki/Gerdau"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Gerdau"
+        },
+        {
+          "text": "empresa siderúrgica brasileira",
+          "url": "https://pt.wikipedia.org/wiki/Grupo_Gerdau"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Grupo_Gerdau"
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Gerdau",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Gerdau",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Gerdau",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": true,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": [
+          {
+            "paragraph": 0,
+            "state": "SUPPORTED",
+            "reason": "none"
+          },
+          {
+            "paragraph": 1,
+            "state": "SUPPORTED",
+            "reason": "none"
+          }
+        ],
+        "format_normalization": null,
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-c2e74cd7f6b4",
+              "type": "explicit_attribute",
+              "description": "Fundadores",
+              "entity": "Gerdau",
+              "attribute": "founders",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Fundadores",
+              "candidate_evidence_ids": [
+                "answer"
+              ],
+              "confirmed_evidence_ids": [
+                "answer"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-d6b5a90e44843ca9"
+              ]
+            },
+            {
+              "id": "R-a30d8c5bd5db",
+              "type": "explicit_attribute",
+              "description": "Data de fundação",
+              "entity": "Gerdau",
+              "attribute": "foundation_date",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Data de fundação",
+              "candidate_evidence_ids": [
+                "answer"
+              ],
+              "confirmed_evidence_ids": [
+                "answer"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-d6b5a90e44843ca9"
+              ]
+            },
+            {
+              "id": "R-1d2d1a1c582f",
+              "type": "explicit_attribute",
+              "description": "Produtos",
+              "entity": "Gerdau",
+              "attribute": "products",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Produtos",
+              "candidate_evidence_ids": [
+                "answer"
+              ],
+              "confirmed_evidence_ids": [],
+              "state": "DISCOVERED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            }
+          ],
+          "passages": [
+            {
+              "id": "P-d6b5a90e44843ca9",
+              "source_id": "answer",
+              "document_id": "D-ffb883c14a784a89b86e6896",
+              "requirement_id": "R-c2e74cd7f6b4",
+              "text_span": {
+                "start": 0,
+                "end": 180,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-d6b5a90e44843ca9",
+              "source_id": "answer",
+              "document_id": "D-ffb883c14a784a89b86e6896",
+              "requirement_id": "R-a30d8c5bd5db",
+              "text_span": {
+                "start": 0,
+                "end": 180,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            }
+          ],
+          "diagnostics": {
+            "read_documents": 1,
+            "generated_passages": 1,
+            "stale_passages_rejected": 0,
+            "matched_bindings": 2,
+            "retained_bindings": 2,
+            "recognized_requirements": 3,
+            "undecomposed_objectives": 0,
+            "direct_requirements": 2,
+            "partial_requirements": 0,
+            "pending_requirements": 1
+          },
+          "fully_decomposed": true,
+          "unparsed_demands": [],
+          "complete": false,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+        }
+      }
+    },
+    {
+      "name": "natura",
+      "query": "Pesquisa profunda sobre quem fundou a Natura, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 49.718,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-46c0aa5352af",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": true,
+      "chat_result_id": "rj-46c0aa5352af-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 1,
+      "source_links": [
+        {
+          "text": "empresa brasileira de cosméticos",
+          "url": "https://pt.wikipedia.org/wiki/Natura"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Natura"
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Natura",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Natura",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Natura",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": true,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": [
+          {
+            "paragraph": 0,
+            "state": "SUPPORTED",
+            "reason": "none"
+          },
+          {
+            "paragraph": 1,
+            "state": "SUPPORTED",
+            "reason": "none"
+          }
+        ],
+        "format_normalization": null,
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-449b9f7105ee",
+              "type": "explicit_attribute",
+              "description": "Fundadores",
+              "entity": "Natura",
+              "attribute": "founders",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Fundadores",
+              "candidate_evidence_ids": [
+                "answer"
+              ],
+              "confirmed_evidence_ids": [],
+              "state": "DISCOVERED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-05d64aff02e5",
+              "type": "explicit_attribute",
+              "description": "Data de fundação",
+              "entity": "Natura",
+              "attribute": "foundation_date",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Data de fundação",
+              "candidate_evidence_ids": [
+                "answer"
+              ],
+              "confirmed_evidence_ids": [
+                "answer"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-46ba53cce2155c7c"
+              ]
+            },
+            {
+              "id": "R-f1f65a9d5ab3",
+              "type": "explicit_attribute",
+              "description": "Produtos",
+              "entity": "Natura",
+              "attribute": "products",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Produtos",
+              "candidate_evidence_ids": [
+                "answer"
+              ],
+              "confirmed_evidence_ids": [
+                "answer"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-46ba53cce2155c7c"
+              ]
+            }
+          ],
+          "passages": [
+            {
+              "id": "P-46ba53cce2155c7c",
+              "source_id": "answer",
+              "document_id": "D-aeaae8bb466d4c47a28fa301",
+              "requirement_id": "R-05d64aff02e5",
+              "text_span": {
+                "start": 0,
+                "end": 172,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-46ba53cce2155c7c",
+              "source_id": "answer",
+              "document_id": "D-aeaae8bb466d4c47a28fa301",
+              "requirement_id": "R-f1f65a9d5ab3",
+              "text_span": {
+                "start": 0,
+                "end": 172,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            }
+          ],
+          "diagnostics": {
+            "read_documents": 1,
+            "generated_passages": 1,
+            "stale_passages_rejected": 0,
+            "matched_bindings": 2,
+            "retained_bindings": 2,
+            "recognized_requirements": 3,
+            "undecomposed_objectives": 0,
+            "direct_requirements": 2,
+            "partial_requirements": 0,
+            "pending_requirements": 1
+          },
+          "fully_decomposed": true,
+          "unparsed_demands": [],
+          "complete": false,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+        }
+      }
+    },
+    {
+      "name": "company",
+      "query": "Pesquisa profunda sobre quem fundou a WEG, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 43.567,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-8bc717e7dd70",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": true,
+      "chat_result_id": "rj-8bc717e7dd70-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 1,
+      "source_links": [
+        {
+          "text": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "WEG",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": true,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": [
+          {
+            "paragraph": 0,
+            "state": "SUPPORTED",
+            "reason": "none"
+          },
+          {
+            "paragraph": 1,
+            "state": "SUPPORTED",
+            "reason": "none"
+          },
+          {
+            "paragraph": 2,
+            "state": "SUPPORTED",
+            "reason": "none"
+          }
+        ],
+        "format_normalization": null,
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-fc4911b2ed70",
+              "type": "explicit_attribute",
+              "description": "Fundadores",
+              "entity": "WEG",
+              "attribute": "founders",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Fundadores",
+              "candidate_evidence_ids": [
+                "answer"
+              ],
+              "confirmed_evidence_ids": [],
+              "state": "DISCOVERED",
+              "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+              "passage_ids": []
+            },
+            {
+              "id": "R-71edac691206",
+              "type": "explicit_attribute",
+              "description": "Data de fundação",
+              "entity": "WEG",
+              "attribute": "foundation_date",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Data de fundação",
+              "candidate_evidence_ids": [
+                "answer"
+              ],
+              "confirmed_evidence_ids": [
+                "answer"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-e685a18bf97c844c"
+              ]
+            },
+            {
+              "id": "R-299cadf0928e",
+              "type": "explicit_attribute",
+              "description": "Produtos",
+              "entity": "WEG",
+              "attribute": "products",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Produtos",
+              "candidate_evidence_ids": [
+                "answer"
+              ],
+              "confirmed_evidence_ids": [
+                "answer"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-e685a18bf97c844c"
+              ]
+            }
+          ],
+          "passages": [
+            {
+              "id": "P-e685a18bf97c844c",
+              "source_id": "answer",
+              "document_id": "D-ec145409e50b8c943b21ba9e",
+              "requirement_id": "R-71edac691206",
+              "text_span": {
+                "start": 0,
+                "end": 310,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-e685a18bf97c844c",
+              "source_id": "answer",
+              "document_id": "D-ec145409e50b8c943b21ba9e",
+              "requirement_id": "R-299cadf0928e",
+              "text_span": {
+                "start": 0,
+                "end": 310,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            }
+          ],
+          "diagnostics": {
+            "read_documents": 1,
+            "generated_passages": 1,
+            "stale_passages_rejected": 0,
+            "matched_bindings": 2,
+            "retained_bindings": 2,
+            "recognized_requirements": 3,
+            "undecomposed_objectives": 0,
+            "direct_requirements": 2,
+            "partial_requirements": 0,
+            "pending_requirements": 1
+          },
+          "fully_decomposed": true,
+          "unparsed_demands": [],
+          "complete": false,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+        }
+      }
+    },
+    {
+      "name": "new-company",
+      "query": "Pesquisa profunda sobre quem fundou a Acer, quando foi fundada e quais produtos fabrica.",
+      "seconds": 51.039,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-732a541f89ea",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-732a541f89ea-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [
+        {
+          "entity": "Acer",
+          "attribute": "founders",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Acer",
+          "attribute": "foundation_date",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Acer",
+          "attribute": "products",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null,
+        "format_normalization": null,
+        "answer_coverage": null
+      }
+    }
+  ],
+  "messages": {
+    "assistant": 8,
+    "user": 4
+  },
+  "message_count": 12,
+  "distinct_message_ids": 12,
+  "models": [
+    "poolside/laguna-s-2.1:free"
+  ],
+  "quick_check": "ok",
+  "limits": [
+    "completed_flow in legacy harness means transport/job observed, not acceptance.",
+    "LLM validation alone does not establish complete research; inspect outcome and requirement coverage."
+  ]
+}

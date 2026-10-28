@@ -1,0 +1,233 @@
+{
+  "scope": "REAL_CHROME_AUTHENTICATED_FASTAPI_DEVELOPMENT_AGENT_TEMPORARY_SQLITE_NO_URL_SEEDS",
+  "cases": [
+    {
+      "name": "company",
+      "query": "Pesquisa profunda sobre quem fundou a WEG, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 27.313,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-a21ab3531343",
+      "job_state": "interrompida",
+      "outcome": {
+        "state": "blocked",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "rate_limit",
+        "read_sources": 2,
+        "reason": "redação ou revisão bloqueada pelo provedor; evidências preservadas"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-a21ab3531343-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 2,
+      "source_links": [
+        {
+          "text": "WEG S.A. - Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://en.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "text": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "WEG",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": "provider_failure",
+        "fallback_provider_code": "rate_limit",
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "independent",
+      "query": "Pesquisa profunda sobre quem fundou a Gerdau, quando foi fundada e quais produtos fabrica.",
+      "seconds": 26.162,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-f7080c682462",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": true,
+      "chat_result_id": "rj-f7080c682462-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 1,
+      "source_links": [
+        {
+          "text": "empresa siderúrgica brasileira",
+          "url": "https://pt.wikipedia.org/wiki/Gerdau"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Gerdau"
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Gerdau",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Gerdau",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Gerdau",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": true,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": [
+          {
+            "paragraph": 0,
+            "state": "SUPPORTED",
+            "reason": "none"
+          },
+          {
+            "paragraph": 1,
+            "state": "SUPPORTED",
+            "reason": "none"
+          }
+        ]
+      }
+    },
+    {
+      "name": "independent-two",
+      "query": "Pesquisa profunda sobre quem fundou a Sega, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 31.595,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-2e33b17b95ee",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 2,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": true,
+      "chat_result_id": "rj-2e33b17b95ee-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 2,
+      "source_links": [
+        {
+          "text": "desenvolvedora de games japonesa",
+          "url": "https://pt.wikipedia.org/wiki/Sega"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Sega"
+        },
+        {
+          "text": "Japanese video game developer and publisher and subsidiary of Sega Sammy Holdings",
+          "url": "https://en.wikipedia.org/wiki/Sega"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://en.wikipedia.org/wiki/Sega"
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Sega",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Sega",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Sega",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": true,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": [
+          {
+            "paragraph": 0,
+            "state": "SUPPORTED",
+            "reason": "none"
+          },
+          {
+            "paragraph": 1,
+            "state": "SUPPORTED",
+            "reason": "none"
+          },
+          {
+            "paragraph": 2,
+            "state": "SUPPORTED",
+            "reason": "none"
+          }
+        ]
+      }
+    }
+  ],
+  "messages": {
+    "assistant": 6,
+    "user": 3
+  },
+  "message_count": 9,
+  "distinct_message_ids": 9,
+  "models": [
+    "poolside/laguna-s-2.1:free"
+  ],
+  "quick_check": "ok",
+  "limits": [
+    "completed_flow in legacy harness means transport/job observed, not acceptance.",
+    "LLM validation alone does not establish complete research; inspect outcome and requirement coverage."
+  ]
+}

@@ -1,0 +1,288 @@
+{
+  "version": "V5.9.12",
+  "initial_head": "40f9531",
+  "tested_logic_head": "3938beef139a1ccc2796e244d209dbb260a0e0c6",
+  "branch": "codex/v598-autonomous-research",
+  "decision": "LOCALIZED_COMPLETE_INTEGRATION_NO_GO_UNIVERSAL_RESEARCH_ULTRA",
+  "production_operations": false,
+  "push_deploy": false,
+  "full_final": {
+    "passed": 1804,
+    "skipped": 4,
+    "warnings": 2,
+    "seconds": 459.36,
+    "exit": 0
+  },
+  "authenticated_final": {
+    "complete": [
+      "gerdau",
+      "company-WEG"
+    ],
+    "partial": [
+      "natura"
+    ],
+    "blocked": [
+      "new-company-Nvidia"
+    ],
+    "gold": "automatic review plus literal/source checks, not independent human gold"
+  },
+  "benchmark_regressions": {
+    "search": "34/34",
+    "shopping": "59/59",
+    "experience": "16/16"
+  },
+  "holdout_candidate": "53d4154",
+  "holdout_limit": "No final-code fresh live holdout; later fixes are citations and semantic answer coverage.",
+  "public_files": [
+    {
+      "file": "qa-artifacts/v5912/authenticated-before-summary.json",
+      "bytes": 6860,
+      "sha256": "d5bd128e5425cf6d352686c26fe2550b82570a9c90bf0b7d9f87c8bf1104180a",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/authenticated-stage-three-summary.json",
+      "bytes": 20991,
+      "sha256": "f6753d1101f5c25995d80b215a078c433add1602d1bc2dac35ea7fa854701fc6",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/authenticated-stage-two-summary.json",
+      "bytes": 11704,
+      "sha256": "12ed59e6f2d92f91e3d46e41719dfe6a57d37980ce22774871a568d9b51a4924",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/authenticated-summary.json",
+      "bytes": 25408,
+      "sha256": "e9bd56eb26cf15ad0f62220a97d973b986f4a620b91431c7eec49fc50ed10eea",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/bing-query-summary.json",
+      "bytes": 1062,
+      "sha256": "43105aad987978b3256fe7d988203793acf3e6408bc56db31513b100b5efc5bc",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/development-summary.json",
+      "bytes": 34476,
+      "sha256": "bc73289a2619fc7962d91d96690207c1d6b972e92d14bb2fe288a6ff51dd5463",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/history-loss-summary.json",
+      "bytes": 1013,
+      "sha256": "ad17366434a09599ea3246efe41dfdcb46ab134fbb69d4e7cd08079b27d31e95",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/holdout-summary.json",
+      "bytes": 63636,
+      "sha256": "85d1bc967ede836cf232cc25f4a13b7ba63d2ee481ccc687f5083bf2e6674341",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/provider-endpoint-summary.json",
+      "bytes": 509,
+      "sha256": "feb86427aac29f145ebb021bea436a3f6dbdf97d478f6a56925b02d7aec81697",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/reading-after-summary.json",
+      "bytes": 23400,
+      "sha256": "376242ba534a52ae6e8f195a6c1ed5d180f8492a03b8effc92677e8d41da4b64",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/reading-before-summary.json",
+      "bytes": 15706,
+      "sha256": "eea13bcc050275732dfc356dc6e17fc91d736a61d761929a7b56842f9d1e8f61",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/reading-stage-one-summary.json",
+      "bytes": 23402,
+      "sha256": "ec53363fe7a98f4fa2fb186e3e0c6299ca47208b6f3514d20ff11dfd0e4e7a23",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/tests-summary.json",
+      "bytes": 911,
+      "sha256": "217c4c85782de6c207c7be9b0db660d15f71d7e7e611d27c5c085adf909d4eee",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/transport-summary.json",
+      "bytes": 13852,
+      "sha256": "474077138185b977e8e23dc45cd0b92c829165a33b116b2dc43d8aa0add3c7ff",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/ui-extra-release-summary.json",
+      "bytes": 223,
+      "sha256": "e63dd61f7d24f253225864444cef1f155287c3ca0a9bd94003ea8df409f4afea",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/ui-release-summary.json",
+      "bytes": 501,
+      "sha256": "97aea219191da0c93d7f118e1325369eb0dc28d8f15a8761a79b31c38c138061",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/qa-shutdown.json",
+      "bytes": 1473,
+      "sha256": "16c12b3d042b4fe000824b96f9880c39b6896bbdb99ecad6645013cbd528a4d7",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/research-export.csv",
+      "bytes": 8603,
+      "sha256": "76250bdeedd51ba86c7b4beff56b93bfb410483f7d717669890298eedea3f4ea",
+      "hash_mode": "lf_text"
+    },
+    {
+      "file": "qa-artifacts/v5912/release-source-320.png",
+      "bytes": 43479,
+      "sha256": "d80bff583989b4ef02b49277e2495cdba32e1fdb68b044c031095b48c00c6d22",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/release-source-1280.png",
+      "bytes": 91731,
+      "sha256": "93f8868b3798e2976decf70cf50e034366594b601d741acdc2b53e3f5ace0adf",
+      "hash_mode": "raw"
+    }
+  ],
+  "local_logs_not_committed": [
+    {
+      "file": "qa-artifacts/v5912/reproduction.log",
+      "bytes": 6453,
+      "sha256": "27239453fed4d577ec3ea18f8b80ab5ee6e2759df07f3d236405cedd4911286e",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/reproduction-corrected.log",
+      "bytes": 4274,
+      "sha256": "f4ee26aa3d32d3103ca65f6b99d2c9de17c2fb2b58b7b05f16f5f27d319d7420",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/combined-focused.log",
+      "bytes": 815,
+      "sha256": "8de36fdd0a97760a1757b789d66b17e49d7d3256901e97e2e34d6059a1814862",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/synthesis-focused.log",
+      "bytes": 182,
+      "sha256": "228cca4e6a1ed315327f396996d2c2070fe7ba113cbb6db1cf00be24b0a90c5c",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/terminal-reproduction.log",
+      "bytes": 3124,
+      "sha256": "039938f5564191a8de6a9e9c3ff5571614b09a707ca6cf641ec3bbe47d980ba2",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/terminal-focused.log",
+      "bytes": 815,
+      "sha256": "8ef3b4223f1cc96988d3ecab6f9b532de3f4d751cddf10c36a485d839510d9f9",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/short-field-reproduction.log",
+      "bytes": 1063,
+      "sha256": "2264eb7bed51efffd8b00dca2c9b57db257161471bd224173c9af0495cbef04a",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/delimiter-reproduction.log",
+      "bytes": 2583,
+      "sha256": "04d94f59b8fec37d11e3b78d1424a175fa87b4ef8776efc26611b707d8e44183",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/catalog-final-focused.log",
+      "bytes": 265,
+      "sha256": "7a110a95fc5a649e2ef95fd1f0c941a9933ea022cd574e56e90671f4d9050f36",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/semantic-coverage-reproduction.log",
+      "bytes": 10360,
+      "sha256": "78a1abdc42cbf79777bcbb7205ce4f22ed326ccd8f3e65f17daf4db20ab00af5",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/semantic-final-focused.log",
+      "bytes": 184,
+      "sha256": "82065cfcbb13ca8e5f340c4236cecfbb8198b94fe600e796970554c7b7aabc0c",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/full-suite.log",
+      "bytes": 6257,
+      "sha256": "75043da52fd1815ad41b495e69b068125a9d288e48c4c8be6a355f48f66ce8e0",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/full-final.log",
+      "bytes": 2888,
+      "sha256": "6b64124c7fbdbba13ea5153ec2cc142ec2657d54ecdbe46b742fc84f0ced49be",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/full-release.log",
+      "bytes": 1072,
+      "sha256": "0bbbe5800936c140e7cb0a57e10ba0561122881a9acb02392266fcc33d8906e6",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/full-verified.log",
+      "bytes": 2969,
+      "sha256": "572d4d5dfb98e01e5eb9e8bdf705e6abe4a244d6cbf0cfa8e3562c117ecd127e",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/search-final.log",
+      "bytes": 775,
+      "sha256": "06e32231e3bda32c9c8786aa0cfffb78f936c9250984fb9b6ba145c75ac11b22",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/shopping-final.log",
+      "bytes": 138,
+      "sha256": "42967aefa027cbaecd120b804434b61e25b0d5fba4eab4cb284af7e4e03164dc",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/experience-final.log",
+      "bytes": 2613,
+      "sha256": "b173c0aaec3aba14040195d5bbeb57bc82f4f6943815166e8505c225f87827e6",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/ui-release.log",
+      "bytes": 2016,
+      "sha256": "ae8f68a52bd0a968a8d61980799c97f1ad16fa413864e3d79211f5d421611cef",
+      "hash_mode": "raw"
+    },
+    {
+      "file": "qa-artifacts/v5912/ui-extra-release.log",
+      "bytes": 2613,
+      "sha256": "2679c9ef15feb1e6484dafefdfdf688d4439142074a786ef2f1b01868159a972",
+      "hash_mode": "raw"
+    }
+  ],
+  "local_raw_json_count": 205,
+  "local_raw_json_bytes": 42016744,
+  "limits": [
+    "Two distinct companies completed; no universal/cross-category reliability claim.",
+    "All failed/interrupted rounds preserved; superseded owned pytest exit15 is not a pass.",
+    "QA disposable services closed; no production process stopped.",
+    "Existing untracked artifacts preserved; raw captures/MD export/private runtime remain local."
+  ]
+}

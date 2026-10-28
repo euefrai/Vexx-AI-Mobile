@@ -1,0 +1,1080 @@
+{
+  "scope": "LIVE_DEVELOPMENT_DIFFERENT_NETWORK_RUNS_NOT_CAUSAL_RANKING_PROOF",
+  "before": "40f9531",
+  "after": "ef97dfc",
+  "cases": {
+    "before": [
+      {
+        "case": {
+          "id": "dev-gerdau",
+          "query": "Quem fundou a Gerdau, quando foi fundada e quais produtos fabrica?"
+        },
+        "code_sha256": {
+          "web_extract": "ecdd0b6bc9d92fece0a75c48d510b92382447d22c7026aa46e6c07b9aff08d19",
+          "evidence_graph": "2fd89f302f4df44a0be5d4e24cdc4739873decaaf050d31cd2570d3c603c6f28",
+          "query_intelligence": "850bbe1b0a7f2571fc84022f87bcec0e90a24c34977fa13349358d5eb7ba4ff9",
+          "search_orchestrator": "e921218a55bf2e0a92f15576c30ed0a849162337447a69b43ee060a1ec2ff3f5",
+          "research_agents": "5730729b2758564f99bbd2cc93e627f9c5f2219505c3ad5e0bfb489f0b7b459b"
+        },
+        "seconds": 10.583,
+        "requirements": [
+          {
+            "entity": "Gerdau",
+            "attribute": "founders",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-6877932af422a09e",
+              "P-4a4782003a319330",
+              "P-4c051b73dda97fd3"
+            ]
+          },
+          {
+            "entity": "Gerdau",
+            "attribute": "foundation_date",
+            "type": "explicit_attribute",
+            "state": "DISCOVERED",
+            "passage_ids": []
+          },
+          {
+            "entity": "Gerdau",
+            "attribute": "products",
+            "type": "explicit_attribute",
+            "state": "DISCOVERED",
+            "passage_ids": []
+          }
+        ],
+        "fully_decomposed": true,
+        "retrieval_complete": false,
+        "calls": 6,
+        "queries": [
+          {
+            "provider": "ddg",
+            "query": "Gerdau Fundadores"
+          },
+          {
+            "provider": "ddg",
+            "query": "Gerdau Data de fundação"
+          },
+          {
+            "provider": "ddg",
+            "query": "Gerdau Produtos"
+          },
+          {
+            "provider": "searxng",
+            "query": "Gerdau Produtos"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Gerdau Produtos"
+          },
+          {
+            "provider": "web",
+            "query": "Gerdau Produtos"
+          }
+        ],
+        "read_observations": 11,
+        "nonempty_extractions": 11,
+        "retained_entries": 3,
+        "retained_read": 3,
+        "retained_sources": [
+          {
+            "id": "ev-23561158c1ab",
+            "url": "https://pt.wikipedia.org/wiki/Gerdau",
+            "read": true,
+            "document_id": "D-11587c8db78bfb69aa08d3f5",
+            "provenance": {
+              "query_ids": [
+                "Q-fc68a476c90765d60464",
+                "Q-a81fb85fa02b1361dac5",
+                "Q-3a72beb3b6f3adb56760"
+              ],
+              "requirement_ids": [
+                "R-434182434f35",
+                "R-d1d3ab5a42d7",
+                "R-d5f04170feb9"
+              ],
+              "provider": "bing",
+              "rank": 2,
+              "candidate_id": "C-9e117757894c29bc704e"
+            },
+            "passage_ids": [
+              "P-6877932af422a09e"
+            ]
+          },
+          {
+            "id": "ev-431fe8ae6320",
+            "url": "https://es.wikipedia.org/wiki/Gerdau",
+            "read": true,
+            "document_id": "D-b9850db54bdf15b3041e1994",
+            "provenance": {
+              "query_ids": [
+                "Q-fc68a476c90765d60464"
+              ],
+              "requirement_ids": [
+                "R-434182434f35"
+              ],
+              "provider": "ddg",
+              "rank": 4,
+              "candidate_id": "C-5756b17d616094c850f2"
+            },
+            "passage_ids": [
+              "P-4a4782003a319330"
+            ]
+          },
+          {
+            "id": "ev-81ed6d7fc58b",
+            "url": "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+            "read": true,
+            "document_id": "D-11587c8db78bfb69aa08d3f5",
+            "provenance": null,
+            "passage_ids": [
+              "P-4c051b73dda97fd3"
+            ]
+          }
+        ],
+        "linked_passages": 3,
+        "requirement_bindings": 3,
+        "error": null
+      },
+      {
+        "case": {
+          "id": "dev-history",
+          "query": "Quais foram as causas e as consequências da Guerra do Contestado?"
+        },
+        "code_sha256": {
+          "web_extract": "ecdd0b6bc9d92fece0a75c48d510b92382447d22c7026aa46e6c07b9aff08d19",
+          "evidence_graph": "2fd89f302f4df44a0be5d4e24cdc4739873decaaf050d31cd2570d3c603c6f28",
+          "query_intelligence": "850bbe1b0a7f2571fc84022f87bcec0e90a24c34977fa13349358d5eb7ba4ff9",
+          "search_orchestrator": "e921218a55bf2e0a92f15576c30ed0a849162337447a69b43ee060a1ec2ff3f5",
+          "research_agents": "5730729b2758564f99bbd2cc93e627f9c5f2219505c3ad5e0bfb489f0b7b459b"
+        },
+        "seconds": 16.403,
+        "requirements": [
+          {
+            "entity": "Guerra do Contestado",
+            "attribute": "causes",
+            "type": "explicit_attribute",
+            "state": "NOT_SEARCHED",
+            "passage_ids": []
+          },
+          {
+            "entity": "Guerra do Contestado",
+            "attribute": "consequences",
+            "type": "explicit_attribute",
+            "state": "NOT_SEARCHED",
+            "passage_ids": []
+          }
+        ],
+        "fully_decomposed": true,
+        "retrieval_complete": false,
+        "calls": 8,
+        "queries": [
+          {
+            "provider": "ddg",
+            "query": "Guerra do Contestado Causas"
+          },
+          {
+            "provider": "searxng",
+            "query": "Guerra do Contestado Causas"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Guerra do Contestado Causas"
+          },
+          {
+            "provider": "web",
+            "query": "Guerra do Contestado Causas"
+          },
+          {
+            "provider": "ddg",
+            "query": "Guerra do Contestado Consequências"
+          },
+          {
+            "provider": "searxng",
+            "query": "Guerra do Contestado Consequências"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Guerra do Contestado Consequências"
+          },
+          {
+            "provider": "web",
+            "query": "Guerra do Contestado Consequências"
+          }
+        ],
+        "read_observations": 8,
+        "nonempty_extractions": 8,
+        "retained_entries": 0,
+        "retained_read": 0,
+        "retained_sources": [],
+        "linked_passages": 0,
+        "requirement_bindings": 0,
+        "error": null
+      },
+      {
+        "case": {
+          "id": "dev-sega",
+          "query": "Quem fundou a Sega, em que ano foi fundada e quais produtos fabrica?"
+        },
+        "code_sha256": {
+          "web_extract": "ecdd0b6bc9d92fece0a75c48d510b92382447d22c7026aa46e6c07b9aff08d19",
+          "evidence_graph": "2fd89f302f4df44a0be5d4e24cdc4739873decaaf050d31cd2570d3c603c6f28",
+          "query_intelligence": "850bbe1b0a7f2571fc84022f87bcec0e90a24c34977fa13349358d5eb7ba4ff9",
+          "search_orchestrator": "e921218a55bf2e0a92f15576c30ed0a849162337447a69b43ee060a1ec2ff3f5",
+          "research_agents": "5730729b2758564f99bbd2cc93e627f9c5f2219505c3ad5e0bfb489f0b7b459b"
+        },
+        "seconds": 13.291,
+        "requirements": [
+          {
+            "entity": "Sega",
+            "attribute": "founders",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-b659999b2463aa8f"
+            ]
+          },
+          {
+            "entity": "Sega",
+            "attribute": "foundation_date",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-b659999b2463aa8f"
+            ]
+          },
+          {
+            "entity": "Sega",
+            "attribute": "products",
+            "type": "explicit_attribute",
+            "state": "DISCOVERED",
+            "passage_ids": []
+          }
+        ],
+        "fully_decomposed": true,
+        "retrieval_complete": false,
+        "calls": 12,
+        "queries": [
+          {
+            "provider": "ddg",
+            "query": "Sega Fundadores"
+          },
+          {
+            "provider": "searxng",
+            "query": "Sega Fundadores"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Sega Fundadores"
+          },
+          {
+            "provider": "web",
+            "query": "Sega Fundadores"
+          },
+          {
+            "provider": "ddg",
+            "query": "Sega Data de fundação"
+          },
+          {
+            "provider": "searxng",
+            "query": "Sega Data de fundação"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Sega Data de fundação"
+          },
+          {
+            "provider": "web",
+            "query": "Sega Data de fundação"
+          },
+          {
+            "provider": "ddg",
+            "query": "Sega Produtos"
+          },
+          {
+            "provider": "searxng",
+            "query": "Sega Produtos"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Sega Produtos"
+          },
+          {
+            "provider": "web",
+            "query": "Sega Produtos"
+          }
+        ],
+        "read_observations": 6,
+        "nonempty_extractions": 6,
+        "retained_entries": 1,
+        "retained_read": 1,
+        "retained_sources": [
+          {
+            "id": "ev-4cbea3d576de",
+            "url": "https://en.wikipedia.org/wiki/Sega",
+            "read": true,
+            "document_id": "D-b0f6f37f4c74bb0a48609fdc",
+            "provenance": {
+              "query_ids": [
+                "Q-a207d2e4b9affb5bc3e1",
+                "Q-2653a92506313ec28b79",
+                "Q-7a500ba0eb1635fab4a5"
+              ],
+              "requirement_ids": [
+                "R-0240d6d5f085",
+                "R-ebfcf5635999",
+                "R-492c6eb8c517"
+              ],
+              "provider": "bing",
+              "rank": 3,
+              "candidate_id": "C-d6ee6460fe55f358b71a"
+            },
+            "passage_ids": [
+              "P-b659999b2463aa8f"
+            ]
+          }
+        ],
+        "linked_passages": 1,
+        "requirement_bindings": 2,
+        "error": null
+      }
+    ],
+    "after": [
+      {
+        "case": {
+          "id": "dev-company-regression",
+          "query": "Quem fundou a WEG, em que ano foi fundada e quais produtos fabrica?"
+        },
+        "code_sha256": {
+          "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+          "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+          "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+          "search_orchestrator": "750148c7f5aa613ed43e9ff96282e1907211287dc1d82f4c711b0ae123a5ac14",
+          "research_agents": "b6909f895d57c3d4a31b8e0e2b7f9df5a029e0b1d9faa3004e0fb79b213f5a69"
+        },
+        "seconds": 16.849,
+        "requirements": [
+          {
+            "entity": "WEG",
+            "attribute": "founders",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-f2c0ee3f8ad6409b",
+              "P-03979007c3658f61"
+            ]
+          },
+          {
+            "entity": "WEG",
+            "attribute": "foundation_date",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-fbd5c2b12436c9a1",
+              "P-03979007c3658f61",
+              "P-af956f219dac24db"
+            ]
+          },
+          {
+            "entity": "WEG",
+            "attribute": "products",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-701a9269889ba7d1",
+              "P-03979007c3658f61",
+              "P-1d71e5a563758fc1"
+            ]
+          }
+        ],
+        "fully_decomposed": true,
+        "retrieval_complete": true,
+        "calls": 12,
+        "queries": [
+          {
+            "provider": "ddg",
+            "query": "WEG fundadores"
+          },
+          {
+            "provider": "searxng",
+            "query": "WEG fundadores"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "WEG fundadores"
+          },
+          {
+            "provider": "web",
+            "query": "WEG fundadores"
+          },
+          {
+            "provider": "ddg",
+            "query": "WEG data de fundação"
+          },
+          {
+            "provider": "searxng",
+            "query": "WEG data de fundação"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "WEG data de fundação"
+          },
+          {
+            "provider": "web",
+            "query": "WEG data de fundação"
+          },
+          {
+            "provider": "ddg",
+            "query": "WEG produtos"
+          },
+          {
+            "provider": "searxng",
+            "query": "WEG produtos"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "WEG produtos"
+          },
+          {
+            "provider": "web",
+            "query": "WEG produtos"
+          }
+        ],
+        "read_observations": 7,
+        "nonempty_extractions": 7,
+        "retained_entries": 2,
+        "retained_read": 2,
+        "retained_sources": [
+          {
+            "id": "ev-4ca1b26504db",
+            "url": "https://pt.wikipedia.org/wiki/WEG_S.A.",
+            "read": true,
+            "document_id": "D-f370998f27caa9755ac3ddd9",
+            "provenance": {
+              "query_ids": [
+                "Q-ffc294a728fb2c5447e2",
+                "Q-a3cb312cad6f3cf61f79"
+              ],
+              "requirement_ids": [
+                "R-d0371df1ee69",
+                "R-0c9ff0620467"
+              ],
+              "provider": "bing",
+              "rank": 6,
+              "candidate_id": "C-c62573bd975ad62e90f8"
+            },
+            "passage_ids": [
+              "P-f2c0ee3f8ad6409b",
+              "P-fbd5c2b12436c9a1",
+              "P-701a9269889ba7d1"
+            ]
+          },
+          {
+            "id": "ev-b502580d9788",
+            "url": "https://en.wikipedia.org/wiki/WEG_S.A.",
+            "read": true,
+            "document_id": "D-3aeeb637fa526e6b4012d3c4",
+            "provenance": {
+              "query_ids": [
+                "Q-ffc294a728fb2c5447e2",
+                "Q-a3cb312cad6f3cf61f79"
+              ],
+              "requirement_ids": [
+                "R-d0371df1ee69",
+                "R-0c9ff0620467"
+              ],
+              "provider": "bing",
+              "rank": 2,
+              "candidate_id": "C-ece2f209d7a8f7effc18"
+            },
+            "passage_ids": [
+              "P-03979007c3658f61",
+              "P-af956f219dac24db",
+              "P-1d71e5a563758fc1"
+            ]
+          }
+        ],
+        "linked_passages": 6,
+        "requirement_bindings": 8,
+        "error": null
+      },
+      {
+        "case": {
+          "id": "dev-gerdau",
+          "query": "Quem fundou a Gerdau, quando foi fundada e quais produtos fabrica?"
+        },
+        "code_sha256": {
+          "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+          "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+          "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+          "search_orchestrator": "750148c7f5aa613ed43e9ff96282e1907211287dc1d82f4c711b0ae123a5ac14",
+          "research_agents": "b6909f895d57c3d4a31b8e0e2b7f9df5a029e0b1d9faa3004e0fb79b213f5a69"
+        },
+        "seconds": 16.039,
+        "requirements": [
+          {
+            "entity": "Gerdau",
+            "attribute": "founders",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-423aa0bf7ad91b5a",
+              "P-4a4782003a319330",
+              "P-b46f6b2552e0ede4",
+              "P-397fb90e5afc0406"
+            ]
+          },
+          {
+            "entity": "Gerdau",
+            "attribute": "foundation_date",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-6bd16041d156cacc",
+              "P-3861d726effa3aa4",
+              "P-189d1c4d228b0b38"
+            ]
+          },
+          {
+            "entity": "Gerdau",
+            "attribute": "products",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-bef9ad1ce8f996b6",
+              "P-4f7a3795cc7b4441",
+              "P-5d4e058e878a6496"
+            ]
+          }
+        ],
+        "fully_decomposed": true,
+        "retrieval_complete": true,
+        "calls": 6,
+        "queries": [
+          {
+            "provider": "ddg",
+            "query": "Gerdau fundadores"
+          },
+          {
+            "provider": "ddg",
+            "query": "Gerdau data de fundação"
+          },
+          {
+            "provider": "ddg",
+            "query": "Gerdau produtos"
+          },
+          {
+            "provider": "searxng",
+            "query": "Gerdau produtos"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Gerdau produtos"
+          },
+          {
+            "provider": "web",
+            "query": "Gerdau produtos"
+          }
+        ],
+        "read_observations": 11,
+        "nonempty_extractions": 11,
+        "retained_entries": 4,
+        "retained_read": 4,
+        "retained_sources": [
+          {
+            "id": "ev-ac9afcce196c",
+            "url": "https://en.wikipedia.org/wiki/Gerdau",
+            "read": true,
+            "document_id": "D-bb9c39d372eebd7998a176e8",
+            "provenance": {
+              "query_ids": [
+                "Q-fbd6033c69a9d164e74c"
+              ],
+              "requirement_ids": [
+                "R-d1d3ab5a42d7"
+              ],
+              "provider": "ddg",
+              "rank": 4,
+              "candidate_id": "C-a5289b1b97262b6eae5f"
+            },
+            "passage_ids": [
+              "P-423aa0bf7ad91b5a",
+              "P-6bd16041d156cacc",
+              "P-bef9ad1ce8f996b6"
+            ]
+          },
+          {
+            "id": "ev-b6fa9a3b937d",
+            "url": "https://es.wikipedia.org/wiki/Gerdau",
+            "read": true,
+            "document_id": "D-4f1d3bc722cf118333f56599",
+            "provenance": {
+              "query_ids": [
+                "Q-78b163659feae61358b9"
+              ],
+              "requirement_ids": [
+                "R-434182434f35"
+              ],
+              "provider": "ddg",
+              "rank": 4,
+              "candidate_id": "C-743f04b80607c96d44bb"
+            },
+            "passage_ids": [
+              "P-4a4782003a319330"
+            ]
+          },
+          {
+            "id": "ev-d7bda8d5a04f",
+            "url": "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+            "read": true,
+            "document_id": "D-f9eefc5b1a4d1a76cf69f3e6",
+            "provenance": null,
+            "passage_ids": [
+              "P-b46f6b2552e0ede4",
+              "P-3861d726effa3aa4",
+              "P-4f7a3795cc7b4441"
+            ]
+          },
+          {
+            "id": "ev-efa4195ae2c9",
+            "url": "https://pt.wikipedia.org/wiki/Gerdau",
+            "read": true,
+            "document_id": "D-f9eefc5b1a4d1a76cf69f3e6",
+            "provenance": {
+              "query_ids": [
+                "Q-78b163659feae61358b9",
+                "Q-fbd6033c69a9d164e74c",
+                "Q-85983307e65b8237e121"
+              ],
+              "requirement_ids": [
+                "R-434182434f35",
+                "R-d1d3ab5a42d7",
+                "R-d5f04170feb9"
+              ],
+              "provider": "bing",
+              "rank": 2,
+              "candidate_id": "C-96d4b5876f9922c81a64"
+            },
+            "passage_ids": [
+              "P-397fb90e5afc0406",
+              "P-189d1c4d228b0b38",
+              "P-5d4e058e878a6496"
+            ]
+          }
+        ],
+        "linked_passages": 10,
+        "requirement_bindings": 10,
+        "error": null
+      },
+      {
+        "case": {
+          "id": "dev-history",
+          "query": "Quais foram as causas e as consequências da Guerra do Contestado?"
+        },
+        "code_sha256": {
+          "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+          "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+          "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+          "search_orchestrator": "750148c7f5aa613ed43e9ff96282e1907211287dc1d82f4c711b0ae123a5ac14",
+          "research_agents": "b6909f895d57c3d4a31b8e0e2b7f9df5a029e0b1d9faa3004e0fb79b213f5a69"
+        },
+        "seconds": 9.388,
+        "requirements": [
+          {
+            "entity": "Guerra do Contestado",
+            "attribute": "causes",
+            "type": "explicit_attribute",
+            "state": "NOT_SEARCHED",
+            "passage_ids": []
+          },
+          {
+            "entity": "Guerra do Contestado",
+            "attribute": "consequences",
+            "type": "explicit_attribute",
+            "state": "NOT_SEARCHED",
+            "passage_ids": []
+          }
+        ],
+        "fully_decomposed": true,
+        "retrieval_complete": false,
+        "calls": 8,
+        "queries": [
+          {
+            "provider": "ddg",
+            "query": "Guerra do Contestado causas"
+          },
+          {
+            "provider": "searxng",
+            "query": "Guerra do Contestado causas"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Guerra do Contestado causas"
+          },
+          {
+            "provider": "web",
+            "query": "Guerra do Contestado causas"
+          },
+          {
+            "provider": "ddg",
+            "query": "Guerra do Contestado consequências"
+          },
+          {
+            "provider": "searxng",
+            "query": "Guerra do Contestado consequências"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Guerra do Contestado consequências"
+          },
+          {
+            "provider": "web",
+            "query": "Guerra do Contestado consequências"
+          }
+        ],
+        "read_observations": 0,
+        "nonempty_extractions": 0,
+        "retained_entries": 0,
+        "retained_read": 0,
+        "retained_sources": [],
+        "linked_passages": 0,
+        "requirement_bindings": 0,
+        "error": null
+      },
+      {
+        "case": {
+          "id": "dev-river",
+          "query": "Quais são a nascente e a foz do rio Tocantins?"
+        },
+        "code_sha256": {
+          "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+          "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+          "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+          "search_orchestrator": "750148c7f5aa613ed43e9ff96282e1907211287dc1d82f4c711b0ae123a5ac14",
+          "research_agents": "b6909f895d57c3d4a31b8e0e2b7f9df5a029e0b1d9faa3004e0fb79b213f5a69"
+        },
+        "seconds": 13.967,
+        "requirements": [
+          {
+            "entity": "rio Tocantins",
+            "attribute": "river_source",
+            "type": "explicit_attribute",
+            "state": "NOT_SEARCHED",
+            "passage_ids": []
+          },
+          {
+            "entity": "rio Tocantins",
+            "attribute": "river_mouth",
+            "type": "explicit_attribute",
+            "state": "NOT_SEARCHED",
+            "passage_ids": []
+          }
+        ],
+        "fully_decomposed": true,
+        "retrieval_complete": false,
+        "calls": 8,
+        "queries": [
+          {
+            "provider": "ddg",
+            "query": "rio Tocantins nascente"
+          },
+          {
+            "provider": "searxng",
+            "query": "rio Tocantins nascente"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "rio Tocantins nascente"
+          },
+          {
+            "provider": "web",
+            "query": "rio Tocantins nascente"
+          },
+          {
+            "provider": "ddg",
+            "query": "rio Tocantins foz"
+          },
+          {
+            "provider": "searxng",
+            "query": "rio Tocantins foz"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "rio Tocantins foz"
+          },
+          {
+            "provider": "web",
+            "query": "rio Tocantins foz"
+          }
+        ],
+        "read_observations": 5,
+        "nonempty_extractions": 5,
+        "retained_entries": 0,
+        "retained_read": 0,
+        "retained_sources": [],
+        "linked_passages": 0,
+        "requirement_bindings": 0,
+        "error": null
+      },
+      {
+        "case": {
+          "id": "dev-sega",
+          "query": "Quem fundou a Sega, em que ano foi fundada e quais produtos fabrica?"
+        },
+        "code_sha256": {
+          "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+          "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+          "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+          "search_orchestrator": "750148c7f5aa613ed43e9ff96282e1907211287dc1d82f4c711b0ae123a5ac14",
+          "research_agents": "b6909f895d57c3d4a31b8e0e2b7f9df5a029e0b1d9faa3004e0fb79b213f5a69"
+        },
+        "seconds": 16.288,
+        "requirements": [
+          {
+            "entity": "Sega",
+            "attribute": "founders",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-cb913a975d825889",
+              "P-b659999b2463aa8f"
+            ]
+          },
+          {
+            "entity": "Sega",
+            "attribute": "foundation_date",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-f9730fd7289bd06a",
+              "P-b659999b2463aa8f",
+              "P-9fda5489a047f292"
+            ]
+          },
+          {
+            "entity": "Sega",
+            "attribute": "products",
+            "type": "explicit_attribute",
+            "state": "SUPPORTED",
+            "passage_ids": [
+              "P-069ac8edc51c87ab"
+            ]
+          }
+        ],
+        "fully_decomposed": true,
+        "retrieval_complete": true,
+        "calls": 12,
+        "queries": [
+          {
+            "provider": "ddg",
+            "query": "Sega fundadores"
+          },
+          {
+            "provider": "searxng",
+            "query": "Sega fundadores"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Sega fundadores"
+          },
+          {
+            "provider": "web",
+            "query": "Sega fundadores"
+          },
+          {
+            "provider": "ddg",
+            "query": "Sega data de fundação"
+          },
+          {
+            "provider": "searxng",
+            "query": "Sega data de fundação"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Sega data de fundação"
+          },
+          {
+            "provider": "web",
+            "query": "Sega data de fundação"
+          },
+          {
+            "provider": "ddg",
+            "query": "Sega produtos"
+          },
+          {
+            "provider": "searxng",
+            "query": "Sega produtos"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Sega produtos"
+          },
+          {
+            "provider": "web",
+            "query": "Sega produtos"
+          }
+        ],
+        "read_observations": 6,
+        "nonempty_extractions": 6,
+        "retained_entries": 2,
+        "retained_read": 2,
+        "retained_sources": [
+          {
+            "id": "ev-163166c888b9",
+            "url": "https://pt.wikipedia.org/wiki/Sega",
+            "read": true,
+            "document_id": "D-537fadf0df0611c534e3ddfa",
+            "provenance": {
+              "query_ids": [
+                "Q-8883556792f121344273",
+                "Q-382097d22b45ba083ee4",
+                "Q-764e388773d808306e7a"
+              ],
+              "requirement_ids": [
+                "R-0240d6d5f085",
+                "R-ebfcf5635999",
+                "R-492c6eb8c517"
+              ],
+              "provider": "bing",
+              "rank": 6,
+              "candidate_id": "C-df2b69bf0927ff83007c"
+            },
+            "passage_ids": [
+              "P-cb913a975d825889",
+              "P-f9730fd7289bd06a"
+            ]
+          },
+          {
+            "id": "ev-b39be1f6e3e1",
+            "url": "https://en.wikipedia.org/wiki/Sega",
+            "read": true,
+            "document_id": "D-a5130ea8fd1ffa3682d1e5fe",
+            "provenance": {
+              "query_ids": [
+                "Q-8883556792f121344273",
+                "Q-382097d22b45ba083ee4",
+                "Q-764e388773d808306e7a"
+              ],
+              "requirement_ids": [
+                "R-0240d6d5f085",
+                "R-ebfcf5635999",
+                "R-492c6eb8c517"
+              ],
+              "provider": "bing",
+              "rank": 3,
+              "candidate_id": "C-e2a09b3019554f21cb8e"
+            },
+            "passage_ids": [
+              "P-b659999b2463aa8f",
+              "P-069ac8edc51c87ab",
+              "P-9fda5489a047f292"
+            ]
+          }
+        ],
+        "linked_passages": 5,
+        "requirement_bindings": 6,
+        "error": null
+      },
+      {
+        "case": {
+          "id": "dev-tech",
+          "query": "Como usar Math.trunc, qual a sintaxe e qual o valor retornado?"
+        },
+        "code_sha256": {
+          "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+          "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+          "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+          "search_orchestrator": "750148c7f5aa613ed43e9ff96282e1907211287dc1d82f4c711b0ae123a5ac14",
+          "research_agents": "b6909f895d57c3d4a31b8e0e2b7f9df5a029e0b1d9faa3004e0fb79b213f5a69"
+        },
+        "seconds": 12.126,
+        "requirements": [
+          {
+            "entity": "Math.trunc",
+            "attribute": "syntax",
+            "type": "explicit_attribute",
+            "state": "NOT_SEARCHED",
+            "passage_ids": []
+          },
+          {
+            "entity": "Math.trunc",
+            "attribute": "return_value",
+            "type": "explicit_attribute",
+            "state": "NOT_SEARCHED",
+            "passage_ids": []
+          },
+          {
+            "entity": "Math.trunc",
+            "attribute": "behavior",
+            "type": "explicit_attribute",
+            "state": "NOT_SEARCHED",
+            "passage_ids": []
+          }
+        ],
+        "fully_decomposed": true,
+        "retrieval_complete": false,
+        "calls": 12,
+        "queries": [
+          {
+            "provider": "ddg",
+            "query": "Math.trunc sintaxe ou assinatura"
+          },
+          {
+            "provider": "searxng",
+            "query": "Math.trunc sintaxe ou assinatura"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Math.trunc sintaxe ou assinatura"
+          },
+          {
+            "provider": "web",
+            "query": "Math.trunc sintaxe ou assinatura"
+          },
+          {
+            "provider": "ddg",
+            "query": "Math.trunc valor retornado"
+          },
+          {
+            "provider": "searxng",
+            "query": "Math.trunc valor retornado"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Math.trunc valor retornado"
+          },
+          {
+            "provider": "web",
+            "query": "Math.trunc valor retornado"
+          },
+          {
+            "provider": "ddg",
+            "query": "Math.trunc comportamento da operação"
+          },
+          {
+            "provider": "searxng",
+            "query": "Math.trunc comportamento da operação"
+          },
+          {
+            "provider": "wikipedia",
+            "query": "Math.trunc comportamento da operação"
+          },
+          {
+            "provider": "web",
+            "query": "Math.trunc comportamento da operação"
+          }
+        ],
+        "read_observations": 0,
+        "nonempty_extractions": 0,
+        "retained_entries": 0,
+        "retained_read": 0,
+        "retained_sources": [],
+        "linked_passages": 0,
+        "requirement_bindings": 0,
+        "error": null
+      }
+    ]
+  },
+  "limit": "The before baseline reload replaced the inner-provider instrumentation; inner calls are not comparable."
+}

@@ -2,7 +2,7 @@
 import argparse,json,sqlite3,tempfile
 from pathlib import Path
 parser=argparse.ArgumentParser();parser.add_argument('--artifact-version',choices=['v5910','v5911','v5912'],default='v5910')
-parser.add_argument('--log-prefix',choices=['live','release'],default='live');args=parser.parse_args()
+parser.add_argument('--log-prefix',choices=['live','release','verified'],default='live');args=parser.parse_args()
 R=Path(__file__).resolve().parents[1];P=R/'qa-artifacts'/args.artifact_version
 private=json.loads((P/'qa-runtime-private.json').read_text())
 database=Path(private['database']).resolve()

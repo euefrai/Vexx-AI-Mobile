@@ -1,0 +1,1741 @@
+{
+  "scope": "FROZEN_LIVE_EXTERNAL_NO_URL_SEEDS_NO_MODEL_NOT_HUMAN_GOLD",
+  "candidate": "53d4154",
+  "later_changes": "1fee389 preserves short-field quotes and normalizes one isolated trailing delimiter; 3938bee binds semantic answer coverage. No later fresh discovery run.",
+  "cases": [
+    {
+      "case": {
+        "id": "rc-01",
+        "category": "company",
+        "query": "Quem fundou a Texas Instruments, em que ano foi fundada e quais produtos fabrica?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 13.604,
+      "requirements": [
+        {
+          "entity": "Texas Instruments",
+          "attribute": "founders",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "Texas Instruments",
+          "attribute": "foundation_date",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "Texas Instruments",
+          "attribute": "products",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": true,
+      "retrieval_complete": false,
+      "calls": 9,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Texas Instruments fundadores"
+        },
+        {
+          "provider": "searxng",
+          "query": "Texas Instruments fundadores"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Texas Instruments fundadores"
+        },
+        {
+          "provider": "ddg",
+          "query": "Texas Instruments data de fundação"
+        },
+        {
+          "provider": "searxng",
+          "query": "Texas Instruments data de fundação"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Texas Instruments data de fundação"
+        },
+        {
+          "provider": "ddg",
+          "query": "Texas Instruments produtos"
+        },
+        {
+          "provider": "searxng",
+          "query": "Texas Instruments produtos"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Texas Instruments produtos"
+        }
+      ],
+      "read_observations": 7,
+      "nonempty_extractions": 7,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-02",
+        "category": "company",
+        "query": "Quem fundou a Toyota, quando foi fundada e quais produtos fabrica?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 18.175,
+      "requirements": [
+        {
+          "entity": "Toyota",
+          "attribute": "founders",
+          "type": "explicit_attribute",
+          "state": "SUPPORTED",
+          "passage_ids": [
+            "P-e0d127f9ec4ca202"
+          ]
+        },
+        {
+          "entity": "Toyota",
+          "attribute": "foundation_date",
+          "type": "explicit_attribute",
+          "state": "SUPPORTED",
+          "passage_ids": [
+            "P-46cd5636924c8539"
+          ]
+        },
+        {
+          "entity": "Toyota",
+          "attribute": "products",
+          "type": "explicit_attribute",
+          "state": "SUPPORTED",
+          "passage_ids": [
+            "P-7b0a99c08b0d8f96"
+          ]
+        }
+      ],
+      "fully_decomposed": true,
+      "retrieval_complete": true,
+      "calls": 9,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Toyota fundadores"
+        },
+        {
+          "provider": "searxng",
+          "query": "Toyota fundadores"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Toyota fundadores"
+        },
+        {
+          "provider": "ddg",
+          "query": "Toyota data de fundação"
+        },
+        {
+          "provider": "searxng",
+          "query": "Toyota data de fundação"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Toyota data de fundação"
+        },
+        {
+          "provider": "ddg",
+          "query": "Toyota produtos"
+        },
+        {
+          "provider": "searxng",
+          "query": "Toyota produtos"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Toyota produtos"
+        }
+      ],
+      "read_observations": 12,
+      "nonempty_extractions": 12,
+      "retained_entries": 1,
+      "retained_read": 1,
+      "retained_sources": [
+        {
+          "id": "ev-a931da666e86",
+          "url": "https://pt.wikipedia.org/wiki/Toyota",
+          "read": true,
+          "document_id": "D-a027564dcff78eefa383ce45",
+          "provenance": {
+            "query_ids": [
+              "Q-3be852c3066cbc9ebba7",
+              "Q-858692c940d26fb9644f",
+              "Q-29419af91f48b9f8af6e",
+              "Q-f37b246a50ba0033ae39",
+              "Q-ae4146f56b0adb1e5286",
+              "Q-2c26459efd0a8c2eeed9"
+            ],
+            "requirement_ids": [
+              "R-85f5d929e705",
+              "R-5ee801b4a3f0",
+              "R-ef0e1647727b"
+            ],
+            "provider": "wikipedia",
+            "rank": 1,
+            "candidate_id": "C-72684025460b1b3ed0bc"
+          },
+          "passage_ids": [
+            "P-e0d127f9ec4ca202",
+            "P-46cd5636924c8539",
+            "P-7b0a99c08b0d8f96"
+          ]
+        }
+      ],
+      "linked_passages": 3,
+      "requirement_bindings": 3,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-03",
+        "category": "history",
+        "query": "Quais foram as causas e as consequências da Revolução Farroupilha?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 8.382,
+      "requirements": [
+        {
+          "entity": "Revolução Farroupilha",
+          "attribute": "causes",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "Revolução Farroupilha",
+          "attribute": "consequences",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": true,
+      "retrieval_complete": false,
+      "calls": 6,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Revolução Farroupilha causas"
+        },
+        {
+          "provider": "searxng",
+          "query": "Revolução Farroupilha causas"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Revolução Farroupilha causas"
+        },
+        {
+          "provider": "ddg",
+          "query": "Revolução Farroupilha consequências"
+        },
+        {
+          "provider": "searxng",
+          "query": "Revolução Farroupilha consequências"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Revolução Farroupilha consequências"
+        }
+      ],
+      "read_observations": 2,
+      "nonempty_extractions": 2,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-04",
+        "category": "science",
+        "query": "Como funcionam as vacinas de RNA mensageiro e quais limitações são documentadas?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 23.519,
+      "requirements": [
+        {
+          "entity": "Como funcionam as vacinas de RNA mensageiro",
+          "attribute": "behavior",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "Como funcionam as vacinas de RNA mensageiro",
+          "attribute": "limitations",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": true,
+      "retrieval_complete": false,
+      "calls": 16,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Como funcionam as vacinas de RNA mensageiro comportamento da operação"
+        },
+        {
+          "provider": "searxng",
+          "query": "Como funcionam as vacinas de RNA mensageiro comportamento da operação"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Como funcionam as vacinas de RNA mensageiro comportamento da operação"
+        },
+        {
+          "provider": "web",
+          "query": "Como funcionam as vacinas de RNA mensageiro comportamento da operação"
+        },
+        {
+          "provider": "ddg",
+          "query": "Como funcionam as vacinas de RNA mensageiro vacinas de RNA mensageiro comportamento da operação"
+        },
+        {
+          "provider": "searxng",
+          "query": "Como funcionam as vacinas de RNA mensageiro vacinas de RNA mensageiro comportamento da operação"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Como funcionam as vacinas de RNA mensageiro vacinas de RNA mensageiro comportamento da operação"
+        },
+        {
+          "provider": "web",
+          "query": "Como funcionam as vacinas de RNA mensageiro vacinas de RNA mensageiro comportamento da operação"
+        },
+        {
+          "provider": "ddg",
+          "query": "Como funcionam as vacinas de RNA mensageiro limitações"
+        },
+        {
+          "provider": "searxng",
+          "query": "Como funcionam as vacinas de RNA mensageiro limitações"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Como funcionam as vacinas de RNA mensageiro limitações"
+        },
+        {
+          "provider": "web",
+          "query": "Como funcionam as vacinas de RNA mensageiro limitações"
+        },
+        {
+          "provider": "ddg",
+          "query": "Como funcionam as vacinas de RNA mensageiro vacinas de RNA mensageiro limitações"
+        },
+        {
+          "provider": "searxng",
+          "query": "Como funcionam as vacinas de RNA mensageiro vacinas de RNA mensageiro limitações"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Como funcionam as vacinas de RNA mensageiro vacinas de RNA mensageiro limitações"
+        },
+        {
+          "provider": "web",
+          "query": "Como funcionam as vacinas de RNA mensageiro vacinas de RNA mensageiro limitações"
+        }
+      ],
+      "read_observations": 0,
+      "nonempty_extractions": 0,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-05",
+        "category": "news",
+        "query": "Quais notícias de Jacobina na Bahia foram publicadas nos últimos sete dias?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 18.11,
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": false,
+      "retrieval_complete": false,
+      "calls": 4,
+      "queries": [
+        {
+          "provider": "web",
+          "query": "Quais notícias de Jacobina na Bahia foram publicadas nos últimos sete dias"
+        },
+        {
+          "provider": "web",
+          "query": "Quais notícias de Jacobina na Bahia foram publicadas nos últimos sete dias? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Quais notícias de Jacobina na Bahia foram publicadas nos últimos sete dias fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Quais notícias de Jacobina na Bahia foram publicadas nos últimos sete dias 2026"
+        }
+      ],
+      "read_observations": 6,
+      "nonempty_extractions": 6,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-06",
+        "category": "technology",
+        "query": "Como funciona a transmissão por fibra óptica e quais são suas limitações?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 17.583,
+      "requirements": [
+        {
+          "entity": "transmissão por fibra óptica",
+          "attribute": "behavior",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "transmissão por fibra óptica",
+          "attribute": "limitations",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": true,
+      "retrieval_complete": false,
+      "calls": 8,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "transmissão por fibra óptica comportamento da operação"
+        },
+        {
+          "provider": "searxng",
+          "query": "transmissão por fibra óptica comportamento da operação"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "transmissão por fibra óptica comportamento da operação"
+        },
+        {
+          "provider": "web",
+          "query": "transmissão por fibra óptica comportamento da operação"
+        },
+        {
+          "provider": "ddg",
+          "query": "transmissão por fibra óptica limitações"
+        },
+        {
+          "provider": "searxng",
+          "query": "transmissão por fibra óptica limitações"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "transmissão por fibra óptica limitações"
+        },
+        {
+          "provider": "web",
+          "query": "transmissão por fibra óptica limitações"
+        }
+      ],
+      "read_observations": 7,
+      "nonempty_extractions": 6,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-07",
+        "category": "product",
+        "query": "Qual o peso da Panasonic Lumix S5 II com bateria e cartão e qual bateria utiliza?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 13.057,
+      "requirements": [
+        {
+          "entity": "Panasonic Lumix S5 II",
+          "attribute": "weight",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "Panasonic Lumix S5 II",
+          "attribute": "battery",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": true,
+      "retrieval_complete": false,
+      "calls": 8,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Panasonic Lumix S5 II peso e unidade com bateria e cartão"
+        },
+        {
+          "provider": "searxng",
+          "query": "Panasonic Lumix S5 II peso e unidade com bateria e cartão"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Panasonic Lumix S5 II peso e unidade com bateria e cartão"
+        },
+        {
+          "provider": "web",
+          "query": "Panasonic Lumix S5 II peso e unidade com bateria e cartão"
+        },
+        {
+          "provider": "ddg",
+          "query": "Panasonic Lumix S5 II bateria com bateria e cartão"
+        },
+        {
+          "provider": "searxng",
+          "query": "Panasonic Lumix S5 II bateria com bateria e cartão"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Panasonic Lumix S5 II bateria com bateria e cartão"
+        },
+        {
+          "provider": "web",
+          "query": "Panasonic Lumix S5 II bateria com bateria e cartão"
+        }
+      ],
+      "read_observations": 0,
+      "nonempty_extractions": 0,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-08",
+        "category": "economy",
+        "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 59.229,
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": false,
+      "retrieval_complete": false,
+      "calls": 24,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados"
+        },
+        {
+          "provider": "web",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados"
+        },
+        {
+          "provider": "ddg",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados"
+        },
+        {
+          "provider": "searxng",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados"
+        },
+        {
+          "provider": "web",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Qual a diferença entre PIB nominal e PIB real e como são calculados fontes primárias texto completo"
+        },
+        {
+          "provider": "ddg",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "diferença entre PIB nominal e PIB real e como são calculados fontes primárias texto completo"
+        }
+      ],
+      "read_observations": 0,
+      "nonempty_extractions": 0,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-09",
+        "category": "geography",
+        "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 58.34,
+      "requirements": [
+        {
+          "entity": "Diamantina em Minas Gerais",
+          "attribute": "location",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "Diamantina em Minas Gerais",
+          "attribute": "population",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": true,
+      "retrieval_complete": false,
+      "calls": 15,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022"
+        },
+        {
+          "provider": "searxng",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022"
+        },
+        {
+          "provider": "ddg",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022?"
+        },
+        {
+          "provider": "searxng",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022?"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022?"
+        },
+        {
+          "provider": "ddg",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022? Localização"
+        },
+        {
+          "provider": "searxng",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022? Localização"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022? Localização"
+        },
+        {
+          "provider": "ddg",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022? População e referência"
+        },
+        {
+          "provider": "searxng",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022? População e referência"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022? População e referência"
+        },
+        {
+          "provider": "ddg",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022? referência"
+        },
+        {
+          "provider": "searxng",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022? referência"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Onde fica Diamantina em Minas Gerais e qual sua população no Censo 2022? referência"
+        }
+      ],
+      "read_observations": 4,
+      "nonempty_extractions": 4,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-10",
+        "category": "culture",
+        "query": "Quem pintou a Mona Lisa e onde a obra está exposta?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 60.527,
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": false,
+      "retrieval_complete": false,
+      "calls": 12,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta"
+        },
+        {
+          "provider": "web",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Quem pintou a Mona Lisa e onde a obra está exposta fontes primárias texto completo"
+        }
+      ],
+      "read_observations": 0,
+      "nonempty_extractions": 0,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-11",
+        "category": "sport",
+        "query": "Qual foi o resultado mais recente da seleção brasileira masculina de basquete e qual o próximo jogo anunciado?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 56.448,
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": false,
+      "retrieval_complete": false,
+      "calls": 12,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "qual foi resultado mais recente seleção brasileira masculina basquete"
+        },
+        {
+          "provider": "searxng",
+          "query": "qual foi resultado mais recente seleção brasileira masculina basquete"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "qual foi resultado mais recente seleção brasileira masculina basquete"
+        },
+        {
+          "provider": "web",
+          "query": "qual foi resultado mais recente seleção brasileira masculina basquete"
+        },
+        {
+          "provider": "ddg",
+          "query": "resultado mais recente seleção brasileira masculina basquete"
+        },
+        {
+          "provider": "searxng",
+          "query": "resultado mais recente seleção brasileira masculina basquete"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "resultado mais recente seleção brasileira masculina basquete"
+        },
+        {
+          "provider": "web",
+          "query": "resultado mais recente seleção brasileira masculina basquete"
+        },
+        {
+          "provider": "ddg",
+          "query": "qual próximo jogo anunciado"
+        },
+        {
+          "provider": "searxng",
+          "query": "qual próximo jogo anunciado"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "qual próximo jogo anunciado"
+        },
+        {
+          "provider": "web",
+          "query": "qual próximo jogo anunciado"
+        }
+      ],
+      "read_observations": 10,
+      "nonempty_extractions": 8,
+      "retained_entries": 3,
+      "retained_read": 1,
+      "retained_sources": [
+        {
+          "id": "ev-1c35dcc1fc07",
+          "url": "https://resultados.tse.jus.br/oficial/app/index.html",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-08dbfffa0258be10c5ad",
+              "Q-c49a51e0335eec5f09ec"
+            ],
+            "requirement_ids": [
+              "R-73bde92e8287"
+            ],
+            "provider": "bing",
+            "rank": 8,
+            "candidate_id": "C-9b54e5cac33c2bc062b0"
+          },
+          "passage_ids": []
+        },
+        {
+          "id": "ev-4306ffd2d744",
+          "url": "https://ge.globo.com/futebol/selecao-brasileira/agenda-de-jogos-da-selecao/",
+          "read": true,
+          "document_id": "D-5cc78d0339ff40871c19a2cb",
+          "provenance": {
+            "query_ids": [
+              "Q-bdfd30ece05a4a1af702",
+              "Q-c49a51e0335eec5f09ec"
+            ],
+            "requirement_ids": [
+              "R-73bde92e8287"
+            ],
+            "provider": "bing",
+            "rank": 2,
+            "candidate_id": "C-73e44fa99e074fe5bd5e"
+          },
+          "passage_ids": []
+        },
+        {
+          "id": "ev-9354fe40290f",
+          "url": "https://institutoselecao.org.br/",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-bdfd30ece05a4a1af702",
+              "Q-c49a51e0335eec5f09ec"
+            ],
+            "requirement_ids": [
+              "R-73bde92e8287"
+            ],
+            "provider": "bing",
+            "rank": 5,
+            "candidate_id": "C-6975aed1ebaae4e3f3d9"
+          },
+          "passage_ids": []
+        }
+      ],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-12",
+        "category": "documentation",
+        "query": "Como usar statistics.median, qual o valor retornado e quais exceções são documentadas?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 81.566,
+      "requirements": [
+        {
+          "entity": "statistics.median",
+          "attribute": "return_value",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "statistics.median",
+          "attribute": "behavior",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": false,
+      "retrieval_complete": false,
+      "calls": 16,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "statistics.median valor retornado"
+        },
+        {
+          "provider": "searxng",
+          "query": "statistics.median valor retornado"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "statistics.median valor retornado"
+        },
+        {
+          "provider": "web",
+          "query": "statistics.median valor retornado"
+        },
+        {
+          "provider": "ddg",
+          "query": "statistics.median comportamento da operação"
+        },
+        {
+          "provider": "searxng",
+          "query": "statistics.median comportamento da operação"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "statistics.median comportamento da operação"
+        },
+        {
+          "provider": "web",
+          "query": "statistics.median comportamento da operação"
+        },
+        {
+          "provider": "ddg",
+          "query": "Como usar statistics.median, qual o valor retornado e quais exceções são documentadas? Como usar statistics.median, qual o valor retornado e quais exceções são documentadas?"
+        },
+        {
+          "provider": "searxng",
+          "query": "Como usar statistics.median, qual o valor retornado e quais exceções são documentadas? Como usar statistics.median, qual o valor retornado e quais exceções são documentadas?"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Como usar statistics.median, qual o valor retornado e quais exceções são documentadas? Como usar statistics.median, qual o valor retornado e quais exceções são documentadas?"
+        },
+        {
+          "provider": "web",
+          "query": "Como usar statistics.median, qual o valor retornado e quais exceções são documentadas? Como usar statistics.median, qual o valor retornado e quais exceções são documentadas?"
+        },
+        {
+          "provider": "ddg",
+          "query": "statistics.median, qual o valor retornado e quais exceções são documentadas? Como usar statistics.median, qual o valor retornado e quais exceções são documentadas"
+        },
+        {
+          "provider": "searxng",
+          "query": "statistics.median, qual o valor retornado e quais exceções são documentadas? Como usar statistics.median, qual o valor retornado e quais exceções são documentadas"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "statistics.median, qual o valor retornado e quais exceções são documentadas? Como usar statistics.median, qual o valor retornado e quais exceções são documentadas"
+        },
+        {
+          "provider": "web",
+          "query": "statistics.median, qual o valor retornado e quais exceções são documentadas? Como usar statistics.median, qual o valor retornado e quais exceções são documentadas"
+        }
+      ],
+      "read_observations": 4,
+      "nonempty_extractions": 4,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-13",
+        "category": "comparison",
+        "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada."
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 55.773,
+      "requirements": [
+        {
+          "entity": "Pentax K-3 III",
+          "attribute": "weight",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "Pentax K-3 III",
+          "attribute": "battery",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "Pentax KP",
+          "attribute": "weight",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        },
+        {
+          "entity": "Pentax KP",
+          "attribute": "battery",
+          "type": "explicit_attribute",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": true,
+      "retrieval_complete": false,
+      "calls": 12,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada"
+        },
+        {
+          "provider": "searxng",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada"
+        },
+        {
+          "provider": "web",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada"
+        },
+        {
+          "provider": "ddg",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada. Peso e unidade"
+        },
+        {
+          "provider": "searxng",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada. Peso e unidade"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada. Peso e unidade"
+        },
+        {
+          "provider": "web",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada. Peso e unidade"
+        },
+        {
+          "provider": "ddg",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada. Bateria"
+        },
+        {
+          "provider": "searxng",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada. Bateria"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada. Bateria"
+        },
+        {
+          "provider": "web",
+          "query": "Compare Pentax K-3 III e Pentax KP quanto ao peso com bateria e cartão e bateria utilizada. Bateria"
+        }
+      ],
+      "read_observations": 0,
+      "nonempty_extractions": 0,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-14",
+        "category": "ambiguous",
+        "query": "Qual a origem de Jaguar e quais suas principais características?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 138.148,
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": false,
+      "retrieval_complete": false,
+      "calls": 28,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Qual a origem de Jaguar e quais suas principais características"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a origem de Jaguar e quais suas principais características"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a origem de Jaguar e quais suas principais características"
+        },
+        {
+          "provider": "web",
+          "query": "Qual a origem de Jaguar e quais suas principais características"
+        },
+        {
+          "provider": "ddg",
+          "query": "origem de Jaguar e quais suas principais características"
+        },
+        {
+          "provider": "searxng",
+          "query": "origem de Jaguar e quais suas principais características"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "origem de Jaguar e quais suas principais características"
+        },
+        {
+          "provider": "web",
+          "query": "origem de Jaguar e quais suas principais características"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual a origem de Jaguar e quais suas principais características? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a origem de Jaguar e quais suas principais características? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a origem de Jaguar e quais suas principais características? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Qual a origem de Jaguar e quais suas principais características? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "origem de Jaguar e quais suas principais características? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "origem de Jaguar e quais suas principais características? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "origem de Jaguar e quais suas principais características? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "origem de Jaguar e quais suas principais características? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual a origem de Jaguar e quais suas principais características fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual a origem de Jaguar e quais suas principais características fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual a origem de Jaguar e quais suas principais características fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Qual a origem de Jaguar e quais suas principais características fontes primárias texto completo"
+        },
+        {
+          "provider": "ddg",
+          "query": "origem de Jaguar e quais suas principais características fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "origem de Jaguar e quais suas principais características fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "origem de Jaguar e quais suas principais características fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "origem de Jaguar e quais suas principais características fontes primárias texto completo"
+        },
+        {
+          "provider": "ddg",
+          "query": "origem jaguar suas características"
+        },
+        {
+          "provider": "searxng",
+          "query": "origem jaguar suas características"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "origem jaguar suas características"
+        },
+        {
+          "provider": "web",
+          "query": "origem jaguar suas características"
+        }
+      ],
+      "read_observations": 8,
+      "nonempty_extractions": 5,
+      "retained_entries": 3,
+      "retained_read": 0,
+      "retained_sources": [
+        {
+          "id": "ev-0e8a633dd957",
+          "url": "https://www.imdb.com/pt/title/tt9813792/",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-f742bd2013a17ebc424d",
+              "Q-97b2fbcf40a6aa3f06d6"
+            ],
+            "requirement_ids": [
+              "R-76509d2328b4"
+            ],
+            "provider": "bing",
+            "rank": 4,
+            "candidate_id": "C-6f24b5afdd40a6de3269"
+          },
+          "passage_ids": []
+        },
+        {
+          "id": "ev-84e0751aec55",
+          "url": "https://www.imdb.com/pt/title/tt9813792/",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-b28163605ae61e8fd11e",
+              "Q-104a6f5eb230cfa7d462"
+            ],
+            "requirement_ids": [
+              "R-76509d2328b4"
+            ],
+            "provider": "bing",
+            "rank": 4,
+            "candidate_id": "C-6f24b5afdd40a6de3269"
+          },
+          "passage_ids": []
+        },
+        {
+          "id": "ev-ea0849cb8145",
+          "url": "https://www.imdb.com/pt/title/tt9813792/",
+          "read": false,
+          "document_id": null,
+          "provenance": {
+            "query_ids": [
+              "Q-8e310339f518fe42ee79",
+              "Q-d83f85b89505fad4c76c"
+            ],
+            "requirement_ids": [
+              "R-76509d2328b4"
+            ],
+            "provider": "bing",
+            "rank": 4,
+            "candidate_id": "C-6f24b5afdd40a6de3269"
+          },
+          "passage_ids": []
+        }
+      ],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-15",
+        "category": "scarce",
+        "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 97.891,
+      "requirements": [
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": false,
+      "retrieval_complete": false,
+      "calls": 20,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026"
+        },
+        {
+          "provider": "web",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026?"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026?"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026?"
+        },
+        {
+          "provider": "web",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026?"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026? primary source original text"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026? primary source original text"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026? primary source original text"
+        },
+        {
+          "provider": "web",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026? primary source original text"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026 fontes primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026 fontes primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026 fontes primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026 fontes primárias texto completo"
+        },
+        {
+          "provider": "ddg",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026? primárias texto completo"
+        },
+        {
+          "provider": "searxng",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026? primárias texto completo"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026? primárias texto completo"
+        },
+        {
+          "provider": "web",
+          "query": "Qual o orçamento confirmado para restauração de fontes históricas em Caculé na Bahia em 2026? primárias texto completo"
+        }
+      ],
+      "read_observations": 5,
+      "nonempty_extractions": 5,
+      "retained_entries": 0,
+      "retained_read": 0,
+      "retained_sources": [],
+      "linked_passages": 0,
+      "requirement_bindings": 0,
+      "error": null
+    },
+    {
+      "case": {
+        "id": "rc-16",
+        "category": "geography",
+        "query": "Quais são a nascente e a foz do rio Jequitinhonha e quais estados ele atravessa?"
+      },
+      "code_sha256": {
+        "web_extract": "66ffec85a2a120dc32068bf5674a1c989c7d71727cd2e024288208ffa6f141fa",
+        "evidence_graph": "8bd0a570a5ee466640d4326c612a6a7e2c5a18f257087e7a96bed840ba78d45a",
+        "query_intelligence": "b1c228f002b0ec9c1752823feae63377f7fd4bd0cdaa3236e8b52f5d79a49b8c",
+        "search_orchestrator": "6a72cd11a3babb5f77f995b7c34f2b69890ae2e0249071b3760a685ddf8caafe",
+        "research_agents": "afb5732be085fbc61350197a2a7bd5b7fb9aa47bef61db74a4c5ac9149509a57"
+      },
+      "seconds": 41.787,
+      "requirements": [
+        {
+          "entity": "rio Jequitinhonha",
+          "attribute": "river_source",
+          "type": "explicit_attribute",
+          "state": "PARTIALLY_SUPPORTED",
+          "passage_ids": [
+            "P-933802070999e220"
+          ]
+        },
+        {
+          "entity": "rio Jequitinhonha",
+          "attribute": "river_mouth",
+          "type": "explicit_attribute",
+          "state": "DISCOVERED",
+          "passage_ids": []
+        },
+        {
+          "entity": "",
+          "attribute": "original_objective",
+          "type": "original_objective",
+          "state": "NOT_SEARCHED",
+          "passage_ids": []
+        }
+      ],
+      "fully_decomposed": false,
+      "retrieval_complete": false,
+      "calls": 12,
+      "queries": [
+        {
+          "provider": "ddg",
+          "query": "rio Jequitinhonha nascente"
+        },
+        {
+          "provider": "searxng",
+          "query": "rio Jequitinhonha nascente"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "rio Jequitinhonha nascente"
+        },
+        {
+          "provider": "ddg",
+          "query": "rio Jequitinhonha foz"
+        },
+        {
+          "provider": "searxng",
+          "query": "rio Jequitinhonha foz"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "rio Jequitinhonha foz"
+        },
+        {
+          "provider": "ddg",
+          "query": "Quais são a nascente e a foz do rio Jequitinhonha e quais estados ele atravessa? Quais são a nascente e a foz do rio Jequitinhonha e quais estados ele atravessa?"
+        },
+        {
+          "provider": "searxng",
+          "query": "Quais são a nascente e a foz do rio Jequitinhonha e quais estados ele atravessa? Quais são a nascente e a foz do rio Jequitinhonha e quais estados ele atravessa?"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "Quais são a nascente e a foz do rio Jequitinhonha e quais estados ele atravessa? Quais são a nascente e a foz do rio Jequitinhonha e quais estados ele atravessa?"
+        },
+        {
+          "provider": "ddg",
+          "query": "nascente e a foz do rio Jequitinhonha e quais estados ele atravessa? Quais são a nascente e a foz do rio Jequitinhonha e quais estados ele atravessa"
+        },
+        {
+          "provider": "searxng",
+          "query": "nascente e a foz do rio Jequitinhonha e quais estados ele atravessa? Quais são a nascente e a foz do rio Jequitinhonha e quais estados ele atravessa"
+        },
+        {
+          "provider": "wikipedia",
+          "query": "nascente e a foz do rio Jequitinhonha e quais estados ele atravessa? Quais são a nascente e a foz do rio Jequitinhonha e quais estados ele atravessa"
+        }
+      ],
+      "read_observations": 3,
+      "nonempty_extractions": 3,
+      "retained_entries": 1,
+      "retained_read": 1,
+      "retained_sources": [
+        {
+          "id": "ev-c4c2760192ad",
+          "url": "https://pt.wikipedia.org/wiki/Rio_Jequitinhonha",
+          "read": true,
+          "document_id": "D-87359a5d447464d92cec07ef",
+          "provenance": {
+            "query_ids": [
+              "Q-1748c09783d12f701f8a",
+              "Q-5c9c1214085dc65856b1",
+              "Q-c17c1dc9eda0b6168d9d",
+              "Q-55ed180fad2a320c2e6e",
+              "Q-61117f6eb8f4fc875923",
+              "Q-31e8a4a328101a46f859",
+              "Q-409022b725d5fcfb26b7"
+            ],
+            "requirement_ids": [
+              "R-6a13ba3915ed",
+              "R-a53ca31be5be"
+            ],
+            "provider": "wikipedia",
+            "rank": 1,
+            "candidate_id": "C-e54ba6c69bf740607725"
+          },
+          "passage_ids": [
+            "P-933802070999e220"
+          ]
+        }
+      ],
+      "linked_passages": 1,
+      "requirement_bindings": 1,
+      "error": null
+    }
+  ],
+  "with_retained_read": 3,
+  "with_linked_passages": 2,
+  "retrieval_complete": 1,
+  "limit": "Retrieval coverage is not a validated final answer; do not compare different holdouts causally or claim global precision."
+}

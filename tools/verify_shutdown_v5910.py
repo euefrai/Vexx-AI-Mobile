@@ -2,10 +2,11 @@
 import argparse,json,tempfile
 from pathlib import Path
 import psutil
-parser=argparse.ArgumentParser();parser.add_argument('--artifact-version',choices=['v5910','v5911'],default='v5910');args=parser.parse_args()
+parser=argparse.ArgumentParser();parser.add_argument('--artifact-version',choices=['v5910','v5911','v5912'],default='v5910');args=parser.parse_args()
 P=Path(__file__).resolve().parents[1]/'qa-artifacts'/args.artifact_version
 out={'production_operations':False,'sessions':{}}
 labels=['C','live']
+if args.artifact_version=='v5912':labels=['pre-terminal','pre-catalog','pre-semantic','verified']
 if args.artifact_version=='v5911' and (P/'raw/bootstrap/runtime.json').exists():labels.append('bootstrap')
 for label in labels:
     runtime=json.loads((P/'raw'/label/'runtime.json').read_text())
@@ -16,7 +17,9 @@ for label in labels:
         try:
             if any(str(folder) in arg for arg in (process.info['cmdline'] or [])):matching.append(process.pid)
         except (psutil.AccessDenied,psutil.NoSuchProcess):continue
-    log=(P/('qa-start.log' if label=='C' else 'qa-live.log')).read_text(encoding='utf-8',errors='replace') if label!='bootstrap' else ''
+    logfile=({'pre-terminal':'qa-live.log','pre-catalog':'qa-final.log','pre-semantic':'qa-release.log','verified':'qa-verified.log'}.get(label)
+             if args.artifact_version=='v5912' else ('qa-start.log' if label=='C' else 'qa-live.log'))
+    log=(P/logfile).read_text(encoding='utf-8',errors='replace') if label!='bootstrap' else ''
     out['sessions'][label]={'temporary_database_removed':not Path(runtime['database']).exists(),
       'temporary_runtime_removed':not Path(runtime['runtime']).exists(),'qa_processes_matching_private_folder':len(matching),
       'disposable_child_wait_timeout':'TimeoutExpired' in log,

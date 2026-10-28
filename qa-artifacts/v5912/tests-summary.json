@@ -1,0 +1,26 @@
+{
+  "runs": {
+    "full-suite": {
+      "result": "3 failed, 1785 passed, 4 skipped, 2 warnings in 388.46s (0:06:28)",
+      "exit": 1
+    },
+    "full-final": {
+      "result": "1790 passed, 4 skipped, 2 warnings in 427.44s (0:07:07)",
+      "exit": 0
+    },
+    "full-release": {
+      "result": "NOT_FINISHED",
+      "exit": 15,
+      "interruption": "Only the owned superseded pytest process was stopped after the semantic coverage defect was reproduced. This run is not a pass."
+    },
+    "full-verified": {
+      "result": "1804 passed, 4 skipped, 2 warnings in 459.36s (0:07:39)",
+      "exit": 0
+    }
+  },
+  "focused": [
+    "165 passed in 31.87s after catalog fixes",
+    "142 passed in 20.73s after semantic coverage"
+  ],
+  "limits": "Overlapping test runs must not be added together. First full failure had three real regressions, corrected before the next full pass."
+}

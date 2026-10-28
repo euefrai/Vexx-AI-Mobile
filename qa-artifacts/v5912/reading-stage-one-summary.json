@@ -1,0 +1,607 @@
+{
+  "scope": "CONTROLLED_SAME_HTML_REEXTRACTION_NO_DISCOVERY_NO_MODEL_NOT_HUMAN_GOLD",
+  "baseline": false,
+  "baseline_ref": "40f9531",
+  "cases": [
+    {
+      "case": {
+        "id": "dev-gerdau",
+        "query": "Quem fundou a Gerdau, quando foi fundada e quais produtos fabrica?"
+      },
+      "snapshot_sha256": "6962470d3690dbf1ff0f9640b10c4aff3dd842bc6903d76c7fb6e247067cdf3b",
+      "documents": 11,
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-434182434f35",
+            "type": "explicit_attribute",
+            "description": "Fundadores",
+            "entity": "Gerdau",
+            "attribute": "founders",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Fundadores",
+            "candidate_evidence_ids": [
+              "https://es.wikipedia.org/wiki/Especial:LoQueEnlazaAqu%C3%AD/Gerdau",
+              "https://en.wikipedia.org/wiki/Category:Gerdau_family",
+              "https://pt.wikipedia.org/wiki/Jorge_Gerdau",
+              "https://investidorsardinha.r7.com/bolsa-de-valores/gerdau/",
+              "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+              "https://pt.wikipedia.org/wiki/Gerdau",
+              "https://en.wikipedia.org/wiki/Gerdau",
+              "https://es.wikipedia.org/wiki/Gerdau"
+            ],
+            "confirmed_evidence_ids": [
+              "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+              "https://pt.wikipedia.org/wiki/Gerdau",
+              "https://en.wikipedia.org/wiki/Gerdau"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-b46f6b2552e0ede4",
+              "P-5124c8c26f9c7aa9",
+              "P-397fb90e5afc0406",
+              "P-50d7e7c202fa3786",
+              "P-423aa0bf7ad91b5a",
+              "P-12b1857aecaf945c",
+              "P-4a4782003a319330"
+            ]
+          },
+          {
+            "id": "R-d1d3ab5a42d7",
+            "type": "explicit_attribute",
+            "description": "Data de fundação",
+            "entity": "Gerdau",
+            "attribute": "foundation_date",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Data de fundação",
+            "candidate_evidence_ids": [
+              "https://es.wikipedia.org/wiki/Especial:LoQueEnlazaAqu%C3%AD/Gerdau",
+              "https://en.wikipedia.org/wiki/Category:Gerdau_family",
+              "https://pt.wikipedia.org/wiki/Jorge_Gerdau",
+              "https://investidorsardinha.r7.com/bolsa-de-valores/gerdau/",
+              "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+              "https://pt.wikipedia.org/wiki/Gerdau",
+              "https://en.wikipedia.org/wiki/Gerdau",
+              "https://es.wikipedia.org/wiki/Gerdau"
+            ],
+            "confirmed_evidence_ids": [
+              "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+              "https://pt.wikipedia.org/wiki/Gerdau",
+              "https://en.wikipedia.org/wiki/Gerdau"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-3861d726effa3aa4",
+              "P-189d1c4d228b0b38",
+              "P-6bd16041d156cacc"
+            ]
+          },
+          {
+            "id": "R-d5f04170feb9",
+            "type": "explicit_attribute",
+            "description": "Produtos",
+            "entity": "Gerdau",
+            "attribute": "products",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Produtos",
+            "candidate_evidence_ids": [
+              "https://es.wikipedia.org/wiki/Especial:LoQueEnlazaAqu%C3%AD/Gerdau",
+              "https://en.wikipedia.org/wiki/Category:Gerdau_family",
+              "https://pt.wikipedia.org/wiki/Jorge_Gerdau",
+              "https://investidorsardinha.r7.com/bolsa-de-valores/gerdau/",
+              "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+              "https://pt.wikipedia.org/wiki/Gerdau",
+              "https://en.wikipedia.org/wiki/Gerdau",
+              "https://es.wikipedia.org/wiki/Gerdau"
+            ],
+            "confirmed_evidence_ids": [
+              "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+              "https://pt.wikipedia.org/wiki/Gerdau",
+              "https://en.wikipedia.org/wiki/Gerdau"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-4f7a3795cc7b4441",
+              "P-5d4e058e878a6496",
+              "P-bef9ad1ce8f996b6"
+            ]
+          }
+        ],
+        "passages": [
+          {
+            "id": "P-b46f6b2552e0ede4",
+            "source_id": "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+            "document_id": "D-2503daf9ad1449bf6a0f0de1",
+            "requirement_id": "R-434182434f35",
+            "text_span": {
+              "start": 78,
+              "end": 102,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-3861d726effa3aa4",
+            "source_id": "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+            "document_id": "D-2503daf9ad1449bf6a0f0de1",
+            "requirement_id": "R-d1d3ab5a42d7",
+            "text_span": {
+              "start": 0,
+              "end": 76,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-4f7a3795cc7b4441",
+            "source_id": "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+            "document_id": "D-2503daf9ad1449bf6a0f0de1",
+            "requirement_id": "R-d5f04170feb9",
+            "text_span": {
+              "start": 104,
+              "end": 141,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-5124c8c26f9c7aa9",
+            "source_id": "https://pt.wikipedia.org/wiki/Grupo_Gerdau",
+            "document_id": "D-2503daf9ad1449bf6a0f0de1",
+            "requirement_id": "R-434182434f35",
+            "text_span": {
+              "start": 510,
+              "end": 1358,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-189d1c4d228b0b38",
+            "source_id": "https://pt.wikipedia.org/wiki/Gerdau",
+            "document_id": "D-c01c4544de711cd734c170c9",
+            "requirement_id": "R-d1d3ab5a42d7",
+            "text_span": {
+              "start": 0,
+              "end": 76,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-5d4e058e878a6496",
+            "source_id": "https://pt.wikipedia.org/wiki/Gerdau",
+            "document_id": "D-c01c4544de711cd734c170c9",
+            "requirement_id": "R-d5f04170feb9",
+            "text_span": {
+              "start": 104,
+              "end": 141,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-397fb90e5afc0406",
+            "source_id": "https://pt.wikipedia.org/wiki/Gerdau",
+            "document_id": "D-c01c4544de711cd734c170c9",
+            "requirement_id": "R-434182434f35",
+            "text_span": {
+              "start": 78,
+              "end": 102,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-6bd16041d156cacc",
+            "source_id": "https://en.wikipedia.org/wiki/Gerdau",
+            "document_id": "D-15420b4f61a21788f238f1bc",
+            "requirement_id": "R-d1d3ab5a42d7",
+            "text_span": {
+              "start": 0,
+              "end": 52,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-bef9ad1ce8f996b6",
+            "source_id": "https://en.wikipedia.org/wiki/Gerdau",
+            "document_id": "D-15420b4f61a21788f238f1bc",
+            "requirement_id": "R-d5f04170feb9",
+            "text_span": {
+              "start": 75,
+              "end": 149,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-50d7e7c202fa3786",
+            "source_id": "https://pt.wikipedia.org/wiki/Gerdau",
+            "document_id": "D-c01c4544de711cd734c170c9",
+            "requirement_id": "R-434182434f35",
+            "text_span": {
+              "start": 510,
+              "end": 1358,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-423aa0bf7ad91b5a",
+            "source_id": "https://en.wikipedia.org/wiki/Gerdau",
+            "document_id": "D-15420b4f61a21788f238f1bc",
+            "requirement_id": "R-434182434f35",
+            "text_span": {
+              "start": 54,
+              "end": 73,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-12b1857aecaf945c",
+            "source_id": "https://en.wikipedia.org/wiki/Gerdau",
+            "document_id": "D-15420b4f61a21788f238f1bc",
+            "requirement_id": "R-434182434f35",
+            "text_span": {
+              "start": 554,
+              "end": 774,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-4a4782003a319330",
+            "source_id": "https://es.wikipedia.org/wiki/Gerdau",
+            "document_id": "D-7d486888af37f5bf480c61aa",
+            "requirement_id": "R-434182434f35",
+            "text_span": {
+              "start": 249,
+              "end": 269,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "PARTIAL_ANSWER",
+            "support_label": "PARTIAL_SUPPORT"
+          }
+        ],
+        "diagnostics": {
+          "read_documents": 11,
+          "generated_passages": 62,
+          "stale_passages_rejected": 0,
+          "matched_bindings": 13,
+          "retained_bindings": 13,
+          "recognized_requirements": 3,
+          "undecomposed_objectives": 0,
+          "direct_requirements": 3,
+          "partial_requirements": 0,
+          "pending_requirements": 0
+        },
+        "fully_decomposed": true,
+        "unparsed_demands": [],
+        "complete": true,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "all_spans_literal": true,
+      "output_chars_max": 6456
+    },
+    {
+      "case": {
+        "id": "dev-history",
+        "query": "Quais foram as causas e as consequências da Guerra do Contestado?"
+      },
+      "snapshot_sha256": "67f92166f9de22343949bb0df5690809aefb4fd0b077caac7a2d8edf66978ec9",
+      "documents": 8,
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-8912acb216c0",
+            "type": "explicit_attribute",
+            "description": "Causas",
+            "entity": "Guerra do Contestado",
+            "attribute": "causes",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Causas",
+            "candidate_evidence_ids": [
+              "https://cidesp.com.br/conteudo/quais-paises-estao-em-guerra-hoje-lista-atualizada",
+              "https://www.sandinorebellion.com/NewsDocs/DiarioModerno1927-1.html",
+              "https://www.noticiasaominuto.com.br/mundo/tag/guerra",
+              "https://www.r7.com/tudo-sobre/guerra/",
+              "https://www.sandinorebellion.com/Top100pgs/Top100-p100.html",
+              "https://www.cnnbrasil.com.br/tudo-sobre/guerra/",
+              "https://g1.globo.com/mundo/ucrania-russia/",
+              "https://pt.wikipedia.org/wiki/Guerra"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          },
+          {
+            "id": "R-c371f49a1890",
+            "type": "explicit_attribute",
+            "description": "Consequências",
+            "entity": "Guerra do Contestado",
+            "attribute": "consequences",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Consequências",
+            "candidate_evidence_ids": [
+              "https://cidesp.com.br/conteudo/quais-paises-estao-em-guerra-hoje-lista-atualizada",
+              "https://www.sandinorebellion.com/NewsDocs/DiarioModerno1927-1.html",
+              "https://www.noticiasaominuto.com.br/mundo/tag/guerra",
+              "https://www.r7.com/tudo-sobre/guerra/",
+              "https://www.sandinorebellion.com/Top100pgs/Top100-p100.html",
+              "https://www.cnnbrasil.com.br/tudo-sobre/guerra/",
+              "https://g1.globo.com/mundo/ucrania-russia/",
+              "https://pt.wikipedia.org/wiki/Guerra"
+            ],
+            "confirmed_evidence_ids": [],
+            "state": "DISCOVERED",
+            "insufficiency_reason": "Nenhuma relação explícita com a entidade foi recuperada para este aspecto.",
+            "passage_ids": []
+          }
+        ],
+        "passages": [],
+        "diagnostics": {
+          "read_documents": 8,
+          "generated_passages": 42,
+          "stale_passages_rejected": 0,
+          "matched_bindings": 0,
+          "retained_bindings": 0,
+          "recognized_requirements": 2,
+          "undecomposed_objectives": 0,
+          "direct_requirements": 0,
+          "partial_requirements": 0,
+          "pending_requirements": 2
+        },
+        "fully_decomposed": true,
+        "unparsed_demands": [],
+        "complete": false,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "all_spans_literal": true,
+      "output_chars_max": 7999
+    },
+    {
+      "case": {
+        "id": "dev-sega",
+        "query": "Quem fundou a Sega, em que ano foi fundada e quais produtos fabrica?"
+      },
+      "snapshot_sha256": "f39e0bc5981428d766a8bf5e461f9b367919507c8df9f3655cffc114a129271e",
+      "documents": 6,
+      "coverage": {
+        "applicable": true,
+        "requirements": [
+          {
+            "id": "R-0240d6d5f085",
+            "type": "explicit_attribute",
+            "description": "Fundadores",
+            "entity": "Sega",
+            "attribute": "founders",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Fundadores",
+            "candidate_evidence_ids": [
+              "https://pt.wikipedia.org/wiki/Sega",
+              "https://en.wikipedia.org/wiki/Sega",
+              "https://www.construtorasega.com.br/",
+              "https://en.wikipedia.org/wiki/Talk:Sega",
+              "https://www.construtorasega.com.br:443/sega",
+              "https://sega.co.jp/en/index.html"
+            ],
+            "confirmed_evidence_ids": [
+              "https://pt.wikipedia.org/wiki/Sega",
+              "https://en.wikipedia.org/wiki/Sega"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-cb913a975d825889",
+              "P-b659999b2463aa8f"
+            ]
+          },
+          {
+            "id": "R-ebfcf5635999",
+            "type": "explicit_attribute",
+            "description": "Data de fundação",
+            "entity": "Sega",
+            "attribute": "foundation_date",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Data de fundação",
+            "candidate_evidence_ids": [
+              "https://pt.wikipedia.org/wiki/Sega",
+              "https://en.wikipedia.org/wiki/Sega",
+              "https://www.construtorasega.com.br/",
+              "https://en.wikipedia.org/wiki/Talk:Sega",
+              "https://www.construtorasega.com.br:443/sega",
+              "https://sega.co.jp/en/index.html"
+            ],
+            "confirmed_evidence_ids": [
+              "https://pt.wikipedia.org/wiki/Sega",
+              "https://en.wikipedia.org/wiki/Sega"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-f9730fd7289bd06a",
+              "P-9fda5489a047f292",
+              "P-b659999b2463aa8f"
+            ]
+          },
+          {
+            "id": "R-492c6eb8c517",
+            "type": "explicit_attribute",
+            "description": "Produtos",
+            "entity": "Sega",
+            "attribute": "products",
+            "constraints": {
+              "reference": "original_request",
+              "must_preserve": false,
+              "mandatory_conditions": []
+            },
+            "expected_information": "Produtos",
+            "candidate_evidence_ids": [
+              "https://pt.wikipedia.org/wiki/Sega",
+              "https://en.wikipedia.org/wiki/Sega",
+              "https://www.construtorasega.com.br/",
+              "https://en.wikipedia.org/wiki/Talk:Sega",
+              "https://www.construtorasega.com.br:443/sega",
+              "https://sega.co.jp/en/index.html"
+            ],
+            "confirmed_evidence_ids": [
+              "https://en.wikipedia.org/wiki/Sega"
+            ],
+            "state": "SUPPORTED",
+            "insufficiency_reason": "",
+            "passage_ids": [
+              "P-069ac8edc51c87ab"
+            ]
+          }
+        ],
+        "passages": [
+          {
+            "id": "P-cb913a975d825889",
+            "source_id": "https://pt.wikipedia.org/wiki/Sega",
+            "document_id": "D-2a2284553f506a15c9e56f28",
+            "requirement_id": "R-0240d6d5f085",
+            "text_span": {
+              "start": 39,
+              "end": 66,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-f9730fd7289bd06a",
+            "source_id": "https://pt.wikipedia.org/wiki/Sega",
+            "document_id": "D-2a2284553f506a15c9e56f28",
+            "requirement_id": "R-ebfcf5635999",
+            "text_span": {
+              "start": 0,
+              "end": 37,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-069ac8edc51c87ab",
+            "source_id": "https://en.wikipedia.org/wiki/Sega",
+            "document_id": "D-e8db9733340ca0e93c4ed471",
+            "requirement_id": "R-492c6eb8c517",
+            "text_span": {
+              "start": 51,
+              "end": 109,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-b659999b2463aa8f",
+            "source_id": "https://en.wikipedia.org/wiki/Sega",
+            "document_id": "D-e8db9733340ca0e93c4ed471",
+            "requirement_id": "R-0240d6d5f085",
+            "text_span": {
+              "start": 111,
+              "end": 877,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-9fda5489a047f292",
+            "source_id": "https://en.wikipedia.org/wiki/Sega",
+            "document_id": "D-e8db9733340ca0e93c4ed471",
+            "requirement_id": "R-ebfcf5635999",
+            "text_span": {
+              "start": 0,
+              "end": 49,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          },
+          {
+            "id": "P-b659999b2463aa8f",
+            "source_id": "https://en.wikipedia.org/wiki/Sega",
+            "document_id": "D-e8db9733340ca0e93c4ed471",
+            "requirement_id": "R-ebfcf5635999",
+            "text_span": {
+              "start": 111,
+              "end": 877,
+              "scope": "returned_extracted_text"
+            },
+            "answerability": "DIRECT_ANSWER",
+            "support_label": "DIRECT_SUPPORT"
+          }
+        ],
+        "diagnostics": {
+          "read_documents": 6,
+          "generated_passages": 21,
+          "stale_passages_rejected": 0,
+          "matched_bindings": 6,
+          "retained_bindings": 6,
+          "recognized_requirements": 3,
+          "undecomposed_objectives": 0,
+          "direct_requirements": 3,
+          "partial_requirements": 0,
+          "pending_requirements": 0
+        },
+        "fully_decomposed": true,
+        "unparsed_demands": [],
+        "complete": true,
+        "scope": "explicit relation patterns in bounded literal spans; not independent factual verification"
+      },
+      "all_spans_literal": true,
+      "output_chars_max": 4710
+    }
+  ]
+}

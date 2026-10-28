@@ -1,0 +1,747 @@
+{
+  "scope": "REAL_CHROME_AUTHENTICATED_FASTAPI_DEVELOPMENT_AGENT_TEMPORARY_SQLITE_NO_URL_SEEDS",
+  "cases": [
+    {
+      "name": "gerdau",
+      "query": "Pesquisa profunda sobre quem fundou a Gerdau, quando foi fundada e quais produtos fabrica.",
+      "seconds": 57.209,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-cc98ebb7c5d5",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "complete",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 2,
+        "reason": "etapas concluídas dentro do escopo recuperado"
+      },
+      "synthesis_llm": true,
+      "chat_result_id": "rj-cc98ebb7c5d5-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 2,
+      "source_links": [
+        {
+          "text": "empresa siderúrgica brasileira",
+          "url": "https://pt.wikipedia.org/wiki/Gerdau"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Gerdau"
+        },
+        {
+          "text": "empresa siderúrgica brasileira",
+          "url": "https://pt.wikipedia.org/wiki/Grupo_Gerdau"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Grupo_Gerdau"
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Gerdau",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Gerdau",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Gerdau",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": true,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": [
+          {
+            "paragraph": 0,
+            "state": "SUPPORTED",
+            "reason": "none",
+            "answers": [
+              {
+                "requirement_id": "R-a30d8c5bd5db",
+                "answer": "A Gerdau foi fundada em 16 de janeiro de 1901, em Porto Alegre, Rio Grande do Sul, com João Gerdau como seu fundador."
+              },
+              {
+                "requirement_id": "R-c2e74cd7f6b4",
+                "answer": "A Gerdau foi fundada em 16 de janeiro de 1901, em Porto Alegre, Rio Grande do Sul, com João Gerdau como seu fundador."
+              }
+            ]
+          },
+          {
+            "paragraph": 1,
+            "state": "SUPPORTED",
+            "reason": "none",
+            "answers": []
+          },
+          {
+            "paragraph": 2,
+            "state": "SUPPORTED",
+            "reason": "none",
+            "answers": [
+              {
+                "requirement_id": "R-1d2d1a1c582f",
+                "answer": "Entre os produtos fabricados pela Gerdau destacam-se aço, pregos, arames e vergalhões."
+              }
+            ]
+          },
+          {
+            "paragraph": 3,
+            "state": "SUPPORTED",
+            "reason": "none",
+            "answers": []
+          },
+          {
+            "paragraph": 4,
+            "state": "SUPPORTED",
+            "reason": "none",
+            "answers": []
+          }
+        ],
+        "format_normalization": null,
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-c2e74cd7f6b4",
+              "type": "explicit_attribute",
+              "description": "Fundadores",
+              "entity": "Gerdau",
+              "attribute": "founders",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Fundadores",
+              "candidate_evidence_ids": [
+                "ev-aabaca5acf71",
+                "ev-60cfb43806db"
+              ],
+              "confirmed_evidence_ids": [
+                "ev-aabaca5acf71",
+                "ev-60cfb43806db"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-2fd79d2500fe6482",
+                "P-5124c8c26f9c7aa9",
+                "P-81c440bcc7430f15",
+                "P-50d7e7c202fa3786"
+              ]
+            },
+            {
+              "id": "R-a30d8c5bd5db",
+              "type": "explicit_attribute",
+              "description": "Data de fundação",
+              "entity": "Gerdau",
+              "attribute": "foundation_date",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Data de fundação",
+              "candidate_evidence_ids": [
+                "ev-aabaca5acf71",
+                "ev-60cfb43806db"
+              ],
+              "confirmed_evidence_ids": [
+                "ev-aabaca5acf71",
+                "ev-60cfb43806db"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-2fd79d2500fe6482",
+                "P-81c440bcc7430f15"
+              ]
+            },
+            {
+              "id": "R-1d2d1a1c582f",
+              "type": "explicit_attribute",
+              "description": "Produtos",
+              "entity": "Gerdau",
+              "attribute": "products",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Produtos",
+              "candidate_evidence_ids": [
+                "ev-aabaca5acf71",
+                "ev-60cfb43806db"
+              ],
+              "confirmed_evidence_ids": [
+                "ev-aabaca5acf71",
+                "ev-60cfb43806db"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-4f7a3795cc7b4441",
+                "P-5d4e058e878a6496"
+              ]
+            }
+          ],
+          "passages": [
+            {
+              "id": "P-2fd79d2500fe6482",
+              "source_id": "ev-aabaca5acf71",
+              "document_id": "D-1f3170231a994fb792741464",
+              "requirement_id": "R-c2e74cd7f6b4",
+              "text_span": {
+                "start": 0,
+                "end": 101,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-2fd79d2500fe6482",
+              "source_id": "ev-aabaca5acf71",
+              "document_id": "D-1f3170231a994fb792741464",
+              "requirement_id": "R-a30d8c5bd5db",
+              "text_span": {
+                "start": 0,
+                "end": 101,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-4f7a3795cc7b4441",
+              "source_id": "ev-aabaca5acf71",
+              "document_id": "D-1f3170231a994fb792741464",
+              "requirement_id": "R-1d2d1a1c582f",
+              "text_span": {
+                "start": 103,
+                "end": 140,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-5124c8c26f9c7aa9",
+              "source_id": "ev-aabaca5acf71",
+              "document_id": "D-1f3170231a994fb792741464",
+              "requirement_id": "R-c2e74cd7f6b4",
+              "text_span": {
+                "start": 142,
+                "end": 990,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-81c440bcc7430f15",
+              "source_id": "ev-60cfb43806db",
+              "document_id": "D-380a70aaa8a9b6fe5265be1d",
+              "requirement_id": "R-a30d8c5bd5db",
+              "text_span": {
+                "start": 0,
+                "end": 101,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-5d4e058e878a6496",
+              "source_id": "ev-60cfb43806db",
+              "document_id": "D-380a70aaa8a9b6fe5265be1d",
+              "requirement_id": "R-1d2d1a1c582f",
+              "text_span": {
+                "start": 103,
+                "end": 140,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-81c440bcc7430f15",
+              "source_id": "ev-60cfb43806db",
+              "document_id": "D-380a70aaa8a9b6fe5265be1d",
+              "requirement_id": "R-c2e74cd7f6b4",
+              "text_span": {
+                "start": 0,
+                "end": 101,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-50d7e7c202fa3786",
+              "source_id": "ev-60cfb43806db",
+              "document_id": "D-380a70aaa8a9b6fe5265be1d",
+              "requirement_id": "R-c2e74cd7f6b4",
+              "text_span": {
+                "start": 142,
+                "end": 990,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            }
+          ],
+          "diagnostics": {
+            "read_documents": 2,
+            "generated_passages": 6,
+            "stale_passages_rejected": 0,
+            "matched_bindings": 8,
+            "retained_bindings": 8,
+            "recognized_requirements": 3,
+            "undecomposed_objectives": 0,
+            "direct_requirements": 3,
+            "partial_requirements": 0,
+            "pending_requirements": 0
+          },
+          "fully_decomposed": true,
+          "unparsed_demands": [],
+          "complete": true,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification",
+          "method": "literal_answer_spans_and_separate_support_review",
+          "answer_spans": [
+            {
+              "requirement_id": "R-a30d8c5bd5db",
+              "answer": "A Gerdau foi fundada em 16 de janeiro de 1901, em Porto Alegre, Rio Grande do Sul, com João Gerdau como seu fundador.",
+              "paragraph": 0,
+              "evidence_ids": [
+                "ev-aabaca5acf71"
+              ]
+            },
+            {
+              "requirement_id": "R-c2e74cd7f6b4",
+              "answer": "A Gerdau foi fundada em 16 de janeiro de 1901, em Porto Alegre, Rio Grande do Sul, com João Gerdau como seu fundador.",
+              "paragraph": 0,
+              "evidence_ids": [
+                "ev-aabaca5acf71"
+              ]
+            },
+            {
+              "requirement_id": "R-1d2d1a1c582f",
+              "answer": "Entre os produtos fabricados pela Gerdau destacam-se aço, pregos, arames e vergalhões.",
+              "paragraph": 2,
+              "evidence_ids": [
+                "ev-aabaca5acf71"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "natura",
+      "query": "Pesquisa profunda sobre quem fundou a Natura, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 52.179,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-fe47f85c870c",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-fe47f85c870c-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 1,
+      "source_links": [
+        {
+          "text": "empresa brasileira de cosméticos",
+          "url": "https://pt.wikipedia.org/wiki/Natura"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Natura"
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Natura",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Natura",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Natura",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": "semantic_review_invalid",
+        "fallback_provider_code": null,
+        "semantic_review": null,
+        "format_normalization": null,
+        "answer_coverage": null
+      }
+    },
+    {
+      "name": "company",
+      "query": "Pesquisa profunda sobre quem fundou a WEG, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 45.267,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-fa49eab4129b",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "complete",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "etapas concluídas dentro do escopo recuperado"
+      },
+      "synthesis_llm": true,
+      "chat_result_id": "rj-fa49eab4129b-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 1,
+      "source_links": [
+        {
+          "text": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "WEG",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": true,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": [
+          {
+            "paragraph": 0,
+            "state": "SUPPORTED",
+            "reason": "none",
+            "answers": [
+              {
+                "requirement_id": "R-fc4911b2ed70",
+                "answer": "Werner Ricardo Voigt, Eggon João da Silva e Geraldo Werninghaus"
+              },
+              {
+                "requirement_id": "R-71edac691206",
+                "answer": "16 de setembro de 1961"
+              }
+            ]
+          },
+          {
+            "paragraph": 1,
+            "state": "SUPPORTED",
+            "reason": "none",
+            "answers": [
+              {
+                "requirement_id": "R-299cadf0928e",
+                "answer": "motores elétricos, geradores, transformadores, aerogeradores, inversores, sistemas de armazenamento de energia, equipamentos de automação, tintas e vernizes"
+              }
+            ]
+          }
+        ],
+        "format_normalization": null,
+        "answer_coverage": {
+          "applicable": true,
+          "requirements": [
+            {
+              "id": "R-fc4911b2ed70",
+              "type": "explicit_attribute",
+              "description": "Fundadores",
+              "entity": "WEG",
+              "attribute": "founders",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Fundadores",
+              "candidate_evidence_ids": [
+                "ev-8c8faee82f26"
+              ],
+              "confirmed_evidence_ids": [
+                "ev-8c8faee82f26"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-e4f3ad5a73ab2214"
+              ]
+            },
+            {
+              "id": "R-71edac691206",
+              "type": "explicit_attribute",
+              "description": "Data de fundação",
+              "entity": "WEG",
+              "attribute": "foundation_date",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Data de fundação",
+              "candidate_evidence_ids": [
+                "ev-8c8faee82f26"
+              ],
+              "confirmed_evidence_ids": [
+                "ev-8c8faee82f26"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-e4f3ad5a73ab2214"
+              ]
+            },
+            {
+              "id": "R-299cadf0928e",
+              "type": "explicit_attribute",
+              "description": "Produtos",
+              "entity": "WEG",
+              "attribute": "products",
+              "constraints": {
+                "reference": "original_request",
+                "must_preserve": false,
+                "mandatory_conditions": []
+              },
+              "expected_information": "Produtos",
+              "candidate_evidence_ids": [
+                "ev-8c8faee82f26"
+              ],
+              "confirmed_evidence_ids": [
+                "ev-8c8faee82f26"
+              ],
+              "state": "SUPPORTED",
+              "insufficiency_reason": "",
+              "passage_ids": [
+                "P-701a9269889ba7d1"
+              ]
+            }
+          ],
+          "passages": [
+            {
+              "id": "P-e4f3ad5a73ab2214",
+              "source_id": "ev-8c8faee82f26",
+              "document_id": "D-118a23d627a92b6385c7008c",
+              "requirement_id": "R-fc4911b2ed70",
+              "text_span": {
+                "start": 0,
+                "end": 115,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-e4f3ad5a73ab2214",
+              "source_id": "ev-8c8faee82f26",
+              "document_id": "D-118a23d627a92b6385c7008c",
+              "requirement_id": "R-71edac691206",
+              "text_span": {
+                "start": 0,
+                "end": 115,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            },
+            {
+              "id": "P-701a9269889ba7d1",
+              "source_id": "ev-8c8faee82f26",
+              "document_id": "D-118a23d627a92b6385c7008c",
+              "requirement_id": "R-299cadf0928e",
+              "text_span": {
+                "start": 117,
+                "end": 282,
+                "scope": "returned_extracted_text"
+              },
+              "answerability": "DIRECT_ANSWER",
+              "support_label": "DIRECT_SUPPORT"
+            }
+          ],
+          "diagnostics": {
+            "read_documents": 1,
+            "generated_passages": 2,
+            "stale_passages_rejected": 0,
+            "matched_bindings": 3,
+            "retained_bindings": 3,
+            "recognized_requirements": 3,
+            "undecomposed_objectives": 0,
+            "direct_requirements": 3,
+            "partial_requirements": 0,
+            "pending_requirements": 0
+          },
+          "fully_decomposed": true,
+          "unparsed_demands": [],
+          "complete": true,
+          "scope": "explicit relation patterns in bounded literal spans; not independent factual verification",
+          "method": "literal_answer_spans_and_separate_support_review",
+          "answer_spans": [
+            {
+              "requirement_id": "R-fc4911b2ed70",
+              "answer": "Werner Ricardo Voigt, Eggon João da Silva e Geraldo Werninghaus",
+              "paragraph": 0,
+              "evidence_ids": [
+                "ev-8c8faee82f26"
+              ]
+            },
+            {
+              "requirement_id": "R-71edac691206",
+              "answer": "16 de setembro de 1961",
+              "paragraph": 0,
+              "evidence_ids": [
+                "ev-8c8faee82f26"
+              ]
+            },
+            {
+              "requirement_id": "R-299cadf0928e",
+              "answer": "motores elétricos, geradores, transformadores, aerogeradores, inversores, sistemas de armazenamento de energia, equipamentos de automação, tintas e vernizes",
+              "paragraph": 1,
+              "evidence_ids": [
+                "ev-8c8faee82f26"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "new-company",
+      "query": "Pesquisa profunda sobre quem fundou a Nvidia, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 41.93,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-fab320478dd2",
+      "job_state": "interrompida",
+      "outcome": {
+        "state": "blocked",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "rate_limit",
+        "read_sources": 3,
+        "reason": "redação ou revisão bloqueada pelo provedor; evidências preservadas"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-fab320478dd2-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 3,
+      "source_links": [
+        {
+          "text": "fabricante de chips de processamento gráfico",
+          "url": "https://pt.wikipedia.org/wiki/NVIDIA"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/NVIDIA"
+        },
+        {
+          "text": "fabricante de chips de processamento gráfico",
+          "url": "https://pt.wikipedia.org/wiki/NVIDIA_Corporation"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/NVIDIA_Corporation"
+        },
+        {
+          "text": "fabricante de chips de processamento gráfico",
+          "url": "https://pt.wikipedia.org/wiki/Nvidia"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Nvidia"
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Nvidia",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Nvidia",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Nvidia",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": "provider_failure",
+        "fallback_provider_code": "rate_limit",
+        "semantic_review": null,
+        "format_normalization": null,
+        "answer_coverage": null
+      }
+    }
+  ],
+  "messages": {
+    "assistant": 8,
+    "user": 4
+  },
+  "message_count": 12,
+  "distinct_message_ids": 12,
+  "models": [
+    "poolside/laguna-s-2.1:free"
+  ],
+  "quick_check": "ok",
+  "limits": [
+    "completed_flow in legacy harness means transport/job observed, not acceptance.",
+    "LLM validation alone does not establish complete research; inspect outcome and requirement coverage."
+  ]
+}

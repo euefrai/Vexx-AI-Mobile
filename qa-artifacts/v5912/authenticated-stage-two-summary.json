@@ -1,0 +1,393 @@
+{
+  "scope": "REAL_CHROME_AUTHENTICATED_FASTAPI_DEVELOPMENT_AGENT_TEMPORARY_SQLITE_NO_URL_SEEDS",
+  "cases": [
+    {
+      "name": "company",
+      "query": "Pesquisa profunda sobre quem fundou a WEG, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 22.475,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-560f37fa8611",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-560f37fa8611-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 1,
+      "source_links": [
+        {
+          "text": "empresa brasileira fabricante de motores, equipamentos , sistemas de energia e automação",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/WEG_S.A."
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "WEG",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "WEG",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": "invalid_json",
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "independent",
+      "query": "Pesquisa profunda sobre quem fundou a Gerdau, quando foi fundada e quais produtos fabrica.",
+      "seconds": 27.139,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-a8e689895b89",
+      "job_state": "interrompida",
+      "outcome": {
+        "state": "blocked",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "vazia",
+        "read_sources": 2,
+        "reason": "redação ou revisão bloqueada pelo provedor; evidências preservadas"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-a8e689895b89-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 2,
+      "source_links": [
+        {
+          "text": "empresa siderúrgica brasileira",
+          "url": "https://pt.wikipedia.org/wiki/Grupo_Gerdau"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Grupo_Gerdau"
+        },
+        {
+          "text": "empresa siderúrgica brasileira",
+          "url": "https://pt.wikipedia.org/wiki/Gerdau"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Gerdau"
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Gerdau",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Gerdau",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Gerdau",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": "provider_failure",
+        "fallback_provider_code": "vazia",
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "independent-two",
+      "query": "Pesquisa profunda sobre quem fundou a Sega, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 32.045,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-e755091be74d",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": true,
+      "chat_result_id": "rj-e755091be74d-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 1,
+      "source_links": [
+        {
+          "text": "desenvolvedora de games japonesa",
+          "url": "https://pt.wikipedia.org/wiki/Sega"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Sega"
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Sega",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Sega",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Sega",
+          "attribute": "products",
+          "state": "DISCOVERED"
+        }
+      ],
+      "synthesis": {
+        "llm": true,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": [
+          {
+            "paragraph": 0,
+            "state": "SUPPORTED",
+            "reason": "none"
+          },
+          {
+            "paragraph": 1,
+            "state": "SUPPORTED",
+            "reason": "none"
+          }
+        ]
+      }
+    },
+    {
+      "name": "independent-three",
+      "query": "Pesquisa profunda sobre quem fundou a Natura, em que ano foi fundada e quais produtos fabrica.",
+      "seconds": 51.69,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-eed36e6587af",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 1,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": true,
+      "chat_result_id": "rj-eed36e6587af-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 1,
+      "source_links": [
+        {
+          "text": "empresa brasileira de cosméticos",
+          "url": "https://pt.wikipedia.org/wiki/Natura"
+        },
+        {
+          "text": "Abrir fonte ↗",
+          "url": "https://pt.wikipedia.org/wiki/Natura"
+        }
+      ],
+      "requirements": [
+        {
+          "entity": "Natura",
+          "attribute": "founders",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Natura",
+          "attribute": "foundation_date",
+          "state": "SUPPORTED"
+        },
+        {
+          "entity": "Natura",
+          "attribute": "products",
+          "state": "SUPPORTED"
+        }
+      ],
+      "synthesis": {
+        "llm": true,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": [
+          {
+            "paragraph": 0,
+            "state": "SUPPORTED",
+            "reason": "none"
+          },
+          {
+            "paragraph": 1,
+            "state": "SUPPORTED",
+            "reason": "none"
+          }
+        ]
+      }
+    },
+    {
+      "name": "history",
+      "query": "Pesquisa profunda sobre quais foram as causas e as consequências da Guerra do Contestado.",
+      "seconds": 22.171,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-fb0924da2393",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-fb0924da2393-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [
+        {
+          "entity": "Guerra do Contestado",
+          "attribute": "causes",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Guerra do Contestado",
+          "attribute": "consequences",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "technical",
+      "query": "Pesquisa profunda sobre como usar Math.trunc, qual a sintaxe e qual o valor retornado.",
+      "seconds": 62.597,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-1e8e5838230a",
+      "job_state": "concluida",
+      "outcome": {
+        "state": "partial",
+        "unresolved_fronts": [],
+        "source_authority_unverified": false,
+        "provider_code": "",
+        "read_sources": 0,
+        "reason": "evidências insuficientes ou limitações remanescentes"
+      },
+      "synthesis_llm": false,
+      "chat_result_id": "rj-1e8e5838230a-result",
+      "assistant_messages": 2,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [
+        {
+          "entity": "Math.trunc",
+          "attribute": "syntax",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Math.trunc",
+          "attribute": "return_value",
+          "state": "NOT_SEARCHED"
+        },
+        {
+          "entity": "Math.trunc",
+          "attribute": "behavior",
+          "state": "NOT_SEARCHED"
+        }
+      ],
+      "synthesis": {
+        "llm": false,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    },
+    {
+      "name": "cancel",
+      "query": "Pesquisa profunda sobre transmissão de energia elétrica e limitações.",
+      "seconds": 1.505,
+      "http_status": 200,
+      "content_type": "text/event-stream; charset=utf-8",
+      "job": "rj-61730061b194",
+      "job_state": "cancelada",
+      "outcome": null,
+      "synthesis_llm": false,
+      "chat_result_id": null,
+      "assistant_messages": 1,
+      "reload_preserved": true,
+      "media_cards": 0,
+      "page_errors": [],
+      "source_card_count": 0,
+      "source_links": [],
+      "requirements": [],
+      "synthesis": {
+        "llm": null,
+        "fallback_detail": null,
+        "fallback_provider_code": null,
+        "semantic_review": null
+      }
+    }
+  ],
+  "messages": {
+    "assistant": 13,
+    "user": 7
+  },
+  "message_count": 20,
+  "distinct_message_ids": 20,
+  "models": [
+    "poolside/laguna-s-2.1:free"
+  ],
+  "quick_check": "ok",
+  "limits": [
+    "completed_flow in legacy harness means transport/job observed, not acceptance.",
+    "LLM validation alone does not establish complete research; inspect outcome and requirement coverage."
+  ]
+}

@@ -1,0 +1,498 @@
+{
+  "scope": "REAL_FREE_MODEL_QA_CALLS_NO_REASONING_CONTENT_PUBLISHED",
+  "stages": {
+    "ef97dfc": [
+      {
+        "capture": "http-001.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": null,
+        "http_status": null,
+        "error_type": "HTTPError",
+        "seconds": 0.652,
+        "usage": {},
+        "choices": []
+      },
+      {
+        "capture": "http-002.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 3.912,
+        "usage": {
+          "prompt_tokens": 1417,
+          "completion_tokens": 115,
+          "total_tokens": 1532
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 308,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-003.json",
+        "task": "verify_support",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 3.268,
+        "usage": {
+          "prompt_tokens": 2586,
+          "completion_tokens": 31,
+          "total_tokens": 2617
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 117,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-004.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 5.053,
+        "usage": {
+          "prompt_tokens": 2101,
+          "completion_tokens": 167,
+          "total_tokens": 2268
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 464,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-005.json",
+        "task": "verify_support",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 2.014,
+        "usage": {
+          "prompt_tokens": 3335,
+          "completion_tokens": 44,
+          "total_tokens": 3379
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 169,
+            "reasoning_present": false
+          }
+        ]
+      }
+    ],
+    "53d4154": [
+      {
+        "capture": "http-001.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 6.214,
+        "usage": {
+          "prompt_tokens": 1454,
+          "completion_tokens": 145,
+          "total_tokens": 1599
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 434,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-002.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 4.036,
+        "usage": {
+          "prompt_tokens": 1678,
+          "completion_tokens": 122,
+          "total_tokens": 1800
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 0,
+            "reasoning_present": true
+          }
+        ]
+      },
+      {
+        "capture": "http-003.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 6.401,
+        "usage": {
+          "prompt_tokens": 1356,
+          "completion_tokens": 85,
+          "total_tokens": 1441
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 225,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-004.json",
+        "task": "verify_support",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 3.955,
+        "usage": {
+          "prompt_tokens": 2157,
+          "completion_tokens": 31,
+          "total_tokens": 2188
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 117,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-005.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 7.736,
+        "usage": {
+          "prompt_tokens": 1413,
+          "completion_tokens": 95,
+          "total_tokens": 1508
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 267,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-006.json",
+        "task": "verify_support",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 2.526,
+        "usage": {
+          "prompt_tokens": 2502,
+          "completion_tokens": 31,
+          "total_tokens": 2533
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 117,
+            "reasoning_present": false
+          }
+        ]
+      }
+    ],
+    "1fee389": [
+      {
+        "capture": "http-001.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 5.568,
+        "usage": {
+          "prompt_tokens": 2439,
+          "completion_tokens": 123,
+          "total_tokens": 2562
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 324,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-002.json",
+        "task": "verify_support",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 2.468,
+        "usage": {
+          "prompt_tokens": 2840,
+          "completion_tokens": 31,
+          "total_tokens": 2871
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 117,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-003.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 3.893,
+        "usage": {
+          "prompt_tokens": 1441,
+          "completion_tokens": 104,
+          "total_tokens": 1545
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 288,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-004.json",
+        "task": "verify_support",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 3.727,
+        "usage": {
+          "prompt_tokens": 2327,
+          "completion_tokens": 31,
+          "total_tokens": 2358
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 117,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-005.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 4.429,
+        "usage": {
+          "prompt_tokens": 1457,
+          "completion_tokens": 162,
+          "total_tokens": 1619
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 477,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-006.json",
+        "task": "verify_support",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 3.257,
+        "usage": {
+          "prompt_tokens": 2509,
+          "completion_tokens": 44,
+          "total_tokens": 2553
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 169,
+            "reasoning_present": false
+          }
+        ]
+      }
+    ],
+    "3938bee": [
+      {
+        "capture": "http-001.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 10.496,
+        "usage": {
+          "prompt_tokens": 2434,
+          "completion_tokens": 398,
+          "total_tokens": 2832
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 1075,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-002.json",
+        "task": "verify_support",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 7.508,
+        "usage": {
+          "prompt_tokens": 3669,
+          "completion_tokens": 272,
+          "total_tokens": 3941
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 800,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-003.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 10.023,
+        "usage": {
+          "prompt_tokens": 1441,
+          "completion_tokens": 104,
+          "total_tokens": 1545
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 288,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-004.json",
+        "task": "verify_support",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 6.934,
+        "usage": {
+          "prompt_tokens": 2623,
+          "completion_tokens": 158,
+          "total_tokens": 2781
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 439,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-005.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 8.177,
+        "usage": {
+          "prompt_tokens": 1456,
+          "completion_tokens": 133,
+          "total_tokens": 1589
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 405,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-006.json",
+        "task": "verify_support",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": "poolside/laguna-s-2.1:free",
+        "http_status": 200,
+        "error_type": null,
+        "seconds": 6.005,
+        "usage": {
+          "prompt_tokens": 2727,
+          "completion_tokens": 175,
+          "total_tokens": 2902
+        },
+        "choices": [
+          {
+            "finish": "stop",
+            "answer_chars": 526,
+            "reasoning_present": false
+          }
+        ]
+      },
+      {
+        "capture": "http-007.json",
+        "task": "write",
+        "requested_model": "poolside/laguna-s-2.1:free",
+        "effective_model": null,
+        "http_status": null,
+        "error_type": "HTTPError",
+        "seconds": 0.62,
+        "usage": {},
+        "choices": []
+      }
+    ]
+  },
+  "limit": "Different cases/code/payloads; not repeated identical requests until success. Reasoning was neither displayed nor used as an answer."
+}
