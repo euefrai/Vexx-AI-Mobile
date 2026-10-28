@@ -232,6 +232,13 @@ def test_two_sessions_share_account_access_over_real_relay(db, monkeypatch):
     monkeypatch.setenv('JULIA_ENV','development')
     monkeypatch.setattr(server,'revogados',{'sids':set(),'ts':0,'suportado':True,'falhas':0})
     monkeypatch.setattr(access,'confirm_locally',lambda *a: True)
+    actual_status = access.status
+    def windows_agent_status(*args, **kwargs):
+        # This integration simulates native capture/consent, including their
+        # Windows host capabilities. Never change sys.platform for asyncio/CI.
+        return {**actual_status(*args, **kwargs), 'platform':'Windows',
+                'supported':True, 'capture_ready':True}
+    monkeypatch.setattr(access,'status',windows_agent_status)
     monkeypatch.setattr(remoto,'capturar',lambda *a:{'imagem':'simulated','largura':960,'altura':540,'ms':1})
     commands=[]
     monkeypatch.setattr(remoto,'executar',lambda cmd,**kw: commands.append(cmd) or {'ok':True,'kind':cmd['kind']})
