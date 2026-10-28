@@ -35,6 +35,7 @@ import learning
 import remoto
 import remote_access
 import research
+import query_intelligence
 import research_agents
 import shopping
 import live_data
@@ -1430,7 +1431,7 @@ def listar_conversas(db, limite: int = 100, owner=DONO_PADRAO) -> list:
 
 
 # ── Pesquisa web opcional (stdlib, sem dependências) ─────────────────
-TERMOS_PESQUISA = ("pesquise", "pesquisar", "busque", "buscar", "google",
+TERMOS_PESQUISA = ("pesquise", "pesquisar", "pesquisa por", "pesquisa sobre", "pesquisa profunda", "busque", "buscar", "google",
                    "últimas notícias", "ultimas noticias", "notícia", "noticia",
                    "fontes", "referências", "referencias", "atualizado", "hoje",
                    "preço", "preco", "clima", "placar", "resultado",
@@ -2086,7 +2087,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                     partes_sistema.append(research.bloco_falha(hoje, "sem_correspondencia"))
             elif not extras.get("research_cmd") and intencao_pesquisa_aprofundada(texto_usuario):
                 run = research.pesquisa_aprofundada(db, owner, consulta, conversation_id)
-                extras['midia'] = run.get('midia') or [] if re.search(r'\b(imagens?|fotos?|v[ií]deos?|pdf|documentos?)\b',texto_usuario,re.I) else []
+                extras['midia'] = run.get('midia') or [] if query_intelligence.requested_media(texto_usuario, documents=True) else []
                 fontes = research.fontes_relevantes(
                     consulta, run.get("fontes", []), run)
                 extras["fontes"] = fontes
@@ -2103,7 +2104,7 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                     partes_sistema.append(research.bloco_falha(hoje, estado))
             elif not extras.get("research_cmd"):
                 rap = research.pesquisa_rapida(db, owner, consulta)
-                extras['midia'] = rap.get('midia') or [] if re.search(r'\b(imagens?|fotos?|v[ií]deos?|pdf|documentos?)\b',texto_usuario,re.I) else []
+                extras['midia'] = rap.get('midia') or [] if query_intelligence.requested_media(texto_usuario, documents=True) else []
                 fontes = research.fontes_relevantes(
                     consulta, rap.get("fontes", []), rap)
                 extras["fontes"] = fontes
@@ -2190,10 +2191,10 @@ def anexar_fontes(texto: str, fontes: list, termo_img: str = "", midia: list = N
             # texto — ela sobe para a primeira linha, sem duplicar.
             resto = (texto[:m.start()] + texto[m.end():]).strip()
             texto = m.group(0) + (("\n\n" + resto) if resto else "")
-    if fontes and not _ja_tem_fontes_markdown(texto):
+    if fontes and (pesquisa_executada or not _ja_tem_fontes_markdown(texto)):
         import research_view
         contextual=research_view.contextual_fence(fontes)
-        if contextual and '"component": "sources"' not in texto:
+        if contextual and (pesquisa_executada or '"component": "sources"' not in texto):
             return texto+contextual
         linhas = "\n".join(
             f"- [{f.get('id', '') + ' ' if f.get('id') else ''}{f['titulo']}]({f['url']})"
@@ -3379,7 +3380,7 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
         return "Já há outra pesquisa em andamento; conclua ou cancele antes. 🔍"
     m = _JOB_START_RE.search(texto or "")
     visual = bool(re.search(r'\b(pesquis\w*|mostr\w*|encontr\w*)\b', t)
-                  and re.search(r'\b(imagens|fotos|v[ií]deos)\b', t)
+                  and query_intelligence.requested_media(t)
                   and not re.search(r'\b(gerar|criar|desenhar|analise|analisar)\b', t))
     official_docs = bool(re.search(r'\bpesquis\w*\b', t)
                          and re.search(r'\bdocumenta[cç][aã]o\s+oficial\b', t))

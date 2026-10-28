@@ -33,6 +33,7 @@
       const path = p.pathname || '';
       if (path === '' || path === '/') return '';
       if (/\/(busca|buscar|search|pesquisa|pesquisar|categoria|category|resultados?|lists?|lista|listas|listagem)(\/|$|s)/i.test(path)) return '';
+      if (/\/(?:placas-de-videos?|graphics-cards|video-cards|gpus)\/?$/i.test(path)) return '';
       return ok;
     } catch (_) { return ''; }
   }

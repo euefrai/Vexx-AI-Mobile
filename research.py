@@ -694,6 +694,7 @@ def consulta_de_pesquisa(texto: str) -> str:
     t = re.sub(r"\s+", " ", (texto or "").strip())
     if not t:
         return ""
+    t = re.sub(r"^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda\s+)?(?:(?:por|sobre|acerca de)\s+)?", "", t, flags=re.I)
     limpa = _RX_PEDIDO_PESQUISA.sub(" ", t)
     limpa = re.sub(r"\s+", " ", limpa).strip(" .,;:!?-\u2013\u2014")
     limpa = re.sub(r"^(?:sobre|e|ou|de|da|do|das|dos|a|o|as|os)\s+", "",

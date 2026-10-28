@@ -47,6 +47,9 @@ def request(text):
             return {'kind': 'currency', 'text': text}
     except ValueError:
         return None
+    import steam_offers
+    if steam_offers.requested(text):
+        return {'kind':'steam_offers','text':text}
     weather = re.search(r'\b(clima|previsao do tempo|meteorologia|temperatura|vai chover|esta chovendo|ta chovendo|chove agora)\b', t)
     weather = weather or re.search(r'\b(como (esta|ta) o tempo|tempo (agora|hoje|amanha|em))\b', t)
     weather = weather or re.search(r'\bprevisao (?:para )?(hoje|amanha|esta semana|os proximos)\b', t)
@@ -621,6 +624,9 @@ def respond(text,context):
     if not req:return None
     try:
         if req['kind']=='greeting':return 'Oi! Tudo bem? Como posso ajudar?'
+        if req['kind']=='steam_offers':
+            import steam_offers
+            return steam_offers.response(lambda base,params:cached(('steam-featured','BR'),60,lambda:get_json(base,params)))
         result={'weather':weather,'clock':clock,'news':news,'currency':currency,'location':location}[req['kind']](text,context,datetime.now(UTC))
         for phrase,status in [('mais de uma localização','ambiguous'),('fora da janela atual','stale'),('Não consegui confirmar a localização','unconfirmed')]:
             if result and phrase in result:return card(result,'Não foi possível concluir',{'ambiguous':'Qual localidade?','stale':'Dado desatualizado','unconfirmed':'Local não confirmado'}[status],badge=status)

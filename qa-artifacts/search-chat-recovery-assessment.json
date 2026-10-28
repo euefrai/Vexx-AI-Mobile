@@ -1,0 +1,69 @@
+{
+  "scope": "LIVE_PUBLIC_RETRIEVAL_ISOLATED_SQLITE_NOT_AUTHENTICATED_PRODUCTION",
+  "live_chat": [
+    {
+      "query": "pesquisa por Minecraft",
+      "seconds": 16.22,
+      "components": [
+        "sources"
+      ],
+      "replay_equal": true,
+      "jdui_errors": [],
+      "error": null
+    },
+    {
+      "query": "pesquisa por jogos em promoção na steam",
+      "seconds": 0.27,
+      "components": [
+        "productgrid"
+      ],
+      "replay_equal": true,
+      "jdui_errors": [],
+      "error": null
+    }
+  ],
+  "minecraft_synthesis": "Model attempted an unavailable textual tool call; existing guard used deterministic retrieved-source digest. No complete synthesis claim.",
+  "steam_scope": "Public BRL featured offers; six items; pages not individually opened; not exhaustive inventory.",
+  "gpu": {
+    "query": "pesquisa por algumas placas de videos que tem 6 de vram",
+    "seconds": 12.59,
+    "products": 0,
+    "product_references": 0,
+    "criteria": {
+      "categoria": "placa de video",
+      "orcamento": {},
+      "marcas": [],
+      "specs": {
+        "vram_gb": 6
+      },
+      "comparacao": false,
+      "texto": "pesquisa por algumas placas de videos que tem 6 de vram"
+    },
+    "diagnostics": [
+      "PRODUCT_PAGE_UNAVAILABLE",
+      "PROVIDER_BLOCKED",
+      "SEARCH_IRRELEVANT",
+      "STRUCTURED_DATA_MISSING"
+    ],
+    "reason": "no_confirmed_offers"
+  },
+  "restart": {
+    "revision": "265844c",
+    "old_pid": 12164,
+    "new_pid": 31528,
+    "state": "RUNNING",
+    "relay_connection_log": true,
+    "messages_before": 307,
+    "messages_after": 307,
+    "integrity": "ok",
+    "scope": "Published version restarted before later local source edits; new fixes not running in production."
+  },
+  "tests": {
+    "passed": 1936,
+    "skipped": 4,
+    "warnings": 2,
+    "seconds": 169.47,
+    "exit": 0,
+    "node_real_jdui_validation": "passed"
+  }
+}

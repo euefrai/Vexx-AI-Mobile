@@ -293,6 +293,14 @@ def url_de_listagem(url: str) -> bool:
     return caminho in ("", "/") or bool(_RX_URL_BUSCA_RAIZ.search(caminho))
 
 
+def url_de_catalogo_produtos(url: str) -> bool:
+    """Product destinations only; catalog sources remain valid research links."""
+    if url_de_listagem(url): return True
+    try: path = urllib.parse.urlsplit(url or '').path
+    except ValueError: return False
+    return bool(re.search(r'/(?:placas-de-videos?|graphics-cards|video-cards|gpus)/?$', path, re.I))
+
+
 # ── Imagens: formato real e dimensões (sem PIL) ────────────────────
 def _formato_imagem(raw: bytes, ctype: str = "") -> str:
     if raw[:8] == b"\x89PNG\r\n\x1a\n":

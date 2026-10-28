@@ -42,6 +42,14 @@ def normalized(text):
                    if not unicodedata.combining(c))
 
 
+def requested_media(text, *, documents=False):
+    """Media requested as output; hardware names do not request a gallery."""
+    value = normalized(text)
+    value = re.sub(r'\bplacas?\s+de\s+videos?\b', 'gpu', value)
+    return bool(re.search(r'\b(imagens?|fotos?|videos?)\b', value)
+                or (documents and re.search(r'\b(pdf|documentos?)\b', value)))
+
+
 _NUMBERS = {'um': 1, 'uma': 1, 'dois': 2, 'duas': 2, 'sete': 7,
             'quinze': 15, 'trinta': 30}
 _CURRENCIES = {'USD': r'dolares?|dolar|usd', 'BRL': r'reais|real|brl',
@@ -265,7 +273,7 @@ def topic_profile(text):
     if tail:
         presentation.append(tail[0].strip())
         value = value[:tail.start()]
-    value = re.sub(r'^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda\s+)?(?:sobre\s+)?', '', value, flags=re.I)
+    value = re.sub(r'^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda\s+)?(?:(?:sobre|por|acerca de)\s+)?', '', value, flags=re.I)
     value = re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure)\s+(?:profundamente\s+|a fundo\s+)?', '', value, flags=re.I)
     value = re.sub(r'^(?:as?\s+)?(?:[uú]ltimas?\s+)?(?:novidades|informa[cç][oõ]es recentes)\s+sobre\s+', '', value, flags=re.I)
     value = re.sub(r'^(?:a|as|o|os)\s+(?=hist[oó]ria|documenta[cç][aã]o|especifica[cç][oõ]es|relat[oó]rio)', '', value, flags=re.I)

@@ -170,6 +170,7 @@ _RX_EXPLICATIVO_PRODUTO = re.compile(
 def detectar_intencao(texto: str) -> bool:
     """True se o usuário pede pesquisa/compra/comparação de produtos."""
     t = _sem_acentos(texto or "")
+    t = re.sub(r"\bplacas?\s+de\s+videos?\b", "placa de video", t)
     tem_verbo_forte = any(v in t for v in (
         "pesquis", "busc", "encontr", "procur", "recomend", "compar",
         "comprar", "compra", "oferta", "preco", "promocao", "mais barato",
@@ -404,9 +405,22 @@ def _modelo_mencionado(specs: dict, produto_txt: str) -> bool:
     return True
 
 
+def _vram_gb(text):
+    value = _sem_acentos(text or '')
+    explicit = re.search(r'\b(\d{1,2})\s*(?:gb\s*)?(?:de\s+)?vram\b|\bvram\s*[:=]?\s*(\d{1,2})\s*gb\b', value)
+    if explicit: return int(explicit[1] or explicit[2])
+    if re.search(r'\b(?:placas? de videos?|gpu|geforce|radeon|rtx|gtx)\b', value) and not re.search(r'\b(?:notebook|laptop|computador|pc gamer)\b', value):
+        capacities = {int(m[1]) for m in re.finditer(r'\b(\d{1,2})\s*gb\b', value)}
+        if len(capacities) == 1: return capacities.pop()
+    return None
+
+
 def _extrair_specs(texto: str) -> dict:
     t = (texto or "").lower()
     specs = {}
+    vram = _vram_gb(texto)
+    if vram is not None:
+        specs["vram_gb"] = vram
     for field,pattern in (('capacidade_l',r'\b(\d{2,4})\s*(?:litros?|l)\b'),('tensao_v',r'\b(110|127|220)\s*(?:v|volts?)\b')):
         match=re.search(pattern,t)
         if match: specs[field]=int(match[1])
@@ -457,7 +471,8 @@ def _extrair_specs(texto: str) -> dict:
 def extrair_criterios(texto: str) -> dict:
     """Categoria, orçamento, marcas e specs obrigatórias do pedido."""
     t = _sem_acentos(texto or "")
-    marcas = [m for m in _MARCAS if m in t]
+    t = re.sub(r"\bplacas?\s+de\s+videos?\b", "placa de video", t)
+    marcas = [m for m in _MARCAS if _marca_no_texto(m, t)]
     categoria = ""
     for c in sorted(CATEGORIAS, key=len, reverse=True):
         if c in t and c not in marcas:
@@ -491,7 +506,7 @@ def extrair_criterios(texto: str) -> dict:
 
 # Specs que o usuário DECLAROU (viram exclusão dura em `aplicar_filtros`);
 # o restante (flags aspiracionais como "gamer") é atributo desejável.
-_SPECS_DURAS = ("ram_fisica_gb", "armazenamento_gb", "tela_pol", "bateria_mah",
+_SPECS_DURAS = ("vram_gb", "ram_fisica_gb", "armazenamento_gb", "tela_pol", "bateria_mah",
                 "flag_novo", "tiers", "modelos", "familias", "armazenamento_exato", "capacidade_l", "tensao_v")
 
 
@@ -842,7 +857,7 @@ def url_exibivel(url: str) -> bool:
         return False
     if not partes.netloc or partes.username or partes.password:
         return False
-    return not source_check.url_de_listagem(u)
+    return not source_check.url_de_catalogo_produtos(u)
 
 
 def _url_chave(url: str) -> str:
@@ -1057,6 +1072,7 @@ def _categoria_comercial(value: str) -> str:
     families = (
         ('celular', r'celular|smartphone|iphone'),
         ('notebook', r'notebook|laptop|ultrabook|macbook'),
+        ('gpu', r'placas? de videos?|gpu|geforce|radeon|rtx|gtx'),
         ('fone', r'fone|fones|headphone|headset|earbuds|airpods'),
         ('tv', r'smart tv|televisor|tv'), ('monitor', r'monitor'),
         ('geladeira', r'geladeira|refrigerador'),
@@ -1148,6 +1164,13 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
                     motivos.append("marca não confirmada no anúncio "
                                    f"(pedido: {', '.join(marcas_pedido)})")
                     codigos.append("marca_nao_confirmada")
+        if specs.get("vram_gb") is not None:
+            vram = _vram_gb(product_text)
+            if vram is None:
+                pendencias.append("VRAM não informada")
+            elif vram != specs["vram_gb"]:
+                motivos.append("VRAM diferente do pedido")
+                codigos.append("vram_diferente")
         if specs.get("ram_fisica_gb"):
             ram = _ram_do_produto(p)
             if ram is None:
@@ -1631,7 +1654,7 @@ def classificar_candidato(item: dict) -> str:
         return "GENERIC_INDEX"
     if _RX_REF_URL_PRODUTO.search(caminho):
         return "PRODUCT_CANDIDATE"
-    if _RX_REF_HOST_LISTA.match(host) or source_check.url_de_listagem(url) \
+    if _RX_REF_HOST_LISTA.match(host) or source_check.url_de_catalogo_produtos(url) \
             or _RX_CAND_HOST_LOJA.match(host) \
             or host in _HOSTS_COMERCIO_CONHECIDOS:
         return "COMMERCIAL_LISTING"
@@ -1885,11 +1908,19 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
     specs = criterios.get("specs", {}) or {}
     orc = criterios.get("orcamento", {}) or {}
     detalhe = ""
+    if specs.get("vram_gb") is not None:
+        detalhe += f" {specs['vram_gb']}GB VRAM"
     if specs.get("ram_fisica_gb"):
         detalhe += f" {specs['ram_fisica_gb']}GB RAM"
     if specs.get("armazenamento_gb"):
         detalhe += f" {specs['armazenamento_gb']}GB"
-    ref = _termo_referencia(texto)
+    search_text = re.sub(r"\bplacas?\s+de\s+v[ií]deos?\b", "GPU", texto or "", flags=re.I)
+    if specs.get("vram_gb") is not None:
+        search_text = re.sub(r"\b\d{1,2}\s*(?:gb\s*)?(?:de\s+)?vram\b", f"{specs['vram_gb']}GB VRAM", search_text, flags=re.I)
+    ref = _termo_referencia(search_text)
+    if criterios.get("categoria") in ("placa de video", "placa de vídeo"):
+        ref = re.sub(r"^(?:algumas?|alguns?|umas?|uns?)\s+", "", ref, flags=re.I)
+        ref = re.sub(r"\bque\s+(?:tem|tenham|tenha)\s+(?=\d)", "", ref, flags=re.I)
     if ref and orc.get("max"):
         ref = re.sub(r"\b(?:at[eé]|abaixo\s+de|menos\s+de|no\s+m[aá]ximo)"
                      r"\s*R?\$?\s*[\d.,]+", " ", ref, flags=re.IGNORECASE)
@@ -2008,7 +2039,7 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
             ext["origem_preco"] = "jsonld"
             url_item = ext.get("url_produto") or ""
             if listagem:
-                if not url_item or source_check.url_de_listagem(url_item):
+                if not url_item or source_check.url_de_catalogo_produtos(url_item):
                     continue  # listagem sem link próprio do item → fonte
                 val = {"veredito": "nao_verificado", "codigo": "item_de_listagem",
                        "motivo": "item extraído de listagem; página do item não aberta"}
@@ -2089,7 +2120,7 @@ def _item_para_confirmar(p: dict) -> bool:
     url = _limpa(p.get("url_item"), 500)
     if not url.lower().startswith(("http://", "https://")):
         return False
-    return not source_check.url_de_listagem(url)
+    return not source_check.url_de_catalogo_produtos(url)
 
 
 def _nome_chave(nome: str) -> str:
@@ -2272,7 +2303,7 @@ def _ref_de_busca(cand: dict, motivo: dict, consulta: str,
     caminho = partes.path or ""
     if not host or not caminho.strip("/"):
         return None
-    if source_check.url_de_listagem(url) or _RX_REF_HOST_LISTA.match(host) \
+    if source_check.url_de_catalogo_produtos(url) or _RX_REF_HOST_LISTA.match(host) \
             or _RX_REF_NAO_PRODUTO.search(caminho):
         return None
     segmentos = [s for s in caminho.split("/") if s]
@@ -2351,7 +2382,7 @@ def _prioridade_descarga(a: dict) -> int:
         caminho = partes.path or ""
         if not host or not caminho.strip("/"):
             return 1
-        if source_check.url_de_listagem(url) or _RX_REF_HOST_LISTA.match(host) \
+        if source_check.url_de_catalogo_produtos(url) or _RX_REF_HOST_LISTA.match(host) \
                 or _RX_REF_NAO_PRODUTO.search(caminho):
             return 1
         if _RX_REF_URL_PRODUTO.search(caminho):
@@ -2591,7 +2622,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         url_fonte = a.get("url", "")[:500]
         if not url_fonte or url_fonte in fontes_vistas:
             continue
-        if source_check.url_de_listagem(url_fonte):
+        if source_check.url_de_catalogo_produtos(url_fonte):
             continue  # home/busca/categoria não é fonte da página do item
         fontes_vistas.add(url_fonte)
         fontes.append({"id": f"S{len(fontes) + 1}",
@@ -2964,7 +2995,7 @@ def _sources_de(fontes: list) -> list:
     out = []
     for i, f in enumerate(fontes or []):
         url = (f.get("url", "") or "")[:500]
-        if not url or source_check.url_de_listagem(url):
+        if not url or source_check.url_de_catalogo_produtos(url):
             continue  # fonte não pode ser apresentada como página de produto
         fid = f.get("id") or f"S{i + 1}"
         out.append({"id": str(fid)[:100], "title": (f.get("titulo", "") or "")[:160],
@@ -3177,7 +3208,7 @@ def _sanitizar_link(m, chaves: set) -> str:
         rotulo, url = m.group(2), m.group(3)
         if _url_na_allowlist(url, chaves):
             return m.group(0)
-        if source_check.url_de_listagem(url):
+        if source_check.url_de_catalogo_produtos(url):
             return f"{rotulo} ({_LABEL_LINK_LISTA})"
         return f"{rotulo} ({_LABEL_LINK_NAO_VERIFICADO})"
     url = m.group(4)
@@ -3190,7 +3221,7 @@ def _sanitizar_link(m, chaves: set) -> str:
     if _url_na_allowlist(limpo, chaves):
         return m.group(0)
     rotulo = _rotulo_url_curto(limpo)
-    if source_check.url_de_listagem(limpo):
+    if source_check.url_de_catalogo_produtos(limpo):
         return f"{rotulo} ({_LABEL_LINK_LISTA}){sufixo}"
     return f"{rotulo} ({_LABEL_LINK_NAO_VERIFICADO}){sufixo}"
 
