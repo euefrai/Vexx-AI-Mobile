@@ -19,7 +19,9 @@
     const mobile = isMobile(navigator);
     let state = null, connected = false, screenBusy = false, statusBusy = false;
     let commandBusy = false, version = 0, identity = '', lastStatus = 0;
-    let screenAbort, statusAbort, gesture = null, longTimer, lastMove = 0;
+    let screenAbort, statusAbort, gesture = null, longTimer;
+    let trackpad = false, pointer = {x:.5,y:.5}, pointerAt = -Infinity, pointerVisible = false;
+    let frameSize = {width:1920,height:1080}, layoutTick;
     let imageURL, legacyFrames = false, legacyBatch = false;
     let scrollTimer, scrollX=0, scrollY=0, composing=false;
     let screenTimer, frameLatency = 450, screenFailures = 0, tapTimer, pendingTap;
@@ -28,6 +30,7 @@
     let inputBusy = false, inputAbort, inputTimer, lastInputAt = 0, inputBlockedUntil=0;
     const inputQueue = [];
     const frame = $('remoteFrame'), image = $('screenImg');
+    const viewer = $('remoteViewer');
     const pageActive = () => !$('page-desktop').hidden && !document.hidden;
     const online = () => ctx.authenticated() && ctx.online() && navigator.onLine;
     const valid = (v, id) => v === version && id === ctx.identity() && online() && pageActive();
@@ -41,11 +44,13 @@
       inputAbort?.abort(); clearTimeout(inputTimer);
       for (const item of inputQueue.splice(0)) item.resolve.forEach(done => done(false));
       $('remoteKeys').value = ''; $('remoteKeys').hidden = true; $('remoteKeys').blur(); $('keyboardButton').setAttribute('aria-expanded','false');
+      viewer.classList.remove('keyboard-open');
+      pointerAt = -Infinity; pointerVisible = false;
       image.removeAttribute('src');
       gesture = null;
       clearTimeout(longTimer);
       $('remotePointer').style.display = 'none';
-      if (document.fullscreenElement === frame) document.exitFullscreen().catch(() => {});
+      if ([frame,viewer].includes(document.fullscreenElement)) document.exitFullscreen().catch(() => {});
     }
     function render(message) {
       $('pcSetup').hidden = mobile;
@@ -65,7 +70,7 @@
       $('remoteConnect').disabled = commandBusy || !online() || !state?.view_allowed || !state?.capture_ready || state?.confirmation_open;
       $('remoteRevoke').hidden = !(state?.approved || state?.view_allowed || state?.pending);
       $('remoteRevoke').disabled = commandBusy || !online();
-      for (const id of ['keyboardButton', 'remoteEnter', 'remoteBackspace', 'remoteScrollUp', 'remoteScrollDown', 'remoteTab', 'remoteEscape', 'remoteDelete', 'remoteKeys']) {
+      for (const id of ['keyboardButton', 'remoteEnter', 'remoteBackspace', 'remoteScrollUp', 'remoteScrollDown', 'remoteTab', 'remoteEscape', 'remoteDelete', 'remoteLeft', 'remoteRight', 'remoteKeys']) {
         $(id).disabled = !connected || !state?.control_allowed || state?.confirmation_open;
       }
       $('remoteAccessStatus').textContent = message || (!online()
@@ -128,8 +133,10 @@
       let nextURL, retryDelay=0, timedOut=false;
       const deadline=setTimeout(()=>{timedOut=true;abort.abort();},10000);
       try {
-        const width = frameLatency > 900 ? 960 : frameLatency > 220 ? 1280 : 1920;
-        const quality = frameLatency > 900 ? 62 : frameLatency > 220 ? 72 : 78;
+        const profile = $('remoteQuality').value || 'auto';
+        const slow = frameLatency > 900;
+        const width = slow || profile === 'fast' ? 960 : profile === 'sharp' || frameLatency <= 220 ? 1920 : 1280;
+        const quality = slow ? 62 : profile === 'fast' ? 65 : profile === 'sharp' ? 85 : frameLatency > 220 ? 72 : 78;
         const options = {headers:ctx.headers(),signal:abort.signal};
         let r;
         if (ctx.frame && !legacyFrames) {
@@ -148,20 +155,21 @@
         frameLatency = frameLatency * .7 + (performance.now() - started) * .3;
         screenFailures = 0;
         frame.style.aspectRatio = r.largura + ' / ' + r.altura;
+        frameSize = {width:r.largura,height:r.altura};
         const cursor = r.cursor, marker = $('remotePointer');
-        const rect = frame.getBoundingClientRect();
         if (cursor && Number.isFinite(cursor.x) && Number.isFinite(cursor.y)
             && cursor.x >= 0 && cursor.x <= 1 && cursor.y >= 0 && cursor.y <= 1
-            && r.largura > 0 && r.altura > 0 && rect.width > 0 && rect.height > 0) {
-          const scale = Math.min(rect.width / r.largura, rect.height / r.altura);
-          const w = r.largura * scale, h = r.altura * scale;
-          marker.style.left = ((rect.width - w) / 2 + cursor.x * w) / rect.width * 100 + '%';
-          marker.style.top = ((rect.height - h) / 2 + cursor.y * h) / rect.height * 100 + '%';
-          marker.style.display = 'block';
-        } else marker.style.display = 'none';
+            && r.largura > 0 && r.altura > 0) {
+          // A frame requested before an input must not pull the local cursor backwards.
+          if (!inputBusy && !inputQueue.length && started > pointerAt) pointer = cursor;
+          pointerVisible = true;
+          paintPointer();
+        } else {pointerVisible=false;marker.style.display = 'none';}
         if (state) state.control_allowed = r.remote_enabled === true;
         $('screenLabel').textContent = 'CONECTADO';
-        $('screenNote').textContent = r.remote_enabled ? 'Toque para clicar; dois toques para abrir. Arraste para selecionar ou mover. Dois dedos para rolar; segure para o botão direito.' : 'Somente visualização. Permita o controle no computador.';
+        $('screenNote').textContent = r.remote_enabled ? (trackpad
+          ? 'Deslize para mover o cursor. Toque para clicar; dois dedos para rolar. Segure para o botão direito.'
+          : 'Toque para clicar; dois toques para abrir. Arraste para selecionar ou mover. Dois dedos para rolar; segure para o botão direito.') : 'Somente visualização. Permita o controle no computador.';
         render();
       } catch (err) {
         if ((err.name !== 'AbortError' || timedOut) && valid(v, id)) {
@@ -182,12 +190,37 @@
         if (screenAbort === abort) {
           screenBusy = false;
           if (valid(v, id) && connected) {
-            const delay = retryDelay || (screenFailures ? 1000 * screenFailures : Math.max(16, 125 - (performance.now() - started)));
+            const delay = retryDelay || (screenFailures ? 1000 * screenFailures : Math.max(4, 100 - (performance.now() - started)));
             screenTimer = setTimeout(pullScreen, delay);
           }
         }
       }
     }
+    function paintPointer() {
+      const rect = frame.getBoundingClientRect(), marker = $('remotePointer');
+      if(!pointerVisible) {marker.style.display='none';return;}
+      if (!rect.width || !rect.height || !frameSize.width || !frameSize.height) return;
+      const scale = Math.min(rect.width/frameSize.width,rect.height/frameSize.height);
+      const w=frameSize.width*scale, h=frameSize.height*scale;
+      marker.style.left=((rect.width-w)/2+pointer.x*w)/rect.width*100+'%';
+      marker.style.top=((rect.height-h)/2+pointer.y*h)/rect.height*100+'%';
+      marker.style.display='block';
+    }
+    function keyboardLayout() {
+      const viewport=window.visualViewport;
+      viewer.style.setProperty('--remote-visible-height',(viewport?.height || window.innerHeight)+'px');
+      viewer.style.setProperty('--remote-visible-top',(viewport?.offsetTop || 0)+'px');
+      viewer.style.setProperty('--remote-visible-left',(viewport?.offsetLeft || 0)+'px');
+      viewer.style.setProperty('--remote-visible-width',(viewport?.width || window.innerWidth)+'px');
+      if(connected)paintPointer();
+    }
+    function scheduleLayout() {
+      cancelAnimationFrame(layoutTick); layoutTick=requestAnimationFrame(keyboardLayout);
+    }
+    window.visualViewport?.addEventListener('resize',scheduleLayout);
+    window.visualViewport?.addEventListener('scroll',scheduleLayout);
+    window.addEventListener('resize',scheduleLayout);
+    document.addEventListener('fullscreenchange',scheduleLayout);
     function send(cmd) {
       if (!connected || !online() || !pageActive() || !state?.control_allowed || state.confirmation_open) return Promise.resolve(false);
       return new Promise(resolve => {
@@ -212,7 +245,8 @@
     async function pumpInput() {
       if (inputBusy || !inputQueue.length) return;
       clearTimeout(inputTimer);
-      const wait = Math.max(70-(Date.now()-lastInputAt),inputBlockedUntil-Date.now());
+      const gap=inputQueue[0].cmd.kind==='move' ? 100 : 70;
+      const wait = Math.max(gap-(Date.now()-lastInputAt),inputBlockedUntil-Date.now());
       if (wait > 0) { inputTimer = setTimeout(pumpInput, wait); return; }
       const item = inputQueue.shift();
       if (!valid(item.version, item.identity) || !connected || !state?.control_allowed || state.confirmation_open) {
@@ -279,7 +313,7 @@
         clearTimeout(longTimer); clearTimeout(tapTimer); pendingTap = null;
         gesture = null; scrollPoint = center(); scrollX=0; scrollY=0; return;
       }
-      gesture = { start: p, point: p, points:[p], moved: false, long: false, id: ev.pointerId };
+      gesture = { start: p, point: trackpad ? {...pointer} : p, points:[p], moved: false, long: false, id: ev.pointerId, clientX:ev.clientX,clientY:ev.clientY };
       if (ev.pointerType !== 'mouse') {
         longTimer = setTimeout(() => { if (gesture && !gesture.moved) { gesture.long = true; send({ kind: 'right', ...gesture.point }); } }, 600);
       }
@@ -295,9 +329,22 @@
       }
       if (!gesture || ev.pointerId !== gesture.id || gesture.long) return;
       const p = position(ev); if (!p) return;
+      if(trackpad) {
+        const rect=frame.getBoundingClientRect();
+        const scale=Math.min(rect.width/frameSize.width,rect.height/frameSize.height);
+        const dx=ev.clientX-gesture.clientX,dy=ev.clientY-gesture.clientY;
+        if(!gesture.moved && Math.hypot((p.x-gesture.start.x)*rect.width,(p.y-gesture.start.y)*rect.height)<=4)return;
+        if(!gesture.moved)flushTap();
+        gesture.moved=true;clearTimeout(longTimer);
+        gesture.clientX=ev.clientX;gesture.clientY=ev.clientY;
+        pointer={x:Math.max(0,Math.min(1,pointer.x+dx/(frameSize.width*scale))),y:Math.max(0,Math.min(1,pointer.y+dy/(frameSize.height*scale)))};
+        gesture.point={...pointer};pointerAt=performance.now();pointerVisible=true;paintPointer();
+        send({kind:'move',...pointer});return;
+      }
       gesture.point = p;
       const rect = frame.getBoundingClientRect();
       if (Math.hypot((p.x - gesture.start.x) * rect.width, (p.y - gesture.start.y) * rect.height) > 8) {
+        if(!gesture.moved)flushTap();
         gesture.moved = true; clearTimeout(longTimer);
         if (gesture.points.length >= 31) gesture.points = gesture.points.filter((_,i)=>i%2===0);
         gesture.points.push(p);
@@ -309,8 +356,9 @@
       if (!touches.size) scrollPoint = null;
       if (!gesture || ev.pointerId !== gesture.id) return;
       const g = gesture; gesture = null; clearTimeout(longTimer);
-      const end = position(ev) || g.point;
+      const end = trackpad ? g.point : position(ev) || g.point;
       if (g.long) return;
+      if(trackpad && g.moved)return;
       if (g.moved) { send({kind:'drag',points:[...g.points,end]}); return; }
       if (ev.button === 2) { send({kind:'right',...end}); return; }
       if (pendingTap && Math.hypot(pendingTap.x-end.x,pendingTap.y-end.y)<.04) {
@@ -338,18 +386,34 @@
     $('remotePermit').addEventListener('click', () => action('request'));
     $('remoteRevoke').addEventListener('click', () => action('revoke'));
     $('refreshButton').addEventListener('click', pullScreen);
-    $('touchMode').addEventListener('click', () => ctx.notify('Toque: clique. Dois toques: abrir. Arraste: mover/selecionar ao soltar. Dois dedos: rolar. Segure: botão direito.'));
+    $('touchMode').addEventListener('click', () => {
+      flushTap();cancelGesture();trackpad=!trackpad;
+      $('touchMode').textContent=trackpad ? 'Touchpad' : 'Toque direto';
+      $('touchMode').setAttribute('aria-pressed',String(trackpad));
+      ctx.notify(trackpad ? 'Deslize para mover o cursor; toque para clicar. Dois dedos para rolar.' : 'Toque no ponto desejado. Arraste para selecionar ou mover ao soltar.');
+    });
     $('remoteScrollUp').addEventListener('click', () => send({kind:'scroll', dy:3}));
     $('remoteScrollDown').addEventListener('click', () => send({kind:'scroll', dy:-3}));
     $('remoteEnter').addEventListener('click', () => {flushKeys();send({kind:'key',key:'enter'});});
-    $('remoteBackspace').addEventListener('click', () => send({kind:'key', key:'backspace'}));
+    $('remoteBackspace').addEventListener('click', () => {flushKeys();send({kind:'key', key:'backspace'});});
     const keys = $('remoteKeys');
+    viewer.addEventListener('pointerdown',ev=>{
+      // Keep the soft keyboard open while using remote key buttons or the screen.
+      if(!keys.hidden && ev.target.closest('button') && ev.target.id!=='remoteDisconnect')ev.preventDefault();
+    });
     $('keyboardButton').addEventListener('click', () => {
       keys.hidden=!keys.hidden;
+      viewer.classList.toggle('keyboard-open',!keys.hidden);
+      keyboardLayout();scheduleLayout();
       $('keyboardButton').setAttribute('aria-expanded',String(!keys.hidden));
-      if(!keys.hidden) keys.focus(); else keys.blur();
+      if(!keys.hidden) keys.focus({preventScroll:true}); else {flushKeys();keys.blur();}
     });
+    function flushTap() {
+      clearTimeout(tapTimer);
+      if(pendingTap) {const p=pendingTap;pendingTap=null;send({kind:'click',...p});}
+    }
     function flushKeys() {
+      flushTap();
       if(composing || !keys.value || !connected || !state?.control_allowed)return;
       const chars=Array.from(keys.value);
       const capacity=Math.max(0,24-inputQueue.length)*200;
@@ -363,6 +427,7 @@
     keys.addEventListener('beforeinput',ev=>{
       if(composing || ev.isComposing)return;
       if(!keys.value && ['deleteContentBackward','deleteContentForward'].includes(ev.inputType)) {
+        flushTap();
         ev.preventDefault();send({kind:'key',key:ev.inputType==='deleteContentBackward' ? 'backspace':'delete'});
       }
     });
@@ -371,16 +436,17 @@
       const named={Enter:'enter',Tab:'tab',Escape:'esc',ArrowLeft:'left',ArrowRight:'right',ArrowUp:'up',ArrowDown:'down'};
       if(named[ev.key]) {ev.preventDefault();flushKeys();send({kind:'key',key:named[ev.key]});}
       else if((ev.key==='Backspace' || ev.key==='Delete') && !keys.value) {
+        flushTap();
         ev.preventDefault();send({kind:'key',key:ev.key==='Backspace' ? 'backspace':'delete'});
       }
     });
-    for(const [id,key] of [['remoteTab','tab'],['remoteEscape','esc'],['remoteDelete','delete']]) {
+    for(const [id,key] of [['remoteTab','tab'],['remoteEscape','esc'],['remoteDelete','delete'],['remoteLeft','left'],['remoteRight','right']]) {
       $(id).addEventListener('click',()=>{flushKeys();send({kind:'key',key});});
     }
     $('fullscreen').addEventListener('click', async () => {
       try {
         if (document.fullscreenElement) await document.exitFullscreen();
-        else if (frame.requestFullscreen) await frame.requestFullscreen();
+        else if (viewer.requestFullscreen) await viewer.requestFullscreen();
         else ctx.notify('Tela cheia indisponível neste navegador.');
       } catch (_) { ctx.notify('Tela cheia não autorizada.'); }
     });

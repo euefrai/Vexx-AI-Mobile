@@ -261,7 +261,8 @@
         </div>
 
         <div class="control-actions">
-          <button class="action-pill selected" type="button" id="touchMode"><svg class="icon"><use href="#i-mouse"/></svg> Toque</button>
+          <button class="action-pill" type="button" id="touchMode" aria-pressed="false" title="Alternar entre toque direto e touchpad">Toque direto</button>
+          <select id="remoteQuality" class="action-pill" aria-label="Qualidade da transmissão"><option value="auto">Imagem: automática</option><option value="fast">Mais leve</option><option value="sharp">Mais nítida</option></select>
           <button class="action-pill" type="button" id="keyboardButton" aria-controls="remoteKeys" aria-expanded="false"><svg class="icon"><use href="#i-keyboard"/></svg> Teclado</button>
           <button class="action-pill" type="button" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg> Atualizar</button>
           <button class="action-pill" type="button" id="remoteScrollUp" aria-label="Rolar para cima">↑ Rolar</button>
@@ -269,11 +270,13 @@
           <button class="action-pill" type="button" id="remoteTab">Tab</button>
           <button class="action-pill" type="button" id="remoteEscape">Esc</button>
           <button class="action-pill" type="button" id="remoteDelete">Delete</button>
+          <button class="action-pill" type="button" id="remoteLeft" aria-label="Mover cursor de texto para a esquerda">←</button>
+          <button class="action-pill" type="button" id="remoteRight" aria-label="Mover cursor de texto para a direita">→</button>
           <button class="action-pill" type="button" id="remoteEnter">Enter</button>
           <button class="action-pill" type="button" id="remoteBackspace" aria-label="Apagar caractere">⌫ Apagar</button>
         </div>
 
-        <textarea id="remoteKeys" class="remote-keys" hidden rows="2" maxlength="3200" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="enter" aria-label="Digitar no computador" placeholder="Digite ou cole um texto para enviar ao PC"></textarea>
+        <textarea id="remoteKeys" class="remote-keys" hidden rows="2" maxlength="3200" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="enter" aria-label="Digitar no computador" placeholder="Digite ou cole no PC…"></textarea>
         </div>
 
         <div class="access-card">

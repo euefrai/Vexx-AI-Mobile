@@ -1,0 +1,39 @@
+{
+  "scope": "REAL_CHROME_MOBILE_EMULATION_SYNTHETIC_FRAME_SIMULATED_INPUT_NOT_PHYSICAL_PHONE",
+  "frames": 35,
+  "observed_fps": 9.73,
+  "server_simulated_delay_ms": 40,
+  "checks": [
+    "binary JPEG decoded",
+    "cursor visible",
+    "native touch events produced wheel",
+    "browser text input preserved accents emoji newline",
+    "disconnect removed image",
+    "touchpad sends movement before finger release",
+    "sharp and fast profiles requested",
+    "420px viewport keeps screen and keyboard field visible"
+  ],
+  "keyboard_layout": {
+    "viewer": {
+      "top": 0,
+      "bottom": 420,
+      "width": 390,
+      "height": 420
+    },
+    "frame": {
+      "top": 58,
+      "bottom": 291,
+      "width": 370,
+      "height": 233
+    },
+    "keys": {
+      "top": 366,
+      "bottom": 410,
+      "width": 370,
+      "height": 44
+    },
+    "viewport": 420
+  },
+  "page_errors": [],
+  "production_csp_enforced": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+}
