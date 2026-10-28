@@ -1625,7 +1625,7 @@ async function api(endpoint, options) {
   if (csrf && options.method && options.method !== 'GET') headers['X-CSRF-Token'] = csrf;
   const res = await fetch(endpoint, { method: options.method || 'GET', body: options.body, headers: Object.assign(headers, options.headers || {}), credentials: 'same-origin', cache: 'no-store', signal: options.signal });
   const data = await res.json().catch(() => ({}));
-  if (!res.ok) { const err = new Error(typeof data.detail === 'string' ? data.detail : 'Erro HTTP ' + res.status); err.status = res.status; throw err; }
+  if (!res.ok) { const err = new Error(typeof data.detail === 'string' ? data.detail : 'Erro HTTP ' + res.status); err.status = res.status; err.retryAfter = Number(res.headers.get('Retry-After')) || 0; throw err; }
   return data;
 }
 let currentUid = 'local';
@@ -3322,6 +3322,18 @@ $('learningToggle').addEventListener('change', async e => {
 
 /* ----- Remoto: consentimento no PC, controles no celular ----- */
 const remoteUI = VexxRemote.mount({
+  frame: async (endpoint, options) => {
+    const res = await fetch(endpoint, {...options, credentials:'same-origin', cache:'no-store'});
+    if (!res.ok) {
+      const data = await res.json().catch(()=>({}));
+      const error = new Error(typeof data.detail==='string' ? data.detail : 'Erro HTTP '+res.status);
+      error.status=res.status; error.retryAfter=Number(res.headers.get('Retry-After'))||0; throw error;
+    }
+    const num = name => Number(res.headers.get(name));
+    return {blob:await res.blob(),largura:num('X-Frame-Width'),altura:num('X-Frame-Height'),
+      remote_enabled:res.headers.get('X-Remote-Control')==='1',
+      cursor:res.headers.has('X-Cursor-X') ? {x:num('X-Cursor-X'),y:num('X-Cursor-Y')} : null};
+  },
   api, authenticated: () => authenticated && !PREVIEW_MODE,
   online: () => pcOnline,
   identity: () => authEpoch + ':' + currentUid,

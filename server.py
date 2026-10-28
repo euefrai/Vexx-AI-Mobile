@@ -262,14 +262,20 @@ class RemotePoint(BaseModel):
 
 
 class InputBody(BaseModel):
-    kind: str = Field(pattern=r"^(move|click|double|right|scroll|key|text|drag)$")
+    kind: str = Field(pattern=r"^(move|click|double|right|scroll|wheel|key|text|drag)$")
     x: float | None = Field(default=None, ge=0.0, le=1.0)
     y: float | None = Field(default=None, ge=0.0, le=1.0)
     dx: int = Field(default=0, ge=-10, le=10)
     dy: int = Field(default=0, ge=-10, le=10)
+    delta_x: int = Field(default=0, ge=-1200, le=1200)
+    delta_y: int = Field(default=0, ge=-1200, le=1200)
     key: str = Field(default="", max_length=20)
     text: str = Field(default="", max_length=200)
     points: list[RemotePoint] | None = Field(default=None, min_length=2, max_length=32)
+
+
+class InputBatch(BaseModel):
+    commands: list[InputBody] = Field(min_length=1, max_length=12)
 
 
 # Single Render instance / single paired PC. All values intentionally volatile.
@@ -346,8 +352,8 @@ RATE_RULES = {
               "JULIA_RATE_ADMIN_GLOBAL", 240, 60),
     "admin_quality": ("JULIA_RATE_ADMIN_QUALITY_USER", 5, 60,
                       "JULIA_RATE_ADMIN_QUALITY_GLOBAL", 10, 60),
-    "screen": ("JULIA_RATE_SCREEN_USER", 300, 60,
-               "JULIA_RATE_SCREEN_GLOBAL", 900, 60),
+    "screen": ("JULIA_RATE_SCREEN_USER", 600, 60,
+               "JULIA_RATE_SCREEN_GLOBAL", 1800, 60),
     "remote_request": ("JULIA_RATE_REMOTE_REQUEST_USER", 3, 600,
                        "JULIA_RATE_REMOTE_REQUEST_GLOBAL", 6, 600),
     "remote_status": ("JULIA_RATE_REMOTE_STATUS_USER", 30, 60,
@@ -418,7 +424,7 @@ async def security_headers(request: Request, call_next):
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["X-Frame-Options"] = "DENY"
-    response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+    response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
     if config()["production"]:
         response.headers["Strict-Transport-Security"] = "max-age=31536000"
     response.headers["Cache-Control"] = "no-store" if request.url.path.startswith("/api/") else "no-cache"
@@ -1507,6 +1513,28 @@ async def screen(request: Request, max_w: int = 800, q: int = 55):
             "remote_enabled": result.get("remote_enabled", False)}
 
 
+@app.get("/api/remote/frame")
+async def remote_frame(request: Request, max_w: int = 1280, q: int = 72):
+    # Reuse every HTTP/session/grant gate, returning only the transport as JPEG.
+    result = await screen(request, max_w, q)
+    try:
+        raw = base64.b64decode(result['imagem'], validate=True)
+    except (ValueError, TypeError):
+        raise HTTPException(503, 'Quadro inválido do computador') from None
+    if len(raw) > 4_000_000 or not raw.startswith(b'\xff\xd8'):
+        raise HTTPException(503, 'Quadro inválido do computador')
+    headers = {'Cache-Control':'no-store, private', 'X-Content-Type-Options':'nosniff',
+        'X-Frame-Width':str(result['largura']), 'X-Frame-Height':str(result['altura']),
+        'X-Remote-Control':'1' if result['remote_enabled'] else '0'}
+    cursor = result.get('cursor')
+    if isinstance(cursor, dict):
+        import math
+        x, y = cursor.get('x'), cursor.get('y')
+        if all(type(n) in (int, float) and math.isfinite(n) and 0 <= n <= 1 for n in (x,y)):
+            headers.update({'X-Cursor-X':str(x), 'X-Cursor-Y':str(y)})
+    return Response(raw, media_type='image/jpeg', headers=headers)
+
+
 @app.post("/api/input")
 async def remote_input(request: Request, body: InputBody):
     """Executa mouse/teclado no PC. Exige login + CSRF + grant remoto (além de JULIA_REMOTE=1)."""
@@ -1520,6 +1548,21 @@ async def remote_input(request: Request, body: InputBody):
             raise HTTPException(403, result.get("error", "Sem autorização."))
         raise HTTPException(503, result.get("error", "Comando recusado"))
     return {"ok": True, "kind": result.get("kind", "")}
+
+
+@app.post('/api/input/batch')
+async def remote_input_batch(request: Request, body: InputBatch):
+    require_csrf(request)
+    owner = await revogacao_ok(request)
+    for _ in body.commands: _rate_limit(request, 'input', owner)
+    if sum(len(c.text) for c in body.commands) > 400 or any(c.kind == 'drag' for c in body.commands):
+        raise HTTPException(422, 'Lote excede os limites')
+    result = await relay.exchange({'type':'input','owner':owner,
+        'cmd':{'kind':'batch','commands':[c.model_dump() for c in body.commands]}}, timeout=15)
+    if result.get('type') != 'input_done':
+        raise HTTPException(403 if result.get('codigo') == 'sem_permissao' else 503,
+                            result.get('error', 'Lote não confirmado; não repita automaticamente.'))
+    return {'ok':True,'kind':'batch'}
 
 
 class LearnAttemptIn(BaseModel):

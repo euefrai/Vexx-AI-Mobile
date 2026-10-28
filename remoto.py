@@ -49,14 +49,14 @@ def _limpar_janela():
         _janela.popleft()
 
 
-def checar_ritmo():
+def checar_ritmo(custo=1):
     _limpar_janela()
     agora = time.monotonic()
     if _janela and agora - _janela[-1] < MIN_INTERVALO:
         raise RemotoErro("Comandos rápidos demais.", "ritmo")
-    if len(_janela) >= MAX_POR_MINUTO:
+    if len(_janela) + custo > MAX_POR_MINUTO:
         raise RemotoErro("Limite de comandos por minuto.", "ritmo")
-    _janela.append(agora)
+    _janela.extend([agora] * custo)
 
 
 def _num(v, nome):
@@ -75,6 +75,16 @@ def validar_comando(cmd: dict) -> dict:
     tipo = cmd.get("kind")
     if tipo in ("move", "click", "double", "right"):
         return {"kind": tipo, "x": _num(cmd.get("x"), "x"), "y": _num(cmd.get("y"), "y")}
+    if tipo == "batch":
+        commands = cmd.get('commands')
+        if not isinstance(commands, list) or not 1 <= len(commands) <= 12:
+            raise RemotoErro('Lote inválido.', 'invalido')
+        if any(not isinstance(c, dict) or c.get('kind') in ('batch','drag') for c in commands):
+            raise RemotoErro('Comando inválido no lote.', 'invalido')
+        validated = [validar_comando(c) for c in commands]
+        if sum(len(c.get('text','')) for c in validated) > 400:
+            raise RemotoErro('Texto do lote grande demais.', 'invalido')
+        return {'kind':'batch','commands':validated}
     if tipo == "drag":
         points = cmd.get("points")
         if not isinstance(points, list) or not 2 <= len(points) <= 32:
@@ -83,6 +93,11 @@ def validar_comando(cmd: dict) -> dict:
             raise RemotoErro("Ponto inválido.", "invalido")
         return {"kind": tipo, "points": [{"x": _num(p.get("x"), "x"),
                                          "y": _num(p.get("y"), "y")} for p in points]}
+    if tipo == 'wheel':
+        values = {key:cmd.get(key,0) for key in ('delta_x','delta_y')}
+        if any(type(v) is not int or not -1200 <= v <= 1200 for v in values.values()):
+            raise RemotoErro('Rolagem inválida.', 'invalido')
+        return {'kind':tipo, **values}
     if tipo == "scroll":
         try:
             dx, dy = int(cmd.get("dx", 0)), int(cmd.get("dy", 0))
@@ -149,7 +164,7 @@ def capturar(max_w: int = MAX_W, qualidade: int = QUALIDADE) -> dict:
             img = ImageGrab.grab().convert("RGB")
             tamanho = img.size
         else:
-            img = Image.frombytes("RGB", rgb[0], rgb[1], "raw", "BGRX").convert("RGB")
+            img = Image.frombytes("RGB", rgb[0], rgb[1], "raw", "BGRX")
         img.thumbnail((max_w, max_w * 2))
         buf = io.BytesIO()
         img.save(buf, "JPEG", quality=qualidade)
@@ -193,14 +208,17 @@ def _digitar_unicode(texto: str) -> None:
         _fields_ = [("type", wintypes.DWORD), ("u", UNION)]
 
     try:
-        encoded = texto.encode('utf-16-le')
+        encoded = texto.replace('\r\n','\n').replace('\r','\n').encode('utf-16-le')
     except UnicodeEncodeError:
         raise RemotoErro('Texto Unicode inválido.', 'invalido') from None
     n = []
     for offset in range(0, len(encoded), 2):
         code_unit = int.from_bytes(encoded[offset:offset + 2], 'little')
         for flags in (0x0004, 0x0004 | 0x0002):  # UNICODE down/up
-            ki = KBDINPUT(0, code_unit, flags, 0, None)
+            if code_unit in (10, 9):
+                ki = KBDINPUT(0x0D if code_unit == 10 else 0x09, 0, flags & 0x0002, 0, None)
+            else:
+                ki = KBDINPUT(0, code_unit, flags, 0, None)
             n.append(INPUT(1, UNION(ki=ki)))
     arr = (INPUT * len(n))(*n)
     send_input = ctypes.windll.user32.SendInput
@@ -217,9 +235,18 @@ def executar(valido: dict, *, autorizado: bool = False) -> dict:
                          "desativado")
     if sys.platform != "win32":
         raise RemotoErro("Entrada só no Windows.", "plataforma")
-    checar_ritmo()
+    if valido['kind'] == 'batch': checar_ritmo(len(valido['commands']))
+    else: checar_ritmo()
     import ctypes
     u = ctypes.windll.user32
+    if valido['kind'] == 'batch':
+        for command in valido['commands']:
+            _executar_evento(command, u)
+        return {'ok':True,'kind':'batch','completed':len(valido['commands'])}
+    return _executar_evento(valido, u)
+
+
+def _executar_evento(valido, u):
     tipo = valido["kind"]
     if tipo == "move":
         u.SetCursorPos(*_para_px(valido["x"], valido["y"]))
@@ -244,6 +271,9 @@ def executar(valido: dict, *, autorizado: bool = False) -> dict:
         finally:
             # One bounded command: disconnects cannot leave a mouse button held.
             u.mouse_event(0x0004, 0, 0, 0, 0)
+    elif tipo == 'wheel':
+        if valido['delta_y']: u.mouse_event(0x0800, 0, 0, valido['delta_y'], 0)
+        if valido['delta_x']: u.mouse_event(0x1000, 0, 0, valido['delta_x'], 0)
     elif tipo == "scroll":
         if valido["dy"]:
             u.mouse_event(0x0800, 0, 0, valido["dy"] * 120, 0)

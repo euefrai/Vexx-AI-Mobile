@@ -1,0 +1,15 @@
+{
+  "scope": "REAL_CHROME_MOBILE_EMULATION_SYNTHETIC_FRAME_SIMULATED_INPUT_NOT_PHYSICAL_PHONE",
+  "frames": 18,
+  "observed_fps": 7.66,
+  "server_simulated_delay_ms": 40,
+  "checks": [
+    "binary JPEG decoded",
+    "cursor visible",
+    "native touch events produced wheel",
+    "browser text input preserved accents emoji newline",
+    "disconnect removed image"
+  ],
+  "page_errors": [],
+  "production_csp_enforced": "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
+}

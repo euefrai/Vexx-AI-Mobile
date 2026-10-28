@@ -262,15 +262,18 @@
 
         <div class="control-actions">
           <button class="action-pill selected" type="button" id="touchMode"><svg class="icon"><use href="#i-mouse"/></svg> Toque</button>
-          <button class="action-pill" type="button" id="keyboardButton"><svg class="icon"><use href="#i-keyboard"/></svg> Teclado</button>
+          <button class="action-pill" type="button" id="keyboardButton" aria-controls="remoteKeys" aria-expanded="false"><svg class="icon"><use href="#i-keyboard"/></svg> Teclado</button>
           <button class="action-pill" type="button" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg> Atualizar</button>
           <button class="action-pill" type="button" id="remoteScrollUp" aria-label="Rolar para cima">↑ Rolar</button>
           <button class="action-pill" type="button" id="remoteScrollDown" aria-label="Rolar para baixo">↓ Rolar</button>
+          <button class="action-pill" type="button" id="remoteTab">Tab</button>
+          <button class="action-pill" type="button" id="remoteEscape">Esc</button>
+          <button class="action-pill" type="button" id="remoteDelete">Delete</button>
           <button class="action-pill" type="button" id="remoteEnter">Enter</button>
           <button class="action-pill" type="button" id="remoteBackspace" aria-label="Apagar caractere">⌫ Apagar</button>
         </div>
 
-        <input id="remoteKeys" class="remote-keys" type="text" maxlength="200" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Digitar no computador" placeholder="" />
+        <textarea id="remoteKeys" class="remote-keys" hidden rows="2" maxlength="3200" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="enter" aria-label="Digitar no computador" placeholder="Digite ou cole um texto para enviar ao PC"></textarea>
         </div>
 
         <div class="access-card">

@@ -262,14 +262,17 @@ def launch(module):
         def __getattr__(self, name):
             return getattr(original_threading, name)
     module.threading = ManagedThreading()
-    pool = getattr(module, "_SINT_POOL", None)
-    original_submit = pool.submit if pool else None
-    if pool:
-        def submit(*args, **kwargs):
+    original_pools = []
+    for pool_name in ("_SINT_POOL", "_SCREEN_POOL"):
+        pool = getattr(module, pool_name, None)
+        if pool is None: continue
+        original_submit = pool.submit
+        original_pools.append((pool, original_submit))
+        def submit(*args, _original_submit=original_submit, **kwargs):
             with runtime.guard:
                 runtime.active += 1
             try:
-                future = original_submit(*args, **kwargs)
+                future = _original_submit(*args, **kwargs)
             except BaseException:
                 with runtime.guard:
                     runtime.active -= 1
@@ -353,8 +356,8 @@ def launch(module):
         module.connect = original_connect
         module.threading = original_threading
         module.time = original_time
-        if pool:
-            pool.submit = original_submit
+        for saved_pool, saved_submit in original_pools:
+            saved_pool.submit = saved_submit
         for name, fn in originals.items():
             setattr(module, name, fn)
 

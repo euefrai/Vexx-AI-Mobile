@@ -51,6 +51,8 @@ log = logging.getLogger("JULIA-pc")
 # Síntese de UI em paralelo com a geração principal (conexão própria por
 # thread; SQLite não compartilha conexão entre threads).
 _SINT_POOL = ThreadPoolExecutor(max_workers=2, thread_name_prefix="juliarsint")
+_SCREEN_POOL = ThreadPoolExecutor(max_workers=1, thread_name_prefix="vexxscreen")
+_SCREEN_SLOT = threading.BoundedSemaphore(1)
 
 
 def _sintetizar_isolado(fn, owner: str, *args):
@@ -2374,6 +2376,40 @@ def resposta_screen(db, req: dict, dono: str, request_id: str) -> dict:
     except remoto.RemotoErro as exc:
         return {"request_id": request_id, "type": "screen_error",
                 "error": str(exc), "codigo": exc.codigo}
+
+
+def submit_screen(path, req, dono, request_id, websocket):
+    """One capture job; never queue screenshots behind encoding or research."""
+    if not _SCREEN_SLOT.acquire(blocking=False):
+        enviar_ws(websocket, {'request_id':request_id, 'type':'screen_error',
+                              'codigo':'ocupado', 'error':'Captura já em andamento.'})
+        return None
+    def work():
+        db = None
+        try:
+            db = sqlite3.connect(Path(path).resolve().as_uri()+'?mode=ro', uri=True, timeout=1)
+            result = resposta_screen(db, req, dono, request_id)
+            # Revocation may occur while pixels are encoded. Never send that frame.
+            with remote_access.guard:
+                if result.get('type') == 'screen' and not remote_access.allowed(db, dono):
+                    result = {'request_id':request_id,'type':'screen_error',
+                              'codigo':'sem_permissao','error':'Acesso revogado.'}
+                enviar_ws(websocket, result)
+        except (ConnectionClosed, OSError):
+            pass
+        except Exception:
+            log.exception('Falha no worker de captura')
+            try: enviar_ws(websocket, {'request_id':request_id,'type':'screen_error','error':'Falha na captura.'})
+            except (ConnectionClosed, OSError): pass
+        finally:
+            if db is not None: db.close()
+    try:
+        future = _SCREEN_POOL.submit(work)
+        future.add_done_callback(lambda _: _SCREEN_SLOT.release())
+        return future
+    except BaseException:
+        _SCREEN_SLOT.release()
+        raise
 
 
 def resposta_input(db, req: dict, dono: str, request_id: str) -> dict:
@@ -5593,7 +5629,8 @@ def run():
                     elif req.get("type") == "remote_revoke":
                         reply = {"request_id": request_id, **remote_access.revoke(db, dono)}
                     elif req.get("type") == "screen":
-                        reply = resposta_screen(db, req, dono, request_id)
+                        submit_screen(database_path(), req, dono, request_id, websocket)
+                        continue
                     elif req.get("type") == "input":
                         reply = resposta_input(db, req, dono, request_id)
                     else:

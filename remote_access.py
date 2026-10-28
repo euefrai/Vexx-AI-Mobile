@@ -63,7 +63,7 @@ def status(db, owner):
                 'supported': windows, 'capture_ready': windows and capture,
                 'approved': enabled, 'view_allowed': bool(permitted),
                 'control_allowed': bool(permitted and (enabled or remoto.entrada_ativada())),
-                'pending': pending, 'confirmation_open': _worker_open,
+                'input_batch': True, 'precise_scroll': True, 'pending': pending, 'confirmation_open': _worker_open,
                 'code': _pending['code'] if pending else ''}
 
 
