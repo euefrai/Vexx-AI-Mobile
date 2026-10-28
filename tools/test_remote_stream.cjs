@@ -19,7 +19,7 @@ let holdFrame=false, releaseFrame;
 const ctx={authenticated:()=>true,online:()=>true,identity:()=> 'u1',headers:()=>({}),notify(){},
  async api(path,opts){requests.push({path,cmd:opts?.body&&JSON.parse(opts.body)});
  if(path.includes('/status'))return {...state};
- if(path.includes('/screen')){if(holdFrame)await new Promise(r=>releaseFrame=r);return {imagem:'fixture',largura:1920,altura:1080,remote_enabled:true};}
+ if(path.includes('/screen')){if(holdFrame)await new Promise(r=>releaseFrame=r);return {imagem:'fixture',cursor:{x:.25,y:.5},largura:1920,altura:1080,remote_enabled:true};}
  return {ok:true};}};
 const flush=async()=>{for(let i=0;i<12;i++)await Promise.resolve();};
 async function advance(ms){now+=ms;for(const [id,t] of [...timers])if(t.at<=now){timers.delete(id);t.fn();}await flush();}
@@ -29,6 +29,9 @@ const commands=()=>requests.filter(x=>x.cmd).map(x=>x.cmd);
  require('../public/remote.js');const remote=VexxRemote.mount(ctx);remote.update();await flush();
  el('remoteConnect').events.click();await flush();
  assert(requests.some(x=>x.path.includes('max_w=1920&q=78')));
+ assert.equal(el('remotePointer').style.display,'block');
+ assert.equal(el('remotePointer').style.left,'25%');
+ assert.equal(el('remotePointer').style.top,'50%');
  event('pointerdown',20,20);event('pointermove',180,100);event('pointerup',190,110);await flush();
  assert.equal(commands().at(-1).kind,'drag');assert.equal(commands().at(-1).points.at(-1).x,190/400);
  await advance(300);
@@ -46,5 +49,6 @@ const commands=()=>requests.filter(x=>x.cmd).map(x=>x.cmd);
  el('refreshButton').events.click();await flush();assert.equal(requests.filter(x=>x.path.includes('/screen')).length,before);
  el('remoteDisconnect').events.click();el('screenImg').src='cleared';releaseFrame();await flush();
  assert.equal(el('screenImg').src,'cleared');
+ assert.equal(el('remotePointer').style.display,'none');
  console.log('PASS drag, double tap, two-finger scroll, cancel, single-flight, stale frame');
 })().catch(e=>{console.error(e);process.exitCode=1;});

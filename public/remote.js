@@ -134,6 +134,17 @@
         frameLatency = frameLatency * .7 + (performance.now() - started) * .3;
         screenFailures = 0;
         frame.style.aspectRatio = r.largura + ' / ' + r.altura;
+        const cursor = r.cursor, marker = $('remotePointer');
+        const rect = frame.getBoundingClientRect();
+        if (cursor && Number.isFinite(cursor.x) && Number.isFinite(cursor.y)
+            && cursor.x >= 0 && cursor.x <= 1 && cursor.y >= 0 && cursor.y <= 1
+            && r.largura > 0 && r.altura > 0 && rect.width > 0 && rect.height > 0) {
+          const scale = Math.min(rect.width / r.largura, rect.height / r.altura);
+          const w = r.largura * scale, h = r.altura * scale;
+          marker.style.left = ((rect.width - w) / 2 + cursor.x * w) / rect.width * 100 + '%';
+          marker.style.top = ((rect.height - h) / 2 + cursor.y * h) / rect.height * 100 + '%';
+          marker.style.display = 'block';
+        } else marker.style.display = 'none';
         if (state) state.control_allowed = r.remote_enabled === true;
         $('screenLabel').textContent = 'CONECTADO';
         $('screenNote').textContent = r.remote_enabled ? 'Toque para clicar; dois toques para abrir. Arraste para selecionar ou mover. Dois dedos para rolar; segure para o botão direito.' : 'Somente visualização. Permita o controle no computador.';

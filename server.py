@@ -1503,6 +1503,7 @@ async def screen(request: Request, max_w: int = 800, q: int = 55):
         raise HTTPException(503, result.get("error", "Tela indisponível"))
     return {"imagem": result["imagem"], "largura": result.get("largura", 0),
             "altura": result.get("altura", 0), "ms": result.get("ms", 0),
+            "cursor": result.get("cursor"),
             "remote_enabled": result.get("remote_enabled", False)}
 
 

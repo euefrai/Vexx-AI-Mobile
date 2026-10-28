@@ -110,6 +110,21 @@ def tamanho_tela() -> tuple:
     return (u.GetSystemMetrics(0), u.GetSystemMetrics(1))
 
 
+def posicao_cursor(largura: int, altura: int):
+    """Position on the captured primary screen; other monitors stay hidden."""
+    import ctypes
+    from ctypes import wintypes
+    point = wintypes.POINT()
+    try:
+        if not ctypes.windll.user32.GetCursorPos(ctypes.byref(point)):
+            return None
+        if largura <= 0 or altura <= 0 or not (0 <= point.x < largura and 0 <= point.y < altura):
+            return None
+        return {"x": point.x / largura, "y": point.y / altura}
+    except (AttributeError, OSError):
+        return None
+
+
 def capturar(max_w: int = MAX_W, qualidade: int = QUALIDADE) -> dict:
     if sys.platform != "win32":
         raise RemotoErro("Captura só no Windows.", "plataforma")
@@ -140,7 +155,7 @@ def capturar(max_w: int = MAX_W, qualidade: int = QUALIDADE) -> dict:
         img.save(buf, "JPEG", quality=qualidade)
         return {"imagem": base64.b64encode(buf.getvalue()).decode(),
                 "largura": img.size[0], "altura": img.size[1],
-                "tela": list(tamanho), "ms": int((time.monotonic() - inicio) * 1000)}
+                "tela": list(tamanho), "cursor": posicao_cursor(*tamanho), "ms": int((time.monotonic() - inicio) * 1000)}
     except ImportError:
         raise RemotoErro("Sem mss nem Pillow no PC.", "dependencia") from None
     except Exception as exc:
