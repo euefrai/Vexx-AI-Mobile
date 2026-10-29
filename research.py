@@ -1571,6 +1571,30 @@ def url_pedida(texto: str) -> str:
     return ""
 
 
+def urls_pedidas(texto: str) -> list:
+    """Explicit reading list, followed by optional instructions after a blank line.
+
+    Incidental links and broad search requests keep their conservative legacy
+    behavior. Only the URL list is read; URLs inside quoted titles are ignored.
+    """
+    text = (texto or '').replace('\r\n', '\n')
+    header = re.match(r'^\s*(?:analise|analisa|compare|resuma|leia)\s+'
+                      r'(?:(?:est[ae]s?|ess[ae]s?|as?|os?)\s+)?'
+                      r'(?:fontes?|p[aá]ginas?|links?)\s*:\s*', text, re.I)
+    if not header:
+        single = url_pedida(text)
+        return [single] if single else []
+    block = text[header.end():].split('\n\n', 1)[0]
+    urls = []
+    for line in block.splitlines():
+        url = re.sub(r'^\s*[-*]\s+', '', line).strip().rstrip('.,;:!?')
+        if not _RX_URL_NA_MENSAGEM.fullmatch(url) or len(url) > 500:
+            return []
+        if url not in urls:
+            urls.append(url)
+    return urls[:6]
+
+
 _RUIDO_CONSULTA = {
     "analise", "analisar", "analisa", "resuma", "resumir", "resumo", "veja", "leia",
     "ler", "abrir", "abra", "sobre", "para", "por", "uma", "este", "esta", "isso",
@@ -1626,12 +1650,39 @@ def analisar_url(url: str, consulta: str = "", timeout: float = 8.0) -> tuple:
     return _fonte_de(rec, {"url": url, "trecho": ""}, consulta, avaliar_relevancia=False), ""
 
 
+def analisar_urls(urls: list, consulta: str = "", timeout: float = 12.0) -> list:
+    """At most six requested pages, three readers and a shared time budget.
+
+    Every page keeps the existing SSRF, redirect, MIME and byte checks. Failure
+    of one page never discards the successfully read comparison candidates.
+    """
+    from concurrent.futures import ThreadPoolExecutor
+    urls = list(dict.fromkeys(urls))[:6]
+    deadline = time.monotonic() + min(12.0, max(1.0, timeout))
+
+    def read(url):
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            return url, None, 'timeout'
+        try:
+            source, error = analisar_url(url, consulta, timeout=min(8.0, remaining))
+            return url, source, error
+        except Exception:
+            return url, None, 'rede'
+
+    if len(urls) < 2:
+        return [read(url) for url in urls]
+    with ThreadPoolExecutor(max_workers=min(3, len(urls)), thread_name_prefix='source-comparison') as pool:
+        return list(pool.map(read, urls))
+
+
 PAGINA_ERRO_TEXTO = {
     "bloqueado": "a página recusou o acesso (bot-wall/CAPTCHA/403) e bloqueios não são contornados",
     "ssrf": "o endereço não é público (bloqueado por segurança)",
     "tipo_bloqueado": "o conteúdo não é texto legível",
     "tamanho": "a página excede o limite de tamanho",
     "rede": "falha de rede ao abrir a página",
+    "timeout": "o tempo disponível para a leitura terminou",
     "http": "a página respondeu com erro HTTP",
     "redirect": "a página redirecionou para um destino inválido",
     "formato": "a resposta veio em formato não suportado",

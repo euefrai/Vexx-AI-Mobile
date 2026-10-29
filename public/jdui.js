@@ -2345,15 +2345,19 @@
   };
 
   R.productcompare = function (root, props, st, save, ctx) {
-    const box = el('div', 'jdui-quiz');
+    const box = el('div', 'jdui-quiz jdui-product-comparison');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
     const itens = props.items;
+    // A numeric price alone cannot rank offers in different currencies or
+    // establish a winner when every other price is unknown.
+    const currencies = new Set(itens.map(p => p.moeda || 'BRL'));
     const precos = itens.map(p => p.preco_valor).filter(v => v !== null && v !== undefined);
-    const menor = precos.length ? Math.min.apply(null, precos) : null;
+    const menor = currencies.size === 1 && precos.length > 1 ? Math.min.apply(null, precos) : null;
     const linhas = [
       { label: 'Preço', vals: itens.map(p => p.preco || 'Preço não confirmado'),
-        win: itens.map(p => p.preco_valor !== null && p.preco_valor === menor) },
+        win: itens.map(p => menor !== null && p.preco_valor === menor) },
       { label: 'Loja', vals: itens.map(p => p.loja || '—') },
+      { label: 'Moeda', vals: itens.map(p => p.moeda || 'BRL') },
       { label: 'Avaliação', vals: itens.map(p => productStars(p.avaliacao, p.n_avaliacoes)) },
       { label: 'Disponibilidade', vals: itens.map(p => DISP_LABEL[p.disponibilidade] || DISP_LABEL.desconhecida) }
     ];
@@ -2362,16 +2366,51 @@
     chaves.slice(0, 8).forEach(k => {
       linhas.push({ label: k, vals: itens.map(p => (p.specs && p.specs[k]) || '—') });
     });
+    box.appendChild(el('p', 'jdui-research-summary', itens.length
+      + ' opções · confira também frete, variante e condições da oferta.'));
+    st.comparisonView = st.comparisonView === 'table' ? 'table' : 'cards';
+    const views = el('div', 'jdui-research-filters');
+    views.setAttribute('role', 'group'); views.setAttribute('aria-label', 'Visualização da comparação');
+    const buttons = [];
+    [['cards', 'Por produto'], ['table', 'Tabela']].forEach(([key, label]) => {
+      const button = el('button', 'jdui-btn ghost', label); button.type = 'button';
+      button.addEventListener('click', () => { st.comparisonView = key; save(st); showView(); });
+      buttons.push({button, key}); views.appendChild(button);
+    });
+    box.appendChild(views);
+    const cards = el('div', 'jdui-comparison-grid');
+    itens.forEach((p, i) => {
+      const card = el('section', 'jdui-comparison-card');
+      card.appendChild(el('h3', 'jdui-pnome', p.nome));
+      const facts = el('dl', 'jdui-comparison-facts');
+      linhas.forEach(l => {
+        const row = el('div', l.win && l.win[i] ? 'is-lowest' : '');
+        row.appendChild(el('dt', '', l.label));
+        row.appendChild(el('dd', '', l.vals[i] || 'Não informado'));
+        facts.appendChild(row);
+      });
+      card.appendChild(facts);
+      if (p.url) {
+        const link = el('a', 'jdui-btn ghost', 'Abrir oferta ↗');
+        link.href = p.url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+        link.setAttribute('aria-label', 'Abrir oferta de ' + p.nome);
+        card.appendChild(link);
+      }
+      cards.appendChild(card);
+    });
+    box.appendChild(cards);
     const holder = el('div', 'jdui-scrollx');
+    holder.setAttribute('tabindex', '0'); holder.setAttribute('role', 'region');
+    holder.setAttribute('aria-label', 'Tabela comparativa; role horizontalmente para ver todas as opções');
     const t = document.createElement('table');
     t.className = 'jdui-cmp';
     const head = document.createElement('tr');
-    head.appendChild(el('th', '', ''));
-    itens.forEach(p => head.appendChild(el('th', '', (p.nome || '').slice(0, 40))));
+    const criterion = el('th', '', 'Critério'); criterion.setAttribute('scope', 'col'); head.appendChild(criterion);
+    itens.forEach(p => { const th = el('th', '', p.nome); th.setAttribute('scope', 'col'); head.appendChild(th); });
     t.appendChild(head);
     linhas.forEach(l => {
       const tr = document.createElement('tr');
-      tr.appendChild(el('th', '', l.label));
+      const th = el('th', '', l.label); th.setAttribute('scope', 'row'); tr.appendChild(th);
       l.vals.forEach((v, i) => {
         tr.appendChild(el('td', l.win && l.win[i] ? 'win' : '', v || '—'));
       });
@@ -2379,14 +2418,20 @@
     });
     holder.appendChild(t);
     box.appendChild(holder);
+    function showView() {
+      cards.hidden = st.comparisonView !== 'cards'; holder.hidden = st.comparisonView !== 'table';
+      acts.hidden = st.comparisonView !== 'table';
+      buttons.forEach(({button, key}) => button.setAttribute('aria-pressed', String(key === st.comparisonView)));
+    }
     const acts = el('div', 'jdui-cardacts');
     itens.forEach(p => {
       if (!p.url) return;
-      const a = el('a', 'jdui-btn ghost', 'Abrir: ' + (p.nome || '').slice(0, 24) + ' ↗');
+      const a = el('a', 'jdui-btn ghost', 'Abrir: ' + p.nome + ' ↗');
       a.href = p.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
       acts.appendChild(a);
     });
     if (acts.children.length) box.appendChild(acts);
+    showView();
     renderProvenance(box, props.sources);
     root.appendChild(box);
   };
@@ -2452,13 +2497,66 @@
     root.appendChild(box);
   };
 
-  R.sources = function (root, props, st, save) {
+  // Follow-ups use the normal chat pipeline with explicit source URLs. Source
+  // titles are data; no model-supplied action or script is executed here.
+  function researchAction(label, prompt, ctx, status, eligible) {
+    const button = el('button', 'jdui-btn ghost', label);
+    button.type = 'button';
+    button.addEventListener('click', async () => {
+      if (button.disabled) return;
+      if (ctx.online && !ctx.online()) {
+        status.textContent = 'Conecte o PC e a internet para continuar a pesquisa.';
+        return;
+      }
+      button.disabled = true; button.setAttribute('aria-busy', 'true');
+      status.textContent = 'Enviando pedido ao chat…';
+      try { await ctx.onChat(typeof prompt === 'function' ? prompt() : prompt); status.textContent = 'Pedido enviado ao chat.'; }
+      catch (_) { status.textContent = 'Não foi possível enviar. Tente novamente.'; }
+      finally { button.disabled = eligible ? !eligible() : false; button.removeAttribute('aria-busy'); }
+    });
+    return button;
+  }
+
+  R.sources = function (root, props, st, save, ctx) {
     st = st || {}; st.sourceDetails = st.sourceDetails || {};
-    const box = el('div', 'jdui-cards');
+    const box = el('div', 'jdui-cards jdui-research-sources');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const readState = f => f.leitura || (['aberta', 'utilizada'].includes(f.status) ? 'READ' : 'FOUND');
+    const hasReading = f => ['READ', 'PARTIAL'].includes(readState(f));
+    const readCount = props.items.filter(hasReading).length;
+    box.appendChild(el('div', 'jdui-research-summary', props.items.length + ' fontes nesta lista · '
+      + readCount + ' com conteúdo recuperado'));
+    const status = el('div', 'jdui-research-feedback');
+    status.setAttribute('role', 'status');
+    const cards = [], filters = [], nextActions = [];
+    const matchesFilter = f => st.sourceFilter === 'read' ? hasReading(f)
+      : st.sourceFilter === 'pending' ? !hasReading(f) : true;
+    const linkedSources = () => props.items.filter(f => f.url && matchesFilter(f)).slice(0, 6);
+    st.sourceFilter = ['all', 'read', 'pending'].includes(st.sourceFilter) ? st.sourceFilter : 'all';
+    if (props.items.length > 1) {
+      const toolbar = el('div', 'jdui-research-filters');
+      toolbar.setAttribute('role', 'group'); toolbar.setAttribute('aria-label', 'Filtrar fontes');
+      [['all', 'Todas', props.items.length], ['read', 'Com leitura', readCount],
+        ['pending', 'Sem leitura', props.items.length - readCount]].forEach(([key, label, count]) => {
+        const button = el('button', 'jdui-btn ghost', label + ' (' + count + ')');
+        button.type = 'button';
+        button.addEventListener('click', () => { st.sourceFilter = key; save(st); filterCards(); });
+        filters.push({button, key}); toolbar.appendChild(button);
+      });
+      box.appendChild(toolbar);
+    }
+    const list = el('div', 'jdui-source-list'); box.appendChild(list);
     const ROT = { encontrada: 'Encontrada · não lida', aberta: 'Fonte lida', utilizada: 'Utilizada na resposta' };
+    const READ = {FOUND:'Encontrada',READ:'Trecho lido',PARTIAL:'Leitura parcial',UNAVAILABLE:'Indisponível'};
     props.items.forEach((f,index) => {
       const card = el('div', 'jdui-srccard');
+      card.dataset.readState = readState(f);
+      const identity = el('div', 'jdui-source-identity');
+      identity.appendChild(el('span', 'jdui-source-number', String(index + 1).padStart(2, '0')));
+      let domain = f.dominio || '';
+      try { if (!domain && f.url) domain = new URL(f.url, location.href).hostname; } catch (_) {}
+      identity.appendChild(el('span', '', f.publicador || domain || 'Fonte sem domínio informado'));
+      card.appendChild(identity);
         if (f.imagem) {
           const img=el('img','jdui-source-image');img.src=f.imagem;img.alt=f.titulo;img.loading='lazy';img.referrerPolicy='no-referrer';
           img.addEventListener('error',()=>img.remove(),{once:true});card.appendChild(img);
@@ -2470,23 +2568,26 @@
         }
       if (f.url) { heading.href = f.url; heading.target = '_blank'; heading.rel = 'noopener noreferrer'; }
       top.appendChild(heading);
-      const READ = {FOUND:'Encontrada',READ:'Trecho lido',PARTIAL:'Leitura parcial',UNAVAILABLE:'Indisponível'};
-      top.appendChild(el('span', 'jdui-badge st-' + f.status, READ[f.leitura] || ROT[f.status] || f.status));
+      top.appendChild(el('span', 'jdui-badge st-' + f.status, f.status === 'utilizada' && hasReading(f)
+        ? 'Utilizada · ' + (READ[readState(f)] || 'conteúdo recuperado') : READ[readState(f)] || ROT[f.status] || f.status));
       card.appendChild(top);
-        const partes = [f.publicador || f.dominio, f.tipo, f.data ? 'Publicado em ' + f.data : ''].filter(Boolean);
+        const partes = [f.tipo, f.data ? 'Publicado em ' + f.data : ''].filter(Boolean);
       if (f.data_evento) partes.push('Acontecimento: ' + f.data_evento);
       if (f.origem_declarada) partes.push('original declarado: ' + f.origem_declarada);
       const meta = partes.join(' · ');
       if (meta) card.appendChild(el('div', 'jdui-ploja', meta));
-        (f.detalhes || []).forEach(line=>card.appendChild(el('div','jdui-source-detail',line)));
       if (f.escopo || f.relacao) card.appendChild(el('div', 'jdui-source-scope', [f.escopo, f.relacao].filter(Boolean).join(' · ')));
-      if (f.trecho) card.appendChild(el('div', 'jdui-desc', f.trecho));
-      if (f.autores || f.doi || f.origem_declarada) {
+      if (f.trecho) {
+        card.appendChild(el('div', 'jdui-source-excerpt-label', hasReading(f) ? 'Trecho recuperado' : 'Prévia da busca · página não lida'));
+        card.appendChild(el('blockquote', 'jdui-desc jdui-source-excerpt', f.trecho));
+      }
+      if (f.autores || f.doi || f.origem_declarada || (f.detalhes || []).length) {
         const details = document.createElement('details'); details.className='jdui-source-provenance';
         const summary = document.createElement('summary'); summary.textContent='Proveniência e publicação'; details.appendChild(summary);
         if (f.autores) details.appendChild(el('div','jdui-source-authors',f.autores));
         if (f.doi) details.appendChild(el('div','jdui-source-doi','DOI: '+f.doi));
         if (f.origem_declarada) details.appendChild(el('div','jdui-source-detail',f.origem_declarada));
+        (f.detalhes || []).forEach(line => details.appendChild(el('div','jdui-source-detail',line)));
         const sourceKey = 'source:' + (f.url || f.doi || f.titulo);
         details.open=Object.prototype.hasOwnProperty.call(st.sourceDetails, sourceKey) && !!st.sourceDetails[sourceKey];
         details.addEventListener('toggle',()=>{st.sourceDetails[sourceKey]=details.open;if(save)save(st);});
@@ -2497,13 +2598,57 @@
         a.href = f.url; a.target = '_blank'; a.rel = 'noopener noreferrer';
         const acts = el('div', 'jdui-cardacts');
         acts.appendChild(a);
+        if (ctx && ctx.onChat) {
+          const prompt = 'Analise esta fonte:\n' + f.url
+            + '\n\nLeia o conteúdo disponível, apresente os pontos principais e as limitações com citações. '
+            + 'Se não conseguir ler, explique o bloqueio; não trate a prévia da busca como texto lido.';
+          acts.appendChild(researchAction('Analisar fonte', prompt, ctx, status));
+        }
           if (f.texto_url && f.texto_url!==f.url) {
             const full=el('a','jdui-btn ghost','Abrir texto recuperado ↗');full.href=f.texto_url;full.target='_blank';full.rel='noopener noreferrer';acts.appendChild(full);
           }
         card.appendChild(acts);
       }
-      box.appendChild(card);
+      cards.push({card, source: f}); list.appendChild(card);
     });
+    const empty = el('p', 'jdui-research-empty', 'Nenhuma fonte neste filtro. Selecione Todas para ver a lista.');
+    list.appendChild(empty);
+    function filterCards() {
+      let visible = 0;
+      cards.forEach(({card, source}) => {
+        card.hidden = !matchesFilter(source);
+        if (!card.hidden) visible++;
+      });
+      filters.forEach(({button, key}) => button.setAttribute('aria-pressed', String(key === st.sourceFilter)));
+      nextActions.forEach(({button, minimum}) => {
+        if (button.getAttribute('aria-busy') !== 'true') button.disabled = linkedSources().length < minimum;
+      });
+      empty.hidden = visible > 0;
+    }
+    filterCards();
+    if (ctx && ctx.onChat) {
+      const linked = props.items.filter(f => f.url);
+      if (linked.length) {
+        const actions = el('div', 'jdui-cardacts jdui-research-next');
+        const rules = () => '\n\nLeitura anterior: '
+          + linkedSources().map((f, i) => 'fonte ' + (i + 1) + ' — ' + READ[readState(f)]).join('; ') + '.'
+          + '\nApresente os pontos principais, diferenças e limitações. Leia as fontes necessárias, cite os links e diferencie evidências, inferências e dados ainda não confirmados. '
+          + 'Uma fonte encontrada não é uma fonte lida. Não invente informações ausentes.';
+        const addAction = (label, prompt, minimum) => {
+          const button = researchAction(label, () => prompt + '\n' + linkedSources().map(f => f.url).join('\n')
+            + rules(), ctx, status, () => linkedSources().length >= minimum);
+          nextActions.push({button, minimum}); actions.appendChild(button);
+        };
+        if (linked.length > 1) addAction('Comparar fontes',
+          'Compare estas fontes:', 2);
+        addAction('Criar resumo',
+          'Resuma estas fontes:', 1);
+        box.appendChild(actions);
+        box.appendChild(el('div', 'jdui-research-summary', 'As ações usam até 6 fontes do filtro selecionado.'));
+      }
+    }
+    filterCards();
+    box.appendChild(status);
     renderProvenance(box, props.sources);
     root.appendChild(box);
   };

@@ -185,9 +185,15 @@ def source_card(item: dict, used=False) -> dict:
         details.append('Suporte parcial: '+', '.join(str(a) for a in partials[:6]))
     sections=list(dict.fromkeys(_text(p.get('section') or p.get('context_heading'),100)
                                for p in (item.get('answer_passages') or [])[:8]
-                               if p.get('section') or p.get('context_heading')))
+                               if isinstance(p, dict) and (p.get('section') or p.get('context_heading'))))
     if read and sections:
         details.append('Contexto da seção: '+' · '.join(sections[:2]))
+    # Show the passage selected to answer the question, not the page's lead.
+    # Discovery snippets remain discovery snippets when the page was not read.
+    passages = item.get('answer_passages') or []
+    excerpt = next((p.get('text') for p in passages[:8]
+                    if isinstance(p, dict) and p.get('text')), '') if read else ''
+    excerpt = excerpt or item.get('trecho') or ''
     labels={'location':'Local','organizer':'Organizador','provider':'Operadora','airline':'Companhia',
             'departureAirport':'Origem','departureBusStop':'Origem','arrivalAirport':'Destino','arrivalBusStop':'Destino',
             'departureTime':'Partida declarada','arrivalTime':'Chegada declarada'}
@@ -200,12 +206,12 @@ def source_card(item: dict, used=False) -> dict:
     return {'titulo':item.get('titulo') or item.get('title'),'url':item.get('url'),
             'dominio':item.get('dominio'),'data':item.get('publicado_em') or str(item.get('year') or ''),
             'origem_declarada':item.get('origem_declarada') or '',
-            'data_evento':data.get('event_date') or '', 'trecho':melhor_trecho(str(item.get('trecho') or ''), '', 300),
+            'data_evento':data.get('event_date') or '', 'trecho':melhor_trecho(str(excerpt), '', 300),
             'tipo':item.get('publication_type') or {'news':'Notícia','events':'Evento declarado','air_travel':'Voo · informações encontradas','bus_travel':'Ônibus · informações encontradas'}.get(vertical.get('kind'),item.get('tipo','Fonte')),
-            'escopo':('Texto de HTML aberto recuperado; extração limitada' if item.get('full_text_format')=='html' else 'Texto de PDF aberto recuperado; extração limitada') if full else 'Somente resumo; texto completo não lido' if abstract else 'Texto recuperado' if read else 'Página não lida; sem suporte factual',
-            'relacao':'Trecho ligado a uma afirmação' if used else 'Fonte de contexto',
+            'escopo':'Página não lida; sem suporte factual' if not read else ('Texto de HTML aberto recuperado; extração limitada' if item.get('full_text_format')=='html' else 'Texto de PDF aberto recuperado; extração limitada') if full else 'Somente resumo; texto completo não lido' if abstract else 'Texto recuperado',
+            'relacao':'Trecho ligado a uma afirmação' if used and read else 'Fonte de contexto',
             'status':'utilizada' if used and read else 'aberta' if read else 'encontrada',
-            'leitura':'PARTIAL' if abstract or full else 'READ' if read else 'UNAVAILABLE' if item.get('access_state')=='blocked' else 'FOUND',
+            'leitura':('PARTIAL' if abstract or full else 'READ') if read else 'UNAVAILABLE' if item.get('access_state')=='blocked' else 'FOUND',
             'publicador':item.get('publicador') or item.get('journal') or item.get('repository') or '',
             'autores':', '.join(str(v) for v in (item.get('authors') or [])[:6]),'doi':item.get('doi') or '',
             'imagem':image if vertical.get('kind')=='news' else '', 'favicon':item.get('favicon') or '',
@@ -261,7 +267,13 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
     used = {eid for claim in resumo.get("achados", []) for eid in
             claim.get("supporting_ids", []) + claim.get("contradicting_ids", [])}
     source_items = []
-    for item in (evidencias or [])[:10]:
+    # Keep cited sources visible even when they were discovered after the first
+    # ten records. Stable ordering within each group preserves discovery order.
+    import research_agents
+    ordered = sorted((evidencias or []), key=lambda item: (
+        not (item.get('id') in used and research_agents._evidencia_lida(item)),
+        not research_agents._evidencia_lida(item)))
+    for item in ordered[:10]:
         source_items.append(source_card(item,item.get('id') in used))
     if source_items:
         candidatos.append(("sources", {"title": "Fontes e estado da leitura", "items": source_items}))

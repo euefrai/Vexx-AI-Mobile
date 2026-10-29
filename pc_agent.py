@@ -2033,26 +2033,30 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         and not shopping.followup_sem_contexto(texto_usuario) \
         and extras["podem_pesquisar"]
     extras["shop"] = eh_shop
-    # V5.7 FINAL: página específica pedida pelo usuário (URL na mensagem) —
-    # lida UMA vez pelo mesmo `baixar` (SSRF/redirect/tamanho/tipo), com aviso
-    # honesto quando não abrir; nunca substitui o shopping nem um job.
+    # Explicit page/list reading uses the same safe downloader and keeps each
+    # failure separate, so one blocked page cannot erase a valid comparison.
     if cfg.get("pesquisa_web", True) and not eh_shop and extras["podem_pesquisar"] \
             and not _JOB_START_RE.search(texto_usuario or ""):
-        url_pu = research.url_pedida(texto_usuario)
-        if url_pu:
+        urls_pu = research.urls_pedidas(texto_usuario)
+        if urls_pu:
             hoje_pu = (_data_local(contexto_local)
                        or datetime.now().date()).strftime("%d/%m/%Y")
-            fonte_pu, erro_pu = research.analisar_url(
-                url_pu, consulta=(texto_usuario or "")[:200])
-            extras["pagina_usuario"] = url_pu
-            if fonte_pu:
-                extras["fontes"] = [fonte_pu]
+            results = research.analisar_urls(urls_pu, consulta=(texto_usuario or "")[:200])
+            extras["pagina_usuario"] = urls_pu[0]
+            extras["paginas_usuario"] = urls_pu
+            extras["fontes"] = []
+            for url_pu, fonte_pu, erro_pu in results:
+                if fonte_pu:
+                    fonte_pu['id'] = 'S' + str(len(extras['fontes']) + 1)
+                    extras['fontes'].append(fonte_pu)
+                else:
+                    partes_sistema.append(research.bloco_pagina_usuario(url_pu, erro_pu))
+            if extras['fontes']:
                 extras["ferramentas_usadas"].append("pagina")
                 partes_sistema.append(
-                    research.bloco_grounding([fonte_pu], hoje_pu)
-                    + " (página específica pedida pelo usuário; leia antes de responder)")
-            else:
-                partes_sistema.append(research.bloco_pagina_usuario(url_pu, erro_pu))
+                    research.bloco_grounding(extras['fontes'], hoje_pu)
+                    + " (fontes específicas pedidas pelo usuário; use somente os trechos lidos, "
+                    "cite cada conclusão e explicite fontes bloqueadas ou lacunas da comparação)")
     if cfg.get("pesquisa_web", True) and intencao_pesquisa(texto_usuario) \
             and not eh_shop and extras["podem_pesquisar"] \
             and not extras.get("pagina_usuario"):

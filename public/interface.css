@@ -364,6 +364,48 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 @media(max-width:360px){.jdui-slot .jdui-readonly .jdui-table{min-width:220px}}
 @media(max-width:420px) {.provider-form {flex-wrap:wrap}.provider-form input {flex-basis:100%}.provider-form button {min-height:40px}.provider-top {gap:5px}}
 
+/* Research: readable sources, deliberate follow-ups and narrow comparisons. */
+.jdui-research-summary {margin:0 0 12px;color:var(--text-2);font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.jdui-research-filters {display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
+.jdui-research-filters .jdui-btn {font-size:12px;padding:7px 11px}
+.jdui-slot .jdui-research-filters [aria-pressed=true] {background:var(--surface-3);border-color:var(--text-3);color:var(--text)}
+.jdui-source-list {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:12px}
+.jdui-source-list .jdui-srccard {height:100%;margin:0}
+.jdui-slot .jdui-source-list [hidden],.jdui-product-comparison [hidden] {display:none!important}
+.jdui-source-identity {display:flex;align-items:center;gap:9px;font-size:11px;color:var(--text-2);min-width:0;overflow-wrap:anywhere}
+.jdui-source-number {display:grid;place-items:center;flex:0 0 28px;height:28px;border:1px solid var(--line);border-radius:9px;font-variant-numeric:tabular-nums;color:var(--text-2)}
+.jdui-research-sources .jdui-cardtop {gap:7px;align-items:flex-start}
+.jdui-research-sources .jdui-source-title {flex:1 1 100%;font-weight:550;letter-spacing:-.012em}
+.jdui-research-sources .jdui-badge {text-transform:none;letter-spacing:0}
+.jdui-source-excerpt-label {font-size:10.5px;color:var(--text-2);margin-top:5px}
+.jdui-source-list blockquote.jdui-source-excerpt {margin:0;padding:0 0 0 11px;border-left:2px solid var(--line);color:var(--text);font-size:12.5px;line-height:1.7;background:transparent}
+.jdui-source-provenance {border-top:1px solid var(--line);padding-top:4px}
+.jdui-source-provenance summary {cursor:pointer;font-size:12px;color:var(--text-2);min-height:40px;align-content:center}
+.jdui-source-provenance[open] .jdui-source-detail,.jdui-source-provenance[open] .jdui-source-authors,.jdui-source-provenance[open] .jdui-source-doi {margin:6px 0;line-height:1.6}
+.jdui-source-list .jdui-cardacts {margin-top:auto;padding-top:8px}
+.jdui-research-next {border-top:1px solid var(--line);padding-top:14px;margin-top:14px;justify-content:flex-start}
+.jdui-research-feedback {font-size:12px;color:var(--text-2);line-height:1.6;overflow-wrap:anywhere}
+.jdui-research-feedback:empty {display:none}
+.jdui-research-empty {grid-column:1/-1;color:var(--text-2);font-size:13px;padding:14px;border:1px dashed var(--line);border-radius:12px}
+.jdui-comparison-grid {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:12px}
+.jdui-comparison-card {min-width:0;border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface-2)}
+.jdui-comparison-card h3 {font-weight:550;font-size:14px;line-height:1.6;margin:0 0 12px;letter-spacing:-.01em}
+.jdui-comparison-card>.jdui-btn {margin-top:12px}
+.jdui-comparison-facts {margin:0;font-size:12px}
+.jdui-comparison-facts>div {padding:9px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:10px;overflow-wrap:anywhere}
+.jdui-comparison-facts dt {color:var(--text-2)}
+.jdui-comparison-facts dd {margin:0;color:var(--text);line-height:1.5}
+.jdui-comparison-facts .is-lowest dd {font-weight:600}
+.jdui-product-comparison .jdui-scrollx {max-width:100%;overflow-x:auto;overscroll-behavior-x:contain}
+.jdui-product-comparison .jdui-cmp {min-width:480px}
+.jdui-product-comparison .jdui-cmp th,.jdui-product-comparison .jdui-cmp td {max-width:240px;overflow-wrap:anywhere;white-space:normal;line-height:1.6}
+.jdui-product-comparison .jdui-cmp th {color:var(--text);background:var(--surface-2)}
+.jdui-product-comparison .jdui-cmp td.win {font-weight:600;background:var(--surface-3)}
+.jdui-product-comparison .jdui-cardacts {margin-top:14px}
+.jdui-product-comparison .jdui-cardacts .jdui-btn {white-space:normal;overflow-wrap:anywhere;max-width:100%}
+.jdui-product-comparison .jdui-scrollx:focus-visible,.jdui-source-provenance summary:focus-visible {outline:2px solid var(--purple);outline-offset:3px}
+@media(max-width:600px){.jdui-source-list,.jdui-comparison-grid{grid-template-columns:1fr}.jdui-comparison-card{padding:13px}}
+
 /* Meu PC: local consent on a computer, deliberate connection on a phone. */
 html:has(.remote-guide-page),body.remote-guide-page {height:auto;overflow:auto}
 body.remote-guide-page {max-width:740px;margin:auto;padding:28px 22px}

@@ -1,4 +1,4 @@
-const VERSION = 'VEXX-shell-trust-20261028-8';
+const VERSION = 'VEXX-shell-research-cards-20261028-9';
 const SHELL = ['/', '/index.html', '/styles.css', '/interface.css', '/app.js', '/workspace.js', '/organize.js', '/jdui.js', '/remote.js', '/remote-setup.html', '/model3d-schema.js', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/trust.css', '/sobre', '/privacidade', '/termos', '/seguranca', '/contato'];
 const MODEL3D_ASSETS = new Set(['/model3d-viewer.js', '/model3d-education.js', '/vendor/three-engine.js', '/models/demo-cube.glb', '/models/preview.svg']);
 self.addEventListener('install', evt => {
