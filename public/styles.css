@@ -1075,6 +1075,8 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
   line-height:1.6;
   margin-top:20px;
 }
+.login-card .login-legal{margin-top:8px}
+.login-legal a{color:var(--accent)}
 .login-switch{
   text-align:center;
   margin:12px 0 6px;
@@ -1368,6 +1370,19 @@ svg.icon{width:19px;height:19px;stroke:currentColor;stroke-width:1.65;stroke-lin
 .settings-note button{
   margin-top:8px;
 }
+.trust-links{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:4px 12px;
+  margin:8px 0 0;
+}
+.trust-links a{
+  color:var(--muted);
+  font-size:10px;
+  text-decoration:none;
+}
+.trust-links a:hover{color:var(--purple)}
 .danger-link{
   color:#f87171;
   font-weight:600;

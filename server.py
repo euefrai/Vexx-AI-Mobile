@@ -424,6 +424,8 @@ async def security_headers(request: Request, call_next):
     response.headers["X-Content-Type-Options"] = "nosniff"
     response.headers["Referrer-Policy"] = "no-referrer"
     response.headers["X-Frame-Options"] = "DENY"
+    response.headers["Permissions-Policy"] = ("camera=(), microphone=(), payment=(), usb=(), "
+                                               "serial=(), bluetooth=(), midi=(), geolocation=(self)")
     response.headers["Content-Security-Policy"] = "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob: https:; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
     if config()["production"]:
         response.headers["Strict-Transport-Security"] = "max-age=31536000"
@@ -2496,5 +2498,57 @@ async def three_engine_asset(request: Request):
 
 import admin_http
 admin_http.install(app, __import__("sys").modules[__name__])
+
+
+# ── Transparência e reputação: páginas públicas, sem autenticação ──────
+# Rotas limpas (sem .html) para os documentos institucionais. Os mesmos
+# arquivos continuam disponíveis em /nome.html via StaticFiles.
+
+def _public_file(name: str, media_type: str):
+    path = ROOT / "public" / name
+    if not path.is_file():
+        raise HTTPException(404, "Arquivo não encontrado")
+    return FileResponse(path, media_type=media_type)
+
+
+@app.get("/sobre", include_in_schema=False)
+def trust_sobre():
+    return _public_file("sobre.html", "text/html")
+
+
+@app.get("/privacidade", include_in_schema=False)
+def trust_privacidade():
+    return _public_file("privacidade.html", "text/html")
+
+
+@app.get("/termos", include_in_schema=False)
+def trust_termos():
+    return _public_file("termos.html", "text/html")
+
+
+@app.get("/seguranca", include_in_schema=False)
+def trust_seguranca():
+    return _public_file("seguranca.html", "text/html")
+
+
+@app.get("/contato", include_in_schema=False)
+def trust_contato():
+    return _public_file("contato.html", "text/html")
+
+
+@app.get("/robots.txt", include_in_schema=False)
+def trust_robots():
+    return _public_file("robots.txt", "text/plain")
+
+
+@app.get("/sitemap.xml", include_in_schema=False)
+def trust_sitemap():
+    return _public_file("sitemap.xml", "application/xml")
+
+
+@app.get("/.well-known/security.txt", include_in_schema=False)
+def trust_security_txt():
+    return _public_file(".well-known/security.txt", "text/plain")
+
 
 app.mount("/", StaticFiles(directory=str(ROOT / "public"), html=True), name="mobile-static")

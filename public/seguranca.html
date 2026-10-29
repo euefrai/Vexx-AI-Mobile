@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Segurança — Vexx AI</title>
+  <meta name="description" content="Modelo de segurança do Vexx AI: relay efêmero, chaves no PC, sessão protegida, consentimento de acesso remoto e canal para relatar vulnerabilidades." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://vexx-ai.space/seguranca" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/trust.css" />
+</head>
+<body>
+  <a class="trust-skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="trust-header">
+    <div class="trust-wrap trust-header-inner">
+      <a class="trust-brand" href="/"><span class="trust-mark" aria-hidden="true">v.</span><span>Vexx AI</span></a>
+      <nav class="trust-nav" aria-label="Navegação institucional">
+        <a href="/sobre">Sobre</a>
+        <a href="/privacidade">Privacidade</a>
+        <a href="/termos">Termos</a>
+        <a href="/seguranca" aria-current="page">Segurança</a>
+        <a href="/contato">Contato</a>
+        <a class="trust-app" href="/">Abrir o app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="trust-wrap">
+      <div class="trust-hero">
+        <p class="eyebrow">Segurança</p>
+        <h1>Segurança e transparência<span class="brand-dot">.</span></h1>
+        <p class="lede">O modelo é simples de auditar: o relay não guarda conversas, as chaves de IA ficam no seu PC e o acesso remoto só é liberado com aprovação local.</p>
+      </div>
+
+      <div class="trust-grid">
+        <div class="card">
+          <h2>Relay efêmero</h2>
+          <p>O servidor na nuvem autentica e encaminha mensagens. Não há banco de conversas no relay.</p>
+        </div>
+        <div class="card">
+          <h2>Chaves no PC</h2>
+          <p>As chaves dos provedores de IA são gravadas pelo agente no computador. O navegador e o relay não as armazenam.</p>
+        </div>
+        <div class="card">
+          <h2>Sem portas de entrada</h2>
+          <p>O agente inicia uma conexão de saída (WSS) para o relay. Você não precisa abrir porta no roteador nem expor o PC à internet.</p>
+        </div>
+        <div class="card">
+          <h2>Consentimento local</h2>
+          <p>O acesso à tela é pedido pelo navegador, mas só pode ser aprovado no PC. A autorização é vinculada à conta e pode ser revogada.</p>
+        </div>
+      </div>
+
+      <h2>1. Autenticação e sessão</h2>
+      <ul>
+        <li>Senhas são verificadas com Argon2id (conta proprietária no relay) ou scrypt (contas comuns no PC); o relay não guarda a senha em texto puro.</li>
+        <li>O cookie de sessão é <code>HttpOnly</code>, <code>Secure</code> em produção e <code>SameSite=Strict</code>, com validade de 12 horas.</li>
+        <li>Requisições que alteram estado exigem token CSRF.</li>
+        <li>Há limite de tentativas de login e de requisições por conta/IP.</li>
+        <li>Sessões podem ser revogadas; o PC é consultado para validar a revogação.</li>
+      </ul>
+
+      <h2>2. Cabeçalhos e transporte</h2>
+      <ul>
+        <li>HTTPS com <code>Strict-Transport-Security</code> em produção.</li>
+        <li><code>Content-Security-Policy</code> restritiva, sem scripts inline.</li>
+        <li><code>X-Content-Type-Options: nosniff</code>, <code>Referrer-Policy: no-referrer</code> e <code>X-Frame-Options: DENY</code>.</li>
+        <li><code>Permissions-Policy</code> bloqueia câmera, microfone, pagamento, USB, serial, Bluetooth e MIDI; geolocalização só é permitida na própria origem.</li>
+        <li><code>Cache-Control: no-store</code> nas rotas de API.</li>
+      </ul>
+
+      <h2>3. Acesso remoto ao PC</h2>
+      <p>O recurso de controle remoto foi desenhado para exigir uma decisão consciente no computador:</p>
+      <ul>
+        <li>O navegador apenas <strong>solicita</strong> acesso; não pode aprovar a si mesmo.</li>
+        <li>A aprovação acontece no PC, é vinculada à conta e tem janela de consentimento curta.</li>
+        <li>A autorização pode ser revogada a qualquer momento e não é armazenada no relay.</li>
+        <li>Frames da tela e comandos são encaminhados durante a sessão autorizada, mas não são persistidos pelo relay.</li>
+        <li>O agente valida coordenadas e eventos antes de aplicá-los.</li>
+      </ul>
+
+      <h2>4. Limites do modelo de segurança</h2>
+      <p>Nenhum sistema é 100% imune a falhas. A segurança também depende de você:</p>
+      <ul>
+        <li>manter o Windows, o navegador e as dependências atualizados;</li>
+        <li>usar uma senha forte e exclusiva, e não compartilhar o token do agente;</li>
+        <li>não aprovar acesso remoto quando não reconhecer a solicitação;</li>
+        <li>revisar os aparelhos e as sessões conectadas à sua conta;</li>
+        <li>não instalar o agente a partir de fontes não oficiais.</li>
+      </ul>
+
+      <h2>5. O que o projeto não faz</h2>
+      <ul>
+        <li>Não instala o agente sem uma ação sua.</li>
+        <li>Não abre portas de entrada no seu computador.</li>
+        <li>Não vende dados pessoais.</li>
+        <li>Não promete que um antivírus deixará de sinalizar o agente; falsos positivos devem ser tratados com assinatura de código e envio para análise.</li>
+      </ul>
+
+      <h2>6. Como relatar uma vulnerabilidade</h2>
+      <p>Relatos de boa-fé são bem-vindos. Não há programa de recompensas financeiras nem garantia de prazo de resposta, pois o projeto é independente.</p>
+      <ul>
+        <li>Abra um issue em <a href="https://github.com/euefrai/Vexx-AI-Mobile/issues" rel="noopener noreferrer">github.com/euefrai/Vexx-AI-Mobile/issues</a> com o rótulo <code>security</code>.</li>
+        <li>Descreva o impacto e os passos mínimos para reproduzir, sem incluir senhas, chaves de API, tokens, dados pessoais ou detalhes que permitam explorar terceiros.</li>
+        <li>Se o relato for sensível, peça no issue um canal privado antes de enviar os detalhes.</li>
+      </ul>
+      <p>O arquivo <a href="/.well-known/security.txt">/.well-known/security.txt</a> segue o formato RFC 9116 e aponta para o canal oficial.</p>
+
+      <h2>7. Escopo</h2>
+      <p>Esta página cobre o aplicativo web em <code>vexx-ai.space</code>, o relay e o agente local do Vexx AI. Provedores de IA, buscadores, lojas e serviços de hospedagem têm programas e políticas de segurança próprios.</p>
+
+      <div class="contact-box">
+        <h2>Contato de segurança</h2>
+        <p>Canal público: <a href="https://github.com/euefrai/Vexx-AI-Mobile/issues" rel="noopener noreferrer">GitHub Issues</a>. Não publique segredos nem dados pessoais em issue aberta.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="trust-footer">
+    <div class="trust-wrap">
+      <p>Vexx AI · Projeto independente. Sem empresa, CNPJ ou sede declarados.</p>
+      <nav aria-label="Links institucionais">
+        <a href="/sobre">Sobre</a>
+        <a href="/privacidade">Privacidade</a>
+        <a href="/termos">Termos</a>
+        <a href="/seguranca">Segurança</a>
+        <a href="/contato">Contato</a>
+        <a href="/">Abrir o app</a>
+      </nav>
+      <p class="trust-meta">Última atualização: 28 de outubro de 2026.</p>
+    </div>
+  </footer>
+</body>
+</html>

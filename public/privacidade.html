@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Política de Privacidade — Vexx AI</title>
+  <meta name="description" content="Onde ficam as conversas, as chaves de API, a localização e os documentos no Vexx AI; quando os dados saem do seu aparelho e como apagar." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://vexx-ai.space/privacidade" />
+  <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="/trust.css" />
+</head>
+<body>
+  <a class="trust-skip" href="#conteudo">Pular para o conteúdo</a>
+
+  <header class="trust-header">
+    <div class="trust-wrap trust-header-inner">
+      <a class="trust-brand" href="/"><span class="trust-mark" aria-hidden="true">v.</span><span>Vexx AI</span></a>
+      <nav class="trust-nav" aria-label="Navegação institucional">
+        <a href="/sobre">Sobre</a>
+        <a href="/privacidade" aria-current="page">Privacidade</a>
+        <a href="/termos">Termos</a>
+        <a href="/seguranca">Segurança</a>
+        <a href="/contato">Contato</a>
+        <a class="trust-app" href="/">Abrir o app</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="conteudo">
+    <div class="trust-wrap">
+      <div class="trust-hero">
+        <p class="eyebrow">Privacidade</p>
+        <h1>Política de Privacidade<span class="brand-dot">.</span></h1>
+        <p class="lede">O Vexx AI foi desenhado para deixar o histórico no seu aparelho e no seu computador. Esta página explica o que fica onde, o que sai do aparelho e como apagar.</p>
+        <p><span class="badge ok">Relay sem banco de conversas</span> <span class="badge">Chaves de IA só no PC</span></p>
+      </div>
+
+      <div class="notice">
+        <strong>Resumo em uma frase:</strong> conversas e memórias ficam no IndexedDB do navegador e no SQLite do PC; o relay na nuvem autentica e encaminha mensagens, mas não mantém um banco de conversas.
+      </div>
+
+      <h2>1. Quais dados existem e onde ficam</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Dado</th><th>Onde fica</th><th>Para quê</th><th>Como apagar</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Conversas, mensagens, preferências e rascunhos</td>
+              <td>IndexedDB no navegador; cópia no SQLite do PC quando ele está online</td>
+              <td>Histórico, continuidade e sincronização entre aparelho e PC</td>
+              <td>Excluir a conversa, usar “Apagar cache” nos Ajustes ou excluir a conta</td>
+            </tr>
+            <tr>
+              <td>Memórias e fatos confirmados</td>
+              <td>SQLite do PC; cache local no aparelho</td>
+              <td>Lembrar preferências e informações que você confirmou</td>
+              <td>Ajustes → Memória → editar ou remover; excluir a conta</td>
+            </tr>
+            <tr>
+              <td>Conta, nome de exibição e senha</td>
+              <td>Cadastro no SQLite do PC; o relay guarda a configuração da conta proprietária (usuário e hash Argon2id) em variável de ambiente. Contas comuns usam hash scrypt no PC</td>
+              <td>Autenticar o acesso e proteger a conta</td>
+              <td>“Excluir conta” nos Ajustes; a senha nunca é armazenada em texto puro</td>
+            </tr>
+            <tr>
+              <td>Chaves de API dos provedores de IA</td>
+              <td>Somente no PC, no arquivo local do agente; nunca no navegador nem no banco do relay</td>
+              <td>Chamar o provedor de IA escolhido por você</td>
+              <td>Provedores → remover chave; ou apagar a configuração local do agente</td>
+            </tr>
+            <tr>
+              <td>Localização aproximada ou cidade digitada</td>
+              <td>No aparelho; opcional e desligada por padrão</td>
+              <td>Responder perguntas sobre lugares quando você autoriza</td>
+              <td>Ajustes → “Apagar localização”</td>
+            </tr>
+            <tr>
+              <td>Documentos e anexos enviados</td>
+              <td>Enviados ao PC para extração e processamento; não ficam armazenados no relay</td>
+              <td>Ler, resumir, comparar e responder sobre o documento</td>
+              <td>Excluir o anexo ou a conversa; apagar o cache</td>
+            </tr>
+            <tr>
+              <td>Cookie de sessão</td>
+              <td>Navegador; cookie <code>HttpOnly</code>, <code>Secure</code> em produção e <code>SameSite=Strict</code>, com validade de 12 horas</td>
+              <td>Manter você autenticado e proteger contra CSRF</td>
+              <td>Sair da conta ou limpar os cookies do site</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>2. Quando os dados saem do seu aparelho</h2>
+      <p>O Vexx AI não vende dados pessoais e não usa rastreadores de publicidade. Ainda assim, algumas funções dependem de serviços externos:</p>
+      <ul>
+        <li><strong>Provedor de IA escolhido:</strong> o conteúdo da mensagem e o contexto necessário são enviados, pelo PC, ao provedor do modelo selecionado. O tratamento posterior segue a política desse provedor, que pode processar dados fora do Brasil.</li>
+        <li><strong>Pesquisa web:</strong> quando você pede uma pesquisa, os termos da consulta são enviados aos provedores de busca configurados. Não enviamos o histórico inteiro da conversa como parte da consulta.</li>
+        <li><strong>Acesso remoto:</strong> durante uma sessão autorizada, frames da tela e comandos de mouse/teclado passam pelo relay para chegar ao PC. A autorização é dada no PC, vinculada à conta, expira e pode ser revogada. O relay não armazena os frames nem o conteúdo da tela.</li>
+        <li><strong>Infraestrutura:</strong> o relay é hospedado no Render e pode registrar metadados técnicos de acesso (data/hora, rota, código de status e endereço IP) para segurança, limites de uso e diagnóstico. Conteúdo de conversa não entra nesses logs.</li>
+      </ul>
+
+      <h2>3. Cookies e armazenamento local</h2>
+      <p>O site usa um cookie de sessão para autenticação e chaves de <code>localStorage</code>/IndexedDB para preferências e cache. Não há Google Analytics, pixels de redes sociais, Hotjar ou ferramentas equivalentes de rastreamento publicitário no código do site.</p>
+
+      <h2>4. Por quanto tempo os dados ficam</h2>
+      <ul>
+        <li><strong>No aparelho e no PC:</strong> até você excluir a conversa, apagar o cache, remover a memória ou excluir a conta.</li>
+        <li><strong>No relay:</strong> mensagens são encaminhadas e não persistidas em banco. Metadados técnicos de segurança podem permanecer nos logs do provedor de hospedagem pelo período configurado por ele.</li>
+        <li><strong>Nos provedores externos:</strong> conforme as políticas dos provedores de IA e de busca que você escolher.</li>
+      </ul>
+
+      <h2>5. Seus direitos</h2>
+      <p>Você pode acessar, corrigir, exportar e excluir seus dados pelos controles do próprio aplicativo (Ajustes → Conta, Memória, Exportar e Apagar cache). Como a maior parte dos dados fica no seu aparelho e no seu PC, esses controles são a via mais direta.</p>
+      <p>Para solicitações relacionadas aos metadados do relay ou a qualquer dúvida sobre privacidade, abra um issue em <a href="https://github.com/euefrai/Vexx-AI-Mobile/issues" rel="noopener noreferrer">github.com/euefrai/Vexx-AI-Mobile/issues</a>. Não inclua senhas, chaves de API ou dados pessoais sensíveis na issue.</p>
+
+      <h2>6. Segurança</h2>
+      <p>O site usa HTTPS, cabeçalhos de segurança, cookie de sessão <code>HttpOnly</code>/<code>SameSite=Strict</code> e token CSRF. As chaves de IA ficam no PC, e o acesso remoto exige aprovação local. Os detalhes e o canal para relatar vulnerabilidades estão na página de <a href="/seguranca">Segurança</a>.</p>
+
+      <h2>7. Crianças e adolescentes</h2>
+      <p>O Vexx AI não é direcionado a crianças menores de 13 anos. Menores devem usar o aplicativo com conhecimento e supervisão de um responsável.</p>
+
+      <h2>8. Alterações desta política</h2>
+      <p>Se esta política mudar, a data de atualização no rodapé será alterada e as mudanças relevantes serão registradas no repositório. O uso contínuo após uma atualização significa que você teve acesso à nova versão.</p>
+
+      <div class="contact-box">
+        <h2>Contato sobre privacidade</h2>
+        <p>Canal público: <a href="https://github.com/euefrai/Vexx-AI-Mobile/issues" rel="noopener noreferrer">GitHub Issues do projeto</a>. Para relatos sensíveis, siga as orientações de <a href="/seguranca">Segurança</a>.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer class="trust-footer">
+    <div class="trust-wrap">
+      <p>Vexx AI · Projeto independente. Sem empresa, CNPJ ou sede declarados.</p>
+      <nav aria-label="Links institucionais">
+        <a href="/sobre">Sobre</a>
+        <a href="/privacidade">Privacidade</a>
+        <a href="/termos">Termos</a>
+        <a href="/seguranca">Segurança</a>
+        <a href="/contato">Contato</a>
+        <a href="/">Abrir o app</a>
+      </nav>
+      <p class="trust-meta">Última atualização: 28 de outubro de 2026.</p>
+    </div>
+  </footer>
+</body>
+</html>
