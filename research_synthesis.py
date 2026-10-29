@@ -72,12 +72,17 @@ datas, números, unidades e incertezas. Não acrescente aspectos sem evidência.
 Responda todos os aspectos sustentados do objetivo. Prefira uma afirmação curta
 por parágrafo, sem contexto adicional; nunca exceda três referências no parágrafo.
 Se só houver dados parciais, responda só essa parte. Sem suporte: {"points":[]}.
+A autoridade e a proveniência são verificadas pelo aplicativo separadamente.
+Não crie parágrafos sobre credibilidade ou sobre o processo de verificação.
+Priorize as regras gerais e o comportamento padrão documentado antes de casos
+especiais. Em comparações, cubra os aspectos de cada alternativa com suporte;
+não gaste vários parágrafos no mesmo aspecto deixando outro sem resposta.
 """
 
 
-def quote_options(source, *, include_ranges=False):
+def quote_options(source, *, include_ranges=False, scan_limit=1800):
     """Bounded literal selections inside existing, contiguous passage ranges."""
-    excerpt=str(source.get('excerpt') or '')[:1800]
+    excerpt=str(source.get('excerpt') or '')[:min(8000,max(0,scan_limit))]
     ranges=source.get('passage_ranges') or [{'start':0,'end':len(excerpt)}]
     pools=[]
     for span in ranges[:8]:
@@ -94,6 +99,13 @@ def quote_options(source, *, include_ranges=False):
                 if len(chunk.strip())>=24:
                     item={'text':chunk,'_range':span,'_offset':offset}
                     if span.get('table_header'):item['table_header']=str(span['table_header'])[:160]
+                    path=span.get('section_path') or []
+                    heading=path[-1] if path else {};hs=heading.get('source_span') or {};ps=span.get('source_span') or {}
+                    if (heading.get('level')==7 and re.search(r'\b\w+(?:\s*\.\s*\w+)+',heading.get('text',''))
+                            and ps.get('sha256') and hs.get('sha256')==ps['sha256']
+                            and type(hs.get('start')) is int and type(hs.get('end')) is int
+                            and type(ps.get('start')) is int and 0<=hs['start']<hs['end']<=ps['start']):
+                        item['api_signature']=str(heading['text'])[:160]
                     pool.append(item)
                 rest=sentence[len(chunk):]
                 offset+=len(chunk)+len(rest)-len(rest.lstrip());sentence=rest.lstrip()
@@ -104,10 +116,11 @@ def quote_options(source, *, include_ranges=False):
         for pool in pools:
             if index>=len(pool):continue
             item=pool[index]
-            if used+len(item['text'])>1800:continue
+            cost=len(item['text'])+(2 if options else 0)
+            if used+cost>1800:continue
             option={'id':'Q'+str(len(options)+1),**item}
             if not include_ranges:option={k:v for k,v in option.items() if not k.startswith('_')}
-            options.append(option);used+=len(item['text'])
+            options.append(option);used+=cost
             if len(options)==12:return options
     return options
 
@@ -182,7 +195,7 @@ def _unsafe_direction(value):
 class ModelOutputError(ValueError):
     """Format/transport metadata failure, without retaining provider text."""
     def __init__(self, reason):
-        self.reason = reason if reason in ('model_truncated','model_filtered') else 'invalid_output'
+        self.reason = reason if reason in ('model_truncated','model_filtered','no_supported_points') else 'invalid_output'
         super().__init__(self.reason)
 
 
@@ -257,12 +270,13 @@ def _bind_counterevidence(review, point, sources):
                   counterevidence_status=status)
 
 
-def check_support(points, sources, verify_fn, timeout, should_stop=None, *, requirements=None):
+def check_support(points, sources, verify_fn, timeout, should_stop=None, *, requirements=None, review_limit=12):
     if should_stop and should_stop():
         raise ReviewUnavailableError('cancelled')
     if timeout < 2:
         raise ReviewUnavailableError('time_budget')
-    deadline = time.monotonic() + min(12, timeout)
+    review_timeout=min(25,review_limit,timeout)
+    deadline = time.monotonic() + review_timeout
     used = {ref['id'] for p in points for ref in p['evidence']}
     payload = {'task': 'verify_support', 'paragraphs': [
         {'paragraph': i, 'text': p['text'], 'citations': p['evidence']} for i, p in enumerate(points)],
@@ -281,7 +295,7 @@ não o inclua em answers. Não use conhecimento externo. Use [] se nenhum aspect
 Nos estados diferentes de SUPPORTED, não inclua answers.'''
     try:
         raw = verify_fn([{'role': 'system', 'content': system},
-                         {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)}], min(12, timeout))
+                         {'role': 'user', 'content': json.dumps(payload, ensure_ascii=False)}], review_timeout)
     except Exception as exc:
         raise ReviewUnavailableError('provider_error', safe_provider_code(exc)) from None
     if should_stop and should_stop():
@@ -303,6 +317,9 @@ Nos estados diferentes de SUPPORTED, não inclua answers.'''
         if requirements is not None and isinstance(review,dict) and review.get('state')=='SUPPORTED':
             answers=review.pop('answers',[])
             if not isinstance(answers,list) or len(answers)>len(known):raise ValueError('invalid support review')
+        elif isinstance(review,dict) and review.get('answers')==[]:
+            # An empty non-publishing field cannot assert answer coverage.
+            review.pop('answers')
         # Some models attach exact flat excerpts to non-publishing verdicts.
         # Accept only this known variation, with source/claim binding; never
         # salvage SUPPORTED, unknown states, new links or arbitrary extra keys.
@@ -443,6 +460,7 @@ def source_coverage(objective, sources):
     return evidence_graph.requirement_coverage(objective,[{
         'id':s.get('evidence_id') or s['id'],'url':s.get('url',''),'titulo':s.get('title',''),
         'texto':s['excerpt'],'texto_lido':True,'content_scope':s.get('scope','retrieved_excerpt'),
+        **({'source_authority':s['source_authority']} if s.get('source_authority') else {}),
         'answer_passages':[{**p,'id':p.get('id') or f"P-{s['id']}-{p['start']}-{p['end']}",
                             'text':s['excerpt'][p['start']:p['end']],
                             'text_span':{'start':p['start'],'end':p['end'],'scope':'returned_extracted_text'}}
@@ -452,13 +470,58 @@ def source_coverage(objective, sources):
         for s in sources])
 
 
+def _reviewed_api_links(requirement, point, sources, objective):
+    """Only a reviewed named API claim + literal quote + verified API scope.
+
+    This resolves implicit subjects in primary API definitions. Generic headings,
+    tables, title-only matches and version/numeric restrictions keep partial
+    support. The separate reviewer must already approve the entire paragraph.
+    """
+    import python_docs_discovery as docs
+    import evidence_graph as eg
+    import query_intelligence as qi
+    entity=requirement.get('entity','')
+    if (requirement.get('attribute') not in ('cancellation','exceptions')
+            or (requirement.get('constraints') or {}).get('must_preserve')
+            or not re.fullmatch(r'\w+(?:\.\w+)+',entity)):
+        return set()
+    anchor=re.compile(r'(?<![\w.])'+re.escape(entity)+r'(?!\w|\.\w)',re.I)
+    if not anchor.search(point['text']):
+        leaf=entity.rsplit('.',1)[-1]
+        names=set(re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+',objective))
+        same_leaf=[n for n in names if n.rsplit('.',1)[-1].casefold()==leaf.casefold()]
+        if len(same_leaf)!=1 or not re.search(r'(?<![\w.])'+re.escape(leaf)+r'(?!\w|\.\w)',point['text'],re.I):
+            return set()
+    if requirement['attribute']=='exceptions' and not re.search(eg._EXCEPTION_RELATION,qi.normalized(point['text'])):
+        return set()
+    linked=set()
+    for ref in point['evidence']:
+        if requirement['attribute']=='exceptions' and not re.search(eg._EXCEPTION_RELATION,qi.normalized(ref['quote'])):
+            continue
+        source=next((s for s in sources if s['id']==ref['id']),None)
+        if not source or not docs.has_read_authority({**source,'texto_lido':True,
+                                                    'content_scope':source.get('scope')},objective):continue
+        for span in source.get('passage_ranges',[]):
+            quote=source['excerpt'][span['start']:span['end']]
+            if normalized(ref['quote']) not in normalized(quote):continue
+            path=span.get('section_path') or []
+            if not path or path[-1].get('level')!=7:continue
+            heading=path[-1];hs=heading.get('source_span') or {};ps=span.get('source_span') or {}
+            if (anchor.search(re.sub(r'\s*\.\s*','.',heading.get('text','')))
+                    and hs.get('sha256')==ps.get('sha256') and ps.get('sha256')
+                    and type(hs.get('start')) is int and type(hs.get('end')) is int
+                    and type(ps.get('start')) is int and 0<=hs['start']<hs['end']<=ps['start']):
+                linked.add(source['evidence_id'])
+    return linked
+
+
 def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=None, verify_fn=None):
     """Validate structure, citation identity, exact quotes and numeric provenance.
 
     Support is reviewed in a separate call; that assessment can still be wrong.
     Any malformed paragraph rejects the entire candidate (no partial assertions).
     """
-    timeout = min(25, timeout)
+    timeout = min(50, timeout)
     started = time.monotonic()
     if not sources or timeout < 4 or (should_stop and should_stop()):
         return None
@@ -473,18 +536,20 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
                              if catalog_mode else sources)
     requirements = coverage['requirements']
     catalogs={sid:{q['id']:q['text'] for q in quotes} for sid,quotes in options.items()}
-    model_sources=[{**{k:v for k,v in s.items() if k not in ('excerpt','passage_ranges')},
+    model_sources=[{**{k:v for k,v in s.items() if k not in ('excerpt','passage_ranges','source_authority')},
                     'quotes':[{k:v for k,v in q.items() if not k.startswith('_')}
-                              for q in options[s['id']]]} for s in sources] if catalog_mode else sources
+                              for q in options[s['id']]]} for s in sources] if catalog_mode else [
+                                  {k:v for k,v in s.items() if k!='source_authority'} for s in sources]
     messages = [{"role": "system", "content": (CATALOG_SYSTEM if catalog_mode else SYSTEM)+'\nIDs de fonte permitidos: '+allowed_ids}, {"role": "user", "content": json.dumps({
         "objective": objective[:500], "sources": model_sources,
         **({'requirements':[{"id":r['id'],"aspect":r['description'],"entity":r['entity'],
-                             "type":r.get('type','explicit_attribute'),"state":r['state']} for r in requirements]} if requirements else {}),
+                             "type":r.get('type','explicit_attribute'),"state":r['state']} for r in requirements
+                            if r.get('type')!='mandatory_constraint']} if requirements else {}),
         "verification": [{"claim": str(v.get("afirmacao", ""))[:400],
                           "state": v.get("estado", "UNVERIFIED")} for v in verdicts[:12]],
     }, ensure_ascii=False)}]
     # Reserve time for review instead of spending the whole budget on writing.
-    raw = generate_fn(messages, min(15, timeout * .6))
+    raw = generate_fn(messages, min(25, timeout * .5))
     if should_stop and should_stop():
         return None
     normalization=[]
@@ -492,6 +557,8 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
     if not isinstance(body, dict) or set(body) != {"points"}:
         raise ValueError("invalid synthesis schema")
     points = body["points"]
+    if points == []:
+        raise ModelOutputError('no_supported_points')
     if not isinstance(points, list) or not 1 <= len(points) <= 5:
         raise ValueError("invalid synthesis paragraphs")
     index = {s["id"]: s for s in sources}
@@ -500,6 +567,11 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
         if not isinstance(point, dict) or set(point) != {"text", "evidence"}:
             raise ValueError("invalid paragraph schema")
         text, refs = point["text"], point["evidence"]
+        if isinstance(text,str):
+            plain=re.sub(r'`([A-Za-z_]\w*(?:\.[A-Za-z_]\w*)*(?:\(\))?(?:\s*(?:==|=|is)\s*(?:True|False|None))?)`',r'\1',text)
+            if plain!=text:
+                if 'inline_code_identifiers' not in normalization:normalization.append('inline_code_identifiers')
+                text=point['text']=plain
         if (not isinstance(text, str) or not 20 <= len(text.strip()) <= 650
                 or re.search(r"[<>`\[\]{}\\]|https?://|\n|!\(|\]\(", text)
                 or not isinstance(refs, list) or not 1 <= len(refs) <= 3):
@@ -546,7 +618,8 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
         raise ValueError("synthesis exceeds presentation budget")
     semantic_coverage=bool(getattr(generate_fn,'semantic_coverage',False))
     review_args=(points,sources,verify_fn or generate_fn,timeout-(time.monotonic()-started),should_stop)
-    reviews=check_support(*review_args,requirements=requirements) if semantic_coverage else check_support(*review_args)
+    review_options={'review_limit':25} if timeout>25 else {}
+    reviews=check_support(*review_args,requirements=requirements,**review_options) if semantic_coverage else check_support(*review_args,**review_options)
     kept = [r['paragraph'] for r in reviews if r['state'] == 'SUPPORTED']
     if not kept:
         raise SupportReviewError(reviews)
@@ -564,15 +637,21 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
             for answer in review.get('answers',[]):
                 req=requirements_by_id[answer['requirement_id']]
                 linked=cited & set(req.get('confirmed_evidence_ids',[]))
-                if req['state']!='SUPPORTED' or not linked:continue
-                answered[req['id']]=True
+                if req['state']=='PARTIALLY_SUPPORTED':
+                    linked=cited & _reviewed_api_links(req,points[review['paragraph']],sources,objective)
+                    if linked:answered[req['id']]='reviewed_scoped_primary_api'
+                elif req['state']=='SUPPORTED' and linked:
+                    answered[req['id']]='literal_relation_and_review'
+                if not linked or req['id'] not in answered:continue
                 spans.append({**answer,'paragraph':positions[review['paragraph']], 'evidence_ids':sorted(linked)})
         result_requirements=[]
         for req in requirements:
             state=req['state']
+            if req['id'] in answered:state='SUPPORTED'
             if req.get('type','explicit_attribute')=='explicit_attribute' and state=='SUPPORTED' and req['id'] not in answered:
                 state='DISCOVERED'
             result_requirements.append({**req,'state':state,
+                **({'support_method':answered[req['id']]} if req['id'] in answered else {}),
                 'insufficiency_reason':'' if state=='SUPPORTED' else 'Aspecto não confirmado na resposta aprovada.'})
         answer_coverage=evidence_graph.compact_coverage({**coverage,'requirements':result_requirements,
             'complete':all(r['state']=='SUPPORTED' for r in result_requirements),

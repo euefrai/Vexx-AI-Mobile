@@ -1,0 +1,309 @@
+{
+  "scope": "OFFLINE_REPLAY_OF_ACTUAL_MODEL_OUTPUT_NO_NEW_PROVIDER_CALL",
+  "answer_coverage": {
+    "applicable": true,
+    "requirements": [
+      {
+        "id": "R-1ab01b7f7130",
+        "type": "explicit_attribute",
+        "description": "Cancelamento da operação",
+        "entity": "asyncio.TaskGroup",
+        "attribute": "cancellation",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Cancelamento da operação",
+        "candidate_evidence_ids": [
+          "ev-3757f6c09b00"
+        ],
+        "confirmed_evidence_ids": [],
+        "state": "SUPPORTED",
+        "insufficiency_reason": "",
+        "passage_ids": [
+          "P-7be003a3271583a6",
+          "P-1f360d7cf03a3784",
+          "P-fbbc0710112ac906"
+        ],
+        "support_method": "reviewed_scoped_primary_api"
+      },
+      {
+        "id": "R-6264fd61bf15",
+        "type": "explicit_attribute",
+        "description": "Tratamento de exceções",
+        "entity": "asyncio.TaskGroup",
+        "attribute": "exceptions",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Tratamento de exceções",
+        "candidate_evidence_ids": [
+          "ev-3757f6c09b00"
+        ],
+        "confirmed_evidence_ids": [],
+        "state": "SUPPORTED",
+        "insufficiency_reason": "",
+        "passage_ids": [
+          "P-7be003a3271583a6",
+          "P-1f360d7cf03a3784",
+          "P-fbbc0710112ac906"
+        ],
+        "support_method": "reviewed_scoped_primary_api"
+      },
+      {
+        "id": "R-3bb9dc5c37da",
+        "type": "explicit_attribute",
+        "description": "Cancelamento da operação",
+        "entity": "asyncio.gather",
+        "attribute": "cancellation",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Cancelamento da operação",
+        "candidate_evidence_ids": [
+          "ev-3757f6c09b00"
+        ],
+        "confirmed_evidence_ids": [],
+        "state": "SUPPORTED",
+        "insufficiency_reason": "",
+        "passage_ids": [
+          "P-ef3e501558c5a648",
+          "P-a1ab3d8488efd7bd"
+        ],
+        "support_method": "reviewed_scoped_primary_api"
+      },
+      {
+        "id": "R-3e9b3f2d6723",
+        "type": "explicit_attribute",
+        "description": "Tratamento de exceções",
+        "entity": "asyncio.gather",
+        "attribute": "exceptions",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": false,
+          "mandatory_conditions": []
+        },
+        "expected_information": "Tratamento de exceções",
+        "candidate_evidence_ids": [
+          "ev-3757f6c09b00"
+        ],
+        "confirmed_evidence_ids": [],
+        "state": "SUPPORTED",
+        "insufficiency_reason": "",
+        "passage_ids": [
+          "P-ef3e501558c5a648",
+          "P-67918bbcf389ff74"
+        ],
+        "support_method": "reviewed_scoped_primary_api"
+      },
+      {
+        "id": "R-681458b611fc",
+        "type": "mandatory_constraint",
+        "attribute": "source_authority",
+        "entity": "",
+        "description": "Autoridade da fonte solicitada",
+        "expected_information": "Verificação da autoridade para a afirmação, além da pertinência do texto",
+        "state": "SUPPORTED",
+        "constraints": {
+          "reference": "original_request",
+          "must_preserve": true,
+          "mandatory_conditions": []
+        },
+        "candidate_evidence_ids": [],
+        "confirmed_evidence_ids": [
+          "ev-3757f6c09b00"
+        ],
+        "passage_ids": [],
+        "insufficiency_reason": ""
+      }
+    ],
+    "passages": [
+      {
+        "id": "P-7be003a3271583a6",
+        "source_id": "ev-3757f6c09b00",
+        "document_id": "D-73122280def5e4a9c9b266ea",
+        "requirement_id": "R-1ab01b7f7130",
+        "text_span": {
+          "start": 0,
+          "end": 527,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "PARTIAL_ANSWER",
+        "support_label": "PARTIAL_SUPPORT"
+      },
+      {
+        "id": "P-7be003a3271583a6",
+        "source_id": "ev-3757f6c09b00",
+        "document_id": "D-73122280def5e4a9c9b266ea",
+        "requirement_id": "R-6264fd61bf15",
+        "text_span": {
+          "start": 0,
+          "end": 527,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "PARTIAL_ANSWER",
+        "support_label": "PARTIAL_SUPPORT"
+      },
+      {
+        "id": "P-ef3e501558c5a648",
+        "source_id": "ev-3757f6c09b00",
+        "document_id": "D-73122280def5e4a9c9b266ea",
+        "requirement_id": "R-3bb9dc5c37da",
+        "text_span": {
+          "start": 529,
+          "end": 741,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "PARTIAL_ANSWER",
+        "support_label": "PARTIAL_SUPPORT"
+      },
+      {
+        "id": "P-ef3e501558c5a648",
+        "source_id": "ev-3757f6c09b00",
+        "document_id": "D-73122280def5e4a9c9b266ea",
+        "requirement_id": "R-3e9b3f2d6723",
+        "text_span": {
+          "start": 529,
+          "end": 741,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "PARTIAL_ANSWER",
+        "support_label": "PARTIAL_SUPPORT"
+      },
+      {
+        "id": "P-1f360d7cf03a3784",
+        "source_id": "ev-3757f6c09b00",
+        "document_id": "D-73122280def5e4a9c9b266ea",
+        "requirement_id": "R-1ab01b7f7130",
+        "text_span": {
+          "start": 743,
+          "end": 1025,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "PARTIAL_ANSWER",
+        "support_label": "PARTIAL_SUPPORT"
+      },
+      {
+        "id": "P-1f360d7cf03a3784",
+        "source_id": "ev-3757f6c09b00",
+        "document_id": "D-73122280def5e4a9c9b266ea",
+        "requirement_id": "R-6264fd61bf15",
+        "text_span": {
+          "start": 743,
+          "end": 1025,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "PARTIAL_ANSWER",
+        "support_label": "PARTIAL_SUPPORT"
+      },
+      {
+        "id": "P-a1ab3d8488efd7bd",
+        "source_id": "ev-3757f6c09b00",
+        "document_id": "D-73122280def5e4a9c9b266ea",
+        "requirement_id": "R-3bb9dc5c37da",
+        "text_span": {
+          "start": 1027,
+          "end": 1291,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "PARTIAL_ANSWER",
+        "support_label": "PARTIAL_SUPPORT"
+      },
+      {
+        "id": "P-67918bbcf389ff74",
+        "source_id": "ev-3757f6c09b00",
+        "document_id": "D-73122280def5e4a9c9b266ea",
+        "requirement_id": "R-3e9b3f2d6723",
+        "text_span": {
+          "start": 1293,
+          "end": 1412,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "PARTIAL_ANSWER",
+        "support_label": "PARTIAL_SUPPORT"
+      },
+      {
+        "id": "P-fbbc0710112ac906",
+        "source_id": "ev-3757f6c09b00",
+        "document_id": "D-73122280def5e4a9c9b266ea",
+        "requirement_id": "R-1ab01b7f7130",
+        "text_span": {
+          "start": 1414,
+          "end": 1665,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "PARTIAL_ANSWER",
+        "support_label": "PARTIAL_SUPPORT"
+      },
+      {
+        "id": "P-fbbc0710112ac906",
+        "source_id": "ev-3757f6c09b00",
+        "document_id": "D-73122280def5e4a9c9b266ea",
+        "requirement_id": "R-6264fd61bf15",
+        "text_span": {
+          "start": 1414,
+          "end": 1665,
+          "scope": "returned_extracted_text"
+        },
+        "answerability": "PARTIAL_ANSWER",
+        "support_label": "PARTIAL_SUPPORT"
+      }
+    ],
+    "diagnostics": {
+      "read_documents": 1,
+      "generated_passages": 6,
+      "stale_passages_rejected": 0,
+      "matched_bindings": 10,
+      "retained_bindings": 10,
+      "recognized_requirements": 4,
+      "undecomposed_objectives": 0,
+      "direct_requirements": 1,
+      "partial_requirements": 4,
+      "pending_requirements": 4
+    },
+    "fully_decomposed": true,
+    "unparsed_demands": [],
+    "complete": true,
+    "scope": "explicit relation patterns in bounded literal spans; not independent factual verification",
+    "method": "literal_answer_spans_and_separate_support_review",
+    "answer_spans": [
+      {
+        "requirement_id": "R-1ab01b7f7130",
+        "answer": "as tarefas restantes no grupo são canceladas",
+        "paragraph": 0,
+        "evidence_ids": [
+          "ev-3757f6c09b00"
+        ]
+      },
+      {
+        "requirement_id": "R-6264fd61bf15",
+        "answer": "KeyboardInterrupt ou SystemExit, cancelando as tarefas restantes e re-levantando a exceção inicial",
+        "paragraph": 1,
+        "evidence_ids": [
+          "ev-3757f6c09b00"
+        ]
+      },
+      {
+        "requirement_id": "R-3e9b3f2d6723",
+        "answer": "a primeira exceção levantada para a tarefa que o aguarda, a menos que return_exceptions seja True",
+        "paragraph": 2,
+        "evidence_ids": [
+          "ev-3757f6c09b00"
+        ]
+      },
+      {
+        "requirement_id": "R-3bb9dc5c37da",
+        "answer": "é tratado como se tivesse levantado CancelledError, e o chamado cancelamento não afeta outras tarefas",
+        "paragraph": 3,
+        "evidence_ids": [
+          "ev-3757f6c09b00"
+        ]
+      }
+    ]
+  }
+}

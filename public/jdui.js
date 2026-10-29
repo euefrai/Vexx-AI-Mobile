@@ -73,8 +73,8 @@
   }
   function renderProvenance(root, sources) {
     if (!Array.isArray(sources) || !sources.length) return;
-    const box = el('div', 'jdui-provenance');
-    box.appendChild(el('span', '', 'Referências:'));
+    const box = el('details', 'jdui-provenance');
+    box.appendChild(el('summary', '', 'Referências (' + sources.length + ')'));
     const list = document.createElement('ul');
     sources.forEach(source => {
       const item = document.createElement('li');
@@ -2213,15 +2213,18 @@
   }
   function productCardEl(prod, ctx, mini) {
     const card = el('div', 'jdui-pcard' + (mini ? ' mini' : ''));
-    const moldura = el('div', 'jdui-pmedia');
-    moldura.appendChild(productImg(prod.imagem, prod.nome));
-    card.appendChild(moldura);
+    if (prod.imagem) {
+      const moldura = el('div', 'jdui-pmedia');
+      moldura.appendChild(productImg(prod.imagem, prod.nome));
+      card.appendChild(moldura);
+    }
     const corpo = el('div', 'jdui-pbody');
+    if (!prod.imagem) corpo.appendChild(el('small', 'jdui-ploja', 'Sem foto na fonte'));
     corpo.appendChild(el('strong', 'jdui-pnome', prod.nome));
     const marca = [prod.marca, prod.modelo].filter(Boolean).join(' · ');
     if (marca) corpo.appendChild(el('div', 'jdui-pmarca', marca));
     corpo.appendChild(el('div', 'jdui-ppreco', prod.preco || 'Preço não confirmado'));
-    const loja = prod.loja + (prod.verificado_em ? ' · verificado em ' + prod.verificado_em : '');
+    const loja = prod.loja + (prod.verificado_em ? ' · verificado em ' + sourceDate(prod.verificado_em) : '');
     if (prod.loja || prod.verificado_em) corpo.appendChild(el('div', 'jdui-ploja', loja));
     const selo = productSelo(prod);
     if (selo) corpo.appendChild(selo);
@@ -2307,6 +2310,7 @@
   R.productgrid = function (root, props, st, save, ctx) {
     const box = el('div', 'jdui-cards');
     if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    box.appendChild(el('p', 'jdui-research-summary', props.items.length + ' opções · confira pagamento, frete e disponibilidade na loja.'));
     st.ordem = st.ordem || 'preco';
     const barra = el('div', 'jdui-actions');
     const rotulo = el('span', '', 'Ordenar:');
@@ -2517,6 +2521,22 @@
     return button;
   }
 
+  function sourceDate(value) {
+    const text = String(value || '');
+    if (/^\d{4}-\d{2}-\d{2}$/.test(text)) {
+      const date = new Date(text + 'T12:00:00Z');
+      return Number.isFinite(date.getTime()) && date.toISOString().startsWith(text)
+        ? text.split('-').reverse().join('/') : text;
+    }
+    if (/^\d{4}-\d{2}-\d{2}T/.test(text)) {
+      const date = new Date(text);
+      if (Number.isFinite(date.getTime())) return new Intl.DateTimeFormat('pt-BR', {
+        day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit', timeZoneName:'short'
+      }).format(date);
+    }
+    return text;
+  }
+
   R.sources = function (root, props, st, save, ctx) {
     st = st || {}; st.sourceDetails = st.sourceDetails || {};
     const box = el('div', 'jdui-cards jdui-research-sources');
@@ -2571,8 +2591,8 @@
       top.appendChild(el('span', 'jdui-badge st-' + f.status, f.status === 'utilizada' && hasReading(f)
         ? 'Utilizada · ' + (READ[readState(f)] || 'conteúdo recuperado') : READ[readState(f)] || ROT[f.status] || f.status));
       card.appendChild(top);
-        const partes = [f.tipo, f.data ? 'Publicado em ' + f.data : ''].filter(Boolean);
-      if (f.data_evento) partes.push('Acontecimento: ' + f.data_evento);
+        const partes = [f.tipo, f.data ? 'Publicado em ' + sourceDate(f.data) : ''].filter(Boolean);
+      if (f.data_evento) partes.push('Acontecimento: ' + sourceDate(f.data_evento));
       if (f.origem_declarada) partes.push('original declarado: ' + f.origem_declarada);
       const meta = partes.join(' · ');
       if (meta) card.appendChild(el('div', 'jdui-ploja', meta));
@@ -3174,8 +3194,9 @@
         if (!fn) return; // desconhecido: validado fora, ignora silencioso
         const ordinal = componentCounts[b.component] || 0;
         componentCounts[b.component] = ordinal + 1;
-        const legacyKey = si + ':' + bi + ':' + b.component;
-        const key = ctx.stableComponentKeys ? si + ':' + ordinal + ':' + b.component : legacyKey;
+        const messageSlot = si + (Number.isInteger(ctx.slotOffset) && ctx.slotOffset >= 0 ? ctx.slotOffset : 0);
+        const legacyKey = messageSlot + ':' + bi + ':' + b.component;
+        const key = ctx.stableComponentKeys ? messageSlot + ':' + ordinal + ':' + b.component : legacyKey;
         let st = {};
         try { st = ctx.loadState ? (ctx.loadState(key) || (ctx.stableComponentKeys && ctx.loadState(legacyKey)) || {}) : {}; } catch (_) { st = {}; }
         if (!st || typeof st !== 'object') st = {};

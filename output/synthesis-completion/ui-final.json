@@ -1,0 +1,31 @@
+{
+  "scope": "REAL_LOCAL_RESEARCH_NO_FIXTURES",
+  "prompt": "Faça uma pesquisa profunda comparando asyncio.TaskGroup e asyncio.gather em Python. Verifique cancelamento e tratamento de exceções, com documentação oficial.",
+  "elapsedMs": 35592,
+  "answer": "Vexx\n\nResultado da pesquisa\n\nInvestigação: comparando asyncio.TaskGroup e asyncio.gather em Python. Verifique cancelamento e tratamento de exceções, com documentação oficial\n\nE1 Coroutines and tasks (docs.python.org):\n\nThe first time any of the tasks belonging to the group fails with an exception other than asyncio.CancelledError, the remaining tasks in the group are cancelled. No further tasks can then be added to the group.\nIf return_exceptions is False (default), the first raised exception is immediately propagated to the task that awaits on gather(). Other awaitables in the aws sequence won’t be cancelled and will continue to run.\nTwo base exceptions are treated specially: If any task fails with KeyboardInterrupt or SystemExit, the task group still cancels the remaining tasks and waits for them, but then the initial KeyboardInterrupt or SystemExit is re-raised instead of ExceptionGroup or BaseExceptionGroup.\nIf any Task or Future from the aws sequence is cancelled, it is treated as if it raised CancelledError – the gather() call is not cancelled in this case. This is to prevent the cancellation of one submitted Task/Future to cause other Tasks/Futures to be cancelled.\nIf return_exceptions is True, exceptions are treated the same as successful results, and aggregated in the result list.\nIn the case where a task group is cancelled externally and also must raise an ExceptionGroup, it will call the parent task’s cancel() method. This ensures that a asyncio.CancelledError will be raised at the next await, so the cancellation is not lost.\nOnce all tasks have finished, if any tasks have failed with an exception other than asyncio.CancelledError, those exceptions are combined in an ExceptionGroup or BaseExceptionGroup (as appropriate; see their documentation) which is then raised.\n\nEvidências recuperadas: 1. A verificação automática ainda não confirmou todas as afirmações.\n\nSíntese extrativa: a redação assistida não foi concluída ou não passou nas validações; evidências preservadas.\n\nObjetivo: comparando asyncio.TaskGroup e asyncio.gather em Python. Verifique cancelamento e tratamento de exceções, com documentação oficial\n\nStatus: etapas finalizadas; resultado com lacunas · Modo: profunda · Evidências: 1\n\nCobertura dos dados: parcial; há dados pendentes\n\nMídia descoberta: 0 item(ns); imagens não são evidência e vídeos não foram assistidos ou analisados.\n\nLimite epistêmico: a verificação é lexical/determinística; estados não estabelecem causalidade e lacunas permanecem explícitas.\n\nAspectos da pergunta\nBaixar CSV\nAspecto\tEvidência recuperada\nasyncio.TaskGroup · Cancelamento da operação\tParcial\nasyncio.TaskGroup · Tratamento de exceções\tParcial\nasyncio.gather · Cancelamento da operação\tParcial\nasyncio.gather · Tratamento de exceções\tParcial\nAutoridade da fonte solicitada\tIdentidade da fonte verificada\nFontes e estado da leitura\n1 fontes nesta lista · 1 com conteúdo recuperado\n01\nPython documentation\nCoroutines and tasks\nTrecho lido\nFonte\nTexto recuperado · Fonte de contexto\nTrecho recuperado\nThe first time any of the tasks belonging to the group fails with an exception other than asyncio.CancelledError, the remaining tasks in the group are cancelled. No further tasks can then be added to the group. At this point, if the body of the async with statement is still active (i.e., __aexit__()\nProveniência e publicação\nAbrir fonte ↗\nAnalisar fonte\nCriar resumo\nAs ações usam até 6 fontes do filtro selecionado.\n08:57\n···",
+  "sources": 1,
+  "links": [
+    {
+      "text": "E1",
+      "url": "https://docs.python.org/3/library/asyncio-task.html"
+    },
+    {
+      "text": "Coroutines and tasks",
+      "url": "https://docs.python.org/3/library/asyncio-task.html"
+    },
+    {
+      "text": "Abrir fonte ↗",
+      "url": "https://docs.python.org/3/library/asyncio-task.html"
+    }
+  ],
+  "assisted": false,
+  "beforeReload": {
+    "messages": 3,
+    "sources": 1
+  },
+  "afterReload": {
+    "messages": 3,
+    "sources": 1
+  },
+  "errors": []
+}

@@ -19,6 +19,7 @@ Responsabilidades (nada mais):
 Não contorna bloqueios; não usa fonte paga; não inventa resultado.
 """
 import re
+import os
 import time
 import unicodedata
 import urllib.parse
@@ -62,7 +63,7 @@ RX_PRODUTO = re.compile(
     r"onde encontrar|oferta|promoção|promocao|mais barato|barato|loja|modelo|"
     r"marca|vale a pena|custo-?benefício)\b", re.I)
 RX_COMPARACAO = re.compile(
-    r"\b(compare|comparar|comparação|comparacao|versus|\bvs\b|diferença|diferenca|"
+    r"\b(compare|comparar|comparando|comparação|comparacao|versus|\bvs\b|diferença|diferenca|"
     r"melhor entre|qual melhor|prós e contras|pros e contras)\b", re.I)
 RX_TEMPORAL = re.compile(
     r"\b(quando|em que ano|desde|até|ate|prazo|data|vigência|vigencia|"
@@ -353,6 +354,7 @@ def classificar(consulta: str) -> dict:
     if not classes:
         classes.append(sp.CLASSE_GERAL)
     return {"classes": classes, "produto": produto, "comparacao": comparacao,
+            "python_docs": bool(re.search(r'\b(python|asyncio)\b', ta)),
             "temporal": temporal, "tecnica": sp.CLASSE_TECNICA in classes,
             "documentacao": bool(re.search(r"documentacao|documentation|fontes? tecnicas|fontes? oficiais", ta)),
             "academica": sp.CLASSE_ACADEMICA in classes,
@@ -882,7 +884,7 @@ def fontes_preferenciais(consulta: str) -> list:
     entries = []
     if docs and _tem_termo("asyncio", t):
         specific = bool(re.search(r'\b(taskgroup|cancelamento|cancellation|create_task|gather)\b', t))
-        entries.append(("Python asyncio TaskGroup tasks documentation" if specific else "Python asyncio documentation",
+        entries.append(("asyncio.TaskGroup e asyncio.gather — Documentação oficial do Python" if specific else "Python asyncio documentation",
                         "https://docs.python.org/3/library/asyncio-task.html" if specific else "https://docs.python.org/3/library/asyncio.html"))
     if docs and _tem_termo("fastapi", t):
         entries.append(("FastAPI documentation", "https://fastapi.tiangolo.com/"))
@@ -921,6 +923,8 @@ def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
         ordem.append("brasilapi")
     if info.get("cripto"):
         ordem.append("coingecko")
+    if info.get('python_docs') and os.getenv('JULIA_PYTHON_DOCS_DISCOVERY', '1') != '0':
+        ordem.append('python-docs')
     if info.get("academica"):
         ordem.extend(["crossref", "openalex", "arxiv"])
     if info.get("produto"):
@@ -1051,6 +1055,9 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         preferidos = [p for p in priority.get("providers") or () if p in nomes]
         if preferidos:
             nomes = list(dict.fromkeys(preferidos + nomes))[: max(1, int(orc["max_provedores"]))]
+
+    if 'python-docs' in nomes:
+        nomes = ['python-docs'] + [p for p in nomes if p != 'python-docs']
 
     t0 = time.monotonic()
     achados = fontes_preferenciais(consulta) if provedores is None else []

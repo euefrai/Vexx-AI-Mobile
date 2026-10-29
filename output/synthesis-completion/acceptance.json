@@ -1,0 +1,43 @@
+{
+  "executed_at_utc": "2026-10-29T12:04:40.771157+00:00",
+  "scope": "REAL_LOCAL_APPLICATION_PUBLIC_NETWORK_CONFIGURED_MODEL",
+  "model": "poolside/laguna-s-2.1:free",
+  "discovery_without_supplied_url": true,
+  "read_sources": 1,
+  "authority_verified": true,
+  "last_ui_assisted": false,
+  "before_reload": {
+    "messages": 3,
+    "sources": 1
+  },
+  "after_reload": {
+    "messages": 3,
+    "sources": 1
+  },
+  "console_errors": [],
+  "outcome": {
+    "state": "partial",
+    "unresolved_fronts": [
+      "asyncio.TaskGroup cancelamento da operação",
+      "asyncio.TaskGroup tratamento de exceções",
+      "asyncio.gather cancelamento da operação",
+      "asyncio.gather tratamento de exceções"
+    ],
+    "source_authority_unverified": false,
+    "provider_code": "",
+    "read_sources": 1,
+    "reason": "evidências insuficientes ou limitações remanescentes"
+  },
+  "later_provider_failure": "HTTP 429",
+  "live_synthesis_consistently_accepted": false,
+  "focused_tests": {
+    "passed": 166
+  },
+  "full_tests": {
+    "passed": 2104,
+    "skipped": 4,
+    "warnings": 2,
+    "exit_code": 0
+  },
+  "replay_scope": "review-replay.json reuses actual recorded model outputs; not a new provider integration test"
+}

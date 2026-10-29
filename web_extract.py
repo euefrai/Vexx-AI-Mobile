@@ -775,6 +775,8 @@ _SECTION_TERMS = {
     'syntax': r'syntax|sintaxe|signature|assinatura',
     'return_value': r'return(?:s| value)?|retorn\w+',
     'behavior': r'description|descri[cç][aã]o|behavior|comportamento',
+    'cancellation': r'cancell?\w*|cancelamento',
+    'exceptions': r'exceptions?|ExceptionGroup|exce[cç][oõ]es|raises?|propagat\w*',
     'limitations': r'limitations?|restri\w+|cannot|must not|warning|caution',
     'examples': r'examples?|exemplos?',
     'weight': r'weight|peso', 'battery': r'batter(?:y|ies)|bateria',
@@ -807,7 +809,8 @@ def _document_windows(text, root, block, query, url, budget):
     requirements = qi.answer_requirements(query)
     terms = [(r['id'], re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+r')\b', re.I),
               re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+'|'+
-                         _SECTION_HEADINGS.get(r['attribute'], r'(?!)')+r')\b', re.I))
+                         _SECTION_HEADINGS.get(r['attribute'], r'(?!)')+r')\b', re.I),
+              re.compile(r'(?<!\w)'+r'\s*\.\s*'.join(map(re.escape,r['entity'].split('.')))+r'(?!\w)', re.I))
              for r in requirements if r['attribute'] in _SECTION_TERMS]
     if not terms or len(text) <= budget:
         return None
@@ -842,12 +845,17 @@ def _document_windows(text, root, block, query, url, budget):
     # short labels that the legacy paragraph collector deliberately omitted.
     def elements(node):
         if node.tag in _IGNORAR | _PULAR: return
+        if node.tag == 'dd' and any(child.tag in _BLOCO for child in node.filhos):
+            # Preserve paragraphs under a definition's real signature instead
+            # of flattening the entire API body into unrelated 1000-char cuts.
+            for child in node.filhos: yield from elements(child)
+            return
         if node.tag == 'tr' or node.tag in _BLOCO:
             value = _normalizar(_texto_bloco(node))
             if value: yield node, value
             return
         for child in node.filhos: yield from elements(child)
-    pools = {rid:[] for rid,_,_ in terms}
+    pools = {rid:[] for rid,_,_,_ in terms}
     cursor=0; section=''; section_start=0; section_end=0; scanned=0
     section_paths={}; active_headings=[]
     if len(headings)==1 and headings[0]['level']==1 and headings[0]['text']:
@@ -858,7 +866,50 @@ def _document_windows(text, root, block, query, url, budget):
             'source_span':{'start':0,'end':len(heading['text']),
                            'scope':'normalized_dom_heading',
                            'sha256':hashlib.sha256(heading['text'].encode()).hexdigest()}}]
-    table_headers={};row_scopes={}
+    table_headers={};row_scopes={};definition_scopes={};section_apis={}
+    def is_api_signature(value):
+        return bool(re.search(r'(?:^class\s+\w+(?:\s*\.\s*\w+)+\b|\b\w+\s*\()',value))
+    def api_scope(node,pos):
+        definitions=[];owner=node.pai
+        while owner is not None:
+            if owner.tag=='dd' and owner.pai is not None:
+                if owner not in definition_scopes:
+                    previous=None
+                    for sibling in owner.pai.filhos:
+                        if sibling is owner:break
+                        if sibling.tag=='dt':previous=sibling
+                    value=_normalizar(_texto_bloco(previous))[:160] if previous else ''
+                    at=source.rfind(value,0,pos) if value and is_api_signature(value) else -1
+                    definition_scopes[owner]=({'text':value,'source_span':{
+                        'start':at,'end':at+len(value),'scope':'normalized_available_extraction','sha256':digest}}
+                        if at>=0 else None)
+                if definition_scopes[owner]:definitions.append(definition_scopes[owner])
+            if owner is block:break
+            owner=owner.pai
+        if not definitions:
+            # Sphinx places explanatory paragraphs after the class's </dl>.
+            # Only a section with one unambiguous formal API declaration can
+            # supply that subject; adjacent/nested sections never inherit it.
+            section=node.pai
+            while section is not None and section.tag!='section':section=section.pai
+            if section is not None:
+                if section not in section_apis:
+                    signatures=[]
+                    for child in _descendentes(section):
+                        if child.tag!='dt':continue
+                        parent=child.pai
+                        while parent is not None and parent.tag!='section':parent=parent.pai
+                        value=_normalizar(_texto_bloco(child))[:160]
+                        if parent is section and re.match(r'^(?:(?:class|awaitable|async)\s+)*(?:\w+\s*\.\s*)+\w+',value):
+                            signatures.append(value)
+                    section_apis[section]=list(dict.fromkeys(signatures))
+                values=section_apis[section]
+                if len(values)==1:
+                    value=values[0];at=source.rfind(value,0,pos)
+                    if at>=0:definitions.append({'text':value,'basis':'unique_api_in_same_section',
+                        'source_span':{'start':at,'end':at+len(value),
+                                       'scope':'normalized_available_extraction','sha256':digest}})
+        return [{**h,'level':7+i} for i,h in enumerate(reversed(definitions))]
     def table_scope(node,pos):
         table=node.pai
         while table is not None and table.tag!='table':table=table.pai
@@ -877,12 +928,17 @@ def _document_windows(text, root, block, query, url, budget):
         if hi<=lo:return
         chunk=source[lo:hi]
         path=section_paths.get(heading_start,[]) if title else []
-        for rid,rx,heading_rx in terms:
+        for rid,rx,heading_rx,entity_rx in terms:
             hits=list(rx.finditer(chunk))
             heading_match=any(heading_rx.search(h['text']) for h in path)
             if not hits and not heading_match:continue
             # Actual leading labels outrank incidental mentions deep in prose.
             score=8*heading_match+4*bool(hits and hits[0].start()<50)+min(3,len(hits))
+            score += 16*any(entity_rx.search(h['text']) for h in path) + 8*bool(entity_rx.search(chunk))
+            if path and path[-1]['level']>=7:
+                score += 24*bool(entity_rx.search(path[-1]['text']))
+                if entity_rx.search(path[-1]['text']) and re.search(r'\b(?:default|padr[aã]o)\b',chunk,re.I):
+                    score += 8  # Keep the documented default before rare edge cases.
             item=(score,-lo,hi,tag,title,heading_start)
             heap=pools[rid]
             if len(heap)<8:heapq.heappush(heap,item)
@@ -913,6 +969,16 @@ def _document_windows(text, root, block, query, url, budget):
                                'scope':'normalized_available_extraction','sha256':digest}})
             section_paths[pos]=list(active_headings)
             continue
+        if tag=='dt' and is_api_signature(value):
+            continue  # A signature supplies scope, never an answer by itself.
+        # DOM containment restores the enclosing class after a nested method
+        # ends; a flat "last signature" would incorrectly keep that method.
+        scope=active_headings+api_scope(node,pos)
+        if scope and scope[-1]['source_span'].get('sha256')==digest:
+            last=scope[-1];section=last['text'];section_start=last['source_span']['start'];section_end=last['source_span']['end']
+            section_paths[section_start]=scope
+        else:
+            section='';section_start=pos;section_end=pos
         # Long elements are scanned in bounded chunks, never cut before scan.
         lo=pos
         while lo<cursor:

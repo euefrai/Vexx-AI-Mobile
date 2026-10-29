@@ -266,10 +266,16 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
     ]
     used = {eid for claim in resumo.get("achados", []) for eid in
             claim.get("supporting_ids", []) + claim.get("contradicting_ids", [])}
+    import research_agents
+    synthesis=resumo.get('sintese') or {}
+    if synthesis.get('llm'):
+        cited={eid for finding in synthesis.get('findings',[]) for eid in finding.get('evidence_ids',[])}
+        provenance={p.get('evidence_id') for p in synthesis.get('provenance',[])}
+        read={e.get('id') for e in (evidencias or []) if research_agents._evidencia_lida(e)}
+        used.update(cited & provenance & read)
     source_items = []
     # Keep cited sources visible even when they were discovered after the first
     # ten records. Stable ordering within each group preserves discovery order.
-    import research_agents
     ordered = sorted((evidencias or []), key=lambda item: (
         not (item.get('id') in used and research_agents._evidencia_lida(item)),
         not research_agents._evidencia_lida(item)))
@@ -283,9 +289,12 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
         labels = {'SUPPORTED':'Trecho pertinente recuperado', 'PARTIALLY_SUPPORTED':'Parcial',
                   'CONTRADICTED':'Fontes divergem; verificar', 'DISCOVERED':'Ainda não confirmado',
                   'NOT_SEARCHED':'Ainda não confirmado', 'UNAVAILABLE':'Indisponível'}
-        rows = [[_text(r.get('description'),100),labels.get(r.get('state'),'Ainda não confirmado')]
+        rows = [[_text(' · '.join(filter(None, [r.get('entity'), r.get('description')])),180),
+                 'Identidade da fonte verificada' if r.get('attribute')=='source_authority' and r.get('state')=='SUPPORTED'
+                 else labels.get(r.get('state'),'Ainda não confirmado')]
                 for r in coverage.get('requirements',[])[:8]]
-        if (resumo.get('usados',{}).get('research_outcome') or {}).get('source_authority_unverified'):
+        if ((resumo.get('usados',{}).get('research_outcome') or {}).get('source_authority_unverified')
+                and not any(r.get('attribute') == 'source_authority' for r in coverage.get('requirements',[]))):
             rows.append(['Fonte oficial ou primária','Autoridade ainda não verificada'])
         if rows:
             candidatos.append(('table',{'title':'Aspectos da pergunta','columns':['Aspecto','Evidência recuperada'],
@@ -343,6 +352,8 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
                   "interrompida": "interrompida", "cancelada": "cancelada",
                   "falhou": "falhou"}
     outcome = (resumo.get('usados') or {}).get('research_outcome', {})
+    if resumo.get('status') == 'concluida' and outcome.get('state') == 'partial':
+        status_rot['concluida'] = 'etapas finalizadas; resultado com lacunas'
     coverage = {'partial': 'parcial; há dados pendentes',
                 'blocked': 'bloqueada pelo provedor; evidências preservadas; retomada explícita disponível',
                 'complete': 'etapas concluídas no escopo recuperado; consulte as limitações'}

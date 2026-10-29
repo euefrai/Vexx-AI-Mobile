@@ -871,7 +871,13 @@ def interpretar_comando_memoria(db, texto: str, owner=DONO_PADRAO):
         feito = descartar_pendencia(db, owner)
         if feito:
             return (f"Tudo bem, descartei **{feito['key']}** — não guardei nada. 🧹", "mem_descartar")
-    if re.search(r"(pend[eê]ncia|pendente|aguardando confirma|para confirmar|confirma[rçã])", t):
+    pending_query = ''.join(c for c in unicodedata.normalize('NFKD', t) if not unicodedata.combining(c))
+    pending_request = re.fullmatch(
+        r'(?:(?:(?:me )?(?:mostre|liste|veja|ver|listar|mostrar)(?: as| minhas| os)?|'
+        r'o que (?:esta|ha|tem|ficou)|quais(?: sao)?(?: as)?|ha algo|tem algo)\s+)?'
+        r'(?:pendencias|pendentes|memorias? pendentes|aguardando confirmacao|para confirmar|confirmacoes?|confirmar)'
+        r'(?: (?:de|da|na) memoria)?[?.!\s]*', pending_query)
+    if pending_request:
         pend = pendencias(db, owner)
         if not pend:
             return ("Nada aguardando confirmação. 🌱", "mem_pend_vazia")
@@ -3076,6 +3082,13 @@ def _pesquisa_sem_evidencia(extras, shop_res=None, user_text=''):
     return 'Não consegui recuperar fontes pertinentes para responder a essa pesquisa agora. Não vou apresentar informações ou datas como se tivessem sido verificadas. Você pode reformular o assunto ou tentar novamente mais tarde.'
 
 
+def _shopping_sem_ofertas(shop_res):
+    """End a finished search honestly instead of asking LLM to promise more work."""
+    if shop_res is None or shop_res.get('produtos'):
+        return ''
+    return shopping.sanitizar_links_resposta(shopping.resumo_texto(shop_res), shop_res)
+
+
 def _fallback_sem_inferencia(user_text: str, extras: dict, shop_res: dict | None) -> str:
     """Texto determinístico quando o LLM falha: fontes reais E ofertas reais.
 
@@ -3086,9 +3099,12 @@ def _fallback_sem_inferencia(user_text: str, extras: dict, shop_res: dict | None
     if extras.get("fontes"):
         digest = research.resumo_deterministico(extras["fontes"], user_text)
     if shop_res is not None and shop_res.get("produtos"):
-        resumo = shopping.resumo_texto(shop_res)
-        base = digest or ("Não consegui gerar a análise completa agora, mas as "
-                          "ofertas abaixo foram verificadas na fonte:")
+        resumo = shopping.resumo_texto(shop_res, compacto=True)
+        # Shopping sources use a different schema from article sources. An
+        # article digest can falsely say "no relevant sources" beside valid
+        # offer cards, so the successful shopping result supplies its own text.
+        base = ("Não consegui gerar a análise completa agora, mas as "
+                "ofertas abaixo foram verificadas na fonte:")
         if resumo and resumo not in base:
             base = base + "\n\n" + resumo
         return _shopping_aplicar(base, shop_res)
@@ -4027,7 +4043,7 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     # (antes respondia de memória com preços/produtos inventados).
     shop_res = _shopping_executar(db, owner, conv, prep.get("user_text", ""),
                                   extras, messages)
-    without_evidence=_pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
+    without_evidence=_shopping_sem_ofertas(shop_res) or _pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
     if without_evidence:
         return {**ai_resposta_direta(db,mid,conv,modelo,prep['reply_id'],without_evidence,owner),'digest':True}
     try:
@@ -4349,7 +4365,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             shop_res = _shopping_executar(db, owner, conv,
                                           prep.get("user_text", ""), extras,
                                           messages, progresso=_prog_shop)
-        without_evidence=_pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
+        without_evidence=_shopping_sem_ofertas(shop_res) or _pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
         if without_evidence:
             if sessao.parar.is_set():
                 partial=''.join(partial_chunks)

@@ -103,6 +103,20 @@ def test_content_outside_offered_text_cannot_gain_selection_priority(context):
     assert next(r for r in payload['requirements'] if r['aspect'] == 'Produtos')['state'] != 'SUPPORTED'
 
 
+def test_failed_writer_preserves_complementary_literal_passages(context):
+    item = source('two-aspects', FOUNDING, texto=FOUNDING+'\n\n'+PRODUCTS,
+                  answer_passages=[
+                      {'id':'founding','text':FOUNDING,'text_span':{'start':0,'end':len(FOUNDING)}},
+                      {'id':'products','text':PRODUCTS,'text_span':{'start':len(FOUNDING)+2,
+                          'end':len(FOUNDING)+2+len(PRODUCTS)}}])
+    db, job = context
+    result = ra.agente_sintetizador(db, job, [item], [], lambda *_: '{"points":[]}')
+    assert not result['llm']
+    assert FOUNDING in result['texto'] and PRODUCTS in result['texto']
+    assert '> '+FOUNDING in result['texto'] and '> '+PRODUCTS in result['texto']
+    assert result['references'] == {'E1':'two-aspects'}
+
+
 def test_stale_passage_does_not_enter_model_context(context):
     item = source('stale', FOUNDING, texto=FOUNDING, answer_passages=[
         {'id': 'stale-p', 'text': PRODUCTS, 'text_span': {'start': 0, 'end': len(PRODUCTS)}}])

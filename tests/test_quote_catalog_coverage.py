@@ -167,7 +167,9 @@ def test_production_writer_flags_complete_cited_answer_reload_and_review(tmp_pat
                                        pc_agent._research_writer({}, threading.Event()))
         assert result['llm'] and result['answer_coverage']['complete']
         assert [phase for phase, _ in calls] == ['write', 'verify_support']
-        assert all(kw['max_tokens'] == 1800 and kw['timeout'] <= 15 for _, kw in calls)
+        assert all(kw['max_tokens'] == 1800 for _, kw in calls)
+        assert calls[0][1]['timeout']<=25 and calls[1][1]['timeout']<=25
+        assert sum(kw['timeout'] for _,kw in calls)<=50
         assert '[E1](https://example.org/atlas)' in result['texto']
         assert [p['quote'] for p in result['provenance']] == [FOUNDING, PRODUCTS]
         job['sintese'], job['status'] = result, 'concluida'
@@ -176,6 +178,8 @@ def test_production_writer_flags_complete_cited_answer_reload_and_review(tmp_pat
         loaded = ra._resumo(db, ra.carregar_job(db, job['owner'], job['id']))
         assert loaded['sintese']['provenance'] == result['provenance']
         assert PRODUCTS in research_view.build_view(loaded, [evidence])['blocks'][0]['content']
+        cards=next(b['props']['items'] for b in research_view.build_view(loaded,[evidence])['blocks'] if b.get('component')=='sources')
+        assert cards[0]['status']=='utilizada'
         for fmt in ('md', 'csv', 'json'):
             exported, _, _ = research_exports.build_export(loaded, [evidence], [], fmt)
             assert PRODUCTS.encode('utf-8') in exported

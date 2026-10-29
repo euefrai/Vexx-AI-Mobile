@@ -235,6 +235,17 @@ def buscar_bing_news(consulta: str, limite: int = 8, timeout: float = 10.0) -> l
     return buscar_bing(consulta, limite, timeout, _path="/news/search", tipo="noticia")
 
 
+def buscar_python_docs(consulta: str, limite: int = 6, timeout: float = 8.0) -> list:
+    import python_docs_discovery
+    try:
+        rows = python_docs_discovery.search(consulta, limite, timeout)
+    except Exception as exc:
+        raise _traduzir(exc) from None
+    if not rows:
+        raise ErroProvedor('Nenhuma referência correspondente no inventário Python.', 'vazio')
+    return rows
+
+
 def buscar_google_news(consulta: str, limite: int = 8, timeout: float = 10.0) -> list:
     """Public RSS discovery. Aggregator links remain aggregator links, not read evidence."""
     import xml.etree.ElementTree as ET
@@ -700,6 +711,8 @@ def _provedor_disponivel(nome: str, meta: dict) -> bool:
 
 
 PROVEDORES: dict = {
+    'python-docs': {'rotulo': 'Documentação oficial Python (inventário público)',
+                    'classes': (CLASSE_TECNICA,), 'tipo': 'tecnico', 'peso': 9.0, 'fn': buscar_python_docs},
     "crossref": {"rotulo": "Crossref (metadados públicos)", "classes": (CLASSE_ACADEMICA,),
                  "tipo": "academico", "peso": 8.0, "fn": buscar_crossref},
     "ddg": {"rotulo": "DuckDuckGo", "classes": (CLASSE_GERAL, CLASSE_TECNICA, CLASSE_ACADEMICA),

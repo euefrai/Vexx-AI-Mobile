@@ -123,6 +123,12 @@ const root2 = new Element('main');
 JDUI.mount(root2, [{ blocks: [{ type: 'ui', component: 'sources',
   props: { items: [sem] } }] }], {});
 t('card-sem-origem', !root2.textContent.includes('original declarado'));
+const bulkKeys = [], inlineKeys = [];
+const groups = [v.msg, v.msg];
+JDUI.mount(new Element('main'), groups, {loadState: key => {bulkKeys.push(key); return {};}});
+groups.forEach((group, index) => JDUI.mount(new Element('main'), [group],
+  {slotOffset:index, loadState:key => {inlineKeys.push(key); return {};}}));
+t('inline-mount-preserva-chaves', JSON.stringify(bulkKeys) === JSON.stringify(inlineKeys));
 """
 
 

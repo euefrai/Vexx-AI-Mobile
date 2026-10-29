@@ -485,7 +485,7 @@ def test_shopping_aplicar_sem_produtos_anexa_nota_honesta():
            "verificado_em": "2026-10-18T00:00:00"}
     out = pc_agent._shopping_aplicar("Não achei ofertas.", res)
     assert "Não achei ofertas." in out
-    assert "nenhuma página trouxe dados estruturados" in out
+    assert "Não consegui confirmar ofertas" in out
 
 
 def test_validar_resposta_anexa_nota_de_confiabilidade():

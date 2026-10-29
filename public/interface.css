@@ -127,6 +127,11 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .message.ai .bubble h4 {font-size:16px;margin-top:16px;color:var(--text-2)}
 .message.ai .bubble > :first-child {margin-top:0}
 .bubble p {margin:10px 0;line-height:1.75}
+.bubble details.refs {margin-top:16px;padding:0;border:0;border-top:1px solid var(--line);border-radius:0;background:transparent;box-shadow:none}
+.bubble .refs summary {min-height:44px;align-content:center;cursor:pointer;color:var(--text-2);font-size:12px}
+.bubble .refs[open] {padding-bottom:10px}
+.bubble .refs summary:focus-visible {outline:2px solid var(--purple);outline-offset:3px;border-radius:4px}
+.bubble .refs .reference-item {margin:6px 0;font-size:12px;line-height:1.6}
 .bubble ul,.bubble ol {margin:10px 0;padding-left:24px}
 .bubble li {padding-left:3px;margin:6px 0;font-size:inherit;line-height:1.7}
 .bubble li::marker {color:var(--purple)}
@@ -152,8 +157,8 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .bubble tbody tr:last-child td {border-bottom:0}
 .bubble tbody tr:hover {background:rgba(182,163,237,.055)}
 .bubble hr {border:0;border-top:1px solid var(--line-strong);margin:20px 0}
-.bubble-avatar {background:none;color:var(--purple);box-shadow:none;font-size:20px;letter-spacing:-1px;margin:0;width:26px;height:30px}
-.sender {font-size:13px;color:var(--text);font-weight:500;margin:0 0 8px}
+.bubble-avatar {display:none}
+.sender {font-size:12px;color:var(--text-2);font-weight:500;margin:0 0 10px}
 .msg-time,.message-ack,.model-badge,.latency-tag,.msg-copy {font-size:11px;font-weight:400}
 .message-ack.synced {color:var(--muted);font-weight:400}
 .message.failed .bubble {border:1px solid var(--danger);padding:12px;border-radius:12px}
@@ -337,6 +342,8 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .jdui-media-grid .jdui-pnome {font-size:14px;line-height:1.5;letter-spacing:-.01em}
 .jdui-slot .jdui-badge {border:0;background:var(--surface-3);color:var(--text-2);font-size:11px;font-weight:400}
 .jdui-slot .jdui-btn {min-height:40px;border-radius:10px;transition:background-color .15s,transform .15s}
+.bubble .jdui-slot a.jdui-btn {color:#17141f;text-decoration:none;word-break:normal}
+.bubble .jdui-slot a.jdui-btn.ghost {color:var(--text)}
 .jdui-slot .jdui-btn:active {transform:translateY(1px)}
 .jdui-slot .jdui-btn:focus-visible,.jdui-image-dialog button:focus-visible,.jdui-image-dialog a:focus-visible {outline:2px solid var(--text);outline-offset:3px}
 .jdui-image-dialog {background:var(--surface-2);padding:16px;max-width:min(96vw,1100px)}
@@ -369,7 +376,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .jdui-research-filters {display:flex;flex-wrap:wrap;gap:6px;margin:0 0 14px}
 .jdui-research-filters .jdui-btn {font-size:12px;padding:7px 11px}
 .jdui-slot .jdui-research-filters [aria-pressed=true] {background:var(--surface-3);border-color:var(--text-3);color:var(--text)}
-.jdui-source-list {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:12px}
+.jdui-source-list {display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px}
 .jdui-source-list .jdui-srccard {height:100%;margin:0}
 .jdui-slot .jdui-source-list [hidden],.jdui-product-comparison [hidden] {display:none!important}
 .jdui-source-identity {display:flex;align-items:center;gap:9px;font-size:11px;color:var(--text-2);min-width:0;overflow-wrap:anywhere}
@@ -391,6 +398,13 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .jdui-comparison-card {min-width:0;border:1px solid var(--line);border-radius:14px;padding:16px;background:var(--surface-2)}
 .jdui-comparison-card h3 {font-weight:550;font-size:14px;line-height:1.6;margin:0 0 12px;letter-spacing:-.01em}
 .jdui-comparison-card>.jdui-btn {margin-top:12px}
+.jdui-slot .jdui-provenance {border-top:1px solid var(--line);padding-top:6px;margin-top:14px;min-width:0}
+.jdui-provenance summary {cursor:pointer;min-height:40px;align-content:center;font-size:12px;color:var(--text-2)}
+.jdui-provenance ul {padding:0 0 0 18px;margin:8px 0;line-height:1.6}
+.jdui-provenance li {margin:8px 0}
+.jdui-provenance a {color:var(--text);text-decoration-color:var(--line)}
+.jdui-provenance summary:focus-visible {outline:2px solid var(--purple);outline-offset:3px;border-radius:4px}
+@media(pointer:coarse){.jdui-provenance summary{min-height:44px}}
 .jdui-comparison-facts {margin:0;font-size:12px}
 .jdui-comparison-facts>div {padding:9px 0;border-top:1px solid var(--line);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:10px;overflow-wrap:anywhere}
 .jdui-comparison-facts dt {color:var(--text-2)}

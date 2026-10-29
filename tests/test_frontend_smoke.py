@@ -44,6 +44,10 @@ function validUrl(u) {
   } catch (_) { return ''; }
 }
 eval(src.slice(start, end));
+if (!renderMarkdown('_Nota de leitura_ e __Conclusão__').includes('<em>Nota de leitura</em>')) throw Error('underscore emphasis');
+if (!renderMarkdown('__Conclusão__').includes('<strong>Conclusão</strong>')) throw Error('underscore strong');
+const underscoreUrl = renderMarkdown('https://example.com/a_b_c?q=snake_case e `snake_case`');
+if (!underscoreUrl.includes('href="https://example.com/a_b_c?q=snake_case"') || !underscoreUrl.includes('<code>snake_case</code>')) throw Error('underscore URL/code corruption');
 const t = (name, cond) => {
   if (!cond) { console.error('FAIL ' + name); process.exitCode = 1; }
   else console.log('ok ' + name);

@@ -10,6 +10,8 @@ def _isolated_optional_retrieval_services(monkeypatch):
     """Optional integrations are enabled explicitly by their mocked tests."""
     monkeypatch.setenv('JULIA_PUBLIC_STORE_RENDER','0')
     monkeypatch.setenv('JULIA_PREFERRED_NEWS_FEEDS','0')
+    monkeypatch.setenv('JULIA_NATIVE_STORE_SEARCH','0')
+    monkeypatch.setenv('JULIA_PYTHON_DOCS_DISCOVERY','0')
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import server  # noqa: E402

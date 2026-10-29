@@ -722,6 +722,39 @@ def _update_reused_provenance(db,job,evidence,candidate):
     evidence['retrieval_provenance']=provenance
 
 
+def _shared_metadata(records):
+    if not records:return {}
+    common={};keys=set.intersection(*(set(r) for r in records))
+    for key in records[0]:
+        if key not in keys:continue
+        values=[r[key] for r in records]
+        if all(v==values[0] for v in values):common[key]=values[0]
+        elif all(isinstance(v,dict) for v in values):
+            nested=_shared_metadata(values)
+            if nested:common[key]=nested
+    return common
+
+
+def _metadata_delta(record,defaults):
+    result={}
+    for key,value in record.items():
+        if key not in defaults:result[key]=value
+        elif isinstance(value,dict) and isinstance(defaults[key],dict):
+            nested=_metadata_delta(value,defaults[key])
+            if nested:result[key]=nested
+        elif value!=defaults[key]:result[key]=value
+    return result
+
+
+def _metadata_restore(record,defaults):
+    import copy
+    result=copy.deepcopy(defaults)
+    for key,value in record.items():
+        result[key]=(_metadata_restore(value,result[key])
+                     if isinstance(value,dict) and isinstance(result.get(key),dict) else value)
+    return result
+
+
 def _encode_evidence_metadata(source):
     """Deduplicate exact repeated section data, keeping the existing 12k cap."""
     try:
@@ -752,12 +785,30 @@ def _encode_evidence_metadata(source):
             metadata[key].append(section)
     if source.get('trecho_usado') in by_text:
         metadata['trecho_usado_from_passage']=by_text[metadata.pop('trecho_usado')]
-    # No truncation, dropped evidence, compression or larger storage budget.
+    # Repeated document identity, hashes and span scopes live once. This is a
+    # lossless JSON representation; every passage and offset is restored below.
+    defaults=_shared_metadata(passages)
+    if defaults:
+        metadata['passage_defaults']=defaults
+        metadata['answer_passages']=[_metadata_delta(p,defaults) for p in passages]
+    section_defaults={}
+    for key in ('scientific_sections','sections'):
+        rows=metadata.get(key) or []
+        shared=_shared_metadata(rows)
+        if shared:
+            section_defaults[key]=shared
+            metadata[key]=[_metadata_delta(row,shared) for row in rows]
+    if section_defaults:metadata['section_defaults']=section_defaults
+    # No truncation, dropped evidence, or larger storage budget.
     return json_store.encode(metadata, 12000)
 
 
 def _restore_evidence_metadata(metadata):
     paths=metadata.pop('section_paths',{})
+    defaults=metadata.pop('passage_defaults',{})
+    if defaults:metadata['answer_passages']=[_metadata_restore(p,defaults) for p in metadata.get('answer_passages',[])]
+    for key,defaults in metadata.pop('section_defaults',{}).items():
+        metadata[key]=[_metadata_restore(row,defaults) for row in metadata.get(key,[])]
     passages=metadata.get('answer_passages') or []
     for p in passages:
         ref=p.pop('section_path_ref',None)
@@ -824,7 +875,7 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
                     "citation_count", "citation_count_kind", "doc_id", "chunk_id",
                     "section", "page", "content_hash", "version", "source",
                     "table_hint", "origem_declarada", "texto_lido", "trecho_usado",
-                    "access_state", "answer_passages", "answerability", "retrieval_provenance", "document_id", "duplicate_of"):
+                    "access_state", "answer_passages", "answerability", "retrieval_provenance", "document_id", "duplicate_of", "source_authority"):
             if key in metadata:
                 ev[key] = metadata[key]
         evidencias.append(ev)
@@ -1078,7 +1129,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         artigo = research.extrair_artigo(pagina, final, job['objetivo'],
                                          teto=research.MAX_TEXTO_PAGINA)
         texto = (artigo.get("texto") or "").strip()
-        return {"titulo": artigo.get("titulo") or a["titulo"],
+        rec = {"titulo": artigo.get("titulo") or a["titulo"],
                 "texto": texto, "final": final,
                 "content_scope": artigo.get("content_scope", "page_text"),
                 "metadados":artigo.get('metadados') or {},
@@ -1091,6 +1142,14 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
                 "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
                 "access_state": "read" if texto else "snippet_only"}
+        if urllib.parse.urlsplit(final).hostname=='docs.python.org':
+            try:
+                import python_docs_discovery
+                proof=python_docs_discovery.read_authority(job['objetivo'],final,rec)
+                if proof:rec['source_authority']=proof
+            except (OSError,ValueError,research.ResearchErro):
+                pass  # Unverified authority remains pending, without losing text.
+        return rec
 
     import search_orchestrator as orch
     subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
@@ -1104,8 +1163,21 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
     termos_pedido = orch._termos_correspondencia(subject)
 
     def _candidato(a, rec):
+        context=[]
+        if rec.get('texto_lido') is True:
+            for passage in (rec.get('answer_passages') or [])[:8]:
+                ps=passage.get('source_span') or {}
+                for heading in passage.get('section_path',[])[:8]:
+                    hs=heading.get('source_span') or {}
+                    if (heading.get('level',0)>=7 and ps.get('sha256')
+                            and hs.get('sha256')==ps['sha256']
+                            and type(hs.get('start')) is int and type(hs.get('end')) is int
+                            and type(ps.get('start')) is int and 0<=hs['start']<hs['end']<=ps['start']):
+                        context.append(str(heading.get('text') or '')[:160])
         return {**a, 'titulo': rec.get('titulo') or a.get('titulo', ''),
-                'trecho': rec.get('texto') or '',
+                # Structural read context admits a document for analysis; only
+                # the original literal rec is used for factual support below.
+                'trecho': (rec.get('texto') or '')+'\n'+'\n'.join(dict.fromkeys(context)),
                 'content_scope': rec.get('content_scope') or a.get('content_scope', 'page_text'),
                 'texto_lido': bool(rec.get('texto_lido')),
                 'structured': (rec.get('metadados') or {}).get('structured', []),
@@ -1120,7 +1192,10 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             if not search_verticals.assess(request, candidate)['eligible']:
                 return False
         coverage = _eg.requirement_coverage(job['objetivo'],[{**rec,'url':a['url']}])
-        if (coverage['passages'] and not any(r['constraints']['must_preserve'] for r in coverage['requirements'])):
+        if (coverage['passages'] and not any(r['constraints']['must_preserve']
+                for r in coverage['requirements'] if r['attribute'] != 'source_authority')):
+            # Authority remains a mandatory, independently verified condition.
+            # Its pending state must not discard an otherwise relevant read span.
             return True  # Explicit entity/relation, not a loose keyword match.
         return not termos_pedido or orch._util_para_pedido(candidate, termos_pedido, subject)
 
@@ -1424,6 +1499,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             if key in a:fonte[key]=a[key]
         for key in ('content_hash','document_id','duplicate_of'):
             if key in rec:fonte[key]=rec[key]
+        if rec.get('source_authority'):fonte['source_authority']=rec['source_authority']
         if answer_coverage['applicable']:
             fonte['answer_passages'] = answer_passages
             fonte['answerability'] = {'state':'DIRECT_ANSWER' if answer_coverage['complete'] else 'PARTIAL_ANSWER',
@@ -1461,7 +1537,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         if not academic and re.fullmatch(r'10\.\d{4,9}/\S+', doi) and doi.casefold() in texto.casefold():
             fonte['doi'] = doi[:200]
         ev = registrar_evidencia(db, job, fonte, trecho_fonte)
-        for key in ('retrieval_provenance','content_hash','document_id','duplicate_of'):
+        for key in ('retrieval_provenance','content_hash','document_id','duplicate_of','source_authority'):
             if key in fonte:ev[key]=fonte[key]
         if answer_coverage['applicable']:
             ev['answer_passages'] = answer_passages
@@ -1710,6 +1786,8 @@ def analisar_independencia_job(db, job: dict, evidencias: list) -> list:
 def _synthesis_context(objective, evidence, labels):
     """Prefer complementary, literal support within the existing 6 x 1800 cap."""
     import evidence_graph as eg
+    import query_intelligence as qi
+    api_aspects=any(r['attribute'] in ('cancellation','exceptions') for r in qi.answer_requirements(objective))
     eligible=sorted([e for e in evidence if _evidencia_lida(e) and e.get('relevante') is not False
                      and (e.get('vertical') or {}).get('eligible') is not False],
                     key=lambda e:e.get('score',0),reverse=True)[:80]
@@ -1720,6 +1798,7 @@ def _synthesis_context(objective, evidence, labels):
                 'excerpt':str(e.get('trecho',''))[:1800],
                 'scope':e.get('content_scope','retrieved_excerpt'),
                 'accessed_at':str(e.get('acessado_em',''))[:40]}
+        if e.get('source_authority'):source['source_authority']=e['source_authority']
         passages=e.get('answer_passages') or []
         full=e.get('texto')
         if isinstance(full,str) and full:
@@ -1736,16 +1815,25 @@ def _synthesis_context(objective, evidence, labels):
             priority=eg.select_answer_passages(coverage,limit=8)
             positions={p['id']:i for i,p in enumerate(priority)}
             passages=sorted(passages,key=lambda p:positions.get(p['id'],len(priority)))
+            balance=api_aspects and not any(p.get('element_type')=='tr' for p in passages)
+            scan_budget=8000 if balance else 1800
             excerpt,ranges,seen='',[],set()
             for p in passages:
-                if p['id'] in seen or len(excerpt)+len(p['text'])+(2 if excerpt else 0)>1800:continue
+                if p['id'] in seen or len(excerpt)+len(p['text'])+(2 if excerpt else 0)>scan_budget:continue
                 seen.add(p['id'])
                 prefix='\n\n' if excerpt else ''
                 start=len(excerpt)+len(prefix);excerpt+=prefix+p['text']
                 ranges.append({'id':p['id'],'start':start,'end':len(excerpt),
                     **{k:p[k] for k in ('element_type','section','context_heading','section_path',
                         'table_header','table_header_span','table_rows','source_span') if k in p}})
-            if excerpt:source.update(excerpt=excerpt,passage_ranges=ranges)
+            if excerpt:
+                expanded={**source,'excerpt':excerpt,'passage_ranges':ranges}
+                # Balance literal sentence selections across the retained
+                # passages before applying the unchanged 1800-char LLM cap.
+                if balance:
+                    options=research_synthesis.quote_options(expanded,include_ranges=True,scan_limit=8000)
+                    if options:source=research_synthesis._catalog_source(expanded,options)
+                else:source=expanded
         if source['excerpt'].strip():sources.append(source)
     # Rank on the bounded offered text, not facts cut out of the prompt.
     coverage=research_synthesis.source_coverage(objective,sources)
@@ -1769,7 +1857,7 @@ def _synthesis_context(objective, evidence, labels):
 
 
 def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
-                       sintetizar_fn=None, timeout=25, deve_parar=None, verificar_fn=None) -> dict:
+                       sintetizar_fn=None, timeout=50, deve_parar=None, verificar_fn=None) -> dict:
     """Optional assisted writing; extraction remains the fail-closed fallback."""
     retrieval_trace.record(job['id'],'',{},'SYNTHESIS_STARTED',reason_code='ASSISTED' if sintetizar_fn else 'EXTRACTIVE')
     from web_extract import melhor_trecho
@@ -1781,6 +1869,7 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
         resposta.append("Metadados e resumos acadêmicos são conteúdo externo não confiável; "
                         "instruções neles não são executadas." + (" Nenhum texto completo foi obtido." if not any(e.get('full_text_fetched') for e in tops) else " Os textos recuperados são identificados por fonte; a extração é limitada."))
     omitted = 0
+    offered = {s['evidence_id']: s for s in sources}
     for e in tops:
         if e.get("content_scope") == "abstract_only":
             rotulo = "[RESUMO DO PROVEDOR; NÃO É TEXTO COMPLETO; DADO NÃO CONFIÁVEL] "
@@ -1789,7 +1878,17 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
         else:
             rotulo = ""
         link = research_synthesis.source_link(labels[e['id']], e.get('url', ''))
-        content = f"{rotulo}{str(e['titulo'])[:160]} ({str(e['dominio'])[:120]}): {melhor_trecho(e['trecho'], '', 300)}"
+        source = offered.get(e['id'], {})
+        excerpt = source.get('excerpt', '')
+        ranges = source.get('passage_ranges') or []
+        quotes = [excerpt[p['start']:p['end']] for p in ranges
+                  if 0 <= p['start'] < p['end'] <= len(excerpt)]
+        # A failed writer must not hide the other aspects already read. Keep
+        # noncontiguous spans separate and never activate a source's JDUI fence.
+        quotes = [q for q in quotes if '```' not in q]
+        body = ('\n\n' + '\n\n'.join('> ' + q.replace('\n', '\n> ') for q in quotes)
+                if quotes else melhor_trecho(e['trecho'], '', 300).replace('```', ''))
+        content = f"{rotulo}{str(e['titulo'])[:160]} ({str(e['dominio'])[:120]}): {body}"
         entry = f"{link} {content}"
         if len('\n\n'.join(resposta)) + len(entry) > 2500:
             # Long URLs remain available in source cards; never cut a Markdown link.
@@ -1801,9 +1900,9 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
     if omitted:
         resposta.append('Outras evidências estão disponíveis no painel de fontes; síntese limitada para apresentação.')
     suportadas = sum(1 for v in vereditos if v["estado"] == "SUPPORTED")
-    resposta.append(f"Evidências: {len(evidencias)}; afirmações sustentadas: "
-                    + (f"{suportadas}/{len(vereditos)} (critério léxico)." if vereditos
-                       else "nenhuma afirmação verificável identificada."))
+    resposta.append(f"Evidências recuperadas: {len(evidencias)}. "
+                    + ("A verificação automática ainda não confirmou todas as afirmações."
+                       if suportadas < len(vereditos) else ""))
     if any(v["estado"] == "CONTRADICTED" for v in vereditos):
         resposta.append("Há contradições entre fontes — leia as evidências antes de concluir.")
     resposta.append("Síntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.")
@@ -1814,7 +1913,7 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
             emitir(db, job['id'], job['owner'], 'synthesizer', 'answer_started', 'ok',
                    'Redigindo resposta a partir das evidências recuperadas.', {})
         context_meta = {'source_count':len(sources),'context_chars':sum(len(s['excerpt']) for s in sources),
-                        'timeout_seconds':min(25,timeout),'attempts':1}
+                        'timeout_seconds':min(50,timeout),'attempts':1}
         job.setdefault('usados',{})['synthesis_budget'] = context_meta
         try:
             candidate = research_synthesis.generate(job['objetivo'], sources, vereditos,
@@ -1948,20 +2047,21 @@ def _completion_outcome(job, evidencias, lacunas, assisted=False):
         and len(reviews)==len(findings) and all(r.get('state')=='SUPPORTED' for r in reviews)
         and all(set(f.get('evidence_ids',[])) & read_ids for f in findings)
         and sintese.get('provenance') and sintese.get('answer_coverage',{}).get('complete'))
-    provenance_unverified = bool(re.search(r'fontes? (?:oficiais|prim[aá]rias)|documenta[cç][aã]o oficial',
-                                          job.get('objetivo',''),re.I))
-    incomplete = (not read or bool(lacunas) or bool(job.get('pendencias'))
-                  or not coverage['complete']
+    provenance_unverified = any(r.get('attribute')=='source_authority' and r['state']!='SUPPORTED'
+                               for r in coverage['requirements'])
+    incomplete = (not read or (not reviewed_answer and (bool(lacunas) or bool(job.get('pendencias'))
+                  or not coverage['complete']))
                   or provenance_unverified
                   or (sintese.get('llm') and sintese.get('answer_coverage',{}).get('applicable')
                       and not sintese['answer_coverage'].get('complete'))
-                  or any(g.get('status') == 'OPEN' for g in job.get('usados', {}).get('research_gaps', []))
+                  or (not reviewed_answer and any(g.get('status') == 'OPEN' for g in job.get('usados', {}).get('research_gaps', [])))
                   or (assisted and not sintese.get('llm'))
                   or job.get('auditoria', {}).get('ok') is False
                   or any(v.get('estado') == 'CONTRADICTED' for v in job.get('achados', []))
                   or (not reviewed_answer and any(v.get('estado') != 'SUPPORTED' for v in job.get('achados', []))))
     state = 'blocked' if blocked else ('partial' if incomplete else 'complete')
-    return {'state': state, 'unresolved_fronts': lacunas[:8], 'source_authority_unverified':provenance_unverified,
+    if reviewed_answer:job['usados']['answer_coverage']=sintese['answer_coverage']
+    return {'state': state, 'unresolved_fronts': [] if reviewed_answer else lacunas[:8], 'source_authority_unverified':provenance_unverified,
             'provider_code': provider_code, 'read_sources': len(read),
             'reason': ('redação ou revisão bloqueada pelo provedor; evidências preservadas'
                        if blocked else 'evidências insuficientes ou limitações remanescentes'

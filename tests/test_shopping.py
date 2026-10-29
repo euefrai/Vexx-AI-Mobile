@@ -386,6 +386,29 @@ def test_cache_historico_marcado():
     assert shopping.consulta_em_cache(db, "bob", "celular samsung") is None
 
 
+def test_cache_associado_ao_novo_chat_sem_renovar_preco_ou_expiracao():
+    db = _db()
+    try:
+        query = 'celular Samsung'
+        criteria = shopping.extrair_criterios(query)
+        key = (criteria['categoria'] + ' ' + ' '.join(criteria['marcas'])).strip()
+        result = {'produtos': [_produto_base(), _produto_base(nome='Outro celular')],
+                  'fontes': [], 'criterios': criteria, 'verificado_em': shopping.agora_iso()}
+        shopping.salvar_consulta(db, 'ana', 'chat-a', key, criteria, result)
+        original = shopping.ultima_consulta(db, 'ana', 'chat-a')
+        cached = shopping.pesquisar(db, 'ana', query, 'chat-b',
+                                   buscar_fn=lambda *_: pytest.fail('Cache should avoid search'))
+        linked = shopping.ultima_consulta(db, 'ana', 'chat-b')
+        assert cached['de_cache'] and linked
+        assert linked['expira_em'] == original['expira_em']
+        assert linked['resultado']['verificado_em'] == result['verificado_em']
+        assert shopping.consulta_em_cache(db, 'ana', key)['verificado_em'] == result['verificado_em']
+        assert shopping.responder_followup(db, 'ana', 'chat-b', 'compare as duas primeiras')['fence']
+        assert shopping.ultima_consulta(db, 'bob', 'chat-b') is None
+    finally:
+        db.close()
+
+
 def test_followups_reusam_consulta():
     db = _db()
     a = _produto_base()

@@ -457,9 +457,6 @@ function inlineFmt(s, sources = {}) {
   });
   s = s.replace(/\[(S\d+)\]/gi, (m, id) => sources[id.toUpperCase()]
     ? keep('<a class="citation" href="' + esc(sources[id.toUpperCase()]) + '" target="_blank" rel="noopener noreferrer" aria-label="Fonte ' + id.toUpperCase() + '">' + m + '</a>') : m);
-  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-  s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>');
-  s = s.replace(/(^|[^*\w])\*([^*\n]+)\*/g, '$1<em>$2</em>');
   // Autolink SÓ em texto puro: nunca dentro de tags/atributos já gerados
   // (img src, href, code, onerror). Prefixo válido: início, espaço ou '('.
   s = s.replace(/(^|[\s(])(https?:\/\/[^\s<\]\)]+)/g, (m, pre, url) => {
@@ -467,8 +464,14 @@ function inlineFmt(s, sources = {}) {
     let u = url, suf = '';
     if (e) { u = url.slice(0, -e[0].length); suf = e[0]; }
     if (!u) return m;
-    return pre + '<a href="' + u + '" title="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(rotuloUrl(u)) + '</a>' + suf;
+    return pre + keep('<a href="' + u + '" title="' + esc(u) + '" target="_blank" rel="noopener noreferrer">' + esc(rotuloUrl(u)) + '</a>') + suf;
   });
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+  s = s.replace(/(^|[^*\w])\*([^*\n]+)\*/g, '$1<em>$2</em>');
+  // Standard underscore emphasis, without touching snake_case or URL tokens.
+  s = s.replace(/(^|[^\p{L}\p{N}_])__([^_\n]+)__(?![\p{L}\p{N}_])/gu, '$1<strong>$2</strong>');
+  s = s.replace(/(^|[^\p{L}\p{N}_])_([^_\n]+)_(?![\p{L}\p{N}_])/gu, '$1<em>$2</em>');
   return s.replace(/\u0001INLINE(\d+)\u0001/g, (_, n) => tokens[Number(n)] || '');
 }
 function srcdocEsc(s) {
@@ -561,7 +564,7 @@ function renderMarkdown(text) {
     const lis = items.slice(1).map(l => {
       return '<div class="reference-item">' + formatInline(l.replace(/^[-*]\s+/, '')) + '</div>';
     }).join('');
-    refsHtml = '<div class="refs"><strong>Fontes e referências</strong>' + (lis || '<span>' + (items[0] || '') + '</span>') + '</div>';
+    refsHtml = '<details class="refs"><summary>Fontes e referências</summary>' + (lis || '<span>' + (items[0] || '') + '</span>') + '</details>';
   }
   const html = [];
   const lines = escapeHtml(src).split('\n');
@@ -767,8 +770,8 @@ function appendMessage(row) {
     try {
       // V4.3 §12: patch in-place — blocos com update_of remontam a bolha alvo
       // com o ctx da mensagem ORIGINAL (estado preservado pelas mesmas chaves).
-      const resto = [];
-      jslots.forEach(slot => {
+      let mountedSlot = 0;
+      jslots.forEach((slot, sourceSlot) => {
         const alvo = slot && slot.update_of;
         const elAlvo = (typeof alvo === 'string' && alvo)
           ? conversation.querySelector('[data-mid="' + alvo + '"] .bubble') : null;
@@ -778,9 +781,11 @@ function appendMessage(row) {
             const alvoRow = rows.find(m => m.id === alvo);
             if (alvoRow) { try { JDUI.mount(elAlvo, [slot], jduiCtx(alvoRow)); } catch (_) {} }
           });
-        } else resto.push(slot);
+        } else {
+          const host = bubble.querySelector('[data-jdui="' + sourceSlot + '"]') || bubble;
+          JDUI.mount(host, [slot], { ...jduiCtx(row), slotOffset: mountedSlot++ });
+        }
       });
-      if (resto.length) JDUI.mount(bubble, resto, jduiCtx(row));
     } catch (_) { /* fallback: só texto */ }
   }
   if (type === 'ai' && row.status !== 'generating') {

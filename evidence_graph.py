@@ -27,6 +27,11 @@ class GraphErro(ValueError):
         self.codigo = codigo
 
 
+_EXCEPTION_ACTION = r'(?:rais\w*|re-rais\w*|propagat\w*|aggregat\w*|combin\w*|group\w*|lanc\w*|levant\w*|relanc\w*|propag\w*|agreg\w*|agrup\w*|tratad\w*|treated)'
+_EXCEPTION_NOUN = r'(?:exceptions?|exceptiongroups?|baseexceptiongroup|excecoes|excecao|return_exceptions)'
+_EXCEPTION_RELATION = (r'\b'+_EXCEPTION_ACTION+r'\b[^.!?;]{0,160}\b'+_EXCEPTION_NOUN+r'\b|'
+                       r'\b'+_EXCEPTION_NOUN+r'\b[^.!?;]{0,160}\b'+_EXCEPTION_ACTION+r'\b')
+
 _ANSWER_RELATIONS = {
     'founders': r'(?:fundad[ao]s?|criad[ao]s?|founded|established).{0,100}\b(?:por|by)\s+\w+|fundadores?\s*[:—-]\s*\w+',
     'foundation_date': r'(?:fundad[ao]|fundacao|founded|established|criad[ao]).{0,100}\b(?:1[5-9]|20)\d{2}\b|\b(?:1[5-9]|20)\d{2}\b.{0,80}(?:fundad[ao]|fundacao|founded)',
@@ -37,6 +42,8 @@ _ANSWER_RELATIONS = {
     'syntax': r'\w+\s*\([^)]*\)',
     'return_value': r'\b(?:retorna|returns?(?!\s+value\b))\b.{8,}',
     'behavior': r'\b(?:retorna|returns?(?!\s+value\b)|permite|allows?|cria|creates?|adiciona|adds?|copia|copies|aumenta|increases?|grows?|grow the|aumentar)\b.{8,}',
+    'cancellation': r'\b(?:cancel(?:s|led|ed|ling|ing)?|cancelad[ao]s?|cancela)\b.{4,}',
+    'exceptions': _EXCEPTION_RELATION,
     'examples': r'\w+\s*\([^)]*\)',
     'limitations': r'\b(?:nao pode|cannot|must not|limitad[ao]|limite de|maximum|exceeds|exception|raises|restricao)\b.{4,}',
     'weight': r'\b\d+(?:[.,]\d+)?\s*(?:g|kg|gramas?|kilograms?)\b',
@@ -122,6 +129,19 @@ def _passage_support(req, passage, source):
         if attribute in fields and re.search(fields[attribute],text) and not re.search(r'\b(?:unknown|desconhecid\w*|nao confirmado)\b',text):
             partial_found=True
     section=qi.normalized(passage.get('section') or '')
+    if qualified and attribute in ('cancellation', 'exceptions'):
+        # A literal API signature can scope later paragraphs in its definition.
+        # Keep this as partial support: a signature is not the local subject.
+        path = passage.get('section_path') or []
+        signature = path[-1] if path else {}
+        hs, ps = signature.get('source_span') or {}, passage.get('source_span') or {}
+        aligned = (signature.get('level') == 7 and hs.get('sha256') == ps.get('sha256')
+                   and bool(ps.get('sha256')) and type(hs.get('start')) is int
+                   and type(hs.get('end')) is int and type(ps.get('start')) is int
+                   and 0 <= hs['start'] < hs['end'] <= ps['start'])
+        if (aligned and anchor.search(_canonical_operation(signature.get('text') or ''))
+                and re.search(relation_rx, text, re.S)):
+            partial_found = True
     section_facets={'return_value':('return value','valor retornado','valor de retorno'),
                     'behavior':('description','descricao')}
     if qualified and section in section_facets.get(attribute,()) and anchor.search(_canonical_operation(source.get('titulo') or '')):
@@ -249,7 +269,13 @@ def _passage_support(req, passage, source):
 def select_answer_passages(coverage, limit=None):
     """Keep multi-requirement bindings and prefer aspect diversity, same budget."""
     if limit is None:
-        limit=min(8,max(3,len({p['requirement_id'] for p in coverage.get('passages',[])})))
+        aspects=len({p['requirement_id'] for p in coverage.get('passages',[])})
+        # API behavior includes default/optional and cancellation/error cases;
+        # one span per aspect loses those conditions. The same eight-span cap
+        # and 1800-character synthesis budget still apply.
+        variants=2 if any(r.get('attribute') in ('cancellation','exceptions')
+                          for r in coverage.get('requirements',[])) else 1
+        limit=min(8,max(3,aspects*variants))
     by_id={}
     for passage in coverage.get('passages',[]):
         saved=by_id.setdefault(passage['id'],{**passage,'requirement_ids':[], 'requirement_support':{}})
@@ -334,6 +360,13 @@ def requirement_coverage(query, sources, *, requirements=None):
                                     'answerability':'DIRECT_ANSWER' if label=='DIRECT_SUPPORT' else 'PARTIAL_ANSWER',
                                     'reason':'bounded_explicit_entity_attribute_relation'})
     for req in requirements:
+        if req.get('attribute')=='source_authority':
+            import python_docs_discovery
+            read=[s for s in sources if s.get('texto_lido') is True]
+            if read and all(python_docs_discovery.has_read_authority(s,query) for s in read):
+                req.update(state='SUPPORTED',insufficiency_reason='',confirmed_evidence_ids=[
+                    str(s.get('id') or s.get('url') or '') for s in read[:8]])
+            continue
         if req.get('type') in ('original_objective','mandatory_constraint'):continue
         found = [p for p in matches if p['requirement_id'] == req['id']]
         direct = [p for p in found if p['support_label']=='DIRECT_SUPPORT']

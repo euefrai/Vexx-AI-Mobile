@@ -67,6 +67,8 @@ ANSWER_FACETS = {
     'syntax': ('Sintaxe ou assinatura', r'sintaxe|assinatura|syntax|signature'),
     'return_value': ('Valor retornado', r'o que retorna|valor retornado|return value|\bretorno\b'),
     'behavior': ('Comportamento da operação', r'como (?:usar|utilizar|funciona)|comportamento|behavior|modifica.*original|altera.*original'),
+    'cancellation': ('Cancelamento da operação', r'\bcancelamento\b|\bcancellation\b'),
+    'exceptions': ('Tratamento de exceções', r'\bexcecoes\b|\bexceptions\b|\bexception handling\b'),
     'examples': ('Exemplos documentados', r'exemplos?|examples?'),
     'limitations': ('Limitações', r'limitacoes|restricoes|limitations?'),
     'weight': ('Peso e unidade', r'\bpeso\b|\bweight\b|\bmais leve\b'),
@@ -90,6 +92,12 @@ def answer_requirements(text):
     if re.search(r'\b(imagens?|fotos?|videos?|cientific\w*|papers?|estudos|artigos cientificos)\b', norm):
         return []
     facets = [key for key, (_, rx) in ANSWER_FACETS.items() if re.search(rx, norm)]
+    # Qualified operations keep technical requests independent of the language
+    # used by their documentation. URLs are not API identifiers.
+    api_text = re.sub(r'https?://\S+', '', original)
+    api_names = list(dict.fromkeys(re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+', api_text)))
+    if not api_names:
+        facets = [f for f in facets if f not in ('cancellation', 'exceptions')]
     if not facets and re.search(r'diferencas entre',norm):facets=['definition']
     if 'battery' in facets and re.match(r'^(?:pesquisa profunda sobre\s+)?bateria\s+\w',norm):
         facets.remove('battery')  # Named subject "Bateria ZX" is not a request for a battery model.
@@ -139,6 +147,8 @@ def answer_requirements(text):
         section=re.split(r',\s*(?:qual|quais)\b',section,maxsplit=1,flags=re.I)[0]
         entities=[e.strip(' ,.!?') for e in re.split(r',|\s+(?:e|versus|vs\.?)\s+',section,flags=re.I) if e.strip(' ,.!?')]
         if not 2<=len(entities)<=4:entities=[subject]
+    if api_names and set(facets) & {'cancellation', 'exceptions'}:
+        entities = api_names[:4]
     constraints = {'reference': 'original_request', 'must_preserve': bool(re.search(
         r'\b(?:nao|sem|exceto|ate|depois|antes|ultimos)\b|\d|r\$', norm))}
     return [{'id': 'R-' + hashlib.sha256((norm+'|'+facet+('|'+normalized(entity) if len(entities)>1 else '')).encode()).hexdigest()[:12],
@@ -417,7 +427,7 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         boundary = r'(?=\s+(?:nos|nas|na ultima|ultimos|ultimas|proximos|proximas|recentemente|hoje|ontem|anteontem|sobre)\b|' + presentation + r'|[,.!?]|$)'
         location = re.search(r'\bem\s+(.+?)'+boundary, t)
         if not location:
-            location = re.search(r'\bnoticias\s+(?:de|do|da|sobre)\s+(.+?)'+boundary, t)
+            location = re.search(r'\bnoticias\s+(?:de|do|da|sobre|desta|nesta|esta)\s+(.+?)'+boundary, t)
         if location:
             raw_location = str(text)[location.start(1):location.end(1)].strip()
             nearby = bool(re.search(r'\be\s+(?:regi[aã]o|arredores|proximidades)\b', raw_location, re.I))

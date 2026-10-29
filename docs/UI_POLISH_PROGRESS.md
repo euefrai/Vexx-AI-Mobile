@@ -58,3 +58,56 @@ para concluir desempenho da IA.
   própria somente depois de medir o bloqueio, mantendo autenticação e cancelamento.
 - Depois: benchmark de histórico grande e Android/iOS reais; lock de dependências,
   restauração completa e política de mídia externa continuam pendentes (R04–R08).
+
+## Atualização de 29/10/2026 — UI/UX e testes reais
+
+- Base `main/c42792a`; alterações anteriores e arquivos já preparados no índice
+  preservados. Sem push/deploy desta rodada.
+- Corrigidos roteamento de memória, comparação no feminino, contexto de ofertas
+  do cache entre chats sem renovar validade, notícias semanais de Ubatã,
+  descoberta KaBuM e documentação Python, perda de passagens em APIs distintas,
+  cards fora da posição Markdown, referências extensas, datas e contraste de ação.
+- UI real local completa com rede e modelo configurado: seis ofertas; produto
+  aberto com variante/preço corretos; dois cards de comparação; três notícias;
+  cinco imagens carregadas; treze mensagens/quinze cards preservados após reload.
+- Navegador em 320/390/1280 px sem overflow. Em 390 px: sidebar clicável,
+  Configurações acessíveis, referências expansíveis e ordenação persistida.
+- Suíte completa final: **2.083 passed, 4 skipped, 2 warnings**, 218,53 s, exit 0.
+  Nenhum erro inesperado de console nas execuções finais da interface.
+- Pesquisa profunda: leitura e descoberta real melhoraram (0 → 1 fonte lida no
+  cenário Python); síntese completa ainda não aprovada. O modelo retornou saída
+  vazia e o fallback agora conserva os vários trechos recuperados, mantendo as
+  lacunas explícitas. Não reduzir validações para esconder essa limitação.
+- Próximo passo exato: reproduzir geração/revisão com os mesmos trechos salvos,
+  medir saída vazia versus rejeição semântica e resolver a condição de autoridade
+  com evidência independente. Depois repetir A/B/C pela interface.
+- Relatório: `RELATORIO_TESTES_REAIS_UI.md`. Evidências: `output/real-ui/`.
+- O agente de produção foi atualizado com backup/IPC para o commit **já publicado**
+  `c42792a`; as correções novas continuam locais. O laboratório usa banco próprio.
+
+## Continuação autorizada em 29/10/2026 — síntese e publicação conjunta
+
+- Corrigidos: prazo da redação/revisão, escopo real de APIs e métodos aninhados,
+  contexto perdido entre catálogo e modelo, autoridade Python com inventário
+  independente, perda da proveniência em memória e persistência JSON acima de
+  12 mil caracteres. Compactação sem perdas: exemplo de 20.153 → 10.342 caracteres.
+- Mantidos dois pedidos ao modelo por síntese, sem retries automáticos; até
+  25 s por fase/50 s no par, prazo restante e cancelamento preservados. Funções
+  genéricas mantêm o padrão anterior de 25/12 s.
+- Corrigido falso positivo real que confundia cancelamento com tratamento de
+  exceções. Suporte exige relação explícita no quote e na resposta, contexto
+  real, fonte verificada e revisão separada; restrições de versão não são
+  ignoradas. Nomes curtos somente quando inequívocos no pedido.
+- Seleção por frases para os aspectos técnicos, sem elevar o limite de 1.800
+  caracteres por fonte. Contexto tabular anterior preservado. Cards passam a
+  reconhecer fontes realmente citadas na redação aprovada.
+- **166 testes focados; suíte completa 2.104 passed, 4 skipped, 2 warnings**, exit 0.
+- UI real: descoberta sem URL, página oficial lida, resposta assistida em quatro
+  parágrafos e preservação após reload. Replay dos dados reais aprovou os quatro
+  aspectos. A rodada independente seguinte teve revisão rejeitada; depois o
+  provedor gratuito retornou HTTP 429. Não declarar C universalmente estável.
+- Próximo passo exato: repetir `tools/live_research_completion.cjs` com quota
+  disponível e registrar cobertura, correção factual, citações e reload. Sem
+  relaxar validações para obter uma marca de pesquisa completa.
+- Publicação conjunta autorizada na `main`; inclui a UI da etapa anterior.
+  Relatório desta continuação: `RELATORIO_CONCLUSAO_PESQUISA.md`.

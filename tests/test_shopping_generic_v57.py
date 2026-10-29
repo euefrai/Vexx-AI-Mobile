@@ -295,7 +295,7 @@ def test_fluxo_vazio_explica_limitacao_sem_exigir_modelo():
                              baixar_fn=_bloqueada)
     assert res["produtos"] == [] and res["encontrados"] == []
     texto = shopping.resumo_texto(res)
-    assert "nenhuma página trouxe dados estruturados" in texto
+    assert "Não consegui confirmar ofertas" in texto
     assert "Nenhuma restrição do seu pedido limitou a busca" in texto
     assert "modelo específico" not in texto
     bloco = shopping.bloco_para_llm(res)

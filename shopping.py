@@ -1378,7 +1378,7 @@ def _id_consulta(owner: str, consulta: str) -> str:
 
 
 def salvar_consulta(db, owner: str, conv: str, consulta: str,
-                    criterios: dict, resultado: dict) -> str:
+                    criterios: dict, resultado: dict, *, expira_em: str = '') -> str:
     import secrets as _s
     sid = _id_consulta(owner, consulta) + _s.token_hex(2)
     with db:
@@ -1389,8 +1389,8 @@ def salvar_consulta(db, owner: str, conv: str, consulta: str,
                     json.dumps(criterios, ensure_ascii=False)[:4000],
                     json.dumps(resultado, ensure_ascii=False)[:60000],
                     agora_iso(),
-                    datetime.fromtimestamp(time.time() + TTL_CONSULTA,
-                                           timezone.utc).isoformat()))
+                    expira_em or datetime.fromtimestamp(time.time() + TTL_CONSULTA,
+                                                       timezone.utc).isoformat()))
         db.execute("DELETE FROM shopping_consultas WHERE owner_id=? AND conv=? AND id NOT IN "
                    "(SELECT id FROM shopping_consultas WHERE owner_id=? AND conv=?"
                    " ORDER BY criado_em DESC LIMIT ?)",
@@ -1415,7 +1415,7 @@ def ultima_consulta(db, owner: str, conv: str) -> dict | None:
 
 
 def consulta_em_cache(db, owner: str, consulta: str, criterios: dict | None = None) -> dict | None:
-    rows = db.execute("SELECT resultado, criado_em FROM shopping_consultas"
+    rows = db.execute("SELECT resultado, criado_em, expira_em FROM shopping_consultas"
                       " WHERE id LIKE ? AND owner_id=? AND expira_em > ?"
                       " ORDER BY criado_em DESC LIMIT 20",
                       (_id_consulta(owner, consulta) + "%", owner, agora_iso())).fetchall()
@@ -1428,7 +1428,8 @@ def consulta_em_cache(db, owner: str, consulta: str, criterios: dict | None = No
             if any(not _preco_vigente(p) for p in res.get("produtos", []) + res.get("alternativas", [])):
                 continue
             res["de_cache"] = True
-            res["verificado_em"] = row[1]
+            res["verificado_em"] = res.get('verificado_em') or row[1]
+            res['cache_expira_em'] = row[2]
             return res
         except (TypeError, ValueError):
             continue
@@ -1829,6 +1830,21 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
                      else "provider_error"),
              ms=(time.monotonic() - inicio) * 1000)
     pool: list = []
+    # Use the public merchant catalog before asking search engines for store
+    # URLs. Every discovered item is still opened and verified below.
+    inicio = time.monotonic()
+    try:
+        import store_discovery
+        named_store = source_priority.explicit_store(texto_lojas or consulta)
+        native = (store_discovery.search_kabum(consulta, limit=limite_mlb)
+                  if not named_store or named_store['domain'] == 'kabum.com.br' else [])
+        if native:
+            etapas.append(f"kabum-search: {len(native)} links de produto (catálogo público; ofertas ainda não verificadas)")
+            _reg(provedor='kabum-search', resultados=len(native), comerciais=len(native),
+                 motivo='useful_candidates_found', ms=(time.monotonic() - inicio) * 1000)
+            return native, etapas
+    except Exception as exc:
+        etapas.append(f"kabum-search: indisponível ({getattr(exc, 'codigo', type(exc).__name__)})")
     loja_query = ""
     if texto_lojas:
         try:
@@ -2547,6 +2563,10 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     _prog("buscando", consulta)
     em_cache = consulta_em_cache(db, owner, consulta, criterios=criterios) if usar_cache else None
     if em_cache is not None:
+        # Reuse the verified data in this conversation too, preserving its
+        # original expiry and verification time rather than refreshing prices.
+        expiry = em_cache.pop('cache_expira_em', '')
+        salvar_consulta(db, owner, conv, consulta, criterios, em_cache, expira_em=expiry)
         return em_cache
 
     consultas = _consultas_produto(criterios, texto)
@@ -3060,7 +3080,7 @@ def _jdui_produto(p: dict) -> dict:
         "avaliacao": p.get("avaliacao"),
         "n_avaliacoes": p.get("n_avaliacoes"),
         "disponibilidade": p.get("disponibilidade", "desconhecida"),
-        "verificado_em": _data_br_curta(p.get("verificado_em", "")),
+        "verificado_em": p.get("verificado_em", ""),
         "link_veredito": (p.get("link_veredito") or "")[:24],
         "link_motivo": (p.get("link_motivo") or "")[:120],
         "item_de_listagem": bool(p.get("item_de_listagem")),
@@ -3075,6 +3095,14 @@ def _jdui_produto(p: dict) -> dict:
 
 
 def _data_br_curta(iso: str) -> str:
+    if 'T' in (iso or ''):
+        try:
+            from zoneinfo import ZoneInfo
+            value = datetime.fromisoformat(iso.replace('Z', '+00:00'))
+            if value.tzinfo:
+                return value.astimezone(ZoneInfo('America/Bahia')).strftime('%d/%m/%Y')
+        except (ValueError, KeyError):
+            pass
     m = re.match(r"(\d{4})-(\d{2})-(\d{2})", (iso or "")[:10])
     if m:
         return f"{m.group(3)}/{m.group(2)}/{m.group(1)}"
@@ -3135,7 +3163,7 @@ def fence_comparacao(produtos: list, fontes: list | None = None) -> str:
     return "\n\n```jdui\n" + json.dumps(msg, ensure_ascii=False) + "\n```"
 
 
-def resumo_texto(resultado: dict) -> str:
+def resumo_texto(resultado: dict, compacto: bool = False) -> str:
     """Texto Markdown do chat (cards vão no fence; sem JSON bruto)."""
     prods = (resultado or {}).get("produtos", [])
     alts = (resultado or {}).get("alternativas", []) or []
@@ -3164,13 +3192,18 @@ def resumo_texto(resultado: dict) -> str:
                                f" — _{str(r.get('motivo') or '')}_"
                                f"\n  {str(r.get('url') or '')}")
         if not linhas:
-            explic = ("Pesquisei anúncios, mas nenhuma página trouxe dados "
-                      "estruturados verificáveis (preço/foto) para montar cards: "
-                      "os sites consultados bloquearam o acesso automático "
-                      "(403/CAPTCHA) ou não expuseram dados estruturados.")
+            diagnostics = (resultado or {}).get('descoberta') or {}
+            reasons = set(diagnostics.get('diagnosticos') or [])
+            explic = 'Não consegui confirmar ofertas com preço e link direto de produto nas fontes consultadas.'
+            if 'PROVIDER_BLOCKED' in reasons:
+                explic += ' Parte das fontes recusou o acesso automático; isso não significa que o produto não exista.'
+            elif 'STRUCTURED_DATA_MISSING' in reasons:
+                explic += ' As páginas recuperadas não trouxeram dados estruturados de produto suficientes para validar uma oferta.'
+            elif diagnostics.get('motivo_final') == 'provider_unavailable' or 'DISCOVERY_EMPTY' in reasons:
+                explic += ' A busca não trouxe links de produto utilizáveis.'
             if not filtros_explicitos(crit):
                 explic += (" Nenhuma restrição do seu pedido limitou a busca — a "
-                           "limitação veio dos sites.")
+                           "limitação foi a falta de ofertas verificáveis nas fontes consultadas.")
             linhas.append(explic)
         elif refs and not alts and not filtros_explicitos(crit):
             linhas.append("_Nenhuma restrição do seu pedido limitou a busca — as "
@@ -3183,6 +3216,10 @@ def resumo_texto(resultado: dict) -> str:
               if todas_ok else
               f"Encontrei **{len(prods)}** {cat} com dados estruturados reais:")
     linhas = [cabeca]
+    if compacto:
+        if resultado.get('de_cache'):
+            linhas.append('Preços de consulta anterior; confira a data de verificação nos cards.')
+        return '\n\n'.join(linhas)
     for p in prods:
         marca = ""
         if p.get("item_de_listagem") or p.get("link_veredito") in ("nao_verificado", "reprovado"):
@@ -3364,8 +3401,8 @@ _FOLLOWUP_RESUMO = re.compile(
     r"qual tem mais|qual o melhor|melhor custo|segunda op|terceira)", re.IGNORECASE)
 
 _FOLLOWUP_COMPARE = re.compile(
-    r"(compare|compar|versus|\bvs\b|diferen).{0,30}(dois primeiros|primeiros|"
-    r"1 e 2|esses dois|entre eles)|^(compare os dois)", re.IGNORECASE)
+    r"(compare|compar|versus|\bvs\b|diferen).{0,30}(dois primeiros|duas primeiras|primeir[oa]s|"
+    r"1 e 2|esses dois|essas duas|entre eles|entre elas)|^(compare (?:os dois|as duas))", re.IGNORECASE)
 
 
 def eh_followup(texto: str) -> bool:
