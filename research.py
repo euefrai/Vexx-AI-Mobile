@@ -329,6 +329,8 @@ def extrair_artigo(pagina: str, url: str = "", consulta: str = "",
     """
     import web_extract
     ext = web_extract.extrair_pagina(pagina, url, consulta, teto=teto)
+    if getattr(pagina,'retrieval_method',''):
+        ext.setdefault('metadados',{})['retrieval_method']=pagina.retrieval_method
     if not (ext.get("texto") or "").strip():
         # Último recurso determinístico (parser simples de texto): nunca
         # devolve página vazia se houver texto legível no HTML.
@@ -360,12 +362,22 @@ _RX_BLOQUEIO = re.compile(
     r"(anomaly-modal|select all squares containing|complete the following challenge|"
     r"are you a robot|making sure you'?re not a bot|checking your browser|"
     r"cf-browser-verification|just a moment\.\.\.|enable javascript and cookies|"
-    r"unusual traffic|verifying you are human|access denied|request blocked|cf-browser-verification)", re.IGNORECASE)
+    r"unusual traffic|verifying you are human|verify (that )?you are (a )?human|"
+    r"complete o captcha|resolva o captcha|confirme que voc[eê] [eé] humano|"
+    r"attention required|barraged by queries from bots|access denied|request blocked)", re.IGNORECASE)
 
 
 def pagina_bloqueada(pagina: str) -> bool:
     """True quando a página é um bot-wall/CAPTCHA (sem bypass)."""
-    return bool(_RX_BLOQUEIO.search((pagina or "")[:8000]))
+    # Error messages inside bundles/templates are not a challenge presented
+    # to the reader. Keep actual challenge markup and visible instructions.
+    sample = (pagina or '')[:MAX_PAGINA_BYTES]
+    sample = re.sub(r'<!--.*?-->|<(script|style|template)\b[^>]*>.*?</\1\s*>',
+                    ' ', sample, flags=re.I | re.S)
+    markup = bool(re.search(r'\b(?:id|class)\s*=\s*[\"\'][^\"\']*\b(?:anomaly-modal|cf-browser-verification)\b', sample, re.I))
+    visible = _html.unescape(re.sub(r'<[^>]*>', ' ', sample))
+    visible = re.sub(r'\s+', ' ', visible)[:16000]
+    return markup or bool(_RX_BLOQUEIO.search(visible))
 
 
 def registrar_status(nome: str, *, resultados: int = 0, bloqueado: bool = False,
@@ -916,7 +928,8 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
         rec = dict(rec or {})
         rec.setdefault("lida", bool((rec.get("texto") or "").strip()))
     else:
-        final, pagina = baixar(a["url"], timeout=timeout_pagina)
+        import public_store_reader
+        final, pagina = public_store_reader.fetch(a["url"], timeout=timeout_pagina)
         if pagina_bloqueada(pagina):
             raise ResearchErro("Página é bot-wall/CAPTCHA (não contornado).", "bloqueado")
         art = extrair_artigo(pagina, url=final, consulta=consulta or a.get("titulo", ""))

@@ -402,12 +402,15 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         # Keep explicit calendar windows out of the entity, including follow-ups.
         if not params.get('start_date'):
             day = re.search(r'\b(anteontem|ontem|hoje)\b', t)
-            week = re.search(r'\b(?:na|da|a)?\s*ultima semana\b', t)
+            week = re.search(r'\b(?:na|da|a)?\s*ultima semana\b|'
+                             r'\b(?:esta|nesta|desta|da|na)?\s*semana\b', t)
             if day:
                 chosen = local.date() - timedelta(days={'hoje':0,'ontem':1,'anteontem':2}[day[1]])
                 params.update(start_date=chosen.isoformat(), end_date=chosen.isoformat())
             elif week:
-                params.update(start_date=(local.date()-timedelta(days=7)).isoformat(), end_date=local.date().isoformat())
+                days=local.date().weekday() if re.search(r'\b(?:esta|nesta|desta)\s+semana\b',t) else 7
+                params.update(start_date=(local.date()-timedelta(days=days)).isoformat(), end_date=local.date().isoformat(),
+                              window_inferred=True)
         # Only remove terminal presentation instructions with generic objects.
         # Comparisons naming entities, exclusions and budgets remain search text.
         presentation = r'\s+(?:e\s+)?(?:compare|resuma|destaque)\s+(?:os acontecimentos(?: mais relevantes)?|os resultados|as noticias|os destaques|os pontos principais)\s*(?=[.!?]|$)'
@@ -416,13 +419,55 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
         if not location:
             location = re.search(r'\bnoticias\s+(?:de|do|da|sobre)\s+(.+?)'+boundary, t)
         if location:
-            params['location'] = str(text)[location.start(1):location.end(1)].strip()
-            city_state = re.fullmatch(r'(.+?)/([A-Za-z]{2})', params['location'])
-            if city_state:
-                params.update(location=city_state[1].strip(), region=city_state[2].upper())
-            region = re.match(r',\s*([a-z ]{2,30}?)(?=,|\s+(?:nos|nas|ultimos|ultimas)|[.!?]|$)', t[location.end():])
-            if region:
-                params['region'] = region[1].strip()
+            raw_location = str(text)[location.start(1):location.end(1)].strip()
+            nearby = bool(re.search(r'\be\s+(?:regi[aã]o|arredores|proximidades)\b', raw_location, re.I))
+            # "notícias de hoje de Ubatã"/"da semana de Ubatã": the temporal
+            # expression is when, not where. "e região" is vicinity, not a
+            # second entity to match literally.
+            raw_location = re.sub(
+                r'^(?:(?:hoje|ontem|anteontem|agora|recentemente)\s+(?:de\s+)?|'
+                r'(?:esta|nesta|desta|da|na|ultima)\s+semana\s+(?:de\s+|em\s+)?|'
+                r'semana\s+(?:de|em)\s+)+', '', raw_location, flags=re.I)
+            raw_location = re.sub(
+                r'\s+e\s+(?:regi[aã]o|arredores|proximidades)\s*$', '',
+                raw_location, flags=re.I).strip(' .,;:-')
+            if normalized(raw_location) in {
+                    'semana', 'esta semana', 'nesta semana', 'desta semana',
+                    'ultima semana', 'hoje', 'ontem', 'anteontem', 'agora',
+                    'recentemente', 'ultimas noticias'}:
+                raw_location = ''
+            # A named source is where to search, not the news location the
+            # article must repeat ("notícias de hoje no G1").
+            try:
+                import source_priority
+                named = source_priority.explicit_source(
+                    raw_location, request={'domain': domain})
+            except Exception:
+                named = None
+            if named:
+                for alias in sorted(named.get('aliases') or {}, key=len, reverse=True):
+                    raw_location = re.sub(r'(?<!\w)' + re.escape(alias) + r'(?!\w)', ' ',
+                                          raw_location, flags=re.I)
+                for source_domain in named.get('domains') or ():
+                    raw_location = re.sub(re.escape(source_domain), ' ', raw_location, flags=re.I)
+                raw_location = re.sub(r'\b(?:no|na|do|da|de|em)\b', ' ', raw_location, flags=re.I)
+                raw_location = re.sub(r'\s+', ' ', raw_location).strip(' .,;:-')
+            scope = normalized(raw_location)
+            if scope in ('mundo', 'internacional', 'exterior', 'global', 'planeta'):
+                # "do mundo" is coverage scope; requiring the word in every
+                # article would reject the actual world coverage.
+                params['scope'] = 'world'
+            elif raw_location:
+                params['location'] = raw_location
+                if nearby and normalized(raw_location)=='ubata':
+                    params['nearby_locations']=['Ubaitaba','Aurelino Leal','Gongogi',
+                                                'Ibirapitanga','Ipiaú','Ibirataia']
+                city_state = re.fullmatch(r'(.+?)/([A-Za-z]{2})', params['location'])
+                if city_state:
+                    params.update(location=city_state[1].strip(), region=city_state[2].upper())
+                region = re.match(r',\s*([a-z ]{2,30}?)(?=,|\s+(?:nos|nas|ultimos|ultimas)|[.!?]|$)', t[location.end():])
+                if region:
+                    params['region'] = region[1].strip()
         if domain == 'news' and not params.get('start_date') and re.search(r'\b(ultimas?|recentemente|recentes?)\b', t):
             params.update(start_date=(local.date()-timedelta(days=7)).isoformat(),end_date=local.date().isoformat(),window_inferred=True)
         if domain == 'events' and not params.get('start_date') and re.search(r'\b(futuros?|proximos?)\b', t):

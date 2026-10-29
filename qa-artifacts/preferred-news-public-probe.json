@@ -1,0 +1,201 @@
+{
+  "scope": "ROUTING_EXAMPLES_NOT_LIVE_VALIDATION",
+  "topics": 28,
+  "examples": [
+    {
+      "question": "Notícias de hoje de Ubatã e região",
+      "priority": {
+        "id": "ubata_news",
+        "label": "Ubatã Notícias",
+        "kind": "news",
+        "primary": [
+          "ubatanoticias.com.br"
+        ],
+        "secondary": [
+          "g1.globo.com"
+        ],
+        "explicit": false,
+        "reason": "assunto com fonte preferencial declarada"
+      }
+    },
+    {
+      "question": "Últimas notícias do mundo",
+      "priority": {
+        "id": "world_news",
+        "label": "Notícias gerais e do mundo",
+        "kind": "news",
+        "primary": [
+          "g1.globo.com"
+        ],
+        "secondary": [
+          "bbc.com",
+          "reuters.com",
+          "apnews.com",
+          "agenciabrasil.ebc.com.br"
+        ],
+        "explicit": false,
+        "reason": "assunto com fonte preferencial declarada"
+      }
+    },
+    {
+      "question": "Jogos de RPG para PC",
+      "priority": {
+        "id": "games",
+        "label": "Jogos e games",
+        "kind": "topic",
+        "primary": [
+          "ign.com.br"
+        ],
+        "secondary": [
+          "eurogamer.pt",
+          "adrenaline.com.br",
+          "tecmundo.com.br",
+          "theenemy.com.br"
+        ],
+        "explicit": false,
+        "reason": "assunto com fonte preferencial declarada"
+      }
+    },
+    {
+      "question": "Comportamento humano e psicologia",
+      "priority": {
+        "id": "psychology",
+        "label": "Comportamento humano e psicologia",
+        "kind": "topic",
+        "primary": [
+          "scielo.br"
+        ],
+        "secondary": [
+          "apa.org",
+          "pubmed.ncbi.nlm.nih.gov",
+          "theconversation.com",
+          "pepsic.bvsalud.org"
+        ],
+        "explicit": false,
+        "reason": "assunto com fonte preferencial declarada"
+      }
+    },
+    {
+      "question": "Nietzsche e niilismo",
+      "priority": {
+        "id": "philosophy",
+        "label": "Filosofia",
+        "kind": "topic",
+        "primary": [
+          "plato.stanford.edu"
+        ],
+        "secondary": [
+          "iep.utm.edu",
+          "scielo.br",
+          "philpapers.org"
+        ],
+        "explicit": false,
+        "reason": "assunto com fonte preferencial declarada"
+      }
+    },
+    {
+      "question": "Teorema de Pitágoras exercícios",
+      "priority": {
+        "id": "mathematics",
+        "label": "Matemática",
+        "kind": "topic",
+        "primary": [
+          "mathworld.wolfram.com"
+        ],
+        "secondary": [
+          "pt.wikipedia.org",
+          "scielo.br",
+          "impa.br",
+          "mathoverflow.net",
+          "khanacademy.org"
+        ],
+        "explicit": false,
+        "reason": "assunto com fonte preferencial declarada"
+      }
+    },
+    {
+      "question": "Saúde e vacinação",
+      "priority": {
+        "id": "health",
+        "label": "Saúde",
+        "kind": "topic",
+        "primary": [
+          "fiocruz.br"
+        ],
+        "secondary": [
+          "who.int",
+          "pubmed.ncbi.nlm.nih.gov",
+          "scielo.br",
+          "butantan.gov.br"
+        ],
+        "explicit": false,
+        "reason": "assunto com fonte preferencial declarada"
+      }
+    },
+    {
+      "question": "Como plantar cacau",
+      "priority": null
+    },
+    {
+      "question": "Pesquisar notebook gamer",
+      "priority": {
+        "id": "technology",
+        "label": "Tecnologia",
+        "kind": "topic",
+        "primary": [
+          "tecmundo.com.br"
+        ],
+        "secondary": [
+          "canaltech.com.br",
+          "olhardigital.com.br",
+          "adrenaline.com.br",
+          "developer.mozilla.org",
+          "docs.python.org",
+          "stackoverflow.com",
+          "github.com"
+        ],
+        "explicit": false,
+        "reason": "assunto com fonte preferencial declarada"
+      }
+    }
+  ],
+  "live_news": {
+    "scope": "PUBLIC_FEED_ARTICLES_AND_ISOLATED_CACHE_NO_MODEL_SYNTHESIS_NO_PRODUCTION_SESSION",
+    "query": "Notícias de hoje de Ubatã e região",
+    "seconds": 4.28,
+    "state": "ok",
+    "from_cache_on_repeat": true,
+    "sources": [
+      {
+        "title": "Ubatã: Polícia Civil cumpre mandado de prisão e prende suspeito de ameaçar ex-namorada de morte e de divulgar imagens íntimas",
+        "url": "https://ubatanoticias.com.br/ubata-policia-civil-cumpre-mandado-de-prisao-e-prende-homem-suspeito-de-ameacar-ex-namorada-de-morte-e-de-divulgar-imagens-intimas/",
+        "state": "aberta",
+        "relevant": true,
+        "read_chars": 341,
+        "published": "2026-10-29T00:28:27+00:00"
+      },
+      {
+        "title": "Ubatã: Projeto Pai Presente facilita reconhecimento de paternidade e fortalece vínculos familiares",
+        "url": "https://ubatanoticias.com.br/ubata-projeto-pai-presente-facilita-reconhecimento-de-paternidade-e-fortalece-vinculos-familiares/",
+        "state": "aberta",
+        "relevant": true,
+        "read_chars": 1200,
+        "published": "2026-10-28T19:20:54+00:00"
+      },
+      {
+        "title": "Ibirapitanga: Homem é preso com pedras de crack, cocaína e maconha",
+        "url": "https://ubatanoticias.com.br/ibirapitanga-homem-e-preso-com-pedras-de-crack-cocaina-e-maconha/",
+        "state": "aberta",
+        "relevant": true,
+        "read_chars": 319,
+        "published": "2026-10-28T19:05:03+00:00"
+      }
+    ],
+    "steps": [
+      "busca: 6 resultados",
+      "prioridade: Ubatã Notícias (ubatanoticias.com.br)",
+      "feed do publicador: 6 artigos candidatos; leitura ainda necessária",
+      "3 fontes, 3 lidas"
+    ]
+  }
+}

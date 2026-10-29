@@ -25,6 +25,7 @@ import urllib.parse
 
 import search_providers as sp
 import evidence_graph as eg  # V5.7: regra única de fonte desatualizada
+import source_priority
 
 # ── Classes de assunto ─────────────────────────────────────────────
 RX_TECNICO = re.compile(
@@ -753,6 +754,17 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
         pontos -= 1.5  # página do próprio provedor não é fonte
     if not (a.get("trecho") or "").strip():
         pontos -= 1.0
+    plano = info.get("source_priority")
+    if plano:
+        bonus, papel = source_priority.score(a, plano)
+        if bonus:
+            pontos += bonus
+            a["prioridade_fonte"] = papel
+            a["prioridade_bonus"] = bonus
+    elif a.get("prioridade_bonus"):
+        # A rodada de recuperação reordena sem o plano; o bônus já atribuído
+        # continua valendo, mas nunca substitui correspondência/verificação.
+        pontos += float(a["prioridade_bonus"])
     return pontos
 
 
@@ -980,6 +992,18 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     orc.update(orcamento or {})
     consultas = list(extra_queries or [])
     query = request_info["search_query"] if request_info["requires_live_data"] else consulta
+    priority = None
+    priority_query = ""
+    if not extra_queries and provedores is None:
+        priority = source_priority.detect(consulta, request_info)
+        # Shopping has its own pipeline; a generic product plan here would
+        # spend the research budget on store queries. An explicitly named
+        # store is still honored.
+        if priority and priority.get("kind") == "shopping" and not priority.get("explicit"):
+            priority = None
+        if priority:
+            info["source_priority"] = priority
+            priority_query = (source_priority.site_queries(priority, query, 1) or [""])[0]
     plan = query_plan(query)
     if not consultas and request_info['domain'] not in ('air_travel', 'bus_travel', 'events', 'currency', 'news'):
         consultas = [row['query'] for row in plan]
@@ -994,14 +1018,25 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                        produto=bool(info.get("produto"))):
         if q not in consultas:
             consultas.append(q)
+    if priority_query:
+        consultas = list(dict.fromkeys([priority_query] + consultas))
     consultas = consultas[: max(1, int(orc["max_consultas"]))]
     consultas = list(dict.fromkeys(query_intelligence.constrain_discovery(q, request_info) for q in consultas))
     nomes = list(provedores) if provedores else _escolher_provedores(info["classes"], info)
     nomes = nomes[: max(1, int(orc["max_provedores"]))]
+    if priority:
+        # Reordena provedores declarados pela fonte, sem acrescentar nenhum
+        # provedor indisponível e sem esconder os demais.
+        preferidos = [p for p in priority.get("providers") or () if p in nomes]
+        if preferidos:
+            nomes = list(dict.fromkeys(preferidos + nomes))[: max(1, int(orc["max_provedores"]))]
 
     t0 = time.monotonic()
     achados = fontes_preferenciais(consulta) if provedores is None else []
     etapas, falhas, vazios = [], [], []
+    if priority:
+        etapas.append(f"prioridade: {priority.get('label')} "
+                      f"({', '.join(priority.get('primary') or ())})")
     tentativas = list(historico or [])
     feitas = {(x["provedor"], x["consulta"].casefold()) for x in tentativas}
     max_tentativas = max(1, int(orc.get("max_tentativas", int(orc["max_provedores"]) * 2)))
@@ -1016,6 +1051,21 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         tentativas.append({"provedor": nome, "consulta": q})
         return True
     usados = {}
+    if priority and priority.get('kind')=='news' and priority.get('feeds'):
+        import os
+        enabled=os.environ.get('JULIA_PREFERRED_NEWS_FEEDS','1').lower() not in ('0','false','off')
+        feed=priority['feeds'][0]
+        if enabled and _tentar('publisher-rss',feed):
+            try:
+                remaining=float(orc['timeout_total'])-(time.monotonic()-t0)
+                rows=sp.buscar_feed_preferencial(feed,consulta,limite=max_resultados,
+                                                timeout=max(.5,min(timeout,remaining))) if remaining>.5 else []
+                achados.extend(rows)
+                usados['publisher-rss']=1
+                etapas.append(f'feed do publicador: {len(rows)} artigos candidatos; leitura ainda necessária')
+            except (sp.ErroProvedor, ValueError, OSError) as exc:
+                etapas.append('feed do publicador indisponível; busca nos provedores mantida')
+                falhas.append({'provedor':'publisher-rss','codigo':getattr(exc,'codigo','rede')})
     def remember(items, name, query):
         provenance=query_intelligence.provider_provenance(query,name)
         for item in items:
@@ -1033,6 +1083,13 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     provedor_indice = 0
     termos_c = _termos_correspondencia(consulta)
     ultimo_ganho = True  # ganho da consulta anterior (parada por ganho zero)
+    # A consulta prioritária pode consumir todos os provedores, mas não o
+    # orçamento inteiro: ao menos uma tentativa fica reservada para a busca
+    # geral, que é o fallback honesto quando a fonte preferida falha.
+    limite_prioridade = (max(1, max_tentativas - max(1, len(consultas) - 1))
+                         if priority_query else None)
+    if limite_prioridade is not None and any(t['provedor']=='publisher-rss' for t in tentativas):
+        limite_prioridade=max(0,limite_prioridade-1)
 
     def _uteis() -> int:
         return sum(1 for a in achados if a.get('content_scope') != 'feed_metadata' and _util_para_pedido(a, termos_c, consulta))
@@ -1068,7 +1125,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         return bool(novos) and any(_util_para_pedido(a, termos_c, consulta) for a in novos)
 
     for i, q in enumerate(consultas):
-        if _uteis() >= int(orc["min_resultados"]) and i > 0:
+        if _uteis() >= int(orc["min_resultados"]) and (i > 0 or usados.get('publisher-rss')):
             break
         if i > 0 and not ultimo_ganho and _uteis() >= 1:
             # V5.7: parada por ganho real — a consulta anterior não trouxe
@@ -1083,6 +1140,9 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         retrato_antes = _retrato(achados, consulta)
         tentativa_provedor = 0
         while tentativa_provedor < 3 and provedor_indice < len(nomes):
+            if i == 0 and limite_prioridade is not None and tentativa_provedor >= limite_prioridade:
+                provedor_indice = len(nomes)
+                break
             restante = float(orc["timeout_total"]) - (time.monotonic() - t0)
             if restante <= 0:
                 etapas.append("orçamento de tempo esgotado durante fallback")
@@ -1152,6 +1212,15 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         # parada por ganho zero na próxima volta
         ultimo_ganho = _ganho_informacao(retrato_antes, achados,
                                          consulta)["ganho_real"]
+        if (i == 0 and priority_query and provedor_indice >= len(nomes)
+                and len(consultas) > 1):
+            # A fonte preferida foi tentada em todos os provedores e não
+            # respondeu: a busca geral continua, sem esconder a falha.
+            etapas.append("prioridade sem resultado utilizável; "
+                          "retomando a busca geral")
+            provedor_indice = 0
+            ultimo_ganho = True
+            continue
         if provedor_indice >= len(nomes):
             break
 
@@ -1265,6 +1334,8 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         "desatualizados": [a.get("url") for a in ranqueados if a.get("desatualizado")],
         "indice_geral": indice_geral,
         "lacunas": lacunas,
+        "prioridade_fonte": ({**source_priority.describe(priority),
+                              "consulta": priority_query} if priority else None),
         "consultas": consultas[:consultas_feitas],
         "recuperacao": recuperacao,
         "descartes": descartes[:20],

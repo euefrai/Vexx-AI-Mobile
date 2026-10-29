@@ -64,7 +64,8 @@ def assess(request, source) -> SourceContract:
         if source.get('content_scope') != 'document_text':
             reasons.append('CONTENT_TYPE_MISMATCH')
     if domain in ('news','events') and p.get('location'):
-        if not contains(p['location'],body): reasons.append('ENTITY_MISMATCH')
+        locations=[p['location']]+(p.get('nearby_locations',[]) if domain=='news' else [])
+        if not any(contains(place,body) for place in locations): reasons.append('ENTITY_MISMATCH')
         region = {'BA': 'Bahia', 'PE': 'Pernambuco', 'SP': 'São Paulo'}.get(str(p.get('region','')).upper(), p.get('region'))
         if region and not (contains(region,body) or contains(p['region'],body)): reasons.append('SOURCE_MISMATCH')
     if domain=='news':

@@ -1066,12 +1066,13 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
                     "access_state": "read" if rec.get("lida") else "snippet_only"}
         try:
-            final, pagina = research.baixar(
+            import public_store_reader
+            final, pagina = public_store_reader.fetch(
                 a["url"], timeout=limite_tempo,
                 max_bytes=max(65_536, int(job["orcamento"].get(
                     "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
         except TypeError:
-            final, pagina = research.baixar(a["url"], timeout=limite_tempo)
+            final, pagina = public_store_reader.fetch(a["url"], timeout=limite_tempo)
         if research.pagina_bloqueada(pagina):
             raise research.ResearchErro("Página bloqueada; conteúdo não usado como evidência.", "bloqueado")
         artigo = research.extrair_artigo(pagina, final, job['objetivo'],
@@ -1300,6 +1301,13 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                         emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
                                f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
                         read_trace(a,'fetch_failed',code=exc.codigo)
+                        if exc.codigo == 'bloqueado':
+                            # Keep every candidate and the same budget, but prefer
+                            # an independent host after a refusal from this one.
+                            host = urllib.parse.urlsplit(a['url']).hostname
+                            tail = novas_paginas[len(alvos):]
+                            tail.sort(key=lambda candidate: urllib.parse.urlsplit(candidate['url']).hostname == host)
+                            novas_paginas[len(alvos):] = tail
                     else:
                         substituir = False
                 except Exception as exc:

@@ -65,11 +65,6 @@ def _audit_request(url, *, final='', status=None):
 
 MAX_BYTES = 768 * 1024
 UA_LEGIVEL = "Mozilla/5.0 (JuliaResearch/1.0; +research-intelligence)"
-_BLOQUEIO_RX = re.compile(
-    r"(anomaly-modal|complete the following challenge|captcha|are you a robot|"
-    r"making sure you'?re not a bot|cf-browser-verification|checking your browser|"
-    r"attention required|just a moment|enable javascript and cookies|"
-    r"unusual traffic|access denied|request blocked|barraged by queries from bots)", re.I)
 
 
 class ErroProvedor(ValueError):
@@ -128,8 +123,7 @@ def _traduzir(exc: Exception) -> ErroProvedor:
 
 
 def _verificar_bloqueio(pagina: str) -> None:
-    amostra = (pagina or "")[:6000]
-    if _BLOQUEIO_RX.search(amostra):
+    if _research().pagina_bloqueada(pagina):
         raise ErroProvedor("Provedor apresentou bot-wall/CAPTCHA (sem bypass).", "bloqueado")
 
 
@@ -264,6 +258,37 @@ def buscar_google_news(consulta: str, limite: int = 8, timeout: float = 10.0) ->
                     'publisher_url':_url_ok(source.get('url','')) if source is not None else '',
                     'meta':{'publicado_em':node.findtext('pubDate','')[:80]},'content_scope':'feed_metadata'})
     if not out: raise ErroProvedor('Feed sem notícias correspondentes.','vazio')
+    return out
+
+
+def buscar_feed_preferencial(feed_url, consulta, *, limite=6, timeout=6):
+    """Original publisher RSS is discovery; each article still requires reading."""
+    import xml.etree.ElementTree as ET
+    import query_intelligence as qi
+    import search_verticals
+    host=urllib.parse.urlsplit(feed_url).hostname
+    final,xml=_baixar(feed_url,timeout,aceitar='feed')
+    if urllib.parse.urlsplit(final).hostname != host:
+        raise ErroProvedor('Feed redirecionou para outro publicador.','redirect')
+    try: root=ET.fromstring(xml)
+    except ET.ParseError: raise ErroProvedor('Feed inválido.','formato') from None
+    request=qi.analyze(consulta)
+    out=[]
+    for node in root.findall('./channel/item')[:40]:
+        link=_url_ok(node.findtext('link',''))
+        title=_limpar(node.findtext('title',''),240)
+        if not link or not title or urllib.parse.urlsplit(link).hostname != host: continue
+        description=node.findtext('description','')
+        description=re.sub(r'<p[^>]*>\s*(?:O post|The post)\b.*?(?:apareceu primeiro em|appeared first on).*?</p>\s*$',
+                           '',description,flags=re.I|re.S)
+        row={'titulo':title,'url':link,'trecho':_limpar(description,1000),
+             'origem':'publisher-rss','tipo':'noticia','publicador':host,
+             'publicado_em':node.findtext('pubDate','')[:80],
+             'content_scope':'article_candidate','source_recovery':{
+                 'method':'preferred_publisher_rss','feed_url':final,'state':'original_candidate'}}
+        if not search_verticals.assess(request,row)['eligible']: continue
+        out.append(row)
+        if len(out)>=max(1,min(12,int(limite))):break
     return out
 
 

@@ -45,6 +45,7 @@ from decimal import Decimal, InvalidOperation
 
 import research
 import source_check
+import source_priority
 
 log = logging.getLogger("JULIA-shopping")
 
@@ -1671,10 +1672,13 @@ def _contagem_classificacoes(candidatos: list) -> dict:
 
 def _ordenar_candidatos(candidatos: list) -> list:
     """Comerciais primeiro, lixo no fim; IRRELEVANT fica FORA (nunca gasta
-    página nem vira referência). Ordenação estável (empate mantém ordem)."""
+    página nem vira referência). Ordenação estável: tipo manda; entre lojas
+    do mesmo tipo, a preferência declarada (KaBuM, Shopee, Mercado Livre,
+    Americanas, Magalu, Amazon...) só desempata — nenhuma validação muda."""
     uteis = [a for a in (candidatos or [])
              if classificar_candidato(a) != "IRRELEVANT"]
-    uteis.sort(key=lambda a: _ORDEM_CANDIDATO.get(classificar_candidato(a), 2))
+    uteis.sort(key=lambda a: (_ORDEM_CANDIDATO.get(classificar_candidato(a), 2),
+                              source_priority.shopping_rank(a.get("url", ""))))
     return uteis
 
 
@@ -1766,7 +1770,8 @@ def buscar_web_v55(consulta: str, max_resultados: int = 10) -> tuple:
 
 
 def buscar_com_fallback(consulta: str, buscar_fn=None,
-                        limite_mlb: int = 10, diag: list | None = None) -> tuple:
+                        limite_mlb: int = 10, diag: list | None = None,
+                        texto_lojas: str | None = None) -> tuple:
     """Cadeia mlb → ddg → lite → web (orquestrador), com gate comercial.
 
     Retorna (achados, etapas). Nunca levanta. V5.7.1: um provedor só encerra
@@ -1813,6 +1818,38 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
                      if getattr(exc, "codigo", "") == "bloqueado"
                      else "provider_error"),
              ms=(time.monotonic() - inicio) * 1000)
+    pool: list = []
+    loja_query = ""
+    if texto_lojas:
+        try:
+            loja_query = (source_priority.shopping_queries(
+                texto_lojas, consulta, 1) or [""])[0]
+        except Exception:
+            loja_query = ""
+    if loja_query:
+        # Lojas preferidas vêm antes da busca genérica; a API oficial do
+        # Mercado Livre continua sendo a primeira fonte, acima desta etapa.
+        inicio = time.monotonic()
+        achados_lojas, letapas = buscar_web_v55(loja_query)
+        etapas.extend(letapas)
+        cont = _contagem_classificacoes(achados_lojas)
+        comerciais = (cont.get("PRODUCT_CANDIDATE", 0)
+                      + cont.get("COMMERCIAL_LISTING", 0))
+        _reg(provedor="lojas", resultados=len(achados_lojas),
+             comerciais=comerciais, rejeitados=cont.get("IRRELEVANT", 0),
+             rebaixados=(cont.get("EDITORIAL_REFERENCE", 0)
+                         + cont.get("GENERIC_INDEX", 0)
+                         + cont.get("UNKNOWN", 0)),
+             alvo_loja=loja_query,
+             motivo=("useful_candidates_found"
+                     if comerciais >= COBERTURA_COMERCIAL_MINIMA else
+                     ("insufficient_commercial_candidates" if achados_lojas
+                      else "discovery_empty")),
+             ms=(time.monotonic() - inicio) * 1000)
+        if achados_lojas:
+            pool = _mesclar_candidatos(pool, achados_lojas)
+        if _descoberta_suficiente(pool, consulta):
+            return _ordenar_candidatos(pool), etapas
     inicio = time.monotonic()
     cascata, detapas = buscar_ddg_chain(consulta)
     etapas.extend(detapas)
@@ -1829,6 +1866,8 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
                  ("insufficient_commercial_candidates" if cascata
                   else "discovery_empty")),
          ms=(time.monotonic() - inicio) * 1000)
+    if pool:
+        cascata = _mesclar_candidatos(pool, cascata)
     if _descoberta_suficiente(cascata, consulta):
         return _ordenar_candidatos(cascata), etapas
     inicio = time.monotonic()
@@ -2006,11 +2045,14 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
                 _reg("vazio", "página sem conteúdo")
                 return []
         else:
-            final, pagina = research.baixar(url, timeout=6.0)
+            import public_store_reader
+            final, pagina = public_store_reader.fetch(url, timeout=6.0)
     except research.ResearchErro as exc:
+        status = getattr(exc, 'http', 0)
         _reg("bloqueio" if exc.codigo == "bloqueado" else
              ("rede" if exc.codigo in ("rede", "timeout") else exc.codigo),
-             str(exc))
+             str(exc), http=status,
+             access_reason={401:'authentication_required',403:'access_denied',429:'rate_limited'}.get(status,exc.codigo))
         log.info("shopping: página ignorada (%s): %s", exc.codigo, url[:80])
         return []
     except Exception as exc:
@@ -2025,6 +2067,10 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
         aval = {}
     listagem = aval.get("codigo") == "listagem_nao_produto"
     bloqueio = aval.get("codigo") == "bloqueio_pagina"
+    if bloqueio or research.pagina_bloqueada(pagina):
+        _reg('bloqueio', 'Página de verificação; conteúdo não confirmado.',
+             http=200, access_reason='challenge_page')
+        return []
     if aval.get("codigo") == "produto_removido":
         # HTTP 200 dizendo que o produto não existe mais: página ignorada
         # por inteiro (nem JSON-LD residual vira card) — soft 404 é fonte,
@@ -2088,7 +2134,8 @@ def _recuperar_ofertas(url: str, titulo: str, baixar_fn=None,
             _reg("sem_dados", "página sem dados estruturados de produto")
     if saidas:
         _reg("extraida", "dados efetivamente extraídos", origem=[p.get("preco_origem") for p in saidas],
-             ofertas=len(saidas), url_final=final, listagem=listagem)
+             ofertas=len(saidas), url_final=final, listagem=listagem,
+             retrieval_method=getattr(pagina,'retrieval_method','direct_http'))
     return saidas
 
 
@@ -2493,6 +2540,13 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         return em_cache
 
     consultas = _consultas_produto(criterios, texto)
+    loja_explicita = source_priority.explicit_store(texto)
+    prioridade_compras = {
+        "lojas_preferidas": [store["label"] for store in source_priority.SHOPPING_STORES],
+        "loja_explicita": loja_explicita["label"] if loja_explicita else None,
+        "consulta_lojas": (source_priority.shopping_queries(texto, consulta, 1)
+                           if (buscar_fn is None and baixar_fn is None) else []),
+    }
     achados, vistas, etapas_prov = [], set(), []
     decisoes: list = []
     for idx_consulta, q in enumerate(consultas):
@@ -2503,7 +2557,10 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                 q = re.sub(re.escape(model), lambda m: '"' + m.group(0) + '"', q, count=1, flags=re.I)
             consultas[idx_consulta] = q
         parcial, detapas = buscar_com_fallback(q, buscar_fn=buscar_fn,
-                                               diag=decisoes)
+                                               diag=decisoes,
+                                               texto_lojas=(texto if (buscar_fn is None
+                                                                     and baixar_fn is None)
+                                                            else None))
         etapas_prov.extend(f"{q[:40]}: {e}" for e in detapas)
         for a in parcial[:12]:
             if a.get("url") and a["url"] not in vistas:
@@ -2515,6 +2572,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         resultado = {"produtos": [], "fontes": [], "criterios": criterios,
                      "total_bruto": 0, "excluidos": [], "de_cache": False,
                      "encontrados": [],
+                     "prioridade_compras": prioridade_compras,
                      "verificado_em": agora_iso(), "erro": "provedor_indisponivel",
                      "etapas_provedores": etapas_prov[:8],
                      "descoberta": {"decisoes": decisoes[:12],
@@ -2532,8 +2590,19 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         identity = _sem_acentos(str(a.get('titulo') or '') + ' ' + urllib.parse.unquote(str(a.get('url') or '')))
         specs = criterios.get('specs') or {}
         match = _modelo_mencionado(specs, identity) if specs.get('modelos') or specs.get('familias') else True
-        return (_prioridade_descarga(a), not match)
-    for a in sorted(achados, key=prioridade_pedido)[:max(1, int(teto_paginas)) * MAX_ONDAS_PAGINAS]:
+        return (_prioridade_descarga(a), not match,
+                source_priority.shopping_rank(a.get('url', '')))
+    # Keep identity/type priorities, but spread equal candidates across hosts
+    # before truncation. One protected store must not occupy the entire budget.
+    escolhas = list(enumerate(achados))
+    ordenadas, hosts = [], {}
+    while escolhas:
+        idx,a = min(escolhas, key=lambda pair:(prioridade_pedido(pair[1])[:2],
+                    hosts.get(_dominio(pair[1].get('url','')),0),
+                    prioridade_pedido(pair[1])[2:],pair[0]))
+        escolhas.remove((idx,a)); ordenadas.append(a)
+        host = _dominio(a.get('url','')); hosts[host] = hosts.get(host,0)+1
+    for a in ordenadas[:max(1, int(teto_paginas)) * MAX_ONDAS_PAGINAS]:
         if a.get("origem") == "mlb" and isinstance(a.get("mlb"), dict):
             try:
                 extraido = produto_de_mlb(a["mlb"])
@@ -2544,13 +2613,21 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
             except Exception as exc:
                 log.info("shopping: item mlb ignorado (%s)", type(exc).__name__)
         paginas.append(a)
-    paginas.sort(key=prioridade_pedido)  # página individual e identidade antes de modelos alheios
     relatorio: list = []
     consultadas: list = []
+    pendentes = list(paginas)
+    hosts_bloqueados = set()
     ondas = 0
     while ondas < MAX_ONDAS_PAGINAS:
-        lote = paginas[ondas * int(teto_paginas):
-                       (ondas + 1) * int(teto_paginas)]
+        lote = []
+        while pendentes and len(lote)<int(teto_paginas):
+            used_hosts={_dominio(row['url']) for row in lote}
+            index,_=min(enumerate(pendentes),key=lambda pair:(
+                prioridade_pedido(pair[1])[:2],
+                _dominio(pair[1]['url']) in hosts_bloqueados,
+                _dominio(pair[1]['url']) in used_hosts,
+                prioridade_pedido(pair[1])[2:],pair[0]))
+            lote.append(pendentes.pop(index))
         if not lote:
             if ondas == 0:
                 _prog("consultando", "0 páginas")
@@ -2575,6 +2652,8 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                     log.info("shopping: extração falhou (%s)",
                              type(exc).__name__)
         consultadas.extend(lote)
+        hosts_bloqueados.update(_dominio(row['url']) for row in relatorio
+                               if row.get('codigo')=='bloqueio')
         validos, _ = aplicar_filtros(deduplicar(brutos), criterios)
         if any(_tier(p) == "confirmada" for p in validos):
             break
@@ -2670,6 +2749,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                  "candidatos": [{"url": a.get("url"), "titulo": a.get("titulo"),
                                   "tipo": classificar_candidato(a)} for a in achados[:24]],
                  "encontrados": encontrados,
+                 "prioridade_compras": prioridade_compras,
                  "fontes": fontes, "criterios": criterios,
                  "total_bruto": len(brutos), "excluidos": duros[:6],
                  "verificacao": _resumo_verificacao(
