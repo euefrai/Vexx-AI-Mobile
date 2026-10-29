@@ -1447,16 +1447,18 @@ MLB_SEARCH_URL = "https://api.mercadolibre.com/sites/MLB/search"
 MLB_TIMEOUT = 8.0
 
 
-def _get_json(url: str, timeout: float) -> dict:
+def _get_json(url: str, timeout: float, headers=None) -> dict:
     """GET JSON com a mesma disciplina SSRF de `research.baixar` (só texto
     vira JSON aqui): URL validada, redirects revalidados um a um, teto de
-    tamanho e tempo. Bloqueio do provedor vira ResearchErro, nunca bypass."""
+    tamanho e tempo. Bloqueio do provedor vira ResearchErro, nunca bypass.
+    `headers` existe apenas para credenciais opcionais (ex.: token OAuth do
+    Mercado Livre); segredos nunca entram na URL nem em mensagens de erro."""
     import urllib.error
     import urllib.parse as _up
     atual = research.url_segura(url)
     for _ in range(research.MAX_REDIRECTS + 1):
         try:
-            resp = research._abrir(atual, timeout)
+            resp = research._abrir(atual, timeout, headers=headers)
         except urllib.error.HTTPError as exc:
             if exc.code in (301, 302, 303, 307, 308):
                 loc = exc.headers.get("Location", "")
@@ -1506,15 +1508,23 @@ def _get_json(url: str, timeout: float) -> dict:
 
 def buscar_mlb(consulta: str, limite: int = 10,
                timeout: float = MLB_TIMEOUT) -> list:
-    """Busca oficial no Mercado Livre (sem chave). Levanta ResearchErro."""
+    """Busca oficial no Mercado Livre. Levanta ResearchErro.
+
+    A API pública pode responder 403 sem autenticação. Quando
+    ``MERCADO_LIVRE_ACCESS_TOKEN`` existe, ele é enviado somente no cabeçalho
+    Authorization; sem token o fallback atual de lojas continua valendo.
+    """
+    import os
     import urllib.parse as _up
     q = (consulta or "").strip()[:120]
     if not q:
         return []
+    token = os.getenv("MERCADO_LIVRE_ACCESS_TOKEN", "").strip()
+    headers = {"Authorization": "Bearer " + token} if token else None
     dados = _get_json(
         MLB_SEARCH_URL + "?" + _up.urlencode(
             {"q": q, "limit": min(max(int(limite), 1), 20)}),
-        timeout=timeout)
+        timeout=timeout, headers=headers)
     out = []
     for item in (dados.get("results") or [])[:limite]:
         if not isinstance(item, dict):

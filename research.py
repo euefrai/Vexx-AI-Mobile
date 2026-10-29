@@ -175,11 +175,22 @@ class _HTTPSHandlerPublico(urllib.request.HTTPSHandler):
         return self.do_open(_HTTPSPublico, req, context=self._context)
 
 
-def _abrir(url: str, timeout: float, user_agent: str = ""):
+def _abrir(url: str, timeout: float, user_agent: str = "", headers=None,
+           data=None, method=None):
+    """Open one HTTP request with the same public-address and no-redirect rules.
+
+    Optional headers/data/method are used only by bounded JSON/Atom API clients
+    (e.g. GitHub token, Brave subscription key, Mercado Livre OAuth token).
+    Redirects are never followed here: callers revalidate each Location.
+    """
     opener = urllib.request.build_opener(_SemRedirect, urllib.request.ProxyHandler({}),
                                          _HTTPHandlerPublico, _HTTPSHandlerPublico)
-    req = urllib.request.Request(
-        url, headers={"User-Agent": user_agent or "Mozilla/5.0 (JuliaResearch/1.0)"})
+    request_headers = {"User-Agent": user_agent or "Mozilla/5.0 (JuliaResearch/1.0)"}
+    for key, value in (headers or {}).items():
+        if str(key).lower() != "user-agent":
+            request_headers[str(key)] = str(value)
+    req = urllib.request.Request(url, data=data, headers=request_headers,
+                                 method=method)
     return opener.open(req, timeout=timeout)
 
 

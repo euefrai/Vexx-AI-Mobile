@@ -25,6 +25,7 @@ import urllib.parse
 
 import search_providers as sp
 import evidence_graph as eg  # V5.7: regra única de fonte desatualizada
+import free_sources
 import source_priority
 
 # ── Classes de assunto ─────────────────────────────────────────────
@@ -348,12 +349,15 @@ def classificar(consulta: str) -> dict:
     produto = bool(RX_PRODUTO.search(ta))
     comparacao = bool(RX_COMPARACAO.search(ta))
     temporal = bool(RX_NOTICIA.search(ta) or RX_TEMPORAL.search(ta))
+    documento, documento_valor = free_sources.detectar_documento(t)
     if not classes:
         classes.append(sp.CLASSE_GERAL)
     return {"classes": classes, "produto": produto, "comparacao": comparacao,
             "temporal": temporal, "tecnica": sp.CLASSE_TECNICA in classes,
             "documentacao": bool(re.search(r"documentacao|documentation|fontes? tecnicas|fontes? oficiais", ta)),
-            "academica": sp.CLASSE_ACADEMICA in classes}
+            "academica": sp.CLASSE_ACADEMICA in classes,
+            "cripto": free_sources.detectar_cripto(ta),
+            "documento": documento, "documento_valor": documento_valor}
 
 
 # ── Consultas alternativas e complementares ────────────────────────
@@ -905,11 +909,22 @@ def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
     """Provedores por afinidade; dados/notícias só quando fazem sentido."""
     nomes = []
     ordem = []
+    todos = set(disponiveis or sp.disponiveis())
+    request = info.get('request') or {}
+    request_text = _sem_acentos(str(request.get('original_request') or ''))
+    code_intent = bool(re.search(
+        r"\b(github|repositorio|repositorios|biblioteca|library|framework|sdk|"
+        r"pacote|package|open[- ]source|codigo[- ]fonte|source code)\b", request_text))
+    # Authoritative structured lookups go first when the request explicitly
+    # contains a CEP/CNPJ or names a crypto asset.
+    if info.get("documento"):
+        ordem.append("brasilapi")
+    if info.get("cripto"):
+        ordem.append("coingecko")
     if info.get("academica"):
-        ordem.append("crossref")
+        ordem.extend(["crossref", "openalex", "arxiv"])
     if info.get("produto"):
         ordem.extend(["bing", "marginalia"])
-    request = info.get('request') or {}
     news_intent = not request or request.get('domain') == 'news' or bool(re.search(
         r'\b(noticias?|manchetes|hoje|ontem|recentes?|ultimas?)\b', _sem_acentos(request.get('original_request', ''))))
     if sp.CLASSE_NOTICIA in classes and not info.get("academica") and news_intent:
@@ -917,8 +932,15 @@ def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
             ordem.append('google-news')
         ordem.extend(["bing-news", "bing", "hn"])
     if sp.CLASSE_TECNICA in classes:
-        ordem.extend(["bing", "ddg", "wikipedia", "stackexchange"] if info.get("documentacao")
-                     else ["stackexchange", "hn", "bing"])
+        if info.get("documentacao"):
+            ordem.extend(["bing", "ddg", "wikipedia", "stackexchange"])
+            if code_intent:
+                ordem.append("github")
+        else:
+            ordem.extend(["stackexchange", "hn"])
+            if code_intent:
+                ordem.append("github")
+            ordem.append("bing")
     if sp.CLASSE_SAUDE in classes:
         ordem.extend(["pubmed", "wikipedia", "bing"])
     if sp.CLASSE_ACADEMICA in classes:
@@ -934,9 +956,8 @@ def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
         ordem.extend(["commons", "bing"])
     if sp.CLASSE_ENCICLOPEDIA in classes:
         ordem.extend(["wikipedia", "bing"])
-    ordem.extend(["bing", "ddg", "marginalia", "wikipedia"])
+    ordem.extend(["brave", "bing", "ddg", "marginalia", "wikipedia"])
     vistos = set()
-    todos = set(disponiveis or sp.disponiveis())
     for nome in ordem:
         if nome in vistos or nome not in todos:
             continue

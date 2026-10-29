@@ -20,12 +20,15 @@ resultado utilizável, com códigos honestos:
 """
 import base64
 import json
+import os
 import re
 import time
 import urllib.parse
 from contextlib import contextmanager
 from contextvars import ContextVar
 from datetime import datetime, timezone
+
+import free_sources
 
 _SEARCH_AUDIT = ContextVar('search_audit', default=None)
 _REQUEST_AUDIT = ContextVar('request_audit', default=None)
@@ -679,6 +682,23 @@ CLASSE_IMAGEM = "imagens"
 CLASSE_LIVRO = "livros"
 CLASSE_SAUDE = "saude"
 
+
+def _provedor_disponivel(nome: str, meta: dict) -> bool:
+    """Optional providers are advertised only when their key/config exists.
+
+    Keyless free APIs can be disabled globally with ``JULIA_FREE_APIS=0``.
+    A provider without ``classes`` (test fixtures) is still considered.
+    """
+    requer = meta.get("requer")
+    if requer and not os.getenv(requer, "").strip():
+        return False
+    if meta.get("gratuito"):
+        desligado = os.getenv("JULIA_FREE_APIS", "1").strip().lower()
+        if desligado in ("0", "false", "off", "no"):
+            return False
+    return True
+
+
 PROVEDORES: dict = {
     "crossref": {"rotulo": "Crossref (metadados públicos)", "classes": (CLASSE_ACADEMICA,),
                  "tipo": "academico", "peso": 8.0, "fn": buscar_crossref},
@@ -711,6 +731,31 @@ PROVEDORES: dict = {
             "tipo": "dados", "peso": 8.0, "fn": buscar_bcb},
     "commons": {"rotulo": "Wikimedia Commons", "classes": (CLASSE_IMAGEM,),
                 "tipo": "imagem", "peso": 6.0, "fn": buscar_commons},
+    # Free-tier APIs added in the public-sources phase. All are additive and
+    # fail closed: a quota error or malformed payload never blocks fallback.
+    "openalex": {"rotulo": "OpenAlex (metadados acadêmicos)",
+                 "classes": (CLASSE_ACADEMICA,), "tipo": "academico", "peso": 9.0,
+                 "fn": free_sources.buscar_openalex, "gratuito": True,
+                 "limites": "keyless ~10 req/s; chave gratuita opcional eleva a cota"},
+    "arxiv": {"rotulo": "arXiv (Atom público)", "classes": (CLASSE_ACADEMICA,),
+              "tipo": "academico", "peso": 8.5, "fn": free_sources.buscar_arxiv,
+              "gratuito": True, "limites": "keyless; ~1 requisição a cada 3 s recomendada"},
+    "github": {"rotulo": "GitHub (busca de repositórios)",
+               "classes": (CLASSE_TECNICA,), "tipo": "tecnico", "peso": 8.0,
+               "fn": free_sources.buscar_github, "gratuito": True,
+               "limites": "10 buscas/min sem token; GITHUB_TOKEN opcional eleva o limite"},
+    "brasilapi": {"rotulo": "BrasilAPI (CEP/CNPJ)", "classes": (CLASSE_DADOS,),
+                  "tipo": "dados", "peso": 9.0, "fn": free_sources.buscar_brasilapi,
+                  "gratuito": True, "limites": "keyless; uma consulta por CEP/CNPJ explícito"},
+    "coingecko": {"rotulo": "CoinGecko (mercado cripto)", "classes": (CLASSE_DADOS,),
+                  "tipo": "dados", "peso": 9.0, "fn": free_sources.buscar_coingecko,
+                  "gratuito": True, "limites": "keyless/demo; cotação pública, sem recomendação"},
+    "brave": {"rotulo": "Brave Search (API opcional)", "classes": (
+                  CLASSE_GERAL, CLASSE_NOTICIA, CLASSE_TECNICA, CLASSE_ACADEMICA,
+                  CLASSE_ENCICLOPEDIA), "tipo": "pagina", "peso": 9.5,
+              "fn": free_sources.buscar_brave, "requer": "BRAVE_SEARCH_API_KEY",
+              "gratuito": True,
+              "limites": "crédito gratuito mensal; desativado sem chave; quota do provedor"},
 }
 
 
@@ -742,17 +787,35 @@ def capacidades() -> dict:
             fields += ['published_at']
         if name == 'google-news':
             fields += ['publisher']
-        if name == 'crossref':
+        if name in ('crossref', 'openalex'):
             fields += ['doi', 'authors', 'year', 'abstract', 'pdf_url', 'license']
+        if name == 'openalex':
+            fields += ['open_access', 'citation_count']
+        if name == 'arxiv':
+            fields += ['authors', 'year', 'published_at', 'doi', 'pdf_url']
+        if name == 'github':
+            fields += ['stars', 'language', 'updated_at', 'topics', 'license']
+        if name == 'brasilapi':
+            fields += ['cep', 'cnpj', 'address', 'ibge', 'coordinates', 'cnae', 'situacao']
+        if name == 'coingecko':
+            fields += ['price_brl', 'price_usd', 'change_24h_pct',
+                       'market_cap_rank', 'updated_at']
+        if name == 'brave':
+            fields += ['age', 'hostname']
         if name == 'bcb':
             fields += ['rate', 'date']
         if name == 'commons':
             fields += ['media_url', 'media_type']
+        requer = meta.get('requer')
         out[name] = {'categories': list(meta['classes']), 'declared_fields': fields,
-                     'auth': 'public_adapter_no_key', 'access': 'metadata_or_public_search',
+                     'auth': 'optional_key' if requer else 'public_adapter_no_key',
+                     'key_env': requer,
+                     'access': 'metadata_or_public_search',
                      'license': 'source_specific; abstracts/media may have separate rights',
                      'commercial_use': 'not_assessed', 'freshness': 'source_declared_not_guaranteed',
-                     'limits': 'existing timeout, byte limit, circuit breaker; no private inventory',
+                     'free_tier': bool(meta.get('gratuito')),
+                     'limits': meta.get('limites') or (
+                         'existing timeout, byte limit, circuit breaker; no private inventory'),
                      'observed': measured.get(name, {}), 'e2e_verified_fields': []}
     return out
 
@@ -778,10 +841,12 @@ def disponiveis(classes=None) -> list:
     """Nomes de provedores (filtrados por classe de assunto, se pedido)."""
     nomes = []
     for nome, meta in PROVEDORES.items():
-        if classes and not (set(classes) & set(meta["classes"])):
+        if not _provedor_disponivel(nome, meta):
+            continue
+        if classes and not (set(classes) & set(meta.get("classes") or (CLASSE_GERAL,))):
             continue
         nomes.append(nome)
-    return sorted(nomes, key=lambda n: -PROVEDORES[n]["peso"])
+    return sorted(nomes, key=lambda n: -PROVEDORES[n].get("peso", 0.0))
 
 
 def buscar(nome: str, consulta: str, limite: int = 6, timeout: float = 10.0) -> list:
@@ -825,6 +890,9 @@ def _buscar_impl(nome: str, consulta: str, limite: int = 6, timeout: float = 10.
     if core._circuito_fechado(nome):
         _metrica(nome, t0, erro='circuit_open')
         raise ErroProvedor('Provedor em espera após bloqueio; sem nova requisição.', 'bloqueado')
+    if not _provedor_disponivel(nome, meta):
+        _metrica(nome, t0, erro='indisponivel')
+        raise ErroProvedor(f'{nome} não configurado ou desativado.', 'indisponivel')
     try:
         achados = meta["fn"](consulta, limite=limite, timeout=timeout) or []
     except ErroProvedor as exc:
