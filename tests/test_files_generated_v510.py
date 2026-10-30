@@ -54,22 +54,42 @@ def test_codigo_anexado_preserva_indentacao_e_entra_no_prompt(db):
     assert "    return a + b" in sistema
 
 
+def test_codigo_desconhecido_e_texto_utf16_preservam_formato(db):
+    julia = "function soma(a, b)\n    return a + b\nend\n"
+    meta = docs_agent.salvar_documento(db, "script.jl", julia.encode("utf-8"), "conv-jl")
+    texto = docs_agent.obter_texto(db, meta["doc_id"])
+    assert "\n    return a + b\n" in texto
+
+    utf16 = b"\xff\xfe" + "primeira linha\r\nsegunda linha".encode("utf-16-le")
+    meta = docs_agent.salvar_documento(db, "notas.txt", utf16, "conv-utf16")
+    texto = docs_agent.obter_texto(db, meta["doc_id"])
+    assert "primeira linha\nsegunda linha" in texto
+
+
 def test_pedido_de_nova_versao_recupera_o_anexo_e_autoriza_arquivo(db):
-    fonte = "def soma(a, b):\n    return a + b\n"
+    fonte = ("# Relatório de vendas\n\nA receita cresceu.\n\n"
+             "def soma(a, b):\n    return a + b\n")
     meta = docs_agent.salvar_documento(db, "app.py", fonte.encode("utf-8"), "conv-ver")
+    pedido_versao = "crie uma nova versão do relatório de vendas"
     for pedido in ("crie uma nova versão desse arquivo",
                    "crie outro arquivo sobreposto",
                    "sobreponha as correções no app.py",
-                   "crie uma nova versão do que enviei"):
+                   "sobreponha o conteúdo",
+                   "crie uma nova versão do que enviei",
+                   pedido_versao):
         assert pc_agent.doc_mencionado(db, pedido, "conv-ver") == meta["doc_id"], pedido
         assert pc_agent.quer_criar_arquivo(pedido, meta["doc_id"]), pedido
+    contexto = docs_agent.contexto_documento(db, meta["doc_id"], pedido_versao)
+    assert contexto["modo"] == "completo"
+    assert "A receita cresceu." in contexto["texto"]
     cfg = dict(pc_agent.ai_config(), pesquisa_web=False, memoria_global=False)
     mensagens, extras = pc_agent.ai_montar_mensagens(
-        db, "conv-ver", cfg, "crie uma nova versão do que enviei")
+        db, "conv-ver", cfg, pedido_versao)
     sistema = mensagens[0]["content"]
     assert extras["doc_id"] == meta["doc_id"]
     assert extras.get("pode_gerar_arquivo") is True
     assert "CONTEÚDO INTEGRAL" in sistema and "    return a + b" in sistema
+    assert "A receita cresceu." in sistema
     assert "JULIAFILE" in sistema
 
 

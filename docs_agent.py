@@ -47,7 +47,7 @@ EXT_OK = ({".pdf", ".docx", ".txt", ".md", ".markdown", ".csv", ".tsv",
            ".xlsx", ".html", ".htm", ".json"} | EXT_TEXTO | EXT_CODIGO)
 EXT_ESTRUTURADO = {".csv", ".tsv", ".xlsx", ".html", ".htm", ".json"}
 EXT_PRESERVAR = EXT_TEXTO | EXT_CODIGO
-EXT_FONTE = EXT_CODIGO | {".html", ".htm", ".json"}
+EXT_FONTE = EXT_PRESERVAR | {".csv", ".tsv", ".html", ".htm", ".json"}
 EXT_NAO_SUPORTADO = {".xls", ".pptx", ".ppt", ".odt", ".ods", ".epub"}
 EXT_BINARIO = {
     ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp", ".ico", ".tif", ".tiff",
@@ -185,6 +185,16 @@ def _tokens(s: str) -> set:
 
 # ── Extração ──────────────────────────────────────────────────────────
 def _decode(raw: bytes) -> str:
+    if raw.startswith((b"\xff\xfe\x00\x00", b"\x00\x00\xfe\xff")):
+        try:
+            return raw.decode("utf-32")
+        except (UnicodeDecodeError, ValueError):
+            pass
+    if raw.startswith((b"\xff\xfe", b"\xfe\xff")):
+        try:
+            return raw.decode("utf-16")
+        except (UnicodeDecodeError, ValueError):
+            pass
     for enc in ("utf-8-sig", "utf-8", "latin-1"):
         try:
             return raw.decode(enc)
@@ -256,6 +266,20 @@ def _validar_texto(raw: bytes) -> None:
     if raw.startswith((b"\x89PNG\r\n\x1a\n", b"\xff\xd8\xff", b"GIF87a", b"GIF89a",
                        b"PK\x03\x04", b"%PDF-", b"MZ", b"\x7fELF")):
         raise DocErro("O conteúdo é binário; envie um arquivo de texto/código.", "conteudo_invalido")
+    if raw.startswith((b"\xff\xfe\x00\x00", b"\x00\x00\xfe\xff",
+                       b"\xff\xfe", b"\xfe\xff")):
+        try:
+            texto = raw.decode("utf-32" if raw[:4] in (
+                b"\xff\xfe\x00\x00", b"\x00\x00\xfe\xff") else "utf-16")
+        except (UnicodeDecodeError, ValueError):
+            raise DocErro("O conteúdo é binário; envie um arquivo de texto/código.",
+                          "conteudo_invalido") from None
+        controls = sum(ord(char) < 32 and char not in "\t\n\f\r" or ord(char) == 127
+                       for char in texto)
+        if controls > max(1, len(texto) // 100):
+            raise DocErro("O conteúdo contém bytes binários incompatíveis com texto.",
+                          "conteudo_invalido")
+        return
     controls = sum(byte < 32 and byte not in (9, 10, 12, 13) or byte == 127
                    for byte in raw)
     if b"\x00" in raw or controls > max(1, len(raw) // 100):
@@ -462,7 +486,8 @@ def _extrair_json(raw: bytes) -> str:
 
 
 def extrair_texto(ext: str, raw: bytes, nome: str, *, pdf_max_pages=200, pdf_max_chars=None) -> str:
-    preservar = ext in EXT_PRESERVAR
+    preservar = (ext in EXT_PRESERVAR or ext not in
+                 (EXT_ESTRUTURADO | {".pdf", ".docx", ".xlsx"}))
     if ext == ".pdf":
         texto = _extrair_pdf(raw, max_pages=pdf_max_pages, max_chars=pdf_max_chars)
     elif ext == ".docx":
@@ -874,7 +899,9 @@ def contexto_documento(db, doc_id: str, pergunta: str = "", owner=DONO_PADRAO, *
         meta = {}
     pedido_explicito = bool(completo or re.search(
         r"(?i)(documento|arquivo)\s+anexado|📎|\b(leia|ler|leitura|conte[uú]do|"
-        r"integral|inteiro|completo|abra|abrir|analise|analisar|explique|resuma)\b",
+        r"integral|inteiro|completo|abra|abrir|analise|analisar|explique|resuma|"
+        r"cri\w*|ger\w*|sobrepon\w*|sobrepost\w*|sobrescrev\w*|substitu\w*|"
+        r"atualiz\w*|modific\w*|corrij\w*|refa[çc]a|vers[ãa]o)\b",
         pergunta or ""))
     orcamento = min(max(int(orcamento or 24000), 2000), 60000)
     trechos = [] if pedido_explicito else trechos_relevantes(
