@@ -139,6 +139,22 @@ def test_filecard_accepts_only_real_export_or_remote_url():
         assert jdui.validar_mensagem(_msg("filecard", bad))[0] is False
 
 
+def test_filecard_aceita_arquivo_gerado_e_rejeita_rota_ampla():
+    ok, norm, erros = jdui.validar_mensagem(_msg("filecard", {"files": [
+        {"name": "app.py", "url": "/api/files/file-0123456789ab/download",
+         "kind": "code", "status": "generated"},
+    ]}))
+    assert ok, erros
+    assert norm["blocks"][0]["props"]["files"][0]["kind"] == "code"
+    for url in ("/api/files/file-0123456789ab",
+                "/api/files/file-0123456789ab/download?x=1",
+                "/api/files/../../admin/download",
+                "/api/files/file-xyz/download"):
+        bad = _msg("filecard", {"files": [
+            {"name": "x.py", "url": url, "kind": "code"}]})
+        assert jdui.validar_mensagem(bad)[0] is False
+
+
 def _resumo():
     return {
         "id": "rj-abc123", "objetivo": "Testar a segurança do café",

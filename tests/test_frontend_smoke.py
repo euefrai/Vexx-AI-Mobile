@@ -180,6 +180,11 @@ const fc = JDUI.validateMessage({ version: 'JULIA-ui-message/v1', blocks: [
     { name: 'R', url: '/api/research/export?job_id=rj-abc&formato=md', kind: 'md' }] } }] });
 t('filecard-export', fc.ok === true &&
   fc.msg.blocks[0].props.files[0].url.indexOf('/api/research/export?') === 0);
+const fg = JDUI.validateMessage({ version: 'JULIA-ui-message/v1', blocks: [
+  { type: 'ui', component: 'filecard', props: { files: [
+    { name: 'app.py', url: '/api/files/file-0123456789ab/download', kind: 'code' }] } }] });
+t('filecard-arquivo-gerado', fg.ok === true &&
+  fg.msg.blocks[0].props.files[0].url === '/api/files/file-0123456789ab/download');
 t('filecard-rota-interna', JDUI.validateMessage({ version: 'JULIA-ui-message/v1', blocks: [
   { type: 'ui', component: 'filecard', props: { files: [
     { name: 'R', url: '/api/admin', kind: 'md' }] } }] }).ok === false);

@@ -41,6 +41,15 @@
     const remote = URL_OK(u);
     if (remote) return remote;
     const s = S(u, 500);
+    if (s.indexOf('/api/files/') === 0) {
+      try {
+        const p = new URL(s, location.origin);
+        if (p.origin !== location.origin || p.search || p.hash ||
+            p.username || p.password) return '';
+        if (!/^\/api\/files\/file-[a-f0-9]{12}\/download$/.test(p.pathname)) return '';
+        return p.pathname;
+      } catch (_) { return ''; }
+    }
     if (s.indexOf('/api/research/export?') !== 0) return '';
     try {
       const p = new URL(s, location.origin);
@@ -605,7 +614,8 @@
     },
     filecard(p) {
       const files = reqList(p, 'files', 1, 8, 'filecard.files 1..8');
-      const kinds = ['pdf', 'docx', 'xlsx', 'csv', 'md', 'txt', 'json', 'zip'];
+      const kinds = ['pdf', 'docx', 'xlsx', 'csv', 'md', 'txt', 'json', 'zip',
+        'html', 'xml', 'yaml', 'code', 'image', 'other'];
       return {
         title: S(p.title, 160) || 'Arquivos',
         files: files.map(f => {

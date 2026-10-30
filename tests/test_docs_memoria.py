@@ -559,3 +559,46 @@ def test_relay_docs_e_memories():
                                 data={'conversation_id': 'conv-001'},
                                 headers={'X-CSRF-Token': csrf})
             assert empty.status_code == 422
+
+
+def test_relay_arquivos_gerados():
+    payload = b'def soma(a, b):\n    return a + b\n'
+    digest = __import__('hashlib').sha256(payload).hexdigest()
+    with TestClient(server.app) as client:
+        csrf = login(client)
+        with client.websocket_connect('/api/agent/ws',
+                                      headers={'Authorization': 'Bearer ' + os.environ['JULIA_AGENT_TOKEN']}) as ws:
+            handlers = {
+                'sess_revogados': lambda r: {'type': 'sess_revogados', 'sids': []},
+                'file_list': lambda r: {'type': 'file_list', 'files': [{
+                    'file_id': 'file-0123456789ab', 'name': 'soma.py', 'kind': 'code',
+                    'size': len(payload), 'version': 1,
+                    'download_url': '/api/files/file-0123456789ab/download'}]},
+                'file_download': lambda r: ({'type': 'file_download',
+                    'name': 'soma.py', 'mime': 'text/x-python', 'sha256': digest,
+                    'data_b64': base64.b64encode(payload).decode('ascii')}
+                    if r.get('owner') == 'local' else
+                    {'type': 'file_error', 'error': 'não encontrado',
+                     'codigo': 'nao_encontrado'}),
+                'file_delete': lambda r: {'type': 'file_deleted',
+                                          'file_id': r.get('file_id')},
+            }
+            t = threading.Thread(target=_agent_loop, args=(ws, handlers), daemon=True)
+            t.start()
+
+            listing = client.get('/api/files')
+            assert listing.status_code == 200, listing.text
+            assert listing.json()['files'][0]['name'] == 'soma.py'
+
+            download = client.get('/api/files/file-0123456789ab/download')
+            assert download.status_code == 200, download.text
+            assert download.content == payload
+            assert 'attachment' in download.headers['content-disposition']
+            assert download.headers['x-content-type-options'] == 'nosniff'
+
+            assert client.get('/api/files/nao-e-um-arquivo/download').status_code == 422
+            assert client.get('/api/files/file-0123456789ab/download?x=1').status_code in (404, 422)
+
+            removed = client.delete('/api/files/file-0123456789ab',
+                                    headers={'X-CSRF-Token': csrf})
+            assert removed.status_code == 200 and removed.json()['ok']

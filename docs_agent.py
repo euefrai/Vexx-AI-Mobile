@@ -1,7 +1,8 @@
 """Documentos no PC: upload, leitura, resumo, tópicos e Q&A sobre o conteúdo.
 
-Formatos lidos: PDF, DOCX, TXT/Markdown, CSV/TSV, XLSX, HTML e JSON.
-Outros (PPTX, ODT, EPUB…) retornam erro amigável pedindo conversão para PDF.
+Formatos lidos: PDF, DOCX, TXT/Markdown, CSV/TSV, XLSX, HTML, JSON, código,
+configuração e texto em geral. Arquivos binários sem extrator (PPTX, ODT,
+EPUB…) retornam erro amigável pedindo conversão para PDF.
 
 Tudo com imports opcionais: se a lib extratora não estiver instalada no PC,
 o erro diz exatamente qual `pip install` fazer — nada quebra o agente.
@@ -30,8 +31,30 @@ TAM_CHUNK = 3000
 OVERLAP = 300
 STOP = frozenset(("que com uma para das dos por seu sua isto isso entre como mas foi ser tem são foi ela ele eles elas meu minha teu tua seu sua nosso nossa este esta esse essa aquele aquela muito mais menos sobre após depois onde quando qual quais todo toda todos todas também pode fazer faz parte vez vezes".split()))
 
-EXT_OK = {".pdf", ".docx", ".txt", ".md", ".markdown", ".csv", ".tsv",
-          ".xlsx", ".html", ".htm", ".json"}
+EXT_TEXTO = {".txt", ".md", ".markdown", ".rst", ".log", ".tex", ".bib"}
+EXT_CODIGO = {
+    ".py", ".pyw", ".js", ".mjs", ".cjs", ".jsx", ".ts", ".tsx", ".vue",
+    ".svelte", ".astro", ".java", ".kt", ".kts", ".scala", ".groovy",
+    ".c", ".h", ".cc", ".cpp", ".cxx", ".hpp", ".cs", ".go", ".rs",
+    ".rb", ".php", ".swift", ".m", ".mm", ".lua", ".r", ".dart",
+    ".sh", ".bash", ".zsh", ".fish", ".ps1", ".bat", ".cmd", ".sql",
+    ".pl", ".pm", ".ex", ".exs", ".erl", ".hrl", ".clj", ".cljs",
+    ".gradle", ".mk", ".cmake", ".dockerfile", ".css", ".scss", ".sass",
+    ".less", ".xml", ".svg", ".yaml", ".yml", ".toml", ".ini", ".cfg",
+    ".conf", ".env", ".properties", ".jsonl", ".ndjson",
+}
+EXT_OK = ({".pdf", ".docx", ".txt", ".md", ".markdown", ".csv", ".tsv",
+           ".xlsx", ".html", ".htm", ".json"} | EXT_TEXTO | EXT_CODIGO)
+EXT_ESTRUTURADO = {".csv", ".tsv", ".xlsx", ".html", ".htm", ".json"}
+EXT_PRESERVAR = EXT_TEXTO | EXT_CODIGO
+EXT_FONTE = EXT_CODIGO | {".html", ".htm", ".json"}
+EXT_NAO_SUPORTADO = {".xls", ".pptx", ".ppt", ".odt", ".ods", ".epub"}
+EXT_BINARIO = {
+    ".png", ".jpg", ".jpeg", ".gif", ".webp", ".bmp", ".ico", ".tif", ".tiff",
+    ".heic", ".psd", ".ai", ".mp3", ".wav", ".ogg", ".flac", ".mp4", ".mov",
+    ".avi", ".mkv", ".webm", ".zip", ".rar", ".7z", ".gz", ".tar", ".bin",
+    ".exe", ".dll", ".msi", ".iso", ".doc", ".ttf", ".otf", ".woff", ".woff2",
+}
 DOC_VERSION = 1
 
 
@@ -229,6 +252,16 @@ def _validar_zip_ooxml(raw: bytes, ext: str) -> None:
         raise DocErro("Arquivo compactado inválido ou corrompido.", "conteudo_invalido") from None
 
 
+def _validar_texto(raw: bytes) -> None:
+    if raw.startswith((b"\x89PNG\r\n\x1a\n", b"\xff\xd8\xff", b"GIF87a", b"GIF89a",
+                       b"PK\x03\x04", b"%PDF-", b"MZ", b"\x7fELF")):
+        raise DocErro("O conteúdo é binário; envie um arquivo de texto/código.", "conteudo_invalido")
+    controls = sum(byte < 32 and byte not in (9, 10, 12, 13) or byte == 127
+                   for byte in raw)
+    if b"\x00" in raw or controls > max(1, len(raw) // 100):
+        raise DocErro("O conteúdo contém bytes binários incompatíveis com texto.", "conteudo_invalido")
+
+
 def _validar_conteudo(ext: str, raw: bytes) -> None:
     if ext == ".pdf":
         if not raw.lstrip().startswith(b"%PDF-"):
@@ -237,11 +270,10 @@ def _validar_conteudo(ext: str, raw: bytes) -> None:
         if not raw.startswith((b"PK\x03\x04", b"PK\x05\x06", b"PK\x07\x08")):
             raise DocErro("O conteúdo não corresponde a um pacote Office.", "conteudo_invalido")
         _validar_zip_ooxml(raw, ext)
-    elif ext in (".txt", ".md", ".markdown", ".csv", ".tsv", ".html", ".htm", ".json"):
-        controls = sum(byte < 32 and byte not in (9, 10, 12, 13) or byte == 127
-                       for byte in raw)
-        if b"\x00" in raw or controls > max(1, len(raw) // 100):
-            raise DocErro("O conteúdo contém bytes binários incompatíveis com texto.", "conteudo_invalido")
+    else:
+        # Extensões de texto/código e também arquivos sem extensão ou com
+        # extensão desconhecida: aceita somente se o conteúdo for texto.
+        _validar_texto(raw)
 
 
 def _extrair_pdf(raw: bytes, *, max_pages=200, max_chars=None) -> str:
@@ -430,6 +462,7 @@ def _extrair_json(raw: bytes) -> str:
 
 
 def extrair_texto(ext: str, raw: bytes, nome: str, *, pdf_max_pages=200, pdf_max_chars=None) -> str:
+    preservar = ext in EXT_PRESERVAR
     if ext == ".pdf":
         texto = _extrair_pdf(raw, max_pages=pdf_max_pages, max_chars=pdf_max_chars)
     elif ext == ".docx":
@@ -444,17 +477,17 @@ def extrair_texto(ext: str, raw: bytes, nome: str, *, pdf_max_pages=200, pdf_max
         texto = _extrair_html(raw)
     elif ext == ".json":
         texto = _extrair_json(raw)
-    elif ext in (".txt", ".md", ".markdown"):
-        texto = _decode(raw).strip()
-        if not texto:
-            raise DocErro("Arquivo de texto vazio.", "vazio")
     elif ext in (".pptx", ".ppt", ".odt", ".ods", ".epub"):
         raise DocErro(f"{ext} ainda não é lido. Converta para PDF e envie de novo.", "nao_suportado")
     else:
-        raise DocErro(f"Tipo {ext or '?'} não suportado. Envie PDF, DOCX, TXT, CSV, XLSX, HTML ou JSON.",
-                      "nao_suportado")
-    texto = re.sub(r"[ \t]+", " ", texto)
-    texto = re.sub(r"\n{3,}", "\n\n", texto).strip()
+        # Texto, código, configuração, arquivos sem extensão (Dockerfile) e
+        # qualquer extensão cujo conteúdo seja texto legível. Não colapsa
+        # espaços: indentação de código faz parte do conteúdo.
+        texto = _decode(raw).replace("\r\n", "\n").replace("\r", "\n").strip("\n")
+    if not preservar:
+        texto = re.sub(r"[ \t]+", " ", texto)
+        texto = re.sub(r"\n{3,}", "\n\n", texto)
+    texto = texto.strip()
     if len(texto) < 10:
         raise DocErro("Não encontrei texto legível neste arquivo.", "vazio")
     return texto[:MAX_TEXTO_DOC]
@@ -475,8 +508,44 @@ def _extrair_pagina_marcador(linha: str):
     return int(m.group(1)) if m else None
 
 
-def _chunk_records(texto: str, doc_id: str, source: str, version: int = DOC_VERSION) -> list:
+def _chunk_records_exatos(texto: str, doc_id: str, source: str,
+                          version: int = DOC_VERSION, secoes: bool = False) -> list:
+    """Chunks de texto/código sem normalizar espaços nem quebrar linhas."""
+    records = []
+    passo = TAM_CHUNK - OVERLAP
+    for start in range(0, len(texto), passo):
+        body = texto[start:start + TAM_CHUNK]
+        if not body:
+            break
+        section, page = "", None
+        if secoes:
+            prefixo = texto[:start + len(body)]
+            for line in prefixo.splitlines():
+                marca = _extrair_pagina_marcador(line)
+                if marca is not None:
+                    page = marca
+                heading = re.match(r"^\s{0,3}(#{1,6})\s+(.+?)\s*#*\s*$", line)
+                if heading:
+                    section = heading.group(2).strip()[:200]
+        overlap = min(OVERLAP, start)
+        digest = hashlib.sha256(body.encode("utf-8")).hexdigest()
+        idx = len(records)
+        records.append({
+            "idx": idx, "chunk_id": f"{doc_id}:{idx}", "text": body,
+            "section": section, "page": page, "content_hash": digest,
+            "version": version, "source": source, "table_hint": 0,
+            "overlap": overlap,
+        })
+        if start + TAM_CHUNK >= len(texto):
+            break
+    return records
+
+
+def _chunk_records(texto: str, doc_id: str, source: str, version: int = DOC_VERSION,
+                   preservar: bool = False, secoes: bool = False) -> list:
     """Separa por seção/parágrafo e mantém página/overlap ao dividir regiões longas."""
+    if preservar:
+        return _chunk_records_exatos(texto, doc_id, source, version, secoes)
     records = []
     section = ""
     page = None
@@ -569,15 +638,23 @@ def salvar_documento(db, nome: str, raw: bytes, conversation_id: str, owner=DONO
         raise DocErro(f"Arquivo grande demais ({len(raw) // 1048576}MB; limite 15MB).", "grande")
     base = re.sub(r'[\\/:*?"<>|]', "_", (nome or "arquivo").strip())[:120] or "arquivo"
     ext = ("." + base.rsplit(".", 1)[1].lower()) if "." in base else ""
-    if ext not in EXT_OK:
-        raise DocErro(f"Tipo {ext or '?'} não suportado. Envie PDF, DOCX, TXT, CSV, XLSX, HTML ou JSON.",
+    if ext in (".xls",):
+        raise DocErro("Converta .xls para .xlsx ou .csv e envie de novo.", "formato_antigo")
+    if ext in EXT_BINARIO:
+        raise DocErro("Imagem/binário não é lido como documento. Envie texto, código, "
+                      "PDF, DOCX, CSV, XLSX, HTML ou JSON.", "nao_suportado")
+    if ext in (".pptx", ".ppt", ".odt", ".ods", ".epub"):
+        raise DocErro(f"{ext} ainda não é lido. Converta para PDF e envie de novo.",
                       "nao_suportado")
     _validar_conteudo(ext, bytes(raw))
     texto_completo = extrair_texto(ext, bytes(raw), base)
     truncado = len(texto_completo) >= MAX_TEXTO_DOC
     texto = texto_completo[:MAX_TEXTO_DOC]
     doc_id = "doc-" + uuid.uuid4().hex[:12]
-    records = _chunk_records(texto, doc_id, base)
+    preservar = (ext in EXT_PRESERVAR or ext not in
+                 (EXT_ESTRUTURADO | {".pdf", ".docx", ".xlsx"}))
+    records = _chunk_records(texto, doc_id, base, preservar=preservar,
+                             secoes=ext in (".md", ".markdown"))
     headings = [{"section": r["section"], "page": r["page"]}
                 for r in records if r["section"]]
     metadata = {
@@ -670,6 +747,27 @@ def obter_texto(db, doc_id: str, limite: int = 60000, owner=DONO_PADRAO) -> str:
     return "".join(partes)[:limite]
 
 
+def obter_fonte(db, doc_id: str, owner=DONO_PADRAO, limite: int = MAX_TEXTO_DOC) -> str:
+    """Fonte original (texto/código/HTML) quando o arquivo ainda está no PC."""
+    row = db.execute("SELECT ext FROM documents WHERE id=? AND owner_id=?",
+                     (doc_id, owner)).fetchone()
+    if not row:
+        return ""
+    ext = row[0] or ""
+    if ext not in EXT_FONTE:
+        return ""
+    path = (docs_dir() / (doc_id + ext)).resolve()
+    base = docs_dir().resolve()
+    if base not in path.parents:
+        return ""
+    try:
+        raw = path.read_bytes()
+    except OSError:
+        return ""
+    texto = _decode(raw).replace("\r\n", "\n").replace("\r", "\n")
+    return texto[:limite]
+
+
 def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DONO_PADRAO, contexto: str = "") -> list:
     """Recupera trechos lexicais com proveniência, usando FTS5 quando disponível."""
     temporal = bool(re.search(r"\b(atual|atuais|recentes?|últim[oa]s?|latest|recent|current)\b", pergunta + " " + contexto, re.I))
@@ -753,6 +851,55 @@ def trechos_relevantes(db, pergunta: str, doc_id: str = "", k: int = 4, owner=DO
              "version": version, "source": source, "table_hint": bool(table_hint),
              "trecho": txt[:1500], "citacao": f"[{chunk_id}]"}
             for _, did, idx, txt, chunk_id, section, page, digest, version, source, name, table_hint in scored[:k]]
+
+
+def contexto_documento(db, doc_id: str, pergunta: str = "", owner=DONO_PADRAO, *,
+                       orcamento: int = 24000, completo: bool = False) -> dict:
+    """Conteúdo pronto para o prompt, com fallback para o texto completo.
+
+    A busca lexical sozinha pode devolver zero trechos para perguntas genéricas
+    ("o que é este arquivo?", "resuma"). Quando o anexo é explícito ou a busca
+    não encontra nada, usamos o conteúdo integral dentro do orçamento.
+    """
+    row = db.execute(
+        """SELECT name, title, chars, extracted_meta, ext FROM documents
+           WHERE id=? AND owner_id=?""", (doc_id, owner)).fetchone()
+    if not row:
+        return {"doc_id": doc_id, "name": "", "title": "", "texto": "",
+                "modo": "ausente", "truncado": False, "chars": 0}
+    name, title, chars, raw_meta, ext = row
+    try:
+        meta = json.loads(raw_meta or "{}")
+    except (TypeError, ValueError):
+        meta = {}
+    pedido_explicito = bool(completo or re.search(
+        r"(?i)(documento|arquivo)\s+anexado|📎|\b(leia|ler|leitura|conte[uú]do|"
+        r"integral|inteiro|completo|abra|abrir|analise|analisar|explique|resuma)\b",
+        pergunta or ""))
+    orcamento = min(max(int(orcamento or 24000), 2000), 60000)
+    trechos = [] if pedido_explicito else trechos_relevantes(
+        db, pergunta, doc_id, k=4, owner=owner)
+    if trechos:
+        texto = "\n\n---\n\n".join(t["trecho"][:1500] for t in trechos)
+        modo = "trechos"
+    else:
+        texto = obter_fonte(db, doc_id, owner, orcamento + 1) if (
+            pedido_explicito and ext in EXT_FONTE) else ""
+        if not texto:
+            texto = obter_texto(db, doc_id, orcamento + 1, owner)
+        modo = "completo"
+    texto = (texto or "").strip()
+    truncado = len(texto) > orcamento
+    if truncado and modo == "completo":
+        cabeca = int(orcamento * 0.7)
+        cauda = max(0, orcamento - cabeca)
+        texto = (texto[:cabeca].rstrip()
+                 + "\n\n[... trecho do meio omitido; conteúdo integral maior que o orçamento ...]\n\n"
+                 + texto[-cauda:].lstrip())
+    return {"doc_id": doc_id, "name": name, "title": title or name,
+            "texto": texto, "modo": modo, "truncado": truncado,
+            "chars": int(chars or len(texto)),
+            "extraction": meta.get("extraction", "")}
 
 
 def comparar_documentos(db, pergunta: str, doc_ids: list, owner=DONO_PADRAO) -> dict:

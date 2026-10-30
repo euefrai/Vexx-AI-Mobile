@@ -65,6 +65,16 @@ def _url_recurso(u) -> str:
     if remote:
         return remote
     path = _str(u, 500)
+    if path.startswith("/api/files/"):
+        try:
+            parsed = urlsplit(path)
+            if parsed.scheme or parsed.netloc or parsed.query or parsed.fragment:
+                return ""
+            if re.fullmatch(r"/api/files/file-[a-f0-9]{12}/download", parsed.path):
+                return path
+        except (ValueError, TypeError):
+            pass
+        return ""
     if not path.startswith("/api/research/export?"):
         return ""
     try:
@@ -767,7 +777,8 @@ def _v_researchmedia(p: dict) -> dict:
             "items": out, "sources": _provenance(p.get("sources"))}
 
 
-FILE_KINDS = ("pdf", "docx", "xlsx", "csv", "md", "txt", "json", "zip")
+FILE_KINDS = ("pdf", "docx", "xlsx", "csv", "md", "txt", "json", "zip",
+              "html", "xml", "yaml", "code", "image", "other")
 
 
 def _v_filecard(p: dict) -> dict:

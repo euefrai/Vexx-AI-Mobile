@@ -3,6 +3,7 @@ No chat history or SQLite file is stored on Render.
 """
 import asyncio
 import base64
+import hashlib
 import hmac
 import json
 import logging
@@ -12,6 +13,7 @@ import secrets
 import time
 import uuid
 from pathlib import Path
+from urllib.parse import quote
 
 from argon2 import PasswordHasher, exceptions as argon_errors
 from fastapi import FastAPI, File, Form, HTTPException, Request, Response, UploadFile, WebSocket, WebSocketDisconnect
@@ -1190,6 +1192,76 @@ async def docs_topicos(request: Request, body: DocAsk):
     if result.get("type") != "doc_topicos":
         raise HTTPException(503, "Tópicos não recebidos")
     return {"doc_id": result.get("doc_id"), "topicos": result.get("topicos", "")}
+
+
+@app.get("/api/files")
+async def files_list(request: Request):
+    """Lista os arquivos gerados pelo Vexx AI no PC do dono autenticado."""
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "file_list", "owner": dono,
+                                   "limit": 50}, timeout=20.0)
+    if result.get("type") != "file_list":
+        raise HTTPException(503, "Arquivos gerados indisponíveis")
+    return {"files": result.get("files", [])[:50]}
+
+
+@app.get("/api/files/{file_id}/download")
+async def files_download(request: Request, file_id: str):
+    """Baixa um arquivo gerado; os bytes vêm do PC via relay."""
+    verify_session(request)
+    dono = await revogacao_ok(request)
+    if request.url.query:
+        raise HTTPException(422, "Parâmetros extras não são permitidos")
+    if not re.fullmatch(r"file-[a-f0-9]{12}", file_id or ""):
+        raise HTTPException(422, "Identificador de arquivo inválido")
+    result = await relay.exchange({"type": "file_download", "owner": dono,
+                                   "file_id": file_id}, timeout=60.0)
+    if result.get("type") == "file_error":
+        codigo = result.get("codigo")
+        raise HTTPException(404 if codigo == "nao_encontrado" else 422,
+                            result.get("error", "Arquivo não encontrado"))
+    if result.get("type") != "file_download":
+        raise HTTPException(503, "Arquivo gerado indisponível")
+    data_b64 = result.get("data_b64")
+    if not isinstance(data_b64, str) or len(data_b64) > 8 * 1024 * 1024:
+        raise HTTPException(503, "Arquivo gerado inválido")
+    try:
+        payload = base64.b64decode(data_b64, validate=True)
+    except (ValueError, TypeError):
+        raise HTTPException(503, "Arquivo gerado inválido") from None
+    sha = str(result.get("sha256") or "")
+    if sha and len(sha) == 64 and not hmac.compare_digest(
+            sha, hashlib.sha256(payload).hexdigest()):
+        raise HTTPException(503, "Arquivo gerado corrompido")
+    filename = re.sub(r"[\r\n\"\\/]", "_", str(result.get("name") or "arquivo"))[:120] or "arquivo"
+    ascii_name = re.sub(r"[^A-Za-z0-9._ -]", "_", filename)[:120] or "arquivo"
+    media_type = str(result.get("mime") or "application/octet-stream")[:100]
+    if not re.fullmatch(r"[A-Za-z0-9.+-]+/[A-Za-z0-9.+-]+(?:;\s*charset=[A-Za-z0-9._-]+)?",
+                        media_type):
+        media_type = "application/octet-stream"
+    return Response(payload, media_type=media_type, headers={
+        "Content-Disposition": (
+            f'attachment; filename="{ascii_name}"; '
+            f"filename*=UTF-8''{quote(filename, safe='')}"),
+        "Cache-Control": "no-store",
+        "X-Content-Type-Options": "nosniff",
+    })
+
+
+@app.delete("/api/files/{file_id}")
+async def files_delete(request: Request, file_id: str):
+    if not re.fullmatch(r"file-[a-f0-9]{12}", file_id or ""):
+        raise HTTPException(422, "Identificador de arquivo inválido")
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    result = await relay.exchange({"type": "file_delete", "owner": dono,
+                                   "file_id": file_id}, timeout=20.0)
+    if result.get("type") == "file_error":
+        raise HTTPException(404, result.get("error", "Arquivo não encontrado"))
+    if result.get("type") != "file_deleted":
+        raise HTTPException(503, "Exclusão de arquivo indisponível")
+    return {"ok": True, "file_id": file_id}
 
 
 class UiStateItem(BaseModel):
