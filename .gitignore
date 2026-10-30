@@ -128,3 +128,13 @@ qa-artifacts/v5912/*.json
 !qa-artifacts/v5912/*-summary.json
 !qa-artifacts/v5912/manifest.json
 !qa-artifacts/v5912/qa-shutdown.json
+
+# Playwright CLI artifacts
+.playwright-cli/
+output/real-ui/*.png
+
+
+output/
+qa-artifacts/*.exit
+qa-artifacts/*.png
+

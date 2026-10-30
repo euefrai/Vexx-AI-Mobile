@@ -23,11 +23,14 @@ MAX_POR_MINUTO = 720
 
 TECLAS_NOMEADAS = {"enter", "backspace", "tab", "esc", "escape", "space",
                    "left", "right", "up", "down", "home", "end",
-                   "pageup", "pagedown", "delete", "insert"}
+                   "pageup", "pagedown", "delete", "insert",
+                   "win", "windows", "ctrl_c", "ctrl_v", "ctrl_a", "ctrl_z",
+                   "alt_tab", "f5", "printscreen"}
 VK = {"enter": 0x0D, "backspace": 0x08, "tab": 0x09, "esc": 0x1B, "escape": 0x1B,
       "space": 0x20, "left": 0x25, "up": 0x26, "right": 0x27, "down": 0x28,
       "home": 0x24, "end": 0x23, "pageup": 0x21, "pagedown": 0x22,
-      "delete": 0x2E, "insert": 0x2D}
+      "delete": 0x2E, "insert": 0x2D, "win": 0x5B, "windows": 0x5B,
+      "f5": 0x74, "printscreen": 0x2C}
 
 _janela = deque()
 
@@ -114,6 +117,10 @@ def validar_comando(cmd: dict) -> dict:
         if not texto or len(texto) > 200:
             raise RemotoErro("Texto inválido (1–200 chars).", "invalido")
         return {"kind": tipo, "text": texto}
+    if tipo == "clipboard_get":
+        return {"kind": "clipboard_get"}
+    if tipo == "clipboard_set":
+        return {"kind": "clipboard_set", "text": str(cmd.get("text", ""))[:4000]}
     raise RemotoErro(f"Tipo '{tipo}' desconhecido.", "invalido")
 
 
@@ -228,6 +235,56 @@ def _digitar_unicode(texto: str) -> None:
         raise RemotoErro('O Windows não aceitou a digitação. Verifique a sessão e as permissões da janela.', 'entrada')
 
 
+def obter_clipboard() -> str:
+    if sys.platform != "win32":
+        return ""
+    import ctypes
+    u = ctypes.windll.user32
+    k = ctypes.windll.kernel32
+    if not u.OpenClipboard(0):
+        return ""
+    try:
+        h = u.GetClipboardData(13)
+        if not h:
+            return ""
+        p = k.GlobalLock(h)
+        if not p:
+            return ""
+        try:
+            return ctypes.c_wchar_p(p).value or ""
+        finally:
+            k.GlobalUnlock(h)
+    finally:
+        u.CloseClipboard()
+
+
+def definir_clipboard(texto: str) -> bool:
+    if sys.platform != "win32":
+        return False
+    import ctypes
+    u = ctypes.windll.user32
+    k = ctypes.windll.kernel32
+    if not u.OpenClipboard(0):
+        return False
+    try:
+        u.EmptyClipboard()
+        data = (texto or "").encode("utf-16-le") + b"\x00\x00"
+        h = k.GlobalAlloc(0x0002, len(data))
+        if not h:
+            return False
+        p = k.GlobalLock(h)
+        if not p:
+            return False
+        try:
+            ctypes.memmove(p, data, len(data))
+        finally:
+            k.GlobalUnlock(h)
+        u.SetClipboardData(13, h)
+        return True
+    finally:
+        u.CloseClipboard()
+
+
 def executar(valido: dict, *, autorizado: bool = False) -> dict:
     """Evento validado. Consentimento por conta é conferido pelo chamador agente."""
     if not entrada_ativada() and not autorizado:
@@ -281,12 +338,29 @@ def _executar_evento(valido, u):
             u.mouse_event(0x1000, 0, 0, valido["dx"] * 120, 0)
     elif tipo == "key":
         t = valido["key"]
-        vk = VK.get(t, 0)
-        if vk:
-            u.keybd_event(vk, 0, 0, 0)
-            u.keybd_event(vk, 0, 2, 0)
+        if t in ("ctrl_c", "ctrl_v", "ctrl_a", "ctrl_z"):
+            vk_letra = {"ctrl_c": 0x43, "ctrl_v": 0x56, "ctrl_a": 0x41, "ctrl_z": 0x5A}[t]
+            u.keybd_event(0x11, 0, 0, 0)
+            u.keybd_event(vk_letra, 0, 0, 0)
+            u.keybd_event(vk_letra, 0, 2, 0)
+            u.keybd_event(0x11, 0, 2, 0)
+        elif t == "alt_tab":
+            u.keybd_event(0x12, 0, 0, 0)
+            u.keybd_event(0x09, 0, 0, 0)
+            u.keybd_event(0x09, 0, 2, 0)
+            u.keybd_event(0x12, 0, 2, 0)
         else:
-            _digitar_unicode(t)
+            vk = VK.get(t, 0)
+            if vk:
+                u.keybd_event(vk, 0, 0, 0)
+                u.keybd_event(vk, 0, 2, 0)
+            else:
+                _digitar_unicode(t)
     elif tipo == "text":
         _digitar_unicode(valido["text"])
+    elif tipo == "clipboard_get":
+        return {"ok": True, "kind": "clipboard_get", "text": obter_clipboard()}
+    elif tipo == "clipboard_set":
+        definir_clipboard(valido.get("text", ""))
+        return {"ok": True, "kind": "clipboard_set"}
     return {"ok": True, "kind": tipo}

@@ -1404,6 +1404,40 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                            'Tentando a próxima fonte após leitura sem conteúdo útil, dentro do orçamento.',
                            {'previous_source_id': str(a.get('id') or '')[:120],
                             'source_id': str(proxima.get('id') or '')[:120]})
+            if (not pendentes and not cancelado and not parar()
+                    and (not prazo or time.monotonic() < prazo)
+                    and len(alvos) < min(limite_tentativas, len(novas_paginas))):
+                # A useful partial page may repeat an already covered aspect.
+                # Keep it, but inspect remaining discoveries before searching again.
+                lidas = list(anteriores.values()) + [
+                    {**rec, 'url': source['url']} for source in alvos + cached_candidates
+                    if (rec := baixados.get(source['url'])) is not None and _util(source, rec)]
+                coverage = _eg.requirement_coverage(job['objetivo'], lidas)
+                with_passage = {p['requirement_id'] for p in coverage['passages']}
+                missing = [r for r in coverage['requirements']
+                           if r.get('type', 'explicit_attribute') == 'explicit_attribute'
+                           and r['id'] not in with_passage]
+                if missing:
+                    # Metadata only orders downloads; factual support still requires
+                    # the ordinary reader, relevance checks and literal passages.
+                    terms = {term for req in missing for term in re.findall(
+                        r'\w{4,}', query_intelligence.normalized(req['description']))}
+                    tail = novas_paginas[len(alvos):]
+                    tail.sort(key=lambda source: not any(term in query_intelligence.normalized(
+                        ' '.join(str(source.get(k) or '') for k in ('titulo', 'trecho', 'url')))
+                        for term in terms))
+                    novas_paginas[len(alvos):] = tail
+                    proxima = novas_paginas[len(alvos)]
+                    alvos.append(proxima)
+                    job['usados']['paginas'] += 1
+                    retrieval_trace.record(job['id'], etapa.get('id', ''), proxima, 'SELECTED', charged=True)
+                    novo_fut = pool.submit(copy_context().run, _ler_cronometrado, proxima)
+                    futs[novo_fut] = proxima
+                    pendentes.add(novo_fut)
+                    emitir(db, job['id'], job['owner'], 'analyst', 'source_aspect_read_started', 'ok',
+                           'Lendo outra fonte descoberta para um aspecto ainda sem trecho, dentro do orçamento.',
+                           {'source_id': str(proxima.get('id') or '')[:120],
+                            'requirement_ids': [r['id'] for r in missing][:8]})
             if cancelado:
                 break
             if expirado:

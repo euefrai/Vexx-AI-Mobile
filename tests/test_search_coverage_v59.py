@@ -81,12 +81,20 @@ def test_read_source_preserves_tables_sections_author_and_date(monkeypatch):
 
 def test_shopping_cache_never_reuses_other_budget_or_model():
     conn = db()
-    first = shopping.pesquisar(conn, 'owner', 'Notebook Lenovo 16 GB RAM até R$ 3000', buscar_fn=lambda q: [])
+    query = 'Notebook Lenovo 16 GB RAM até R$ 3000'
+    criteria = shopping.extrair_criterios(query)
+    cache_key = (criteria['categoria']+' '+' '.join(criteria['marcas'])).strip()
+    shopping.salvar_consulta(conn, 'owner', '', cache_key, criteria, {
+        'criterios':criteria, 'produtos':[{'nome':'Notebook Lenovo 16GB RAM',
+            'preco':2500, 'preco_confirmado':True}], 'alternativas':[]})
+    first = shopping.pesquisar(conn, 'owner', query, buscar_fn=lambda q: [])
+    assert first['de_cache']  # Useful positive cache, not an empty search.
     second = shopping.pesquisar(conn, 'owner', 'Notebook Lenovo 16 GB RAM até R$ 1500', buscar_fn=lambda q: [])
     assert not second['de_cache']
     assert second['criterios']['orcamento']['max'] == 1500
     third = shopping.pesquisar(conn, 'owner', 'Notebook Lenovo 16 GB RAM até R$ 3000', buscar_fn=lambda q: [])
     assert third['de_cache']
+    assert not shopping.pesquisar(conn, 'owner', 'Notebook Dell 16 GB RAM até R$ 3000', buscar_fn=lambda q: [])['de_cache']
 
 
 def test_shopping_queries_preserve_product_and_explicit_budget_filter():

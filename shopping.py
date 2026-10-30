@@ -410,7 +410,7 @@ def _vram_gb(text):
     value = _sem_acentos(text or '')
     explicit = re.search(r'\b(\d{1,2})\s*(?:gb\s*)?(?:de\s+)?vram\b|\bvram\s*[:=]?\s*(\d{1,2})\s*gb\b', value)
     if explicit: return int(explicit[1] or explicit[2])
-    if re.search(r'\b(?:placas? de videos?|gpu|geforce|radeon|rtx|gtx)\b', value) and not re.search(r'\b(?:notebook|laptop|computador|pc gamer)\b', value):
+    if _categoria_comercial(value)=='gpu' and not _acessorio_gpu(value):
         capacities = {int(m[1]) for m in re.finditer(r'\b(\d{1,2})\s*gb\b', value)}
         if len(capacities) == 1: return capacities.pop()
     return None
@@ -1072,8 +1072,10 @@ def _categoria_comercial(value: str) -> str:
     value = _sem_acentos(str(value or ''))
     families = (
         ('celular', r'celular|smartphone|iphone'),
+        ('tablet', r'tablets?|ipad|galaxy tab'),
         ('notebook', r'notebook|laptop|ultrabook|macbook'),
-        ('gpu', r'placas? de videos?|gpu|geforce|radeon|rtx|gtx'),
+        ('computador', r'computador|desktop|pc gamer|mini pc'),
+        ('gpu', r'placas? de videos?|gpu|geforce|radeon|rtx|gtx|quadro|(?:intel\s+)?arc\s+[ab]\d{3}'),
         ('fone', r'fone|fones|headphone|headset|earbuds|airpods'),
         ('tv', r'smart tv|televisor|tv'), ('monitor', r'monitor'),
         ('geladeira', r'geladeira|refrigerador'),
@@ -1085,11 +1087,25 @@ def _categoria_comercial(value: str) -> str:
         ('tenis', r'tenis'), ('bola', r'bola de basquete'),
         ('movel', r'cadeira|mesa|sofa|colchao|guarda-roupas?'),
         ('construcao', r'cimento|argamassa|tijolo|rejunte'),
+        ('ram', r'^ram\b|memorias?\s+(?:ram|ddr[3456])|pentes?\s+de\s+memoria|sodimm|dimm|ddr[3456]'),
     )
-    for family, pattern in families:
-        if re.search(r'\b(?:' + pattern + r')\b', value):
-            return family
+    matches=[]
+    for order,(family,pattern) in enumerate(families):
+        match=re.search(r'\b(?:'+pattern+r')\b',value)
+        if match:matches.append((match.start(),order,family))
+    # A GPU model mentioned after a device/component is compatibility, not its
+    # product type. Preserve the existing ordering for unrelated families.
+    if matches:return min(matches)[2] if any(m[2]=='gpu' for m in matches) else matches[0][2]
     return 'celular' if re.search(r'\bgalaxy\s+[as]\d{2}\b', value) else ''
+
+
+def _acessorio_gpu(value: str) -> bool:
+    """Distinguish the product from a later GPU compatibility mention."""
+    value=_sem_acentos(str(value or ''))
+    accessory=re.search(r'\b(?:capas?|peliculas?|suportes?|cabos?|adaptador(?:es)?|riser|ventoinhas?|coolers?|fans?|backplate|waterblock|dissipador|bracket|holder|stand|peca de reposicao)\b',value)
+    gpu=re.search(r'\b(?:placas? de videos?|gpu|geforce|radeon|rtx|gtx|quadro|(?:intel\s+)?arc\s+[ab]\d{3})\b',value)
+    return bool(accessory and (not gpu or accessory.start()<gpu.start()
+        or re.match(r'^gpu\s+(?:waterblock|cooler|fan|bracket|holder|stand|support|riser)\b',value)))
 
 
 def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
@@ -1112,7 +1128,12 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
         found_category = _categoria_comercial(p.get('nome') or '')
         if category and found_category and category != found_category:
             motivos.append('tipo de produto diferente do pedido'); codigos.append('tipo_produto_diferente')
-        if category and re.search(r'\b(capa|pelicula|suporte para|peca de reposicao|compativel com)\b', _sem_acentos(p.get('nome') or '')) and not re.search(r'\b(capa|pelicula|suporte|peca|compativel)\b', requested):
+        accessory = (_acessorio_gpu(p.get('nome') or '') and not _acessorio_gpu(requested)
+                     if category=='gpu' else bool(category and re.search(
+                         r'\b(capa|pelicula|suporte para|peca de reposicao|compativel com)\b',
+                         _sem_acentos(p.get('nome') or '')) and not re.search(
+                             r'\b(capa|pelicula|suporte|peca|compativel)\b',requested)))
+        if accessory:
             motivos.append('acessório em vez do produto solicitado'); codigos.append('acessorio')
         # Explicit cross-category conflicts in newly covered families, not missing metadata.
         families=(r'geladeira|refrigerador',r'lavadora|maquina de lavar',r'furadeira',r'parafusadeira',r'livro',r'resistor',r'capacitor',r'transistor',r'pastilha de freio',r'amortecedor',r'bola de basquete')
@@ -1415,6 +1436,16 @@ def ultima_consulta(db, owner: str, conv: str) -> dict | None:
 
 
 def consulta_em_cache(db, owner: str, consulta: str, criterios: dict | None = None) -> dict | None:
+    def tem_preco_declarado(item):
+        if (not isinstance(item, dict) or
+                ('preco_confirmado' in item and item['preco_confirmado'] is not True)):
+            return False
+        try:
+            value = Decimal(str(item.get('preco')))
+        except (InvalidOperation, TypeError, ValueError):
+            return False
+        return value.is_finite() and Decimal(0) < value < Decimal('1e9')
+
     rows = db.execute("SELECT resultado, criado_em, expira_em FROM shopping_consultas"
                       " WHERE id LIKE ? AND owner_id=? AND expira_em > ?"
                       " ORDER BY criado_em DESC LIMIT 20",
@@ -1422,10 +1453,23 @@ def consulta_em_cache(db, owner: str, consulta: str, criterios: dict | None = No
     for row in rows:
         try:
             res = json.loads(row[0])
+            if not isinstance(res, dict) or res.get('erro'):
+                continue
             # Category/brand alone cannot identify a budget, model or variant.
             if criterios is not None and res.get("criterios") != criterios:
                 continue
-            if any(not _preco_vigente(p) for p in res.get("produtos", []) + res.get("alternativas", [])):
+            products, alternatives = res.get('produtos') or [], res.get('alternativas') or []
+            if not isinstance(products, list) or not isinstance(alternatives, list):
+                continue
+            offers = products + alternatives
+            # Failure history and search references are not a reusable offer.
+            # Legacy numeric prices without a confirmation flag stay partial;
+            # an explicitly unconfirmed price never becomes a cache hit.
+            # In particular, old empty rows must not suppress a fresh attempt
+            # for the full six-hour positive-cache TTL after a provider recovers.
+            if not any(tem_preco_declarado(p) for p in offers):
+                continue
+            if any(not isinstance(p, dict) or not _preco_vigente(p) for p in offers):
                 continue
             res["de_cache"] = True
             res["verificado_em"] = res.get('verificado_em') or row[1]
@@ -1782,7 +1826,8 @@ def buscar_web_v55(consulta: str, max_resultados: int = 10) -> tuple:
 
 def buscar_com_fallback(consulta: str, buscar_fn=None,
                         limite_mlb: int = 10, diag: list | None = None,
-                        texto_lojas: str | None = None) -> tuple:
+                        texto_lojas: str | None = None, pular_diretos: bool = False,
+                        excluir_urls: tuple | list | None = None) -> tuple:
     """Cadeia mlb → ddg → lite → web (orquestrador), com gate comercial.
 
     Retorna (achados, etapas). Nunca levanta. V5.7.1: um provedor só encerra
@@ -1794,10 +1839,22 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
 
     `diag` (opcional): lista que recebe o rastreamento estruturado das
     decisões reais da descoberta (provedor, contagens, motivo, erro, ms).
+    `pular_diretos` permite uma descoberta independente após os candidatos
+    iniciais falharem na leitura; não altera a loja nem os critérios pedidos.
+    `excluir_urls` retira candidatos já conhecidos antes de avaliar suficiência.
     """
+    named_store = source_priority.explicit_store(texto_lojas or consulta, require_request=True)
+    excluded = tuple(url for url in (excluir_urls or ()) if isinstance(url, str) and url)
+    def _escopo(rows):
+        domain=named_store['domain'] if named_store else ''
+        return [row for row in rows or [] if isinstance(row,dict)
+                and (not domain or _dominio(row.get('url',''))==domain or _dominio(row.get('url','')).endswith('.'+domain))
+                and not any(_mesmo_recurso(row.get('url',''),url) for url in excluded)]
+    consulta_web=consulta
+    if named_store:consulta_web+=' site:'+named_store['domain']
     if buscar_fn is not None:
         try:
-            return list(buscar_fn(consulta) or [])[:12], ["injetado (teste)"]
+            return _escopo(buscar_fn(consulta))[:12], ["injetado (teste)"]
         except Exception as exc:
             return [], [f"injetado falhou ({type(exc).__name__})"]
 
@@ -1809,35 +1866,35 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
 
     etapas: list = []
     inicio = time.monotonic()
-    try:
-        if isinstance(diag, list) and any(d.get("provedor") == "mlb" and d.get("codigo") == "bloqueado" for d in diag):
-            raise research.ResearchErro("Bloqueio já observado nesta pesquisa; API não repetida.", "bloqueado")
-        achados = buscar_mlb(consulta, limite=limite_mlb)
-        etapas.append(f"mlb: {len(achados)} ofertas (API oficial)")
-        _reg(provedor="mlb", resultados=len(achados),
-             comerciais=len(achados), rejeitados=0, rebaixados=0,
-             motivo="useful_candidates_found",
-             ms=(time.monotonic() - inicio) * 1000)
-        if achados:
-            return achados, etapas
-    except Exception as exc:
-        etapas.append(f"mlb: falhou ({type(exc).__name__})")
-        _reg(provedor="mlb", resultados=0, comerciais=0, rejeitados=0,
-             rebaixados=0, erro=type(exc).__name__,
-             codigo=getattr(exc, "codigo", "erro"), http=getattr(exc, "http", 0),
-             motivo=("provider_blocked"
-                     if getattr(exc, "codigo", "") == "bloqueado"
-                     else "provider_error"),
-             ms=(time.monotonic() - inicio) * 1000)
+    if not pular_diretos and (not named_store or named_store['domain']=='mercadolivre.com.br'):
+        try:
+            if isinstance(diag, list) and any(d.get("provedor") == "mlb" and d.get("codigo") == "bloqueado" for d in diag):
+                raise research.ResearchErro("Bloqueio já observado nesta pesquisa; API não repetida.", "bloqueado")
+            achados = _escopo(buscar_mlb(consulta, limite=limite_mlb))
+            etapas.append(f"mlb: {len(achados)} ofertas (API oficial)")
+            _reg(provedor="mlb", resultados=len(achados),
+                 comerciais=len(achados), rejeitados=0, rebaixados=0,
+                 motivo="useful_candidates_found",
+                 ms=(time.monotonic() - inicio) * 1000)
+            if achados:
+                return achados, etapas
+        except Exception as exc:
+            etapas.append(f"mlb: falhou ({type(exc).__name__})")
+            _reg(provedor="mlb", resultados=0, comerciais=0, rejeitados=0,
+                 rebaixados=0, erro=type(exc).__name__,
+                 codigo=getattr(exc, "codigo", "erro"), http=getattr(exc, "http", 0),
+                 motivo=("provider_blocked"
+                         if getattr(exc, "codigo", "") == "bloqueado"
+                         else "provider_error"),
+                 ms=(time.monotonic() - inicio) * 1000)
     pool: list = []
     # Use the public merchant catalog before asking search engines for store
     # URLs. Every discovered item is still opened and verified below.
     inicio = time.monotonic()
     try:
         import store_discovery
-        named_store = source_priority.explicit_store(texto_lojas or consulta)
-        native = (store_discovery.search_kabum(consulta, limit=limite_mlb)
-                  if not named_store or named_store['domain'] == 'kabum.com.br' else [])
+        native = _escopo(store_discovery.search_kabum(consulta, limit=limite_mlb)
+                  if not pular_diretos and (not named_store or named_store['domain'] == 'kabum.com.br') else [])
         if native:
             etapas.append(f"kabum-search: {len(native)} links de produto (catálogo público; ofertas ainda não verificadas)")
             _reg(provedor='kabum-search', resultados=len(native), comerciais=len(native),
@@ -1846,7 +1903,7 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
     except Exception as exc:
         etapas.append(f"kabum-search: indisponível ({getattr(exc, 'codigo', type(exc).__name__)})")
     loja_query = ""
-    if texto_lojas:
+    if texto_lojas and not pular_diretos:
         try:
             loja_query = (source_priority.shopping_queries(
                 texto_lojas, consulta, 1) or [""])[0]
@@ -1857,6 +1914,7 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
         # Mercado Livre continua sendo a primeira fonte, acima desta etapa.
         inicio = time.monotonic()
         achados_lojas, letapas = buscar_web_v55(loja_query)
+        achados_lojas = _escopo(achados_lojas)
         etapas.extend(letapas)
         cont = _contagem_classificacoes(achados_lojas)
         comerciais = (cont.get("PRODUCT_CANDIDATE", 0)
@@ -1877,7 +1935,8 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
         if _descoberta_suficiente(pool, consulta):
             return _ordenar_candidatos(pool), etapas
     inicio = time.monotonic()
-    cascata, detapas = buscar_ddg_chain(consulta)
+    cascata, detapas = buscar_ddg_chain(consulta_web)
+    cascata = _escopo(cascata)
     etapas.extend(detapas)
     cont = _contagem_classificacoes(cascata)
     comerciais = (cont.get("PRODUCT_CANDIDATE", 0)
@@ -1897,7 +1956,8 @@ def buscar_com_fallback(consulta: str, buscar_fn=None,
     if _descoberta_suficiente(cascata, consulta):
         return _ordenar_candidatos(cascata), etapas
     inicio = time.monotonic()
-    achados, wetapas = buscar_web_v55(consulta)
+    achados, wetapas = buscar_web_v55(consulta_web)
+    achados = _escopo(achados)
     etapas.extend(wetapas)
     cont = _contagem_classificacoes(achados)
     comerciais = (cont.get("PRODUCT_CANDIDATE", 0)
@@ -2570,7 +2630,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         return em_cache
 
     consultas = _consultas_produto(criterios, texto)
-    loja_explicita = source_priority.explicit_store(texto)
+    loja_explicita = source_priority.explicit_store(texto, require_request=True)
     prioridade_compras = {
         "lojas_preferidas": [store["label"] for store in source_priority.SHOPPING_STORES],
         "loja_explicita": loja_explicita["label"] if loja_explicita else None,
@@ -2647,18 +2707,38 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
     consultadas: list = []
     pendentes = list(paginas)
     hosts_bloqueados = set()
+    recuperacao_descoberta = False
     ondas = 0
+    def _complementar_descoberta():
+        nonlocal recuperacao_descoberta
+        if recuperacao_descoberta or ondas>=MAX_ONDAS_PAGINAS or buscar_fn is not None:return False
+        recuperacao_descoberta = True
+        _prog('recuperando','buscando outras fontes após leitura sem ofertas confirmadas')
+        novos, novas_etapas = buscar_com_fallback(consultas[0] if consultas else texto,
+            diag=decisoes,texto_lojas=texto,pular_diretos=True,
+            excluir_urls=tuple(a.get('url','') for a in achados))
+        etapas_prov.extend(novas_etapas)
+        antes=len(pendentes)
+        for a in novos[:24]:
+            url=a.get('url','')
+            if not url or any(_mesmo_recurso(url,old.get('url','')) for old in achados):continue
+            achados.append(a);paginas.append(a);pendentes.append(a)
+        return len(pendentes)>antes
     while ondas < MAX_ONDAS_PAGINAS:
         lote = []
+        hosts_consultados={_dominio(a['url']) for a in consultadas}
         while pendentes and len(lote)<int(teto_paginas):
             used_hosts={_dominio(row['url']) for row in lote}
             index,_=min(enumerate(pendentes),key=lambda pair:(
                 prioridade_pedido(pair[1])[:2],
                 _dominio(pair[1]['url']) in hosts_bloqueados,
+                recuperacao_descoberta and _dominio(pair[1]['url']) in hosts_consultados,
                 _dominio(pair[1]['url']) in used_hosts,
                 prioridade_pedido(pair[1])[2:],pair[0]))
             lote.append(pendentes.pop(index))
         if not lote:
+            validos, _ = aplicar_filtros(deduplicar(brutos), criterios)
+            if not any(_tier(p)=='confirmada' for p in validos) and _complementar_descoberta():continue
             if ondas == 0:
                 _prog("consultando", "0 páginas")
             break
@@ -2687,6 +2767,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
         validos, _ = aplicar_filtros(deduplicar(brutos), criterios)
         if any(_tier(p) == "confirmada" for p in validos):
             break
+        _complementar_descoberta()
     _prog("extraindo", f"{len(brutos)} ofertas estruturadas")
     dedup = deduplicar(brutos)
     _prog("validando", f"{len(dedup)} modelos únicos")
@@ -2792,6 +2873,7 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                      "paginas_disponiveis": len(paginas),
                      "paginas_consultadas": len(consultadas),
                      "ondas": ondas,
+                     "recuperacao_descoberta": recuperacao_descoberta,
                      "ofertas_extraidas": len(brutos),
                       "confirmadas": sum(_tier(p) == "confirmada" for p in produtos),
                      "orcamento_esgotado": esgotado,

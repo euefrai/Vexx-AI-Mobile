@@ -132,7 +132,7 @@ def test_pesquisa_rapida_cache_e_isolamento(monkeypatch):
                                    abrir=lambda u, t=10: _abrir_fake("ddg"))
 
     r1 = research.pesquisa_rapida(db, "u-x", "fotossíntese", buscar_fn=buscar,
-                                  recuperar_fn=lambda u: {"titulo": "T", "texto": "texto rico",
+                                  recuperar_fn=lambda u: {"titulo": "Fotossíntese", "texto": "A fotossíntese converte luz em energia química nas plantas.",
                                                           "final": u})
     assert r1["de_cache"] is False and len(r1["fontes"]) == 3
     assert [f["id"] for f in r1["fontes"]] == ["S1", "S2", "S3"]

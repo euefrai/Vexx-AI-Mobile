@@ -6,12 +6,25 @@
     return nav.userAgentData?.mobile === true || /Android|iPhone|iPad|iPod|Mobile/i.test(ua)
       || (/Macintosh|MacIntel/.test(ua + ' ' + (nav.platform || '')) && nav.maxTouchPoints > 1);
   }
-  function imagePosition(rect, width, height, clientX, clientY) {
+  function imagePosition(rect, width, height, clientX, clientY, isRotated = false, fitMode = 'contain') {
     if (!width || !height || !rect.width || !rect.height) return null;
-    const scale = Math.min(rect.width / width, rect.height / height);
+    let r = rect, cx = clientX, cy = clientY;
+    if (isRotated) {
+      const midX = rect.left + rect.width / 2, midY = rect.top + rect.height / 2;
+      const dx = clientX - midX, dy = clientY - midY;
+      const unrotX = midX + dy, unrotY = midY - dx;
+      const origW = rect.height, origH = rect.width;
+      r = { left: midX - origW / 2, top: midY - origH / 2, width: origW, height: origH };
+      cx = unrotX; cy = unrotY;
+    }
+    if (fitMode === 'fill') {
+      const x = (cx - r.left) / r.width, y = (cy - r.top) / r.height;
+      return x < 0 || x > 1 || y < 0 || y > 1 ? null : { x, y };
+    }
+    const scale = fitMode === 'cover' ? Math.max(r.width / width, r.height / height) : Math.min(r.width / width, r.height / height);
     const w = width * scale, h = height * scale;
-    const x = (clientX - rect.left - (rect.width - w) / 2) / w;
-    const y = (clientY - rect.top - (rect.height - h) / 2) / h;
+    const x = (cx - r.left - (r.width - w) / 2) / w;
+    const y = (cy - r.top - (r.height - h) / 2) / h;
     return x < 0 || x > 1 || y < 0 || y > 1 ? null : { x, y };
   }
   function mount(ctx) {
@@ -29,6 +42,7 @@
     let scrollPoint = null;
     let inputBusy = false, inputAbort, inputTimer, lastInputAt = 0, inputBlockedUntil=0;
     const inputQueue = [];
+    let isRotated = false, fitMode = 'contain', hudHidden = false;
     const frame = $('remoteFrame'), image = $('screenImg');
     const viewer = $('remoteViewer');
     const pageActive = () => !$('page-desktop').hidden && !document.hidden;
@@ -282,7 +296,7 @@
       } finally { inputBusy = false; pumpInput(); }
     }
     function position(ev) {
-      return imagePosition(frame.getBoundingClientRect(), image.naturalWidth, image.naturalHeight, ev.clientX, ev.clientY);
+      return imagePosition(frame.getBoundingClientRect(), image.naturalWidth || frameSize.width, image.naturalHeight || frameSize.height, ev.clientX, ev.clientY, isRotated, fitMode);
     }
     const cancelGesture = () => { clearTimeout(longTimer); clearTimeout(scrollTimer); scrollTimer=null; scrollX=0; scrollY=0; gesture = null; touches.clear(); scrollPoint = null; };
     const center = () => {
@@ -445,12 +459,122 @@
     }
     $('fullscreen').addEventListener('click', async () => {
       try {
-        if (document.fullscreenElement) await document.exitFullscreen();
-        else if (viewer.requestFullscreen) await viewer.requestFullscreen();
-        else ctx.notify('Tela cheia indisponível neste navegador.');
+        if (document.fullscreenElement) {
+          await document.exitFullscreen();
+        } else if (viewer.requestFullscreen) {
+          if (screen.orientation && screen.orientation.lock) {
+            screen.orientation.lock('landscape').catch(() => {});
+          }
+          await viewer.requestFullscreen();
+          ctx.notify('Tela cheia ativada. Use o botão ⚙ para ocultar/mostrar controles.');
+        } else {
+          ctx.notify('Tela cheia indisponível neste navegador.');
+        }
       } catch (_) { ctx.notify('Tela cheia não autorizada.'); }
     });
     $('remoteExitFullscreen').addEventListener('click', () => document.exitFullscreen().catch(() => {}));
+
+    // Alternar rotação da tela (Paisagem 90° para celular vertical)
+    $('rotateScreenBtn')?.addEventListener('click', () => {
+      isRotated = !isRotated;
+      viewer.classList.toggle('is-rotated', isRotated);
+      $('rotateScreenBtn').setAttribute('aria-pressed', String(isRotated));
+      ctx.notify(isRotated ? 'Tela rotacionada 90° (Paisagem completa no celular).' : 'Orientação padrão restaurada.');
+      keyboardLayout(); scheduleLayout();
+    });
+
+    // Alternar modos de enquadramento (Ajustar / Preencher / Esticar)
+    $('fitScreenBtn')?.addEventListener('click', () => {
+      viewer.classList.remove('fit-cover', 'fit-fill');
+      if (fitMode === 'contain') {
+        fitMode = 'cover';
+        viewer.classList.add('fit-cover');
+        $('fitScreenBtn').textContent = '📏 Modo: Preencher';
+        ctx.notify('Modo Preencher ativado: tela ocupa 100% sem bordas.');
+      } else if (fitMode === 'cover') {
+        fitMode = 'fill';
+        viewer.classList.add('fit-fill');
+        $('fitScreenBtn').textContent = '📏 Modo: Esticar';
+        ctx.notify('Modo Esticar ativado: imagem esticada de ponta a ponta.');
+      } else {
+        fitMode = 'contain';
+        $('fitScreenBtn').textContent = '📏 Modo: Ajustar';
+        ctx.notify('Modo Ajustar restaurado: proporção nativa exata.');
+      }
+      keyboardLayout(); scheduleLayout();
+    });
+
+    // Mostrar / Ocultar HUD translúcido em Tela Cheia
+    $('remoteHudToggle')?.addEventListener('click', () => {
+      hudHidden = !hudHidden;
+      viewer.classList.toggle('hud-hidden', hudHidden);
+    });
+
+    // Atalhos do sistema
+    $('shortcutCtrlC')?.addEventListener('click', () => send({kind: 'key', key: 'ctrl_c'}));
+    $('shortcutCtrlV')?.addEventListener('click', () => send({kind: 'key', key: 'ctrl_v'}));
+    $('shortcutAltTab')?.addEventListener('click', () => send({kind: 'key', key: 'alt_tab'}));
+    $('shortcutWin')?.addEventListener('click', () => send({kind: 'key', key: 'win'}));
+
+    // Clipboard Remoto (Copiar do PC / Colar no PC)
+    $('remoteCopyClip')?.addEventListener('click', async () => {
+      if (!connected || !state?.control_allowed) return;
+      ctx.notify('Lendo área de transferência do PC…');
+      try {
+        const res = await ctx.api('/api/input', {
+          method: 'POST',
+          body: JSON.stringify({ kind: 'clipboard_get' })
+        });
+        if (res && res.text) {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(res.text);
+          }
+          ctx.notify('Texto copiado do PC: "' + res.text.slice(0, 40) + '…"');
+        } else {
+          ctx.notify('Área de transferência do PC está vazia.');
+        }
+      } catch (err) {
+        ctx.notify('Não foi possível ler o clipboard do PC.');
+      }
+    });
+
+    $('remotePasteClip')?.addEventListener('click', async () => {
+      if (!connected || !state?.control_allowed) return;
+      try {
+        let clip = '';
+        if (navigator.clipboard && navigator.clipboard.readText) {
+          clip = await navigator.clipboard.readText();
+        }
+        if (!clip) {
+          ctx.notify('Área de transferência do celular vazia ou sem permissão.');
+          return;
+        }
+        ctx.notify('Colando no PC…');
+        await ctx.api('/api/input', {
+          method: 'POST',
+          body: JSON.stringify({ kind: 'clipboard_set', text: clip.slice(0, 2000) })
+        });
+        await send({ kind: 'key', key: 'ctrl_v' });
+        ctx.notify('Texto colado no PC com sucesso!');
+      } catch (err) {
+        ctx.notify('Erro ao colar no PC: ' + (err.message || ''));
+      }
+    });
+
+    // Screen-to-Research: Fusão AnyDesk + Perplexity Deep Research
+    $('screenToResearch')?.addEventListener('click', () => {
+      if (!image.src) {
+        ctx.notify('Nenhuma tela ativa para pesquisar.');
+        return;
+      }
+      if (document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {});
+      }
+      ctx.notify('Enviando tela para Pesquisa Profunda…');
+      window.dispatchEvent(new CustomEvent('vexx:screen_research', {
+        detail: { src: image.src, timestamp: Date.now() }
+      }));
+    });
     function update() {
       const id = ctx.identity();
       if (identity !== id || !online() || !pageActive()) {

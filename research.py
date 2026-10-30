@@ -376,6 +376,10 @@ _RX_BLOQUEIO = re.compile(
     r"unusual traffic|verifying you are human|verify (that )?you are (a )?human|"
     r"complete o captcha|resolva o captcha|confirme que voc[eê] [eé] humano|"
     r"attention required|barraged by queries from bots|access denied|request blocked)", re.IGNORECASE)
+_JS_SCRIPT_TYPES = frozenset(('', 'module', 'text/javascript', 'application/javascript',
+    'text/ecmascript', 'application/ecmascript', 'application/x-javascript',
+    'application/x-ecmascript', 'text/x-javascript', 'text/x-ecmascript',
+    'text/jscript', 'text/livescript', *('text/javascript1.'+str(i) for i in range(6))))
 
 
 def pagina_bloqueada(pagina: str) -> bool:
@@ -383,12 +387,43 @@ def pagina_bloqueada(pagina: str) -> bool:
     # Error messages inside bundles/templates are not a challenge presented
     # to the reader. Keep actual challenge markup and visible instructions.
     sample = (pagina or '')[:MAX_PAGINA_BYTES]
-    sample = re.sub(r'<!--.*?-->|<(script|style|template)\b[^>]*>.*?</\1\s*>',
+    sample = re.sub(r'<!--.*?-->|<(style|template)\b[^>]*>.*?</\1\s*>',
                     ' ', sample, flags=re.I | re.S)
-    markup = bool(re.search(r'\b(?:id|class)\s*=\s*[\"\'][^\"\']*\b(?:anomaly-modal|cf-browser-verification)\b', sample, re.I))
+    # A managed interstitial can contain no readable instruction at all. Both
+    # markers must occur in executable script, not JSON data or an example.
+    managed_challenge = False
+    for script in re.finditer(r'<script\b([^>]*)>(.*?)</script\s*>', sample, re.I | re.S):
+        attrs, body = script.groups()
+        kind = re.search(r'\btype\s*=\s*(?:"([^"]*)"|\'([^\']*)\'|([^\s>]+))', attrs, re.I)
+        script_type = next((value.strip().casefold() for value in kind.groups() if value is not None), '') if kind else ''
+        if script_type not in _JS_SCRIPT_TYPES:
+            continue
+        if (re.search(r'^\s*(?:\(\s*function\s*\([^)]*\)\s*\{\s*)?'
+                      r'(?:window\s*(?:\.\s*_cf_chl_opt|\[\s*[\"\']_cf_chl_opt[\"\']\s*\])|_cf_chl_opt)\s*=', body)
+                and re.search(r'/cdn-cgi/challenge-platform/[^\s\"\'<>]{0,160}/orchestrate/chl_page/', body)):
+            managed_challenge = True
+            break
+    sample = re.sub(r'<(script)\b[^>]*>.*?</\1\s*>',
+                    ' ', sample, flags=re.I | re.S)
+    markup = bool(re.search(r'<[a-z][^>]*\b(?:id|class)\s*=\s*[\"\'][^\"\']*\b(?:anomaly-modal|cf-browser-verification)\b', sample, re.I))
+    # Documentation often quotes diagnostic messages literally. Ignore those
+    # examples only inside a substantial article/main with a normal heading;
+    # a short error page or a challenge heading is still classified as blocked.
+    headings = ' '.join(re.findall(r'<(?:title|h[1-2])\b[^>]*>(.*?)</(?:title|h[1-2])\s*>', sample, re.I | re.S))
+    all_visible = _html.unescape(re.sub(r'<[^>]*>', ' ', sample))
+    interactive = bool(re.search(r'select all squares containing|complete (?:the following challenge|o captcha)|'
+                                 r'are you a robot|verify (?:that )?you are (?:a )?human|verifying you are human|'
+                                 r'resolva o captcha|confirme que voc[eê] [eé] humano', all_visible, re.I))
+    prose = re.sub(r'<(pre|code|samp|kbd)\b[^>]*>.*?</\1\s*>', ' ', sample, flags=re.I | re.S)
+    prose_text = _html.unescape(re.sub(r'<[^>]*>', ' ', prose))
+    if (re.search(r'<(?:article|main)\b', sample, re.I)
+            and len(re.sub(r'\s+', ' ', prose_text).strip()) >= 240
+            and not interactive
+            and not _RX_BLOQUEIO.search(_html.unescape(re.sub(r'<[^>]*>', ' ', headings)))):
+        sample = prose
     visible = _html.unescape(re.sub(r'<[^>]*>', ' ', sample))
     visible = re.sub(r'\s+', ' ', visible)[:16000]
-    return markup or bool(_RX_BLOQUEIO.search(visible))
+    return managed_challenge or markup or bool(_RX_BLOQUEIO.search(visible))
 
 
 def registrar_status(nome: str, *, resultados: int = 0, bloqueado: bool = False,
@@ -1161,6 +1196,7 @@ def _buscar_orquestrado(consulta: str, max_resultados: int = 6,
             "segundos": res.get("segundos", 0.0),
             "recuperou": bool(res.get("recuperou")),
             "tentativas_busca": res.get("tentativas_busca", []),
+            "consultas_executadas": res.get("consultas_executadas", len(res.get("consultas", []))),
             "query_plan": res.get("query_plan", []),
             "discovery_reservoir": res.get("candidate_reservoir"),
             "etapas": list(res.get("etapas", []))}
@@ -1259,26 +1295,131 @@ def selecionar_candidatos_leitura(achados, pedido, limite=6):
     return selected
 
 
+def _cache_pesquisa_util(resultado, consulta: str = '') -> bool:
+    """Reuse read evidence or pertinent media discovery, never a failed read."""
+    if not isinstance(resultado, dict) or not isinstance(resultado.get('fontes'), list):
+        return False
+    if any(isinstance(f, dict) and f.get('status') == 'aberta'
+           and f.get('relevante', True) and str(f.get('texto_lido') or '').strip()
+           for f in resultado['fontes']):
+        return True
+    import query_intelligence
+    import media_evidence
+    if not query_intelligence.requested_media(consulta, documents=True):
+        return False
+    media = resultado.get('midia')
+    if not isinstance(media, list):
+        return False
+    # A Commons image can be useful without an HTML read. Preserve its honest
+    # metadata-only/not-analyzed state; a broken or unrelated link is no hit.
+    candidates = [item for item in media if isinstance(item, dict)
+                  and item.get('type') in ('image', 'video', 'document')
+                  and item.get('validation_state') not in ('blocked', 'invalid')
+                  and media_evidence._safe_url(item.get('url'))
+                  and media_evidence._safe_url(item.get('source_url'))]
+    return bool(media_evidence.relevant_media(candidates, consulta))
+
+
+def _contexto_cache_pesquisa(pedido: str, ttl: int):
+    import query_intelligence
+    request_info = query_intelligence.analyze(pedido)
+    chave = request_info['resolved_request'] if request_info['temporal'] else pedido
+    parameters = request_info['parameters']
+    if parameters.get('start_date'):
+        chave += ' | '+parameters['start_date']+' '+parameters.get('end_date', '')
+    if request_info['requires_live_data']:
+        ttl = min(ttl, 180)
+    return chave, ttl, request_info
+
+
+def _descobrir_apos_leitura(pedido, info, orcamento, timeout, started, excluir_urls):
+    """One native discovery round; previous attempts and elapsed reads spend its budget."""
+    import search_orchestrator as orch
+    import query_intelligence
+    import source_priority
+    trace = {'executed': False, 'reason': 'budget_exhausted', 'origin': 'post_read',
+             'new_candidates': 0, 'seconds': 0.0, 'allowed_domains': []}
+    if 'tentativas_busca' not in info:
+        trace['reason'] = 'discovery_history_unavailable'
+        return [], info, trace
+    budget = dict(ORCAMENTO_RAPIDA)
+    budget.update(orcamento or {})
+    history = info['tentativas_busca']
+    elapsed = max(time.monotonic() - started, float(info.get('segundos', 0)))
+    remaining = float(budget['timeout_total']) - elapsed
+    query_count = int(info.get('consultas_executadas', len(info.get('consultas', []))))
+    query_limit = int(budget.get('max_consultas_total', 2 * int(budget['max_consultas'])))
+    attempt_limit = max(1, int(budget.get('max_tentativas', int(budget['max_provedores']) * 2)))
+    trace.update(remaining_seconds=max(0.0, round(remaining, 3)), previous_attempts=len(history))
+    if remaining <= 0 or query_count >= query_limit or len(history) >= attempt_limit:
+        return [], info, trace
+    previous = info.get('provedores') or {}
+    blocked = {f.get('provedor') for f in previous.get('falhas', [])
+               if f.get('codigo') in ('bloqueado', 'rate_limited') or str(f.get('http')) == '429'}
+    request = query_intelligence.analyze(pedido)
+    classification = orch.classificar(pedido)
+    classification['request'] = request
+    if request['domain'] in ('air_travel', 'bus_travel', 'events', 'currency'):
+        classification['produto'] = False
+    providers = orch._escolher_provedores(classification['classes'], classification)[:max(1, int(budget['max_provedores']))]
+    consulted = set(previous.get('consultados', [])) | {row['provedor'] for row in history}
+    providers = sorted((p for p in providers if p not in blocked), key=lambda p: p in consulted)
+    if not providers:
+        trace['reason'] = 'no_healthy_provider'
+        return [], info, trace
+    query = query_intelligence.constrain_discovery(consulta_de_pesquisa(pedido), request, lock_context=True)
+    explicit = source_priority.explicit_source(pedido, request=request)
+    if explicit:
+        trace['allowed_domains'] = list(explicit.get('primary') or ())
+        query = (source_priority.site_queries(explicit, query, 1) or [query])[0]
+    budget.update(timeout_total=remaining, max_consultas=1, max_tentativas=attempt_limit)
+    round_start = time.monotonic()
+    extra = orch.pesquisar(pedido, max_resultados=6, timeout=min(timeout, remaining),
+        orcamento=budget, provedores=providers, extra_queries=[query], historico=history,
+        excluir_urls=excluir_urls, dominios_permitidos=trace['allowed_domains'])
+    extra_history = extra.get('tentativas_busca', history)
+    attempted = len(extra_history) > len(history)
+    trace.update(executed=attempted, reason='no_useful_read' if attempted else 'no_unused_attempt',
+                 new_candidates=len(extra.get('achados', [])),
+                 seconds=round(time.monotonic() - round_start, 3),
+                 attempts=len(extra_history)-len(history), providers=[row['provedor'] for row in extra_history[len(history):]])
+    merged = dict(info)
+    for field in ('etapas', 'descartes'):
+        merged[field] = list(info.get(field, [])) + list(extra.get(field, []))
+    if attempted:
+        merged['etapas'].insert(len(info.get('etapas', [])), 'recuperação após leitura sem fonte útil')
+    merged['consultas'] = list(dict.fromkeys(info.get('consultas', []) + extra.get('consultas', [])))
+    merged['consultas_executadas'] = query_count + int(extra.get('consultas_executadas', len(extra.get('consultas', []))))
+    merged['tentativas_busca'] = extra_history
+    merged['segundos'] = round(float(info.get('segundos', 0)) + float(extra.get('segundos', 0)), 3)
+    extra_providers = extra.get('provedores') or {}
+    used = dict(previous.get('usados') or {})
+    for name, count in extra_providers.get('usados', {}).items():
+        used[name] = used.get(name, 0) + count
+    merged['provedores'] = {'usados': used,
+        'falhas': list(previous.get('falhas', [])) + list(extra_providers.get('falhas', [])),
+        'vazios': list(dict.fromkeys(previous.get('vazios', []) + extra_providers.get('vazios', []))),
+        'consultados': list(dict.fromkeys(previous.get('consultados', []) + extra_providers.get('consultados', [])))}
+    return list(extra.get('achados', [])), merged, trace
+
+
 def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=None,
                     max_fontes: int = 3, ttl: int = TTL_RAPIDA, timeout_pagina: float = 6.0,
-                    orcamento: dict = None, timeout_busca: float = 8.0) -> dict:
-    """1 busca orquestrada (multi-provedor) + até N páginas realmente lidas.
+                    orcamento: dict = None, timeout_busca: float = 8.0, deve_parar=None) -> dict:
+    """Busca orquestrada e até seis leituras em duas ondas.
 
     `buscar_fn`/`recuperar_fn` continuam injetáveis (testes e agentes);
     sem injeção, a busca usa o `search_orchestrator` com orçamento curto.
+    Uma recuperação nativa após leitura compartilha esse mesmo orçamento.
     Fonte só vira "aberta" quando a página foi recuperada de fato; achados
     sem página legível entram como "encontrada" (trecho do índice).
     """
     from concurrent.futures import ThreadPoolExecutor
-    pedido = consulta
     import query_intelligence
-    request_info = query_intelligence.analyze(pedido)
-    cache_pedido = request_info["resolved_request"] if request_info["temporal"] else pedido
-    if request_info['parameters'].get('start_date'):
-        cache_pedido += ' | '+request_info['parameters']['start_date']+' '+request_info['parameters'].get('end_date','')
-    if request_info["requires_live_data"]:
-        ttl = min(ttl, 180)
+    pedido = consulta
+    cache_pedido, ttl, request_info = _contexto_cache_pesquisa(pedido, ttl)
     consulta = consulta_de_pesquisa(consulta)
+    native_search = buscar_fn is None
     if buscar_fn is None:
         def buscar_fn(q, _m=6, _o=orcamento, _t=timeout_busca):
             achados, info = _buscar_orquestrado(pedido, _m, timeout=_t, orcamento=_o)
@@ -1288,11 +1429,12 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
         buscar_fn.etapas = []
         buscar_fn.info = {}
     salvos = cache_get(db, owner, "web", cache_pedido)
-    if salvos is not None and salvos.get("retrieval_version") == RETRIEVAL_VERSION:
+    if _cache_pesquisa_util(salvos, pedido) and salvos.get("retrieval_version") == RETRIEVAL_VERSION:
         salvos = dict(salvos)
         salvos["de_cache"] = True
         return salvos
     etapas, fontes = [], []
+    started = time.monotonic()
     try:
         import search_orchestrator
         achados = search_orchestrator.preservar_candidatos(buscar_fn(consulta), pedido, 12)
@@ -1317,7 +1459,23 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
     recs: dict = {};read_outcomes={}
     candidates=selecionar_candidatos_leitura(achados,pedido)
     answer_aware = bool(query_intelligence.answer_requirements(pedido))
-    initial = candidates[:3] if answer_aware else candidates
+    seen_urls = set()
+    def unread(rows, limit):
+        selected = []
+        for row in rows:
+            try: canonical = search_orchestrator.canonizar_url(row.get('url', ''))
+            except ValueError: continue
+            if not canonical or canonical in seen_urls:
+                continue
+            seen_urls.add(canonical); selected.append(row)
+            if len(selected) >= limit:
+                break
+        return selected
+    cancelled = lambda: deve_parar is not None and deve_parar()
+    stopped = cancelled()
+    initial = [] if stopped else unread(candidates, 3)
+    read_recovery = {'executed': False, 'reason': 'not_needed', 'origin': 'post_read',
+                     'new_candidates': 0, 'seconds': 0.0, 'read_urls': []}
     with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliarq") as pool:
         futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina, pedido): a
                 for a in initial}
@@ -1333,32 +1491,84 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
             except Exception as exc:
                 read_outcomes[a['url']]={'error':type(exc).__name__}
                 etapas.append(f"página ignorada ({type(exc).__name__}): {a['url'][:60]}")
+        for rec in recs.values():
+            try: seen_urls.add(search_orchestrator.canonizar_url((rec or {}).get('final', '')))
+            except ValueError: pass
+        initial_sources = [_fonte_de(recs[a['url']], a, pedido) for a in initial if recs.get(a['url']) is not None]
+        useful = sum(f.get('status') == 'aberta' and f.get('relevante', True) for f in initial_sources)
+        read_recovery.update(initial_reads=len(initial), initial_useful_reads=useful)
+        recovered = []
+        stopped = stopped or cancelled()
+        if stopped:
+            read_recovery['reason'] = 'cancelled'
+            etapas.append('interrompida pelo usuário')
+        elif not native_search:
+            read_recovery['reason'] = 'injected_search'
+        elif not useful and _cache_pesquisa_util({'fontes': [], 'midia': midia}, pedido):
+            read_recovery['reason'] = 'requested_media_available'
+        elif not useful:
+            excluded = list(seen_urls) + [a['url'] for a in achados]
+            recovered, info_busca, recovery_trace = _descobrir_apos_leitura(
+                pedido, info_busca, orcamento, timeout_busca, started, excluded)
+            read_recovery.update(recovery_trace)
+            buscar_fn.info = info_busca
+            buscar_fn.etapas = info_busca.get('etapas', [])
+            achados.extend(recovered)
+            midia.extend(media_evidence.discover_search_media(recovered))
+        next_reads = []
         if answer_aware:
             from web_extract import navigation_candidates
             import evidence_graph
-            visited = {a['url'] for a in initial}
-            next_reads = []
             for a in initial:
                 rec = recs.get(a['url']) or {}
                 if evidence_graph.requirement_coverage(pedido,[{**rec,'url':a['url']}])['complete']:
                     continue
                 for link in navigation_candidates(rec.get('links'), pedido, rec.get('final') or a['url'], limit=2):
-                    if link['url'] not in visited:
-                        visited.add(link['url']); next_reads.append(link)
-            next_reads = (next_reads + candidates[3:])[:max(0,6-len(initial))]
-            for link in next_reads:
-                if link not in achados: achados.append(link)
-            candidates = initial + next_reads
-            followups = {pool.submit(_recuperar_um,a,recuperar_fn,timeout_pagina,pedido):a for a in next_reads}
-            for fut,a in followups.items():
-                try:
-                    recs[a['url']] = fut.result()
-                    rec = recs[a['url']] or {}
-                    read_outcomes[a['url']]={'chars':len(rec.get('texto') or ''),'final':str(rec.get('final') or a['url'])[:500]}
-                    midia.extend(rec.get('midia') or [])
-                    if a.get('_navigation_parent'): etapas.append('FOLLOW_LINK: '+a['url'][:180])
-                except Exception as exc:
-                    read_outcomes[a['url']]={'error':getattr(exc,'codigo',type(exc).__name__)}
+                    next_reads.append(link)
+        remaining_candidates = selecionar_candidatos_leitura(recovered, pedido) + next_reads + candidates
+        blocked_hosts = {_dominio(a['url']) for a in initial
+                         if read_outcomes.get(a['url'], {}).get('error') in ('bloqueado', 'rate_limited')}
+        if not useful and blocked_hosts:
+            remaining_candidates.sort(key=lambda a: _dominio(a['url']) in blocked_hosts)
+        scope = read_recovery.get('allowed_domains') or []
+        if scope:
+            remaining_candidates = [a for a in remaining_candidates if any(
+                _dominio(a['url']).removeprefix('www.') == d or _dominio(a['url']).endswith('.' + d) for d in scope)]
+        stopped = stopped or cancelled()
+        if stopped:
+            read_recovery['read_skip_reason'] = 'cancelled'
+            if 'interrompida pelo usuário' not in etapas:
+                etapas.append('interrompida pelo usuário')
+        next_reads = [] if stopped else unread(remaining_candidates, 6-len(initial))
+        for link in next_reads:
+            if link not in achados: achados.append(link)
+        candidates = initial + next_reads
+        followup_timeout = timeout_pagina
+        if read_recovery['executed']:
+            budget = dict(ORCAMENTO_RAPIDA); budget.update(orcamento or {})
+            remaining = float(budget['timeout_total']) - max(time.monotonic() - started, float(info_busca.get('segundos', 0)))
+            if remaining <= 0:
+                next_reads = []; candidates = initial
+                read_recovery['read_skip_reason'] = 'budget_exhausted'
+            else:
+                followup_timeout = min(timeout_pagina, remaining)
+        followups = {pool.submit(_recuperar_um,a,recuperar_fn,followup_timeout,pedido):a for a in next_reads}
+        recovered_urls = {a['url'] for a in recovered}
+        read_recovery['read_urls'] = [a['url'] for a in next_reads if a['url'] in recovered_urls]
+        for fut,a in followups.items():
+            try:
+                recs[a['url']] = fut.result()
+                rec = recs[a['url']] or {}
+                final_host = _dominio(rec.get('final') or a['url']).removeprefix('www.')
+                if scope and not any(final_host == d or final_host.endswith('.' + d) for d in scope):
+                    recs.pop(a['url'], None)
+                    read_outcomes[a['url']] = {'error': 'source_scope_mismatch'}
+                    continue
+                read_outcomes[a['url']]={'chars':len(rec.get('texto') or ''),'final':str(rec.get('final') or a['url'])[:500]}
+                midia.extend(rec.get('midia') or [])
+                if a.get('_navigation_parent'): etapas.append('FOLLOW_LINK: '+a['url'][:180])
+            except Exception as exc:
+                read_outcomes[a['url']]={'error':getattr(exc,'codigo',type(exc).__name__)}
     normalized=[]
     for a in achados:
         rec = recs.get(a["url"])
@@ -1372,6 +1582,11 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
     # Reclassify after reading, before source truncation. Irrelevant first
     # candidates must not hide useful content obtained later in the same batch.
     normalized.sort(key=lambda f:(not f.get('relevante',True),f.get('status')!='aberta'))
+    recovered_reads = set(read_recovery['read_urls'])
+    read_recovery['useful_reads'] = sum(f.get('url') in recovered_reads and f.get('status') == 'aberta'
+                                      and f.get('relevante', True) for f in normalized)
+    read_recovery['total_reads'] = len(candidates)
+    read_recovery['elapsed_seconds'] = round(time.monotonic() - started, 3)
     fontes=normalized[:max_fontes]
     lidas_n = sum(1 for f in fontes if f.get("status") == "aberta")
     uteis_n = sum(1 for f in fontes if f.get("status") == "aberta" and f.get("relevante", True))
@@ -1394,6 +1609,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
                  read_outcomes=read_outcomes,selected_urls={a['url'] for a in candidates},
                  returned_urls={f['url'] for f in fontes}),
              "retrieval_version": RETRIEVAL_VERSION, "request": request_info,
+             "read_recovery": read_recovery,
              "query_plan": info_busca.get('query_plan', []),
              "discovery_reservoir": info_busca.get('discovery_reservoir'),
              "midia": list({item['id']:item for item in media_evidence.relevant_media(midia,pedido)}.values())[:12],
@@ -1413,7 +1629,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
              "segundos": info_busca.get("segundos", 0.0)}
     import evidence_graph
     saida['answer_coverage'] = evidence_graph.requirement_coverage(pedido, saida['fontes'])
-    if fontes or saida['midia']:
+    if _cache_pesquisa_util(saida, pedido):
         try:
             cache_put(db, owner, "web", cache_pedido, saida, ttl)
         except json_store.JSONLimitError:
@@ -1713,8 +1929,9 @@ def pesquisa_aprofundada(db, owner: str, consulta: str, conv: str = "", buscar_f
                          recuperar_fn=None, deve_parar=None, ttl: int = TTL_PROFUNDA,
                          timeout_pagina: float = 6.0, orcamento: dict = None) -> dict:
     """N subconsultas determinísticas + merge/dedupe + run persistido. Interrompível."""
-    salvos = cache_get(db, owner, "web-deep", consulta)
-    if salvos is not None and salvos.get('retrieval_version') == RETRIEVAL_VERSION:
+    cache_pedido, ttl, _ = _contexto_cache_pesquisa(consulta, ttl)
+    salvos = cache_get(db, owner, "web-deep", cache_pedido)
+    if _cache_pesquisa_util(salvos, consulta) and salvos.get('retrieval_version') == RETRIEVAL_VERSION:
         salvos = dict(salvos)
         salvos["de_cache"] = True
         return salvos
@@ -1734,7 +1951,7 @@ def pesquisa_aprofundada(db, owner: str, consulta: str, conv: str = "", buscar_f
         try:
             parcial = pesquisa_rapida(db, owner, s, buscar_fn, recuperar_fn,
                                       max_fontes=3, ttl=ttl, timeout_pagina=timeout_pagina,
-                                      orcamento=orc_sub)
+                                      orcamento=orc_sub, deve_parar=deve_parar)
         except Exception as exc:
             etapas.append(f"sub-busca falhou ({type(exc).__name__})")
             continue
@@ -1788,8 +2005,8 @@ def pesquisa_aprofundada(db, owner: str, consulta: str, conv: str = "", buscar_f
                     json.dumps(saida["divergencias"], ensure_ascii=False),
                     "interrompida" if deve_parar is not None and deve_parar() else "concluida",
                     agora_iso(), agora_iso()))
-        if saida["fontes"]:
-            cache_put(db, owner, "web-deep", consulta, saida, ttl)
+        if _cache_pesquisa_util(saida, consulta):
+            cache_put(db, owner, "web-deep", cache_pedido, saida, ttl)
     saida["run_id"] = rid
     return saida
 

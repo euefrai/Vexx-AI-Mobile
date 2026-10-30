@@ -27,6 +27,15 @@ def read(source):
             and source.get('content_scope') not in ('feed_metadata', 'metadata_only', 'abstract_only'))
 
 
+def _doi(source):
+    value = re.sub(r'^https?://(?:dx\.)?doi\.org/', '', str(source.get('doi') or '').strip(), flags=re.I)
+    return value.casefold() if re.fullmatch(r'10\.\d{4,9}/[-._;()/:a-zA-Z0-9]+', value) else ''
+
+
+def _publication_identity(source):
+    return _doi(source) or str(source.get('url') or source.get('id') or '').casefold()
+
+
 def identify(job, evidence):
     objective = str(job.get('objetivo') or '')
     if not objective:
@@ -59,7 +68,7 @@ def identify(job, evidence):
     required = 2 if scientific and compare else 1
     readable = [e for e in evidence if read(e)]
     if scientific:
-        readable = [e for e in readable if re.fullmatch(r'10\.\d{4,9}/\S+', str(e.get('doi') or ''))
+        readable = [e for e in readable if _doi(e)
                     or e.get('publication_type') in ('journal-article','proceedings-article','preprint','scholarlyarticle')]
     definitions = [('original_text', 'Trecho original pertinente', 'primary source original text', readable)]
     if scientific:
@@ -106,12 +115,11 @@ def identify(job, evidence):
         except ValueError:
             continue
     # A discovered DOI is a precise query identifier, never a fabricated OA URL.
-    doi = next((str(e.get('doi', '')).removeprefix('https://doi.org/') for e in evidence
-                if re.fullmatch(r'(?:https://doi.org/)?10\.\d{4,9}/[-._;()/:a-zA-Z0-9]+', str(e.get('doi', '')))), '')
+    dois = list(dict.fromkeys(_doi(e) for e in evidence if _doi(e) and e.get('relevante') is not False))
     stem = re.sub(r'[\x00-\x1f"`<>]', ' ', objective).strip()[:140]
     if scientific:
         stem = science_subject(stem)
-    anchor = ('"' + doi[:120] + '"') if scientific and doi else stem
+    anchor = stem
     if re.search(r'noticia|acontecimentos?', normalized(objective)):
         lead = next((e for e in evidence if e.get('content_scope') == 'feed_metadata' and e.get('titulo')), None)
         if lead:
@@ -119,9 +127,19 @@ def identify(job, evidence):
             anchor = '"' + title + '" ' + stem[:90]
     out = []
     for index, (dimension, label, terms, matched) in enumerate(definitions[:6]):
-        identities = {str(e.get('doi') or e.get('url') or e.get('id')).casefold() for e in matched}
+        identities = {_publication_identity(e) for e in matched if _publication_identity(e)}
         resolved = len(identities) >= required
-        query = (('papers ' if scientific else '') + anchor + ' ' + terms)[:240]
+        # Search the publication still missing this dimension, not the first
+        # paper which may already support it. If all known papers support it,
+        # discover another paper by subject rather than repeating a covered DOI.
+        covered_dois = {_doi(e) for e in matched}
+        missing_dois = [doi for doi in dois if doi not in covered_dois
+                        and len(doi)+len(terms)+10 <= 240] if scientific and not resolved else []
+        target_doi = next((doi for doi in missing_dois
+                          if key('papers "'+doi+'" '+terms) not in planned),
+                         missing_dois[0] if missing_dois else '')
+        dimension_anchor = ('"'+target_doi+'"') if target_doi else anchor
+        query = (('papers ' if scientific else '') + dimension_anchor + ' ' + terms)[:240]
         previous = [q for q in attempted if key(q) == key(query)]
         out.append({'id': hashlib.sha256((str(job.get('id', '')) + ':' + dimension).encode()).hexdigest()[:16],
             'dimension': dimension, 'description': label, 'subquestion': query,
@@ -132,6 +150,7 @@ def identify(job, evidence):
             'query': query if not resolved and key(query) not in planned and remaining else '',
             'budget': {'remaining_searches': remaining, 'max_new_searches': 1},
             'required_publications': required, 'observed_publications': len(identities),
+            'target_doi': target_doi,
             'scope': 'bounded extracted evidence; no claim of full study coverage'})
     return out
 

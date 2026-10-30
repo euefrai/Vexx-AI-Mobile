@@ -807,6 +807,7 @@ def _document_windows(text, root, block, query, url, budget):
     import heapq
     import query_intelligence as qi
     requirements = qi.answer_requirements(query)
+    behavior_ids = {r['id'] for r in requirements if r['attribute'] == 'behavior'}
     terms = [(r['id'], re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+r')\b', re.I),
               re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+'|'+
                          _SECTION_HEADINGS.get(r['attribute'], r'(?!)')+r')\b', re.I),
@@ -931,7 +932,12 @@ def _document_windows(text, root, block, query, url, budget):
         for rid,rx,heading_rx,entity_rx in terms:
             hits=list(rx.finditer(chunk))
             heading_match=any(heading_rx.search(h['text']) for h in path)
-            if not hits and not heading_match:continue
+            # API descriptions often explain the operation without a literal
+            # "Description" label. A real aligned definition can locate that
+            # body; downstream support checks still evaluate its literal text.
+            api_description = (rid in behavior_ids and path and path[-1]['level'] >= 7
+                               and entity_rx.search(path[-1]['text']))
+            if not hits and not heading_match and not api_description:continue
             # Actual leading labels outrank incidental mentions deep in prose.
             score=8*heading_match+4*bool(hits and hits[0].start()<50)+min(3,len(hits))
             score += 16*any(entity_rx.search(h['text']) for h in path) + 8*bool(entity_rx.search(chunk))

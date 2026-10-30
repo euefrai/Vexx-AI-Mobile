@@ -66,7 +66,7 @@ ANSWER_FACETS = {
     'consequences': ('Consequências', r'consequencias?|consequences?|o que (?:mudou|aconteceu) depois|what changed afterward'),
     'syntax': ('Sintaxe ou assinatura', r'sintaxe|assinatura|syntax|signature'),
     'return_value': ('Valor retornado', r'o que retorna|valor retornado|return value|\bretorno\b'),
-    'behavior': ('Comportamento da operação', r'como (?:usar|utilizar|funciona)|comportamento|behavior|modifica.*original|altera.*original'),
+    'behavior': ('Comportamento da operação', r'como (?:usar|utilizar|funciona)|\bo que faz\b|comportamento|behavior|modifica.*original|altera.*original'),
     'cancellation': ('Cancelamento da operação', r'\bcancelamento\b|\bcancellation\b'),
     'exceptions': ('Tratamento de exceções', r'\bexcecoes\b|\bexceptions\b|\bexception handling\b'),
     'examples': ('Exemplos documentados', r'exemplos?|examples?'),
@@ -80,8 +80,20 @@ ANSWER_FACETS = {
     'location': ('Localização', r'onde (?:fica|se localiza)'),
     'population': ('População e referência', r'\bpopulacao\b'),
     'alternatives': ('Alternativas', r'\balternativas\b'),
-    'definition': ('Definição e finalidade', r'\bo que e\b|\bpara que serve\b'),
+    'definition': ('Definição e finalidade', r'\bo que e\b|\bpara que serve\b|\bdiferencas? entre\b'),
 }
+
+
+def _research_body(text):
+    value = re.sub(r'^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda\s+)?(?:(?:sobre|por|acerca de)\s+)?', '', str(text).strip(), flags=re.I)
+    return re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure)\s+(?:profundamente\s+|a fundo\s+)?(?:sobre\s+)?', '', value, flags=re.I)
+
+
+def _unparsed_demands(text):
+    factual = re.sub(r'\s+e\s+(?:apresente|mostre|organize|exiba)\b.*?\bem\s+(?:cards|tabelas?|cartoes)\b.*$', '', normalized(_research_body(text)))
+    clauses = re.split(r'[,;?]|\s+e\s+(?=(?:qual|quais|onde|quando|como|quant[oa]s?|por que|o que|explique|descreva|detalhe|compare|analise)\b)', factual)
+    return [c.strip() for c in clauses if re.match(r'^(?:qual|quais|onde|quando|como|quant[oa]s?|por que|o que|em que|explique|descreva|detalhe|compare|analise)\b', c.strip())
+            and not any(re.search(rx, c) for _, rx in ANSWER_FACETS.values())]
 
 
 def answer_requirements(text):
@@ -92,6 +104,12 @@ def answer_requirements(text):
     if re.search(r'\b(imagens?|fotos?|videos?|cientific\w*|papers?|estudos|artigos cientificos)\b', norm):
         return []
     facets = [key for key, (_, rx) in ANSWER_FACETS.items() if re.search(rx, norm)]
+    # A comparison with named aspects asks for those aspects, not an additional
+    # definition of every entity. Definitions remain explicit for "o que é".
+    if ('definition' in facets and len(facets) > 1
+            and re.search(r'\bdiferencas? entre\b', norm)
+            and not re.search(r'\bo que e\b|\bpara que serve\b', norm)):
+        facets.remove('definition')
     # Qualified operations keep technical requests independent of the language
     # used by their documentation. URLs are not API identifiers.
     api_text = re.sub(r'https?://\S+', '', original)
@@ -107,7 +125,9 @@ def answer_requirements(text):
         if 'creation_date' not in facets:facets.append('creation_date')
     if not facets:
         return []
-    subject = re.sub(r'^(?:pesquise|pesquisa profunda sobre|encontre)\s+', '', original, flags=re.I)
+    subject = _research_body(original).rstrip(' .?!')
+    comparison_text = subject
+    subject = re.sub(r'^n[ao]\s+documenta[cç][aã]o\s+(?:oficial\s+)?(?:d[eo]\s+.+?\s+)?(?=(?:o que|como|para que)\b)', '', subject, flags=re.I)
     company = re.match(r'^quando\s+(?:a |o )?(.+?)\s+foi\s+fundad[ao]\b', subject, re.I)
     if company:
         subject = company[1]
@@ -125,11 +145,11 @@ def answer_requirements(text):
         if causal:subject=causal[1]
         subject = re.sub(r'^(?:quais\s+(?:(?:foram|s[aã]o)\s+)?as?\s+|as?\s+)?(?:causas? e (?:as?\s+)?consequ[eê]ncias?)\s+(?:de|do|da)\s+', '', subject, flags=re.I)
         subject = re.sub(r'^(?:como (?:usar|utilizar|funciona)|qual (?:[eé] )?(?:o peso|a bateria) (?:de|do|da))\s+', '', subject, flags=re.I)
+        subject = re.sub(r'^(?:o que (?:[eé]|faz|retorna)|para que serve)(?:\s+|$)', '', subject, flags=re.I)
         subject = re.sub(r'^(?:peso|bateria)\s+(?:de|do|da)\s+','',subject,flags=re.I)
         subject = re.sub(r'^(?:documenta[cç][aã]o\s+(?:oficial\s+)?|hist[oó]ria\s+(?:de|do|da)\s+(?:empresa\s+)?)', '', subject, flags=re.I)
         subject = re.split(r'[,?]|\s+(?:causas?|consequ[eê]ncias?|limita[cç][oõ]es|documenta[cç][aã]o|exemplos?|sintaxe|comportamento|peso|bateria|fontes?\s+oficiais)\b', subject, maxsplit=1, flags=re.I)[0]
-    operations=re.findall(r'\b[A-Za-z_]\w*(?:\.[A-Za-z_]\w*)+',original) if set(facets)&{'syntax','behavior','examples','limitations','return_value'} else []
-    operations=[op for op in operations if op[0].isupper() or re.search(re.escape(op)+r'\s*\(',original)]
+    operations=api_names if set(facets)&{'syntax','behavior','examples','limitations','return_value'} else []
     if len(set(operations))==1:
         subject=operations[0]
     subject = re.sub(r'^(?:o|a|os|as)\s+', '', subject.strip(' .?!'), flags=re.I)[:180]
@@ -139,16 +159,20 @@ def answer_requirements(text):
     if river:subject=river[1]
     place=re.search(r'onde (?:fica|se localiza)\s+(.+?)(?:\s+e\s+(?:qual|quais)\b|[?,]|$)',original,re.I)
     if place:subject=place[1]
-    subject=re.split(r'\s+e\s+(?:qual\b|quais\b|quando\b|onde\b|como\b|quant[oa]s?\b|compare\b|divergencias\b)',subject,maxsplit=1,flags=re.I)[0]
-    compare=re.search(r'^(?:pesquisa profunda sobre\s+)?(?:compare|entre|quais (?:s[aã]o )?as diferen[cç]as entre)\s+(.+?)(?:\s+(?:quanto|considerando|segundo|em rela[cç][aã]o)\b|[?]|$)',original,re.I)
+    subject=re.split(r'\s+e\s+(?:qual\b|quais\b|quando\b|onde\b|como\b|quant[oa]s?\b|o que\b|explique\b|descreva\b|detalhe\b|compare\b|divergencias\b)',subject,maxsplit=1,flags=re.I)[0]
+    compare=re.search(r'^(?:compare|entre|(?:(?:qual [eé] a|quais (?:s[aã]o )?as|a|as)\s+)?diferen[cç]as? entre)\s+(.+?)(?:\s+(?:quanto|considerando|segundo|em rela[cç][aã]o)\b|[?]|$)',comparison_text,re.I)
     entities=[subject]
     if compare:
         section=compare[1].split('?',1)[0]
         section=re.split(r',\s*(?:qual|quais)\b',section,maxsplit=1,flags=re.I)[0]
+        section=re.split(r'\s+e\s+(?:como|o que|qual|quais|explique|descreva|detalhe)\b',section,maxsplit=1,flags=re.I)[0]
         entities=[e.strip(' ,.!?') for e in re.split(r',|\s+(?:e|versus|vs\.?)\s+',section,flags=re.I) if e.strip(' ,.!?')]
         if not 2<=len(entities)<=4:entities=[subject]
     if api_names and set(facets) & {'cancellation', 'exceptions'}:
         entities = api_names[:4]
+    entities = [entity for entity in entities if entity and normalized(entity) not in ('na', 'no', 'nas', 'nos', 'em', 'de', 'do', 'da', 'o', 'a')]
+    if not entities:
+        return []
     constraints = {'reference': 'original_request', 'must_preserve': bool(re.search(
         r'\b(?:nao|sem|exceto|ate|depois|antes|ultimos)\b|\d|r\$', norm))}
     return [{'id': 'R-' + hashlib.sha256((norm+'|'+facet+('|'+normalized(entity) if len(entities)>1 else '')).encode()).hexdigest()[:12],
@@ -165,10 +189,8 @@ def requirement_contract(text):
     """Keep unparsed demands pending; they can never acquire factual support."""
     original=str(text or '')[:1000]
     requirements=answer_requirements(original)
-    factual=re.sub(r'\s+e\s+(?:apresente|mostre|organize|exiba)\b.*?\bem\s+(?:cards|tabelas?|cartoes)\b.*$','',normalized(original))
-    clauses=re.split(r'[,;?]|\s+e\s+(?=(?:qual|quais|onde|quando|como|quant[oa]s?|por que|o que)\b)',factual)
-    ignored=[c.strip() for c in clauses if re.match(r'^(?:qual|quais|onde|quando|como|quant[oa]s?|por que|o que|em que)\b',c.strip())
-             and not any(re.search(rx,c) for _,rx in ANSWER_FACETS.values())]
+    factual=normalized(original)
+    ignored=_unparsed_demands(original)
     if re.search(r'\be compare (?:as )?fontes\b|\bdivergencias entre fontes\b',factual):
         ignored.append('Comparação entre fontes ainda exige verificação.')
     # Bare comparative definitions have an explicit per-entity requirement.
@@ -205,7 +227,8 @@ def entity_alias_matches(entity,text):
 def requirement_query(requirement, original):
     # Facet labels are search terms, not part of a capitalized proper name.
     query = requirement['entity'] + ' ' + requirement['description'].lower()
-    if requirement.get('constraints', {}).get('must_preserve') and not _model_only_scope(original):
+    comparison_scope = re.search(r'\bdiferencas? entre\b|\b(?:compare|comparar|comparando|versus|vs)\b', normalized(original))
+    if (requirement.get('constraints', {}).get('must_preserve') or comparison_scope) and not _model_only_scope(original):
         return str(original)[:190] + ' ' + requirement['description']
     if re.search(r'com bateria e (?:o )?cartao',normalized(original)):
         query+=' com bateria e cartão'
@@ -240,8 +263,9 @@ def retrieval_context(original):
     # Numerical, negative, geographical and comparison scope stays verbatim.
     # Do not guess how to translate a model identifier or a temporal interval.
     guarded = bool(re.search(
-        r'\d|\b(?:sem|nao|exceto|exclu\w*|compare|comparar|versus|vs|'
-        r'ultim\w*|hoje|ontem|semana|noticias|eventos)\b', normalized(text)))
+        r'\d|\bdiferencas? entre\b|\b(?:sem|nao|exceto|exclu\w*|compare|comparar|versus|vs|'
+        r'ultim\w*|hoje|ontem|semana|noticias|eventos)\b', normalized(text))
+        or (requirements and _unparsed_demands(text)))
     entity = requirements[0]['entity'] if requirements else ''
     return {'original_request': str(original or ''), 'research_request': text,
             'entity': entity, 'requirements': requirements, 'guarded': guarded,
@@ -283,8 +307,7 @@ def topic_profile(text):
     if tail:
         presentation.append(tail[0].strip())
         value = value[:tail.start()]
-    value = re.sub(r'^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda\s+)?(?:(?:sobre|por|acerca de)\s+)?', '', value, flags=re.I)
-    value = re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure)\s+(?:profundamente\s+|a fundo\s+)?', '', value, flags=re.I)
+    value = _research_body(value)
     value = re.sub(r'^(?:as?\s+)?(?:[uú]ltimas?\s+)?(?:novidades|informa[cç][oõ]es recentes)\s+sobre\s+', '', value, flags=re.I)
     value = re.sub(r'^(?:a|as|o|os)\s+(?=hist[oó]ria|documenta[cç][aã]o|especifica[cç][oõ]es|relat[oó]rio)', '', value, flags=re.I)
     operation = ''
@@ -292,7 +315,7 @@ def topic_profile(text):
                       r'documenta[cç][aã]o\s+(?:oficia(?:l|is)\s+)?|'
                       r'especifica[cç][oõ]es\s+(?:oficia(?:l|is)\s+)?|'
                       r'relat[oó]rio\s+(?:p[uú]blico\s+)?(?:PDF\s+)?)', value, re.I)
-    if prefix:
+    if prefix and normalized(value[prefix.end():].strip()) not in ('', 'na', 'no', 'nas', 'nos', 'em', 'de', 'do', 'da', 'o', 'a'):
         operation = prefix[0].strip()
         value = value[prefix.end():].strip()
     source_preference = re.search(r'\s+(fontes?\s+(?:oficiais|prim[aá]rias|originais))$', value, re.I)
@@ -313,14 +336,24 @@ def topic_profile(text):
                 'organization' if re.search(r'\bempresa\b', normalized(original)) else 'unresolved_named_entity')
         entities.append({'name': name, 'kind': kind, 'resolution': 'explicit_text_not_verified'})
     requirements = answer_requirements(original)
+    natural_question = bool(re.search(r'\b(?:o que (?:e|faz|retorna)|para que serve|diferencas? entre)\b', normalized(original)))
     reorder = bool(re.search(r'quem fundou|quais foram as causas',normalized(original)) or (
         re.search(r'como (?:usar|utilizar|funciona)',normalized(original)) and re.search(r'\w+\.\w+',original)))
-    if requirements and requirements[0]['entity'] and reorder:
-        value = requirements[0]['entity']
-    focused = ' '.join(x for x in (value, ' '.join(required[:1]), preference) if x).strip()
+    if requirements and requirements[0]['entity'] and (reorder or natural_question):
+        value = ' e '.join(dict.fromkeys(r['entity'] for r in requirements))
+        if natural_question:
+            # Move the parsed subject before operation words, retaining every
+            # demand the deterministic facet parser could not interpret.
+            required += list(dict.fromkeys(r['description'].lower() for r in requirements))
+            required += _unparsed_demands(original)
+            source_clause = re.search(r'\bdocumenta[cç][aã]o\s+oficial(?:\s+d[eo]\s+.+?)?(?=\s+(?:o que|como|para que)\b|[,.!?]|$)', original, re.I)
+            if source_clause:
+                required.append(source_clause[0])
+    focused = ' '.join(x for x in (value, ' '.join(required if natural_question else required[:1]), preference) if x).strip()
     # Discovery can reorder a noun phrase, but must not silently drop a
     # negative/budget/comparison suffix that this deterministic parser cannot model.
-    guarded = bool(re.search(r'\b(?:nao|exceto|exclua|sem|ate|abaixo|acima|compare|versus)\b|r\$|\bvs\b', normalized(original)))
+    guarded = bool(re.search(r'\b(?:nao|exceto|exclua|sem|ate|abaixo|acima|compare|versus)\b|r\$|\bvs\b', normalized(original))
+                   or (natural_question and re.search(r'\d', original)))
     if guarded:
         focused = original.strip()
     return {'original_request': original, 'primary_topic': value or original.strip(),

@@ -455,8 +455,15 @@ function inlineFmt(s, sources = {}) {
   s = s.replace(/\[([^\]]+)\]\((https?:[^)\s]+)\)/g, (m, t, u) => {
     return keep('<a href="' + esc(u.replace(/&amp;/g, '&')) + '" target="_blank" rel="noopener noreferrer">' + t + '</a>');
   });
-  s = s.replace(/\[(S\d+)\]/gi, (m, id) => sources[id.toUpperCase()]
-    ? keep('<a class="citation" href="' + esc(sources[id.toUpperCase()]) + '" target="_blank" rel="noopener noreferrer" aria-label="Fonte ' + id.toUpperCase() + '">' + m + '</a>') : m);
+  s = s.replace(/\[(?:(S)?(\d+))\]/gi, (m, prefix, num) => {
+    const key = prefix ? ('S' + num).toUpperCase() : num;
+    const url = sources[key] || sources['S' + num] || sources[num];
+    const disp = prefix ? ('S' + num) : num;
+    if (url) {
+      return keep('<button class="citation-pill" data-url="' + esc(url) + '" data-num="' + disp + '" type="button" aria-label="Fonte ' + disp + '">[' + disp + ']</button>');
+    }
+    return m;
+  });
   // Autolink SÓ em texto puro: nunca dentro de tags/atributos já gerados
   // (img src, href, code, onerror). Prefixo válido: início, espaço ou '('.
   s = s.replace(/(^|[\s(])(https?:\/\/[^\s<\]\)]+)/g, (m, pre, url) => {
@@ -557,8 +564,22 @@ function renderMarkdown(text) {
   }
   if (refBody) {
     refBody.split('\n').forEach(line => {
-      const id = line.match(/\[(S\d+)\]/i), url = line.match(/https?:\/\/[^\s<>\)]+/);
-      if (id && url) sources[id[1].toUpperCase()] = validUrl(url[0].replace(/[.,;]+$/, ''));
+      const id = line.match(/\[(?:(S)?(\d+))\]/i) || line.match(/^(\d+)[\.\)]/);
+      const url = line.match(/https?:\/\/[^\s<>\)]+/);
+      if (id && url) {
+        const u = validUrl(url[0].replace(/[.,;]+$/, ''));
+        if (u) {
+          if (id[2]) {
+            const k = (id[1] ? 'S' : '') + id[2];
+            sources[k.toUpperCase()] = u;
+            sources[id[2]] = u;
+            sources['S' + id[2]] = u;
+          } else if (id[1]) {
+            sources[id[1]] = u;
+            sources['S' + id[1]] = u;
+          }
+        }
+      }
     });
     const items = escapeHtml(refBody).split('\n').map(l => l.trim()).filter(Boolean);
     const lis = items.slice(1).map(l => {
@@ -3384,3 +3405,69 @@ setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
   await restoreSession(); await fetchAuthConfig(); await checkStatus(); updateConnection();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('/sw.js').catch(() => {});
 })();
+
+/* === PERPLEXITY-STYLE: CITATION POPOVER & SCREEN-TO-RESEARCH === */
+function showCitationPopover(targetEl, url, num) {
+  const existing = document.getElementById('citationPopover');
+  if (existing) existing.remove();
+  let domain = '';
+  try { domain = new URL(url).hostname.replace(/^www\./, ''); } catch (_) { domain = url; }
+  const pop = document.createElement('div');
+  pop.id = 'citationPopover';
+  pop.className = 'citation-popover';
+  const label = rotuloUrl ? rotuloUrl(url) : domain;
+  pop.innerHTML = '<div class="citation-popover-head">' +
+    '<img src="https://www.google.com/s2/favicons?domain=' + encodeURIComponent(domain) + '&sz=32" alt="" width="16" height="16" onerror="this.style.display=\'none\'" />' +
+    '<span class="citation-popover-domain">' + esc(domain) + '</span>' +
+    '<span style="margin-left:auto;font-size:10px;opacity:0.6">[' + esc(num) + ']</span>' +
+    '</div>' +
+    '<div class="citation-popover-title">' + esc(label || domain) + '</div>' +
+    '<div class="citation-popover-snippet">Fonte citada como evidência para esta resposta na pesquisa profunda.</div>' +
+    '<a class="citation-popover-link" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">Acessar fonte original ↗</a>';
+  document.body.appendChild(pop);
+  const rect = targetEl.getBoundingClientRect();
+  const popRect = pop.getBoundingClientRect();
+  let top = rect.bottom + 8;
+  if (top + popRect.height > window.innerHeight - 16) {
+    top = Math.max(16, rect.top - popRect.height - 8);
+  }
+  let left = Math.max(16, Math.min(window.innerWidth - popRect.width - 16, rect.left));
+  pop.style.top = top + 'px';
+  pop.style.left = left + 'px';
+  const close = e => {
+    if (!pop.contains(e.target) && e.target !== targetEl) {
+      pop.remove();
+      document.removeEventListener('pointerdown', close);
+    }
+  };
+  setTimeout(() => document.addEventListener('pointerdown', close), 10);
+}
+
+document.addEventListener('click', ev => {
+  const pill = ev.target.closest('.citation-pill');
+  if (!pill) return;
+  ev.preventDefault();
+  const url = pill.dataset.url;
+  const num = pill.dataset.num;
+  if (url) showCitationPopover(pill, url, num);
+});
+
+// Listener para Screen-to-Research (AnyDesk + Perplexity Deep Research)
+window.addEventListener('vexx:screen_research', ev => {
+  const src = ev.detail && ev.detail.src;
+  const chatNavBtn = document.querySelector('[data-tab="chat"]');
+  if (chatNavBtn) chatNavBtn.click();
+  else {
+    document.querySelectorAll('.page').forEach(p => { p.hidden = (p.id !== 'page-chat'); });
+    $('page-chat')?.classList.add('active');
+    $('page-desktop')?.setAttribute('hidden', '');
+  }
+  const input = $('chatInput');
+  if (input) {
+    input.value = 'Investigue a tela atual do meu computador e faça uma pesquisa profunda investigando os dados, erros e conceitos nela: ';
+    input.focus();
+  }
+  if (typeof notify === 'function') {
+    notify('Tela do PC vinculada à Pesquisa Profunda. Clique em Enviar para iniciar a investigação.');
+  }
+});

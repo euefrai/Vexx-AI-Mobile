@@ -604,6 +604,11 @@ def detect(text: str, request: dict | None = None) -> dict | None:
     if explicit:
         return explicit
 
+    # Editorial technology/news preferences must not outrank a request for
+    # official documentation. Native documentation providers keep their order.
+    if re.search(r'\b(?:documentac(?:ao|oes) oficia(?:l|is)|official documentation)\b', norm):
+        return None
+
     news = _news_context(norm, request)
     shopping = _shopping_context(norm, request)
     candidates = []
@@ -692,26 +697,46 @@ def describe(plan: dict | None) -> dict | None:
     }
 
 
-def explicit_store(text: str):
-    """Loja nomeada no pedido de compra (ou None)."""
+def explicit_store(text: str, *, require_request: bool = False):
+    """Loja nomeada; escopo exclusivo exige referência à loja, não à marca."""
     norm = normalize(text)
     if not norm:
         return None
     best = None
+    requested = set()
+    def store_requested(match, store):
+        if not require_request:
+            return True
+        before, after = norm[:match.start()], norm[match.end():]
+        # Amazon is also a device brand. "Amazon Echo" alone must retain
+        # other merchants, even when a search provider recognizes the brand.
+        product_brand = store['id'] == 'amazon' and re.match(
+            r'\s+(?:echo|fire|kindle|alexa|basics)\b', after)
+        named_site = re.search(r'\b(?:loja|site|marketplace)\s+(?:(?:da|do|de)\s+)?$', before)
+        if product_brand and not named_site:
+            return False
+        return bool(named_site or re.search(
+            r'\b(?:na|no|nas|nos|pela|pelo|em|so|apenas|somente|exclusivamente)'
+            r'\s+(?:(?:na|no|em|a|o)\s+)?$', before)
+            or re.match(r'\s*(?:apenas|somente|exclusivamente)\b', after))
     for order, store in enumerate(SHOPPING_STORES):
         for alias in store["aliases"]:
-            match = re.search(r"(?<!\w)" + re.escape(alias) + r"(?!\w)", norm)
-            if match:
-                candidate = (match.start(), order, store)
-                if best is None or candidate[:2] < best[:2]:
-                    best = candidate
+            for match in re.finditer(r"(?<!\w)" + re.escape(alias) + r"(?!\w)", norm):
+                if store_requested(match, store):
+                    requested.add(store['domain'])
+                    candidate = (match.start(), order, store)
+                    if best is None or candidate[:2] < best[:2]:
+                        best = candidate
         domain = store["domain"]
-        match = re.search(r"(?<![\w.-])" + re.escape(domain) + r"(?![\w.-])",
+        match = re.search(r"(?<![\w.-])(?:www\.)?" + re.escape(domain) + r"(?![\w.-])",
                           norm)
         if match:
+            requested.add(store['domain'])
             candidate = (match.start(), order, store)
             if best is None or candidate[:2] < best[:2]:
                 best = candidate
+    if require_request and len(requested) > 1:
+        return None  # A comparison between stores is not one exclusive store.
     return best[2] if best else None
 
 

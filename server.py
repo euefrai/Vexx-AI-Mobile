@@ -264,7 +264,7 @@ class RemotePoint(BaseModel):
 
 
 class InputBody(BaseModel):
-    kind: str = Field(pattern=r"^(move|click|double|right|scroll|wheel|key|text|drag)$")
+    kind: str = Field(pattern=r"^(move|click|double|right|scroll|wheel|key|text|drag|clipboard_get|clipboard_set)$")
     x: float | None = Field(default=None, ge=0.0, le=1.0)
     y: float | None = Field(default=None, ge=0.0, le=1.0)
     dx: int = Field(default=0, ge=-10, le=10)

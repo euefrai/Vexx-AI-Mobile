@@ -261,7 +261,16 @@
         </div>
 
         <div class="control-actions">
+          <button class="action-pill accent-pill" type="button" id="rotateScreenBtn" title="Girar tela 90° para ocupar 100% da altura do celular">🔄 Girar 90°</button>
+          <button class="action-pill" type="button" id="fitScreenBtn" title="Alternar entre Ajustar, Preencher sem bordas ou Esticar">📏 Modo: Ajustar</button>
+          <button class="action-pill research-pill" type="button" id="screenToResearch" title="Pesquisa Profunda estilo Perplexity a partir da tela"><svg class="icon"><use href="#i-search"/></svg> Pesquisar Tela</button>
           <button class="action-pill" type="button" id="touchMode" aria-pressed="false" title="Alternar entre toque direto e touchpad">Toque direto</button>
+          <button class="action-pill" type="button" id="remoteCopyClip" title="Copiar área de transferência do PC">📋 Copiar do PC</button>
+          <button class="action-pill" type="button" id="remotePasteClip" title="Colar texto do celular no PC">📋 Colar no PC</button>
+          <button class="action-pill" type="button" id="shortcutCtrlC" title="Copiar seleção">Ctrl+C</button>
+          <button class="action-pill" type="button" id="shortcutCtrlV" title="Colar seleção">Ctrl+V</button>
+          <button class="action-pill" type="button" id="shortcutAltTab" title="Alternar janela no PC">Alt+Tab</button>
+          <button class="action-pill" type="button" id="shortcutWin" title="Menu Iniciar do Windows">Win ⊞</button>
           <select id="remoteQuality" class="action-pill" aria-label="Qualidade da transmissão"><option value="auto">Imagem: automática</option><option value="fast">Mais leve</option><option value="sharp">Mais nítida</option></select>
           <button class="action-pill" type="button" id="keyboardButton" aria-controls="remoteKeys" aria-expanded="false"><svg class="icon"><use href="#i-keyboard"/></svg> Teclado</button>
           <button class="action-pill" type="button" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg> Atualizar</button>
@@ -275,6 +284,7 @@
           <button class="action-pill" type="button" id="remoteEnter">Enter</button>
           <button class="action-pill" type="button" id="remoteBackspace" aria-label="Apagar caractere">⌫ Apagar</button>
         </div>
+        <button class="remote-hud-toggle" id="remoteHudToggle" type="button" title="Mostrar/Ocultar controles" aria-label="Alternar controles">⚙</button>
 
         <textarea id="remoteKeys" class="remote-keys" hidden rows="2" maxlength="3200" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="enter" aria-label="Digitar no computador" placeholder="Digite ou cole no PC…"></textarea>
         </div>

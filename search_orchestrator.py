@@ -165,10 +165,43 @@ def _termos(texto: str, minimo: int = 3) -> list:
             if len(t := raw.strip(".,;:-")) >= minimo and t not in _ESTOPO]
 
 
+def _assuntos_naturais(consulta: str) -> list:
+    """Explicit subjects for topical relevance, never answer completeness.
+
+    Unknown numeric/filter scope keeps the original conservative term path.
+    A subordinate "o que não ..." is an unanswered demand, not an exclusion.
+    """
+    import query_intelligence as qi
+    norm = qi.normalized(consulta)
+    if not re.search(r'\b(?:o que (?:e|faz|retorna)|para que serve|diferencas? entre)\b', norm):
+        return []
+    filter_scope = re.sub(r'\bo que nao\b', 'o que', norm)
+    if re.search(r'\b(?:nao|sem|exceto|exclu\w*|ate|abaixo|acima|antes|depois|desde)\b|r\$', filter_scope):
+        return []
+    requirements = qi.answer_requirements(consulta)
+    entities = list(dict.fromkeys(r['entity'] for r in requirements if r.get('entity')))
+    if not entities or not set(re.findall(r'\d+', norm)) <= set(re.findall(r'\d+', ' '.join(entities))):
+        return []
+    remaining = norm
+    for entity in entities:
+        remaining = remaining.replace(qi.normalized(entity), '')
+    remaining = re.sub(r'\b(?:na|no|em)\s+documentacao\s+(?:oficial\s+)?(?:d[eo]\s+.+?\s+)?(?=(?:o que|como|para que)\b|$)', '', remaining)
+    if re.search(r'(?<!de )\b(?:em|no|na|nos|nas)\s+\w+', remaining):
+        # A qualified API may leave an OS, place or other unparsed context
+        # outside its identifier. Do not silently erase that scope.
+        return []
+    groups = [[term for term in _termos(entity) if term not in _GENERICOS_CORRESPONDENCIA]
+              for entity in entities]
+    return groups if all(groups) else []
+
+
 def _termos_correspondencia(consulta: str) -> list:
     """Termos do pedido que provam correspondência (sem genéricos de loja)."""
     import query_intelligence as qi
     request = qi.analyze(consulta)
+    subjects = _assuntos_naturais(consulta) if request['domain'] in ('general', 'documents') else []
+    if subjects:
+        return list(dict.fromkeys(term for group in subjects for term in group))
     params = request["parameters"]
     if request["domain"] in ("air_travel", "bus_travel") and params.get("origin") and params.get("destination"):
         consulta = params["origin"] + " " + params["destination"]
@@ -225,6 +258,12 @@ def _util_para_pedido(a: dict, termos: list, consulta: str = "") -> bool:
         return False
     if a.get("metadata_source") == "academic_provider" and not (a.get("abstract") or "").strip() and not (a.get('open_access') and a.get('pdf_url')):
         return False
+    subjects = _assuntos_naturais(consulta) if request.get('domain') in ('general', 'documents') else []
+    if subjects:
+        # One compared subject can contribute to a partial answer. Operation
+        # words cannot substitute for that subject, and all hard gates above
+        # remain authoritative. Coverage is assessed separately from relevance.
+        return any(all(_tem_termo(term, text) for term in group) for group in subjects)
     if not termos:
         return True
     texto = " ".join(str(a.get(k) or "") for k in ("titulo", "trecho", "curated_topic"))
@@ -1001,7 +1040,8 @@ CODIGO_TEXTO = {
 
 def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
               provedores=None, classes_forcadas=None, orcamento: dict = None,
-              extra_queries=None, historico=None) -> dict:
+              extra_queries=None, historico=None, excluir_urls=None,
+              dominios_permitidos=None) -> dict:
     """Busca orquestrada completa. Nunca levanta por falha de provedor."""
     info = classificar(consulta)
     import query_intelligence
@@ -1059,8 +1099,40 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     if 'python-docs' in nomes:
         nomes = ['python-docs'] + [p for p in nomes if p != 'python-docs']
 
+    excluded = set()
+    for url in excluir_urls or ():
+        try:
+            canonical = canonizar_url(url)
+        except ValueError:
+            continue
+        if canonical:
+            excluded.add(canonical)
+    allowed = tuple(str(host).lower().removeprefix('www.') for host in (dominios_permitidos or ()))
+
+    def scope_query(query):
+        if not allowed:
+            return query
+        return source_priority.site_queries({'primary': allowed, 'domains': allowed}, query, 1)[0]
+
+    consultas = list(dict.fromkeys(scope_query(q) for q in consultas))
+
+    def admit(items):
+        if not excluded and not allowed:
+            return list(items)
+        accepted = []
+        for item in items:
+            try:
+                url = canonizar_url(item.get('url', ''))
+            except ValueError:
+                continue
+            host = _dominio(url)
+            if (url and url not in excluded
+                    and (not allowed or any(host == d or host.endswith('.' + d) for d in allowed))):
+                accepted.append(item)
+        return accepted
+
     t0 = time.monotonic()
-    achados = fontes_preferenciais(consulta) if provedores is None else []
+    achados = admit(fontes_preferenciais(consulta)) if provedores is None else []
     etapas, falhas, vazios = [], [], []
     if priority:
         etapas.append(f"prioridade: {priority.get('label')} "
@@ -1088,13 +1160,15 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 remaining=float(orc['timeout_total'])-(time.monotonic()-t0)
                 rows=sp.buscar_feed_preferencial(feed,consulta,limite=max_resultados,
                                                 timeout=max(.5,min(timeout,remaining))) if remaining>.5 else []
-                achados.extend(rows)
+                achados.extend(admit(rows))
                 usados['publisher-rss']=1
                 etapas.append(f'feed do publicador: {len(rows)} artigos candidatos; leitura ainda necessária')
             except (sp.ErroProvedor, ValueError, OSError) as exc:
                 etapas.append('feed do publicador indisponível; busca nos provedores mantida')
                 falhas.append({'provedor':'publisher-rss','codigo':getattr(exc,'codigo','rede')})
     def remember(items, name, query):
+        discovered = len(items)
+        items = admit(items)
         provenance=query_intelligence.provider_provenance(query,name)
         for item in items:
             item.setdefault('discovery_query', query[:240])
@@ -1104,9 +1178,10 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         achados.extend(items)
         attempt = next((a for a in reversed(tentativas) if a['provedor'] == name and a['consulta'] == query), None)
         if attempt is not None:
-            attempt.update(discovered=len(items), new_urls=sum(canonizar_url(a.get('url', '')) not in before for a in items),
+            attempt.update(discovered=discovered, excluded=discovered-len(items), new_urls=sum(canonizar_url(a.get('url', '')) not in before for a in items),
                            useful_candidates=sum(_util_para_pedido(a, _termos_correspondencia(consulta), consulta) for a in items),
                            evidence_obtained=0, evidence_scope='discovery_only_requires_reading')
+        return items
     consultas_feitas = 0
     provedor_indice = 0
     termos_c = _termos_correspondencia(consulta)
@@ -1133,7 +1208,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
             return False
         q_prov = termos_para_provedor(alt, "tecnico" if info["tecnica"]
                                       and nome in ("stackexchange", "hn") else "")
-        q_prov = query_intelligence.constrain_provider_query(q_prov)
+        q_prov = query_intelligence.constrain_provider_query(scope_query(q_prov))
         restante = float(orc["timeout_total"]) - (time.monotonic() - t0)
         if restante <= 0 or not _tentar(nome, q_prov):
             return False
@@ -1149,7 +1224,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         usados[nome] = usados.get(nome, 0) + 1
         etapas.append(f"{nome} (consulta reformulada '{alt[:40]}'): "
                       f"{len(novos)} resultados")
-        remember(novos, nome, q_prov)
+        novos = remember(novos, nome, q_prov)
         return bool(novos) and any(_util_para_pedido(a, termos_c, consulta) for a in novos)
 
     for i, q in enumerate(consultas):
@@ -1191,7 +1266,11 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                 usados[nome] = usados.get(nome, 0) + 1
                 etapas.append(f"{nome}: {len(achados_novos)} resultados "
                               f"({q[:40]})")
-                remember(achados_novos, nome, consulta_prov)
+                achados_novos = remember(achados_novos, nome, consulta_prov)
+                if not achados_novos and (excluded or allowed):
+                    provedor_indice += 1
+                    tentativa_provedor += 1
+                    continue
                 if achados_novos and all(a.get('content_scope') == 'feed_metadata' for a in achados_novos):
                     etapas.append(f'{nome}: RSS apenas para descoberta; procurando artigos originais')
                     provedor_indice += 1
@@ -1261,6 +1340,8 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
                        key=lambda a:not _util_para_pedido(a,termos_c,consulta))[:2]
         for feed in feeds:
             publisher = urllib.parse.urlsplit(feed.get('publisher_url') or '').hostname or ''
+            if allowed and not any(publisher == d or publisher.endswith('.' + d) for d in allowed):
+                continue
             title = str(feed.get('titulo') or '').strip()
             label = str(feed.get('publicador') or '').strip()
             if label and title.endswith(' - ' + label):
@@ -1365,6 +1446,7 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         "prioridade_fonte": ({**source_priority.describe(priority),
                               "consulta": priority_query} if priority else None),
         "consultas": consultas[:consultas_feitas],
+        "consultas_executadas": consultas_feitas,
         "recuperacao": recuperacao,
         "descartes": descartes[:20],
         "correspondencia": correspondencia,
@@ -1401,7 +1483,7 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
     # max_consultas is the legacy per-round limit. The total is explicit and
     # bounded across the original round plus at most one recovery round.
     max_total = int(orc2.get("max_consultas_total", 2 * int(orc2["max_consultas"])))
-    consultas_restantes = max_total - len(res.get("consultas", []))
+    consultas_restantes = max_total - int(res.get("consultas_executadas", len(res.get("consultas", []))))
     if restante <= 0 or consultas_restantes <= 0:
         res["recuperou"] = False
         res["recuperacao_adiada"] = "orçamento total de tempo/consultas esgotado"
@@ -1409,7 +1491,7 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
     orc2["timeout_total"] = restante
     orc2["max_consultas"] = min(int(orc2["max_consultas"]), consultas_restantes)
     blocked = {f.get("provedor") for f in res.get("provedores", {}).get("falhas", [])
-               if f.get("codigo") in ("bloqueado", "rate_limited")}
+               if f.get("codigo") in ("bloqueado", "rate_limited") or str(f.get('http')) == '429'}
     saudaveis = [p for p in _escolher_provedores(res.get("classes", []), classificar(consulta)) if p not in blocked]
     if not saudaveis:
         res["recuperou"] = False
@@ -1427,6 +1509,7 @@ def pesquisar_com_recuperacao(consulta: str, *, max_resultados: int = 6,
         consulta, res.get("classes", []),
         {"temporal": bool(res.get("temporal"))})
     res["achados"] = merged
+    res['consultas_executadas'] = int(res.get('consultas_executadas', len(res.get('consultas', [])))) + int(extra.get('consultas_executadas', len(extra.get('consultas', []))))
     res["consultas"] = list(dict.fromkeys(res.get("consultas", []) + extra.get("consultas", [])))
     res["tentativas_busca"] = extra.get("tentativas_busca", res.get("tentativas_busca", []))
     original_p, extra_p = res.get("provedores", {}), extra.get("provedores", {})

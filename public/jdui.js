@@ -2018,25 +2018,81 @@
   };
 
   R.compare = function (root, props) {
-    const box = el('div', 'jdui-quiz');
-    if (props.title) box.appendChild(el('div', 'jdui-title', props.title));
+    const box = el('div', 'jdui-comparison-matrix jdui-quiz');
+    const headerRow = el('div', 'jdui-matrix-header');
+    if (props.title) headerRow.appendChild(el('div', 'jdui-matrix-title', props.title));
+    
+    // Perplexity Filter: Alternar entre tudo e apenas diferencas
+    let onlyDiffs = false;
+    const filterBtn = el('button', 'jdui-matrix-filter-btn', 'Ver apenas diferencas');
+    filterBtn.type = 'button';
+    headerRow.appendChild(filterBtn);
+    box.appendChild(headerRow);
+
     const holder = el('div', 'jdui-chart');
     const t = document.createElement('table');
-    t.className = 'jdui-cmp';
+    t.className = 'jdui-matrix-grid jdui-cmp';
     const head = document.createElement('tr');
-    head.appendChild(el('th', '', ''));
-    props.columns.forEach(c => head.appendChild(el('th', '', c)));
+    head.appendChild(el('th', '', 'Criterio / Especificacao'));
+    
+    const winsA = props.rows.filter(r => r.melhor === 'a').length;
+    const winsB = props.rows.filter(r => r.melhor === 'b').length;
+    
+    props.columns.forEach((c, idx) => {
+      const th = el('th', '', '');
+      th.appendChild(el('div', '', c));
+      if (idx === 0 && winsA > winsB) {
+        th.appendChild(el('span', 'jdui-matrix-badge winner', '🏆 Vencedor'));
+      } else if (idx === 1 && winsB > winsA) {
+        th.appendChild(el('span', 'jdui-matrix-badge winner', '🏆 Vencedor'));
+      }
+      head.appendChild(th);
+    });
     t.appendChild(head);
+    
+    const rowEls = [];
     props.rows.forEach(r => {
       const tr = document.createElement('tr');
       tr.appendChild(el('th', '', r.label));
-      const ca = el('td', r.melhor === 'a' ? 'win' : '', r.a || '—');
-      const cb = el('td', r.melhor === 'b' ? 'win' : '', r.b || '—');
+      
+      const formatCell = (val, isWin) => {
+        const td = el('td', isWin ? 'win' : '', '');
+        const str = String(val || '-');
+        if (str.includes('+ ') || str.includes('- ')) {
+          str.split('\n').forEach(line => {
+            const trimmed = line.trim();
+            if (trimmed.startsWith('+')) td.appendChild(el('div', 'jdui-matrix-pro', '✓ ' + trimmed.slice(1).trim()));
+            else if (trimmed.startsWith('-')) td.appendChild(el('div', 'jdui-matrix-con', '✕ ' + trimmed.slice(1).trim()));
+            else td.appendChild(el('div', '', trimmed));
+          });
+        } else {
+          td.textContent = str;
+        }
+        return td;
+      };
+      
+      const ca = formatCell(r.a, r.melhor === 'a');
+      const cb = formatCell(r.b, r.melhor === 'b');
       if (r.melhor === 'a') ca.setAttribute('aria-label', r.a + ' (destaque)');
       if (r.melhor === 'b') cb.setAttribute('aria-label', r.b + ' (destaque)');
       tr.appendChild(ca); tr.appendChild(cb);
+      
+      const isDiff = (r.melhor === 'a' || r.melhor === 'b' || r.a !== r.b);
+      tr.dataset.isDiff = String(isDiff);
       t.appendChild(tr);
+      rowEls.push({ tr, isDiff });
     });
+    
+    filterBtn.addEventListener('click', () => {
+      onlyDiffs = !onlyDiffs;
+      filterBtn.classList.toggle('active', onlyDiffs);
+      filterBtn.textContent = onlyDiffs ? 'Mostrar todas as linhas' : 'Ver apenas diferencas';
+      rowEls.forEach(item => {
+        if (onlyDiffs && !item.isDiff) item.tr.style.display = 'none';
+        else item.tr.style.display = '';
+      });
+    });
+
     holder.appendChild(t);
     box.appendChild(holder);
     renderProvenance(box, props.sources);
