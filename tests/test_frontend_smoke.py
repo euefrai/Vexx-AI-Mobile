@@ -94,7 +94,7 @@ t('table-empty-cell', renderMarkdown('| a | b | c |\n|---|---|---|\n| 1 | | 3 |'
 t('code-emphasis-literal', renderMarkdown('`**literal**`').includes('<code>**literal**</code>'));
 t('no-fake-image', !renderMarkdown('![teste](https://example.com/a.png)').includes('picsum'));
 const sources = renderMarkdown('Afirmação [S1]. Sem fonte [S2].\n\n## Fontes\n- [S1] [Documento](https://example.com/prova)');
-t('real-citation', sources.includes('class="citation" href="https://example.com/prova"') && sources.includes('Sem fonte [S2]'));
+t('real-citation', sources.includes('class="citation-pill" data-url="https://example.com/prova"') && sources.includes('Sem fonte [S2]'));
 t('source-url-not-markdown', !sources.includes('href="https://example.com/prova)'));
 t('heading-levels', renderMarkdown('# Título\n## Seção\n### Detalhe').includes('<h2>Título</h2><h3>Seção</h3><h4>Detalhe</h4>'));
 t('responsive-table-wrapper', renderMarkdown('| a | b |\n|---|---|\n| 1 | 2 |').includes('<div class="table-wrap"><table>'));

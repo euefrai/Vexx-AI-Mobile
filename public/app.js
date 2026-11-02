@@ -3417,7 +3417,7 @@ function showCitationPopover(targetEl, url, num) {
   pop.className = 'citation-popover';
   const label = rotuloUrl ? rotuloUrl(url) : domain;
   pop.innerHTML = '<div class="citation-popover-head">' +
-    '<img src="https://www.google.com/s2/favicons?domain=' + encodeURIComponent(domain) + '&sz=32" alt="" width="16" height="16" onerror="this.style.display=\'none\'" />' +
+    '<img src="https://www.google.com/s2/favicons?domain=' + encodeURIComponent(domain) + '&sz=32" alt="" width="16" height="16" />' +
     '<span class="citation-popover-domain">' + esc(domain) + '</span>' +
     '<span style="margin-left:auto;font-size:10px;opacity:0.6">[' + esc(num) + ']</span>' +
     '</div>' +

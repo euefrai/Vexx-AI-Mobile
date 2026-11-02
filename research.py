@@ -1109,7 +1109,15 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
                          and not any(r['constraints']['must_preserve'] for r in coverage['requirements'])
                          and (fonte['vertical']['eligible'] if fonte['vertical']['kind'] in
                               ('news','events','air_travel','bus_travel','documents') else True))
-        fonte['relevante'] = (fonte['relevante'] or safe_relation) and bool(passages)
+        # Pertinent read text can contribute without proving an extracted facet.
+        # Require the subject in the body itself; title/snippet alone is no proof.
+        body_evidence = {**evidence, 'titulo': '', 'trecho': texto, 'curated_topic': ''}
+        facets = {r['attribute'] for r in coverage['requirements'] if r.get('type') == 'explicit_attribute'}
+        topical_read = (bool(facets) and facets <= {'definition', 'behavior'}
+                        and lida and fonte['relevante'] and bool(texto.strip())
+                        and rec.get('content_scope') not in ('metadata_only', 'feed_metadata', 'navigation')
+                        and orch._util_para_pedido(body_evidence, orch._termos_correspondencia(consulta), consulta))
+        fonte['relevante'] = ((fonte['relevante'] or safe_relation) and bool(passages)) or bool(topical_read)
         if passages:
             fonte['trecho'] = melhor_trecho(passages[0]['text'], '', 600)
             fonte['texto_lido'] = passages[0]['text']
@@ -1339,7 +1347,7 @@ def _descobrir_apos_leitura(pedido, info, orcamento, timeout, started, excluir_u
     import source_priority
     trace = {'executed': False, 'reason': 'budget_exhausted', 'origin': 'post_read',
              'new_candidates': 0, 'seconds': 0.0, 'allowed_domains': []}
-    if 'tentativas_busca' not in info:
+    if not info.get('tentativas_busca'):
         trace['reason'] = 'discovery_history_unavailable'
         return [], info, trace
     budget = dict(ORCAMENTO_RAPIDA)
