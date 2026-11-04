@@ -1178,11 +1178,26 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         tentativas.append({"provedor": nome, "consulta": q})
         return True
     usados = {}
+    rest_rows = []
+    if priority and priority.get('kind') == 'news' and priority.get('id') == 'ubata_news':
+        import publisher_reader
+        if publisher_reader.enabled() and max_tentativas > 1 and _tentar('publisher-rest', publisher_reader.ENDPOINT):
+            try:
+                remaining = float(orc['timeout_total']) - (time.monotonic() - t0)
+                rest_rows = admit(publisher_reader.discover(consulta, max_resultados,
+                    timeout=min(3.0, remaining))) if remaining > .5 else []
+                achados.extend(rest_rows)
+                usados['publisher-rest'] = 1
+                etapas.append(f'API do publicador: {len(rest_rows)} artigos candidatos; leitura ainda necessária')
+            except (ValueError, OSError) as exc:
+                falhas.append({'provedor': 'publisher-rest', 'codigo': getattr(exc, 'codigo', 'rede')})
+                etapas.append('API do publicador indisponível; outros canais mantidos')
     if priority and priority.get('kind')=='news' and priority.get('feeds'):
         import os
         enabled=os.environ.get('JULIA_PREFERRED_NEWS_FEEDS','1').lower() not in ('0','false','off')
         feed=priority['feeds'][0]
-        if enabled and _tentar('publisher-rss',feed):
+        reserve_general = any(t['provedor']=='publisher-rest' for t in tentativas) and len(tentativas)>=max_tentativas-1
+        if enabled and not rest_rows and not reserve_general and _tentar('publisher-rss',feed):
             try:
                 remaining=float(orc['timeout_total'])-(time.monotonic()-t0)
                 rows=sp.buscar_feed_preferencial(feed,consulta,limite=max_resultados,
@@ -1218,8 +1233,8 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     # geral, que é o fallback honesto quando a fonte preferida falha.
     limite_prioridade = (max(1, max_tentativas - max(1, len(consultas) - 1))
                          if priority_query else None)
-    if limite_prioridade is not None and any(t['provedor']=='publisher-rss' for t in tentativas):
-        limite_prioridade=max(0,limite_prioridade-1)
+    if limite_prioridade is not None:
+        limite_prioridade=max(0,limite_prioridade-sum(t['provedor'] in ('publisher-rss','publisher-rest') for t in tentativas))
 
     def _uteis() -> int:
         return sum(1 for a in achados if a.get('content_scope') != 'feed_metadata' and _util_para_pedido(a, termos_c, consulta))

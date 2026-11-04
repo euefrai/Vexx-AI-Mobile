@@ -2,7 +2,9 @@
 
 Data: 04/11/2026. Escopo desta rodada: publicar as correções de leitura já
 validadas, pesquisar documentação e preparar os próximos passos. As mudanças
-de arquitetura abaixo são propostas; não foram implementadas nesta rodada.
+de arquitetura abaixo descrevem o plano original. Os incrementos 1 e 2 foram
+implementados depois, localmente, em `RELATORIO_ACESSO_PESQUISA.md`, com resultados
+reais e limitações explícitas. Os demais incrementos continuam pendentes.
 
 ## Conclusão
 

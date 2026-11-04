@@ -1,0 +1,93 @@
+{
+  "date": "2026-11-04T19:54:48.604816+00:00",
+  "scope": "real public network; common/deep reading and SQLite; no model synthesis or production UI",
+  "cases": [
+    {
+      "query": "Notícias de hoje de Ubatã e região",
+      "candidates": [
+        {
+          "url": "https://ubatanoticias.com.br/ibirataia-agricultura-itinerante-reune-produtores-rurais-da-regiao-da-ingazeira-em-parceria-com-o-banco-do-nordeste/",
+          "titulo": "Ibirataia: Agricultura Itinerante reúne produtores rurais da região da Ingazeira em parceria com o Banco do Nordeste",
+          "publicado_em": "2026-11-04T18:33:59Z"
+        }
+      ],
+      "common": {
+        "read": true,
+        "relevant": true,
+        "url": "https://ubatanoticias.com.br/ibirataia-agricultura-itinerante-reune-produtores-rurais-da-regiao-da-ingazeira-em-parceria-com-o-banco-do-nordeste/",
+        "extractor": "publisher_rest"
+      },
+      "deep": {
+        "read_evidence": 1,
+        "persisted": 1,
+        "scopes": [
+          "publisher_article"
+        ]
+      },
+      "seconds": 3.66
+    },
+    {
+      "query": "Notícias da semana de Ubatã e região",
+      "candidates": [
+        {
+          "url": "https://ubatanoticias.com.br/ibirataia-agricultura-itinerante-reune-produtores-rurais-da-regiao-da-ingazeira-em-parceria-com-o-banco-do-nordeste/",
+          "titulo": "Ibirataia: Agricultura Itinerante reúne produtores rurais da região da Ingazeira em parceria com o Banco do Nordeste",
+          "publicado_em": "2026-11-04T18:33:59Z"
+        },
+        {
+          "url": "https://ubatanoticias.com.br/ubata-tera-quatro-feriados-ate-o-fim-de-2026-confira-as-datas/",
+          "titulo": "Ubatã terá quatro feriados até o fim de 2026; confira as datas",
+          "publicado_em": "2026-11-03T22:02:55Z"
+        },
+        {
+          "url": "https://ubatanoticias.com.br/ibirataia-prefeitura-intensifica-acoes-de-manutencao-e-melhorias-em-diferentes-pontos-do-municipio/",
+          "titulo": "Ibirataia: Prefeitura intensifica ações de manutenção e melhorias em diferentes pontos do município",
+          "publicado_em": "2026-11-03T21:25:23Z"
+        }
+      ],
+      "common": {
+        "read": true,
+        "relevant": true,
+        "url": "https://ubatanoticias.com.br/ibirataia-agricultura-itinerante-reune-produtores-rurais-da-regiao-da-ingazeira-em-parceria-com-o-banco-do-nordeste/",
+        "extractor": "publisher_rest"
+      },
+      "deep": {
+        "read_evidence": 1,
+        "persisted": 1,
+        "scopes": [
+          "publisher_article"
+        ]
+      },
+      "seconds": 3.66
+    },
+    {
+      "query": "Notícias sobre educação em Ubatã",
+      "candidates": [
+        {
+          "url": "https://ubatanoticias.com.br/ubata-prefeitura-nomeia-novos-membros-do-conselho-municipal-dos-direitos-da-crianca-e-do-adolescente/",
+          "titulo": "Ubatã: Prefeitura nomeia novos membros do Conselho Municipal dos Direitos da Criança e do Adolescente",
+          "publicado_em": "2026-10-23T13:02:09Z"
+        },
+        {
+          "url": "https://ubatanoticias.com.br/ubata-ja-movimenta-o-tabuleiro-da-sucessao-municipal/",
+          "titulo": "Ubatã já movimenta o tabuleiro da sucessão municipal",
+          "publicado_em": "2026-10-20T21:00:55Z"
+        }
+      ],
+      "common": {
+        "read": true,
+        "relevant": true,
+        "url": "https://ubatanoticias.com.br/ubata-prefeitura-nomeia-novos-membros-do-conselho-municipal-dos-direitos-da-crianca-e-do-adolescente/",
+        "extractor": "publisher_rest"
+      },
+      "deep": {
+        "read_evidence": 1,
+        "persisted": 1,
+        "scopes": [
+          "publisher_article"
+        ]
+      },
+      "seconds": 3.66
+    }
+  ]
+}

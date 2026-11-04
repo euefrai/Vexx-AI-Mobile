@@ -1136,9 +1136,16 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             return {**rec, "midia": [], "texto_lido": bool(rec.get("lida")),
                     "access_state": "read" if rec.get("lida") else "snippet_only"}
         try:
+            import publisher_reader
+            started = time.monotonic()
+            published = publisher_reader.read(a['url'], job['objetivo'],
+                                               timeout=min(3.0, limite_tempo), cancelled=parar)
+            if published:
+                return published
+            limite_tempo = max(0.001, limite_tempo - (time.monotonic() - started))
             import public_store_reader
             final, pagina = public_store_reader.fetch(
-                a["url"], timeout=limite_tempo,
+                a["url"], timeout=limite_tempo, cancelar=parar,
                 max_bytes=max(65_536, int(job["orcamento"].get(
                     "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
         except TypeError:
@@ -1373,7 +1380,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         return reutilizadas
     job["usados"]["paginas"] = job["usados"].get("paginas", 0) + len(alvos)
     baixados: dict = dict(cached_pages)
-    def read_trace(source, state, rec=None, code='', coverage=None):
+    def read_trace(source, state, rec=None, code='', coverage=None, access=None):
         rec=rec or {}
         reason = {'extracted': 'CONTENT_EXTRACTED', 'no_readable_content': 'CONTENT_EMPTY',
                   'relevance_rejected': 'RELEVANCE_REJECTED', 'topic_only': 'PASSAGE_NOT_FOUND',
@@ -1385,7 +1392,10 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             reason = 'REDIRECT_INVALID'
         elif state == 'reader_failed' and code == 'TimeoutError':
             reason = 'FETCH_TIMEOUT'
-        retrieval_trace.record(job['id'], etapa.get('id', ''), source, reason, rec=rec, coverage=coverage, reason_code=str(code).upper())
+        access_reason = getattr(access, 'access_reason', '')
+        retrieval_trace.record(job['id'], etapa.get('id', ''), source, reason, rec=rec, coverage=coverage,
+                               http_status=getattr(access, 'http', None),
+                               reason_code=str(access_reason or code).upper())
         if state in ('relevance_rejected', 'no_readable_content', 'reader_failed', 'fetch_failed'):
             detalhe = str(code or reason).upper()
             _registrar_rejeicao(source, detalhe, reason)
@@ -1396,6 +1406,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         emit_meta={'url':_url_publica(source.get('url')), 'final_url':_url_publica(rec.get('final')),
             'source_state': transitions.get(state, 'DISCOVERED'),
             'stage':state,'code':str(code)[:60], 'scope':rec.get('content_scope',''),
+            'access_reason':str(access_reason)[:60], 'http_status':getattr(access, 'http', None),
             'extracted_chars':len(rec.get('texto') or ''), 'read':bool(rec.get('texto_lido')),
             'published_at':(rec.get('metadados') or {}).get('publicado_em') or source.get('publicado_em') or (source.get('meta') or {}).get('publicado_em',''),
             'excerpt':str(rec.get('trecho_usado') or rec.get('texto') or '')[:400]}
@@ -1466,7 +1477,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                             _registrar_falha(a, exc.codigo)
                         emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
                                f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
-                        read_trace(a,'fetch_failed',code=exc.codigo)
+                        read_trace(a,'fetch_failed',code=exc.codigo,access=exc)
                         if exc.codigo == 'bloqueado':
                             # Keep every candidate and the same budget, but prefer
                             # an independent host after a refusal from this one.

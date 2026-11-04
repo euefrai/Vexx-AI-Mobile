@@ -1,0 +1,68 @@
+{
+  "estado": "sem_correspondencia",
+  "estado_texto": "houve resultados, mas nenhum responde ao pedido",
+  "etapas": [
+    "busca: 12 resultados",
+    "página ignorada (bloqueado): https://www.zhihu.com/question/1903231775980913051",
+    "prioridade: Ubatã Notícias (ubatanoticias.com.br)",
+    "API do publicador: 0 artigos candidatos; leitura ainda necessária",
+    "feed do publicador: 0 artigos candidatos; leitura ainda necessária",
+    "bing: 6 resultados (\"Ubatã e região e mostre as fontes\" notí)",
+    "bing: sem correspondência com o pedido; tentando outro provedor (\"Ubatã e região e mostre as fontes\" notí)",
+    "google-news: sem resultados (\"Ubatã e região e mostre as fontes\" notí)",
+    "bing-news: sem resultados (\"Ubatã e região e mostre as fontes\" notí)",
+    "prioridade sem resultado utilizável; retomando a busca geral",
+    "bing: 6 resultados (\"Ubatã e região e mostre as fontes\" notí)",
+    "bing: sem correspondência com o pedido; tentando outro provedor (\"Ubatã e região e mostre as fontes\" notí)",
+    "— recuperação por lacuna —",
+    "recuperação sem ganho novo: nenhum domínio/tema além da 1ª rodada",
+    "3 fontes, 3 lidas"
+  ],
+  "provedores": {
+    "usados": {
+      "publisher-rest": 1,
+      "publisher-rss": 1,
+      "bing": 2
+    },
+    "falhas": [],
+    "vazios": [
+      "google-news",
+      "bing-news"
+    ],
+    "consultados": [
+      "publisher-rest",
+      "publisher-rss",
+      "bing",
+      "google-news",
+      "bing-news"
+    ]
+  },
+  "consultas": [
+    "\"Ubatã e região e mostre as fontes\" notícias site:ubatanoticias.com.br",
+    "\"Ubatã e região e mostre as fontes\" notícias",
+    "ubatã região \"Ubatã e região e mostre as fontes\""
+  ],
+  "lacunas": [
+    "nenhuma fonte utilizável"
+  ],
+  "sources": [
+    {
+      "url": "https://support.google.com/youtubetv/?hl=en",
+      "status": "aberta",
+      "relevante": false,
+      "extrator": "deterministico"
+    },
+    {
+      "url": "https://support.google.com/youtube/answer/1646861?hl=th",
+      "status": "aberta",
+      "relevante": false,
+      "extrator": "deterministico"
+    },
+    {
+      "url": "https://forum.vivaldi.net/topic/78815/whatsapp-web-on-web-panel-became-extremely-slow?page=4",
+      "status": "aberta",
+      "relevante": false,
+      "extrator": "deterministico"
+    }
+  ]
+}

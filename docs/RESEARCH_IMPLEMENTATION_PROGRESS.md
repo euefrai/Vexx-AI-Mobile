@@ -512,3 +512,31 @@ primeiro separar erros e coordenar requisições por origem; depois aproveitar
 o canal WordPress. Firecrawl anônimo atual não atende ao contrato de autenticação
 documentado. Nenhuma nova integração paga foi ativada; o PC Agent não foi
 reiniciado. Próxima implementação de acesso e nova validação da síntese pendentes.
+
+## Coordenação por origem e leitura de notícias — 04/11/2026
+
+Implementados localmente `read_access.py` e `publisher_reader.py`: limites por
+origem, junção de downloads simultâneos, motivo HTTP específico, Retry-After,
+cancelamento em fila e REST pública de Ubatã. Redirects coordenados no destino;
+SSRF/isolamento preservados. Corrigidos achados reais: crédito “Ubatã Notícias”
+tratado como local e “mostre as fontes” absorvido pelo nome da cidade.
+
+Interface comum: pergunta antes sem fontes agora tem artigo regional lido,
+card persistido e clique abrindo o artigo exato. Profunda: seis fontes lidas,
+nove evidências, mas redação bloqueada por cota DeepSeek; fallback sem cards
+de fonte nesta resposta. Não marcar a síntese/experiência profunda como aprovada.
+Reload, console após login e overflow 390 px verificados nos dois casos.
+Laboratório privado encerrado com validação de identidade e operações zeradas;
+produção preservada. Dados/limitações em `RELATORIO_ACESSO_PESQUISA.md`.
+
+Fechamento: suíte completa isolada sem WIP alheio, 2.697 aprovados, 4 pulados,
+2 avisos; exit 0 em 452,02 s. Log: `qa-artifacts/origin-access-final-isolated-suite.log`.
+Uma execução isolada intermediária foi interrompida para incluir a regressão
+final de preservação de parágrafos; não conta como aprovação. O workspace havia
+passado com 2.720 testes antes dos dois ajustes finais. Não somar os conjuntos.
+Hashes do código/testes conferidos com a exportação final; diff-check passou.
+
+Próximo passo exato: implementar cache público com revalidação e testar síntese
+com modelo operacional; conferir os cards do fallback profundo antes de aprovar C.
+Somente uma linha nova em `tests/conftest.py` pertence a esta etapa; preservar
+as demais alterações preexistentes nesse arquivo. Ainda sem novo push desta rodada.

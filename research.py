@@ -205,90 +205,146 @@ def _tipo_aceito(ctype: str, aceitar: str) -> bool:
 
 
 def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
-           abrir=None, aceitar: str = "html", user_agent: str = "") -> tuple:
+           abrir=None, aceitar: str = "html", user_agent: str = "", cancelar=None) -> tuple:
     """Baixa com redirects revalidados (≤3), teto de tamanho e só texto.
 
     `aceitar`: "html" (texto+JSON, padrão), "json", "feed" (RSS/Atom) ou
     "texto" (qualquer text/*). O tipo pedido é sempre validado; nada além
     do declarado passa — e nunca se contorna bloqueio/CAPTCHA.
     """
+    import math
+    import read_access
     import retrieval_trace
-    abrir = abrir or _abrir
+    if not isinstance(timeout, (int, float)) or not math.isfinite(timeout) or timeout <= 0:
+        raise ResearchErro('Orçamento de leitura esgotado.', 'rede')
+    transport = abrir or _abrir
+    deadline = time.monotonic() + timeout
     atual = url_segura(url)
     for _ in range(MAX_REDIRECTS + 1):
-        retrieval_trace.transport(atual, 'FETCH_STARTED')
         try:
+            return read_access.public_reads.run(atual, (max_bytes, aceitar, user_agent),
+                deadline - time.monotonic(),
+                lambda remaining: _baixar_resposta(atual, remaining, max_bytes, transport, aceitar, user_agent),
+                namespace=transport, cancelled=cancelar)
+        except _ReadRedirect as exc:
             try:
-                resp = abrir(atual, timeout, user_agent)
-            except TypeError:
-                resp = abrir(atual, timeout)  # assinatura antiga (testes/fixtures)
-        except urllib.error.HTTPError as exc:
-            retrieval_trace.transport(atual, 'HTTP_RESPONSE', status=exc.code)
-            if exc.code in (301, 302, 303, 307, 308):
-                loc = exc.headers.get("Location", "")
-                if not loc:
-                    raise ResearchErro("Redirect sem destino.", "redirect")
-                try:
-                    atual = url_segura(urllib.parse.urljoin(atual, loc))
-                except ResearchErro:
-                    retrieval_trace.transport(atual, 'REDIRECT_INVALID', status=exc.code)
-                    raise
-                retrieval_trace.transport(atual, 'REDIRECT_VALIDATED', status=exc.code)
-                continue
-            if exc.code in (401, 403, 429):
-                err = ResearchErro(f"Provedor bloqueou ({exc.code}).", "bloqueado")
-                err.http = exc.code
-                raise err from None
-            raise ResearchErro(f"Página HTTP {exc.code}.", "http")
-        except (OSError, TimeoutError, ValueError) as exc:
-            retrieval_trace.transport(atual, 'FETCH_TIMEOUT' if isinstance(exc, TimeoutError) else 'FETCH_FAILED')
-            raise ResearchErro(f"Falha de rede ({type(exc).__name__}).", "rede") from None
-        with resp:
-            retrieval_trace.transport(atual, 'HTTP_RESPONSE', status=getattr(resp,'status',None))
-            if getattr(resp, "status", 200) >= 400:
-                if resp.status in (401, 403, 429):
-                    err = ResearchErro(f"Provedor bloqueou ({resp.status}).", "bloqueado")
-                    err.http = resp.status
-                    raise err
-                raise ResearchErro(f"Página HTTP {resp.status}.", "http")
-            ctype = (resp.headers.get_content_type() if hasattr(resp.headers, "get_content_type")
-                     else str(resp.headers.get("Content-Type", "")).split(";")[0]).lower()
-            if not _tipo_aceito(ctype, aceitar):
-                raise ResearchErro(f"Conteúdo não textual ({ctype}).", "tipo_bloqueado")
-            try:
-                total = int(resp.headers.get("Content-Length") or 0)
-            except (TypeError, ValueError):
-                total = 0
-            if total > max_bytes:
-                raise ResearchErro("Documento grande demais.", "tamanho")
-            raw = resp.read(max_bytes + 1)
-            retrieval_trace.transport(atual, 'BODY_RECEIVED', status=getattr(resp,'status',None),
-                                      byte_count=len(raw), content_type=ctype)
-            if len(raw) > max_bytes:
-                raise ResearchErro("Documento grande demais.", "tamanho")
-            # Some official RSS feeds return gzip even for Accept-Encoding: identity.
-            # Bound the decoded payload too, rather than expanding a compressed bomb.
-            encoding = str(resp.headers.get('Content-Encoding', '')).lower().strip()
-            if encoding == 'gzip':
-                import gzip
-                import io
-                import zlib
-                try:
-                    with gzip.GzipFile(fileobj=io.BytesIO(raw)) as compressed:
-                        raw = compressed.read(max_bytes + 1)
-                except (OSError, EOFError, zlib.error) as exc:
-                    raise ResearchErro('Resposta gzip inválida.', 'formato') from exc
-                if len(raw)>max_bytes:
-                    raise ResearchErro('Documento descompactado grande demais.', 'tamanho')
-            elif encoding not in ('', 'identity'):
-                raise ResearchErro('Compressão de resposta não suportada.', 'formato')
-            charset = "utf-8"
-            try:
-                charset = resp.headers.get_content_charset() or "utf-8"
-            except Exception:
-                pass
-            return atual, raw.decode(charset, errors="ignore")
+                atual = url_segura(urllib.parse.urljoin(atual, exc.location))
+            except ResearchErro:
+                retrieval_trace.transport(atual, 'REDIRECT_INVALID', status=exc.http)
+                raise
+            retrieval_trace.transport(atual, 'REDIRECT_VALIDATED', status=exc.http)
+        except read_access.Deferred as exc:
+            error = ResearchErro(str(exc), exc.codigo)
+            error.http, error.access_reason, error.retry_after = exc.http, exc.access_reason, exc.retry_after
+            retrieval_trace.transport(atual, 'ACCESS_DEFERRED', status=exc.http,
+                                      reason_code=exc.access_reason.upper())
+            raise error from None
+        except ResearchErro as exc:
+            retrieval_trace.transport(atual, 'ACCESS_FAILED', status=getattr(exc, 'http', None),
+                                      reason_code=getattr(exc, 'access_reason', '').upper())
+            raise
     raise ResearchErro("Redirects demais.", "redirect")
+
+
+class _ReadRedirect(ResearchErro):
+    def __init__(self, status, location):
+        super().__init__('Redirect de leitura.', 'redirect')
+        self.http, self.location = status, location
+
+    def __reduce__(self):
+        return type(self), (self.http, self.location)
+
+
+def _http_read_error(status, headers):
+    import read_access
+    error = ResearchErro(f'Página HTTP {status}.', 'bloqueado' if status in (401, 403, 429) else 'http')
+    error.http = status
+    error.access_reason = {401: 'authentication_required', 403: 'access_denied',
+                           404: 'not_found', 429: 'rate_limited',
+                           503: 'service_unavailable'}.get(status, 'http_error')
+    error.retry_after = read_access.retry_after(headers)
+    return error
+
+
+def _baixar_resposta(url, timeout, max_bytes, abrir, aceitar, user_agent):
+    """One bounded hop; redirects re-enter the coordinator for their own origin."""
+    import retrieval_trace
+    retrieval_trace.transport(url, 'FETCH_STARTED')
+    try:
+        try:
+            resp = abrir(url, timeout, user_agent)
+        except TypeError:
+            resp = abrir(url, timeout)
+    except urllib.error.HTTPError as exc:
+        retrieval_trace.transport(url, 'HTTP_RESPONSE', status=exc.code)
+        try:
+            if exc.code in (301, 302, 303, 307, 308):
+                location = exc.headers.get('Location', '')
+                if not location:
+                    raise ResearchErro('Redirect sem destino.', 'redirect')
+                raise _ReadRedirect(exc.code, location)
+            raise _http_read_error(exc.code, exc.headers)
+        finally:
+            exc.close()
+    except ResearchErro:
+        raise
+    except (OSError, ValueError, http.client.HTTPException) as exc:
+        error = ResearchErro(f'Falha de rede ({type(exc).__name__}).', 'rede')
+        error.access_reason = 'fetch_timeout' if isinstance(exc, TimeoutError) or isinstance(getattr(exc, 'reason', None), TimeoutError) else 'network_error'
+        raise error from None
+    with resp:
+        status = getattr(resp, 'status', 200)
+        retrieval_trace.transport(url, 'HTTP_RESPONSE', status=status)
+        if status in (301, 302, 303, 307, 308):
+            location = resp.headers.get('Location', '')
+            if not location:
+                raise ResearchErro('Redirect sem destino.', 'redirect')
+            raise _ReadRedirect(status, location)
+        if status >= 400:
+            raise _http_read_error(status, resp.headers)
+        ctype = (resp.headers.get_content_type() if hasattr(resp.headers, 'get_content_type')
+                 else str(resp.headers.get('Content-Type', '')).split(';')[0]).lower()
+        if not _tipo_aceito(ctype, aceitar):
+            raise ResearchErro(f'Conteúdo não textual ({ctype}).', 'tipo_bloqueado')
+        try:
+            total = int(resp.headers.get('Content-Length') or 0)
+        except (TypeError, ValueError):
+            total = 0
+        if total > max_bytes:
+            raise ResearchErro('Documento grande demais.', 'tamanho')
+        try:
+            raw = resp.read(max_bytes + 1)
+        except (OSError, http.client.HTTPException) as exc:
+            error = ResearchErro(f'Falha de rede ({type(exc).__name__}).', 'rede')
+            error.access_reason = 'fetch_timeout' if isinstance(exc, TimeoutError) else 'network_error'
+            raise error from None
+        retrieval_trace.transport(url, 'BODY_RECEIVED', status=status, byte_count=len(raw), content_type=ctype)
+        if len(raw) > max_bytes:
+            raise ResearchErro('Documento grande demais.', 'tamanho')
+        encoding = str(resp.headers.get('Content-Encoding', '')).lower().strip()
+        if encoding == 'gzip':
+            import gzip
+            import io
+            import zlib
+            try:
+                with gzip.GzipFile(fileobj=io.BytesIO(raw)) as compressed:
+                    raw = compressed.read(max_bytes + 1)
+            except (OSError, EOFError, zlib.error) as exc:
+                raise ResearchErro('Resposta gzip inválida.', 'formato') from exc
+            if len(raw) > max_bytes:
+                raise ResearchErro('Documento descompactado grande demais.', 'tamanho')
+        elif encoding not in ('', 'identity'):
+            raise ResearchErro('Compressão de resposta não suportada.', 'formato')
+        try:
+            charset = resp.headers.get_content_charset() or 'utf-8'
+        except Exception:
+            charset = 'utf-8'
+        page = raw.decode(charset, errors='ignore')
+        if 'html' in ctype and pagina_bloqueada(page):
+            error = ResearchErro('Página apresentou desafio de acesso.', 'bloqueado')
+            error.access_reason = 'challenge_required'
+            raise error
+        return url, page
 
 
 class _TextoHTML(HTMLParser):
@@ -1004,6 +1060,13 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
         rec = dict(rec or {})
         rec.setdefault("lida", bool((rec.get("texto") or "").strip()))
     else:
+        import publisher_reader
+        started = time.monotonic()
+        published = publisher_reader.read(a['url'], consulta or a.get('titulo', ''),
+                                           timeout=min(3.0, timeout_pagina))
+        if published:
+            return published
+        timeout_pagina = max(0.001, timeout_pagina - (time.monotonic() - started))
         import public_store_reader
         final, pagina = public_store_reader.fetch(a["url"], timeout=timeout_pagina)
         if pagina_bloqueada(pagina):
@@ -1541,7 +1604,8 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
                 read_outcomes[a['url']]={'chars':len(rec.get('texto') or ''),'final':str(rec.get('final') or a['url'])[:500]}
                 midia.extend((recs[a['url']] or {}).get('midia') or [])
             except ResearchErro as exc:
-                read_outcomes[a['url']]={'error':exc.codigo}
+                read_outcomes[a['url']]={'error':exc.codigo, 'access_reason':getattr(exc,'access_reason',''),
+                                         'http_status':getattr(exc,'http',None)}
                 etapas.append(f"página ignorada ({exc.codigo}): {a['url'][:60]}")
             except Exception as exc:
                 read_outcomes[a['url']]={'error':type(exc).__name__}
@@ -1627,7 +1691,9 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
                 midia.extend(rec.get('midia') or [])
                 if a.get('_navigation_parent'): etapas.append('FOLLOW_LINK: '+a['url'][:180])
             except Exception as exc:
-                read_outcomes[a['url']]={'error':getattr(exc,'codigo',type(exc).__name__)}
+                read_outcomes[a['url']]={'error':getattr(exc,'codigo',type(exc).__name__),
+                                         'access_reason':getattr(exc,'access_reason',''),
+                                         'http_status':getattr(exc,'http',None)}
     normalized=[]
     for a in achados:
         rec = recs.get(a["url"])

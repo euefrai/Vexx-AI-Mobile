@@ -97,13 +97,16 @@ def render(url, timeout, max_bytes):
         _slots.release()
 
 
-def fetch(url, *, timeout=6.0, max_bytes=None):
+def fetch(url, *, timeout=6.0, max_bytes=None, cancelar=None):
     import research
     started = time.monotonic()
+    if cancelar and cancelar():
+        raise research.ResearchErro('Pesquisa cancelada.', 'cancelada')
     enabled = os.environ.get('JULIA_PUBLIC_STORE_RENDER','0').lower() not in ('0','false','off')
     original_error = None
     options = {'timeout':timeout}
     if max_bytes is not None: options['max_bytes']=max_bytes
+    if cancelar is not None: options['cancelar']=cancelar
     try:
         original = research.baixar(url, **options)
     except research.ResearchErro as exc:
@@ -111,6 +114,8 @@ def fetch(url, *, timeout=6.0, max_bytes=None):
         original_error = exc
         original = None
     if enabled and eligible(url):
+        if cancelar and cancelar():
+            raise research.ResearchErro('Pesquisa cancelada.', 'cancelada')
         needs_render = original is None
         if original:
             _,text=research.extrair_texto_html(original[1])

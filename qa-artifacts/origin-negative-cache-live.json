@@ -1,0 +1,25 @@
+{
+  "scope": "real anonymous public GET; no credentials; second read may be deferred locally",
+  "results": [
+    {
+      "attempt": 1,
+      "code": "bloqueado",
+      "http": 403,
+      "reason": "access_denied",
+      "retry_after": 0
+    },
+    {
+      "attempt": 2,
+      "code": "bloqueado",
+      "http": 403,
+      "reason": "access_denied",
+      "retry_after": 15.0
+    }
+  ],
+  "transport_events": {
+    "FETCH_STARTED": 1,
+    "HTTP_RESPONSE": 1,
+    "ACCESS_FAILED": 1,
+    "ACCESS_DEFERRED": 1
+  }
+}

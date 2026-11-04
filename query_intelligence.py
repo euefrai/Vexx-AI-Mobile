@@ -487,7 +487,10 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
                               window_inferred=True)
         # Only remove terminal presentation instructions with generic objects.
         # Comparisons naming entities, exclusions and budgets remain search text.
-        presentation = r'\s+(?:e\s+)?(?:compare|resuma|destaque)\s+(?:os acontecimentos(?: mais relevantes)?|os resultados|as noticias|os destaques|os pontos principais)\s*(?=[.!?]|$)'
+        presentation = (r'\s+(?:e\s+)?(?:(?:compare|resuma|destaque)\s+'
+            r'(?:os acontecimentos(?: mais relevantes)?|os resultados|as noticias|os destaques|os pontos principais)|'
+            r'(?:mostre|exiba|apresente|liste|inclua|cite)\s+(?:(?:as?|os?)\s+)?'
+            r'(?:fontes|links|referencias)(?:\s+(?:consultadas|utilizadas|originais|diretos))?)\s*(?=[.!?]|$)')
         boundary = r'(?=\s+(?:nos|nas|na ultima|ultimos|ultimas|proximos|proximas|recentemente|hoje|ontem|anteontem|sobre)\b|' + presentation + r'|[,.!?]|$)'
         location = re.search(r'\bem\s+(.+?)'+boundary, t)
         if not location:
