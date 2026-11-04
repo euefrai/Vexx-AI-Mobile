@@ -1,4 +1,4 @@
-const VERSION = 'VEXX-shell-generated-files-20261029-01';
+const VERSION = 'VEXX-shell-pc-agent-1.1.0-20261103';
 const SHELL = ['/', '/index.html', '/styles.css', '/interface.css', '/app.js', '/workspace.js', '/organize.js', '/jdui.js', '/remote.js', '/remote-setup.html', '/model3d-schema.js', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/trust.css', '/sobre', '/privacidade', '/termos', '/seguranca', '/contato'];
 const MODEL3D_ASSETS = new Set(['/model3d-viewer.js', '/model3d-education.js', '/vendor/three-engine.js', '/models/demo-cube.glb', '/models/preview.svg']);
 self.addEventListener('install', evt => {
@@ -9,7 +9,7 @@ self.addEventListener('activate', evt => {
 });
 self.addEventListener('fetch', evt => {
   const url = new URL(evt.request.url);
-  if (evt.request.method !== 'GET' || url.origin !== location.origin || url.pathname.startsWith('/api/')) return;
+  if (evt.request.method !== 'GET' || url.origin !== location.origin || url.pathname.startsWith('/api/') || url.pathname.startsWith('/downloads/')) return;
   const cacheKey = MODEL3D_ASSETS.has(url.pathname) ? url.pathname : evt.request;
   // Only cache public, versioned application shell. Never intercept private API calls.
   evt.respondWith(fetch(evt.request).then(res => {

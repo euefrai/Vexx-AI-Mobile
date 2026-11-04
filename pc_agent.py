@@ -5118,6 +5118,9 @@ def run():
                             reply = {"request_id": request_id, **admin_console.handle(db, req, __import__("sys").modules[__name__])}
                         except JULIA_auth.AuthErro as exc:
                             reply = _resp_erro(str(exc), exc.codigo)
+                    elif tipo == "companion_registry":
+                        import companion_registry
+                        reply = {"request_id": request_id, **companion_registry.handle(db, req)}
                     elif tipo == "auth_login":
                         try:
                             user = JULIA_auth.login_conta(db, req.get("username", ""),

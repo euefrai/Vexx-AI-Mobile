@@ -67,6 +67,11 @@
       if ([frame,viewer].includes(document.fullscreenElement)) document.exitFullscreen().catch(() => {});
     }
     function render(message) {
+      const deviceOnline = online() && state && !state.offline;
+      if ($('deviceStatus')) {
+        $('deviceStatus').textContent = deviceOnline ? 'Online' : 'Offline';
+        $('deviceStatus').classList.toggle('connected', !!deviceOnline);
+      }
       $('pcSetup').hidden = mobile;
       $('pcConnect').hidden = !mobile || connected;
       $('remoteViewer').hidden = !mobile || !connected;
@@ -75,12 +80,12 @@
       $('remoteDeviceName').textContent = state?.device_name || 'Meu computador';
       $('remoteSetupTitle').textContent = state?.approved ? 'Pronto para conectar' : 'Acesse pelo celular';
       $('remoteSetupCopy').textContent = state?.approved
-        ? 'No celular, entre nesta mesma conta, abra Meu PC e toque em Conectar. Mantenha o computador ligado e o agente aberto.'
-        : 'Autorize este PC uma vez. Depois, entre na mesma conta no celular para ver a tela e usar mouse e teclado.';
+        ? 'Acesso autorizado por até uma hora. No celular, entre nesta mesma conta e toque em Conectar. Mantenha o Vexx PC aberto.'
+        : 'Vincule o Vexx PC à sua conta e autorize o acesso no painel local quando precisar.';
       $('remoteSteps').hidden = state?.approved === true;
-      $('deviceDetail').textContent = state ? state.platform + ' · PC Agent conectado' : 'Aguardando PC Agent';
+      $('deviceDetail').textContent = state ? state.platform + (state.offline ? ' · Vexx PC offline' : ' · Vexx PC conectado') : 'Aguardando PC Agent';
       $('remotePermit').disabled = commandBusy || !online() || !state?.capture_ready || state.approved || state.confirmation_open;
-      $('remotePermit').textContent = state?.approved ? 'Acesso permitido' : state?.pending ? 'Confirme no Windows…' : 'Permitir acesso pelo celular';
+      $('remotePermit').textContent = state?.approved ? 'Acesso permitido' : state?.pending ? 'Confirme no Vexx PC…' : 'Pedir autorização no Vexx PC';
       $('remoteConnect').disabled = commandBusy || !online() || !state?.view_allowed || !state?.capture_ready || state?.confirmation_open;
       $('remoteRevoke').hidden = !(state?.approved || state?.view_allowed || state?.pending);
       $('remoteRevoke').disabled = commandBusy || !online();
@@ -90,9 +95,10 @@
       $('remoteAccessStatus').textContent = message || (!online()
         ? 'Abra o PC Agent no computador e mantenha os dois aparelhos conectados à internet.'
         : !state ? 'Verificando o agente conectado…'
+        : state.offline ? 'Baixe o Vexx PC, vincule sua conta pelo guia e abra o aplicativo no seu computador.'
         : !state.supported ? 'O controle está disponível para computadores Windows.'
         : !state.capture_ready ? 'Instale a dependência de captura no computador. Veja o guia do PC Agent.'
-        : state.pending ? 'Confirme no Windows do PC ' + state.device_name + '. Código: ' + state.code + '. O pedido expira em 2 minutos.'
+        : state.pending ? 'Abra o painel local do Vexx PC ' + state.device_name + ' e permita o acesso.'
         : state.confirmation_open ? 'Feche a confirmação anterior no Windows. O controle fica pausado enquanto ela estiver aberta.'
         : state.approved ? 'Acesso permitido para esta conta. Você pode revogar a qualquer momento.'
         : state.view_allowed ? 'Acesso autorizado pelo administrador' + (state.control_allowed ? '.' : ' · somente visualização.')
@@ -106,7 +112,7 @@
       statusBusy = true;
       const abort = new AbortController(); statusAbort = abort;
       try {
-        const data = await ctx.api('/api/remote/status', { headers: ctx.headers(), signal: abort.signal });
+        const data = await ctx.api('/api/companion/remote/status', { headers: ctx.headers(), signal: abort.signal });
         if (!valid(v, id)) return;
         state = data; lastStatus = Date.now();
         if (!state.view_allowed || state.confirmation_open) stop();
@@ -115,7 +121,7 @@
         if (err.name !== 'AbortError' && valid(v, id)) {
           state = null; stop(); lastStatus = Date.now();
           render(err.status === 404 || err.status === 503
-            ? 'Atualize e reinicie o PC Agent para preparar o acesso. Consulte o guia de instalação.'
+            ? 'Abra o Vexx PC no seu computador ou consulte o guia para instalar e vincular sua conta.'
             : err.message || 'Não foi possível verificar o acesso.');
         }
       } finally { if (statusAbort === abort) statusBusy = false; }
@@ -130,7 +136,7 @@
       const v = version, id = ctx.identity();
       commandBusy = true; render();
       try {
-        const data = await ctx.api('/api/remote/' + kind, { method: 'POST' });
+        const data = await ctx.api('/api/companion/remote/' + kind, { method: 'POST' });
         if (!valid(v, id)) return;
         state = data; lastStatus = Date.now(); render();
       } catch (err) {
@@ -154,10 +160,10 @@
         const options = {headers:ctx.headers(),signal:abort.signal};
         let r;
         if (ctx.frame && !legacyFrames) {
-          try { r=await ctx.frame('/api/remote/frame?max_w='+width+'&q='+quality, options); }
+          try { r=await ctx.frame('/api/companion/remote/frame?max_w='+width+'&q='+quality, options); }
           catch(err) { if(err.status===404 || err.status===405)legacyFrames=true; else throw err; }
         }
-        if (!r) r=await ctx.api('/api/screen?max_w='+width+'&q='+quality,options);
+        if (!r) r=await ctx.api('/api/companion/screen?max_w='+width+'&q='+quality,options);
         if (!valid(v, id) || !connected) return;
         const next = new Image();
         next.src = r.blob ? (nextURL=URL.createObjectURL(r.blob)) : 'data:image/jpeg;base64,'+r.imagem;
@@ -280,7 +286,7 @@
       lastInputAt = Date.now(); inputAbort = new AbortController();
       const batch=items.length>1;
       try {
-        await ctx.api(batch ? '/api/input/batch' : '/api/input', {method:'POST',body:JSON.stringify(batch ? {commands:items.map(i=>i.cmd)} : item.cmd),signal:inputAbort.signal});
+        await ctx.api(batch ? '/api/companion/input/batch' : '/api/companion/input', {method:'POST',body:JSON.stringify(batch ? {commands:items.map(i=>i.cmd)} : item.cmd),signal:inputAbort.signal});
         items.forEach(i=>i.resolve.forEach(done=>done(true)));
       }
       catch (err) {
@@ -521,7 +527,7 @@
       if (!connected || !state?.control_allowed) return;
       ctx.notify('Lendo área de transferência do PC…');
       try {
-        const res = await ctx.api('/api/input', {
+        const res = await ctx.api('/api/companion/input', {
           method: 'POST',
           body: JSON.stringify({ kind: 'clipboard_get' })
         });
@@ -550,7 +556,7 @@
           return;
         }
         ctx.notify('Colando no PC…');
-        await ctx.api('/api/input', {
+        await ctx.api('/api/companion/input', {
           method: 'POST',
           body: JSON.stringify({ kind: 'clipboard_set', text: clip.slice(0, 2000) })
         });

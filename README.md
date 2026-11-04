@@ -247,6 +247,12 @@ rode tudo em casa numa rede privada:
 Só funciona com o PC ligado (honesto: sem PC não há IA nem banco).
 O modo Render continua disponível como alternativa.
 
+## Vexx PC para outras pessoas
+
+O aplicativo público está em [`pc_companion/`](pc_companion/README.md), separado do agente central de IA. Inclui painel local com Visão geral, PC, Rede, Logs e Copiloto; instalador Windows com Python/dependências; índice de arquivos; vínculo individual por conta e autorização local do acesso remoto.
+
+O site oferece o download em `/downloads/vexx-pc-agent-windows.zip` e o guia de instalação/vínculo em `/remote-setup.html`. O ZIP é gerado por uma lista explícita de arquivos, sem configurações ou bancos pessoais. A implantação precisa incluir a atualização do relay **e do agente central**. Veja a [validação e os limites](docs/PC_COMPANION_VALIDATION.md).
+
 ## Deploy no Render (preparação)
 
 1. Conecte este repositório (privado) via **New → Blueprint** (`render.yaml`) ou Web
