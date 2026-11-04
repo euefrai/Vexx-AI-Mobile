@@ -974,7 +974,8 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
             providers_for_query = general + academic
         import query_intelligence
         if (query_intelligence.analyze(q)['domain'] in ('news', 'events', 'air_travel', 'bus_travel', 'science', 'documents')
-                or orch.classificar(q).get('produto') or orch.classificar(job['objetivo']).get('python_docs')):
+                or orch.classificar(q).get('produto') or orch.classificar(job['objetivo']).get('python_docs')
+                or (etapa.get('replan_reason') and any(r['attribute']=='source_authority' for r in requirements))):
             specialized = [p for p in providers_for_query if isinstance(p, ProvedorOrquestrado)]
             providers_for_query = specialized + [p for p in providers_for_query if p not in specialized]
         query_id='Q-'+hashlib.sha256((job['id']+'|'+etapa.get('id','')+'|'+q).encode()).hexdigest()[:20]
@@ -1579,6 +1580,9 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         trecho_fonte = str(rec.get("trecho_usado") or "").strip()
         answer_coverage = _eg.requirement_coverage(job['objetivo'], [{**rec,'url':a['url']}])
         answer_passages = _eg.select_answer_passages(answer_coverage)
+        if answer_passages:
+            import web_extract
+            answer_passages += web_extract.select_context_passages(rec,job['objetivo'])
         import research_product_evidence
         structured_offer = research_product_evidence.valid(rec.get('product_offer'), a['url'])
         if answer_coverage['applicable'] and not answer_passages and not structured_offer:
@@ -1956,7 +1960,7 @@ def _synthesis_context(objective, evidence, labels):
                 start=len(excerpt)+len(prefix);excerpt+=prefix+p['text']
                 ranges.append({'id':p['id'],'start':start,'end':len(excerpt),
                     **{k:p[k] for k in ('element_type','section','context_heading','section_path',
-                        'table_header','table_header_span','table_rows','source_span') if k in p}})
+                        'table_header','table_header_span','table_rows','source_span','context_only') if k in p}})
             if excerpt:
                 expanded={**source,'excerpt':excerpt,'passage_ranges':ranges}
                 # Balance literal sentence selections across the retained

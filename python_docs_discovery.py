@@ -49,6 +49,11 @@ def search(query, limit=6, timeout=6):
         _CACHE = (time.monotonic() + 6 * 3600, lines)
     tokens = set(re.findall(r'[a-z_][a-z_0-9]*', query.casefold()))
     qualified = set(re.findall(r'\b[a-z_]\w*(?:\.[a-z_]\w*)+\b', query.casefold()))
+    # Search reformulation may replace dots with spaces. Recover an exact API
+    # only when the original request names it and its segments remain together.
+    for name in re.findall(r'\b[a-z_]\w*(?:\.[a-z_]\w*)+\b',original.casefold()):
+        pattern=r'(?<!\w)'+r'[\s.]+'.join(map(re.escape,name.split('.')))+r'(?!\w)'
+        if re.search(pattern,query,re.I):qualified.add(name)
     tokens -= {'compare', 'analyze', 'print', 'python', 'verifique', 'fontes', 'oficial', 'documentacao'}
     candidates = []
     for line in _CACHE[1]:
@@ -59,7 +64,7 @@ def search(query, limit=6, timeout=6):
         if qualified and name.casefold() not in qualified:
             continue
         leaf = name.rsplit('.', 1)[-1].casefold()
-        if len(leaf) < 4 or leaf not in tokens:
+        if (len(leaf) < 4 and name.casefold() not in qualified) or leaf not in tokens:
             continue
         url = urllib.parse.urljoin('https://docs.python.org/3/', path.replace('$', name))
         parsed = urllib.parse.urlsplit(url)

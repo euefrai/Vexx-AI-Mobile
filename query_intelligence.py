@@ -87,7 +87,7 @@ ANSWER_FACETS = {
 def _research_body(text):
     value = re.sub(r'^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda(?:\s*:\s*|\s+))?(?:(?:sobre|por|acerca de)\s+)?', '', str(text).strip(), flags=re.I)
     value = re.sub(r'^investigue\s+a\s+fundo\s+(?:sobre\s+)?', '', value, flags=re.I)
-    return re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure)\s+(?:profundamente\s+|a fundo\s+)?(?:sobre\s+)?', '', value, flags=re.I)
+    return re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure|investigue)\s+(?:profundamente\s+|a fundo\s+)?(?:sobre\s+)?', '', value, flags=re.I)
 
 
 def _facet_subject(text):
@@ -287,9 +287,16 @@ def retrieval_context(original):
     entity = requirements[0]['entity'] if requirements else ''
     return {'original_request': str(original or ''), 'research_request': text,
             'entity': entity, 'requirements': requirements, 'guarded': guarded,
-            'source_preference': 'documentação oficial' if re.search(
-                r'documentacao oficial', normalized(text)) else '',
+            'source_preference': ('documentação oficial' if re.search(
+                r'documentacao oficial', normalized(text)) else 'fontes oficiais' if re.search(
+                r'fontes? oficiais', normalized(text)) else 'fontes primárias' if re.search(
+                r'fontes? primarias', normalized(text)) else ''),
             'presentation_preferences': profile['presentation_preferences']}
+
+
+def _with_source_preference(query, preference):
+    marker=r'\bprimari[ao]s?\b' if 'primari' in normalized(preference) else r'\boficia(?:l|is)\b'
+    return str(query)+' '+preference if preference and not re.search(marker,normalized(query)) else query
 
 
 def context_subqueries(original, fallback, limit=4):
@@ -301,7 +308,7 @@ def context_subqueries(original, fallback, limit=4):
     if requirements and context['entity']:
         queries = [requirement_query(r, text) for r in requirements]
         if context['source_preference']:
-            queries = [q + ' ' + context['source_preference'] for q in queries]
+            queries = [_with_source_preference(q,context['source_preference']) for q in queries]
         return list(dict.fromkeys(queries))[:max(1, limit)]
     # Splitting unknown proper names or presentation tails is unsafe. The
     # existing independent-topic split remains valid for e.g. café e chá.
@@ -601,12 +608,14 @@ def constrain_discovery(query, request, *, lock_context=False):
                                    for r in context['requirements'])
           and normalized(context['entity']) not in normalized(query)):
         query = context['entity'] + ' ' + str(query)
-    if context['source_preference'] and 'oficial' not in normalized(query):
-        query = str(query) + ' ' + context['source_preference']
+    query = _with_source_preference(query,context['source_preference'])
     # Keep a disambiguating category when an aspect-only query is generated.
     # This prevents a language's name becoming a game or film search.
     if re.search(r'\blinguagem\b', normalized(original)) and not re.search(r'\blinguagem\b', normalized(query)):
         query = str(query) + ' linguagem'
+    if (re.search(r'\bpython\b', normalized(original)) and re.search(r'\b\w+(?:\.\w+)+\b',original)
+            and not re.search(r'\b(?:python|asyncio)\b',normalized(query))):
+        query = str(query) + ' Python'
     if request.get('domain') != 'news': return query
     params=request.get('parameters') or {}
     missing=[]

@@ -148,8 +148,10 @@ def _passage_support(req, passage, source):
         from web_extract import scoped_api_aliases
         identified=bool(anchor.search(_canonical_operation(signature.get('text') or ''))
                         or entity in [qi.normalized(n) for n in scoped_api_aliases(passage)])
+        passive_return=(attribute=='return_value'
+            and re.search(r'\b(?:is|are|was|were)\b[^.!?;]{0,100}\breturned\b',text))
         if (aligned and identified
-                and re.search(relation_rx, text, re.S)):
+                and (re.search(relation_rx, text, re.S) or passive_return)):
             partial_found = True
     section_facets={'return_value':('return value','valor retornado','valor de retorno'),
                     'behavior':('description','descricao')}

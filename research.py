@@ -34,7 +34,7 @@ from html.parser import HTMLParser
 
 TTL_RAPIDA = 6 * 3600
 TTL_PROFUNDA = 24 * 3600
-RETRIEVAL_VERSION = '5.9.9.9-api-sections-2'
+RETRIEVAL_VERSION = '5.9.9.9-complementary-reading-1'
 MAX_REDIRECTS = 3
 MAX_PAGINA_BYTES = 2 * 1024 * 1024
 MAX_TEXTO_PAGINA = 8000
@@ -790,6 +790,12 @@ def consulta_tem_assunto(texto: str) -> bool:
     return bool(termos_assunto(texto))
 
 
+def _with_verified_table_context(evidence, coverage):
+    headers=list(dict.fromkeys(str(p['table_header'])[:160] for p in coverage.get('passages',[])
+        if p.get('element_type')=='tr' and p.get('table_header') and p.get('support_label')=='DIRECT_SUPPORT'))
+    return {**evidence,'trecho':str(evidence.get('trecho') or '')+'\n'+' '.join(headers)}
+
+
 def fontes_relevantes(consulta: str, fontes: list, info: dict | None = None) -> list:
     """Gate PEDIDO → FONTES antes de anexar qualquer fonte à resposta.
 
@@ -821,6 +827,25 @@ def fontes_relevantes(consulta: str, fontes: list, info: dict | None = None) -> 
                     "trecho": " ".join(str(f.get(k) or "") for k in ("trecho", "texto_lido"))}
         if orch._util_para_pedido(evidence, orch._termos_correspondencia(consulta), consulta):
             out.append(f)
+        elif f.get('status')=='aberta' and f.get('relevante') is True:
+            # A short table field need not repeat its actual table heading.
+            # Recheck literal read spans instead of discarding an established
+            # binding just because the display title is generic.
+            read=f.get('texto_lido');passages=[]
+            if not isinstance(read,str) or not read.strip():continue
+            for passage in (f.get('answer_passages') or [])[:8]:
+                literal=passage.get('text') or ''
+                if not literal or len(literal)>1100:continue
+                start=read.find(literal)
+                if start>=0:
+                    passages.append({**passage,'text_span':{'start':start,'end':start+len(literal)}})
+            import evidence_graph
+            coverage=evidence_graph.requirement_coverage(consulta,[{
+                **f,'texto':read,'texto_lido':True,'answer_passages':passages}])
+            if (any(p['support_label']=='DIRECT_SUPPORT' for p in coverage['passages'])
+                    and not orch._context_mismatch(_with_verified_table_context(evidence,coverage),consulta)
+                    and not any(r['constraints']['must_preserve'] for r in coverage['requirements'])):
+                out.append(f)
     if not out and fontes:
         info["rejeitadas_por_relevancia"] = len(fontes)
     return out
@@ -1104,13 +1129,16 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
     coverage = evidence_graph.requirement_coverage(consulta, [{**rec, 'url': fonte['url_final'], 'lida': lida}])
     if coverage['applicable']:
         passages = evidence_graph.select_answer_passages(coverage)
+        if passages:
+            import web_extract
+            passages += web_extract.select_context_passages(rec,consulta)
         fonte['answer_passages'] = passages
         fonte['answerability'] = {'state': ('DIRECT_ANSWER' if coverage['complete'] else 'PARTIAL_ANSWER') if passages else 'TOPIC_ONLY' if lida else 'UNREADABLE',
                                  'requirement_ids': list(dict.fromkeys(p['requirement_id'] for p in coverage['passages'])),
                                  'aspects':[r['description'] for r in coverage['requirements'] if r['state']=='SUPPORTED'],
                                  'partial_aspects':[r['description'] for r in coverage['requirements'] if r['state']=='PARTIALLY_SUPPORTED'],
                                  'scope': coverage['scope']}
-        safe_relation = (bool(passages) and not orch._context_mismatch(evidence,consulta)
+        safe_relation = (bool(passages) and not orch._context_mismatch(_with_verified_table_context(evidence,coverage),consulta)
                          and not any(r['constraints']['must_preserve'] for r in coverage['requirements'])
                          and (fonte['vertical']['eligible'] if fonte['vertical']['kind'] in
                               ('news','events','air_travel','bus_travel','documents') else True))

@@ -469,3 +469,33 @@ Integração final com o main remoto (PC Companion preservado): 2.633 aprovados,
 `qa-artifacts/research-merged-release-suite.log`. Árvore combinada testada em
 exportação isolada. WIP local preservado; laboratório encerrado com validação
 de identidade e zero operações ativas. Não houve reinício do agente de produção.
+
+## Leitura complementar — 04/11/2026
+
+Corrigidas perdas de campos de tabelas no ranking e no filtro final de fontes,
+títulos genéricos, descarte de regra geral de retorno na síntese, APIs curtas,
+remoção de pontos/linguagem das subconsultas e localização do retorno passivo.
+Preferências oficiais/primárias preservadas sem duplicação; a busca de autoridade
+é priorizada nas lacunas sem substituir o contexto inicial. Cache interno de
+leitura: `5.9.9.9-complementary-reading-1`; históricos preservados.
+
+Sete testes reais pela interface, sete persistidos após reload, zero erros de
+console capturados e zero overflow em 390 px. Cliques reais abriram o artigo da
+Embraer e a referência `list.pop`, sem redirecionar para a home. Os casos da
+Embraer passaram a mostrar fundador/data; Python preserva contexto e recupera
+o item retornado por pop. Não promover a regra geral None a prova de cada API.
+
+Limite atual: Hermes com erro de autenticação, modelo gratuito antigo ausente
+do catálogo e DeepSeek com cota esgotada. A tentativa Mistral ficou parcial.
+Leitura/descoberta avançaram; síntese assistida não foi aprovada nesta rodada.
+Relatório: `RELATORIO_LEITURA_COMPLEMENTAR.md`; dados:
+`qa-artifacts/research-complementary-reading-real.json`.
+
+Próximo passo: repetir a síntese com modelo/cota válidos; registrar a causa
+precisa da geração/revisão Mistral; comprovar aplicação da regra de retorno aos
+métodos; recuperar fonte primária para o criador de Rust. Preservar os testes
+negativos e os critérios de autoridade. Não reiniciar o agente de produção.
+
+Suíte final desta etapa: 2.669 aprovados, 4 pulados e 2 avisos; exit 0 em
+198,20 s, em `qa-artifacts/complementary-reading-verified-full.log`.
+Diff-check passou. Alterações locais, ainda sem publicação desta etapa.

@@ -655,6 +655,31 @@ def scoped_api_aliases(passage):
             and name.split('.')[-1]==leaf]
 
 
+def _shared_return_policy(text):
+    """Locate a general rule, never assign its return value to an API."""
+    return bool(not re.search(r'\b\w+(?:\.\w+)+\b',text)
+        and re.search(r'\b(?:methods?|m[eé]todos?)\b.{0,220}\b(?:in place|in-place|no pr[oó]prio objeto)\b'
+                      r'.{0,160}\b(?:return|retorn\w*)\b.{0,60}\bNone\b',text,re.I|re.S))
+
+
+def select_context_passages(record, query):
+    """Keep one read shared rule without inventing a requirement binding."""
+    import query_intelligence as qi
+    if not any(r['attribute']=='return_value' for r in qi.answer_requirements(query)):
+        return []
+    text=record.get('texto') or ''
+    digest=(record.get('document_scan') or {}).get('source_sha256')
+    if not isinstance(text,str) or not isinstance(digest,str) or not re.fullmatch('[0-9a-f]{64}',digest):return []
+    for passage in (record.get('answer_passages') or [])[:40]:
+        span=passage.get('text_span') or {};lo,hi=span.get('start'),span.get('end')
+        if (type(lo) is int and type(hi) is int and 0<=lo<hi<=len(text)
+                and text[lo:hi]==passage.get('text') and (passage.get('source_span') or {}).get('sha256')==digest
+                and not any(h.get('level',0)>=7 for h in passage.get('section_path',[]))
+                and _shared_return_policy(passage['text'])):
+            return [{**passage,'context_only':True}]
+    return []
+
+
 def passage_candidates(texto, source_url='', sections=None, limit=40):
     """Literal spans in the returned extraction, never offsets in HTML/PDF bytes."""
     import hashlib
@@ -802,7 +827,7 @@ def _extruct(pagina: str, url: str = "") -> dict:
 # ── Entrada única ──────────────────────────────────────────────────
 _SECTION_TERMS = {
     'syntax': r'syntax|sintaxe|signature|assinatura',
-    'return_value': r'return(?:s| value)?|retorn\w+',
+    'return_value': r'return(?:s|ed|ing| value)?|retorn\w+',
     'behavior': r'description|descri[cç][aã]o|behavior|comportamento',
     'cancellation': r'cancell?\w*|cancelamento',
     'exceptions': r'exceptions?|ExceptionGroup|exce[cç][oõ]es|raises?|propagat\w*',
@@ -838,6 +863,7 @@ def _document_windows(text, root, block, query, url, budget):
     import query_intelligence as qi
     requirements = qi.answer_requirements(query)
     behavior_ids = {r['id'] for r in requirements if r['attribute'] == 'behavior'}
+    return_ids = {r['id'] for r in requirements if r['attribute'] == 'return_value'}
     terms = [(r['id'], re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+r')\b', re.I),
               re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+'|'+
                          _SECTION_HEADINGS.get(r['attribute'], r'(?!)')+r')\b', re.I),
@@ -989,6 +1015,15 @@ def _document_windows(text, root, block, query, url, budget):
             # Actual leading labels outrank incidental mentions deep in prose.
             score=8*heading_match+4*bool(hits and hits[0].start()<50)+min(3,len(hits))
             score += 16*any(entity_rx.search(h['text']) for h in path) + 8*bool(entity_rx.search(chunk))
+            if rid in return_ids and not any(h.get('level',0)>=7 for h in path) and _shared_return_policy(chunk):
+                score+=24  # Preserve a shared rule as context, not direct proof.
+            if tag=='tr':
+                table=row_scopes.get(lo,{})
+                header=re.sub(r'\s+(?:s\.?a\.?|inc\.?|ltd\.?)$', '',
+                              table.get('table_header',''),flags=re.I)
+                if entity_rx.fullmatch(header):
+                    score+=24+8*bool(hits and hits[0].start()<24)
+                    # Identity + leading field label outrank incidental prose.
             if path and path[-1]['level']>=7:
                 score += 24*bool(entity_rx.search(api_names))
                 if entity_rx.search(path[-1]['text']) and re.search(r'\b(?:default|padr[aã]o)\b',chunk,re.I):
@@ -1162,8 +1197,16 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
     preferred_urls = {item['url'] for item in preferred}
     links = ([item for item in links if item['url'] in preferred_urls]
              + [item for item in links if item['url'] not in preferred_urls])[:30]
+    title=metas['titulo'] or _limpar(parser.titulo,200)
+    document_title=_limpar(parser.titulo,200)
+    for requirement in requirements:
+        entity=qi.normalized(re.sub(r'^linguagem\s+','',requirement['entity'],flags=re.I))
+        if not entity:continue
+        name=re.compile(r'(?<!\w)'+re.escape(entity)+r'(?!\w)')
+        if name.search(qi.normalized(document_title)) and not name.search(qi.normalized(title)):
+            title=document_title;break
     saida = {
-        "titulo": metas["titulo"] or _limpar(parser.titulo, 200),
+        "titulo": title,
         "texto": texto_final,
         "paragrafos": paragrafos[:240],
         "secoes": secs,
