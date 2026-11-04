@@ -231,26 +231,38 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
                           **({"auth_error": True} if auth_ruim else {})})
     # Up to 500 proxy models + 200 per external provider. Do not silently cut
     # off the providers at the end of the registry after only 500 total IDs.
+    default = hermes_bridge.DEFAULT_MODEL
+    live_proxy = discoveries.get('hermes', (None, ''))[0]
+    if live_proxy and default not in live_proxy:
+        default = next((mid for mid in live_proxy if mid.endswith(':free')), default)
     return {"models": [i["id"] for i in itens], "items": itens,
-            "default": hermes_bridge.DEFAULT_MODEL, "providers": provs}
+            "default": default, "providers": provs}
 
 
 # ── Chamadas ──────────────────────────────────────────────────────────
 
 def _para_openai(messages: list) -> list:
-    return [{"role": m.get("role", "user"), "content": str(m.get("content", ""))[:12000]}
-            for m in messages if isinstance(m, dict)]
+    # Do not cut JSON evidence or instructions mid-message. Bound the request
+    # explicitly, before transport, so oversized input fails without corruption.
+    result, total = [], 0
+    for m in messages:
+        if not isinstance(m, dict):
+            continue
+        content = str(m.get("content", ""))
+        total += len(content)
+        if len(content) > 64000 or total > 128000 or len(result) >= 64:
+            raise BridgeErro("Contexto excede o limite de envio ao provedor.", "pedido")
+        result.append({"role": m.get("role", "user"), "content": content})
+    return result
 
 
 def _para_anthropic(messages: list) -> tuple:
     sistema, resto = "", []
-    for m in messages:
-        if not isinstance(m, dict):
-            continue
+    for m in _para_openai(messages):
         if m.get("role") == "system" and not sistema:
-            sistema = str(m.get("content", ""))[:12000]
+            sistema = m["content"]
         elif m.get("role") in ("user", "assistant"):
-            resto.append({"role": m["role"], "content": str(m.get("content", ""))[:12000]})
+            resto.append(m)
     if not resto:
         raise BridgeErro("Sem mensagem de usuário.", "pedido")
     return sistema, resto

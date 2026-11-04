@@ -323,11 +323,26 @@ def salvar_job(db, job: dict, forcar_status: bool = False) -> None:
 
 
 def listar_jobs(db, owner: str, limite: int = 20) -> list:
-    rows = db.execute("SELECT id, conv, modo, objetivo, status, criado_em, atualizado_em"
+    rows = db.execute("SELECT id, conv, modo, objetivo, status, criado_em, atualizado_em, usados"
                       " FROM research_jobs WHERE owner_id=? ORDER BY criado_em DESC LIMIT ?",
                       (owner, max(1, min(limite, 100)))).fetchall()
-    return [{"id": r[0], "conv": r[1], "modo": r[2], "objetivo": r[3][:120],
-             "status": r[4], "criado_em": r[5], "atualizado_em": r[6]} for r in rows]
+    jobs = []
+    for r in rows:
+        try:
+            usados = json.loads(r[7] or "{}")
+        except (TypeError, ValueError):
+            usados = {}
+        if not isinstance(usados, dict):
+            usados = {}
+        outcome = usados.get("research_outcome") if isinstance(
+            usados.get("research_outcome"), dict) else {}
+        evidencias = db.execute(
+            "SELECT COUNT(*) FROM evidence WHERE job_id=? AND owner_id=?",
+            (r[0], owner)).fetchone()[0]
+        jobs.append({"id": r[0], "conv": r[1], "modo": r[2], "objetivo": r[3][:120],
+                     "status": r[4], "criado_em": r[5], "atualizado_em": r[6],
+                     "evidencias": int(evidencias or 0), "research_outcome": outcome})
+    return jobs
 
 
 def job_ativo(db, owner: str):
@@ -683,7 +698,9 @@ def buscar_com_fallback(provedores: list, consulta: str, limite: int = 6,
         if achados:
             import query_intelligence as qi
             import search_orchestrator as orch
-            usable=[a for a in achados if not orch._context_mismatch(a,consulta)]
+            scope=qi._discovery_context.get() or {}
+            original=(scope.get('request') or {}).get('original_request') or consulta
+            usable=[a for a in achados if not orch._context_mismatch(a,original)]
             if len(usable)!=len(achados):
                 erros.append({'provedor':getattr(p,'nome','?'),'codigo':'context_mismatch',
                               'rejected_candidates':len(achados)-len(usable)})
@@ -875,7 +892,7 @@ def listar_evidencias(db, owner: str, job_id: str, status: str = "") -> list:
                     "citation_count", "citation_count_kind", "doc_id", "chunk_id",
                     "section", "page", "content_hash", "version", "source",
                     "table_hint", "origem_declarada", "texto_lido", "trecho_usado",
-                    "access_state", "answer_passages", "answerability", "retrieval_provenance", "document_id", "duplicate_of", "source_authority"):
+                    "access_state", "answer_passages", "answerability", "retrieval_provenance", "document_id", "duplicate_of", "source_authority", "product_offer"):
             if key in metadata:
                 ev[key] = metadata[key]
         evidencias.append(ev)
@@ -956,7 +973,8 @@ def agente_busca(db, job: dict, etapa: dict, provedores: list, vistas: set,
         else:
             providers_for_query = general + academic
         import query_intelligence
-        if query_intelligence.analyze(q)['domain'] in ('news', 'events', 'air_travel', 'bus_travel', 'science', 'documents'):
+        if (query_intelligence.analyze(q)['domain'] in ('news', 'events', 'air_travel', 'bus_travel', 'science', 'documents')
+                or orch.classificar(q).get('produto') or orch.classificar(job['objetivo']).get('python_docs')):
             specialized = [p for p in providers_for_query if isinstance(p, ProvedorOrquestrado)]
             providers_for_query = specialized + [p for p in providers_for_query if p not in specialized]
         query_id='Q-'+hashlib.sha256((job['id']+'|'+etapa.get('id','')+'|'+q).encode()).hexdigest()[:20]
@@ -1142,6 +1160,19 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
                 "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
                 "access_state": "read" if texto else "snippet_only"}
+        if orch.classificar(job['objetivo']).get('produto'):
+            import research_product_evidence
+            offer = research_product_evidence.extract(pagina, final, rec['titulo'], job['objetivo'])
+            if offer:
+                rec['product_offer'] = offer
+                if not rec['texto_lido']:
+                    # A short product page can still expose a verified Offer.
+                    # Describe only those fields, not a full DOM/article read.
+                    rec.update(texto=research_product_evidence.text(offer, final),
+                               texto_lido=True, access_state='read', content_scope='structured_product_offer')
+                    rec['trecho_usado'] = rec['texto']
+                    for key in ('answer_passages', 'document_context', 'document_scan'):
+                        rec.pop(key, None)
         if urllib.parse.urlsplit(final).hostname=='docs.python.org':
             try:
                 import python_docs_discovery
@@ -1174,6 +1205,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                             and type(hs.get('start')) is int and type(hs.get('end')) is int
                             and type(ps.get('start')) is int and 0<=hs['start']<hs['end']<=ps['start']):
                         context.append(str(heading.get('text') or '')[:160])
+                import web_extract
+                context.extend(web_extract.scoped_api_aliases(passage))
         return {**a, 'titulo': rec.get('titulo') or a.get('titulo', ''),
                 # Structural read context admits a document for analysis; only
                 # the original literal rec is used for factual support below.
@@ -1202,8 +1235,46 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
     def _util(a, rec):
         texto = (rec.get('texto') or '').strip()
         coverage = _eg.requirement_coverage(job['objetivo'], [{**rec,'url':a['url']}])
+        import research_product_evidence
+        structured_offer = research_product_evidence.valid(rec.get('product_offer'), a['url'])
         return (bool(texto) and _evidencia_lida({**rec, 'trecho': texto}) and _corresponde(a, rec)
-                and (not coverage['applicable'] or bool(coverage['passages'])))
+                and (not coverage['applicable'] or bool(coverage['passages']) or structured_offer))
+
+    def _url_publica(value):
+        try:
+            parts = urllib.parse.urlsplit(value or '')
+            return urllib.parse.urlunsplit(
+                (parts.scheme, parts.netloc.rsplit('@', 1)[-1], parts.path, '', ''))[:500]
+        except ValueError:
+            return ''
+
+    def _registrar_rejeicao(source, motivo, estagio=''):
+        """Persiste por candidato por que ele não virou evidência (bounded)."""
+        registros = job.setdefault('usados', {}).setdefault('rejection_reasons', [])
+        if not isinstance(registros, list):
+            registros = []
+            job['usados']['rejection_reasons'] = registros
+        url = _url_publica(source.get('url'))
+        reason = str(motivo or estagio or 'REJECTED')[:160]
+        entrada = {'url': url, 'domain': (urllib.parse.urlsplit(url).hostname or '')[:120],
+                   'reason': reason, 'stage': str(estagio or '')[:60]}
+        if any(isinstance(row, dict) and row.get('url') == url
+               and row.get('reason') == reason for row in registros):
+            return
+        registros.append(entrada)
+        if len(registros) > 60:
+            del registros[:-60]
+
+    def _motivos_rejeicao(a, rec):
+        candidate = _candidato(a, rec)
+        motivos = list(search_verticals.assess(request, candidate).get('reasons') or [])
+        motivos += list(orch._context_mismatch(candidate, job['objetivo']) or [])
+        coverage = _eg.requirement_coverage(job['objetivo'], [{**rec, 'url': a['url']}])
+        if coverage['applicable'] and not coverage['passages']:
+            motivos.append('COVERAGE')
+        if not _evidencia_lida({**rec, 'trecho': rec.get('texto') or ''}):
+            motivos.append('NOT_READ')
+        return list(dict.fromkeys(motivos)) or ['RELEVANCE']
 
     # Preserve ranking, but never spend a page slot on the same canonical URL twice.
     unicos, vistas = [], set()
@@ -1217,11 +1288,13 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             unicos.append(a)
         elif chave:
             retrieval_trace.record(job['id'], etapa.get('id', ''), a, 'SKIPPED_DUPLICATE')
+            _registrar_rejeicao(a, 'SKIPPED_DUPLICATE')
     # RSS is discovery, not a network page read. It must not consume all three
     # quick-mode slots before an original candidate can even reach the reader.
     discovery_only = [a for a in unicos if a.get('content_scope')=='feed_metadata']
     for a in discovery_only:
         retrieval_trace.record(job['id'], etapa.get('id', ''), a, 'SKIPPED_AGGREGATOR')
+        _registrar_rejeicao(a, 'SKIPPED_AGGREGATOR')
     achados = [a for a in unicos if a.get('content_scope')!='feed_metadata']
     if request['domain']=='news':
         achados.sort(key=lambda a: not bool(a.get('source_recovery')))
@@ -1230,14 +1303,29 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         historico_falhas = []
     falhas_leitura = {key for key in historico_falhas[:80]
                      if isinstance(key, str) and re.fullmatch(r'[0-9a-f]{64}', key)}
+    # Legacy hashes remain suppressed for this run; new failures expire so a
+    # temporary outage does not permanently exclude a source after a checkpoint.
+    failure_expiry = job['usados'].get('failed_source_expiry', {})
+    if not isinstance(failure_expiry, dict):
+        failure_expiry = {}
+    timed_keys = set(failure_expiry)
+    now = time.time()
+    failure_expiry = {key: value for key, value in failure_expiry.items()
+                      if key in falhas_leitura and type(value) in (int, float)
+                      and now < value <= now + 900}
+    falhas_leitura = {key for key in falhas_leitura
+                     if key not in timed_keys or key in failure_expiry}
+    job['usados']['failed_source_reads'] = sorted(falhas_leitura)
+    job['usados']['failed_source_expiry'] = failure_expiry
 
     def _chave_fonte(a):
         return hashlib.sha256(orch.canonizar_url(a['url']).encode('utf-8')).hexdigest()
 
-    def _registrar_falha(a):
+    def _registrar_falha(a, code='network'):
         # No URL/query string or raw exception is stored in the job counters.
         if not parar() and (not prazo or time.monotonic() < prazo) and len(falhas_leitura) < 80:
             falhas_leitura.add(_chave_fonte(a))
+            failure_expiry[_chave_fonte(a)] = time.time() + (600 if code == 'bloqueado' else 60)
             job['usados']['failed_source_reads'] = sorted(falhas_leitura)
 
     reader_scope='network'
@@ -1297,16 +1385,14 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         elif state == 'reader_failed' and code == 'TimeoutError':
             reason = 'FETCH_TIMEOUT'
         retrieval_trace.record(job['id'], etapa.get('id', ''), source, reason, rec=rec, coverage=coverage, reason_code=str(code).upper())
-        def public_url(value):
-            try:
-                parts=urllib.parse.urlsplit(value or '')
-                return urllib.parse.urlunsplit((parts.scheme,parts.netloc.rsplit('@',1)[-1],parts.path,'',''))[:500]
-            except ValueError: return ''
+        if state in ('relevance_rejected', 'no_readable_content', 'reader_failed', 'fetch_failed'):
+            detalhe = str(code or reason).upper()
+            _registrar_rejeicao(source, detalhe, reason)
         transitions = {'extracted':'READABLE', 'no_readable_content':'FETCHED',
                        'relevance_rejected':'REJECTED', 'evidence_stored':'EVIDENCE_ELIGIBLE',
                        'discovery_stored':'DISCOVERED', 'reader_failed':'REJECTED',
                        'fetch_failed':'BLOCKED' if code in ('bloqueado','rate_limit','rate_limited') else 'REJECTED'}
-        emit_meta={'url':public_url(source.get('url')), 'final_url':public_url(rec.get('final')),
+        emit_meta={'url':_url_publica(source.get('url')), 'final_url':_url_publica(rec.get('final')),
             'source_state': transitions.get(state, 'DISCOVERED'),
             'stage':state,'code':str(code)[:60], 'scope':rec.get('content_scope',''),
             'extracted_chars':len(rec.get('texto') or ''), 'read':bool(rec.get('texto_lido')),
@@ -1350,7 +1436,11 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                             retrieval_trace.record(job['id'],etapa.get('id',''),a,'DOCUMENT_DEDUPLICATED',rec=rec,
                                                    reason_code='IDENTICAL_BOUNDED_EXTRACTION')
                         read_trace(a,'extracted' if rec.get('texto') else 'no_readable_content',rec)
-                        substituir = not _util(a, rec)
+                        util = _util(a, rec)
+                        if rec.get('texto') and not util:
+                            read_trace(a, 'relevance_rejected', rec,
+                                       code=','.join(_motivos_rejeicao(a, rec)))
+                        substituir = not util
                         coverage_read = _eg.requirement_coverage(job['objetivo'],[{**rec,'url':a['url']}])
                         if rec.get('texto_lido') and coverage_read['applicable'] and not coverage_read['complete']:
                             from web_extract import navigation_candidates
@@ -1372,7 +1462,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                         break
                     if exc.codigo != "cancelada":
                         if not concluida:
-                            _registrar_falha(a)
+                            _registrar_falha(a, exc.codigo)
                         emitir(db, job["id"], job["owner"], "analyst", "source_opened", "falha",
                                f"Ignorada ({exc.codigo}): {a['url'][:60]}.", {})
                         read_trace(a,'fetch_failed',code=exc.codigo)
@@ -1452,6 +1542,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             reason = ('BUDGET_EXHAUSTED' if job['usados']['paginas'] >= job['orcamento']['paginas']
                       else 'SKIPPED_LOW_PRIORITY')
             retrieval_trace.record(job['id'], etapa.get('id',''), candidate, reason)
+            _registrar_rejeicao(candidate, reason)
     if expirado:
         emitir(db, job["id"], job["owner"], "analyst", "source_reading_timeout", "alerta",
                "Prazo de leitura esgotado; apenas resultados concluídos no prazo serão usados.",
@@ -1488,7 +1579,9 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         trecho_fonte = str(rec.get("trecho_usado") or "").strip()
         answer_coverage = _eg.requirement_coverage(job['objetivo'], [{**rec,'url':a['url']}])
         answer_passages = _eg.select_answer_passages(answer_coverage)
-        if answer_coverage['applicable'] and not answer_passages:
+        import research_product_evidence
+        structured_offer = research_product_evidence.valid(rec.get('product_offer'), a['url'])
+        if answer_coverage['applicable'] and not answer_passages and not structured_offer:
             read_trace(a,'topic_only',rec,code='NO_ANSWER_PASSAGE')
             continue
         if answer_passages:
@@ -1534,6 +1627,10 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         for key in ('content_hash','document_id','duplicate_of'):
             if key in rec:fonte[key]=rec[key]
         if rec.get('source_authority'):fonte['source_authority']=rec['source_authority']
+        if rec.get('product_offer'):
+            import research_product_evidence
+            if research_product_evidence.valid(rec['product_offer'], fonte['url']):
+                fonte['product_offer'] = rec['product_offer']
         if answer_coverage['applicable']:
             fonte['answer_passages'] = answer_passages
             fonte['answerability'] = {'state':'DIRECT_ANSWER' if answer_coverage['complete'] else 'PARTIAL_ANSWER',
@@ -1571,7 +1668,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         if not academic and re.fullmatch(r'10\.\d{4,9}/\S+', doi) and doi.casefold() in texto.casefold():
             fonte['doi'] = doi[:200]
         ev = registrar_evidencia(db, job, fonte, trecho_fonte)
-        for key in ('retrieval_provenance','content_hash','document_id','duplicate_of','source_authority'):
+        for key in ('retrieval_provenance','content_hash','document_id','duplicate_of','source_authority','product_offer'):
             if key in fonte:ev[key]=fonte[key]
         if answer_coverage['applicable']:
             ev['answer_passages'] = answer_passages
@@ -1868,6 +1965,29 @@ def _synthesis_context(objective, evidence, labels):
                     options=research_synthesis.quote_options(expanded,include_ranges=True,scan_limit=8000)
                     if options:source=research_synthesis._catalog_source(expanded,options)
                 else:source=expanded
+        if e.get('product_offer'):
+            import research_product_evidence
+            observed = research_product_evidence.text(e['product_offer'], source['url'])
+            if observed:
+                # Preserve the raw field/hash record on the evidence. This
+                # normalized structured text is separate from DOM text offsets.
+                original = source['excerpt']
+                retained = source.pop('passage_ranges', [])
+                combined = observed
+                ranges = [{'start':0, 'end':len(observed), 'content_scope':'structured_product_offer'}]
+                for span in retained:
+                    text = original[span['start']:span['end']]
+                    if len(combined) + 2 + len(text) > 1800:
+                        continue
+                    start = len(combined) + 2
+                    combined += '\n\n' + text
+                    ranges.append({**span, 'start':start, 'end':len(combined)})
+                source.update(excerpt=combined, structured_provenance={
+                    'field_path':'Product.offers', 'sha256':e['product_offer']['sha256']})
+                if len(ranges) > 1:
+                    source['passage_ranges'] = ranges
+                else:
+                    source['scope'] = 'structured_product_offer'
         if source['excerpt'].strip():sources.append(source)
     # Rank on the bounded offered text, not facts cut out of the prompt.
     coverage=research_synthesis.source_coverage(objective,sources)
@@ -1916,12 +2036,19 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
         excerpt = source.get('excerpt', '')
         ranges = source.get('passage_ranges') or []
         quotes = [excerpt[p['start']:p['end']] for p in ranges
-                  if 0 <= p['start'] < p['end'] <= len(excerpt)]
+                  if 0 <= p['start'] < p['end'] <= len(excerpt)
+                  and p.get('content_scope') != 'structured_product_offer']
         # A failed writer must not hide the other aspects already read. Keep
         # noncontiguous spans separate and never activate a source's JDUI fence.
         quotes = [q for q in quotes if '```' not in q]
         body = ('\n\n' + '\n\n'.join('> ' + q.replace('\n', '\n> ') for q in quotes)
                 if quotes else melhor_trecho(e['trecho'], '', 300).replace('```', ''))
+        if source.get('structured_provenance'):
+            # These are normalized fields from a read Offer, not a DOM quote.
+            # Keep the observed price usable even when the model fails.
+            import research_product_evidence
+            observed = research_product_evidence.summary(e.get('product_offer'), e.get('url', ''))
+            body = observed + (body if quotes else '')
         content = f"{rotulo}{str(e['titulo'])[:160]} ({str(e['dominio'])[:120]}): {body}"
         entry = f"{link} {content}"
         if len('\n\n'.join(resposta)) + len(entry) > 2500:
@@ -2008,6 +2135,10 @@ def agente_auditor(db, job: dict, sintese: dict, evidencias: list) -> dict:
     citadas = sorted({m.group(0) for m in re.finditer(r"\[E\d+\]", sintese.get("texto", ""))})
     fantasmas = [c for c in citadas if c.strip("[]") not in ids]
     problemas = [f"citação sem evidência: {c}" for c in fantasmas]
+    if not valid_evidence:
+        problemas.insert(0, "NO_EVIDENCE: pesquisa sem evidências"
+                         if not evidencias else
+                         "NO_EVIDENCE: pesquisa sem evidências lidas")
     ok = not problemas
     emitir(db, job["id"], job["owner"], "auditor", "answer_started" if ok else "answer_started",
            "ok" if ok else "alerta", f"Auditoria: {len(problemas)} problemas.", {"problemas": problemas})
@@ -2053,14 +2184,47 @@ def _orcamento_etapa(job: dict, tipo: str) -> str:
 def preparar_retomada(db, owner: str, job_id: str) -> dict:
     """Explicit user resume only; preserve reads and permit one new writing attempt."""
     job = carregar_job(db, owner, job_id)
-    if job['status'] not in ('interrompida', 'cancelada', 'falhou'):
+    partial = job.get('usados',{}).get('research_outcome',{}).get('state') == 'partial'
+    if job['status'] not in ('interrompida', 'cancelada', 'falhou') and not (job['status']=='concluida' and partial):
         raise AgentErro('pesquisa não pode ser retomada neste estado', 'estado')
     job['status'] = 'em_andamento'
     job.get('usados',{}).pop('partial_delivery_ready',None)
-    if job.get('usados', {}).get('research_outcome', {}).get('state') == 'blocked':
+    # User-requested retry can revisit network failures, under the existing
+    # remaining page/time budget. Ordinary checkpoint reload keeps its cooldown.
+    job['usados'].pop('failed_source_reads', None)
+    job['usados'].pop('failed_source_expiry', None)
+    if job.get('usados', {}).get('research_outcome', {}).get('state') in ('blocked', 'partial'):
         job['usados'].pop('synthesis_attempted', None)
     salvar_job(db, job, forcar_status=True)
     return job
+
+
+def _published_answer_reviewed(synthesis):
+    """Bind every published paragraph to its original review after omissions."""
+    findings = synthesis.get('findings') or []
+    reviews = synthesis.get('semantic_review') or []
+    provenance = synthesis.get('provenance') or []
+    if not findings or not reviews or not provenance:
+        return False
+    indexed = {}
+    for review in reviews:
+        original = review.get('paragraph')
+        if type(original) is not int or original < 0 or original in indexed:
+            return False
+        indexed[original] = review
+    published = set()
+    for position, finding in enumerate(findings):
+        proofs = [p for p in provenance if type(p.get('paragraph')) is int and p['paragraph'] == position]
+        original = {p.get('original_paragraph', position) for p in proofs}
+        if len(original) != 1:
+            return False
+        original = original.pop()
+        if type(original) is not int or original in published or indexed.get(original, {}).get('state') != 'SUPPORTED':
+            return False
+        if {p.get('evidence_id') for p in proofs} != set(finding.get('evidence_ids') or []):
+            return False
+        published.add(original)
+    return published == {i for i, r in indexed.items() if r.get('state') == 'SUPPORTED'}
 
 
 def _completion_outcome(job, evidencias, lacunas, assisted=False):
@@ -2077,8 +2241,7 @@ def _completion_outcome(job, evidencias, lacunas, assisted=False):
     # Preliminary extraction also includes the user's question and unused
     # context. Keep those verdicts intact; assess the published answer using
     # its own validated citations, review and requirement coverage.
-    reviewed_answer=bool(sintese.get('llm') and findings and reviews
-        and len(reviews)==len(findings) and all(r.get('state')=='SUPPORTED' for r in reviews)
+    reviewed_answer=bool(sintese.get('llm') and _published_answer_reviewed(sintese)
         and all(set(f.get('evidence_ids',[])) & read_ids for f in findings)
         and sintese.get('provenance') and sintese.get('answer_coverage',{}).get('complete'))
     provenance_unverified = any(r.get('attribute')=='source_authority' and r['state']!='SUPPORTED'
@@ -2135,6 +2298,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
     t0 = t0 or time.monotonic()
     timeout = job["orcamento"].get("timeout_s", 120)
     prazo = t0 + timeout
+    retrieval_deadline = prazo - min(40.0, timeout * .35) if sintetizar_fn else prazo
     vistas = set(job["usados"].get("consultas_etapas", {}))
     todas_evid = []
     vereditos = []
@@ -2174,7 +2338,7 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
                 emitir(db, job["id"], owner, "orchestrator", "research_cancelled", "ok",
                        "Interrompida pelo usuário; retomável.", {})
                 return _resumo(db, job)
-            if time.monotonic() > prazo:
+            if time.monotonic() > prazo or (etapa["tipo"] in ("busca", "ler") and time.monotonic() >= retrieval_deadline):
                 job["pendencias"].append("tempo esgotado antes de " + etapa["id"])
                 break
             msg = _orcamento_etapa(job, etapa["tipo"])
@@ -2188,14 +2352,14 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             try:
                 if etapa["tipo"] == "busca":
                     etapa["_achados"] = agente_busca(db, job, etapa, provedores, vistas,
-                                                     deve_parar=deve_parar, prazo=prazo)
+                                                     deve_parar=deve_parar, prazo=retrieval_deadline)
                 elif etapa["tipo"] == "ler":
                     teto = max(1, job["orcamento"].get("paginas", 3) // max(1, len(
                         [s for s in job["plano"] if s["tipo"] == "ler"])))
                     fonte = _achados_etapa(job, etapa)
                     etapa["_evidencias"] = agente_analista(db, job, etapa, fonte,
                                                           recuperar_fn, teto,
-                                                          deve_parar=deve_parar, prazo=prazo)
+                                                          deve_parar=deve_parar, prazo=retrieval_deadline)
                     todas_evid.extend(etapa["_evidencias"])
                     todas_evid = list({e["id"]: e for e in todas_evid if e.get("id")}.values())
                 elif etapa["tipo"] == "analisar":
@@ -2258,8 +2422,9 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             lacunas += [q for inv in job["investigacoes"] for q in inv.get("follow_up", [])]
         lacunas = list(dict.fromkeys(lacunas))[:8]
         zero_gain = bool(job["usados"].get("replans", 0) and
-                         (job["usados"].get("adaptive_rounds") or [{}])[-1].get("new_evidence") == 0)
-        if lacunas and not zero_gain and not _orcamento_ok(job) and job["plano"] and \
+                         (job["usados"].get("adaptive_rounds") or [{}])[-1].get("new_evidence") == 0
+                         and not (job["usados"].get("adaptive_rounds") or [{}])[-1].get("requirement_changes"))
+        if time.monotonic() < retrieval_deadline and lacunas and not zero_gain and not _orcamento_ok(job) and job["plano"] and \
                 job["usados"].get("replans", 0) < job["orcamento"].get("replans", 1) and \
                 all(s.get("status") != "pendente" for s in job["plano"]):
             v0 = job["plano_versao"]
@@ -2293,12 +2458,18 @@ def executar(db, job_id: str, owner: str, provedores: list, recuperar_fn=None,
             durable = todas_evid or _evidencias_job(db,job)
             job['sintese'] = agente_sintetizador(db,job,durable,vereditos)
             job['auditoria'] = agente_auditor(db,job,job['sintese'],durable)
-        job["status"] = "concluida" if not job["pendencias"] or todas_evid else \
-            ("concluida" if todas_evid else "interrompida")
-        if job["status"] == "interrompida" and not job["pendencias"]:
-            job["pendencias"].append("sem evidências suficientes")
+        durable = todas_evid or _evidencias_job(db, job)
+        lidas = [e for e in durable if _evidencia_lida(e)]
+        if not lidas:
+            # "Concluída" sem nenhuma fonte lida é o pior falso positivo:
+            # preserva o resultado parcial, mas não o apresenta como completo.
+            job["status"] = "interrompida"
+            if not any("sem evidências" in str(p).lower() for p in job["pendencias"]):
+                job["pendencias"].append("sem evidências lidas suficientes")
+        else:
+            job["status"] = "concluida"
         job["usados"]["research_outcome"] = _completion_outcome(
-            job, todas_evid or _evidencias_job(db, job), lacunas, bool(sintetizar_fn))
+            job, durable, lacunas, bool(sintetizar_fn))
         if job['usados']['research_outcome']['state'] == 'blocked':
             job['status'] = 'interrompida'
         if job['status']=='interrompida':

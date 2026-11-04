@@ -123,6 +123,12 @@ const root2 = new Element('main');
 JDUI.mount(root2, [{ blocks: [{ type: 'ui', component: 'sources',
   props: { items: [sem] } }] }], {});
 t('card-sem-origem', !root2.textContent.includes('original declarado'));
+const offerRoot = new Element('main');
+JDUI.mount(offerRoot, [{ blocks: [{ type: 'ui', component: 'sources',
+  props: { items: [Object.assign({}, sem, {tipo:'Oferta', trecho:'Preço observado: R$ 42,00.'})] } }] }], {});
+t('oferta-preco-visivel', offerRoot.textContent.includes('R$ 42,00'));
+t('oferta-nao-e-citacao-dom', offerRoot.textContent.includes('Dados recuperados da oferta') &&
+  !offerRoot.textContent.includes('Trecho recuperado'));
 const bulkKeys = [], inlineKeys = [];
 const groups = [v.msg, v.msg];
 JDUI.mount(new Element('main'), groups, {loadState: key => {bulkKeys.push(key); return {};}});

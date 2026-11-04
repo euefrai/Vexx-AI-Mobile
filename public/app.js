@@ -1237,15 +1237,24 @@ async function renderPesquisas() {
     const ROT = { criada: 'criada', em_andamento: 'em andamento', pausada: 'pausada',
       concluida: 'conclu?da', interrompida: 'interrompida', cancelada: 'cancelada',
       falhou: 'falhou' };
+    const OUTCOME = { complete: 'cobertura completa', partial: 'resultado parcial',
+      blocked: 'bloqueada pelo provedor' };
     jobs.forEach(job => {
       const card = document.createElement('div');
       card.className = 'doc-item';
       const strong = document.createElement('strong');
       strong.textContent = job.objetivo || 'Pesquisa sem objetivo';
       card.appendChild(strong);
+      const outcome = job.research_outcome || {};
+      const terminal = job.status === 'concluida' || job.status === 'interrompida';
+      const semEvidencia = terminal && (Number(job.evidencias || 0) === 0
+        || (outcome.state && Number(outcome.read_sources || 0) === 0));
+      const statusTexto = (ROT[job.status] || job.status || '')
+        + (semEvidencia ? ' · sem evidências lidas' : '');
       const meta = document.createElement('small');
-      meta.textContent = [ROT[job.status] || job.status || '', job.modo || '',
-        job.atualizado_em || job.criado_em || ''].filter(Boolean).join(' · ');
+      meta.textContent = [statusTexto, job.modo || '',
+        OUTCOME[outcome.state] || '', job.atualizado_em || job.criado_em || '']
+        .filter(Boolean).join(' · ');
       card.appendChild(meta);
       const acts = document.createElement('div');
       acts.className = 'doc-actions';
@@ -2029,12 +2038,14 @@ async function loadModels(force) {
     modelCatalog = { models: r.models || [], providers: r.providers || [], default: r.default || '',
       itemProvider: Object.fromEntries((r.items || []).map(i => [i.id, i.provider])) };
     const cur = fillModels($('modelSearch') ? $('modelSearch').value : '');
-    if (!modeloAtivo() && r.default) localStorage.setItem('julia-model', r.default);
+    // Persist only an explicit choice. The server resolves an implicit default
+    // against the live catalog; freezing it here breaks newly created jobs.
     const escolhido = modeloAtivo() || r.default || '?';
     const pid = providerOf(escolhido);
-    const aviso = (pid !== 'hermes' && !isConfigured(pid))
+    const noCatalogo = modelCatalog.models.includes(escolhido);
+    const aviso = !noCatalogo ? ' · fora do catálogo; escolha outro modelo' : (pid !== 'hermes' && !isConfigured(pid))
       ? (providerFlag(pid, 'auth_error') ? ' · chave recusada no PC' : ' · sem chave no PC') : '';
-    $('aiStatus').textContent = (isConfigured(pid) ? 'Modelo selecionado · ' : 'Modelo indisponível · ') + escolhido + aviso;
+    $('aiStatus').textContent = (noCatalogo && isConfigured(pid) ? 'Modelo selecionado · ' : 'Modelo indisponível · ') + escolhido + aviso;
     return true;
   } catch (_) { if (version === modelLoadVersion) $('aiStatus').textContent = 'IA: sem resposta do PC'; return false; }
 }

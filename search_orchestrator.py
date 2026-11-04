@@ -146,6 +146,8 @@ _GENERICOS_CORRESPONDENCIA = {
 
 
 _GENERICOS_CORRESPONDENCIA.update({
+    "criador", "criadores", "finalidade", "enunciado", "fundacao", "fundação", "fundadores",
+    "mostre", "consulte", "retorno", "alteram", "original",
     "principais", "novidades", "acontecimentos", "relevantes",
     "usar", "utilizar", "utilize", "utilizando", "explique-me",
     "como", "funciona", "funcionam", "traga", "trazer", "explique", "explique-me", "fontes", "fonte", "tecnicas", "técnicas",
@@ -173,7 +175,7 @@ def _assuntos_naturais(consulta: str) -> list:
     """
     import query_intelligence as qi
     norm = qi.normalized(consulta)
-    if not re.search(r'\b(?:o que (?:e|faz|retorna)|para que serve|diferencas? entre)\b', norm):
+    if not re.search(r'\b(?:o que (?:e|faz|retorna)|para que serve|diferencas? entre|quem (?:fundou|criou))\b', norm) and not qi._facet_subject(consulta):
         return []
     filter_scope = re.sub(r'\bo que nao\b', 'o que', norm)
     if re.search(r'\b(?:nao|sem|exceto|exclu\w*|ate|abaixo|acima|antes|depois|desde)\b|r\$', filter_scope):
@@ -185,6 +187,8 @@ def _assuntos_naturais(consulta: str) -> list:
     remaining = norm
     for entity in entities:
         remaining = remaining.replace(qi.normalized(entity), '')
+    if any(r['attribute'] in ('foundation_date','creation_date') for r in requirements):
+        remaining = re.sub(r'\bem que ano\b', '', remaining)
     remaining = re.sub(r'\b(?:na|no|em)\s+documentacao\s+(?:oficial\s+)?(?:d[eo]\s+.+?\s+)?(?=(?:o que|como|para que)\b|$)', '', remaining)
     if re.search(r'(?<!de )\b(?:em|no|na|nos|nas)\s+\w+', remaining):
         # A qualified API may leave an OS, place or other unparsed context
@@ -212,6 +216,11 @@ def _termos_correspondencia(consulta: str) -> list:
         consulta=re.sub(r'\b(texto completo(?: aberto)?|acesso aberto|com doi|original)\b',' ',consulta,flags=re.I)
     if request['domain'] == 'documents':
         consulta=re.sub(r'\b(documenta[cç][aã]o|documentation|oficial|oficiais)\b', ' ', consulta, flags=re.I)
+    if RX_PRODUTO.search(_sem_acentos(consulta)):
+        # Presentation/freshness instructions are not words the product page
+        # must repeat. Actual models/specifications remain in the query.
+        consulta=re.sub(r'\blinks?\s+diretos?(?:\s+(?:do|dos|de)\s+produtos?)?\b', ' ', consulta, flags=re.I)
+        consulta=re.sub(r'\b(pre[cç]os?)\s+atuais?\b|\b(pre[cç]o)\s+atual\b', 'preco', consulta, flags=re.I)
     consulta=re.sub(r'\bfaz\s+bem\b',' ',consulta,flags=re.I)
     return [t for t in _termos(consulta) if t not in _GENERICOS_CORRESPONDENCIA]
 
@@ -222,7 +231,8 @@ def _tem_termo(termo: str, texto: str) -> bool:
                "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",), "cancelamento": ("cancellation", "cancelled", "cancelling"), "materiais": ("materials",), "semicondutores": ("semiconductor", "semiconductors")}
     term = _sem_acentos(termo)
     text = _sem_acentos(texto)
-    aliases.update({'exemplos':('examples','example'),'limitacoes':('limitations','limitation')})
+    aliases.update({'exemplos':('examples','example'),'limitacoes':('limitations','limitation'),
+                    'linguagem':('language','programming')})
     if re.fullmatch(r'[a-z_]\w*(?:\.[a-z_]\w*)+',term):
         # Semantic HTML can split a qualified API name across adjacent spans.
         text=re.sub(r'\s*\.\s*','.',text)
@@ -290,6 +300,8 @@ def _context_mismatch(a: dict, consulta: str) -> list:
     import query_intelligence as qi
     operations={r['entity'] for r in qi.answer_requirements(consulta)
                 if re.fullmatch(r'\w+(?:\.\w+)+',r['entity'])}
+    if re.search(r'\blinguagem\b',q) and not re.search(r'\b(linguagem|language|programming|programacao)\b',body):
+        reasons.append('CONTEXT_MISMATCH')
     if operations:
         # A generic calculator/dictionary cannot answer a named API. Preserve
         # sparse metadata when its actual path identifies the requested method.
@@ -308,6 +320,21 @@ def _context_mismatch(a: dict, consulta: str) -> list:
         if not (any(present) if RX_COMPARACAO.search(consulta) else all(present)):
             reasons.append('ENTITY_MISMATCH')
     named = []
+    if RX_PRODUTO.search(q) and not RX_COMPARACAO.search(q):
+        # A product page with another GPU model/capacity is not a substitute.
+        # Use its title, not related-product recommendations in the page body.
+        gpu = r'\b(?:rtx|gtx)\s*\d{3,4}\b'
+        requested = {re.sub(r'\s+', '', value) for value in re.findall(gpu, q)}
+        title = _sem_acentos(str(a.get('titulo') or ''))
+        offered = {re.sub(r'\s+', '', value) for value in re.findall(gpu, title)}
+        if requested and offered:
+            if not requested & offered:
+                reasons.append('ENTITY_MISMATCH')
+            else:
+                import shopping
+                wanted_vram, found_vram = shopping._vram_gb(q), shopping._vram_gb(title)
+                if wanted_vram is not None and found_vram is not None and wanted_vram != found_vram:
+                    reasons.append('VARIANT_MISMATCH')
     model_entities={r['entity'] for r in qi.answer_requirements(consulta)
                     if r['attribute'] in ('weight','battery') and re.search(r'\d',r['entity']) and qi._model_only_scope(consulta)}
     named.extend(qi.entity_alias_matches(name,body) for name in model_entities)
@@ -967,7 +994,7 @@ def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
     if info.get("academica"):
         ordem.extend(["crossref", "openalex", "arxiv"])
     if info.get("produto"):
-        ordem.extend(["bing", "marginalia"])
+        ordem.extend(["kabum", "bing", "marginalia"])
     news_intent = not request or request.get('domain') == 'news' or bool(re.search(
         r'\b(noticias?|manchetes|hoje|ontem|recentes?|ultimas?)\b', _sem_acentos(request.get('original_request', ''))))
     if sp.CLASSE_NOTICIA in classes and not info.get("academica") and news_intent:

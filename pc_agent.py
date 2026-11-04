@@ -30,6 +30,7 @@ import hermes_bridge
 import intent
 import jdui
 import providers
+import inference_status
 import tool_protocol
 import julia_auth as JULIA_auth
 import learning
@@ -372,6 +373,7 @@ def ai_config() -> dict:
     return {
         "proxy": os.environ.get("HERMES_PROXY_URL", hermes_bridge.DEFAULT_PROXY_URL),
         "model": os.environ.get("JULIA_AI_MODEL", hermes_bridge.DEFAULT_MODEL),
+        "model_implicit": not bool(os.environ.get("JULIA_AI_MODEL")),
         "fallbacks": _lista_fallbacks(os.environ.get("JULIA_AI_FALLBACKS", "")),
         "system": system_with_identity((os.environ.get("JULIA_SYSTEM_PROMPT", "").strip()
                                         or SYSTEM_PADRAO)[:2000]),
@@ -408,19 +410,50 @@ def gerar_texto(cfg: dict, messages: list, preferido: str = "",
     Modelos "provedor/modelo" roteiam para providers.py; IDs simples usam o
     Hermes (legado)."""
     fila = modelos_tentativa(cfg, preferido)
+    lookup_started = time.monotonic()
+    fila = inference_status.effective_models(cfg, fila, timeout=min(2, timeout))
+    timeout = max(.1, timeout - (time.monotonic() - lookup_started))
     if any(providers.dividir(m)[0] != "hermes" for m in fila):
         return providers.tentar_modelos(
             fila, messages, timeout_por_tentativa=timeout,
             max_tokens=max_tokens or cfg["max_tokens"],
             proxy=cfg.get("proxy") or "")
-    return hermes_bridge.tentar_modelos(
-        cfg["proxy"], fila, messages,
-        timeout_por_tentativa=timeout, max_tokens=max_tokens or cfg["max_tokens"])
+    structured = {}
+    if cfg.get('_research_response_format') and len(fila) == 1:
+        import research_output
+        started = time.monotonic()
+        if research_output.supported(cfg['proxy'], fila[0], timeout=timeout):
+            structured['response_format'] = cfg['_research_response_format']
+            effort = research_output.reasoning_effort(cfg['proxy'], fila[0])
+            if effort:structured['reasoning_effort'] = effort
+        timeout = max(.1, timeout-(time.monotonic()-started))
+    attempt_started=time.monotonic()
+    try:
+        result = hermes_bridge.tentar_modelos(
+            cfg["proxy"], fila, messages,
+            timeout_por_tentativa=timeout, max_tokens=max_tokens or cfg["max_tokens"], **structured)
+    except hermes_bridge.BridgeErro as exc:
+        metadata=getattr(exc,'response_metadata',{})
+        remaining=timeout-(time.monotonic()-attempt_started)
+        if not (structured and exc.codigo=='vazia' and metadata.get('finish_reason')=='stop'
+                and remaining>=5):
+            raise
+        # Some gateways advertise strict JSON but return null content. Retry
+        # once on the same model, retaining declared reasoning effort and all
+        # downstream JSON/evidence validation, within the original deadline.
+        result=hermes_bridge.tentar_modelos(cfg['proxy'],fila,messages,
+            timeout_por_tentativa=remaining,max_tokens=max_tokens or cfg['max_tokens'],
+            **({'reasoning_effort':structured['reasoning_effort']} if structured.get('reasoning_effort') else {}))
+        result['structured_output_fallback']='empty_content'
+    if structured:result['structured_output_requested'] = True
+    return result
 
 
 def gerar_stream(cfg: dict, modelos: list, messages: list, emitir,
                  deve_parar=None, max_tokens: int = 0) -> dict:
     """Stream com fallback; roteia multi-provedor quando houver prefixo."""
+    if not (deve_parar and deve_parar()):
+        modelos = inference_status.effective_models(cfg, modelos)
     if any(providers.dividir(m)[0] != "hermes" for m in modelos):
         return providers.chat_stream_fb(
             modelos, messages, emitir, deve_parar,
@@ -1479,6 +1512,205 @@ def intencao_pesquisa(texto: str) -> bool:
     return research.consulta_tem_assunto(re.sub(r'\b(?:encontre|procure)\b',' ',texto,flags=re.I) if explicit_find else texto)
 
 
+# P0-3: retrieval-first para perguntas factuais. O gatilho explicito acima
+# continua valendo; este classificador cobre quem/qual/quando/onde/como,
+# entidades, datas, numeros, comparacoes e recomendacoes sem transformar
+# conversa pessoal, memoria, codigo local ou criacao em busca web.
+_RX_FACTUAL_STRONG_Q = re.compile(
+    r"\b(?:quem|qual|quais|quando|onde|quanto|quantos|quantas)\b")
+_RX_FACTUAL_WHAT = re.compile(
+    r"\b(?:o que (?:e|sao|foi|foram|eram|significa|quer dizer)|"
+    r"que (?:e|sao|foi|foram)|quem (?:e|foi|eram|sao)|"
+    r"em que (?:ano|dia|pais|epoca|seculo)|que (?:ano|dia))\b")
+_RX_FACTUAL_HOW = re.compile(
+    r"\bcomo (?:funciona|funcionam|surgiu|surgiram|foi|foram|e feito|"
+    r"e produzid[oa]|acontece|aconteceu|se formou|se formam|nasceu|morreu)\b")
+_RX_FACTUAL_WHY = re.compile(r"\b(?:por que|porque)\b")
+_RX_FACTUAL_COMPARE = re.compile(
+    r"\b(?:diferenca entre|comparacao entre|compare|comparar|versus|"
+    r"vs|melhor que)\b")
+_RX_FACTUAL_RECOMMEND = re.compile(
+    r"\b(?:me recomende|recomende|recomendacao|qual (?:e )?(?:o|a) melhor|"
+    r"quais (?:sao )?(?:os|as) melhores|vale a pena|qual devo|o que devo)\b")
+_RX_FACTUAL_VERB = re.compile(
+    r"\b(?:foi|eram|nasceu|morreu|criou|inventou|descobriu|lancou|ganhou|"
+    r"elegeu|aconteceu|assinou|fundou|comecou|terminou|escreveu|publicou|"
+    r"estreou|acontecera|sera)\b")
+_RX_FACTUAL_TIME = re.compile(
+    r"\b(?:1[0-9]{3}|20[0-9]{2}|seculo|hoje|ontem|anteontem|amanha|"
+    r"esta semana|este mes|este ano|ultimas noticias|agora|atualmente)\b")
+_RX_FACTUAL_NUMBER = re.compile(
+    r"(?:r\$\s?\d|\d+(?:[.,]\d+)?\s*(?:%|km|kg|m|cm|mm|milhoes|bilhoes|"
+    r"habitantes|anos|graus|celsius|fahrenheit|dolares|reais))")
+_RX_FACTUAL_SUMMARY = re.compile(
+    r"\b(?:resuma|resumir|resumo (?:de|sobre|do|da))\b")
+_RX_FACTUAL_TALK = re.compile(
+    r"\b(?:me fale|fale|fala|me conte|conte) sobre\b")
+_RX_FACTUAL_HISTORY = re.compile(
+    r"\b(?:historia|origem|surgimento|contexto historico)\b")
+_RX_FACTUAL_ENTITY = re.compile(
+    r"(?:[A-ZÁÀÂÃÉÊÍÓÔÕÚÇ][a-záàâãéêíóôõúç]{2,}|[A-Z]{2,})")
+
+_RX_FACTUAL_NO_SEARCH = re.compile(
+    r"\b(?:nao|sem)\s+(?:pesquis\w*|busc\w*|internet|google)\b|\boffline\b")
+_RX_FACTUAL_CREATIVE = re.compile(
+    r"\b(?:piada|poema)\b|"
+    r"\b(?:conte|escreva|crie|gere|faca|desenhe)\b.{0,30}"
+    r"\b(?:uma|um)\s+(?:historia|conto|roteiro|musica|letra|cancao|"
+    r"imagem|foto|desenho)\b|"
+    r"\b(?:gere|desenhe|crie)\s+(?:uma?\s+)?(?:imagem|foto|desenho)\b")
+_RX_FACTUAL_INSTRUCTION = re.compile(
+    r"^\s*(?:escreva|conte|crie|gere|faca|monte|desenhe|traduza|corrija|"
+    r"refatore|implemente|programe|calcule|responda|liste|mostre|explique)\b")
+_RX_FACTUAL_CODE = re.compile(
+    r"\b(?:codigo|python|javascript|typescript|java|sql|regex|html|css|"
+    r"bug|funcao|script|programa)\b")
+_RX_FACTUAL_HOWTO = re.compile(
+    r"\bcomo (?:faco|fazer|consigo|posso|criar|abrir|instalar|configurar|"
+    r"usar|baixar|acessar|mudar|corrigir)\b")
+_RX_FACTUAL_PERSONAL = re.compile(
+    r"\b(?:meu|minha|meus|minhas)\s+(?:nome|prova|agenda|arquivo|pc|"
+    r"computador|codigo|conversa|memoria|rotina|tarefa|trabalho|vida|"
+    r"saude|peso|altura|idade|email|telefone|endereco|senha|gastos|"
+    r"conta|sentimento|filha|filho|familia)\b|"
+    r"\b(?:quanto|o que|como)\s+eu\s+(?:tenho|ganho|gasto|sinto|estou|"
+    r"peso|media|faco|sou)\b|"
+    r"\b(?:nossa|nesta|desta)\s+(?:conversa|vida|rotina)\b|"
+    r"\b(?:o que|que)\s+(?:ja )?(?:falei|disse)\b|"
+    r"\bsobre mim\b|"
+    r"\b(?:lembre-se|lembra|memoria|guarde|anote|esqueca)\b")
+_RX_FACTUAL_IDENTITY = re.compile(
+    r"\b(?:quem (?:e|foi) voce|qual (?:e )?(?:o )?(?:seu|teu) nome|"
+    r"se apresente|como (?:voce|vc) funciona|"
+    r"voce (?:e|foi) (?:um )?(?:humano|robo|ia|modelo)|"
+    r"(?:fale|fala|conte) sobre (?:voce|vc))\b")
+_RX_FACTUAL_LOCAL = re.compile(
+    r"\bque horas (?:sao|e)\b|\bque dia (?:e|foi) hoje\b|"
+    r"\b(?:clima|temperatura) (?:aqui|onde estou)\b")
+_RX_FACTUAL_MATH = re.compile(
+    r"^\s*(?:quanto (?:e|vale)\s*)?[\d\s()+\-*/^.,%]+$")
+_RX_FACTUAL_DOC = re.compile(r"\b(?:documento|arquivo|anexo|pdf)\b")
+_RX_FACTUAL_DOC_ACT = re.compile(
+    r"\b(?:resuma|resumir|analise|analisar|leia|ler|deste|desse|"
+    r"anexado|enviado)\b")
+_RX_FACTUAL_META = re.compile(
+    r"\b(?:voce|vc)\b.{0,40}\b(?:acha|pensa|gosta|prefere|comeu|sente)\b")
+
+
+def _sem_acentos_factual(texto: str) -> str:
+    sem = "".join(c for c in unicodedata.normalize("NFKD", (texto or "").lower())
+                  if not unicodedata.combining(c))
+    return re.sub(r"\s+", " ", sem).strip()
+
+
+def _entidades_factuais(texto: str) -> list:
+    """Nomes proprios/acronimos, ignorando a primeira palavra da frase."""
+    palavras = re.findall(r"[A-Za-zÀ-ÿ0-9]+", texto or "")
+    return [p for i, p in enumerate(palavras)
+            if i > 0 and _RX_FACTUAL_ENTITY.fullmatch(p)]
+
+
+def classificar_intencao_factual(texto: str) -> dict:
+    """Classifica pergunta factual que se beneficia de busca web.
+
+    Retorna ``{"factual": bool, "score": int, "signals": [...],
+    "entities": [...], "reason": str}``. E deterministico e conservador:
+    perguntas pessoais, memoria, codigo local, calculo, criacao e documentos
+    anexados nao disparam busca automatica. O objetivo e retrieval-first sem
+    transformar toda conversa em pesquisa.
+    """
+    bruto = texto or ""
+    t = _sem_acentos_factual(bruto)
+    info = {"factual": False, "score": 0, "signals": [],
+            "entities": [], "reason": ""}
+    if len(t) < 8:
+        info["reason"] = "curta"
+        return info
+    for rx, motivo in (
+            (_RX_FACTUAL_NO_SEARCH, "pedido_sem_busca"),
+            (_RX_FACTUAL_PERSONAL, "pessoal_ou_memoria"),
+            (_RX_FACTUAL_IDENTITY, "identidade"),
+            (_RX_FACTUAL_CREATIVE, "criativo"),
+            (_RX_FACTUAL_HOWTO, "instrucao_local"),
+            (_RX_FACTUAL_LOCAL, "dado_local"),
+            (_RX_FACTUAL_META, "meta_conversa")):
+        if rx.search(t):
+            info["reason"] = motivo
+            return info
+    if _RX_FACTUAL_MATH.match(t):
+        info["reason"] = "calculo_local"
+        return info
+    if _RX_FACTUAL_DOC.search(t) and _RX_FACTUAL_DOC_ACT.search(t):
+        info["reason"] = "documento_anexado"
+        return info
+    try:
+        tem_assunto = research.consulta_tem_assunto(bruto)
+    except Exception:
+        info["reason"] = "erro_classificador"
+        return info
+    if not tem_assunto:
+        info["reason"] = "sem_assunto"
+        return info
+
+    forte = bool(_RX_FACTUAL_STRONG_Q.search(t))
+    o_que = bool(_RX_FACTUAL_WHAT.search(t))
+    como = bool(_RX_FACTUAL_HOW.search(t))
+    por_que = bool(_RX_FACTUAL_WHY.search(t))
+    comparacao = bool(_RX_FACTUAL_COMPARE.search(t))
+    recomendacao = bool(_RX_FACTUAL_RECOMMEND.search(t))
+    resumo = bool(_RX_FACTUAL_SUMMARY.search(t))
+    fale = bool(_RX_FACTUAL_TALK.search(t))
+    historia = bool(_RX_FACTUAL_HISTORY.search(t))
+    verbo = bool(_RX_FACTUAL_VERB.search(t))
+    tempo = bool(_RX_FACTUAL_TIME.search(t))
+    numero = bool(_RX_FACTUAL_NUMBER.search(t))
+    entidades = _entidades_factuais(bruto)
+
+    # Instrucoes locais e codigo so continuam quando ha sinal factual forte
+    # (ex.: "compare Python e JavaScript").
+    if _RX_FACTUAL_INSTRUCTION.search(t) and not (
+            o_que or como or comparacao or recomendacao or resumo or fale):
+        info["reason"] = "instrucao"
+        return info
+    if _RX_FACTUAL_CODE.search(t) and not (o_que or como or comparacao):
+        info["reason"] = "codigo_local"
+        return info
+    # Follow-up curto sem entidade/data ("qual a capital?", "e ele?") precisa
+    # do contexto da conversa; nao vira busca generica.
+    if len(t.split()) <= 3 and not (entidades or tempo or numero
+                                   or comparacao or recomendacao):
+        info["reason"] = "followup_curto"
+        return info
+
+    pontos, sinais = 0, []
+    for ativo, nome, peso in (
+            (o_que, "o_que_e", 2),
+            (como, "como_funciona", 2),
+            (comparacao, "comparacao", 2),
+            (recomendacao, "recomendacao", 2),
+            (forte, "pergunta_factual", 2),
+            (por_que, "por_que", 2),
+            (resumo, "resumo_pedido", 1),
+            (fale, "fale_sobre", 1),
+            (historia, "contexto_historico", 1),
+            (verbo, "verbo_factual", 1),
+            (tempo, "data_ou_atualidade", 1),
+            (numero, "numero_ou_unidade", 1),
+            (bool(entidades), "entidade", 1)):
+        if ativo:
+            pontos += peso
+            sinais.append(nome)
+    info.update(factual=pontos >= 2, score=pontos, signals=sinais,
+                entities=entidades[:8],
+                reason="factual" if pontos >= 2 else "sinais_insuficientes")
+    return info
+
+
+def intencao_factual(texto: str) -> bool:
+    """Atalho booleano do classificador factual (P0-3)."""
+    return bool(classificar_intencao_factual(texto).get("factual"))
+
+
 APROFUNDADA_TRIGGERS = ("a fundo", "aprofundada", "aprofundado", "relatório completo",
                         "relatorio completo", "dossiê", "dossie", "verifique se",
                         "é verdade", "e verdade", "checar fatos", "comparar fontes")
@@ -2145,9 +2377,20 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                     research.bloco_grounding(extras['fontes'], hoje_pu)
                     + " (fontes específicas pedidas pelo usuário; use somente os trechos lidos, "
                     "cite cada conclusão e explicite fontes bloqueadas ou lacunas da comparação)")
-    if cfg.get("pesquisa_web", True) and intencao_pesquisa(texto_usuario) \
+    busca_explicita = bool(cfg.get("pesquisa_web", True)
+                           and intencao_pesquisa(texto_usuario))
+    factual_first = {"factual": False}
+    if (cfg.get("pesquisa_web", True) and not busca_explicita
+            and not eh_shop and not extras.get("doc_id")):
+        factual_first = classificar_intencao_factual(texto_usuario)
+    if (busca_explicita or factual_first.get("factual")) \
             and not eh_shop and extras["podem_pesquisar"] \
             and not extras.get("pagina_usuario"):
+        if factual_first.get("factual"):
+            extras["factual_first"] = factual_first
+            log.info("retrieval-first factual: score=%s sinais=%s",
+                     factual_first.get("score"),
+                     ",".join(factual_first.get("signals") or [])[:120])
         hoje = (_data_local(contexto_local) or datetime.now().date()).strftime("%d/%m/%Y")
         consulta = (texto_usuario or "")[:200]
         termos_mem = termos_memoria_pesquisa(db, owner, texto_usuario)
@@ -2259,8 +2502,23 @@ def _ja_tem_fontes_markdown(texto: str) -> bool:
     return False
 
 
+_RX_CITACAO_FONTE = re.compile(r"\[S(\d+)\]")
+
+
+def _tem_citacao_inline(texto: str, fontes: list) -> bool:
+    """True quando o texto cita no corpo ao menos um ID de fonte recuperada."""
+    ids = {str(f.get("id") or "").strip() for f in fontes
+           if str(f.get("id") or "").strip()}
+    if not ids:
+        return False
+    citadas = {"S" + m.group(1) for m in _RX_CITACAO_FONTE.finditer(texto or "")}
+    return bool(citadas & ids)
+
+
 def anexar_fontes(texto: str, fontes: list, termo_img: str = "", midia: list = None, pesquisa_executada=False, consulta='') -> str:
     texto = texto or ""
+    if pesquisa_executada and fontes:
+        texto = inference_status.grounded_reply(texto, fontes, consulta or termo_img)
     if pesquisa_executada:
         import research_view
         texto=research_view.strip_model_research_cards(texto)
@@ -2269,7 +2527,17 @@ def anexar_fontes(texto: str, fontes: list, termo_img: str = "", midia: list = N
         promise_only=len(texto.strip())<220 and bool(re.match(r'\s*(?:vou (?:pesquisar|buscar)|procurarei|pesquisarei|buscarei)\b',texto,re.I))
         denies_access=bool(fontes) and bool(re.search(r'n[aã]o (?:tenho|consigo|posso).{0,100}(?:acesso|pesquis|navega)',texto,re.I))
         if re.search(r'<tool_call\b',texto,re.I) or promise_only or denies_access:
-            texto='A redação do modelo não pôde ser utilizada; preservei os resultados recuperados.\n\n'+research.resumo_deterministico(fontes,consulta or termo_img or 'fontes recuperadas').replace('Sem inferência no momento; ','')
+            texto='A redação do modelo não pôde ser utilizada; preservei os resultados recuperados.\n\n'+research.resumo_deterministico(fontes,consulta or termo_img or 'fontes recuperadas',citar=bool(fontes)).replace('Sem inferência no momento; ','')
+    if fontes and pesquisa_executada and any(
+            f.get("status") == "aberta" for f in fontes) \
+            and not _tem_citacao_inline(texto, fontes):
+        # P0-3: fonte lida sem citação inline não sustenta a redação do
+        # modelo. Entrega o digest determinístico, que cita [S1..].
+        texto = ("A redação do modelo não citou as fontes lidas; segue o resumo "
+                 "verificável do que foi recuperado.\n\n"
+                 + research.resumo_deterministico(
+                     fontes, consulta or termo_img or "fontes recuperadas",
+                     citar=True))
     if midia:
         import research_view
         fence = research_view.media_fence(midia)
@@ -2925,7 +3193,8 @@ def sintetizar_grafico_evolucao(db, owner: str) -> str:
 
 
 _JOB_START_RE = re.compile(
-    r"(?i)pesquis[ae] (?:a fundo|profunda) (?:sobre )?(.{3,500}?)[.?!]*$")
+    r"(?i)\b(?:pesquis[ae]\s+(?:a fundo|profunda)|investigue\s+a\s+fundo)"
+    r"(?:\s*:\s*|\s+)(?:sobre\s+)?(.{3,500}?)[.?!]*$")
 
 
 def _ultimo_job(db, owner: str, estados: tuple = (), conv=None) -> dict | None:
@@ -3212,7 +3481,25 @@ def _shopping_sem_ofertas(shop_res):
     return shopping.sanitizar_links_resposta(shopping.resumo_texto(shop_res), shop_res)
 
 
+def _shopping_resposta_factual(shop_res, user_text):
+    """Price/link requests can be answered from verified offers without an LLM."""
+    text = query_intelligence.normalized(user_text)
+    products = (shop_res or {}).get('produtos') or []
+    if (not products or not re.search(r'\b(preco|precos|link|links)\b',text)
+            or re.search(r'compar|melhor|vantag|analis|explique|diferenc|recomend|vale|desempenho|calcule|por que|custo.beneficio',text)
+            or any(not p.get('preco_confirmado') or p.get('link_veredito')!='verificado'
+                   or p.get('pendencias_do_pedido') for p in products)):
+        return ''
+    return _shopping_aplicar(shopping.resumo_texto(shop_res), shop_res)
+
+
 def _fallback_sem_inferencia(user_text: str, extras: dict, shop_res: dict | None) -> str:
+    text = _fallback_dados_recuperados(user_text, extras, shop_res)
+    code = extras.get("inference_error_code")
+    return inference_status.with_failure_notice(text, code) if code else text
+
+
+def _fallback_dados_recuperados(user_text: str, extras: dict, shop_res: dict | None) -> str:
     """Texto determinístico quando o LLM falha: fontes reais E ofertas reais.
 
     V5.7.3: ofertas verificadas da busca de produtos não somem porque a
@@ -3439,7 +3726,7 @@ def cmd_projeto(db, texto: str, owner: str, conv: str) -> str:
             "(ex.: 'vamos montar o PC para jogos').")
 
 
-def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
+def cmd_pesquisa(db, texto: str, owner: str, conv: str, model: str = "") -> str:
     """Comandos determinísticos de memória de pesquisa (sem LLM; funcionam
     mesmo com o Hermes bloqueado). Retorna texto ou ''."""
     t = (texto or "").lower()
@@ -3544,7 +3831,9 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
             f"- [{o.get('titulo', o.get('url', ''))}]({o.get('url', '')})" for o in origens)[:2000]
     if any(k in t for k in ("continue aquela pesquisa", "retome a pesquisa",
                             "continuar a pesquisa", "continua a pesquisa")):
-        job = _ultimo_job(db, owner, ("interrompida", "cancelada", "falhou"))
+        job = _ultimo_job(db, owner, ("interrompida", "cancelada", "falhou", "concluida"))
+        if job and job["status"] == "concluida" and job.get("usados",{}).get("research_outcome",{}).get("state") != "partial":
+            return "Essa pesquisa já foi concluída. Envie uma nova pergunta para ampliar o escopo."
         if job is None:
             ativo = _ultimo_job(db, owner, ("em_andamento", "criada"))
             if ativo is not None:
@@ -3573,7 +3862,7 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
         return 'Não consegui recuperar mídia pertinente nas fontes disponíveis agora. '+str(result.get('estado_texto') or '')
     if m or "inicie uma pesquisa sobre" in t or visual or official_docs:
         objetivo = (m.group(1).strip() if m else texto)[:500]
-        req = {"objetivo": objetivo, "conv": conv or "",
+        req = {"objetivo": objetivo, "conv": conv or "", "model": model,
                "modo": "profunda" if m else "rapida" if visual else ""}
         resp = rjob_start(db, req, owner)
         if resp.get("type") != "research_job":
@@ -3586,7 +3875,7 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str) -> str:
 
 def fence_de_evidencias(db, owner: str, conv: str) -> str:
     """Cards das fontes da última pesquisa (links reais, sem números inventados)."""
-    job = _ultimo_job(db, owner, ())
+    job = _ultimo_job(db, owner, (), conv=conv)
     if job is None:
         return ""
     evs = research_agents.listar_evidencias(db, owner, job["id"])[:8]
@@ -3605,9 +3894,9 @@ def fence_de_evidencias(db, owner: str, conv: str) -> str:
     return "\n\n```jdui\n" + json.dumps(norm, ensure_ascii=False) + "\n```"
 
 
-def fence_de_fontes(db, owner: str) -> str:
+def fence_de_fontes(db, owner: str, conv=None) -> str:
     """Componente `sources` da última pesquisa (status honestos, links reais)."""
-    job = _ultimo_job(db, owner, ())
+    job = _ultimo_job(db, owner, (), conv=conv)
     if job is None:
         return ""
     evs = research_agents.listar_evidencias(db, owner, job["id"])[:10]
@@ -4126,7 +4415,8 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
     if cmd:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
-    rp = cmd_pesquisa(db, prep.get("user_text", ""), owner, conv)
+    rp = cmd_pesquisa(db, prep.get("user_text", ""), owner, conv,
+                     model=payload.get('model') or ('' if cfg.get('model_implicit') else modelo))
     if rp:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], rp, owner)
     cp = cmd_projeto(db, prep.get("user_text", ""), owner, conv)
@@ -4166,12 +4456,13 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     # (antes respondia de memória com preços/produtos inventados).
     shop_res = _shopping_executar(db, owner, conv, prep.get("user_text", ""),
                                   extras, messages)
-    without_evidence=_shopping_sem_ofertas(shop_res) or _pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
+    without_evidence=_shopping_resposta_factual(shop_res,prep.get('user_text','')) or _shopping_sem_ofertas(shop_res) or _pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
     if without_evidence:
         return {**ai_resposta_direta(db,mid,conv,modelo,prep['reply_id'],without_evidence,owner),'digest':True}
     try:
         res = gerar_texto(cfg, messages, preferido=modelo)
     except hermes_bridge.BridgeErro as exc:
+        extras["inference_error_code"] = exc.codigo
         texto_fb = _fallback_sem_inferencia(
             prep.get("user_text", ""), extras, shop_res)
         if texto_fb:
@@ -4217,7 +4508,7 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
     elif "mostre as fontes" in (prep.get("user_text", "") or "").lower() or \
             "mostra as fontes" in (prep.get("user_text", "") or "").lower() or \
             "quais as fontes" in (prep.get("user_text", "") or "").lower():
-        fence = fence_de_fontes(db, owner)
+        fence = '' if extras.get('pesquisa_executada') else fence_de_fontes(db, owner, conv=conv)
         if fence:
             texto += fence
             log.info("fontes sintetizadas para %s", mid)
@@ -4337,7 +4628,8 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             except (ConnectionClosed, OSError, RuntimeError, ValueError):
                 pass
             return
-        rp = cmd_pesquisa(db, prep.get("user_text", ""), owner, conv)
+        rp = cmd_pesquisa(db, prep.get("user_text", ""), owner, conv,
+                         model=payload.get('model') or ('' if cfg.get('model_implicit') else modelo))
         if rp:
             direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], rp, owner)
             try:
@@ -4489,7 +4781,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             shop_res = _shopping_executar(db, owner, conv,
                                           prep.get("user_text", ""), extras,
                                           messages, progresso=_prog_shop)
-        without_evidence=_shopping_sem_ofertas(shop_res) or _pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
+        without_evidence=_shopping_resposta_factual(shop_res,prep.get('user_text','')) or _shopping_sem_ofertas(shop_res) or _pesquisa_sem_evidencia(extras,shop_res,prep.get('user_text',''))
         if without_evidence:
             if sessao.parar.is_set():
                 partial=''.join(partial_chunks)
@@ -4533,6 +4825,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 fut_sintese.cancel()
             # V5.0.1/V5.7.3: sem inferência, fontes reais (digest) e/ou
             # ofertas verificadas continuam disponíveis em vez de erro vazio.
+            extras["inference_error_code"] = exc.codigo
             texto_fb = _fallback_sem_inferencia(
                 prep.get("user_text", ""), extras, shop_res)
             if texto_fb:
@@ -4598,7 +4891,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
         elif "mostre as fontes" in (prep.get("user_text", "") or "").lower() or \
                 "mostra as fontes" in (prep.get("user_text", "") or "").lower() or \
                 "quais as fontes" in (prep.get("user_text", "") or "").lower():
-            fence = fence_de_fontes(db, owner)
+            fence = '' if extras.get('pesquisa_executada') else fence_de_fontes(db, owner, conv=conv)
             if fence:
                 texto_final += fence
                 log.info("fontes sintetizadas no stream %s", mid)
@@ -4709,6 +5002,14 @@ def iniciar_job_bg(db_path, job_id: str, owner: str, websocket=None) -> bool:
         parar = threading.Event()
         pronto = threading.Event()
         cfg = ai_config()
+        config_db = open_db(Path(db_path))
+        try:
+            saved = research_agents.carregar_job(config_db, owner, job_id)
+        finally:
+            config_db.close()
+        chosen = (saved.get("ajustes") or {}).get("model", "")
+        if chosen:
+            cfg = dict(cfg, model=chosen, model_implicit=False, fallbacks=[])
         t = threading.Thread(target=_job_worker,
                              args=(str(db_path), job_id, owner, cfg, parar, pronto,
                                    websocket),
@@ -4769,6 +5070,9 @@ def _research_writer(cfg: dict, parar):
         if parar.is_set():
             return ''
         bounded = dict(cfg, fallbacks=[])
+        import research_output
+        schema = research_output.response_format(messages)
+        if schema:bounded['_research_response_format'] = schema
         messages = [dict(m) for m in messages]
         messages[0]['content'] = system_with_identity(messages[0]['content'])
         try:
@@ -4780,7 +5084,7 @@ def _research_writer(cfg: dict, parar):
             if write.last_metadata.get('finish_reason')=='content_filter':
                 raise research_synthesis.ModelOutputError('model_filtered') from exc
             raise
-        write.last_metadata = {k:result[k] for k in ('finish_reason','usage','truncada','latencia_s') if k in result}
+        write.last_metadata = {k:result[k] for k in ('finish_reason','usage','truncada','latencia_s','structured_output_requested','structured_output_fallback') if k in result}
         if result.get('truncada') or result.get('finish_reason') == 'length':
             raise research_synthesis.ModelOutputError('model_truncated')
         if result.get('finish_reason') == 'content_filter':
@@ -4839,11 +5143,16 @@ def rjob_start(db, req: dict, dono: str, websocket=None) -> dict:
             any(v.get("owner") == dono for v in JOBS_BG.values()):
         return {"type": "learn_error", "error": "Já há pesquisa em andamento.",
                 "codigo": "ocupado"}
+    chosen = req.get("model") or ""
+    if not isinstance(chosen, str) or (chosen and not re.fullmatch(r"[A-Za-z0-9_~.][A-Za-z0-9_~.:/-]{0,119}", chosen)):
+        return {"type": "learn_error", "codigo": "invalido", "error": "Modelo inválido."}
     try:
         job = research_agents.criar_job(db, dono, str(req.get("objetivo", ""))[:500],
                                         str(req.get("conv", ""))[:100],
                                         manual=str(req.get("modo", ""))[:20])
         research_agents.montar_plano(db, job)
+        if chosen:
+            job.setdefault("ajustes", {})["model"] = chosen
     except research_agents.AgentErro as exc:
         return {"type": "learn_error", "error": str(exc), "codigo": exc.codigo}
     job["status"] = "em_andamento"

@@ -151,6 +151,7 @@ def _armazenamento_aparente(txt: str) -> int | None:
         except ValueError:
             pass
     vals = [v for v in vals if v >= 64]
+    vals.extend(int(m.group(1))*1024 for m in re.finditer(r'\b(\d{1,3})\s?tb\b',(txt or '').lower()))
     return max(vals) if vals else None
 
 
@@ -1401,7 +1402,7 @@ def _id_consulta(owner: str, consulta: str) -> str:
 def salvar_consulta(db, owner: str, conv: str, consulta: str,
                     criterios: dict, resultado: dict, *, expira_em: str = '') -> str:
     import secrets as _s
-    sid = _id_consulta(owner, consulta) + _s.token_hex(2)
+    sid = _id_consulta(owner, consulta) + _s.token_hex(16)
     with db:
         db.execute("INSERT INTO shopping_consultas (id, owner_id, conv, consulta,"
                    " criterios, resultado, criado_em, expira_em)"

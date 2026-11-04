@@ -2664,8 +2664,9 @@
       if (meta) card.appendChild(el('div', 'jdui-ploja', meta));
       if (f.escopo || f.relacao) card.appendChild(el('div', 'jdui-source-scope', [f.escopo, f.relacao].filter(Boolean).join(' · ')));
       if (f.trecho) {
-        card.appendChild(el('div', 'jdui-source-excerpt-label', hasReading(f) ? 'Trecho recuperado' : 'Prévia da busca · página não lida'));
-        card.appendChild(el('blockquote', 'jdui-desc jdui-source-excerpt', f.trecho));
+        const offer = hasReading(f) && f.tipo === 'Oferta';
+        card.appendChild(el('div', 'jdui-source-excerpt-label', offer ? 'Dados recuperados da oferta' : hasReading(f) ? 'Trecho recuperado' : 'Prévia da busca · página não lida'));
+        card.appendChild(el(offer ? 'div' : 'blockquote', 'jdui-desc jdui-source-excerpt', f.trecho));
       }
       if (f.autores || f.doi || f.origem_declarada || (f.detalhes || []).length) {
         const details = document.createElement('details'); details.className='jdui-source-provenance';

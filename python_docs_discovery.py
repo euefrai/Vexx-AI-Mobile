@@ -33,7 +33,10 @@ def parse_inventory(blob):
 def search(query, limit=6, timeout=6):
     import research
     global _CACHE
-    if not re.search(r'\b(python|asyncio)\b', query, re.I):
+    import query_intelligence as qi
+    scope=qi._discovery_context.get() or {}
+    original=(scope.get('request') or {}).get('original_request') or ''
+    if not re.search(r'\b(python|asyncio)\b', query+' '+original, re.I):
         return []
     if not _CACHE or _CACHE[0] <= time.monotonic():
         research.url_segura(INVENTORY)
@@ -100,6 +103,8 @@ def read_authority(query, url, record, timeout=3):
     read_text=record.get('texto') or ''
     scope=read_text+' '+' '.join(h.get('text','') for p in record.get('answer_passages',[])
                                for h in p.get('section_path',[]))
+    import web_extract
+    scope+=' '+' '.join(name for p in record.get('answer_passages',[]) for name in web_extract.scoped_api_aliases(p))
     scope=re.sub(r'\s*\.\s*','.',scope).casefold()
     if not read_text.strip() or not all(re.search(r'(?<!\w)'+re.escape(n)+r'(?!\w)',scope) for n in names):
         return None

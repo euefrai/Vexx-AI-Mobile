@@ -2004,6 +2004,7 @@ async def learn_history(request: Request, limite: int = 50):
 
 
 class ResearchStartIn(BaseModel):
+    model: str = Field(default="", max_length=120, pattern=r"^[A-Za-z0-9_~.:/-]*$")
     objetivo: str = Field(min_length=3, max_length=500)
     conv: str = Field(default="", max_length=100)
     modo: str = Field(default="", max_length=20)
@@ -2032,7 +2033,7 @@ async def research_start(request: Request, body: ResearchStartIn):
     _rate_limit(request, "research_start", dono)
     result = await relay.exchange({"type": "research_job_start", "owner": dono,
                                    "objetivo": body.objetivo, "conv": body.conv,
-                                   "modo": body.modo}, timeout=20.0)
+                                   "modo": body.modo, "model": body.model}, timeout=20.0)
     if result.get("type") != "research_job":
         raise _research_erro(result)
     return {"job_id": result["job_id"], "modo": result.get("modo", ""),

@@ -12,6 +12,39 @@ import hermes_bridge
 import providers
 
 
+def test_evidence_json_survives_provider_adapters_without_mid_document_cut():
+    payload = json.dumps({'sources': [{'id': 'E1', 'excerpt': 'evidence ' * 1800}],
+                          'requirements': ['late requirement']})
+    messages = [{'role': 'system', 'content': 'strict contract'}, {'role': 'user', 'content': payload}]
+    assert len(payload) > 12000
+    for converted in (providers._para_openai(messages), providers._para_anthropic(messages)[1]):
+        assert json.loads(converted[-1]['content']) == json.loads(payload)
+
+
+@pytest.mark.parametrize('catalog,expected', [
+    (['vendor/current:free'], 'vendor/current:free'),
+    (['vendor/paid'], hermes_bridge.DEFAULT_MODEL),
+    ([hermes_bridge.DEFAULT_MODEL, 'vendor/current:free'], hermes_bridge.DEFAULT_MODEL),
+])
+def test_ui_default_comes_from_live_free_catalog(monkeypatch, catalog, expected):
+    monkeypatch.setattr(providers, 'chave', lambda _: '')
+    monkeypatch.setattr(hermes_bridge, 'listar_modelos', lambda *a, **k: catalog)
+    assert providers.listar_tudo()['default'] == expected
+
+
+@pytest.mark.parametrize('messages', [
+    [{'role': 'user', 'content': 'x' * 64001}],
+    [{'role': 'user', 'content': 'x' * 50000}] * 3,
+    [{'role': 'user', 'content': 'x'}] * 65,
+])
+def test_provider_context_limit_is_explicit_and_does_not_leak_content(messages):
+    for adapter in (providers._para_openai, providers._para_anthropic):
+        with pytest.raises(hermes_bridge.BridgeErro) as exc:
+            adapter(messages)
+        assert exc.value.codigo == 'pedido'
+        assert 'xxxxx' not in str(exc.value)
+
+
 class _Resp:
     def __init__(self, corpo: bytes):
         self._corpo = corpo

@@ -200,12 +200,15 @@ class AcumuladorSSE:
 
 def chat_complete(base: str, model: str, messages: list,
                   timeout: float = 120.0, max_tokens: int = 2000,
-                  api_key: str = "", hosts: tuple = ()) -> dict:
+                  api_key: str = "", hosts: tuple = (), response_format=None,
+                  reasoning_effort=None) -> dict:
     url = _base(base, api_key, hosts)
     inicio = time.monotonic()
     try:
         req = _req(url + "/chat/completions",
-                   {"model": model, "messages": messages, "max_tokens": max_tokens},
+                   {"model": model, "messages": messages, "max_tokens": max_tokens,
+                    **({'response_format':response_format} if response_format else {}),
+                    **({'reasoning_effort':reasoning_effort} if reasoning_effort else {})},
                    timeout, api_key)
         with urllib.request.urlopen(req, timeout=timeout) as r:
             dados = json.loads(r.read().decode("utf-8"))
@@ -229,6 +232,9 @@ def chat_complete(base: str, model: str, messages: list,
         log.warning("TOOL_PROTOCOL %s ferramenta=%s: %s", erro.get("codigo"),
                     erro.get("ferramenta") or "?", erro.get("detalhe") or "")
     if not texto.strip():
+        message=choices[0].get('message') if isinstance(choices,list) and choices and isinstance(choices[0],dict) else None
+        if isinstance(message,dict) and message.get('refusal'):
+            raise BridgeErro('O modelo recusou a solicitação.','recusa')
         if erros:
             raise BridgeErro("O modelo emitiu apenas uma chamada interna de ferramenta; "
                              "nada foi executado nem exibido.", "protocolo_ferramenta")
@@ -359,7 +365,7 @@ def _circuito_registrar(base: str, ok: bool) -> None:
 
 def tentar_modelos(base: str, modelos: list, messages: list,
                    timeout_por_tentativa: float = 60.0,
-                   max_tokens: int = 2000) -> dict:
+                   max_tokens: int = 2000, response_format=None, reasoning_effort=None) -> dict:
     """Tenta modelos em ordem até a primeira resposta não vazia.
 
     Para em `auth` (credencial vale para todos). Backoff 1s/2s/4s entre
@@ -378,7 +384,9 @@ def tentar_modelos(base: str, modelos: list, messages: list,
         inicio = time.monotonic()
         try:
             res = chat_complete(base, modelo, messages,
-                                timeout=timeout_por_tentativa, max_tokens=max_tokens)
+                                timeout=timeout_por_tentativa, max_tokens=max_tokens,
+                                **({'response_format':response_format} if response_format else {}),
+                                **({'reasoning_effort':reasoning_effort} if reasoning_effort else {}))
             _circuito_registrar(base, True)
             res["model_usado"] = modelo
             res["tentativas"] = tentativas

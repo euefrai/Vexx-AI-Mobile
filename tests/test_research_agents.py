@@ -9,6 +9,7 @@ import pc_agent
 import docs_agent
 import research
 import research_agents as ra
+import research_view
 
 
 def _db(nome="rag.sqlite3"):
@@ -310,11 +311,79 @@ def test_verificador_estados():
 def test_auditor_citacao_fantasma():
     db = _db()
     job = ra.criar_job(db, "u-x", "café?")
-    a = ra.agente_auditor(db, job, {"texto": "verdade [E1] e invencionice [E9]"}, [{"id": "x"}])
+    a = ra.agente_auditor(db, job, {"texto": "verdade [E1] e invencionice [E9]"},
+                          [{"id": "x", "trecho": "trecho lido"}])
     assert a["ok"] is False and a["problemas"] == ["citação sem evidência: [E9]"]
     b = ra.agente_auditor(db, job, {"texto": "só texto"}, [])
-    assert b == {"ok": True, "problemas": []}
+    assert b["ok"] is False
+    assert b["problemas"] == ["NO_EVIDENCE: pesquisa sem evidências"]
+    # Evidência encontrada mas não lida também não sustenta uma resposta.
+    c = ra.agente_auditor(db, job, {"texto": "só texto"},
+                          [{"id": "x", "status": "encontrada"}])
+    assert c["ok"] is False and c["problemas"][0].startswith("NO_EVIDENCE:")
     db.close()
+
+
+def test_job_sem_evidencias_nao_vira_concluido():
+    db = _db()
+    prov = FakeProv({})
+    job = ra.criar_job(db, "u-x", "tema obscuro xyz", manual="rapida")
+    r = ra.executar(db, job["id"], "u-x", [prov], lambda u: {"titulo": "", "texto": "", "final": u})
+    assert r["status"] == "interrompida", r
+    assert r["evidencias"] == 0
+    assert r["auditoria_ok"] is False
+    assert any("sem evidências" in p.lower() for p in r["pendencias"])
+    assert r["usados"]["research_outcome"]["read_sources"] == 0
+    assert r["usados"]["research_outcome"]["state"] == "partial"
+    db.close()
+
+
+def test_listar_jobs_expoe_evidencias_e_outcome():
+    db = _db()
+    prov = FakeProv({"*": CAFE})
+    rec = lambda u: {"titulo": "Café e saúde", "texto": CAFE[0]["trecho"], "final": u}  # noqa: E731
+    job = ra.criar_job(db, "u-x", "café faz bem?", manual="rapida")
+    ra.executar(db, job["id"], "u-x", [prov], rec)
+    listado = next(item for item in ra.listar_jobs(db, "u-x") if item["id"] == job["id"])
+    assert listado["evidencias"] >= 1
+    assert listado["research_outcome"]["read_sources"] >= 1
+    db.close()
+
+
+def test_rejeicoes_de_candidatos_ficam_persistidas():
+    db = _db()
+    job = ra.criar_job(db, "u-x", "asyncio.TaskGroup e asyncio.gather documentação oficial",
+                       manual="rapida")
+    etapa = {"id": "s1", "tipo": "ler", "alvo": "asyncio.TaskGroup asyncio.gather"}
+    achados = [{"titulo": "Receita de bolo", "url": "https://exemplo.com/bolo",
+                "trecho": "farinha"}]
+    evs = ra.agente_analista(
+        db, job, etapa, achados,
+        lambda u: {"titulo": "Receita de bolo", "texto": "Farinha, ovos e açúcar.",
+                   "final": u, "texto_lido": True})
+    assert evs == []
+    rejeicoes = job["usados"].get("rejection_reasons") or []
+    assert rejeicoes
+    assert any("ENTITY_MISMATCH" in item["reason"]
+               or item["stage"] == "RELEVANCE_REJECTED" for item in rejeicoes)
+    assert all(item.get("url") and "@" not in item["url"] for item in rejeicoes)
+    db.close()
+
+
+def test_view_marca_sem_evidencias_e_motivos_de_rejeicao():
+    resumo = {"objetivo": "asyncio", "status": "interrompida", "modo": "profunda",
+              "evidencias": 0,
+              "usados": {"research_outcome": {"state": "partial", "read_sources": 0},
+                         "rejection_reasons": [{"domain": "exemplo.com",
+                                                "reason": "ENTITY_MISMATCH",
+                                                "stage": "RELEVANCE_REJECTED"}]}}
+    view = research_view.build_view(resumo, [])
+    texto = "\n".join(block.get("content", "") for block in view["blocks"]
+                      if block.get("type") == "text")
+    assert "sem evidências lidas" in texto
+    assert any(block.get("component") == "accordion"
+               and "Fontes descartadas" in block["props"]["items"][0]["title"]
+               for block in view["blocks"])
 
 
 def test_executar_fim_a_fim_e_retomada():

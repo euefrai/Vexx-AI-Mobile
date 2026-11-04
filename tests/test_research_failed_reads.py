@@ -84,4 +84,36 @@ def test_cancellation_during_network_error_does_not_poison_history(research_job)
     ra.agente_analista(db, job, {'alvo': job['objetivo']}, hits('topic'), fail,
                       deve_parar=cancelled.is_set)
     assert not job['usados'].get('failed_source_reads')
+
+
+@pytest.mark.parametrize('blocked,seconds', [(False, 61), (True, 601)])
+def test_failed_read_cooldown_expires_after_checkpoint(research_job, monkeypatch, blocked, seconds):
+    db, job = research_job
+    now = [1700000000.0]
+    monkeypatch.setattr(ra.time, 'time', lambda: now[0])
+    def fail(url):
+        if blocked:
+            raise research.ResearchErro('fixture', 'bloqueado')
+        raise TimeoutError('fixture')
+    ra.agente_analista(db, job, {'alvo': job['objetivo']}, hits('topic'), fail)
+    ra.salvar_job(db, job)
+    resumed = ra.carregar_job(db, job['owner'], job['id'])
+    assert ra.agente_analista(db, resumed, {'alvo': job['objetivo']}, hits('topic'),
+        lambda url: pytest.fail('cooldown must still apply')) == []
+    now[0] += seconds
+    assert ra.agente_analista(db, resumed, {'alvo': job['objetivo']}, hits('topic'), content)
+    assert not resumed['usados']['failed_source_reads']
+
+
+def test_explicit_resume_releases_failure_cache_but_keeps_budget(research_job):
+    db, job = research_job
+    def fail(url):
+        raise TimeoutError('fixture')
+    ra.agente_analista(db, job, {'alvo': job['objetivo']}, hits('topic'), fail)
+    job['status'] = 'interrompida'
+    ra.salvar_job(db, job)
+    resumed = ra.preparar_retomada(db, job['owner'], job['id'])
+    assert resumed['usados']['paginas'] == job['usados']['paginas']
+    assert resumed['orcamento'] == job['orcamento']
+    assert ra.agente_analista(db, resumed, {'alvo': job['objetivo']}, hits('topic'), content)
     assert ra.agente_analista(db, job, {'alvo': job['objetivo']}, hits('topic'), content)
