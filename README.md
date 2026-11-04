@@ -34,7 +34,7 @@ FUNCIONAL:
 AINDA NÃO IMPLEMENTADO:
 
 - Memória/skills nativas do Hermes Agent (a memória do Vexx fica no SQLite local).
-- Vídeo fluido/WebRTC (a tela ao vivo é polling ~2 fps).
+- Vídeo codificado/WebRTC. A tela usa JPEG em transmissão HTTP contínua, com teto de 8 quadros/s e fallback para captura sequencial; a taxa efetiva depende da captura e da rede.
 
 PENDÊNCIAS CONHECIDAS:
 
@@ -171,14 +171,22 @@ versão — não compartilhe o aparelho desbloqueado.
 
 ## Tela ao vivo e controle (Meu PC)
 
-A aba Meu PC detecta o tipo de aparelho: no computador, prepara o acesso;
-no celular, oferece Conectar e os controles. O botão Permitir abre uma
+A aba Meu PC permite conectar e usar os controles no computador ou celular.
+No computador também oferece a preparação do acesso. O botão Permitir abre uma
 confirmação local no Windows, vinculando a autorização à conta no SQLite.
 Após confirmar, os aparelhos conectados à mesma conta podem acessar esse PC;
 Revogar acesso bloqueia a tela e os comandos da conta. O bloqueio do
 administrador continua valendo. O agente precisa estar atualizado.
 
-A transmissão usa JPEG periódico (intervalo de 1,6 s, até 960 px), sem áudio.
+A transmissão usa JPEG sobre HTTP contínuo (até 8 quadros/s e 960 px), sem áudio.
+Em servidores anteriores, usa captura sequencial com pausa de 150 ms entre
+respostas. Não há requisições simultâneas de captura no mesmo visualizador.
+O teclado visível aceita Unicode, colagem e teclas de navegação. O ritmo mínimo
+dos comandos é 60 ms no navegador e 50 ms no agente; os limites por minuto são
+configuráveis no relay. A conexão do agente e a autorização de acesso são
+mostradas separadamente; uma falha de consulta permite verificar novamente.
+Atualize o servidor e o PC Agent para usar os novos limites; atualizar só o
+navegador mantém os limites da instalação antiga. A taxa real depende da rede.
 Login, CSRF e autorização no agente são exigidos. O modo legado com grant
 administrativo e `JULIA_REMOTE=1` permanece compatível. Há um PC Agent por
 instalação, sem cadastro automático de vários computadores. Veja

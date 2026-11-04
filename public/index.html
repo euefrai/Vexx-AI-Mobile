@@ -241,6 +241,7 @@
           <button class="primary-button" id="remoteConnect" type="button" disabled>Conectar</button>
         </div>
 
+        <button class="subtle-button" id="remoteRetry" type="button">Verificar conexão</button>
         <p class="pc-access-status" id="remoteAccessStatus" role="status" aria-live="polite">Verificando acesso…</p>
         <div id="remoteViewer" hidden>
         <div class="screen-top">
@@ -266,11 +267,14 @@
           <button class="action-pill" type="button" id="refreshButton"><svg class="icon"><use href="#i-refresh"/></svg> Atualizar</button>
           <button class="action-pill" type="button" id="remoteScrollUp" aria-label="Rolar para cima">↑ Rolar</button>
           <button class="action-pill" type="button" id="remoteScrollDown" aria-label="Rolar para baixo">↓ Rolar</button>
+          <button class="action-pill" type="button" id="remoteTab">Tab</button>
+          <button class="action-pill" type="button" id="remoteEscape">Esc</button>
           <button class="action-pill" type="button" id="remoteEnter">Enter</button>
           <button class="action-pill" type="button" id="remoteBackspace" aria-label="Apagar caractere">⌫ Apagar</button>
         </div>
 
-        <input id="remoteKeys" class="remote-keys" type="text" maxlength="200" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Digitar no computador" placeholder="" />
+        <label class="remote-keyboard-label" for="remoteKeys">Digitar no computador</label>
+        <input id="remoteKeys" class="remote-keys" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Digitar no computador" placeholder="Toque aqui e digite…" />
         </div>
 
         <div class="access-card">

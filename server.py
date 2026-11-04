@@ -340,13 +340,13 @@ RATE_RULES = {
               "JULIA_RATE_ADMIN_GLOBAL", 240, 60),
     "admin_quality": ("JULIA_RATE_ADMIN_QUALITY_USER", 5, 60,
                       "JULIA_RATE_ADMIN_QUALITY_GLOBAL", 10, 60),
-    "screen": ("JULIA_RATE_SCREEN_USER", 60, 60,
+    "screen": ("JULIA_RATE_SCREEN_USER", 600, 60,
                "JULIA_RATE_SCREEN_GLOBAL", 180, 60),
     "remote_request": ("JULIA_RATE_REMOTE_REQUEST_USER", 3, 600,
                        "JULIA_RATE_REMOTE_REQUEST_GLOBAL", 6, 600),
     "remote_status": ("JULIA_RATE_REMOTE_STATUS_USER", 30, 60,
                       "JULIA_RATE_REMOTE_STATUS_GLOBAL", 120, 60),
-    "input": ("JULIA_RATE_INPUT_USER", 120, 60,
+    "input": ("JULIA_RATE_INPUT_USER", 1200, 60,
               "JULIA_RATE_INPUT_GLOBAL", 360, 60),
 }
 
@@ -1498,6 +1498,33 @@ async def screen(request: Request, max_w: int = 800, q: int = 55):
     return {"imagem": result["imagem"], "largura": result.get("largura", 0),
             "altura": result.get("altura", 0), "ms": result.get("ms", 0),
             "remote_enabled": result.get("remote_enabled", False)}
+
+
+@app.get('/api/screen/stream')
+async def screen_stream(request: Request, max_w: int = 960, q: int = 55):
+    """Bounded live frames over one HTTP connection; authorize every frame."""
+    from fastapi.responses import StreamingResponse
+    # Check before headers so unsupported/unauthorized agents return normal errors.
+    first = await screen(request, max_w, q)
+
+    async def frames():
+        current = first
+        while not await request.is_disconnected():
+            started = asyncio.get_running_loop().time()
+            yield json.dumps(current, separators=(',', ':')) + '\n'
+            await asyncio.sleep(max(0.01, 0.125 - (asyncio.get_running_loop().time() - started)))
+            if await request.is_disconnected():
+                break
+            try:
+                # Includes session revocation, rate limiting and agent-side grants.
+                current = await screen(request, max_w, q)
+            except HTTPException as exc:
+                yield json.dumps({'error': str(exc.detail), 'status': exc.status_code}) + '\n'
+                break
+
+    return StreamingResponse(frames(), media_type='application/x-ndjson', headers={
+        'Cache-Control': 'no-store, private', 'X-Accel-Buffering': 'no',
+        'X-Content-Type-Options': 'nosniff'})
 
 
 @app.post("/api/input")

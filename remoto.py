@@ -19,7 +19,7 @@ from collections import deque
 MAX_W = 960
 QUALIDADE = 55
 MIN_INTERVALO = 0.05
-MAX_POR_MINUTO = 120
+MAX_POR_MINUTO = 1200
 
 TECLAS_NOMEADAS = {"enter", "backspace", "tab", "esc", "escape", "space",
                    "left", "right", "up", "down", "home", "end",

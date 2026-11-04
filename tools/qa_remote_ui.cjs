@@ -1,4 +1,4 @@
-/* Real browser + real static/CSP server, explicitly simulated API/desktop frames.
+/* Real browser + local static server, explicitly simulated API/desktop frames.
    No native consent or mouse/keyboard execution is claimed by this UI harness. */
 async page => {
   if (!page.url().startsWith('http://127.0.0.1:')) throw Error('Disposable loopback QA only');
@@ -57,7 +57,7 @@ async page => {
   await page.getByRole('button',{name:'Meu PC',exact:true}).click();
   await page.locator('#remotePermit').waitFor({state:'visible'});
   await page.waitForFunction(()=>!document.getElementById('remotePermit').disabled);
-  check('Desktop shows preparation, hides controller',await page.locator('#pcSetup').isVisible() && !await page.locator('#remoteViewer').isVisible());
+  check('Desktop shows preparation before connecting',await page.locator('#pcSetup').isVisible() && !await page.locator('#remoteViewer').isVisible());
   check('Desktop does not request screen frames',!requests.some(r=>r.path==='/api/screen'));
   await page.locator('#remotePermit').click();
   await page.waitForFunction(()=>document.getElementById('remoteAccessStatus').textContent.includes('123456'));
@@ -67,13 +67,44 @@ async page => {
   await page.evaluate(()=>navigate('chat'));
   await page.evaluate(()=>navigate('desktop'));
   await page.waitForFunction(()=>document.getElementById('remotePermit').textContent==='Acesso permitido');
+  check('Device is online in Meu PC',await page.locator('#deviceStatus').textContent()==='Online');
+  check('Desktop can connect too',!await page.locator('#remoteConnect').isDisabled());
+  await page.locator('#remoteConnect').click();
+  await page.waitForFunction(()=>document.getElementById('screenImg').naturalWidth===960);
+  await page.waitForTimeout(900);
+  check('Compatibility frames arrive faster than old 1.6 second timer',requests.filter(r=>r.path==='/api/screen').length>=4);
+  await page.locator('#remoteDisconnect').click();
   await page.screenshot({path:'output/playwright/remote-access/desktop.png'});
   await page.setViewportSize({width:390,height:844});
   check('Resizing desktop does not turn it into a phone',await page.locator('#pcSetup').isVisible());
   const mobile=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,
     userAgent:'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Mobile/15E148 Safari/604.1'});
   try {
-    await configure(mobile);const phone=await mobile.newPage();await ready(phone);
+    await configure(mobile);
+    // Simulated continuous response exercises browser framing and cancellation;
+    // backend authentication/revocation are covered separately by Python tests.
+    await mobile.addInitScript(() => {
+      const original = window.fetch.bind(window);
+      window.fetch = async (url, options = {}) => {
+        if (String(url).split('?')[0] !== '/api/screen/stream') return original(url, options);
+        const encoder = new TextEncoder(); let cancelled = false;
+        window.__streamStarts = (window.__streamStarts || 0) + 1;
+        const body = new ReadableStream({
+          async pull(controller) {
+            await new Promise(done => setTimeout(done, 125));
+            if (cancelled || options.signal?.aborted) { controller.close(); return; }
+            let data;
+            if (window.__denyRemoteStream) data = {error:'Acesso revogado no PC', status:403};
+            else data = await (await original('/api/screen', options)).json();
+            const line = encoder.encode(JSON.stringify(data) + '\n');
+            controller.enqueue(line.slice(0, 17)); controller.enqueue(line.slice(17));
+          },
+          cancel() { cancelled = true; }
+        });
+        return new Response(body, {headers:{'Content-Type':'application/x-ndjson'}});
+      };
+    });
+    const phone=await mobile.newPage();await ready(phone);
     await phone.getByRole('button',{name:'Abrir menu',exact:true}).click();
     await phone.getByRole('button',{name:'Meu PC',exact:true}).click();
     await phone.waitForFunction(()=>!document.getElementById('remoteConnect').disabled);
@@ -90,12 +121,28 @@ async page => {
     await phone.locator('#keyboardButton').click();
     await phone.locator('#remoteKeys').fill('ação á 🚀');
     await phone.waitForTimeout(700);
+    check('Visible keyboard field',await phone.locator('#remoteKeys').isVisible());
     check('Unicode text routes intact',requests.some(r=>r.path==='/api/input'&&JSON.parse(r.body).text==='ação á 🚀'));
+    await phone.locator('#remoteKeys').fill('abc'.repeat(150));
+    await phone.waitForTimeout(500);
+    const text= requests.filter(r=>r.path==='/api/input').map(r=>JSON.parse(r.body)).filter(c=>c.kind==='text').map(c=>c.text).join('');
+    check('Long pasted text is not truncated',text.includes('abc'.repeat(150)));
+    await phone.locator('#remoteKeys').press('ArrowLeft');
+    await phone.locator('#remoteTab').click();
+    await phone.waitForTimeout(300);
+    check('Arrow and Tab reach remote keyboard',requests.some(r=>r.path==='/api/input'&&JSON.parse(r.body).key==='left') && requests.some(r=>r.path==='/api/input'&&JSON.parse(r.body).key==='tab'));
     for(const width of [390,320]){
       await phone.setViewportSize({width,height:844});
       check('No overflow at '+width,await phone.evaluate(()=>document.documentElement.scrollWidth<=innerWidth && document.getElementById('page-desktop').scrollWidth<=document.getElementById('page-desktop').clientWidth+1));
       await phone.screenshot({path:'output/playwright/remote-access/phone-connected-'+width+'.png'});
     }
+    check('Continuous transport is used',await phone.evaluate(()=>window.__streamStarts===1));
+    await phone.evaluate(()=>window.__denyRemoteStream=true);
+    await phone.locator('#remoteViewer').waitFor({state:'hidden'});
+    check('Mid-stream denial stops viewer and keyboard',await phone.locator('#remoteKeys').isDisabled());
+    await phone.evaluate(()=>window.__denyRemoteStream=false);
+    await phone.locator('#remoteConnect').click();
+    await phone.waitForFunction(()=>document.getElementById('screenImg').naturalWidth===960);
     await phone.locator('#remoteDisconnect').click();
     check('Disconnect clears the screen',await phone.locator('#screenImg').getAttribute('src')===null);
     await phone.reload();await phone.locator('#loginOverlay').waitFor({state:'hidden'});
@@ -104,7 +151,7 @@ async page => {
     await phone.waitForFunction(()=>!document.getElementById('remoteConnect').disabled);
     check('Reload retains account access without auto-connecting',!await phone.locator('#remoteViewer').isVisible());
     await phone.locator('#remoteRevoke').click();
-    await phone.waitForFunction(()=>document.getElementById('remoteConnect').disabled);
+    await phone.locator('#remoteRevoke').waitFor({state:'hidden'});
     check('Revoke disables connection',await phone.locator('#remoteRevoke').isHidden());
     await phone.screenshot({path:'output/playwright/remote-access/phone-revoked.png'});
   } finally {await mobile.close();}

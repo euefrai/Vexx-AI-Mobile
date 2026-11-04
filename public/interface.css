@@ -399,3 +399,12 @@ body.remote-guide-page {max-width:740px;margin:auto;padding:28px 22px}
 .remote-exit-fullscreen {position:absolute;top:12px;right:12px;z-index:2;padding:10px 16px;background:#202025;color:#fff;border:1px solid #555;border-radius:10px;min-height:44px;display:none}
 .remote-frame:fullscreen .remote-exit-fullscreen {display:block}
 @media(max-width:480px){.pc-setup,.pc-connect{padding:18px}.pc-setup h2,.pc-connect h2{font-size:21px}.pc-setup .primary-button,.pc-connect .primary-button{width:100%}#remoteViewer .control-actions{gap:6px}#remoteViewer .action-pill{padding:9px 12px}}
+
+/* Remote workspace: keep connection, screen and keyboard reachable. */
+#remoteViewer .remote-keys {position:static;opacity:1;pointer-events:auto;width:100%;height:48px;padding:12px;margin:8px 0 18px;font-size:16px;border:1px solid var(--line);border-radius:10px;background:var(--surface-1);color:var(--text)}
+#remoteViewer .remote-keys:focus {outline:2px solid var(--purple);outline-offset:2px}
+.remote-keyboard-label {display:block;font-size:13px;color:var(--text-2)}
+#remoteViewer .screen-top {gap:10px;flex-wrap:wrap}
+#remoteViewer .action-pill {flex:1 1 90px;min-height:44px}
+#page-desktop .pc-connect {padding:18px}
+#page-desktop .pc-access-status {overflow-wrap:anywhere}
