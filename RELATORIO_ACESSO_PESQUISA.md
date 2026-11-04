@@ -1,8 +1,8 @@
 # Controle de acesso e leitura do publicador
 
 04/11/2026. Implementados os dois primeiros incrementos do plano: coordenação
-de leituras públicas e REST pública do Ubatã Notícias. Alterações desta rodada
-locais, sem novo push. O PC Agent de produção não foi reiniciado. Não houve
+de leituras públicas e REST pública do Ubatã Notícias, publicados em `5ecf05d`
+no main, com hash remoto verificado. O PC Agent de produção não foi reiniciado. Não houve
 ativação de serviço pago, resolução de CAPTCHA ou alteração de dados reais.
 O laboratório usa conta/SQLite privados e agente de desenvolvimento.
 
@@ -115,14 +115,16 @@ depreciações existentes de mss e timeout no TestClient. Os arquivos de código
 e testes conferem com a exportação validada; somente a documentação recebeu
 o resultado depois. Diff-check passou. As 11 alterações de outras frentes
 continuam preservadas byte a byte, descontada a linha nova de conftest.
-O índice principal permanece vazio; não houve commit/push nesta rodada.
+Esse conjunto foi enviado após a validação no commit `5ecf05d`. A continuação
+de cache/cards está descrita em `RELATORIO_CACHE_E_CARDS.md`.
 
 ## Pendências
 
-Cache público com revalidação e frescor permanece para o próximo incremento.
+O cache público com revalidação e os cards foram implementados na continuação,
+descrita em `RELATORIO_CACHE_E_CARDS.md`, com provas reais e limitações próprias.
 Revisar a autenticação do leitor externo: Firecrawl anônimo não foi ativado.
-Repetir síntese com provedor/cota operacional e corrigir cards do fallback
-profundo antes de aprovar a experiência completa. Coordenação é por processo,
+Repetir síntese com provedor/cota operacional antes de aprovar a experiência
+completa. Coordenação é por processo,
 não distribuída. Não há promessa de acesso a qualquer site.
 
 Contratos: [WordPress Posts REST](https://developer.wordpress.org/rest-api/reference/posts/)

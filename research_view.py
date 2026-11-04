@@ -178,6 +178,9 @@ def source_card(item: dict, used=False) -> dict:
     data=vertical.get('data') or {}
     observed_offer = ''
     details=['Disponibilidade atual não confirmada'] if vertical.get('kind') in ('air_travel','bus_travel') else []
+    if read and item.get('cache_state') in ('fresh_cache','revalidated'):
+        details.append('Conteúdo recuperado em '+_text(item.get('fetched_at'),40)
+                       +'; confirmado em '+_text(item.get('checked_at'),40))
     if read and item.get('product_offer'):
         import research_product_evidence
         offer = item['product_offer']
@@ -245,6 +248,46 @@ def contextual_fence(sources: list) -> str:
     message={'version':jdui.VERSION,'blocks':[{'type':'ui','component':'sources','props':{'title':'Fontes e dados recuperados','items':[source_card(s) for s in selected[:6]]}}]}
     ok,normalized,_=jdui.validar_mensagem(message)
     return '\n\n```jdui\n'+json.dumps(normalized,ensure_ascii=False)+'\n```' if ok else ''
+
+
+def chat_blocks(view, media_intent=False, limit=10000):
+    """Fit the chat envelope without dropping a whole group of real sources."""
+    import copy
+    import json
+    blocks=copy.deepcopy([b for b in view.get('blocks',[]) if b.get('type')=='text'
+        or b.get('component')=='sources' or (b.get('component')=='media' and media_intent)
+        or (b.get('component')=='table' and b.get('props',{}).get('title')=='Aspectos da pergunta')])
+    for block in blocks:
+        if block.get('component')=='sources':
+            items=block.get('props',{}).get('items',[])
+            read=[item for item in items if item.get('leitura') in ('READ','PARTIAL')]
+            if read:block['props']['items']=read
+    while blocks:
+        valid, normalized, _=jdui.validar_mensagem({'version':jdui.VERSION,'blocks':blocks})
+        if not valid:return []
+        size=len('Resultado da pesquisa\n\n```jdui\n'+json.dumps(normalized,ensure_ascii=False)+'\n```')
+        if size<=limit:return blocks
+        # Keep one usable source while reducing cards or other optional widgets.
+        group=next((b for b in reversed(blocks) if b.get('component')=='sources'
+                    and len(b.get('props',{}).get('items',[]))>1),None)
+        if group is not None:
+            group['props']['items'].pop()
+            continue
+        removable=next((b for b in reversed(blocks) if b.get('type')=='ui'
+                        and b.get('component')!='sources'),None)
+        if removable is None:
+            card=next((item for b in reversed(blocks) if b.get('component')=='sources'
+                       for item in reversed(b.get('props',{}).get('items',[])) if item.get('detalhes')),None)
+            if card is not None:
+                card['detalhes'].pop()
+                continue
+            # An oversized source must never suppress the factual answer itself.
+            blocks=[b for b in blocks if b.get('type')=='text']
+            valid,normalized,_=jdui.validar_mensagem({'version':jdui.VERSION,'blocks':blocks})
+            size=len('Resultado da pesquisa\n\n```jdui\n'+json.dumps(normalized,ensure_ascii=False)+'\n```')
+            return blocks if valid and size<=limit else []
+        blocks.remove(removable)
+    return []
 
 
 def strip_model_research_cards(text: str) -> str:

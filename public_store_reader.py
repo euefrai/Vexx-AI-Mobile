@@ -97,7 +97,7 @@ def render(url, timeout, max_bytes):
         _slots.release()
 
 
-def fetch(url, *, timeout=6.0, max_bytes=None, cancelar=None):
+def fetch(url, *, timeout=6.0, max_bytes=None, cancelar=None, cache=None):
     import research
     started = time.monotonic()
     if cancelar and cancelar():
@@ -108,7 +108,7 @@ def fetch(url, *, timeout=6.0, max_bytes=None, cancelar=None):
     if max_bytes is not None: options['max_bytes']=max_bytes
     if cancelar is not None: options['cancelar']=cancelar
     try:
-        original = research.baixar(url, **options)
+        original = (cache.fetch if cache else research.baixar)(url, **options)
     except research.ResearchErro as exc:
         if exc.codigo != 'bloqueado' or getattr(exc,'http',0) in (401,429): raise
         original_error = exc

@@ -1,0 +1,89 @@
+{
+  "scope": "two real public documents; no inference; large document intentionally exceeds 512 KiB cache cap",
+  "large_document": {
+    "scope": "real public document reads, no inference",
+    "requests": [
+      {
+        "step": "first",
+        "final": "https://docs.python.org/3/builtins/stdtypes.html#list.append",
+        "chars": 814438,
+        "cache_state": "network",
+        "status": 200,
+        "headers": {
+          "etag": "\"6aebaf6c-c709b\"",
+          "age": "0",
+          "vary": "Accept-Encoding"
+        },
+        "fetched_at": "2026-11-04T23:19:28.517716+00:00",
+        "checked_at": "2026-11-04T23:19:28.517716+00:00"
+      },
+      {
+        "step": "another_section",
+        "final": "https://docs.python.org/3/builtins/stdtypes.html#list.pop",
+        "chars": 814438,
+        "cache_state": "network",
+        "status": 200,
+        "headers": {
+          "etag": "\"6aebaf6c-c709b\"",
+          "age": "1",
+          "vary": "Accept-Encoding"
+        },
+        "fetched_at": "2026-11-04T23:19:29.628113+00:00",
+        "checked_at": "2026-11-04T23:19:29.628113+00:00"
+      },
+      {
+        "step": "revalidation",
+        "final": "https://docs.python.org/3/builtins/stdtypes.html#list.append",
+        "chars": 814438,
+        "cache_state": "network",
+        "status": 200,
+        "headers": {
+          "etag": "\"6aebaf6c-c709b\"",
+          "age": "2",
+          "vary": "Accept-Encoding"
+        },
+        "fetched_at": "2026-11-04T23:19:30.824110+00:00",
+        "checked_at": "2026-11-04T23:19:30.824110+00:00"
+      }
+    ],
+    "events": {
+      "FETCH_STARTED": 3,
+      "HTTP_RESPONSE": 3,
+      "BODY_RECEIVED": 3
+    }
+  },
+  "bounded_document": {
+    "requests": [
+      {
+        "step": "first",
+        "url": "https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks",
+        "chars": 110941,
+        "cache_state": "network",
+        "fetched_at": "2026-11-04T23:20:03.383427+00:00",
+        "checked_at": "2026-11-04T23:20:03.383427+00:00"
+      },
+      {
+        "step": "another_section",
+        "url": "https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-queues",
+        "chars": 110941,
+        "cache_state": "revalidated",
+        "fetched_at": "2026-11-04T23:20:03.383427+00:00",
+        "checked_at": "2026-11-04T23:20:03.857569+00:00"
+      },
+      {
+        "step": "revalidation",
+        "url": "https://docs.python.org/3/tutorial/datastructures.html#using-lists-as-stacks",
+        "chars": 110941,
+        "cache_state": "revalidated",
+        "fetched_at": "2026-11-04T23:20:03.383427+00:00",
+        "checked_at": "2026-11-04T23:20:04.196412+00:00"
+      }
+    ],
+    "events": {
+      "FETCH_STARTED": 3,
+      "HTTP_RESPONSE": 3,
+      "BODY_RECEIVED": 1,
+      "PUBLIC_BODY_REVALIDATED": 2
+    }
+  }
+}

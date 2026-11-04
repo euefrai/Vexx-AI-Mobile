@@ -539,4 +539,29 @@ Hashes do código/testes conferidos com a exportação final; diff-check passou.
 Próximo passo exato: implementar cache público com revalidação e testar síntese
 com modelo operacional; conferir os cards do fallback profundo antes de aprovar C.
 Somente uma linha nova em `tests/conftest.py` pertence a esta etapa; preservar
-as demais alterações preexistentes nesse arquivo. Ainda sem novo push desta rodada.
+as demais alterações preexistentes nesse arquivo. Publicado em `5ecf05d`, com
+hash remoto do main conferido; deploy/atualização do agente não foram verificados.
+
+## Cache público e cards — 04/11/2026
+
+Corpos públicos limitados em memória por dono, com ETag/Last-Modified/304,
+respeito a políticas de cache, limites e revalidação de preços. Evidências são
+selecionadas novamente para cada pergunta. Nenhum corpo vencido substitui uma
+falha de rede. Integração comum/profunda e REST; sem novas dependências.
+
+Chat profundo agora conserva cards dentro do limite de 10 mil caracteres.
+Interface real: seis cards lidos persistidos após reload, clique no artigo
+exato, sem erro capturado após login ou overflow em 390 px. Modelo DeepSeek
+continua bloqueado por cota; Gemini/Mistral também falharam nos probes desta
+rodada. Não aprovar síntese com base apenas no catálogo ou na extração.
+
+Suíte isolada final: 2.720 aprovados, 4 pulados, 2 avisos; exit 0 em 411,97 s.
+Log: `qa-artifacts/public-cache-release-full.log`. Regressão focada: 150 aprovados.
+Código/testes conferidos com a árvore validada. Laboratório encerrado com
+verificação de identidade e zero operações, sem reiniciar produção.
+
+Entrega ao main autorizada; conferir o hash remoto ao concluir o envio.
+Próximo passo: repetir síntese com provedor operacional, mantendo validadores
+e limites. Não tratar cota/limite do modelo como CAPTCHA do publicador.
+Relatório e provas em `RELATORIO_CACHE_E_CARDS.md`. Preservar hunks de watchdog
+em `pc_agent.py` e autenticação em `tests/conftest.py` ao preparar a entrega.

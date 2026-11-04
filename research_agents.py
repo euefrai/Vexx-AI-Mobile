@@ -1139,13 +1139,13 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
             import publisher_reader
             started = time.monotonic()
             published = publisher_reader.read(a['url'], job['objetivo'],
-                                               timeout=min(3.0, limite_tempo), cancelled=parar)
+                                               timeout=min(3.0, limite_tempo), cancelled=parar, cache=raw_cache)
             if published:
                 return published
             limite_tempo = max(0.001, limite_tempo - (time.monotonic() - started))
             import public_store_reader
             final, pagina = public_store_reader.fetch(
-                a["url"], timeout=limite_tempo, cancelar=parar,
+                a["url"], timeout=limite_tempo, cancelar=parar, **({'cache':raw_cache} if raw_cache else {}),
                 max_bytes=max(65_536, int(job["orcamento"].get(
                     "max_bytes_pagina", research.MAX_PAGINA_BYTES))))
         except TypeError:
@@ -1168,6 +1168,9 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
                 "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
                 "access_state": "read" if texto else "snippet_only"}
+        rec.update(fetched_at=getattr(pagina,'fetched_at',research.agora_iso()),
+                   checked_at=getattr(pagina,'checked_at',research.agora_iso()),
+                   cache_state=getattr(pagina,'cache_state','network'))
         if orch.classificar(job['objetivo']).get('produto'):
             import research_product_evidence
             offer = research_product_evidence.extract(pagina, final, rec['titulo'], job['objetivo'])
@@ -1191,6 +1194,8 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         return rec
 
     import search_orchestrator as orch
+    import public_document_cache
+    raw_cache = public_document_cache.reader(job['owner'],job['objetivo']) if recuperar_fn is None else None
     subject = job['objetivo'] if etapa.get('replan_reason') else etapa['alvo']
     import query_intelligence
     import search_verticals
@@ -1619,6 +1624,7 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
         if not trecho_fonte:
             trecho_fonte = texto[:1500] or str(a.get("trecho") or "")
         fonte = {"id": a.get("id", ""), "url": a["url"],
+                 **{k:rec[k] for k in ('fetched_at','checked_at','cache_state') if k in rec},
                  "titulo": rec.get("titulo") or a.get("titulo", ""),
                  "content_scope": rec.get("content_scope", "page_text"),
                  **({"full_text_fetched": False} if rec.get("content_scope") == "abstract_only" else {}),

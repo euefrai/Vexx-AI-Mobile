@@ -1,0 +1,53 @@
+{
+  "catalog_id_attempt": {
+    "provider": "gemini",
+    "configured": true,
+    "model_count": 60,
+    "selected": "models/gemini-2.5-flash",
+    "error_type": "BridgeErro",
+    "code": "modelo-nao-encontrado",
+    "http": null
+  },
+  "normalized_id_attempt": {
+    "provider": "gemini",
+    "selected": "gemini-2.5-flash-lite",
+    "error_type": "BridgeErro",
+    "code": "modelo-nao-encontrado"
+  },
+  "same_catalog_model_without_resource_prefix": {
+    "provider": "gemini",
+    "selected": "gemini-2.5-flash",
+    "error_type": "BridgeErro",
+    "code": "modelo-nao-encontrado"
+  },
+  "current_catalog_model_attempt": {
+    "listed_flash_models": [
+      "gemini-2.5-flash",
+      "gemini-2.5-flash-lite",
+      "gemini-2.5-flash-preview-tts",
+      "gemini-3-flash-preview",
+      "gemini-3.1-flash-lite",
+      "gemini-3.1-flash-lite-preview",
+      "gemini-3.1-flash-tts-preview",
+      "gemini-3.5-flash",
+      "gemini-3.5-flash-lite",
+      "gemini-3.6-flash",
+      "gemini-3.7-flash",
+      "gemini-3.8-flash",
+      "gemini-3.8-flash-lite-tts",
+      "gemini-3.8-flash-tts",
+      "gemini-flash-latest",
+      "gemini-flash-lite-latest"
+    ],
+    "selected": "gemini-3.8-flash",
+    "error_type": "BridgeErro",
+    "code": "provedor"
+  },
+  "mistral_attempt": {
+    "provider": "mistral",
+    "selected": "mistral-small-latest",
+    "configured": true,
+    "error_type": "BridgeErro",
+    "code": "rate_limit"
+  }
+}

@@ -205,7 +205,7 @@ def _tipo_aceito(ctype: str, aceitar: str) -> bool:
 
 
 def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
-           abrir=None, aceitar: str = "html", user_agent: str = "", cancelar=None) -> tuple:
+           abrir=None, aceitar: str = "html", user_agent: str = "", cancelar=None, validadores=None) -> tuple:
     """Baixa com redirects revalidados (≤3), teto de tamanho e só texto.
 
     `aceitar`: "html" (texto+JSON, padrão), "json", "feed" (RSS/Atom) ou
@@ -218,15 +218,22 @@ def baixar(url: str, timeout: float = 10.0, max_bytes: int = MAX_PAGINA_BYTES,
     if not isinstance(timeout, (int, float)) or not math.isfinite(timeout) or timeout <= 0:
         raise ResearchErro('Orçamento de leitura esgotado.', 'rede')
     transport = abrir or _abrir
+    validators = {}
+    for key,value in (validadores or {}).items():
+        name = {'if-none-match':'If-None-Match','if-modified-since':'If-Modified-Since'}.get(str(key).lower())
+        if not name or not isinstance(value,str) or len(value)>1024 or re.search(r'[\r\n\x00]',value):
+            raise ResearchErro('Validador HTTP inválido.','http')
+        validators[name] = value
     deadline = time.monotonic() + timeout
     atual = url_segura(url)
     for _ in range(MAX_REDIRECTS + 1):
         try:
-            return read_access.public_reads.run(atual, (max_bytes, aceitar, user_agent),
+            return read_access.public_reads.run(atual, (max_bytes, aceitar, user_agent, tuple(sorted(validators.items()))),
                 deadline - time.monotonic(),
-                lambda remaining: _baixar_resposta(atual, remaining, max_bytes, transport, aceitar, user_agent),
+                lambda remaining: _baixar_resposta(atual, remaining, max_bytes, transport, aceitar, user_agent, validators),
                 namespace=transport, cancelled=cancelar)
         except _ReadRedirect as exc:
+            validators = {}  # Validators belong to the exact original representation.
             try:
                 atual = url_segura(urllib.parse.urljoin(atual, exc.location))
             except ResearchErro:
@@ -266,18 +273,21 @@ def _http_read_error(status, headers):
     return error
 
 
-def _baixar_resposta(url, timeout, max_bytes, abrir, aceitar, user_agent):
+def _baixar_resposta(url, timeout, max_bytes, abrir, aceitar, user_agent, validators=None):
     """One bounded hop; redirects re-enter the coordinator for their own origin."""
     import retrieval_trace
     retrieval_trace.transport(url, 'FETCH_STARTED')
     try:
         try:
-            resp = abrir(url, timeout, user_agent)
+            resp = abrir(url, timeout, user_agent, headers=validators) if validators else abrir(url, timeout, user_agent)
         except TypeError:
             resp = abrir(url, timeout)
     except urllib.error.HTTPError as exc:
         retrieval_trace.transport(url, 'HTTP_RESPONSE', status=exc.code)
         try:
+            if exc.code==304 and validators:
+                from public_document_cache import response_body
+                return url,response_body('',exc.headers,304)
             if exc.code in (301, 302, 303, 307, 308):
                 location = exc.headers.get('Location', '')
                 if not location:
@@ -295,6 +305,10 @@ def _baixar_resposta(url, timeout, max_bytes, abrir, aceitar, user_agent):
     with resp:
         status = getattr(resp, 'status', 200)
         retrieval_trace.transport(url, 'HTTP_RESPONSE', status=status)
+        if status==304:
+            if not validators:raise ResearchErro('Resposta 304 sem validador.','http')
+            from public_document_cache import response_body
+            return url,response_body('',resp.headers,304)
         if status in (301, 302, 303, 307, 308):
             location = resp.headers.get('Location', '')
             if not location:
@@ -344,7 +358,8 @@ def _baixar_resposta(url, timeout, max_bytes, abrir, aceitar, user_agent):
             error = ResearchErro('Página apresentou desafio de acesso.', 'bloqueado')
             error.access_reason = 'challenge_required'
             raise error
-        return url, page
+        from public_document_cache import response_body
+        return url, response_body(page,resp.headers)
 
 
 class _TextoHTML(HTMLParser):
@@ -1011,7 +1026,7 @@ def _numerar(fontes: list) -> list:
     return fontes
 
 
-def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = ""):
+def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = "", cache=None, cancelar=None):
     """Recupera 1 página; retorna rec ou None (vazia); levanta ResearchErro.
 
     V5.5: além do texto, guarda título/metadados/trecho realmente usado e
@@ -1025,7 +1040,7 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
     if recuperar_fn is None and a.get("metadata_source") == "academic_provider":
         import academic_research
         full = academic_research.read_open_text(a, timeout_pagina,
-            lambda record, timeout: _recuperar_um(record, None, timeout, consulta))
+            lambda record, timeout: _recuperar_um(record, None, timeout, consulta, cache, cancelar))
         if full and full.get('full_text_fetched'):
             return full
         abstract = str(a.get("abstract") or "")[:1200]
@@ -1063,12 +1078,13 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
         import publisher_reader
         started = time.monotonic()
         published = publisher_reader.read(a['url'], consulta or a.get('titulo', ''),
-                                           timeout=min(3.0, timeout_pagina))
+                                           timeout=min(3.0, timeout_pagina), cache=cache, cancelled=cancelar)
         if published:
             return published
         timeout_pagina = max(0.001, timeout_pagina - (time.monotonic() - started))
         import public_store_reader
-        final, pagina = public_store_reader.fetch(a["url"], timeout=timeout_pagina)
+        options = {**({'cache':cache} if cache else {}), **({'cancelar':cancelar} if cancelar else {})}
+        final, pagina = public_store_reader.fetch(a["url"], timeout=timeout_pagina, **options)
         if pagina_bloqueada(pagina):
             raise ResearchErro("Página é bot-wall/CAPTCHA (não contornado).", "bloqueado")
         art = extrair_artigo(pagina, url=final, consulta=consulta or a.get("titulo", ""))
@@ -1086,6 +1102,9 @@ def _recuperar_um(a: dict, recuperar_fn, timeout_pagina: float, consulta: str = 
                "imagens": art.get("imagens", [])[:10],
                "midia": media_evidence.extrair_midia(pagina, final, art.get('titulo') or ''),
                "extrator": art.get("extrator", ""),
+               "fetched_at": getattr(pagina,'fetched_at',agora_iso()),
+               "checked_at": getattr(pagina,'checked_at',agora_iso()),
+               "cache_state": getattr(pagina,'cache_state','network'),
                "ilegivel": bool(art.get("ilegivel")),
                "lida": bool((art.get("texto") or "").strip())}
     if not (rec.get("texto") or "").strip() and not a.get("trecho"):
@@ -1149,6 +1168,7 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
             "url_final": (rec.get("final") or a.get("url") or "")[:500],
             "dominio": _dominio(a.get("url", "")),
             "acessado_em": agora_iso(),
+            **{k:rec[k] for k in ('fetched_at','checked_at','cache_state') if k in rec},
             "trecho": trecho[:600],
             "texto_lido": (_janela_lida(texto, trecho) if lida else ""),
             "tipo": a.get("tipo", "pagina"),
@@ -1590,12 +1610,15 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
                 break
         return selected
     cancelled = lambda: deve_parar is not None and deve_parar()
+    import public_document_cache
+    raw_cache = public_document_cache.reader(owner,pedido) if native_search and recuperar_fn is None else None
+    read_options = {'cache':raw_cache,'cancelar':cancelled} if raw_cache else {}
     stopped = cancelled()
     initial = [] if stopped else unread(candidates, 3)
     read_recovery = {'executed': False, 'reason': 'not_needed', 'origin': 'post_read',
                      'new_candidates': 0, 'seconds': 0.0, 'read_urls': []}
     with ThreadPoolExecutor(max_workers=3, thread_name_prefix="juliarq") as pool:
-        futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina, pedido): a
+        futs = {pool.submit(_recuperar_um, a, recuperar_fn, timeout_pagina, pedido, **read_options): a
                 for a in initial}
         for fut, a in futs.items():
             try:
@@ -1675,7 +1698,7 @@ def pesquisa_rapida(db, owner: str, consulta: str, buscar_fn=None, recuperar_fn=
                 read_recovery['read_skip_reason'] = 'budget_exhausted'
             else:
                 followup_timeout = min(timeout_pagina, remaining)
-        followups = {pool.submit(_recuperar_um,a,recuperar_fn,followup_timeout,pedido):a for a in next_reads}
+        followups = {pool.submit(_recuperar_um,a,recuperar_fn,followup_timeout,pedido,**read_options):a for a in next_reads}
         recovered_urls = {a['url'] for a in recovered}
         read_recovery['read_urls'] = [a['url'] for a in next_reads if a['url'] in recovered_urls]
         for fut,a in followups.items():

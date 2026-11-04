@@ -35,10 +35,10 @@ def _identity(url):
     return unquote(p.path).rstrip('/')
 
 
-def _posts(params, timeout, cancelled=None):
+def _posts(params, timeout, cancelled=None, cache=None):
     import research
     target = ENDPOINT + '?' + urlencode({**params, '_fields': FIELDS, 'context': 'view'})
-    final, body = research.baixar(target, timeout=timeout, aceitar='json', cancelar=cancelled)
+    final, body = (cache.fetch if cache else research.baixar)(target, timeout=timeout, aceitar='json', cancelar=cancelled)
     actual = urlsplit(final)
     if (actual.scheme != 'https' or actual.hostname not in (HOST, 'www.' + HOST)
             or actual.path.rstrip('/') != urlsplit(ENDPOINT).path):
@@ -49,7 +49,7 @@ def _posts(params, timeout, cancelled=None):
         raise research.ResearchErro('API de notícias devolveu JSON inválido.', 'formato') from None
     if not isinstance(rows, list):
         raise research.ResearchErro('API de notícias fora do formato.', 'formato')
-    return rows[:20], final
+    return rows[:20], final, body
 
 
 def _record(row):
@@ -107,7 +107,7 @@ def discover(query, limit=6, timeout=3):
         args['before'] = params['end_date'] + 'T23:59:59'
     if params.get('topic'):
         args['search'] = str(params['topic'])[:160]
-    posts, final = _posts(args, timeout)
+    posts, final, _ = _posts(args, timeout)
     found = []
     for post in posts:
         record = _record(post)
@@ -125,15 +125,15 @@ def discover(query, limit=6, timeout=3):
     return found
 
 
-def read(url, query, timeout=3, cancelled=None):
+def read(url, query, timeout=3, cancelled=None, cache=None):
     """Resolve an exact article slug; never substitute another article or homepage."""
     if not enabled() or not eligible(url):
         return None
     import research
     research.url_segura(url)
     try:
-        posts, final = _posts({'slug': unquote(urlsplit(url).path).strip('/').split('/')[-1],
-                               'per_page': 2}, timeout, cancelled)
+        posts, final, body = _posts({'slug': unquote(urlsplit(url).path).strip('/').split('/')[-1],
+                               'per_page': 2}, timeout, cancelled, cache)
     except research.ResearchErro as exc:
         if exc.codigo in ('ssrf', 'cancelada'):
             raise
@@ -161,5 +161,7 @@ def read(url, query, timeout=3, cancelled=None):
         return {**article, 'metadados': metadata, 'final': record['url'],
                 'lida': True, 'texto_lido': True, 'access_state': 'read', 'midia': [],
                 'content_scope': 'publisher_article', 'extrator': 'publisher_rest',
-                'fetched_at': research.agora_iso()}
+                'fetched_at': getattr(body,'fetched_at',research.agora_iso()),
+                'checked_at': getattr(body,'checked_at',research.agora_iso()),
+                'cache_state': getattr(body,'cache_state','network')}
     return None
