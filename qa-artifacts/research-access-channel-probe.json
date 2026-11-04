@@ -1,0 +1,41 @@
+{
+  "checked_at": "2026-11-04T19:04:33.581258+00:00",
+  "scope": "anonymous read-only public endpoints; no model generation or production UI validation",
+  "results": [
+    {
+      "case": "ubata_public_rest",
+      "url": "https://ubatanoticias.com.br/wp-json/wp/v2/posts?per_page=1&_fields=id,link,date,title,content",
+      "authenticated": false,
+      "final_url": "https://ubatanoticias.com.br/wp-json/wp/v2/posts?per_page=1&_fields=id,link,date,title,content",
+      "bytes": 5599,
+      "challenge": false,
+      "transport": "success",
+      "post_count": 1,
+      "has_content": true,
+      "article_url": "https://ubatanoticias.com.br/pets-podem-ter-sobrenome-dos-tutores-veja-como-registrar/",
+      "seconds": 1.09
+    },
+    {
+      "case": "kabum_product",
+      "url": "https://www.kabum.com.br/produto/1012613/placa-de-video-msi-rtx-3050-lp-oc-nvidia-geforce-6gb-gddr6-96-bit-low-profile-g3050lp6c",
+      "authenticated": false,
+      "final_url": "https://www.kabum.com.br/produto/1012613/placa-de-video-msi-rtx-3050-lp-oc-nvidia-geforce-6gb-gddr6-96-bit-low-profile-g3050lp6c",
+      "bytes": 154681,
+      "challenge": false,
+      "transport": "success",
+      "readable_chars": 2717,
+      "title": "Placa De Vídeo MSI RTX 3050 LP OC NVIDIA Geforce, 6GB, GDDR6, 96-Bit, Low Profile - G3050LP6C",
+      "seconds": 1.36
+    },
+    {
+      "case": "mercadolivre_official_api_without_token",
+      "url": "https://api.mercadolibre.com/sites/MLB/search?q=RTX%203050%206GB&limit=1",
+      "authenticated": false,
+      "transport": "error",
+      "error_type": "ResearchErro",
+      "code": "bloqueado",
+      "http": 403,
+      "seconds": 0.65
+    }
+  ]
+}

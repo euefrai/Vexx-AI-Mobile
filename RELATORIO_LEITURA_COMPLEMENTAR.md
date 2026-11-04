@@ -100,9 +100,10 @@ As alterações de segurança/watchdog existentes no workspace foram preservadas
 O agente de produção não foi reiniciado. Esta rodada valida funcionamento local;
 não comprova implantação no Render nem disponibilidade dos provedores.
 
-As alterações desta etapa permanecem locais. O relatório e a matriz preservam
-as falhas de cota/autenticação e o resultado parcial da síntese, em vez de
-classificar a rodada como sete pesquisas completas.
+O código desta etapa foi enviado a `origin/main` no commit `d2fcdb5`, com o hash
+remoto conferido. O relatório e a matriz preservam as falhas de cota/autenticação
+e o resultado parcial da síntese, em vez de classificar a rodada como sete
+pesquisas completas. O push não comprova implantação concluída no Render.
 
 Preparação do push autorizado: o conjunto selecionado foi exportado do índice
 Git, sem o WIP de outras frentes. A suíte completa dessa árvore passou:
@@ -111,6 +112,11 @@ Git, sem o WIP de outras frentes. A suíte completa dessa árvore passou:
 2.669 corresponde ao conjunto de alterações/testes locais que não integra esta
 publicação; não foram removidos testes do repositório. O código validado não
 recebeu novas alterações após essa execução.
+
+O diagnóstico seguinte e as propostas para reduzir falhas de acesso estão em
+`docs/RESEARCH_ACCESS_RECOVERY_PLAN.md`. Três requisições públicas reais estão
+registradas em `qa-artifacts/research-access-channel-probe.json`; não são novos
+testes de interface, geração de respostas ou validação do ambiente de produção.
 
 ## Próximo passo exato
 

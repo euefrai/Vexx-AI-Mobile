@@ -498,4 +498,17 @@ negativos e os critérios de autoridade. Não reiniciar o agente de produção.
 
 Suíte final desta etapa: 2.669 aprovados, 4 pulados e 2 avisos; exit 0 em
 198,20 s, em `qa-artifacts/complementary-reading-verified-full.log`.
-Diff-check passou. Alterações locais, ainda sem publicação desta etapa.
+Diff-check passou. Código enviado a `origin/main` em `d2fcdb5`, com hash remoto
+conferido; implantação no Render não foi verificada. Antes do envio, a árvore
+selecionada foi exportada do índice sem o WIP alheio e aprovada em suíte completa:
+2.644 aprovados, 4 pulados e 2 avisos, exit 0 em 304,84 s
+(`qa-artifacts/complementary-reading-publish-isolated.log`). Os 2.669 anteriores
+referem-se ao workspace com outras alterações locais, preservadas sem envio.
+
+Diagnóstico de acesso: REST pública do Ubatã entregou conteúdo de um post;
+uma página exata KaBuM foi lida; API Mercado Livre sem token retornou 403,
+sem comprovação de CAPTCHA. Plano em `docs/RESEARCH_ACCESS_RECOVERY_PLAN.md`:
+primeiro separar erros e coordenar requisições por origem; depois aproveitar
+o canal WordPress. Firecrawl anônimo atual não atende ao contrato de autenticação
+documentado. Nenhuma nova integração paga foi ativada; o PC Agent não foi
+reiniciado. Próxima implementação de acesso e nova validação da síntese pendentes.
