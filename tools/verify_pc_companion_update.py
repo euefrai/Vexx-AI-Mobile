@@ -27,6 +27,11 @@ import uvicorn
 from fastapi import FastAPI
 from fastapi.responses import Response
 from pc_companion.release import bundle, manifest
+from pc_companion import __version__
+BASE = __version__
+parts = BASE.split(".")
+NEXT = ".".join(parts[:-1]+[str(int(parts[-1])+1)])
+BROKEN = ".".join(parts[:-1]+[str(int(parts[-1])+2)])
 
 
 def fixture_release(ver, broken=False):
@@ -57,6 +62,7 @@ def wait_for(getter,predicate,seconds=150):
 
 def main():
     if os.name!='nt': raise SystemExit('This installer smoke requires Windows.')
+    native = '--native' in sys.argv
     base=Path('output')/('pc-update-'+uuid.uuid4().hex[:10]);base.mkdir(parents=True)
     base=base.resolve();(base/'evidence.txt').write_text('Isolated Vexx PC updater QA\n')
     extracted=base/'package'
@@ -66,7 +72,7 @@ def main():
     ca=trustme.CA();cert=ca.issue_cert('127.0.0.1')
     cert.private_key_pem.write_to_path(base/'key.pem');cert.cert_chain_pems[0].write_to_path(base/'cert.pem')
     combined=base/'ca.pem';combined.write_bytes(Path(certifi.where()).read_bytes()+b'\n'+ca.cert_pem.bytes())
-    state={'package':fixture_release('1.1.1')}
+    state={'package':fixture_release(NEXT)}
     api=FastAPI()
     @api.get('/api/companion/release')
     async def release():return state['package'][1]
@@ -89,7 +95,7 @@ def main():
     old=install/active['release'];env=os.environ.copy();env['SSL_CERT_FILE']=str(combined)
     exe=old/'.venv/Scripts/python.exe'
     with (base/'runtime.log').open('ab') as log:
-        initial=subprocess.Popen([str(exe),'-m','pc_companion','--no-browser','--data-dir',str(data),
+        initial=subprocess.Popen([str(exe),'-m','pc_companion',*([] if native else ['--no-browser']),'--data-dir',str(data),
             '--root',str(documents)],cwd=old,env=env,stdout=log,stderr=log,creationflags=subprocess.CREATE_NO_WINDOW)
     def record():return json.loads((data/'runtime.json').read_text('utf-8'))
     def local_client(expected=None):
@@ -100,31 +106,31 @@ def main():
         return client,rec
     client=None
     try:
-        client,first=local_client('1.1.0')
+        client,first=local_client(BASE)
         update=client.post('/api/update/check',json={}).json()
-        assert update['installed'] and update['available'] and update['latest']=='1.1.1',update
-        print('Applying verified HTTPS update 1.1.0 -> 1.1.1...',flush=True)
+        assert update['installed'] and update['available'] and update['latest']==NEXT,update
+        print(f'Applying verified HTTPS update {BASE} -> {NEXT}...',flush=True)
         assert client.post('/api/update/apply',json={}).status_code==200
         result=wait_for(lambda:json.loads((data/'update-result.json').read_text('utf-8')),lambda r:r['state']=='complete')
         initial.wait(timeout=5)
-        client.close();client,second=local_client('1.1.1')
+        client.close();client,second=local_client(NEXT)
         assert second['pid']!=first['pid']
         assert json.loads((data/'config.json').read_text('utf-8'))==config
         with sqlite3.connect(data/'files.sqlite3') as db:assert db.execute('PRAGMA quick_check').fetchone()[0]=='ok'
-        assert (old/'pc_companion/__init__.py').read_text().find("'1.1.0'")>=0
+        assert (old/'pc_companion/__init__.py').read_text().find(repr(BASE))>=0
         assert not client.get('/api/status').json()['connection']['approved']
-        state['package']=fixture_release('1.1.2',broken=True)
+        state['package']=fixture_release(BROKEN,broken=True)
         print('Applying fixture with invalid dependencies; expecting automatic rollback...',flush=True)
         assert client.post('/api/update/check',json={}).json()['available']
         assert client.post('/api/update/apply',json={}).status_code==200
         result=wait_for(lambda:json.loads((data/'update-result.json').read_text('utf-8')),
-                        lambda r:r.get('version')=='1.1.2' and r.get('rolled_back') is True)
-        client.close();client,last=local_client('1.1.1')
+                        lambda r:r.get('version')==BROKEN and r.get('rolled_back') is True)
+        client.close();client,last=local_client(NEXT)
         assert json.loads((data/'config.json').read_text('utf-8'))==config
         current=json.loads((install/'current.json').read_text('utf-8'))
-        assert current['version']=='1.1.1'
-        report={'initial_install':True,'tls_verified':True,'sha256_verified':True,
-            'update_1_1_0_to_1_1_1':True,'graceful_exit':initial.returncode==0,
+        assert current['version']==NEXT
+        report={'initial_install':True,'native_window_mode':native,'tls_verified':True,'sha256_verified':True,
+            'update':{'from':BASE,'to':NEXT},'graceful_exit':initial.returncode==0,
             'fresh_environment':True,'live_health_before_promotion':True,
             'remote_paused_after_restart':True,'config_preserved':True,'index_integrity':True,
             'dependency_failure_rollback':True,'old_release_preserved':True}

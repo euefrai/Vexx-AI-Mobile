@@ -234,6 +234,11 @@ def create_app(directory=None, roots=None):
             callback = getattr(app.state, 'request_exit', None)
             if callback:
                 asyncio.get_running_loop().call_later(.3, callback)
+        elif action == 'show_window':
+            callback = getattr(app.state, 'show_window', None)
+            if not callback:
+                raise HTTPException(409, 'Esta execução está em modo de diagnóstico.')
+            await asyncio.to_thread(callback)
         else:
             raise HTTPException(400, 'Ação desconhecida')
         return {'ok': True}

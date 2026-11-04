@@ -1,7 +1,6 @@
 """Bind an OS-selected loopback port; never adopt or terminate an existing process."""
 import argparse
 import socket
-import threading
 import webbrowser
 import os
 import secrets
@@ -14,6 +13,7 @@ from . import __version__
 def main():
     parser = argparse.ArgumentParser(description='Vexx PC local')
     parser.add_argument('--no-browser', action='store_true')
+    parser.add_argument('--start-hidden', action='store_true')
     parser.add_argument('--port', type=int, default=0)
     parser.add_argument('--data-dir')
     parser.add_argument('--root', action='append', help='Diretório para indexar (repetível)')
@@ -29,12 +29,32 @@ def main():
     app.state.instance_id = secrets.token_hex(16)
     app.state.runtime = {'url':url, 'pid':os.getpid(), 'version':__version__, 'instance_id':app.state.instance_id}
     app.state.updater.no_browser = args.no_browser
-    if not args.no_browser:
-        threading.Timer(1.5, lambda: webbrowser.open(url)).start()
     print('Vexx PC:', url, flush=True)
-    server = uvicorn.Server(uvicorn.Config(app, log_level='warning', access_log=False))
+    server = uvicorn.Server(uvicorn.Config(app, log_level='warning', access_log=False, use_colors=False))
     app.state.request_exit = lambda: setattr(server, 'should_exit', True)
-    server.run(sockets=[sock])
+    if not args.no_browser and os.name == 'nt':
+        from .desktop import run
+        import ctypes
+        from ctypes import wintypes
+        kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+        kernel.CreateMutexW.argtypes = (wintypes.LPVOID, wintypes.BOOL, wintypes.LPCWSTR)
+        kernel.CreateMutexW.restype = wintypes.HANDLE
+        kernel.CloseHandle.argtypes = (wintypes.HANDLE,)
+        mutex = kernel.CreateMutexW(None, False, 'VexxPC.Desktop')
+        if not mutex:
+            raise ctypes.WinError(ctypes.get_last_error())
+        already_running = ctypes.get_last_error() == 183
+        try:
+            if not already_running:
+                run(server, sock, url, app, hidden=args.start_hidden)
+        finally:
+            kernel.CloseHandle(mutex)
+            sock.close()
+    else:
+        if not args.no_browser:
+            import threading
+            threading.Timer(1.5, lambda: webbrowser.open(url)).start()
+        server.run(sockets=[sock])
 
 
 if __name__ == '__main__':

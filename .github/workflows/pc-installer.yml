@@ -1,0 +1,29 @@
+name: Windows PC installer
+
+on:
+  workflow_dispatch:
+  push:
+    tags: ['vexx-pc-v*']
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+      - run: python -m pip install Pillow
+      - name: Build installer with bundled runtime and offline dependencies
+        run: python tools/build_pc_installer.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Vexx-PC-Windows-installer
+          path: |
+            output/windows-installer/Vexx-PC-Setup-*.exe
+            output/windows-installer/SHA256SUMS
+            output/windows-installer/build.json
+          if-no-files-found: error

@@ -47,14 +47,20 @@ def prepare_release(job, execute=subprocess.run):
         [str(runtime_python(new)), '-m', 'pip', 'install', '--disable-pip-version-check', '-r', str(new / 'pc_companion' / 'requirements.txt')],
         [str(runtime_python(new)), '-c', 'import pc_companion.app, mss, PIL, psutil; from pc_companion import __version__; print(__version__)'],
     ]
+    environment = os.environ.copy()
+    if os.name == 'nt':
+        windows = Path(environment.get('SystemRoot', 'C:/Windows'))
+        environment['PATH'] = os.pathsep.join(map(str, (runtime_python(new).parent, windows/'System32', windows)))
     for command in commands:
         execute(command, cwd=new, check=True, timeout=300,
+                env=environment,
                 creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)
     return new
 
 
 def start_release(release, job):
-    args = [str(runtime_python(release, hidden=True)), '-m', 'pc_companion', '--no-browser', '--data-dir', job['directory']]
+    flag = '--no-browser' if job.get('no_browser') or not (Path(release)/'pc_companion/desktop.py').is_file() else '--start-hidden'
+    args = [str(runtime_python(release, hidden=True)), '-m', 'pc_companion', flag, '--data-dir', job['directory']]
     for root in job.get('roots', []):
         args += ['--root', root]
     return subprocess.Popen(args, cwd=release, stdin=subprocess.DEVNULL,
@@ -80,11 +86,28 @@ def wait_healthy(child, directory, expected_version=None, timeout=30):
                 data = json.load(response)
             if (data.get('service') == 'vexx-pc' and data.get('instance_id') == record['instance_id']
                     and data.get('pid') == record['pid'] and (expected_version is None or data.get('version') == expected_version)):
+                child.vexx_runtime = record
                 return record['url']
         except (OSError, ValueError, KeyError, psutil.Error):
             pass
         time.sleep(.2)
     raise RuntimeError('A nova versão não confirmou a inicialização.')
+
+
+def show_release(child, url):
+    import httpx
+    record = getattr(child, 'vexx_runtime', {})
+    with httpx.Client(base_url=url, timeout=5, trust_env=False, follow_redirects=False) as client:
+        health = client.get('/health').json()
+        if health.get('instance_id') != record.get('instance_id') or health.get('pid') != record.get('pid'):
+            raise RuntimeError('A identidade da janela mudou.')
+        client.get('/').raise_for_status()
+        token = client.get('/api/bootstrap').json()['token']
+        response = client.post('/api/action', headers={'X-Vexx-Token':token}, json={'action':'show_window'})
+        if response.status_code in (400, 409):  # Older releases have no native window.
+            webbrowser.open(url)
+        else:
+            response.raise_for_status()
 
 
 def run(job, prepare=prepare_release, start=start_release, healthy=wait_healthy):
@@ -102,7 +125,7 @@ def run(job, prepare=prepare_release, start=start_release, healthy=wait_healthy)
         atomic_json(report, {'state':'complete', 'version':job['version'], 'url':url})
         if not job.get('no_browser'):
             try:
-                webbrowser.open(url)
+                show_release(child, url)
             except OSError:
                 pass
         return True
@@ -129,7 +152,7 @@ def run(job, prepare=prepare_release, start=start_release, healthy=wait_healthy)
         atomic_json(report, {'state':'failed', 'rolled_back':True, 'url':url, 'version':job['version'],
                              'message':'Não foi possível instalar a atualização. A versão anterior foi reaberta.'})
         if not job.get('no_browser'):
-            webbrowser.open(url)
+            show_release(fallback, url)
         return False
 
 

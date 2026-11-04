@@ -5,11 +5,11 @@ Aplicativo público independente para Windows 10/11. Não instala Studio, túnei
 ## Instalar
 
 1. No site Vexx AI, abra **Meu PC → Preparar computador → Baixar Vexx PC para Windows**.
-2. Extraia o ZIP e dê dois cliques em **Instalar.cmd**. Internet necessária na primeira instalação. O instalador procura Python 3.12–3.14 compatível e, se necessário, instala Python 3.13 pelo WinGet; cria ambiente virtual e instala as dependências. Se o WinGet estiver indisponível, apresenta o endereço oficial para instalar Python.
+2. Abra **Vexx-PC-Setup-1.2.0.exe** e instale. O pacote inclui Python e todas as dependências do aplicativo. Não exige Python do sistema, WinGet ou extração manual. Em computadores sem WebView2, o instalador baixa esse componente oficial da Microsoft; nesse caso precisa de internet.
 3. Abra **Vexx PC** pelo atalho. No site, entre na sua conta e gere um código temporário. No aplicativo, informe o endereço HTTPS do site e o código. Cada conta mantém um PC vinculado; novo vínculo substitui o anterior.
 4. Autorize visualização ou controle no **painel local**, apenas quando precisar. A permissão dura até uma hora, é revogável e começa pausada ao abrir o aplicativo. No celular, entre na mesma conta e abra **Meu PC**.
 
-O download é feito com um clique; a instalação exige extrair e executar o instalador. O pacote não possui assinatura Authenticode nem instalador EXE. Não ignore bloqueios do Windows; revise a origem oficial do arquivo.
+O aplicativo abre em janela própria e cria atalhos no menu Iniciar e, opcionalmente, na Área de Trabalho. Instala para seu usuário em Windows 10/11 x64, sem administrador. Fechar a janela encerra o aplicativo e o acesso remoto. A desinstalação em Aplicativos do Windows remove o código e preserva a configuração e o índice. O EXE ainda não possui assinatura Authenticode.
 
 ## O que inclui
 
@@ -28,6 +28,8 @@ O ícone **↻** no topo verifica novas versões no site HTTPS ao qual este PC f
 A instalação é preparada em uma pasta separada, com seu próprio ambiente virtual e dependências. O aplicativo pausa o acesso remoto e encerra de forma controlada. A nova versão só vira a versão ativa depois de iniciar e responder ao teste de saúde com a identidade correta. Se dependências ou inicialização falharem, a versão anterior é reaberta. A conta, a credencial e o índice continuam na pasta de dados. O acesso remoto volta pausado.
 
 O atalho usa `app/launch.py` e `app/current.json`; as versões ficam em `app/releases/`. O atualizador não sobrescreve nem apaga versões anteriores. Instalações manuais pelo código não se atualizam sozinhas: use o instalador Windows para habilitar essa função. O pacote e o manifesto vêm do mesmo site confiável por HTTPS, sem redirecionamentos; SHA-256 confere integridade, não constitui uma assinatura independente do publicador.
+
+O instalador inicial é um EXE; o ZIP continua sendo apenas o formato interno de atualização, baixado e aplicado pelo próprio app.
 
 Para publicar uma nova atualização, aumente `__version__` em `pc_companion/__init__.py`, valide e implante o repositório. O endpoint público `/api/companion/release` informa versão, tamanho, arquivos e hash do ZIP gerado. Não inclua configurações ou bancos pessoais no pacote.
 
@@ -49,10 +51,10 @@ python -m venv .venv-pc
 .venv-pc\Scripts\python -m pc_companion
 ```
 
-Para diagnóstico/QA isolada: `python -m pc_companion --no-browser --port 0 --data-dir C:\temp\vexx-qa --root C:\pasta-de-teste`. A porta efetiva aparece no terminal; não adote outro serviço pela porta. O navegador é a interface do aplicativo; fechar a aba não encerra o processo. Para encerrar a versão de código, use Ctrl+C no terminal. A versão instalada oferece **Encerrar aplicativo** no painel.
+Para diagnóstico/QA isolada: `python -m pc_companion --no-browser --port 0 --data-dir C:\temp\vexx-qa --root C:\pasta-de-teste`. A porta efetiva aparece no terminal; não adote outro serviço pela porta. No Windows, a execução normal abre uma janela WebView2. `--no-browser` executa apenas o serviço local para diagnóstico. Para encerrar a versão de código, use Ctrl+C no terminal. A versão instalada oferece **Encerrar aplicativo** no painel.
 
 ## Publicar no site
 
-Implante juntos `companion_api.py`, `companion_registry.py`, a pasta `pc_companion`, `remoto.py`, a integração em `server.py` e o frontend. Atualize também o agente central (`pc_agent.py`) para persistir os vínculos no banco de autenticação existente. O servidor entrega o ZIP em `/downloads/vexx-pc-agent-windows.zip`, gerado por lista explícita de arquivos. A conta e a IA continuam usando o agente central; o PC público cuida apenas do dispositivo da pessoa. As rotas antigas de acesso remoto permanecem para compatibilidade, enquanto o site público usa `/api/companion/*`.
+Implante juntos `companion_api.py`, `companion_registry.py`, a pasta `pc_companion`, `remoto.py`, a integração em `server.py` e o frontend. Atualize também o agente central (`pc_agent.py`) para persistir os vínculos no banco de autenticação existente. O download público `/downloads/vexx-pc-agent-setup.exe` aponta ao EXE da versão no GitHub Releases. Gere com `python tools/build_pc_installer.py` no Windows (Pillow necessário), confira a instalação e publique o EXE e `SHA256SUMS` na release `vexx-pc-v<versão>` **antes** de implantar a nova versão no site. A compilação inclui Python independente, wheels para instalação offline e bootstrapper WebView2 com assinatura Microsoft verificada. As fontes e hashes dos fornecedores estão em `installer/sources.json`. O workflow Windows também permite compilar artefatos para revisão. O servidor mantém o ZIP interno em `/downloads/vexx-pc-agent-windows.zip`, gerado por lista explícita de arquivos. A conta e a IA continuam usando o agente central; o PC público cuida apenas do dispositivo da pessoa. As rotas antigas de acesso remoto permanecem para compatibilidade, enquanto o site público usa `/api/companion/*`.
 
-Referências: [SQLite FTS5 trigram](https://www.sqlite.org/fts5.html#the_trigram_tokenizer), [WinGet install](https://learn.microsoft.com/windows/package-manager/winget/install).
+Referências: [SQLite FTS5 trigram](https://www.sqlite.org/fts5.html#the_trigram_tokenizer), [WebView2](https://learn.microsoft.com/microsoft-edge/webview2/concepts/distribution), [Python standalone](https://docs.astral.sh/python-build-standalone/).

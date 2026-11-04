@@ -19,7 +19,7 @@ def main():
     root = Path(__file__).resolve().parent
     selected = selected_release(root)
     executable = selected / '.venv' / ('Scripts/pythonw.exe' if os.name == 'nt' else 'bin/python')
-    subprocess.Popen([str(executable), '-m', 'pc_companion'], cwd=selected,
+    subprocess.Popen([str(executable), '-m', 'pc_companion', *sys.argv[1:]], cwd=selected,
                      creationflags=subprocess.CREATE_NO_WINDOW if os.name == 'nt' else 0)
 
 

@@ -2,7 +2,7 @@
 
 Validado localmente em 3 de novembro de 2026. Mudanças aplicadas ao checkout `julia-mobile-v0.2`; alterações anteriores de pesquisa, autenticação e outros trabalhos foram preservadas. O painel de desenvolvimento Fajulto não foi modificado.
 
-## Entrega
+## Histórico da entrega inicial
 
 - `pc_companion/`: aplicativo independente com Visão geral, PC, Rede, Logs e Copiloto local. Sem Studio, Mente, serviços de desenvolvimento ou criação de túneis. Instalador Windows, ambiente virtual, dependências, atalho e encerramento pelo painel.
 - `system.py`: CPU/RAM, armazenamento local, uptime do sistema, bateria, interfaces/IPs, tráfego, SSID quando disponível e RAM do aplicativo. Atualização a cada 3 s; consulta do Wi-Fi em processo oculto, com timeout, no máximo a cada 30 s.
@@ -26,7 +26,7 @@ Artefatos locais: `output/pc-companion-release/Vexx-PC-Windows.zip`, `validation
 
 - Os testes locais não demonstram download/vínculo no site implantado. A publicação precisa incluir os arquivos do relay/frontend e a atualização do agente central junto. Não basta copiar somente a pasta do aplicativo; a versão publicada deve ser conferida pelo manifesto e download reais.
 - Há um PC por conta. O agente central continua necessário para autenticação e IA. Estado de conexão/códigos é volátil no relay; registro de dispositivos é persistente no SQLite central. Use a topologia atual de uma instância do relay; múltiplos workers/instâncias exigem coordenação compartilhada de sockets e códigos.
-- O download é um clique; a instalação requer extrair o ZIP e executar `Instalar.cmd`. Não há EXE independente nem assinatura Authenticode. WinGet pode solicitar confirmação; sem WinGet/Python, há instrução de instalação manual.
+- Na versão inicial 1.1, o download exigia extração manual. Essa limitação foi substituída pelo instalador EXE da versão 1.2 descrito abaixo. O EXE ainda não possui assinatura Authenticode.
 - A primeira indexação demora conforme disco/quantidade de arquivos. Caches, diretórios protegidos, dependências, junctions e volumes remotos são ignorados. O índice pode ficar defasado até a próxima atualização; tamanhos de pastas podem ser parciais. Não foi feita uma varredura completa dos discos pessoais durante QA.
 - A autorização remota dura até uma hora e começa pausada em cada execução. TLS de transporte; sem criptografia ponta a ponta adicional, áudio, UAC ou tela bloqueada. Captura/entrada nativas e conectividade entre duas máquinas/redes reais ainda precisam de aceitação após implantação.
 - O Copiloto público executa comandos locais de diagnóstico, busca, navegação e pausa/atualização. As ações administrativas do painel de desenvolvimento foram excluídas. Não há execução arbitrária de terminal ou dependência de provedor de IA no aplicativo público.
@@ -48,3 +48,16 @@ O código desta entrega foi isolado em `vexx-pc-agent-publish-dd6f5c4`, sobre o 
 - UI real: botão de verificar versão e mensagem sem vínculo conferidos; ícone visível e documento sem overflow em 320 px. Código JavaScript/Python/PowerShell e `git diff --check` verificados.
 
 Reproduzir QA de atualização no Windows: instalar `trustme` no Python de QA e executar `python tools/verify_pc_companion_update.py`. Não usa credenciais, contas ou bancos de produção e não envia entrada nativa ao Windows. Evidência local em `output/pc-update-*/summary.json`; teste não é distribuído no ZIP.
+
+
+## Instalador e aplicativo Windows 1.2.0
+
+O download principal passa a ser `/downloads/vexx-pc-agent-setup.exe`, com redirecionamento fixo ao artefato da mesma versão no GitHub Releases. O ZIP permanece exclusivamente como transporte interno do atualizador e para compatibilidade com instalações anteriores.
+
+- Inno Setup por usuário, atalhos no menu Iniciar/Área de Trabalho e desinstalação pelo Windows. Python 3.13 independente e wheels das dependências acompanham o EXE; a instalação usa `pip --no-index`. Nenhuma instalação de Python do sistema é necessária. O bootstrapper WebView2 oficial é verificado por Authenticode na compilação; somente máquinas sem esse runtime precisam de internet para prepará-lo.
+- Janela própria com pywebview/WebView2, sem ponte de execução Python. Fechar a janela drena o servidor local e encerra o acesso. Mutex impede abrir duas instâncias e bloqueia a reinstalação sobre o runtime em uso. Diagnóstico continua disponível com `--no-browser`.
+- Atualizador inicia a nova janela oculta, confirma saúde/PID/nonce antes da promoção e solicita exibição por API local autenticada. Compatibilidade com a versão anterior baseada em navegador permanece.
+- Fontes e hashes de Python/Inno: `installer/sources.json`; compilação: `tools/build_pc_installer.py` e workflow `pc-installer.yml`. O EXE e `SHA256SUMS` precisam estar publicados antes do deploy que altera o link. Nenhum executável grande é versionado no Git.
+- 139 testes locais passaram, incluindo isolamento/autorização, integridade do pacote, modos nativo/diagnóstico, encerramento e redirecionamento do instalador. `tools/verify_pc_companion_update.py` usa versões derivadas da versão real; o teste HTTPS verificou 1.2.0 → 1.2.1 e rollback após falha de dependências da fixture 1.2.2, preservando os dados. `--native` habilita o mesmo fluxo com janelas reais do Windows.
+
+A instalação inicial continua sujeita à confirmação do Windows para aplicativos sem assinatura do publicador. O caminho de preparação WebView2 ausente não foi exercitado nesta máquina, que já possui o runtime. O teste de acesso entre dois computadores/redes reais permanece separado dos testes locais.

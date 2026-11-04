@@ -1,10 +1,13 @@
 param(
     [string]$InstallRoot = (Join-Path $env:LOCALAPPDATA 'VexxPC\app'),
     [string]$PythonExecutable,
+    [string]$WheelDirectory,
+    [string]$LogPath,
     [switch]$SkipLaunch,
     [switch]$NoShortcut
 )
 $ErrorActionPreference = 'Stop'
+if ($LogPath) { Start-Transcript -LiteralPath $LogPath -Append | Out-Null }
 $sourceRoot = [IO.Path]::GetFullPath((Split-Path -Parent $PSScriptRoot))
 $targetRoot = [IO.Path]::GetFullPath($InstallRoot)
 if ($targetRoot -eq $sourceRoot) { throw 'Escolha outra pasta de instalacao, fora do pacote extraido.' }
@@ -57,7 +60,7 @@ New-Item -ItemType Directory -Path $releaseRoot -Force | Out-Null
 $targetPackage = Join-Path $releaseRoot 'pc_companion'
 New-Item -ItemType Directory -Path $targetPackage -Force | Out-Null
 # Package code only; never copy the source repository, environment or private data.
-foreach ($name in @('__init__.py','__main__.py','app.py','system.py','indexer.py','connection.py','release.py','updater.py','apply_update.py','launcher.py','requirements.txt','README.md','Instalar.cmd','instalar.ps1')) {
+foreach ($name in @('__init__.py','__main__.py','app.py','system.py','indexer.py','connection.py','release.py','updater.py','apply_update.py','launcher.py','desktop.py','requirements.txt','README.md','Instalar.cmd','instalar.ps1')) {
     Copy-Item -LiteralPath (Join-Path $PSScriptRoot $name) -Destination (Join-Path $targetPackage $name) -Force
 }
 $webTarget = Join-Path $targetPackage 'web'
@@ -72,7 +75,12 @@ if (-not (Test-Path -LiteralPath $venvPython)) {
     & $runtimePython -m venv $venvPath
     if ($LASTEXITCODE -ne 0) { throw 'Falha ao criar o ambiente isolado.' }
 }
-& $venvPython -m pip install --disable-pip-version-check -r (Join-Path $targetPackage 'requirements.txt')
+$pipArgs = @('-m','pip','install','--disable-pip-version-check')
+if ($WheelDirectory) {
+    if (-not (Test-Path -LiteralPath $WheelDirectory -PathType Container)) { throw 'Dependencias do instalador ausentes.' }
+    $pipArgs += @('--no-index','--find-links',$WheelDirectory)
+}
+& $venvPython @pipArgs -r (Join-Path $targetPackage 'requirements.txt')
 if ($LASTEXITCODE -ne 0) { throw 'Falha nas dependencias. Verifique sua internet e execute novamente.' }
 Push-Location -LiteralPath $releaseRoot
 try {
@@ -101,3 +109,4 @@ Write-Host 'Vexx PC instalado. Abra pelo atalho na area de trabalho.'
 if (-not $SkipLaunch) {
     Start-Process -FilePath $launchPython -ArgumentList @('"' + (Join-Path $targetRoot 'launch.py') + '"') -WorkingDirectory $targetRoot -WindowStyle Hidden
 }
+if ($LogPath) { Stop-Transcript | Out-Null }

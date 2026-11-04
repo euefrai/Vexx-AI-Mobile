@@ -8,10 +8,10 @@ import uuid
 from pathlib import Path
 
 from fastapi import HTTPException, Request, WebSocket, WebSocketDisconnect
-from fastapi.responses import Response
+from fastapi.responses import Response, RedirectResponse
 from itsdangerous import BadSignature, URLSafeTimedSerializer
 from pydantic import BaseModel, Field
-from pc_companion.release import BUNDLE_FILES, bundle, manifest
+from pc_companion.release import BUNDLE_FILES, bundle, manifest, installer_url
 
 ROOT = Path(__file__).resolve().parent
 
@@ -95,6 +95,10 @@ def install(host):
         return Response(await asyncio.to_thread(bundle), media_type='application/zip',
                         headers={'Content-Disposition': 'attachment; filename="Vexx-PC-Windows.zip"',
                                  'Cache-Control': 'public, max-age=300'})
+
+    @app.get('/downloads/vexx-pc-agent-setup.exe')
+    async def download_installer():
+        return RedirectResponse(installer_url(), status_code=302, headers={'Cache-Control':'no-store'})
 
     @app.post('/api/companion/pair')
     async def pair(request: Request):
