@@ -426,3 +426,9 @@ O relatório `RELATORIO_TESTES_REAIS_PESQUISA_VARIADA.md` registra causas,
 regressões corrigidas, testes reais, suítes, arquivos, limitações e pendências.
 Não houve declaração de sucesso universal: continuam lacunas de fonte primária,
 atribuição de fundador, retorno de operações e cobertura integral da síntese.
+
+Fechamento: três pedidos atendidos e cinco parciais na matriz real, oito
+persistidos após reload, sem erros de console capturados ou overflow em 390 px.
+Matemática completou enunciado, fórmula e exemplo citado/revisado. A árvore final,
+integrada aos dois commits novos do main remoto, passou com 2.633 testes,
+4 pulados e 2 avisos. Dados reais e WIP de outras frentes preservados.

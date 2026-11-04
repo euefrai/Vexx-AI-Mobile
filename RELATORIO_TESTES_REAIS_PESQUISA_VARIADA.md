@@ -167,8 +167,8 @@ inspecionadas; isso não equivale a auditoria visual completa de todas as telas.
   ao pedido de fontes oficiais.
 - Python recupera a diferença entre as operações e confirma a identidade
   da documentação; o retorno ainda não foi sustentado por um trecho selecionado.
-- Matemática recupera enunciado/exemplos, mas completar a redação e a cobertura
-  depende de selecionar e publicar ambos os aspectos, além da revisão.
+- Matemática completou a consulta desta matriz na última repetição; isso ainda
+  precisa ser reproduzido em perguntas e documentos novos.
 - O provedor ainda pode falhar. A recuperação é limitada e não garante resposta
   de qualquer modelo. Não houve bypass de CAPTCHA, fonte inventada ou relaxamento
   da exigência de evidências para aumentar os resultados positivos.
@@ -190,4 +190,58 @@ PC Companion, watchdog, controle remoto e workflow permanecem fora do commit.
 
 Durante o fechamento surgiram dois commits do PC Companion no main remoto.
 A integração conserva esses commits e os separa das alterações de pesquisa;
-o código combinado também será validado antes do envio, sem limpar o WIP local.
+o código combinado foi validado antes do envio, sem limpar o WIP local.
+
+### Fechamento da matriz real
+
+Depois da recuperação de compatibilidade e da última repetição independente:
+
+| Caso | Resultado final desta rodada |
+|---|---|
+| Embraer, pergunta direta | Fonte oficial com fundação; fundador pendente; parcial |
+| Embraer, história/fundação/fundadores | Mesma recuperação oficial; parcial |
+| Notícias de Ubatã e região | Três matérias com datas e links; coleta atendida |
+| SSD Kingston NV3 1 TB | Seis ofertas verificadas; preço e link atendidos |
+| Rust, pergunta direta | Criador/finalidade recuperados; fonte oficial pendente; parcial |
+| Rust, formulação alternativa | Mesmo resultado útil, sem duplicar cards editoriais; parcial |
+| Python append/extend | Trechos das duas operações e identidade da documentação; retorno pendente; parcial |
+| Pitágoras | Enunciado, fórmula e exemplo numérico citados; síntese revisada; complete |
+
+Na última execução de matemática houve cinco fontes lidas e o exemplo de catetos
+7 cm e 24 cm com hipotenusa 25 cm. O sistema preservou texto e cinco cards após
+reload. Esta consulta satisfez leitura, descoberta sem URL fornecida e síntese
+citada/persistida. Isso aprova esse cenário, não todos os temas.
+
+Oito de oito resultados preservados após reload, nenhum erro de console
+capturado e nenhum overflow da página em 390 px. O contador de cards dos scripts
+mede fontes; os seis cards de produto foram confirmados no teste de clique.
+O harness de reload passou a aguardar DOMContentLoaded e conteúdo da aplicação,
+em vez de depender da conclusão de recursos externos da página. Execuções que
+expiraram foram repetidas; não foram contadas como aprovação.
+
+Avaliação conservadora: três pedidos atendidos e cinco parciais. Todos os oito
+recuperaram dados úteis; a pesquisa ainda precisa melhorar sua completude.
+O resumo JSON consolidado contém as respostas integrais e os estados reais.
+
+A suíte intermediária final do índice detectou colisão em shopping_consultas.id
+(1 falha, 2.579 aprovados). O teste não foi removido nem ignorado: a entropia do
+identificador foi corrigida e os 63 testes focados de histórico, seguimento,
+roteamento e transporte passaram. A validação completa da integração é
+registrada no fechamento de publicação.
+
+### Fechamento de publicação
+
+Conteúdo final integrado com os dois commits remotos do PC Companion:
+**2.633 testes aprovados, 4 pulados, 2 avisos; exit 0 em 220,63 s**.
+Log: `qa-artifacts/research-merged-release-suite.log`. A suíte rodou numa
+exportação isolada da árvore exata de integração, incluindo as correções de
+compatibilidade, IDs de compras e hrefs. O total difere do workspace porque
+as mudanças locais ainda pendentes de segurança/watchdog não entraram no commit.
+Os avisos são as depreciações conhecidas de mss e timeout no TestClient.
+
+Também passaram o diff-check do conteúdo preparado e a verificação de sintaxe
+JavaScript. Não foram removidos testes. A integração preservou, por hash, os
+52 arquivos locais existentes envolvidos no WIP/adições remotas; não houve
+reset, limpeza de dados ou force push. O laboratório foi encerrado após conferir
+PID, cwd, role development, SQLite privado e ausência de operações ativas.
+Os dados privados de QA foram preservados e o agente de produção não foi reiniciado.

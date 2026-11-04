@@ -451,7 +451,21 @@ parte do QA; somente os processos descartáveis deste laboratório são gerencia
 Próximo passo exato: resolver as lacunas restantes da matriz sem enfraquecer os
 validadores: localizar a fonte do fundador da Embraer; descobrir fonte primária
 para criador/finalidade de Rust; selecionar a passagem que documenta o retorno
-dos métodos de lista no Python; garantir que enunciado e exemplo numérico sejam
-publicados juntos na resposta de matemática. Repetir leitura, descoberta e
+dos métodos de lista no Python; confirmar a síntese completa em outra pergunta
+de matemática. Repetir leitura, descoberta e
 síntese separadamente e novamente pela interface, preservando reload e links.
 Não classificar esta etapa como pesquisa universal completa.
+
+Fechamento real desta rodada: matemática completou enunciado + fórmula + exemplo
+numérico, com cinco fontes lidas, revisão e persistência. A matriz consolidada
+tem três pedidos atendidos e cinco parciais; oito preservados após reload,
+zero erros de console capturados e zero overflow em 390 px. As pendências de
+Embraer, Rust e Python continuam; para matemática, o próximo teste deve usar
+outra pergunta/fonte, sem reapresentar o cenário aprovado como avanço novo.
+IDs do histórico de compras ganharam 128 bits após colisão revelada pela suíte.
+
+Integração final com o main remoto (PC Companion preservado): 2.633 aprovados,
+4 pulados e 2 avisos; exit 0 em 220,63 s. Log em
+`qa-artifacts/research-merged-release-suite.log`. Árvore combinada testada em
+exportação isolada. WIP local preservado; laboratório encerrado com validação
+de identidade e zero operações ativas. Não houve reinício do agente de produção.
