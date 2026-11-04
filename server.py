@@ -2624,4 +2624,8 @@ def trust_security_txt():
     return _public_file(".well-known/security.txt", "text/plain")
 
 
+# Public companions never receive the central inference agent's credential.
+import companion_api
+companion_hub = companion_api.install(__import__('sys').modules[__name__])
+
 app.mount("/", StaticFiles(directory=str(ROOT / "public"), html=True), name="mobile-static")

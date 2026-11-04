@@ -20,7 +20,7 @@ const state={approved:true,view_allowed:true,control_allowed:true,capture_ready:
 let holdFrame=false, releaseFrame, holdInput=false, releaseInput;
 const ctx={authenticated:()=>true,online:()=>true,identity:()=> 'u1',headers:()=>({}),notify(){},
  async api(path,opts){requests.push({path,cmd:opts?.body&&JSON.parse(opts.body)});
- if(path.startsWith('/api/input') && holdInput){holdInput=false;await new Promise(r=>releaseInput=r);}
+ if(path.startsWith('/api/companion/input') && holdInput){holdInput=false;await new Promise(r=>releaseInput=r);}
  if(path.includes('/status'))return {...state};
  if(path.includes('/screen')){if(holdFrame)await new Promise(r=>releaseFrame=r);return {imagem:'fixture',cursor:{x:.25,y:.5},largura:1920,altura:1080,remote_enabled:true};}
  return {ok:true};}};
@@ -73,7 +73,7 @@ const commands=()=>requests.filter(x=>x.cmd).map(x=>x.cmd);
  keys.events.keydown({key:'Enter',preventDefault(){}});
  releaseInput();await flush();await advance(100);
  const modernRequests=requests.slice(start).filter(x=>x.cmd);
- assert(modernRequests.some(x=>x.path==='/api/input/batch'));
+ assert(modernRequests.some(x=>x.path==='/api/companion/input/batch'));
  const flat=modernRequests.flatMap(x=>x.cmd.commands || [x.cmd]);
  assert.equal(flat.filter(x=>x.kind==='text').map(x=>x.text).join(''),'prefixação🚀'+'🙂'.repeat(201)+'z');
  assert.equal(flat.at(-1).key,'enter');assert(flat.filter(x=>x.kind==='text').every(x=>Array.from(x.text).length<=200));

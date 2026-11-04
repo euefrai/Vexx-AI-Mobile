@@ -16,8 +16,12 @@ jobs:
         with:
           node-version: "20"
       - name: Install dependencies
-        run: pip install -r requirements.txt pytest httpx
+        run: pip install -r requirements.txt -r pc_companion/requirements.txt pytest httpx
       - name: Run pytest
         run: pytest -q tests
       - name: Check frontend syntax
-        run: node --check public/app.js
+        run: |
+          node --check public/app.js
+          node --check public/remote.js
+          node --check public/companion-setup.js
+          node --check pc_companion/web/app.js

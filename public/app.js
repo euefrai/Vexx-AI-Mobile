@@ -1630,8 +1630,8 @@ function updateConnection() {
   $('popSync').textContent = $('syncCounter').textContent + ' pendentes'
     + (relayHa != null && relayHa >= 0 ? ' · agente há ' + relayHa + 's' : '');
   const dot = $('drawerDot'); if (dot) { dot.style.background = pcOnline ? '#ff2bd6' : '#5a5972'; }
-  $('deviceStatus').textContent = pcOnline ? 'Online' : 'Offline';
-  $('deviceStatus').classList.toggle('connected', pcOnline);
+  // Device status is rendered by VexxRemote from the account companion connection.
+
   $('memoryStatus').textContent = memoryOn() ? 'Ativada neste aparelho' : 'Pausada neste aparelho';
   $('syncStatusText').textContent = pcOnline ? 'PC disponível. Pendências serão sincronizadas.'
     : 'PC desconectado. Mensagens ficam no celular.' + (lastSyncErr ? ' ' + lastSyncErr : '');
