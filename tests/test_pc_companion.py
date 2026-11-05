@@ -50,6 +50,27 @@ def relay_client(tmp_path, monkeypatch):
 HEADERS = {'X-CSRF-Token': 'qa-local'}
 
 
+def test_rejected_device_credential_reopens_pin_connection_without_erasing_update_origin(monkeypatch):
+    from types import SimpleNamespace
+    config={'token':'qa-revoked','relay':'https://qa.example','nick':'saved-pc'}
+    connection=Connection(config,lambda:None,lambda _:None)
+    connection.approved=True;connection.control=True
+    class Refused:
+        async def __aenter__(self):
+            error=RuntimeError('fixture rejection');error.response=SimpleNamespace(status_code=403);raise error
+        async def __aexit__(self,*args):pass
+    monkeypatch.setattr('pc_companion.connection.websockets.connect',lambda *a,**kw:Refused())
+    async def stop_poll(*args):raise asyncio.CancelledError()
+    monkeypatch.setattr('pc_companion.connection.asyncio.sleep',stop_poll)
+    async def scenario():
+        with pytest.raises(asyncio.CancelledError):await connection.run()
+        assert connection.status()['relink_required'] and not connection.status()['approved']
+        assert config['relay']=='https://qa.example' and config['token']=='qa-revoked'
+        await connection.unlink()
+        assert not connection.status()['relink_required']
+    asyncio.run(scenario())
+
+
 def test_persistent_nick_pin_connect_rotate_delete_and_unlink(relay_client):
     client, users, db = relay_client
     identity = {'nick':'Alice-PC', 'pin':'672938'}

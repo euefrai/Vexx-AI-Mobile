@@ -44,7 +44,7 @@ function render(data) {
     $('ssid').textContent = s.ssid ? 'Wi-Fi conectado: ' + s.ssid : 'Nome Wi-Fi indisponível. As interfaces acima são detectadas pelo sistema.';
   }
   $('connection-badge').textContent = c.online ? 'Conectado' : data.linked ? 'Reconectando' : 'Sem vínculo';
-  $('pair-form').hidden = data.linked;
+  $('pair-form').hidden = data.linked && !c.relink_required;
   if (data.relay && document.activeElement !== $('relay-url')) $('relay-url').value = data.relay;
   if (data.nick && !$('pair-nick').value) $('pair-nick').value = data.nick;
   $('ai-mode-label').textContent = data.ai?.enabled ? (data.ai.model || 'Escolha um modelo na aba IA') : 'Ações locais. Dados reais.';

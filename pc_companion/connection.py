@@ -22,6 +22,7 @@ class Connection:
         self.online, self.approved, self.pending, self.control = False, False, False, False
         self.task, self.ws = None, None
         self.last_error = ''
+        self.relink_required = False
         self.guard = asyncio.Lock()
         self.grant_until = 0
 
@@ -31,7 +32,8 @@ class Connection:
         return {'device_name': platform.node(), 'platform': platform.system(), 'supported': platform.system() == 'Windows',
                 'capture_ready': bool(capture), 'approved': approved, 'view_allowed': approved,
                 'control_allowed': approved and self.control, 'pending': self.pending,
-                'confirmation_open': self.pending, 'code': '', 'online': self.online, 'error': self.last_error}
+                'confirmation_open': self.pending, 'code': '', 'online': self.online, 'error': self.last_error,
+                'relink_required':self.relink_required}
 
     async def run(self):
         delay = 2
@@ -46,6 +48,7 @@ class Connection:
                                               max_size=64000, ping_interval=20, open_timeout=10) as ws:
                     self.ws, self.online = ws, True
                     self.last_error = ''
+                    self.relink_required = False
                     self.log('Conexão com sua conta estabelecida.')
                     delay = 2
                     async for raw in ws:
@@ -58,7 +61,8 @@ class Connection:
                 status = getattr(getattr(exc, 'response', None), 'status_code', None)
                 if status in (401, 403):
                     await self.permission(False)
-                self.last_error = ('Vínculo recusado ou expirado. Desvincule e conecte novamente com seu nick e PIN.'
+                    self.relink_required = True
+                self.last_error = ('Vínculo recusado ou expirado. Informe novamente seu nick e PIN.'
                                    if status in (401, 403) else 'Sem conexão com o site. Verifique a rede e o endereço configurado.')
                 # Never log credential-bearing URLs, headers or third-party response bodies.
                 if self.online:
@@ -110,6 +114,7 @@ class Connection:
 
     async def unlink(self):
         await self.permission(False)
+        self.relink_required = False
         self.config.pop('token', None)
         self.config.pop('device_id', None)
         self.save()
