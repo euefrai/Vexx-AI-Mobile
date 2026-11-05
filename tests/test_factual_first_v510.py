@@ -3,7 +3,7 @@
 O golden set cobre 30 perguntas factuais em PT-BR. A busca é simulada para
 provar o roteamento e a citação; nenhum teste depende da rede.
 """
-from datetime import datetime
+from datetime import datetime, timezone
 
 import pytest
 
@@ -92,7 +92,9 @@ def _fonte(consulta):
         "texto_lido": texto,
         "trecho": texto,
         "content_scope": "document_text",
-        "publicado_em": datetime.now().date().isoformat(),
+        # A publication instant must not become tomorrow's date when the runner
+        # uses UTC while the news request uses America/Bahia near midnight.
+        "publicado_em": datetime.now(timezone.utc).isoformat(),
     }
 
 
@@ -164,6 +166,26 @@ def test_golden_set_has_source_and_inline_citation(tmp_path, monkeypatch):
                 "Resposta do modelo sem citação.", extras["fontes"],
                 pesquisa_executada=True, consulta=pergunta)
             assert "[S1]" in final, pergunta
+    finally:
+        db.close()
+
+
+@pytest.mark.parametrize('instant', ['2020-01-01T00:30:00+00:00', '2020-01-01T04:30:00+00:00'])
+def test_news_golden_fixture_at_utc_and_bahia_date_boundary(tmp_path, monkeypatch, instant):
+    import query_intelligence
+    import sys
+    fixed = datetime.fromisoformat(instant)
+    class Clock(datetime):
+        @classmethod
+        def now(cls, tz=None):
+            return fixed.astimezone(tz) if tz else fixed.replace(tzinfo=None)
+    monkeypatch.setattr(sys.modules[__name__], 'datetime', Clock)
+    monkeypatch.setattr(query_intelligence, 'datetime', Clock)
+    db = pc_agent.open_db(tmp_path/'news-date-boundary.sqlite3')
+    monkeypatch.setattr(research, 'pesquisa_rapida', lambda db,owner,consulta,**kw: {'fontes':[_fonte(consulta)], 'estado':'ok', 'correspondencia':1.0})
+    try:
+        _, extras = pc_agent.ai_montar_mensagens(db,'news-boundary',_cfg(),GOLDEN[22],'u-test',{})
+        assert extras['fontes'], 'A current publication instant must survive filtering in the request timezone'
     finally:
         db.close()
 
