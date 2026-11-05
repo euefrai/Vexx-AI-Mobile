@@ -2,6 +2,7 @@ import json
 import os
 from pathlib import Path
 import socket
+import sqlite3
 import subprocess
 import sys
 import time
@@ -58,6 +59,22 @@ def test_review_rechecks_entire_selection_and_never_overwrites_restore_destinati
     item=files.trash_items()['items'][0]
     result=files.execute(files.prepare('restore',[item['id']])['token'])
     assert result['failed'] and a.read_text()=='replacement' and files.trash_items()['count']==1
+
+
+def test_trash_database_connections_close_without_waiting_for_garbage_collection(storage,monkeypatch):
+    root,index,existing=storage;connections=[];connect=sqlite3.connect
+    def retained(path,*args,**kwargs):
+        db=connect(path,*args,**kwargs)
+        if str(path).endswith('trash.sqlite3'):connections.append(db)
+        return db
+    monkeypatch.setattr(sqlite3,'connect',retained)
+    files=Files(existing.directory,index);file=root/'fixture.txt';file.write_text('fixture')
+    files.execute(files.prepare('trash',[str(file)])['token'])
+    item=files.trash_items()['items'][0]
+    files.execute(files.prepare('restore',[item['id']])['token'])
+    assert file.read_text()=='fixture' and len(connections)>=4
+    for db in connections:
+        with pytest.raises(sqlite3.ProgrammingError,match='closed'):db.execute('SELECT 1')
 
 
 def test_protected_paths_outside_roots_folders_and_links_cannot_be_removed(storage,tmp_path):

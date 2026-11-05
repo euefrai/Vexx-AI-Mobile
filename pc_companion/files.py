@@ -6,6 +6,7 @@ import stat
 import threading
 import time
 import uuid
+from contextlib import contextmanager
 from pathlib import Path
 
 BLOCKED = {'windows','program files','program files (x86)','programdata','appdata',
@@ -63,8 +64,15 @@ class Files:
         self.path = self.directory/'trash.sqlite3'
         self.guard = threading.RLock()
         self.previews = {}
-        with sqlite3.connect(self.path) as db:
+        with self.db() as db:
             db.execute('CREATE TABLE IF NOT EXISTS trash (id TEXT PRIMARY KEY,original TEXT,stored TEXT,size INTEGER,modified REAL,created REAL)')
+
+    @contextmanager
+    def db(self):
+        db=sqlite3.connect(self.path,timeout=2)
+        try:
+            with db:yield db
+        finally:db.close()
 
     def stored_path(self, stored, original, identity):
         path=Path(stored)
@@ -104,7 +112,7 @@ class Files:
 
     def trash_items(self, offset=0):
         offset=max(0,min(int(offset),100000))
-        with sqlite3.connect(self.path) as db:
+        with self.db() as db:
             rows=db.execute('SELECT id,original,size,modified,created FROM trash ORDER BY created DESC LIMIT 61 OFFSET ?',(offset,)).fetchall()
             count,size=db.execute('SELECT COUNT(*),COALESCE(SUM(size),0) FROM trash').fetchone()
         return {'items':[dict(zip(('id','path','size','modified','removed'),row)) for row in rows[:60]], 'count':count,'size':size,'more':len(rows)>60}
@@ -124,7 +132,7 @@ class Files:
                     path=self.paths.check(value,write=True)
                     records.append({'path':str(path),'fingerprint':fingerprint(path),'size':path.stat().st_size})
                 else:
-                    with sqlite3.connect(self.path) as db:
+                    with self.db() as db:
                         row=db.execute('SELECT id,original,stored,size FROM trash WHERE id=?',(value,)).fetchone()
                     if not row:raise ValueError('Um item não está mais na Lixeira. Atualize a lista.')
                     path=self.stored_path(row[2],row[1],row[0])
@@ -147,7 +155,7 @@ class Files:
                 path=self.paths.check(item['path'],write=True) if job['mode']=='trash' else self.stored_path(item['path'],item['original'],item['id'])
                 if fingerprint(path)!=item['fingerprint']:raise ValueError('Um arquivo mudou desde a revisão. Nenhum item foi processado; revise novamente.')
             done=[];failed=[]
-            with sqlite3.connect(self.path) as db:
+            with self.db() as db:
                 for item in job['records']:
                     path=Path(item['path'])
                     try:

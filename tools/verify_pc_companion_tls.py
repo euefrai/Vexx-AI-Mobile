@@ -115,7 +115,9 @@ def main():
                 assert site.get('/api/companion/remote/frame').status_code == 403
                 assert site.post('/api/companion/remote/request').json()['pending']
                 assert pc.get('/api/status').json()['connection']['pending']
-                pc.post('/api/action',json={'action':'allow','control':True}).raise_for_status()
+                pc.post('/api/action',json={'action':'allow','control':True,'permanent':True}).raise_for_status()
+                assert pc.get('/api/status').json()['connection']['permanent_control']
+                assert site.post('/api/companion/remote/request').json()['approved']
                 start = time.perf_counter()
                 frame = site.get('/api/companion/remote/frame')
                 assert frame.status_code == 200 and frame.content.startswith(b'\xff\xd8')
@@ -141,7 +143,7 @@ def main():
                 assert answer.json()['reply']=='Resposta da IA de QA, via HTTP real.'
                 assert 'qa-only-api-key' not in pc.get('/api/ai/config').text
                 report = {'persistent_nick_pin':True,'rotation_and_delete_revoke':True,'ai_real_http':True,'https_pairing':True, 'outbound_wss':True, 'remote_request':True,
-                          'local_consent':True, 'jpeg_transport':True, 'native_input_fixture_only':True,
+                          'local_consent':True, 'permanent_consent':True, 'jpeg_transport':True, 'native_input_fixture_only':True,
                           'pause_blocks_input':True, 'server_and_local_unlink':True, 'fixture_frame_ms':frame_ms}
                 print(json.dumps(report, indent=2),flush=True)
                 if '--ui' in sys.argv:
