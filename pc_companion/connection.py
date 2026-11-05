@@ -1,5 +1,6 @@
 """Outbound TLS connection; remote access starts paused and requires local consent."""
 import asyncio
+import hashlib
 import importlib.util
 import json
 import platform
@@ -25,6 +26,16 @@ class Connection:
         self.relink_required = False
         self.guard = asyncio.Lock()
         self.grant_until = 0
+        if self._permanent():
+            self.approved,self.control=True,True
+            self.grant_until=float('inf')
+
+    def _permanent(self):
+        saved=self.config.get('permanent_control')
+        token=self.config.get('token')
+        return bool(isinstance(saved,dict) and token and self.config.get('device_id')
+                    and saved.get('device_id')==self.config['device_id']
+                    and saved.get('credential')==hashlib.sha256(token.encode()).hexdigest())
 
     def status(self):
         capture = all(importlib.util.find_spec(name) for name in ('mss', 'PIL'))
@@ -33,7 +44,7 @@ class Connection:
                 'capture_ready': bool(capture), 'approved': approved, 'view_allowed': approved,
                 'control_allowed': approved and self.control, 'pending': self.pending,
                 'confirmation_open': self.pending, 'code': '', 'online': self.online, 'error': self.last_error,
-                'relink_required':self.relink_required}
+                'relink_required':self.relink_required, 'permanent_control':self._permanent()}
 
     async def run(self):
         delay = 2
@@ -75,9 +86,10 @@ class Connection:
     async def handle(self, req):
         kind = req.get('type')
         if kind == 'remote_request':
-            self.pending = True
-            self.approved = False
-            self.log('Pedido de acesso recebido. Autorize no painel local deste computador.')
+            if not (self._permanent() and self.approved):
+                self.pending = True
+                self.approved = False
+                self.log('Pedido de acesso recebido. Autorize no painel local deste computador.')
         if kind == 'remote_revoke':
             await self.permission(False)
         if kind in ('remote_status', 'remote_request', 'remote_revoke'):
@@ -101,12 +113,20 @@ class Connection:
             except Exception:
                 return {'type': kind + '_error', 'error': 'Ação recusada ou recurso indisponível.', 'codigo': 'sem_permissao'}
 
-    async def permission(self, allow, control=False):
+    async def permission(self, allow, control=False, permanent=False, preserve=False):
         # Serialize consent/revocation with in-flight native commands.
         async with self.guard:
+            if permanent and (not allow or not control or not self.config.get('token') or not self.config.get('device_id')):
+                raise ValueError('Vincule este computador antes de permitir controle permanente.')
+            if not preserve:
+                self.config.pop('permanent_control',None)
+                if permanent:
+                    self.config['permanent_control']={'device_id':self.config['device_id'],
+                        'credential':hashlib.sha256(self.config['token'].encode()).hexdigest()}
+                self.save()
             self.approved, self.control, self.pending = allow, allow and control, False
-            self.grant_until = time.monotonic() + 3600 if allow else 0
-            self.log('Acesso remoto autorizado por uma hora.' if allow else 'Acesso remoto pausado.')
+            self.grant_until = float('inf') if permanent else time.monotonic() + 3600 if allow else 0
+            self.log('Controle permanente autorizado para a conta vinculada.' if permanent else 'Acesso remoto autorizado por uma hora.' if allow else 'Acesso remoto pausado.')
 
     async def restart(self):
         if self.ws:

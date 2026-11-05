@@ -232,7 +232,7 @@ def test_filename_index_real_scan_metadata_deletion_and_no_query_disk_scan(tmp_p
 def test_search_large_index_pagination_and_bounded_latency(tmp_path):
     index = FileIndex(tmp_path / 'large.sqlite3', [])
     with index.db() as db:
-        db.executemany('INSERT INTO files VALUES (?,?,?,?,?,?)',
+        db.executemany('INSERT INTO files(path,name,size,directory,modified,generation) VALUES (?,?,?,?,?,?)',
                        ((f'/qa/{n}', f'file-{n:06d}.txt', n, 0, 0, 'qa') for n in range(100000)))
         db.commit()
     result = index.search('.txt')
@@ -295,6 +295,33 @@ def test_connection_local_permission_expiry_revoke_and_no_native_input(monkeypat
         assert (await c.handle(cmd))['codigo'] == 'sem_permissao'
         await c.handle({'type':'remote_revoke'})
         assert not c.status()['approved']
+    asyncio.run(scenario())
+
+
+def test_permanent_control_is_explicit_bound_to_device_persistent_and_revocable():
+    async def scenario():
+        config={'token':'fixture-device-token','device_id':'fixture-pc'};saved=[]
+        make=lambda:Connection(config,lambda:saved.append(True),lambda _:None)
+        connection=make()
+        assert not connection.status()['approved']
+        await connection.permission(True,True,permanent=True)
+        reopened=make()
+        assert reopened.status()['control_allowed'] and reopened.status()['permanent_control']
+        assert (await reopened.handle({'type':'remote_request'}))['approved']
+        assert not reopened.pending
+        await reopened.permission(False,preserve=True)
+        assert not reopened.status()['approved'] and make().status()['approved']
+        config['token']='different-device-credential'
+        assert not make().status()['approved']
+        config['token']='fixture-device-token'
+        await connection.handle({'type':'remote_revoke'})
+        assert not make().status()['approved'] and 'permanent_control' not in config
+        await connection.permission(True,True,permanent=True)
+        await connection.permission(True,False)
+        assert not make().status()['approved'] and not connection.status()['permanent_control']
+        await connection.unlink()
+        assert not make().status()['approved'] and saved
+        with pytest.raises(ValueError):await connection.permission(True,True,permanent=True)
     asyncio.run(scenario())
 
 

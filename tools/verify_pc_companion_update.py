@@ -29,6 +29,8 @@ from fastapi.responses import Response
 from pc_companion.release import bundle, manifest
 from pc_companion import __version__
 from pc_companion.ai import AI
+from pc_companion.files import Files
+from pc_companion.indexer import FileIndex
 BASE = __version__
 parts = BASE.split(".")
 NEXT = ".".join(parts[:-1]+[str(int(parts[-1])+1)])
@@ -68,7 +70,9 @@ def main():
     base=base.resolve();(base/'evidence.txt').write_text('Isolated Vexx PC updater QA\n')
     extracted=base/'package'
     with zipfile.ZipFile(io.BytesIO(bundle())) as z:z.extractall(extracted)
-    install=base/'installed';data=base/'data';data.mkdir();documents=base/'documents';documents.mkdir()
+    install=base/'installed';data=base/'data';data.mkdir()
+    documents=Path.home()/'.vexx-ui-qa'/('update-'+uuid.uuid4().hex[:10]);documents.mkdir(parents=True)
+    (base/'qa-document-root.txt').write_text(str(documents),'utf-8')
     (documents/'qa-document.txt').write_text('QA only')
     ca=trustme.CA();cert=ca.issue_cert('127.0.0.1')
     cert.private_key_pem.write_to_path(base/'key.pem');cert.cert_chain_pems[0].write_to_path(base/'cert.pem')
@@ -88,6 +92,11 @@ def main():
     (data/'config.json').write_text(json.dumps(config),'utf-8')
     AI(data).save({'provider':'ollama','model':'qa-preserved-model','api_key':'qa-preserved-key'})
     ai_before = (data/'ai.json').read_bytes()
+    index=FileIndex(data/'files.sqlite3',[documents]);files=Files(data,index)
+    disposable=documents/'qa-trash.txt';disposable.write_text('recover after update')
+    files.execute(files.prepare('trash',[str(disposable)])['token']);index.stop.set()
+    trash_before=(data/'trash.sqlite3').read_bytes()
+    trash_payload=next((data/'.vexx-trash').iterdir());trash_content=trash_payload.read_bytes()
     installer=extracted/'Vexx-PC/pc_companion/instalar.ps1'
     print('Installing public ZIP in isolated directory...',flush=True)
     with (base/'install.log').open('wb') as log:
@@ -120,6 +129,7 @@ def main():
         assert second['pid']!=first['pid']
         assert json.loads((data/'config.json').read_text('utf-8'))==config
         assert (data/'ai.json').read_bytes()==ai_before
+        assert (data/'trash.sqlite3').read_bytes()==trash_before and trash_payload.read_bytes()==trash_content
         with sqlite3.connect(data/'files.sqlite3') as db:assert db.execute('PRAGMA quick_check').fetchone()[0]=='ok'
         assert (old/'pc_companion/__init__.py').read_text().find(repr(BASE))>=0
         assert not client.get('/api/status').json()['connection']['approved']
@@ -134,11 +144,12 @@ def main():
         current=json.loads((install/'current.json').read_text('utf-8'))
         assert current['version']==NEXT
         assert (data/'ai.json').read_bytes()==ai_before
+        assert (data/'trash.sqlite3').read_bytes()==trash_before and trash_payload.read_bytes()==trash_content
         report={'initial_install':True,'native_window_mode':native,'tls_verified':True,'sha256_verified':True,
             'update':{'from':BASE,'to':NEXT},'graceful_exit':initial.returncode==0,
             'fresh_environment':True,'live_health_before_promotion':True,
             'remote_paused_after_restart':True,'config_preserved':True,'index_integrity':True,
-            'dependency_failure_rollback':True,'old_release_preserved':True,'ai_settings_preserved':True}
+            'dependency_failure_rollback':True,'old_release_preserved':True,'ai_settings_preserved':True,'trash_preserved':True}
         (base/'summary.json').write_text(json.dumps(report,indent=2),'utf-8')
         print(json.dumps(report,indent=2),flush=True)
         print('Evidence:',base,flush=True)

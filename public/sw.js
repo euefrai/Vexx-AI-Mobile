@@ -1,5 +1,5 @@
-const VERSION = 'VEXX-shell-pc-agent-1.3.0-20261104';
-const SHELL = ['/', '/index.html', '/styles.css', '/interface.css', '/app.js', '/workspace.js', '/organize.js', '/jdui.js', '/remote.js', '/remote-setup.html', '/model3d-schema.js', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/trust.css', '/sobre', '/privacidade', '/termos', '/seguranca', '/contato'];
+const VERSION = 'VEXX-shell-pc-agent-1.4.0-20261105';
+const SHELL = ['/', '/index.html', '/styles.css', '/interface.css', '/app.js', '/workspace.js', '/organize.js', '/jdui.js', '/remote.js', '/companion-setup.js', '/companion-setup.css', '/remote-setup.html', '/model3d-schema.js', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/trust.css', '/sobre', '/privacidade', '/termos', '/seguranca', '/contato'];
 const MODEL3D_ASSETS = new Set(['/model3d-viewer.js', '/model3d-education.js', '/vendor/three-engine.js', '/models/demo-cube.glb', '/models/preview.svg']);
 self.addEventListener('install', evt => {
   evt.waitUntil(caches.open(VERSION).then(cache => cache.addAll(SHELL)).then(() => self.skipWaiting()));

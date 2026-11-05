@@ -183,7 +183,7 @@ class Updater:
                         if len(payload) > MAX_PACKAGE:
                             raise ValueError('Download excede o limite permitido.')
             await asyncio.to_thread(extract_verified, bytes(payload), release, stage)
-            await self.connection.permission(False)
+            await self.connection.permission(False,preserve=True)
             root = installed_root()
             if root is None:
                 raise ValueError('A instalação mudou. Abra o Vexx PC pelo atalho e tente novamente.')

@@ -14,6 +14,7 @@ def run(server, sock, url, app, *, hidden=False):
     window = webview.create_window('Vexx PC', url, width=1280, height=850,
         min_size=(390, 600), hidden=hidden, background_color='#0e1117', text_select=True)
     app.state.show_window = window.show
+    app.state.pick_folder = lambda: window.create_file_dialog(webview.FileDialog.FOLDER, directory=str(Path.home()))
 
     def closed():
         server.should_exit = True

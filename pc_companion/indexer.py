@@ -9,7 +9,7 @@ from contextlib import contextmanager
 from pathlib import Path
 
 EXCLUDED = {'$recycle.bin', 'system volume information', 'windows', 'node_modules',
-            '.git', '.venv', '__pycache__', '.cache', 'appdata', 'programdata'}
+            '.git', '.venv', '.vexx-venv', '__pycache__', '.cache', 'appdata', 'programdata', '.vexx-trash'}
 
 
 class FileIndex:
@@ -17,6 +17,9 @@ class FileIndex:
         self.path, self.roots = Path(path), [Path(p).resolve() for p in roots]
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.lock = threading.Lock()
+        self.write_lock = threading.RLock()
+        self.removed = set()
+        self.generation = 'manual'
         self.stop = threading.Event()
         self.paused = threading.Event()
         self.running, self.error, self.count, self.skipped = False, '', 0, 0
@@ -34,6 +37,28 @@ class FileIndex:
                     DELETE FROM names WHERE rowid=old.rowid;
                     INSERT INTO names(rowid,name,path) VALUES(new.rowid,new.name,new.path); END;''')
             self.count = db.execute('SELECT count(*) FROM files').fetchone()[0]
+            columns={row[1] for row in db.execute('PRAGMA table_info(files)')}
+            for column in ('parent','extension'):
+                if column not in columns:db.execute('ALTER TABLE files ADD COLUMN '+column+' TEXT')
+            db.executescript('''CREATE INDEX IF NOT EXISTS files_size ON files(directory,size DESC,path);
+                CREATE INDEX IF NOT EXISTS files_age ON files(directory,modified,path);
+                CREATE INDEX IF NOT EXISTS files_extension ON files(extension,size DESC,path);
+                CREATE INDEX IF NOT EXISTS files_parent ON files(parent,name COLLATE NOCASE,path);''')
+        self.migrating=True
+        threading.Thread(target=self._metadata,name='vexx-index-metadata',daemon=True).start()
+
+    def _metadata(self):
+        try:
+            with self.db() as db:
+                while not self.stop.is_set():
+                    rows=db.execute('SELECT path FROM files WHERE parent IS NULL LIMIT 1000').fetchall()
+                    if not rows:break
+                    db.executemany('UPDATE files SET parent=?,extension=? WHERE path=? AND parent IS NULL',
+                        ((str(Path(p).parent),Path(p).suffix.casefold(),p) for (p,) in rows));db.commit()
+                    self.stop.wait(.025)
+        except sqlite3.Error:
+            pass  # The normal background scan also fills the metadata.
+        finally:self.migrating=False
 
     @contextmanager
     def db(self):
@@ -55,10 +80,12 @@ class FileIndex:
     def status(self):
         return {'running': self.running, 'paused': self.paused.is_set(), 'count': self.count,
                 'skipped': self.skipped, 'error': self.error, 'last_scan': self.last_scan,
-                'roots': [str(p) for p in self.roots]}
+                'roots': [str(p) for p in self.roots], 'migrating':self.migrating}
 
     def scan(self):
         generation, batch, sizes = uuid.uuid4().hex, [], {}
+        with self.write_lock:
+            self.generation=generation;self.removed.clear()
         self.count = 0
         self.error, self.skipped = '', 0
         try:
@@ -118,14 +145,16 @@ class FileIndex:
     def _flush(self, db, batch):
         if not batch:
             return
-        db.executemany('''INSERT INTO files VALUES (?,?,?,?,?,?) ON CONFLICT(path) DO UPDATE SET
-            name=excluded.name,size=excluded.size,directory=excluded.directory,
-            modified=excluded.modified,generation=excluded.generation''', batch)
-        db.commit()
+        with self.write_lock:
+            db.executemany('''INSERT INTO files(path,name,size,directory,modified,generation,parent,extension) VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(path) DO UPDATE SET
+                name=excluded.name,size=excluded.size,directory=excluded.directory,
+                modified=excluded.modified,generation=excluded.generation,parent=excluded.parent,extension=excluded.extension''',
+                ((*row,str(Path(row[0]).parent),Path(row[0]).suffix.casefold()) for row in batch if row[0] not in self.removed))
+            db.commit()
         self.count += len(batch)
         batch.clear()
 
-    def search(self, query='', offset=0, kind='all'):
+    def search(self, query='', offset=0, kind='all', sort='relevance', min_size=0, age_days=0, folder=''):
         started = time.perf_counter()
         query = query.strip()[:160]
         offset = max(0, min(int(offset), 100000))
@@ -140,10 +169,22 @@ class FileIndex:
         if kind in ('files', 'folders'):
             where.append('f.directory=?')
             params.append(int(kind == 'folders'))
+        else:
+            from .files import CATEGORIES
+            if kind in CATEGORIES:
+                extensions=sorted(CATEGORIES[kind]);where.append('f.directory=0 AND f.extension IN ('+','.join('?' for _ in extensions)+')');params.extend(extensions)
+        if min_size:
+            where.append('f.size>=?');params.append(max(0,min(int(min_size),10**15)))
+        if age_days:
+            where.append('f.modified<=?');params.append(time.time()-max(0,min(int(age_days),36500))*86400)
+        if folder:
+            where.append('f.parent=?');params.append(str(Path(folder)))
         sql = 'SELECT f.path,f.name,f.size,f.directory,f.modified FROM ' + source
         if where:
             sql += ' WHERE ' + ' AND '.join(where)
-        # No count(*) or full result sort; only a bounded page is read.
+        order={'name':'f.name COLLATE NOCASE,f.path','largest':'f.size DESC,f.path','smallest':'f.size,f.path',
+               'newest':'f.modified DESC,f.path','oldest':'f.modified,f.path'}
+        if sort in order:sql += ' ORDER BY '+order[sort]
         sql += ' LIMIT 61 OFFSET ?'
         with self.db() as db:
             db.set_progress_handler(lambda: int(time.perf_counter() - started > .15), 1000)

@@ -2,6 +2,7 @@
 const $ = id => document.getElementById(id);
 let token = '', current = 'overview', snapshot, offset = 0, more = false, searchSequence = 0, logs = [], searchTimer;
 let updating = false, seenUpdateResult = '';
+const pageScroll = {};
 const bytes = n => n == null ? 'Calculando…' : new Intl.NumberFormat('pt-BR', {maximumFractionDigits:1}).format(n / 1024 ** (n >= 1024**3 ? 3 : n >= 1024**2 ? 2 : n >= 1024 ? 1 : 0)) + ' ' + (n >= 1024**3 ? 'GB' : n >= 1024**2 ? 'MB' : n >= 1024 ? 'KB' : 'B');
 const message = text => { $('notice').textContent = text; };
 async function api(path, body) {
@@ -11,14 +12,16 @@ async function api(path, body) {
   return data;
 }
 function go(page) {
-  if (!['overview','pc','network','logs','ai'].includes(page)) return;
+  if (!['overview','pc','cleaner','projects','network','logs','ai'].includes(page)) return;
+  pageScroll[current] = $('main-content').scrollTop;
   current = page;
   for (const view of document.querySelectorAll('[data-view]')) view.hidden = view.dataset.view !== page;
   for (const b of document.querySelectorAll('nav [data-page]')) {
     if (b.dataset.page === page) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
   }
-  if (page === 'pc') search().catch(showError);
+  if (window.vexxWorkspace) window.vexxWorkspace.enter(page).catch(showError);
   if (page === 'logs') loadLogs().catch(showError);
+  $('main-content').scrollTop = pageScroll[page] || 0;
 }
 function showError(err) { message(err.message || 'Ocorreu uma falha. Tente novamente.'); }
 function render(data) {
@@ -50,8 +53,9 @@ function render(data) {
   $('ai-mode-label').textContent = data.ai?.enabled ? (data.ai.model || 'Escolha um modelo na aba IA') : 'Ações locais. Dados reais.';
   $('connection-copy').textContent = c.pending ? 'Sua conta pediu acesso. Confira e autorize neste computador.' : data.linked ? 'Este PC está vinculado à sua conta. A sessão remota precisa da sua permissão local.' : 'No site Vexx AI, abra Meu PC e crie seu nick e PIN. Informe os mesmos dados abaixo.';
   if (data.linked && c.error) $('connection-copy').textContent = c.error;
-  $('access-hint').textContent = c.approved ? 'Acesso autorizado por até uma hora · ' + (c.control_allowed ? 'visualização, mouse e teclado.' : 'somente visualização.') : 'Acesso pausado. A autorização expira em uma hora e ao fechar o aplicativo.';
-  $('allow-view').disabled = !c.online; $('allow-control').disabled = !c.online;
+  $('access-hint').textContent = c.approved ? (c.permanent_control ? 'Acesso permanente ativo · ' : 'Acesso autorizado por até uma hora · ') + (c.control_allowed ? 'visualização, mouse e teclado.' : 'somente visualização.') : 'Acesso pausado. Autorize por uma hora ou ative o controle permanente.';
+  $('allow-view').disabled = !c.online; $('allow-control').disabled = !c.online; $('allow-permanent').disabled = !data.linked || c.permanent_control;
+  $('pause-access').textContent = c.permanent_control ? 'Revogar acesso permanente' : 'Pausar acesso';
   $('pause-access').disabled = !c.approved && !c.pending; $('unlink').hidden = !data.linked;
   $('index-count').textContent = i.count.toLocaleString('pt-BR') + ' entradas';
   const status = i.error || (i.paused ? 'Indexação pausada' : i.running ? 'Indexando em segundo plano' : 'Índice pronto') + ' · ' + i.count.toLocaleString('pt-BR') + ' entradas · ' + i.skipped + ' inacessíveis';
@@ -90,31 +94,21 @@ $('update-button').onclick = async () => {
 };
 async function refresh() { if (document.hidden || !token) return; render(await api('/api/status')); if(current==='logs')await loadLogs(); }
 async function act(action, extras = {}) { await api('/api/action',{action,...extras}); await refresh(); }
-async function search() {
-  const seq = ++searchSequence;
-  const data = await api('/api/search?' + new URLSearchParams({q:$('file-query').value,offset,kind:$('file-kind').value}));
-  if (seq !== searchSequence) return;
-  more = data.more;
-  $('search-summary').textContent = data.hint || data.items.length + ' resultados nesta página · ' + data.ms + ' ms · tamanhos do último índice';
-  const rows = data.items.map(item => {
-    const row = document.createElement('tr'), name = document.createElement('td'), strong = document.createElement('b'), path = document.createElement('small');
-    strong.textContent = item.name; path.textContent = item.path; name.append(strong,path);
-    const type = document.createElement('td'), size = document.createElement('td'), action = document.createElement('td'), copy = document.createElement('button');
-    type.textContent = item.directory ? 'Pasta' : 'Arquivo'; size.textContent = bytes(item.size) + (item.directory && item.size != null ? ' indexados' : '');
-    copy.textContent = 'Copiar caminho'; copy.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(item.path);message('Caminho copiado.');}catch{message(item.path);}});
-    action.append(copy); row.append(name,type,size,action); return row;
-  });
-  if (!rows.length) { const tr = document.createElement('tr'), td = document.createElement('td');td.colSpan=4;td.textContent=data.running ? 'Nenhum resultado ainda. O índice continua em segundo plano.' : 'Nenhum resultado. Revise o nome ou atualize o índice.';tr.append(td);rows.push(tr); }
-  $('file-results').replaceChildren(...rows); $('previous-page').disabled = offset === 0; $('next-page').disabled = !more; $('page-number').textContent = 'Página ' + (offset / 60 + 1);
-}
+async function search() { if(window.vexxWorkspace)return window.vexxWorkspace.search(); }
 async function loadLogs(){ logs=(await api('/api/logs')).items; filterLogs(); }
 function filterLogs(){const q=$('log-filter').value.toLocaleLowerCase();$('log-output').textContent=logs.filter(l=>l.message.toLocaleLowerCase().includes(q)).map(l=>l.time+'  '+l.message).join('\n') || 'Nenhum evento para mostrar.';}
-function bubble(text,user=false){const div=document.createElement('div');div.className='bubble'+(user?' user':'');div.textContent=text;$('chat-messages').append(div);while($('chat-messages').children.length>40)$('chat-messages').firstElementChild.remove();div.scrollIntoView({block:'nearest'});}
-async function prompt(text){bubble(text,true);const data=await api('/api/copilot',{text});bubble(data.reply);if(data.search){$('file-query').value=data.search;offset=0;go('pc');}else if(data.page)go(data.page);await refresh();}
+function bubble(text,user=false){
+  const host=$('chat-messages'),nearBottom=host.scrollHeight-host.scrollTop-host.clientHeight<45;
+  const div=document.createElement('div');div.className='bubble'+(user?' user':'');div.textContent=text;host.append(div);
+  while(host.children.length>80)host.firstElementChild.remove();
+  if(nearBottom||user)host.scrollTop=host.scrollHeight;
+}
+async function prompt(text){bubble(text,true);const data=await api('/api/copilot',{text});bubble(data.reply);if(data.search){$('file-query').value=data.search;offset=0;window.vexxWorkspace?.setSearch();go('pc');}else if(data.page)go(data.page);await refresh();}
 for(const b of document.querySelectorAll('[data-page]')) b.addEventListener('click',()=>go(b.dataset.page));
 for(const b of document.querySelectorAll('[data-go]')) b.addEventListener('click',()=>go(b.dataset.go));
 for(const b of document.querySelectorAll('[data-prompt]')) b.addEventListener('click',()=>prompt(b.dataset.prompt).catch(showError));
 $('pair-form').addEventListener('submit',async e=>{e.preventDefault();const b=e.submitter;b.disabled=true;try{await api('/api/pair',Object.fromEntries(new FormData(e.target)));e.target.elements.pin.value='';message('PC vinculado. Aguardando conexão segura…');await refresh();}catch(err){showError(err);}finally{b.disabled=false;}});
+$('allow-permanent').onclick=()=>{if(confirm('Permitir visualização, mouse e teclado permanentemente para a conta vinculada? O acesso continuará autorizado ao reabrir o aplicativo. Para cancelar, use Revogar acesso permanente ou desvincule o PC.'))act('allow',{control:true,permanent:true}).catch(showError);};
 $('allow-view').onclick=()=>act('allow').catch(showError);
 $('allow-control').onclick=()=>{if(confirm('Permitir que os aparelhos conectados à sua conta vejam a tela e controlem mouse e teclado deste PC por uma hora?'))act('allow',{control:true}).catch(showError);};
 $('pause-access').onclick=()=>act('pause').catch(showError);

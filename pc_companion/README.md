@@ -5,19 +5,45 @@ Aplicativo público independente para Windows 10/11. Não instala Studio, túnei
 ## Instalar
 
 1. No site Vexx AI, abra **Meu PC → Preparar computador → Baixar Vexx PC para Windows**.
-2. Abra **Vexx-PC-Setup-1.3.0.exe** e instale. O pacote inclui Python e todas as dependências do aplicativo. Não exige Python do sistema, WinGet ou extração manual. Em computadores sem WebView2, o instalador baixa esse componente oficial da Microsoft; nesse caso precisa de internet.
+2. Abra **Vexx-PC-Setup-1.4.0.exe** e instale. O pacote inclui Python e todas as dependências do aplicativo. Não exige Python do sistema, WinGet ou extração manual. Em computadores sem WebView2, o instalador baixa esse componente oficial da Microsoft; nesse caso precisa de internet.
 3. No site, entre na sua conta e abra **Meu PC → Seu nick e PIN**. Crie um nick exclusivo (3–30 caracteres) e um PIN (6–12 números). Abra o aplicativo e informe apenas os mesmos nick e PIN para conectar. O endereço oficial já está preenchido; outro servidor HTTPS fica nas opções avançadas. Cada conta mantém um PC vinculado; novo vínculo substitui o anterior.
-4. Autorize visualização ou controle no **painel local**, apenas quando precisar. A permissão dura até uma hora, é revogável e começa pausada ao abrir o aplicativo. No celular, entre na mesma conta e abra **Meu PC**.
+4. Autorize visualização ou controle no **painel local**, apenas quando precisar. Escolha permissão por uma hora ou **Permitir mouse e teclado permanentemente**. A opção permanente é explícita, fica vinculada à credencial desse PC e retorna ao reabrir o aplicativo. **Revogar acesso permanente**, trocar o vínculo ou revogar no site cancela essa opção. Sem essa escolha, o acesso começa pausado ao abrir. No celular, entre na mesma conta e abra **Meu PC**.
 
 O aplicativo abre em janela própria e cria atalhos no menu Iniciar e, opcionalmente, na Área de Trabalho. Instala para seu usuário em Windows 10/11 x64, sem administrador. Fechar a janela encerra o aplicativo e o acesso remoto. A desinstalação em Aplicativos do Windows remove o código e preserva a configuração e o índice. O EXE ainda não possui assinatura Authenticode.
 
 ## O que inclui
 
 - Visão geral: CPU, RAM, unidades locais, bateria, tempo desde a inicialização do Windows e consumo do aplicativo.
-- PC: índice SQLite FTS5 de nomes/caminhos/tamanhos. Pesquisa com 3 caracteres ou mais, paginação de 60 itens, tempo de consulta limitado a 150 ms. Nenhum conteúdo de arquivo é lido ou enviado para o site. Tamanhos de pastas representam apenas arquivos indexados, sem caches/protegidos.
+- Arquivos: navegação por pastas, seleção de até 100 arquivos, filtros por tipo, tamanho e data, ordenação pelos maiores e índice SQLite FTS5 de nomes/caminhos/tamanhos. Pesquisa com 3 caracteres ou mais, paginação de 60 itens, tempo de consulta limitado a 150 ms. Nenhum conteúdo de arquivo é lido ou enviado para o site. Tamanhos de pastas representam apenas arquivos indexados, sem caches/protegidos.
 - Rede: interfaces ativas, IPs locais, velocidade reportada e tráfego observado. SSID Wi-Fi quando disponível. Não executa speed test nem identifica uma interface ativa como prova de internet.
 - Logs: até 300 eventos da sessão, filtro e exportação. Não grava tokens ou conteúdo de arquivos.
 - Copiloto: comandos locais em português, sem chave de IA: `status do computador`, `buscar relatorio.pdf`, `diagnosticar conexao`, `abrir logs`, `pausar acesso`, `pausar indice`, `atualizar indice`. Não executa comandos de terminal arbitrários.
+
+- Limpeza: instaladores/APKs, imagens, vídeos, áudios, compactados e temporários. O aplicativo mostra candidatos; não decide sozinho o que é inútil. Aplicativos instalados aparecem por tamanho estimado, com remoção pelo gerenciador nativo do Windows.
+- Projetos: análise antes de executar, plano com comandos/dependências/portas, logs e opção para parar o grupo de processos iniciado pelo Vexx. O Copiloto usa uma área de scroll independente e vira painel lateral recolhível em janelas pequenas.
+
+## Limpeza e Lixeira Vexx
+
+**Revisar remoção** mostra nomes, caminhos e tamanho antes de alterar arquivos. A remoção move arquivos comuns para uma lixeira própria no mesmo volume, sem copiar arquivos grandes nem recorrer à exclusão permanente. Ela continua ocupando espaço até **Revisar exclusão definitiva**, que exige digitar `EXCLUIR`. Restaurar nunca sobrescreve um arquivo existente. Não há esvaziamento automático nem exclusão recursiva de pastas. Arquivos do sistema, programas instalados, ambientes, links, junctions e dados do Vexx são protegidos.
+
+O catálogo persistente fica em `trash.sqlite3`; os arquivos ficam em `.vexx-trash` na pasta de dados ou, em outro volume, ao lado da pasta original. Reinstalar, atualizar e desinstalar o código preservam os dados. Não apague essa pasta manualmente se quiser restaurar arquivos. A revisão expira em cinco minutos e confere novamente todos os arquivos antes da operação.
+
+## Iniciar projetos
+
+Na aba **Arquivos**, abra uma pasta ou selecione **▷ Iniciar…** ao lado da entrada. Também é possível colar o caminho em **Projetos**. A análise não executa código: apresenta o plano e pede uma ação explícita para iniciar. Execute apenas projetos confiáveis; preparar dependências executa os instaladores e scripts declarados por eles.
+
+São reconhecidos Python (`main.py`, `app.py`, `server.py`, `manage.py` ou arquivo `.py` escolhido), FastAPI, Flask, Django, scripts `dev`/`start` do npm, JavaScript Node selecionado e HTML estático. Python usa `.vexx-venv` próprio e pode preparar `requirements.txt`/`pyproject.toml`; Node precisa estar instalado. HTML, CSS e JS locais são servidos por HTTP em loopback, com proteção de caminhos e arquivos ocultos. O Vexx reconhece backend/frontend em pastas comuns e destinos literais de proxy Vite, configurando a porta do backend e variáveis de URL. Não adivinha senhas, bancos, serviços externos ou todos os formatos de projeto.
+
+Para dependências ou ordens específicas, crie `vexx-project.json` na raiz. Os serviços começam na ordem declarada e uma porta só é apresentada depois de confirmar que pertence ao grupo iniciado. Exemplo:
+
+```json
+{"services": [
+  {"name": "Backend", "cwd": "backend", "command": ["python", "main.py"], "port": 8000},
+  {"name": "Interface", "cwd": "frontend", "command": ["npm", "run", "dev", "--", "--host", "127.0.0.1", "--port", "5173"], "port": 5173}
+]}
+```
+
+Os caminhos precisam permanecer dentro do projeto; comandos são listas de argumentos, sem shell genérico. Portas ocupadas geram erro: o app não adota nem encerra programas existentes. No Windows, grupos de processos pertencentes ao projeto são encerrados ao parar ou fechar o Vexx PC. Até três projetos podem ficar ativos por sessão. A preparação de cada comando tem limite de dez minutos e a confirmação de porta, um minuto. Aplicações que exigem múltiplos comandos, versões específicas do Python ou configuração externa podem precisar de ajustes manuais.
 
 O primeiro índice precisa percorrer os arquivos e pode levar tempo em discos grandes. Ele trabalha em lotes, respeita permissões, evita junctions/symlinks e pode ser pausado. Resultados aparecem conforme o índice avança. Metadados atualizados a cada 30 minutos ou manualmente. Não há promessa de pesquisa instantânea antes da indexação.
 
@@ -37,7 +63,7 @@ Referências: [API Ollama](https://docs.ollama.com/api/chat), [Chat Completions]
 
 O ícone **↻** no topo verifica novas versões no site HTTPS ao qual este PC foi vinculado. A verificação também ocorre ao iniciar e a cada 30 minutos. Quando houver uma versão mais recente, o botão mostra **Atualizar**; clique para baixar, conferir o SHA-256 e instalar. Sem nova versão, o botão apenas informa a versão atual.
 
-A instalação é preparada em uma pasta separada, com seu próprio ambiente virtual e dependências. O aplicativo pausa o acesso remoto e encerra de forma controlada. A nova versão só vira a versão ativa depois de iniciar e responder ao teste de saúde com a identidade correta. Se dependências ou inicialização falharem, a versão anterior é reaberta. A conta, a credencial e o índice continuam na pasta de dados. O acesso remoto volta pausado.
+A instalação é preparada em uma pasta separada, com seu próprio ambiente virtual e dependências. O aplicativo pausa o acesso remoto e encerra de forma controlada. A nova versão só vira a versão ativa depois de iniciar e responder ao teste de saúde com a identidade correta. Se dependências ou inicialização falharem, a versão anterior é reaberta. A conta, a credencial e o índice continuam na pasta de dados. O acesso remoto volta pausado, exceto se você escolheu controle permanente para a mesma credencial. A Lixeira Vexx e as configurações também são preservadas.
 
 O atalho usa `app/launch.py` e `app/current.json`; as versões ficam em `app/releases/`. O atualizador não sobrescreve nem apaga versões anteriores. Instalações manuais pelo código não se atualizam sozinhas: use o instalador Windows para habilitar essa função. O pacote e o manifesto vêm do mesmo site confiável por HTTPS, sem redirecionamentos; SHA-256 confere integridade, não constitui uma assinatura independente do publicador.
 

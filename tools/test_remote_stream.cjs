@@ -30,6 +30,15 @@ function event(type,x,y,id=1){el('remoteFrame').events[type]({clientX:x,clientY:
 const commands=()=>requests.filter(x=>x.cmd).map(x=>x.cmd);
 (async()=>{
  require('../public/remote.js');const remote=VexxRemote.mount(ctx);remote.update();await flush();
+ if(process.argv.includes('--desktop')){
+   assert.equal(el('pcConnect').hidden,true);assert.equal(el('pcSetup').hidden,false);
+   assert.equal(el('remoteConnect').disabled,true);
+   el('remoteConnect').events.click();await flush();
+   assert.equal(el('remoteViewer').hidden,true);
+   assert(!requests.some(x=>x.path.includes('/screen')||x.path.includes('/frame')));
+   assert.equal(el('remoteSetupTitle').textContent,'Pronto para acessar pelo celular');
+   console.log('Desktop setup only; no remote connection or frame requests.');return;
+ }
  el('remoteConnect').events.click();await flush();
  assert(requests.some(x=>x.path.includes('max_w=1280&q=72')));
  assert.equal(el('remotePointer').style.display,'block');

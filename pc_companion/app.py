@@ -19,6 +19,8 @@ from .indexer import FileIndex
 from .system import SystemMonitor
 from .updater import Updater
 from .ai import AI
+from .files import Files, installed_apps
+from .projects import Projects
 from . import __version__
 
 WEB = Path(__file__).parent / 'web'
@@ -62,6 +64,8 @@ def create_app(directory=None, roots=None):
 
     connection = Connection(config, save, log)
     ai = AI(directory)
+    files = Files(directory,index)
+    projects = Projects(directory,index.roots)
     def shutdown():
         callback = getattr(app.state, 'request_exit', None)
         if callback:
@@ -99,11 +103,12 @@ def create_app(directory=None, roots=None):
                 log(previous.get('message', 'A atualização não foi concluída; versão anterior preservada.'))
         except (OSError, ValueError):
             pass
-        log('Vexx PC iniciado. Acesso remoto pausado.')
+        log('Vexx PC iniciado. '+('Controle permanente ativo para a conta vinculada.' if connection.status()['approved'] else 'Acesso remoto pausado.'))
         try:
             yield
         finally:
             index.stop.set()
+            await asyncio.to_thread(projects.close)
             for task in tasks:
                 task.cancel()
             await asyncio.gather(*tasks, return_exceptions=True)
@@ -111,6 +116,7 @@ def create_app(directory=None, roots=None):
     app = FastAPI(docs_url=None, redoc_url=None, openapi_url=None, lifespan=lifespan)
     app.state.local_token, app.state.index, app.state.connection = local_token, index, connection
     app.state.updater, app.state.directory = updater, directory
+    app.state.files, app.state.projects = files,projects
 
     async def payload(request):
         try:
@@ -140,9 +146,10 @@ def create_app(directory=None, roots=None):
             elif not secrets.compare_digest(provided, local_token):
                 return JSONResponse({'detail': 'Sessão local inválida'}, 401)
             try:
-                if int(request.headers.get('content-length', 0)) > 8192:
+                limit=65536 if request.url.path=='/api/files/prepare' else 8192
+                if int(request.headers.get('content-length', 0)) > limit:
                     return JSONResponse({'detail': 'Pedido muito grande'}, 413)
-                if len(await request.body()) > 8192:
+                if len(await request.body()) > limit:
                     return JSONResponse({'detail': 'Pedido muito grande'}, 413)
             except ValueError:
                 return JSONResponse({'detail': 'Pedido inválido'}, 400)
@@ -212,8 +219,80 @@ def create_app(directory=None, roots=None):
             raise HTTPException(400, str(exc)) from None
 
     @app.get('/api/search')
-    async def search(q: str = '', offset: int = 0, kind: str = 'all'):
-        return await asyncio.to_thread(index.search, q, offset, kind)
+    async def search(q: str = '', offset: int = 0, kind: str = 'all', sort: str = 'relevance', min_size: int = 0, age_days: int = 0, folder: str = ''):
+        result=await asyncio.to_thread(index.search, q, offset, kind, sort,min_size,age_days,folder)
+        for item in result['items']:item['removable']=not item['directory'] and files.removable(item['path'])
+        return result
+
+    async def local_work(fn,*args):
+        try:return await asyncio.to_thread(fn,*args)
+        except ValueError as exc:raise HTTPException(400,str(exc)) from None
+        except OSError:raise HTTPException(400,'Não foi possível acessar o item. Confira se existe, está disponível e permite acesso.') from None
+
+    @app.get('/api/files/browse')
+    async def browse(path: str = '', offset: int = 0, sort: str = 'name'):
+        result=await local_work(files.browse,path,offset,sort)
+        for item in result['items']:item['removable']=not item['directory'] and files.removable(item['path'])
+        return result
+
+    @app.get('/api/files/trash')
+    async def trash_items(offset: int = 0):return await local_work(files.trash_items,offset)
+
+    @app.post('/api/files/pick-folder')
+    async def pick_folder():
+        callback=getattr(app.state,'pick_folder',None)
+        if not callback:raise HTTPException(409,'Cole o caminho ou use Raízes locais. O seletor de pastas está disponível na janela Windows.')
+        result=await asyncio.to_thread(callback)
+        if not result:return {'path':''}
+        path=await local_work(files.paths.check,result[0])
+        return {'path':str(path)}
+
+    @app.post('/api/files/prepare')
+    async def files_prepare(request: Request):
+        body=await payload(request)
+        return await local_work(files.prepare,body.get('mode','trash'),body.get('items'))
+
+    @app.post('/api/files/execute')
+    async def files_execute(request: Request):
+        body=await payload(request)
+        result=await local_work(files.execute,str(body.get('token','')),str(body.get('confirmation','')))
+        log('Operação de arquivos: '+result['mode']+' · '+str(len(result['done']))+' concluídos · '+str(len(result['failed']))+' pendentes.')
+        return result
+
+    @app.post('/api/files/open-folder')
+    async def open_folder(request: Request):
+        body=await payload(request)
+        path=await local_work(files.paths.check,body.get('path',''))
+        if os.name!='nt':raise HTTPException(400,'Abrir pastas no sistema está disponível no Windows.')
+        await asyncio.to_thread(os.startfile,str(path if path.is_dir() else path.parent))
+        return {'ok':True}
+
+    @app.get('/api/apps')
+    async def apps():return await local_work(installed_apps)
+
+    @app.post('/api/apps/manage')
+    async def manage_apps():
+        if os.name!='nt':raise HTTPException(400,'Gerencie os aplicativos pelo Windows.')
+        await asyncio.to_thread(os.startfile,'ms-settings:appsfeatures')
+        return {'ok':True}
+
+    @app.post('/api/projects/inspect')
+    async def project_inspect(request: Request):
+        body=await payload(request)
+        return await local_work(projects.inspect,body.get('path',''))
+
+    @app.post('/api/projects/start')
+    async def project_start(request: Request):
+        body=await payload(request)
+        return await local_work(projects.start,str(body.get('token','')),body.get('prepare') is True)
+
+    @app.get('/api/projects/status')
+    async def project_status(id: str = ''):return projects.status(id)
+
+    @app.post('/api/projects/stop')
+    async def project_stop(request: Request):
+        body=await payload(request)
+        return await local_work(projects.stop,str(body.get('id','')))
 
     @app.get('/api/logs')
     async def get_logs():
@@ -233,7 +312,8 @@ def create_app(directory=None, roots=None):
         elif action == 'index_refresh':
             index.start()
         elif action == 'allow':
-            await connection.permission(True, body.get('control') is True)
+            try:await connection.permission(True, body.get('control') is True, permanent=body.get('permanent') is True)
+            except ValueError as exc:raise HTTPException(400,str(exc)) from None
         elif action == 'pause':
             await connection.permission(False)
         elif action == 'unlink':
@@ -251,7 +331,7 @@ def create_app(directory=None, roots=None):
                     raise HTTPException(503, 'Não foi possível revogar no site. Use Desvincular na sua conta ou tente novamente.') from None
             await connection.unlink()
         elif action == 'shutdown':
-            await connection.permission(False)
+            await connection.permission(False,preserve=True)
             index.stop.set()
             callback = getattr(app.state, 'request_exit', None)
             if callback:
