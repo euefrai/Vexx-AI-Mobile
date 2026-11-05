@@ -176,7 +176,11 @@ def test_managed_tcp_service_confirms_ownership_and_stops_descendants(tmp_path):
         if os.name=='nt':assert run['processes']
         manager.stop(job['id'])
         wait_for(lambda:manager.status()['items'][0]['state'],lambda s:s=='stopped')
-        assert free_port(port)==port
+        # Linux can keep an accepted connection in TIME_WAIT after process exit;
+        # an exclusive bind is not a reliable test for a surviving listener.
+        with socket.socket() as probe:
+            probe.settimeout(.5)
+            assert probe.connect_ex(('127.0.0.1',port))!=0
     finally:manager.close()
 
 

@@ -325,6 +325,26 @@ def test_permanent_control_is_explicit_bound_to_device_persistent_and_revocable(
     asyncio.run(scenario())
 
 
+def test_permanent_control_api_survives_app_reopen_and_persists_revocation(tmp_path):
+    data=tmp_path/'data';data.mkdir();root=tmp_path/'documents';root.mkdir()
+    (data/'config.json').write_text(json.dumps({'token':'fixture-only','device_id':'qa-pc','relay':'https://127.0.0.1:1'}))
+    def local_client(app):
+        client=TestClient(app,base_url='http://127.0.0.1')
+        client.get('/');client.headers['X-Vexx-Token']=client.get('/api/bootstrap').json()['token']
+        return client
+    with local_client(create_app(data,[root])) as client:
+        assert client.post('/api/action',json={'action':'allow','permanent':True}).status_code==400
+        assert client.post('/api/action',json={'action':'allow','control':True,'permanent':True}).status_code==200
+        assert client.get('/api/status').json()['connection']['permanent_control']
+    with local_client(create_app(data,[root])) as client:
+        state=client.get('/api/status').json()['connection']
+        assert state['control_allowed'] and state['permanent_control']
+        assert client.post('/api/action',json={'action':'pause'}).status_code==200
+    with local_client(create_app(data,[root])) as client:
+        state=client.get('/api/status').json()['connection']
+        assert not state['control_allowed'] and not state['permanent_control']
+
+
 @pytest.mark.parametrize('url', ['http://example.com', 'https://user:pass@example.com', 'https://example.com/path', 'https://example.com?token=x'])
 def test_relay_url_rejects_unsafe_origins(url):
     with pytest.raises(ValueError): relay_url(url)
