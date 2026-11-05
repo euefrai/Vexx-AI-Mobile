@@ -11,7 +11,7 @@ async function api(path, body) {
   return data;
 }
 function go(page) {
-  if (!['overview','pc','network','logs'].includes(page)) return;
+  if (!['overview','pc','network','logs','ai'].includes(page)) return;
   current = page;
   for (const view of document.querySelectorAll('[data-view]')) view.hidden = view.dataset.view !== page;
   for (const b of document.querySelectorAll('nav [data-page]')) {
@@ -45,8 +45,10 @@ function render(data) {
   }
   $('connection-badge').textContent = c.online ? 'Conectado' : data.linked ? 'Reconectando' : 'Sem vínculo';
   $('pair-form').hidden = data.linked;
-  if (data.relay && !$('relay-url').value) $('relay-url').value = data.relay;
-  $('connection-copy').textContent = c.pending ? 'Sua conta pediu acesso. Confira e autorize neste computador.' : data.linked ? 'Este PC está vinculado à sua conta. A sessão remota precisa da sua permissão local.' : 'No site Vexx AI, abra Meu PC → Preparar computador → Gerar código. Cole o endereço do site e o código abaixo.';
+  if (data.relay && document.activeElement !== $('relay-url')) $('relay-url').value = data.relay;
+  if (data.nick && !$('pair-nick').value) $('pair-nick').value = data.nick;
+  $('ai-mode-label').textContent = data.ai?.enabled ? (data.ai.model || 'Escolha um modelo na aba IA') : 'Ações locais. Dados reais.';
+  $('connection-copy').textContent = c.pending ? 'Sua conta pediu acesso. Confira e autorize neste computador.' : data.linked ? 'Este PC está vinculado à sua conta. A sessão remota precisa da sua permissão local.' : 'No site Vexx AI, abra Meu PC e crie seu nick e PIN. Informe os mesmos dados abaixo.';
   if (data.linked && c.error) $('connection-copy').textContent = c.error;
   $('access-hint').textContent = c.approved ? 'Acesso autorizado por até uma hora · ' + (c.control_allowed ? 'visualização, mouse e teclado.' : 'somente visualização.') : 'Acesso pausado. A autorização expira em uma hora e ao fechar o aplicativo.';
   $('allow-view').disabled = !c.online; $('allow-control').disabled = !c.online;
@@ -112,12 +114,12 @@ async function prompt(text){bubble(text,true);const data=await api('/api/copilot
 for(const b of document.querySelectorAll('[data-page]')) b.addEventListener('click',()=>go(b.dataset.page));
 for(const b of document.querySelectorAll('[data-go]')) b.addEventListener('click',()=>go(b.dataset.go));
 for(const b of document.querySelectorAll('[data-prompt]')) b.addEventListener('click',()=>prompt(b.dataset.prompt).catch(showError));
-$('pair-form').addEventListener('submit',async e=>{e.preventDefault();const b=e.submitter;b.disabled=true;try{await api('/api/pair',Object.fromEntries(new FormData(e.target)));e.target.elements.code.value='';message('PC vinculado. Aguardando conexão segura…');await refresh();}catch(err){showError(err);}finally{b.disabled=false;}});
+$('pair-form').addEventListener('submit',async e=>{e.preventDefault();const b=e.submitter;b.disabled=true;try{await api('/api/pair',Object.fromEntries(new FormData(e.target)));e.target.elements.pin.value='';message('PC vinculado. Aguardando conexão segura…');await refresh();}catch(err){showError(err);}finally{b.disabled=false;}});
 $('allow-view').onclick=()=>act('allow').catch(showError);
 $('allow-control').onclick=()=>{if(confirm('Permitir que os aparelhos conectados à sua conta vejam a tela e controlem mouse e teclado deste PC por uma hora?'))act('allow',{control:true}).catch(showError);};
 $('pause-access').onclick=()=>act('pause').catch(showError);
 $('unlink').onclick=()=>{if(confirm('Desvincular este computador da sua conta? O acesso será pausado.'))act('unlink').catch(showError);};
-$('shutdown').onclick=()=>{if(confirm('Encerrar Vexx PC e pausar todo acesso remoto?'))api('/api/action',{action:'shutdown'}).then(()=>{token='';message('Vexx PC encerrado. Você pode fechar esta aba.');}).catch(showError);};
+$('shutdown').onclick=()=>{if(confirm('Encerrar Vexx PC e pausar todo acesso remoto?'))api('/api/action',{action:'shutdown'}).then(()=>{token='';message('Vexx PC encerrado. Você pode fechar esta janela.');}).catch(showError);};
 $('index-toggle').onclick=()=>act(snapshot?.index.paused?'index_resume':'index_pause').catch(showError);
 $('index-refresh').onclick=()=>act('index_refresh').then(()=>{message('Índice atualizando em segundo plano.');return search();}).catch(showError);
 $('search-form').onsubmit=e=>{e.preventDefault();offset=0;search().catch(showError);};
@@ -128,5 +130,27 @@ $('next-page').onclick=()=>{if(more){offset+=60;search().catch(showError);}};
 $('log-filter').oninput=filterLogs;$('logs-refresh').onclick=()=>loadLogs().catch(showError);
 $('logs-export').onclick=()=>{const blob=new Blob([logs.map(l=>l.time+' '+l.message).join('\n')],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='vexx-pc-logs.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);};
 $('chat-form').onsubmit=async e=>{e.preventDefault();const text=$('chat-input').value.trim();if(!text)return;e.submitter.disabled=true;$('chat-input').value='';try{await prompt(text);}catch(err){showError(err);}finally{e.submitter.disabled=false;}};
-async function boot(){const r=await fetch('/api/bootstrap');if(!r.ok)throw new Error('Reabra pelo atalho Vexx PC.');token=(await r.json()).token;await refresh();setInterval(()=>refresh().catch(err=>{if(!updating)showError(err);}),3000);}
+async function boot(){const r=await fetch('/api/bootstrap');if(!r.ok)throw new Error('Reabra pelo atalho Vexx PC.');token=(await r.json()).token;await refresh();loadAI(await api('/api/ai/config'));setInterval(()=>refresh().catch(err=>{if(!updating)showError(err);}),3000);}
 boot().catch(showError);
+
+function loadAI(data){
+  $('ai-provider').value=data.provider;$('ai-url').value=data.base_url;$('ai-model').value=data.model;
+  $('ai-key').value='';$('ai-clear-key').checked=false;
+  $('ai-key').placeholder=data.key_set?'Chave salva · deixe vazio para manter':'Opcional para serviços locais';
+  $('ai-status').textContent=data.enabled?'Configuração salva neste computador.':'Comandos locais ativos, sem provedor de IA.';
+}
+$('ai-provider').onchange=()=>{
+  const defaults={ollama:'http://127.0.0.1:11434',hermes:'http://127.0.0.1:8645/v1',openai:'https://api.openai.com/v1'};
+  $('ai-url').value=defaults[$('ai-provider').value]||'';$('ai-model').value='';$('ai-key').value='';
+  $('ai-key').placeholder='Informe uma chave se o serviço exigir';$('ai-models').replaceChildren();
+};
+async function saveAI(){
+  const data=Object.fromEntries(new FormData($('ai-form')));data.clear_key=$('ai-clear-key').checked;
+  const result=await api('/api/ai/config',data);loadAI(result);return result;
+}
+$('ai-form').onsubmit=async e=>{e.preventDefault();e.submitter.disabled=true;try{await saveAI();message('Configuração de IA salva.');await refresh();}catch(err){showError(err);}finally{e.submitter.disabled=false;}};
+$('ai-test').onclick=async()=>{
+  const b=$('ai-test');b.disabled=true;$('ai-status').textContent='Testando o serviço…';
+  try{await saveAI();const result=await api('/api/ai/test',{});$('ai-models').replaceChildren(...result.models.map(model=>{const o=document.createElement('option');o.value=model;return o;}));$('ai-status').textContent='Conectado · '+result.models.length+' modelos disponíveis. Escolha o modelo e salve.';}
+  catch(err){$('ai-status').textContent=err.message;}finally{b.disabled=false;}
+};

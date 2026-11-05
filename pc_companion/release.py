@@ -9,7 +9,7 @@ from . import __version__
 
 ROOT = Path(__file__).resolve().parents[1]
 BUNDLE_FILES = ('__init__.py', '__main__.py', 'app.py', 'system.py', 'indexer.py',
-                'connection.py', 'release.py', 'updater.py', 'apply_update.py', 'launcher.py', 'desktop.py',
+                'connection.py', 'release.py', 'updater.py', 'apply_update.py', 'launcher.py', 'desktop.py', 'ai.py',
                 'requirements.txt', 'Instalar.cmd', 'instalar.ps1', 'README.md',
                 'web/index.html', 'web/style.css', 'web/app.js')
 
@@ -38,7 +38,7 @@ def manifest():
     return {'version': __version__, 'sha256': hashlib.sha256(payload).hexdigest(),
             'size': len(payload), 'url': '/downloads/vexx-pc-agent-windows.zip',
             'files': files, 'minimum_python': '3.12', 'installer_url':'/downloads/vexx-pc-agent-setup.exe',
-            'notes': 'Aplicativo Windows com instalador e atualização pelo próprio Vexx PC.'}
+            'notes': 'Nick e PIN persistentes, provedores de IA e conexões locais no Copiloto.'}
 
 
 def installer_url():

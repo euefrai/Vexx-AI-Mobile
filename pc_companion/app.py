@@ -18,6 +18,7 @@ from .connection import Connection, relay_url
 from .indexer import FileIndex
 from .system import SystemMonitor
 from .updater import Updater
+from .ai import AI
 from . import __version__
 
 WEB = Path(__file__).parent / 'web'
@@ -60,6 +61,7 @@ def create_app(directory=None, roots=None):
             pass
 
     connection = Connection(config, save, log)
+    ai = AI(directory)
     def shutdown():
         callback = getattr(app.state, 'request_exit', None)
         if callback:
@@ -174,7 +176,27 @@ def create_app(directory=None, roots=None):
     @app.get('/api/status')
     async def status():
         return {**state, 'index': index.status(), 'connection': connection.status(), 'update':updater.status(),
-                'linked': bool(config.get('token')), 'relay': config.get('relay', '')}
+                'linked': bool(config.get('token')), 'relay': config.get('relay', ''), 'nick':config.get('nick',''), 'ai':ai.status()}
+
+    @app.get('/api/ai/config')
+    async def ai_config():
+        return ai.status()
+
+    @app.post('/api/ai/config')
+    async def ai_save(request: Request):
+        try:
+            result = await asyncio.to_thread(ai.save, await payload(request))
+            log('Configuração de IA atualizada neste computador.')
+            return result
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from None
+
+    @app.post('/api/ai/test')
+    async def ai_test():
+        try:
+            return await ai.models()
+        except ValueError as exc:
+            raise HTTPException(400, str(exc)) from None
 
     @app.post('/api/update/check')
     async def update_check():
@@ -247,19 +269,29 @@ def create_app(directory=None, roots=None):
     async def pair(request: Request):
         body = await payload(request)
         try:
-            relay = relay_url(str(body.get('relay', '')))
-            code = str(body.get('code', '')).replace('-', '').strip().upper()
-            if len(code) != 8 or not all(c in '0123456789ABCDEF' for c in code):
-                raise ValueError('Código deve ter 8 caracteres. Gere-o no site Vexx AI.')
+            relay = relay_url(str(body.get('relay') or 'https://vexx-ai.onrender.com'))
+            if body.get('nick'):
+                import re
+                nick, pin = str(body['nick']).strip().lower(), str(body.get('pin',''))
+                if not re.fullmatch(r'[a-z0-9][a-z0-9._-]{2,29}', nick) or not re.fullmatch(r'[0-9]{6,12}', pin):
+                    raise ValueError('Informe o nick do site e o PIN de 6 a 12 números.')
+                path, claim = '/api/companion/connect', {'nick':nick,'pin':pin,'name':__import__('platform').node()}
+            else:  # Compatibility with installed 1.1/1.2 clients and existing diagnostic tools.
+                code = str(body.get('code', '')).replace('-', '').strip().upper()
+                if len(code) != 8 or not all(c in '0123456789ABCDEF' for c in code):
+                    raise ValueError('Informe seu nick e PIN cadastrados em Meu PC no site.')
+                path, claim = '/api/companion/claim', {'code':code,'name':__import__('platform').node()}
             async with httpx.AsyncClient(timeout=15, follow_redirects=False) as client:
-                result = await client.post(relay + '/api/companion/claim', json={'code': code, 'name': __import__('platform').node()})
+                result = await client.post(relay + path, json=claim)
                 if result.status_code != 200:
-                    raise ValueError('O site recusou o código. Verifique o endereço e gere outro código.')
+                    raise ValueError('O site recusou o vínculo. Confira nick e PIN; após muitas tentativas, aguarde 15 minutos.')
                 data = result.json()
                 if not isinstance(data.get('token'), str) or not isinstance(data.get('device_id'), str):
                     raise ValueError('Resposta de vínculo inválida.')
             await connection.permission(False)
             config.update(relay=relay, token=data['token'], device_id=data['device_id'])
+            if data.get('nick'):
+                config['nick'] = data['nick']
             save()
             await connection.restart()
             asyncio.create_task(updater.check())
@@ -273,7 +305,7 @@ def create_app(directory=None, roots=None):
     @app.post('/api/copilot')
     async def copilot(request: Request):
         body = await payload(request)
-        text = str(body.get('text', ''))[:500].strip()
+        text = str(body.get('text', ''))[:2000].strip()
         normalized = ''.join(c for c in unicodedata.normalize('NFKD', text.casefold()) if not unicodedata.combining(c))
         if normalized.startswith(('buscar ', 'busque ', 'pesquisar ', 'procure ')):
             query = text.split(' ', 1)[1]
@@ -301,7 +333,12 @@ def create_app(directory=None, roots=None):
                 return {'reply': 'Aguardando a primeira amostra dos sensores.'}
             return {'reply': f"CPU: {s['cpu_percent']}%. RAM: {s['ram']['percent']}%. Ligado há {int(s['uptime']//60)} minutos. "
                     f"Índice: {index.count} entradas. Acesso remoto: {'autorizado' if connection.status()['approved'] else 'pausado'}.", 'page': 'overview'}
-        return {'reply': 'Posso consultar CPU/RAM/disco, diagnosticar a conexão, buscar arquivos por nome, abrir logs, pausar acesso e pausar/atualizar o índice. Exemplos: “buscar relatorio.pdf”, “status do computador”, “pausar acesso”.'}
+        if ai.status()['enabled']:
+            try:
+                return await ai.chat(text)
+            except ValueError as exc:
+                raise HTTPException(400, str(exc)) from None
+        return {'reply': 'Posso consultar CPU/RAM/disco, buscar arquivos e diagnosticar a conexão. Para conversar com um modelo, configure seu provedor na aba IA.', 'page':'ai'}
 
     app.mount('/assets', StaticFiles(directory=WEB), name='assets')
     return app

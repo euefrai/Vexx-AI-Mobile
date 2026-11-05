@@ -56,7 +56,9 @@ class Connection:
                 raise
             except Exception as exc:
                 status = getattr(getattr(exc, 'response', None), 'status_code', None)
-                self.last_error = ('Vínculo recusado ou expirado. Desvincule e gere outro código no site.'
+                if status in (401, 403):
+                    await self.permission(False)
+                self.last_error = ('Vínculo recusado ou expirado. Desvincule e conecte novamente com seu nick e PIN.'
                                    if status in (401, 403) else 'Sem conexão com o site. Verifique a rede e o endereço configurado.')
                 # Never log credential-bearing URLs, headers or third-party response bodies.
                 if self.online:

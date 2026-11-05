@@ -25,7 +25,8 @@ os.environ.update(JULIA_SESSION_SECRET=secrets.token_hex(32), JULIA_AGENT_TOKEN=
 import httpx
 import trustme
 import uvicorn
-from fastapi import HTTPException
+from fastapi import HTTPException, FastAPI, Request
+from fastapi.responses import JSONResponse
 from PIL import Image
 import companion_registry
 import julia_auth
@@ -78,8 +79,23 @@ def main():
             native_calls.append((cmd, kw))
             return {'ok':True, 'kind':cmd['kind'], **({'text':'QA clipboard'} if cmd['kind']=='clipboard_get' else {})}
         remoto.executar = input_fixture
+        if '--ui' in sys.argv:
+            @server.app.middleware('http')
+            async def qa_session(req,call_next):
+                if req.url.path=='/api/session':return JSONResponse({'authenticated':True,'user':'Alice QA','uid':user['uid'],'csrf':'qa-tls'})
+                return await call_next(req)
         relay, relay_thread, relay_port = serve(server.app, ssl_keyfile=str(root / 'key.pem'), ssl_certfile=str(root / 'cert.pem'))
         local_app = create_app(root / 'local', [Path(__file__).resolve().parents[1] / 'pc_companion'])
+        fake_ai = FastAPI()
+        @fake_ai.get('/v1/models')
+        async def models():return {'data':[{'id':'fixture-model'}]}
+        @fake_ai.post('/v1/chat/completions')
+        async def chat(req: Request):
+            body=await req.json()
+            assert req.headers.get('authorization')=='Bearer qa-only-api-key'
+            assert body['messages'][-1]['role']=='user'
+            return {'choices':[{'message':{'content':'Resposta da IA de QA, via HTTP real.'}}]}
+        ai_server, ai_thread, ai_port = serve(fake_ai)
         local, local_thread, local_port = serve(local_app)
         try:
             origin = f'https://127.0.0.1:{relay_port}'
@@ -87,8 +103,10 @@ def main():
                  httpx.Client(base_url=f'http://127.0.0.1:{local_port}', timeout=15) as pc:
                 pc.get('/').raise_for_status()
                 pc.headers['X-Vexx-Token'] = pc.get('/api/bootstrap').json()['token']
-                code = site.post('/api/companion/pair').json()['code']
-                pair = pc.post('/api/pair', json={'relay':origin, 'code':code})
+                identity={'nick':'alice-qa-pc','pin':'736194'}
+                site.post('/api/companion/identity',json=identity).raise_for_status()
+                assert site.get('/api/companion/identity').json()=={'configured':True,'nick':identity['nick']}
+                pair = pc.post('/api/pair', json={'relay':origin, **identity})
                 assert pair.status_code == 200, pair.text
                 until = time.monotonic() + 12
                 while not pc.get('/api/status').json()['connection']['online'] and time.monotonic() < until:
@@ -109,15 +127,33 @@ def main():
                 pc.post('/api/action',json={'action':'pause'}).raise_for_status()
                 assert site.post('/api/companion/input',json={'kind':'key','key':'enter'}).status_code == 403
                 assert len(native_calls) == 2
-                site.post('/api/companion/unlink').raise_for_status()
+                site.post('/api/companion/identity',json={**identity,'pin':'846215'}).raise_for_status()
+                assert site.post('/api/companion/input',json={'kind':'key','key':'enter'}).status_code==503
+                assert site.post('/api/companion/connect',json={**identity,'name':'QA'}).status_code==403
+                site.delete('/api/companion/identity').raise_for_status()
+                assert site.get('/api/companion/identity').json()['configured'] is False
                 pc.post('/api/action',json={'action':'unlink'}).raise_for_status()
                 assert not pc.get('/api/status').json()['linked']
-                report = {'https_pairing':True, 'outbound_wss':True, 'remote_request':True,
+                ai_settings={'provider':'compatible','base_url':f'http://127.0.0.1:{ai_port}/v1','model':'fixture-model','api_key':'qa-only-api-key'}
+                pc.post('/api/ai/config',json=ai_settings).raise_for_status()
+                assert pc.post('/api/ai/test',json={}).json()['models']==['fixture-model']
+                answer=pc.post('/api/copilot',json={'text':'Olá, vamos conversar?'});answer.raise_for_status()
+                assert answer.json()['reply']=='Resposta da IA de QA, via HTTP real.'
+                assert 'qa-only-api-key' not in pc.get('/api/ai/config').text
+                report = {'persistent_nick_pin':True,'rotation_and_delete_revoke':True,'ai_real_http':True,'https_pairing':True, 'outbound_wss':True, 'remote_request':True,
                           'local_consent':True, 'jpeg_transport':True, 'native_input_fixture_only':True,
                           'pause_blocks_input':True, 'server_and_local_unlink':True, 'fixture_frame_ms':frame_ms}
-                print(json.dumps(report, indent=2))
+                print(json.dumps(report, indent=2),flush=True)
+                if '--ui' in sys.argv:
+                    ui_site, ui_thread, ui_port = serve(server.app)
+                    evidence=Path('output/pc-pin-ui.json');evidence.write_text(json.dumps({'site':f'http://127.0.0.1:{ui_port}','pc':f'http://127.0.0.1:{local_port}','ai':ai_settings['base_url'],'relay':origin}), 'utf-8')
+                    print('UI QA ready:',evidence,flush=True)
+                    try:
+                        while not Path('output/pc-pin-ui-stop').exists():time.sleep(.5)
+                    finally:ui_site.should_exit=True;ui_thread.join(5)
         finally:
-            local.should_exit = True; relay.should_exit = True
+            local.should_exit = True; relay.should_exit = True; ai_server.should_exit=True
+            ai_thread.join(5)
             local_thread.join(5); relay_thread.join(5)
             db.close()
 

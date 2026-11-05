@@ -25,3 +25,5 @@ jobs:
           node --check public/remote.js
           node --check public/companion-setup.js
           node --check pc_companion/web/app.js
+          node tools/test_remote_stream.cjs
+          node tools/test_remote_stream.cjs --desktop

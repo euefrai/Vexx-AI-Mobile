@@ -5,8 +5,8 @@ Aplicativo público independente para Windows 10/11. Não instala Studio, túnei
 ## Instalar
 
 1. No site Vexx AI, abra **Meu PC → Preparar computador → Baixar Vexx PC para Windows**.
-2. Abra **Vexx-PC-Setup-1.2.0.exe** e instale. O pacote inclui Python e todas as dependências do aplicativo. Não exige Python do sistema, WinGet ou extração manual. Em computadores sem WebView2, o instalador baixa esse componente oficial da Microsoft; nesse caso precisa de internet.
-3. Abra **Vexx PC** pelo atalho. No site, entre na sua conta e gere um código temporário. No aplicativo, informe o endereço HTTPS do site e o código. Cada conta mantém um PC vinculado; novo vínculo substitui o anterior.
+2. Abra **Vexx-PC-Setup-1.3.0.exe** e instale. O pacote inclui Python e todas as dependências do aplicativo. Não exige Python do sistema, WinGet ou extração manual. Em computadores sem WebView2, o instalador baixa esse componente oficial da Microsoft; nesse caso precisa de internet.
+3. No site, entre na sua conta e abra **Meu PC → Seu nick e PIN**. Crie um nick exclusivo (3–30 caracteres) e um PIN (6–12 números). Abra o aplicativo e informe apenas os mesmos nick e PIN para conectar. O endereço oficial já está preenchido; outro servidor HTTPS fica nas opções avançadas. Cada conta mantém um PC vinculado; novo vínculo substitui o anterior.
 4. Autorize visualização ou controle no **painel local**, apenas quando precisar. A permissão dura até uma hora, é revogável e começa pausada ao abrir o aplicativo. No celular, entre na mesma conta e abra **Meu PC**.
 
 O aplicativo abre em janela própria e cria atalhos no menu Iniciar e, opcionalmente, na Área de Trabalho. Instala para seu usuário em Windows 10/11 x64, sem administrador. Fechar a janela encerra o aplicativo e o acesso remoto. A desinstalação em Aplicativos do Windows remove o código e preserva a configuração e o índice. O EXE ainda não possui assinatura Authenticode.
@@ -20,6 +20,18 @@ O aplicativo abre em janela própria e cria atalhos no menu Iniciar e, opcionalm
 - Copiloto: comandos locais em português, sem chave de IA: `status do computador`, `buscar relatorio.pdf`, `diagnosticar conexao`, `abrir logs`, `pausar acesso`, `pausar indice`, `atualizar indice`. Não executa comandos de terminal arbitrários.
 
 O primeiro índice precisa percorrer os arquivos e pode levar tempo em discos grandes. Ele trabalha em lotes, respeita permissões, evita junctions/symlinks e pode ser pausado. Resultados aparecem conforme o índice avança. Metadados atualizados a cada 30 minutos ou manualmente. Não há promessa de pesquisa instantânea antes da indexação.
+
+## Nick e PIN persistentes
+
+As credenciais ficam no SQLite de autenticação do agente central, com hash scrypt do PIN, sem expiração automática. O PIN não é recuperável na interface e não é salvo no aplicativo: após o vínculo, o app mantém apenas sua credencial individual e o nick. **Desvincular** mantém nick/PIN; **trocar** ou **apagar** no site revoga o dispositivo atual. Nick é exclusivo, sem distinção entre maiúsculas e minúsculas. Cinco falhas bloqueiam novas tentativas por 15 minutos no registro persistente, além do limite por IP no relay. A troca confere uma geração para impedir que uma conexão em andamento reative credenciais antigas.
+
+## Configurar IA no aplicativo
+
+Abra a aba **IA**. Escolha Ollama, OpenAI, Hermes/proxy ou outro endpoint compatível, informe endereço base, modelo e chave quando exigida. **Testar e listar modelos** consulta o serviço escolhido; salve o modelo para conversar no Copiloto. Ollama usa `/api/tags` e `/api/chat`; os outros modos usam `/models` e `/chat/completions` relativos ao endereço base. Hermes sugere `http://127.0.0.1:8645/v1`; altere para a porta real do seu proxy. O app não instala, inicia nem converte protocolos de outros serviços.
+
+A chave é protegida com DPAPI para o usuário do Windows em `ai.json`; a API local só informa se existe chave. Trocar provedor/endereço exige informar novamente a chave, evitando enviá-la ao serviço errado. Em execução por código fora do Windows, o arquivo usa permissão 0600. Desmarcar IA preserva os comandos locais. Mensagens de conversa seguem diretamente ao provedor escolhido, com histórico curto em memória; arquivos, índice e chaves não são incluídos. A IA não recebe ferramentas para executar comandos ou controlar o PC. HTTP somente para loopback/rede privada; serviços externos exigem HTTPS. Não são seguidos redirecionamentos com a chave.
+
+Referências: [API Ollama](https://docs.ollama.com/api/chat), [Chat Completions](https://developers.openai.com/api/reference/resources/chat/subresources/completions/methods/create).
 
 ## Atualizar pelo aplicativo
 

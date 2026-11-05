@@ -73,8 +73,8 @@
         $('deviceStatus').classList.toggle('connected', !!deviceOnline);
       }
       $('pcSetup').hidden = mobile;
-      $('pcConnect').hidden = !mobile || connected;
-      $('remoteViewer').hidden = !mobile || !connected;
+      $('pcConnect').hidden = connected;
+      $('remoteViewer').hidden = !connected;
       $('remoteTitle').textContent = mobile ? 'Seu PC, onde você estiver.' : 'Conectar meu computador.';
       $('remoteIntro').textContent = mobile ? 'Acesse a tela do PC autorizado na sua conta.' : 'Prepare o acesso pelo celular, com a sua permissão.';
       $('remoteDeviceName').textContent = state?.device_name || 'Meu computador';
@@ -144,7 +144,7 @@
       } finally { commandBusy = false; if (valid(v, id)) render($('remoteAccessStatus').textContent); }
     }
     async function pullScreen() {
-      if (!connected || !mobile || !online() || !pageActive() || screenBusy) return;
+      if (!connected || !online() || !pageActive() || screenBusy) return;
       const v = version, id = ctx.identity();
       clearTimeout(screenTimer);
       const started = performance.now();
@@ -399,7 +399,7 @@
     }, {passive:false});
     frame.addEventListener('contextmenu', ev => ev.preventDefault());
     $('remoteConnect').addEventListener('click', () => {
-      if (!mobile || !state?.view_allowed || state.confirmation_open) return;
+      if (!state?.view_allowed || state.confirmation_open) return;
       connected = true; render(); pullScreen();
     });
     $('remoteDisconnect').addEventListener('click', () => { stop(); render(); });

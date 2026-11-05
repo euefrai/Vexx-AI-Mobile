@@ -50,6 +50,69 @@ def relay_client(tmp_path, monkeypatch):
 HEADERS = {'X-CSRF-Token': 'qa-local'}
 
 
+def test_persistent_nick_pin_connect_rotate_delete_and_unlink(relay_client):
+    client, users, db = relay_client
+    identity = {'nick':'Alice-PC', 'pin':'672938'}
+    assert client.post('/api/companion/identity', json=identity).status_code == 403
+    assert client.post('/api/companion/identity', headers=HEADERS, json=identity).status_code == 200
+    state = client.get('/api/companion/identity', headers=HEADERS).json()
+    assert state == {'configured':True, 'nick':'alice-pc'}
+    stored = db.execute('SELECT pin_hash FROM companion_identities WHERE owner=?', (users['alice'],)).fetchone()[0]
+    assert stored != identity['pin'] and stored.startswith('scrypt$')
+    claim = {'nick':'ALICE-PC','pin':identity['pin'],'name':'QA Windows'}
+    response = client.post('/api/companion/connect',json=claim)
+    assert response.status_code == 200
+    token = response.json()['token'];device=response.json()['device_id']
+    assert companion_registry.handle(db, {'owner':users['alice'],'action':'validate','device_id':device,'token':token})['allowed']
+    assert client.post('/api/companion/unlink',headers=HEADERS).status_code == 200
+    assert client.get('/api/companion/identity',headers=HEADERS).json()==state
+    assert client.post('/api/companion/connect',json=claim).status_code == 200
+    assert client.post('/api/companion/identity',headers=HEADERS,json={'nick':'alice-new','pin':'481926'}).status_code == 200
+    assert client.post('/api/companion/connect',json=claim).status_code == 403
+    assert not companion_registry.handle(db, {'owner':users['alice'],'action':'validate','device_id':device,'token':token})['allowed']
+    claim.update(nick='alice-new',pin='481926')
+    assert client.post('/api/companion/connect',json=claim).status_code == 200
+    assert client.delete('/api/companion/identity',headers=HEADERS).status_code == 200
+    assert client.get('/api/companion/identity',headers=HEADERS).json()=={'configured':False,'nick':''}
+    assert client.post('/api/companion/connect',json=claim).status_code == 403
+
+
+def test_nick_uniqueness_owner_isolation_and_stale_generation(relay_client):
+    client, users, db = relay_client
+    identity={'nick':'shared-name','pin':'987652'}
+    assert client.post('/api/companion/identity',headers=HEADERS,json=identity).status_code==200
+    assert client.post('/api/companion/identity',headers={**HEADERS,'x-account':'bruno'},json=identity).status_code==409
+    assert client.get('/api/companion/identity',headers={**HEADERS,'x-account':'bruno'}).json()['configured'] is False
+    authenticated=companion_registry.handle(db,{'action':'authenticate_identity',**identity})
+    assert authenticated['owner']==users['alice']
+    client.delete('/api/companion/identity',headers=HEADERS)
+    stale=companion_registry.handle(db,{'action':'enroll','owner':users['alice'],'generation':authenticated['generation'],'device_id':'a'*32,'token_hash':'b'*64})
+    assert stale['denied']
+
+
+def test_pin_throttle_survives_registry_calls_and_rejects_inactive_account(relay_client):
+    client, users, db=relay_client
+    identity={'nick':'locked-pc','pin':'238194'}
+    client.post('/api/companion/identity',headers=HEADERS,json=identity)
+    for _ in range(5):
+        assert companion_registry.handle(db,{'action':'authenticate_identity',**identity,'pin':'000000'})['denied']
+    assert companion_registry.handle(db,{'action':'authenticate_identity',**identity})['denied']
+    db.execute('UPDATE companion_identities SET locked_until=0');db.commit()
+    assert companion_registry.handle(db,{'action':'authenticate_identity',**identity})['owner']==users['alice']
+    db.execute("UPDATE users SET status='bloqueado' WHERE uid=?",(users['alice'],));db.commit()
+    assert companion_registry.handle(db,{'action':'authenticate_identity',**identity})['denied']
+
+
+def test_identity_profile_survives_sqlite_reopen(tmp_path):
+    path=tmp_path/'accounts.sqlite3'
+    db=sqlite3.connect(path);julia_auth.criar_tabelas(db)
+    user=julia_auth.criar_usuario(db,'persist-user','QA','fixture-password',criado_por='local')['uid']
+    assert companion_registry.handle(db,{'owner':user,'action':'identity_set','nick':'persist-pc','pin':'112738'})['ok']
+    db.close();db=sqlite3.connect(path)
+    assert companion_registry.handle(db,{'action':'authenticate_identity','nick':'persist-pc','pin':'112738'})['owner']==user
+    db.close()
+
+
 def enroll(client, name='Alice-PC', account='alice'):
     code = client.post('/api/companion/pair', headers={**HEADERS, 'x-account': account}).json()['code']
     r = client.post('/api/companion/claim', json={'code': code, 'name': name})

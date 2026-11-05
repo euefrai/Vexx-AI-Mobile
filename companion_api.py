@@ -21,6 +21,15 @@ class PairClaim(BaseModel):
     name: str = Field(min_length=1, max_length=80)
 
 
+class PCIdentity(BaseModel):
+    nick: str = Field(min_length=3, max_length=30, pattern=r'^[a-zA-Z0-9][a-zA-Z0-9._-]{2,29}$')
+    pin: str = Field(min_length=6, max_length=12, pattern=r'^[0-9]{6,12}$')
+
+
+class IdentityClaim(PCIdentity):
+    name: str = Field(min_length=1, max_length=80)
+
+
 class CompanionHub:
     def __init__(self, host):
         self.host = host
@@ -33,7 +42,7 @@ class CompanionHub:
                                                  'action': action, **data}, timeout=8)
         if result.get('type') != 'companion_registry' or result.get('error'):
             raise HTTPException(503, 'Atualize o agente central para vincular computadores.')
-        if action in ('enroll', 'revoke'):
+        if action in ('enroll', 'revoke', 'identity_set', 'identity_delete'):
             self.cache.pop(owner, None)
         return result
 
@@ -112,6 +121,51 @@ def install(host):
         code = secrets.token_hex(4).upper()
         hub.codes[code] = {'owner': owner, 'until': now + 180}
         return {'code': code, 'expires_in': 180}
+
+    @app.get('/api/companion/identity')
+    async def identity_get(request: Request):
+        owner = await account(request)
+        result = await hub.registry(owner, 'identity_get')
+        return {'configured':result['configured'], 'nick':result['nick']}
+
+    @app.post('/api/companion/identity')
+    async def identity_set(request: Request, body: PCIdentity):
+        owner = await account(request)
+        if host.rate_limiter.hit('companion-identity:' + owner, 10, 600):
+            raise HTTPException(429, 'Aguarde antes de alterar novamente.')
+        result = await hub.registry(owner, 'identity_set', nick=body.nick.lower(), pin=body.pin)
+        if result.get('conflict'):
+            raise HTTPException(409, 'Este nick já está em uso. Escolha outro.')
+        if not result.get('ok'):
+            raise HTTPException(400, 'Revise o nick e o PIN.')
+        hub.codes = {k:v for k,v in hub.codes.items() if v['owner'] != owner}
+        await hub.disconnect(owner)
+        return {'ok':True, 'nick':body.nick.lower()}
+
+    @app.delete('/api/companion/identity')
+    async def identity_delete(request: Request):
+        owner = await account(request)
+        await hub.registry(owner, 'identity_delete')
+        hub.codes = {k:v for k,v in hub.codes.items() if v['owner'] != owner}
+        await hub.disconnect(owner)
+        return {'ok':True}
+
+    @app.post('/api/companion/connect')
+    async def identity_claim(request: Request, body: IdentityClaim):
+        from rate_limit import client_ip
+        if host.rate_limiter.hit('companion-connect:' + client_ip(request), 10, 600):
+            raise HTTPException(429, 'Muitas tentativas. Aguarde antes de tentar novamente.')
+        result = await hub.registry('', 'authenticate_identity', nick=body.nick.lower(), pin=body.pin)
+        if result.get('denied') or not result.get('owner'):
+            raise HTTPException(403, 'Nick ou PIN inválidos, indisponíveis ou temporariamente bloqueados.')
+        owner, device = result['owner'], uuid.uuid4().hex
+        token = signer().dumps({'owner':owner, 'device_id':device})
+        enrolled = await hub.registry(owner, 'enroll', device_id=device, name=body.name,
+                         token_hash=hashlib.sha256(token.encode()).hexdigest(), generation=result['generation'])
+        if enrolled.get('denied'):
+            raise HTTPException(403, 'As credenciais foram alteradas. Conecte novamente.')
+        await hub.disconnect(owner)
+        return {'token':token, 'device_id':device, 'nick':body.nick.lower()}
 
     @app.post('/api/companion/claim')
     async def claim(request: Request, body: PairClaim):

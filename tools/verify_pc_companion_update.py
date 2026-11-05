@@ -28,6 +28,7 @@ from fastapi import FastAPI
 from fastapi.responses import Response
 from pc_companion.release import bundle, manifest
 from pc_companion import __version__
+from pc_companion.ai import AI
 BASE = __version__
 parts = BASE.split(".")
 NEXT = ".".join(parts[:-1]+[str(int(parts[-1])+1)])
@@ -85,6 +86,8 @@ def main():
     origin=f'https://127.0.0.1:{port}'
     config={'relay':origin,'token':'qa-unused-token','device_id':'qa-preserved-device','marker':'preserve-me'}
     (data/'config.json').write_text(json.dumps(config),'utf-8')
+    AI(data).save({'provider':'ollama','model':'qa-preserved-model','api_key':'qa-preserved-key'})
+    ai_before = (data/'ai.json').read_bytes()
     installer=extracted/'Vexx-PC/pc_companion/instalar.ps1'
     print('Installing public ZIP in isolated directory...',flush=True)
     with (base/'install.log').open('wb') as log:
@@ -116,6 +119,7 @@ def main():
         client.close();client,second=local_client(NEXT)
         assert second['pid']!=first['pid']
         assert json.loads((data/'config.json').read_text('utf-8'))==config
+        assert (data/'ai.json').read_bytes()==ai_before
         with sqlite3.connect(data/'files.sqlite3') as db:assert db.execute('PRAGMA quick_check').fetchone()[0]=='ok'
         assert (old/'pc_companion/__init__.py').read_text().find(repr(BASE))>=0
         assert not client.get('/api/status').json()['connection']['approved']
@@ -129,11 +133,12 @@ def main():
         assert json.loads((data/'config.json').read_text('utf-8'))==config
         current=json.loads((install/'current.json').read_text('utf-8'))
         assert current['version']==NEXT
+        assert (data/'ai.json').read_bytes()==ai_before
         report={'initial_install':True,'native_window_mode':native,'tls_verified':True,'sha256_verified':True,
             'update':{'from':BASE,'to':NEXT},'graceful_exit':initial.returncode==0,
             'fresh_environment':True,'live_health_before_promotion':True,
             'remote_paused_after_restart':True,'config_preserved':True,'index_integrity':True,
-            'dependency_failure_rollback':True,'old_release_preserved':True}
+            'dependency_failure_rollback':True,'old_release_preserved':True,'ai_settings_preserved':True}
         (base/'summary.json').write_text(json.dumps(report,indent=2),'utf-8')
         print(json.dumps(report,indent=2),flush=True)
         print('Evidence:',base,flush=True)

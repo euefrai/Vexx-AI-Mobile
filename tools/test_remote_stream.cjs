@@ -14,7 +14,7 @@ global.document={hidden:false,getElementById:el,addEventListener(){}};
 global.window=global;global.addEventListener=()=>{};
 global.requestAnimationFrame=fn=>setTimeout(fn,16);global.cancelAnimationFrame=clearTimeout;
 global.visualViewport={height:420,width:390,offsetTop:12,offsetLeft:0,addEventListener(){}};
-Object.defineProperty(global,'navigator',{value:{userAgent:'Android',onLine:true},configurable:true});
+Object.defineProperty(global,'navigator',{value:{userAgent:process.argv.includes('--desktop')?'Windows':'Android',onLine:true},configurable:true});
 global.Image=class{async decode(){}};
 const state={approved:true,view_allowed:true,control_allowed:true,capture_ready:true,supported:true};
 let holdFrame=false, releaseFrame, holdInput=false, releaseInput;
