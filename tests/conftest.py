@@ -21,11 +21,14 @@ import server  # noqa: E402
 
 @pytest.fixture(autouse=True)
 def _limpar_limitadores():
+    import providers
+    providers._CATALOGS.clear()
     server.rate_limiter.clear()
     server.login_failures.clear()
     yield
     server.rate_limiter.clear()
     server.login_failures.clear()
+    providers._CATALOGS.clear()
 
 
 @pytest.fixture(autouse=True)

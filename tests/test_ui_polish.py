@@ -71,9 +71,10 @@ def test_frontend_stream_lifecycle(tmp_path):
 const fs = require('fs'), vm = require('vm'), assert = require('assert/strict');
 const src = fs.readFileSync(process.argv[2], 'utf8');
 const code = src.slice(src.indexOf('function requestAI(userRow'), src.indexOf('\nfunction stopAI()'));
+const policy = src.slice(src.indexOf('function modelSelectionError()'), src.indexOf('\nlet modelCatalog'));
 const event = (name, data, nl='\n') => `event: ${name}${nl}data: ${JSON.stringify(data)}${nl}${nl}`;
-async function run(wire, apiResult, previous='') {
-  const rows = new Map(), saves=[], calls=[], notices=[];
+async function run(wire, apiResult, previous='', badModel=false) {
+  const rows = new Map(), saves=[], calls=[], notices=[], requests=[];
   const id='polish-user-001-r1';
   if(previous) rows.set(id,{id,text:previous,status:'failed',created_at:'2026-01-01T00:00:00Z'});
   const bytes = new TextEncoder().encode(wire);
@@ -85,18 +86,20 @@ async function run(wire, apiResult, previous='') {
     messageById:async id=>rows.get(id), allMessages:async()=>[...rows.values()],
     storeMessages:async ms=>ms.forEach(m=>{rows.set(m.id,m); saves.push({...m});}),
     modeloAtivo:()=> 'test-model', memoryOn:()=>false, aiLocalContext:()=>({}),
+    modelCatalog:{models:badModel?[]:['test-model']},modelsLoadedAt:Date.now(),
+    isConfigured:()=>true,providerOf:()=> 'hermes',abrirSeletorDeModelo:()=>notices.push('choose-model'),
     setGenBar(){},tickGen(){},schedulePaint(){},showToast:m=>notices.push(m),
     renderMessages:async()=>{},renderSessions:async()=>{},$:()=>({value:''}),
-    fetch:async()=>({ok:true,body:new ReadableStream({start(c){
+    fetch:async()=>{requests.push('stream');return {ok:true,body:new ReadableStream({start(c){
       // One-byte chunks exercise UTF-8 and CRLF boundaries across network reads.
       for(const b of bytes)c.enqueue(new Uint8Array([b])); c.close();
-    }})}),
+    }})};},
     api:async(path)=>{calls.push(path);if(path==='/api/sync')return {confirmed_ids:['polish-user-001']};
       return apiResult || {response_text:'Fallback',reply_id:id};}
   };
-  vm.createContext(ctx);vm.runInContext(code,ctx);
+  vm.createContext(ctx);vm.runInContext(policy+code,ctx);
   await ctx.requestAI({id:'polish-user-001',conversation_id:'conv-polish',text:'Oi'}, {immediate:true});
-  return {row:rows.get(id),saves,calls,notices,ctx};
+  return {row:rows.get(id),saves,calls,notices,ctx,requests};
 }
 (async()=>{
   let r=await run(event('done',{response_text:'Olá',reply_id:'polish-user-001-r1'},'\r\n'));
@@ -119,7 +122,11 @@ async function run(wire, apiResult, previous='') {
   r=await run(event('error',{codigo:'offline',error:'Sem rede'}),null,'Texto preservado');
   assert.equal(r.row.text,'Texto preservado');assert.equal(r.row.owner,'alice');
   assert.equal(r.ctx.aiRequests.size,0);
-  console.log('9 streaming lifecycle scenarios passed');
+  r=await run('',null,'',true);
+  assert.equal(r.row.status,'failed');assert.equal(r.requests.length,0);assert.equal(r.calls.length,0);
+  assert(r.row.text.includes('modelo selecionado'));assert(r.notices.includes('choose-model'));
+  assert.equal(r.ctx.aiRequests.size,0);
+  console.log('10 streaming lifecycle scenarios passed');
 })().catch(e=>{console.error(e);process.exitCode=1;});
 ''', encoding='utf-8')
     result = subprocess.run([node, str(harness), str(ROOT / 'public/app.js')],

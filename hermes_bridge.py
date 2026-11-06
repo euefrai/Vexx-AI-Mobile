@@ -110,6 +110,15 @@ def _mapear_http(exc: urllib.error.HTTPError, model: str) -> BridgeErro:
     return BridgeErro(f"Falha HTTP {exc.code}.", "http", detalhe)
 
 
+class ModelCatalog(list):
+    """String IDs remain backwards compatible; retain declared capabilities."""
+    def __init__(self, records):
+        super().__init__(m['id'] for m in records)
+        self.metadata = {m['id']: {k: m[k] for k in (
+            'capabilities', 'supportedGenerationMethods', 'output_modalities', 'type') if k in m}
+            for m in records}
+
+
 def listar_modelos(base: str, timeout: float = 10.0, api_key: str = "",
                    hosts: tuple = ()) -> list:
     url = _base(base, api_key, hosts)
@@ -126,8 +135,8 @@ def listar_modelos(base: str, timeout: float = 10.0, api_key: str = "",
                          "Rode 'hermes proxy start'.", "indisponivel") from None
     if not isinstance(dados, dict) or not isinstance(dados.get("data"), list):
         raise BridgeErro("Resposta /v1/models em formato inesperado.", "formato")
-    ids = [m.get("id") for m in dados["data"]
-           if isinstance(m, dict) and isinstance(m.get("id"), str)]
+    ids = ModelCatalog([m for m in dados['data']
+                        if isinstance(m, dict) and isinstance(m.get('id'), str)])
     if not ids:
         raise BridgeErro("Proxy não listou nenhum modelo.", "vazio")
     return ids

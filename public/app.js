@@ -1962,6 +1962,15 @@ async function syncAndRefresh() {
 
 /* ----- Modelos ----- */
 function modeloAtivo() { return localStorage.getItem('julia-model') || ''; }
+function modelSelectionError() {
+  const chosen = modeloAtivo();
+  // Missing/expired metadata is not proof of removal. No extra network per send.
+  if (!chosen || !modelsLoadedAt || Date.now() - modelsLoadedAt >= 300000) return '';
+  if (!(modelCatalog.models || []).includes(chosen) || !isConfigured(providerOf(chosen))) {
+    return 'O modelo selecionado não está disponível para chat. Abra Provedores de IA e escolha outro modelo.';
+  }
+  return '';
+}
 let modelCatalog = { models: [], providers: [] };
 let modelLoadVersion = 0;
 let providerMutation = false;
@@ -2019,6 +2028,11 @@ function fillModels(filter) {
     groups.get(key).appendChild(o);
   }
   // Filtering must not silently select a different model than the one sent.
+  if (cur && !(modelCatalog.models || []).includes(cur)) {
+    const missing = document.createElement('option');
+    missing.value = cur; missing.textContent = 'Indisponível · ' + cur;
+    missing.disabled = true; sel.prepend(missing);
+  }
   sel.value = cur;
   const selected = $('modelSelected');
   if (selected) selected.textContent = cur ? 'Selecionado: ' + cur : 'Escolha um modelo';
@@ -2320,8 +2334,15 @@ async function runAIRequest(userRow, options, timing) {
     aiRequests.delete(replyId);
     return;
   }
-  const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: existingReply?.text || '', created_at: existingReply?.created_at || new Date().toISOString(), status: 'generating', model: modeloAtivo(), owner: options.owner };
+  const selectionError = modelSelectionError();
+  const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: selectionError || existingReply?.text || '', created_at: existingReply?.created_at || new Date().toISOString(), status: selectionError ? 'failed' : 'generating', model: modeloAtivo(), owner: options.owner };
   try { await storeMessages([ph]); } catch (_) { aiRequests.delete(replyId); return; }
+  if (selectionError) {
+    aiRequests.delete(replyId);
+    renderMessages().catch(() => showToast('Não foi possível atualizar a conversa.'));
+    abrirSeletorDeModelo(); showToast(selectionError);
+    return;
+  }
   aiStartT = Date.now(); aiFirstTokenT = 0;
   setGenBar(true, 'Preparando resposta…');
   clearInterval(genTimer); genTimer = setInterval(tickGen, 500);

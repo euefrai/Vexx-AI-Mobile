@@ -16,6 +16,10 @@ def effective_models(cfg, models, timeout=2):
             or models[0] != hermes_bridge.DEFAULT_MODEL):
         return models
     base = cfg.get('proxy') or hermes_bridge.DEFAULT_PROXY_URL
+    import providers
+    resolved = providers.cached_default(base, models[0])
+    if resolved != models[0]:
+        return list(dict.fromkeys([resolved] + models[1:]))
     with _LOCK:
         cached = _CACHE.get(base)
         if cached and cached[0] > time.monotonic():
@@ -25,7 +29,8 @@ def effective_models(cfg, models, timeout=2):
             try:
                 catalog = hermes_bridge.listar_modelos(base, timeout=max(.1, min(2, timeout)))
                 ids = [m for m in catalog if isinstance(m, str)
-                       and re.fullmatch(r'[A-Za-z0-9_~.][A-Za-z0-9_~.:/-]{0,119}', m)]
+                       and re.fullmatch(r'[A-Za-z0-9_~.][A-Za-z0-9_~.:/-]{0,119}', m)
+                       and providers.supports_chat(m, getattr(catalog,'metadata',{}).get(m))]
                 if selected not in ids:
                     selected = next((m for m in ids if m.endswith(':free')), selected)
             except hermes_bridge.BridgeErro:

@@ -11,11 +11,13 @@ caímos na curadoria se a listagem falhar (Anthropic não tem listagem —
 use os IDs do console).
 """
 import json
+import hashlib
 from concurrent.futures import ThreadPoolExecutor
 import logging
 import os
 import re
 import time
+import threading
 import urllib.error
 import urllib.request
 
@@ -25,6 +27,71 @@ import tool_protocol
 from hermes_bridge import BridgeErro
 
 log = logging.getLogger("JULIA-providers")
+
+_CATALOGS = {}
+_CATALOG_LOCK = threading.Lock()
+CATALOG_TTL = 300
+
+
+def supports_chat(model_id, metadata=None):
+    """Declared capability first; conservative exclusion when metadata is absent."""
+    meta = metadata if isinstance(metadata, dict) else {}
+    capabilities = meta.get('capabilities')
+    if isinstance(capabilities, dict):
+        for key in ('chat', 'text_generation'):
+            if type(capabilities.get(key)) is bool:
+                return capabilities[key]
+    methods = meta.get('supportedGenerationMethods')
+    if isinstance(methods, list) and methods:
+        return any(m in ('generateContent', 'streamGenerateContent', 'chat', 'completions') for m in methods)
+    outputs = meta.get('output_modalities')
+    if isinstance(outputs, list) and outputs:
+        return 'text' in [str(v).lower() for v in outputs]
+    kind = str(meta.get('type') or '').lower()
+    if kind in ('embedding', 'rerank', 'audio', 'image', 'speech'):
+        return False
+    return not re.search(r'(?:^|[/_.:-])(?:embeddings?|rerank\w*|whisper\w*|tts|'
+                         r'transcrib\w*|speech|audio|realtime|live|lyria\w*|aqa|'
+                         r'sentence-transformers|gte|image)(?:$|[/_.:-])', str(model_id).lower())
+
+
+def _catalog_key(provider, proxy=''):
+    # Configuration changes invalidate cached availability without retaining keys.
+    credential = chave(provider) if provider != 'hermes' else ''
+    return provider, hashlib.sha256((proxy + '\0' + credential).encode()).digest()
+
+
+def _remember_catalog(provider, ids, proxy=''):
+    with _CATALOG_LOCK:
+        # At most one current configuration per provider; no bodies or prompts.
+        _CATALOGS[provider] = (_catalog_key(provider, proxy), time.monotonic(), frozenset(ids))
+
+
+def selection_error(model, proxy=''):
+    """No network on the message path; reject only known unavailable selections."""
+    provider, mid = dividir(model)
+    unavailable = not supports_chat(mid)
+    with _CATALOG_LOCK:
+        row = _CATALOGS.get(provider)
+        if row and row[0] == _catalog_key(provider, proxy if provider == 'hermes' else '') \
+                and time.monotonic() - row[1] < CATALOG_TTL:
+            # The accepted catalog already applied declared capabilities. A
+            # text-capable multimodal model may legitimately contain "audio".
+            unavailable = mid not in row[2]
+    if unavailable:
+        return {'codigo': 'modelo_indisponivel', 'error':
+                'O modelo selecionado não está disponível para chat. Abra Provedores de IA e escolha outro modelo.'}
+    return None
+
+
+def cached_default(proxy, fallback):
+    """Resolve an implicit default from a fresh free catalog without new I/O."""
+    with _CATALOG_LOCK:
+        row = _CATALOGS.get('hermes')
+        if (row and row[0] == _catalog_key('hermes', proxy)
+                and time.monotonic() - row[1] < CATALOG_TTL and fallback not in row[2]):
+            return next(iter(sorted(i for i in row[2] if i.endswith(':free'))), fallback)
+    return fallback
 
 PROVIDERS = {
     "hermes": {
@@ -188,7 +255,11 @@ def _modelos_vivos_openai(nome: str, d: dict, timeout: float = 8.0) -> tuple:
     except BridgeErro as exc:
         log.warning("provedor %s: listagem falhou (%s)", nome, exc.codigo)
         return None, exc.codigo
-    return (sorted({i for i in ids if isinstance(i, str) and i}, key=lambda mid: (not mid.endswith(":free"), mid))[:200] or None), ""
+    metadata = getattr(ids, 'metadata', {})
+    filtered = sorted({i for i in ids if isinstance(i, str) and i
+                       and supports_chat(i, metadata.get(i))}, key=lambda mid: (not mid.endswith(':free'), mid))
+    _remember_catalog(nome, filtered)
+    return hermes_bridge.ModelCatalog([{'id': i, **metadata.get(i, {})} for i in filtered[:200]]), ''
 
 
 def listar_tudo(proxy_cfg: str = "") -> dict:
@@ -199,7 +270,11 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
         if nome == "hermes":
             try:
                 ids = hermes_bridge.listar_modelos(proxy_cfg or hermes_bridge.DEFAULT_PROXY_URL)
-                return sorted(set(ids), key=lambda mid: (not mid.endswith(":free"), mid))[:500], ""
+                metadata = getattr(ids, 'metadata', {})
+                filtered = sorted({i for i in ids if isinstance(i, str) and i
+                    and supports_chat(i, metadata.get(i))}, key=lambda mid: (not mid.endswith(':free'), mid))
+                _remember_catalog(nome, filtered, proxy_cfg or hermes_bridge.DEFAULT_PROXY_URL)
+                return hermes_bridge.ModelCatalog([{'id': i, **metadata.get(i, {})} for i in filtered[:500]]), ''
             except BridgeErro as exc:
                 log.warning("hermes listar falhou (%s)", exc.codigo)
                 return [], exc.codigo
@@ -222,7 +297,9 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
         if auth_ruim:
             prov["auth_error"] = True
         provs.append(prov)
-        for mid in (vivos if vivos else d["modelos"]):
+        for mid in (vivos if vivos is not None else d["modelos"]):
+            if not supports_chat(mid, getattr(vivos, 'metadata', {}).get(mid)):
+                continue
             itens.append({"id": mid if nome == "hermes" else f"{nome}/{mid}",
                           "provider": nome, "label": d["label"],
                           "free": mid.endswith(":free"),

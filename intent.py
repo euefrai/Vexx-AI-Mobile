@@ -421,7 +421,7 @@ _RX_PRECO_ALEGADO = re.compile(
     r"|\b\d{1,3}(?:\.\d{3})+(?:\s?(?:-|–|a|—)\s?\d{1,3}(?:\.\d{3})*)?\b"
     r"|\b\d{2,5}[.,]\d{2}\b")
 _RX_CONTEXTO_COMERCIAL = re.compile(
-    r"(pre[cç]o|pre[cç]os|reais|comprar|loja|ofertas?|custa|custam|barat\w*)")
+    r"\b(pre[cç]o|pre[cç]os|comprar|loja|ofertas?|custa|custam|barat\w*)\b")
 _RX_JA_AVISOU = re.compile(
     r"(nao verifiquei|sem verifica|nao foram verificad|nao esta(o)? verificad|"
     r"podem ter mudado|nao confirmad|nao sao precos atuais|"

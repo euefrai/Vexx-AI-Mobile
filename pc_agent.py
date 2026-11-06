@@ -1147,6 +1147,10 @@ def extrair_candidatos(texto: str) -> list:
         m = re.search(rx, t)
         if not m:
             continue
+        sentence_start = max(t.rfind(mark, 0, m.start()) for mark in ('.', '?', '!', '\n')) + 1
+        prefix = t[sentence_start:m.start()]
+        if re.search(r'(?i)\b(qual|quais|quando|quantos|quantas|por que|como)\b', prefix):
+            continue  # A question about a date/name is not a personal assertion.
         # V5.0: exemplo/hipótese não é fato — "suponha que meu nome seja X"
         # nunca vira memória.
         antes = t[max(0, m.start() - 30):m.start()].lower()
@@ -2908,6 +2912,12 @@ def _ai_preparar(db, payload: dict, cfg: dict) -> dict:
                 "response_text": previo["response_text"], "model": previo["model"]}
     if previo and previo["state"] in ("queued", "processing"):
         return {"busy": True}
+    proxy = cfg.get('proxy') or hermes_bridge.DEFAULT_PROXY_URL
+    if not payload.get('model') and cfg.get('model_implicit'):
+        modelo = providers.cached_default(proxy, modelo)
+    selection_error = providers.selection_error(modelo, proxy)
+    if selection_error:
+        return selection_error
     lim = JULIA_auth.limites_usuario(db, owner)
     if JULIA_auth.simultaneas_ia(db, owner) >= lim["max_ia_simult"]:
         return {"error": "Muitas gerações ao mesmo tempo; aguarde.", "codigo": "limite"}

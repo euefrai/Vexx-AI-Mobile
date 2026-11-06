@@ -1,0 +1,51 @@
+{
+  "kind": "headed_chromium_real_local_ui_no_mocks",
+  "account": "disposable_local_test_account",
+  "resumed_database": "backup_of_previous_isolated_lab_only",
+  "comparison": {
+    "clicked_product_compare": true,
+    "corrected_reference_metadata_counting": true,
+    "visible_products_after_repeat": 4,
+    "comparison_survived_browser_reload": true
+  },
+  "product_link": {
+    "clicked_open_offer": true,
+    "landed_url": "https://www.kabum.com.br/produto/998334/placa-de-video-pcyes-nvidia-geforce-rtx-3050-6gb-gddr6-96bits-pvpcr30506gb2f",
+    "landed_title": "GPU PCYES RTX 3050 6GB GDDR6 | KaBuM!",
+    "store_homepage": false
+  },
+  "source_read": {
+    "submitted_via_composer": true,
+    "known_url": "https://www.sqlite.org/wal.html",
+    "correct_cases_reviewed": ["exclusive_locking", "last_connection_cleanup", "crash_recovery"],
+    "cited": true,
+    "raw_tool_protocol": false,
+    "source_card_excerpt_contains_answer_context": true,
+    "answer_and_source_card_survived_reload": true,
+    "known_limit": "One repeated long-quote response ended mid-quote; independent concise request in a new chat completed. General finish-reason and synthesis review remain pending."
+  },
+  "models": {"options_observed": 450, "embeddings_or_rerank_offered": false},
+  "responsive": {
+    "desktop_width": 1365,
+    "mobile_width": 390,
+    "mobile_document_width": 390,
+    "narrow_width": 320,
+    "narrow_document_width": 320,
+    "narrow_source_card_width": 278,
+    "mobile_sidebar_open_select_chat_close": true,
+    "physical_phone_tested": false
+  },
+  "console": {
+    "final_reload_errors": 0,
+    "final_reload_warnings": 0,
+    "earlier_expected_errors": ["401 before test login", "one companion status 503 during deliberate development Agent restart"]
+  },
+  "local_screenshots": [
+    "output/playwright/research-refactor/comparison-desktop.png",
+    "output/playwright/research-refactor/comparison-mobile.png",
+    "output/playwright/research-refactor/read-desktop.png",
+    "output/playwright/research-refactor/read-mobile.png",
+    "output/playwright/research-refactor/read-source-mobile.png"
+  ],
+  "scope": "These cases passed; not universal discovery, physical-device QA, production rollout, or general deep-synthesis approval."
+}

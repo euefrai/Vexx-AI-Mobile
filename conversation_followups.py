@@ -1,9 +1,40 @@
 """Small, explicit continuation resolver. No cross-chat or permanent memory."""
 import re
+import json
+import jdui
 import live_data
 import shopping
 
 ASK_PRODUCT = 'Qual modelo você quer usar como referência?'
+
+
+def _displayed_products(previous, products):
+    """Product items are visible context; reference metadata is not an item."""
+    urls, names, structured = set(), set(), False
+    for raw in jdui.extrair_fences(previous)[:8]:
+        try:
+            ok, message, _ = jdui.validar_mensagem(json.loads(raw))
+        except (ValueError, TypeError):
+            continue
+        if not ok:
+            continue
+        for block in message['blocks']:
+            component = block.get('component')
+            if component not in ('productcard', 'productgrid', 'productcompare'):
+                continue
+            structured = True
+            props = block['props']
+            items = props['items'] if component != 'productcard' else [props['produto']]
+            for item in items:
+                if item.get('url'):
+                    urls.add(item['url'])
+                else:
+                    names.add(item.get('nome', '').casefold())
+    if structured:
+        return [p for p in products if p.get('url') in urls or p.get('nome', '').casefold() in names]
+    # Legacy prose remains supported without counting JSON in other cards.
+    prose = jdui.FENCE_RE.sub('', previous).casefold()
+    return [p for p in products if p.get('nome') and p['nome'].casefold() in prose]
 
 
 def news_request(db,owner,conv,text,message_id=None):
@@ -101,7 +132,7 @@ def product_reply(db, owner, conv, text, previous):
         return None
     products=last.get('resultado',{}).get('produtos',[])
     # Only products actually present in the immediately preceding answer qualify.
-    shown=[p for p in products if p.get('nome') and p['nome'].casefold() in previous.casefold()]
+    shown=_displayed_products(previous, products)
     if not shown:return None
     ordinals={'primeiro':0,'primeira':0,'segundo':1,'segunda':1,'terceiro':2,'terceira':2}
     ordinal=re.search(r'\b(primeiro|primeira|segundo|segunda|terceiro|terceira)\b',t)
@@ -115,6 +146,11 @@ def product_reply(db, owner, conv, text, previous):
     criteria=last.get('criterios',{})
     if not criteria.get('categoria'):
         return f'Identifiquei {reference_name}. Qual categoria de produto devo pesquisar para buscar alternativas com preço?'
+    if re.search(r'\bcompar(?:e|ar)\b', t) and re.search(r'\boutras? opco', t) and len(shown)>1:
+        items = [reference] + [p for p in shown if p is not reference]
+        return (f'Comparei {min(4,len(items))} das {len(shown)} opções da resposta anterior. Os valores mantêm a data de verificação '
+                'original; esta comparação não atualiza preço, estoque ou compatibilidade.\n\n'
+                + shopping.fence_comparacao(items[:4], last.get('resultado',{}).get('fontes',[])))
     # Refresh verified offers; never represent an old price as a fresh quote.
     search_text=text
     if selecting:
@@ -129,8 +165,8 @@ def product_reply(db, owner, conv, text, previous):
         return True
     result={**result,'produtos':[p for p in result.get('produtos',[]) if different(p)],'alternativas':[]}
     # Save the displayed set so a subsequent ordinal references the visible answer.
-    shopping.salvar_consulta(db,owner,conv,last['consulta'],result.get('criterios',criteria),result)
     if not result['produtos']:
         return f'Usei **{reference_name}** como referência, mantendo os critérios da pesquisa. Não consegui confirmar outro modelo e preço nas fontes disponíveis agora.'
+    shopping.salvar_consulta(db,owner,conv,last['consulta'],result.get('criterios',criteria),result)
     return (f'Busquei alternativas a **{reference_name}**, mantendo categoria, orçamento e requisitos informados. Semelhança por esses critérios; não implica desempenho ou compatibilidade idênticos.\n\n'
             +shopping.resumo_texto(result)+shopping.fence_resultado(result))

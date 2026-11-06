@@ -1,0 +1,24 @@
+{
+  "revision_base": "57487fbfc89dea12ee74b909fa192e7c289d5388",
+  "branch": "codex/research-contract-refactor",
+  "full_suite": {
+    "command": "pytest -q -rs --durations=8",
+    "passed": 2786,
+    "skipped": 4,
+    "warnings": 2,
+    "failed": 0,
+    "seconds": 340.56,
+    "skipped_scope": [
+      "semantic LLM benchmark without operational provider",
+      "real Hermes synthesis unavailable in the test environment",
+      "shopping provider inaccessible",
+      "Mercado Livre HTTP 403 and search providers without results"
+    ]
+  },
+  "focused_regressions": {"passed": 56, "failed": 0},
+  "audit_contracts": {"passed": 12, "failed": 0},
+  "ui_acceptance": "specific scenarios passed: comparison click, reload, explicit read, direct product link, mobile menu, 320/390/1365px; see browser-validation.json for scope and synthesis limits",
+  "production_deployed": false,
+  "production_restarted": false,
+  "original_modified_files_preserved": 35
+}

@@ -23,18 +23,19 @@ class FileIndex:
         self.stop = threading.Event()
         self.paused = threading.Event()
         self.running, self.error, self.count, self.skipped = False, '', 0, 0
+        self.error_code = ''
         self.last_scan = 0
         with self.db() as db:
             db.executescript('''PRAGMA journal_mode=WAL;
                 CREATE TABLE IF NOT EXISTS files (path TEXT PRIMARY KEY, name TEXT, size INTEGER,
                     directory INTEGER, modified REAL, generation TEXT);
-                CREATE VIRTUAL TABLE IF NOT EXISTS names USING fts5(name, path UNINDEXED, tokenize='trigram');
+                CREATE VIRTUAL TABLE IF NOT EXISTS names USING fts5(name, path, content='files', content_rowid='rowid', tokenize='trigram');
                 CREATE TRIGGER IF NOT EXISTS files_ai AFTER INSERT ON files BEGIN
                     INSERT INTO names(rowid,name,path) VALUES(new.rowid,new.name,new.path); END;
                 CREATE TRIGGER IF NOT EXISTS files_ad AFTER DELETE ON files BEGIN
-                    DELETE FROM names WHERE rowid=old.rowid; END;
-                CREATE TRIGGER IF NOT EXISTS files_au AFTER UPDATE ON files WHEN new.name IS NOT old.name BEGIN
-                    DELETE FROM names WHERE rowid=old.rowid;
+                    INSERT INTO names(names,rowid,name,path) VALUES('delete',old.rowid,old.name,old.path); END;
+                CREATE TRIGGER IF NOT EXISTS files_au AFTER UPDATE ON files WHEN new.name IS NOT old.name OR new.path IS NOT old.path BEGIN
+                    INSERT INTO names(names,rowid,name,path) VALUES('delete',old.rowid,old.name,old.path);
                     INSERT INTO names(rowid,name,path) VALUES(new.rowid,new.name,new.path); END;''')
             self.count = db.execute('SELECT count(*) FROM files').fetchone()[0]
             columns={row[1] for row in db.execute('PRAGMA table_info(files)')}
@@ -44,21 +45,55 @@ class FileIndex:
                 CREATE INDEX IF NOT EXISTS files_age ON files(directory,modified,path);
                 CREATE INDEX IF NOT EXISTS files_extension ON files(extension,size DESC,path);
                 CREATE INDEX IF NOT EXISTS files_parent ON files(parent,name COLLATE NOCASE,path);''')
+            schema = db.execute("SELECT sql FROM sqlite_master WHERE name='names'").fetchone()[0]
+            self.path_search_ready = 'unindexed' not in schema.lower()
         self.migrating=True
         threading.Thread(target=self._metadata,name='vexx-index-metadata',daemon=True).start()
 
     def _metadata(self):
         try:
             with self.db() as db:
+                if not self.path_search_ready:
+                    self._migrate_path_index(db)
                 while not self.stop.is_set():
                     rows=db.execute('SELECT path FROM files WHERE parent IS NULL LIMIT 1000').fetchall()
                     if not rows:break
                     db.executemany('UPDATE files SET parent=?,extension=? WHERE path=? AND parent IS NULL',
                         ((str(Path(p).parent),Path(p).suffix.casefold(),p) for (p,) in rows));db.commit()
                     self.stop.wait(.025)
-        except sqlite3.Error:
-            pass  # The normal background scan also fills the metadata.
+        except sqlite3.Error as exc:
+            self.error_code = getattr(exc, 'sqlite_errorname', 'SQLITE_ERROR')
+            self.error = 'Atualização do índice pendente; tente atualizar novamente.'
         finally:self.migrating=False
+
+    def _migrate_path_index(self, db):
+        """Atomic derived-index migration. Rollback preserves old search and files."""
+        with self.write_lock:
+            db.execute('BEGIN IMMEDIATE')
+            db.set_progress_handler(lambda: int(self.stop.is_set() or self.paused.is_set()), 10000)
+            try:
+                db.execute("CREATE VIRTUAL TABLE names_next USING fts5(name,path,content='files',content_rowid='rowid',tokenize='trigram')")
+                db.execute("INSERT INTO names_next(names_next) VALUES('rebuild')")
+                for name in ('files_ai', 'files_ad', 'files_au'):
+                    db.execute('DROP TRIGGER IF EXISTS ' + name)
+                db.execute('DROP TABLE names')
+                db.execute('ALTER TABLE names_next RENAME TO names')
+                db.execute('''CREATE TRIGGER files_ai AFTER INSERT ON files BEGIN
+                    INSERT INTO names(rowid,name,path) VALUES(new.rowid,new.name,new.path); END''')
+                db.execute('''CREATE TRIGGER files_ad AFTER DELETE ON files BEGIN
+                    INSERT INTO names(names,rowid,name,path) VALUES('delete',old.rowid,old.name,old.path); END''')
+                db.execute('''CREATE TRIGGER files_au AFTER UPDATE ON files
+                    WHEN new.name IS NOT old.name OR new.path IS NOT old.path BEGIN
+                    INSERT INTO names(names,rowid,name,path) VALUES('delete',old.rowid,old.name,old.path);
+                    INSERT INTO names(rowid,name,path) VALUES(new.rowid,new.name,new.path); END''')
+                db.commit()
+                self.path_search_ready = True
+            except sqlite3.Error:
+                db.set_progress_handler(None, 0)
+                db.rollback()
+                raise
+            finally:
+                db.set_progress_handler(None, 0)
 
     @contextmanager
     def db(self):
@@ -74,20 +109,23 @@ class FileIndex:
             if self.running:
                 return False
             self.running = True
+            if not self.path_search_ready and not self.migrating:
+                self.migrating = True
+                threading.Thread(target=self._metadata, name='vexx-index-metadata', daemon=True).start()
         threading.Thread(target=self.scan, name='vexx-file-index', daemon=True).start()
         return True
 
     def status(self):
         return {'running': self.running, 'paused': self.paused.is_set(), 'count': self.count,
                 'skipped': self.skipped, 'error': self.error, 'last_scan': self.last_scan,
-                'roots': [str(p) for p in self.roots], 'migrating':self.migrating}
+                'roots': [str(p) for p in self.roots], 'migrating':self.migrating,
+                'error_code': self.error_code, 'path_search_ready': self.path_search_ready}
 
     def scan(self):
         generation, batch, sizes = uuid.uuid4().hex, [], {}
         with self.write_lock:
             self.generation=generation;self.removed.clear()
-        self.count = 0
-        self.error, self.skipped = '', 0
+        self.error, self.error_code, self.skipped = '', '', 0
         try:
             with self.db() as db:
                 stack = list(self.roots)
@@ -138,6 +176,7 @@ class FileIndex:
                     self.last_scan = time.time()
                 self.count = db.execute('SELECT count(*) FROM files').fetchone()[0]
         except (OSError, sqlite3.Error) as exc:
+            self.error_code = getattr(exc, 'sqlite_errorname', type(exc).__name__)
             self.error = type(exc).__name__ + ': não foi possível concluir o índice.'
         finally:
             self.running = False
@@ -146,12 +185,19 @@ class FileIndex:
         if not batch:
             return
         with self.write_lock:
+            rows = [row for row in batch if row[0] not in self.removed]
+            paths = list({row[0] for row in rows})
+            existing = set()
+            for offset in range(0, len(paths), 256):
+                chunk = paths[offset:offset+256]
+                existing.update(r[0] for r in db.execute('SELECT path FROM files WHERE path IN ('
+                    + ','.join('?' for _ in chunk) + ')', chunk))
             db.executemany('''INSERT INTO files(path,name,size,directory,modified,generation,parent,extension) VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(path) DO UPDATE SET
                 name=excluded.name,size=excluded.size,directory=excluded.directory,
                 modified=excluded.modified,generation=excluded.generation,parent=excluded.parent,extension=excluded.extension''',
-                ((*row,str(Path(row[0]).parent),Path(row[0]).suffix.casefold()) for row in batch if row[0] not in self.removed))
+                ((*row,str(Path(row[0]).parent),Path(row[0]).suffix.casefold()) for row in rows))
             db.commit()
-        self.count += len(batch)
+            self.count += len(paths) - len(existing)
         batch.clear()
 
     def search(self, query='', offset=0, kind='all', sort='relevance', min_size=0, age_days=0, folder=''):
@@ -190,8 +236,13 @@ class FileIndex:
             db.set_progress_handler(lambda: int(time.perf_counter() - started > .15), 1000)
             try:
                 rows = db.execute(sql, (*params, offset)).fetchall()
-            except sqlite3.OperationalError:
-                return {'items': [], 'more': False, 'ms': round((time.perf_counter()-started)*1000),
-                        'hint': 'Busca interrompida pelo limite de tempo. Refine o nome.', **self.status()}
+            except sqlite3.OperationalError as exc:
+                interrupted = getattr(exc, 'sqlite_errorcode', None) == sqlite3.SQLITE_INTERRUPT
+                message = ('Busca interrompida pelo limite de tempo. Refine o nome.' if interrupted
+                           else 'Índice indisponível. Atualize o índice ou consulte o diagnóstico.')
+                return {**self.status(), 'items': [], 'more': False,
+                        'ms': round((time.perf_counter()-started)*1000), 'hint': message,
+                        'code': 'timeout' if interrupted else getattr(exc,'sqlite_errorname','SQLITE_ERROR'),
+                        **({} if interrupted else {'error': message})}
         return {'items': [dict(zip(('path', 'name', 'size', 'directory', 'modified'), row)) for row in rows[:60]],
                 'more': len(rows) > 60, 'ms': round((time.perf_counter() - started) * 1000, 1), **self.status()}

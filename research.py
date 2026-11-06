@@ -1140,6 +1140,16 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
     if not trecho:
         trecho = (a.get("trecho") or "")[:600]
     lida = bool(rec.get("lida", bool(texto.strip()))) and not rec.get("ilegivel", False)
+    from web_extract import query_identifiers, melhor_trecho
+    identifiers = query_identifiers(consulta)
+    window = _janela_lida(texto, trecho) if lida else ''
+    if lida and any(name.casefold() in texto.casefold() for name in identifiers):
+        # Reuse the existing per-source prompt budget around the named symbol.
+        # A short teaser can contain the symbol but cut off its list of cases.
+        window = melhor_trecho(texto, consulta, 3600)
+        # Fit the source-card excerpt too, so a later 300-char projection cannot
+        # discard the symbol and display only the page's table of contents.
+        trecho = melhor_trecho(window, consulta, 300)
     relevante = True
     if lida or avaliar_relevancia:
         import search_orchestrator as orch
@@ -1170,7 +1180,7 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
             "acessado_em": agora_iso(),
             **{k:rec[k] for k in ('fetched_at','checked_at','cache_state') if k in rec},
             "trecho": trecho[:600],
-            "texto_lido": (_janela_lida(texto, trecho) if lida else ""),
+            "texto_lido": window,
             "tipo": a.get("tipo", "pagina"),
             "status": "aberta" if lida else "encontrada",
             "relevante": relevante,
@@ -1238,6 +1248,12 @@ def _fonte_de(rec: dict, a: dict, consulta: str, *, avaliar_relevancia: bool = T
             fonte['trecho'] = melhor_trecho(passages[0]['text'], '', 600)
             # Preserve complementary literal passages within the prompt budget.
             selected=[];used=0
+            if any(name.casefold() in texto.casefold() and not any(
+                    name.casefold() in str(p.get('text','')).casefold() for p in passages)
+                   for name in identifiers):
+                # Keep named literal context without labelling it supported.
+                selected = [melhor_trecho(texto, consulta, 1200)]
+                used = len(selected[0])
             for passage in passages:
                 text=str(passage.get('text') or '').strip()
                 if not text or text in selected:continue
@@ -1939,6 +1955,13 @@ def url_pedida(texto: str) -> str:
         return ""
     bruto = m.group(0).rstrip(".,;:!?")
     resto = (texto or "").replace(m.group(0), " ").strip()
+    if re.search(r'(?i)\b(?:n[aã]o|sem)\s+(?:leia|ler|abra|abrir|consulte|consultar)\b', texto or ''):
+        return ''
+    prefix = (texto or '')[:m.start()]
+    if re.fullmatch(r'\s*(?:por favor[, ]*)?(?:leia|abra|analise|analisa|resuma|consulte|veja)\s+'
+                    r'(?:(?:(?:est[ae]|ess[ae]|a|o)\s+)?(?:p[aá]gina|fonte|link|documento|'
+                    r'documenta[çc][aã]o|artigo|site)(?:\s+oficial)?\s*:?\s*)?', prefix, re.I):
+        return bruto[:500]
     if len(resto) < 12:
         return bruto[:500]
     if _RX_PESQUISA_PEDIDO.search(texto or ""):
@@ -1989,7 +2012,7 @@ def _consulta_limpa(consulta: str) -> str:
     com menu de navegação em vez do conteúdo.
     """
     consulta = urllib.parse.unquote(consulta or "")
-    palavras = [p for p in re.findall(r"[0-9a-zà-ú]{3,}", consulta.lower())
+    palavras = [p for p in re.findall(r"[0-9a-zà-ú_]{3,}", consulta.lower())
                 if p not in _RUIDO_CONSULTA]
     vistos, out = set(), []
     for p in palavras:
@@ -2023,6 +2046,8 @@ def analisar_url(url: str, consulta: str = "", timeout: float = 8.0) -> tuple:
     rec = {"titulo": art.get("titulo") or "", "texto": art.get("texto", ""),
            "final": final, "trecho_usado": art.get("trecho_usado", ""),
            "metadados": art.get("metadados", {}), "extrator": art.get("extrator", ""),
+           **{k: art[k] for k in ('answer_passages', 'document_context', 'document_scan',
+                                 'content_scope', 'secoes', 'tabelas', 'imagens') if k in art},
            "ilegivel": bool(art.get("ilegivel")), "lida": True}
     return _fonte_de(rec, {"url": url, "trecho": ""}, consulta, avaliar_relevancia=False), ""
 

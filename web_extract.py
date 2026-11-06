@@ -580,6 +580,12 @@ def _penalidade_citacoes(pedaco: str) -> float:
     return min(30.0, len(_REFS_RX.findall(pedaco)) * 3.0)
 
 
+def query_identifiers(query):
+    """Literal error/parameter names; ranking hints, never evidence of support."""
+    return list(dict.fromkeys(re.findall(
+        r'(?<!\w)[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)+(?!\w)', str(query))))[:8]
+
+
 def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
     """Trecho literal que melhor cobre os termos da consulta (sem gerar texto)."""
     texto = _normalizar(texto)
@@ -600,6 +606,8 @@ def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
         return texto[inicio:fim].strip()
 
     termos = {t for t in re.findall(r"[0-9a-zà-ú]{3,}", (consulta or "").lower())}
+    identifiers = [re.compile(r'(?<!\w)' + re.escape(i) + r'(?!\w)', re.I)
+                   for i in query_identifiers(consulta)]
     if not termos:
         return janela_literal(0)
     melhor, melhor_pontos = "", 0.0
@@ -608,7 +616,14 @@ def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
         pedaco = janela_literal(i)
         baixo = pedaco.lower()
         pontos = sum(len(t) for t in termos if t in baixo)
+        # Exact identifiers outrank repetition of generic words such as WAL.
+        pontos += 1000 * sum(bool(rx.search(pedaco)) for rx in identifiers)
         frases = pedaco.count(". ") + (1 if pedaco.endswith(".") else 0)
+        if identifiers:
+            # Numbered tables of contents are not explanatory sentences. Keep
+            # their punctuation from outranking the actual error discussion.
+            frases = min(frases, 3)
+            pontos += 12 * sum(min(3, len(rx.findall(pedaco))) for rx in identifiers)
         pontos += frases * 3
         pontos -= _penalidade_citacoes(pedaco)
         if pontos > melhor_pontos:
@@ -869,6 +884,10 @@ def _document_windows(text, root, block, query, url, budget):
                          _SECTION_HEADINGS.get(r['attribute'], r'(?!)')+r')\b', re.I),
               re.compile(r'(?<!\w)'+r'\s*\.\s*'.join(map(re.escape,re.sub(r'^linguagem\s+','',r['entity'],flags=re.I).split('.')))+r'(?!\w)', re.I))
              for r in requirements if r['attribute'] in _SECTION_TERMS]
+    # Literal names are discovery hints even when requirement decomposition is
+    # incomplete. They do not add a requirement or certify semantic support.
+    terms = [('identifier:' + name, *(re.compile(r'(?<!\w)' + re.escape(name) + r'(?!\w)', re.I),) * 3)
+             for name in query_identifiers(query)] + terms
     if not terms or len(text) <= budget:
         return None
     source = _normalizar(text)
@@ -1160,6 +1179,18 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
         r"(?:^|[\s_-])abstract(?:$|[\s_-])", _pista(bloco), re.I))
     import query_intelligence as qi
     requirements = qi.answer_requirements(consulta)
+    identifiers = query_identifiers(consulta)
+    if identifiers and not abstract_only and bloco is not None:
+        current = _texto_bloco(bloco)
+        missing = [name for name in identifiers if name.casefold() not in current.casefold()]
+        container = bloco
+        while missing and container.pai is not None:
+            container = container.pai
+            if container.tag in ('main', 'article', 'body') or container.attrs.get('role') == 'main':
+                body = _texto_bloco(container)
+                if any(re.search(r'(?<!\w)' + re.escape(name) + r'(?!\w)', body, re.I) for name in missing):
+                    bloco = container
+                break
     if (requirements and not abstract_only and bloco is not None
             and (bloco.tag in ('ol','ul','section') or re.search(r'reference|bibliograph',_pista(bloco),re.I))):
         # Readability can select a bibliography or a card list and discard the
@@ -1177,6 +1208,9 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
                  else _texto_documento(parser.raiz))
     paragrafos = [t for _, t in _paragrafos(bloco)] if bloco is not None else []
     secs = secoes(bloco) if bloco is not None else []
+    if identifiers and texto_art and any(name.casefold() in texto_det.casefold()
+            and name.casefold() not in texto_art.casefold() for name in identifiers):
+        texto_art, extrator = texto_det, 'deterministico'
     if abstract_only:
         texto_art, extrator = texto_det, "deterministico"
     elif not texto_art:
@@ -1185,6 +1219,9 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
         # trafilatura devolveu menos que o extrator local: o local é mais útil
         texto_art, extrator = texto_det, "deterministico"
     texto_final = texto_art[:teto]
+    if any(name.casefold() in texto_art.casefold() and name.casefold() not in texto_final.casefold()
+           for name in identifiers):
+        texto_final = melhor_trecho(texto_art, consulta, teto)
     # Select a bounded window around the requested operation rather than lose
     # late documentation sections. All offsets below refer to this returned text.
     import query_intelligence as qi
