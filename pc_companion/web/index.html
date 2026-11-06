@@ -1,34 +1,548 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><title>Vexx PC</title><link rel="stylesheet" href="/assets/style.css"><script src="/assets/app.js" defer></script><script src="/assets/workspace.js" defer></script></head>
+<html lang="pt-BR" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark light">
+<meta name="theme-color" content="#080b11">
+<title>Vexx PC · Visão geral</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%230b1017'/%3E%3Cpath fill='%238ee8c5' d='M32 10l5.2 16.8L54 32l-16.8 5.2L32 54l-5.2-16.8L10 32l16.8-5.2z'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/assets/style.css">
+<script src="/assets/app.js" defer></script>
+<script src="/assets/workspace.js" defer></script>
+</head>
 <body>
-<header><a class="brand" href="/" aria-label="Vexx PC início"><b>v.</b> Vexx <span>PC</span></a><div class="header-tools"><button id="chat-toggle" type="button" aria-controls="copilot-panel" aria-expanded="true">✦ Copiloto</button><button id="update-button" type="button" title="Verificar atualizações do Vexx PC" aria-label="Verificar atualizações do Vexx PC"><span aria-hidden="true">↻</span><span id="update-label">Verificar versão</span></button><div class="local"><span class="dot"></span> Painel local <span id="host-name"></span></div></div></header>
-<div class="layout">
-<nav aria-label="Navegação principal"><p class="eyebrow">SEU COMPUTADOR</p><button data-page="overview" aria-current="page"><span>◉</span>Visão geral</button><button data-page="pc"><span>▣</span>Arquivos</button><button data-page="cleaner"><span>◌</span>Limpeza</button><button data-page="projects"><span>▷</span>Projetos</button><button data-page="network"><span>⌁</span>Rede</button><button data-page="logs"><span>≡</span>Logs</button><button data-page="ai"><span>✧</span>IA</button><div class="nav-bottom"><span class="dot"></span> Dados no seu PC<small id="app-version">Vexx PC</small></div></nav>
-<main id="main-content" tabindex="-1">
-<div id="notice" role="status" aria-live="polite"></div>
-<section data-view="overview"><p class="eyebrow">VISÃO GERAL</p><h1>Tudo bem com seu PC?</h1><p class="intro">Recursos, arquivos e conexão. Tudo no seu espaço.</p>
-<div class="metrics">
-<article><span class="eyebrow">PROCESSADOR</span><strong id="cpu">—</strong><progress id="cpu-bar" max="100" value="0" aria-label="Uso da CPU"></progress><small id="cores">Aguardando sensores</small></article>
-<article><span class="eyebrow">MEMÓRIA RAM</span><strong id="ram">—</strong><progress id="ram-bar" max="100" value="0" aria-label="Uso da memória"></progress><small id="ram-detail">Aguardando sensores</small></article>
-<article><span class="eyebrow">ARMAZENAMENTO</span><strong id="disk">—</strong><small id="disk-detail">Unidade principal</small></article>
-<article><span class="eyebrow">TEMPO LIGADO</span><strong id="uptime">—</strong><small id="battery">Desde a inicialização do sistema</small></article>
+<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+
+<svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.6l2 6.4 6.4 2-6.4 2-2 6.4-2-6.4-6.4-2 6.4-2 2-6.4z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3.5" y="3.5" width="6.5" height="6.5" rx="1.8"/><rect x="14" y="3.5" width="6.5" height="6.5" rx="1.8"/><rect x="3.5" y="14" width="6.5" height="6.5" rx="1.8"/><rect x="14" y="14" width="6.5" height="6.5" rx="1.8"/></g></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="10.8" cy="10.8" r="6.3"/><path d="M15.5 15.5L21 21"/></g></symbol>
+  <symbol id="i-network" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 9.5a12 12 0 0 1 16 0"/><path d="M7.2 13.2a7.5 7.5 0 0 1 9.6 0"/><path d="M10.2 16.8a3.2 3.2 0 0 1 3.6 0"/><circle cx="12" cy="20" r=".9" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="i-logs" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 6h12M9 12h12M9 18h12"/><circle cx="4.5" cy="6" r="1" fill="currentColor" stroke="none"/><circle cx="4.5" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="4.5" cy="18" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path fill="currentColor" d="M10.5 3l1.4 4.6 4.6 1.4-4.6 1.4-1.4 4.6-1.4-4.6L4.5 9l4.6-1.4L10.5 3z"/><path fill="currentColor" d="M18 13l.9 2.9 2.9.9-2.9.9-.9 2.9-.9-2.9-2.9-.9 2.9-.9.9-2.9z" opacity=".8"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2.4"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/><path d="M9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></g></symbol>
+  <symbol id="i-memory" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="7" width="18" height="10" rx="2.2"/><path d="M7 11v2M11 11v2M15 11v2M19 11v2"/><path d="M6 7V5M10 7V5M14 7V5M18 7V5M6 19v-2M10 19v-2M14 19v-2M18 19v-2"/></g></symbol>
+  <symbol id="i-disk" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="5.5" width="18" height="13" rx="3"/><path d="M3 12h18"/><circle cx="17.2" cy="15.3" r=".9" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></g></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 2.8v5.4c0 4.5-2.9 8.2-7 9.8-4.1-1.6-7-5.3-7-9.8V5.8L12 3z"/><path d="M8.8 11.8l2.2 2.2 4.2-4.4"/></g></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11.5A8 8 0 1 0 17.8 17"/><path d="M20 4.5v7h-7"/></g></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M18.7 5.3l-1.4 1.4M6.7 17.3l-1.4 1.4"/></g></symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M20 14.5A8.3 8.3 0 0 1 9.5 4 8.5 8.5 0 1 0 20 14.5z"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="8" width="12" height="12" rx="2.2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.5l4.6 4.6L19.5 6.7"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.8L21 20H3L12 3.8z"/><path d="M12 9v4.2"/><circle cx="12" cy="17" r=".9" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="i-send" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="M6 11l6-6 6 6"/></g></symbol>
+  <symbol id="i-eye" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 12S6 5.8 12 5.8 21.5 12 21.5 12 18 18.2 12 18.2 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="2.8"/></g></symbol>
+  <symbol id="i-eye-off" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M10.6 5.9A9.8 9.8 0 0 1 12 5.8c6 0 9.5 6.2 9.5 6.2a16 16 0 0 1-2.4 3.3M6.3 7.3A16.6 16.6 0 0 0 2.5 12S6 18.2 12 18.2a9 9 0 0 0 3.5-.7"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/></g></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M3 7.5a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-9z"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3.5h7l5 5V20a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V4.5a1 1 0 0 1 1-1z"/><path d="M13 3.5V9h5"/></g></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2.4"/><circle cx="8.5" cy="9.5" r="1.4"/><path d="M4 17l5.2-5 4 3.8 2.6-2.4L20 17.2"/></g></symbol>
+  <symbol id="i-video" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="5.5" width="13" height="13" rx="2.4"/><path d="M16 10.2l4.5-2.4v8.4L16 13.8"/></g></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V6l10-2v12"/><circle cx="6.5" cy="18" r="2.5"/><circle cx="16.5" cy="16" r="2.5"/></g></symbol>
+  <symbol id="i-archive" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="5" rx="1.2"/><path d="M5 9.5V20h14V9.5M10 13h4"/></g></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 7l-5 5 5 5M16 7l5 5-5 5M13.5 4l-3 16"/></g></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><g fill="currentColor"><rect x="7" y="4.5" width="3.4" height="15" rx="1.2"/><rect x="13.6" y="4.5" width="3.4" height="15" rx="1.2"/></g></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 4.8v14.4L19 12 8 4.8z"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="M7 10l5 5 5-5"/><path d="M4 19.5h16"/></g></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 15V4"/><path d="M7 9l5-5 5 5"/><path d="M4 19.5h16"/></g></symbol>
+  <symbol id="i-monitor" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="2.8" y="4" width="18.4" height="12.5" rx="2.2"/><path d="M9 20h6M12 16.5V20"/></g></symbol>
+  <symbol id="i-mouse" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="7" y="2.8" width="10" height="18.4" rx="5"/><path d="M12 6.5v3"/></g></symbol>
+  <symbol id="i-key" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15.5" r="3.8"/><path d="M10.8 12.7L20 3.5M16.8 6.7l2.8 2.8M14 9.5l2.2 2.2"/></g></symbol>
+  <symbol id="i-chevron-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M14.5 5l-7 7 7 7"/></symbol>
+  <symbol id="i-chevron-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9.5 5l7 7-7 7"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><ellipse cx="12" cy="5.5" rx="7.5" ry="3"/><path d="M4.5 5.5v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/><path d="M4.5 11.5v6c0 1.7 3.4 3 7.5 3s7.5-1.3 7.5-3v-6"/></g></symbol>
+  <symbol id="i-link" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13.8a4.5 4.5 0 0 0 6.4 0l2.2-2.2a4.5 4.5 0 0 0-6.4-6.4L11 6.4"/><path d="M14 10.2a4.5 4.5 0 0 0-6.4 0l-2.2 2.2a4.5 4.5 0 0 0 6.4 6.4l1.2-1.2"/></g></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="4.5" y="10" width="15" height="10.5" rx="2.4"/><path d="M8 10V7.5a4 4 0 0 1 8 0V10"/><circle cx="12" cy="15.2" r="1" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M3 12h4l2.5-6 4 12 2.7-6H21"/></symbol>
+</svg>
+
+<header class="topbar">
+  <a class="brand" href="/" aria-label="Vexx PC, início">
+    <span class="brand-mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><use href="#i-star"/></svg></span>
+    <span class="brand-name">Vexx <b>PC</b></span>
+  </a>
+  <div class="topbar-meta">
+    <span class="local-badge"><span class="pulse-dot"></span>Painel local</span>
+    <span class="host-name" id="host-name"></span>
+  </div>
+  <div class="topbar-actions">
+    <button class="chat-toggle" id="chat-toggle" type="button" aria-controls="copilot-panel" aria-expanded="true" title="Mostrar ou ocultar o Copiloto">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sparkles"/></svg>
+      <span>Copiloto</span>
+    </button>
+    <button class="icon-button theme-toggle" id="theme-toggle" type="button" aria-label="Ativar tema claro" title="Alternar tema">
+      <svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-moon"/></svg>
+      <svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sun"/></svg>
+    </button>
+    <button class="update-button" id="update-button" type="button" title="Verificar atualizações do Vexx PC" aria-label="Verificar atualizações do Vexx PC">
+      <svg class="icon update-icon" viewBox="0 0 24 24" aria-hidden="true"><use id="update-icon-use" href="#i-refresh"/></svg>
+      <span id="update-label">Verificar atualização</span>
+    </button>
+  </div>
+</header>
+
+<div class="app-shell">
+  <nav class="sidebar" aria-label="Navegação principal">
+    <p class="side-label">Painel</p>
+    <div class="nav-list">
+      <button class="nav-item" type="button" data-page="overview" aria-current="page" aria-keyshortcuts="Alt+1" aria-label="Visão geral" title="Visão geral (Alt+1)"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-grid"/></svg></span><span class="nav-text">Visão geral</span><kbd>1</kbd></button>
+      <button class="nav-item" type="button" data-page="pc" aria-keyshortcuts="Alt+2" aria-label="Arquivos" title="Arquivos (Alt+2)"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-folder"/></svg></span><span class="nav-text">Arquivos</span><kbd>2</kbd></button>
+      <button class="nav-item" type="button" data-page="cleaner" aria-keyshortcuts="Alt+3" aria-label="Limpeza" title="Limpeza (Alt+3)"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-disk"/></svg></span><span class="nav-text">Limpeza</span><kbd>3</kbd></button>
+      <button class="nav-item" type="button" data-page="projects" aria-keyshortcuts="Alt+4" aria-label="Projetos" title="Projetos (Alt+4)"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-play"/></svg></span><span class="nav-text">Projetos</span><kbd>4</kbd></button>
+      <button class="nav-item" type="button" data-page="network" aria-keyshortcuts="Alt+5" aria-label="Rede" title="Rede (Alt+5)"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-network"/></svg></span><span class="nav-text">Rede</span><kbd>5</kbd></button>
+      <button class="nav-item" type="button" data-page="logs" aria-keyshortcuts="Alt+6" aria-label="Logs" title="Logs (Alt+6)"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-logs"/></svg></span><span class="nav-text">Logs</span><kbd>6</kbd></button>
+      <button class="nav-item" type="button" data-page="ai" aria-keyshortcuts="Alt+7" aria-label="IA" title="IA (Alt+7)"><span class="nav-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sparkles"/></svg></span><span class="nav-text">IA</span><kbd>7</kbd></button>
+    </div>
+    <div class="side-spacer"></div>
+    <div class="privacy-note">
+      <span class="privacy-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span>
+      <div><strong>Seus dados ficam aqui</strong><p>Nada sai deste PC sem sua ação.</p></div>
+    </div>
+    <p class="side-version" id="app-version">Vexx PC</p>
+  </nav>
+
+  <main id="main-content" tabindex="-1">
+    <div class="toast" id="notice" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+
+    <section data-view="overview" aria-labelledby="overview-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow"><span></span>Visão geral</p>
+          <h1 id="overview-title">Tudo no seu PC.</h1>
+          <p class="intro">Recursos, arquivos e conexão em um só lugar. <span class="intro-soft" id="system-summary">Sensores iniciando…</span></p>
+        </div>
+        <div class="page-actions">
+          <span class="live-chip"><span class="pulse-dot"></span>Ao vivo</span>
+          <button class="icon-button" id="refresh-now" type="button" title="Atualizar dados agora" aria-label="Atualizar dados agora"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-refresh"/></svg></button>
+        </div>
+      </div>
+
+      <div class="metrics">
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-cpu"/></svg></span><span class="metric-label">Processador</span></div>
+          <div class="metric-value"><strong id="cpu">—</strong><small>de uso</small></div>
+          <progress id="cpu-bar" max="100" value="0" aria-label="Uso da CPU"></progress>
+          <p class="metric-detail" id="cores">Aguardando sensores</p>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-icon violet"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-memory"/></svg></span><span class="metric-label">Memória RAM</span></div>
+          <div class="metric-value"><strong id="ram">—</strong><small>em uso</small></div>
+          <progress id="ram-bar" max="100" value="0" aria-label="Uso da memória"></progress>
+          <p class="metric-detail" id="ram-detail">Aguardando sensores</p>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-disk"/></svg></span><span class="metric-label">Armazenamento</span></div>
+          <div class="metric-value"><strong id="disk">—</strong><small>livres</small></div>
+          <progress id="disk-bar" max="100" value="0" aria-label="Uso do disco principal"></progress>
+          <p class="metric-detail" id="disk-detail">Unidade principal</p>
+        </article>
+        <article class="metric-card">
+          <div class="metric-top"><span class="metric-icon violet"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-clock"/></svg></span><span class="metric-label">Tempo ligado</span></div>
+          <div class="metric-value"><strong id="uptime">—</strong><small>desde o boot</small></div>
+          <div class="metric-foot"><span class="metric-detail" id="battery">Desde a inicialização do sistema</span></div>
+        </article>
+      </div>
+
+      <article class="panel performance-panel">
+        <div class="panel-head">
+          <div><h2>Desempenho</h2><p class="hint">Últimos minutos · atualiza a cada 3 segundos</p></div>
+          <div class="legend"><span><i class="legend-dot cpu"></i>CPU</span><span><i class="legend-dot ram"></i>RAM</span></div>
+        </div>
+        <div class="chart-box">
+          <canvas id="performance-chart" role="img" aria-label="Histórico de uso de CPU e memória">Seu navegador não desenha gráficos.</canvas>
+          <p class="chart-empty" id="chart-empty">Coletando as primeiras amostras…</p>
+        </div>
+      </article>
+
+      <article class="panel account-panel">
+        <div class="panel-head">
+          <div class="panel-title">
+            <span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <div><h2>Conta e acesso remoto</h2><p class="hint">Seu computador só responde quando você autoriza.</p></div>
+          </div>
+          <span class="badge neutral" id="connection-badge">Sem vínculo</span>
+        </div>
+        <p class="panel-copy" id="connection-copy">No site Vexx AI, abra Meu PC e crie seu nick e PIN. Informe os mesmos dados abaixo.</p>
+        <form id="pair-form" class="pair-form">
+          <div class="pair-row">
+            <label class="field">Nick criado no site<input name="nick" id="pair-nick" required minlength="3" maxlength="30" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{2,29}" placeholder="meu-pc" autocomplete="username" spellcheck="false"></label>
+            <label class="field">PIN<input name="pin" type="password" inputmode="numeric" required minlength="6" maxlength="12" pattern="[0-9]{6,12}" placeholder="Seu PIN" autocomplete="current-password"></label>
+            <button class="primary" type="submit">Conectar meu PC<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-link"/></svg></button>
+          </div>
+          <details><summary>Outro servidor Vexx AI (opcional)</summary><label class="field">Endereço do site<input name="relay" id="relay-url" type="url" value="https://vexx-ai.onrender.com" autocomplete="url"></label></details>
+          <p class="hint">Crie seu nick e PIN em Meu PC no site. O PIN não é gravado neste aplicativo.</p>
+        </form>
+        <div class="access-box" id="access-box" data-state="paused">
+          <div class="access-summary">
+            <span class="access-icon" id="access-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lock"/></svg></span>
+            <div><strong id="access-state-label">Acesso pausado</strong><p class="hint" id="access-state-detail">Nenhum dispositivo pode ver ou controlar este PC.</p></div>
+          </div>
+          <div class="actions">
+            <button class="secondary" id="allow-view" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-eye"/></svg>Permitir visualização</button>
+            <button class="secondary" id="allow-control" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mouse"/></svg>Permitir controle</button>
+            <button class="secondary" id="allow-permanent" type="button" title="Mantém o controle autorizado mesmo ao reabrir o aplicativo"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lock"/></svg>Controle permanente</button>
+            <button class="ghost" id="pause-access" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pause"/></svg><span id="pause-access-label">Pausar</span></button>
+          </div>
+        </div>
+        <p class="hint" id="access-hint">O acesso começa pausado a cada abertura. Autorize apenas quando precisar.</p>
+        <div class="account-foot">
+          <button class="text-button danger" id="unlink" type="button" hidden>Desvincular</button>
+          <button class="text-button" id="shutdown" type="button">Encerrar aplicativo</button>
+        </div>
+      </article>
+
+      <div class="bottom-grid">
+        <article class="panel compact">
+          <div class="panel-head">
+            <div class="panel-title"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-database"/></svg></span><h2>Índice local</h2></div>
+            <span class="badge neutral" id="index-badge">Aguardando</span>
+          </div>
+          <div class="big-stat" id="index-count">0 entradas</div>
+          <p class="hint" id="index-overview">Índice local em segundo plano.</p>
+          <div class="index-progress" id="index-progress" data-state="idle" aria-hidden="true"><span></span></div>
+          <button class="text-button" type="button" data-go="pc">Pesquisar no PC<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+        </article>
+        <article class="panel compact">
+          <div class="panel-head">
+            <div class="panel-title"><span class="icon-tile violet"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-network"/></svg></span><h2>Conexão</h2></div>
+            <span class="badge neutral" id="network-badge">—</span>
+          </div>
+          <p class="hint" id="network-overview">Aguardando interfaces…</p>
+          <div class="mini-stats">
+            <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg><strong id="overview-download">—</strong></span>
+            <span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-upload"/></svg><strong id="overview-upload">—</strong></span>
+          </div>
+          <p class="hint" id="agent-memory">—</p>
+          <button class="text-button" type="button" data-go="network">Ver rede<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+        </article>
+        <article class="panel compact">
+          <div class="panel-head">
+            <div class="panel-title"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-disk"/></svg></span><h2>Unidades</h2></div>
+            <span class="badge neutral" id="storage-count">—</span>
+          </div>
+          <div class="disk-list" id="disk-list"><p class="hint">Aguardando discos…</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section data-view="pc" hidden aria-labelledby="pc-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow"><span></span>Explorar</p>
+          <h1 id="pc-title">Encontre no seu PC.</h1>
+          <p class="intro">Navegue pelas pastas ou pesquise no índice. O índice fica só aqui.</p>
+        </div>
+        <div class="page-actions"><span class="shortcut-hint"><kbd>Ctrl</kbd><kbd>K</kbd></span></div>
+      </div>
+      <article class="panel search-panel">
+        <div class="folder-toolbar">
+          <div class="actions">
+            <button id="files-roots" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-database"/></svg>Raízes locais</button>
+            <button id="files-up" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-left"/></svg>Pasta acima</button>
+            <button id="files-pick" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-folder"/></svg>Escolher pasta</button>
+          </div>
+          <span class="path-label" id="files-location">Raízes locais</span>
+        </div>
+        <form class="address-row" id="folder-form">
+          <label class="sr-only" for="folder-path">Caminho da pasta</label>
+          <input id="folder-path" type="text" placeholder="Cole o caminho de uma pasta" autocomplete="off" spellcheck="false">
+          <button type="submit">Abrir pasta</button>
+          <button id="folder-run" type="button" hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-play"/></svg>Analisar projeto</button>
+        </form>
+        <form class="search-form" id="search-form">
+          <label class="field search-field">Pesquisar no PC
+            <span class="input-shell">
+              <svg class="icon input-icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-search"/></svg>
+              <input id="file-query" type="search" placeholder="Nome, extensão ou parte do caminho" autocomplete="off">
+              <button class="input-clear" id="search-clear" type="button" title="Limpar busca" aria-label="Limpar busca" hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-close"/></svg></button>
+            </span>
+          </label>
+          <label class="field kind-field">Mostrar<select id="file-kind"><option value="all">Tudo</option><option value="files">Arquivos</option><option value="folders">Pastas</option><option value="images">Imagens</option><option value="videos">Vídeos</option><option value="installers">Instaladores / APKs</option><option value="archives">Compactados</option></select></label>
+          <label class="field sort-field">Ordenar<select id="file-sort"><option value="name">Nome</option><option value="largest">Maior primeiro</option><option value="newest">Mais recente</option><option value="oldest">Mais antigo</option></select></label>
+          <button class="primary search-submit" type="submit">Buscar no índice</button>
+        </form>
+        <div class="index-strip">
+          <span class="index-dot" id="index-dot"></span>
+          <p class="hint grow" id="index-status">Índice local em segundo plano.</p>
+          <div class="actions">
+            <button id="index-toggle" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pause"/></svg><span id="index-toggle-label">Pausar índice</span></button>
+            <button id="index-refresh" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-refresh"/></svg>Atualizar índice</button>
+          </div>
+        </div>
+        <details><summary>Sobre o índice e as raízes</summary><p class="hint" id="index-roots"></p><p class="hint" id="index-last-scan"></p><p class="hint">O índice é atualizado em segundo plano. Tamanhos de pastas são parciais e consideram apenas arquivos indexados. Atalhos, volumes remotos e diretórios protegidos não entram nas operações de remoção.</p></details>
+      </article>
+      <div class="results-head">
+        <p class="hint" id="search-summary" aria-live="polite">Navegue pelas pastas ou pesquise no índice local.</p>
+        <span class="hint results-limit">60 por página</span>
+      </div>
+      <div class="table-wrap">
+        <table class="file-table">
+          <thead><tr><th><input id="files-select-page" type="checkbox" aria-label="Selecionar arquivos desta página"></th><th>Nome e caminho</th><th>Tamanho</th><th>Alteração</th><th>Ações</th></tr></thead>
+          <tbody id="file-results"></tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button id="previous-page" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-left"/></svg>Anteriores</button>
+        <span id="page-number">Página 1</span>
+        <button id="next-page" type="button">Próximos<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+      </div>
+      <div class="selection-bar" id="files-selection" hidden>
+        <span id="files-selection-count"></span>
+        <div class="actions">
+          <button id="files-clear" type="button">Limpar seleção</button>
+          <button class="danger-solid" id="files-remove" type="button">Revisar remoção<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+        </div>
+      </div>
+    </section>
+
+    <section data-view="cleaner" hidden aria-labelledby="cleaner-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow"><span></span>Espaço em disco</p>
+          <h1 id="cleaner-title">Escolha o que vale guardar.</h1>
+          <p class="intro">Revise instaladores, imagens, vídeos e outros arquivos. Você escolhe o que mover para a Lixeira Vexx.</p>
+        </div>
+      </div>
+      <div class="segmented" role="group" aria-label="Área de limpeza">
+        <button id="clean-files" type="button" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-file"/></svg>Arquivos</button>
+        <button id="clean-apps" type="button" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-grid"/></svg>Apps instalados</button>
+        <button id="clean-trash" type="button" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-archive"/></svg>Lixeira Vexx</button>
+      </div>
+      <div id="clean-filter-panel">
+        <article class="panel compact clean-filter-panel">
+          <form class="clean-form" id="clean-form">
+            <label class="field grow">Nome<input id="clean-query" type="search" placeholder="Opcional: nome ou extensão" autocomplete="off"></label>
+            <label class="field">Tipo<select id="clean-kind"><option value="files">Todos os arquivos</option><option value="installers">Instaladores / APKs</option><option value="images">Imagens</option><option value="videos">Vídeos</option><option value="audio">Áudio</option><option value="archives">Compactados</option><option value="temporary">Temporários / logs</option></select></label>
+            <label class="field">Tamanho mínimo<select id="clean-size"><option value="0">Qualquer</option><option value="10485760">10 MB</option><option value="104857600">100 MB</option><option value="1073741824">1 GB</option></select></label>
+            <label class="field">Sem alteração há<select id="clean-age"><option value="0">Qualquer data</option><option value="30">30 dias</option><option value="180">6 meses</option><option value="365">1 ano</option></select></label>
+            <label class="field">Ordem<select id="clean-sort"><option value="largest">Maior primeiro</option><option value="oldest">Mais antigo</option><option value="newest">Mais recente</option><option value="name">Nome</option></select></label>
+            <button class="primary" type="submit"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-search"/></svg>Filtrar</button>
+          </form>
+        </article>
+      </div>
+      <p class="hint clean-summary" id="clean-summary" aria-live="polite"></p>
+      <div class="table-wrap">
+        <table class="file-table">
+          <thead id="clean-head"><tr><th><input id="clean-select-page" type="checkbox" aria-label="Selecionar arquivos desta página de limpeza"></th><th>Item</th><th>Tamanho</th><th>Data</th><th>Ações</th></tr></thead>
+          <tbody id="clean-results"></tbody>
+        </table>
+      </div>
+      <div class="pagination">
+        <button id="clean-prev" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-left"/></svg>Anteriores</button>
+        <span id="clean-page">Página 1</span>
+        <button id="clean-next" type="button">Próximos<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+      </div>
+      <div class="selection-bar" id="clean-selection" hidden>
+        <span id="clean-selection-count"></span>
+        <div class="actions">
+          <button id="clean-clear" type="button">Limpar seleção</button>
+          <button id="clean-restore" type="button" hidden>Restaurar seleção</button>
+          <button class="danger-solid" id="clean-remove" type="button">Revisar remoção<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+        </div>
+      </div>
+      <p class="hint">A Lixeira Vexx usa pastas ocultas .vexx-trash no mesmo volume. Os itens continuam ocupando espaço até você confirmar a exclusão definitiva. Para apps instalados, use o desinstalador do Windows.</p>
+      <button class="text-button" id="manage-apps" type="button">Gerenciar desinstalação no Windows<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
+    </section>
+
+    <section data-view="projects" hidden aria-labelledby="projects-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow"><span></span>Executar no computador</p>
+          <h1 id="projects-title">Seu projeto, em execução.</h1>
+          <p class="intro">Analise a entrada, revise os serviços e acompanhe o início e os logs.</p>
+        </div>
+      </div>
+      <article class="panel compact">
+        <form class="address-row project-form" id="project-form">
+          <label class="field grow">Pasta ou arquivo principal<input id="project-path" type="text" placeholder="Caminho do projeto, main.py, package.json ou index.html" autocomplete="off" required></label>
+          <button class="primary" type="submit"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-play"/></svg>Analisar projeto</button>
+        </form>
+        <details><summary>Como o Vexx PC inicia projetos</summary><p class="hint">Python usa um ambiente .vexx-venv do projeto. Node/Vite usa o npm instalado. Interfaces HTML são servidas por HTTP local, com CSS e JS. Um manifesto vexx-project.json pode declarar serviços em ordem para projetos que precisam de outra configuração.</p></details>
+      </article>
+      <div id="project-runs"></div>
+      <article class="panel" id="project-log-panel" hidden>
+        <div class="panel-head">
+          <div class="panel-title"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-logs"/></svg></span><h2 id="project-log-title">Logs do projeto</h2></div>
+          <button class="secondary" id="project-logs-copy" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-copy"/></svg>Copiar logs</button>
+        </div>
+        <pre class="project-logs" id="project-logs" tabindex="0"></pre>
+      </article>
+      <p class="hint">Fechar o Vexx PC encerra as árvores de processos que ele iniciou. Serviços externos e processos abertos fora deste painel não são assumidos nem encerrados.</p>
+    </section>
+
+    <section data-view="network" hidden aria-labelledby="network-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow"><span></span>Conectividade</p>
+          <h1 id="network-title">Sua rede, com clareza.</h1>
+          <p class="intro">Interfaces locais e tráfego observado neste computador.</p>
+        </div>
+        <div class="page-actions"><span class="live-chip"><span class="pulse-dot"></span>Ao vivo</span></div>
+      </div>
+      <div class="speed-grid">
+        <article class="panel speed-card">
+          <div class="panel-head"><div class="panel-title"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg></span><h2>Recebendo</h2></div></div>
+          <div class="speed-value" id="download">—</div>
+          <p class="hint">Tráfego total das interfaces</p>
+        </article>
+        <article class="panel speed-card">
+          <div class="panel-head"><div class="panel-title"><span class="icon-tile violet"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-upload"/></svg></span><h2>Enviando</h2></div></div>
+          <div class="speed-value" id="upload">—</div>
+          <p class="hint">Sem testar ou ocupar sua banda</p>
+        </article>
+      </div>
+      <article class="panel">
+        <div class="panel-head"><div><h2>Tráfego observado</h2><p class="hint">Histórico recente das interfaces ativas</p></div><div class="legend"><span><i class="legend-dot cpu"></i>Download</span><span><i class="legend-dot ram"></i>Upload</span></div></div>
+        <div class="chart-box short"><canvas id="network-chart" role="img" aria-label="Histórico de tráfego de rede">Seu navegador não desenha gráficos.</canvas><p class="chart-empty" id="network-chart-empty">Coletando as primeiras amostras…</p></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><h2>Interfaces ativas</h2><p class="hint">Uma interface ativa não garante acesso à internet.</p></div><span class="badge neutral" id="adapter-count">—</span></div>
+        <div class="adapter-list" id="adapters"></div>
+        <p class="hint" id="ssid"></p>
+      </article>
+    </section>
+
+    <section data-view="logs" hidden aria-labelledby="logs-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow"><span></span>Atividade</p>
+          <h1 id="logs-title">O que acontece por aqui.</h1>
+          <p class="intro">Eventos do aplicativo nesta sessão. Sem conteúdo de arquivos ou credenciais.</p>
+        </div>
+      </div>
+      <article class="panel logs-panel">
+        <div class="log-toolbar">
+          <label class="field grow">Filtrar eventos<input id="log-filter" type="search" placeholder="Pesquisar nos logs"></label>
+          <div class="actions">
+            <button id="logs-refresh" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-refresh"/></svg>Atualizar</button>
+            <button id="logs-export" class="secondary" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg>Salvar logs</button>
+          </div>
+        </div>
+        <div class="log-meta"><span class="hint" id="log-count">—</span><span class="hint">Até 300 eventos por sessão</span></div>
+        <div class="log-list" id="log-output" tabindex="0" role="log" aria-live="polite"></div>
+      </article>
+    </section>
+
+    <section data-view="ai" hidden aria-labelledby="ai-title">
+      <div class="page-head">
+        <div>
+          <p class="eyebrow"><span></span>Copiloto</p>
+          <h1 id="ai-title">Sua IA, do seu jeito.</h1>
+          <p class="intro">Use uma API ou um modelo que roda no seu computador.</p>
+        </div>
+      </div>
+      <div class="settings-grid">
+        <article class="panel">
+          <div class="panel-head">
+            <div class="panel-title"><span class="icon-tile violet"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-sparkles"/></svg></span><div><h2>Provedor de IA</h2><p class="hint">A conversa vai direto ao serviço escolhido.</p></div></div>
+            <span class="badge neutral" id="ai-saved-badge">Desativado</span>
+          </div>
+          <form id="ai-form" class="ai-form">
+            <label class="field">Provedor<select id="ai-provider" name="provider"><option value="none">Somente comandos locais</option><option value="ollama">Ollama local</option><option value="openai">OpenAI</option><option value="hermes">Hermes / proxy compatível</option><option value="compatible">Outro serviço compatível com OpenAI</option></select><span class="hint" id="ai-provider-help">O Copiloto usa apenas comandos locais, sem chave de IA.</span></label>
+            <div class="field-grid">
+              <label class="field">Endereço base<input id="ai-url" name="base_url" type="url" placeholder="http://127.0.0.1:11434" autocomplete="off"></label>
+              <label class="field">Modelo<input id="ai-model" name="model" list="ai-models" maxlength="150" placeholder="Nome do modelo disponível no seu serviço" autocomplete="off"><datalist id="ai-models"></datalist></label>
+            </div>
+            <label class="field">Chave de API<span class="secret-field"><input id="ai-key" name="api_key" type="password" maxlength="2048" autocomplete="new-password" placeholder="Opcional para serviços locais"><button class="icon-button" id="ai-key-toggle" type="button" aria-label="Mostrar chave" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-eye"/></svg></button></span></label>
+            <label class="check-row"><input id="ai-clear-key" name="clear_key" type="checkbox"><span>Apagar a chave salva</span></label>
+            <div class="model-chips" id="ai-model-chips" hidden></div>
+            <div class="form-actions">
+              <button class="primary" type="submit"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-check"/></svg>Salvar configuração</button>
+              <button class="secondary" id="ai-test" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-activity"/></svg>Testar e listar modelos</button>
+            </div>
+          </form>
+          <p class="inline-status" id="ai-status" role="status" aria-live="polite"></p>
+          <p class="hint">A chave fica neste usuário do Windows, protegida pelo sistema. Somente as mensagens enviadas ao Copiloto vão para o provedor escolhido; nenhum conteúdo ou índice de arquivos é enviado automaticamente. Ao trocar provedor ou endereço, informe novamente a chave.</p>
+          <details><summary>Ollama, Hermes e outros modelos locais</summary><p class="hint">Inicie o serviço antes de testar. Ollama usa normalmente http://127.0.0.1:11434. Para Hermes, LM Studio, llama.cpp e proxies, informe o endereço base da API compatível com OpenAI (geralmente termina em /v1), a porta real e o modelo publicado pelo serviço. Este aplicativo não inicia nem converte protocolos de outros serviços.</p></details>
+        </article>
+        <aside class="settings-side">
+          <article class="panel compact">
+            <div class="panel-head"><div class="panel-title"><span class="icon-tile"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-key"/></svg></span><h2>Configuração ativa</h2></div></div>
+            <dl class="status-list">
+              <div><dt>Provedor</dt><dd id="ai-current-provider">—</dd></div>
+              <div><dt>Modelo</dt><dd id="ai-current-model">—</dd></div>
+              <div><dt>Chave</dt><dd id="ai-current-key">—</dd></div>
+            </dl>
+            <p class="hint" id="ai-summary">O Copiloto responde com comandos locais.</p>
+          </article>
+          <article class="panel compact privacy-panel">
+            <span class="privacy-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span>
+            <h2>Privado por padrão</h2>
+            <p class="hint">Nenhum arquivo, índice ou credencial é incluído nas mensagens. A IA não recebe permissão para controlar o computador.</p>
+          </article>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <aside class="copilot" id="copilot-panel" aria-label="Copiloto Vexx">
+    <div class="copilot-head">
+      <span class="copilot-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg></span>
+      <div class="copilot-title"><h2>Copiloto Vexx</h2><p class="hint"><span class="status-dot"></span><span id="ai-mode-label">Ações locais. Dados reais.</span></p></div>
+      <button class="copilot-close" id="chat-close" type="button" aria-label="Fechar Copiloto" title="Fechar Copiloto"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <div class="copilot-body">
+      <div class="copilot-welcome" id="copilot-welcome">
+        <span class="welcome-orb"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg></span>
+        <h3>Como posso ajudar?</h3>
+        <p>Consulte o PC, encontre arquivos ou cuide do acesso remoto. Suas ações ficam neste computador.</p>
+        <div class="welcome-actions" aria-label="Sugestões de comandos">
+          <button type="button" data-prompt="status do computador"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-activity"/></svg><span>Status do PC</span></button>
+          <button type="button" data-prompt="diagnosticar conexao"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-network"/></svg><span>Ver conexão</span></button>
+          <button type="button" data-prompt="pausar acesso"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lock"/></svg><span>Pausar acesso</span></button>
+          <button type="button" data-prompt="atualizar indice"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-database"/></svg><span>Atualizar índice</span></button>
+        </div>
+      </div>
+      <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions" hidden></div>
+    </div>
+    <form id="chat-form" class="chat-form">
+      <label class="sr-only" for="chat-input">Mensagem para o Copiloto</label>
+      <div class="composer-box">
+        <textarea id="chat-input" rows="2" maxlength="2000" placeholder="Peça em português…" required></textarea>
+        <button type="submit" class="send-button" aria-label="Enviar mensagem" title="Enviar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-send"/></svg></button>
+      </div>
+      <small class="hint composer-hint"><kbd>Enter</kbd> envia · <kbd>Shift</kbd>+<kbd>Enter</kbd> quebra linha</small>
+    </form>
+    <small class="hint copilot-note" id="copilot-note">Comandos locais sem chave. Configure uma IA para conversar.</small>
+  </aside>
 </div>
-<article class="pair-card"><div class="section-title"><h2>Sua conta, seu computador</h2><span class="badge" id="connection-badge">Sem vínculo</span></div><p id="connection-copy">Vincule este computador ao Vexx AI para acessar pelo celular.</p>
-<form id="pair-form"><div class="pair-row"><label>Nick criado no site<input name="nick" id="pair-nick" required minlength="3" maxlength="30" pattern="[a-zA-Z0-9][a-zA-Z0-9._\-]{2,29}" placeholder="meu-pc" autocomplete="username" spellcheck="false"></label><label>PIN<input name="pin" type="password" inputmode="numeric" required minlength="6" maxlength="12" pattern="[0-9]{6,12}" placeholder="Seu PIN" autocomplete="current-password"></label><button class="primary" type="submit">Conectar meu PC ↗</button></div><details><summary>Outro servidor Vexx AI (opcional)</summary><label>Endereço do site<input name="relay" id="relay-url" type="url" value="https://vexx-ai.onrender.com" autocomplete="url"></label></details><p class="hint">Crie seu nick e PIN em Meu PC no site. O PIN não é gravado neste aplicativo.</p></form>
-<div class="actions"><button id="allow-view">Permitir visualização por 1h</button><button id="allow-control">Permitir mouse e teclado por 1h</button><button id="allow-permanent">Permitir mouse e teclado permanentemente</button><button id="pause-access" class="danger">Pausar acesso</button><button id="unlink" class="ghost">Desvincular</button><button id="shutdown" class="ghost">Encerrar aplicativo</button></div><p class="hint" id="access-hint">Escolha acesso por uma hora ou permanente para a conta vinculada. Você pode revogar quando quiser.</p></article>
-<div class="bottom-grid"><article><h2>Arquivos ao alcance</h2><strong class="medium" id="index-count">0 entradas</strong><p class="hint" id="index-overview">Índice local em segundo plano.</p><button data-go="pc" class="text-button">Pesquisar no PC →</button></article><article><h2>Conexão e recursos</h2><p id="network-overview">Aguardando interfaces…</p><p class="hint" id="agent-memory">—</p><button data-go="network" class="text-button">Ver rede →</button></article></div>
-</section>
-<section data-view="pc" hidden><p class="eyebrow">EXPLORAR</p><h1>Seus arquivos, organizados.</h1><p class="intro">Navegue pelas pastas ou pesquise no índice. Abra um projeto para revisar como ele inicia.</p>
-<div class="section-title"><div class="actions"><button id="files-roots">Raízes locais</button><button id="files-up">↑ Pasta acima</button><button id="files-pick">Escolher pasta</button></div><span id="files-location" class="path-label"></span></div>
-<form id="folder-form" class="address-row"><label class="sr-only" for="folder-path">Caminho da pasta</label><input id="folder-path" placeholder="Cole o caminho de uma pasta" autocomplete="off"><button>Abrir pasta</button><button id="folder-run" type="button" hidden>▷ Analisar projeto</button></form>
-<article class="compact"><form id="search-form" class="search-tools"><label class="grow">Pesquisar no PC<input id="file-query" type="search" placeholder="Nome, extensão ou parte do caminho" autocomplete="off"></label><label>Mostrar<select id="file-kind"><option value="all">Tudo</option><option value="files">Arquivos</option><option value="folders">Pastas</option><option value="images">Imagens</option><option value="videos">Vídeos</option><option value="installers">Instaladores / APKs</option><option value="archives">Compactados</option></select></label><label>Ordenar<select id="file-sort"><option value="name">Nome</option><option value="largest">Maior primeiro</option><option value="newest">Mais recente</option><option value="oldest">Mais antigo</option></select></label><button class="primary">Buscar no índice</button></form><div class="section-title"><span class="hint" id="index-status"></span><div class="actions"><button id="index-toggle">Pausar índice</button><button id="index-refresh">Atualizar índice</button></div></div><details><summary>Sobre o índice e as raízes</summary><p class="hint" id="index-roots"></p><p class="hint">O índice é atualizado em segundo plano. Tamanhos de pastas são parciais e consideram apenas arquivos indexados. Atalhos, volumes remotos e diretórios protegidos não entram nas operações de remoção.</p></details></article>
-<p class="hint" id="search-summary" aria-live="polite"></p><div class="table-wrap"><table class="file-table"><thead><tr><th><input id="files-select-page" type="checkbox" aria-label="Selecionar arquivos desta página"></th><th>Nome e caminho</th><th>Tamanho</th><th>Alteração</th><th>Ações</th></tr></thead><tbody id="file-results"></tbody></table></div><div class="pagination"><button id="previous-page">← Anteriores</button><span id="page-number"></span><button id="next-page">Próximos →</button></div><div id="files-selection" class="selection-bar" hidden><span id="files-selection-count"></span><div class="actions"><button id="files-clear">Limpar seleção</button><button id="files-remove" class="danger">Revisar remoção →</button></div></div></section>
-<section data-view="cleaner" hidden><p class="eyebrow">ESPAÇO EM DISCO</p><h1>Escolha o que vale guardar.</h1><p class="intro">Revise instaladores, imagens, vídeos e outros arquivos. Você escolhe o que mover para a Lixeira.</p><div class="segmented" role="group" aria-label="Área de limpeza"><button id="clean-files" aria-pressed="true">Arquivos</button><button id="clean-apps" aria-pressed="false">Apps instalados</button><button id="clean-trash" aria-pressed="false">Lixeira Vexx</button></div>
-<div id="clean-filter-panel"><article class="compact"><form id="clean-form" class="search-tools"><label class="grow">Nome<input id="clean-query" type="search" placeholder="Opcional: nome ou extensão"></label><label>Tipo<select id="clean-kind"><option value="files">Todos os arquivos</option><option value="installers">Instaladores / APKs</option><option value="images">Imagens</option><option value="videos">Vídeos</option><option value="audio">Áudio</option><option value="archives">Compactados</option><option value="temporary">Temporários / logs</option></select></label><label>Tamanho mínimo<select id="clean-size"><option value="0">Qualquer</option><option value="10485760">10 MB</option><option value="104857600">100 MB</option><option value="1073741824">1 GB</option></select></label><label>Sem alteração há<select id="clean-age"><option value="0">Qualquer data</option><option value="30">30 dias</option><option value="180">6 meses</option><option value="365">1 ano</option></select></label><label>Ordem<select id="clean-sort"><option value="largest">Maior primeiro</option><option value="oldest">Mais antigo</option><option value="newest">Mais recente</option><option value="name">Nome</option></select></label><button class="primary">Filtrar</button></form></article></div>
-<p id="clean-summary" class="hint" aria-live="polite"></p><div class="table-wrap"><table class="file-table"><thead id="clean-head"><tr><th><input id="clean-select-page" type="checkbox" aria-label="Selecionar arquivos desta página de limpeza"></th><th>Item</th><th>Tamanho</th><th>Data</th><th>Ações</th></tr></thead><tbody id="clean-results"></tbody></table></div><div class="pagination"><button id="clean-prev">← Anteriores</button><span id="clean-page"></span><button id="clean-next">Próximos →</button></div><div id="clean-selection" class="selection-bar" hidden><span id="clean-selection-count"></span><div class="actions"><button id="clean-clear">Limpar seleção</button><button id="clean-restore" hidden>Restaurar seleção</button><button id="clean-remove" class="danger">Revisar remoção →</button></div></div><p class="hint">A Lixeira Vexx usa pastas ocultas .vexx-trash no mesmo volume. Os itens continuam ocupando espaço até você confirmar a exclusão definitiva. Para apps instalados, use o desinstalador do Windows.</p><button id="manage-apps">Gerenciar desinstalação no Windows ↗</button></section>
-<section data-view="projects" hidden><p class="eyebrow">EXECUTAR NO COMPUTADOR</p><h1>Seu projeto, em execução.</h1><p class="intro">Analise a entrada, revise os serviços e acompanhe o início e os logs.</p><form id="project-form" class="address-row"><label class="grow">Pasta ou arquivo principal<input id="project-path" placeholder="Caminho do projeto, main.py, package.json ou index.html" required></label><button class="primary">Analisar projeto</button></form><p class="hint">Python usa um ambiente .vexx-venv do projeto. Node/Vite usa o npm instalado. Interfaces HTML são servidas por HTTP local, com CSS e JS. Um manifesto vexx-project.json pode declarar serviços em ordem para projetos que precisam de outra configuração.</p><div id="project-runs"></div><article id="project-log-panel" hidden><div class="section-title"><h2 id="project-log-title">Logs do projeto</h2><button id="project-logs-copy">Copiar logs</button></div><pre id="project-logs" tabindex="0"></pre></article><p class="hint">Fechar o Vexx PC encerra as árvores de processos que ele iniciou. Serviços externos e processos abertos fora deste painel não são assumidos nem encerrados.</p></section>
-<section data-view="network" hidden><p class="eyebrow">CONECTIVIDADE</p><h1>Sua rede, com clareza.</h1><p class="intro">Interfaces locais e tráfego observado neste computador.</p><div class="metrics"><article><span class="eyebrow">RECEBENDO</span><strong id="download">—</strong><small>Tráfego total das interfaces</small></article><article><span class="eyebrow">ENVIANDO</span><strong id="upload">—</strong><small>Sem testar ou ocupar sua banda</small></article></div><article><h2>Interfaces ativas</h2><div id="adapters"></div><p class="hint" id="ssid"></p><p class="hint">Uma interface ativa não garante acesso à internet. O vínculo com sua conta aparece na Visão geral.</p></article></section>
-<section data-view="logs" hidden><p class="eyebrow">ATIVIDADE</p><h1>O que acontece por aqui.</h1><p class="intro">Eventos do aplicativo nesta sessão. Sem conteúdo de arquivos ou credenciais.</p><article><label>Filtrar eventos<input id="log-filter" type="search" placeholder="Pesquisar nos logs"></label><div class="actions"><button id="logs-refresh">Atualizar eventos</button><button id="logs-export">Salvar logs</button></div><pre id="log-output" tabindex="0"></pre></article></section>
-<section data-view="ai" hidden><p class="eyebrow">COPILOTO</p><h1>Sua IA, do seu jeito.</h1><p class="intro">Use uma API ou um modelo que roda no seu computador.</p><article><form id="ai-form"><label>Provedor<select id="ai-provider" name="provider"><option value="none">Somente comandos locais</option><option value="ollama">Ollama local</option><option value="openai">OpenAI</option><option value="hermes">Hermes / proxy compatível</option><option value="compatible">Outro serviço compatível com OpenAI</option></select></label><label>Endereço base<input id="ai-url" name="base_url" type="url" placeholder="http://127.0.0.1:11434" autocomplete="off"></label><label>Modelo<input id="ai-model" name="model" list="ai-models" maxlength="150" placeholder="Nome do modelo disponível no seu serviço" autocomplete="off"><datalist id="ai-models"></datalist></label><label>Chave de API<input id="ai-key" name="api_key" type="password" maxlength="2048" autocomplete="new-password" placeholder="Opcional para serviços locais"></label><label class="check-row"><input id="ai-clear-key" name="clear_key" type="checkbox">Apagar a chave salva</label><div class="actions"><button class="primary" type="submit">Salvar configuração</button><button id="ai-test" type="button">Testar e listar modelos</button></div></form><p id="ai-status" role="status" aria-live="polite"></p><p class="hint">A chave fica neste usuário do Windows, protegida pelo sistema. Somente as mensagens enviadas ao Copiloto vão para o provedor escolhido; nenhum conteúdo ou índice de arquivos é enviado automaticamente. Ao trocar provedor ou endereço, informe novamente a chave.</p><details><summary>Ollama, Hermes e outros modelos locais</summary><p class="hint">Inicie o serviço antes de testar. Ollama usa normalmente http://127.0.0.1:11434. Para Hermes, LM Studio, llama.cpp e proxies, informe o endereço base da API compatível com OpenAI (geralmente termina em /v1), a porta real e o modelo publicado pelo serviço. Este aplicativo não inicia nem instala esses serviços.</p></details></article></section></main>
-<button id="chat-backdrop" aria-label="Fechar Copiloto" tabindex="-1" hidden></button><aside id="copilot-panel" class="copilot" aria-label="Copiloto Vexx"><div><div class="section-title"><h2><span class="spark">✦</span> Copiloto Vexx</h2><button id="chat-close" aria-label="Fechar Copiloto">×</button></div><p class="hint"><span id="ai-mode-label">Ações locais. Dados reais.</span></p></div><div id="chat-messages" role="log" aria-live="polite"><div class="bubble">Como posso ajudar?<br>Consulte os recursos do PC, pesquise arquivos ou verifique a conexão.</div></div><div class="suggestions"><button data-prompt="status do computador">Como está meu PC?</button><button data-prompt="diagnosticar conexao">Verificar conexão</button></div><form id="chat-form"><label class="sr-only" for="chat-input">Mensagem para o Copiloto</label><textarea id="chat-input" rows="2" maxlength="2000" placeholder="Peça em português…" required></textarea><button type="submit" class="primary">Enviar ↑</button></form><small class="hint">Comandos locais sem chave. Configure uma IA para conversar.</small></aside>
-</div><dialog id="review-dialog" class="modal" aria-labelledby="review-title"><div class="modal-head"><h2 id="review-title">Revisar</h2><button id="review-close" aria-label="Cancelar revisão">×</button></div><div class="modal-body"><p id="review-summary"></p><div id="review-items"></div><p id="review-note" class="hint"></p><label id="review-prepare-row" class="check-row" hidden><input id="review-prepare" type="checkbox">Autorizo preparar as dependências com os comandos mostrados acima.</label><label id="review-word-row" hidden>Digite EXCLUIR para apagar definitivamente<input id="review-word" autocomplete="off"></label><p id="review-error" role="alert"></p></div><div class="modal-actions"><button id="review-cancel">Cancelar</button><button id="review-confirm" class="primary">Confirmar</button></div></dialog></body></html>
+
+<button class="chat-backdrop" id="chat-backdrop" type="button" aria-label="Fechar Copiloto" tabindex="-1" hidden></button>
+
+<dialog class="review-dialog" id="review-dialog" aria-labelledby="review-title">
+  <div class="review-head">
+    <div>
+      <p class="eyebrow"><span></span>Revisar antes de continuar</p>
+      <h2 id="review-title">Revisar</h2>
+    </div>
+    <button class="icon-button" id="review-close" type="button" aria-label="Cancelar revisão"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-close"/></svg></button>
+  </div>
+  <div class="review-body">
+    <p class="review-summary" id="review-summary"></p>
+    <div class="review-items" id="review-items"></div>
+    <p class="hint" id="review-note"></p>
+    <label class="check-row review-check" id="review-prepare-row" hidden><input id="review-prepare" type="checkbox"><span>Autorizo preparar as dependências com os comandos mostrados acima.</span></label>
+    <label class="field review-word" id="review-word-row" hidden>Digite EXCLUIR para apagar definitivamente<input id="review-word" type="text" autocomplete="off" spellcheck="false"></label>
+    <p class="review-error" id="review-error" role="alert"></p>
+  </div>
+  <div class="review-actions">
+    <button class="ghost" id="review-cancel" type="button">Cancelar</button>
+    <button class="primary" id="review-confirm" type="button">Confirmar</button>
+  </div>
+</dialog>
+
+<dialog class="confirm-dialog" id="confirm-dialog" aria-labelledby="confirm-title">
+  <form method="dialog" class="confirm-card">
+    <span class="confirm-symbol"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-alert"/></svg></span>
+    <h2 id="confirm-title">Confirmar ação</h2>
+    <p id="confirm-body"></p>
+    <div class="confirm-actions">
+      <button value="cancel" class="ghost" autofocus>Cancelar</button>
+      <button value="confirm" class="primary" id="confirm-accept">Confirmar</button>
+    </div>
+  </form>
+</dialog>
+</body>
+</html>
