@@ -21,7 +21,7 @@
 ## Evidência e aceitação
 
 - 12/12 contratos da auditoria passaram.
-- Rodada completa final, após os últimos ajustes: **2.786 passaram, 4 pulados, 2 avisos**, em 340,56 s. Não houve falhas.
+- Rodada completa final, após os últimos ajustes: **2.787 passaram, 4 pulados, 2 avisos**, em 756,87 s. Não houve falhas.
 - Retomada visual concluída em Chromium com janela: comparação por clique, reload, abertura da oferta na página específica KaBuM, leitura pelo composer, fontes e persistência após reload. Viewports 1365, 390 e 320 px; sem overflow horizontal da página nos dois menores. Menu mobile abriu e permitiu selecionar o chat. Não é teste em celular físico nem aceite universal de toda a UI.
 - O teste visual encontrou e corrigiu contagem de produtos mencionados apenas nas referências e card de fonte que mostrava o sumário em vez da passagem sobre o erro. Regressões adicionadas.
 - API real do laboratório, sem mocks: seis produtos KaBuM com URLs de produto; comparação de quatro das seis opções (limite do componente informado na resposta), JDUI `productcompare`, persistência SQLite, replay idêntico e uma única resposta.
