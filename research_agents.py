@@ -219,7 +219,7 @@ def _nid(prefixo: str) -> str:
 
 
 def criar_job(db, owner: str, objetivo: str, conv: str = "", modo: str = "",
-              manual: str = "") -> dict:
+              manual: str = "", imagem: str = "") -> dict:
     objetivo = str(objetivo or "")[:500]
     if len(objetivo) < 3:
         raise AgentErro("objetivo curto demais", "objetivo")
@@ -230,6 +230,22 @@ def criar_job(db, owner: str, objetivo: str, conv: str = "", modo: str = "",
            "usados": {"buscas": 0, "paginas": 0}, "midia": [],
            "achados": [], "pendencias": [], "erros": [], "investigacoes": [],
            "auditoria": {}, "ajustes": {"restricoes": [], "prioridades": [], "metricas": []}}
+    if imagem and isinstance(imagem, str) and imagem.strip():
+        try:
+            import vision_service
+            res_vis = vision_service.analisar_imagem(imagem.strip())
+            if res_vis and res_vis.get("status") == "sucesso":
+                job["ajustes"]["visual_context"] = res_vis
+                objs = [d.get("objeto") for d in res_vis.get("deteccoes", []) if isinstance(d, dict)]
+                job["midia"].append({
+                    "tipo": "imagem",
+                    "origem": "consulta_pesquisa",
+                    "rotulos": objs,
+                    "texto_ocr": res_vis.get("texto_extraido", ""),
+                    "tags": res_vis.get("tags_busca", "")
+                })
+        except Exception:
+            pass
     with db:
         db.execute("INSERT INTO research_jobs (id, owner_id, conv, modo, objetivo, plano,"
                    " plano_versao, status, orcamento, usados, achados, pendencias, erros,"
@@ -237,8 +253,13 @@ def criar_job(db, owner: str, objetivo: str, conv: str = "", modo: str = "",
                    (job["id"], owner, job["conv"], modo, objetivo, "[]", 1, "criada",
                     json.dumps(job["orcamento"]), json.dumps(job["usados"]), "[]", "[]", "[]",
                     agora_iso(), agora_iso()))
+    if job.get("ajustes", {}).get("visual_context") or job.get("midia"):
+        salvar_job(db, job)
+    meta_ev = {"modo": modo}
+    if job["ajustes"].get("visual_context"):
+        meta_ev["visual_tags"] = job["ajustes"]["visual_context"].get("tags_busca", "")
     emitir(db, job["id"], owner, "orchestrator", "research_created", "ok",
-           f"Pesquisa criada (modo {modo}).", {"modo": modo})
+           f"Pesquisa criada (modo {modo}).", meta_ev)
     return job
 
 
@@ -397,6 +418,14 @@ def montar_plano(db, job: dict) -> dict:
     # a rendered date range loses hour windows and can absorb it into the city.
     request_text = job["objetivo"]
     subs = _subconsultas_unicas(request_text, int(job["orcamento"].get("subs", 3) or 3))
+    v_ctx = (job.get("ajustes") or {}).get("visual_context") or {}
+    v_tags = v_ctx.get("tags_busca", "")
+    if v_tags:
+        limite_subs = int(job["orcamento"].get("subs", 3) or 3)
+        if len(subs) < limite_subs:
+            v_front = f"{job['objetivo']} {v_tags}".strip()[:140]
+            if v_front not in subs:
+                subs.append(v_front)
     feitas = { (s.get("tipo"), s.get("alvo")) for s in job["plano"] if s.get("status") == "feita" }
     plano, n = [], 0
     for sub_index, sub in enumerate(subs):
@@ -1085,6 +1114,45 @@ def _agregar_midia(db, job: dict, itens: list) -> int:
     return adicionados
 
 
+def _extrair_evidencias_visuais_artigo(imagens: list, limite: int = 1) -> list:
+    """Extrai evidências visuais de gráficos, diagramas e tabelas em imagens via YOLOv8 + RapidOCR."""
+    if not imagens:
+        return []
+    candidatos = []
+    palavras_chave = ("chart", "graph", "diagram", "table", "tabela", "grafico", "benchmark",
+                      "comparison", "comparativo", "infographic", "spec", "data", "metric", "flow")
+    for img in imagens:
+        img_url = (img if isinstance(img, str) else (img.get("url") or img.get("src") or "")) if isinstance(img, (str, dict)) else ""
+        if not img_url or not str(img_url).startswith("http"):
+            continue
+        url_lower = str(img_url).lower()
+        if any(k in url_lower for k in palavras_chave):
+            candidatos.insert(0, str(img_url))
+        else:
+            candidatos.append(str(img_url))
+    evidencias = []
+    try:
+        import vision_service
+        for url in candidatos[:limite]:
+            res = vision_service.analisar_imagem(url)
+            if res and res.get("status") == "sucesso":
+                ocr = (res.get("texto_extraido") or "").strip()
+                objs = [d.get("objeto") for d in res.get("deteccoes", []) if isinstance(d, dict)]
+                tags = res.get("tags_busca", "")
+                if ocr or objs:
+                    evidencias.append({
+                        "url": url,
+                        "tags": tags,
+                        "objetos": objs,
+                        "texto_ocr": ocr[:800],
+                        "total_objetos": res.get("total_objetos", 0),
+                        "total_textos": res.get("total_textos", 0)
+                    })
+    except Exception:
+        pass
+    return evidencias
+
+
 def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None,
                     teto_paginas: int = 3, deve_parar=None, prazo: float = 0) -> list:
     """Source Analyst: abre (em paralelo), extrai, pontua, registra (sequencial)."""
@@ -1168,6 +1236,25 @@ def agente_analista(db, job: dict, etapa: dict, achados: list, recuperar_fn=None
                 "texto_lido": bool(texto) and not artigo.get("ilegivel", False),
                 "trecho_usado": str(artigo.get("trecho_usado") or texto[:1500])[:1500],
                 "access_state": "read" if texto else "snippet_only"}
+        if rec.get("imagens"):
+            try:
+                evs_vis = _extrair_evidencias_visuais_artigo(rec["imagens"], limite=1)
+                if evs_vis:
+                    rec["evidencias_visuais"] = evs_vis
+                    blocos_vis = []
+                    for ev in evs_vis:
+                        partes = []
+                        if ev.get("tags"):
+                            partes.append(f"Elementos visuais (YOLOv8): {ev['tags']}")
+                        if ev.get("texto_ocr"):
+                            partes.append(f"Texto detectado no gráfico/imagem (OCR): {ev['texto_ocr']}")
+                        if partes:
+                            blocos_vis.append(f"[EVIDÊNCIA VISUAL IDENTIFICADA NA IMAGEM DA PÁGINA: {' | '.join(partes)}]")
+                    if blocos_vis:
+                        rec["texto"] = (rec["texto"] + "\n\n" + "\n".join(blocos_vis)).strip()
+                        rec["trecho_usado"] = str(rec.get("trecho_usado") or rec["texto"][:1500])[:1500]
+            except Exception:
+                pass
         rec.update(fetched_at=getattr(pagina,'fetched_at',research.agora_iso()),
                    checked_at=getattr(pagina,'checked_at',research.agora_iso()),
                    cache_state=getattr(pagina,'cache_state','network'))
@@ -1950,6 +2037,7 @@ def _synthesis_context(objective, evidence, labels):
                 'excerpt':str(e.get('trecho',''))[:1800],
                 'scope':e.get('content_scope','retrieved_excerpt'),
                 'accessed_at':str(e.get('acessado_em',''))[:40]}
+        if e.get('evidencias_visuais'): source['visual_evidence'] = e['evidencias_visuais']
         if e.get('source_authority'):source['source_authority']=e['source_authority']
         passages=e.get('answer_passages') or []
         full=e.get('texto')
@@ -2087,6 +2175,17 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                        if suportadas < len(vereditos) else ""))
     if any(v["estado"] == "CONTRADICTED" for v in vereditos):
         resposta.append("Há contradições entre fontes — leia as evidências antes de concluir.")
+    v_ctx = (job.get('ajustes') or {}).get('visual_context')
+    if v_ctx:
+        v_tags = v_ctx.get("tags_busca", "")
+        v_ocr = (v_ctx.get("texto_extraido", "") or "").strip()
+        bloco_v = []
+        if v_tags:
+            bloco_v.append(f"Objetos visuais (YOLOv8): {v_tags}")
+        if v_ocr:
+            bloco_v.append(f"Texto detectado na imagem (OCR): {v_ocr[:200]}")
+        if bloco_v:
+            resposta.append(f"Contexto visual analisado: {' | '.join(bloco_v)}")
     resposta.append("Síntese extrativa: redação por LLM indisponível neste fluxo determinístico; nenhuma inferência foi solicitada.")
     sintese = {"texto": "\n\n".join(resposta), "llm": False,
                "references": {labels[e['id']]: e['id'] for e in tops}}
@@ -2098,8 +2197,10 @@ def agente_sintetizador(db, job: dict, evidencias: list, vereditos: list,
                         'timeout_seconds':min(50,timeout),'attempts':1}
         job.setdefault('usados',{})['synthesis_budget'] = context_meta
         try:
+            visual_ctx = (job.get('ajustes') or {}).get('visual_context')
             candidate = research_synthesis.generate(job['objetivo'], sources, vereditos,
-                                                    sintetizar_fn, timeout, deve_parar, verificar_fn)
+                                                    sintetizar_fn, timeout, deve_parar, verificar_fn,
+                                                    visual_context=visual_ctx)
             if candidate:
                 import evidence_graph
                 answer_coverage = candidate.get('answer_coverage') or evidence_graph.requirement_coverage(job['objetivo'], [

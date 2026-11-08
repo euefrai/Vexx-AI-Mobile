@@ -697,8 +697,13 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str, model: str = "") -> str:
         return 'Não consegui recuperar mídia pertinente nas fontes disponíveis agora. '+str(result.get('estado_texto') or '')
     if m or "inicie uma pesquisa sobre" in t or visual or official_docs:
         objetivo = (m.group(1).strip() if m else texto)[:500]
+        imagem = ""
+        m_img = re.search(r'(https?://[^\s]+(?:\.(?:png|jpg|jpeg|webp|gif)|(?=[?#]))|data:image/[^;]+;base64,[^\s]+)', texto or "", re.I)
+        if m_img:
+            imagem = m_img.group(1)
         req = {"objetivo": objetivo, "conv": conv or "", "model": model,
-               "modo": "profunda" if m else "rapida" if visual else ""}
+               "modo": "profunda" if m else "rapida" if visual else "",
+               "imagem": imagem}
         resp = rjob_start(db, req, owner)
         if resp.get("type") != "research_job":
             return "Não consegui iniciar: " + resp.get("error", "tente de novo") + " 🔍"

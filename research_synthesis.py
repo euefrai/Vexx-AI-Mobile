@@ -686,7 +686,7 @@ def _draft_envelope(raw, normalization):
     return body
 
 
-def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=None, verify_fn=None):
+def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=None, verify_fn=None, visual_context=None):
     """Validate structure, citation identity, exact quotes and numeric provenance.
 
     Support is reviewed in a separate call; that assessment can still be wrong.
@@ -711,14 +711,27 @@ def generate(objective, sources, verdicts, generate_fn, timeout=25, should_stop=
                     'quotes':[{k:v for k,v in q.items() if not k.startswith('_')}
                               for q in options[s['id']]]} for s in sources] if catalog_mode else [
                                   {k:v for k,v in s.items() if k!='source_authority'} for s in sources]
-    messages = [{"role": "system", "content": (CATALOG_SYSTEM if catalog_mode else SYSTEM)+'\nIDs de fonte permitidos: '+allowed_ids}, {"role": "user", "content": json.dumps({
+    system_prompt = (CATALOG_SYSTEM if catalog_mode else SYSTEM) + '\nIDs de fonte permitidos: ' + allowed_ids
+    user_payload = {
         "objective": objective[:500], "sources": model_sources,
         **({'requirements':[{"id":r['id'],"aspect":r['description'],"entity":r['entity'],
                              "type":r.get('type','explicit_attribute'),"state":r['state']} for r in requirements
                             if r.get('type')!='mandatory_constraint']} if requirements else {}),
         "verification": [{"claim": str(v.get("afirmacao", ""))[:400],
                           "state": v.get("estado", "UNVERIFIED")} for v in verdicts[:12]],
-    }, ensure_ascii=False)}]
+    }
+    if visual_context and isinstance(visual_context, dict):
+        v_tags = visual_context.get("tags_busca", "")
+        v_ocr = visual_context.get("texto_extraido", "")
+        v_objs = [d.get("objeto") for d in visual_context.get("deteccoes", []) if isinstance(d, dict)]
+        user_payload["visual_evidence"] = {
+            "tags": v_tags,
+            "detected_objects": v_objs,
+            "extracted_text": str(v_ocr)[:1000]
+        }
+        system_prompt += "\nEvidências visuais (YOLOv8 + RapidOCR) foram detectadas e devem ser correlacionadas com as fontes para máxima precisão."
+
+    messages = [{"role": "system", "content": system_prompt}, {"role": "user", "content": json.dumps(user_payload, ensure_ascii=False)}]
     # Reserve time for review instead of spending the whole budget on writing.
     raw = generate_fn(messages, min(25, timeout * .5))
     if should_stop and should_stop():

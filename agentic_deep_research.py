@@ -952,6 +952,7 @@ def search_and_compare_products(
     max_sites: int = 5,
     timeout: float = 15.0,
     llm_fn: Callable[[str], str] | None = None,
+    image: str | None = None,
 ) -> dict[str, Any]:
     """Busca o mesmo produto em diferentes sites, extrai preços, tamanhos, estilos
     e cores, e formata o retorno em JSON + tabela Markdown estruturada.
@@ -963,6 +964,15 @@ def search_and_compare_products(
         raise ValueError("A query de busca de produtos não pode ser vazia.")
 
     max_retries = max(1, min(int(max_retries or 3), 3))
+    visual_ctx: dict[str, Any] | None = None
+    if image and isinstance(image, str) and image.strip():
+        try:
+            import vision_service
+            res_v = vision_service.analisar_imagem(image.strip())
+            if res_v and res_v.get("status") == "sucesso":
+                visual_ctx = res_v
+        except Exception as exc:
+            logger.warning("Falha ao analisar imagem comercial: %s", exc)
     attempts_log: list[dict[str, Any]] = []
     extracted_products: list[dict[str, Any]] = []
     seen_urls: set[str] = set()
@@ -979,6 +989,10 @@ def search_and_compare_products(
             previous_queries=previous_queries,
             llm_fn=llm_fn,
         )
+        if attempt == 1 and visual_ctx and visual_ctx.get("tags_busca"):
+            v_query = f"{clean_query} {visual_ctx['tags_busca']}".strip()[:100]
+            if v_query not in sub_queries and len(sub_queries) < 4:
+                sub_queries.append(v_query)
         previous_queries.extend(sub_queries)
 
         if attempt == 1:
@@ -1102,6 +1116,7 @@ def _synthesize_product_comparison(
     products: list[dict[str, Any]],
     price_stats: dict[str, Any],
     llm_fn: Callable[[str], str] | None = None,
+    visual_context: dict[str, Any] | None = None,
 ) -> str:
     if not products:
         return (
@@ -1154,6 +1169,7 @@ def deep_investigate_topic(
     max_retries: int = 3,
     timeout: float = 15.0,
     llm_fn: Callable[[str], str] | None = None,
+    image: str | None = None,
 ) -> dict[str, Any]:
     """Acessa pelo menos `min_deep_links` (padrão 3) links profundos da pesquisa,
     lê o conteúdo interno em Markdown e cruza os dados (previsões, análise de
@@ -1167,6 +1183,19 @@ def deep_investigate_topic(
 
     min_deep_links = max(3, int(min_deep_links or 3))
     max_retries = max(1, min(int(max_retries or 3), 3))
+
+    visual_ctx: dict[str, Any] | None = None
+    if image and isinstance(image, str) and image.strip():
+        try:
+            import vision_service
+            res_v = vision_service.analisar_imagem(image.strip())
+            if res_v and res_v.get("status") == "sucesso":
+                visual_ctx = res_v
+                v_tags = res_v.get("tags_busca", "")
+                if v_tags:
+                    logger.info("Deep Research enriquecida com tags visuais (YOLOv8): %s", v_tags)
+        except Exception as exc:
+            logger.warning("Falha ao analisar imagem visual no Deep Research: %s", exc)
 
     attempts_log: list[dict[str, Any]] = []
     deep_sources: list[dict[str, Any]] = []
@@ -1270,7 +1299,7 @@ def deep_investigate_topic(
 
     cross_analysis = _cross_reference_sources(clean_query, deep_sources)
     report_markdown = _synthesize_deep_report(
-        clean_query, deep_sources, cross_analysis, llm_fn=llm_fn
+        clean_query, deep_sources, cross_analysis, llm_fn=llm_fn, visual_context=visual_ctx
     )
 
     return {
@@ -1284,6 +1313,7 @@ def deep_investigate_topic(
         "sources": deep_sources,
         "cross_reference": cross_analysis,
         "report_markdown": report_markdown,
+        "visual_context": visual_ctx,
         "generated_at": _now_iso(),
     }
 
@@ -1361,6 +1391,7 @@ def _synthesize_deep_report(
     sources: list[dict[str, Any]],
     cross_analysis: dict[str, Any],
     llm_fn: Callable[[str], str] | None = None,
+    visual_context: dict[str, Any] | None = None,
 ) -> str:
     if not sources:
         return (
@@ -1402,6 +1433,13 @@ def _synthesize_deep_report(
         "",
         "### 1. Síntese e Cruzamento de Evidências",
     ]
+    if visual_context:
+        lines.append("### Evidências Visuais e Análise de Imagem (YOLOv8 + RapidOCR)")
+        if visual_context.get("tags_busca"):
+            lines.append(f"- **Elementos e Objetos Identificados:** {visual_context['tags_busca']}")
+        if visual_context.get("texto_extraido"):
+            lines.append(f"- **Texto Lido na Imagem:** {visual_context['texto_extraido']}")
+        lines.append("")
     for s in sources:
         fatos = s.get("key_facts") or []
         resumo_fato = fatos[0] if fatos else s.get("markdown", "")[:220].replace("\n", " ")

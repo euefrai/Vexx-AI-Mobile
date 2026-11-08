@@ -19,6 +19,7 @@ class ResearchStartIn(BaseModel):
     objetivo: str = Field(min_length=3, max_length=500)
     conv: str = Field(default="", max_length=100)
     modo: str = Field(default="", max_length=20)
+    imagem: str = Field(default="", max_length=50000)
 
 
 class ResearchJobIn(BaseModel):
@@ -44,7 +45,8 @@ async def research_start(request: Request, body: ResearchStartIn):
     _rate_limit(request, "research_start", dono)
     result = await relay.exchange({"type": "research_job_start", "owner": dono,
                                    "objetivo": body.objetivo, "conv": body.conv,
-                                   "modo": body.modo, "model": body.model}, timeout=20.0)
+                                   "modo": body.modo, "model": body.model,
+                                   "imagem": body.imagem}, timeout=20.0)
     if result.get("type") != "research_job":
         raise _research_erro(result)
     return {"job_id": result["job_id"], "modo": result.get("modo", ""),
@@ -363,6 +365,7 @@ class AgenticResearchWebhookIn(BaseModel):
     min_deep_links: int = Field(default=3, ge=1, le=8)
     max_sites: int = Field(default=5, ge=1, le=10)
     async_dispatch: bool = Field(default=True)
+    image: str = Field(default="", max_length=50000)
 
 
 def _authorize_webhook_or_session(request: Request) -> str:
@@ -390,6 +393,7 @@ async def research_deep_investigate_endpoint(request: Request, body: AgenticRese
             body.query,
             min_deep_links=body.min_deep_links,
             max_retries=body.max_retries,
+            image=body.image,
         ),
     )
     if body.webhook_url:
@@ -412,6 +416,7 @@ async def research_compare_products_endpoint(request: Request, body: AgenticRese
             body.query,
             max_retries=body.max_retries,
             max_sites=body.max_sites,
+            image=body.image,
         ),
     )
     if body.webhook_url:

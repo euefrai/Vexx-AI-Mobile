@@ -179,9 +179,11 @@ def rjob_start(db, req: dict, dono: str, websocket=None) -> dict:
     if not isinstance(chosen, str) or (chosen and not re.fullmatch(r"[A-Za-z0-9_~.][A-Za-z0-9_~.:/-]{0,119}", chosen)):
         return {"type": "learn_error", "codigo": "invalido", "error": "Modelo inválido."}
     try:
+        imagem = req.get("imagem") or req.get("image") or ""
         job = research_agents.criar_job(db, dono, str(req.get("objetivo", ""))[:500],
                                         str(req.get("conv", ""))[:100],
-                                        manual=str(req.get("modo", ""))[:20])
+                                        manual=str(req.get("modo", ""))[:20],
+                                        imagem=str(imagem)[:50000])
         research_agents.montar_plano(db, job)
         if chosen:
             job.setdefault("ajustes", {})["model"] = chosen
