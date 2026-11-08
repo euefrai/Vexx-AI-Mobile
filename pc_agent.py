@@ -62,6 +62,7 @@ import time  # noqa: F401
 import tool_protocol  # noqa: F401
 import unicodedata  # noqa: F401
 import uuid  # noqa: F401
+import vision_service  # noqa: F401
 import workspace_store  # noqa: F401
 
 from assistant_identity import (

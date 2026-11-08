@@ -15,6 +15,7 @@ import remoto
 import research
 import shopping
 import sqlite3
+import vision_service
 import workspace_store
 
 from assistant_identity import system_with_identity
@@ -236,6 +237,24 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
     extras["intent"] = intencao
     extras["ferramentas_usadas"] = []
     extras["podem_pesquisar"] = intencao.get("podem_pesquisar", True)
+    # Visão Computacional (YOLOv8 no Hugging Face Spaces): sempre que houver
+    # imagem associada ao prompt/pesquisa, processa no YOLO primeiro e injeta
+    # tags_busca + coordenadas no contexto do LLM e nas consultas de busca.
+    resultados_visao = []
+    imagens_associadas = vision_service.extrair_imagens_do_texto(texto_usuario, contexto_local)
+    if imagens_associadas and vision_service.vision_habilitada():
+        try:
+            resultados_visao = vision_service.analisar_imagens_contexto(
+                texto_usuario, contexto_local)
+        except Exception as exc:
+            log.warning("vision falhou (%s)", type(exc).__name__)
+            resultados_visao = []
+    extras["visao"] = resultados_visao
+    extras["tags_busca_visao"] = vision_service.coletar_tags_busca(resultados_visao)
+    bloco_visao = vision_service.formatar_contexto_visao(resultados_visao)
+    if bloco_visao:
+        extras["ferramentas_usadas"].append("vision")
+        partes_sistema.append(bloco_visao)
     _fmt = (intencao.get("restricoes", {}) or {}).get("formato", {}) or {}
     if isinstance(_fmt.get("max_linhas"), int):
         partes_sistema.append(
@@ -258,7 +277,8 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
     # failure separate, so one blocked page cannot erase a valid comparison.
     if cfg.get("pesquisa_web", True) and not eh_shop and extras["podem_pesquisar"] \
             and not _JOB_START_RE.search(texto_usuario or ""):
-        urls_pu = research.urls_pedidas(texto_usuario)
+        urls_pu = [u for u in research.urls_pedidas(texto_usuario)
+                   if u not in set(imagens_associadas)]
         if urls_pu:
             hoje_pu = (_data_local(contexto_local)
                        or datetime.now().date()).strftime("%d/%m/%Y")
@@ -294,6 +314,9 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                      ",".join(factual_first.get("signals") or [])[:120])
         hoje = (_data_local(contexto_local) or datetime.now().date()).strftime("%d/%m/%Y")
         consulta = (texto_usuario or "")[:200]
+        if resultados_visao:
+            consulta = vision_service.enriquecer_consulta_com_visao(
+                consulta, resultados_visao, max_chars=200)
         termos_mem = termos_memoria_pesquisa(db, owner, texto_usuario)
         if termos_mem:
             consulta = f"{consulta} {termos_mem}"[:200]

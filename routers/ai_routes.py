@@ -26,7 +26,7 @@ async def ai_complete(request: Request, body: AIRequest):
                                    "local_time": body.local_time, "timezone": body.timezone,
                                    "city": body.city, "latitude": body.latitude,
                                    "longitude": body.longitude, "text": body.text,
-                                   "created_at": body.created_at, "scene_state": body.scene_state}, timeout=180.0)
+                                   "created_at": body.created_at, "scene_state": body.scene_state, **({"image": body.image} if body.image else {})}, timeout=180.0)
     if result.get("type") != "ai_done" or "response_text" not in result:
         if result.get("type") == "ai_error":
             raise erro_relay(result, "IA indisponível")
@@ -146,7 +146,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     model: str = "", memory: str = "1", local_time: str = "",
                     timezone: str = "", city: str = "",
                     latitude: float | None = None, longitude: float | None = None,
-                    text: str = "", created_at: str = "", scene_state: str = ""):
+                    text: str = "", created_at: str = "", scene_state: str = "", image: str = ""):
     """SSE com deltas reais do Hermes (via agente). Fechar a conexão cancela."""
     request_started = time.monotonic()
     require_csrf(request)
@@ -179,7 +179,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                "memory": "0" if str(memory) == "0" else "1",
                "local_time": local_time, "timezone": timezone, "city": city,
                "latitude": latitude, "longitude": longitude,
-               "text": text, "created_at": created_at, "scene_state": scene_state}
+               "text": text, "created_at": created_at, "scene_state": scene_state, **({"image": image[:2000000]} if image else {})}
 
     async def gerar():
         concluido = False

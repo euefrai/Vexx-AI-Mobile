@@ -11,6 +11,7 @@ import research
 import research_agents
 import shlex
 import shopping
+import vision_service
 import workspace_store
 
 from pc_modules.memory_store import _normalizar_temporal
@@ -229,7 +230,11 @@ def _shopping_executar(db, owner: str, conv: str, user_text: str, extras: dict,
         return None
     shop_res = None
     try:
-        shop_res = shopping.pesquisar(db, owner, user_text, conv,
+        consulta_shop = user_text
+        if extras.get("visao"):
+            consulta_shop = vision_service.enriquecer_consulta_com_visao(
+                user_text, extras.get("visao"), max_chars=240)
+        shop_res = shopping.pesquisar(db, owner, consulta_shop, conv,
                                       progresso=progresso)
         extras["ferramentas_usadas"].append("shopping")
     except Exception as exc:

@@ -163,6 +163,14 @@ def _contexto_local_seguro(payload: dict) -> dict:
             contexto["coordinates"] = (round(lat, 2), round(lon, 2))
     except (KeyError, TypeError, ValueError):
         pass
+    img = str(payload.get("image") or payload.get("image_url") or payload.get("image_b64") or "").strip()
+    if img:
+        contexto["image"] = img[:2_000_000]
+    imgs = payload.get("images")
+    if isinstance(imgs, (list, tuple)):
+        limpas = [str(i).strip()[:2_000_000] for i in imgs[:5] if isinstance(i, str) and str(i).strip()]
+        if limpas:
+            contexto["images"] = limpas
     return contexto
 
 
