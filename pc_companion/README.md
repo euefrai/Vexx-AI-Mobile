@@ -5,7 +5,7 @@ Aplicativo público independente para Windows 10/11. Não instala Studio, túnei
 ## Instalar
 
 1. No site Vexx AI, abra **Meu PC → Preparar computador → Baixar Vexx PC para Windows**.
-2. Abra **Vexx-PC-Setup-1.5.0.exe** e instale. O pacote inclui Python e todas as dependências do aplicativo. Não exige Python do sistema, WinGet ou extração manual. Em computadores sem WebView2, o instalador baixa esse componente oficial da Microsoft; nesse caso precisa de internet.
+2. Abra **Vexx-PC-Setup-1.5.1.exe** e instale. O pacote inclui Python e todas as dependências do aplicativo. Não exige Python do sistema, WinGet ou extração manual. Em computadores sem WebView2, o instalador baixa esse componente oficial da Microsoft; nesse caso precisa de internet.
 3. No site, entre na sua conta e abra **Meu PC → Seu nick e PIN**. Crie um nick exclusivo (3–30 caracteres) e um PIN (6–12 números). Abra o aplicativo e informe apenas os mesmos nick e PIN para conectar. O endereço oficial já está preenchido; outro servidor HTTPS fica nas opções avançadas. Cada conta mantém um PC vinculado; novo vínculo substitui o anterior.
 4. Autorize visualização ou controle no **painel local**, apenas quando precisar. Escolha permissão por uma hora ou **Permitir mouse e teclado permanentemente**. A opção permanente é explícita, fica vinculada à credencial desse PC e retorna ao reabrir o aplicativo. **Revogar acesso permanente**, trocar o vínculo ou revogar no site cancela essa opção. Sem essa escolha, o acesso começa pausado ao abrir. No celular, entre na mesma conta e abra **Meu PC**.
 
@@ -13,7 +13,7 @@ O aplicativo abre em janela própria e cria atalhos no menu Iniciar e, opcionalm
 
 ## O que inclui
 
-- Visão geral: CPU, RAM, unidades locais, bateria, tempo desde a inicialização do Windows, consumo do aplicativo e sugestões locais de processos com alto uso de RAM e arquivos grandes. Encerrar um processo pede confirmação e protege o Windows; arquivos vão para a revisão da aba Limpeza.
+- Visão geral: CPU, RAM, unidades locais, bateria, tempo desde a inicialização do Windows, consumo do aplicativo e sugestões locais de processos com alto uso de RAM, aplicativos grandes e arquivos grandes. Encerrar um processo pede confirmação e protege o Windows; apps abrem o gerenciador nativo e arquivos vão para a revisão da aba Limpeza.
 - Arquivos: navegação por pastas, seleção de até 100 arquivos, filtros por tipo, tamanho e data, ordenação pelos maiores e índice SQLite FTS5 de nomes/caminhos/tamanhos. Pesquisa com 3 caracteres ou mais, paginação de 60 itens, tempo de consulta limitado a 150 ms. O conteúdo não é indexado nem enviado ao site. Pastas coladas no Copiloto são examinadas localmente com limites de tempo, quantidade e tamanho; arquivos de texto podem ser resumidos e binários são descritos por metadados. Só são enviados ao provedor de IA escolhido quando você envia essa conversa. Tamanhos de pastas representam apenas arquivos indexados, sem caches/protegidos.
 - Rede: interfaces ativas, IPs locais, velocidade reportada e tráfego observado. SSID Wi-Fi quando disponível. Não executa speed test nem identifica uma interface ativa como prova de internet.
 - Logs: até 300 eventos da sessão, filtro e exportação. Não grava tokens ou conteúdo de arquivos.

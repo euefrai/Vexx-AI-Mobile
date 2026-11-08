@@ -38,7 +38,7 @@ def manifest():
     return {'version': __version__, 'sha256': hashlib.sha256(payload).hexdigest(),
             'size': len(payload), 'url': '/downloads/vexx-pc-agent-windows.zip',
             'files': files, 'minimum_python': '3.12', 'installer_url':'/downloads/vexx-pc-agent-setup.exe',
-            'notes': 'Sugestões locais de RAM e arquivos grandes, resumo local de arquivos e pastas, comandos revisados e confirmação antes de executar.'}
+            'notes': 'Sugestões de RAM, apps e arquivos grandes, resumo local de arquivos e pastas, comandos revisados e confirmação antes de executar.'}
 
 
 def installer_url():

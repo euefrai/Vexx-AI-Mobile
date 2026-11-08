@@ -69,6 +69,7 @@ def create_app(directory=None, roots=None):
     files = Files(directory,index)
     projects = Projects(directory,index.roots)
     command_reviews={}
+    apps_cache={'at':0,'items':[]}
     def shutdown():
         callback = getattr(app.state, 'request_exit', None)
         if callback:
@@ -192,7 +193,11 @@ def create_app(directory=None, roots=None):
     async def recommendations():
         result=await asyncio.to_thread(index.search,'',0,'files','largest')
         largest=[item for item in result['items'] if not item.get('directory') and files.removable(item['path'])][:5]
-        return {'files':largest,'sampled_at':time.time()}
+        if os.name=='nt' and time.monotonic()-apps_cache['at']>120:
+            catalog=await asyncio.to_thread(installed_apps)
+            apps_cache.update(at=time.monotonic(),items=catalog['items'] if catalog['supported'] else [])
+        apps=[item for item in apps_cache['items'] if item['size']>=1024**3][:3]
+        return {'files':largest,'apps':apps,'sampled_at':time.time()}
     @app.get('/api/ai/config')
     async def ai_config():
         return ai.status()
