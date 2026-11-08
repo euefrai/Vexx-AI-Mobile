@@ -21,9 +21,10 @@ from .indexer import FileIndex
 from .system import SystemMonitor
 from .updater import Updater
 from .ai import AI
-from .files import Files, installed_apps
+from .files import Files, installed_apps, referenced_local_paths, fingerprint, analyze_local_paths
 from .projects import Projects
 from . import __version__
+from .system_audit import collect as collect_system_audit, report as system_audit_report
 
 WEB = Path(__file__).parent / 'web'
 
@@ -37,6 +38,23 @@ def default_roots():
     if os.name == 'nt':
         return [p.mountpoint for p in psutil.disk_partitions() if 'fixed' in p.opts and not p.mountpoint.startswith('\\\\')]
     return [str(Path.home())]
+
+
+def terminate_process(pid,created):
+    import psutil
+    try:
+        pid=int(pid);process=psutil.Process(pid)
+        if pid in (0,4,os.getpid()) or abs(process.create_time()-float(created))>.01:raise ValueError('O processo mudou desde a análise.')
+        name=process.name().casefold();exe=Path(process.exe()).resolve() if process.exe() else None
+        windows=Path(os.environ.get('WINDIR','C:/Windows')).resolve()
+        protected={'system','registry','memory compression','idle','system interrupts','csrss.exe','wininit.exe','services.exe','lsass.exe','smss.exe','winlogon.exe'}
+        if (exe and exe.is_relative_to(windows)) or name in protected:raise ValueError('Este processo do Windows é protegido.')
+        process.terminate()
+        try:process.wait(3)
+        except psutil.TimeoutExpired:raise ValueError('O processo não encerrou no prazo.') from None
+        return True
+    except (psutil.NoSuchProcess,psutil.AccessDenied,psutil.ZombieProcess):
+        raise ValueError('O processo não está disponível ou não pode ser encerrado.') from None
 
 
 def create_app(directory=None, roots=None):
@@ -70,6 +88,7 @@ def create_app(directory=None, roots=None):
     projects = Projects(directory,index.roots)
     command_reviews={}
     apps_cache={'at':0,'items':[]}
+    system_audits={}
     def shutdown():
         callback = getattr(app.state, 'request_exit', None)
         if callback:
@@ -198,6 +217,49 @@ def create_app(directory=None, roots=None):
             apps_cache.update(at=time.monotonic(),items=catalog['items'] if catalog['supported'] else [])
         apps=[item for item in apps_cache['items'] if item['size']>=1024**3][:3]
         return {'files':largest,'apps':apps,'sampled_at':time.time()}
+
+    @app.post('/api/system/apply')
+    async def system_apply(request: Request):
+        body=await payload(request);audit_id=str(body.get('audit_id',''));selected=body.get('items')
+        audit=system_audits.get(audit_id)
+        if not audit or audit['expires']<time.monotonic():raise HTTPException(400,'A auditoria expirou. Faça uma nova análise.')
+        if not isinstance(selected,list) or not 1<=len(selected)<=15 or not all(isinstance(x,str) for x in selected):raise HTTPException(400,'Selecione de 1 a 15 ações da auditoria.')
+        actions=audit['actions'];chosen=[actions[x] for x in dict.fromkeys(selected) if x in actions]
+        if len(chosen)!=len(set(selected)):raise HTTPException(400,'Uma ação mudou desde a auditoria. Analise o sistema novamente.')
+        done=[];failed=[];file_actions=[]
+        for item in (x for x in chosen if x['kind']=='file'):
+            try:
+                path=files.paths.check(item['path'],write=True)
+                if not files.removable(str(path)) or fingerprint(path)!=item['fingerprint']:
+                    raise ValueError('O arquivo foi alterado ou é protegido; faça outra análise.')
+                file_actions.append(item)
+            except (OSError,ValueError) as exc:failed.append({'name':item['name'],'error':str(exc)})
+        if file_actions:
+            try:
+                plan=await asyncio.to_thread(files.prepare,'trash',[x['path'] for x in file_actions])
+                result=await asyncio.to_thread(files.execute,plan['token'],'')
+                done.extend({'name':Path(p).name,'action':'movido para a Lixeira Vexx'} for p in result['done'])
+                failed.extend({'name':Path(x['path']).name,'error':'Não foi possível mover para a Lixeira Vexx.'} for x in result['failed'])
+            except ValueError as exc:failed.extend({'name':x['name'],'error':str(exc)} for x in file_actions)
+        for item in (x for x in chosen if x['kind']=='process'):
+            for process in item.get('processes',[]):
+                try:
+                    await asyncio.to_thread(terminate_process,process['pid'],process['created'])
+                    done.append({'name':item['name'],'action':'processo encerrado'})
+                except (ValueError,OSError) as exc:failed.append({'name':item['name'],'error':str(exc)})
+        system_audits.pop(audit_id,None)
+        if done:log('Plano da auditoria aplicado · '+str(len(done))+' ação(ões) concluídas · '+str(len(failed))+' pendentes.')
+        return {'done':done,'failed':failed}
+
+    @app.post('/api/system/open-settings')
+    async def system_open_settings(request: Request):
+        body=await payload(request);setting=str(body.get('setting',''))
+        targets={'storage':'ms-settings:storage','startup':'ms-settings:startupapps','apps':'ms-settings:appsfeatures',
+                 'power':'ms-settings:powersleep','network':'ms-settings:network-status','windows-trash':'shell:RecycleBinFolder'}
+        if os.name!='nt' or setting not in targets:raise HTTPException(400,'Esta página de configurações não está disponível neste sistema.')
+        if setting=='windows-trash':await asyncio.to_thread(subprocess.Popen,['explorer.exe','shell:RecycleBinFolder'])
+        else:await asyncio.to_thread(os.startfile,targets[setting])
+        return {'ok':True}
     @app.get('/api/ai/config')
     async def ai_config():
         return ai.status()
@@ -286,18 +348,8 @@ def create_app(directory=None, roots=None):
     @app.post('/api/process/stop')
     async def stop_process(request: Request):
         body=await payload(request)
-        try:
-            import psutil
-            pid=int(body.get('pid',0));created=float(body.get('created',0));process=psutil.Process(pid)
-            if pid in (0,4,os.getpid()) or abs(process.create_time()-created)>.01:raise ValueError('O processo mudou desde a análise.')
-            name=process.name().casefold()
-            exe=Path(process.exe()).resolve() if process.exe() else None
-            windows=Path(os.environ.get('WINDIR', 'C:/Windows')).resolve()
-            if exe and exe.is_relative_to(windows):raise ValueError('Processos do Windows são protegidos.')
-            if name in {'system','registry','memory compression','idle','system interrupts','csrss.exe','wininit.exe','services.exe','lsass.exe','smss.exe','winlogon.exe'}:raise ValueError('Este processo protegido não pode ser encerrado pelo Vexx PC.')
-            process.terminate();await asyncio.to_thread(process.wait,3)
-            return {'ok':True}
-        except (ValueError,psutil.Error) as exc:raise HTTPException(400,str(exc) or 'Não foi possível encerrar o processo.') from None
+        try:return await asyncio.to_thread(terminate_process,body.get('pid',0),body.get('created',0))
+        except ValueError as exc:raise HTTPException(400,str(exc)) from None
 
     @app.post('/api/apps/manage')
     async def manage_apps():
@@ -411,21 +463,42 @@ def create_app(directory=None, roots=None):
         except httpx.HTTPError:
             raise HTTPException(503, 'Não foi possível conectar ao site Vexx AI.') from None
 
+    async def create_system_audit():
+        now=time.monotonic()
+        if now-apps_cache['at']>120:
+            catalog=await asyncio.to_thread(installed_apps)
+            apps_cache.update(at=now,items=catalog['items'] if catalog['supported'] else [])
+        sample=state['system'] or await asyncio.to_thread(monitor.snapshot)
+        audit=await asyncio.to_thread(collect_system_audit,index,files,sample,apps_cache['items'])
+        audit_id=secrets.token_urlsafe(18)
+        actions=audit['files']+audit['processes']
+        audit['suggestions']=[{key:value for key,value in item.items() if key!='fingerprint'} for item in actions]
+        system_audits.clear()
+        system_audits[audit_id]={'expires':now+600,'actions':{item['id']:item for item in actions}}
+        return {'reply':system_audit_report(audit),'audit':audit,'audit_id':audit_id}
+
     @app.post('/api/copilot')
     async def copilot(request: Request):
         body = await payload(request)
-        text = str(body.get('text', ''))[:2000].strip()
+        provider_analysis=body.get('provider_analysis') is True
+        text = str(body.get('text', ''))[:30000 if provider_analysis else 2000].strip()
         normalized = ''.join(c for c in unicodedata.normalize('NFKD', text.casefold()) if not unicodedata.combining(c))
+        if provider_analysis:
+            if not ai.status()['enabled']:raise HTTPException(400,'Configure uma IA antes de enviar a auditoria.')
+            try:return await ai.chat(text)
+            except ValueError as exc:raise HTTPException(400,str(exc)) from None
         attachments=body.get('paths',[]);uploaded=body.get('attachments',[])
         if not isinstance(uploaded,list) or len(uploaded)>10 or any(not isinstance(f,dict) or len(str(f.get('text','')))>12000 for f in uploaded):raise HTTPException(400,'Anexos de texto inválidos.')
         if uploaded:text+='\n\nArquivos anexados pelo usuário:\n'+'\n'.join('### '+str(f.get('name','arquivo'))+'\n'+str(f.get('text','')) for f in uploaded)
         if not isinstance(attachments,list) or len(attachments)>10 or not all(isinstance(p,str) for p in attachments):raise HTTPException(400,'Anexe até 10 caminhos locais.')
+        attachments=referenced_local_paths(files,text,attachments)
+        audit_request=normalized.startswith(('!auditar','!auditoria')) or 'auditoria do sistema' in normalized or 'analise completa do sistema' in normalized or 'analise completa do computador' in normalized or ('analise' in normalized and any(word in normalized for word in ('sistema','computador',' pc','tudo')) and any(word in normalized for word in ('configur','arquivo','pasta','lixeira','nuvem','complet','tudo')))
+        if audit_request:return await create_system_audit()
         if attachments:
-            try:analysis=await asyncio.to_thread(analyze_local_paths,files,attachments)
+            try:analysis=await asyncio.to_thread(analyze_local_paths,files,attachments,True)
             except ValueError as exc:raise HTTPException(400,str(exc)) from None
-            text += '\n\nConteúdo analisado localmente pelo usuário:\n'+analysis[:50000]
-            if not ai.status()['enabled']:
-                return {'reply':analysis,'attachments':len(attachments)}
+            return {'reply':analysis,'attachments':len(attachments),'local_analysis':analysis[:50000],
+                    'needs_provider_analysis':ai.status()['enabled']}
         if normalized.startswith('!confirmar '):
             review=text.split(' ',1)[1].strip();entry=command_reviews.pop(review,None)
             if not entry or entry['expires']<time.monotonic():raise HTTPException(400,'A revisão expirou. Prepare o comando novamente.')

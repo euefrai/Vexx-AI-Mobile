@@ -1,16 +1,20 @@
 """Bounded local browsing and reversible, reviewed file removal. No recursive delete."""
 import os
+import re
 import secrets
 import sqlite3
 import stat
 import threading
 import time
 import uuid
+import zipfile
+import xml.etree.ElementTree as ET
 from contextlib import contextmanager
 from pathlib import Path
 
 BLOCKED = {'windows','program files','program files (x86)','programdata','appdata',
            '$recycle.bin','system volume information','recovery','boot','.git','.venv','.vexx-venv','venv'}
+PROTECTED_NAMES={'pagefile.sys','hiberfil.sys','swapfile.sys','bootmgr','bootnxt','ntldr','boot.ini'}
 TRASH = '.vexx-trash'
 CATEGORIES = {
     'installers':{'.exe','.msi','.msix','.msixbundle','.appx','.appxbundle','.apk','.aab'},
@@ -21,9 +25,125 @@ CATEGORIES = {
     'temporary':{'.tmp','.temp','.bak','.old','.log'},
 }
 TEXT_TYPES={'.txt','.md','.py','.js','.mjs','.cjs','.ts','.tsx','.jsx','.html','.css','.json','.yaml','.yml','.toml','.ini','.cfg','.csv','.log','.sql','.sh','.ps1','.bat','.cmd','.xml','.rst'}
+DOCUMENT_TYPES={'.pdf','.docx','.xlsx','.pptx'}
 
 
-def analyze_local_paths(files,values):
+def _document_text(path,size):
+    ext=path.suffix.casefold()
+    if ext=='.pdf':
+        if size>25_000_000:return 'PDF maior que 25 MB; conteúdo não lido para preservar desempenho.'
+        try:
+            from pypdf import PdfReader
+            reader=PdfReader(str(path),strict=False)
+            if reader.is_encrypted:return 'PDF protegido por senha; conteúdo não lido.'
+            if len(reader.pages)>500:return f'PDF com {len(reader.pages)} páginas; o conteúdo excede o limite de análise.'
+            pages=[]
+            for page in reader.pages[:10]:
+                text=page.extract_text() or ''
+                if text:pages.append(text[:6000])
+            return f'PDF com {len(reader.pages)} páginas. Trechos das primeiras 10 páginas:\n'+'\n'.join(pages)[:20000]
+        except Exception:return 'PDF detectado, mas não foi possível extrair texto. Pode conter apenas imagens, estar danificado ou usar codificação não suportada.'
+    try:
+        with zipfile.ZipFile(path) as archive:
+            infos=archive.infolist()
+            if len(infos)>2000 or sum(item.file_size for item in infos)>25_000_000:return 'Documento compactado excede os limites de análise.'
+            if ext=='.docx':
+                info=archive.getinfo('word/document.xml')
+                if info.file_size>8_000_000:return 'Documento Word contém uma parte grande demais para leitura local.'
+                root=ET.fromstring(archive.read(info));text=' '.join(node.text or '' for node in root.iter() if node.tag.rsplit('}',1)[-1]=='t')
+                return 'Documento Word: '+text[:20000]
+            if ext=='.pptx':
+                slides=sorted(x for x in archive.namelist() if re.fullmatch(r'ppt/slides/slide\d+\.xml',x))[:20]
+                result=[]
+                for name in slides:
+                    root=ET.fromstring(archive.read(name));text=' '.join(n.text or '' for n in root.iter() if n.tag.rsplit('}',1)[-1]=='t')
+                    if text:result.append(name.rsplit('/',1)[-1]+': '+text[:2000])
+                return f'Apresentação PowerPoint com {len(infos)} partes; texto de até 20 slides:\n'+'\n'.join(result)[:20000]
+            if ext=='.xlsx':
+                shared=[]
+                if 'xl/sharedStrings.xml' in archive.namelist():
+                    root=ET.fromstring(archive.read('xl/sharedStrings.xml'));shared=[''.join(n.text or '' for n in item.iter() if n.tag.rsplit('}',1)[-1]=='t') for item in list(root)[:3000]]
+                sheets=sorted(x for x in archive.namelist() if re.fullmatch(r'xl/worksheets/sheet\d+\.xml',x))[:10];result=[]
+                for name in sheets:
+                    root=ET.fromstring(archive.read(name));rows=[]
+                    for row in list(root):
+                        if row.tag.rsplit('}',1)[-1]!='sheetData':continue
+                        for record in list(row)[:30]:
+                            if record.tag.rsplit('}',1)[-1]!='row':continue
+                            values=[]
+                            for cell in list(record)[:20]:
+                                if cell.tag.rsplit('}',1)[-1]!='c':continue
+                                raw=next((n.text or '' for n in list(cell) if n.tag.rsplit('}',1)[-1]=='v'),'')
+                                if cell.attrib.get('t')=='s' and raw.isdigit() and int(raw)<len(shared):raw=shared[int(raw)]
+                                if raw:values.append(cell.attrib.get('r','')+'='+raw[:160])
+                            if values:rows.append(' | '.join(values))
+                            if len(rows)>=20:break
+                    result.extend([name+':',*rows])
+                return 'Planilha Excel; amostra limitada de células (fórmulas não são executadas):\n'+'\n'.join(result)[:20000]
+    except Exception:return 'Documento Office detectado, mas não foi possível ler sua estrutura interna com segurança.'
+    return 'Formato de documento não reconhecido.'
+
+
+def _image_info(path):
+    try:
+        from PIL import Image
+        with Image.open(path) as image:return f'Imagem {image.format or "desconhecida"} · {image.width} × {image.height} pixels.'
+    except Exception:return 'Imagem detectada; dimensões não disponíveis.'
+
+
+def referenced_local_paths(files,text,explicit=()):
+    values=list(explicit)
+    for match in re.finditer(r'(?i)(?:"((?:[a-z]:[\\/]|\\\\)[^"\r\n]+)"|((?:[a-z]:[\\/]|\\\\)[^\r\n<>|?*]+))',text):
+        value=match.group(1) or match.group(2)
+        candidates=[value.strip().rstrip('.,;:!?)]}')]
+        if not match.group(1):
+            parts=candidates[0].split()
+            candidates += [' '.join(parts[:end]).rstrip('.,;:!?)]}') for end in range(len(parts)-1,0,-1)]
+        for candidate in candidates:
+            try:
+                checked=files.paths.check(candidate)
+                if checked.is_file() or checked.is_dir():
+                    values.append(str(checked));break
+            except (OSError,ValueError):continue
+    return list(dict.fromkeys(values))[:10]
+
+
+def _file_description(path,size):
+    name=path.name.casefold();ext=path.suffix.casefold()
+    if name=='pagefile.sys':return 'Arquivo de paginação do Windows, usado para memória virtual. O Windows gerencia esse arquivo; não o exclua manualmente.'
+    if name=='hiberfil.sys':return 'Arquivo de hibernação do Windows, controlado pelo sistema. Não o exclua manualmente.'
+    if name=='swapfile.sys':return 'Arquivo de memória virtual do Windows, controlado pelo sistema. Não o exclua manualmente.'
+    types={'.py':'código Python','.js':'código JavaScript','.ts':'código TypeScript','.html':'página HTML','.css':'folha de estilos CSS',
+           '.json':'dados JSON','.csv':'tabela CSV','.md':'documentação Markdown','.pdf':'documento PDF','.docx':'documento Word',
+           '.xlsx':'planilha Excel','.pptx':'apresentação PowerPoint','.exe':'programa executável','.msi':'instalador do Windows',
+           '.apk':'aplicativo Android','.dll':'biblioteca do Windows','.sys':'arquivo de sistema ou driver','.db':'banco de dados',
+           '.sqlite':'banco de dados SQLite','.zip':'arquivo compactado','.mp4':'vídeo','.mkv':'vídeo','.jpg':'imagem','.jpeg':'imagem','.png':'imagem'}
+    return types.get(ext,'arquivo '+(ext or 'sem extensão'))
+
+
+def _text_outline(path,content):
+    lines=content.splitlines();result=[f'{len(lines)} linhas.']
+    if path.suffix.casefold() in {'.py','.js','.mjs','.ts','.tsx','.jsx'}:
+        symbols=[line.strip() for line in lines if re.match(r'\s*(?:async\s+)?(?:def|class|function)\s+\w+|\s*(?:export\s+)?(?:const|let)\s+\w+\s*=\s*(?:async\s*)?\(',line)][:12]
+        if symbols:result.append('Pontos de entrada e símbolos: '+', '.join(symbols))
+        imports=[line.strip() for line in lines if re.match(r'\s*(?:import|from|require\s*\()',line)][:8]
+        if imports:result.append('Dependências mencionadas: '+', '.join(imports))
+    headings=[line.strip().lstrip('#').strip() for line in lines if line.lstrip().startswith('#')][:8]
+    if headings:result.append('Títulos: '+', '.join(headings))
+    if path.suffix.casefold()=='.json':
+        try:
+            import json
+            value=json.loads(content)
+            if isinstance(value,dict):result.append('Chaves principais: '+', '.join(str(key)[:80] for key in list(value)[:20]))
+            elif isinstance(value,list):result.append('Lista com '+str(len(value))+' itens.')
+        except ValueError:result.append('O conteúdo não pôde ser interpretado como JSON válido.')
+    if not headings and not any(s in ' '.join(result) for s in ('símbolos','Chaves','Lista com')):
+        excerpt=' '.join(line.strip() for line in lines[:4] if line.strip())[:500]
+        if excerpt:result.append('Início: '+excerpt)
+    return ' '.join(result)
+
+
+def analyze_local_paths(files,values,include_content=False):
     found=[];metadata=[];total=0;truncated=False
     values=list(dict.fromkeys(values))
     for value in values:
@@ -43,18 +163,27 @@ def analyze_local_paths(files,values):
         if len(candidates)>40:truncated=True
         for item in candidates[:40]:
             checked=files.paths.check(str(item));size=checked.stat().st_size
-            if len(metadata)<40:metadata.append((str(checked),size,checked.suffix.casefold() or 'sem extensão'))
-            if checked.suffix.casefold() not in TEXT_TYPES:continue
-            if size>1_000_000 or total+size>10_000_000:truncated=True;continue
-            total+=size
-            if len(found)<12:
-                content=checked.read_text('utf-8',errors='replace')[:12000]
-                found.append((str(checked),content))
+            ext=checked.suffix.casefold()
+            content=''
+            if ext in TEXT_TYPES:
+                if size>1_000_000 or total+size>10_000_000:truncated=True
+                elif len(found)<12:
+                    total+=size
+                    content=checked.read_text('utf-8',errors='replace')[:12000]
+            elif ext in DOCUMENT_TYPES and size<=25_000_000 and len(found)<12:
+                total+=size
+                content=_document_text(checked,size)
+            elif ext in CATEGORIES['images']:
+                content=_image_info(checked)
+            if len(metadata)<40:metadata.append((str(checked),size,ext.lstrip('.') or 'sem extensão',content))
+            if content and len(found)<12:found.append((checked,content))
     if not metadata:return 'Os caminhos foram verificados. Não encontrei arquivos acessíveis para resumo.'
-    summary=[f"Análise local de {len(values)} caminho(s). Inventário de até {len(metadata)} arquivos; conteúdo de {len(found)} arquivos de texto lido ({total} bytes). Imagens e binários são descritos por metadados, sem leitura do conteúdo."]
+    summary=[f"Análise local de {len(values)} caminho(s). Inventário de até {len(metadata)} arquivos; conteúdo de {len(found)} arquivos lido localmente ({total} bytes). Arquivos binários são descritos por tipo e metadados, sem executar seu conteúdo."]
     if truncated:summary.append('A leitura foi limitada por segurança e desempenho.')
-    summary.extend('\n- '+name+' · '+str(size)+' bytes · '+kind for name,size,kind in metadata)
-    for name,content in found:summary.extend(['\n### '+name,'```\n'+content+'\n```'])
+    summary.extend('\n- '+name+' · '+str(size)+' bytes · '+kind+' · '+_file_description(Path(name),size) for name,size,kind,_ in metadata)
+    for path,content in found:
+        summary.extend(['\n### '+str(path),_text_outline(path,content)])
+        if include_content:summary.extend(['Conteúdo fornecido à IA a pedido do usuário:','```\n'+content+'\n```'])
     return '\n'.join(summary)[:50000]
 
 
@@ -79,6 +208,8 @@ class Paths:
         if TRASH in {p.casefold() for p in path.parts} and not trash:
             raise ValueError('Use a aba Lixeira para acessar os itens removidos.')
         if write:
+            if path.name.casefold() in PROTECTED_NAMES:
+                raise ValueError('Arquivos controlados pelo Windows não podem ser removidos.')
             if any(path==p or path.is_relative_to(p) for p in self.protected):
                 raise ValueError('Os arquivos do Vexx PC não podem ser removidos aqui.')
             if any(p.casefold() in BLOCKED for p in path.parts) or path==Path(path.anchor) or (path.is_file() and path.parent==Path(path.anchor)):
@@ -155,7 +286,8 @@ class Files:
 
     def removable(self,value):
         path=Path(value)
-        return not (any(p.casefold() in BLOCKED or p.casefold()==TRASH for p in path.parts) or path.parent==Path(path.anchor)
+        return not (path.name.casefold() in PROTECTED_NAMES or path==Path(path.anchor) or path.parent==Path(path.anchor)
+                    or any(p.casefold() in BLOCKED or p.casefold()==TRASH for p in path.parts)
                     or any(path==p or path.is_relative_to(p) for p in self.paths.protected))
 
     def prepare(self, mode, values):

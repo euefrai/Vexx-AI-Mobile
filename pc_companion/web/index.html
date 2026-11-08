@@ -157,7 +157,7 @@
       </article>
 
       <article class="panel resource-actions">
-        <div class="panel-head"><div><h2>Ações sugeridas</h2><p class="hint">RAM e arquivos grandes · leitura local a cada 30 segundos</p></div><span class="badge neutral">Neste PC</span></div>
+        <div class="panel-head"><div><h2>Ações sugeridas</h2><p class="hint">RAM, arquivos, apps e configurações · dados locais</p></div><button id="system-audit" class="secondary" type="button">Analisar sistema</button></div>
         <div id="suggested-actions" class="suggested-actions"><p class="hint">Analisando recursos locais…</p></div>
       </article>
 
@@ -506,7 +506,7 @@
       <label class="sr-only" for="chat-input">Mensagem para o Copiloto</label>
       <div id="attachment-list" class="attachment-list" hidden></div>
       <div class="composer-box">
-        <textarea id="chat-input" rows="2" maxlength="2000" placeholder="Peça em português… · !cmd comando para CMD" required></textarea>
+      <textarea id="chat-input" rows="2" maxlength="2000" placeholder="Analise arquivos, pastas ou o sistema… · !cmd comando" required></textarea>
         <button class="attach-button" id="attach-file" type="button" title="Anexar arquivo de texto" aria-label="Anexar arquivo"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-file"/></svg></button>
         <input id="chat-attachments" type="file" multiple accept=".txt,.md,.py,.js,.ts,.tsx,.jsx,.html,.css,.json,.yaml,.yml,.toml,.ini,.csv,.sql,.xml,.log,.sh,.ps1,.bat,.cmd" hidden>
         <button type="submit" class="send-button" aria-label="Enviar mensagem" title="Enviar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-send"/></svg></button>
