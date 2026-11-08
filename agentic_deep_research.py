@@ -204,8 +204,19 @@ def decompose_complex_query(
 
     max_queries = max(2, min(int(max_queries or 3), 3))
 
-    # Se houver função LLM injetada, tenta decomposição/auto-correção inteligente
-    if callable(llm_fn):
+    effective_llm = llm_fn
+    if effective_llm is None:
+        try:
+            import qwen_llm_service
+            def _qwen_decompose_wrapper(p: str) -> str:
+                r = qwen_llm_service.gerar_resposta_qwen(p, temperatura=0.2, max_tokens=256)
+                return str(r.get("resposta") or "")
+            effective_llm = _qwen_decompose_wrapper
+        except Exception:
+            effective_llm = None
+
+    # Se houver função LLM injetada ou modelo Qwen VEXX disponível
+    if callable(effective_llm):
         try:
             prompt = (
                 QUERY_SELF_CORRECTION_PROMPT.format(
@@ -217,7 +228,7 @@ def decompose_complex_query(
                 if attempt > 1
                 else QUERY_DECOMPOSITION_PROMPT.format(mode=mode, query=base)
             )
-            raw_resp = llm_fn(prompt) or ""
+            raw_resp = effective_llm(prompt) or ""
             match = re.search(r"\[[\s\S]*?\]", raw_resp)
             if match:
                 parsed = json.loads(match.group(0))
@@ -1132,7 +1143,7 @@ def _synthesize_product_comparison(
                 "Escreva um resumo executivo direto destacando o melhor custo-benefício, "
                 "variação de preços, disponibilidade de cores/tamanhos e recomendação."
             )
-            ans = (llm_fn(prompt) or "").strip()
+            ans = (effective_llm(prompt) or "").strip()
             if len(ans) >= 40:
                 return ans
         except Exception as exc:
@@ -1399,7 +1410,18 @@ def _synthesize_deep_report(
             "após 3 tentativas de busca e auto-correção."
         )
 
-    if callable(llm_fn):
+    effective_llm = llm_fn
+    if effective_llm is None:
+        try:
+            import qwen_llm_service
+            def _qwen_synth_wrapper(p: str) -> str:
+                r = qwen_llm_service.gerar_resposta_qwen(p, temperatura=0.3, max_tokens=1024)
+                return str(r.get("resposta") or "")
+            effective_llm = _qwen_synth_wrapper
+        except Exception:
+            effective_llm = None
+
+    if callable(effective_llm):
         try:
             context_blocks = []
             for s in sources[:6]:
@@ -1417,7 +1439,7 @@ def _synthesize_deep_report(
                 "3. Tendências, Previsões e Implicações de Mercado\n"
                 "4. Fontes Consultadas"
             )
-            ans = (llm_fn(prompt) or "").strip()
+            ans = (effective_llm(prompt) or "").strip()
             if len(ans) >= 80:
                 return ans
         except Exception as exc:

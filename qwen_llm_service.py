@@ -195,19 +195,19 @@ def planejar_pesquisa_qwen(pergunta: str, contexto_visao: str = "") -> List[str]
     resp = gerar_resposta_qwen(prompt, temperatura=0.2, max_tokens=256)
     queries = resp.get("queries_pesquisa") or []
 
-    if not queries and resp.get("resposta"):
+    if resp.get("status") == "sucesso" and not queries and resp.get("resposta"):
         # Tenta extrair queries do texto se vieram fora do bloco
         linhas = resp["resposta"].splitlines()
         for l in linhas:
             l_clean = re.sub(r"^[\d\.\-\*\"\']+", "", l).strip().strip('"').strip("'")
-            if len(l_clean) >= 4 and not l_clean.startswith("[") and not l_clean.startswith("```"):
+            if len(l_clean) >= 4 and not l_clean.startswith("[") and not l_clean.startswith("```") and not any(l_clean.startswith(pref) for pref in ("Análise Qwen", "Você é", "Pergunta", "Contexto", "Erro", "Gere de")):
                 queries.append(l_clean)
             if len(queries) >= 3:
                 break
 
     # Fallback seguro combinando pergunta e visão se a IA não gerou lista
     if not queries:
-        queries = [clean_p[:120]]
+        queries = [clean_p[:300]]
         if contexto_visao:
             queries.append(f"{clean_p} {contexto_visao[:60]}".strip()[:140])
 
@@ -238,3 +238,196 @@ def decidir_ferramenta_qwen(
         return calls[0]
 
     return None
+
+VOCAB_HEURISTICAS = {
+    "fone": "headphone, earphones, bluetooth headset, earbuds",
+    "audio": "speaker, soundbar, headset, audio device",
+    "celular": "cell phone, mobile phone, smartphone, screen",
+    "smartphone": "smartphone, mobile phone, cell phone",
+    "computador": "laptop, computer monitor, keyboard, mouse",
+    "notebook": "laptop, keyboard, screen",
+    "teclado": "keyboard, keys",
+    "mouse": "mouse, computer mouse",
+    "botao": "button, clickable button, icon",
+    "comprar": "buy button, shopping cart, add to cart, price tag",
+    "carrinho": "shopping cart, cart icon, bag",
+    "login": "login button, sign in, username, password field, input field",
+    "entrar": "sign in button, login button, submit button",
+    "pesquisar": "search bar, search input, search button, magnifying glass",
+    "busca": "search bar, search input, magnifying glass",
+    "fechar": "close button, x icon, cancel button",
+    "link": "hyperlink, text link, button",
+    "icone": "icon, logo, symbol",
+    "imagem": "image, photo, picture, thumbnail",
+    "tabela": "table, data grid, spreadsheet",
+    "preco": "price, price tag, currency, discount badge",
+    "relogio": "smartwatch, watch, clock",
+    "livro": "book, document, paper, text",
+    "caneca": "cup, mug, coffee cup",
+    "garrafa": "bottle, water bottle",
+    "carro": "car, vehicle, automobile",
+}
+
+
+def sugerir_classes_visao_qwen(consulta: str) -> str:
+    """Traduz o pedido do usuario para classes de vocabulario aberto (YOLO-World v2)."""
+    c_limpa = (consulta or "").lower().strip()
+    if not c_limpa:
+        return "object, button, text, item"
+
+    classes_encontradas: list[str] = []
+    for k, v in VOCAB_HEURISTICAS.items():
+        if k in c_limpa:
+            for item in v.split(","):
+                c_norm = item.strip()
+                if c_norm and c_norm not in classes_encontradas:
+                    classes_encontradas.append(c_norm)
+
+    try:
+        prompt = (
+            "Extraia de 2 a 5 nomes de objetos em ingles para deteccao com YOLO-World v2.\n"
+            f"Consulta: {consulta}\n"
+            "Retorne APENAS os nomes separados por virgula (ex: 'bluetooth headphone, price, buy button')."
+        )
+        resp = gerar_resposta_qwen(prompt, temperatura=0.1, max_tokens=60)
+        saida = resp.get("resposta", "").strip().strip(".'\"")
+        if saida and len(saida) >= 3 and not saida.startswith("Erro"):
+            for item in saida.split(","):
+                item_limpo = item.strip().lower()
+                if 2 <= len(item_limpo) <= 40 and item_limpo not in classes_encontradas:
+                    classes_encontradas.append(item_limpo)
+    except Exception:
+        pass
+
+    if not classes_encontradas:
+        classes_encontradas = ["object", "item", "button", "text"]
+
+    return ", ".join(classes_encontradas[:8])
+
+
+def sintetizar_pesquisa_multimodal_qwen(
+    consulta: str,
+    fontes: list[dict[str, Any]],
+    imagens: list[dict[str, Any]] | None = None,
+    contexto_visao: str = "",
+) -> dict[str, Any]:
+    """Sintetiza um relatorio de pesquisa profunda com links diretos, imagens e fatos verificados."""
+    if not fontes:
+        return {
+            "status": "vazio",
+            "relatorio_markdown": f"Nenhuma fonte factual encontrada para '{consulta}'.",
+            "fontes": [],
+            "imagens": [],
+        }
+
+    linhas_md = [
+        f"## Pesquisa e Analise Aprofundada: {consulta}",
+        "",
+        "### Resumo Executivo",
+    ]
+
+    blocos_contexto = []
+    for idx, f in enumerate(fontes[:6], start=1):
+        titulo = f.get("titulo") or f.get("title") or "Fonte"
+        url = f.get("url") or f.get("link") or ""
+        trecho = str(f.get("trecho") or f.get("snippet") or f.get("markdown") or "")[:500].replace("\n", " ")
+        blocos_contexto.append(f"[{idx}] {titulo} ({url}): {trecho}")
+
+    resumo_gerado = ""
+    try:
+        evidencias_str = "\n".join(blocos_contexto)
+        prompt = (
+            f"Topico da pesquisa: {consulta}\n"
+            f"Evidencias encontradas:\n{evidencias_str}\n\n"
+            "Escreva uma resposta analitica, detalhada e precisa em portugues citando as fontes com [1], [2]..."
+        )
+        resp_qwen = gerar_resposta_qwen(prompt, temperatura=0.2, max_tokens=1024)
+        if resp_qwen.get("status") == "sucesso" and len(resp_qwen.get("resposta", "")) >= 100:
+            resumo_gerado = resp_qwen["resposta"].strip()
+    except Exception:
+        pass
+
+    if resumo_gerado:
+        linhas_md.append(resumo_gerado)
+    else:
+        for idx, f in enumerate(fontes[:4], start=1):
+            titulo = f.get("titulo") or f.get("title") or "Fonte"
+            trecho = str(f.get("trecho") or f.get("snippet") or "")[:200].replace("\n", " ")
+            url = f.get("url") or ""
+            linhas_md.append(f"- **[{idx}] [{titulo}]({url}):** {trecho}")
+
+    imgs_validas = []
+    if imagens:
+        for img in imagens:
+            if isinstance(img, dict) and img.get("url"):
+                u = str(img["url"]).strip()
+                if u.startswith("http://") or u.startswith("https://"):
+                    imgs_validas.append(img)
+            elif isinstance(img, str) and (img.startswith("http://") or img.startswith("https://")):
+                imgs_validas.append({"url": img, "titulo": "Imagem do produto/artigo"})
+
+    if imgs_validas:
+        linhas_md.extend([
+            "",
+            "### Imagens e Evidencias Visuais",
+        ])
+        for img in imgs_validas[:4]:
+            t = img.get("titulo") or img.get("alt") or consulta
+            linhas_md.append(f"![{t}]({img['url']})")
+
+    if contexto_visao:
+        linhas_md.extend([
+            "",
+            "### Analise Visual Direta (YOLO-World + RapidOCR)",
+            f"{contexto_visao}",
+        ])
+
+    linhas_md.extend([
+        "",
+        "### Fontes e Links Consultados",
+    ])
+    for idx, f in enumerate(fontes[:8], start=1):
+        titulo = f.get("titulo") or f.get("title") or "Fonte"
+        url = f.get("url") or f.get("link") or ""
+        dominio = f.get("dominio") or f.get("domain") or ""
+        linhas_md.append(f"- **[{idx}]** [{titulo}]({url}) {f'({dominio})' if dominio else ''}")
+
+    relatorio = "\n".join(linhas_md)
+    return {
+        "status": "sucesso",
+        "relatorio_markdown": relatorio,
+        "total_fontes": len(fontes),
+        "fontes": fontes,
+        "total_imagens": len(imgs_validas),
+        "imagens": imgs_validas,
+    }
+
+
+def enriquecer_pesquisa_com_visao_qwen(
+    consulta_texto: str,
+    dados_visao: dict | list | None = None,
+) -> list[str]:
+    """Combina texto do usuario com objetos detectados e textos OCR em queries otimizadas."""
+    c_limpa = (consulta_texto or "").strip()
+    if not c_limpa:
+        return []
+
+    tags = ""
+    ocr_texto = ""
+    if isinstance(dados_visao, dict):
+        tags = str(dados_visao.get("tags_busca") or "")
+        ocr_texto = str(dados_visao.get("texto_extraido") or "")
+    elif isinstance(dados_visao, list):
+        tags_list = []
+        for d in dados_visao:
+            if isinstance(d, dict) and d.get("tags_busca"):
+                tags_list.append(str(d["tags_busca"]))
+        tags = ", ".join(tags_list)
+
+    ctx = ""
+    if tags:
+        ctx += f"Tags identificadas: {tags}. "
+    if ocr_texto:
+        ctx += f"Texto lido na imagem: {ocr_texto[:140]}."
+
+    return planejar_pesquisa_qwen(c_limpa, contexto_visao=ctx)

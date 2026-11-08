@@ -182,8 +182,15 @@ def _empacotar_arquivo_gradio(alvo: str):
         return alvo
 
 
-def _invocar_predicao(cliente: Any, entrada: Any, api_name: str = DEFAULT_API_NAME) -> Any:
-    """Chama ``/predict`` com fallback para ``/detectar_objetos`` ou ``fn_index=0``."""
+def _invocar_predicao(cliente: Any, entrada: Any, api_name: str = DEFAULT_API_NAME,
+                      classes_personalizadas: str = "") -> Any:
+    """Chama endpoint de predição com suporte a classes personalizadas (YOLO-World) e fallbacks."""
+    if classes_personalizadas:
+        try:
+            return cliente.predict(entrada, str(classes_personalizadas), api_name="/detectar_com_classes")
+        except Exception as exc:
+            log.warning("Falha em /detectar_com_classes (%s), tentando endpoints padrao...", exc)
+
     tentativas_api = [api_name]
     if "/detectar_objetos" not in tentativas_api:
         tentativas_api.append("/detectar_objetos")
@@ -416,6 +423,7 @@ def _normalizar_resposta(bruto: Any, origem: str = "") -> dict[str, Any]:
 def analisar_imagem(
     imagem: Any,
     *,
+    classes_personalizadas: str = "",
     space_url: str | None = None,
     api_name: str = DEFAULT_API_NAME,
     timeout: float = DEFAULT_TIMEOUT_S,
@@ -427,6 +435,8 @@ def analisar_imagem(
 
     Retorna objetos detectados, ``texto_extraido``, ``textos_lidos``, ``tags_busca``
     e ``alvos_clique`` com coordenadas exatas e normalizadas de clique.
+    Se ``classes_personalizadas`` for fornecido (ex: "cellphone, mug, buy button"),
+    invoca o endpoint YOLO-World v2 de detecção de vocabulário aberto.
     """
     if isinstance(imagem, dict) and "deteccoes" in imagem and "status" in imagem:
         return _normalizar_resposta(imagem, origem=str(imagem.get("origem") or "dict"))
@@ -479,7 +489,8 @@ def analisar_imagem(
                     else:
                         cliente = obter_cliente(url, timeout=timeout_efetivo, recriar=recriar)
                     entrada = _empacotar_arquivo_gradio(alvo)
-                    return _invocar_predicao(cliente, entrada, api_name=api_name)
+                    return _invocar_predicao(cliente, entrada, api_name=api_name,
+                                             classes_personalizadas=classes_personalizadas)
 
                 with ThreadPoolExecutor(max_workers=1) as pool:
                     fut = pool.submit(_executar_chamada)
@@ -607,45 +618,257 @@ def clicar_alvo_tela(
     *,
     tipo_clique: str = "click",
     autorizado: bool = False,
+    classes_personalizadas: str = "",
     **kwargs: Any,
 ) -> dict[str, Any]:
-    """Localiza um botão, link, texto ou objeto na tela e executa o clique via ``remoto``."""
+    """Localiza um botao, link, texto ou objeto na tela e executa o clique agil (RULE[user_global])."""
     import remoto
 
     img_entrada = imagem
+    tela_direta = False
     if img_entrada is None:
+        tela_direta = True
         captura = remoto.capturar()
         img_entrada = "data:image/jpeg;base64," + captura["imagem"]
 
-    coord = encontrar_coordenada_clique(img_entrada, alvo_texto_ou_objeto, **kwargs)
-    if not coord:
-        return {
-            "ok": False,
-            "erro": f"Alvo '{alvo_texto_ou_objeto}' não encontrado na imagem/tela.",
-            "alvo": alvo_texto_ou_objeto,
-        }
+    loc = localizar_alvos_inteligente(
+        img_entrada,
+        alvo_texto_ou_objeto,
+        classes_personalizadas=classes_personalizadas,
+        limite=3,
+        **kwargs
+    )
+    melhor = loc.get("melhor_alvo")
+    if not melhor:
+        coord = encontrar_coordenada_clique(img_entrada, alvo_texto_ou_objeto, **kwargs)
+        if not coord:
+            return {
+                "ok": False,
+                "erro": f"Alvo '{alvo_texto_ou_objeto}' nao encontrado na imagem/tela.",
+                "alvo": alvo_texto_ou_objeto,
+            }
+        melhor = coord
 
     kind = tipo_clique if tipo_clique in ("click", "double", "right", "move") else "click"
+    x_px = int(melhor.get("x", 0))
+    y_px = int(melhor.get("y", 0))
+    x_norm = float(melhor.get("x_norm", 0.0))
+    y_norm = float(melhor.get("y_norm", 0.0))
+
+    if tela_direta:
+        try:
+            import pyautogui
+            sw, sh = pyautogui.size()
+            target_x = int(round(x_norm * sw)) if x_norm > 0 else x_px
+            target_y = int(round(y_norm * sh)) if y_norm > 0 else y_px
+
+            if kind == "right":
+                pyautogui.rightClick(target_x, target_y)
+            elif kind == "double":
+                pyautogui.doubleClick(target_x, target_y)
+            elif kind == "move":
+                pyautogui.moveTo(target_x, target_y)
+            else:
+                pyautogui.click(target_x, target_y)
+
+            return {
+                "ok": True,
+                "acao": kind,
+                "metodo": "pyautogui",
+                "alvo": melhor.get("rotulo", alvo_texto_ou_objeto),
+                "tipo": melhor.get("tipo", "objeto"),
+                "coordenada": {
+                    "x": target_x,
+                    "y": target_y,
+                    "x_norm": x_norm,
+                    "y_norm": y_norm,
+                },
+                "score": melhor.get("score", 100.0),
+            }
+        except Exception as exc_pyauto:
+            log.warning("pyautogui clique falhou (%s), caindo para remoto...", exc_pyauto)
+
     cmd = remoto.validar_comando({
         "kind": kind,
-        "x": coord["x_norm"],
-        "y": coord["y_norm"],
+        "x": x_norm,
+        "y": y_norm,
     })
     exec_res = remoto.executar(cmd, autorizado=autorizado)
     return {
         "ok": True,
         "acao": kind,
-        "alvo": coord["rotulo"],
-        "tipo": coord["tipo"],
+        "metodo": "remoto",
+        "alvo": melhor.get("rotulo", alvo_texto_ou_objeto),
+        "tipo": melhor.get("tipo", "objeto"),
         "coordenada": {
-            "x": coord["x"],
-            "y": coord["y"],
-            "x_norm": coord["x_norm"],
-            "y_norm": coord["y_norm"],
+            "x": x_px,
+            "y": y_px,
+            "x_norm": x_norm,
+            "y_norm": y_norm,
         },
+        "score": melhor.get("score", 100.0),
         "remoto": exec_res,
     }
 
+
+def analisar_imagem_yolo(caminho_ou_url_imagem: str) -> dict[str, Any]:
+    """Envia uma imagem para a API YOLOv8 no Hugging Face (conforme RULE[user_global])."""
+    return analisar_imagem(caminho_ou_url_imagem)
+
+
+def localizar_alvos_inteligente(
+    imagem: Any,
+    consulta_ou_alvo: str,
+    *,
+    classes_personalizadas: str = "",
+    limite: int = 10,
+    threshold_score: float = 0.20,
+    space_url: str | None = None,
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Localiza alvos visuais (objetos YOLO + textos RapidOCR) com ranking semantico e pontos de clique."""
+    consulta_limpa = _sem_acentos(consulta_ou_alvo)
+    if not consulta_limpa:
+        return {
+            "status": "erro",
+            "mensagem": "Consulta ou alvo vazio",
+            "consulta": consulta_ou_alvo,
+            "total_alvos": 0,
+            "alvos": [],
+            "melhor_alvo": None,
+        }
+
+    classes_finais = classes_personalizadas
+    if not classes_finais:
+        try:
+            import qwen_llm_service
+            classes_finais = qwen_llm_service.sugerir_classes_visao_qwen(consulta_ou_alvo)
+        except Exception:
+            pass
+
+    res = analisar_imagem(imagem, classes_personalizadas=classes_finais, space_url=space_url, **kwargs)
+    if res.get("status") != "sucesso":
+        return {
+            "status": res.get("status") or "erro",
+            "mensagem": res.get("mensagem") or "Falha na analise de imagem",
+            "consulta": consulta_ou_alvo,
+            "classes_usadas": classes_finais,
+            "total_alvos": 0,
+            "alvos": [],
+            "melhor_alvo": None,
+        }
+
+    alvos_candidatos = list(res.get("alvos_clique") or [])
+    tokens_alvo = [t for t in re.findall(r"[a-z0-9]+", consulta_limpa) if len(t) >= 2]
+
+    ranqueados = []
+    for item in alvos_candidatos:
+        rotulo = str(item.get("rotulo") or "")
+        rotulo_norm = _sem_acentos(rotulo)
+        if not rotulo_norm:
+            continue
+        conf = float(item.get("confianca") or 0.0)
+        score = 0.0
+        if rotulo_norm == consulta_limpa:
+            score = 100.0 + (conf * 10.0)
+        elif consulta_limpa in rotulo_norm:
+            score = 80.0 + (conf * 10.0)
+        elif rotulo_norm in consulta_limpa and len(rotulo_norm) >= 3:
+            score = 65.0 + (conf * 10.0)
+        elif tokens_alvo:
+            hits = sum(1 for t in tokens_alvo if t in rotulo_norm)
+            if hits:
+                score = (40.0 * (hits / len(tokens_alvo))) + (conf * 10.0)
+
+        if classes_finais:
+            for c in classes_finais.lower().split(","):
+                c = c.strip()
+                if c and (c in rotulo_norm or rotulo_norm in c):
+                    score = max(score, 70.0 + (conf * 10.0))
+
+        if score >= (threshold_score * 100.0) or score >= 20.0:
+            pt = item.get("ponto_clique") or {}
+            ranqueados.append({
+                "tipo": item.get("tipo", "objeto"),
+                "rotulo": rotulo,
+                "confianca": round(conf, 3),
+                "score": round(score, 2),
+                "coordenadas": item.get("coordenadas", []),
+                "ponto_clique": pt,
+                "x": int(pt.get("x", 0)),
+                "y": int(pt.get("y", 0)),
+                "x_norm": float(pt.get("x_norm", 0.0)),
+                "y_norm": float(pt.get("y_norm", 0.0)),
+            })
+
+    ranqueados.sort(key=lambda x: (x["score"], x["confianca"]), reverse=True)
+    if limite and limite > 0:
+        ranqueados = ranqueados[:limite]
+
+    melhor = ranqueados[0] if ranqueados else None
+    return {
+        "status": "sucesso",
+        "consulta": consulta_ou_alvo,
+        "classes_usadas": classes_finais,
+        "total_alvos": len(ranqueados),
+        "alvos": ranqueados,
+        "melhor_alvo": melhor,
+        "dimensoes": res.get("dimensoes") or {"largura": 0, "altura": 0},
+        "tags_busca": res.get("tags_busca", ""),
+        "texto_extraido": res.get("texto_extraido", ""),
+    }
+
+
+def localizar_coisas_na_tela(
+    consulta_ou_alvo: str,
+    *,
+    classes_personalizadas: str = "",
+    limite: int = 10,
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Captura a tela em tempo real (via mss/ImageGrab) e localiza alvos visuais ou textuais."""
+    temp_file = None
+    try:
+        import mss
+        from PIL import Image
+        with mss.mss() as sct:
+            monitor = sct.monitors[1] if len(sct.monitors) > 1 else sct.monitors[0]
+            sct_img = sct.grab(monitor)
+            img = Image.frombytes("RGB", sct_img.size, sct_img.bgra, "raw", "BGRX")
+            with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tf:
+                temp_file = tf.name
+                img.save(temp_file, format="PNG")
+    except Exception:
+        try:
+            from PIL import ImageGrab
+            img = ImageGrab.grab()
+            with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tf:
+                temp_file = tf.name
+                img.save(temp_file, format="PNG")
+        except Exception as exc:
+            return {
+                "status": "erro",
+                "mensagem": f"Nao foi possivel capturar a tela: {exc}",
+                "consulta": consulta_ou_alvo,
+                "total_alvos": 0,
+                "alvos": [],
+                "melhor_alvo": None,
+            }
+
+    try:
+        return localizar_alvos_inteligente(
+            temp_file,
+            consulta_ou_alvo,
+            classes_personalizadas=classes_personalizadas,
+            limite=limite,
+            **kwargs,
+        )
+    finally:
+        if temp_file:
+            try:
+                Path(temp_file).unlink(missing_ok=True)
+            except OSError:
+                pass
 
 def extrair_imagens_do_texto(texto: str, contexto_local: dict | None = None) -> list[str]:
     """Extrai URLs de imagens, data URIs Base64 ou imagens anexadas em ``contexto_local``."""
