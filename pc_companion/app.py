@@ -61,6 +61,22 @@ def requested_wifi_ssid(text):
     return value[:32] if value else ''
 
 
+def asks_for_system_audit(text):
+    explicit=('auditoria','audite','analise completa','diagnostico completo','diagnostico geral',
+              'analise o sistema','analise meu pc','analise meu computador','verifique meu computador','avalie o sistema')
+    if any(term in text for term in explicit):return True
+    action=any(term in text for term in ('analis','verifique','avalie','diagnost','revise','mostre','liste'))
+    scope=any(term in text for term in ('sistema','computador',' pc','tudo','geral','configur','lixeira','nuvem'))
+    return action and scope and any(term in text for term in ('complet','inteir','tudo','arquivo','pasta','configur','lixeira','nuvem','espaco','memoria'))
+
+
+def asks_for_cleanup(text):
+    target=any(term in text for term in ('arquivo','pasta','app','aplicativo','programa','disco','espaco','computador',' pc','hd','ssd'))
+    action=any(term in text for term in ('exclu','apag','remov','liber','limp','inutil','desnecess','nao uso','ocupando muito','pesado'))
+    question=any(term in text for term in ('o que posso','o que da para','o que dá para','tem algum','quais'))
+    return target and (action or question and any(term in text for term in ('espaco','arquivo','app','programa','inutil','pesado')))
+
+
 def default_roots():
     import psutil
     if os.name == 'nt':
@@ -533,10 +549,9 @@ def create_app(directory=None, roots=None):
         if uploaded:text+='\n\nArquivos anexados pelo usuário:\n'+'\n'.join('### '+str(f.get('name','arquivo'))+'\n'+str(f.get('text','')) for f in uploaded)
         if not isinstance(attachments,list) or len(attachments)>10 or not all(isinstance(p,str) for p in attachments):raise HTTPException(400,'Anexe até 10 caminhos locais.')
         attachments=referenced_local_paths(files,text,attachments)
-        cleanup_intent=(any(word in normalized for word in ('excluir','exclua','apagar','apague','remover','remova','delete','liberar espaco','limpar o disco'))
-                        and any(word in normalized for word in ('arquivo','pasta','file','disco','espaco','computador','pc','hd')))
+        cleanup_intent=asks_for_cleanup(normalized)
         delete_action=bool(re.search(r'\b(?:exclua|apague|delete|remova|mova para a lixeira)\b',normalized))
-        audit_request=normalized.startswith(('!auditar','!auditoria')) or 'auditoria do sistema' in normalized or 'analise completa do sistema' in normalized or 'analise completa do computador' in normalized or ('analise' in normalized and any(word in normalized for word in ('sistema','computador',' pc','tudo')) and any(word in normalized for word in ('configur','arquivo','pasta','lixeira','nuvem','complet','tudo')))
+        audit_request=normalized.startswith(('!auditar','!auditoria')) or asks_for_system_audit(normalized)
         if audit_request:return await create_system_audit()
         if cleanup_intent and not attachments:
             result=await create_system_audit()

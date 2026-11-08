@@ -84,15 +84,31 @@ def collect(index,files,system,apps):
             for d in system.get('disks',[])]
     cloud_note=('Pastas de sincronização locais encontradas; o conteúdo remoto/da conta na nuvem não foi acessado.' if sync
                 else 'Nenhuma pasta local conhecida do OneDrive, Google Drive, Dropbox ou iCloud foi detectada. Contas e arquivos remotos não foram acessados.')
+    startup_count=_startup_count()
+    recommendations=[]
+    memory=system.get('ram') or {}
+    if memory.get('percent',0)>=85:
+        if processes:
+            recommendations.append('A RAM está acima de 85%. Revise os processos listados e feche apenas os que não estiverem em uso; trabalhos não salvos podem ser perdidos.')
+        else:
+            recommendations.append('A RAM está acima de 85%. Confira os aplicativos abertos e a aba de inicialização do Windows.')
+    if any((drive.get('percent') or 0)>=90 for drive in system.get('disks',[])):
+        recommendations.append('Há um disco com 90% ou mais de uso. Revise os maiores arquivos encontrados e o armazenamento do Windows antes de remover qualquer item.')
+    if startup_count is not None and startup_count>=20:
+        recommendations.append(f'Foram encontrados {startup_count} itens de inicialização. Revise a lista do Windows e desative apenas aplicativos que não precisam iniciar com o PC.')
+    if indexed.get('running'):
+        recommendations.append('O índice ainda está sendo atualizado; aguarde a conclusão para ampliar a cobertura da busca por arquivos e pastas.')
+    if not recommendations:
+        recommendations.append('Não há um alerta de uso alto nos dados desta amostra. Revise os arquivos grandes e as configurações abaixo apenas se quiser liberar espaço ou ajustar o PC.')
     return {'created_at':time.time(),'computer':system.get('name',''),'os':system.get('os',''),'cpu_percent':system.get('cpu_percent'),
             'cores':system.get('cpu_cores'),'ram':system.get('ram',{}),'uptime':system.get('uptime',0),'drives':drives,
             'network':system.get('adapters',[]),'ssid':system.get('ssid',''),'power_plan':_power_plan(),
-            'startup_count':_startup_count(),'index':{'count':indexed.get('count',0),'skipped':indexed.get('skipped',0),
+            'startup_count':startup_count,'index':{'count':indexed.get('count',0),'skipped':indexed.get('skipped',0),
                 'running':indexed.get('running',False),'paused':indexed.get('paused',False),'roots':indexed.get('roots',[])},
             'processes':processes,'files':file_actions,'apps':heavy_apps,
             'folders':[{'path':x['path'],'name':x['name'],'size':x.get('size')} for x in folders[:5] if (x.get('size') or 0)>=1024**3],
             'trash':{'count':trash['count'],'size':trash['size']},'windows_trash':_windows_recycle_bin(),
-            'sync':sync,'cloud_note':cloud_note,
+            'sync':sync,'cloud_note':cloud_note,'recommendations':recommendations,
             'settings':[{'id':'storage','name':'Armazenamento do Windows','description':'Revise arquivos temporários e uso do disco.','uri':'ms-settings:storage'},
                         {'id':'startup','name':'Aplicativos de inicialização','description':'Revise programas que iniciam com o Windows.','uri':'ms-settings:startupapps'},
                         {'id':'power','name':'Energia e suspensão','description':'Revise as configurações de energia.','uri':'ms-settings:powersleep'},
@@ -134,5 +150,7 @@ def report(audit):
     if audit['folders']:
         lines.append('### Pastas grandes no índice')
         lines.extend(f"- {x['path']}: até {size(x['size'])} indexados." for x in audit['folders'])
+    lines.append('### Recomendações')
+    lines.extend('- '+item for item in audit.get('recommendations',[]))
     lines.append('### Próximas ações\nOs itens marcados para liberar espaço são movidos à Lixeira Vexx e podem ser restaurados. Encerrar processos pode perder trabalho não salvo. Apps abrem o gerenciador do Windows. Nenhuma mudança acontece até você selecionar e confirmar. A cobertura dos arquivos depende das raízes e do estado do índice.')
     return '\n\n'.join(lines)
