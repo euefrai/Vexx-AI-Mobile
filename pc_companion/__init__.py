@@ -1,2 +1,2 @@
 """Vexx PC: public, local-first desktop companion."""
-__version__ = '1.4.0'
+__version__ = '1.5.0'

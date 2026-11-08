@@ -20,6 +20,42 @@ CATEGORIES = {
     'archives':{'.zip','.7z','.rar','.tar','.gz','.bz2','.xz','.iso'},
     'temporary':{'.tmp','.temp','.bak','.old','.log'},
 }
+TEXT_TYPES={'.txt','.md','.py','.js','.mjs','.cjs','.ts','.tsx','.jsx','.html','.css','.json','.yaml','.yml','.toml','.ini','.cfg','.csv','.log','.sql','.sh','.ps1','.bat','.cmd','.xml','.rst'}
+
+
+def analyze_local_paths(files,values):
+    found=[];metadata=[];total=0;truncated=False
+    values=list(dict.fromkeys(values))
+    for value in values:
+        path=files.paths.check(value)
+        candidates=[]
+        if path.is_file():candidates=[path]
+        elif path.is_dir():
+            start=time.monotonic()
+            for folder,dirs,names in os.walk(path,followlinks=False):
+                dirs[:]=[d for d in dirs if d.casefold() not in BLOCKED and d!=TRASH and not (Path(folder)/d).is_symlink()]
+                for name in names:
+                    item=Path(folder)/name
+                    if not item.is_symlink():candidates.append(item)
+                    if len(candidates)>=500 or time.monotonic()-start>2:truncated=True;break
+                if truncated or len(candidates)>=500:break
+        else:raise ValueError('Selecione um arquivo ou pasta.')
+        if len(candidates)>40:truncated=True
+        for item in candidates[:40]:
+            checked=files.paths.check(str(item));size=checked.stat().st_size
+            if len(metadata)<40:metadata.append((str(checked),size,checked.suffix.casefold() or 'sem extensão'))
+            if checked.suffix.casefold() not in TEXT_TYPES:continue
+            if size>1_000_000 or total+size>10_000_000:truncated=True;continue
+            total+=size
+            if len(found)<12:
+                content=checked.read_text('utf-8',errors='replace')[:12000]
+                found.append((str(checked),content))
+    if not metadata:return 'Os caminhos foram verificados. Não encontrei arquivos acessíveis para resumo.'
+    summary=[f"Análise local de {len(values)} caminho(s). Inventário de até {len(metadata)} arquivos; conteúdo de {len(found)} arquivos de texto lido ({total} bytes). Imagens e binários são descritos por metadados, sem leitura do conteúdo."]
+    if truncated:summary.append('A leitura foi limitada por segurança e desempenho.')
+    summary.extend('\n- '+name+' · '+str(size)+' bytes · '+kind for name,size,kind in metadata)
+    for name,content in found:summary.extend(['\n### '+name,'```\n'+content+'\n```'])
+    return '\n'.join(summary)[:50000]
 
 
 class Paths:

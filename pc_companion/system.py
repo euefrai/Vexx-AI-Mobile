@@ -13,6 +13,7 @@ class SystemMonitor:
         psutil.cpu_percent(None)
         self.previous = None
         self.ssid, self.ssid_at = '', 0
+        self.processes_at,self.heavy_processes=0,[]
 
     def snapshot(self):
         memory = psutil.virtual_memory()
@@ -58,8 +59,25 @@ class SystemMonitor:
                 self.ssid = match.group(1).strip() if match else ''
             except (OSError, subprocess.TimeoutExpired):
                 self.ssid = ''
+        if now-self.processes_at>=30:
+            processes=[]
+            for proc in psutil.process_iter(('pid','name','memory_info','create_time')):
+                try:
+                    info=proc.info;memory_info=info.get('memory_info')
+                    if not memory_info or not info.get('name'):continue
+                    processes.append({'pid':info['pid'],'name':info['name'][:120],'rss':memory_info.rss,'created':info.get('create_time')})
+                except (psutil.Error,OSError):continue
+            apps={}
+            for proc in processes:
+                name=proc['name'].casefold()
+                if name in ('system','registry','memory compression','idle','system interrupts') or proc['pid']==os.getpid():continue
+                item=apps.setdefault(name,{'name':proc['name'],'rss':0,'processes':[]})
+                item['rss']+=proc['rss'];item['processes'].append({'pid':proc['pid'],'created':proc['created']})
+            self.heavy_processes=sorted(apps.values(),key=lambda p:p['rss'],reverse=True)[:8]
+            self.processes_at=now
+        heavy=self.heavy_processes
         return {'name': platform.node(), 'os': platform.platform(), 'cpu_percent': psutil.cpu_percent(None),
                 'cpu_cores': psutil.cpu_count(), 'ram': {'used': memory.used, 'total': memory.total, 'percent': memory.percent},
                 'uptime': max(0, time.time() - psutil.boot_time()), 'disks': disks, 'adapters': adapters,
                 'network': rates, 'ssid': self.ssid, 'battery': None if not battery else {'percent': battery.percent, 'plugged': battery.power_plugged},
-                'agent_rss': psutil.Process(os.getpid()).memory_info().rss, 'sampled_at': time.time()}
+                'agent_rss': psutil.Process(os.getpid()).memory_info().rss, 'processes':heavy,'sampled_at': time.time()}

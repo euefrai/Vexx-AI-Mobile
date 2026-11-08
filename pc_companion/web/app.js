@@ -17,7 +17,7 @@ const state = {
   token: '', current: 'overview', snapshot: null, online: false,
   offset: 0, more: false, searchSequence: 0, searchTimer: 0,
   logs: [], logsFingerprint: '', lastSampleAt: 0, refreshing: null, lastRefreshError: '',
-  chatBusy: false, updating: false, updateResultSeen: '', updateInitialized: false,
+  chatBusy: false, updating: false, updateResultSeen: '', updateInitialized: false, suggestionAt: 0,
   updateErrorSeen: '', updateApplyingSeen: false,
   history: {cpu: [], ram: [], down: [], up: []},
   pageScroll: {},
@@ -335,10 +335,21 @@ function render(data) {
   renderStorage(data.system || {});
   renderAIStatus(data.ai || state.ai);
   renderUpdate(data.update);
+  if(state.current==='overview'&&Date.now()-state.suggestionAt>30000){state.suggestionAt=Date.now();loadSuggestions(data.system||{}).catch(()=>{});}
   if (data.nick) {
     const nickInput = $('pair-nick');
     if (nickInput && !nickInput.value) nickInput.value = data.nick;
   }
+}
+async function loadSuggestions(system){
+  const host=$('suggested-actions');if(!host)return;const fragment=document.createDocumentFragment();
+  for(const item of (system.processes||[]).filter(p=>p.rss>=512*1024**2).slice(0,3)){
+    const card=el('div','resource-suggestion'),copy=el('div','resource-suggestion-copy'),title=el('strong','',item.name),detail=el('small','',bytes(item.rss)+' de RAM'),button=el('button','secondary','Encerrar');
+    button.type='button';button.addEventListener('click',async()=>{const accepted=await askConfirm({title:'Encerrar aplicativo?',body:'Encerrar '+item.name+' ('+bytes(item.rss)+' de RAM)? O trabalho não salvo pode ser perdido.',label:'Encerrar'});if(!accepted)return;button.disabled=true;try{for(const proc of item.processes)await api('/api/process/stop',proc);notify(item.name+' encerrado.','success');await refresh();}catch(error){showError(error);}finally{button.disabled=false;}});copy.append(title,detail);card.append(copy,button);fragment.append(card);
+  }
+  try{const data=await api('/api/recommendations');for(const file of data.files){const card=el('div','resource-suggestion'),copy=el('div','resource-suggestion-copy'),title=el('strong','',file.name),detail=el('small','',bytes(file.size)+' · '+file.path),button=el('button','secondary','Revisar');button.type='button';button.addEventListener('click',()=>{go('cleaner');window.vexxWorkspace?.findLargeFile(file.name);});copy.append(title,detail);card.append(copy,button);fragment.append(card);}}catch{}
+  if(!fragment.childNodes.length)fragment.append(el('p','empty-state','Nenhum processo acima de 512 MB ou arquivo grande encontrado. Os dados permanecem neste computador.'));
+  host.replaceChildren(fragment);
 }
 function renderSystem(system, data) {
   const hasSensors = Boolean(system && system.name);
@@ -844,7 +855,8 @@ function addTyping() {
   messages.scrollTop = messages.scrollHeight;
   return message;
 }
-async function sendPrompt(text) {
+let chatFiles=[],chatPaths=[],chatFileRead=Promise.resolve();
+async function sendPrompt(text, extra = {}) {
   if (state.chatBusy) return;
   const value = String(text || '').trim();
   if (!value) return;
@@ -856,9 +868,12 @@ async function sendPrompt(text) {
   addMessage(value, true);
   const typing = addTyping();
   try {
-    const data = await api('/api/copilot', {text: value});
+    await chatFileRead;
+    const files=extra.attachments||chatFiles,paths=extra.paths||chatPaths;chatFiles=[];chatPaths=[];$('attachment-list').replaceChildren();$('attachment-list').hidden=true;
+    const data = await api('/api/copilot', {text:value,attachments:files,paths});
     typing.remove();
     addMessage(data.reply || 'Não houve resposta do serviço.');
+    if(data.command_preview){const accepted=await askConfirm({title:'Executar comando?',body:data.reply+'\n\nComando revisado:\n'+data.command_preview,label:'Executar comando',danger:true});if(accepted){const result=await api('/api/copilot',{text:'!confirmar '+data.confirmation});addMessage(result.reply||'Comando iniciado.');}else addMessage('Comando cancelado.');}
     if (data.search) {
       $('file-query').value = data.search;
       updateSearchClear();
@@ -1173,10 +1188,25 @@ function bindEvents() {
     event.preventDefault();
     const input = $('chat-input');
     const text = input.value.trim();
-    if (!text) return;
+    if (!text && !chatFiles.length && !chatPaths.length) return;
+    const quoted=[...text.matchAll(/"([a-z]:\\[^"\r\n]+)"/gi)].map(match=>match[1]);
+    const fullPath=/^(?:[a-z]:[\\/]|\\\\)/i.test(text)?[text]:[];
+    chatPaths=[...new Set([...chatPaths,...quoted,...fullPath])].slice(0,10);
     input.value = '';
     sendPrompt(text);
   });
+  $('chat-attachments').addEventListener('change',(event)=>{
+    const selected=[...event.target.files].slice(0,10);
+    event.target.value='';
+    chatFileRead=Promise.all(selected.map(file=>new Promise(resolve=>{
+      const ext=file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
+      if(file.size>12000){resolve({name:file.name,text:'Arquivo maior que 12 KB; cole o caminho local para análise.'});return;}
+      if(!['.txt','.md','.py','.js','.ts','.tsx','.jsx','.html','.css','.json','.yaml','.yml','.toml','.ini','.csv','.sql','.xml','.log','.sh','.ps1','.bat','.cmd'].includes(ext)){resolve({name:file.name,text:'Arquivo binário; cole o caminho local para analisar o conteúdo.'});return;}
+      const reader=new FileReader();reader.onload=()=>resolve({name:file.name,text:String(reader.result||'').slice(0,12000)});reader.onerror=()=>resolve({name:file.name,text:'Não foi possível ler o arquivo; cole o caminho local.'});reader.readAsText(file);
+    }))).then(items=>{chatFiles=items;const list=$('attachment-list');list.replaceChildren(...items.map(file=>el('span','attachment-chip',file.name)));list.hidden=!items.length;});
+  });
+  $('attach-file').addEventListener('click',()=>$('chat-attachments').click());
+  $('chat-input').addEventListener('paste',(event)=>{const files=[...(event.clipboardData?.files||[])];if(!files.length)return;event.preventDefault();const transfer=new DataTransfer();for(const file of files.slice(0,10))transfer.items.add(file);const picker=$('chat-attachments');picker.files=transfer.files;picker.dispatchEvent(new Event('change',{bubbles:true}));});
   $('chat-input').addEventListener('keydown', (event) => {
     if (event.key === 'Enter' && !event.shiftKey && !event.isComposing) {
       event.preventDefault();

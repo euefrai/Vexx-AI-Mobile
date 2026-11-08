@@ -1,7 +1,9 @@
-"""Loopback-only authenticated desktop dashboard; no shell execution endpoint."""
+"""Loopback-only authenticated desktop dashboard with reviewed local actions."""
 import asyncio
 import json
 import os
+import re
+import subprocess
 import secrets
 import time
 import unicodedata
@@ -66,6 +68,7 @@ def create_app(directory=None, roots=None):
     ai = AI(directory)
     files = Files(directory,index)
     projects = Projects(directory,index.roots)
+    command_reviews={}
     def shutdown():
         callback = getattr(app.state, 'request_exit', None)
         if callback:
@@ -146,7 +149,7 @@ def create_app(directory=None, roots=None):
             elif not secrets.compare_digest(provided, local_token):
                 return JSONResponse({'detail': 'Sessão local inválida'}, 401)
             try:
-                limit=65536 if request.url.path=='/api/files/prepare' else 8192
+                limit=160000 if request.url.path=='/api/copilot' else 65536 if request.url.path=='/api/files/prepare' else 8192
                 if int(request.headers.get('content-length', 0)) > limit:
                     return JSONResponse({'detail': 'Pedido muito grande'}, 413)
                 if len(await request.body()) > limit:
@@ -185,6 +188,11 @@ def create_app(directory=None, roots=None):
         return {**state, 'index': index.status(), 'connection': connection.status(), 'update':updater.status(),
                 'linked': bool(config.get('token')), 'relay': config.get('relay', ''), 'nick':config.get('nick',''), 'ai':ai.status()}
 
+    @app.get('/api/recommendations')
+    async def recommendations():
+        result=await asyncio.to_thread(index.search,'',0,'files','largest')
+        largest=[item for item in result['items'] if not item.get('directory') and files.removable(item['path'])][:5]
+        return {'files':largest,'sampled_at':time.time()}
     @app.get('/api/ai/config')
     async def ai_config():
         return ai.status()
@@ -269,6 +277,22 @@ def create_app(directory=None, roots=None):
 
     @app.get('/api/apps')
     async def apps():return await local_work(installed_apps)
+
+    @app.post('/api/process/stop')
+    async def stop_process(request: Request):
+        body=await payload(request)
+        try:
+            import psutil
+            pid=int(body.get('pid',0));created=float(body.get('created',0));process=psutil.Process(pid)
+            if pid in (0,4,os.getpid()) or abs(process.create_time()-created)>.01:raise ValueError('O processo mudou desde a análise.')
+            name=process.name().casefold()
+            exe=Path(process.exe()).resolve() if process.exe() else None
+            windows=Path(os.environ.get('WINDIR', 'C:/Windows')).resolve()
+            if exe and exe.is_relative_to(windows):raise ValueError('Processos do Windows são protegidos.')
+            if name in {'system','registry','memory compression','idle','system interrupts','csrss.exe','wininit.exe','services.exe','lsass.exe','smss.exe','winlogon.exe'}:raise ValueError('Este processo protegido não pode ser encerrado pelo Vexx PC.')
+            process.terminate();await asyncio.to_thread(process.wait,3)
+            return {'ok':True}
+        except (ValueError,psutil.Error) as exc:raise HTTPException(400,str(exc) or 'Não foi possível encerrar o processo.') from None
 
     @app.post('/api/apps/manage')
     async def manage_apps():
@@ -387,6 +411,30 @@ def create_app(directory=None, roots=None):
         body = await payload(request)
         text = str(body.get('text', ''))[:2000].strip()
         normalized = ''.join(c for c in unicodedata.normalize('NFKD', text.casefold()) if not unicodedata.combining(c))
+        attachments=body.get('paths',[]);uploaded=body.get('attachments',[])
+        if not isinstance(uploaded,list) or len(uploaded)>10 or any(not isinstance(f,dict) or len(str(f.get('text','')))>12000 for f in uploaded):raise HTTPException(400,'Anexos de texto inválidos.')
+        if uploaded:text+='\n\nArquivos anexados pelo usuário:\n'+'\n'.join('### '+str(f.get('name','arquivo'))+'\n'+str(f.get('text','')) for f in uploaded)
+        if not isinstance(attachments,list) or len(attachments)>10 or not all(isinstance(p,str) for p in attachments):raise HTTPException(400,'Anexe até 10 caminhos locais.')
+        if attachments:
+            try:analysis=await asyncio.to_thread(analyze_local_paths,files,attachments)
+            except ValueError as exc:raise HTTPException(400,str(exc)) from None
+            text += '\n\nConteúdo analisado localmente pelo usuário:\n'+analysis[:50000]
+            if not ai.status()['enabled']:
+                return {'reply':analysis,'attachments':len(attachments)}
+        if normalized.startswith('!confirmar '):
+            review=text.split(' ',1)[1].strip();entry=command_reviews.pop(review,None)
+            if not entry or entry['expires']<time.monotonic():raise HTTPException(400,'A revisão expirou. Prepare o comando novamente.')
+            command=entry['command']
+            args=['shutdown.exe',*command.split()[1:]] if command.startswith('shutdown ') else ['cmd.exe','/d','/s','/c',command]
+            try:process=subprocess.Popen(args,stdin=subprocess.DEVNULL,stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL,cwd=str(Path.home()),creationflags=subprocess.CREATE_NO_WINDOW if os.name=='nt' else 0)
+            except OSError:raise HTTPException(400,'O Windows não conseguiu iniciar o comando.') from None
+            return {'reply':'Comando iniciado após sua confirmação. Processo '+str(process.pid)+'.'}
+        if normalized.startswith('!cmd '):
+            command=text[5:].strip()
+            if os.name!='nt':raise HTTPException(400,'Comandos CMD estão disponíveis apenas no Windows.')
+            if not command or len(command)>2000 or '\x00' in command:raise HTTPException(400,'Comando inválido ou muito longo.')
+            command_reviews.clear();review=secrets.token_urlsafe(24);command_reviews[review]={'command':command,'expires':time.monotonic()+300}
+            return {'reply':'Revise o comando completo. Ele será executado como seu usuário do Windows e pode alterar arquivos ou configurações.','command_preview':command,'confirmation':review}
         if normalized.startswith(('buscar ', 'busque ', 'pesquisar ', 'procure ')):
             query = text.split(' ', 1)[1]
             result = await asyncio.to_thread(index.search, query)
@@ -407,6 +455,13 @@ def create_app(directory=None, roots=None):
                     '. Conexão com sua conta: ' + ('ativa.' if connection.online else 'desconectada. Interfaces ativas não garantem acesso à internet.'), 'page': 'network'}
         if 'log' in normalized:
             return {'reply': 'Abri os eventos desta sessão. Use o filtro para localizar um evento.', 'page': 'logs'}
+        if re.search(r'deslig\w*',normalized) and ('computador' in normalized or 'pc' in normalized):
+            match=re.search(r'(\d+)\s*(minutos|minuto|min|horas|hora)',normalized)
+            if match:
+                seconds=int(match.group(1))* (3600 if 'hora' in match.group(2) else 60)
+                if seconds>604800:raise HTTPException(400,'O agendamento aceita no máximo sete dias.')
+                command=f'shutdown /s /t {seconds}';review=secrets.token_urlsafe(24);command_reviews[review]={'command':command,'expires':time.monotonic()+300}
+                return {'reply':f"Vou agendar o desligamento do computador em {match.group(1)} {match.group(2)}. Revise e confirme para prosseguir.",'command_preview':command,'confirmation':review}
         if any(word in normalized for word in ('status', 'memoria', 'ram', 'cpu', 'computador', 'disco')):
             s = state['system']
             if not s:
@@ -418,7 +473,7 @@ def create_app(directory=None, roots=None):
                 return await ai.chat(text)
             except ValueError as exc:
                 raise HTTPException(400, str(exc)) from None
-        return {'reply': 'Posso consultar CPU/RAM/disco, buscar arquivos e diagnosticar a conexão. Para conversar com um modelo, configure seu provedor na aba IA.', 'page':'ai'}
+        return {'reply': 'Posso analisar arquivos e pastas deste PC, consultar recursos e sugerir ações. Para outros comandos, escreva !cmd seguido do comando completo; vou mostrar exatamente o que será executado para você revisar e confirmar.', 'page':'ai'}
 
     app.mount('/assets', StaticFiles(directory=WEB), name='assets')
     return app

@@ -156,6 +156,11 @@
         </div>
       </article>
 
+      <article class="panel resource-actions">
+        <div class="panel-head"><div><h2>Ações sugeridas</h2><p class="hint">RAM e arquivos grandes · leitura local a cada 30 segundos</p></div><span class="badge neutral">Neste PC</span></div>
+        <div id="suggested-actions" class="suggested-actions"><p class="hint">Analisando recursos locais…</p></div>
+      </article>
+
       <article class="panel account-panel">
         <div class="panel-head">
           <div class="panel-title">
@@ -470,7 +475,7 @@
           <article class="panel compact privacy-panel">
             <span class="privacy-icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-shield"/></svg></span>
             <h2>Privado por padrão</h2>
-            <p class="hint">Nenhum arquivo, índice ou credencial é incluído nas mensagens. A IA não recebe permissão para controlar o computador.</p>
+            <p class="hint">Nenhum arquivo, índice ou credencial é incluído automaticamente. A IA não executa ações diretamente; comandos locais exigem revisão e confirmação suas.</p>
           </article>
         </aside>
       </div>
@@ -499,13 +504,16 @@
     </div>
     <form id="chat-form" class="chat-form">
       <label class="sr-only" for="chat-input">Mensagem para o Copiloto</label>
+      <div id="attachment-list" class="attachment-list" hidden></div>
       <div class="composer-box">
-        <textarea id="chat-input" rows="2" maxlength="2000" placeholder="Peça em português…" required></textarea>
+        <textarea id="chat-input" rows="2" maxlength="2000" placeholder="Peça em português… · !cmd comando para CMD" required></textarea>
+        <button class="attach-button" id="attach-file" type="button" title="Anexar arquivo de texto" aria-label="Anexar arquivo"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-file"/></svg></button>
+        <input id="chat-attachments" type="file" multiple accept=".txt,.md,.py,.js,.ts,.tsx,.jsx,.html,.css,.json,.yaml,.yml,.toml,.ini,.csv,.sql,.xml,.log,.sh,.ps1,.bat,.cmd" hidden>
         <button type="submit" class="send-button" aria-label="Enviar mensagem" title="Enviar"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-send"/></svg></button>
       </div>
       <small class="hint composer-hint"><kbd>Enter</kbd> envia · <kbd>Shift</kbd>+<kbd>Enter</kbd> quebra linha</small>
     </form>
-    <small class="hint copilot-note" id="copilot-note">Comandos locais sem chave. Configure uma IA para conversar.</small>
+    <small class="hint copilot-note" id="copilot-note">Anexe texto ou cole caminhos locais. Comandos Windows: !cmd comando · revisar antes de executar.</small>
   </aside>
 </div>
 
