@@ -5,7 +5,7 @@ Aplicativo público independente para Windows 10/11. Não instala Studio, túnei
 ## Instalar
 
 1. No site Vexx AI, abra **Meu PC → Preparar computador → Baixar Vexx PC para Windows**.
-2. Abra **Vexx-PC-Setup-1.6.0.exe** e instale. O pacote inclui Python e todas as dependências do aplicativo. Não exige Python do sistema, WinGet ou extração manual. Em computadores sem WebView2, o instalador baixa esse componente oficial da Microsoft; nesse caso precisa de internet.
+2. Abra **Vexx-PC-Setup-1.6.1.exe** e instale. O pacote inclui Python e todas as dependências do aplicativo. Não exige Python do sistema, WinGet ou extração manual. Em computadores sem WebView2, o instalador baixa esse componente oficial da Microsoft; nesse caso precisa de internet.
 3. No site, entre na sua conta e abra **Meu PC → Seu nick e PIN**. Crie um nick exclusivo (3–30 caracteres) e um PIN (6–12 números). Abra o aplicativo e informe apenas os mesmos nick e PIN para conectar. O endereço oficial já está preenchido; outro servidor HTTPS fica nas opções avançadas. Cada conta mantém um PC vinculado; novo vínculo substitui o anterior.
 4. Autorize visualização ou controle no **painel local**, apenas quando precisar. Escolha permissão por uma hora ou **Permitir mouse e teclado permanentemente**. A opção permanente é explícita, fica vinculada à credencial desse PC e retorna ao reabrir o aplicativo. **Revogar acesso permanente**, trocar o vínculo ou revogar no site cancela essa opção. Sem essa escolha, o acesso começa pausado ao abrir. No celular, entre na mesma conta e abra **Meu PC**.
 

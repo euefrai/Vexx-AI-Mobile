@@ -111,6 +111,11 @@ def report(audit):
     if audit.get('ram'):lines.append(f"CPU: {audit.get('cpu_percent','—')}% em {audit.get('cores','—')} núcleos lógicos · RAM: {size(audit['ram'].get('used'))} de {size(audit['ram'].get('total'))} ({audit['ram'].get('percent','—')}%) · Ligado: {int((audit.get('uptime') or 0)//3600)} h")
     lines.append('### Discos')
     lines.extend(f"- {d['path']}: {size(d['free'])} livres de {size(d['total'])} ({d['used_percent']}% usados)" for d in audit['drives'])
+    lines.append('### Rede')
+    lines.append('- Wi-Fi: '+(audit.get('ssid') or 'SSID não detectado ou Wi-Fi não conectado.'))
+    if audit['network']:
+        lines.extend(f"- {item['name']}: {', '.join(item['addresses'])} · {item.get('speed_mbps',0)} Mbps." for item in audit['network'])
+    else:lines.append('- Nenhum adaptador de rede ativo detectado.')
     lines.append(f"### Arquivos e índice\n- {audit['index']['count']:,} entradas indexadas; {audit['index']['skipped']:,} inacessíveis. Raízes: {', '.join(audit['index']['roots']) or 'nenhuma'}." + (' Indexação ainda em andamento.' if audit['index']['running'] else ''))
     lines.append(f"### Lixeiras\n- Lixeira Vexx: {audit['trash']['count']:,} itens · {size(audit['trash']['size'])} ocupados.")
     if audit.get('windows_trash') is not None:lines.append(f"- Lixeira do Windows: {audit['windows_trash']['count']:,} itens · {size(audit['windows_trash']['size'])} ocupados. A revisão/exclusão acontece pelo próprio Windows.")
