@@ -322,6 +322,17 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         if resultados_visao:
             consulta = vision_service.enriquecer_consulta_com_visao(
                 consulta, resultados_visao, max_chars=200)
+        try:
+            import qwen_llm_service
+            ctx_v = ""
+            if resultados_visao:
+                ctx_v = f"Tags: {resultados_visao.get('tags_busca', '')} | OCR: {str(resultados_visao.get('texto_extraido', ''))[:120]}"
+            sugestoes_qwen = qwen_llm_service.planejar_pesquisa_qwen(consulta, contexto_visao=ctx_v)
+            if sugestoes_qwen and len(sugestoes_qwen) > 0 and len(sugestoes_qwen[0]) >= 4:
+                consulta = sugestoes_qwen[0][:200]
+                extras["qwen_queries"] = sugestoes_qwen
+        except Exception:
+            pass
         termos_mem = termos_memoria_pesquisa(db, owner, texto_usuario)
         if termos_mem:
             consulta = f"{consulta} {termos_mem}"[:200]

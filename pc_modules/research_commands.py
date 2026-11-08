@@ -701,9 +701,16 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str, model: str = "") -> str:
         m_img = re.search(r'(https?://[^\s]+(?:\.(?:png|jpg|jpeg|webp|gif)|(?=[?#]))|data:image/[^;]+;base64,[^\s]+)', texto or "", re.I)
         if m_img:
             imagem = m_img.group(1)
+        queries_qwen = []
+        try:
+            import qwen_llm_service
+            queries_qwen = qwen_llm_service.planejar_pesquisa_qwen(objetivo, contexto_visao=imagem)
+        except Exception:
+            pass
         req = {"objetivo": objetivo, "conv": conv or "", "model": model,
                "modo": "profunda" if m else "rapida" if visual else "",
-               "imagem": imagem}
+               "imagem": imagem,
+               "queries_planejadas": queries_qwen}
         resp = rjob_start(db, req, owner)
         if resp.get("type") != "research_job":
             return "Não consegui iniciar: " + resp.get("error", "tente de novo") + " 🔍"

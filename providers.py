@@ -35,6 +35,8 @@ CATALOG_TTL = 300
 
 def supports_chat(model_id, metadata=None):
     """Declared capability first; conservative exclusion when metadata is absent."""
+    if model_id == "vexx-qwen-2.5-3b":
+        return True
     meta = metadata if isinstance(metadata, dict) else {}
     capabilities = meta.get('capabilities')
     if isinstance(capabilities, dict):
@@ -69,6 +71,8 @@ def _remember_catalog(provider, ids, proxy=''):
 
 def selection_error(model, proxy=''):
     """No network on the message path; reject only known unavailable selections."""
+    if model in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b"):
+        return None
     provider, mid = dividir(model)
     unavailable = not supports_chat(mid)
     with _CATALOG_LOCK:
@@ -94,6 +98,11 @@ def cached_default(proxy, fallback):
     return fallback
 
 PROVIDERS = {
+    "vexx": {
+        "label": "⚡ VEXX Qwen 2.5 3B (Pesquisa & Tools - Prioritário)",
+        "key_env": None, "api": "vexx_qwen",
+        "modelos": ["vexx-qwen-2.5-3b"],
+    },
     "hermes": {
         "label": "Hermes (proxy local)", "key_env": None, "api": "openai",
         "modelos": [],
@@ -227,10 +236,10 @@ def chave_origem(nome: str) -> str:
 
 
 def configurados() -> list:
-    """Provedores utilizáveis agora: hermes sempre + quem tem chave."""
-    out = ["hermes"]
+    """Provedores utilizáveis agora: vexx e hermes sempre + quem tem chave."""
+    out = ["vexx", "hermes"]
     for nome, d in PROVIDERS.items():
-        if nome != "hermes" and chave(nome):
+        if nome not in ("vexx", "hermes") and chave(nome):
             out.append(nome)
     return out
 
@@ -238,7 +247,9 @@ def configurados() -> list:
 def dividir(modelo: str) -> tuple:
     """'gemini/gemini-2.0-flash' → ('gemini', 'gemini-2.0-flash').
     Sem prefixo conhecido → ('hermes', modelo) (legado)."""
-    texto = str(modelo or "")
+    texto = str(modelo or "").strip()
+    if texto in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b") or texto.startswith("vexx/"):
+        return "vexx", "vexx-qwen-2.5-3b"
     if "/" in texto:
         prov, resto = texto.split("/", 1)
         if prov.lower() in PROVIDERS and resto:
@@ -285,7 +296,18 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
     with ThreadPoolExecutor(max_workers=len(PROVIDERS)) as pool:
         pending = {nome: pool.submit(descobrir, nome, d) for nome, d in PROVIDERS.items()}
         discoveries = {nome: task.result() for nome, task in pending.items()}
-    itens, provs = [], []
+    itens = [{
+        "id": "vexx-qwen-2.5-3b",
+        "provider": "vexx",
+        "label": "⚡ VEXX Qwen 2.5 3B (Pesquisa & Tools - Prioritário)",
+        "free": True,
+    }]
+    provs = [{
+        "id": "vexx",
+        "label": "⚡ VEXX Qwen 2.5 3B (Pesquisa & Tools - Prioritário)",
+        "configured": True,
+        "source": "hf_space"
+    }]
     for nome, d in PROVIDERS.items():
         conf = True if nome == "hermes" else bool(chave(nome))
         prov = {"id": nome, "label": d["label"], "configured": conf}
@@ -308,10 +330,7 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
                           **({"auth_error": True} if auth_ruim else {})})
     # Up to 500 proxy models + 200 per external provider. Do not silently cut
     # off the providers at the end of the registry after only 500 total IDs.
-    default = hermes_bridge.DEFAULT_MODEL
-    live_proxy = discoveries.get('hermes', (None, ''))[0]
-    if live_proxy and default not in live_proxy:
-        default = next((mid for mid in live_proxy if mid.endswith(':free')), default)
+    default = "vexx-qwen-2.5-3b"
     return {"models": [i["id"] for i in itens], "items": itens,
             "default": default, "providers": provs}
 
@@ -351,6 +370,18 @@ def chat_complete(prov: str, model_id: str, messages: list,
     d = definicao(prov)
     if d is None:
         raise BridgeErro(f"Provedor '{prov}' desconhecido.", "provedor")
+    if prov == "vexx" or model_id == "vexx-qwen-2.5-3b":
+        import qwen_llm_service
+        inicio = time.monotonic()
+        res = qwen_llm_service.gerar_resposta_qwen(messages, max_tokens=max_tokens, timeout=timeout)
+        texto = res.get("resposta") or ""
+        return {
+            "texto": texto[:hermes_bridge.MAX_TEXTO],
+            "truncada": len(texto) > hermes_bridge.MAX_TEXTO,
+            "latencia_s": round(time.monotonic() - inicio, 2),
+            "tool_calls": res.get("tool_calls", []),
+            "queries_pesquisa": res.get("queries_pesquisa", [])
+        }
     if prov == "hermes":
         return hermes_bridge.chat_complete(
             proxy or hermes_bridge.DEFAULT_PROXY_URL, model_id, messages,
@@ -436,6 +467,19 @@ def chat_stream(prov: str, model_id: str, messages: list, on_delta,
     d = definicao(prov)
     if d is None:
         raise BridgeErro(f"Provedor '{prov}' desconhecido.", "provedor")
+    if prov == "vexx" or model_id == "vexx-qwen-2.5-3b":
+        import qwen_llm_service
+        inicio = time.monotonic()
+        res = qwen_llm_service.gerar_resposta_qwen(messages, max_tokens=max_tokens, timeout=timeout)
+        texto = res.get("resposta") or ""
+        if callable(on_delta):
+            on_delta(texto)
+        return {
+            "texto": texto[:hermes_bridge.MAX_TEXTO],
+            "truncada": len(texto) > hermes_bridge.MAX_TEXTO,
+            "latencia_s": round(time.monotonic() - inicio, 2),
+            "chunks": 1
+        }
     if prov == "hermes":
         return hermes_bridge.chat_stream(
             proxy or hermes_bridge.DEFAULT_PROXY_URL, model_id, messages, on_delta,

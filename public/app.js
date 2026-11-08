@@ -1993,7 +1993,7 @@ function providerFlag(pid, campo) {
   return !!(p && p[campo]);
 }
 function isConfigured(pid) {
-  if (pid === 'hermes') return true;
+  if (pid === 'hermes' || pid === 'vexx') return true;
   return providerFlag(pid, 'configured') && !providerFlag(pid, 'auth_error');
 }
 function providerOf(id) {
@@ -2007,6 +2007,7 @@ function providerOf(id) {
   return 'hermes';
 }
 function modelGroup(id) {
+  if (id === 'vexx-qwen-2.5-3b') return -1;
   const pid = providerOf(id);
   if (String(id).endsWith(':free')) return 0;
   return pid !== 'hermes' && isConfigured(pid) ? 1 : 2;
@@ -2027,8 +2028,8 @@ function fillModels(filter) {
     const key = rank + ':' + pid;
     if (!groups.has(key)) {
       const g = document.createElement('optgroup');
-      g.label = ['Grátis', 'Suas API keys', 'Outros'][rank] + ' · ' + providerLabel(pid) +
-        (pronto ? '' : recusada ? ' · chave recusada' : ' · sem chave');
+      g.label = rank === -1 ? '⚡ Prioritário (VEXX AI)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
+        (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave');
       groups.set(key, g); sel.appendChild(g);
     }
     const o = document.createElement('option');
