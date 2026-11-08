@@ -57,7 +57,7 @@ from routers.memories_routes import (
 )  # noqa: F401
 from routers.ai_routes import (
     ai_complete, ai_continue, ai_models, ai_regenerate, ai_stream, ai_stream_post, AIContinue,
-    provider_key, ProviderKey,
+    provider_key, ProviderKey, voice_chat_stream,
 )  # noqa: F401
 from routers.remote_routes import (
     _remote_access_exchange, remote_access_request, remote_access_revoke, remote_access_status,

@@ -11,9 +11,12 @@
   <link rel="stylesheet" href="/styles.css" />
   <link rel="stylesheet" href="/interface.css" />
   <link rel="stylesheet" href="/companion-setup.css" />
+  <link rel="stylesheet" href="/voice-mode.css" />
 </head>
 <body>
   <svg aria-hidden="true" class="svg-sprite" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/></symbol>
+    <symbol id="i-mic-off" viewBox="0 0 24 24"><line x1="2" y1="2" x2="22" y2="22"/><path d="M18.89 13.23A7.12 7.12 0 0 0 19 12v-2M5 10v2a7 7 0 0 0 12 5M15 9.34V5a3 3 0 0 0-5.68-1.33M9 9v3a3 3 0 0 0 3.5 2.96M12 19v4M8 23h8"/></symbol>
     <symbol id="i-chat" viewBox="0 0 24 24"><path d="M20 11.5a8.5 8.5 0 0 1-8.5 8.5 8.6 8.6 0 0 1-4-.97L3 20l1.02-4.1A8.5 8.5 0 1 1 20 11.5Z"/></symbol>
     <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2.5" y="3.5" width="19" height="14" rx="2"/><path d="M8 21h8m-4-3.5V21"/></symbol>
     <symbol id="i-activity" viewBox="0 0 24 24"><path d="M3 12h4l3-7 4 14 3-7h4"/></symbol>
@@ -504,6 +507,7 @@
           <button type="button" class="composer-plus" id="attachButton" title="Anexar documento (PDF, DOCX, TXT, CSV, XLSX)"><svg class="icon"><use href="#i-plus"/></svg></button>
           <label class="sr-only" for="messageInput">Mensagem</label>
           <textarea id="messageInput" placeholder="Mensagem…" maxlength="10000" rows="1"></textarea>
+          <button type="button" class="composer-voice" id="voiceModeButton" title="Modo de Voz Conversacional (ChatGPT Voice)"><svg class="icon"><use href="#i-mic"/></svg></button>
           <button class="send-button" type="submit" aria-label="Enviar">
             <svg class="icon"><use href="#i-send"/></svg>
           </button>
@@ -589,6 +593,55 @@
     <p id="providersError" class="login-error" role="alert" hidden></p>
     <div class="dialog-actions"><button class="subtle-button" id="providersRefresh" type="button">Atualizar lista de modelos</button></div>
   </dialog>
+  <!-- MODO DE VOZ CONVERSACIONAL (CHATGPT VOICE STYLE) -->
+  <div id="voiceModeOverlay" class="voice-mode-overlay" hidden>
+    <div class="voice-mode-header">
+      <div class="voice-brand">
+        <span class="voice-badge">AO VIVO</span>
+        <span class="voice-title">Vexx Voice</span>
+      </div>
+      <div class="voice-header-actions">
+        <select id="voiceSelect" class="voice-select" title="Seletor de Voz">
+          <option value="pm_alex">Alex (BR Masculino)</option>
+          <option value="pm_santa">Santa (BR Masculino)</option>
+          <option value="pf_dora">Dora (PT Feminino)</option>
+          <option value="af_heart">Heart (EN Feminino)</option>
+        </select>
+        <button id="voiceCloseBtn" class="voice-icon-btn" title="Fechar Modo de Voz" aria-label="Fechar">
+          <svg class="icon"><use href="#i-close"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="voice-visualizer-container">
+      <div class="voice-orb-wrapper">
+        <div id="voiceOrb" class="voice-orb idle">
+          <div class="voice-orb-inner"></div>
+          <div class="voice-orb-glow"></div>
+        </div>
+        <div id="voiceOrbRings" class="voice-orb-rings">
+          <div class="voice-ring ring-1"></div>
+          <div class="voice-ring ring-2"></div>
+          <div class="voice-ring ring-3"></div>
+        </div>
+      </div>
+      <div id="voiceStatusLabel" class="voice-status-label">Toque no microfone para conversar</div>
+      <div class="voice-subtitles-box">
+        <div id="voiceUserSubtitle" class="voice-sub-user"></div>
+        <div id="voiceAiSubtitle" class="voice-sub-ai"></div>
+      </div>
+    </div>
+
+    <div class="voice-mode-footer">
+      <button id="voiceMuteBtn" class="voice-action-btn" title="Mutar/Desmutar Microfone">
+        <svg class="icon"><use href="#i-mic"/></svg>
+      </button>
+      <button id="voiceInterruptBtn" class="voice-action-btn interrupt-btn" title="Interromper fala da IA">
+        <svg class="icon"><use href="#i-stop"/></svg>
+      </button>
+    </div>
+  </div>
+
   <script src="/workspace.js" defer></script>
   <script src="/organize.js" defer></script>
   <script src="/model3d-schema.js" defer></script>
@@ -597,5 +650,6 @@
   <script src="/remote.js" defer></script>
   <script src="/app.js" defer></script>
   <script src="/citations.js" defer></script>
+  <script src="/voice-mode.js" defer></script>
 </body>
 </html>
