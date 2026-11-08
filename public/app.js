@@ -1615,9 +1615,10 @@ if (localStorage.getItem('julia-memory') === '0') $('memoryToggle').checked = fa
 
 function updateConnection() {
   remoteUI.update();
-  const msg = PREVIEW_MODE ? 'Prévia local' : (!navigator.onLine ? 'Sem internet' : pcOnline ? 'PC conectado' : 'PC desconectado');
+  const base = PREVIEW_MODE ? 'Prévia local' : (!navigator.onLine ? 'Sem internet' : pcOnline ? 'PC conectado' : 'PC desconectado');
+  const msg = pcOnline && pcDrift ? base + ' · versão diferente' : base;
   $('connectionLabel').textContent = msg;
-  $('connectionShort').textContent = pcOnline && navigator.onLine ? 'PC conectado' : 'Offline';
+  $('connectionShort').textContent = pcOnline && navigator.onLine ? (pcDrift ? 'Versão diferente' : 'PC conectado') : 'Offline';
   $('statusButton').setAttribute('aria-label', 'Conexão: ' + msg);
   if (!pcOnline) $('aiStatus').textContent = 'PC desconectado';
   const on = pcOnline && navigator.onLine;
@@ -1633,10 +1634,13 @@ function updateConnection() {
   // Device status is rendered by VexxRemote from the account companion connection.
 
   $('memoryStatus').textContent = memoryOn() ? 'Ativada neste aparelho' : 'Pausada neste aparelho';
-  $('syncStatusText').textContent = pcOnline ? 'PC disponível. Pendências serão sincronizadas.'
+  $('syncStatusText').textContent = pcOnline
+    ? (pcDrift ? 'PC conectado em outra versão. Atualize o agente para sincronizar com segurança.' : 'PC disponível. Pendências serão sincronizadas.')
     : 'PC desconectado. Mensagens ficam no celular.' + (lastSyncErr ? ' ' + lastSyncErr : '');
 }
 let relayHa = null;
+let pcStale = false;
+let pcDrift = false;
 let lastSyncErr = '';
 function marcaErroSync(msg) {
   try {
@@ -1775,7 +1779,9 @@ async function fetchAuthConfig() {
     showRegister.hidden = authConfig.modo === 'fechado' && !offline;
     availability.hidden = !offline;
     availability.textContent = offline
-      ? 'Conecte o computador com o agente JULIA para criar contas e entrar com elas.'
+      ? (authConfig.stale === true
+        ? 'PC offline. Mantendo a última configuração conhecida; conecte o computador com o agente JULIA.'
+        : 'Conecte o computador com o agente JULIA para criar contas e entrar com elas.')
       : '';
     if (authConfig.modo === 'fechado' && !offline) {
       showRegister.style.display = 'none';
@@ -1871,10 +1877,14 @@ async function checkStatus() {
   try {
     const st = await api('/api/status');
     pcOnline = st.pc_online === true;
+    pcDrift = st.drift === true;
+    pcStale = st.stale === true || pcDrift;
     if (typeof st.agente_ha === 'number') relayHa = st.agente_ha;
     try {
       const dg = await api('/api/diag');
       if (typeof dg.agente_ha === 'number') relayHa = dg.agente_ha;
+      if (typeof dg.drift === 'boolean') pcDrift = dg.drift;
+      if (typeof dg.stale === 'boolean') pcStale = dg.stale;
     } catch (_) { /* diag é auxiliar; status já vale */ }
     updateConnection();
     if (pcOnline) {
@@ -3437,69 +3447,3 @@ setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
   await restoreSession(); await fetchAuthConfig(); await checkStatus(); updateConnection();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('/sw.js').catch(() => {});
 })();
-
-/* === PERPLEXITY-STYLE: CITATION POPOVER & SCREEN-TO-RESEARCH === */
-function showCitationPopover(targetEl, url, num) {
-  const existing = document.getElementById('citationPopover');
-  if (existing) existing.remove();
-  let domain = '';
-  try { domain = new URL(url).hostname.replace(/^www\./, ''); } catch (_) { domain = url; }
-  const pop = document.createElement('div');
-  pop.id = 'citationPopover';
-  pop.className = 'citation-popover';
-  const label = rotuloUrl ? rotuloUrl(url) : domain;
-  pop.innerHTML = '<div class="citation-popover-head">' +
-    '<img src="https://www.google.com/s2/favicons?domain=' + encodeURIComponent(domain) + '&sz=32" alt="" width="16" height="16" />' +
-    '<span class="citation-popover-domain">' + esc(domain) + '</span>' +
-    '<span style="margin-left:auto;font-size:10px;opacity:0.6">[' + esc(num) + ']</span>' +
-    '</div>' +
-    '<div class="citation-popover-title">' + esc(label || domain) + '</div>' +
-    '<div class="citation-popover-snippet">Fonte citada como evidência para esta resposta na pesquisa profunda.</div>' +
-    '<a class="citation-popover-link" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">Acessar fonte original ↗</a>';
-  document.body.appendChild(pop);
-  const rect = targetEl.getBoundingClientRect();
-  const popRect = pop.getBoundingClientRect();
-  let top = rect.bottom + 8;
-  if (top + popRect.height > window.innerHeight - 16) {
-    top = Math.max(16, rect.top - popRect.height - 8);
-  }
-  let left = Math.max(16, Math.min(window.innerWidth - popRect.width - 16, rect.left));
-  pop.style.top = top + 'px';
-  pop.style.left = left + 'px';
-  const close = e => {
-    if (!pop.contains(e.target) && e.target !== targetEl) {
-      pop.remove();
-      document.removeEventListener('pointerdown', close);
-    }
-  };
-  setTimeout(() => document.addEventListener('pointerdown', close), 10);
-}
-
-document.addEventListener('click', ev => {
-  const pill = ev.target.closest('.citation-pill');
-  if (!pill) return;
-  ev.preventDefault();
-  const url = pill.dataset.url;
-  const num = pill.dataset.num;
-  if (url) showCitationPopover(pill, url, num);
-});
-
-// Listener para Screen-to-Research (AnyDesk + Perplexity Deep Research)
-window.addEventListener('vexx:screen_research', ev => {
-  const src = ev.detail && ev.detail.src;
-  const chatNavBtn = document.querySelector('[data-tab="chat"]');
-  if (chatNavBtn) chatNavBtn.click();
-  else {
-    document.querySelectorAll('.page').forEach(p => { p.hidden = (p.id !== 'page-chat'); });
-    $('page-chat')?.classList.add('active');
-    $('page-desktop')?.setAttribute('hidden', '');
-  }
-  const input = $('chatInput');
-  if (input) {
-    input.value = 'Investigue a tela atual do meu computador e faça uma pesquisa profunda investigando os dados, erros e conceitos nela: ';
-    input.focus();
-  }
-  if (typeof notify === 'function') {
-    notify('Tela do PC vinculada à Pesquisa Profunda. Clique em Enviar para iniciar a investigação.');
-  }
-});

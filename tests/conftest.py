@@ -20,6 +20,12 @@ import server  # noqa: E402
 
 
 @pytest.fixture(autouse=True)
+def _legacy_login_opt_in(monkeypatch):
+    """Tests exercise the legacy owner path explicitly (opt-in in production)."""
+    monkeypatch.setenv("JULIA_ALLOW_LEGACY_LOGIN", "1")
+
+
+@pytest.fixture(autouse=True)
 def _limpar_limitadores():
     import providers
     providers._CATALOGS.clear()

@@ -43,6 +43,7 @@ def _login_legacy(client):
 def test_registro_valido_invalido_duplicado():
     db = _db()
     JULIA_auth.config_set(db, 'modo_cadastro', 'convite')
+    JULIA_auth.config_set(db, 'exigir_aprovacao', '0')
     conv = JULIA_auth.gerar_convite(db, 'owner', max_usos=5)
     r = JULIA_auth.registrar(db, 'Ana', 'ana', 'senha-forte-1', conv['codigo'])
     assert r['status'] == 'ativo' and r['uid'].startswith('u-')
@@ -145,6 +146,7 @@ def test_modos_fechado_aberto():
 def test_login_e_bloqueio():
     db = _db()
     JULIA_auth.config_set(db, 'modo_cadastro', 'convite')
+    JULIA_auth.config_set(db, 'exigir_aprovacao', '0')
     conv = JULIA_auth.gerar_convite(db, 'owner', max_usos=5)
     JULIA_auth.registrar(db, 'Bia', 'bia', 'senha-forte-1', conv['codigo'])
     assert JULIA_auth.login_conta(db, 'bia', 'senha-forte-1')['uid'].startswith('u-')
@@ -210,6 +212,7 @@ def test_revogacao_e_ultimo_admin():
 def test_admin_exige_papel_e_registro_nao_escala():
     db = _db()
     JULIA_auth.config_set(db, 'modo_cadastro', 'convite')
+    JULIA_auth.config_set(db, 'exigir_aprovacao', '0')
     conv = JULIA_auth.gerar_convite(db, 'owner', max_usos=5)
     JULIA_auth.registrar(db, 'Cid', 'cid', 'senha-forte-1', conv['codigo'])
     assert JULIA_auth.buscar_uid(db, JULIA_auth.buscar_usuario(db, 'cid')['uid'])['role'] == 'user'
@@ -227,6 +230,7 @@ def test_schemas_sem_owner_forjavel():
 def test_sem_plaintext_nem_segredo():
     db = _db()
     JULIA_auth.config_set(db, 'modo_cadastro', 'convite')
+    JULIA_auth.config_set(db, 'exigir_aprovacao', '0')
     conv = JULIA_auth.gerar_convite(db, 'owner')
     assert conv['codigo'].startswith('JULIA-')
     cols = [c[1] for c in db.execute('PRAGMA table_info(invites)').fetchall()]
@@ -538,6 +542,56 @@ def test_remoto_exige_grant_explicito():
     _ja.definir_status(db, 'local', visitante, 'bloqueado')
     assert _ja.pode_remoto(db, visitante) is False
     db.close()
+
+
+def test_pode_remoto_local_obedece_banco(monkeypatch):
+    db = _db()
+    JULIA_auth.vincular_proprietario(db, 'owneruser', 'Dono', 'senha-forte-owner')
+    # A linha local existe e começa sem grant: não há passe livre.
+    assert JULIA_auth.pode_remoto(db, 'local') is False
+    JULIA_auth.update_limits(db, 'local', 'local', 0, 0, True)
+    assert JULIA_auth.pode_remoto(db, 'local') is True
+    JULIA_auth.update_limits(db, 'local', 'local', 0, 0, False)
+    assert JULIA_auth.pode_remoto(db, 'local') is False
+    # Sem linha, o acesso só volta com o opt-in explícito do login legado.
+    db.execute("DELETE FROM users WHERE uid='local'")
+    db.commit()
+    monkeypatch.delenv('JULIA_ALLOW_LEGACY_LOGIN', raising=False)
+    assert JULIA_auth.pode_remoto(db, 'local') is False
+    monkeypatch.setenv('JULIA_ALLOW_LEGACY_LOGIN', '1')
+    assert JULIA_auth.pode_remoto(db, 'local') is True
+    db.close()
+
+
+def test_convite_exige_aprovacao_por_padrao():
+    db = _db()
+    JULIA_auth.config_set(db, 'modo_cadastro', 'convite')
+    conv = JULIA_auth.gerar_convite(db, 'owner')
+    r = JULIA_auth.registrar(db, 'Pendente', 'pendente', 'senha-forte-1', conv['codigo'])
+    assert r['status'] == 'pendente'
+    assert JULIA_auth.buscar_uid(db, r['uid'])['status'] == 'pendente'
+    db.close()
+
+
+def test_login_legado_desativado_por_padrao(monkeypatch):
+    monkeypatch.delenv('JULIA_ALLOW_LEGACY_LOGIN', raising=False)
+    with TestClient(server.app) as client:
+        r = client.post('/api/login', json={'username': 'owneruser',
+                                            'password': 'strong-example-password'})
+        assert r.status_code == 401
+        assert 'JULIA_session' not in r.cookies
+
+
+def test_sessao_local_existente_rejeitada_quando_legado_desligado(monkeypatch):
+    monkeypatch.setenv('JULIA_ALLOW_LEGACY_LOGIN', '1')
+    with TestClient(server.app) as client:
+        r = client.post('/api/login', json={'username': 'owneruser',
+                                            'password': 'strong-example-password'})
+        assert r.status_code == 200 and r.json()['uid'] == 'local'
+        assert client.get('/api/session').status_code == 200
+        monkeypatch.delenv('JULIA_ALLOW_LEGACY_LOGIN', raising=False)
+        assert client.get('/api/session').status_code == 401
+        assert client.get('/api/account').status_code == 401
 
 
 def test_suspensao_temporaria_auto_levanta():

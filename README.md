@@ -122,6 +122,7 @@ python -c "import secrets; print(secrets.token_urlsafe(48))"
 | `JULIA_ENV` | `production` no Render |
 | `JULIA_USERNAME` | Nome de usuário escolhido |
 | `JULIA_PASSWORD_HASH` | Hash Argon2id gerado acima |
+| `JULIA_ALLOW_LEGACY_LOGIN` | `0` (padrão seguro). `1` só para reativar o login legado do `.env` durante migração |
 | `JULIA_AGENT_TOKEN` | Segredo forte; **o mesmo no PC** |
 | `JULIA_SESSION_SECRET` | Outro segredo forte (somente Render) |
 

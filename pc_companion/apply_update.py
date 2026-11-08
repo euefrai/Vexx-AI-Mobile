@@ -123,6 +123,15 @@ def run(job, prepare=prepare_release, start=start_release, healthy=wait_healthy)
         # Promotion happens only after dependencies/imports and live identity/health checks.
         atomic_json(root / 'current.json', {'release':release.relative_to(root).as_posix(), 'version':job['version']})
         atomic_json(report, {'state':'complete', 'version':job['version'], 'url':url})
+        keep = {release.resolve(), Path(job.get('old_release', '')).resolve()}
+        releases_dir = root / 'releases'
+        if releases_dir.is_dir():
+            for item in releases_dir.iterdir():
+                if item.is_dir() and item.resolve() not in keep:
+                    shutil.rmtree(item, ignore_errors=True)
+        stage_dir = Path(job.get('stage', '')).resolve()
+        if stage_dir.is_dir() and stage_dir.is_relative_to(directory / 'updates'):
+            shutil.rmtree(stage_dir, ignore_errors=True)
         if not job.get('no_browser'):
             try:
                 show_release(child, url)

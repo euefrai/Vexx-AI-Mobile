@@ -118,6 +118,8 @@ def test_real_pythonw_wss_reconnect_named_pipe_stop_and_wal(tmp_path):
     ready=threading.Event()
     def handler(ws):
         index=len(received)+1
+        hello=json.loads(ws.recv(timeout=12))
+        assert hello['type']=='agent_hello' and hello['db_ok'] is True
         ws.send(json.dumps({'type':'auth_config','request_id':f'qa-{index}'}))
         received.append(json.loads(ws.recv(timeout=12)))
         phases.append((f'auth-{index}',round(time.monotonic()-started,3)))

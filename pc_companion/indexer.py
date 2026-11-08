@@ -1,6 +1,6 @@
 """Disk-backed filename FTS index. No file contents, junction traversal or per-query scan."""
+import gc
 import os
-import re
 import sqlite3
 import threading
 import time
@@ -8,8 +8,15 @@ import uuid
 from contextlib import contextmanager
 from pathlib import Path
 
-EXCLUDED = {'$recycle.bin', 'system volume information', 'windows', 'node_modules',
-            '.git', '.venv', '.vexx-venv', '__pycache__', '.cache', 'appdata', 'programdata', '.vexx-trash'}
+EXCLUDED = {
+    '$recycle.bin', 'system volume information', 'windows', 'program files', 'program files (x86)',
+    'recovery', 'boot', 'perflogs', 'msocache', 'node_modules', 'bower_components',
+    '.git', '.hg', '.svn', '.venv', '.vexx-venv', 'venv', '.tox', '.nox',
+    '__pycache__', '__pypackages__', 'site-packages', '.cache', '.pytest_cache',
+    '.mypy_cache', '.ruff_cache', '.parcel-cache', '.next', '.nuxt', '.svelte-kit', '.turbo',
+    '.gradle', '.rustup', '.cargo', '.m2', '.npm', '.pnpm-store', '.yarn', '.nuget',
+    '.vscode', '.vs', '.idea', '.playwright-cli', 'appdata', 'programdata', '.vexx-trash',
+}
 
 
 class FileIndex:
@@ -27,6 +34,7 @@ class FileIndex:
         self.last_scan = 0
         with self.db() as db:
             db.executescript('''PRAGMA journal_mode=WAL;
+                PRAGMA synchronous=NORMAL;
                 CREATE TABLE IF NOT EXISTS files (path TEXT PRIMARY KEY, name TEXT, size INTEGER,
                     directory INTEGER, modified REAL, generation TEXT);
                 CREATE VIRTUAL TABLE IF NOT EXISTS names USING fts5(name, path, content='files', content_rowid='rowid', tokenize='trigram');
@@ -38,17 +46,18 @@ class FileIndex:
                     INSERT INTO names(names,rowid,name,path) VALUES('delete',old.rowid,old.name,old.path);
                     INSERT INTO names(rowid,name,path) VALUES(new.rowid,new.name,new.path); END;''')
             self.count = db.execute('SELECT count(*) FROM files').fetchone()[0]
-            columns={row[1] for row in db.execute('PRAGMA table_info(files)')}
-            for column in ('parent','extension'):
-                if column not in columns:db.execute('ALTER TABLE files ADD COLUMN '+column+' TEXT')
+            columns = {row[1] for row in db.execute('PRAGMA table_info(files)')}
+            for column in ('parent', 'extension'):
+                if column not in columns:
+                    db.execute('ALTER TABLE files ADD COLUMN ' + column + ' TEXT')
             db.executescript('''CREATE INDEX IF NOT EXISTS files_size ON files(directory,size DESC,path);
                 CREATE INDEX IF NOT EXISTS files_age ON files(directory,modified,path);
                 CREATE INDEX IF NOT EXISTS files_extension ON files(extension,size DESC,path);
                 CREATE INDEX IF NOT EXISTS files_parent ON files(parent,name COLLATE NOCASE,path);''')
             schema = db.execute("SELECT sql FROM sqlite_master WHERE name='names'").fetchone()[0]
             self.path_search_ready = 'unindexed' not in schema.lower()
-        self.migrating=True
-        threading.Thread(target=self._metadata,name='vexx-index-metadata',daemon=True).start()
+        self.migrating = True
+        threading.Thread(target=self._metadata, name='vexx-index-metadata', daemon=True).start()
 
     def _metadata(self):
         try:
@@ -56,15 +65,18 @@ class FileIndex:
                 if not self.path_search_ready:
                     self._migrate_path_index(db)
                 while not self.stop.is_set():
-                    rows=db.execute('SELECT path FROM files WHERE parent IS NULL LIMIT 1000').fetchall()
-                    if not rows:break
+                    rows = db.execute('SELECT path FROM files WHERE parent IS NULL LIMIT 1000').fetchall()
+                    if not rows:
+                        break
                     db.executemany('UPDATE files SET parent=?,extension=? WHERE path=? AND parent IS NULL',
-                        ((str(Path(p).parent),Path(p).suffix.casefold(),p) for (p,) in rows));db.commit()
+                                   ((str(Path(p).parent), Path(p).suffix.casefold(), p) for (p,) in rows))
+                    db.commit()
                     self.stop.wait(.025)
         except sqlite3.Error as exc:
             self.error_code = getattr(exc, 'sqlite_errorname', 'SQLITE_ERROR')
             self.error = 'Atualização do índice pendente; tente atualizar novamente.'
-        finally:self.migrating=False
+        finally:
+            self.migrating = False
 
     def _migrate_path_index(self, db):
         """Atomic derived-index migration. Rollback preserves old search and files."""
@@ -99,10 +111,43 @@ class FileIndex:
     def db(self):
         db = sqlite3.connect(self.path, timeout=2)
         db.execute('PRAGMA busy_timeout=2000')
+        db.execute('PRAGMA cache_size=-2048')
+        db.execute('PRAGMA temp_store=MEMORY')
+        db.execute('PRAGMA mmap_size=0')
         try:
             yield db
         finally:
             db.close()
+
+    def db_size(self):
+        try:
+            return self.path.stat().st_size
+        except OSError:
+            return 0
+
+    def compact(self):
+        """Optimize FTS5, checkpoint WAL and reclaim unused SQLite pages."""
+        before = self.db_size()
+        try:
+            with self.write_lock:
+                with self.db() as db:
+                    db.execute("INSERT INTO names(names) VALUES('optimize')")
+                    db.commit()
+                    db.execute('PRAGMA wal_checkpoint(TRUNCATE)')
+                    freelist = db.execute('PRAGMA freelist_count').fetchone()[0]
+                    pages = db.execute('PRAGMA page_count').fetchone()[0]
+                if freelist > 512 and pages > 0 and (freelist / pages > 0.10 or freelist > 4096):
+                    conn = sqlite3.connect(self.path, timeout=10, isolation_level=None)
+                    try:
+                        conn.execute('VACUUM')
+                        conn.execute('PRAGMA wal_checkpoint(TRUNCATE)')
+                    finally:
+                        conn.close()
+        except sqlite3.Error:
+            pass
+        gc.collect()
+        after = self.db_size()
+        return {'before': before, 'after': after, 'saved': max(0, before - after)}
 
     def start(self):
         with self.lock:
@@ -118,14 +163,17 @@ class FileIndex:
     def status(self):
         return {'running': self.running, 'paused': self.paused.is_set(), 'count': self.count,
                 'skipped': self.skipped, 'error': self.error, 'last_scan': self.last_scan,
-                'roots': [str(p) for p in self.roots], 'migrating':self.migrating,
-                'error_code': self.error_code, 'path_search_ready': self.path_search_ready}
+                'roots': [str(p) for p in self.roots], 'migrating': self.migrating,
+                'error_code': self.error_code, 'path_search_ready': self.path_search_ready,
+                'db_size': self.db_size()}
 
     def scan(self):
         generation, batch, sizes = uuid.uuid4().hex, [], {}
         with self.write_lock:
-            self.generation=generation;self.removed.clear()
+            self.generation = generation
+            self.removed.clear()
         self.error, self.error_code, self.skipped = '', '', 0
+        deleted_rows = 0
         try:
             with self.db() as db:
                 stack = list(self.roots)
@@ -143,7 +191,7 @@ class FileIndex:
                                 if self.stop.is_set():
                                     break
                                 if entry.is_symlink() or getattr(os.path, 'isjunction', lambda _: False)(entry.path):
-                                    continue
+                                     continue
                                 try:
                                     directory = entry.is_dir(follow_symlinks=False)
                                     if directory and entry.name.casefold() in EXCLUDED:
@@ -164,22 +212,28 @@ class FileIndex:
                         self.skipped += 1
                 self._flush(db, batch)
                 if not self.stop.is_set():
-                    db.execute('DELETE FROM files WHERE generation<>?', (generation,))
-                    # Aggregate once after the scan. Never recurse or stat on a query.
-                    for folder in sorted(sizes, key=len, reverse=True):
-                        parent = str(Path(folder).parent)
-                        if parent in sizes and parent != folder:
-                            sizes[parent] += sizes[folder]
-                    db.executemany('UPDATE files SET size=? WHERE path=? AND directory=1',
-                                   ((size, folder) for folder, size in sizes.items()))
-                    db.commit()
+                    with self.write_lock:
+                        cur = db.execute('DELETE FROM files WHERE generation<>?', (generation,))
+                        deleted_rows = cur.rowcount if cur.rowcount and cur.rowcount > 0 else 0
+                        # Aggregate once after the scan. Never recurse or stat on a query.
+                        for folder in sorted(sizes, key=len, reverse=True):
+                            parent = str(Path(folder).parent)
+                            if parent in sizes and parent != folder:
+                                sizes[parent] += sizes[folder]
+                        db.executemany('UPDATE files SET size=? WHERE path=? AND directory=1 AND (size IS NULL OR size<>?)',
+                                       ((size, folder, size) for folder, size in sizes.items()))
+                        db.commit()
                     self.last_scan = time.time()
                 self.count = db.execute('SELECT count(*) FROM files').fetchone()[0]
+            sizes.clear()
+            if deleted_rows > 1000 and not self.stop.is_set():
+                self.compact()
         except (OSError, sqlite3.Error) as exc:
             self.error_code = getattr(exc, 'sqlite_errorname', type(exc).__name__)
             self.error = type(exc).__name__ + ': não foi possível concluir o índice.'
         finally:
             self.running = False
+            gc.collect()
 
     def _flush(self, db, batch):
         if not batch:
@@ -187,18 +241,52 @@ class FileIndex:
         with self.write_lock:
             rows = [row for row in batch if row[0] not in self.removed]
             paths = list({row[0] for row in rows})
-            existing = set()
+            existing = {}
             for offset in range(0, len(paths), 256):
                 chunk = paths[offset:offset+256]
-                existing.update(r[0] for r in db.execute('SELECT path FROM files WHERE path IN ('
-                    + ','.join('?' for _ in chunk) + ')', chunk))
-            db.executemany('''INSERT INTO files(path,name,size,directory,modified,generation,parent,extension) VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(path) DO UPDATE SET
-                name=excluded.name,size=excluded.size,directory=excluded.directory,
-                modified=excluded.modified,generation=excluded.generation,parent=excluded.parent,extension=excluded.extension''',
-                ((*row,str(Path(row[0]).parent),Path(row[0]).suffix.casefold()) for row in rows))
+                for p, sz, mod, d, par, ext in db.execute(
+                    'SELECT path, size, modified, directory, parent, extension FROM files WHERE path IN ('
+                    + ','.join('?' for _ in chunk) + ')', chunk
+                ):
+                    existing[p] = (sz, mod, d, par, ext)
+            changed = []
+            unchanged = []
+            for row in rows:
+                p, name, sz, d, mod, gen = row
+                par = str(Path(p).parent)
+                ext = Path(p).suffix.casefold()
+                prev = existing.get(p)
+                if prev is not None and prev[0] == sz and prev[1] == mod and prev[2] == d and prev[3] == par and prev[4] == ext:
+                    unchanged.append((gen, p))
+                else:
+                    changed.append((p, name, sz, d, mod, gen, par, ext))
+            if changed:
+                db.executemany('''INSERT INTO files(path,name,size,directory,modified,generation,parent,extension) VALUES (?,?,?,?,?,?,?,?) ON CONFLICT(path) DO UPDATE SET
+                    name=excluded.name,size=excluded.size,directory=excluded.directory,
+                    modified=excluded.modified,generation=excluded.generation,parent=excluded.parent,extension=excluded.extension''',
+                    changed)
+            if unchanged:
+                db.executemany('UPDATE files SET generation=? WHERE path=?', unchanged)
             db.commit()
             self.count += len(paths) - len(existing)
         batch.clear()
+
+    def category_summary(self):
+        from .files import CATEGORIES
+        summary = {}
+        try:
+            with self.db() as db:
+                for category, extensions in CATEGORIES.items():
+                    exts = sorted(extensions)
+                    placeholders = ','.join('?' for _ in exts)
+                    row = db.execute(
+                        f'SELECT COUNT(*), COALESCE(SUM(size), 0) FROM files WHERE directory=0 AND extension IN ({placeholders})',
+                        exts
+                    ).fetchone()
+                    summary[category] = {'count': int(row[0] or 0) if row else 0, 'size': int(row[1] or 0) if row else 0}
+        except sqlite3.Error:
+            pass
+        return summary
 
     def search(self, query='', offset=0, kind='all', sort='relevance', min_size=0, age_days=0, folder=''):
         started = time.perf_counter()
@@ -218,19 +306,25 @@ class FileIndex:
         else:
             from .files import CATEGORIES
             if kind in CATEGORIES:
-                extensions=sorted(CATEGORIES[kind]);where.append('f.directory=0 AND f.extension IN ('+','.join('?' for _ in extensions)+')');params.extend(extensions)
+                extensions = sorted(CATEGORIES[kind])
+                where.append('f.directory=0 AND f.extension IN (' + ','.join('?' for _ in extensions) + ')')
+                params.extend(extensions)
         if min_size:
-            where.append('f.size>=?');params.append(max(0,min(int(min_size),10**15)))
+            where.append('f.size>=?')
+            params.append(max(0, min(int(min_size), 10**15)))
         if age_days:
-            where.append('f.modified<=?');params.append(time.time()-max(0,min(int(age_days),36500))*86400)
+            where.append('f.modified<=?')
+            params.append(time.time() - max(0, min(int(age_days), 36500)) * 86400)
         if folder:
-            where.append('f.parent=?');params.append(str(Path(folder)))
+            where.append('f.parent=?')
+            params.append(str(Path(folder)))
         sql = 'SELECT f.path,f.name,f.size,f.directory,f.modified FROM ' + source
         if where:
             sql += ' WHERE ' + ' AND '.join(where)
-        order={'name':'f.name COLLATE NOCASE,f.path','largest':'f.size DESC,f.path','smallest':'f.size,f.path',
-               'newest':'f.modified DESC,f.path','oldest':'f.modified,f.path'}
-        if sort in order:sql += ' ORDER BY '+order[sort]
+        order = {'name': 'f.name COLLATE NOCASE,f.path', 'largest': 'f.size DESC,f.path', 'smallest': 'f.size,f.path',
+                 'newest': 'f.modified DESC,f.path', 'oldest': 'f.modified,f.path'}
+        if sort in order:
+            sql += ' ORDER BY ' + order[sort]
         sql += ' LIMIT 61 OFFSET ?'
         with self.db() as db:
             db.set_progress_handler(lambda: int(time.perf_counter() - started > .15), 1000)
@@ -241,8 +335,43 @@ class FileIndex:
                 message = ('Busca interrompida pelo limite de tempo. Refine o nome.' if interrupted
                            else 'Índice indisponível. Atualize o índice ou consulte o diagnóstico.')
                 return {**self.status(), 'items': [], 'more': False,
-                        'ms': round((time.perf_counter()-started)*1000), 'hint': message,
-                        'code': 'timeout' if interrupted else getattr(exc,'sqlite_errorname','SQLITE_ERROR'),
+                        'ms': round((time.perf_counter() - started) * 1000), 'hint': message,
+                        'code': 'timeout' if interrupted else getattr(exc, 'sqlite_errorname', 'SQLITE_ERROR'),
                         **({} if interrupted else {'error': message})}
         return {'items': [dict(zip(('path', 'name', 'size', 'directory', 'modified'), row)) for row in rows[:60]],
                 'more': len(rows) > 60, 'ms': round((time.perf_counter() - started) * 1000, 1), **self.status()}
+
+    def category_summary(self):
+        """Return fast file count and total size grouped by category."""
+        from .files import CATEGORIES
+        labels = {
+            'videos': 'Vídeos',
+            'images': 'Imagens',
+            'installers': 'Instaladores / APKs',
+            'archives': 'Compactados',
+            'documents': 'Documentos',
+            'audio': 'Áudio',
+            'code': 'Código',
+            'temporary': 'Temporários / logs',
+        }
+        ext_to_cat = {}
+        for cat, exts in CATEGORIES.items():
+            for ext in exts:
+                ext_to_cat[ext] = cat
+        totals = {cat: {'id': cat, 'label': labels.get(cat, cat), 'count': 0, 'size': 0} for cat in labels}
+        totals['other'] = {'id': 'other', 'label': 'Outros arquivos', 'count': 0, 'size': 0}
+        started = time.perf_counter()
+        with self.db() as db:
+            db.set_progress_handler(lambda: int(time.perf_counter() - started > .25), 2000)
+            try:
+                rows = db.execute('SELECT extension, COUNT(*), COALESCE(SUM(size), 0) FROM files WHERE directory=0 GROUP BY extension').fetchall()
+            except sqlite3.OperationalError:
+                rows = []
+        for ext, count, size in rows:
+            cat = ext_to_cat.get(ext or '', 'other')
+            if cat not in totals:
+                cat = 'other'
+            totals[cat]['count'] += int(count or 0)
+            totals[cat]['size'] += int(size or 0)
+        ordered = sorted(totals.values(), key=lambda x: (-x['size'], -x['count'], x['label']))
+        return {'categories': ordered, 'db_size': self.db_size(), **self.status()}

@@ -18,7 +18,7 @@ from fastapi.staticfiles import StaticFiles
 
 from .connection import Connection, relay_url
 from .indexer import FileIndex
-from .system import SystemMonitor
+from .system import SystemMonitor, optimize_system_memory, listening_ports, flush_dns, network_diagnostics
 from .updater import Updater
 from .ai import AI
 from .files import Files, installed_apps, referenced_local_paths, fingerprint, analyze_local_paths
@@ -46,6 +46,9 @@ def set_login_startup(enabled):
         except (OSError,ValueError) as exc:raise ValueError('Esta instalação não tem um iniciador estável para o login.') from exc
         root=Path(record.get('install_root','')).resolve();launcher=root/'launch.py'
         pythonw=root/'runtime'/'pythonw.exe'
+        if not pythonw.is_file():
+            fallback=Path(__file__).resolve().parents[1]/'.venv'/'Scripts'/'pythonw.exe'
+            if fallback.is_file():pythonw=fallback
         if not launcher.is_file() or not pythonw.is_file():raise ValueError('O iniciador do Vexx PC não está instalado em um caminho estável.')
         winreg.SetValueEx(key,'VexxPC',0,winreg.REG_SZ,f'"{pythonw}" "{launcher}" --start-hidden')
 
@@ -126,7 +129,9 @@ def create_app(directory=None, roots=None):
         except OSError:
             pass
 
-    connection = Connection(config, save, log, set_login_startup)
+    is_default_data = directory.resolve() == data_directory().resolve()
+    startup_cb = set_login_startup if is_default_data else (lambda _: None)
+    connection = Connection(config, save, log, startup_cb)
     ai = AI(directory)
     files = Files(directory,index)
     projects = Projects(directory,index.roots)
@@ -316,6 +321,52 @@ def create_app(directory=None, roots=None):
                 capture_output=True,timeout=8,creationflags=subprocess.CREATE_NO_WINDOW)
         except (OSError,subprocess.TimeoutExpired):return {'ok':False,'saved_profile':False}
         return {'ok':result.returncode==0,'saved_profile':result.returncode==0}
+
+    @app.get('/api/network/ports')
+    async def get_network_ports():
+        return {'items': await asyncio.to_thread(listening_ports)}
+
+    @app.post('/api/network/diagnostics')
+    async def run_network_diagnostics():
+        result = await asyncio.to_thread(network_diagnostics, config.get('relay', ''))
+        log('Diagnóstico de rede e DNS executado.')
+        return result
+
+    @app.post('/api/network/flush-dns')
+    async def run_flush_dns():
+        result = await asyncio.to_thread(flush_dns)
+        if not result.get('ok'):
+            raise HTTPException(400, result.get('message', 'Não foi possível limpar o cache DNS.'))
+        log('Cache DNS do sistema limpo.')
+        return result
+
+    @app.post('/api/system/optimize-memory')
+    async def system_optimize_memory():
+        mem_result = await asyncio.to_thread(optimize_system_memory)
+        idx_result = await asyncio.to_thread(index.compact)
+        try:
+            state['system'] = await asyncio.to_thread(monitor.snapshot)
+        except Exception:
+            pass
+        freed_mb = round(max(0, mem_result.get('freed', 0)) / (1024 ** 2), 1)
+        idx_saved_mb = round(max(0, idx_result.get('saved', 0)) / (1024 ** 2), 1)
+        log(f"Memória RAM otimizada ({freed_mb} MB liberados · {mem_result.get('trimmed_processes', 0)} processos ajustados · {idx_saved_mb} MB compactados no índice).")
+        return {'memory': mem_result, 'index': idx_result, 'system': state['system']}
+
+    @app.post('/api/index/compact')
+    async def compact_index():
+        result = await asyncio.to_thread(index.compact)
+        saved_mb = round(max(0, result.get('saved', 0)) / (1024 ** 2), 1)
+        log(f"Índice local compactado ({saved_mb} MB economizados).")
+        return {**result, 'index': index.status()}
+
+    @app.get('/api/files/summary')
+    async def files_summary():
+        return await asyncio.to_thread(index.category_summary)
+
+    @app.get('/api/files/duplicates')
+    async def files_duplicates(min_size: int = 1048576, offset: int = 0):
+        return await local_work(files.duplicates, min_size, offset)
     @app.get('/api/ai/config')
     async def ai_config():
         return ai.status()
@@ -549,6 +600,44 @@ def create_app(directory=None, roots=None):
         if uploaded:text+='\n\nArquivos anexados pelo usuário:\n'+'\n'.join('### '+str(f.get('name','arquivo'))+'\n'+str(f.get('text','')) for f in uploaded)
         if not isinstance(attachments,list) or len(attachments)>10 or not all(isinstance(p,str) for p in attachments):raise HTTPException(400,'Anexe até 10 caminhos locais.')
         attachments=referenced_local_paths(files,text,attachments)
+        if any(term in normalized for term in ('otimizar ram','otimize a ram','liberar ram','libere ram','limpar ram','limpe a ram','limpar memoria ram','otimizar memoria','reduzir ram','compactar indice','compacte o indice')):
+            mem_res = await asyncio.to_thread(optimize_system_memory)
+            idx_res = await asyncio.to_thread(index.compact)
+            try:state['system'] = await asyncio.to_thread(monitor.snapshot)
+            except Exception:pass
+            freed_mb = round(max(0, mem_res.get('freed', 0)) / (1024 ** 2), 1)
+            saved_mb = round(max(0, idx_res.get('saved', 0)) / (1024 ** 2), 1)
+            after_pct = mem_res.get('after', {}).get('percent', '—')
+            log(f"Otimização via Copiloto: {freed_mb} MB RAM liberados · {saved_mb} MB compactados no índice.")
+            return {'reply': f"Otimização concluída! Liberei **{freed_mb} MB** de memória RAM ociosa (working-set ajustado em {mem_res.get('trimmed_processes', 0)} processos; uso atual de RAM: {after_pct}%) e compactei o banco do índice local (economia de **{saved_mb} MB**, tamanho atual: {round(idx_res.get('after', 0)/(1024**2), 1)} MB).",
+                    'page': 'overview', 'memory_optimized': mem_res}
+        if any(term in normalized for term in ('duplicado','duplicada','arquivos repetidos','copias repetidas','achar duplicados','buscar duplicados','encontrar duplicados')):
+            dups = await asyncio.to_thread(files.duplicates, 1024 * 1024, 0)
+            wasted_mb = round(dups.get('wasted_size', 0) / (1024 ** 2), 1)
+            groups = dups.get('groups', [])
+            if not groups:
+                return {'reply': 'Não encontrei arquivos duplicados com 1 MB ou mais no índice atual. Você pode ajustar o tamanho mínimo na aba Limpeza > Duplicados.', 'page': 'cleaner', 'cleaner_view': 'duplicates'}
+            preview = '\n'.join(f"- **{g['name']}** ({g['count']} cópias · {round(g['wasted']/(1024**2),1)} MB recuperáveis)" for g in groups[:6])
+            return {'reply': f"Encontrei **{len(groups)} grupo(s)** de arquivos duplicados idênticos (verificados por hash BLAKE2b), somando **{wasted_mb} MB** recuperáveis:\n{preview}\n\nAbri a visão de Duplicados em Limpeza para você revisar e mover apenas as cópias extras para a Lixeira Vexx.",
+                    'page': 'cleaner', 'cleaner_view': 'duplicates'}
+        if any(term in normalized for term in ('resumo por categoria','resumo de armazenamento','categorias de arquivos','distribuicao de arquivos','espaco por tipo')):
+            summary = await asyncio.to_thread(index.category_summary)
+            cats = summary.get('categories', [])
+            lines = [f"- **{c['label']}:** {c['count']:,} arquivo(s) · {round(c['size']/(1024**2), 1)} MB" for c in cats if c['count'] > 0]
+            return {'reply': '### Distribuição de arquivos no índice local\n' + ('\n'.join(lines) or 'Nenhum arquivo categorizado ainda.') + f"\n\nBanco do índice: {round(summary.get('db_size', 0)/(1024**2), 1)} MB.", 'page': 'cleaner'}
+        if any(term in normalized for term in ('limpar dns','flush dns','limpe o dns','resetar dns')):
+            res = await asyncio.to_thread(flush_dns)
+            return {'reply': res.get('message', 'Operação de DNS concluída.'), 'page': 'network'}
+        if any(term in normalized for term in ('portas abertas','portas em escuta','portas locais','quais portas','listar portas')):
+            ports = await asyncio.to_thread(listening_ports)
+            if not ports:
+                return {'reply': 'Nenhuma porta TCP local em escuta foi detectada.', 'page': 'network'}
+            lines = '\n'.join(f"- **{p['address']}:{p['port']}** · {p['process'] or 'Processo local'} (PID {p['pid']})" + (' · *Apenas local*' if p['loopback'] else ' · *Rede local/Externa*') for p in ports[:12])
+            return {'reply': f"### Portas TCP em escuta ({len(ports)} encontradas)\n{lines}", 'page': 'network', 'ports': ports}
+        if any(term in normalized for term in ('diagnosticar rede','diagnostico de rede','testar dns','testar conexao','testar latencia')):
+            diag = await asyncio.to_thread(network_diagnostics, config.get('relay', ''))
+            checks = '\n'.join(f"- **{c['target']}:** {'OK ('+str(c['latency_ms'])+' ms · '+c.get('ip','')+')' if c['ok'] else 'Falhou'}" for c in diag.get('checks', []))
+            return {'reply': f"### Diagnóstico de rede e DNS\n{checks}\n- Portas em escuta: {diag.get('listening_count', 0)} ({diag.get('exposed_ports', 0)} expostas fora do loopback).", 'page': 'network', 'network_diagnostics': diag}
         cleanup_intent=asks_for_cleanup(normalized)
         delete_action=bool(re.search(r'\b(?:exclua|apague|delete|remova|mova para a lixeira)\b',normalized))
         audit_request=normalized.startswith(('!auditar','!auditoria')) or asks_for_system_audit(normalized)
@@ -639,6 +728,19 @@ def create_app(directory=None, roots=None):
                 if seconds>604800:raise HTTPException(400,'O agendamento aceita no máximo sete dias.')
                 command=f'shutdown /s /t {seconds}';review=secrets.token_urlsafe(24);command_reviews[review]={'command':command,'expires':time.monotonic()+300}
                 return {'reply':f"Vou agendar o desligamento do computador em {match.group(1)} {match.group(2)}. Revise e confirme para prosseguir.",'command_preview':command,'confirmation':review}
+        if any(term in normalized for term in ('cancelar desligamento','cancele o desligamento','abortar desligamento')):
+            command='shutdown /a';review=secrets.token_urlsafe(24);command_reviews[review]={'command':command,'expires':time.monotonic()+300}
+            return {'reply':'Vou cancelar qualquer desligamento ou reinicialização agendada no Windows. Revise e confirme para prosseguir.','command_preview':command,'confirmation':review}
+        if re.search(r'reinici\w*',normalized) and ('computador' in normalized or 'pc' in normalized):
+            match=re.search(r'(\d+)\s*(minutos|minuto|min|horas|hora)',normalized)
+            seconds=int(match.group(1))*(3600 if 'hora' in match.group(2) else 60) if match else 60
+            if seconds>604800:raise HTTPException(400,'O agendamento aceita no máximo sete dias.')
+            command=f'shutdown /r /t {seconds}';review=secrets.token_urlsafe(24);command_reviews[review]={'command':command,'expires':time.monotonic()+300}
+            label=f'{match.group(1)} {match.group(2)}' if match else '1 minuto'
+            return {'reply':f'Vou agendar a reinicialização do computador em {label}. Revise e confirme para prosseguir.','command_preview':command,'confirmation':review}
+        if any(term in normalized for term in ('bloquear tela','bloqueie a tela','bloquear computador','bloquear pc','bloqueie o pc')):
+            command='rundll32.exe user32.dll,LockWorkStation';review=secrets.token_urlsafe(24);command_reviews[review]={'command':command,'expires':time.monotonic()+300}
+            return {'reply':'Vou bloquear a sessão atual do Windows. Revise e confirme para prosseguir.','command_preview':command,'confirmation':review}
         status_request=any(word in normalized for word in ('status','memoria','ram','cpu','disco')) or bool(re.search(r'\bcomo (?:esta|está) (?:o )?(?:computador|pc)\b',normalized))
         if status_request:
             s = state['system']

@@ -222,3 +222,44 @@ def test_file_and_project_api_retain_origin_token_and_confirmation_checks(tmp_pa
         assert client.post('/api/projects/inspect',headers={**headers,'Origin':'https://evil.example'},json={'path':str(root)}).status_code==403
         assert client.post('/api/files/execute',headers=headers,json={'token':'invented'}).status_code==400
         assert client.post('/api/projects/start',headers=headers,json={'token':'invented'}).status_code==400
+
+
+def test_duplicates_category_summary_memory_optimization_and_new_copilot_skills(tmp_path,monkeypatch):
+    import pc_companion.files as module
+    monkeypatch.setattr(module,'BLOCKED',module.BLOCKED-{'appdata'})
+    root=tmp_path/'documents';root.mkdir()
+    payload=b'vexx-duplicate-content-'*60000
+    (root/'original.pdf').write_bytes(payload)
+    (root/'copy1.pdf').write_bytes(payload)
+    (root/'unique.py').write_text('print("ok")\n','utf-8')
+    app=create_app(tmp_path/'data',[root])
+    app.state.index.scan()
+    with TestClient(app,base_url='http://127.0.0.1') as client:
+        for path in ('/api/files/summary','/api/files/duplicates','/api/network/ports'):
+            assert client.get(path).status_code==401
+        for path in ('/api/system/optimize-memory','/api/index/compact','/api/network/diagnostics'):
+            assert client.post(path,json={}).status_code==401
+        client.get('/');headers={'X-Vexx-Token':client.get('/api/bootstrap').json()['token']}
+        summary=client.get('/api/files/summary',headers=headers).json()
+        cats={c['id']:c['count'] for c in summary['categories']}
+        assert cats['documents']==2 and cats['code']==1
+        dups=client.get('/api/files/duplicates?min_size=1024',headers=headers).json()
+        assert len(dups['groups'])==1 and dups['wasted_size']==len(payload)
+        copies=[item for item in dups['items'] if item['is_duplicate_copy']]
+        assert len(copies)==1 and copies[0]['removable']
+        compact_res=client.post('/api/index/compact',headers=headers,json={}).json()
+        assert compact_res['after']>0
+        opt_res=client.post('/api/system/optimize-memory',headers=headers,json={}).json()
+        assert 'memory' in opt_res and 'index' in opt_res
+        ports_res=client.get('/api/network/ports',headers=headers).json()
+        assert isinstance(ports_res['items'],list)
+        r_ram=client.post('/api/copilot',headers=headers,json={'text':'otimizar ram'}).json()
+        assert r_ram['page']=='overview' and 'memory_optimized' in r_ram
+        r_dup=client.post('/api/copilot',headers=headers,json={'text':'buscar duplicados'}).json()
+        assert r_dup['page']=='cleaner' and r_dup.get('cleaner_view')=='duplicates'
+        r_cat=client.post('/api/copilot',headers=headers,json={'text':'resumo por categoria'}).json()
+        assert 'Documentos' in r_cat['reply']
+        r_cancel=client.post('/api/copilot',headers=headers,json={'text':'cancelar desligamento'}).json()
+        assert r_cancel.get('command_preview')=='shutdown /a'
+        r_reboot=client.post('/api/copilot',headers=headers,json={'text':'reiniciar pc em 5 minutos'}).json()
+        assert r_reboot.get('command_preview')=='shutdown /r /t 300'

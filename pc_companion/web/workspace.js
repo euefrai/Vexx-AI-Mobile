@@ -1,21 +1,45 @@
 'use strict';
 (() => {
   const pc={mode:'browse',folder:'',offset:0,more:false,selected:new Map(),items:[],seq:0};
-  const clean={mode:'files',offset:0,more:false,selected:new Map(),items:[],seq:0};
+  const clean={mode:'files',offset:0,more:false,selected:new Map(),items:[],seq:0,summaryAt:0};
   let pending=null,runId='',runsSignature='',logText='',projectBusy=false,searchTimer=0;
   const main=$('main-content'),dialog=$('review-dialog');
   const el=(tag,text,className)=>{const node=document.createElement(tag);if(text!=null)node.textContent=text;if(className)node.className=className;return node;};
-  const button=(text,fn)=>{const b=el('button',text);b.type='button';b.onclick=()=>Promise.resolve(fn()).catch(showError);return b;};
+  const button=(text,fn,className='')=>{const b=el('button',text,className);b.type='button';b.onclick=()=>Promise.resolve(fn()).catch(showError);return b;};
   const date=value=>{if(!value)return '—';const d=new Date(typeof value==='number'?value*1000:String(value).replace(/^(\d{4})(\d\d)(\d\d)$/,'$1-$2-$3'));return Number.isNaN(d.getTime())?'—':d.toLocaleDateString('pt-BR');};
   const keyOf=item=>item.id||item.path;
+
+  function renderBreadcrumbs(folderPath){
+    const nav=$('files-breadcrumbs');
+    if(!nav)return;
+    if(!folderPath||pc.mode!=='browse'){nav.hidden=true;nav.replaceChildren();return;}
+    nav.hidden=false;
+    const frag=document.createDocumentFragment();
+    frag.append(button('Raízes',()=>openFolder(''),'crumb-btn'));
+    const normalized=String(folderPath).replace(/\//g,'\\');
+    const parts=normalized.split('\\').filter(Boolean);
+    let accum='';
+    parts.forEach((part,idx)=>{
+      frag.append(el('span','/','crumb-sep'));
+      accum=idx===0&&part.endsWith(':')?part+'\\':(accum.endsWith('\\')?accum+part:accum+'\\'+part);
+      const target=accum;
+      const btn=button(part,()=>openFolder(target),'crumb-btn'+(idx===parts.length-1?' active':''));
+      frag.append(btn);
+    });
+    nav.replaceChildren(frag);
+  }
+
   function selectedBar(state,prefix){
     const count=state.selected.size,total=[...state.selected.values()].reduce((s,i)=>s+(i.size||0),0);
     $(prefix+'-selection').hidden=!count;$(prefix+'-selection-count').textContent=count+' arquivos · '+bytes(total)+' selecionados';
     const check=$(prefix==='files'?'files-select-page':'clean-select-page');
     const eligible=state.items.filter(i=>!i.directory&&i.removable!==false);
     check.checked=eligible.length>0&&eligible.every(i=>state.selected.has(keyOf(i)));check.indeterminate=!check.checked&&eligible.some(i=>state.selected.has(keyOf(i)));
+    const dupBtn=$('clean-select-duplicates');
+    if(dupBtn&&prefix==='clean')dupBtn.hidden=clean.mode!=='duplicates';
   }
   function clear(state,prefix){state.selected.clear();selectedBar(state,prefix);}
+
   function rowList(items,tbody,state,prefix){
     state.items=items;const fragment=document.createDocumentFragment();
     for(const item of items){
@@ -24,11 +48,19 @@
       check.setAttribute('aria-label','Selecionar '+(item.name||item.path));
       check.onchange=()=>{if(check.checked&&state.selected.size>=100){check.checked=false;message('Selecione no máximo 100 arquivos por operação.');return;}if(check.checked)state.selected.set(keyOf(item),item);else state.selected.delete(keyOf(item));row.classList.toggle('selected',check.checked);selectedBar(state,prefix);};pick.append(check);
       const name=el('td'),label=item.name||item.path.split(/[\\/]/).pop();
-      if(item.directory){const b=button('▸ '+label,()=>openFolder(item.path));b.className='file-name';name.append(b);}else name.append(el('b',label));
+      if(item.directory){const b=button('▸ '+label,()=>openFolder(item.path),'file-name');name.append(b);}else name.append(el('b',label));
+      if(item.is_duplicate_copy!==undefined){
+        const badge=el('span',item.is_duplicate_copy?'Cópia duplicada':'Original sugerido','badge '+(item.is_duplicate_copy?'warning':'success'));
+        name.append(badge);
+      }
       name.append(el('small',item.path));if(item.removed)name.append(el('small','Removido em '+date(item.removed)));
       const size=el('td',bytes(item.size)+(item.directory&&item.size!=null?' indexados':''));size.setAttribute('aria-label','Tamanho: '+size.textContent);
-      const modified=el('td',date(item.modified)),actions=el('td');
+      const modified=el('td',date(item.modified)),actions=el('td',null,'row-actions');
       if(!item.id){
+        actions.append(button('Abrir local',()=>api('/api/files/open-folder',{path:item.path}).then(()=>message('Pasta aberta no Explorer.'))));
+        if(!item.directory){
+          actions.append(button('Analisar',()=>sendPrompt('Analise o arquivo "'+item.path+'"')));
+        }
         actions.append(button('Copiar caminho',()=>navigator.clipboard.writeText(item.path).then(()=>message('Caminho copiado.'))));
         if(item.directory||/\.(py|html?|m?js|cjs)$/i.test(item.path)||/(?:^|[\\/])(?:package\.json|vexx-project\.json|pyproject\.toml)$/i.test(item.path))actions.append(button('▷ Iniciar…',()=>inspectProject(item.path)));
       }else actions.append(button('Restaurar',()=>reviewFiles('restore',[item.id])));
@@ -37,6 +69,7 @@
     if(!items.length){const row=el('tr'),cell=el('td','Nenhum item para mostrar. Revise o filtro ou atualize o índice.');cell.colSpan=5;row.append(cell);fragment.append(row);}
     $(tbody).replaceChildren(fragment);selectedBar(state,prefix);
   }
+
   async function loadPC(){
     const seq=++pc.seq;
     try{
@@ -44,8 +77,8 @@
       if(pc.mode==='browse')data=await api('/api/files/browse?'+new URLSearchParams({path:pc.folder,offset:pc.offset,sort:$('file-sort').value}));
       else data=await api('/api/search?'+new URLSearchParams({q:$('file-query').value,kind:$('file-kind').value,sort:$('file-sort').value,offset:pc.offset}));
       if(seq!==pc.seq)return;pc.more=data.more;
-      if(pc.mode==='browse'){pc.folder=data.path;$('folder-path').value=pc.folder;$('files-location').textContent=pc.folder||'Raízes locais';$('folder-run').hidden=!pc.folder;$('files-up').disabled=!pc.folder;pc.parent=data.parent;}
-      else{$('files-location').textContent='Pesquisa em todo o índice';$('folder-run').hidden=true;}
+      if(pc.mode==='browse'){pc.folder=data.path;$('folder-path').value=pc.folder;$('files-location').textContent=pc.folder||'Raízes locais';$('folder-run').hidden=!pc.folder;$('files-up').disabled=!pc.folder;pc.parent=data.parent;renderBreadcrumbs(pc.folder);}
+      else{$('files-location').textContent='Pesquisa em todo o índice';$('folder-run').hidden=true;renderBreadcrumbs('');}
       $('search-summary').textContent=data.hint||(pc.mode==='browse'?(data.partial?'Pasta muito grande: mostrando uma parte. Use o índice para pesquisar.':'Navegação direta · '+data.items.length+' itens nesta página'):(data.items.length+' resultados nesta página · '+data.ms+' ms · tamanhos do último índice'));
       rowList(data.items,'file-results',pc,'files');$('previous-page').disabled=!pc.offset;$('next-page').disabled=!pc.more;$('page-number').textContent='Página '+(pc.offset/60+1);
       if(typeof updateSearchClear==='function')updateSearchClear();
@@ -56,10 +89,39 @@
   }
   async function openFolder(path){clear(pc,'files');pc.mode='browse';pc.folder=path;pc.offset=0;$('file-query').value='';if(typeof updateSearchClear==='function')updateSearchClear();if(state.current!=='pc')go('pc');else await loadPC();window.scrollTo({top:0,behavior:'instant'});}
   async function searchPC(){pc.mode='search';return loadPC();}
+
+  async function loadCategorySummary(){
+    const strip=$('clean-categories');
+    if(!strip||Date.now()-clean.summaryAt<15000)return;
+    try{
+      const data=await api('/api/files/summary');
+      clean.summaryAt=Date.now();
+      const cats=(data.categories||[]).filter(c=>c.count>0);
+      if(!cats.length){strip.replaceChildren();return;}
+      const frag=document.createDocumentFragment();
+      for(const c of cats){
+        const card=el('button',null,'category-pill');
+        card.type='button';
+        card.append(el('strong',c.label),el('small',c.count.toLocaleString('pt-BR')+' · '+bytes(c.size)));
+        card.onclick=()=>{
+          if(c.id==='other')return;
+          clean.mode='files';clean.offset=0;$('clean-kind').value=c.id;
+          loadClean().catch(showError);
+        };
+        frag.append(card);
+      }
+      strip.replaceChildren(frag);
+    }catch(_){}
+  }
+
   async function loadClean(){
     const seq=++clean.seq;let data;
-    $('clean-filter-panel').hidden=clean.mode!=='files';$('clean-restore').hidden=clean.mode!=='trash';$('manage-apps').hidden=clean.mode!=='apps';$('clean-remove').textContent=clean.mode==='trash'?'Revisar exclusão definitiva →':'Revisar remoção →';
-    for(const mode of ['files','apps','trash'])$('clean-'+mode).setAttribute('aria-pressed',String(clean.mode===mode));
+    loadCategorySummary();
+    $('clean-filter-panel').hidden=!['files','duplicates'].includes(clean.mode);
+    $('clean-restore').hidden=clean.mode!=='trash';
+    $('manage-apps').hidden=clean.mode!=='apps';
+    $('clean-remove').textContent=clean.mode==='trash'?'Revisar exclusão definitiva →':'Revisar remoção →';
+    for(const mode of ['files','duplicates','apps','trash']){const btn=$('clean-'+mode);if(btn)btn.setAttribute('aria-pressed',String(clean.mode===mode));}
     $('clean-head').hidden=clean.mode==='apps';
     if(clean.mode==='apps'){
       data=await api('/api/apps');if(seq!==clean.seq)return;
@@ -71,6 +133,25 @@
       data=await api('/api/files/trash?offset='+clean.offset);if(seq!==clean.seq)return;
       $('clean-summary').textContent=data.count+' arquivos na Lixeira · '+bytes(data.size)+' ainda ocupados em disco. Restaurar não sobrescreve arquivos existentes.';
       rowList(data.items,'clean-results',clean,'clean');clean.more=!!data.more;
+    }else if(clean.mode==='duplicates'){
+      const minSize=Math.max(65536,Number($('clean-size').value)||1048576);
+      data=await api('/api/files/duplicates?'+new URLSearchParams({min_size:String(minSize),offset:String(clean.offset)}));
+      if(seq!==clean.seq)return;clean.more=!!data.more;
+      const groupsCount=(data.groups||[]).length;
+      const copies=(data.items||[]).filter(i=>i.is_duplicate_copy&&i.removable!==false);
+      $('clean-summary').textContent=groupsCount
+        ?`${groupsCount} grupo(s) de arquivos idênticos (hash BLAKE2b) · ${bytes(data.wasted_size||0)} recuperáveis em cópias extras (${data.ms||0} ms).`
+        :'Nenhum arquivo duplicado encontrado com este tamanho mínimo. Experimente reduzir o filtro de Tamanho mínimo.';
+      rowList(data.items||[],'clean-results',clean,'clean');
+      const dupBtn=$('clean-select-duplicates');
+      if(dupBtn){
+        dupBtn.hidden=!copies.length;
+        dupBtn.onclick=()=>{
+          for(const item of copies){if(clean.selected.size<100)clean.selected.set(keyOf(item),item);}
+          rowList(clean.items,'clean-results',clean,'clean');
+          message(copies.length+' cópia(s) selecionadas (os originais foram preservados).');
+        };
+      }
     }else{
       data=await api('/api/search?'+new URLSearchParams({q:$('clean-query').value,kind:$('clean-kind').value,sort:$('clean-sort').value,min_size:$('clean-size').value,age_days:$('clean-age').value,offset:clean.offset}));
       if(seq!==clean.seq)return;clean.more=data.more;
@@ -146,7 +227,7 @@
   $('files-clear').onclick=()=>{clear(pc,'files');loadPC().catch(showError);};$('clean-clear').onclick=()=>{clear(clean,'clean');loadClean().catch(showError);};
   $('files-remove').onclick=()=>reviewFiles('trash',[...pc.selected.keys()]).catch(showError);
   $('clean-remove').onclick=()=>reviewFiles(clean.mode==='trash'?'purge':'trash',[...clean.selected.keys()]).catch(showError);$('clean-restore').onclick=()=>reviewFiles('restore',[...clean.selected.keys()]).catch(showError);
-  for(const mode of ['files','apps','trash'])$('clean-'+mode).onclick=()=>{clear(clean,'clean');clean.mode=mode;clean.offset=0;loadClean().catch(showError);};
+  for(const mode of ['files','duplicates','apps','trash']){const btn=$('clean-'+mode);if(btn)btn.onclick=()=>{clear(clean,'clean');clean.mode=mode;clean.offset=0;loadClean().catch(showError);};}
   $('manage-apps').onclick=()=>api('/api/apps/manage',{}).catch(showError);
   $('clean-form').onsubmit=e=>{e.preventDefault();clear(clean,'clean');clean.offset=0;loadClean().catch(showError);};
   $('clean-prev').onclick=()=>{clean.offset=Math.max(0,clean.offset-60);loadClean().catch(showError);};$('clean-next').onclick=()=>{clean.offset+=60;loadClean().catch(showError);};
@@ -159,7 +240,15 @@
   $('previous-page').onclick=()=>{pc.offset=Math.max(0,pc.offset-60);loadPC().catch(showError);};$('next-page').onclick=()=>{pc.offset+=60;loadPC().catch(showError);};
   $('project-form').onsubmit=e=>{e.preventDefault();inspectProject($('project-path').value).catch(showError);};
   $('project-logs-copy').onclick=()=>navigator.clipboard.writeText($('project-logs').textContent).then(()=>message('Logs copiados.')).catch(showError);
-  window.vexxWorkspace={search:searchPC,setSearch:()=>{pc.mode='search';pc.offset=0;$('files-location').textContent='Pesquisa em todo o índice';},clearSearch:()=>openFolder(pc.folder||''),reviewFiles,findLargeFile:name=>{clean.mode='files';clean.offset=0;$('clean-query').value=name;for(const mode of ['files','apps','trash'])$('clean-'+mode).setAttribute('aria-pressed',String(mode==='files'));$('clean-head').hidden=false;loadClean().catch(showError);},enter:async page=>{if(page==='pc')await loadPC();if(page==='cleaner')await loadClean();if(page==='projects')await projectStatus();}};
+  window.vexxWorkspace={
+    search:searchPC,
+    setSearch:()=>{pc.mode='search';pc.offset=0;$('files-location').textContent='Pesquisa em todo o índice';},
+    clearSearch:()=>openFolder(pc.folder||''),
+    reviewFiles,
+    openDuplicates:async()=>{clear(clean,'clean');clean.mode='duplicates';clean.offset=0;await loadClean();},
+    findLargeFile:name=>{clean.mode='files';clean.offset=0;$('clean-query').value=name;for(const mode of ['files','duplicates','apps','trash']){const b=$('clean-'+mode);if(b)b.setAttribute('aria-pressed',String(mode==='files'));}$('clean-head').hidden=false;loadClean().catch(showError);},
+    enter:async page=>{if(page==='pc')await loadPC();if(page==='cleaner')await loadClean();if(page==='projects')await projectStatus();}
+  };
   setInterval(()=>projectStatus().catch(showError),2000);
   let desktopClosed=localStorage.getItem('vexx-chat')==='closed',drawerOpen=false;
   function chatLayout(){const small=matchMedia('(max-width:1240px)').matches;document.body.classList.toggle('chat-collapsed',!small&&desktopClosed);document.body.classList.toggle('chat-open',small&&drawerOpen);$('chat-backdrop').hidden=!(small&&drawerOpen);$('chat-toggle').setAttribute('aria-expanded',String(small?drawerOpen:!desktopClosed));const modal=small&&drawerOpen;main.inert=modal;document.querySelector('nav').inert=modal;$('copilot-panel').setAttribute('role',small?'dialog':'complementary');if(modal)$('copilot-panel').setAttribute('aria-modal','true');else $('copilot-panel').removeAttribute('aria-modal');}

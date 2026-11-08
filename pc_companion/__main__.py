@@ -47,6 +47,17 @@ def main():
         try:
             if not already_running:
                 run(server, sock, url, app, hidden=args.start_hidden)
+            elif not args.start_hidden:
+                try:
+                    import json, httpx
+                    record = json.loads((app.state.directory / 'runtime.json').read_text('utf-8'))
+                    with httpx.Client(base_url=record['url'], timeout=3, trust_env=False, follow_redirects=False) as client:
+                        if client.get('/health').json().get('instance_id') == record.get('instance_id'):
+                            client.get('/')
+                            token = client.get('/api/bootstrap').json()['token']
+                            client.post('/api/action', headers={'X-Vexx-Token': token}, json={'action': 'show_window'})
+                except Exception:
+                    pass
         finally:
             kernel.CloseHandle(mutex)
             sock.close()

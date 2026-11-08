@@ -29,6 +29,8 @@ def run(server, sock, url, app, *, hidden=False):
     def on_closing(*_):
         if not app.state.exiting:
             window.hide()
+            from .system import trim_self_memory
+            threading.Thread(target=trim_self_memory, daemon=True).start()
             return False
     closing_event = getattr(window.events, 'closing', None)
     if closing_event is not None:
@@ -70,6 +72,7 @@ def run(server, sock, url, app, *, hidden=False):
 
         tray = pystray.Icon('Vexx PC', tray_image, 'Vexx PC', pystray.Menu(
             pystray.MenuItem('Abrir Vexx PC', lambda _icon, _item: window.show(), default=True),
+            pystray.MenuItem('Otimizar memória RAM', lambda _icon, _item: threading.Thread(target=__import__('pc_companion.system', fromlist=['optimize_system_memory']).optimize_system_memory, daemon=True).start()),
             pystray.Menu.SEPARATOR,
             pystray.MenuItem('Encerrar Vexx PC', quit_from_tray)))
         tray_ready = threading.Event()

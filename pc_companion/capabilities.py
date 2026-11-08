@@ -1,13 +1,13 @@
 """Single source of truth for the public Vexx PC Copilot's installed features."""
 
 FEATURES=(
-    {'page':'overview','name':'Visão geral','details':'CPU, RAM, discos, rede, tempo ligado e recomendações locais de arquivos, apps e processos.'},
-    {'page':'pc','name':'Arquivos','details':'Navegar e pesquisar o índice local; resumir arquivos de texto, documentos suportados e metadados de imagens.'},
-    {'page':'cleaner','name':'Limpeza','details':'Filtrar candidatos, revisar apps instalados e restaurar arquivos movidos para a Lixeira Vexx.'},
+    {'page':'overview','name':'Visão geral','details':'CPU, RAM, discos, rede, tempo ligado, otimização de memória RAM (working-set), compactação do índice e recomendações locais de arquivos, apps e processos.'},
+    {'page':'pc','name':'Arquivos','details':'Navegar com breadcrumbs e pesquisar o índice local; abrir no Explorer, resumir arquivos de texto, documentos suportados e metadados de imagens.'},
+    {'page':'cleaner','name':'Limpeza','details':'Filtrar candidatos por categoria, detectar arquivos duplicados idênticos (hash BLAKE2b), revisar apps instalados e restaurar arquivos movidos para a Lixeira Vexx.'},
     {'page':'projects','name':'Projetos','details':'Analisar, iniciar e acompanhar projetos locais compatíveis após revisão.'},
-    {'page':'network','name':'Rede','details':'Consultar adaptadores, endereços e Wi-Fi; conectar a perfis Wi-Fi salvos ou abrir as configurações do Windows.'},
+    {'page':'network','name':'Rede','details':'Consultar adaptadores, endereços, portas locais em escuta e Wi-Fi; diagnosticar DNS/conectividade, limpar cache DNS, conectar a perfis Wi-Fi salvos ou abrir as configurações do Windows.'},
     {'page':'logs','name':'Logs','details':'Consultar e filtrar eventos locais da sessão.'},
-    {'page':'ai','name':'IA e Copiloto','details':'Configurar provedor/modelo, pedir explicações, navegar por abas e executar ações locais com confirmação.'},
+    {'page':'ai','name':'IA e Copiloto','details':'Configurar provedor/modelo, pedir explicações, navegar por abas e executar ações locais (energia, sessão, rede, RAM e arquivos) com confirmação.'},
 )
 
 OPERATIONS=(

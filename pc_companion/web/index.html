@@ -157,7 +157,7 @@
       </article>
 
       <article class="panel resource-actions">
-        <div class="panel-head"><div><h2>Ações sugeridas</h2><p class="hint">RAM, arquivos, apps e configurações · dados locais</p></div><button id="system-audit" class="secondary" type="button">Analisar sistema</button></div>
+        <div class="panel-head"><div><h2>Ações sugeridas</h2><p class="hint">RAM, arquivos, apps e configurações · dados locais</p></div><div class="actions"><button id="optimize-ram-btn" class="secondary" type="button" title="Liberar memória RAM ociosa (working-set) e compactar índice"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-memory"/></svg>Otimizar RAM</button><button id="find-duplicates-btn" class="secondary" type="button" title="Localizar arquivos duplicados idênticos"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-copy"/></svg>Duplicados</button><button id="system-audit" class="secondary" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-activity"/></svg>Analisar sistema</button></div></div>
         <div id="suggested-actions" class="suggested-actions"><p class="hint">Analisando recursos locais…</p></div>
       </article>
 
@@ -251,6 +251,7 @@
           </div>
           <span class="path-label" id="files-location">Raízes locais</span>
         </div>
+        <nav class="breadcrumbs" id="files-breadcrumbs" aria-label="Caminho atual" hidden></nav>
         <form class="address-row" id="folder-form">
           <label class="sr-only" for="folder-path">Caminho da pasta</label>
           <input id="folder-path" type="text" placeholder="Cole o caminho de uma pasta" autocomplete="off" spellcheck="false">
@@ -265,7 +266,7 @@
               <button class="input-clear" id="search-clear" type="button" title="Limpar busca" aria-label="Limpar busca" hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-close"/></svg></button>
             </span>
           </label>
-          <label class="field kind-field">Mostrar<select id="file-kind"><option value="all">Tudo</option><option value="files">Arquivos</option><option value="folders">Pastas</option><option value="images">Imagens</option><option value="videos">Vídeos</option><option value="installers">Instaladores / APKs</option><option value="archives">Compactados</option></select></label>
+          <label class="field kind-field">Mostrar<select id="file-kind"><option value="all">Tudo</option><option value="files">Arquivos</option><option value="folders">Pastas</option><option value="documents">Documentos</option><option value="code">Código</option><option value="images">Imagens</option><option value="videos">Vídeos</option><option value="audio">Áudio</option><option value="installers">Instaladores / APKs</option><option value="archives">Compactados</option><option value="temporary">Temporários / logs</option></select></label>
           <label class="field sort-field">Ordenar<select id="file-sort"><option value="name">Nome</option><option value="largest">Maior primeiro</option><option value="newest">Mais recente</option><option value="oldest">Mais antigo</option></select></label>
           <button class="primary search-submit" type="submit">Buscar no índice</button>
         </form>
@@ -274,6 +275,7 @@
           <p class="hint grow" id="index-status">Índice local em segundo plano.</p>
           <div class="actions">
             <button id="index-toggle" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pause"/></svg><span id="index-toggle-label">Pausar índice</span></button>
+            <button id="index-compact" type="button" title="Compactar banco de dados do índice local"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-database"/></svg>Compactar</button>
             <button id="index-refresh" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-refresh"/></svg>Atualizar índice</button>
           </div>
         </div>
@@ -311,8 +313,10 @@
           <p class="intro">Revise instaladores, imagens, vídeos e outros arquivos. Você escolhe o que mover para a Lixeira Vexx.</p>
         </div>
       </div>
+      <div class="category-strip" id="clean-categories" aria-label="Resumo por categoria"></div>
       <div class="segmented" role="group" aria-label="Área de limpeza">
         <button id="clean-files" type="button" aria-pressed="true"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-file"/></svg>Arquivos</button>
+        <button id="clean-duplicates" type="button" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-copy"/></svg>Duplicados</button>
         <button id="clean-apps" type="button" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-grid"/></svg>Apps instalados</button>
         <button id="clean-trash" type="button" aria-pressed="false"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-archive"/></svg>Lixeira Vexx</button>
       </div>
@@ -320,7 +324,7 @@
         <article class="panel compact clean-filter-panel">
           <form class="clean-form" id="clean-form">
             <label class="field grow">Nome<input id="clean-query" type="search" placeholder="Opcional: nome ou extensão" autocomplete="off"></label>
-            <label class="field">Tipo<select id="clean-kind"><option value="files">Todos os arquivos</option><option value="installers">Instaladores / APKs</option><option value="images">Imagens</option><option value="videos">Vídeos</option><option value="audio">Áudio</option><option value="archives">Compactados</option><option value="temporary">Temporários / logs</option></select></label>
+            <label class="field">Tipo<select id="clean-kind"><option value="files">Todos os arquivos</option><option value="installers">Instaladores / APKs</option><option value="documents">Documentos</option><option value="code">Código</option><option value="images">Imagens</option><option value="videos">Vídeos</option><option value="audio">Áudio</option><option value="archives">Compactados</option><option value="temporary">Temporários / logs</option></select></label>
             <label class="field">Tamanho mínimo<select id="clean-size"><option value="0">Qualquer</option><option value="10485760">10 MB</option><option value="104857600">100 MB</option><option value="1073741824">1 GB</option></select></label>
             <label class="field">Sem alteração há<select id="clean-age"><option value="0">Qualquer data</option><option value="30">30 dias</option><option value="180">6 meses</option><option value="365">1 ano</option></select></label>
             <label class="field">Ordem<select id="clean-sort"><option value="largest">Maior primeiro</option><option value="oldest">Mais antigo</option><option value="newest">Mais recente</option><option value="name">Nome</option></select></label>
@@ -343,6 +347,7 @@
       <div class="selection-bar" id="clean-selection" hidden>
         <span id="clean-selection-count"></span>
         <div class="actions">
+          <button id="clean-select-duplicates" type="button" hidden>Selecionar apenas cópias</button>
           <button id="clean-clear" type="button">Limpar seleção</button>
           <button id="clean-restore" type="button" hidden>Restaurar seleção</button>
           <button class="danger-solid" id="clean-remove" type="button">Revisar remoção<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-chevron-right"/></svg></button>
@@ -407,6 +412,16 @@
         <div class="panel-head"><div><h2>Interfaces ativas</h2><p class="hint">Uma interface ativa não garante acesso à internet.</p></div><span class="badge neutral" id="adapter-count">—</span></div>
         <div class="adapter-list" id="adapters"></div>
         <p class="hint" id="ssid"></p>
+        <div class="actions net-tools-bar">
+          <button id="net-diagnose" class="secondary" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-activity"/></svg>Diagnosticar DNS e rede</button>
+          <button id="net-flush-dns" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-refresh"/></svg>Limpar cache DNS</button>
+          <button id="net-wifi-settings" type="button"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-network"/></svg>Configurações de Wi-Fi</button>
+        </div>
+        <div id="net-diagnostics-output" class="net-diagnostics" hidden></div>
+      </article>
+      <article class="panel">
+        <div class="panel-head"><div><h2>Portas locais em escuta</h2><p class="hint">Serviços TCP ativos neste computador (loopback vs. rede local).</p></div><div class="actions"><span class="badge neutral" id="ports-count">—</span><button id="ports-refresh" type="button" title="Atualizar portas"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-refresh"/></svg>Atualizar</button></div></div>
+        <div class="adapter-list" id="listening-ports"><p class="hint">Clique em Atualizar ou abra esta aba para listar as portas locais.</p></div>
       </article>
     </section>
 
@@ -487,6 +502,7 @@
     <div class="copilot-head">
       <span class="copilot-mark"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-star"/></svg></span>
       <div class="copilot-title"><h2>Copiloto Vexx</h2><p class="hint"><span class="status-dot"></span><span id="ai-mode-label">Ações locais. Dados reais.</span></p></div>
+      <button class="icon-button" id="chat-clear" type="button" aria-label="Nova conversa" title="Limpar conversa"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-refresh"/></svg></button>
       <button class="copilot-close" id="chat-close" type="button" aria-label="Fechar Copiloto" title="Fechar Copiloto"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-close"/></svg></button>
     </div>
     <div class="copilot-body">
@@ -499,6 +515,8 @@
           <button type="button" data-prompt="diagnosticar conexao"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-network"/></svg><span>Ver conexão</span></button>
           <button type="button" data-prompt="pausar acesso"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-lock"/></svg><span>Pausar acesso</span></button>
           <button type="button" data-prompt="atualizar indice"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-database"/></svg><span>Atualizar índice</span></button>
+          <button type="button" data-prompt="otimizar ram"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-memory"/></svg><span>Otimizar RAM</span></button>
+          <button type="button" data-prompt="buscar duplicados"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-copy"/></svg><span>Duplicados</span></button>
         </div>
       </div>
       <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions" hidden></div>

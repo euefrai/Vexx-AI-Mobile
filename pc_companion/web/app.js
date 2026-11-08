@@ -223,6 +223,7 @@ function go(page) {
     window.vexxWorkspace.enter(page).catch(showError);
   }
   if (page === 'logs') loadLogs().catch(showError);
+  if (page === 'network') loadListeningPorts({silent: true}).catch(() => {});
   if (page === 'overview' || page === 'network') requestAnimationFrame(drawCharts);
 }
 
@@ -427,6 +428,35 @@ function renderAdapters(adapters) {
     return card;
   }));
 }
+async function loadListeningPorts({silent = false} = {}) {
+  const host = $('listening-ports');
+  if (!host) return;
+  try {
+    const data = await api('/api/network/ports');
+    const items = Array.isArray(data.items) ? data.items : [];
+    setBadge($('ports-count'), items.length ? items.length + (items.length === 1 ? ' porta' : ' portas') : 'Nenhuma', items.length ? 'neutral' : 'success');
+    if (!items.length) {
+      host.replaceChildren(el('p', 'hint', 'Nenhuma porta TCP em escuta detectada neste momento.'));
+      return;
+    }
+    host.replaceChildren(...items.slice(0, 30).map((item) => {
+      const card = el('article', 'adapter-card');
+      const icon = el('span', 'adapter-icon');
+      icon.append(svgIcon(item.loopback ? 'i-lock' : 'i-network'));
+      const main = el('div', 'adapter-main');
+      main.append(el('strong', '', (item.process || 'Processo local') + (item.pid ? ' (PID ' + item.pid + ')' : '')));
+      const addresses = el('div', 'adapter-addresses');
+      addresses.append(el('span', 'adapter-address', item.address + ':' + item.port));
+      addresses.append(el('span', 'badge ' + (item.loopback ? 'success' : 'warning'), item.loopback ? 'Apenas local (loopback)' : 'Rede local / Externa'));
+      main.append(addresses);
+      const portBadge = el('span', 'adapter-speed', 'TCP ' + item.port);
+      card.append(icon, main, portBadge);
+      return card;
+    }));
+  } catch (error) {
+    if (!silent) showError(error);
+  }
+}
 function renderStorage(system) {
   const list = $('disk-list');
   if (!list) return;
@@ -473,8 +503,10 @@ function renderIndex(index) {
   const status = index.error
     ? index.error
     : label + ' · ' + countText + ' · ' + (Number(index.skipped) || 0) + ' inacessíveis';
-  $('index-overview').textContent = status;
-  $('index-status').textContent = status;
+  const fullStatus = status + (!index.error && index.db_size ? ' · Banco: ' + bytes(index.db_size) : '');
+  $('index-overview').textContent = fullStatus;
+  $('index-status').textContent = fullStatus;
+
   setBadge($('index-badge'), label, tone);
   const dot = $('index-dot');
   if (dot) dot.className = 'index-dot' + (index.error ? ' error' : index.paused ? ' paused' : index.running ? ' running' : '');
@@ -935,6 +967,11 @@ async function sendPrompt(text, extra = {}) {
       go('pc');
     } else if (data.page) {
       go(data.page);
+      if (data.cleaner_view === 'duplicates' && window.vexxWorkspace?.openDuplicates) {
+        window.vexxWorkspace.openDuplicates().catch(showError);
+      }
+      if (false)
+      go(data.page);
     }
     refresh().catch(() => {});
   } catch (error) {
@@ -1250,12 +1287,98 @@ function bindEvents() {
     sendPrompt(text);
   });
   $('system-audit').addEventListener('click',()=>sendPrompt('Faça uma análise completa do sistema: recursos, configurações, arquivos, apps, Lixeira Vexx e pastas de nuvem sincronizadas.').catch(showError));
+  $('optimize-ram-btn')?.addEventListener('click', async () => {
+    const button = $('optimize-ram-btn');
+    button.disabled = true;
+    try {
+      const result = await api('/api/system/optimize-memory', {});
+      const freed = bytes(Math.max(0, result.memory?.freed || 0));
+      const saved = bytes(Math.max(0, result.index?.saved || 0));
+      notify(`Memória otimizada: ${freed} de RAM liberados · ${saved} compactados no índice.`, 'success');
+      await refresh();
+    } catch (error) {
+      showError(error);
+    } finally {
+      button.disabled = false;
+    }
+  });
+  $('find-duplicates-btn')?.addEventListener('click', () => {
+    go('cleaner');
+    window.vexxWorkspace?.openDuplicates?.().catch(showError);
+  });
+  $('index-compact')?.addEventListener('click', async () => {
+    const button = $('index-compact');
+    button.disabled = true;
+    try {
+      const result = await api('/api/index/compact', {});
+      notify(`Índice compactado (${bytes(Math.max(0, result.saved || 0))} economizados · tamanho atual: ${bytes(result.after || 0)}).`, 'success');
+      await refresh();
+    } catch (error) {
+      showError(error);
+    } finally {
+      button.disabled = false;
+    }
+  });
+  $('net-diagnose')?.addEventListener('click', async () => {
+    const button = $('net-diagnose');
+    const out = $('net-diagnostics-output');
+    button.disabled = true;
+    try {
+      const result = await api('/api/network/diagnostics', {});
+      if (out) {
+        out.hidden = false;
+        const rows = (result.checks || []).map((c) => {
+          const item = el('div', 'resource-suggestion');
+          const copy = el('div', 'resource-suggestion-copy');
+          copy.append(el('strong', '', c.target), el('small', '', c.ok ? `Resolvido (${c.ip}) · Latência: ${c.latency_ms} ms` : 'Sem resposta / falha de resolução'));
+          const badge = el('span', 'badge ' + (c.ok ? 'success' : 'danger'), c.ok ? c.latency_ms + ' ms' : 'Falhou');
+          item.append(copy, badge);
+          return item;
+        });
+        out.replaceChildren(...rows);
+      }
+      await loadListeningPorts({silent: true});
+      notify(result.all_ok ? 'Diagnóstico de rede concluído: conectividade e DNS OK.' : 'Diagnóstico concluído com alertas.', result.all_ok ? 'success' : 'warning');
+    } catch (error) {
+      showError(error);
+    } finally {
+      button.disabled = false;
+    }
+  });
+  $('net-flush-dns')?.addEventListener('click', async () => {
+    const button = $('net-flush-dns');
+    button.disabled = true;
+    try {
+      const result = await api('/api/network/flush-dns', {});
+      notify(result.message || 'Cache DNS limpo.', 'success');
+    } catch (error) {
+      showError(error);
+    } finally {
+      button.disabled = false;
+    }
+  });
+  $('net-wifi-settings')?.addEventListener('click', () => {
+    api('/api/system/open-settings', {setting: 'wifi'}).catch(showError);
+  });
+  $('ports-refresh')?.addEventListener('click', () => {
+    loadListeningPorts().then(() => notify('Portas locais atualizadas.', 'success')).catch(showError);
+  });
+  $('chat-clear')?.addEventListener('click', () => {
+    $('chat-messages').replaceChildren();
+    $('chat-messages').hidden = true;
+    $('copilot-welcome').hidden = false;
+    chatFiles = [];
+    chatPaths = [];
+    $('attachment-list').replaceChildren();
+    $('attachment-list').hidden = true;
+    notify('Conversa limpa.', 'info');
+  });
   $('chat-attachments').addEventListener('change',(event)=>{
     const selected=[...event.target.files].slice(0,10);
     event.target.value='';
     chatFileRead=Promise.all(selected.map(file=>new Promise(resolve=>{
       const ext=file.name.slice(file.name.lastIndexOf('.')).toLowerCase();
-      if(file.size>12000){resolve({name:file.name,text:'Arquivo maior que 12 KB; cole o caminho local para análise.'});return;}
+      if(file.size>2*1024*1024){resolve({name:file.name,text:'Arquivo maior que 2 MB; cole o caminho local para análise.'});return;}
       if(!['.txt','.md','.py','.js','.ts','.tsx','.jsx','.html','.css','.json','.yaml','.yml','.toml','.ini','.csv','.sql','.xml','.log','.sh','.ps1','.bat','.cmd'].includes(ext)){resolve({name:file.name,text:'Arquivo binário; cole o caminho local para analisar o conteúdo.'});return;}
       const reader=new FileReader();reader.onload=()=>resolve({name:file.name,text:String(reader.result||'').slice(0,12000)});reader.onerror=()=>resolve({name:file.name,text:'Não foi possível ler o arquivo; cole o caminho local.'});reader.readAsText(file);
     }))).then(items=>{chatFiles=items;const list=$('attachment-list');list.replaceChildren(...items.map(file=>el('span','attachment-chip',file.name)));list.hidden=!items.length;});

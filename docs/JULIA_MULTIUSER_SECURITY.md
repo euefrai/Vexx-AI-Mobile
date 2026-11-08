@@ -9,7 +9,9 @@
    qualquer ação administrativa.
 4. **Proteção contra escalada.** Nenhum usuário comum pode elevar para admin.
 5. **Senha nunca em texto plano.** scrypt (contas novas); Argon2id só no
-   login legado do `.env`, verificado no relay.
+   login legado do `.env`, verificado no relay e desligado por padrão.
+   `JULIA_ALLOW_LEGACY_LOGIN=1` é um opt-in explícito para migração: sem ele,
+   cookies `uid=local` e o POST `/api/login` do proprietário são recusados.
 
 ## Identificadores
 
