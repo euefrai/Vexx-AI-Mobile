@@ -41,6 +41,9 @@ Name: "brazilianportuguese"; MessagesFile: "compiler:Languages\BrazilianPortugue
 [Tasks]
 Name: "desktopicon"; Description: "Criar atalho na Área de Trabalho"; Flags: checkedonce
 
+[UninstallRun]
+Filename: "{sys}\reg.exe"; Parameters: "delete ""HKCU\Software\Microsoft\Windows\CurrentVersion\Run"" /v VexxPC /f"; Flags: runhidden
+
 [Files]
 Source: "{#PayloadDir}\runtime\*"; DestDir: "{app}\runtime"; Flags: ignoreversion recursesubdirs createallsubdirs
 Source: "{#PayloadDir}\source\Vexx-PC\*"; DestDir: "{tmp}\VexxPCSource"; Flags: ignoreversion recursesubdirs createallsubdirs deleteafterinstall

@@ -60,7 +60,7 @@ New-Item -ItemType Directory -Path $releaseRoot -Force | Out-Null
 $targetPackage = Join-Path $releaseRoot 'pc_companion'
 New-Item -ItemType Directory -Path $targetPackage -Force | Out-Null
 # Package code only; never copy the source repository, environment or private data.
-foreach ($name in @('__init__.py','__main__.py','app.py','system.py','indexer.py','connection.py','release.py','updater.py','apply_update.py','launcher.py','desktop.py','ai.py','files.py','projects.py','project_host.py','process_group.py','requirements.txt','README.md','Instalar.cmd','instalar.ps1')) {
+foreach ($name in @('__init__.py','__main__.py','app.py','system.py','indexer.py','connection.py','release.py','updater.py','apply_update.py','launcher.py','desktop.py','ai.py','capabilities.py','files.py','projects.py','project_host.py','process_group.py','requirements.txt','README.md','Instalar.cmd','instalar.ps1')) {
     Copy-Item -LiteralPath (Join-Path $PSScriptRoot $name) -Destination (Join-Path $targetPackage $name) -Force
 }
 $webTarget = Join-Path $targetPackage 'web'
@@ -84,7 +84,7 @@ if ($WheelDirectory) {
 if ($LASTEXITCODE -ne 0) { throw 'Falha nas dependencias. Verifique sua internet e execute novamente.' }
 Push-Location -LiteralPath $releaseRoot
 try {
-    'from pc_companion.app import create_app; import mss, PIL, psutil; print("Dependencias verificadas.")' | & $venvPython -
+    'from pc_companion.app import create_app; import mss, PIL, psutil, pystray; print("Dependencias verificadas.")' | & $venvPython -
     if ($LASTEXITCODE -ne 0) { throw 'Falha ao verificar a instalacao.' }
 } finally { Pop-Location }
 

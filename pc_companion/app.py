@@ -24,6 +24,7 @@ from .ai import AI
 from .files import Files, installed_apps, referenced_local_paths, fingerprint, analyze_local_paths
 from .projects import Projects
 from . import __version__
+from .capabilities import FEATURES, copilot_guide
 from .system_audit import collect as collect_system_audit, report as system_audit_report
 
 WEB = Path(__file__).parent / 'web'
@@ -31,6 +32,33 @@ WEB = Path(__file__).parent / 'web'
 
 def data_directory():
     return Path(os.environ.get('LOCALAPPDATA', Path.home() / '.local' / 'share')) / 'VexxPC'
+
+
+def set_login_startup(enabled):
+    if os.name!='nt':return
+    import winreg
+    with winreg.CreateKey(winreg.HKEY_CURRENT_USER,r'Software\Microsoft\Windows\CurrentVersion\Run') as key:
+        if not enabled:
+            try:winreg.DeleteValue(key,'VexxPC')
+            except FileNotFoundError:pass
+            return
+        try:record=json.loads((Path(__file__).resolve().parents[1]/'installation.json').read_text('utf-8'))
+        except (OSError,ValueError) as exc:raise ValueError('Esta instalação não tem um iniciador estável para o login.') from exc
+        root=Path(record.get('install_root','')).resolve();launcher=root/'launch.py'
+        pythonw=root/'runtime'/'pythonw.exe'
+        if not launcher.is_file() or not pythonw.is_file():raise ValueError('O iniciador do Vexx PC não está instalado em um caminho estável.')
+        winreg.SetValueEx(key,'VexxPC',0,winreg.REG_SZ,f'"{pythonw}" "{launcher}" --start-hidden')
+
+
+def requested_wifi_ssid(text):
+    quoted=re.search(r'["“]([^"”\r\n]{1,32})["”]',text)
+    if quoted:return quoted.group(1).strip()
+    match=re.search(r'(?i)(?:wi[\s-]?fi|rede)(?:\s+(?:chamada|com nome|de nome))?\s+(.+)$',text.strip())
+    if not match:return ''
+    value=match.group(1).strip().rstrip('.,;:!?')
+    value=re.sub(r'(?i)^(?:da|do|de)\s+','',value)
+    value=re.sub(r'(?i)\s+(?:por favor|agora|para mim)$','',value).strip()
+    return value[:32] if value else ''
 
 
 def default_roots():
@@ -82,7 +110,7 @@ def create_app(directory=None, roots=None):
         except OSError:
             pass
 
-    connection = Connection(config, save, log)
+    connection = Connection(config, save, log, set_login_startup)
     ai = AI(directory)
     files = Files(directory,index)
     projects = Projects(directory,index.roots)
@@ -255,11 +283,23 @@ def create_app(directory=None, roots=None):
     async def system_open_settings(request: Request):
         body=await payload(request);setting=str(body.get('setting',''))
         targets={'storage':'ms-settings:storage','startup':'ms-settings:startupapps','apps':'ms-settings:appsfeatures',
-                 'power':'ms-settings:powersleep','network':'ms-settings:network-status','windows-trash':'shell:RecycleBinFolder'}
+                 'power':'ms-settings:powersleep','network':'ms-settings:network-status','wifi':'ms-settings:network-wifi',
+                 'windows-trash':'shell:RecycleBinFolder'}
         if os.name!='nt' or setting not in targets:raise HTTPException(400,'Esta página de configurações não está disponível neste sistema.')
         if setting=='windows-trash':await asyncio.to_thread(subprocess.Popen,['explorer.exe','shell:RecycleBinFolder'])
         else:await asyncio.to_thread(os.startfile,targets[setting])
         return {'ok':True}
+
+    @app.post('/api/network/wifi/connect')
+    async def wifi_connect(request: Request):
+        body=await payload(request);ssid=str(body.get('ssid','')).strip()
+        if os.name!='nt':raise HTTPException(400,'A conexão Wi-Fi está disponível no Windows.')
+        if not 1<=len(ssid)<=32 or any(ord(char)<32 for char in ssid):raise HTTPException(400,'Nome de rede Wi-Fi inválido.')
+        try:
+            result=await asyncio.to_thread(subprocess.run,['netsh','wlan','connect','name='+ssid,'ssid='+ssid],
+                capture_output=True,timeout=8,creationflags=subprocess.CREATE_NO_WINDOW)
+        except (OSError,subprocess.TimeoutExpired):return {'ok':False,'saved_profile':False}
+        return {'ok':result.returncode==0,'saved_profile':result.returncode==0}
     @app.get('/api/ai/config')
     async def ai_config():
         return ai.status()
@@ -412,6 +452,7 @@ def create_app(directory=None, roots=None):
                     raise HTTPException(503, 'Não foi possível revogar no site. Use Desvincular na sua conta ou tente novamente.') from None
             await connection.unlink()
         elif action == 'shutdown':
+            app.state.exiting=True
             await connection.permission(False,preserve=True)
             index.stop.set()
             callback = getattr(app.state, 'request_exit', None)
@@ -492,8 +533,51 @@ def create_app(directory=None, roots=None):
         if uploaded:text+='\n\nArquivos anexados pelo usuário:\n'+'\n'.join('### '+str(f.get('name','arquivo'))+'\n'+str(f.get('text','')) for f in uploaded)
         if not isinstance(attachments,list) or len(attachments)>10 or not all(isinstance(p,str) for p in attachments):raise HTTPException(400,'Anexe até 10 caminhos locais.')
         attachments=referenced_local_paths(files,text,attachments)
+        cleanup_intent=(any(word in normalized for word in ('excluir','exclua','apagar','apague','remover','remova','delete','liberar espaco','limpar o disco'))
+                        and any(word in normalized for word in ('arquivo','pasta','file','disco','espaco','computador','pc','hd')))
+        delete_action=bool(re.search(r'\b(?:exclua|apague|delete|remova|mova para a lixeira)\b',normalized))
         audit_request=normalized.startswith(('!auditar','!auditoria')) or 'auditoria do sistema' in normalized or 'analise completa do sistema' in normalized or 'analise completa do computador' in normalized or ('analise' in normalized and any(word in normalized for word in ('sistema','computador',' pc','tudo')) and any(word in normalized for word in ('configur','arquivo','pasta','lixeira','nuvem','complet','tudo')))
         if audit_request:return await create_system_audit()
+        if cleanup_intent and not attachments:
+            result=await create_system_audit()
+            result['reply']='Vou listar candidatos reais que podem ser revisados para liberar espaço. Nada será alterado até você selecionar itens e confirmar.\n\n'+result['reply']
+            return result
+        if attachments and delete_action:
+            try:
+                paths=[files.paths.check(path) for path in attachments]
+                if any(not path.is_file() for path in paths):raise ValueError('A exclusão em lote aceita arquivos individuais; pastas não são removidas recursivamente.')
+            except (OSError,ValueError) as exc:raise HTTPException(400,str(exc)) from None
+            return {'reply':'Abri uma revisão com os caminhos selecionados. Confira os nomes e tamanhos; só serão movidos à Lixeira Vexx se você confirmar.','file_review':[str(path) for path in paths]}
+        if any(term in normalized for term in ('o que voce pode fazer','o que o aplicativo faz','o que faz o vexx pc','quais abas','quais funcoes','suas funcoes','quais funcionalidades','suas habilidades','suas capacidades','como voce funciona','conhece o vexx pc')):
+            return {'reply':copilot_guide()}
+        if re.search(r'\b(?:conecte|conectar|conecta|entre na rede)\b',normalized) and any(net in normalized for net in ('wifi','wi-fi','rede')):
+            ssid=requested_wifi_ssid(text)
+            if not ssid:return {'reply':'Abrirei as configurações de Wi-Fi para você escolher a rede e, se necessário, informar a senha diretamente ao Windows.','page':'network','open_wifi_settings':True}
+            return {'reply':'Vou pedir ao Windows para conectar ao perfil Wi-Fi salvo “'+ssid+'”. Confirme para continuar; nenhuma senha será enviada ao Copiloto.','confirmation_action':'connect_wifi','ssid':ssid}
+        if 'permanente' in normalized and any(word in normalized for word in ('controle','mouse','teclado','remoto')) and any(word in normalized for word in ('ativ','permit','inici','liber','habil','quero','ligue','ligar')):
+            if not config.get('token') or not config.get('device_id'):
+                return {'reply':'Vincule este computador primeiro usando o nick e PIN de Meu PC. Depois posso solicitar a autorização permanente.','page':'overview'}
+            if connection.status()['permanent_control']:
+                return {'reply':'O controle permanente já está ativo para o PC vinculado e configurado para iniciar oculto ao entrar no Windows. Você pode revogá-lo em Visão geral.','page':'overview'}
+            return {'reply':'Posso ativar o controle de tela, mouse e teclado para o PC vinculado e configurar o Vexx PC para iniciar oculto no login do Windows. Confirme a autorização. Você pode revogá-la no painel ou no site.','confirmation_action':'permanent_control'}
+        if 'permanente' in normalized and any(word in normalized for word in ('controle','mouse','teclado','remoto')) and any(word in normalized for word in ('revog','desativ','paus','deslig','remov')):
+            if not connection.status()['permanent_control']:return {'reply':'Não há controle permanente ativo para revogar.','page':'overview'}
+            return {'reply':'Vou revogar a autorização permanente e remover o início automático do Vexx PC. Confirme para continuar.','confirmation_action':'revoke_permanent_control'}
+        if 'controle permanente' in normalized and any(word in normalized for word in ('esta ativo','esta ligado','status','funciona')):
+            return {'reply':'Controle permanente: '+('ativo e configurado para iniciar no login do Windows.' if connection.status()['permanent_control'] else 'inativo. Você pode pedir para ativar; o Vexx solicitará confirmação local.'),'page':'overview'}
+        if any(term in normalized for term in ('abra a aba','abra a guia','navegue para','va para','ir para','mostre a aba','abra o painel')):
+            aliases={'overview':('visao geral','inicio'),'pc':('arquivo','pasta'),'cleaner':('limpeza','lixeira'),
+                     'projects':('projeto',),'network':('rede','wifi','wi-fi'),'logs':('log',),'ai':('copiloto','ia')}
+            for item in FEATURES:
+                page=item['page'];terms=aliases.get(page,())
+                if any(term in normalized for term in terms):return {'reply':'Abrindo '+dict(overview='Visão geral',pc='Arquivos',cleaner='Limpeza',projects='Projetos',network='Rede',logs='Logs',ai='Copiloto')[page]+'.','page':page}
+        search_intent=any(term in normalized for term in ('busque','buscar','pesquise','pesquisar','procure','procurar','encontre','localize','ache','onde esta','onde fica'))
+        if search_intent and any(term in normalized for term in ('arquivo','pasta','documento','imagem','foto','video','app','programa')):
+            query=re.sub(r'(?i)^\s*(?:por favor\s+)?(?:busque|buscar|pesquise|pesquisar|procure|procurar|encontre|localize|ache|onde está|onde esta|onde fica)\s+','',text).strip()
+            query=re.sub(r'(?i)^(?:o|a|um|uma)\s+(?:arquivo|pasta|documento|imagem|foto|vídeo|video|app|programa)\s+(?:chamado\s+|chamada\s+|com nome\s+)?','',query).strip(' .?!')
+            if len(query)<3:return {'reply':'Digite pelo menos três caracteres do nome ou caminho para pesquisar no índice local.','page':'pc'}
+            result=await asyncio.to_thread(index.search,query)
+            return {'reply':f"Encontrei até {len(result['items'])} correspondências para “{query}” no índice local. Abri Arquivos para você revisar os caminhos.",'search':query}
         if attachments:
             try:analysis=await asyncio.to_thread(analyze_local_paths,files,attachments,True)
             except ValueError as exc:raise HTTPException(400,str(exc)) from None
@@ -540,12 +624,14 @@ def create_app(directory=None, roots=None):
                 if seconds>604800:raise HTTPException(400,'O agendamento aceita no máximo sete dias.')
                 command=f'shutdown /s /t {seconds}';review=secrets.token_urlsafe(24);command_reviews[review]={'command':command,'expires':time.monotonic()+300}
                 return {'reply':f"Vou agendar o desligamento do computador em {match.group(1)} {match.group(2)}. Revise e confirme para prosseguir.",'command_preview':command,'confirmation':review}
-        if any(word in normalized for word in ('status', 'memoria', 'ram', 'cpu', 'computador', 'disco')):
+        status_request=any(word in normalized for word in ('status','memoria','ram','cpu','disco')) or bool(re.search(r'\bcomo (?:esta|está) (?:o )?(?:computador|pc)\b',normalized))
+        if status_request:
             s = state['system']
             if not s:
                 return {'reply': 'Aguardando a primeira amostra dos sensores.'}
             return {'reply': f"CPU: {s['cpu_percent']}%. RAM: {s['ram']['percent']}%. Ligado há {int(s['uptime']//60)} minutos. "
-                    f"Índice: {index.count} entradas. Acesso remoto: {'autorizado' if connection.status()['approved'] else 'pausado'}.", 'page': 'overview'}
+                    f"Índice: {index.count} entradas. Rede Wi-Fi: {s.get('ssid') or 'não conectada ou não detectada'}. "
+                    f"Acesso remoto: {'autorizado' if connection.status()['approved'] else 'pausado'}.", 'page': 'overview'}
         if ai.status()['enabled']:
             try:
                 return await ai.chat(text)

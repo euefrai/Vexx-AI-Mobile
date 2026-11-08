@@ -18,8 +18,9 @@ def relay_url(value):
 
 
 class Connection:
-    def __init__(self, config, save, log):
+    def __init__(self, config, save, log, permanent_changed=None):
         self.config, self.save, self.log = config, save, log
+        self.permanent_changed=permanent_changed
         self.online, self.approved, self.pending, self.control = False, False, False, False
         self.task, self.ws = None, None
         self.last_error = ''
@@ -27,8 +28,14 @@ class Connection:
         self.guard = asyncio.Lock()
         self.grant_until = 0
         if self._permanent():
-            self.approved,self.control=True,True
-            self.grant_until=float('inf')
+            try:
+                if self.permanent_changed:self.permanent_changed(True)
+                self.approved,self.control=True,True
+                self.grant_until=float('inf')
+            except Exception:
+                self.config.pop('permanent_control',None);self.save()
+                self.last_error='Não foi possível reativar o início automático do controle permanente.'
+                self.log(self.last_error+' Autorize novamente no painel local.')
 
     def _permanent(self):
         saved=self.config.get('permanent_control')
@@ -119,11 +126,23 @@ class Connection:
             if permanent and (not allow or not control or not self.config.get('token') or not self.config.get('device_id')):
                 raise ValueError('Vincule este computador antes de permitir controle permanente.')
             if not preserve:
+                previous=self.config.get('permanent_control')
                 self.config.pop('permanent_control',None)
                 if permanent:
                     self.config['permanent_control']={'device_id':self.config['device_id'],
                         'credential':hashlib.sha256(self.config['token'].encode()).hexdigest()}
                 self.save()
+                if self.permanent_changed:
+                    try:self.permanent_changed(permanent)
+                    except Exception as exc:
+                        if permanent:
+                            if previous is not None:self.config['permanent_control']=previous
+                            else:self.config.pop('permanent_control',None)
+                            self.save()
+                            try:self.permanent_changed(False)
+                            except Exception:pass
+                            raise ValueError('Não foi possível configurar o início automático no login do Windows; o controle permanente não foi ativado.') from exc
+                        self.log('A autorização foi revogada, mas não foi possível remover o início automático do Vexx PC.')
             self.approved, self.control, self.pending = allow, allow and control, False
             self.grant_until = float('inf') if permanent else time.monotonic() + 3600 if allow else 0
             self.log('Controle permanente autorizado para a conta vinculada.' if permanent else 'Acesso remoto autorizado por uma hora.' if allow else 'Acesso remoto pausado.')
