@@ -466,13 +466,50 @@ def _lista_fallbacks(valor: str) -> list:
     return out[:4]
 
 
+FALLBACKS_GRATIS_PADRAO = [
+    "vexx-qwen-2.5-3b",
+    "meituan/longcat-2.5:free",
+    "meta-llama/llama-3.2-3b-instruct:free",
+    "meta-llama/llama-3.1-8b-instruct:free",
+    "google/gemini-2.0-flash-exp:free",
+]
+
+_MODELOS_COOLDOWN = {}
+
+
+def registrar_cooldown_modelo(model: str, segundos: float = 180.0):
+    if model:
+        _MODELOS_COOLDOWN[model] = time.monotonic() + segundos
+
+
 def modelos_tentativa(cfg: dict, preferido: str = "") -> list:
-    """[preferido, *fallbacks] sem duplicar (lista pequena e explícita)."""
-    fila = [preferido or cfg.get("model", "")]
+    """[preferido, *fallbacks_configurados, *fallbacks_gratis_padrao] sem duplicar.
+
+    Quando um modelo preferido atinge limite (429) ou fica indisponível,
+    ele é colocado em cooldown temporário e o sistema alterna sozinho
+    para outro modelo gratuito saudável."""
+    agora = time.monotonic()
+    primario = (preferido or cfg.get("model", "")).strip()
+    candidatos = []
+    if primario:
+        candidatos.append(primario)
     for fb in cfg.get("fallbacks", []) or []:
-        if fb and fb not in fila:
-            fila.append(fb)
-    return [m for m in fila if m][:5]
+        if fb and fb not in candidatos:
+            candidatos.append(fb)
+    for fb in FALLBACKS_GRATIS_PADRAO:
+        if fb and fb not in candidatos:
+            candidatos.append(fb)
+
+    if preferido and preferido in candidatos:
+        resto = [m for m in candidatos if m != preferido]
+        resto_saudaveis = [m for m in resto if _MODELOS_COOLDOWN.get(m, 0) < agora]
+        resto_espera = [m for m in resto if _MODELOS_COOLDOWN.get(m, 0) >= agora]
+        fila = [preferido] + resto_saudaveis + resto_espera
+    else:
+        saudaveis = [m for m in candidatos if _MODELOS_COOLDOWN.get(m, 0) < agora]
+        em_espera = [m for m in candidatos if _MODELOS_COOLDOWN.get(m, 0) >= agora]
+        fila = saudaveis + em_espera if saudaveis else candidatos
+    return [m for m in fila if m][:6]
 
 
 def gerar_texto(cfg: dict, messages: list, preferido: str = "",

@@ -570,6 +570,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 emitir(last_delta_seq[0] + 1, seguro)
 
         try:
+            modelo_original = modelo
             res = gerar_stream(cfg, modelos_tentativa(cfg, modelo), messages,
                                emitir_modelo, deve_parar=sessao.parar.is_set,
                                max_tokens=cfg["max_tokens"])
@@ -732,9 +733,11 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             round((time.monotonic() - provider_started) * 1000),
             round((first_delta_at[0] - provider_started) * 1000) if first_delta_at[0] else -1,
             round((time.monotonic() - worker_started) * 1000), len(extras["fontes"]))
+        fallback_usado = bool(res.get("fallback_usado") or (modelo and modelo != modelo_original))
         enviar({"request_id": request_id, "type": "ai_done",
                 "reply_id": prep["reply_id"],
-                "response_text": texto_final, "model": modelo})
+                "response_text": texto_final, "model": modelo,
+                "fallback_usado": fallback_usado})
     except Exception:
         log.exception("Falha inesperada no stream %s", request_id)
         if claimed:

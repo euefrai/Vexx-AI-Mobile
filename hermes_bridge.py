@@ -398,12 +398,18 @@ def tentar_modelos(base: str, modelos: list, messages: list,
                                 **({'reasoning_effort':reasoning_effort} if reasoning_effort else {}))
             _circuito_registrar(base, True)
             res["model_usado"] = modelo
+            res["fallback_usado"] = (i > 0)
             res["tentativas"] = tentativas
             return res
         except BridgeErro as exc:
             tentativas.append({"model": modelo, "codigo": exc.codigo,
                                "latencia_s": round(time.monotonic() - inicio, 2)})
             _circuito_registrar(base, False)
+            try:
+                from pc_modules.db_core import registrar_cooldown_modelo
+                registrar_cooldown_modelo(modelo, 180.0)
+            except Exception:
+                pass
             if exc.codigo == "auth":
                 raise BridgeErro(str(exc) + " (fallback interrompido: vale para todos).",
                                  "auth", exc.detalhe) from None
@@ -460,12 +466,18 @@ def chat_stream_fb(base: str, modelos: list, messages: list, on_delta,
                               timeout, max_tokens)
             _circuito_registrar(base, True)
             res["model_usado"] = modelo
+            res["fallback_usado"] = (i > 0)
             res["tentativas"] = tentativas
             return res
         except BridgeErro as exc:
             tentativas.append({"model": modelo, "codigo": exc.codigo,
                                "latencia_s": round(time.monotonic() - inicio, 2)})
             _circuito_registrar(base, False)
+            try:
+                from pc_modules.db_core import registrar_cooldown_modelo
+                registrar_cooldown_modelo(modelo, 180.0)
+            except Exception:
+                pass
             if n_deltas[0] > 0 or exc.codigo == "auth":
                 raise  # meio do stream ou auth: sem troca silenciosa
             if len(fila) == 1:

@@ -2474,6 +2474,18 @@ async function runAIRequest(userRow, options, timing) {
             const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
             cur = finalText(d);
             await saveReply(cur, 'synced', {model: d.model || ph.model, latency_s: secs});
+            if (d.fallback_usado && d.model && d.model !== modeloAtivo()) {
+              try {
+                localStorage.setItem('julia-model', d.model);
+                const sel = $('modelSelect');
+                if (sel) sel.value = d.model;
+                const lab = $('modelSelected');
+                if (lab) lab.textContent = 'Selecionado: ' + modelDisplayLabel(d.model);
+                const st = $('aiStatus');
+                if (st) st.textContent = 'IA pronta · ' + modelDisplayLabel(d.model);
+                showToast('⚡ Limite atingido: modelo alternado automaticamente para ' + modelDisplayLabel(d.model) + ' (grátis)');
+              } catch (_) {}
+            }
             terminal = true; break stream;
           } else if (tipo === 'cancelled') {
             cur = d.partial || cur;
@@ -2502,6 +2514,16 @@ async function runAIRequest(userRow, options, timing) {
             cur = finalText(fb);
             const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
             await saveReply(cur, 'synced', {model: fb.model || ph.model, latency_s: secs});
+            if (fb.fallback_usado && fb.model && fb.model !== modeloAtivo()) {
+              try {
+                localStorage.setItem('julia-model', fb.model);
+                const sel = $('modelSelect');
+                if (sel) sel.value = fb.model;
+                const lab = $('modelSelected');
+                if (lab) lab.textContent = 'Selecionado: ' + modelDisplayLabel(fb.model);
+                showToast('⚡ Limite atingido: modelo alternado automaticamente para ' + modelDisplayLabel(fb.model) + ' (grátis)');
+              } catch (_) {}
+            }
             console.warn('[chat-timing] sincronização de compatibilidade antes do retry da IA',
               userRow.id.slice(-8));
             terminal = true; break stream;
@@ -2523,6 +2545,16 @@ async function runAIRequest(userRow, options, timing) {
               cur = finalText(fb);
               const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
               await saveReply(cur, 'synced', {model: fb.model || ph.model, latency_s: secs});
+              if (fb.fallback_usado && fb.model && fb.model !== modeloAtivo()) {
+                try {
+                  localStorage.setItem('julia-model', fb.model);
+                  const sel = $('modelSelect');
+                  if (sel) sel.value = fb.model;
+                  const lab = $('modelSelected');
+                  if (lab) lab.textContent = 'Selecionado: ' + modelDisplayLabel(fb.model);
+                  showToast('⚡ Limite atingido: modelo alternado automaticamente para ' + modelDisplayLabel(fb.model) + ' (grátis)');
+                } catch (_) {}
+              }
             } else throw new Error('Resposta vazia da IA');
           } catch (e2) { throw new Error('Resposta vazia da IA'); }
         }

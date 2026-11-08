@@ -376,6 +376,8 @@ def chat_complete(prov: str, model_id: str, messages: list,
         import qwen_llm_service
         inicio = time.monotonic()
         res = qwen_llm_service.gerar_resposta_qwen(messages, max_tokens=max_tokens, timeout=timeout)
+        if res.get("status") == "fallback" or not (res.get("resposta") or "").strip():
+            raise BridgeErro("Qwen Space em hibernação ou indisponível.", "indisponivel")
         texto = res.get("resposta") or ""
         return {
             "texto": texto[:hermes_bridge.MAX_TEXTO],
@@ -473,6 +475,8 @@ def chat_stream(prov: str, model_id: str, messages: list, on_delta,
         import qwen_llm_service
         inicio = time.monotonic()
         res = qwen_llm_service.gerar_resposta_qwen(messages, max_tokens=max_tokens, timeout=timeout)
+        if res.get("status") == "fallback" or not (res.get("resposta") or "").strip():
+            raise BridgeErro("Qwen Space em hibernação ou indisponível.", "indisponivel")
         texto = res.get("resposta") or ""
         if callable(on_delta):
             try:
@@ -603,7 +607,7 @@ def tentar_modelos(modelos: list, messages: list, timeout_por_tentativa: float =
     tentativas = []
     for i, modelo in enumerate(fila):
         if i:
-            time.sleep(min(2 ** (i - 1), 4))
+            time.sleep(0.3)
         inicio = time.monotonic()
         try:
             prov, mid = dividir(modelo)
@@ -611,11 +615,19 @@ def tentar_modelos(modelos: list, messages: list, timeout_por_tentativa: float =
                                 timeout=timeout_por_tentativa, max_tokens=max_tokens,
                                 proxy=proxy)
             res["model_usado"] = modelo
+            res["fallback_usado"] = (i > 0)
             res["tentativas"] = tentativas
             return res
         except BridgeErro as exc:
             tentativas.append({"model": modelo, "codigo": exc.codigo,
                                "latencia_s": round(time.monotonic() - inicio, 2)})
+            try:
+                from pc_modules.db_core import registrar_cooldown_modelo
+                registrar_cooldown_modelo(modelo, 180.0)
+            except Exception:
+                pass
+            log.warning("MODEL_FAILOVER modelo=%s falhou com codigo=%s. Tentando próximo modelo...",
+                        modelo, exc.codigo)
             if exc.codigo in ("auth", "sem_chave"):
                 # Credencial vale para todos os modelos do MESMO provedor.
                 # Se ainda há candidato de OUTRO provedor, seguimos a fila.
@@ -642,7 +654,7 @@ def chat_stream_fb(modelos: list, messages: list, on_delta,
     tentativas = []
     for i, modelo in enumerate(fila):
         if i:
-            time.sleep(min(2 ** (i - 1), 4))
+            time.sleep(0.3)
         inicio = time.monotonic()
         n_deltas = [0]
 
@@ -655,6 +667,7 @@ def chat_stream_fb(modelos: list, messages: list, on_delta,
             res = chat_stream(prov, mid, messages, _emit, deve_parar,
                               timeout, max_tokens, proxy=proxy)
             res["model_usado"] = modelo
+            res["fallback_usado"] = (i > 0)
             res["tentativas"] = tentativas
             return res
         except BridgeErro as exc:
@@ -662,6 +675,13 @@ def chat_stream_fb(modelos: list, messages: list, on_delta,
                                "latencia_s": round(time.monotonic() - inicio, 2)})
             if n_deltas[0] > 0:
                 raise
+            try:
+                from pc_modules.db_core import registrar_cooldown_modelo
+                registrar_cooldown_modelo(modelo, 180.0)
+            except Exception:
+                pass
+            log.warning("MODEL_FAILOVER stream modelo=%s falhou com codigo=%s. Tentando próximo da fila...",
+                        modelo, exc.codigo)
             if exc.codigo in ("auth", "sem_chave"):
                 restantes = fila[i + 1:]
                 if not any(dividir(r)[0] != dividir(modelo)[0] for r in restantes):

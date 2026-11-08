@@ -35,7 +35,7 @@ async def ai_complete(request: Request, body: AIRequest):
             raise erro_relay(result, "IA indisponível")
         raise HTTPException(503, "Resposta da IA não recebida")
     return {"reply_id": result.get("reply_id"), "response_text": result["response_text"],
-            "model": result.get("model", "")}
+            "model": result.get("model", ""), "fallback_usado": bool(result.get("fallback_usado", False))}
 
 
 class AIContinue(BaseModel):
@@ -83,7 +83,7 @@ async def ai_continue(request: Request, body: AIContinue):
     if result.get("type") != "ai_done" or "response_text" not in result:
         raise HTTPException(503, "Continuação não recebida")
     return {"reply_id": result.get("reply_id"), "response_text": result["response_text"],
-            "model": result.get("model", "")}
+            "model": result.get("model", ""), "fallback_usado": bool(result.get("fallback_usado", False))}
 
 
 class ProviderKey(BaseModel):
@@ -261,7 +261,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     log.info("AI_RELAY_DONE msg=%s total_ms=%d",
                              message_id[-8:],
                              round((time.monotonic() - request_started) * 1000))
-                    yield f"event: done\ndata: {json.dumps({'reply_id': item.get('reply_id'), 'response_text': item.get('response_text', ''), 'model': item.get('model', '')}, ensure_ascii=False)}\n\n"
+                    yield f"event: done\ndata: {json.dumps({'reply_id': item.get('reply_id'), 'response_text': item.get('response_text', ''), 'model': item.get('model', ''), 'fallback_usado': bool(item.get('fallback_usado', False))}, ensure_ascii=False)}\n\n"
                     return
                 elif tipo == "ai_cancelled":
                     concluido = True
@@ -460,7 +460,8 @@ async def voice_chat_stream(websocket: WebSocket):
                         "type": "ai_done",
                         "response_text": resp_text,
                         "reply_id": item.get("reply_id"),
-                        "model": item.get("model", "")
+                        "model": item.get("model", ""),
+                        "fallback_usado": bool(item.get("fallback_usado", False))
                     })
                     break
 
