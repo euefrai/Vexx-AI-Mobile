@@ -103,9 +103,12 @@ TECNICO_EN = {
     "função": "function", "classe": "class", "biblioteca": "library",
     "permissão": "permission", "requisição": "request", "resposta": "response",
     "lento": "slow", "travando": "hanging", "vazamento": "leak",
+    "conectar": "connect", "conexao": "connection", "conexão": "connection",
+    "assincrono": "async", "assíncrono": "async", "implementar": "implement",
+    "integrar": "integrate", "enviar": "send", "receber": "receive",
 }
 
-_ESTOPO = {"para", "como", "mais", "sobre", "entre", "isso", "esse", "esta",
+_ESTOPO = {"para", "como", "mais", "sobre", "comparativo", "comparacao", "comparativa", "entre", "isso", "esse", "esta",
            "este", "qual", "quais", "onde", "quando", "porque", "pode", "ser",
            "são", "sao", "the", "and", "com", "dos", "das", "uma", "que",
            "não", "nao", "por", "favor", "quero", "preciso", "gostaria",
@@ -131,7 +134,7 @@ _GENERICOS_CORRESPONDENCIA = {
     "valores", "melhor", "melhores", "barato", "barata", "brasil", "site",
     "site:", "até", "ate", "hoje", "reais", "quanto", "custa", "custam",
     "onde", "encontrar", "encontre", "loja", "lojas", "vale", "pena",
-    "desconto", "cupom", "frete", "venda", "vendas", "compare", "comparar",
+    "desconto", "cupom", "frete", "venda", "vendas", "compare", "comparar", "comparativo", "comparacao", "comparativa",
     "pesquisar", "buscar", "procurar", "queria", "preciso",
     # Follow-ups de interface/ordenação: "agora mostre só os resultados mais
     # baratos" não tem assunto e não pode autorizar busca externa.
@@ -246,6 +249,11 @@ def _tem_termo(termo: str, texto: str) -> bool:
 
 def correspondencia_item(a: dict, consulta: str) -> dict:
     termos = _termos_correspondencia(consulta)
+    url_dom = _dominio(a.get('url', '')).lower()
+    if any(d in url_dom for d in ('dicio.com.br', 'significados.com.br', 'priberam.org', 'definicao.net', 'dicionarioinformal.com.br', 'oxfordlearnersdictionaries.com', 'merriam-webster.com')):
+        pede_def = bool(re.search(r'\b(o que significa|qual o significado|definicao de|o que e|significa|etimologia|definir|sinonimo)\b', consulta, re.I))
+        if not pede_def:
+            return {"tipo": "IRRELEVANT", "cobertura": 0.0, "faltantes": list(termos)}
     texto = " ".join(str(a.get(k) or "") for k in ("titulo", "trecho"))
     presentes = [t for t in termos if _tem_termo(t, texto)]
     ratio = len(presentes) / len(termos) if termos else 1.0
@@ -286,6 +294,11 @@ def _context_mismatch(a: dict, consulta: str) -> list:
     """Hard entity/context exclusions, separate from broad lexical coverage."""
     import research
     if research.is_search_ad_url(a.get('url','')):return ['SEARCH_ADVERTISEMENT']
+    url_dom = _dominio(a.get('url', '')).lower()
+    if any(d in url_dom for d in ('dicio.com.br', 'significados.com.br', 'priberam.org', 'definicao.net', 'dicionarioinformal.com.br', 'oxfordlearnersdictionaries.com', 'merriam-webster.com')):
+        pede_def = bool(re.search(r'\b(o que significa|qual o significado|definicao de|o que e|significa|etimologia|definir|sinonimo)\b', consulta, re.I))
+        if not pede_def:
+            return ['DICTIONARY_NOISE']
     q=_sem_acentos(consulta);body=_sem_acentos(' '.join(str(a.get(k) or '') for k in ('titulo','trecho')))
     model_query=re.sub(r'\b10\.\d{4,9}/[^\s\"]+','',q)
     models=set(re.findall(r'\b[a-z]{1,16}-?\d+[a-z0-9-]*\b',model_query))
@@ -510,12 +523,20 @@ def consulta_cientifica(consulta: str) -> str:
 
 
 def termos_para_provedor(consulta: str, classe: str) -> str:
-    """Consulta ajustada ao provedor (ex.: técnico → inglês determinístico)."""
+    """Consulta ajustada ao provedor (ex.: técnico → inglês determinístico e sem stop-words)."""
     if classe != sp.CLASSE_TECNICA:
         return consulta
     t = consulta
+    # Remove scaffolding de pergunta
+    for sc in _SCAFFOLD_PERGUNTA:
+        if t.lower().startswith(sc):
+            t = t[len(sc):].strip()
+            break
     for pt, en in TECNICO_EN.items():
         t = re.sub(r"\b" + re.escape(pt) + r"\b", en, t, flags=re.I)
+    # Remove conectivos menores em português para provedores técnicos
+    t = re.sub(r"\b(no|na|nos|nas|do|da|dos|das|de|em|para|com|como|um|uma)\b", " ", t, flags=re.I)
+    t = re.sub(r"\s+", " ", t).strip()
     return t[:180]
 
 
@@ -530,7 +551,7 @@ _SCAFFOLD_PERGUNTA = (
     "o que são", "o que sao", "o que é", "o que e", "o que fazem", "o que faz",
     "como funcionam", "como funciona", "como fazer", "como faz", "como usar",
     "como usam", "como montar", "como configurar", "como instalar",
-    "como resolver", "como consertar", "quem foram", "quem foi", "quem é",
+    "como resolver", "como consertar", "como conectar", "como implementar", "como criar", "como rodar", "como integrar", "como utilizar", "quem foram", "quem foi", "quem é",
     "quem e", "quem eram", "quem são", "quem sao", "qual é", "qual e",
     "qual o preço de", "qual o preco de", "qual o", "qual a", "qual foi",
     "quais são", "quais sao", "quais foram", "quando foi", "quando aconteceu",
@@ -765,6 +786,11 @@ def _ano_alvo(consulta: str, info: dict):
 
 
 def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> float:
+    url_dom = _dominio(a.get('url', '')).lower()
+    if any(d in url_dom for d in ('dicio.com.br', 'significados.com.br', 'priberam.org', 'definicao.net', 'dicionarioinformal.com.br', 'oxfordlearnersdictionaries.com', 'merriam-webster.com')):
+        pede_def = bool(re.search(r'\b(o que significa|qual o significado|definicao de|o que e|significa|etimologia|definir|sinonimo)\b', consulta, re.I))
+        if not pede_def:
+            return -100.0
     titulo = (a.get("titulo") or "").lower()
     trecho = (a.get("trecho") or "").lower()
     url = (a.get("url") or "").lower()
@@ -841,6 +867,8 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
 
 
 def ranquear(achados: list, consulta: str, classes: list, info: dict) -> list:
+    # Remove candidatos com ruído de dicionário ou publicidade antes de ordenar
+    achados = [a for a in achados if not ('DICTIONARY_NOISE' in _context_mismatch(a, consulta))]
     for a in achados:
         match = correspondencia_item(a, consulta)
         a["correspondencia_tipo"] = match["tipo"]

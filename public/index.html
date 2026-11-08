@@ -116,7 +116,11 @@
         <div class="drawer-model">
           <label for="modelSelect">Modelo</label>
           <input id="modelSearch" class="model-search" type="search" placeholder="Pesquisar modelo ou provedor…" aria-label="Pesquisar modelo" autocomplete="off" />
-          <select id="modelSelect" class="model-select" size="8" aria-label="Modelo de IA" aria-describedby="modelResults modelSelected"></select>
+          <select id="modelSelect" class="model-select" size="8" aria-label="Modelo de IA" aria-describedby="modelResults modelSelected">
+            <optgroup label="⚡ Modelo Próprio (VEXX AI)">
+              <option value="vexx-qwen-2.5-3b" selected>⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)</option>
+            </optgroup>
+          </select>
           <small id="modelResults" class="model-hint" role="status"></small>
           <small id="modelSelected" class="model-hint"></small>
           <button id="modelRefresh" class="model-refresh" type="button" title="Atualizar a lista de modelos e provedores" aria-label="Atualizar lista de modelos">Atualizar</button>

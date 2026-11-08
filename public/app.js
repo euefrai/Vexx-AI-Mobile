@@ -1981,7 +1981,13 @@ function modelSelectionError() {
   }
   return '';
 }
-let modelCatalog = { models: [], providers: [] };
+let modelCatalog = {
+  models: ['vexx-qwen-2.5-3b'],
+  providers: [{ id: 'vexx', label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)', configured: true, source: 'hf_space' }],
+  default: 'vexx-qwen-2.5-3b',
+  itemProvider: { 'vexx-qwen-2.5-3b': 'vexx' },
+  itemLabel: { 'vexx-qwen-2.5-3b': '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)' }
+};
 let modelLoadVersion = 0;
 let providerMutation = false;
 function providerLabel(pid) {
@@ -2022,7 +2028,7 @@ function fillModels(filter) {
   sel.replaceChildren();
   const q = (filter || '').trim().toLowerCase();
   const ids = [...new Set(modelCatalog.models || [])].filter(id => !q ||
-    id.toLowerCase().includes(q) || providerLabel(providerOf(id)).toLowerCase().includes(q));
+    id.toLowerCase().includes(q) || modelDisplayLabel(id).toLowerCase().includes(q) || providerLabel(providerOf(id)).toLowerCase().includes(q));
   ids.sort((a, b) => modelGroup(a) - modelGroup(b) ||
     providerLabel(providerOf(a)).localeCompare(providerLabel(providerOf(b)), 'pt-BR') || a.localeCompare(b));
   const groups = new Map();
@@ -2068,13 +2074,42 @@ async function loadModels(force) {
     const r = await api('/api/ai/models');
     if (version !== modelLoadVersion || owner !== currentUid || !authenticated) return false;
     modelsLoadedAt = Date.now();
-    modelCatalog = { models: r.models || [], providers: r.providers || [], default: r.default || '',
-      itemProvider: Object.fromEntries((r.items || []).map(i => [i.id, i.provider])),
-      itemLabel: Object.fromEntries((r.items || []).map(i => [i.id, i.label])) };
+    const allModels = r.models || [];
+    if (!allModels.includes('vexx-qwen-2.5-3b')) {
+      allModels.unshift('vexx-qwen-2.5-3b');
+    }
+    const allItems = r.items || [];
+    if (!allItems.some(i => i.id === 'vexx-qwen-2.5-3b')) {
+      allItems.unshift({
+        id: 'vexx-qwen-2.5-3b',
+        provider: 'vexx',
+        label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
+        free: true
+      });
+    }
+    const allProviders = r.providers || [];
+    if (!allProviders.some(p => p.id === 'vexx')) {
+      allProviders.unshift({
+        id: 'vexx',
+        label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
+        configured: true,
+        source: 'hf_space'
+      });
+    }
+    modelCatalog = {
+      models: allModels,
+      providers: allProviders,
+      default: 'vexx-qwen-2.5-3b',
+      itemProvider: Object.fromEntries(allItems.map(i => [i.id, i.provider])),
+      itemLabel: Object.fromEntries(allItems.map(i => [i.id, i.label]))
+    };
+    modelCatalog.itemLabel['vexx-qwen-2.5-3b'] = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+    let escolhido = modeloAtivo();
+    if (!escolhido || !modelCatalog.models.includes(escolhido) || escolhido.includes('crouton-alpha')) {
+      escolhido = 'vexx-qwen-2.5-3b';
+      localStorage.setItem('julia-model', 'vexx-qwen-2.5-3b');
+    }
     const cur = fillModels($('modelSearch') ? $('modelSearch').value : '');
-    // Persist only an explicit choice. The server resolves an implicit default
-    // against the live catalog; freezing it here breaks newly created jobs.
-    const escolhido = modeloAtivo() || r.default || '?';
     const pid = providerOf(escolhido);
     const noCatalogo = modelCatalog.models.includes(escolhido);
     const aviso = !noCatalogo ? ' · fora do catálogo; escolha outro modelo' : (pid !== 'hermes' && !isConfigured(pid))

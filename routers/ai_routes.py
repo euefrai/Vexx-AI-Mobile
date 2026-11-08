@@ -118,25 +118,63 @@ async def provider_key(request: Request, body: ProviderKey):
 async def ai_models(request: Request):
     dono = sessao_usuario(request)
     _rate_limit(request, "ai", dono)
-    result = await relay.exchange({"type": "ai_models"}, timeout=30.0)
-    if result.get("type") == "ai_error":
-        raise HTTPException(503, result.get("error", "Hermes indisponível"))
-    if result.get("type") != "ai_models":
-        raise HTTPException(503, "Modelos indisponíveis")
-    # providers/items: só metadados — chaves nunca saem do PC.
+
+    vexx_item = {
+        "id": "vexx-qwen-2.5-3b",
+        "provider": "vexx",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+        "free": True
+    }
+    vexx_provider = {
+        "id": "vexx",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+        "configured": True,
+        "source": "hf_space"
+    }
+
+    try:
+        result = await relay.exchange({"type": "ai_models"}, timeout=15.0)
+    except Exception:
+        result = {}
+
+    if not isinstance(result, dict) or result.get("type") != "ai_models":
+        return {
+            "models": ["vexx-qwen-2.5-3b"],
+            "default": "vexx-qwen-2.5-3b",
+            "items": [vexx_item],
+            "providers": [vexx_provider]
+        }
+
     provs = result.get("providers", [])
     if not isinstance(provs, list):
         provs = []
     itens = result.get("items", [])
     if not isinstance(itens, list):
         itens = []
-    return {"models": result.get("models", [])[:2000], "default": result.get("default", ""),
-            "items": [{k: i.get(k) for k in ("id", "provider", "free")
-                       if (k != "free" or isinstance(i.get(k), bool)) and i.get(k) is not None}
-                      for i in itens if isinstance(i, dict)][:2000],
-            "providers": [{k: p.get(k) for k in ("id", "label", "configured", "auth_error", "source")
-                           if p.get(k) is not None}
-                          for p in provs if isinstance(p, dict)][:20]}
+    models = result.get("models", [])
+    if not isinstance(models, list):
+        models = []
+
+    if "vexx-qwen-2.5-3b" in models:
+        models.remove("vexx-qwen-2.5-3b")
+    models.insert(0, "vexx-qwen-2.5-3b")
+
+    itens = [i for i in itens if isinstance(i, dict) and i.get("id") != "vexx-qwen-2.5-3b"]
+    itens.insert(0, vexx_item)
+
+    provs = [p for p in provs if isinstance(p, dict) and p.get("id") != "vexx"]
+    provs.insert(0, vexx_provider)
+
+    return {
+        "models": models[:2000],
+        "default": "vexx-qwen-2.5-3b",
+        "items": [{k: i.get(k) for k in ("id", "provider", "free")
+                   if (k != "free" or isinstance(i.get(k), bool)) and i.get(k) is not None}
+                  for i in itens if isinstance(i, dict)][:2000],
+        "providers": [{k: p.get(k) for k in ("id", "label", "configured", "auth_error", "source")
+                       if p.get(k) is not None}
+                      for p in provs if isinstance(p, dict)][:20]
+    }
 
 
 @router.post("/api/ai/stream")

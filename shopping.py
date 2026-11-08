@@ -3128,7 +3128,7 @@ def bloco_para_llm(resultado: dict) -> str:
     for ex in (resultado or {}).get("excluidos", [])[:3]:
         linhas.append(f"- EXCLUÍDO (explique se citar): {ex.get('nome', '')[:80]}"
                        f" ({ex.get('excluido_por', '')})")
-    linhas.append("Apresente em texto curto; NÃO emita blocos jdui de produto.")
+    linhas.append("Apresente as opções em uma TABELA COMPARATIVA em Markdown (| Produto | Preço | Destaques & Especificações | Loja / Link |) com os dados acima e um breve resumo objetivo; NUNCA invente produtos, preços ou links fora desta lista; NÃO emita blocos jdui de produto.")
     return "\n".join(linhas)
 
 

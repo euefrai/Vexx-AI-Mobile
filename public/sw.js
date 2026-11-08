@@ -1,4 +1,4 @@
-const VERSION = 'VEXX-shell-pc-agent-1.4.3-20261108';
+const VERSION = 'VEXX-shell-pc-agent-1.4.4-20261108';
 const SHELL = ['/', '/index.html', '/styles.css', '/interface.css', '/app.js', '/citations.js', '/workspace.js', '/organize.js', '/jdui.js', '/remote.js', '/companion-setup.js', '/companion-setup.css', '/remote-setup.html', '/model3d-schema.js', '/manifest.webmanifest', '/icon-192.png', '/icon-512.png', '/trust.css', '/sobre', '/privacidade', '/termos', '/seguranca', '/contato'];
 const MODEL3D_ASSETS = new Set(['/model3d-viewer.js', '/model3d-education.js', '/vendor/three-engine.js', '/models/demo-cube.glb', '/models/preview.svg']);
 self.addEventListener('install', evt => {
