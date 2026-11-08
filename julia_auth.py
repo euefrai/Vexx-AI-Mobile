@@ -25,6 +25,17 @@ ROLES = ("admin", "user")
 STATUS = ("pendente", "ativo", "bloqueado")
 MODOS = ("fechado", "convite", "aberto")
 
+
+def login_legado_permitido() -> bool:
+    """Login do proprietário via JULIA_USERNAME/JULIA_PASSWORD_HASH (opt-in).
+
+    O relay antigo criava sessão ``uid=local`` como admin com apenas as
+    credenciais do `.env`. Em produção isso ficou desligado por padrão; só é
+    reativado explicitamente para migração/desenvolvimento.
+    """
+    return os.environ.get("JULIA_ALLOW_LEGACY_LOGIN", "").strip().lower() in (
+        "1", "true", "sim", "yes", "on")
+
 USERNAME_RE = re.compile(r"^[a-z0-9][a-z0-9._-]{2,29}$")
 SENHA_MIN = 8
 SENHA_MAX = 128
@@ -647,7 +658,7 @@ def registrar(db, display: str, username: str, senha: str, convite: str = "") ->
         if not (convite or "").strip():
             raise AuthErro("É necessário um código de convite.", "convite_necessario")
         consumir_convite(db, convite)
-        precisa_aprovacao = config_get(db, "exigir_aprovacao", "0") == "1"
+        precisa_aprovacao = config_get(db, "exigir_aprovacao", "1") == "1"
         user = criar_usuario(db, u, d, senha, criado_por="convite",
                              aprovado=not precisa_aprovacao)
         return {"uid": user["uid"], "username": u, "display": d,
@@ -734,14 +745,20 @@ def update_limits(db, ator_uid: str, alvo_uid: str, max_ai_hora: int, max_ia_sim
 
 
 def pode_remoto(db, owner: str) -> bool:
-    """Controle remoto/tela: dono local sempre; contas só com grant explícito."""
-    if dono_valido_local(owner):
-        return True
+    """Controle remoto/tela: conta ativa com grant explícito.
+
+    O uid legado ``local`` não é mais um passe livre: se existir linha no
+    banco, valem status e ``remote_ok`` como para qualquer conta. Sem linha,
+    só há acesso quando o login legado está explicitamente habilitado.
+    """
+    chave = str(owner or "").strip().lower() or DONO_UID
     try:
-        user = buscar_uid(db, owner)
-        return bool(user) and user.get("status") == "ativo" and bool(user.get("remote_ok"))
+        user = buscar_uid(db, chave)
     except Exception:
-        return False
+        user = None
+    if user:
+        return user.get("status") == "ativo" and bool(user.get("remote_ok"))
+    return chave == DONO_UID and login_legado_permitido()
 
 
 def dono_valido_local(owner) -> bool:

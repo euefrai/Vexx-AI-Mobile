@@ -117,8 +117,8 @@ def source_scope(job_id, step_id, source):
         _source.reset(token)
 
 
-def transport(url, state, *, status=None, byte_count=None, content_type=''):
+def transport(url, state, *, status=None, byte_count=None, content_type='', reason_code=''):
     source = _source.get()
     if source is not None:
         record(*source, state, http_status=status, response_bytes=byte_count,
-               content_type=content_type, request_url=str(url))
+               content_type=content_type, request_url=str(url), reason_code=reason_code)

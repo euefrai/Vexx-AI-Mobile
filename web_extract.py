@@ -476,7 +476,7 @@ def extrair_links(pagina: str, base_url: str = "", *, limite: int = 30,
     dom_base = dominio_base or (urllib.parse.urlsplit(base_url).hostname or "")
     out, vistos = [], set()
     for m in rx.finditer(pagina or ""):
-        href, texto = m.group(1), _limpar(m.group(2), 160)
+        href, texto = _html.unescape(m.group(1)), _limpar(m.group(2), 160)
         if href.startswith(("javascript:", "mailto:", "tel:", "#", "data:")):
             continue
         url = _url_absoluta(href, base_url)
@@ -580,6 +580,12 @@ def _penalidade_citacoes(pedaco: str) -> float:
     return min(30.0, len(_REFS_RX.findall(pedaco)) * 3.0)
 
 
+def query_identifiers(query):
+    """Literal error/parameter names; ranking hints, never evidence of support."""
+    return list(dict.fromkeys(re.findall(
+        r'(?<!\w)[A-Za-z][A-Za-z0-9]*(?:_[A-Za-z0-9]+)+(?!\w)', str(query))))[:8]
+
+
 def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
     """Trecho literal que melhor cobre os termos da consulta (sem gerar texto)."""
     texto = _normalizar(texto)
@@ -600,6 +606,8 @@ def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
         return texto[inicio:fim].strip()
 
     termos = {t for t in re.findall(r"[0-9a-zà-ú]{3,}", (consulta or "").lower())}
+    identifiers = [re.compile(r'(?<!\w)' + re.escape(i) + r'(?!\w)', re.I)
+                   for i in query_identifiers(consulta)]
     if not termos:
         return janela_literal(0)
     melhor, melhor_pontos = "", 0.0
@@ -608,7 +616,14 @@ def melhor_trecho(texto: str, consulta: str, janela: int = 280) -> str:
         pedaco = janela_literal(i)
         baixo = pedaco.lower()
         pontos = sum(len(t) for t in termos if t in baixo)
+        # Exact identifiers outrank repetition of generic words such as WAL.
+        pontos += 1000 * sum(bool(rx.search(pedaco)) for rx in identifiers)
         frases = pedaco.count(". ") + (1 if pedaco.endswith(".") else 0)
+        if identifiers:
+            # Numbered tables of contents are not explanatory sentences. Keep
+            # their punctuation from outranking the actual error discussion.
+            frases = min(frases, 3)
+            pontos += 12 * sum(min(3, len(rx.findall(pedaco))) for rx in identifiers)
         pontos += frases * 3
         pontos -= _penalidade_citacoes(pedaco)
         if pontos > melhor_pontos:
@@ -634,6 +649,50 @@ def passage_role(text):
     if re.match(r'(?:explica[çc][aã]o|coment[aá]rio|justificativa)\s*[:—-]', value, re.I):
         return 'EXPLANATION'
     return 'PROSE'
+
+
+def scoped_api_aliases(passage):
+    """DOM anchor aliases on the enclosing, aligned API definition only."""
+    path=passage.get('section_path') or []
+    heading=path[-1] if path else {}
+    hs=heading.get('source_span') or {};ps=passage.get('source_span') or {}
+    if not (heading.get('level',0)>=7 and hs.get('sha256') and hs['sha256']==ps.get('sha256')
+            and type(hs.get('start')) is int and type(hs.get('end')) is int
+            and type(ps.get('start')) is int and 0<=hs['start']<hs['end']
+            and (hs['end']<=ps['start'] or (hs['start']==ps['start']
+                 and passage.get('text','').startswith(heading.get('text',''))))):
+        return []
+    signature=re.search(r'\b(\w+(?:\s*\.\s*\w+)+)\s*\(',heading.get('text',''))
+    if not signature:return []
+    leaf=re.sub(r'\s+','',signature[1]).split('.')[-1]
+    return [name for name in heading.get('dom_api_aliases',[])[:8]
+            if isinstance(name,str) and re.fullmatch(r'\w+(?:\.\w+)+',name)
+            and name.split('.')[-1]==leaf]
+
+
+def _shared_return_policy(text):
+    """Locate a general rule, never assign its return value to an API."""
+    return bool(not re.search(r'\b\w+(?:\.\w+)+\b',text)
+        and re.search(r'\b(?:methods?|m[eé]todos?)\b.{0,220}\b(?:in place|in-place|no pr[oó]prio objeto)\b'
+                      r'.{0,160}\b(?:return|retorn\w*)\b.{0,60}\bNone\b',text,re.I|re.S))
+
+
+def select_context_passages(record, query):
+    """Keep one read shared rule without inventing a requirement binding."""
+    import query_intelligence as qi
+    if not any(r['attribute']=='return_value' for r in qi.answer_requirements(query)):
+        return []
+    text=record.get('texto') or ''
+    digest=(record.get('document_scan') or {}).get('source_sha256')
+    if not isinstance(text,str) or not isinstance(digest,str) or not re.fullmatch('[0-9a-f]{64}',digest):return []
+    for passage in (record.get('answer_passages') or [])[:40]:
+        span=passage.get('text_span') or {};lo,hi=span.get('start'),span.get('end')
+        if (type(lo) is int and type(hi) is int and 0<=lo<hi<=len(text)
+                and text[lo:hi]==passage.get('text') and (passage.get('source_span') or {}).get('sha256')==digest
+                and not any(h.get('level',0)>=7 for h in passage.get('section_path',[]))
+                and _shared_return_policy(passage['text'])):
+            return [{**passage,'context_only':True}]
+    return []
 
 
 def passage_candidates(texto, source_url='', sections=None, limit=40):
@@ -716,6 +775,13 @@ def navigation_candidates(links, query, parent_url, depth=0, max_depth=2, limit=
             continue
         if parsed.scheme not in ('http','https') or not parsed.hostname or parsed.username or parsed.password:
             continue
+        if parsed.hostname.endswith('.wikipedia.org'):
+            actions=urllib.parse.parse_qs(parsed.query)
+            namespace=urllib.parse.unquote(parsed.path).rsplit('/wiki/',1)[-1]
+            if (set(actions)&{'action','oldid','diff'}
+                    or re.match(r'(?:Talk|Discussão|Special|Especial|User|Usuário|File|Ficheiro|Category|Categoria):',namespace,re.I)
+                    or (parent.hostname and parent.hostname.endswith('.wikipedia.org') and parsed.hostname!=parent.hostname)):
+                continue  # Editorial tools/translations are not a new source.
         if (parsed.netloc, parsed.path, parsed.query) == (parent.netloc, parent.path, parent.query):
             continue
         label = qi.normalized(str(item.get('texto') or '') + ' ' + urllib.parse.unquote(parsed.path))
@@ -723,9 +789,12 @@ def navigation_candidates(links, query, parent_url, depth=0, max_depth=2, limit=
         facet = bool(re.search(r'histor|found|funda|produt|product|portfolio|catalog|reference|referencia|api', label))
         # One exact operation/name anchor or several subject words, never a
         # generic legal/login link just because it shares the host.
-        if not hits or (hits < min(2,len(terms)) and not facet):
+        identity_link = (parsed.hostname == parent.hostname
+            and any(r['attribute'] in ('founders','foundation_date','creation_date') for r in requirements)
+            and bool(re.search(r'\b(?:about|sobre|historia|history|historico|quem somos)\b',label)))
+        if not identity_link and (not hits or (hits < min(2,len(terms)) and not facet)):
             continue
-        ranked.append((hits, parsed.hostname == parent.hostname, -index,
+        ranked.append((hits+8*bool(identity_link), parsed.hostname == parent.hostname, -index,
                        {'url': url[:500], 'titulo': str(item.get('texto') or '')[:160],
                         'trecho': '', '_navigation_depth': depth+1,
                         '_navigation_parent': parent_url[:500], 'origem': 'in_source_link'}))
@@ -773,7 +842,7 @@ def _extruct(pagina: str, url: str = "") -> dict:
 # ── Entrada única ──────────────────────────────────────────────────
 _SECTION_TERMS = {
     'syntax': r'syntax|sintaxe|signature|assinatura',
-    'return_value': r'return(?:s| value)?|retorn\w+',
+    'return_value': r'return(?:s|ed|ing| value)?|retorn\w+',
     'behavior': r'description|descri[cç][aã]o|behavior|comportamento',
     'cancellation': r'cancell?\w*|cancelamento',
     'exceptions': r'exceptions?|ExceptionGroup|exce[cç][oõ]es|raises?|propagat\w*',
@@ -781,12 +850,13 @@ _SECTION_TERMS = {
     'examples': r'examples?|exemplos?',
     'weight': r'weight|peso', 'battery': r'batter(?:y|ies)|bateria',
     'price': r'price|pre[cç]o|USD|BRL|EUR',
-    'founders': r'founder|founded|fundad\w+|fundou',
+    'founders': r'founder|founded|fundad\w+|fundou|criad\w+|creator|developed|designed',
     'foundation_date': r'founded|established|fundad\w+|funda[cç][aã]o',
     'creation_date': r'created|criad\w+|cria[cç][aã]o|desenvolvid\w+',
     'products': r'products?|produtos?|manufactur\w+|fabrica\w+',
     'causes': r'causes?|causas?|caused|devido',
     'consequences': r'consequences?|consequ[eê]ncias?|resulted|resultou',
+    'definition': r'definition|defini[cç][aã]o|finalidade|linguagem|language|theorem|teorema',
 }
 
 # These labels locate possible evidence; they are not causal predicates.
@@ -808,11 +878,16 @@ def _document_windows(text, root, block, query, url, budget):
     import query_intelligence as qi
     requirements = qi.answer_requirements(query)
     behavior_ids = {r['id'] for r in requirements if r['attribute'] == 'behavior'}
+    return_ids = {r['id'] for r in requirements if r['attribute'] == 'return_value'}
     terms = [(r['id'], re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+r')\b', re.I),
               re.compile(r'\b(?:'+_SECTION_TERMS[r['attribute']]+'|'+
                          _SECTION_HEADINGS.get(r['attribute'], r'(?!)')+r')\b', re.I),
-              re.compile(r'(?<!\w)'+r'\s*\.\s*'.join(map(re.escape,r['entity'].split('.')))+r'(?!\w)', re.I))
+              re.compile(r'(?<!\w)'+r'\s*\.\s*'.join(map(re.escape,re.sub(r'^linguagem\s+','',r['entity'],flags=re.I).split('.')))+r'(?!\w)', re.I))
              for r in requirements if r['attribute'] in _SECTION_TERMS]
+    # Literal names are discovery hints even when requirement decomposition is
+    # incomplete. They do not add a requirement or certify semantic support.
+    terms = [('identifier:' + name, *(re.compile(r'(?<!\w)' + re.escape(name) + r'(?!\w)', re.I),) * 3)
+             for name in query_identifiers(query)] + terms
     if not terms or len(text) <= budget:
         return None
     source = _normalizar(text)
@@ -857,6 +932,9 @@ def _document_windows(text, root, block, query, url, budget):
             return
         for child in node.filhos: yield from elements(child)
     pools = {rid:[] for rid,_,_,_ in terms}
+    declarations=' '.join((_texto_bloco(n) if n.tag=='dt' else str(n.attrs.get('id') or ''))
+                          for n in _descendentes(block or root) if n.tag in ('dt','span'))
+    located_api_ids={rid for rid,_,_,entity_rx in terms if entity_rx.search(declarations)}
     cursor=0; section=''; section_start=0; section_end=0; scanned=0
     section_paths={}; active_headings=[]
     if len(headings)==1 and headings[0]['level']==1 and headings[0]['text']:
@@ -884,6 +962,16 @@ def _document_windows(text, root, block, query, url, budget):
                     definition_scopes[owner]=({'text':value,'source_span':{
                         'start':at,'end':at+len(value),'scope':'normalized_available_extraction','sha256':digest}}
                         if at>=0 else None)
+                    if definition_scopes[owner] is not None:
+                        # Sphinx may display sequence.append but retain the
+                        # documented list.append alias as an empty DOM anchor.
+                        aliases=[]
+                        for sibling in owner.pai.filhos:
+                            if sibling is previous:break
+                            if sibling.tag=='span' and not _texto_bloco(sibling).strip():
+                                name=str(sibling.attrs.get('id') or '')
+                                if re.fullmatch(r'\w+(?:\.\w+)+',name):aliases.append(name)
+                        definition_scopes[owner]['dom_api_aliases']=aliases[:8]
                 if definition_scopes[owner]:definitions.append(definition_scopes[owner])
             if owner is block:break
             owner=owner.pai
@@ -935,14 +1023,28 @@ def _document_windows(text, root, block, query, url, budget):
             # API descriptions often explain the operation without a literal
             # "Description" label. A real aligned definition can locate that
             # body; downstream support checks still evaluate its literal text.
+            api_names=(path[-1]['text']+' '+' '.join(path[-1].get('dom_api_aliases',[]))) if path else ''
+            if (rid in located_api_ids and path and path[-1]['level']>=7 and not entity_rx.search(api_names)
+                    and not any(entity_rx.search(h['text']) for h in path[:-1])
+                    and not entity_rx.search(chunk)):
+                continue  # Another operation's return value is not this one's.
             api_description = (rid in behavior_ids and path and path[-1]['level'] >= 7
-                               and entity_rx.search(path[-1]['text']))
+                               and entity_rx.search(api_names))
             if not hits and not heading_match and not api_description:continue
             # Actual leading labels outrank incidental mentions deep in prose.
             score=8*heading_match+4*bool(hits and hits[0].start()<50)+min(3,len(hits))
             score += 16*any(entity_rx.search(h['text']) for h in path) + 8*bool(entity_rx.search(chunk))
+            if rid in return_ids and not any(h.get('level',0)>=7 for h in path) and _shared_return_policy(chunk):
+                score+=24  # Preserve a shared rule as context, not direct proof.
+            if tag=='tr':
+                table=row_scopes.get(lo,{})
+                header=re.sub(r'\s+(?:s\.?a\.?|inc\.?|ltd\.?)$', '',
+                              table.get('table_header',''),flags=re.I)
+                if entity_rx.fullmatch(header):
+                    score+=24+8*bool(hits and hits[0].start()<24)
+                    # Identity + leading field label outrank incidental prose.
             if path and path[-1]['level']>=7:
-                score += 24*bool(entity_rx.search(path[-1]['text']))
+                score += 24*bool(entity_rx.search(api_names))
                 if entity_rx.search(path[-1]['text']) and re.search(r'\b(?:default|padr[aã]o)\b',chunk,re.I):
                     score += 8  # Keep the documented default before rare edge cases.
             item=(score,-lo,hi,tag,title,heading_start)
@@ -991,7 +1093,9 @@ def _document_windows(text, root, block, query, url, budget):
             hi=min(cursor,lo+1000)
             while hi<cursor and hi>lo and not source[hi].isspace():hi-=1
             if hi<=lo:break
-            start=section_start if (tag!='tr' and section and not source[section_end:lo].strip()
+            repeats_subject=any(entity_rx.search(section) and entity_rx.search(source[lo:hi])
+                                for _,_,_,entity_rx in terms)
+            start=section_start if (tag!='tr' and section and not repeats_subject and not source[section_end:lo].strip()
                                    and 0<=lo-section_start<180 and hi-section_start<=1100) else lo
             offer(start,hi,tag,section,section_start)
             lo=hi
@@ -1073,10 +1177,40 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
     bloco = melhor_bloco(parser.raiz)
     abstract_only = bloco is not None and bool(re.search(
         r"(?:^|[\s_-])abstract(?:$|[\s_-])", _pista(bloco), re.I))
+    import query_intelligence as qi
+    requirements = qi.answer_requirements(consulta)
+    identifiers = query_identifiers(consulta)
+    if identifiers and not abstract_only and bloco is not None:
+        current = _texto_bloco(bloco)
+        missing = [name for name in identifiers if name.casefold() not in current.casefold()]
+        container = bloco
+        while missing and container.pai is not None:
+            container = container.pai
+            if container.tag in ('main', 'article', 'body') or container.attrs.get('role') == 'main':
+                body = _texto_bloco(container)
+                if any(re.search(r'(?<!\w)' + re.escape(name) + r'(?!\w)', body, re.I) for name in missing):
+                    bloco = container
+                break
+    if (requirements and not abstract_only and bloco is not None
+            and (bloco.tag in ('ol','ul','section') or re.search(r'reference|bibliograph',_pista(bloco),re.I))):
+        # Readability can select a bibliography or a card list and discard the
+        # article's introduction. Scan the actual document container before
+        # selecting bounded literal windows; keep abstract-only scope intact.
+        container = bloco
+        while container.pai is not None:
+            if (container.tag in ('main', 'article', 'body')
+                    or container.attrs.get('role') == 'main'
+                    or str(container.attrs.get('itemprop', '')).lower() == 'articlebody'):
+                bloco = container
+                break
+            container = container.pai
     texto_det = (_texto_bloco(bloco) if bloco is not None
                  else _texto_documento(parser.raiz))
     paragrafos = [t for _, t in _paragrafos(bloco)] if bloco is not None else []
     secs = secoes(bloco) if bloco is not None else []
+    if identifiers and texto_art and any(name.casefold() in texto_det.casefold()
+            and name.casefold() not in texto_art.casefold() for name in identifiers):
+        texto_art, extrator = texto_det, 'deterministico'
     if abstract_only:
         texto_art, extrator = texto_det, "deterministico"
     elif not texto_art:
@@ -1085,6 +1219,9 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
         # trafilatura devolveu menos que o extrator local: o local é mais útil
         texto_art, extrator = texto_det, "deterministico"
     texto_final = texto_art[:teto]
+    if any(name.casefold() in texto_art.casefold() and name.casefold() not in texto_final.casefold()
+           for name in identifiers):
+        texto_final = melhor_trecho(texto_art, consulta, teto)
     # Select a bounded window around the requested operation rather than lose
     # late documentation sections. All offsets below refer to this returned text.
     import query_intelligence as qi
@@ -1097,8 +1234,16 @@ def extrair_pagina(pagina: str, base_url: str = "", consulta: str = "",
     preferred_urls = {item['url'] for item in preferred}
     links = ([item for item in links if item['url'] in preferred_urls]
              + [item for item in links if item['url'] not in preferred_urls])[:30]
+    title=metas['titulo'] or _limpar(parser.titulo,200)
+    document_title=_limpar(parser.titulo,200)
+    for requirement in requirements:
+        entity=qi.normalized(re.sub(r'^linguagem\s+','',requirement['entity'],flags=re.I))
+        if not entity:continue
+        name=re.compile(r'(?<!\w)'+re.escape(entity)+r'(?!\w)')
+        if name.search(qi.normalized(document_title)) and not name.search(qi.normalized(title)):
+            title=document_title;break
     saida = {
-        "titulo": metas["titulo"] or _limpar(parser.titulo, 200),
+        "titulo": title,
         "texto": texto_final,
         "paragrafos": paragrafos[:240],
         "secoes": secs,

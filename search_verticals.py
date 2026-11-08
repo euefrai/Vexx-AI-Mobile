@@ -59,6 +59,9 @@ def structured(page):
 def assess(request, source) -> SourceContract:
     domain=request['domain'];p=request.get('parameters') or {}
     body=text(source.get('titulo'),1000)+' '+str(source.get('trecho') or '')
+    if domain == 'news':
+        # A publisher credit alone is not evidence that the event is local.
+        body=re.sub(r'\bubat[aã]\s+not[ií]cias\b','',body,flags=re.I)
     data={};reasons=[];state='UNVERIFIED';eligible=True
     if domain == 'documents' and re.search(r'\bpdf\b', qi.normalized(request.get('original_request', ''))):
         if source.get('content_scope') != 'document_text':

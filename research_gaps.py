@@ -40,7 +40,8 @@ def identify(job, evidence):
     objective = str(job.get('objetivo') or '')
     if not objective:
         return []
-    if re.search(r'\b(imagens?|fotos?|videos?)\b', normalized(objective)) and not re.search(
+    import query_intelligence
+    if query_intelligence.requested_media(objective) and not re.search(
             r'analis|evidenc|compar|transcri', normalized(objective)):
         return []  # Retrieval/gallery intent does not require reading an article.
     evidence = [e for e in evidence[:80] if isinstance(e, dict)]

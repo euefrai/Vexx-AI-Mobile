@@ -33,7 +33,10 @@ def parse_inventory(blob):
 def search(query, limit=6, timeout=6):
     import research
     global _CACHE
-    if not re.search(r'\b(python|asyncio)\b', query, re.I):
+    import query_intelligence as qi
+    scope=qi._discovery_context.get() or {}
+    original=(scope.get('request') or {}).get('original_request') or ''
+    if not re.search(r'\b(python|asyncio)\b', query+' '+original, re.I):
         return []
     if not _CACHE or _CACHE[0] <= time.monotonic():
         research.url_segura(INVENTORY)
@@ -46,6 +49,11 @@ def search(query, limit=6, timeout=6):
         _CACHE = (time.monotonic() + 6 * 3600, lines)
     tokens = set(re.findall(r'[a-z_][a-z_0-9]*', query.casefold()))
     qualified = set(re.findall(r'\b[a-z_]\w*(?:\.[a-z_]\w*)+\b', query.casefold()))
+    # Search reformulation may replace dots with spaces. Recover an exact API
+    # only when the original request names it and its segments remain together.
+    for name in re.findall(r'\b[a-z_]\w*(?:\.[a-z_]\w*)+\b',original.casefold()):
+        pattern=r'(?<!\w)'+r'[\s.]+'.join(map(re.escape,name.split('.')))+r'(?!\w)'
+        if re.search(pattern,query,re.I):qualified.add(name)
     tokens -= {'compare', 'analyze', 'print', 'python', 'verifique', 'fontes', 'oficial', 'documentacao'}
     candidates = []
     for line in _CACHE[1]:
@@ -56,7 +64,7 @@ def search(query, limit=6, timeout=6):
         if qualified and name.casefold() not in qualified:
             continue
         leaf = name.rsplit('.', 1)[-1].casefold()
-        if len(leaf) < 4 or leaf not in tokens:
+        if (len(leaf) < 4 and name.casefold() not in qualified) or leaf not in tokens:
             continue
         url = urllib.parse.urljoin('https://docs.python.org/3/', path.replace('$', name))
         parsed = urllib.parse.urlsplit(url)
@@ -100,6 +108,8 @@ def read_authority(query, url, record, timeout=3):
     read_text=record.get('texto') or ''
     scope=read_text+' '+' '.join(h.get('text','') for p in record.get('answer_passages',[])
                                for h in p.get('section_path',[]))
+    import web_extract
+    scope+=' '+' '.join(name for p in record.get('answer_passages',[]) for name in web_extract.scoped_api_aliases(p))
     scope=re.sub(r'\s*\.\s*','.',scope).casefold()
     if not read_text.strip() or not all(re.search(r'(?<!\w)'+re.escape(n)+r'(?!\w)',scope) for n in names):
         return None

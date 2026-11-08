@@ -33,7 +33,7 @@ _EXCEPTION_RELATION = (r'\b'+_EXCEPTION_ACTION+r'\b[^.!?;]{0,160}\b'+_EXCEPTION_
                        r'\b'+_EXCEPTION_NOUN+r'\b[^.!?;]{0,160}\b'+_EXCEPTION_ACTION+r'\b')
 
 _ANSWER_RELATIONS = {
-    'founders': r'(?:fundad[ao]s?|criad[ao]s?|founded|established).{0,100}\b(?:por|by)\s+\w+|fundadores?\s*[:—-]\s*\w+',
+    'founders': r'(?:fundad[ao]s?|criad[ao]s?|desenvolvid[ao]|founded|established|designed|developed).{0,100}\b(?:por|by)\s+\w+|fundadores?\s*[:—-]\s*\w+',
     'foundation_date': r'(?:fundad[ao]|fundacao|founded|established|criad[ao]).{0,100}\b(?:1[5-9]|20)\d{2}\b|\b(?:1[5-9]|20)\d{2}\b.{0,80}(?:fundad[ao]|fundacao|founded)',
     'creation_date': r'\b(?:criad[ao]|created|desenvolvid[ao])\s+(?:(?:em|in)\s+)?(?:1[5-9]|20)\d{2}\b',
     'products': r'\b(?:produz|fabrica|fabricam|produzem|manufactures?|makes?|manufacturers? of|producers? of|products include|produtos incluem)\b.{4,}',
@@ -41,10 +41,10 @@ _ANSWER_RELATIONS = {
     'consequences': r'\b(?:resultou|resultaram|consequencias? (?:foram|incluem)|resulted|levou a|levaram a|provocou)\b.{8,}',
     'syntax': r'\w+\s*\([^)]*\)',
     'return_value': r'\b(?:retorna|returns?(?!\s+value\b))\b.{8,}',
-    'behavior': r'\b(?:retorna|returns?(?!\s+value\b)|permite|allows?|cria|creates?|adiciona|adds?|copia|copies|aumenta|increases?|grows?|grow the|aumentar)\b.{8,}',
+    'behavior': r'\b(?:retorna|returns?(?!\s+value\b)|permite|allows?|cria|creates?|adiciona|adds?|append|extend|copia|copies|aumenta|increases?|grows?|grow the|aumentar|executa|executes?|runs?|aguarda|awaits?|waits?|propaga|propagates?|raises?|lanca)\b.{8,}',
     'cancellation': r'\b(?:cancel(?:s|led|ed|ling|ing)?|cancelad[ao]s?|cancela)\b.{4,}',
     'exceptions': _EXCEPTION_RELATION,
-    'examples': r'\w+\s*\([^)]*\)',
+    'examples': r'\w+\s*\([^)]*\)|\b(?:exemplo|example)\b[^.!?]{0,350}\d',
     'limitations': r'\b(?:nao pode|cannot|must not|limitad[ao]|limite de|maximum|exceeds|exception|raises|restricao)\b.{4,}',
     'weight': r'\b\d+(?:[.,]\d+)?\s*(?:g|kg|gramas?|kilograms?)\b',
     'battery': r'\b(?:bateria|battery)\b.{0,60}\b[A-Za-z]+[ -]?[A-Za-z]*\d[\w-]*',
@@ -55,7 +55,7 @@ _ANSWER_RELATIONS = {
     'location': r'\b(?:fica|localiza-se|esta localizad[ao]|is located)\s+(?:em|n[ao]s?|in)\s+\w.{4,}',
     'population': r'\b(?:tem|possui|population of|populacao de)\s+(?:uma populacao de )?\d[\d., ]*\s*(?:habitantes|people|residents)\b',
     'alternatives': r'\b(?:alternativas? (?:incluem|sao)|alternatives include)\s+\w.{4,}',
-    'definition': r'\b(?:e|is)\s+(?:um[a]?|a|an)\s+(?:tipo de |modalidade de )?(?:curso|graduacao|degree|programa|software|ferramenta)\b.{8,}',
+    'definition': r'\b(?:e|is)\s+(?:um[a]?|a|an)\s+(?:tipo de |modalidade de )?(?:curso|graduacao|degree|programa|software|ferramenta|linguagem|language|teorema|theorem)\b.{8,}|\b(?:afirma|estabelece|relaciona|states)\b.{12,}',
 }
 
 
@@ -76,6 +76,10 @@ def _passage_support(req, passage, source):
     if passage_role(passage['text']) in ('QUESTION_TEXT','ANSWER_OPTION','UNKNOWN_CORRECTNESS'):
         return None
     entity=_canonical_operation(req['entity']).strip(' .?!')
+    if entity.startswith('linguagem '):
+        category=qi.normalized(str(source.get('texto') or source.get('trecho') or ''))
+        if not re.search(r'\b(?:linguagem|language|programming|programacao)\b',category):return None
+        entity=entity.removeprefix('linguagem ')
     anchor=re.compile(r'(?<![\w.])'+re.escape(entity)+r'(?!\w|\.\w)')
     text=qi.normalized(passage['text'])
     text=re.sub(r'^(?:explicacao|comentario|justificativa|resposta correta|gabarito)\s*[:—-]\s*','',text)
@@ -110,7 +114,7 @@ def _passage_support(req, passage, source):
         verified=(header==entity and hs.get('sha256') and hs.get('sha256')==rs.get('sha256')
                   and type(hs.get('start')) is int and type(hs.get('end')) is int and type(rs.get('start')) is int
                   and 0<=hs['start']<hs['end']<=rs['start'])
-        fields={'founders':r'^(?:founder(?:s)?|fundador(?:es|\s*\(es\))?)\s+[^\d]{4,}',
+        fields={'founders':r'^(?:founder(?:s)?|fundador(?:es|\s*\(es\))?|criado por|created by)\s+[^\d]{4,}',
                 'foundation_date':r'^(?:founded|funda[cç][aã]o)\s+.{0,90}\b(?:1[5-9]|20)\d{2}\b',
                 'products':r'^(?:products|produtos)\s+\w.{3,}'}
         rows=passage.get('table_rows') or [{'start':0,'end':len(passage['text'])}]
@@ -129,7 +133,7 @@ def _passage_support(req, passage, source):
         if attribute in fields and re.search(fields[attribute],text) and not re.search(r'\b(?:unknown|desconhecid\w*|nao confirmado)\b',text):
             partial_found=True
     section=qi.normalized(passage.get('section') or '')
-    if qualified and attribute in ('cancellation', 'exceptions'):
+    if qualified and attribute in ('cancellation', 'exceptions', 'behavior', 'return_value'):
         # A literal API signature can scope later paragraphs in its definition.
         # Keep this as partial support: a signature is not the local subject.
         path = passage.get('section_path') or []
@@ -138,9 +142,16 @@ def _passage_support(req, passage, source):
         aligned = (signature.get('level') == 7 and hs.get('sha256') == ps.get('sha256')
                    and bool(ps.get('sha256')) and type(hs.get('start')) is int
                    and type(hs.get('end')) is int and type(ps.get('start')) is int
-                   and 0 <= hs['start'] < hs['end'] <= ps['start'])
-        if (aligned and anchor.search(_canonical_operation(signature.get('text') or ''))
-                and re.search(relation_rx, text, re.S)):
+                   and 0 <= hs['start'] < hs['end']
+                   and (hs['end'] <= ps['start'] or (hs['start']==ps['start']
+                        and passage.get('text','').startswith(signature.get('text','')))))
+        from web_extract import scoped_api_aliases
+        identified=bool(anchor.search(_canonical_operation(signature.get('text') or ''))
+                        or entity in [qi.normalized(n) for n in scoped_api_aliases(passage)])
+        passive_return=(attribute=='return_value'
+            and re.search(r'\b(?:is|are|was|were)\b[^.!?;]{0,100}\breturned\b',text))
+        if (aligned and identified
+                and (re.search(relation_rx, text, re.S) or passive_return)):
             partial_found = True
     section_facets={'return_value':('return value','valor retornado','valor de retorno'),
                     'behavior':('description','descricao')}

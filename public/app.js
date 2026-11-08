@@ -1237,15 +1237,24 @@ async function renderPesquisas() {
     const ROT = { criada: 'criada', em_andamento: 'em andamento', pausada: 'pausada',
       concluida: 'conclu?da', interrompida: 'interrompida', cancelada: 'cancelada',
       falhou: 'falhou' };
+    const OUTCOME = { complete: 'cobertura completa', partial: 'resultado parcial',
+      blocked: 'bloqueada pelo provedor' };
     jobs.forEach(job => {
       const card = document.createElement('div');
       card.className = 'doc-item';
       const strong = document.createElement('strong');
       strong.textContent = job.objetivo || 'Pesquisa sem objetivo';
       card.appendChild(strong);
+      const outcome = job.research_outcome || {};
+      const terminal = job.status === 'concluida' || job.status === 'interrompida';
+      const semEvidencia = terminal && (Number(job.evidencias || 0) === 0
+        || (outcome.state && Number(outcome.read_sources || 0) === 0));
+      const statusTexto = (ROT[job.status] || job.status || '')
+        + (semEvidencia ? ' · sem evidências lidas' : '');
       const meta = document.createElement('small');
-      meta.textContent = [ROT[job.status] || job.status || '', job.modo || '',
-        job.atualizado_em || job.criado_em || ''].filter(Boolean).join(' · ');
+      meta.textContent = [statusTexto, job.modo || '',
+        OUTCOME[outcome.state] || '', job.atualizado_em || job.criado_em || '']
+        .filter(Boolean).join(' · ');
       card.appendChild(meta);
       const acts = document.createElement('div');
       acts.className = 'doc-actions';
@@ -1606,9 +1615,10 @@ if (localStorage.getItem('julia-memory') === '0') $('memoryToggle').checked = fa
 
 function updateConnection() {
   remoteUI.update();
-  const msg = PREVIEW_MODE ? 'Prévia local' : (!navigator.onLine ? 'Sem internet' : pcOnline ? 'PC conectado' : 'PC desconectado');
+  const base = PREVIEW_MODE ? 'Prévia local' : (!navigator.onLine ? 'Sem internet' : pcOnline ? 'PC conectado' : 'PC desconectado');
+  const msg = pcOnline && pcDrift ? base + ' · versão diferente' : base;
   $('connectionLabel').textContent = msg;
-  $('connectionShort').textContent = pcOnline && navigator.onLine ? 'PC conectado' : 'Offline';
+  $('connectionShort').textContent = pcOnline && navigator.onLine ? (pcDrift ? 'Versão diferente' : 'PC conectado') : 'Offline';
   $('statusButton').setAttribute('aria-label', 'Conexão: ' + msg);
   if (!pcOnline) $('aiStatus').textContent = 'PC desconectado';
   const on = pcOnline && navigator.onLine;
@@ -1617,17 +1627,20 @@ function updateConnection() {
     d.style.background = on ? 'var(--rose)' : '';
     d.style.boxShadow = on ? '0 0 0 3px var(--glow-rose)' : '';
   });
-  $('popModel').textContent = modeloAtivo() || '—';
+  $('popModel').textContent = modelDisplayLabel(modeloAtivo() || modelCatalog.default || '—');
   $('popSync').textContent = $('syncCounter').textContent + ' pendentes'
     + (relayHa != null && relayHa >= 0 ? ' · agente há ' + relayHa + 's' : '');
   const dot = $('drawerDot'); if (dot) { dot.style.background = pcOnline ? '#ff2bd6' : '#5a5972'; }
   // Device status is rendered by VexxRemote from the account companion connection.
 
   $('memoryStatus').textContent = memoryOn() ? 'Ativada neste aparelho' : 'Pausada neste aparelho';
-  $('syncStatusText').textContent = pcOnline ? 'PC disponível. Pendências serão sincronizadas.'
+  $('syncStatusText').textContent = pcOnline
+    ? (pcDrift ? 'PC conectado em outra versão. Atualize o agente para sincronizar com segurança.' : 'PC disponível. Pendências serão sincronizadas.')
     : 'PC desconectado. Mensagens ficam no celular.' + (lastSyncErr ? ' ' + lastSyncErr : '');
 }
 let relayHa = null;
+let pcStale = false;
+let pcDrift = false;
 let lastSyncErr = '';
 function marcaErroSync(msg) {
   try {
@@ -1766,7 +1779,9 @@ async function fetchAuthConfig() {
     showRegister.hidden = authConfig.modo === 'fechado' && !offline;
     availability.hidden = !offline;
     availability.textContent = offline
-      ? 'Conecte o computador com o agente JULIA para criar contas e entrar com elas.'
+      ? (authConfig.stale === true
+        ? 'PC offline. Mantendo a última configuração conhecida; conecte o computador com o agente JULIA.'
+        : 'Conecte o computador com o agente JULIA para criar contas e entrar com elas.')
       : '';
     if (authConfig.modo === 'fechado' && !offline) {
       showRegister.style.display = 'none';
@@ -1862,10 +1877,14 @@ async function checkStatus() {
   try {
     const st = await api('/api/status');
     pcOnline = st.pc_online === true;
+    pcDrift = st.drift === true;
+    pcStale = st.stale === true || pcDrift;
     if (typeof st.agente_ha === 'number') relayHa = st.agente_ha;
     try {
       const dg = await api('/api/diag');
       if (typeof dg.agente_ha === 'number') relayHa = dg.agente_ha;
+      if (typeof dg.drift === 'boolean') pcDrift = dg.drift;
+      if (typeof dg.stale === 'boolean') pcStale = dg.stale;
     } catch (_) { /* diag é auxiliar; status já vale */ }
     updateConnection();
     if (pcOnline) {
@@ -1953,7 +1972,22 @@ async function syncAndRefresh() {
 
 /* ----- Modelos ----- */
 function modeloAtivo() { return localStorage.getItem('julia-model') || ''; }
-let modelCatalog = { models: [], providers: [] };
+function modelSelectionError() {
+  const chosen = modeloAtivo();
+  // Missing/expired metadata is not proof of removal. No extra network per send.
+  if (!chosen || !modelsLoadedAt || Date.now() - modelsLoadedAt >= 300000) return '';
+  if (!(modelCatalog.models || []).includes(chosen) || !isConfigured(providerOf(chosen))) {
+    return 'O modelo selecionado não está disponível para chat. Abra Provedores de IA e escolha outro modelo.';
+  }
+  return '';
+}
+let modelCatalog = {
+  models: ['vexx-qwen-2.5-3b'],
+  providers: [{ id: 'vexx', label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)', configured: true, source: 'hf_space' }],
+  default: 'vexx-qwen-2.5-3b',
+  itemProvider: { 'vexx-qwen-2.5-3b': 'vexx' },
+  itemLabel: { 'vexx-qwen-2.5-3b': '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)' }
+};
 let modelLoadVersion = 0;
 let providerMutation = false;
 function providerLabel(pid) {
@@ -1965,7 +1999,7 @@ function providerFlag(pid, campo) {
   return !!(p && p[campo]);
 }
 function isConfigured(pid) {
-  if (pid === 'hermes') return true;
+  if (pid === 'hermes' || pid === 'vexx') return true;
   return providerFlag(pid, 'configured') && !providerFlag(pid, 'auth_error');
 }
 function providerOf(id) {
@@ -1978,7 +2012,12 @@ function providerOf(id) {
   }
   return 'hermes';
 }
+function modelDisplayLabel(id) {
+  if (id === 'vexx-qwen-2.5-3b') return '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+  return (modelCatalog.itemLabel && modelCatalog.itemLabel[id]) || id;
+}
 function modelGroup(id) {
+  if (id === 'vexx-qwen-2.5-3b') return -1;
   const pid = providerOf(id);
   if (String(id).endsWith(':free')) return 0;
   return pid !== 'hermes' && isConfigured(pid) ? 1 : 2;
@@ -1989,7 +2028,7 @@ function fillModels(filter) {
   sel.replaceChildren();
   const q = (filter || '').trim().toLowerCase();
   const ids = [...new Set(modelCatalog.models || [])].filter(id => !q ||
-    id.toLowerCase().includes(q) || providerLabel(providerOf(id)).toLowerCase().includes(q));
+    id.toLowerCase().includes(q) || modelDisplayLabel(id).toLowerCase().includes(q) || providerLabel(providerOf(id)).toLowerCase().includes(q));
   ids.sort((a, b) => modelGroup(a) - modelGroup(b) ||
     providerLabel(providerOf(a)).localeCompare(providerLabel(providerOf(b)), 'pt-BR') || a.localeCompare(b));
   const groups = new Map();
@@ -1999,20 +2038,29 @@ function fillModels(filter) {
     const key = rank + ':' + pid;
     if (!groups.has(key)) {
       const g = document.createElement('optgroup');
-      g.label = ['Grátis', 'Suas API keys', 'Outros'][rank] + ' · ' + providerLabel(pid) +
-        (pronto ? '' : recusada ? ' · chave recusada' : ' · sem chave');
+      g.label = rank === -1 ? '⚡ Modelo Próprio (VEXX AI)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
+        (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave');
       groups.set(key, g); sel.appendChild(g);
     }
     const o = document.createElement('option');
     o.value = id;
-    o.textContent = pid !== 'hermes' && id.startsWith(pid + '/') ? id.slice(pid.length + 1) : id;
+    if (id === 'vexx-qwen-2.5-3b') {
+      o.textContent = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+    } else {
+      o.textContent = pid !== 'hermes' && id.startsWith(pid + '/') ? id.slice(pid.length + 1) : id;
+    }
     o.title = id; o.disabled = !pronto;
     groups.get(key).appendChild(o);
   }
   // Filtering must not silently select a different model than the one sent.
+  if (cur && !(modelCatalog.models || []).includes(cur)) {
+    const missing = document.createElement('option');
+    missing.value = cur; missing.textContent = 'Indisponível · ' + cur;
+    missing.disabled = true; sel.prepend(missing);
+  }
   sel.value = cur;
   const selected = $('modelSelected');
-  if (selected) selected.textContent = cur ? 'Selecionado: ' + cur : 'Escolha um modelo';
+  if (selected) selected.textContent = cur ? 'Selecionado: ' + modelDisplayLabel(cur) : 'Escolha um modelo';
   const info = $('modelResults');
   if (info) info.textContent = ids.length ? ids.length + ' modelos · grátis, suas chaves e outros' : 'Nenhum modelo encontrado. Tente outra busca ou atualize a lista.';
   return cur;
@@ -2026,15 +2074,47 @@ async function loadModels(force) {
     const r = await api('/api/ai/models');
     if (version !== modelLoadVersion || owner !== currentUid || !authenticated) return false;
     modelsLoadedAt = Date.now();
-    modelCatalog = { models: r.models || [], providers: r.providers || [], default: r.default || '',
-      itemProvider: Object.fromEntries((r.items || []).map(i => [i.id, i.provider])) };
+    const allModels = r.models || [];
+    if (!allModels.includes('vexx-qwen-2.5-3b')) {
+      allModels.unshift('vexx-qwen-2.5-3b');
+    }
+    const allItems = r.items || [];
+    if (!allItems.some(i => i.id === 'vexx-qwen-2.5-3b')) {
+      allItems.unshift({
+        id: 'vexx-qwen-2.5-3b',
+        provider: 'vexx',
+        label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
+        free: true
+      });
+    }
+    const allProviders = r.providers || [];
+    if (!allProviders.some(p => p.id === 'vexx')) {
+      allProviders.unshift({
+        id: 'vexx',
+        label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
+        configured: true,
+        source: 'hf_space'
+      });
+    }
+    modelCatalog = {
+      models: allModels,
+      providers: allProviders,
+      default: 'vexx-qwen-2.5-3b',
+      itemProvider: Object.fromEntries(allItems.map(i => [i.id, i.provider])),
+      itemLabel: Object.fromEntries(allItems.map(i => [i.id, i.label]))
+    };
+    modelCatalog.itemLabel['vexx-qwen-2.5-3b'] = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+    let escolhido = modeloAtivo();
+    if (!escolhido || !modelCatalog.models.includes(escolhido) || escolhido.includes('crouton-alpha')) {
+      escolhido = 'vexx-qwen-2.5-3b';
+      localStorage.setItem('julia-model', 'vexx-qwen-2.5-3b');
+    }
     const cur = fillModels($('modelSearch') ? $('modelSearch').value : '');
-    if (!modeloAtivo() && r.default) localStorage.setItem('julia-model', r.default);
-    const escolhido = modeloAtivo() || r.default || '?';
     const pid = providerOf(escolhido);
-    const aviso = (pid !== 'hermes' && !isConfigured(pid))
+    const noCatalogo = modelCatalog.models.includes(escolhido);
+    const aviso = !noCatalogo ? ' · fora do catálogo; escolha outro modelo' : (pid !== 'hermes' && !isConfigured(pid))
       ? (providerFlag(pid, 'auth_error') ? ' · chave recusada no PC' : ' · sem chave no PC') : '';
-    $('aiStatus').textContent = (isConfigured(pid) ? 'Modelo selecionado · ' : 'Modelo indisponível · ') + escolhido + aviso;
+    $('aiStatus').textContent = (noCatalogo && isConfigured(pid) ? 'Modelo selecionado · ' : 'Modelo indisponível · ') + modelDisplayLabel(escolhido) + aviso;
     return true;
   } catch (_) { if (version === modelLoadVersion) $('aiStatus').textContent = 'IA: sem resposta do PC'; return false; }
 }
@@ -2042,8 +2122,8 @@ $('modelSearch') && $('modelSearch').addEventListener('input', e => { fillModels
 $('modelSelect').addEventListener('change', e => {
   if (!e.target.value || !isConfigured(providerOf(e.target.value))) return;
   localStorage.setItem('julia-model', e.target.value);
-  $('aiStatus').textContent = 'IA pronta · ' + e.target.value;
-  $('modelSelected').textContent = 'Selecionado: ' + e.target.value;
+  $('aiStatus').textContent = 'IA pronta · ' + modelDisplayLabel(e.target.value);
+  $('modelSelected').textContent = 'Selecionado: ' + modelDisplayLabel(e.target.value);
 });
 $('modelRefresh') && $('modelRefresh').addEventListener('click', async () => {
   const b = $('modelRefresh');
@@ -2309,8 +2389,15 @@ async function runAIRequest(userRow, options, timing) {
     aiRequests.delete(replyId);
     return;
   }
-  const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: existingReply?.text || '', created_at: existingReply?.created_at || new Date().toISOString(), status: 'generating', model: modeloAtivo(), owner: options.owner };
+  const selectionError = modelSelectionError();
+  const ph = { id: replyId, conversation_id: userRow.conversation_id, origin: 'mobile', role: 'assistant', text: selectionError || existingReply?.text || '', created_at: existingReply?.created_at || new Date().toISOString(), status: selectionError ? 'failed' : 'generating', model: modeloAtivo(), owner: options.owner };
   try { await storeMessages([ph]); } catch (_) { aiRequests.delete(replyId); return; }
+  if (selectionError) {
+    aiRequests.delete(replyId);
+    renderMessages().catch(() => showToast('Não foi possível atualizar a conversa.'));
+    abrirSeletorDeModelo(); showToast(selectionError);
+    return;
+  }
   aiStartT = Date.now(); aiFirstTokenT = 0;
   setGenBar(true, 'Preparando resposta…');
   clearInterval(genTimer); genTimer = setInterval(tickGen, 500);
@@ -2319,7 +2406,7 @@ async function runAIRequest(userRow, options, timing) {
   if (sceneContext) ctx.scene_state = JSON.stringify(sceneContext);
   const qs = new URLSearchParams(Object.assign({
     message_id: userRow.id, conversation_id: userRow.conversation_id,
-    model: modeloAtivo(), memory: memoryOn() ? '1' : '0',
+    model: modeloAtivo() || modelCatalog.default || 'vexx-qwen-2.5-3b', memory: memoryOn() ? '1' : '0',
     text: userRow.text || '', created_at: userRow.created_at || ''
   }, ctx));
   aiAbort = new AbortController();
@@ -2387,6 +2474,18 @@ async function runAIRequest(userRow, options, timing) {
             const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
             cur = finalText(d);
             await saveReply(cur, 'synced', {model: d.model || ph.model, latency_s: secs});
+            if (d.fallback_usado && d.model && d.model !== modeloAtivo()) {
+              try {
+                localStorage.setItem('julia-model', d.model);
+                const sel = $('modelSelect');
+                if (sel) sel.value = d.model;
+                const lab = $('modelSelected');
+                if (lab) lab.textContent = 'Selecionado: ' + modelDisplayLabel(d.model);
+                const st = $('aiStatus');
+                if (st) st.textContent = 'IA pronta · ' + modelDisplayLabel(d.model);
+                showToast('⚡ Limite atingido: modelo alternado automaticamente para ' + modelDisplayLabel(d.model) + ' (grátis)');
+              } catch (_) {}
+            }
             terminal = true; break stream;
           } else if (tipo === 'cancelled') {
             cur = d.partial || cur;
@@ -2415,6 +2514,16 @@ async function runAIRequest(userRow, options, timing) {
             cur = finalText(fb);
             const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
             await saveReply(cur, 'synced', {model: fb.model || ph.model, latency_s: secs});
+            if (fb.fallback_usado && fb.model && fb.model !== modeloAtivo()) {
+              try {
+                localStorage.setItem('julia-model', fb.model);
+                const sel = $('modelSelect');
+                if (sel) sel.value = fb.model;
+                const lab = $('modelSelected');
+                if (lab) lab.textContent = 'Selecionado: ' + modelDisplayLabel(fb.model);
+                showToast('⚡ Limite atingido: modelo alternado automaticamente para ' + modelDisplayLabel(fb.model) + ' (grátis)');
+              } catch (_) {}
+            }
             console.warn('[chat-timing] sincronização de compatibilidade antes do retry da IA',
               userRow.id.slice(-8));
             terminal = true; break stream;
@@ -2436,6 +2545,16 @@ async function runAIRequest(userRow, options, timing) {
               cur = finalText(fb);
               const secs = Math.round((Date.now() - aiStartT) / 100) / 10;
               await saveReply(cur, 'synced', {model: fb.model || ph.model, latency_s: secs});
+              if (fb.fallback_usado && fb.model && fb.model !== modeloAtivo()) {
+                try {
+                  localStorage.setItem('julia-model', fb.model);
+                  const sel = $('modelSelect');
+                  if (sel) sel.value = fb.model;
+                  const lab = $('modelSelected');
+                  if (lab) lab.textContent = 'Selecionado: ' + modelDisplayLabel(fb.model);
+                  showToast('⚡ Limite atingido: modelo alternado automaticamente para ' + modelDisplayLabel(fb.model) + ' (grátis)');
+                } catch (_) {}
+              }
             } else throw new Error('Resposta vazia da IA');
           } catch (e2) { throw new Error('Resposta vazia da IA'); }
         }
@@ -3405,69 +3524,3 @@ setInterval(() => { if (!document.hidden) checkStatus(); }, 12000);
   await restoreSession(); await fetchAuthConfig(); await checkStatus(); updateConnection();
   if ('serviceWorker' in navigator && location.protocol !== 'file:') navigator.serviceWorker.register('/sw.js').catch(() => {});
 })();
-
-/* === PERPLEXITY-STYLE: CITATION POPOVER & SCREEN-TO-RESEARCH === */
-function showCitationPopover(targetEl, url, num) {
-  const existing = document.getElementById('citationPopover');
-  if (existing) existing.remove();
-  let domain = '';
-  try { domain = new URL(url).hostname.replace(/^www\./, ''); } catch (_) { domain = url; }
-  const pop = document.createElement('div');
-  pop.id = 'citationPopover';
-  pop.className = 'citation-popover';
-  const label = rotuloUrl ? rotuloUrl(url) : domain;
-  pop.innerHTML = '<div class="citation-popover-head">' +
-    '<img src="https://www.google.com/s2/favicons?domain=' + encodeURIComponent(domain) + '&sz=32" alt="" width="16" height="16" />' +
-    '<span class="citation-popover-domain">' + esc(domain) + '</span>' +
-    '<span style="margin-left:auto;font-size:10px;opacity:0.6">[' + esc(num) + ']</span>' +
-    '</div>' +
-    '<div class="citation-popover-title">' + esc(label || domain) + '</div>' +
-    '<div class="citation-popover-snippet">Fonte citada como evidência para esta resposta na pesquisa profunda.</div>' +
-    '<a class="citation-popover-link" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">Acessar fonte original ↗</a>';
-  document.body.appendChild(pop);
-  const rect = targetEl.getBoundingClientRect();
-  const popRect = pop.getBoundingClientRect();
-  let top = rect.bottom + 8;
-  if (top + popRect.height > window.innerHeight - 16) {
-    top = Math.max(16, rect.top - popRect.height - 8);
-  }
-  let left = Math.max(16, Math.min(window.innerWidth - popRect.width - 16, rect.left));
-  pop.style.top = top + 'px';
-  pop.style.left = left + 'px';
-  const close = e => {
-    if (!pop.contains(e.target) && e.target !== targetEl) {
-      pop.remove();
-      document.removeEventListener('pointerdown', close);
-    }
-  };
-  setTimeout(() => document.addEventListener('pointerdown', close), 10);
-}
-
-document.addEventListener('click', ev => {
-  const pill = ev.target.closest('.citation-pill');
-  if (!pill) return;
-  ev.preventDefault();
-  const url = pill.dataset.url;
-  const num = pill.dataset.num;
-  if (url) showCitationPopover(pill, url, num);
-});
-
-// Listener para Screen-to-Research (AnyDesk + Perplexity Deep Research)
-window.addEventListener('vexx:screen_research', ev => {
-  const src = ev.detail && ev.detail.src;
-  const chatNavBtn = document.querySelector('[data-tab="chat"]');
-  if (chatNavBtn) chatNavBtn.click();
-  else {
-    document.querySelectorAll('.page').forEach(p => { p.hidden = (p.id !== 'page-chat'); });
-    $('page-chat')?.classList.add('active');
-    $('page-desktop')?.setAttribute('hidden', '');
-  }
-  const input = $('chatInput');
-  if (input) {
-    input.value = 'Investigue a tela atual do meu computador e faça uma pesquisa profunda investigando os dados, erros e conceitos nela: ';
-    input.focus();
-  }
-  if (typeof notify === 'function') {
-    notify('Tela do PC vinculada à Pesquisa Profunda. Clique em Enviar para iniciar a investigação.');
-  }
-});

@@ -68,6 +68,7 @@
     }
     function render(message) {
       const deviceOnline = online() && state && !state.offline;
+      const ready = deviceOnline && state.supported && state.capture_ready && state.view_allowed && !state.confirmation_open;
       if ($('deviceStatus')) {
         $('deviceStatus').textContent = deviceOnline ? 'Online' : 'Offline';
         $('deviceStatus').classList.toggle('connected', !!deviceOnline);
@@ -75,18 +76,18 @@
       $('pcSetup').hidden = mobile;
       $('pcConnect').hidden = !mobile || connected;
       $('remoteViewer').hidden = !mobile || !connected;
-      $('remoteTitle').textContent = mobile ? 'Seu PC, onde você estiver.' : 'Conectar meu computador.';
+      $('remoteTitle').textContent = mobile ? 'Seu PC, onde você estiver.' : 'Preparar meu computador.';
       $('remoteIntro').textContent = mobile ? 'Acesse a tela do PC autorizado na sua conta.' : 'Prepare o acesso pelo celular, com a sua permissão.';
       $('remoteDeviceName').textContent = state?.device_name || 'Meu computador';
-      $('remoteSetupTitle').textContent = state?.approved ? 'Pronto para conectar' : 'Acesse pelo celular';
-      $('remoteSetupCopy').textContent = state?.approved
-        ? 'Acesso autorizado por até uma hora. No celular, entre nesta mesma conta e toque em Conectar. Mantenha o Vexx PC aberto.'
-        : 'Vincule o Vexx PC à sua conta e autorize o acesso no painel local quando precisar.';
-      $('remoteSteps').hidden = state?.approved === true;
+      $('remoteSetupTitle').textContent = ready ? (state.control_allowed ? 'Pronto para acessar pelo celular' : 'Visualização disponível no celular') : state?.offline ? 'Abra o Vexx PC no computador' : state?.pending ? 'Autorize no aplicativo Vexx PC' : 'Prepare o acesso pelo celular';
+      $('remoteSetupCopy').textContent = ready
+        ? (state.permanent_control ? 'Controle permanente ativo para esta conta. ' : 'Acesso autorizado no aplicativo. ') + 'No celular, entre nesta mesma conta e toque em Conectar. Mantenha o Vexx PC aberto; você pode revogar o acesso a qualquer momento.'
+        : 'Instale o Vexx PC, informe seu nick e PIN e autorize visualização ou controle no aplicativo. A conexão para controlar aparece apenas no celular.';
+      $('remoteSteps').hidden = !!ready;
       $('deviceDetail').textContent = state ? state.platform + (state.offline ? ' · Vexx PC offline' : ' · Vexx PC conectado') : 'Aguardando PC Agent';
       $('remotePermit').disabled = commandBusy || !online() || !state?.capture_ready || state.approved || state.confirmation_open;
       $('remotePermit').textContent = state?.approved ? 'Acesso permitido' : state?.pending ? 'Confirme no Vexx PC…' : 'Pedir autorização no Vexx PC';
-      $('remoteConnect').disabled = commandBusy || !online() || !state?.view_allowed || !state?.capture_ready || state?.confirmation_open;
+      $('remoteConnect').disabled = !mobile || commandBusy || !ready;
       $('remoteRevoke').hidden = !(state?.approved || state?.view_allowed || state?.pending);
       $('remoteRevoke').disabled = commandBusy || !online();
       for (const id of ['keyboardButton', 'remoteEnter', 'remoteBackspace', 'remoteScrollUp', 'remoteScrollDown', 'remoteTab', 'remoteEscape', 'remoteDelete', 'remoteLeft', 'remoteRight', 'remoteKeys']) {
@@ -144,7 +145,7 @@
       } finally { commandBusy = false; if (valid(v, id)) render($('remoteAccessStatus').textContent); }
     }
     async function pullScreen() {
-      if (!connected || !mobile || !online() || !pageActive() || screenBusy) return;
+      if (!mobile || !connected || !online() || !pageActive() || screenBusy) return;
       const v = version, id = ctx.identity();
       clearTimeout(screenTimer);
       const started = performance.now();
@@ -399,7 +400,7 @@
     }, {passive:false});
     frame.addEventListener('contextmenu', ev => ev.preventDefault());
     $('remoteConnect').addEventListener('click', () => {
-      if (!mobile || !state?.view_allowed || state.confirmation_open) return;
+      if (!mobile || !online() || !state?.view_allowed || state.offline || !state.supported || !state.capture_ready || state.confirmation_open) return;
       connected = true; render(); pullScreen();
     });
     $('remoteDisconnect').addEventListener('click', () => { stop(); render(); });

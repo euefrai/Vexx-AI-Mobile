@@ -22,6 +22,7 @@ import re
 
 ABERTURA = "<tool_call>"
 FECHAMENTO = "</tool_call>"
+MARCADORES = {ABERTURA: FECHAMENTO, '<longcat_tool_call>': '</longcat_tool_call>'}
 MAX_BUFFER = 200_000
 
 _RX_NOME = re.compile(r"^\s*(?:[A-Za-z_][\w.-]*\s*[:.]?\s*)?", re.S)
@@ -76,8 +77,8 @@ def _dentro_de_codigo(prefixo: str) -> bool:
 def _prefixo_marcador(texto: str) -> int:
     """Tamanho do sufixo que pode ser o começo de `<tool_call>` (sem caixa)."""
     baixo = (texto or "").lower()
-    for n in range(min(len(ABERTURA) - 1, len(baixo)), 0, -1):
-        if ABERTURA.startswith(baixo[-n:]):
+    for n in range(min(max(map(len, MARCADORES)) - 1, len(baixo)), 0, -1):
+        if any(marker.startswith(baixo[-n:]) for marker in MARCADORES):
             return n
     return 0
 
@@ -113,11 +114,15 @@ class Sanitizador:
     def __init__(self):
         self.buffer = ""
         self.erros: list[dict] = []
+        self.contexto = ""
+        self.descartar_ate = ""
 
     def _processar(self, final: bool) -> str:
         saida: list[str] = []
         while True:
-            pos = self.buffer.lower().find(ABERTURA)
+            matches = [(self.buffer.lower().find(marker), marker) for marker in MARCADORES]
+            pos, abertura = min((m for m in matches if m[0] >= 0), default=(-1, ABERTURA))
+            fechamento = MARCADORES[abertura]
             if pos < 0:
                 if final:
                     saida.append(self.buffer)
@@ -133,15 +138,32 @@ class Sanitizador:
                 break
             prefixo = self.buffer[:pos]
             # Documentação/código que cita o marcador é conteúdo legítimo.
-            contexto = "".join(saida) + prefixo
+            contexto = self.contexto + "".join(saida) + prefixo
             if _dentro_de_codigo(contexto):
-                saida.append(self.buffer[:pos + len(ABERTURA)])
-                self.buffer = self.buffer[pos + len(ABERTURA):]
+                saida.append(self.buffer[:pos + len(abertura)])
+                self.buffer = self.buffer[pos + len(abertura):]
                 continue
             saida.append(prefixo)
-            corpo_inicio = pos + len(ABERTURA)
+            corpo_inicio = pos + len(abertura)
             resto = self.buffer[corpo_inicio:]
-            fecha = resto.lower().find(FECHAMENTO)
+            fecha = resto.lower().find(fechamento)
+            if abertura != ABERTURA:
+                # Native dialects are protocol errors, never executable tools.
+                if fecha < 0 and not final:
+                    self.buffer = self.buffer[pos:]
+                    return ''.join(saida)
+                corpo = resto[:fecha] if fecha >= 0 else resto
+                native = re.match(r'\s*([A-Za-z_][\w.:-]{0,79})', corpo)
+                is_call = fecha >= 0 or '<longcat_arg_' in corpo.lower() or bool(
+                    native and '_' in native[1])
+                if is_call:
+                    self.erros.append(_erro('tool_call_nativa_removida', native[1] if native else '',
+                                             'chamada nativa descartada'))
+                    self.buffer = resto[fecha + len(fechamento):] if fecha >= 0 else ''
+                    continue
+                saida.append(self.buffer[pos:])
+                self.buffer = ''
+                break
             if fecha >= 0:
                 self.erros.append(_classificar_corpo(resto[:fecha]))
                 self.buffer = resto[fecha + len(FECHAMENTO):]
@@ -201,15 +223,33 @@ class Sanitizador:
         if not trecho:
             return ""
         self.buffer += str(trecho)
+        if self.descartar_ate:
+            pos = self.buffer.lower().find(self.descartar_ate)
+            if pos < 0:
+                self.buffer = self.buffer[-len(self.descartar_ate):]
+                return ''
+            self.buffer = self.buffer[pos + len(self.descartar_ate):]
+            self.descartar_ate = ''
         if len(self.buffer) > MAX_BUFFER:
             # Proteção de memória: o limite de resposta normal é bem menor.
             self.erros.append(_erro("protocolo_buffer_excedido",
                                     detalhe="buffer descartado"))
-            self.buffer = self.buffer[-MAX_BUFFER:]
-        return self._processar(final=False)
+            for opening, closing in MARCADORES.items():
+                pos = self.buffer.lower().find(opening)
+                if pos >= 0 and self.buffer.lower().find(closing, pos) < 0:
+                    self.descartar_ate = closing
+                    break
+            self.buffer = ''
+            return ''
+        result = self._processar(final=False)
+        self.contexto = (self.contexto + result)[-MAX_BUFFER:]
+        return result
 
     def finalizar(self) -> tuple[str, list[dict]]:
         """Fecha o stream; devolve (texto_restante, erros_estruturados)."""
+        if self.descartar_ate:
+            self.buffer = ''
+            return '', list(self.erros)
         return self._processar(final=True), list(self.erros)
 
 

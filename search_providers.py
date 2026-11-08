@@ -235,6 +235,12 @@ def buscar_bing_news(consulta: str, limite: int = 8, timeout: float = 10.0) -> l
     return buscar_bing(consulta, limite, timeout, _path="/news/search", tipo="noticia")
 
 
+def buscar_kabum(consulta: str, limite: int = 6, timeout: float = 8.0) -> list:
+    """Public catalog discovery only; the product reader verifies every offer."""
+    import store_discovery
+    return store_discovery.search_kabum(consulta, limit=limite, timeout=timeout)
+
+
 def buscar_python_docs(consulta: str, limite: int = 6, timeout: float = 8.0) -> list:
     import python_docs_discovery
     try:
@@ -700,6 +706,8 @@ def _provedor_disponivel(nome: str, meta: dict) -> bool:
     Keyless free APIs can be disabled globally with ``JULIA_FREE_APIS=0``.
     A provider without ``classes`` (test fixtures) is still considered.
     """
+    if nome == 'kabum' and os.getenv('JULIA_NATIVE_STORE_SEARCH', '1') == '0':
+        return False
     requer = meta.get("requer")
     if requer and not os.getenv(requer, "").strip():
         return False
@@ -711,6 +719,8 @@ def _provedor_disponivel(nome: str, meta: dict) -> bool:
 
 
 PROVEDORES: dict = {
+    'kabum': {'rotulo': 'KaBuM (catálogo público)', 'classes': (CLASSE_GERAL,),
+              'tipo': 'produto', 'peso': 8.0, 'fn': buscar_kabum},
     'python-docs': {'rotulo': 'Documentação oficial Python (inventário público)',
                     'classes': (CLASSE_TECNICA,), 'tipo': 'tecnico', 'peso': 9.0, 'fn': buscar_python_docs},
     "crossref": {"rotulo": "Crossref (metadados públicos)", "classes": (CLASSE_ACADEMICA,),

@@ -426,13 +426,23 @@ def clock(text, context, now):
         except (ValueError,ZoneInfoNotFoundError):pass
     place,error=geocode(city)
     if error:return error
+    # Exact municipal identities, not a longitude-based estimate or a whole-state
+    # assumption (some Brazilian states span more than one time zone).
+    known_zones = {'5300108': 'America/Sao_Paulo', '3550308': 'America/Sao_Paulo',
+                   '2927408': 'America/Bahia', '2611606': 'America/Recife'}
+    known = known_zones.get(str(place.get('ibge_id','')))
+    zone_origin = 'localização consultada'
+    if not place.get('timezone') and known:
+        place = dict(place, timezone=known)
+        zone_origin = 'associação municipal ao fuso IANA'
     if not place.get('timezone'):
         place=dict(place,timezone=_weather_data(round(place['latitude'],2),round(place['longitude'],2),now)['timezone'])
+        zone_origin = 'Visual Crossing'
     zone=ZoneInfo(place['timezone'])
     instant=now.astimezone(zone)
     geographic_source='IBGE' if place.get('ibge_id') else '© OpenStreetMap contributors · ODbL'
     geographic_url=place.get('source_url','https://www.openstreetmap.org/copyright')
-    body=f'Em **{safe(place["label"])}**, são **{instant:%H:%M}**, dia **{instant:%d/%m/%Y}** ({safe(place["timezone"])}).\n\nHorário calculado pelo fuso IANA; localização: [{geographic_source}]({geographic_url}); fuso confirmado pela Visual Crossing.'
+    body=f'Em **{safe(place["label"])}**, são **{instant:%H:%M}**, dia **{instant:%d/%m/%Y}** ({safe(place["timezone"])}).\n\nHorário calculado pelo fuso IANA; localização: [{geographic_source}]({geographic_url}); fuso: {zone_origin}.'
     return card(body,place['label'],instant.strftime('%H:%M'),desc=instant.strftime('%d/%m/%Y')+' · '+place['timezone'],badge='Relógio do sistema')
 
 

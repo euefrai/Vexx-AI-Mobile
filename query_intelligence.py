@@ -58,7 +58,7 @@ _CURRENCIES = {'USD': r'dolares?|dolar|usd', 'BRL': r'reais|real|brl',
 # Explicit facets only. These are retrieval requirements, not factual answers
 # or an assertion that arbitrary natural language has been fully understood.
 ANSWER_FACETS = {
-    'founders': ('Fundadores', r'quem (?:a |o )?(?:fundou|criou)|fundadores?|fundador[ae]?|founded by|who (?:created|founded)'),
+    'founders': ('Fundadores', r'quem (?:a |o )?(?:fundou|criou)|fundadores?|fundador[ae]?|\bcriador(?:es)?\b|founded by|who (?:created|founded)'),
     'foundation_date': ('Data de fundação', r'quando.*(?:fundad|criad)|em que ano|data de funda|ano de funda'),
     'products': ('Produtos', r'produtos|o que.*fabrica|products'),
     'creation_date': ('Data de criação', r'\bdata de criacao\b'),
@@ -68,7 +68,7 @@ ANSWER_FACETS = {
     'return_value': ('Valor retornado', r'o que retorna|valor retornado|return value|\bretorno\b'),
     'behavior': ('Comportamento da operação', r'como (?:usar|utilizar|funciona)|\bo que faz\b|comportamento|behavior|modifica.*original|altera.*original'),
     'cancellation': ('Cancelamento da operação', r'\bcancelamento\b|\bcancellation\b'),
-    'exceptions': ('Tratamento de exceções', r'\bexcecoes\b|\bexceptions\b|\bexception handling\b'),
+    'exceptions': ('Tratamento de exceções', r'\bexce(?:coes|cao)\b|\bexceptions?\b'),
     'examples': ('Exemplos documentados', r'exemplos?|examples?'),
     'limitations': ('Limitações', r'limitacoes|restricoes|limitations?'),
     'weight': ('Peso e unidade', r'\bpeso\b|\bweight\b|\bmais leve\b'),
@@ -80,13 +80,26 @@ ANSWER_FACETS = {
     'location': ('Localização', r'onde (?:fica|se localiza)'),
     'population': ('População e referência', r'\bpopulacao\b'),
     'alternatives': ('Alternativas', r'\balternativas\b'),
-    'definition': ('Definição e finalidade', r'\bo que e\b|\bpara que serve\b|\bdiferencas? entre\b'),
+    'definition': ('Definição e finalidade', r'\bo que e\b|\bpara que serve\b|\bfinalidade\b|\benunciado\b|\bdiferencas? entre\b'),
 }
 
 
 def _research_body(text):
-    value = re.sub(r'^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda\s+)?(?:(?:sobre|por|acerca de)\s+)?', '', str(text).strip(), flags=re.I)
-    return re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure)\s+(?:profundamente\s+|a fundo\s+)?(?:sobre\s+)?', '', value, flags=re.I)
+    value = re.sub(r'^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda(?:\s*:\s*|\s+))?(?:(?:sobre|por|acerca de)\s+)?', '', str(text).strip(), flags=re.I)
+    value = re.sub(r'^investigue\s+a\s+fundo\s+(?:sobre\s+)?', '', value, flags=re.I)
+    return re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure|investigue)\s+(?:profundamente\s+|a fundo\s+)?(?:sobre\s+)?', '', value, flags=re.I)
+
+
+def _facet_subject(text):
+    """Explicit topic:facets syntax only; the original retains all constraints."""
+    body = _research_body(text)
+    head, sep, tail = body.partition(':')
+    if (not sep or re.match(r'^(?:quem|qual|quais|como|quando|onde|https?)\b',head,re.I)
+            or not any(re.search(rx, normalized(tail)) for _,rx in ANSWER_FACETS.values())):
+        return ''
+    head = re.sub(r'^(?:a\s+|o\s+)?hist[oó]ria\s+(?:de|da|do)\s+', '',head,flags=re.I)
+    head = re.sub(r'^(?:a|o)\s+', '',head.strip(),flags=re.I)
+    return re.sub(r'^linguagem\s+(?=[A-Z])', '',head)
 
 
 def _unparsed_demands(text):
@@ -101,9 +114,11 @@ def answer_requirements(text):
     norm = normalized(original)
     # Avoid inventing technical answer requirements for a gallery/search-only
     # intent, or imposing general-purpose facets on scientific research.
-    if re.search(r'\b(imagens?|fotos?|videos?|cientific\w*|papers?|estudos|artigos cientificos)\b', norm):
+    if requested_media(original) or re.search(r'\b(cientific\w*|papers?|estudos|artigos cientificos)\b', norm):
         return []
     facets = [key for key, (_, rx) in ANSWER_FACETS.items() if re.search(rx, norm)]
+    if _facet_subject(original) and re.search(r'\bfundacao\b', normalized(_research_body(original).partition(':')[2])) and 'foundation_date' not in facets:
+        facets.append('foundation_date')
     # A comparison with named aspects asks for those aspects, not an additional
     # definition of every entity. Definitions remain explicit for "o que é".
     if ('definition' in facets and len(facets) > 1
@@ -137,7 +152,7 @@ def answer_requirements(text):
     # existing Query Intelligence parser; the original remains authoritative.
     match = re.search(r'\b(?:quem (?:fundou|criou)|who (?:created|founded))\s+(?:a |o |the )?([^,?]+)', subject, re.I)
     if match:
-        subject = re.split(r'\s+(?:em que|e quando|and when|quando|e quais)\b', match[1], flags=re.I)[0]
+        subject = re.split(r'\s+(?:e\s+)?(?:em que|quando|and when|quais)\b|[.!]', match[1], flags=re.I)[0]
     else:
         causal=re.match(r'^por que (?:aconteceu|ocorreu|houve)\s+(.+?)(?:\s+e\s+o que\b|[?,]|$)',subject,re.I)
         if causal:subject=causal[1]
@@ -161,13 +176,16 @@ def answer_requirements(text):
     if place:subject=place[1]
     subject=re.split(r'\s+e\s+(?:qual\b|quais\b|quando\b|onde\b|como\b|quant[oa]s?\b|o que\b|explique\b|descreva\b|detalhe\b|compare\b|divergencias\b)',subject,maxsplit=1,flags=re.I)[0]
     compare=re.search(r'^(?:compare|entre|(?:(?:qual [eé] a|quais (?:s[aã]o )?as|a|as)\s+)?diferen[cç]as? entre)\s+(.+?)(?:\s+(?:quanto|considerando|segundo|em rela[cç][aã]o)\b|[?]|$)',comparison_text,re.I)
-    entities=[subject]
+    entities=[_facet_subject(original) or subject]
     if compare:
         section=compare[1].split('?',1)[0]
         section=re.split(r',\s*(?:qual|quais)\b',section,maxsplit=1,flags=re.I)[0]
         section=re.split(r'\s+e\s+(?:como|o que|qual|quais|explique|descreva|detalhe)\b',section,maxsplit=1,flags=re.I)[0]
         entities=[e.strip(' ,.!?') for e in re.split(r',|\s+(?:e|versus|vs\.?)\s+',section,flags=re.I) if e.strip(' ,.!?')]
         if not 2<=len(entities)<=4:entities=[subject]
+        entities=[re.sub(r'\s+(?:no|em)\s+Python\b.*$', '',entity,flags=re.I) for entity in entities]
+        if len(operations)>=2:
+            entities=operations[:4]
     if api_names and set(facets) & {'cancellation', 'exceptions'}:
         entities = api_names[:4]
     entities = [entity for entity in entities if entity and normalized(entity) not in ('na', 'no', 'nas', 'nos', 'em', 'de', 'do', 'da', 'o', 'a')]
@@ -269,9 +287,16 @@ def retrieval_context(original):
     entity = requirements[0]['entity'] if requirements else ''
     return {'original_request': str(original or ''), 'research_request': text,
             'entity': entity, 'requirements': requirements, 'guarded': guarded,
-            'source_preference': 'documentação oficial' if re.search(
-                r'documentacao oficial', normalized(text)) else '',
+            'source_preference': ('documentação oficial' if re.search(
+                r'documentacao oficial', normalized(text)) else 'fontes oficiais' if re.search(
+                r'fontes? oficiais', normalized(text)) else 'fontes primárias' if re.search(
+                r'fontes? primarias', normalized(text)) else ''),
             'presentation_preferences': profile['presentation_preferences']}
+
+
+def _with_source_preference(query, preference):
+    marker=r'\bprimari[ao]s?\b' if 'primari' in normalized(preference) else r'\boficia(?:l|is)\b'
+    return str(query)+' '+preference if preference and not re.search(marker,normalized(query)) else query
 
 
 def context_subqueries(original, fallback, limit=4):
@@ -283,7 +308,7 @@ def context_subqueries(original, fallback, limit=4):
     if requirements and context['entity']:
         queries = [requirement_query(r, text) for r in requirements]
         if context['source_preference']:
-            queries = [q + ' ' + context['source_preference'] for q in queries]
+            queries = [_with_source_preference(q,context['source_preference']) for q in queries]
         return list(dict.fromkeys(queries))[:max(1, limit)]
     # Splitting unknown proper names or presentation tails is unsafe. The
     # existing independent-topic split remains valid for e.g. café e chá.
@@ -336,12 +361,16 @@ def topic_profile(text):
                 'organization' if re.search(r'\bempresa\b', normalized(original)) else 'unresolved_named_entity')
         entities.append({'name': name, 'kind': kind, 'resolution': 'explicit_text_not_verified'})
     requirements = answer_requirements(original)
+    explicit_subject = _facet_subject(original)
+    if explicit_subject:
+        value = explicit_subject
+        required += list(dict.fromkeys(r['description'].lower() for r in requirements))
     natural_question = bool(re.search(r'\b(?:o que (?:e|faz|retorna)|para que serve|diferencas? entre)\b', normalized(original)))
-    reorder = bool(re.search(r'quem fundou|quais foram as causas',normalized(original)) or (
+    reorder = bool(re.search(r'quem (?:fundou|criou)|quais foram as causas',normalized(original)) or (
         re.search(r'como (?:usar|utilizar|funciona)',normalized(original)) and re.search(r'\w+\.\w+',original)))
     if requirements and requirements[0]['entity'] and (reorder or natural_question):
         value = ' e '.join(dict.fromkeys(r['entity'] for r in requirements))
-        if natural_question:
+        if natural_question or reorder:
             # Move the parsed subject before operation words, retaining every
             # demand the deterministic facet parser could not interpret.
             required += list(dict.fromkeys(r['description'].lower() for r in requirements))
@@ -349,7 +378,9 @@ def topic_profile(text):
             source_clause = re.search(r'\bdocumenta[cç][aã]o\s+oficial(?:\s+d[eo]\s+.+?)?(?=\s+(?:o que|como|para que)\b|[,.!?]|$)', original, re.I)
             if source_clause:
                 required.append(source_clause[0])
-    focused = ' '.join(x for x in (value, ' '.join(required if natural_question else required[:1]), preference) if x).strip()
+    if re.search(r'\blinguagem\b', normalized(original)) and 'linguagem' not in required:
+        required.append('linguagem')
+    focused = ' '.join(x for x in (value, ' '.join(required if natural_question or explicit_subject or reorder else required[:1]), preference) if x).strip()
     # Discovery can reorder a noun phrase, but must not silently drop a
     # negative/budget/comparison suffix that this deterministic parser cannot model.
     guarded = bool(re.search(r'\b(?:nao|exceto|exclua|sem|ate|abaixo|acima|compare|versus)\b|r\$|\bvs\b', normalized(original))
@@ -456,7 +487,10 @@ def analyze(text, now=None, timezone_name='America/Bahia'):
                               window_inferred=True)
         # Only remove terminal presentation instructions with generic objects.
         # Comparisons naming entities, exclusions and budgets remain search text.
-        presentation = r'\s+(?:e\s+)?(?:compare|resuma|destaque)\s+(?:os acontecimentos(?: mais relevantes)?|os resultados|as noticias|os destaques|os pontos principais)\s*(?=[.!?]|$)'
+        presentation = (r'\s+(?:e\s+)?(?:(?:compare|resuma|destaque)\s+'
+            r'(?:os acontecimentos(?: mais relevantes)?|os resultados|as noticias|os destaques|os pontos principais)|'
+            r'(?:mostre|exiba|apresente|liste|inclua|cite)\s+(?:(?:as?|os?)\s+)?'
+            r'(?:fontes|links|referencias)(?:\s+(?:consultadas|utilizadas|originais|diretos))?)\s*(?=[.!?]|$)')
         boundary = r'(?=\s+(?:nos|nas|na ultima|ultimos|ultimas|proximos|proximas|recentemente|hoje|ontem|anteontem|sobre)\b|' + presentation + r'|[,.!?]|$)'
         location = re.search(r'\bem\s+(.+?)'+boundary, t)
         if not location:
@@ -577,8 +611,14 @@ def constrain_discovery(query, request, *, lock_context=False):
                                    for r in context['requirements'])
           and normalized(context['entity']) not in normalized(query)):
         query = context['entity'] + ' ' + str(query)
-    if context['source_preference'] and 'oficial' not in normalized(query):
-        query = str(query) + ' ' + context['source_preference']
+    query = _with_source_preference(query,context['source_preference'])
+    # Keep a disambiguating category when an aspect-only query is generated.
+    # This prevents a language's name becoming a game or film search.
+    if re.search(r'\blinguagem\b', normalized(original)) and not re.search(r'\blinguagem\b', normalized(query)):
+        query = str(query) + ' linguagem'
+    if (re.search(r'\bpython\b', normalized(original)) and re.search(r'\b\w+(?:\.\w+)+\b',original)
+            and not re.search(r'\b(?:python|asyncio)\b',normalized(query))):
+        query = str(query) + ' Python'
     if request.get('domain') != 'news': return query
     params=request.get('parameters') or {}
     missing=[]

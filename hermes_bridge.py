@@ -110,6 +110,15 @@ def _mapear_http(exc: urllib.error.HTTPError, model: str) -> BridgeErro:
     return BridgeErro(f"Falha HTTP {exc.code}.", "http", detalhe)
 
 
+class ModelCatalog(list):
+    """String IDs remain backwards compatible; retain declared capabilities."""
+    def __init__(self, records):
+        super().__init__(m['id'] for m in records)
+        self.metadata = {m['id']: {k: m[k] for k in (
+            'capabilities', 'supportedGenerationMethods', 'output_modalities', 'type') if k in m}
+            for m in records}
+
+
 def listar_modelos(base: str, timeout: float = 10.0, api_key: str = "",
                    hosts: tuple = ()) -> list:
     url = _base(base, api_key, hosts)
@@ -126,8 +135,8 @@ def listar_modelos(base: str, timeout: float = 10.0, api_key: str = "",
                          "Rode 'hermes proxy start'.", "indisponivel") from None
     if not isinstance(dados, dict) or not isinstance(dados.get("data"), list):
         raise BridgeErro("Resposta /v1/models em formato inesperado.", "formato")
-    ids = [m.get("id") for m in dados["data"]
-           if isinstance(m, dict) and isinstance(m.get("id"), str)]
+    ids = ModelCatalog([m for m in dados['data']
+                        if isinstance(m, dict) and isinstance(m.get('id'), str)])
     if not ids:
         raise BridgeErro("Proxy não listou nenhum modelo.", "vazio")
     return ids
@@ -200,12 +209,15 @@ class AcumuladorSSE:
 
 def chat_complete(base: str, model: str, messages: list,
                   timeout: float = 120.0, max_tokens: int = 2000,
-                  api_key: str = "", hosts: tuple = ()) -> dict:
+                  api_key: str = "", hosts: tuple = (), response_format=None,
+                  reasoning_effort=None) -> dict:
     url = _base(base, api_key, hosts)
     inicio = time.monotonic()
     try:
         req = _req(url + "/chat/completions",
-                   {"model": model, "messages": messages, "max_tokens": max_tokens},
+                   {"model": model, "messages": messages, "max_tokens": max_tokens,
+                    **({'response_format':response_format} if response_format else {}),
+                    **({'reasoning_effort':reasoning_effort} if reasoning_effort else {})},
                    timeout, api_key)
         with urllib.request.urlopen(req, timeout=timeout) as r:
             dados = json.loads(r.read().decode("utf-8"))
@@ -229,6 +241,9 @@ def chat_complete(base: str, model: str, messages: list,
         log.warning("TOOL_PROTOCOL %s ferramenta=%s: %s", erro.get("codigo"),
                     erro.get("ferramenta") or "?", erro.get("detalhe") or "")
     if not texto.strip():
+        message=choices[0].get('message') if isinstance(choices,list) and choices and isinstance(choices[0],dict) else None
+        if isinstance(message,dict) and message.get('refusal'):
+            raise BridgeErro('O modelo recusou a solicitação.','recusa')
         if erros:
             raise BridgeErro("O modelo emitiu apenas uma chamada interna de ferramenta; "
                              "nada foi executado nem exibido.", "protocolo_ferramenta")
@@ -359,7 +374,7 @@ def _circuito_registrar(base: str, ok: bool) -> None:
 
 def tentar_modelos(base: str, modelos: list, messages: list,
                    timeout_por_tentativa: float = 60.0,
-                   max_tokens: int = 2000) -> dict:
+                   max_tokens: int = 2000, response_format=None, reasoning_effort=None) -> dict:
     """Tenta modelos em ordem até a primeira resposta não vazia.
 
     Para em `auth` (credencial vale para todos). Backoff 1s/2s/4s entre
@@ -378,15 +393,23 @@ def tentar_modelos(base: str, modelos: list, messages: list,
         inicio = time.monotonic()
         try:
             res = chat_complete(base, modelo, messages,
-                                timeout=timeout_por_tentativa, max_tokens=max_tokens)
+                                timeout=timeout_por_tentativa, max_tokens=max_tokens,
+                                **({'response_format':response_format} if response_format else {}),
+                                **({'reasoning_effort':reasoning_effort} if reasoning_effort else {}))
             _circuito_registrar(base, True)
             res["model_usado"] = modelo
+            res["fallback_usado"] = (i > 0)
             res["tentativas"] = tentativas
             return res
         except BridgeErro as exc:
             tentativas.append({"model": modelo, "codigo": exc.codigo,
                                "latencia_s": round(time.monotonic() - inicio, 2)})
             _circuito_registrar(base, False)
+            try:
+                from pc_modules.db_core import registrar_cooldown_modelo
+                registrar_cooldown_modelo(modelo, 180.0)
+            except Exception:
+                pass
             if exc.codigo == "auth":
                 raise BridgeErro(str(exc) + " (fallback interrompido: vale para todos).",
                                  "auth", exc.detalhe) from None
@@ -443,12 +466,18 @@ def chat_stream_fb(base: str, modelos: list, messages: list, on_delta,
                               timeout, max_tokens)
             _circuito_registrar(base, True)
             res["model_usado"] = modelo
+            res["fallback_usado"] = (i > 0)
             res["tentativas"] = tentativas
             return res
         except BridgeErro as exc:
             tentativas.append({"model": modelo, "codigo": exc.codigo,
                                "latencia_s": round(time.monotonic() - inicio, 2)})
             _circuito_registrar(base, False)
+            try:
+                from pc_modules.db_core import registrar_cooldown_modelo
+                registrar_cooldown_modelo(modelo, 180.0)
+            except Exception:
+                pass
             if n_deltas[0] > 0 or exc.codigo == "auth":
                 raise  # meio do stream ou auth: sem troca silenciosa
             if len(fila) == 1:

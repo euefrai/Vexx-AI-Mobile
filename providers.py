@@ -11,11 +11,13 @@ caímos na curadoria se a listagem falhar (Anthropic não tem listagem —
 use os IDs do console).
 """
 import json
+import hashlib
 from concurrent.futures import ThreadPoolExecutor
 import logging
 import os
 import re
 import time
+import threading
 import urllib.error
 import urllib.request
 
@@ -26,7 +28,81 @@ from hermes_bridge import BridgeErro
 
 log = logging.getLogger("JULIA-providers")
 
+_CATALOGS = {}
+_CATALOG_LOCK = threading.Lock()
+CATALOG_TTL = 300
+
+
+def supports_chat(model_id, metadata=None):
+    """Declared capability first; conservative exclusion when metadata is absent."""
+    if model_id == "vexx-qwen-2.5-3b":
+        return True
+    meta = metadata if isinstance(metadata, dict) else {}
+    capabilities = meta.get('capabilities')
+    if isinstance(capabilities, dict):
+        for key in ('chat', 'text_generation'):
+            if type(capabilities.get(key)) is bool:
+                return capabilities[key]
+    methods = meta.get('supportedGenerationMethods')
+    if isinstance(methods, list) and methods:
+        return any(m in ('generateContent', 'streamGenerateContent', 'chat', 'completions') for m in methods)
+    outputs = meta.get('output_modalities')
+    if isinstance(outputs, list) and outputs:
+        return 'text' in [str(v).lower() for v in outputs]
+    kind = str(meta.get('type') or '').lower()
+    if kind in ('embedding', 'rerank', 'audio', 'image', 'speech'):
+        return False
+    return not re.search(r'(?:^|[/_.:-])(?:embeddings?|rerank\w*|whisper\w*|tts|'
+                         r'transcrib\w*|speech|audio|realtime|live|lyria\w*|aqa|'
+                         r'sentence-transformers|gte|image)(?:$|[/_.:-])', str(model_id).lower())
+
+
+def _catalog_key(provider, proxy=''):
+    # Configuration changes invalidate cached availability without retaining keys.
+    credential = chave(provider) if provider != 'hermes' else ''
+    return provider, hashlib.sha256((proxy + '\0' + credential).encode()).digest()
+
+
+def _remember_catalog(provider, ids, proxy=''):
+    with _CATALOG_LOCK:
+        # At most one current configuration per provider; no bodies or prompts.
+        _CATALOGS[provider] = (_catalog_key(provider, proxy), time.monotonic(), frozenset(ids))
+
+
+def selection_error(model, proxy=''):
+    """No network on the message path; reject only known unavailable selections."""
+    if model in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b"):
+        return None
+    provider, mid = dividir(model)
+    unavailable = not supports_chat(mid)
+    with _CATALOG_LOCK:
+        row = _CATALOGS.get(provider)
+        if row and row[0] == _catalog_key(provider, proxy if provider == 'hermes' else '') \
+                and time.monotonic() - row[1] < CATALOG_TTL:
+            # The accepted catalog already applied declared capabilities. A
+            # text-capable multimodal model may legitimately contain "audio".
+            unavailable = mid not in row[2]
+    if unavailable:
+        return {'codigo': 'modelo_indisponivel', 'error':
+                'O modelo selecionado não está disponível para chat. Abra Provedores de IA e escolha outro modelo.'}
+    return None
+
+
+def cached_default(proxy, fallback):
+    """Resolve an implicit default from a fresh free catalog without new I/O."""
+    with _CATALOG_LOCK:
+        row = _CATALOGS.get('hermes')
+        if (row and row[0] == _catalog_key('hermes', proxy)
+                and time.monotonic() - row[1] < CATALOG_TTL and fallback not in row[2]):
+            return next(iter(sorted(i for i in row[2] if i.endswith(':free'))), fallback)
+    return fallback
+
 PROVIDERS = {
+    "vexx": {
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+        "key_env": None, "api": "vexx_qwen",
+        "modelos": ["vexx-qwen-2.5-3b"],
+    },
     "hermes": {
         "label": "Hermes (proxy local)", "key_env": None, "api": "openai",
         "modelos": [],
@@ -160,10 +236,10 @@ def chave_origem(nome: str) -> str:
 
 
 def configurados() -> list:
-    """Provedores utilizáveis agora: hermes sempre + quem tem chave."""
-    out = ["hermes"]
+    """Provedores utilizáveis agora: vexx e hermes sempre + quem tem chave."""
+    out = ["vexx", "hermes"]
     for nome, d in PROVIDERS.items():
-        if nome != "hermes" and chave(nome):
+        if nome not in ("vexx", "hermes") and chave(nome):
             out.append(nome)
     return out
 
@@ -171,7 +247,9 @@ def configurados() -> list:
 def dividir(modelo: str) -> tuple:
     """'gemini/gemini-2.0-flash' → ('gemini', 'gemini-2.0-flash').
     Sem prefixo conhecido → ('hermes', modelo) (legado)."""
-    texto = str(modelo or "")
+    texto = str(modelo or "").strip()
+    if texto in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b") or texto.startswith("vexx/"):
+        return "vexx", "vexx-qwen-2.5-3b"
     if "/" in texto:
         prov, resto = texto.split("/", 1)
         if prov.lower() in PROVIDERS and resto:
@@ -188,7 +266,11 @@ def _modelos_vivos_openai(nome: str, d: dict, timeout: float = 8.0) -> tuple:
     except BridgeErro as exc:
         log.warning("provedor %s: listagem falhou (%s)", nome, exc.codigo)
         return None, exc.codigo
-    return (sorted({i for i in ids if isinstance(i, str) and i}, key=lambda mid: (not mid.endswith(":free"), mid))[:200] or None), ""
+    metadata = getattr(ids, 'metadata', {})
+    filtered = sorted({i for i in ids if isinstance(i, str) and i
+                       and supports_chat(i, metadata.get(i))}, key=lambda mid: (not mid.endswith(':free'), mid))
+    _remember_catalog(nome, filtered)
+    return hermes_bridge.ModelCatalog([{'id': i, **metadata.get(i, {})} for i in filtered[:200]]), ''
 
 
 def listar_tudo(proxy_cfg: str = "") -> dict:
@@ -199,7 +281,11 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
         if nome == "hermes":
             try:
                 ids = hermes_bridge.listar_modelos(proxy_cfg or hermes_bridge.DEFAULT_PROXY_URL)
-                return sorted(set(ids), key=lambda mid: (not mid.endswith(":free"), mid))[:500], ""
+                metadata = getattr(ids, 'metadata', {})
+                filtered = sorted({i for i in ids if isinstance(i, str) and i
+                    and supports_chat(i, metadata.get(i))}, key=lambda mid: (not mid.endswith(':free'), mid))
+                _remember_catalog(nome, filtered, proxy_cfg or hermes_bridge.DEFAULT_PROXY_URL)
+                return hermes_bridge.ModelCatalog([{'id': i, **metadata.get(i, {})} for i in filtered[:500]]), ''
             except BridgeErro as exc:
                 log.warning("hermes listar falhou (%s)", exc.codigo)
                 return [], exc.codigo
@@ -210,8 +296,21 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
     with ThreadPoolExecutor(max_workers=len(PROVIDERS)) as pool:
         pending = {nome: pool.submit(descobrir, nome, d) for nome, d in PROVIDERS.items()}
         discoveries = {nome: task.result() for nome, task in pending.items()}
-    itens, provs = [], []
+    itens = [{
+        "id": "vexx-qwen-2.5-3b",
+        "provider": "vexx",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+        "free": True,
+    }]
+    provs = [{
+        "id": "vexx",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+        "configured": True,
+        "source": "hf_space"
+    }]
     for nome, d in PROVIDERS.items():
+        if nome == "vexx":
+            continue
         conf = True if nome == "hermes" else bool(chave(nome))
         prov = {"id": nome, "label": d["label"], "configured": conf}
         origem = chave_origem(nome) if conf else ""
@@ -222,7 +321,9 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
         if auth_ruim:
             prov["auth_error"] = True
         provs.append(prov)
-        for mid in (vivos if vivos else d["modelos"]):
+        for mid in (vivos if vivos is not None else d["modelos"]):
+            if not supports_chat(mid, getattr(vivos, 'metadata', {}).get(mid)):
+                continue
             itens.append({"id": mid if nome == "hermes" else f"{nome}/{mid}",
                           "provider": nome, "label": d["label"],
                           "free": mid.endswith(":free"),
@@ -231,26 +332,35 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
                           **({"auth_error": True} if auth_ruim else {})})
     # Up to 500 proxy models + 200 per external provider. Do not silently cut
     # off the providers at the end of the registry after only 500 total IDs.
+    default = "vexx-qwen-2.5-3b"
     return {"models": [i["id"] for i in itens], "items": itens,
-            "default": hermes_bridge.DEFAULT_MODEL, "providers": provs}
+            "default": default, "providers": provs}
 
 
 # ── Chamadas ──────────────────────────────────────────────────────────
 
 def _para_openai(messages: list) -> list:
-    return [{"role": m.get("role", "user"), "content": str(m.get("content", ""))[:12000]}
-            for m in messages if isinstance(m, dict)]
+    # Do not cut JSON evidence or instructions mid-message. Bound the request
+    # explicitly, before transport, so oversized input fails without corruption.
+    result, total = [], 0
+    for m in messages:
+        if not isinstance(m, dict):
+            continue
+        content = str(m.get("content", ""))
+        total += len(content)
+        if len(content) > 64000 or total > 128000 or len(result) >= 64:
+            raise BridgeErro("Contexto excede o limite de envio ao provedor.", "pedido")
+        result.append({"role": m.get("role", "user"), "content": content})
+    return result
 
 
 def _para_anthropic(messages: list) -> tuple:
     sistema, resto = "", []
-    for m in messages:
-        if not isinstance(m, dict):
-            continue
+    for m in _para_openai(messages):
         if m.get("role") == "system" and not sistema:
-            sistema = str(m.get("content", ""))[:12000]
+            sistema = m["content"]
         elif m.get("role") in ("user", "assistant"):
-            resto.append({"role": m["role"], "content": str(m.get("content", ""))[:12000]})
+            resto.append(m)
     if not resto:
         raise BridgeErro("Sem mensagem de usuário.", "pedido")
     return sistema, resto
@@ -262,6 +372,20 @@ def chat_complete(prov: str, model_id: str, messages: list,
     d = definicao(prov)
     if d is None:
         raise BridgeErro(f"Provedor '{prov}' desconhecido.", "provedor")
+    if prov == "vexx" or model_id == "vexx-qwen-2.5-3b":
+        import qwen_llm_service
+        inicio = time.monotonic()
+        res = qwen_llm_service.gerar_resposta_qwen(messages, max_tokens=max_tokens, timeout=timeout)
+        if res.get("status") == "fallback" or not (res.get("resposta") or "").strip():
+            raise BridgeErro("Qwen Space em hibernação ou indisponível.", "indisponivel")
+        texto = res.get("resposta") or ""
+        return {
+            "texto": texto[:hermes_bridge.MAX_TEXTO],
+            "truncada": len(texto) > hermes_bridge.MAX_TEXTO,
+            "latencia_s": round(time.monotonic() - inicio, 2),
+            "tool_calls": res.get("tool_calls", []),
+            "queries_pesquisa": res.get("queries_pesquisa", [])
+        }
     if prov == "hermes":
         return hermes_bridge.chat_complete(
             proxy or hermes_bridge.DEFAULT_PROXY_URL, model_id, messages,
@@ -347,6 +471,24 @@ def chat_stream(prov: str, model_id: str, messages: list, on_delta,
     d = definicao(prov)
     if d is None:
         raise BridgeErro(f"Provedor '{prov}' desconhecido.", "provedor")
+    if prov == "vexx" or model_id == "vexx-qwen-2.5-3b":
+        import qwen_llm_service
+        inicio = time.monotonic()
+        res = qwen_llm_service.gerar_resposta_qwen(messages, max_tokens=max_tokens, timeout=timeout)
+        if res.get("status") == "fallback" or not (res.get("resposta") or "").strip():
+            raise BridgeErro("Qwen Space em hibernação ou indisponível.", "indisponivel")
+        texto = res.get("resposta") or ""
+        if callable(on_delta):
+            try:
+                on_delta(1, texto)
+            except TypeError:
+                on_delta(texto)
+        return {
+            "texto": texto[:hermes_bridge.MAX_TEXTO],
+            "truncada": len(texto) > hermes_bridge.MAX_TEXTO,
+            "latencia_s": round(time.monotonic() - inicio, 2),
+            "chunks": 1
+        }
     if prov == "hermes":
         return hermes_bridge.chat_stream(
             proxy or hermes_bridge.DEFAULT_PROXY_URL, model_id, messages, on_delta,
@@ -465,7 +607,7 @@ def tentar_modelos(modelos: list, messages: list, timeout_por_tentativa: float =
     tentativas = []
     for i, modelo in enumerate(fila):
         if i:
-            time.sleep(min(2 ** (i - 1), 4))
+            time.sleep(0.3)
         inicio = time.monotonic()
         try:
             prov, mid = dividir(modelo)
@@ -473,11 +615,19 @@ def tentar_modelos(modelos: list, messages: list, timeout_por_tentativa: float =
                                 timeout=timeout_por_tentativa, max_tokens=max_tokens,
                                 proxy=proxy)
             res["model_usado"] = modelo
+            res["fallback_usado"] = (i > 0)
             res["tentativas"] = tentativas
             return res
         except BridgeErro as exc:
             tentativas.append({"model": modelo, "codigo": exc.codigo,
                                "latencia_s": round(time.monotonic() - inicio, 2)})
+            try:
+                from pc_modules.db_core import registrar_cooldown_modelo
+                registrar_cooldown_modelo(modelo, 180.0)
+            except Exception:
+                pass
+            log.warning("MODEL_FAILOVER modelo=%s falhou com codigo=%s. Tentando próximo modelo...",
+                        modelo, exc.codigo)
             if exc.codigo in ("auth", "sem_chave"):
                 # Credencial vale para todos os modelos do MESMO provedor.
                 # Se ainda há candidato de OUTRO provedor, seguimos a fila.
@@ -504,7 +654,7 @@ def chat_stream_fb(modelos: list, messages: list, on_delta,
     tentativas = []
     for i, modelo in enumerate(fila):
         if i:
-            time.sleep(min(2 ** (i - 1), 4))
+            time.sleep(0.3)
         inicio = time.monotonic()
         n_deltas = [0]
 
@@ -517,6 +667,7 @@ def chat_stream_fb(modelos: list, messages: list, on_delta,
             res = chat_stream(prov, mid, messages, _emit, deve_parar,
                               timeout, max_tokens, proxy=proxy)
             res["model_usado"] = modelo
+            res["fallback_usado"] = (i > 0)
             res["tentativas"] = tentativas
             return res
         except BridgeErro as exc:
@@ -524,6 +675,13 @@ def chat_stream_fb(modelos: list, messages: list, on_delta,
                                "latencia_s": round(time.monotonic() - inicio, 2)})
             if n_deltas[0] > 0:
                 raise
+            try:
+                from pc_modules.db_core import registrar_cooldown_modelo
+                registrar_cooldown_modelo(modelo, 180.0)
+            except Exception:
+                pass
+            log.warning("MODEL_FAILOVER stream modelo=%s falhou com codigo=%s. Tentando próximo da fila...",
+                        modelo, exc.codigo)
             if exc.codigo in ("auth", "sem_chave"):
                 restantes = fila[i + 1:]
                 if not any(dividir(r)[0] != dividir(modelo)[0] for r in restantes):

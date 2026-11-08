@@ -176,7 +176,20 @@ def source_card(item: dict, used=False) -> dict:
     full=bool(item.get('full_text_fetched'))
     vertical=item.get('vertical') or {}
     data=vertical.get('data') or {}
+    observed_offer = ''
     details=['Disponibilidade atual não confirmada'] if vertical.get('kind') in ('air_travel','bus_travel') else []
+    if read and item.get('cache_state') in ('fresh_cache','revalidated'):
+        details.append('Conteúdo recuperado em '+_text(item.get('fetched_at'),40)
+                       +'; confirmado em '+_text(item.get('checked_at'),40))
+    if read and item.get('product_offer'):
+        import research_product_evidence
+        offer = item['product_offer']
+        if research_product_evidence.valid(offer, item.get('url', '')):
+            import shopping
+            observed_offer = research_product_evidence.summary(offer, item.get('url', ''))
+            details.append('Preço observado no JSON-LD: '+shopping.formatar_preco(offer['price'], offer['currency'])
+                           +' · leitura '+offer['observed_at'])
+            details.append('Disponibilidade declarada: '+research_product_evidence.availability_label(offer))
     aspects = (item.get('answerability') or {}).get('aspects') or []
     if aspects:
         details.append('Aspectos com passagem: '+', '.join(str(a) for a in aspects[:6]))
@@ -193,7 +206,7 @@ def source_card(item: dict, used=False) -> dict:
     passages = item.get('answer_passages') or []
     excerpt = next((p.get('text') for p in passages[:8]
                     if isinstance(p, dict) and p.get('text')), '') if read else ''
-    excerpt = excerpt or item.get('trecho') or ''
+    excerpt = observed_offer or excerpt or item.get('trecho') or ''
     labels={'location':'Local','organizer':'Organizador','provider':'Operadora','airline':'Companhia',
             'departureAirport':'Origem','departureBusStop':'Origem','arrivalAirport':'Destino','arrivalBusStop':'Destino',
             'departureTime':'Partida declarada','arrivalTime':'Chegada declarada'}
@@ -207,8 +220,8 @@ def source_card(item: dict, used=False) -> dict:
             'dominio':item.get('dominio'),'data':item.get('publicado_em') or str(item.get('year') or ''),
             'origem_declarada':item.get('origem_declarada') or '',
             'data_evento':data.get('event_date') or '', 'trecho':melhor_trecho(str(excerpt), '', 300),
-            'tipo':item.get('publication_type') or {'news':'Notícia','events':'Evento declarado','air_travel':'Voo · informações encontradas','bus_travel':'Ônibus · informações encontradas'}.get(vertical.get('kind'),item.get('tipo','Fonte')),
-            'escopo':'Página não lida; sem suporte factual' if not read else ('Texto de HTML aberto recuperado; extração limitada' if item.get('full_text_format')=='html' else 'Texto de PDF aberto recuperado; extração limitada') if full else 'Somente resumo; texto completo não lido' if abstract else 'Texto recuperado',
+            'tipo':'Oferta' if observed_offer else item.get('publication_type') or {'news':'Notícia','events':'Evento declarado','air_travel':'Voo · informações encontradas','bus_travel':'Ônibus · informações encontradas'}.get(vertical.get('kind'),item.get('tipo','Fonte')),
+            'escopo':'Página não lida; sem suporte factual' if not read else 'Oferta estruturada lida (JSON-LD)' if item.get('content_scope')=='structured_product_offer' else ('Texto de HTML aberto recuperado; extração limitada' if item.get('full_text_format')=='html' else 'Texto de PDF aberto recuperado; extração limitada') if full else 'Somente resumo; texto completo não lido' if abstract else 'Texto recuperado',
             'relacao':'Trecho ligado a uma afirmação' if used and read else 'Fonte de contexto',
             'status':'utilizada' if used and read else 'aberta' if read else 'encontrada',
             'leitura':('PARTIAL' if abstract or full else 'READ') if read else 'UNAVAILABLE' if item.get('access_state')=='blocked' else 'FOUND',
@@ -235,6 +248,46 @@ def contextual_fence(sources: list) -> str:
     message={'version':jdui.VERSION,'blocks':[{'type':'ui','component':'sources','props':{'title':'Fontes e dados recuperados','items':[source_card(s) for s in selected[:6]]}}]}
     ok,normalized,_=jdui.validar_mensagem(message)
     return '\n\n```jdui\n'+json.dumps(normalized,ensure_ascii=False)+'\n```' if ok else ''
+
+
+def chat_blocks(view, media_intent=False, limit=10000):
+    """Fit the chat envelope without dropping a whole group of real sources."""
+    import copy
+    import json
+    blocks=copy.deepcopy([b for b in view.get('blocks',[]) if b.get('type')=='text'
+        or b.get('component')=='sources' or (b.get('component')=='media' and media_intent)
+        or (b.get('component')=='table' and b.get('props',{}).get('title')=='Aspectos da pergunta')])
+    for block in blocks:
+        if block.get('component')=='sources':
+            items=block.get('props',{}).get('items',[])
+            read=[item for item in items if item.get('leitura') in ('READ','PARTIAL')]
+            if read:block['props']['items']=read
+    while blocks:
+        valid, normalized, _=jdui.validar_mensagem({'version':jdui.VERSION,'blocks':blocks})
+        if not valid:return []
+        size=len('Resultado da pesquisa\n\n```jdui\n'+json.dumps(normalized,ensure_ascii=False)+'\n```')
+        if size<=limit:return blocks
+        # Keep one usable source while reducing cards or other optional widgets.
+        group=next((b for b in reversed(blocks) if b.get('component')=='sources'
+                    and len(b.get('props',{}).get('items',[]))>1),None)
+        if group is not None:
+            group['props']['items'].pop()
+            continue
+        removable=next((b for b in reversed(blocks) if b.get('type')=='ui'
+                        and b.get('component')!='sources'),None)
+        if removable is None:
+            card=next((item for b in reversed(blocks) if b.get('component')=='sources'
+                       for item in reversed(b.get('props',{}).get('items',[])) if item.get('detalhes')),None)
+            if card is not None:
+                card['detalhes'].pop()
+                continue
+            # An oversized source must never suppress the factual answer itself.
+            blocks=[b for b in blocks if b.get('type')=='text']
+            valid,normalized,_=jdui.validar_mensagem({'version':jdui.VERSION,'blocks':blocks})
+            size=len('Resultado da pesquisa\n\n```jdui\n'+json.dumps(normalized,ensure_ascii=False)+'\n```')
+            return blocks if valid and size<=limit else []
+        blocks.remove(removable)
+    return []
 
 
 def strip_model_research_cards(text: str) -> str:
@@ -332,6 +385,25 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
         # Keep all discovery metadata in the job/export, but do not turn a
         # paper's navigation/references into a second gallery of unread files.
         candidatos=[entry for entry in candidatos if entry[0]!='media']
+    rejeicoes = [r for r in ((resumo.get('usados') or {}).get('rejection_reasons') or [])
+                 if isinstance(r, dict)][:60]
+    if rejeicoes:
+        contagem = {}
+        for item in rejeicoes:
+            motivo = _text(item.get('reason') or item.get('stage') or 'REJECTED', 120)
+            contagem[motivo] = contagem.get(motivo, 0) + 1
+        linhas_rej = ['Motivos registrados para candidatos que não viraram evidência:']
+        for motivo, total in sorted(contagem.items(), key=lambda par: (-par[1], par[0]))[:8]:
+            linhas_rej.append(f'- **{motivo}**: {total} candidato(s)')
+        exemplos = [item for item in rejeicoes if item.get('domain')][:6]
+        if exemplos:
+            linhas_rej.append('\nExemplos (domínio · motivo):')
+            for item in exemplos:
+                linhas_rej.append(
+                    f"- {_text(item.get('domain'), 120)} · {_text(item.get('reason'), 120)}")
+        candidatos.append(('accordion', {'items': [{
+            'title': f'Fontes descartadas ({len(rejeicoes)})',
+            'markdown': '\n'.join(linhas_rej)[:2800]}]}))
     priority=['media','sources','evidence'] if media_intent else ['evidence','table','sources','media']
     if media_intent or source_items:
         candidatos.sort(key=lambda entry: priority.index(entry[0]) if entry[0] in priority else 10)
@@ -354,15 +426,27 @@ def build_view(resumo: dict, evidencias: list = None, hypotheses: list = None) -
     outcome = (resumo.get('usados') or {}).get('research_outcome', {})
     if resumo.get('status') == 'concluida' and outcome.get('state') == 'partial':
         status_rot['concluida'] = 'etapas finalizadas; resultado com lacunas'
+    evidencias_total = int(resumo.get('evidencias') or 0)
+    fontes_lidas = int(outcome.get('read_sources') or 0)
+    terminal = resumo.get('status') in ('concluida', 'interrompida')
+    sem_evidencia = (terminal and outcome.get('state') != 'blocked'
+                     and (evidencias_total == 0
+                          or (bool(outcome) and fontes_lidas == 0)))
+    if sem_evidencia:
+        atual = status_rot.get(resumo.get('status'), '')
+        status_rot[resumo.get('status')] = (atual + ' — sem evidências lidas').strip(' —')
     coverage = {'partial': 'parcial; há dados pendentes',
                 'blocked': 'bloqueada pelo provedor; evidências preservadas; retomada explícita disponível',
                 'complete': 'etapas concluídas no escopo recuperado; consulte as limitações'}
+    cobertura = ('nenhuma fonte lida; resultado não conclusivo' if sem_evidencia
+                 else coverage.get(outcome.get('state'),
+                                   'consulte evidências e limitações'))
     linhas = [
         f"**Objetivo:** {_text(resumo.get('objetivo'), 500) or '(não informado)'}",
         f"**Status:** {status_rot.get(resumo.get('status'), _text(resumo.get('status'), 40) or '-')} · "
         f"**Modo:** {_text(resumo.get('modo'), 40) or '-'} · "
-        f"**Evidências:** {int(resumo.get('evidencias') or 0)}",
-        '**Cobertura dos dados:** ' + coverage.get(outcome.get('state'), 'consulte evidências e limitações'),
+        f"**Evidências:** {evidencias_total}",
+        '**Cobertura dos dados:** ' + cobertura,
         f"**Mídia descoberta:** {int(resumo_midia.get('total') or 0)} item(ns); "
         "imagens não são evidência e vídeos não foram assistidos ou analisados.",
         "**Limite epistêmico:** a verificação é lexical/determinística; "

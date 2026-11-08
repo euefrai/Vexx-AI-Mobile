@@ -617,3 +617,6 @@ body.remote-guide-page {max-width:740px;margin:auto;padding:28px 22px}
 .research-cot-step.active .research-cot-step-icon { background:var(--accent,#a78bfa); color:#000; animation:pulseDot 1.5s infinite; }
 .research-cot-step.done .research-cot-step-icon { background:rgba(34,197,94,0.2); color:#4ade80; }
 @keyframes pulseDot { 0%,100% { transform:scale(1); opacity:1; } 50% { transform:scale(1.2); opacity:0.75; } }
+
+/* Device presentation must respect hidden even when layout rules set display. */
+#pcConnect[hidden],#pcSetup[hidden],#remoteViewer[hidden],#companion-saved[hidden]{display:none!important}

@@ -103,9 +103,12 @@ TECNICO_EN = {
     "função": "function", "classe": "class", "biblioteca": "library",
     "permissão": "permission", "requisição": "request", "resposta": "response",
     "lento": "slow", "travando": "hanging", "vazamento": "leak",
+    "conectar": "connect", "conexao": "connection", "conexão": "connection",
+    "assincrono": "async", "assíncrono": "async", "implementar": "implement",
+    "integrar": "integrate", "enviar": "send", "receber": "receive",
 }
 
-_ESTOPO = {"para", "como", "mais", "sobre", "entre", "isso", "esse", "esta",
+_ESTOPO = {"para", "como", "mais", "sobre", "comparativo", "comparacao", "comparativa", "entre", "isso", "esse", "esta",
            "este", "qual", "quais", "onde", "quando", "porque", "pode", "ser",
            "são", "sao", "the", "and", "com", "dos", "das", "uma", "que",
            "não", "nao", "por", "favor", "quero", "preciso", "gostaria",
@@ -131,7 +134,7 @@ _GENERICOS_CORRESPONDENCIA = {
     "valores", "melhor", "melhores", "barato", "barata", "brasil", "site",
     "site:", "até", "ate", "hoje", "reais", "quanto", "custa", "custam",
     "onde", "encontrar", "encontre", "loja", "lojas", "vale", "pena",
-    "desconto", "cupom", "frete", "venda", "vendas", "compare", "comparar",
+    "desconto", "cupom", "frete", "venda", "vendas", "compare", "comparar", "comparativo", "comparacao", "comparativa",
     "pesquisar", "buscar", "procurar", "queria", "preciso",
     # Follow-ups de interface/ordenação: "agora mostre só os resultados mais
     # baratos" não tem assunto e não pode autorizar busca externa.
@@ -146,6 +149,8 @@ _GENERICOS_CORRESPONDENCIA = {
 
 
 _GENERICOS_CORRESPONDENCIA.update({
+    "criador", "criadores", "finalidade", "enunciado", "fundacao", "fundação", "fundadores",
+    "mostre", "consulte", "retorno", "alteram", "original",
     "principais", "novidades", "acontecimentos", "relevantes",
     "usar", "utilizar", "utilize", "utilizando", "explique-me",
     "como", "funciona", "funcionam", "traga", "trazer", "explique", "explique-me", "fontes", "fonte", "tecnicas", "técnicas",
@@ -173,7 +178,7 @@ def _assuntos_naturais(consulta: str) -> list:
     """
     import query_intelligence as qi
     norm = qi.normalized(consulta)
-    if not re.search(r'\b(?:o que (?:e|faz|retorna)|para que serve|diferencas? entre)\b', norm):
+    if not re.search(r'\b(?:o que (?:e|faz|retorna)|para que serve|diferencas? entre|quem (?:fundou|criou))\b', norm) and not qi._facet_subject(consulta):
         return []
     filter_scope = re.sub(r'\bo que nao\b', 'o que', norm)
     if re.search(r'\b(?:nao|sem|exceto|exclu\w*|ate|abaixo|acima|antes|depois|desde)\b|r\$', filter_scope):
@@ -185,6 +190,8 @@ def _assuntos_naturais(consulta: str) -> list:
     remaining = norm
     for entity in entities:
         remaining = remaining.replace(qi.normalized(entity), '')
+    if any(r['attribute'] in ('foundation_date','creation_date') for r in requirements):
+        remaining = re.sub(r'\bem que ano\b', '', remaining)
     remaining = re.sub(r'\b(?:na|no|em)\s+documentacao\s+(?:oficial\s+)?(?:d[eo]\s+.+?\s+)?(?=(?:o que|como|para que)\b|$)', '', remaining)
     if re.search(r'(?<!de )\b(?:em|no|na|nos|nas)\s+\w+', remaining):
         # A qualified API may leave an OS, place or other unparsed context
@@ -212,6 +219,11 @@ def _termos_correspondencia(consulta: str) -> list:
         consulta=re.sub(r'\b(texto completo(?: aberto)?|acesso aberto|com doi|original)\b',' ',consulta,flags=re.I)
     if request['domain'] == 'documents':
         consulta=re.sub(r'\b(documenta[cç][aã]o|documentation|oficial|oficiais)\b', ' ', consulta, flags=re.I)
+    if RX_PRODUTO.search(_sem_acentos(consulta)):
+        # Presentation/freshness instructions are not words the product page
+        # must repeat. Actual models/specifications remain in the query.
+        consulta=re.sub(r'\blinks?\s+diretos?(?:\s+(?:do|dos|de)\s+produtos?)?\b', ' ', consulta, flags=re.I)
+        consulta=re.sub(r'\b(pre[cç]os?)\s+atuais?\b|\b(pre[cç]o)\s+atual\b', 'preco', consulta, flags=re.I)
     consulta=re.sub(r'\bfaz\s+bem\b',' ',consulta,flags=re.I)
     return [t for t in _termos(consulta) if t not in _GENERICOS_CORRESPONDENCIA]
 
@@ -222,7 +234,8 @@ def _tem_termo(termo: str, texto: str) -> bool:
                "estado": ("state",), "solido": ("solid",), "assincrono": ("asynchronous",), "cancelamento": ("cancellation", "cancelled", "cancelling"), "materiais": ("materials",), "semicondutores": ("semiconductor", "semiconductors")}
     term = _sem_acentos(termo)
     text = _sem_acentos(texto)
-    aliases.update({'exemplos':('examples','example'),'limitacoes':('limitations','limitation')})
+    aliases.update({'exemplos':('examples','example'),'limitacoes':('limitations','limitation'),
+                    'linguagem':('language','programming')})
     if re.fullmatch(r'[a-z_]\w*(?:\.[a-z_]\w*)+',term):
         # Semantic HTML can split a qualified API name across adjacent spans.
         text=re.sub(r'\s*\.\s*','.',text)
@@ -236,6 +249,11 @@ def _tem_termo(termo: str, texto: str) -> bool:
 
 def correspondencia_item(a: dict, consulta: str) -> dict:
     termos = _termos_correspondencia(consulta)
+    url_dom = _dominio(a.get('url', '')).lower()
+    if any(d in url_dom for d in ('dicio.com.br', 'significados.com.br', 'priberam.org', 'definicao.net', 'dicionarioinformal.com.br', 'oxfordlearnersdictionaries.com', 'merriam-webster.com')):
+        pede_def = bool(re.search(r'\b(o que significa|qual o significado|definicao de|o que e|significa|etimologia|definir|sinonimo)\b', consulta, re.I))
+        if not pede_def:
+            return {"tipo": "IRRELEVANT", "cobertura": 0.0, "faltantes": list(termos)}
     texto = " ".join(str(a.get(k) or "") for k in ("titulo", "trecho"))
     presentes = [t for t in termos if _tem_termo(t, texto)]
     ratio = len(presentes) / len(termos) if termos else 1.0
@@ -276,6 +294,11 @@ def _context_mismatch(a: dict, consulta: str) -> list:
     """Hard entity/context exclusions, separate from broad lexical coverage."""
     import research
     if research.is_search_ad_url(a.get('url','')):return ['SEARCH_ADVERTISEMENT']
+    url_dom = _dominio(a.get('url', '')).lower()
+    if any(d in url_dom for d in ('dicio.com.br', 'significados.com.br', 'priberam.org', 'definicao.net', 'dicionarioinformal.com.br', 'oxfordlearnersdictionaries.com', 'merriam-webster.com')):
+        pede_def = bool(re.search(r'\b(o que significa|qual o significado|definicao de|o que e|significa|etimologia|definir|sinonimo)\b', consulta, re.I))
+        if not pede_def:
+            return ['DICTIONARY_NOISE']
     q=_sem_acentos(consulta);body=_sem_acentos(' '.join(str(a.get(k) or '') for k in ('titulo','trecho')))
     model_query=re.sub(r'\b10\.\d{4,9}/[^\s\"]+','',q)
     models=set(re.findall(r'\b[a-z]{1,16}-?\d+[a-z0-9-]*\b',model_query))
@@ -290,6 +313,8 @@ def _context_mismatch(a: dict, consulta: str) -> list:
     import query_intelligence as qi
     operations={r['entity'] for r in qi.answer_requirements(consulta)
                 if re.fullmatch(r'\w+(?:\.\w+)+',r['entity'])}
+    if re.search(r'\blinguagem\b',q) and not re.search(r'\b(linguagem|language|programming|programacao)\b',body):
+        reasons.append('CONTEXT_MISMATCH')
     if operations:
         # A generic calculator/dictionary cannot answer a named API. Preserve
         # sparse metadata when its actual path identifies the requested method.
@@ -308,6 +333,21 @@ def _context_mismatch(a: dict, consulta: str) -> list:
         if not (any(present) if RX_COMPARACAO.search(consulta) else all(present)):
             reasons.append('ENTITY_MISMATCH')
     named = []
+    if RX_PRODUTO.search(q) and not RX_COMPARACAO.search(q):
+        # A product page with another GPU model/capacity is not a substitute.
+        # Use its title, not related-product recommendations in the page body.
+        gpu = r'\b(?:rtx|gtx)\s*\d{3,4}\b'
+        requested = {re.sub(r'\s+', '', value) for value in re.findall(gpu, q)}
+        title = _sem_acentos(str(a.get('titulo') or ''))
+        offered = {re.sub(r'\s+', '', value) for value in re.findall(gpu, title)}
+        if requested and offered:
+            if not requested & offered:
+                reasons.append('ENTITY_MISMATCH')
+            else:
+                import shopping
+                wanted_vram, found_vram = shopping._vram_gb(q), shopping._vram_gb(title)
+                if wanted_vram is not None and found_vram is not None and wanted_vram != found_vram:
+                    reasons.append('VARIANT_MISMATCH')
     model_entities={r['entity'] for r in qi.answer_requirements(consulta)
                     if r['attribute'] in ('weight','battery') and re.search(r'\d',r['entity']) and qi._model_only_scope(consulta)}
     named.extend(qi.entity_alias_matches(name,body) for name in model_entities)
@@ -483,12 +523,20 @@ def consulta_cientifica(consulta: str) -> str:
 
 
 def termos_para_provedor(consulta: str, classe: str) -> str:
-    """Consulta ajustada ao provedor (ex.: técnico → inglês determinístico)."""
+    """Consulta ajustada ao provedor (ex.: técnico → inglês determinístico e sem stop-words)."""
     if classe != sp.CLASSE_TECNICA:
         return consulta
     t = consulta
+    # Remove scaffolding de pergunta
+    for sc in _SCAFFOLD_PERGUNTA:
+        if t.lower().startswith(sc):
+            t = t[len(sc):].strip()
+            break
     for pt, en in TECNICO_EN.items():
         t = re.sub(r"\b" + re.escape(pt) + r"\b", en, t, flags=re.I)
+    # Remove conectivos menores em português para provedores técnicos
+    t = re.sub(r"\b(no|na|nos|nas|do|da|dos|das|de|em|para|com|como|um|uma)\b", " ", t, flags=re.I)
+    t = re.sub(r"\s+", " ", t).strip()
     return t[:180]
 
 
@@ -503,7 +551,7 @@ _SCAFFOLD_PERGUNTA = (
     "o que são", "o que sao", "o que é", "o que e", "o que fazem", "o que faz",
     "como funcionam", "como funciona", "como fazer", "como faz", "como usar",
     "como usam", "como montar", "como configurar", "como instalar",
-    "como resolver", "como consertar", "quem foram", "quem foi", "quem é",
+    "como resolver", "como consertar", "como conectar", "como implementar", "como criar", "como rodar", "como integrar", "como utilizar", "quem foram", "quem foi", "quem é",
     "quem e", "quem eram", "quem são", "quem sao", "qual é", "qual e",
     "qual o preço de", "qual o preco de", "qual o", "qual a", "qual foi",
     "quais são", "quais sao", "quais foram", "quando foi", "quando aconteceu",
@@ -738,6 +786,11 @@ def _ano_alvo(consulta: str, info: dict):
 
 
 def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> float:
+    url_dom = _dominio(a.get('url', '')).lower()
+    if any(d in url_dom for d in ('dicio.com.br', 'significados.com.br', 'priberam.org', 'definicao.net', 'dicionarioinformal.com.br', 'oxfordlearnersdictionaries.com', 'merriam-webster.com')):
+        pede_def = bool(re.search(r'\b(o que significa|qual o significado|definicao de|o que e|significa|etimologia|definir|sinonimo)\b', consulta, re.I))
+        if not pede_def:
+            return -100.0
     titulo = (a.get("titulo") or "").lower()
     trecho = (a.get("trecho") or "").lower()
     url = (a.get("url") or "").lower()
@@ -814,6 +867,8 @@ def _pontos_relevancia(a: dict, consulta: str, classes: list, info: dict) -> flo
 
 
 def ranquear(achados: list, consulta: str, classes: list, info: dict) -> list:
+    # Remove candidatos com ruído de dicionário ou publicidade antes de ordenar
+    achados = [a for a in achados if not ('DICTIONARY_NOISE' in _context_mismatch(a, consulta))]
     for a in achados:
         match = correspondencia_item(a, consulta)
         a["correspondencia_tipo"] = match["tipo"]
@@ -967,7 +1022,7 @@ def _escolher_provedores(classes: list, info: dict, disponiveis=None) -> list:
     if info.get("academica"):
         ordem.extend(["crossref", "openalex", "arxiv"])
     if info.get("produto"):
-        ordem.extend(["bing", "marginalia"])
+        ordem.extend(["kabum", "bing", "marginalia"])
     news_intent = not request or request.get('domain') == 'news' or bool(re.search(
         r'\b(noticias?|manchetes|hoje|ontem|recentes?|ultimas?)\b', _sem_acentos(request.get('original_request', ''))))
     if sp.CLASSE_NOTICIA in classes and not info.get("academica") and news_intent:
@@ -1151,11 +1206,26 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
         tentativas.append({"provedor": nome, "consulta": q})
         return True
     usados = {}
+    rest_rows = []
+    if priority and priority.get('kind') == 'news' and priority.get('id') == 'ubata_news':
+        import publisher_reader
+        if publisher_reader.enabled() and max_tentativas > 1 and _tentar('publisher-rest', publisher_reader.ENDPOINT):
+            try:
+                remaining = float(orc['timeout_total']) - (time.monotonic() - t0)
+                rest_rows = admit(publisher_reader.discover(consulta, max_resultados,
+                    timeout=min(3.0, remaining))) if remaining > .5 else []
+                achados.extend(rest_rows)
+                usados['publisher-rest'] = 1
+                etapas.append(f'API do publicador: {len(rest_rows)} artigos candidatos; leitura ainda necessária')
+            except (ValueError, OSError) as exc:
+                falhas.append({'provedor': 'publisher-rest', 'codigo': getattr(exc, 'codigo', 'rede')})
+                etapas.append('API do publicador indisponível; outros canais mantidos')
     if priority and priority.get('kind')=='news' and priority.get('feeds'):
         import os
         enabled=os.environ.get('JULIA_PREFERRED_NEWS_FEEDS','1').lower() not in ('0','false','off')
         feed=priority['feeds'][0]
-        if enabled and _tentar('publisher-rss',feed):
+        reserve_general = any(t['provedor']=='publisher-rest' for t in tentativas) and len(tentativas)>=max_tentativas-1
+        if enabled and not rest_rows and not reserve_general and _tentar('publisher-rss',feed):
             try:
                 remaining=float(orc['timeout_total'])-(time.monotonic()-t0)
                 rows=sp.buscar_feed_preferencial(feed,consulta,limite=max_resultados,
@@ -1191,8 +1261,8 @@ def pesquisar(consulta: str, *, max_resultados: int = 6, timeout: float = 8.0,
     # geral, que é o fallback honesto quando a fonte preferida falha.
     limite_prioridade = (max(1, max_tentativas - max(1, len(consultas) - 1))
                          if priority_query else None)
-    if limite_prioridade is not None and any(t['provedor']=='publisher-rss' for t in tentativas):
-        limite_prioridade=max(0,limite_prioridade-1)
+    if limite_prioridade is not None:
+        limite_prioridade=max(0,limite_prioridade-sum(t['provedor'] in ('publisher-rss','publisher-rest') for t in tentativas))
 
     def _uteis() -> int:
         return sum(1 for a in achados if a.get('content_scope') != 'feed_metadata' and _util_para_pedido(a, termos_c, consulta))
