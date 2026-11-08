@@ -63,6 +63,9 @@ import tool_protocol  # noqa: F401
 import unicodedata  # noqa: F401
 import uuid  # noqa: F401
 import vision_service  # noqa: F401
+from vision_service import (
+    analisar_imagem, clicar_alvo_tela, encontrar_coordenada_clique, ler_fontes_imagem,
+)  # noqa: F401
 import workspace_store  # noqa: F401
 
 from assistant_identity import (

@@ -251,6 +251,11 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
             resultados_visao = []
     extras["visao"] = resultados_visao
     extras["tags_busca_visao"] = vision_service.coletar_tags_busca(resultados_visao)
+    extras["texto_extraido_visao"] = vision_service.coletar_texto_extraido(resultados_visao)
+    extras["alvos_clique_visao"] = [
+        alvo for r in resultados_visao if isinstance(r, dict)
+        for alvo in (r.get("alvos_clique") or [])
+    ]
     bloco_visao = vision_service.formatar_contexto_visao(resultados_visao)
     if bloco_visao:
         extras["ferramentas_usadas"].append("vision")

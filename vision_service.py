@@ -1,9 +1,12 @@
-"""Serviço de Visão Computacional (YOLOv8) integrado ao Hugging Face Spaces.
+"""Serviço de Visão Computacional, Leitura de Fontes (OCR) e Clique por Coordenada (YOLOv8 + RapidOCR).
 
 Conecta ao Space ``euefrai/api-visao-yolo`` (``https://euefrai-api-visao-yolo.hf.space``)
 via ``gradio_client`` com suporte a URL, caminho de arquivo, bytes ou Base64,
-tratamento de timeout/retry (para acordar o Space em caso de hibernação) e
-enriquecimento direto do contexto de pesquisa e LLM do VEXX-AI.
+tratamento de timeout/retry e funções dedicadas:
+- ``analisar_imagem(imagem)``: objetos YOLOv8, ``texto_extraido``, ``textos_lidos``, ``tags_busca`` e ``alvos_clique``.
+- ``ler_fontes_imagem(imagem)``: todos os textos/fontes lidos na imagem com posições e pontos de clique.
+- ``encontrar_coordenada_clique(imagem, alvo_texto_ou_objeto)``: localiza objetos ou textos e retorna ``{x, y, x_norm, y_norm}``.
+- ``clicar_alvo_tela(alvo_texto_ou_objeto, imagem=None)``: integra com ``remoto.py`` para clicar no elemento na tela.
 """
 from __future__ import annotations
 
@@ -16,6 +19,7 @@ import re
 import tempfile
 import threading
 import time
+import unicodedata
 from typing import Any, Callable
 from urllib.parse import urlparse
 
@@ -44,10 +48,10 @@ _URL_IMAGE_RE = re.compile(
     re.IGNORECASE,
 )
 _RAW_BASE64_PREFIXES = (
-    "/9j/",       # JPEG
+    "/9j/",         # JPEG
     "iVBORw0KGgo",  # PNG
-    "R0lGOD",     # GIF
-    "UklGR",      # WEBP
+    "R0lGOD",       # GIF
+    "UklGR",        # WEBP
 )
 
 
@@ -61,6 +65,13 @@ def vision_habilitada() -> bool:
     """Permite desativar chamadas externas de visão via VEXX_VISION_ENABLED=0."""
     val = os.environ.get("VEXX_VISION_ENABLED", "1").strip().lower()
     return val not in ("0", "false", "no", "off")
+
+
+def _sem_acentos(texto: str) -> str:
+    return "".join(
+        c for c in unicodedata.normalize("NFKD", str(texto or "").lower())
+        if not unicodedata.combining(c)
+    )
 
 
 def _detectar_extensao_bytes(raw: bytes) -> str:
@@ -94,10 +105,7 @@ def _decodificar_base64_imagem(valor: str) -> bytes | None:
 
 
 def _preparar_entrada_imagem(imagem: Any) -> tuple[str, str | None, str]:
-    """Converte URL, caminho local, bytes ou Base64 em entrada para o Gradio Client.
-
-    Retorna ``(alvo_para_handle_file, temp_path_para_limpar, rotulo_origem)``.
-    """
+    """Converte URL, caminho local, bytes ou Base64 em entrada para o Gradio Client."""
     if imagem is None:
         raise ValueError("Nenhuma imagem enviada")
 
@@ -195,19 +203,59 @@ def _invocar_predicao(cliente: Any, entrada: Any, api_name: str = DEFAULT_API_NA
         raise
 
 
+def _calcular_ponto_clique(coordenadas: list[float], largura: int, altura: int,
+                           ponto_existente: Any = None) -> dict[str, float | int]:
+    """Garante cálculo consistente de ``{x, y, x_norm, y_norm}`` a partir da bounding box."""
+    if isinstance(ponto_existente, dict) and all(k in ponto_existente for k in ("x", "y", "x_norm", "y_norm")):
+        try:
+            return {
+                "x": int(round(float(ponto_existente["x"]))),
+                "y": int(round(float(ponto_existente["y"]))),
+                "x_norm": round(float(ponto_existente["x_norm"]), 4),
+                "y_norm": round(float(ponto_existente["y_norm"]), 4),
+            }
+        except (TypeError, ValueError):
+            pass
+
+    if len(coordenadas) >= 4:
+        x1, y1, x2, y2 = coordenadas[:4]
+        cx = int(round((x1 + x2) / 2.0))
+        cy = int(round((y1 + y2) / 2.0))
+    else:
+        cx, cy = 0, 0
+
+    w = max(1, int(largura or 1))
+    h = max(1, int(altura or 1))
+    nx = round(min(1.0, max(0.0, cx / float(w))), 4) if largura else 0.0
+    ny = round(min(1.0, max(0.0, cy / float(h))), 4) if altura else 0.0
+    return {"x": cx, "y": cy, "x_norm": nx, "y_norm": ny}
+
+
 def _normalizar_resposta(bruto: Any, origem: str = "") -> dict[str, Any]:
-    """Padroniza o payload retornado pela API YOLOv8 do Space."""
+    """Padroniza o payload retornado pela API YOLOv8 + RapidOCR do Space."""
     if isinstance(bruto, (list, tuple)) and len(bruto) == 1 and isinstance(bruto[0], dict):
         bruto = bruto[0]
     if not isinstance(bruto, dict):
         return {
             "status": "erro",
             "mensagem": "Resposta inesperada da API de visão",
+            "dimensoes": {"largura": 0, "altura": 0},
             "total_objetos": 0,
+            "total_textos": 0,
             "tags_busca": "",
+            "texto_extraido": "",
             "deteccoes": [],
+            "textos_lidos": [],
+            "alvos_clique": [],
             "origem": origem,
         }
+
+    dim_bruta = bruto.get("dimensoes") if isinstance(bruto.get("dimensoes"), dict) else {}
+    try:
+        largura = max(0, int(dim_bruta.get("largura") or 0))
+        altura = max(0, int(dim_bruta.get("altura") or 0))
+    except (TypeError, ValueError):
+        largura, altura = 0, 0
 
     deteccoes_brutas = bruto.get("deteccoes")
     if not isinstance(deteccoes_brutas, list):
@@ -215,10 +263,12 @@ def _normalizar_resposta(bruto: Any, origem: str = "") -> dict[str, Any]:
 
     deteccoes: list[dict[str, Any]] = []
     classes_confiaveis: list[str] = []
+    max_x, max_y = largura, altura
+
     for item in deteccoes_brutas:
         if not isinstance(item, dict):
             continue
-        objeto = str(item.get("objeto") or "").strip()
+        objeto = str(item.get("objeto") or item.get("rotulo") or "").strip()
         if not objeto:
             continue
         try:
@@ -233,29 +283,129 @@ def _normalizar_resposta(bruto: Any, origem: str = "") -> dict[str, Any]:
                     coordenadas.append(round(float(c), 2))
                 except (TypeError, ValueError):
                     pass
+        if len(coordenadas) >= 4:
+            max_x = max(max_x, int(round(coordenadas[2])))
+            max_y = max(max_y, int(round(coordenadas[3])))
+        ponto = _calcular_ponto_clique(coordenadas, max_x or 1, max_y or 1, item.get("ponto_clique"))
         deteccoes.append({
+            "tipo": "objeto",
             "objeto": objeto,
             "confianca": confianca,
             "coordenadas": coordenadas,
+            "ponto_clique": ponto,
         })
         if confianca >= 0.35:
             classes_confiaveis.append(objeto)
 
+    textos_brutos = bruto.get("textos_lidos")
+    if not isinstance(textos_brutos, list):
+        textos_brutos = []
+
+    textos_lidos: list[dict[str, Any]] = []
+    frases_extraidas: list[str] = []
+    for item in textos_brutos:
+        if not isinstance(item, dict):
+            continue
+        txt = str(item.get("texto") or item.get("rotulo") or "").strip()
+        if not txt:
+            continue
+        try:
+            confianca = round(float(item.get("confianca", 0.0)), 2)
+        except (TypeError, ValueError):
+            confianca = 0.0
+        coords_raw = item.get("coordenadas")
+        coordenadas = []
+        if isinstance(coords_raw, (list, tuple)):
+            for c in coords_raw[:4]:
+                try:
+                    coordenadas.append(round(float(c), 2))
+                except (TypeError, ValueError):
+                    pass
+        if len(coordenadas) >= 4:
+            max_x = max(max_x, int(round(coordenadas[2])))
+            max_y = max(max_y, int(round(coordenadas[3])))
+        ponto = _calcular_ponto_clique(coordenadas, max_x or 1, max_y or 1, item.get("ponto_clique"))
+        textos_lidos.append({
+            "tipo": "texto",
+            "texto": txt,
+            "confianca": confianca,
+            "coordenadas": coordenadas,
+            "ponto_clique": ponto,
+        })
+        frases_extraidas.append(txt)
+
+    if not largura and max_x:
+        largura = max_x
+    if not altura and max_y:
+        altura = max_y
+
+    texto_extraido = str(bruto.get("texto_extraido") or "").strip()
+    if not texto_extraido and frases_extraidas:
+        texto_extraido = " ".join(frases_extraidas).strip()
+
     tags_busca = str(bruto.get("tags_busca") or "").strip()
-    if not tags_busca and classes_confiaveis:
-        tags_unicas = list(dict.fromkeys(classes_confiaveis))
+    if not tags_busca:
+        palavras_ocr = [
+            m.group(0) for m in re.finditer(r"[A-Za-zÀ-ÿ0-9]{3,}", texto_extraido)
+        ][:8]
+        tags_unicas = list(dict.fromkeys(classes_confiaveis + palavras_ocr))
         tags_busca = ", ".join(tags_unicas)
+
+    alvos_brutos = bruto.get("alvos_clique")
+    alvos_clique: list[dict[str, Any]] = []
+    if isinstance(alvos_brutos, list) and alvos_brutos:
+        for item in alvos_brutos:
+            if not isinstance(item, dict):
+                continue
+            rotulo = str(item.get("rotulo") or item.get("texto") or item.get("objeto") or "").strip()
+            if not rotulo:
+                continue
+            tipo = str(item.get("tipo") or ("texto" if "texto" in item else "objeto"))
+            coords = list(item.get("coordenadas") or [])
+            ponto = _calcular_ponto_clique(coords, largura or 1, altura or 1, item.get("ponto_clique"))
+            alvos_clique.append({
+                "tipo": tipo,
+                "rotulo": rotulo,
+                "confianca": round(float(item.get("confianca", 0.0)), 2),
+                "coordenadas": coords,
+                "ponto_clique": ponto,
+            })
+    else:
+        for d in deteccoes:
+            alvos_clique.append({
+                "tipo": "objeto",
+                "rotulo": d["objeto"],
+                "confianca": d["confianca"],
+                "coordenadas": d["coordenadas"],
+                "ponto_clique": d["ponto_clique"],
+            })
+        for t in textos_lidos:
+            alvos_clique.append({
+                "tipo": "texto",
+                "rotulo": t["texto"],
+                "confianca": t["confianca"],
+                "coordenadas": t["coordenadas"],
+                "ponto_clique": t["ponto_clique"],
+            })
 
     status = str(bruto.get("status") or "sucesso").strip().lower()
     total_objetos = bruto.get("total_objetos")
     if not isinstance(total_objetos, int):
         total_objetos = len(deteccoes)
+    total_textos = bruto.get("total_textos")
+    if not isinstance(total_textos, int):
+        total_textos = len(textos_lidos)
 
     saida: dict[str, Any] = {
         "status": status,
+        "dimensoes": {"largura": largura, "altura": altura},
         "total_objetos": total_objetos,
+        "total_textos": total_textos,
         "tags_busca": tags_busca,
+        "texto_extraido": texto_extraido,
         "deteccoes": deteccoes,
+        "textos_lidos": textos_lidos,
+        "alvos_clique": alvos_clique,
         "origem": origem,
     }
     if bruto.get("mensagem"):
@@ -273,18 +423,26 @@ def analisar_imagem(
     backoff_s: float = DEFAULT_BACKOFF_S,
     client_factory: Callable[..., Any] | None = None,
 ) -> dict[str, Any]:
-    """Envia uma imagem (URL, arquivo, bytes ou Base64) ao Space YOLOv8 e retorna detecções e tags.
+    """Envia uma imagem (URL, arquivo, bytes ou Base64) ao Space YOLOv8 + RapidOCR.
 
-    Inclui tratamento de timeout por tentativa e retry exponencial para lidar com
-    cold-start / hibernação do Hugging Face Spaces.
+    Retorna objetos detectados, ``texto_extraido``, ``textos_lidos``, ``tags_busca``
+    e ``alvos_clique`` com coordenadas exatas e normalizadas de clique.
     """
+    if isinstance(imagem, dict) and "deteccoes" in imagem and "status" in imagem:
+        return _normalizar_resposta(imagem, origem=str(imagem.get("origem") or "dict"))
+
     if not vision_habilitada():
         return {
             "status": "desativado",
             "mensagem": "Serviço de visão desativado por configuração",
+            "dimensoes": {"largura": 0, "altura": 0},
             "total_objetos": 0,
+            "total_textos": 0,
             "tags_busca": "",
+            "texto_extraido": "",
             "deteccoes": [],
+            "textos_lidos": [],
+            "alvos_clique": [],
             "origem": "",
         }
 
@@ -295,9 +453,14 @@ def analisar_imagem(
         return {
             "status": "erro",
             "mensagem": str(exc),
+            "dimensoes": {"largura": 0, "altura": 0},
             "total_objetos": 0,
+            "total_textos": 0,
             "tags_busca": "",
+            "texto_extraido": "",
             "deteccoes": [],
+            "textos_lidos": [],
+            "alvos_clique": [],
             "origem": "",
         }
 
@@ -341,9 +504,14 @@ def analisar_imagem(
         return {
             "status": "erro",
             "mensagem": ultimo_erro or "API de visão indisponível",
+            "dimensoes": {"largura": 0, "altura": 0},
             "total_objetos": 0,
+            "total_textos": 0,
             "tags_busca": "",
+            "texto_extraido": "",
             "deteccoes": [],
+            "textos_lidos": [],
+            "alvos_clique": [],
             "origem": origem,
         }
     finally:
@@ -356,6 +524,127 @@ def analisar_imagem(
 
 # Alias semântico compatível com o contrato do Space
 detectar_objetos = analisar_imagem
+
+
+def ler_fontes_imagem(imagem: Any, **kwargs: Any) -> dict[str, Any]:
+    """Retorna todos os textos/fontes lidos na imagem com suas posições e pontos de clique."""
+    res = analisar_imagem(imagem, **kwargs)
+    return {
+        "status": res.get("status", "erro"),
+        "dimensoes": res.get("dimensoes", {"largura": 0, "altura": 0}),
+        "total_textos": int(res.get("total_textos", 0)),
+        "texto_extraido": str(res.get("texto_extraido") or ""),
+        "textos_lidos": list(res.get("textos_lidos") or []),
+        "origem": res.get("origem", ""),
+        **({"mensagem": res["mensagem"]} if res.get("mensagem") else {}),
+    }
+
+
+def encontrar_coordenada_clique(
+    imagem: Any,
+    alvo_texto_ou_objeto: str,
+    **kwargs: Any,
+) -> dict[str, Any] | None:
+    """Busca nos objetos do YOLO e nos textos do OCR e retorna ``{x, y, x_norm, y_norm}`` para clicar."""
+    alvo_limpo = _sem_acentos(alvo_texto_ou_objeto)
+    if not alvo_limpo:
+        return None
+
+    res = analisar_imagem(imagem, **kwargs)
+    if res.get("status") != "sucesso":
+        return None
+
+    alvos = list(res.get("alvos_clique") or [])
+    if not alvos:
+        return None
+
+    melhor: tuple[float, dict[str, Any]] | None = None
+    tokens_alvo = [t for t in re.findall(r"[a-z0-9]+", alvo_limpo) if len(t) >= 2]
+
+    for item in alvos:
+        rotulo = str(item.get("rotulo") or "")
+        rotulo_norm = _sem_acentos(rotulo)
+        if not rotulo_norm:
+            continue
+        conf = float(item.get("confianca") or 0.0)
+        score = 0.0
+        if rotulo_norm == alvo_limpo:
+            score = 100.0 + conf
+        elif alvo_limpo in rotulo_norm:
+            score = 80.0 + conf
+        elif rotulo_norm in alvo_limpo and len(rotulo_norm) >= 3:
+            score = 65.0 + conf
+        elif tokens_alvo:
+            hits = sum(1 for t in tokens_alvo if t in rotulo_norm)
+            if hits:
+                score = (40.0 * (hits / len(tokens_alvo))) + conf
+
+        if score > 0 and (melhor is None or score > melhor[0]):
+            melhor = (score, item)
+
+    if melhor is None:
+        return None
+
+    escolhido = melhor[1]
+    pt = escolhido.get("ponto_clique") or {}
+    return {
+        "encontrado": True,
+        "tipo": escolhido.get("tipo", "objeto"),
+        "rotulo": escolhido.get("rotulo", ""),
+        "confianca": escolhido.get("confianca", 0.0),
+        "coordenadas": escolhido.get("coordenadas", []),
+        "x": int(pt.get("x", 0)),
+        "y": int(pt.get("y", 0)),
+        "x_norm": float(pt.get("x_norm", 0.0)),
+        "y_norm": float(pt.get("y_norm", 0.0)),
+        "ponto_clique": pt,
+    }
+
+
+def clicar_alvo_tela(
+    alvo_texto_ou_objeto: str,
+    imagem: Any = None,
+    *,
+    tipo_clique: str = "click",
+    autorizado: bool = False,
+    **kwargs: Any,
+) -> dict[str, Any]:
+    """Localiza um botão, link, texto ou objeto na tela e executa o clique via ``remoto``."""
+    import remoto
+
+    img_entrada = imagem
+    if img_entrada is None:
+        captura = remoto.capturar()
+        img_entrada = "data:image/jpeg;base64," + captura["imagem"]
+
+    coord = encontrar_coordenada_clique(img_entrada, alvo_texto_ou_objeto, **kwargs)
+    if not coord:
+        return {
+            "ok": False,
+            "erro": f"Alvo '{alvo_texto_ou_objeto}' não encontrado na imagem/tela.",
+            "alvo": alvo_texto_ou_objeto,
+        }
+
+    kind = tipo_clique if tipo_clique in ("click", "double", "right", "move") else "click"
+    cmd = remoto.validar_comando({
+        "kind": kind,
+        "x": coord["x_norm"],
+        "y": coord["y_norm"],
+    })
+    exec_res = remoto.executar(cmd, autorizado=autorizado)
+    return {
+        "ok": True,
+        "acao": kind,
+        "alvo": coord["rotulo"],
+        "tipo": coord["tipo"],
+        "coordenada": {
+            "x": coord["x"],
+            "y": coord["y"],
+            "x_norm": coord["x_norm"],
+            "y_norm": coord["y_norm"],
+        },
+        "remoto": exec_res,
+    }
 
 
 def extrair_imagens_do_texto(texto: str, contexto_local: dict | None = None) -> list[str]:
@@ -397,7 +686,7 @@ def analisar_imagens_contexto(
     max_imagens: int = 3,
     **kwargs: Any,
 ) -> list[dict[str, Any]]:
-    """Detecta objetos em todas as imagens associadas ao prompt/pesquisa."""
+    """Detecta objetos e lê textos em todas as imagens associadas ao prompt/pesquisa."""
     imagens = extrair_imagens_do_texto(texto, contexto_local)[:max(1, int(max_imagens))]
     if not imagens:
         return []
@@ -409,7 +698,7 @@ def analisar_imagens_contexto(
 
 
 def coletar_tags_busca(resultados_visao: list[dict[str, Any]] | dict[str, Any] | None) -> str:
-    """Consolida ``tags_busca`` únicas a partir de um ou mais resultados do YOLO."""
+    """Consolida ``tags_busca`` únicas a partir de um ou mais resultados do YOLO + OCR."""
     if not resultados_visao:
         return ""
     lista = [resultados_visao] if isinstance(resultados_visao, dict) else list(resultados_visao)
@@ -425,23 +714,47 @@ def coletar_tags_busca(resultados_visao: list[dict[str, Any]] | dict[str, Any] |
     return ", ".join(tags)
 
 
+def coletar_texto_extraido(resultados_visao: list[dict[str, Any]] | dict[str, Any] | None) -> str:
+    """Consolida todo o ``texto_extraido`` (OCR) das imagens analisadas."""
+    if not resultados_visao:
+        return ""
+    lista = [resultados_visao] if isinstance(resultados_visao, dict) else list(resultados_visao)
+    textos: list[str] = []
+    for res in lista:
+        if not isinstance(res, dict) or res.get("status") != "sucesso":
+            continue
+        txt = str(res.get("texto_extraido") or "").strip()
+        if txt and txt not in textos:
+            textos.append(txt)
+    return " | ".join(textos)
+
+
 def enriquecer_consulta_com_visao(
     consulta: str,
     resultados_visao: list[dict[str, Any]] | dict[str, Any] | None,
     *,
     max_chars: int = 240,
 ) -> str:
-    """Concatena as ``tags_busca`` detectadas pelo YOLO à consulta de pesquisa."""
+    """Concatena ``tags_busca`` (objetos) e ``texto_extraido`` (leitura de fontes) à consulta."""
     base = str(consulta or "").strip()
     if base:
         base = _DATA_IMAGE_RE.sub("", base).strip()
     tags = coletar_tags_busca(resultados_visao)
-    if not tags:
-        return base[:max_chars]
-    termos_novos = [
-        t.strip() for t in tags.split(",")
-        if t.strip() and t.strip().lower() not in base.lower()
-    ]
+    texto_ocr = coletar_texto_extraido(resultados_visao)
+
+    termos_novos: list[str] = []
+    if tags:
+        for t in tags.split(","):
+            limpo = t.strip()
+            if limpo and limpo.lower() not in base.lower() and limpo not in termos_novos:
+                termos_novos.append(limpo)
+    if texto_ocr:
+        for palavra in re.findall(r"[A-Za-zÀ-ÿ0-9]{3,}", texto_ocr):
+            if palavra.lower() not in base.lower() and palavra not in termos_novos:
+                termos_novos.append(palavra)
+                if len(termos_novos) >= 12:
+                    break
+
     if not termos_novos:
         return base[:max_chars]
     complemento = ", ".join(termos_novos)
@@ -450,7 +763,7 @@ def enriquecer_consulta_com_visao(
 
 
 def formatar_contexto_visao(resultados_visao: list[dict[str, Any]] | dict[str, Any] | None) -> str:
-    """Formata ``tags_busca`` e coordenadas do YOLOv8 para injeção no contexto do LLM/pesquisa."""
+    """Formata ``tags_busca``, ``texto_extraido``, detecções e ``ponto_clique`` para o LLM."""
     if not resultados_visao:
         return ""
     lista = [resultados_visao] if isinstance(resultados_visao, dict) else list(resultados_visao)
@@ -459,7 +772,7 @@ def formatar_contexto_visao(resultados_visao: list[dict[str, Any]] | dict[str, A
         return ""
 
     linhas = [
-        "ANÁLISE VISUAL (VEXX-AI Vision API / YOLOv8 — objetos e coordenadas detectados na imagem associada):"
+        "ANÁLISE VISUAL (VEXX-AI Vision API / YOLOv8 + RapidOCR — objetos, textos lidos e coordenadas de clique):"
     ]
     tags_globais = coletar_tags_busca(sucessos)
     if tags_globais:
@@ -467,25 +780,49 @@ def formatar_contexto_visao(resultados_visao: list[dict[str, Any]] | dict[str, A
     else:
         linhas.append("- Tags de busca (tags_busca): nenhum objeto com confiança >= 0.35")
 
+    texto_global = coletar_texto_extraido(sucessos)
+    if texto_global:
+        linhas.append(f"- Texto lido nas fontes da imagem (texto_extraido): \"{texto_global[:800]}\"")
+
     for idx, res in enumerate(sucessos, start=1):
         origem = res.get("origem") or f"imagem_{idx}"
-        total = int(res.get("total_objetos") or len(res.get("deteccoes") or []))
+        total_obj = int(res.get("total_objetos") or len(res.get("deteccoes") or []))
+        total_txt = int(res.get("total_textos") or len(res.get("textos_lidos") or []))
         deteccoes = res.get("deteccoes") or []
-        if not deteccoes:
+        textos_lidos = res.get("textos_lidos") or []
+
+        if deteccoes:
+            itens_fmt = []
+            for d in deteccoes[:15]:
+                obj = d.get("objeto", "objeto")
+                conf = d.get("confianca", 0.0)
+                coords = d.get("coordenadas", [])
+                pt = d.get("ponto_clique") or {}
+                itens_fmt.append(
+                    f"{obj} (confiança={conf}, coordenadas={coords}, "
+                    f"clique=({pt.get('x', 0)}, {pt.get('y', 0)} | norm={pt.get('x_norm', 0.0)}, {pt.get('y_norm', 0.0)}))"
+                )
+            linhas.append(
+                f"- Imagem {idx} ({origem}, total_objetos={total_obj}): " + "; ".join(itens_fmt)
+            )
+        else:
             linhas.append(f"- Imagem {idx} ({origem}): nenhum objeto detectado (total_objetos=0).")
-            continue
-        itens_fmt = []
-        for d in deteccoes[:15]:
-            obj = d.get("objeto", "objeto")
-            conf = d.get("confianca", 0.0)
-            coords = d.get("coordenadas", [])
-            itens_fmt.append(f"{obj} (confiança={conf}, coordenadas={coords})")
-        linhas.append(
-            f"- Imagem {idx} ({origem}, total_objetos={total}): " + "; ".join(itens_fmt)
-        )
+
+        if textos_lidos:
+            txts_fmt = []
+            for t in textos_lidos[:20]:
+                txt = t.get("texto", "")
+                conf = t.get("confianca", 0.0)
+                pt = t.get("ponto_clique") or {}
+                txts_fmt.append(
+                    f"\"{txt}\" (conf={conf}, clique=({pt.get('x', 0)}, {pt.get('y', 0)} | norm={pt.get('x_norm', 0.0)}, {pt.get('y_norm', 0.0)}))"
+                )
+            linhas.append(
+                f"- Textos/Fontes lidos na Imagem {idx} (total_textos={total_txt}): " + "; ".join(txts_fmt)
+            )
 
     linhas.append(
-        "Use estas tags_busca e coordenadas reais detectadas pelo YOLOv8 para responder com precisão "
-        "e contextualizar a pesquisa."
+        "Use estas tags_busca, o texto_extraido (OCR) e as coordenadas/ponto_clique reais para responder com precisão, "
+        "contextualizar a pesquisa e localizar elementos clicáveis."
     )
     return "\n".join(linhas)
