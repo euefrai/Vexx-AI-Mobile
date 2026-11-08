@@ -1627,7 +1627,7 @@ function updateConnection() {
     d.style.background = on ? 'var(--rose)' : '';
     d.style.boxShadow = on ? '0 0 0 3px var(--glow-rose)' : '';
   });
-  $('popModel').textContent = modeloAtivo() || '—';
+  $('popModel').textContent = modelDisplayLabel(modeloAtivo() || modelCatalog.default || '—');
   $('popSync').textContent = $('syncCounter').textContent + ' pendentes'
     + (relayHa != null && relayHa >= 0 ? ' · agente há ' + relayHa + 's' : '');
   const dot = $('drawerDot'); if (dot) { dot.style.background = pcOnline ? '#ff2bd6' : '#5a5972'; }
@@ -2006,6 +2006,10 @@ function providerOf(id) {
   }
   return 'hermes';
 }
+function modelDisplayLabel(id) {
+  if (id === 'vexx-qwen-2.5-3b') return '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+  return (modelCatalog.itemLabel && modelCatalog.itemLabel[id]) || id;
+}
 function modelGroup(id) {
   if (id === 'vexx-qwen-2.5-3b') return -1;
   const pid = providerOf(id);
@@ -2028,13 +2032,17 @@ function fillModels(filter) {
     const key = rank + ':' + pid;
     if (!groups.has(key)) {
       const g = document.createElement('optgroup');
-      g.label = rank === -1 ? '⚡ Prioritário (VEXX AI)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
+      g.label = rank === -1 ? '⚡ Modelo Próprio (VEXX AI)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
         (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave');
       groups.set(key, g); sel.appendChild(g);
     }
     const o = document.createElement('option');
     o.value = id;
-    o.textContent = pid !== 'hermes' && id.startsWith(pid + '/') ? id.slice(pid.length + 1) : id;
+    if (id === 'vexx-qwen-2.5-3b') {
+      o.textContent = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+    } else {
+      o.textContent = pid !== 'hermes' && id.startsWith(pid + '/') ? id.slice(pid.length + 1) : id;
+    }
     o.title = id; o.disabled = !pronto;
     groups.get(key).appendChild(o);
   }
@@ -2046,7 +2054,7 @@ function fillModels(filter) {
   }
   sel.value = cur;
   const selected = $('modelSelected');
-  if (selected) selected.textContent = cur ? 'Selecionado: ' + cur : 'Escolha um modelo';
+  if (selected) selected.textContent = cur ? 'Selecionado: ' + modelDisplayLabel(cur) : 'Escolha um modelo';
   const info = $('modelResults');
   if (info) info.textContent = ids.length ? ids.length + ' modelos · grátis, suas chaves e outros' : 'Nenhum modelo encontrado. Tente outra busca ou atualize a lista.';
   return cur;
@@ -2061,7 +2069,8 @@ async function loadModels(force) {
     if (version !== modelLoadVersion || owner !== currentUid || !authenticated) return false;
     modelsLoadedAt = Date.now();
     modelCatalog = { models: r.models || [], providers: r.providers || [], default: r.default || '',
-      itemProvider: Object.fromEntries((r.items || []).map(i => [i.id, i.provider])) };
+      itemProvider: Object.fromEntries((r.items || []).map(i => [i.id, i.provider])),
+      itemLabel: Object.fromEntries((r.items || []).map(i => [i.id, i.label])) };
     const cur = fillModels($('modelSearch') ? $('modelSearch').value : '');
     // Persist only an explicit choice. The server resolves an implicit default
     // against the live catalog; freezing it here breaks newly created jobs.
@@ -2070,7 +2079,7 @@ async function loadModels(force) {
     const noCatalogo = modelCatalog.models.includes(escolhido);
     const aviso = !noCatalogo ? ' · fora do catálogo; escolha outro modelo' : (pid !== 'hermes' && !isConfigured(pid))
       ? (providerFlag(pid, 'auth_error') ? ' · chave recusada no PC' : ' · sem chave no PC') : '';
-    $('aiStatus').textContent = (noCatalogo && isConfigured(pid) ? 'Modelo selecionado · ' : 'Modelo indisponível · ') + escolhido + aviso;
+    $('aiStatus').textContent = (noCatalogo && isConfigured(pid) ? 'Modelo selecionado · ' : 'Modelo indisponível · ') + modelDisplayLabel(escolhido) + aviso;
     return true;
   } catch (_) { if (version === modelLoadVersion) $('aiStatus').textContent = 'IA: sem resposta do PC'; return false; }
 }
@@ -2078,8 +2087,8 @@ $('modelSearch') && $('modelSearch').addEventListener('input', e => { fillModels
 $('modelSelect').addEventListener('change', e => {
   if (!e.target.value || !isConfigured(providerOf(e.target.value))) return;
   localStorage.setItem('julia-model', e.target.value);
-  $('aiStatus').textContent = 'IA pronta · ' + e.target.value;
-  $('modelSelected').textContent = 'Selecionado: ' + e.target.value;
+  $('aiStatus').textContent = 'IA pronta · ' + modelDisplayLabel(e.target.value);
+  $('modelSelected').textContent = 'Selecionado: ' + modelDisplayLabel(e.target.value);
 });
 $('modelRefresh') && $('modelRefresh').addEventListener('click', async () => {
   const b = $('modelRefresh');
@@ -2362,7 +2371,7 @@ async function runAIRequest(userRow, options, timing) {
   if (sceneContext) ctx.scene_state = JSON.stringify(sceneContext);
   const qs = new URLSearchParams(Object.assign({
     message_id: userRow.id, conversation_id: userRow.conversation_id,
-    model: modeloAtivo(), memory: memoryOn() ? '1' : '0',
+    model: modeloAtivo() || modelCatalog.default || 'vexx-qwen-2.5-3b', memory: memoryOn() ? '1' : '0',
     text: userRow.text || '', created_at: userRow.created_at || ''
   }, ctx));
   aiAbort = new AbortController();

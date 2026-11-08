@@ -99,7 +99,7 @@ def cached_default(proxy, fallback):
 
 PROVIDERS = {
     "vexx": {
-        "label": "⚡ VEXX Qwen 2.5 3B (Pesquisa & Tools - Prioritário)",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
         "key_env": None, "api": "vexx_qwen",
         "modelos": ["vexx-qwen-2.5-3b"],
     },
@@ -299,16 +299,18 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
     itens = [{
         "id": "vexx-qwen-2.5-3b",
         "provider": "vexx",
-        "label": "⚡ VEXX Qwen 2.5 3B (Pesquisa & Tools - Prioritário)",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
         "free": True,
     }]
     provs = [{
         "id": "vexx",
-        "label": "⚡ VEXX Qwen 2.5 3B (Pesquisa & Tools - Prioritário)",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
         "configured": True,
         "source": "hf_space"
     }]
     for nome, d in PROVIDERS.items():
+        if nome == "vexx":
+            continue
         conf = True if nome == "hermes" else bool(chave(nome))
         prov = {"id": nome, "label": d["label"], "configured": conf}
         origem = chave_origem(nome) if conf else ""
@@ -473,7 +475,10 @@ def chat_stream(prov: str, model_id: str, messages: list, on_delta,
         res = qwen_llm_service.gerar_resposta_qwen(messages, max_tokens=max_tokens, timeout=timeout)
         texto = res.get("resposta") or ""
         if callable(on_delta):
-            on_delta(texto)
+            try:
+                on_delta(1, texto)
+            except TypeError:
+                on_delta(texto)
         return {
             "texto": texto[:hermes_bridge.MAX_TEXTO],
             "truncada": len(texto) > hermes_bridge.MAX_TEXTO,

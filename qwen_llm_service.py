@@ -21,11 +21,35 @@ FALLBACK_SPACE_URL = os.environ.get("VEXX_VISION_API_URL", "https://euefrai-api-
 DEFAULT_TIMEOUT = float(os.environ.get("VEXX_QWEN_TIMEOUT", 35.0))
 MAX_RETRIES = int(os.environ.get("VEXX_QWEN_MAX_RETRIES", 2))
 
+def _obter_hf_token() -> str:
+    """Recupera o token Hugging Face do ambiente ou de arquivos .env conhecidos."""
+    token = os.environ.get("HUGGINGFACE_API_KEY") or os.environ.get("HF_TOKEN") or ""
+    if not token:
+        for p in [r"C:\Users\efrai\Documents\complete_local\.env", ".env"]:
+            if os.path.exists(p):
+                try:
+                    with open(p, "r", encoding="utf-8") as f:
+                        for line in f:
+                            if "HUGGINGFACE" in line or "HF_TOKEN" in line:
+                                m = re.search(r"=\s*([^\s#]+)", line)
+                                if m:
+                                    token = m.group(1).strip("\"'")
+                                    break
+                except Exception:
+                    pass
+            if token:
+                break
+    return token
+
+
 
 def _post_gradio_api(url: str, endpoint: str, payload_data: Any, timeout: float = 30.0) -> Dict[str, Any]:
     """Chama a API Gradio 5/4 via endpoint /gradio_api/call/<endpoint> + SSE stream."""
     call_url = f"{url}/gradio_api/call/{endpoint.lstrip('/')}"
     headers = {"Content-Type": "application/json", "User-Agent": "VEXX-AI-Client/1.0"}
+    token = _obter_hf_token()
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
     body = json.dumps({"data": [payload_data]}).encode("utf-8")
 
     req = urllib.request.Request(call_url, data=body, headers=headers, method="POST")
@@ -70,7 +94,8 @@ def _chamar_api_qwen_com_retry(payload: Dict[str, Any], timeout: float = DEFAULT
                 # 1. Tenta via gradio_client se disponível
                 try:
                     from gradio_client import Client
-                    client = Client(target_url)
+                    token = _obter_hf_token()
+                    client = Client(target_url, token=token or None)
                     for api_name in ("/gerar_resposta", "/predict"):
                         try:
                             res = client.predict(payload, api_name=api_name)

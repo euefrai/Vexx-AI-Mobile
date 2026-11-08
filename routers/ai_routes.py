@@ -132,7 +132,7 @@ async def ai_models(request: Request):
         itens = []
     return {"models": result.get("models", [])[:2000], "default": result.get("default", ""),
             "items": [{k: i.get(k) for k in ("id", "provider", "free")
-                       if k != "free" or isinstance(i.get(k), bool)}
+                       if (k != "free" or isinstance(i.get(k), bool)) and i.get(k) is not None}
                       for i in itens if isinstance(i, dict)][:2000],
             "providers": [{k: p.get(k) for k in ("id", "label", "configured", "auth_error", "source")
                            if p.get(k) is not None}
