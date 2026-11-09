@@ -382,6 +382,17 @@ def open_db(path: Path):
         state TEXT NOT NULL, updated_at TEXT NOT NULL,
         owner_id TEXT NOT NULL DEFAULT 'local'
     )""")
+    db.execute("""CREATE TABLE IF NOT EXISTS agent_cognition (
+        owner_id TEXT NOT NULL DEFAULT 'local',
+        humor TEXT NOT NULL DEFAULT 'curioso_e_focado',
+        energia REAL NOT NULL DEFAULT 1.0,
+        desejo_ativo TEXT NOT NULL DEFAULT 'Aprender, raciocinar e auxiliar com profundidade',
+        pensamento_recente TEXT NOT NULL DEFAULT '',
+        curiosidade TEXT NOT NULL DEFAULT '',
+        aprendizados TEXT NOT NULL DEFAULT '[]',
+        updated_at TEXT NOT NULL,
+        PRIMARY KEY (owner_id)
+    )""")
     _ensure_owner_coluna(db, "ui_state")
     db.execute("CREATE INDEX IF NOT EXISTS idx_uistate_msg ON ui_state(message_id)")
     db.commit()

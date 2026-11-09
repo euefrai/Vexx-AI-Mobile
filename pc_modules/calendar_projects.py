@@ -450,11 +450,23 @@ def _consolidar_memorias(db, cfg: dict, owner=DONO_PADRAO) -> None:
         with db:
             db.execute("DELETE FROM memories WHERE owner_id=?", (owner,))
             db.execute("DELETE FROM memory_facts WHERE owner_id=?", (owner,))
+            try:
+                db.execute("DELETE FROM memories_fts WHERE owner_id=?", (owner,))
+            except Exception:
+                pass
             for f in novos[:25]:
                 if isinstance(f, dict) and f.get("value"):
                     chave = re.sub(r"\s+", "_", str(f.get("key", "fato")).strip().lower())[:60] or "fato"
-                    db.execute("INSERT INTO memories (owner_id, key, value, updated_at) VALUES (?, ?, ?, ?)",
-                               (owner, chave, str(f["value"])[:500], agora_iso()))
+                    valor = str(f["value"])[:500]
+                    db.execute("""INSERT INTO memories (owner_id, key, value, updated_at)
+                                  VALUES (?, ?, ?, ?)
+                                  ON CONFLICT(owner_id, key) DO UPDATE SET
+                                  value=excluded.value, updated_at=excluded.updated_at""",
+                               (owner, chave, valor, agora_iso()))
+                    try:
+                        _fts_sync(db, owner, chave, valor, "")
+                    except Exception:
+                        pass
         log.info("memória consolidada: %d fatos", len(novos))
     except Exception as exc:
         log.warning("consolidação falhou: %s", exc)

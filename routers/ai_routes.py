@@ -654,3 +654,12 @@ async def vision_analyze_post(request: Request, body: VisionAnalyzeRequest):
         motor=body.engine or None,
         classes_personalizadas=body.classes,
     )
+
+@router.post("/api/ai/latency-test")
+async def ai_latency_test(request: Request):
+    """Executa benchmark de latência da IA local (Qwen 2.5 1.5B)."""
+    require_csrf(request)
+    await revogacao_ok(request)
+    import providers
+    return providers.testar_latencia_ai()
+

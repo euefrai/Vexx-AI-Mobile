@@ -126,7 +126,11 @@
           </select>
           <small id="modelResults" class="model-hint" role="status"></small>
           <small id="modelSelected" class="model-hint"></small>
-          <button id="modelRefresh" class="model-refresh" type="button" title="Atualizar a lista de modelos e provedores" aria-label="Atualizar lista de modelos">Atualizar</button>
+          <div class="drawer-model-actions" style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+            <button id="modelRefresh" class="model-refresh" type="button" title="Atualizar a lista de modelos e provedores" aria-label="Atualizar lista de modelos">Atualizar</button>
+            <button id="aiBenchmarkBtn" class="model-refresh ai-bench-btn" type="button" title="Testar latência da IA local no PC" aria-label="Testar latência da IA local no PC">⚡ Testar Latência IA</button>
+          </div>
+          <small id="aiBenchmarkHint" class="model-hint" style="margin-top:4px;display:block;"></small>
         </div>
         <div class="drawer-vision" id="drawerVision">
           <div class="drawer-vision-header">

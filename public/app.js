@@ -2163,6 +2163,47 @@ $('modelRefresh') && $('modelRefresh').addEventListener('click', async () => {
   b.disabled = false;
   showToast(ok ? 'Lista de modelos atualizada' : 'Não consegui atualizar a lista agora');
 });
+async function testarLatenciaAiPC() {
+  const btn = $('aiBenchmarkBtn');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Testando…';
+  }
+  const hint = $('aiBenchmarkHint');
+  if (hint) {
+    hint.textContent = 'Executando benchmark do Qwen 2.5 no seu PC…';
+    hint.style.color = '';
+  }
+  try {
+    const res = await api('/api/ai/latency-test', { method: 'POST' });
+    if (res && res.status === 'sucesso') {
+      const msg = `⚡ Qwen Local: ${res.ttft_ms}ms TTFT · ${res.tokens_per_sec || 0} tok/s · Total: ${(res.duracao_ms/1000).toFixed(2)}s`;
+      if (hint) {
+        hint.textContent = msg;
+        hint.style.color = 'var(--accent, #10b981)';
+      }
+      showToast(msg);
+    } else {
+      const err = (res && res.mensagem) || 'IA local não respondeu na porta 8008';
+      if (hint) {
+        hint.textContent = 'Aviso: ' + err;
+        hint.style.color = '#ef4444';
+      }
+      showToast('Aviso: ' + err);
+    }
+  } catch (err) {
+    if (hint) hint.textContent = 'Erro ao medir latência da IA';
+    showToast('Não foi possível testar a latência da IA agora');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = '⚡ Testar Latência IA';
+    }
+  }
+}
+$('aiBenchmarkBtn') && $('aiBenchmarkBtn').addEventListener('click', () => {
+  testarLatenciaAiPC();
+});
 function abrirSeletorDeModelo() {
   setDrawer(true);
   const det = document.querySelector('.drawer-connection');

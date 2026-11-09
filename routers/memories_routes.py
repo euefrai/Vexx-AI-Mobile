@@ -23,7 +23,7 @@ async def memories_list(request: Request):
 async def memories_forget(request: Request, key: str):
     require_csrf(request)
     dono = await revogacao_ok(request)
-    if not re.fullmatch(r"[a-z0-9_]{1,60}", key):
+    if not re.fullmatch(r"[\w\-\.]{1,80}", key, re.UNICODE):
         raise HTTPException(422, "Chave inválida")
     result = await relay.exchange({"type": "mem_forget", "owner": dono,
                                    "key": key}, timeout=20.0)
@@ -66,7 +66,7 @@ async def memories_confirm(request: Request):
 async def memories_update(request: Request, key: str, body: MemUpdate):
     require_csrf(request)
     dono = await revogacao_ok(request)
-    if not re.fullmatch(r"[a-z0-9_]{1,60}", key):
+    if not re.fullmatch(r"[\w\-\.]{1,80}", key, re.UNICODE):
         raise HTTPException(422, "Chave inválida")
     result = await relay.exchange({"type": "mem_update", "owner": dono,
                                    "key": key, "value": body.value}, timeout=20.0)

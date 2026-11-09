@@ -5,10 +5,12 @@ import sys
 import urllib.error
 from pathlib import Path
 import pytest
+from fastapi.testclient import TestClient
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import hermes_bridge
 import providers
+import server
 
 
 def test_qwen_local_configuracao_e_divisao():
@@ -43,6 +45,19 @@ def test_qwen_local_listar_tudo_prioridade():
     assert cat["providers"][0]["configured"] is True
 
 
+def test_qwen_local_podar_contexto():
+    mensagens = [
+        {"role": "system", "content": "Instrução inicial"},
+        {"role": "user", "content": "M1 " * 500},
+        {"role": "assistant", "content": "R1 " * 500},
+        {"role": "user", "content": "M2 recente"}
+    ]
+    podado = providers._podar_contexto_local(mensagens, max_chars=100)
+    assert len(podado) == 2
+    assert podado[0]["role"] == "system"
+    assert podado[1]["content"] == "M2 recente"
+
+
 def test_qwen_local_chat_complete_mock(monkeypatch):
     chamadas = []
 
@@ -71,6 +86,32 @@ def test_qwen_local_chat_complete_mock(monkeypatch):
     assert len(chamadas) == 1
     assert chamadas[0].full_url == "http://127.0.0.1:8008/v1/chat/completions"
     assert chamadas[0].headers.get("Authorization") == "Bearer sk-local"
+
+
+def test_qwen_local_endpoint_latencia(monkeypatch):
+    import routers.ai_routes as air
+    async def fake_rev(req):
+        return "user_test"
+    monkeypatch.setattr(air, "revogacao_ok", fake_rev)
+    monkeypatch.setattr(air, "require_csrf", lambda req: None)
+
+    fake_res = {
+        "status": "sucesso",
+        "local_online": True,
+        "modelo": "qwen2.5-1.5b-instruct",
+        "ttft_ms": 235.0,
+        "duracao_ms": 650.0,
+        "tokens_per_sec": 14.5
+    }
+    monkeypatch.setattr(providers, "testar_latencia_ai", lambda *a, **k: fake_res)
+
+    client = TestClient(server.app)
+    resp = client.post("/api/ai/latency-test")
+    assert resp.status_code == 200
+    dados = resp.json()
+    assert dados["status"] == "sucesso"
+    assert dados["local_online"] is True
+    assert dados["ttft_ms"] == 235.0
 
 
 def test_qwen_local_live_endpoint_se_disponivel():
