@@ -1982,11 +1982,17 @@ function modelSelectionError() {
   return '';
 }
 let modelCatalog = {
-  models: ['vexx-qwen-2.5-3b'],
-  providers: [{ id: 'vexx', label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)', configured: true, source: 'hf_space' }],
-  default: 'vexx-qwen-2.5-3b',
-  itemProvider: { 'vexx-qwen-2.5-3b': 'vexx' },
-  itemLabel: { 'vexx-qwen-2.5-3b': '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)' }
+  models: ['qwen2.5-1.5b-instruct', 'vexx-qwen-2.5-3b'],
+  providers: [
+    { id: 'qwen_local', label: '🖥️ Qwen 2.5 1.5B (Local PC - Principal)', configured: true, source: 'local_pc' },
+    { id: 'vexx', label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)', configured: true, source: 'hf_space' }
+  ],
+  default: 'qwen2.5-1.5b-instruct',
+  itemProvider: { 'qwen2.5-1.5b-instruct': 'qwen_local', 'vexx-qwen-2.5-3b': 'vexx' },
+  itemLabel: {
+    'qwen2.5-1.5b-instruct': '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)',
+    'vexx-qwen-2.5-3b': '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)'
+  }
 };
 let modelLoadVersion = 0;
 let providerMutation = false;
@@ -1999,7 +2005,7 @@ function providerFlag(pid, campo) {
   return !!(p && p[campo]);
 }
 function isConfigured(pid) {
-  if (pid === 'hermes' || pid === 'vexx') return true;
+  if (pid === 'hermes' || pid === 'vexx' || pid === 'qwen_local' || pid === 'local') return true;
   return providerFlag(pid, 'configured') && !providerFlag(pid, 'auth_error');
 }
 function providerOf(id) {
@@ -2013,10 +2019,12 @@ function providerOf(id) {
   return 'hermes';
 }
 function modelDisplayLabel(id) {
+  if (id === 'qwen2.5-1.5b-instruct') return '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
   if (id === 'vexx-qwen-2.5-3b') return '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
   return (modelCatalog.itemLabel && modelCatalog.itemLabel[id]) || id;
 }
 function modelGroup(id) {
+  if (id === 'qwen2.5-1.5b-instruct') return -2;
   if (id === 'vexx-qwen-2.5-3b') return -1;
   const pid = providerOf(id);
   if (String(id).endsWith(':free')) return 0;
@@ -2038,13 +2046,15 @@ function fillModels(filter) {
     const key = rank + ':' + pid;
     if (!groups.has(key)) {
       const g = document.createElement('optgroup');
-      g.label = rank === -1 ? '⚡ Modelo Próprio (VEXX AI)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
-        (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave');
+      g.label = rank === -2 ? '🖥️ IA Local (Principal)' : (rank === -1 ? '⚡ Modelo Próprio (VEXX AI)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
+        (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave'));
       groups.set(key, g); sel.appendChild(g);
     }
     const o = document.createElement('option');
     o.value = id;
-    if (id === 'vexx-qwen-2.5-3b') {
+    if (id === 'qwen2.5-1.5b-instruct') {
+      o.textContent = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
+    } else if (id === 'vexx-qwen-2.5-3b') {
       o.textContent = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
     } else {
       o.textContent = pid !== 'hermes' && id.startsWith(pid + '/') ? id.slice(pid.length + 1) : id;
@@ -2075,39 +2085,60 @@ async function loadModels(force) {
     if (version !== modelLoadVersion || owner !== currentUid || !authenticated) return false;
     modelsLoadedAt = Date.now();
     const allModels = r.models || [];
-    if (!allModels.includes('vexx-qwen-2.5-3b')) {
-      allModels.unshift('vexx-qwen-2.5-3b');
+    for (const mId of ['vexx-qwen-2.5-3b', 'qwen2.5-1.5b-instruct']) {
+      const idx = allModels.indexOf(mId);
+      if (idx !== -1) allModels.splice(idx, 1);
     }
+    allModels.unshift('vexx-qwen-2.5-3b');
+    allModels.unshift('qwen2.5-1.5b-instruct');
+
     const allItems = r.items || [];
-    if (!allItems.some(i => i.id === 'vexx-qwen-2.5-3b')) {
-      allItems.unshift({
-        id: 'vexx-qwen-2.5-3b',
-        provider: 'vexx',
-        label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
-        free: true
-      });
-    }
+    const localItem = {
+      id: 'qwen2.5-1.5b-instruct',
+      provider: 'qwen_local',
+      label: '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)',
+      free: true
+    };
+    const vexxItem = {
+      id: 'vexx-qwen-2.5-3b',
+      provider: 'vexx',
+      label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
+      free: true
+    };
+    const filteredItems = allItems.filter(i => i.id !== 'qwen2.5-1.5b-instruct' && i.id !== 'vexx-qwen-2.5-3b');
+    filteredItems.unshift(vexxItem);
+    filteredItems.unshift(localItem);
+
     const allProviders = r.providers || [];
-    if (!allProviders.some(p => p.id === 'vexx')) {
-      allProviders.unshift({
-        id: 'vexx',
-        label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
-        configured: true,
-        source: 'hf_space'
-      });
-    }
+    const localProv = {
+      id: 'qwen_local',
+      label: '🖥️ Qwen 2.5 1.5B (Local PC - Principal)',
+      configured: true,
+      source: 'local_pc'
+    };
+    const vexxProv = {
+      id: 'vexx',
+      label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
+      configured: true,
+      source: 'hf_space'
+    };
+    const filteredProvs = allProviders.filter(p => p.id !== 'qwen_local' && p.id !== 'vexx');
+    filteredProvs.unshift(vexxProv);
+    filteredProvs.unshift(localProv);
+
     modelCatalog = {
       models: allModels,
-      providers: allProviders,
-      default: 'vexx-qwen-2.5-3b',
-      itemProvider: Object.fromEntries(allItems.map(i => [i.id, i.provider])),
-      itemLabel: Object.fromEntries(allItems.map(i => [i.id, i.label]))
+      providers: filteredProvs,
+      default: 'qwen2.5-1.5b-instruct',
+      itemProvider: Object.fromEntries(filteredItems.map(i => [i.id, i.provider])),
+      itemLabel: Object.fromEntries(filteredItems.map(i => [i.id, i.label]))
     };
+    modelCatalog.itemLabel['qwen2.5-1.5b-instruct'] = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
     modelCatalog.itemLabel['vexx-qwen-2.5-3b'] = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
     let escolhido = modeloAtivo();
     if (!escolhido || !modelCatalog.models.includes(escolhido) || escolhido.includes('crouton-alpha')) {
-      escolhido = 'vexx-qwen-2.5-3b';
-      localStorage.setItem('julia-model', 'vexx-qwen-2.5-3b');
+      escolhido = 'qwen2.5-1.5b-instruct';
+      localStorage.setItem('julia-model', 'qwen2.5-1.5b-instruct');
     }
     const cur = fillModels($('modelSearch') ? $('modelSearch').value : '');
     const pid = providerOf(escolhido);
@@ -2505,7 +2536,7 @@ async function runAIRequest(userRow, options, timing) {
   ctx.yolo_engine = yoloEngineAtivo();
   const qs = new URLSearchParams(Object.assign({
     message_id: userRow.id, conversation_id: userRow.conversation_id,
-    model: modeloAtivo() || modelCatalog.default || 'vexx-qwen-2.5-3b', memory: memoryOn() ? '1' : '0',
+    model: modeloAtivo() || modelCatalog.default || 'qwen2.5-1.5b-instruct', memory: memoryOn() ? '1' : '0',
     text: userRow.text || '', created_at: userRow.created_at || ''
   }, ctx));
   aiAbort = new AbortController();

@@ -85,14 +85,14 @@ def test_decidir_ferramenta_qwen():
 
 
 def test_qwen_prioritario_numero_um_no_catalogo():
-    # Verifica que o Qwen2.5-3B é o modelo #1 absoluto e padrão do catálogo
+    # Verifica que o Qwen local e o Qwen2.5-3B estão presentes e ativos no catálogo
     catalogo = providers.listar_tudo()
 
-    assert catalogo["default"] == "vexx-qwen-2.5-3b"
-    assert catalogo["models"][0] == "vexx-qwen-2.5-3b"
-    assert catalogo["items"][0]["id"] == "vexx-qwen-2.5-3b"
-    assert catalogo["items"][0]["provider"] == "vexx"
-    assert "Prioritário" in catalogo["items"][0]["label"]
+    assert catalogo["default"] == "qwen2.5-1.5b-instruct"
+    assert catalogo["models"][0] == "qwen2.5-1.5b-instruct"
+    assert "vexx-qwen-2.5-3b" in catalogo["models"]
+    assert any(i["id"] == "vexx-qwen-2.5-3b" and i["provider"] == "vexx" for i in catalogo["items"])
+    assert any(i["id"] == "qwen2.5-1.5b-instruct" and i["provider"] == "qwen_local" for i in catalogo["items"])
 
     # Verifica suporte a chat sem erro de seleção
     assert providers.supports_chat("vexx-qwen-2.5-3b") is True

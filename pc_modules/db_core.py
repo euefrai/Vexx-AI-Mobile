@@ -444,7 +444,7 @@ def list_messages(db, limit=200, owner=DONO_PADRAO, conversation_id="", before=N
 def ai_config() -> dict:
     return {
         "proxy": os.environ.get("HERMES_PROXY_URL", hermes_bridge.DEFAULT_PROXY_URL),
-        "model": os.environ.get("JULIA_AI_MODEL", hermes_bridge.DEFAULT_MODEL),
+        "model": os.environ.get("JULIA_AI_MODEL", "qwen2.5-1.5b-instruct"),
         "model_implicit": not bool(os.environ.get("JULIA_AI_MODEL")),
         "fallbacks": _lista_fallbacks(os.environ.get("JULIA_AI_FALLBACKS", "")),
         "system": system_with_identity((os.environ.get("JULIA_SYSTEM_PROMPT", "").strip()
@@ -467,6 +467,7 @@ def _lista_fallbacks(valor: str) -> list:
 
 
 FALLBACKS_GRATIS_PADRAO = [
+    "qwen2.5-1.5b-instruct",
     "vexx-qwen-2.5-3b",
     "meituan/longcat-2.5:free",
     "meta-llama/llama-3.2-3b-instruct:free",

@@ -119,6 +119,18 @@ async def ai_models(request: Request):
     dono = sessao_usuario(request)
     _rate_limit(request, "ai", dono)
 
+    local_item = {
+        "id": "qwen2.5-1.5b-instruct",
+        "provider": "qwen_local",
+        "label": "🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)",
+        "free": True
+    }
+    local_provider = {
+        "id": "qwen_local",
+        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Principal)",
+        "configured": True,
+        "source": "local_pc"
+    }
     vexx_item = {
         "id": "vexx-qwen-2.5-3b",
         "provider": "vexx",
@@ -139,10 +151,10 @@ async def ai_models(request: Request):
 
     if not isinstance(result, dict) or result.get("type") != "ai_models":
         return {
-            "models": ["vexx-qwen-2.5-3b"],
-            "default": "vexx-qwen-2.5-3b",
-            "items": [vexx_item],
-            "providers": [vexx_provider]
+            "models": ["qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b"],
+            "default": "qwen2.5-1.5b-instruct",
+            "items": [local_item, vexx_item],
+            "providers": [local_provider, vexx_provider]
         }
 
     provs = result.get("providers", [])
@@ -155,19 +167,23 @@ async def ai_models(request: Request):
     if not isinstance(models, list):
         models = []
 
-    if "vexx-qwen-2.5-3b" in models:
-        models.remove("vexx-qwen-2.5-3b")
+    for m_id in ("vexx-qwen-2.5-3b", "qwen2.5-1.5b-instruct"):
+        if m_id in models:
+            models.remove(m_id)
     models.insert(0, "vexx-qwen-2.5-3b")
+    models.insert(0, "qwen2.5-1.5b-instruct")
 
-    itens = [i for i in itens if isinstance(i, dict) and i.get("id") != "vexx-qwen-2.5-3b"]
+    itens = [i for i in itens if isinstance(i, dict) and i.get("id") not in ("qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b")]
     itens.insert(0, vexx_item)
+    itens.insert(0, local_item)
 
-    provs = [p for p in provs if isinstance(p, dict) and p.get("id") != "vexx"]
+    provs = [p for p in provs if isinstance(p, dict) and p.get("id") not in ("qwen_local", "vexx")]
     provs.insert(0, vexx_provider)
+    provs.insert(0, local_provider)
 
     return {
         "models": models[:2000],
-        "default": "vexx-qwen-2.5-3b",
+        "default": "qwen2.5-1.5b-instruct",
         "items": [{k: i.get(k) for k in ("id", "provider", "free")
                    if (k != "free" or isinstance(i.get(k), bool)) and i.get(k) is not None}
                   for i in itens if isinstance(i, dict)][:2000],

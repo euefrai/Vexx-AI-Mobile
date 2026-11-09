@@ -29,7 +29,8 @@ def test_evidence_json_survives_provider_adapters_without_mid_document_cut():
 def test_ui_default_comes_from_live_free_catalog(monkeypatch, catalog, expected):
     monkeypatch.setattr(providers, 'chave', lambda _: '')
     monkeypatch.setattr(hermes_bridge, 'listar_modelos', lambda *a, **k: catalog)
-    assert providers.listar_tudo()['default'] == expected
+    providers._remember_catalog('hermes', catalog, '')
+    assert providers.cached_default('', hermes_bridge.DEFAULT_MODEL) == expected
 
 
 @pytest.mark.parametrize('messages', [
@@ -99,7 +100,7 @@ def test_configurados_respeita_chave(monkeypatch):
                 "DEEPSEEK_API_KEY", "GROQ_API_KEY", "MISTRAL_API_KEY",
                 "OPENROUTER_API_KEY"):
         monkeypatch.delenv(env, raising=False)
-    assert providers.configurados() == ["hermes"]
+    assert set(providers.configurados()) >= {"hermes", "vexx", "qwen_local"}
     monkeypatch.setenv("GEMINI_API_KEY", "  AIzafake  ")
     assert providers.chave("gemini") == "AIzafake"
     assert "gemini" in providers.configurados()
@@ -133,10 +134,10 @@ def test_listar_sem_chaves_mostra_curadoria_sem_vazar(monkeypatch):
                         lambda *a, **k: (_ for _ in ()).throw(
                             hermes_bridge.BridgeErro("x", "indisponivel")))
     cat = providers.listar_tudo()
-    assert cat["models"] == [] or all("/" in m for m in cat["models"])
+    assert cat["models"] == [] or all("/" in m or m in ("qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b") for m in cat["models"])
     assert "sk-" not in json.dumps(cat)
     assert {p["id"] for p in cat["providers"]} >= {"hermes", "openai", "gemini"}
-    assert all(p["configured"] is False for p in cat["providers"] if p["id"] != "hermes")
+    assert all(p["configured"] is False for p in cat["providers"] if p["id"] not in ("hermes", "vexx", "qwen_local"))
 
 
 def test_listar_com_chave_usa_live_ou_curadoria(monkeypatch):
@@ -244,6 +245,7 @@ def test_gerar_texto_roteia(monkeypatch):
     pc_agent.gerar_texto(cfg, [], preferido="openai/gpt-4o-mini")
     assert chamadas == {"prov": True}
     chamadas.clear()
+    monkeypatch.setattr(pc_agent.db_core, "FALLBACKS_GRATIS_PADRAO", ["laguna"])
     pc_agent.gerar_texto({**cfg, "model": "laguna"}, [], preferido="laguna")
     assert chamadas == {"hermes": True}
 

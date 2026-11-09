@@ -35,7 +35,7 @@ CATALOG_TTL = 300
 
 def supports_chat(model_id, metadata=None):
     """Declared capability first; conservative exclusion when metadata is absent."""
-    if model_id == "vexx-qwen-2.5-3b":
+    if model_id in ("vexx-qwen-2.5-3b", "qwen2.5-1.5b-instruct"):
         return True
     meta = metadata if isinstance(metadata, dict) else {}
     capabilities = meta.get('capabilities')
@@ -71,7 +71,9 @@ def _remember_catalog(provider, ids, proxy=''):
 
 def selection_error(model, proxy=''):
     """No network on the message path; reject only known unavailable selections."""
-    if model in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b"):
+    if model in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b",
+                 "qwen2.5-1.5b-instruct", "qwen_local/qwen2.5-1.5b-instruct",
+                 "local/qwen2.5-1.5b-instruct"):
         return None
     provider, mid = dividir(model)
     unavailable = not supports_chat(mid)
@@ -98,6 +100,15 @@ def cached_default(proxy, fallback):
     return fallback
 
 PROVIDERS = {
+    "qwen_local": {
+        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Principal)",
+        "key_env": None,
+        "base": "http://127.0.0.1:8008/v1",
+        "hosts": ("127.0.0.1", "localhost"),
+        "api": "openai",
+        "modelos": ["qwen2.5-1.5b-instruct"],
+        "api_key": "sk-local",
+    },
     "vexx": {
         "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
         "key_env": None, "api": "vexx_qwen",
@@ -212,6 +223,8 @@ def definicao(nome: str) -> dict | None:
 
 def chave(nome: str) -> str:
     """API key do provedor ("" se ausente). Nunca logar o valor."""
+    if nome == "qwen_local":
+        return "sk-local"
     d = definicao(nome)
     if not d or not d.get("key_env"):
         return ""
@@ -221,6 +234,8 @@ def chave(nome: str) -> str:
 def chave_origem(nome: str) -> str:
     """Onde a chave está definida: 'arquivo' (.env local, salva pelo app),
     'sistema' (variável do PC) ou '' (sem chave). Nunca expõe o valor."""
+    if nome == "qwen_local":
+        return "local_pc"
     d = definicao(nome)
     if not d or not d.get("key_env"):
         return ""
@@ -236,10 +251,10 @@ def chave_origem(nome: str) -> str:
 
 
 def configurados() -> list:
-    """Provedores utilizáveis agora: vexx e hermes sempre + quem tem chave."""
-    out = ["vexx", "hermes"]
+    """Provedores utilizáveis agora: qwen_local, vexx e hermes sempre + quem tem chave."""
+    out = ["qwen_local", "vexx", "hermes"]
     for nome, d in PROVIDERS.items():
-        if nome not in ("vexx", "hermes") and chave(nome):
+        if nome not in ("qwen_local", "vexx", "hermes") and chave(nome):
             out.append(nome)
     return out
 
@@ -248,6 +263,9 @@ def dividir(modelo: str) -> tuple:
     """'gemini/gemini-2.0-flash' → ('gemini', 'gemini-2.0-flash').
     Sem prefixo conhecido → ('hermes', modelo) (legado)."""
     texto = str(modelo or "").strip()
+    if texto in ("qwen2.5-1.5b-instruct", "qwen_local/qwen2.5-1.5b-instruct", "local/qwen2.5-1.5b-instruct") or texto.startswith(("qwen_local/", "local/")):
+        resto = texto.split("/", 1)[1] if "/" in texto else texto
+        return "qwen_local", resto or "qwen2.5-1.5b-instruct"
     if texto in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b") or texto.startswith("vexx/"):
         return "vexx", "vexx-qwen-2.5-3b"
     if "/" in texto:
@@ -296,20 +314,38 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
     with ThreadPoolExecutor(max_workers=len(PROVIDERS)) as pool:
         pending = {nome: pool.submit(descobrir, nome, d) for nome, d in PROVIDERS.items()}
         discoveries = {nome: task.result() for nome, task in pending.items()}
-    itens = [{
-        "id": "vexx-qwen-2.5-3b",
-        "provider": "vexx",
-        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+    local_item = {
+        "id": "qwen2.5-1.5b-instruct",
+        "provider": "qwen_local",
+        "label": "🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)",
         "free": True,
-    }]
-    provs = [{
-        "id": "vexx",
-        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+    }
+    local_provider = {
+        "id": "qwen_local",
+        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Principal)",
         "configured": True,
-        "source": "hf_space"
-    }]
+        "source": "local_pc"
+    }
+    itens = [
+        local_item,
+        {
+            "id": "vexx-qwen-2.5-3b",
+            "provider": "vexx",
+            "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+            "free": True,
+        }
+    ]
+    provs = [
+        local_provider,
+        {
+            "id": "vexx",
+            "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+            "configured": True,
+            "source": "hf_space"
+        }
+    ]
     for nome, d in PROVIDERS.items():
-        if nome == "vexx":
+        if nome in ("qwen_local", "vexx"):
             continue
         conf = True if nome == "hermes" else bool(chave(nome))
         prov = {"id": nome, "label": d["label"], "configured": conf}
@@ -332,7 +368,7 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
                           **({"auth_error": True} if auth_ruim else {})})
     # Up to 500 proxy models + 200 per external provider. Do not silently cut
     # off the providers at the end of the registry after only 500 total IDs.
-    default = "vexx-qwen-2.5-3b"
+    default = "qwen2.5-1.5b-instruct"
     return {"models": [i["id"] for i in itens], "items": itens,
             "default": default, "providers": provs}
 
