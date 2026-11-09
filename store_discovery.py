@@ -21,8 +21,21 @@ def catalog_query(query):
              'oferta', 'ofertas', 'melhor', 'menor', 'preço', 'preco', 'preços', 'precos',
              'atual', 'atuais', 'brasil', 'brasileiras', 'venda', 'vender', 'direto', 'diretos',
              'link', 'links', 'produto', 'produtos', 'quero', 'com', 'uma', 'um', 'de', 'no',
-             'na', 'a', 'à', 'e', 'para', 'por', 'gpu', 'vram'}
-    return ' '.join(word for word in words if word.casefold() not in noise)[:120]
+             'na', 'a', 'à', 'e', 'para', 'por', 'gpu', 'vram', 'compare', 'comparar',
+             'comparativo', 'comparando', 'qual', 'versus', 'vs', 'diferença', 'diferenca',
+             'recomende', 'indique', 'abaixo', 'menos', 'ate', 'até', 'top', 'barato',
+             'barata', 'reais', 'r'}
+    cleaned_words = [word for word in words if word.casefold() not in noise]
+    lower_words = [w.casefold() for w in cleaned_words]
+    if any(w in ('fone', 'fones') for w in lower_words) and not any(w in ('ouvido', 'headphone', 'headset', 'earbuds', 'airpods') for w in lower_words):
+        expanded = []
+        for w in cleaned_words:
+            if w.casefold() in ('fone', 'fones'):
+                expanded.extend(['fone', 'de', 'ouvido'])
+            else:
+                expanded.append(w)
+        cleaned_words = expanded
+    return ' '.join(cleaned_words)[:120]
 
 
 def extract_kabum(page, limit=8):
@@ -30,7 +43,10 @@ def extract_kabum(page, limit=8):
     if not match:
         return []
     try:
-        data = json.loads(match.group(1))['props']['pageProps']['data']['catalogServer']['data']
+        raw_data = json.loads(match.group(1))['props']['pageProps']['data']
+        if isinstance(raw_data, str):
+            raw_data = json.loads(raw_data)
+        data = raw_data['catalogServer']['data']
     except (ValueError, KeyError, TypeError, RecursionError):
         return []
     if not isinstance(data, list):
@@ -70,9 +86,14 @@ def search_kabum(query, limit=8, timeout=5):
     url = 'https://www.kabum.com.br/busca/' + urllib.parse.quote(topic, safe='')
     final, page = research.baixar(url, timeout=min(6, timeout), max_bytes=2 * 1024 * 1024)
     target = urllib.parse.urlsplit(final)
-    if target.hostname != 'www.kabum.com.br' or not target.path.startswith('/busca/') or research.pagina_bloqueada(page):
+    if target.hostname != 'www.kabum.com.br' or research.pagina_bloqueada(page):
+        return []
+    if target.path.startswith(('/atendimento', '/carrinho', '/login', '/cadastro', '/conta')):
         return []
     rows = extract_kabum(page, limit=12)
+    topic_low = topic.casefold()
+    if 'fone' in topic_low or 'headphone' in topic_low or 'headset' in topic_low or 'earbud' in topic_low:
+        rows = [r for r in rows if not re.search(r'\b(?:fonte\s+carregador|fonte\s+para\s+notebook|carregador\s+para|fonte\s+chaveada|fonte\s+atx)\b', (r.get('titulo') or '').casefold())]
     if len(_CACHE) >= 32:
         _CACHE.pop(next(iter(_CACHE)))
     # A short discovery cache never constitutes a fresh offer verification.

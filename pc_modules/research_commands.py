@@ -277,12 +277,14 @@ def _shopping_aplicar(texto: str, shop_res: dict | None,
         return texto
     fence_shop = ""
     if shop_res.get("produtos"):
+        prods_validos = [p for p in shop_res["produtos"]
+                         if not (p.get("excluido_codigos") and "tipo_produto_diferente" in p.get("excluido_codigos"))]
         crit = shop_res.get("criterios", {}) or {}
-        if crit.get("comparacao") and len(shop_res["produtos"]) >= 2:
+        if crit.get("comparacao") and len(prods_validos) >= 2:
             fence_shop = shopping.fence_comparacao(
-                shop_res["produtos"][:4], shop_res.get("fontes", []))
-        else:
-            fence_shop = shopping.fence_resultado(shop_res)
+                prods_validos[:4], shop_res.get("fontes", []))
+        elif prods_validos:
+            fence_shop = shopping.fence_resultado({**shop_res, "produtos": prods_validos})
     else:
         nota = shopping.resumo_texto(shop_res)
         if nota and nota not in texto:
