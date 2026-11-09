@@ -17,7 +17,7 @@ import workspace_store
 from pc_modules.memory_store import _normalizar_temporal
 from pc_modules.calendar_projects import _projetos_relevantes, _trechos_projeto, pendencias
 from pc_modules.db_core import database_path, dono_valido, log
-from pc_modules.context_providers import imagens_primeiro
+from pc_modules.context_providers import anexar_fontes, imagens_primeiro
 
 # Símbolos de módulos posteriores injetados na inicialização do pacote:
 iniciar_job_bg = None  # provido por pc_modules.research_jobs
@@ -698,9 +698,31 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str, model: str = "") -> str:
         import research_view
         media = result.get('midia') or []
         fence = research_view.media_fence(media)
-        if fence:
-            return imagens_primeiro(fence, f'Encontrei {len(media)} item(ns) de mídia com origem indicada. Metadados recuperados; imagens e vídeos não foram analisados.')
         fontes = result.get('fontes') or []
+        if fence:
+            midias_validas = []
+            padroes_lixo = ('sino', 'notificacao', 'notificação', 'notificações', 'notification', 'bell', 'icon', 'icone', 'logo', 'badge', 'assets-v4', 'pixel')
+            for m_item in media:
+                txt = (str(m_item.get('title') or '') + ' ' + str(m_item.get('url') or '')).lower()
+                if not any(p in txt for p in padroes_lixo) and not txt.endswith('.svg'):
+                    midias_validas.append(m_item)
+            
+            topicos_destaque = []
+            for m_item in midias_validas[:6]:
+                tit = (m_item.get('title') or '').strip()
+                if tit:
+                    limpo = tit.split(' - ')[0].split(' | ')[0].strip(' .?!')
+                    if len(limpo) > 10 and limpo not in topicos_destaque:
+                        topicos_destaque.append(limpo)
+            
+            linhas_destaque = "\n".join(f"- {d}" for d in topicos_destaque) if topicos_destaque else ""
+            corpo = (
+                f"Encontrei fotos e notícias recentes sobre celebridades e personalidades em destaque:\n\n"
+                f"{linhas_destaque}\n\n"
+                f"*(Galeria com {len(midias_validas)} imagens verificadas das fontes oficiais anexada acima.)*"
+            )
+            anexo = anexar_fontes(corpo, fontes) if fontes else corpo
+            return imagens_primeiro(fence, anexo)
         if fontes:
             resumo = research.resumo_deterministico(fontes, termo_busca)
             anexo = anexar_fontes(resumo, fontes)

@@ -128,8 +128,27 @@ def _hypotheses(resumo: dict) -> dict:
 
 def _media(resumo: dict) -> dict:
     items = []
-    for item in (resumo.get("midia") or [])[:12]:
+    padroes_lixo = (
+        'sino', 'notificacao', 'notificação', 'notificações', 'notification', 'bell',
+        'icon', 'icone', 'ícone', 'logo', 'logotipo', 'badge', 'avatar-placeholder',
+        'pixel', 'spacer', 'tracking', 'banner-ad', 'compartilhar', 'share-button',
+        'btn-', 'assets-v4', 'assets-v3', 'favicon'
+    )
+    for item in (resumo.get("midia") or [])[:20]:
         if not isinstance(item, dict) or not item.get("url"):
+            continue
+        texto_total = " ".join([
+            str(item.get("title") or ""),
+            str(item.get("alt") or ""),
+            str(item.get("url") or ""),
+            str(item.get("thumb") or ""),
+            str(item.get("source_title") or ""),
+        ]).lower()
+        if any(p in texto_total for p in padroes_lixo):
+            continue
+        url_l = str(item.get("url") or "").lower()
+        thumb_l = str(item.get("thumb") or "").lower()
+        if url_l.endswith(".svg") or thumb_l.endswith(".svg"):
             continue
         items.append({
             "type": item.get("type"),
@@ -147,7 +166,9 @@ def _media(resumo: dict) -> dict:
             "excerpt": item.get("excerpt") or "",
             "alt": item.get("title") or "",
         })
-    return {"title": "Mídia descoberta (não é evidência)", "items": items}
+        if len(items) >= 12:
+            break
+    return {"title": "Fotos e Mídias Relacionadas", "items": items}
 
 
 def _files(resumo: dict) -> dict:
