@@ -270,6 +270,7 @@ class AIRequest(BaseModel):
     text: str = Field(default="", max_length=10000)
     created_at: str = Field(default="", max_length=48)
     image: str = Field(default="", max_length=2000000)
+    vision_engine: str = Field(default="", max_length=50)
 
 
 class ExportMessage(BaseModel):

@@ -2147,6 +2147,103 @@ $('popModelRow') && $('popModelRow').addEventListener('keydown', e => {
   if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('statusPop').hidden = true; abrirSeletorDeModelo(); }
 });
 
+/* ----- Visão Computacional (YOLO) ----- */
+function yoloEngineAtivo() {
+  return localStorage.getItem('vexx-yolo-engine') || 'local';
+}
+function yoloEngineDisplayLabel(engine) {
+  if (engine === 'local') return '💻 Meu Computador (Local)';
+  if (engine === 'huggingface') return '☁️ Hugging Face (Nuvem)';
+  return '⚡ Automático (PC + Fallback)';
+}
+function atualizarYoloUI(engine) {
+  const val = engine || yoloEngineAtivo();
+  const sel = $('yoloEngineSelect');
+  if (sel && sel.value !== val) sel.value = val;
+  const hint = $('yoloEngineHint');
+  if (hint) {
+    hint.textContent = val === 'local'
+      ? 'Motor: Meu Computador (Local - YOLOv8, ~80-120ms)'
+      : val === 'huggingface'
+      ? 'Motor: Hugging Face Spaces (nuvem)'
+      : 'Motor: Automático (PC local com fallback nuvem)';
+  }
+  const badge = $('yoloBadge');
+  if (badge) {
+    badge.textContent = val === 'local' ? 'PC Local' : (val === 'huggingface' ? 'Nuvem' : 'Auto');
+    badge.style.color = val === 'huggingface' ? 'var(--blue-bright, #38bdf8)' : '#22c55e';
+    badge.style.background = val === 'huggingface' ? 'rgba(56, 189, 248, 0.15)' : 'rgba(34, 197, 94, 0.15)';
+  }
+  const popVis = $('popVision');
+  if (popVis) {
+    popVis.textContent = val === 'local' ? 'PC Local' : (val === 'huggingface' ? 'Nuvem' : 'Auto');
+  }
+}
+async function salvarYoloEngine(engine) {
+  localStorage.setItem('vexx-yolo-engine', engine);
+  atualizarYoloUI(engine);
+  try {
+    await api('/api/vision/engine', {
+      method: 'POST',
+      body: JSON.stringify({ engine })
+    });
+  } catch (_) {}
+}
+async function testarLatenciaYoloPC() {
+  const btn = $('yoloBenchmarkBtn');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Testando…';
+  }
+  const hint = $('yoloEngineHint');
+  if (hint) hint.textContent = 'Executando benchmark do YOLOv8 no seu PC…';
+  try {
+    const res = await api('/api/vision/latency-test', {
+      method: 'POST',
+      body: JSON.stringify({ iterations: 5 })
+    });
+    if (res && res.status === 'sucesso') {
+      const msg = `⚡ YOLO no PC (${res.dispositivo}): média ${res.latencia_media_ms}ms (mín ${res.latencia_min_ms}ms, máx ${res.latencia_max_ms}ms | ~${res.fps_estimado} FPS)`;
+      if (hint) hint.textContent = msg;
+      showToast(msg);
+    } else {
+      showToast('Erro no teste: ' + (res?.mensagem || 'desconhecido'));
+    }
+  } catch (err) {
+    showToast('Falha no teste de latência: ' + (err.message || ''));
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Testar latência';
+    }
+  }
+}
+function abrirSeletorDeYolo() {
+  setDrawer(true);
+  const det = document.querySelector('.drawer-connection');
+  if (det) det.open = true;
+  const alvo = $('yoloEngineSelect');
+  if (alvo) {
+    if (alvo.scrollIntoView) alvo.scrollIntoView({ block: 'nearest' });
+    try { alvo.focus({ preventScroll: true }); } catch (_) { alvo.focus(); }
+  }
+}
+$('yoloEngineSelect') && $('yoloEngineSelect').addEventListener('change', e => {
+  salvarYoloEngine(e.target.value);
+  showToast('Motor de visão alterado para: ' + (e.target.value === 'local' ? 'Meu Computador' : (e.target.value === 'huggingface' ? 'Hugging Face' : 'Automático')));
+});
+$('yoloBenchmarkBtn') && $('yoloBenchmarkBtn').addEventListener('click', () => {
+  testarLatenciaYoloPC();
+});
+$('popVisionRow') && $('popVisionRow').addEventListener('click', () => {
+  $('statusPop').hidden = true;
+  abrirSeletorDeYolo();
+});
+$('popVisionRow') && $('popVisionRow').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('statusPop').hidden = true; abrirSeletorDeYolo(); }
+});
+
+
 /* ----- Provedores de IA: chaves ficam SÓ no PC (nunca aqui no app) ----- */
 function providerChipInfo(p) {
   if (!p.configured) return { texto: 'Sem chave', classe: '' };
@@ -2404,6 +2501,8 @@ async function runAIRequest(userRow, options, timing) {
   const ctx = aiLocalContext(userRow.text || '');
   const sceneContext = typeof globalThis.getModel3DContext === 'function' ? globalThis.getModel3DContext(options.owner,userRow.conversation_id) : null;
   if (sceneContext) ctx.scene_state = JSON.stringify(sceneContext);
+  ctx.vision_engine = yoloEngineAtivo();
+  ctx.yolo_engine = yoloEngineAtivo();
   const qs = new URLSearchParams(Object.assign({
     message_id: userRow.id, conversation_id: userRow.conversation_id,
     model: modeloAtivo() || modelCatalog.default || 'vexx-qwen-2.5-3b', memory: memoryOn() ? '1' : '0',
@@ -2738,7 +2837,7 @@ conversation.addEventListener('click', e => {
 /* ----- Envio ----- */
 function autoresize() { messageInput.style.height = 'auto'; messageInput.style.height = Math.min(messageInput.scrollHeight, 140) + 'px'; }
 messageInput.addEventListener('input', () => {
-  autoresize();
+  autoresize(); atualizarYoloUI();
   const n = messageInput.value.length;
   $('charCount').textContent = n > 9000 ? n + ' / 10000' : '';
 });

@@ -1827,3 +1827,15 @@ button.jdui-pthumb:focus-visible,button.jdui-node:focus-visible,.jdui-cards sele
 .jdui-media-grid .jdui-pimg{object-fit:contain;aspect-ratio:16/10}
 .jdui-media-grid .jdui-cardacts{flex-wrap:wrap}
 .jdui-media-grid .jdui-cardacts .jdui-btn{flex:1 1 8rem;min-width:0;overflow-wrap:normal}
+
+/* YOLO Vision Engine Drawer */
+.drawer-vision{display:flex;flex-direction:column;gap:6px;padding:10px 8px;margin-top:8px;border-top:1px solid var(--line);font-size:12px}
+.drawer-vision-header{display:flex;justify-content:space-between;align-items:center;width:100%}
+.drawer-vision-header label{font-weight:600;color:var(--text);font-size:12px}
+.yolo-badge{font-size:10px;padding:2px 6px;border-radius:6px;background:rgba(34,197,94,0.15);color:#22c55e;font-weight:600}
+.yolo-select{width:100%;height:36px;padding:6px 8px;border-radius:8px;background:var(--bg);border:1px solid var(--line);color:var(--text);font-size:12px;cursor:pointer}
+.yolo-select:focus{border-color:var(--purple-2)}
+.drawer-vision-actions{display:flex;justify-content:space-between;align-items:center;gap:8px;width:100%}
+.yolo-bench-btn{background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:5px 8px;color:var(--soft);font-size:11px;cursor:pointer;white-space:nowrap}
+.yolo-bench-btn:hover{color:var(--text)}
+.yolo-bench-btn:disabled{opacity:.55;cursor:default}

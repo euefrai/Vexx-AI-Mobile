@@ -125,6 +125,21 @@
           <small id="modelSelected" class="model-hint"></small>
           <button id="modelRefresh" class="model-refresh" type="button" title="Atualizar a lista de modelos e provedores" aria-label="Atualizar lista de modelos">Atualizar</button>
         </div>
+        <div class="drawer-vision" id="drawerVision">
+          <div class="drawer-vision-header">
+            <label for="yoloEngineSelect">Visão Computacional (YOLO)</label>
+            <span class="yolo-badge" id="yoloBadge">PC Local</span>
+          </div>
+          <select id="yoloEngineSelect" class="yolo-select" aria-label="Motor YOLO de Visão">
+            <option value="auto">⚡ Automático (Meu Computador + Fallback Nuvem)</option>
+            <option value="local" selected>💻 Meu Computador (Local - YOLOv8)</option>
+            <option value="huggingface">☁️ Hugging Face Spaces (Nuvem)</option>
+          </select>
+          <div class="drawer-vision-actions">
+            <small id="yoloEngineHint" class="model-hint">Motor: Meu Computador (Local - YOLOv8)</small>
+            <button id="yoloBenchmarkBtn" class="model-refresh yolo-bench-btn" type="button" title="Testar latência do YOLO no PC" aria-label="Testar latência do YOLO no PC">Testar latência</button>
+          </div>
+        </div>
         <div class="drawer-status"><span class="status-dot" id="drawerDot"></span><span id="aiStatus" class="muted">IA: verificando…</span></div>
         </details>
         <p id="workspaceStatus" class="workspace-status" role="status">Projetos salvos neste aparelho</p>
@@ -147,6 +162,7 @@
       <div class="status-pop" id="statusPop" hidden role="status" aria-label="Detalhes de status">
         <div class="status-pop-row"><span class="status-dot" id="popDot"></span><strong id="connectionLabel">Verificando…</strong></div>
         <div class="status-pop-row" id="popModelRow" role="button" tabindex="0" title="Trocar o modelo que responde"><span>Modelo</span><span id="popModel">—</span></div>
+        <div class="status-pop-row" id="popVisionRow" role="button" tabindex="0" title="Trocar o motor de visão YOLO"><span>Visão YOLO</span><span id="popVision">Local</span></div>
         <div class="status-pop-row" id="popProvidersRow" role="button" tabindex="0" title="Adicionar ou trocar chaves de API"><span>Provedores</span><span>Gerenciar…</span></div>
         <div class="status-pop-row"><span>Sincronização</span><span id="popSync">—</span></div>
       </div>

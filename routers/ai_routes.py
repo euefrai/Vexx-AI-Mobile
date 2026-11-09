@@ -29,7 +29,7 @@ async def ai_complete(request: Request, body: AIRequest):
                                    "local_time": body.local_time, "timezone": body.timezone,
                                    "city": body.city, "latitude": body.latitude,
                                    "longitude": body.longitude, "text": body.text,
-                                   "created_at": body.created_at, "scene_state": body.scene_state, **({"image": body.image} if body.image else {})}, timeout=180.0)
+                                   "created_at": body.created_at, "scene_state": body.scene_state, **({"image": body.image} if body.image else {}), **({"vision_engine": body.vision_engine} if getattr(body, "vision_engine", "") else {})}, timeout=180.0)
     if result.get("type") != "ai_done" or "response_text" not in result:
         if result.get("type") == "ai_error":
             raise erro_relay(result, "IA indisponível")
@@ -187,7 +187,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     model: str = "", memory: str = "1", local_time: str = "",
                     timezone: str = "", city: str = "",
                     latitude: float | None = None, longitude: float | None = None,
-                    text: str = "", created_at: str = "", scene_state: str = "", image: str = ""):
+                    text: str = "", created_at: str = "", scene_state: str = "", image: str = "", vision_engine: str = ""):
     """SSE com deltas reais do Hermes (via agente). Fechar a conexão cancela."""
     request_started = time.monotonic()
     require_csrf(request)
@@ -573,3 +573,68 @@ async def voice_chat_stream(websocket: WebSocket):
         log.error("VOICE_CHAT_EXCEPTION session=%s error=%s", session_id, e)
     finally:
         await _cancelar_geracao_atual()
+
+
+class VisionEngineRequest(BaseModel):
+    engine: str = Field(min_length=2, max_length=30)
+
+
+class VisionLatencyRequest(BaseModel):
+    iterations: int = Field(default=5, ge=1, le=20)
+
+
+class VisionAnalyzeRequest(BaseModel):
+    image: str = Field(min_length=1, max_length=2000000)
+    engine: str = Field(default="", max_length=30)
+    classes: str = Field(default="", max_length=200)
+
+
+@router.get("/api/vision/engine")
+async def vision_engine_get():
+    """Retorna o motor de visão ativo e a lista de motores disponíveis."""
+    import vision_service
+    return {
+        "engine": vision_service.obter_motor_visao(),
+        "engines": vision_service.listar_motores_visao(),
+    }
+
+
+@router.post("/api/vision/engine")
+async def vision_engine_post(request: Request, body: VisionEngineRequest):
+    """Altera o motor de visão em tempo de execução ('local', 'huggingface', 'auto')."""
+    require_csrf(request)
+    await revogacao_ok(request)
+    import vision_service
+    try:
+        novo = vision_service.definir_motor_visao(body.engine)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc))
+    return {
+        "ok": True,
+        "engine": novo,
+        "engines": vision_service.listar_motores_visao(),
+    }
+
+
+@router.post("/api/vision/latency-test")
+async def vision_latency_test(request: Request, body: VisionLatencyRequest | None = None):
+    """Executa benchmark de latência do modelo YOLO no PC local."""
+    require_csrf(request)
+    await revogacao_ok(request)
+    import vision_service
+    iters = body.iterations if body else 5
+    return vision_service.testar_latencia_yolo_local(iteracoes=iters)
+
+
+@router.post("/api/vision/analyze")
+async def vision_analyze_post(request: Request, body: VisionAnalyzeRequest):
+    """Executa detecção de visão em uma imagem via motor ativo ou especificado."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    _rate_limit(request, "ai", dono)
+    import vision_service
+    return vision_service.analisar_imagem(
+        body.image,
+        motor=body.engine or None,
+        classes_personalizadas=body.classes,
+    )

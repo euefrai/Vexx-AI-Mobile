@@ -171,6 +171,9 @@ def _contexto_local_seguro(payload: dict) -> dict:
         limpas = [str(i).strip()[:2_000_000] for i in imgs[:5] if isinstance(i, str) and str(i).strip()]
         if limpas:
             contexto["images"] = limpas
+    v_eng = str(payload.get("vision_engine") or payload.get("yolo_engine") or "").strip().lower()
+    if v_eng in ("local", "pc", "huggingface", "hf", "nuvem", "auto"):
+        contexto["vision_engine"] = v_eng
     return contexto
 
 

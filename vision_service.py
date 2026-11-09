@@ -32,6 +32,12 @@ DEFAULT_TIMEOUT_S = 25.0
 DEFAULT_RETRIES = 3
 DEFAULT_BACKOFF_S = 1.5
 
+DEFAULT_VISION_ENGINE = os.environ.get("VEXX_VISION_ENGINE", "auto").strip().lower()
+_CURRENT_VISION_ENGINE = DEFAULT_VISION_ENGINE
+_LOCAL_YOLO_LOCK = threading.Lock()
+_LOCAL_YOLO_MODEL = None
+_LOCAL_YOLO_MODEL_PATH: str | None = None
+
 _CLIENT_LOCK = threading.Lock()
 _CLIENT_CACHE: dict[str, Any] = {}
 
@@ -148,6 +154,13 @@ def _preparar_entrada_imagem(imagem: Any) -> tuple[str, str | None, str]:
             return resolvido, None, caminho.name
 
         raise ValueError("Formato de imagem inválido (informe URL, caminho de arquivo ou Base64)")
+
+    # Suporte nativo a PIL Image
+    if hasattr(imagem, "save") and hasattr(imagem, "size"):
+        fd, tmp_path = tempfile.mkstemp(prefix="vexx_vision_pil_", suffix=".png")
+        os.close(fd)
+        imagem.save(tmp_path, format="PNG")
+        return tmp_path, tmp_path, f"pil_image({imagem.size[0]}x{imagem.size[1]})"
 
     raise ValueError(f"Tipo de imagem não suportado: {type(imagem).__name__}")
 
@@ -420,7 +433,7 @@ def _normalizar_resposta(bruto: Any, origem: str = "") -> dict[str, Any]:
     return saida
 
 
-def analisar_imagem(
+def analisar_imagem_huggingface(
     imagem: Any,
     *,
     classes_personalizadas: str = "",
@@ -532,6 +545,358 @@ def analisar_imagem(
             except OSError:
                 pass
 
+
+
+def localizar_modelo_yolo_local() -> Path | str:
+    """Localiza o arquivo de pesos do YOLOv8 no computador."""
+    candidatos = [
+        Path(__file__).resolve().parent / "models" / "yolov8n.pt",
+        Path(__file__).resolve().parent.parent / "yolov8n.pt",
+        Path("models/yolov8n.pt"),
+        Path("yolov8n.pt"),
+    ]
+    for c in candidatos:
+        if c.is_file():
+            return c
+    return "yolov8n.pt"
+
+
+def verificar_disponibilidade_yolo_local() -> tuple[bool, str]:
+    """Checa se o pacote ultralytics e pesos do YOLO estão disponíveis no PC."""
+    try:
+        import ultralytics  # noqa: F401
+        caminho = localizar_modelo_yolo_local()
+        nome = getattr(caminho, "name", str(caminho))
+        return True, nome
+    except Exception:
+        return False, "não instalado"
+
+
+def obter_motor_visao() -> str:
+    """Retorna o motor de visão ativo ('local', 'huggingface' ou 'auto')."""
+    global _CURRENT_VISION_ENGINE
+    return _CURRENT_VISION_ENGINE or "auto"
+
+
+def definir_motor_visao(motor: str) -> str:
+    """Define o motor de visão ativo em tempo de execução."""
+    global _CURRENT_VISION_ENGINE
+    m = (motor or "").strip().lower()
+    if m in ("local", "pc"):
+        _CURRENT_VISION_ENGINE = "local"
+    elif m in ("huggingface", "hf", "nuvem"):
+        _CURRENT_VISION_ENGINE = "huggingface"
+    elif m in ("auto", "automatico"):
+        _CURRENT_VISION_ENGINE = "auto"
+    else:
+        raise ValueError(f"Motor inválido: {motor}. Opções permitidas: 'local', 'huggingface', 'auto'.")
+    os.environ["VEXX_VISION_ENGINE"] = _CURRENT_VISION_ENGINE
+    return _CURRENT_VISION_ENGINE
+
+
+def listar_motores_visao() -> list[dict[str, Any]]:
+    """Lista os motores de visão disponíveis com status e detalhes para a UI."""
+    disp_local, mod_nome = verificar_disponibilidade_yolo_local()
+    atual = obter_motor_visao()
+    return [
+        {
+            "id": "auto",
+            "nome": "⚡ Automático (Meu Computador + Fallback Nuvem)",
+            "descricao": "Usa o YOLOv8 no seu PC para velocidade instantânea; recorre ao Hugging Face se necessário.",
+            "disponivel": True,
+            "ativo": atual == "auto",
+        },
+        {
+            "id": "local",
+            "nome": "💻 Meu Computador (Local - YOLOv8)",
+            "descricao": "Processamento local no PC (~80-120ms) sem enviar imagens para a internet.",
+            "disponivel": disp_local,
+            "modelo": mod_nome,
+            "ativo": atual == "local",
+        },
+        {
+            "id": "huggingface",
+            "nome": "☁️ Hugging Face (Nuvem - Spaces)",
+            "descricao": "API remota no Hugging Face Spaces (euefrai-api-visao-yolo) com YOLOv8 + RapidOCR.",
+            "disponivel": True,
+            "url": space_url_configurada(),
+            "ativo": atual == "huggingface",
+        },
+    ]
+
+
+def carregar_modelo_yolo_local(forcar_recarga: bool = False):
+    """Carrega o modelo YOLOv8 local em memória com thread safety."""
+    global _LOCAL_YOLO_MODEL, _LOCAL_YOLO_MODEL_PATH
+    with _LOCAL_YOLO_LOCK:
+        if not forcar_recarga and _LOCAL_YOLO_MODEL is not None:
+            return _LOCAL_YOLO_MODEL
+        from ultralytics import YOLO
+        caminho = localizar_modelo_yolo_local()
+        log.info("Carregando modelo YOLO local: %s", caminho)
+        modelo = YOLO(str(caminho))
+        _LOCAL_YOLO_MODEL = modelo
+        _LOCAL_YOLO_MODEL_PATH = str(caminho)
+        return _LOCAL_YOLO_MODEL
+
+
+def analisar_imagem_local(
+    imagem: Any,
+    *,
+    classes_personalizadas: str = "",
+    conf_min: float = 0.25,
+) -> dict[str, Any]:
+    """Executa detecção de objetos YOLOv8 diretamente no computador local."""
+    temp_path: str | None = None
+    try:
+        alvo, temp_path, origem = _preparar_entrada_imagem(imagem)
+    except ValueError as exc:
+        return {
+            "status": "erro",
+            "mensagem": str(exc),
+            "dimensoes": {"largura": 0, "altura": 0},
+            "total_objetos": 0,
+            "total_textos": 0,
+            "tags_busca": "",
+            "texto_extraido": "",
+            "deteccoes": [],
+            "textos_lidos": [],
+            "alvos_clique": [],
+            "origem": "",
+        }
+
+    try:
+        t0 = time.perf_counter()
+        modelo = carregar_modelo_yolo_local()
+        resultados = modelo(alvo, conf=conf_min, verbose=False)
+        latencia_ms = round((time.perf_counter() - t0) * 1000.0, 2)
+
+        res = resultados[0] if resultados else None
+        if res is None:
+            raise RuntimeError("Nenhum resultado retornado pelo modelo YOLO local")
+
+        orig_shape = getattr(res, "orig_shape", (0, 0))  # (h, w)
+        altura = int(orig_shape[0]) if len(orig_shape) >= 2 else 0
+        largura = int(orig_shape[1]) if len(orig_shape) >= 2 else 0
+
+        # Classes personalizadas para filtro (se fornecido)
+        filtro_classes: set[str] = set()
+        if classes_personalizadas:
+            filtro_classes = {
+                _sem_acentos(c.strip()) for c in classes_personalizadas.split(",") if c.strip()
+            }
+
+        deteccoes: list[dict[str, Any]] = []
+        alvos_clique: list[dict[str, Any]] = []
+        classes_confiaveis: list[str] = []
+
+        boxes = getattr(res, "boxes", None)
+        if boxes is not None:
+            names_map = getattr(modelo, "names", {})
+            for b in boxes:
+                try:
+                    cls_id = int(b.cls[0])
+                    rotulo = str(names_map.get(cls_id, cls_id)).strip()
+                    confianca = round(float(b.conf[0]), 2)
+                    coords_raw = b.xyxy[0].tolist()
+                    coordenadas = [round(float(c), 2) for c in coords_raw[:4]]
+                except Exception:
+                    continue
+
+                if filtro_classes and _sem_acentos(rotulo) not in filtro_classes:
+                    continue
+
+                ponto = _calcular_ponto_clique(coordenadas, largura or 1, altura or 1)
+                item = {
+                    "tipo": "objeto",
+                    "objeto": rotulo,
+                    "confianca": confianca,
+                    "coordenadas": coordenadas,
+                    "ponto_clique": ponto,
+                }
+                deteccoes.append(item)
+                alvos_clique.append({
+                    "tipo": "objeto",
+                    "rotulo": rotulo,
+                    "confianca": confianca,
+                    "coordenadas": coordenadas,
+                    "ponto_clique": ponto,
+                })
+                if confianca >= 0.35:
+                    classes_confiaveis.append(rotulo)
+
+        tags_busca = ", ".join(list(dict.fromkeys(classes_confiaveis)))
+
+        return {
+            "status": "sucesso",
+            "motor": "local",
+            "modelo": "YOLOv8 Local (PC)",
+            "dimensoes": {"largura": largura, "altura": altura},
+            "total_objetos": len(deteccoes),
+            "total_textos": 0,
+            "tags_busca": tags_busca,
+            "texto_extraido": "",
+            "deteccoes": deteccoes,
+            "textos_lidos": [],
+            "alvos_clique": alvos_clique,
+            "origem": origem,
+            "latencia_ms": latencia_ms,
+        }
+    finally:
+        if temp_path:
+            try:
+                Path(temp_path).unlink(missing_ok=True)
+            except OSError:
+                pass
+
+
+def testar_latencia_yolo_local(iteracoes: int = 5) -> dict[str, Any]:
+    """Realiza teste de benchmark de latência do YOLO no PC local."""
+    from PIL import Image
+
+    iteracoes = max(1, min(20, int(iteracoes)))
+    # Imagem padrão de teste sintética 640x480
+    img = Image.new("RGB", (640, 480), (140, 160, 190))
+    modelo = carregar_modelo_yolo_local()
+
+    # 1 warm-up
+    modelo(img, verbose=False)
+
+    latencias: list[float] = []
+    for _ in range(iteracoes):
+        t0 = time.perf_counter()
+        modelo(img, verbose=False)
+        latencias.append((time.perf_counter() - t0) * 1000.0)
+
+    avg_ms = round(sum(latencias) / len(latencias), 2)
+    min_ms = round(min(latencias), 2)
+    max_ms = round(max(latencias), 2)
+    fps = round(1000.0 / max(avg_ms, 1.0), 1)
+
+    try:
+        import torch
+        disp = "CUDA (GPU)" if torch.cuda.is_available() else "CPU"
+    except Exception:
+        disp = "CPU"
+
+    return {
+        "status": "sucesso",
+        "motor": "local",
+        "modelo": getattr(_LOCAL_YOLO_MODEL_PATH, "name", str(_LOCAL_YOLO_MODEL_PATH or "yolov8n.pt")),
+        "dispositivo": disp,
+        "iteracoes": iteracoes,
+        "latencia_media_ms": avg_ms,
+        "latencia_min_ms": min_ms,
+        "latencia_max_ms": max_ms,
+        "fps_estimado": fps,
+        "mensagem": f"YOLOv8 no PC ({disp}): média {avg_ms}ms (mín {min_ms}ms, máx {max_ms}ms, ~{fps} FPS)",
+    }
+
+
+def analisar_imagem(
+    imagem: Any,
+    *,
+    motor: str | None = None,
+    classes_personalizadas: str = "",
+    space_url: str | None = None,
+    api_name: str = DEFAULT_API_NAME,
+    timeout: float = DEFAULT_TIMEOUT_S,
+    retries: int = DEFAULT_RETRIES,
+    backoff_s: float = DEFAULT_BACKOFF_S,
+    client_factory: Callable[..., Any] | None = None,
+) -> dict[str, Any]:
+    """Analisa imagem roteando entre YOLOv8 local no PC e Hugging Face com auto-recuperação (fallback)."""
+    if isinstance(imagem, dict) and "deteccoes" in imagem and "status" in imagem:
+        return _normalizar_resposta(imagem, origem=str(imagem.get("origem") or "dict"))
+
+    if not vision_habilitada():
+        return {
+            "status": "desativado",
+            "mensagem": "Serviço de visão desativado por configuração",
+            "dimensoes": {"largura": 0, "altura": 0},
+            "total_objetos": 0,
+            "total_textos": 0,
+            "tags_busca": "",
+            "texto_extraido": "",
+            "deteccoes": [],
+            "textos_lidos": [],
+            "alvos_clique": [],
+            "origem": "",
+        }
+
+    # Se client_factory foi fornecido explicitamente (ex: testes com mock do gradio), usa o Hugging Face
+    if client_factory is not None:
+        return analisar_imagem_huggingface(
+            imagem,
+            classes_personalizadas=classes_personalizadas,
+            space_url=space_url,
+            api_name=api_name,
+            timeout=timeout,
+            retries=retries,
+            backoff_s=backoff_s,
+            client_factory=client_factory,
+        )
+
+    motor_ativo = (motor or obter_motor_visao() or "auto").strip().lower()
+
+    if motor_ativo in ("local", "pc"):
+        try:
+            res_local = analisar_imagem_local(imagem, classes_personalizadas=classes_personalizadas)
+            if res_local.get("status") == "sucesso":
+                return res_local
+            log.warning("YOLO local retornou status não-sucesso (%s); acionando fallback Hugging Face...", res_local.get("mensagem"))
+        except Exception as exc:
+            log.warning("Falha no YOLO local (%s); acionando fallback Hugging Face...", exc)
+        return analisar_imagem_huggingface(
+            imagem,
+            classes_personalizadas=classes_personalizadas,
+            space_url=space_url,
+            api_name=api_name,
+            timeout=timeout,
+            retries=retries,
+            backoff_s=backoff_s,
+        )
+
+    if motor_ativo in ("huggingface", "hf", "nuvem"):
+        res_hf = analisar_imagem_huggingface(
+            imagem,
+            classes_personalizadas=classes_personalizadas,
+            space_url=space_url,
+            api_name=api_name,
+            timeout=timeout,
+            retries=retries,
+            backoff_s=backoff_s,
+        )
+        if res_hf.get("status") == "sucesso":
+            return res_hf
+        log.warning("Hugging Face falhou (%s); acionando fallback para YOLO local no PC...", res_hf.get("mensagem"))
+        try:
+            res_local = analisar_imagem_local(imagem, classes_personalizadas=classes_personalizadas)
+            if res_local.get("status") == "sucesso":
+                res_local["fallback_de_huggingface"] = True
+                return res_local
+        except Exception as exc:
+            log.warning("Fallback local também falhou: %s", exc)
+        return res_hf
+
+    # Modo 'auto': tenta o YOLO local primeiro (ultra rápido, offline)
+    try:
+        res_local = analisar_imagem_local(imagem, classes_personalizadas=classes_personalizadas)
+        if res_local.get("status") == "sucesso":
+            return res_local
+        log.warning("Modo auto: YOLO local falhou (%s); tentando Hugging Face...", res_local.get("mensagem"))
+    except Exception as exc:
+        log.warning("Modo auto: exceção no YOLO local (%s); tentando Hugging Face...", exc)
+
+    return analisar_imagem_huggingface(
+        imagem,
+        classes_personalizadas=classes_personalizadas,
+        space_url=space_url,
+        api_name=api_name,
+        timeout=timeout,
+        retries=retries,
+        backoff_s=backoff_s,
+    )
 
 # Alias semântico compatível com o contrato do Space
 detectar_objetos = analisar_imagem
@@ -913,9 +1278,12 @@ def analisar_imagens_contexto(
     imagens = extrair_imagens_do_texto(texto, contexto_local)[:max(1, int(max_imagens))]
     if not imagens:
         return []
+    motor = kwargs.pop("motor", None)
+    if not motor and isinstance(contexto_local, dict):
+        motor = contexto_local.get("vision_engine") or contexto_local.get("yolo_engine")
     resultados: list[dict[str, Any]] = []
     for img in imagens:
-        res = analisar_imagem(img, **kwargs)
+        res = analisar_imagem(img, motor=motor, **kwargs)
         resultados.append(res)
     return resultados
 

@@ -1441,6 +1441,8 @@ def _synthesize_deep_report(
             )
             ans = (effective_llm(prompt) or "").strip()
             if len(ans) >= 80:
+                if "Relatório de Pesquisa Profunda" not in ans and "Relat�rio de Pesquisa Profunda" not in ans:
+                    ans = f"## Relatório de Pesquisa Profunda: {query}\n\n" + ans
                 return ans
         except Exception as exc:
             logger.warning("Fallback determinístico na síntese profunda: %s", exc)
