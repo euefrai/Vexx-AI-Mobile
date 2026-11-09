@@ -1077,7 +1077,8 @@ def _categoria_comercial(value: str) -> str:
         ('notebook', r'notebook|laptop|ultrabook|macbook'),
         ('computador', r'computador|desktop|pc gamer|mini pc'),
         ('gpu', r'placas? de videos?|gpu|geforce|radeon|rtx|gtx|quadro|(?:intel\s+)?arc\s+[ab]\d{3}'),
-        ('fone', r'fone|fones|headphone|headset|earbuds|airpods'),
+        ('fonte_carregador', r'fontes?\s+(?:carregador\w*|chaveada|atx|para\s+notebook|de\s+alimentac\w*|bivolt)|carregador\s+(?:para|de\s+notebook|veicular)|adaptador\s+de\s+energia'),
+        ('fone', r'fones?(?:\s+de\s+ouvido|\s+bluetooth|\s+sem\s+fio|\s+headset|\s+in-ear|\s+intra)?|headphones?|headsets?|earbuds?|airpods?|auriculares?'),
         ('tv', r'smart tv|televisor|tv'), ('monitor', r'monitor'),
         ('geladeira', r'geladeira|refrigerador'),
         ('lavadora', r'lavadora|maquina de lavar'),
@@ -1136,6 +1137,16 @@ def aplicar_filtros(produtos: list, criterios: dict) -> tuple:
                              r'\b(capa|pelicula|suporte|peca|compativel)\b',requested)))
         if accessory:
             motivos.append('acessório em vez do produto solicitado'); codigos.append('acessorio')
+        if category == 'fone':
+            is_phone = bool(re.search(r'\b(?:fones?(?:\s+de\s+ouvido|\s+bluetooth|\s+sem\s+fio|\s+headset|\s+in-ear|\s+intra)?|headphones?|headsets?|earbuds?|airpods?|auriculares?)\b', product_text))
+            is_false_fonte = bool(re.search(r'\b(?:fontes?\s+carregador\w*|fontes?\s+para\s+notebook|carregador\s+para|fontes?\s+de\s+alimentac\w*|fontes?\s+atx|voltagem\s+de\s+entrada|baterias?\s+de\s+notebook)\b', product_text))
+            is_holder_cable = bool(re.search(r'\b(?:suportes?(?:\s+para|\s+de)?\s+fone|cabos?\s+(?:p2|auxiliar|extens\w*)|almofadas?(?:\s+para|\s+de)?\s+fone|espumas?\s+para\s+fone|adaptador\s+bluetooth)\b', product_text)) and not re.search(r'\b(?:fone\s+com\s+suporte|fone\s+com\s+cabo)\b', requested)
+            if is_false_fonte or not is_phone:
+                motivos.append('tipo de produto diferente do pedido (não é fone de ouvido)')
+                codigos.append('tipo_produto_diferente')
+            elif is_holder_cable:
+                motivos.append('acessório em vez do produto solicitado')
+                codigos.append('acessorio')
         # Explicit cross-category conflicts in newly covered families, not missing metadata.
         families=(r'geladeira|refrigerador',r'lavadora|maquina de lavar',r'furadeira',r'parafusadeira',r'livro',r'resistor',r'capacitor',r'transistor',r'pastilha de freio',r'amortecedor',r'bola de basquete')
         asked=next((rx for rx in families if re.search(r'\b(?:'+rx+r')\b',requested)),None)
@@ -2004,7 +2015,9 @@ _RX_PEDIDO_WORDS = re.compile(
     r"\b(?:me\s+mostre|mostre|mostra|quero|queria|procuro|pesquis[ea]|"
     r"pesquise|busque|buscar|encontre|encontrar|pre[cç]os?|preco|imagens?|"
     r"fotos?|links?|comprar|compra|ofertas?|promo[cç][aã]o|promo|onde|"
-    r"quanto|custa|por\s+favor|pra\s+mim|para\s+mim|imagem)\b",
+    r"quanto|custa|por\s+favor|pra\s+mim|para\s+mim|imagem|"
+    r"compare|comparativo|comparar|comparando|qual\s+o?\s*melhor|qual\s+o?\s*menor|"
+    r"recomende|indique|versus|\bvs\b|diferen[cç]a)\b",
     re.IGNORECASE)
 
 
@@ -2047,6 +2060,8 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
     if criterios.get("categoria") in ("placa de video", "placa de vídeo"):
         ref = re.sub(r"^(?:algumas?|alguns?|umas?|uns?)\s+", "", ref, flags=re.I)
         ref = re.sub(r"\bque\s+(?:tem|tenham|tenha)\s+(?=\d)", "", ref, flags=re.I)
+    if (criterios.get("categoria") in ("fone", "fones") or "fone" in (ref or "").lower()) and "ouvido" not in (ref or "").lower() and "head" not in (ref or "").lower() and "ear" not in (ref or "").lower():
+        ref = re.sub(r"\bfones?\b", "fone de ouvido", ref, flags=re.I)
     if ref and orc.get("max"):
         ref = re.sub(r"\b(?:at[eé]|abaixo\s+de|menos\s+de|no\s+m[aá]ximo)"
                      r"\s*R?\$?\s*[\d.,]+", " ", ref, flags=re.IGNORECASE)
