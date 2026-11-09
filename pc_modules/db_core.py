@@ -508,6 +508,22 @@ def modelos_tentativa(cfg: dict, preferido: str = "") -> list:
     for fb in cfg.get("fallbacks", []) or []:
         if fb and fb not in candidatos:
             candidatos.append(fb)
+
+    # Provedores com credenciais ativas do usuário (Gemini, DeepSeek, Groq, OpenAI)
+    try:
+        import providers
+        provs = providers.configurados()
+        if "gemini" in provs and "gemini/gemini-2.0-flash" not in candidatos:
+            candidatos.append("gemini/gemini-2.0-flash")
+        if "groq" in provs and "groq/llama-3.3-70b-versatile" not in candidatos:
+            candidatos.append("groq/llama-3.3-70b-versatile")
+        if "deepseek" in provs and "deepseek/deepseek-chat" not in candidatos:
+            candidatos.append("deepseek/deepseek-chat")
+        if "openai" in provs and "openai/gpt-4o-mini" not in candidatos:
+            candidatos.append("openai/gpt-4o-mini")
+    except Exception:
+        pass
+
     for fb in FALLBACKS_GRATIS_PADRAO:
         if fb and fb not in candidatos:
             candidatos.append(fb)
