@@ -984,6 +984,18 @@ def fontes_preferenciais(consulta: str) -> list:
         entries.append(("FastAPI documentation", "https://fastapi.tiangolo.com/"))
     if docs and _tem_termo("django", t):
         entries.append(("Django documentation", "https://docs.djangoproject.com/en/stable/"))
+    if docs and _tem_termo("react", t):
+        entries.append(("React documentation", "https://react.dev/"))
+    if docs and (_tem_termo("nextjs", t) or (_tem_termo("next", t) and _tem_termo("js", t))):
+        entries.append(("Next.js documentation", "https://nextjs.org/docs"))
+    if docs and (_tem_termo("nodejs", t) or (_tem_termo("node", t) and _tem_termo("js", t))):
+        entries.append(("Node.js documentation", "https://nodejs.org/docs/latest/api/"))
+    if docs and _tem_termo("vue", t):
+        entries.append(("Vue.js documentation", "https://vuejs.org/guide/introduction.html"))
+    if docs and _tem_termo("python", t) and not _tem_termo("asyncio", t):
+        entries.append(("Python documentation", "https://docs.python.org/3/"))
+    if docs and _tem_termo("pytorch", t):
+        entries.append(("PyTorch documentation", "https://pytorch.org/docs/stable/index.html"))
     if docs and re.search(r"arquitetura\s+transformer|transformer\s+architecture", t):
         entries.append(("Attention Is All You Need (Transformer)", "https://arxiv.org/abs/1706.03762"))
     sources=[{"titulo": title, "url": url, "trecho": "", "origem": "fonte-primaria",

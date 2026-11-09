@@ -227,9 +227,15 @@ def intencao_factual(texto: str) -> bool:
     return bool(classificar_intencao_factual(texto).get("factual"))
 
 
-APROFUNDADA_TRIGGERS = ("a fundo", "aprofundada", "aprofundado", "relatório completo",
-                        "relatorio completo", "dossiê", "dossie", "verifique se",
-                        "é verdade", "e verdade", "checar fatos", "comparar fontes")
+APROFUNDADA_TRIGGERS = (
+    "a fundo", "aprofundada", "aprofundado", "relatório completo",
+    "relatorio completo", "dossiê", "dossie", "verifique se",
+    "é verdade", "e verdade", "checar fatos", "comparar fontes",
+    "documentação", "documentacao", "sites diferentes", "diversas fontes",
+    "mais preciso", "resultado preciso", "faça análises", "faca analises",
+    "fazer análises", "fazer analises", "cruzar dados", "cruzando dados",
+    "análise aprofundada", "analise aprofundada", "comparativo detalhado",
+)
 
 
 def intencao_pesquisa_aprofundada(texto: str) -> bool:

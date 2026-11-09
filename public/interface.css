@@ -184,7 +184,19 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 .upload-status[hidden] {display:none}
 #uploadLabel {min-width:0}
 #cancelAttachmentUpload {flex-shrink:0;min-height:44px;font-size:12px}
-.gen-bar {border:0;background:transparent;font-size:13px;padding:4px 0 12px;margin:0}
+.gen-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border: 0;
+  background: transparent;
+  padding: 2px 0 8px;
+  margin: 0;
+}
+.gen-bar .gen-dots,
+.gen-bar #genLabel {
+  display: none !important;
+}
 .stream-placeholder {color:var(--muted);letter-spacing:3px}
 
 /* VEXX Thinking Indicator - Minimalista, Leve e Elegante */

@@ -272,6 +272,8 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                             round((forwarded_at - auth_completed) * 1000),
                             round((now - request_started) * 1000))
                     yield f"event: delta\ndata: {json.dumps({'seq': item.get('seq', 0), 'trecho': item.get('trecho', '')}, ensure_ascii=False)}\n\n"
+                elif tipo == "ai_step":
+                    yield f"event: step\ndata: {json.dumps({'step': item.get('step', '')}, ensure_ascii=False)}\n\n"
                 elif tipo == "ai_done":
                     concluido = True
                     log.info("AI_RELAY_DONE msg=%s total_ms=%d",
@@ -455,6 +457,8 @@ async def voice_chat_stream(websocket: WebSocket):
                                 "format": "wav"
                             })
 
+                elif tipo == "ai_step":
+                    yield f"event: step\ndata: {json.dumps({'step': item.get('step', '')}, ensure_ascii=False)}\n\n"
                 elif tipo == "ai_done":
                     oracoes_finais = acumulador.flush()
                     for oracao in oracoes_finais:

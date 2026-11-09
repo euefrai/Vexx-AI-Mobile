@@ -2486,6 +2486,51 @@ const VEXX_THINKING_PHRASES = [
 ];
 let vexxThinkingIdx = 0;
 let currentThinkingMsg = VEXX_THINKING_PHRASES[0];
+let vexxStepIsReal = false;
+
+function calcularPassoInicial(userText, options) {
+  const t = (userText || '').toLowerCase();
+  if (t.includes('kabum') || t.includes('kaboom')) {
+    return 'Consultando produtos no KaBuM! (kabum.com.br)…';
+  }
+  if (t.includes('amazon')) {
+    return 'Consultando produtos na Amazon (amazon.com.br)…';
+  }
+  if (t.includes('mercado livre') || t.includes('meli')) {
+    return 'Consultando produtos no Mercado Livre (mercadolivre.com.br)…';
+  }
+  if (/\b(fone|celular|smartphone|notebook|placa|processador|mouse|teclado|monitor|comprar|pre[cç]o|quanto custa|valor at[eé]|loja|lojas)\b/i.test(t)) {
+    return 'Consultando produtos em lojas especializadas e comparando preços…';
+  }
+  if (t.includes('documenta') || t.includes('docs') || t.includes('documentação')) {
+    return 'Consultando documentação oficial e referências técnicas…';
+  }
+  if (/\b(compare|comparar|comparativo|diferen[cç]a|versus|vs)\b/i.test(t)) {
+    return 'Pesquisando em múltiplas fontes para comparação aprofundada…';
+  }
+  if (/\b(foto|fotos|imagem|imagens)\b/i.test(t)) {
+    return 'Verificando imagens e analisando mídia disponível…';
+  }
+  if (/\b(pesquise|pesquisa|procure|busque|investigue|not[ií]cia)\b/i.test(t)) {
+    return 'Consultando fontes e cruzando dados na web…';
+  }
+  if (options && options.hasDoc) {
+    return 'Lendo documento anexado e extraindo trechos…';
+  }
+  return 'Analisando mensagem e preparando contexto…';
+}
+
+function atualizarPassoPensamento(passo, isReal = true) {
+  if (!passo) return;
+  currentThinkingMsg = passo;
+  if (isReal) vexxStepIsReal = true;
+  const genLab = $('genLabel');
+  if (genLab) genLab.textContent = passo;
+  if (conversation) {
+    const pills = conversation.querySelectorAll('.vexx-thinking-text');
+    pills.forEach(el => { el.textContent = passo; });
+  }
+}
 
 function vexxThinkingPillHtml(msg) {
   const frase = msg || currentThinkingMsg || 'Raciocinando…';
@@ -2505,13 +2550,15 @@ function setGenBar(on, label) {
 }
 function tickGen() {
   if (aiFirstTokenT) {
-    $('genLabel').textContent = 'Transmitindo resposta…';
-  } else {
+    if ($('genLabel')) $('genLabel').textContent = 'Transmitindo resposta…';
+  } else if (!vexxStepIsReal) {
     vexxThinkingIdx = (vexxThinkingIdx + 1) % VEXX_THINKING_PHRASES.length;
     currentThinkingMsg = VEXX_THINKING_PHRASES[vexxThinkingIdx];
-    $('genLabel').textContent = currentThinkingMsg;
-    const p = conversation ? conversation.querySelector('.vexx-thinking-text') : null;
-    if (p) p.textContent = currentThinkingMsg;
+    if ($('genLabel')) $('genLabel').textContent = currentThinkingMsg;
+    if (conversation) {
+      const pills = conversation.querySelectorAll('.vexx-thinking-text');
+      pills.forEach(el => { el.textContent = currentThinkingMsg; });
+    }
   }
 }
 function localContextKey(name) { return 'julia-context:' + currentUid + ':' + name; }
@@ -2598,8 +2645,10 @@ async function runAIRequest(userRow, options, timing) {
     return;
   }
   aiStartT = Date.now(); aiFirstTokenT = 0;
-  setGenBar(true, 'Preparando resposta…');
-  clearInterval(genTimer); genTimer = setInterval(tickGen, 500);
+  vexxStepIsReal = false;
+  currentThinkingMsg = calcularPassoInicial(userRow.text || '', options);
+  setGenBar(true, currentThinkingMsg);
+  clearInterval(genTimer); genTimer = setInterval(tickGen, 600);
   const ctx = aiLocalContext(userRow.text || '');
   const sceneContext = typeof globalThis.getModel3DContext === 'function' ? globalThis.getModel3DContext(options.owner,userRow.conversation_id) : null;
   if (sceneContext) ctx.scene_state = JSON.stringify(sceneContext);
@@ -2654,7 +2703,12 @@ async function runAIRequest(userRow, options, timing) {
           lastEvt = Date.now();
           let d = {};
           try { d = JSON.parse(dados); } catch (_) { continue; }
-          if (tipo === 'delta') {
+          if (tipo === 'step') {
+            const passo = (d.step || '').trim();
+            if (passo) {
+              atualizarPassoPensamento(passo, true);
+            }
+          } else if (tipo === 'delta') {
             if (Number.isInteger(d.seq) && d.seq > 0) {
               if (d.seq <= lastSeq) continue;
               // Tolerante a micro-agrupamento de pacotes SSE sem quebrar o stream
@@ -2784,6 +2838,7 @@ async function runAIRequest(userRow, options, timing) {
     streamDraft = null;
     clearInterval(genTimer);
     setGenBar(false);
+    vexxStepIsReal = false;
     if (rafPending) { cancelAnimationFrame(rafPending); rafPending = null; }
     if (userRow.conversation_id === activeConversation) await renderMessages();
     await renderSessions($('sessionSearch').value);
