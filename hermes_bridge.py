@@ -60,16 +60,18 @@ def _req(url: str, corpo: dict, timeout: float, api_key: str = "",
 
 
 def base_publica(url: str, hosts: tuple) -> str:
-    """Base HTTPS de provedor direto. Só hosts da allowlist do provedor;
-    https obrigatório; sem credenciais, query ou fragmento."""
+    """Base HTTPS de provedor direto (ou HTTP para loopback local). Só hosts da allowlist do provedor;
+    sem credenciais, query ou fragmento."""
     base = (url or "").strip().rstrip("/")
     try:
         parte = urllib.parse.urlsplit(base)
     except ValueError as exc:
         raise BridgeErro(f"URL do provedor inválida: {exc}.", "url_invalida") from None
-    if parte.scheme != "https" or not parte.hostname:
-        raise BridgeErro("Provedor direto exige https://host.", "url_invalida")
-    if parte.hostname.lower() not in tuple(h.lower() for h in hosts):
+    host_lower = (parte.hostname or "").lower()
+    is_loopback = host_lower in LOOPBACK
+    if (parte.scheme != "https" and not (parte.scheme == "http" and is_loopback)) or not parte.hostname:
+        raise BridgeErro("Provedor direto exige https://host (ou http:// para loopback local).", "url_invalida")
+    if host_lower not in tuple(h.lower() for h in hosts):
         raise BridgeErro(f"Host '{parte.hostname}' fora da lista do provedor.",
                          "url_bloqueada")
     if parte.username or parte.password or parte.query or parte.fragment:

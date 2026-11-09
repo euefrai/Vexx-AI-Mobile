@@ -17,7 +17,7 @@ import workspace_store
 from pc_modules.memory_store import _normalizar_temporal
 from pc_modules.calendar_projects import _projetos_relevantes, _trechos_projeto, pendencias
 from pc_modules.db_core import database_path, dono_valido, log
-from pc_modules.context_providers import imagens_primeiro
+from pc_modules.context_providers import anexar_fontes, imagens_primeiro
 
 # Símbolos de módulos posteriores injetados na inicialização do pacote:
 iniciar_job_bg = None  # provido por pc_modules.research_jobs
@@ -690,13 +690,44 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str, model: str = "") -> str:
     official_docs = bool(re.search(r'\bpesquis\w*\b', t)
                          and re.search(r'\bdocumenta[cç][aã]o\s+oficial\b', t))
     if visual and not m and 'pesquisa profunda' not in t:
-        result=research.pesquisa_rapida(db,owner,texto)
+        termo_busca = re.sub(r'^(?:pesquis\w*|busqu\w*|procur\w*|encontr\w*|mostr\w*)\s+(?:por\s+)?(?:alguns?|algumas?|os?|as?)?\s*', '', texto, flags=re.I)
+        termo_busca = re.sub(r'\s+e\s+(?:me\s+)?(?:mostr\w*|traga|busqu\w*|encontr\w*)\s+(?:as\s+)?(?:fotos?|imagens?|midias?|fotos\s+delas?|fotos\s+deles?)\b.*$', '', termo_busca, flags=re.I).strip()
+        if not termo_busca:
+            termo_busca = texto
+        result = research.pesquisa_rapida(db, owner, termo_busca)
         import research_view
-        media=result.get('midia') or []
-        fence=research_view.media_fence(media)
+        media = result.get('midia') or []
+        fence = research_view.media_fence(media)
+        fontes = result.get('fontes') or []
         if fence:
-            return imagens_primeiro(fence,f'Encontrei {len(media)} item(ns) de mídia com origem indicada. Metadados recuperados; imagens e vídeos não foram analisados.')
-        return 'Não consegui recuperar mídia pertinente nas fontes disponíveis agora. '+str(result.get('estado_texto') or '')
+            midias_validas = []
+            padroes_lixo = ('sino', 'notificacao', 'notificação', 'notificações', 'notification', 'bell', 'icon', 'icone', 'logo', 'badge', 'assets-v4', 'pixel')
+            for m_item in media:
+                txt = (str(m_item.get('title') or '') + ' ' + str(m_item.get('url') or '')).lower()
+                if not any(p in txt for p in padroes_lixo) and not txt.endswith('.svg'):
+                    midias_validas.append(m_item)
+            
+            topicos_destaque = []
+            for m_item in midias_validas[:6]:
+                tit = (m_item.get('title') or '').strip()
+                if tit:
+                    limpo = tit.split(' - ')[0].split(' | ')[0].strip(' .?!')
+                    if len(limpo) > 10 and limpo not in topicos_destaque:
+                        topicos_destaque.append(limpo)
+            
+            linhas_destaque = "\n".join(f"- {d}" for d in topicos_destaque) if topicos_destaque else ""
+            corpo = (
+                f"Encontrei fotos e notícias recentes sobre celebridades e personalidades em destaque:\n\n"
+                f"{linhas_destaque}\n\n"
+                f"*(Galeria com {len(midias_validas)} imagens verificadas das fontes oficiais anexada acima.)*"
+            )
+            anexo = anexar_fontes(corpo, fontes) if fontes else corpo
+            return imagens_primeiro(fence, anexo)
+        if fontes:
+            resumo = research.resumo_deterministico(fontes, termo_busca)
+            anexo = anexar_fontes(resumo, fontes)
+            return (f"{anexo}\n\n*(Nota: Não foi possível obter pré-visualizações diretas de fotos para estas fontes no momento.)*")
+        return 'Não consegui recuperar mídia pertinente nas fontes disponíveis agora. ' + str(result.get('estado_texto') or '')
     if m or "inicie uma pesquisa sobre" in t or visual or official_docs:
         objetivo = (m.group(1).strip() if m else texto)[:500]
         imagem = ""

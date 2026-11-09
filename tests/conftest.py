@@ -12,18 +12,29 @@ def _isolated_optional_retrieval_services(monkeypatch):
     monkeypatch.setenv('JULIA_PREFERRED_NEWS_FEEDS','0')
     monkeypatch.setenv('JULIA_NATIVE_STORE_SEARCH','0')
     monkeypatch.setenv('JULIA_PYTHON_DOCS_DISCOVERY','0')
+    monkeypatch.setenv('JULIA_PUBLISHER_REST','0')
+    monkeypatch.setenv('JULIA_PUBLIC_DOCUMENT_CACHE','0')
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import server  # noqa: E402
 
 
 @pytest.fixture(autouse=True)
+def _legacy_login_opt_in(monkeypatch):
+    """Tests exercise the legacy owner path explicitly (opt-in in production)."""
+    monkeypatch.setenv("JULIA_ALLOW_LEGACY_LOGIN", "1")
+
+
+@pytest.fixture(autouse=True)
 def _limpar_limitadores():
+    import providers
+    providers._CATALOGS.clear()
     server.rate_limiter.clear()
     server.login_failures.clear()
     yield
     server.rate_limiter.clear()
     server.login_failures.clear()
+    providers._CATALOGS.clear()
 
 
 @pytest.fixture(autouse=True)

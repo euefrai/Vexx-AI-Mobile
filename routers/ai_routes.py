@@ -29,7 +29,7 @@ async def ai_complete(request: Request, body: AIRequest):
                                    "local_time": body.local_time, "timezone": body.timezone,
                                    "city": body.city, "latitude": body.latitude,
                                    "longitude": body.longitude, "text": body.text,
-                                   "created_at": body.created_at, "scene_state": body.scene_state, **({"image": body.image} if body.image else {})}, timeout=180.0)
+                                   "created_at": body.created_at, "scene_state": body.scene_state, **({"image": body.image} if body.image else {}), **({"vision_engine": body.vision_engine} if getattr(body, "vision_engine", "") else {})}, timeout=180.0)
     if result.get("type") != "ai_done" or "response_text" not in result:
         if result.get("type") == "ai_error":
             raise erro_relay(result, "IA indisponível")
@@ -119,6 +119,18 @@ async def ai_models(request: Request):
     dono = sessao_usuario(request)
     _rate_limit(request, "ai", dono)
 
+    local_item = {
+        "id": "qwen2.5-1.5b-instruct",
+        "provider": "qwen_local",
+        "label": "🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)",
+        "free": True
+    }
+    local_provider = {
+        "id": "qwen_local",
+        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Principal)",
+        "configured": True,
+        "source": "local_pc"
+    }
     vexx_item = {
         "id": "vexx-qwen-2.5-3b",
         "provider": "vexx",
@@ -139,10 +151,10 @@ async def ai_models(request: Request):
 
     if not isinstance(result, dict) or result.get("type") != "ai_models":
         return {
-            "models": ["vexx-qwen-2.5-3b"],
-            "default": "vexx-qwen-2.5-3b",
-            "items": [vexx_item],
-            "providers": [vexx_provider]
+            "models": ["qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b"],
+            "default": "qwen2.5-1.5b-instruct",
+            "items": [local_item, vexx_item],
+            "providers": [local_provider, vexx_provider]
         }
 
     provs = result.get("providers", [])
@@ -155,19 +167,23 @@ async def ai_models(request: Request):
     if not isinstance(models, list):
         models = []
 
-    if "vexx-qwen-2.5-3b" in models:
-        models.remove("vexx-qwen-2.5-3b")
+    for m_id in ("vexx-qwen-2.5-3b", "qwen2.5-1.5b-instruct"):
+        if m_id in models:
+            models.remove(m_id)
     models.insert(0, "vexx-qwen-2.5-3b")
+    models.insert(0, "qwen2.5-1.5b-instruct")
 
-    itens = [i for i in itens if isinstance(i, dict) and i.get("id") != "vexx-qwen-2.5-3b"]
+    itens = [i for i in itens if isinstance(i, dict) and i.get("id") not in ("qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b")]
     itens.insert(0, vexx_item)
+    itens.insert(0, local_item)
 
-    provs = [p for p in provs if isinstance(p, dict) and p.get("id") != "vexx"]
+    provs = [p for p in provs if isinstance(p, dict) and p.get("id") not in ("qwen_local", "vexx")]
     provs.insert(0, vexx_provider)
+    provs.insert(0, local_provider)
 
     return {
         "models": models[:2000],
-        "default": "vexx-qwen-2.5-3b",
+        "default": "qwen2.5-1.5b-instruct",
         "items": [{k: i.get(k) for k in ("id", "provider", "free")
                    if (k != "free" or isinstance(i.get(k), bool)) and i.get(k) is not None}
                   for i in itens if isinstance(i, dict)][:2000],
@@ -187,7 +203,7 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                     model: str = "", memory: str = "1", local_time: str = "",
                     timezone: str = "", city: str = "",
                     latitude: float | None = None, longitude: float | None = None,
-                    text: str = "", created_at: str = "", scene_state: str = "", image: str = ""):
+                    text: str = "", created_at: str = "", scene_state: str = "", image: str = "", vision_engine: str = ""):
     """SSE com deltas reais do Hermes (via agente). Fechar a conexão cancela."""
     request_started = time.monotonic()
     require_csrf(request)
@@ -256,6 +272,8 @@ async def ai_stream(request: Request, message_id: str = "", conversation_id: str
                             round((forwarded_at - auth_completed) * 1000),
                             round((now - request_started) * 1000))
                     yield f"event: delta\ndata: {json.dumps({'seq': item.get('seq', 0), 'trecho': item.get('trecho', '')}, ensure_ascii=False)}\n\n"
+                elif tipo == "ai_step":
+                    yield f"event: step\ndata: {json.dumps({'step': item.get('step', '')}, ensure_ascii=False)}\n\n"
                 elif tipo == "ai_done":
                     concluido = True
                     log.info("AI_RELAY_DONE msg=%s total_ms=%d",
@@ -439,6 +457,8 @@ async def voice_chat_stream(websocket: WebSocket):
                                 "format": "wav"
                             })
 
+                elif tipo == "ai_step":
+                    yield f"event: step\ndata: {json.dumps({'step': item.get('step', '')}, ensure_ascii=False)}\n\n"
                 elif tipo == "ai_done":
                     oracoes_finais = acumulador.flush()
                     for oracao in oracoes_finais:
@@ -573,3 +593,130 @@ async def voice_chat_stream(websocket: WebSocket):
         log.error("VOICE_CHAT_EXCEPTION session=%s error=%s", session_id, e)
     finally:
         await _cancelar_geracao_atual()
+
+
+class VisionEngineRequest(BaseModel):
+    engine: str = Field(min_length=2, max_length=30)
+
+
+class VisionLatencyRequest(BaseModel):
+    iterations: int = Field(default=5, ge=1, le=20)
+
+
+class VisionAnalyzeRequest(BaseModel):
+    image: str = Field(min_length=1, max_length=2000000)
+    engine: str = Field(default="", max_length=30)
+    classes: str = Field(default="", max_length=200)
+
+
+@router.get("/api/vision/engine")
+async def vision_engine_get():
+    """Retorna o motor de visão ativo e a lista de motores disponíveis."""
+    if relay.ws is not None:
+        try:
+            res = await relay.exchange({"type": "vision_engine_get"}, timeout=10.0)
+            if res.get("type") == "vision_engine_get_ok":
+                return res.get("resultado", {})
+        except Exception as exc:
+            log.warning("Falha ao obter motor de visão via relay: %s", exc)
+    import vision_service
+    return {
+        "engine": vision_service.obter_motor_visao(),
+        "engines": vision_service.listar_motores_visao(),
+    }
+
+
+@router.post("/api/vision/engine")
+async def vision_engine_post(request: Request, body: VisionEngineRequest):
+    """Altera o motor de visão em tempo de execução ('local', 'huggingface', 'auto')."""
+    require_csrf(request)
+    await revogacao_ok(request)
+    if relay.ws is not None:
+        try:
+            res = await relay.exchange({"type": "vision_engine_post", "engine": body.engine}, timeout=10.0)
+            if res.get("type") == "vision_engine_post_ok":
+                return res.get("resultado", {})
+        except Exception as exc:
+            log.warning("Falha ao configurar motor de visão via relay: %s", exc)
+    import vision_service
+    try:
+        novo = vision_service.definir_motor_visao(body.engine)
+    except ValueError as exc:
+        raise HTTPException(422, str(exc))
+    return {
+        "ok": True,
+        "engine": novo,
+        "engines": vision_service.listar_motores_visao(),
+    }
+
+
+@router.post("/api/vision/latency-test")
+async def vision_latency_test(request: Request, body: VisionLatencyRequest | None = None):
+    """Executa benchmark de latência do modelo YOLO no PC local."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    iters = body.iterations if body else 5
+    if relay.ws is not None:
+        try:
+            res = await relay.exchange({"type": "vision_latency_test", "owner": dono, "iterations": iters}, timeout=25.0)
+            if res.get("type") == "vision_latency_test_ok":
+                return res.get("resultado", {})
+            return res.get("resultado") or {"status": "erro", "mensagem": res.get("error", "Erro ao executar benchmark YOLO")}
+        except Exception as exc:
+            log.warning("Falha ao delegar vision_latency_test ao PC: %s", exc)
+            return {"status": "erro", "mensagem": f"PC não respondeu ao teste de visão: {exc}"}
+    import vision_service
+    try:
+        return vision_service.testar_latencia_yolo_local(iteracoes=iters)
+    except Exception as exc:
+        return {"status": "erro", "mensagem": str(exc)}
+
+
+@router.post("/api/vision/analyze")
+async def vision_analyze_post(request: Request, body: VisionAnalyzeRequest):
+    """Executa detecção de visão em uma imagem via motor ativo ou especificado."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    _rate_limit(request, "ai", dono)
+    if relay.ws is not None:
+        try:
+            res = await relay.exchange({
+                "type": "vision_analyze",
+                "owner": dono,
+                "image": body.image,
+                "engine": body.engine or "",
+                "classes": body.classes,
+            }, timeout=60.0)
+            if res.get("type") == "vision_analyze_ok":
+                return res.get("resultado", {})
+            return res.get("resultado") or {"status": "erro", "mensagem": res.get("error", "Erro na análise")}
+        except Exception as exc:
+            log.warning("Falha ao delegar vision_analyze ao PC: %s", exc)
+    import vision_service
+    return vision_service.analisar_imagem(
+        body.image,
+        motor=body.engine or None,
+        classes_personalizadas=body.classes,
+    )
+
+
+@router.post("/api/ai/latency-test")
+async def ai_latency_test(request: Request):
+    """Executa benchmark de latência da IA local (Qwen 2.5 1.5B)."""
+    require_csrf(request)
+    dono = await revogacao_ok(request)
+    if relay.ws is not None:
+        try:
+            res = await relay.exchange({"type": "ai_latency_test", "owner": dono}, timeout=15.0)
+            if res.get("type") == "ai_latency_test_ok":
+                return res.get("resultado", {})
+            return res.get("resultado") or {"status": "erro", "mensagem": res.get("error", "Erro ao executar benchmark de IA no PC")}
+        except Exception as exc:
+            log.warning("Falha ao delegar ai_latency_test ao PC: %s", exc)
+            return {"status": "erro", "mensagem": f"PC não respondeu ao teste de latência: {exc}"}
+    import providers
+    try:
+        return providers.testar_latencia_ai()
+    except Exception as exc:
+        return {"status": "erro", "mensagem": f"Servidor local na porta 8008 inacessível: {exc}"}
+

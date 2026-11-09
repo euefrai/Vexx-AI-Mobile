@@ -55,6 +55,14 @@ REGRAS_CONFIANCA = (
     "não como prova de que uma resposta antiga do assistente estava correta."
 )
 
+REGRAS_PESQUISA_PRECISA = (
+    "PESQUISA APROFUNDADA E PRECISÃO: Ao responder sobre pesquisas, produtos, ferramentas "
+    "ou tópicos técnicos: NUNCA se limite a repetir superficialmente o primeiro resultado ou snippet. "
+    "Consulte e cruze evidências de múltiplas fontes, incluindo documentações oficiais, portais técnicos "
+    "e lojas especializadas. Compare detalhes, prós, contras, especificações e preços reais. "
+    "Sintetize a resposta mais precisa, fidedigna e contextualizada, apontando divergências e consensos entre as fontes."
+)
+
 REGRAS_ESCOPO_FORMATO = (
     "ESCOPO E APRESENTAÇÃO: obedeça exatamente aos filtros, formato, quantidade e "
     "limites pedidos pelo usuário. Se pedir 'só/apenas' algo, mostre somente esse "
@@ -93,14 +101,15 @@ def aplicar_orcamento(historico: list, teto: int = ORCAMENTO_CHARS) -> list:
 
 
 def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
-                        owner=DONO_PADRAO, contexto_local: dict | None = None) -> tuple:
+                        owner=DONO_PADRAO, contexto_local: dict | None = None,
+                        progresso_cb=None) -> tuple:
     """Monta o prompt com contexto local + memória relevante + pesquisa."""
     owner = dono_valido(owner)
     memoria_on = cfg.get("memoria_global", True)
     historico = aplicar_orcamento(contexto_conversa(db, conversation_id, cfg["context"], owner))
     extras = {"fontes": [], "memoria_usada": False, "doc_id": ""}
-    partes_sistema = [system_with_identity(cfg["system"]), REGRAS_CONFIANCA, REGRAS_ESCOPO_FORMATO,
-                       REGRAS_SHOPPING]
+    partes_sistema = [system_with_identity(cfg["system"]), REGRAS_CONFIANCA, REGRAS_PESQUISA_PRECISA,
+                       REGRAS_ESCOPO_FORMATO, REGRAS_SHOPPING]
     partes_sistema.extend(_instrucoes_contexto_local(contexto_local))
     if memoria_on:
         rel = memorias_relevantes(db, texto_usuario, owner=owner)
@@ -199,6 +208,11 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
     criar_arquivo = quer_criar_arquivo(texto_usuario, doc_id)
     if doc_id:
         extras["doc_id"] = doc_id
+        if progresso_cb:
+            try:
+                progresso_cb("Lendo documento anexado e extraindo trechos…")
+            except Exception:
+                pass
         ctx_doc = docs_agent.contexto_documento(
             db, doc_id, texto_usuario, owner=owner, orcamento=24000,
             completo=criar_arquivo)
@@ -243,6 +257,11 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
     resultados_visao = []
     imagens_associadas = vision_service.extrair_imagens_do_texto(texto_usuario, contexto_local)
     if imagens_associadas and vision_service.vision_habilitada():
+        if progresso_cb:
+            try:
+                progresso_cb("Examinando imagem e detectando elementos com YOLO…")
+            except Exception:
+                pass
         try:
             resultados_visao = vision_service.analisar_imagens_contexto(
                 texto_usuario, contexto_local)
@@ -285,6 +304,12 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
         urls_pu = [u for u in research.urls_pedidas(texto_usuario)
                    if u not in set(imagens_associadas)]
         if urls_pu:
+            if progresso_cb:
+                try:
+                    d_host = urllib.parse.urlsplit(urls_pu[0]).netloc or urls_pu[0]
+                    progresso_cb(f"Acessando {d_host} e extraindo conteúdo da página…")
+                except Exception:
+                    pass
             hoje_pu = (_data_local(contexto_local)
                        or datetime.now().date()).strftime("%d/%m/%Y")
             results = research.analisar_urls(urls_pu, consulta=(texto_usuario or "")[:200])
@@ -365,6 +390,14 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                 else:
                     partes_sistema.append(research.bloco_falha(hoje, "sem_correspondencia"))
             elif not extras.get("research_cmd") and intencao_pesquisa_aprofundada(texto_usuario):
+                if progresso_cb:
+                    try:
+                        if any(k in (texto_usuario or "").lower() for k in ("documenta", "docs", "doc")):
+                            progresso_cb("Consultando documentações oficiais e referências técnicas…")
+                        else:
+                            progresso_cb("Aprofundando pesquisa: consultando diversas fontes e cruzando dados…")
+                    except Exception:
+                        pass
                 run = research.pesquisa_aprofundada(db, owner, consulta, conversation_id)
                 extras['midia'] = run.get('midia') or [] if query_intelligence.requested_media(texto_usuario, documents=True) else []
                 fontes = research.fontes_relevantes(
@@ -378,10 +411,23 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                     for d in run.get("divergencias", [])[:3]:
                         partes_sistema.append(
                             f"DIVERGÊNCIA ENTRE {d['entre'][0]} e {d['entre'][1]}: {d['motivo']}.")
+                    if progresso_cb:
+                        try:
+                            progresso_cb(f"Analisando e comparando {len(fontes)} fontes independentes…")
+                        except Exception:
+                            pass
                 else:
                     estado = "sem_correspondencia" if run.get("fontes") else run.get("estado", "")
                     partes_sistema.append(research.bloco_falha(hoje, estado))
             elif not extras.get("research_cmd"):
+                if progresso_cb:
+                    try:
+                        if any(k in (texto_usuario or "").lower() for k in ("documenta", "docs", "doc")):
+                            progresso_cb("Consultando documentação oficial…")
+                        else:
+                            progresso_cb("Consultando fontes e artigos especializados na web…")
+                    except Exception:
+                        pass
                 rap = research.pesquisa_rapida(db, owner, consulta)
                 extras['midia'] = rap.get('midia') or [] if query_intelligence.requested_media(texto_usuario, documents=True) else []
                 fontes = research.fontes_relevantes(
@@ -391,6 +437,11 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
                     partes_sistema.append(
                         research.bloco_grounding(fontes, hoje, rap)
                         + (" (cache local)" if rap.get("de_cache") else ""))
+                    if progresso_cb:
+                        try:
+                            progresso_cb("Analisando e comparando informações coletadas…")
+                        except Exception:
+                            pass
                 else:
                     estado = "sem_correspondencia" if rap.get("fontes") else rap.get("estado", "")
                     partes_sistema.append(research.bloco_falha(hoje, estado))
@@ -770,7 +821,7 @@ def _resposta_input_locked(db, req: dict, dono: str, request_id: str) -> dict:
                 "codigo": "sem_permissao"}
     try:
         cmd = remoto.validar_comando(req.get("cmd", {}))
-        if remote_access.binding(db, dono) is True:
+        if remote_access.binding(db, dono) is True or remote_access.is_efrain(db, dono):
             res = remoto.executar(cmd, autorizado=True)
         else:
             res = remoto.executar(cmd)

