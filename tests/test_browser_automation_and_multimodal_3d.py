@@ -83,3 +83,17 @@ def test_agent_cognition_and_desires(tmp_path):
     assert res is not None
     assert "Estado Cognitivo" in res[0]
     assert "Reflexivo" in res[0]
+
+
+def test_verificar_instagram_analise_real_com_notificacoes(monkeypatch):
+    from pc_modules import browser_automation
+    monkeypatch.setattr(browser_automation, "disparar_notificacao_windows", lambda t, m: True)
+
+    img_path = r"C:\Users\efrai\.gemini\antigravity\brain\1b10b50a-5d0f-497f-a792-807af867cd5c\.user_uploaded\media_1794242148455_a8a54b7f.jpg"
+    res = browser_automation.verificar_instagram(caminho_imagem_teste=img_path)
+    assert res["status"] == "sucesso"
+    assert res["total_pendentes"] == 7
+    assert len(res["mensagens_nao_lidas"]) >= 2
+    assert "Gustavo" in res["resumo"]
+    assert "WZZ" in res["resumo"]
+    assert "7 mensagens pendentes detectadas" in res["resumo"]

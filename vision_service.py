@@ -904,7 +904,16 @@ detectar_objetos = analisar_imagem
 
 def ler_fontes_imagem(imagem: Any, **kwargs: Any) -> dict[str, Any]:
     """Retorna todos os textos/fontes lidos na imagem com suas posições e pontos de clique."""
+    if "motor" not in kwargs and "client_factory" not in kwargs:
+        kwargs["motor"] = "huggingface"
     res = analisar_imagem(imagem, **kwargs)
+    if res.get("total_textos", 0) == 0 and kwargs.get("motor") != "huggingface" and "client_factory" not in kwargs:
+        try:
+            res_hf = analisar_imagem_huggingface(imagem)
+            if res_hf.get("status") == "sucesso" and res_hf.get("total_textos", 0) > 0:
+                res = res_hf
+        except Exception:
+            pass
     return {
         "status": res.get("status", "erro"),
         "dimensoes": res.get("dimensoes", {"largura": 0, "altura": 0}),
