@@ -465,6 +465,15 @@ def chat_complete(prov: str, model_id: str, messages: list,
                          "sem_chave")
     if d["api"] == "anthropic":
         return _anthropic_complete(d, key, model_id, messages, timeout, max_tokens)
+    if prov == "qwen_local":
+        try:
+            return _chamar(hermes_bridge.chat_complete, prov, model_id,
+                           d["base"], model_id, _para_openai(messages),
+                           timeout=min(timeout, 3.0), max_tokens=max_tokens,
+                           api_key=key, hosts=d["hosts"])
+        except BridgeErro as exc:
+            log.warning("Qwen local 1.5B (porta 8008) indisponível (%s). Alternando para VEXX Qwen 2.5 3B...", exc)
+            return chat_complete("vexx", "vexx-qwen-2.5-3b", messages, timeout=timeout, max_tokens=max_tokens, proxy=proxy)
     return _chamar(hermes_bridge.chat_complete, prov, model_id,
                    d["base"], model_id, _para_openai(messages),
                    timeout=timeout, max_tokens=max_tokens,
@@ -579,6 +588,16 @@ def chat_stream(prov: str, model_id: str, messages: list, on_delta,
     if d["api"] == "anthropic":
         return _anthropic_stream(d, key, model_id, messages, on_delta,
                                  deve_parar, timeout, max_tokens)
+    if prov == "qwen_local":
+        try:
+            return _chamar(hermes_bridge.chat_stream, prov, model_id,
+                           d["base"], model_id, _para_openai(messages), on_delta,
+                           deve_parar, timeout=min(timeout, 3.0), max_tokens=max_tokens,
+                           api_key=key, hosts=d["hosts"])
+        except BridgeErro as exc:
+            log.warning("Qwen local 1.5B (porta 8008) indisponível (%s). Alternando para VEXX Qwen 2.5 3B...", exc)
+            return chat_stream("vexx", "vexx-qwen-2.5-3b", messages, on_delta,
+                               deve_parar, timeout=timeout, max_tokens=max_tokens, proxy=proxy)
     return _chamar(hermes_bridge.chat_stream, prov, model_id,
                    d["base"], model_id, _para_openai(messages), on_delta,
                    deve_parar, timeout, max_tokens,

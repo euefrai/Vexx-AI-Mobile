@@ -90,6 +90,7 @@
       $('remoteConnect').disabled = !mobile || commandBusy || !ready;
       $('remoteRevoke').hidden = !(state?.approved || state?.view_allowed || state?.pending);
       $('remoteRevoke').disabled = commandBusy || !online();
+      $('remoteRevoke').textContent = state?.permanent_control ? 'Revogar permanentemente' : 'Revogar acesso';
       for (const id of ['keyboardButton', 'remoteEnter', 'remoteBackspace', 'remoteScrollUp', 'remoteScrollDown', 'remoteTab', 'remoteEscape', 'remoteDelete', 'remoteLeft', 'remoteRight', 'remoteKeys']) {
         $(id).disabled = !connected || !state?.control_allowed || state?.confirmation_open;
       }

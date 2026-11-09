@@ -37,12 +37,11 @@ def test_qwen_local_configuracao_e_divisao():
 
 def test_qwen_local_listar_tudo_prioridade():
     cat = providers.listar_tudo()
-    assert cat["default"] == "qwen2.5-1.5b-instruct"
-    assert cat["models"][0] == "qwen2.5-1.5b-instruct"
-    assert cat["items"][0]["id"] == "qwen2.5-1.5b-instruct"
-    assert cat["items"][0]["provider"] == "qwen_local"
-    assert cat["providers"][0]["id"] == "qwen_local"
-    assert cat["providers"][0]["configured"] is True
+    assert cat["default"] == "vexx-qwen-2.5-3b"
+    assert "vexx-qwen-2.5-3b" in cat["models"]
+    assert "qwen2.5-1.5b-instruct" in cat["models"]
+    assert any(it["id"] == "qwen2.5-1.5b-instruct" and it["provider"] == "qwen_local" for it in cat["items"])
+    assert any(p["id"] == "qwen_local" and p["configured"] is True for p in cat["providers"])
 
 
 def test_qwen_local_podar_contexto():

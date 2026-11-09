@@ -821,7 +821,7 @@ def _resposta_input_locked(db, req: dict, dono: str, request_id: str) -> dict:
                 "codigo": "sem_permissao"}
     try:
         cmd = remoto.validar_comando(req.get("cmd", {}))
-        if remote_access.binding(db, dono) is True:
+        if remote_access.binding(db, dono) is True or remote_access.is_efrain(db, dono):
             res = remoto.executar(cmd, autorizado=True)
         else:
             res = remoto.executar(cmd)

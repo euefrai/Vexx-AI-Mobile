@@ -294,3 +294,42 @@ def test_two_sessions_share_account_access_over_real_relay(db, monkeypatch):
         worker.join(5)
         assert not worker.is_alive()
     assert not errors,errors
+
+
+def test_efrain_permanent_control_and_revoke(db, monkeypatch):
+    julia_auth.criar_usuario(db, 'efrain', 'eu.efrai', 'test-password-12345', criado_por='test')
+    efrain_user = julia_auth.buscar_usuario(db, 'efrain')
+    efrain_uid = efrain_user['uid']
+
+    # 1. Por padrão, controle do efrain é SEMPRE ativo o tempo todo
+    assert access.is_efrain(db, efrain_uid) is True
+    assert access.allowed(db, efrain_uid) is True
+
+    st = access.status(db, efrain_uid)
+    assert st['approved'] is True
+    assert st['view_allowed'] is True
+    assert st['control_allowed'] is True
+    assert st['permanent_control'] is True
+    assert st['pending'] is False
+
+    # 2. Input remoto funciona diretamente com autorização permanente
+    seen = []
+    monkeypatch.setattr(remoto, 'executar', lambda cmd, **kw: seen.append((cmd, kw)) or {'ok': True, 'kind': cmd['kind']})
+    res_in = pc_agent.resposta_input(db, {'cmd': {'kind': 'click', 'x': 0.5, 'y': 0.5}}, efrain_uid, 'r_efr')
+    assert res_in['type'] == 'input_done'
+    assert seen[0][1] == {'autorizado': True}
+
+    # 3. Só desativa se o usuário clicar expressamente em revogar
+    st_rev = access.revoke(db, efrain_uid)
+    assert st_rev['approved'] is False
+    assert st_rev['view_allowed'] is False
+    assert st_rev['control_allowed'] is False
+    assert access.allowed(db, efrain_uid) is False
+    assert pc_agent.resposta_input(db, {'cmd': {'kind': 'click', 'x': 0.5, 'y': 0.5}}, efrain_uid, 'r_efr2')['codigo'] == 'sem_permissao'
+
+    # 4. Ao solicitar acesso novamente, efrain reativa instantaneamente sem popup bloqueante
+    st_req = access.request_access(db, efrain_uid)
+    assert st_req['approved'] is True
+    assert st_req['control_allowed'] is True
+    assert access.allowed(db, efrain_uid) is True
+
