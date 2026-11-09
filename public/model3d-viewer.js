@@ -149,6 +149,8 @@ export async function mount(root, props, saved, save, preview, status, start, ct
         if(item.role==='structural')marcas.push('Estrutural');else if(item.role==='optional')marcas.push('Opcional');
         if(item.group==='internal')marcas.push('Interna');else if(item.group==='external')marcas.push('Externa');
         if(item.order>0)marcas.push('Montagem #'+item.order);
+        if(item.roughness!==undefined)marcas.push(`Rugosidade: ${Math.round(item.roughness*100)}%`);
+        if(item.metalness!==undefined)marcas.push(`Metálico: ${Math.round(item.metalness*100)}%`);
         if(marcas.length)details.append(element('small','',marcas.join(' · ')));
       }
     }
@@ -233,15 +235,57 @@ export async function mount(root, props, saved, save, preview, status, start, ct
       if (dead || !root.isConnected) {disposeTree(glb); controller.dispose(); return;}
       glb.traverse(o => {if (o.isMesh) {o.userData.objectId = 'demo-cube'; o.material.color.set(p.color); o.material.roughness = .5; o.material.metalness = .1; o.castShadow = true; attachEdges(o, o.geometry);}}); content.add(glb);
     } else {
-      const geometries=new Map();
+      function createGeometry(kind) {
+        if (kind === 'cube' || kind === 'box') return new T.BoxGeometry(...(p.education?[1,1,1]:[1.3,1.3,1.3]));
+        if (kind === 'sphere') return new T.SphereGeometry(p.education ? 0.5 : 0.8, 24, 16);
+        if (kind === 'cylinder') return new T.CylinderGeometry(0.5, 0.5, 1.0, 24);
+        if (kind === 'cone') return new T.ConeGeometry(0.5, 1.0, 24);
+        if (kind === 'pyramid') return new T.ConeGeometry(0.7, 1.0, 4);
+        if (kind === 'ring' || kind === 'torus') return new T.CylinderGeometry(0.5, 0.5, 0.08, 32);
+        if (kind === 'pipe') return new T.CylinderGeometry(0.5, 0.5, 1.0, 24, 1, true);
+        if (kind === 'capsule' || kind === 'lathe') return new T.CylinderGeometry(0.48, 0.48, 1.0, 24);
+        return new T.BoxGeometry(1, 1, 1);
+      }
+      const geometries = new Map();
       for (const item of p.objects) {
-        let geometry=geometries.get(item.kind);
-        if(!geometry){geometry = item.kind === 'cube' ? new T.BoxGeometry(...(p.education?[1,1,1]:[1.3,1.3,1.3])) : item.kind === 'sphere' ? new T.SphereGeometry(p.education ? .5 : .8,20,12) : item.kind === 'cylinder' ? new T.CylinderGeometry(.65,.65,1.5,20) : new T.ConeGeometry(.95,1.5,4);geometries.set(item.kind,geometry);}
-        const mesh = new T.Mesh(geometry,new T.MeshStandardMaterial({color:item.color || p.color,roughness:.52,metalness:.08}));
-        mesh.position.set(...item.position); mesh.rotation.set(...item.rotation.map(radians)); mesh.scale.setScalar(item.scale);
-        if(item.dimensions)mesh.scale.multiply(new T.Vector3(...item.dimensions));
-        mesh.userData.objectId = item.id; mesh.castShadow = true; content.add(mesh);
-        if(item.kind === 'cube') attachEdges(mesh, geometry);
+        let geometry = geometries.get(item.kind);
+        if (!geometry) {
+          geometry = createGeometry(item.kind);
+          geometries.set(item.kind, geometry);
+        }
+        const roughness = typeof item.roughness === 'number' ? item.roughness : 0.48;
+        const metalness = typeof item.metalness === 'number' ? item.metalness : 0.12;
+        const opacity = typeof item.opacity === 'number' ? item.opacity : 1.0;
+        const transparent = Boolean(item.transparent || opacity < 1.0);
+        const wireframe = Boolean(item.wireframe);
+        const emissiveHex = item.emissive ? parseInt(item.emissive.replace('#', '0x'), 16) : 0x000000;
+        
+        const mat = new T.MeshStandardMaterial({
+          color: item.color || p.color,
+          roughness,
+          metalness,
+          opacity,
+          transparent,
+          wireframe,
+          emissive: emissiveHex
+        });
+        const mesh = new T.Mesh(geometry, mat);
+        mesh.position.set(...item.position);
+        mesh.rotation.set(...item.rotation.map(radians));
+        mesh.scale.setScalar(item.scale);
+        if (item.dimensions) mesh.scale.multiply(new T.Vector3(...item.dimensions));
+        mesh.userData.objectId = item.id;
+        mesh.userData.group = item.group || '';
+        mesh.userData.role = item.role || '';
+        mesh.userData.baseOpacity = opacity;
+        mesh.userData.baseTransparent = transparent;
+        if (item.explodeVector) {
+          mesh.userData.explodeVector = new T.Vector3(...item.explodeVector);
+        }
+        mesh.castShadow = true;
+        mesh.receiveShadow = true;
+        content.add(mesh);
+        if (item.kind === 'cube' || item.kind === 'box') attachEdges(mesh, geometry);
       }
     }
     const bounds = new T.Box3().setFromObject(content), center = bounds.getCenter(new T.Vector3()), extent = bounds.getSize(new T.Vector3());

@@ -14,8 +14,13 @@ TITULO_PREFIXO = 'Catálogo local V5.6 — '
 
 # A ordem importa: apelidos específicos antes dos genéricos.
 _ALIASES = (
+    ('turbina_aviao', r'turbina|turbofan|motor a jato|jet engine|turbina de aviao'),
+    ('smartphone_desmontado', r'smartphone desmontado|celular desmontado|pecas do celular|pecas do smartphone'),
+    ('carro_eletrico', r'carro eletrico|veiculo eletrico|chassi eletrico|bateria de carro'),
+    ('drone_quadricoptero', r'drone|quadricoptero|fpv'),
+    ('coracao_humano', r'coracao|coracao humano|anatomia do coracao'),
     ('suporte_celular', r'suporte (?:de |para )?(?:celular|telefone)'),
-    ('motor_v8', r'\bv8\b'),
+    ('motor_v8', r'\bv8\b|motor v8'),
     ('xbox', r'xbox'),
     ('playstation', r'playstation|\bps ?[2-5]\b'),
     ('controle', r'controle|gamepad|joystick'),
@@ -57,10 +62,27 @@ def assunto(texto_norm):
 
 
 def _peca(objects, key, label, pos, dims, color, desc, related=(), role='functional',
-          group='', order=0, kind='cube', rot=(0, 0, 0)):
-    objects.append(dict(id=key, kind=kind, label=label, position=list(pos), dimensions=list(dims),
-                        color=color, description=desc, related=list(related), role=role, group=group,
-                        order=order, rotation=list(rot), metadata={'conceptual': True, 'note': NOTE}))
+          group='', order=0, kind='cube', rot=(0, 0, 0),
+          roughness=None, metalness=None, opacity=None, transparent=None,
+          wireframe=None, emissive=None, explodeVector=None):
+    p = dict(id=key, kind=kind, label=label, position=list(pos), dimensions=list(dims),
+             color=color, description=desc, related=list(related), role=role, group=group,
+             order=order, rotation=list(rot), metadata={'conceptual': True, 'note': NOTE})
+    if roughness is not None:
+        p['roughness'] = roughness
+    if metalness is not None:
+        p['metalness'] = metalness
+    if opacity is not None:
+        p['opacity'] = opacity
+    if transparent is not None:
+        p['transparent'] = transparent
+    if wireframe is not None:
+        p['wireframe'] = wireframe
+    if emissive is not None:
+        p['emissive'] = emissive
+    if explodeVector is not None:
+        p['explodeVector'] = list(explodeVector)
+    objects.append(p)
 
 
 def _cena(chave, titulo, descricao, objects, steps, fonte, education='device', precision='aproximado'):
@@ -458,35 +480,60 @@ def _suporte_celular():
 
 def _motor_v8():
     o = []
-    _peca(o, 'bloco', 'Bloco do motor', [0, .1, 0], [1.6, .75, .9], '#4a5568',
-          'Bloco em V: a disposição dos cilindros é conceitual.', ('tampa_esq', 'tampa_dir', 'cambota', 'admissao'),
-          role='structural', group='external', order=1)
-    _peca(o, 'tampa_esq', 'Tampa de válvulas esquerda', [0, .62, -.3], [1.5, .12, .5], '#5b6480',
-          'Tampa ilustrativa do banco esquerdo.', ('bloco', 'cilindro_e1'), group='external', order=2, rot=(28, 0, 0))
-    _peca(o, 'tampa_dir', 'Tampa de válvulas direita', [0, .62, .3], [1.5, .12, .5], '#5b6480',
-          'Tampa ilustrativa do banco direito.', ('bloco', 'cilindro_d1'), group='external', order=3, rot=(-28, 0, 0))
-    for i, x in enumerate((-.55, -.18, .18, .55), start=1):
-        _peca(o, f'cilindro_e{i}', f'Cilindro esquerdo {i}', [x, .74, -.34], [.2, .34, .2], '#9aa0ae',
-              'Cilindro ilustrativo do banco esquerdo.', ('tampa_esq', 'bloco'), group='internal',
-              order=3 + i, kind='cylinder', rot=(28, 0, 0))
-        _peca(o, f'cilindro_d{i}', f'Cilindro direito {i}', [x, .74, .34], [.2, .34, .2], '#9aa0ae',
-              'Cilindro ilustrativo do banco direito.', ('tampa_dir', 'bloco'), group='internal',
-              order=7 + i, kind='cylinder', rot=(-28, 0, 0))
-    _peca(o, 'admissao', 'Admissão', [0, .82, 0], [1.2, .18, .5], '#5b6480',
-          'Coletor de admissão entre os bancos.', ('bloco', 'tampa_esq', 'tampa_dir'), group='internal', order=12)
-    _peca(o, 'cambota', 'Virabrequim', [0, -.05, 0], [.18, 1.25, .18], '#9aa0ae',
-          'Eixo do virabrequim, girando no eixo do comprimento.', ('bloco',), group='internal', order=13,
-          kind='cylinder', rot=(0, 0, 90))
-    _peca(o, 'polia', 'Polia', [.92, -.05, 0], [.3, .06, .3], '#3a3f4c',
-          'Polia na frente do motor.', ('cambota',), group='internal', order=14, kind='cylinder', rot=(0, 0, 90))
-    steps = [dict(title='Bloco em V', text='Os dois bancos formam o V característico.', selected='bloco'),
-             dict(title='Cilindros', text='Oito cilindros ilustrativos compõem os bancos.', selected='cilindro_e1'),
-             dict(title='Virabrequim', text='O virabrequim é um eixo conceitual; sem movimento real.',
-                  selected='cambota', exploded=True),
-             dict(title='Montagem', text='Admissão e polia completam a visão educativa.', selected='admissao')]
-    return _cena('motor-v8', 'Motor V8 ilustrativo',
-                 'Composição educativa de um motor V8 em V; formas, ângulos e dimensões são aproximados, '
-                 'sem qualquer precisão mecânica.', o, steps, 'motor V8 ilustrativo')
+    _peca(o, 'bloco', 'Bloco de cilindros V8', [0, .05, 0], [1.3, .75, 1.4], '#3a404d',
+          'Bloco em V a 90 graus com galerias de arrefecimento e mancais principais; aproximação.',
+          ('cabecote_esq', 'cabecote_dir', 'carter', 'virabrequim', 'admissao'),
+          role='structural', group='external', order=1, metalness=0.75, roughness=0.35)
+    _peca(o, 'carter', 'Cárter de óleo inferior', [0, -.46, 0], [1.1, .28, 1.3], '#212529',
+          'Reservatório e cárter de lubrificação sob o virabrequim.', ('bloco',),
+          role='structural', group='external', order=2, metalness=0.6, roughness=0.4, explodeVector=[0, -.8, 0])
+    _peca(o, 'cabecote_esq', 'Cabeçote do banco esquerdo', [-.45, .52, 0], [.55, .28, 1.35], '#495057',
+          'Cabeçote com câmaras de combustão e sedes de válvulas.', ('bloco', 'tampa_esq', 'coletor_escape_esq'),
+          role='structural', group='external', order=3, rot=(0, 0, 28), metalness=0.8, roughness=0.3, explodeVector=[-.8, .8, 0])
+    _peca(o, 'cabecote_dir', 'Cabeçote do banco direito', [.45, .52, 0], [.55, .28, 1.35], '#495057',
+          'Cabeçote do banco direito com câmara de fluxo cruzado.', ('bloco', 'tampa_dir', 'coletor_escape_dir'),
+          role='structural', group='external', order=4, rot=(0, 0, -28), metalness=0.8, roughness=0.3, explodeVector=[.8, .8, 0])
+    _peca(o, 'tampa_esq', 'Tampa de válvulas anodizada esquerda', [-.55, .72, 0], [.48, .14, 1.38], '#c92a2a',
+          'Tampa protetora do comando com acabamento em pintura eletrostática.', ('cabecote_esq',),
+          group='external', order=5, rot=(0, 0, 28), metalness=0.7, roughness=0.2, explodeVector=[-1.1, 1.2, 0])
+    _peca(o, 'tampa_dir', 'Tampa de válvulas anodizada direita', [.55, .72, 0], [.48, .14, 1.38], '#c92a2a',
+          'Tampa protetora do comando direito.', ('cabecote_dir',),
+          group='external', order=6, rot=(0, 0, -28), metalness=0.7, roughness=0.2, explodeVector=[1.1, 1.2, 0])
+    _peca(o, 'virabrequim', 'Virabrequim crossplane forjado', [0, -.15, 0], [.24, .24, 1.5], '#adb5bd',
+          'Eixo de manivelas crossplane forjado com contrapesos de balanceamento.', ('bloco', 'pistao_e1', 'polia'),
+          role='functional', group='internal', order=7, kind='cylinder', rot=(90, 0, 0), metalness=0.95, roughness=0.15, explodeVector=[0, -.5, 0])
+    for i, z in enumerate((-.5, -.17, .17, .5), start=1):
+        _peca(o, f'pistao_e{i}', f'Pistão e biela esquerdo {i}', [-.32, .25, z], [.22, .32, .22], '#ced4da',
+              f'Pistão forjado do banco esquerdo {i} com anéis de compressão.', ('virabrequim', 'cabecote_esq'),
+              group='internal', order=7 + i, kind='cylinder', rot=(0, 0, 28), metalness=0.9, roughness=0.2, explodeVector=[-.6, .6, 0])
+        _peca(o, f'pistao_d{i}', f'Pistão e biela direito {i}', [.32, .25, z], [.22, .32, .22], '#ced4da',
+              f'Pistão forjado do banco direito {i}.', ('virabrequim', 'cabecote_dir'),
+              group='internal', order=11 + i, kind='cylinder', rot=(0, 0, -28), metalness=0.9, roughness=0.2, explodeVector=[.6, .6, 0])
+    _peca(o, 'admissao', 'Coletor de admissão plenum duplo', [0, .76, 0], [.72, .22, 1.1], '#868e96',
+          'Coletor de admissão de ar de alta vazão no vale central entre os bancos.', ('bloco', 'corpo_borboleta'),
+          group='external', order=16, metalness=0.85, roughness=0.25, explodeVector=[0, 1.1, 0])
+    _peca(o, 'corpo_borboleta', 'Corpo de borboleta frontal', [0, .86, .65], [.32, .32, .22], '#343a40',
+          'Válvula borboleta eletrônica dosadora de ar.', ('admissao',),
+          group='external', order=17, kind='cylinder', rot=(90, 0, 0), metalness=0.8, roughness=0.3, explodeVector=[0, 1.2, .6])
+    _peca(o, 'coletor_escape_esq', 'Coletores tubulares de escape esquerdo', [-.82, .25, 0], [.28, .45, 1.25], '#b18852',
+          'Coletores de escape individuais dimensionados em aço inox revenido.', ('cabecote_esq',),
+          group='external', order=18, metalness=0.75, roughness=0.4, explodeVector=[-1.2, -.2, 0])
+    _peca(o, 'coletor_escape_dir', 'Coletores tubulares de escape direito', [.82, .25, 0], [.28, .45, 1.25], '#b18852',
+          'Coletores tubulares de escape do banco direito.', ('cabecote_dir',),
+          group='external', order=19, metalness=0.75, roughness=0.4, explodeVector=[1.2, -.2, 0])
+    _peca(o, 'polia', 'Polia e amortecedor harmônico', [0, -.15, .82], [.38, .38, .12], '#212529',
+          'Polia frontal da correia de acessórios com dumper torsional.', ('virabrequim',),
+          group='external', order=20, kind='cylinder', rot=(90, 0, 0), metalness=0.7, roughness=0.3, explodeVector=[0, 0, .8])
+    _peca(o, 'volante_motor', 'Volante do motor para embreagem', [0, -.15, -.82], [.62, .62, .12], '#495057',
+          'Volante de inércia com cremalheira de partida.', ('virabrequim',),
+          group='external', order=21, kind='cylinder', rot=(90, 0, 0), metalness=0.85, roughness=0.2, explodeVector=[0, 0, -.8])
+    steps = [dict(title='Bloco e Bancos em V', text='Os dois bancos de 4 cilindros em ângulo de 90° proporcionam equilíbrio mecânico.', selected='bloco'),
+             dict(title='Conjunto Móvel Interno', text='Virabrequim crossplane e os 8 pistões convertem a combustão em rotação.', selected='virabrequim'),
+             dict(title='Admissão e Escapamento', text='Coletor de alto fluxo superior e saídas tubulares independentes.', selected='admissao'),
+             dict(title='Vista Explodida Mecânica', text='Desmontagem vertical dos cabeçotes e radial dos pistões.', selected='cabecote_esq', exploded=True)]
+    return _cena('motor-v8', 'Motor V8 de alta performance',
+                 'Composição mecânica educativa e aproximada de um motor V8 em 90 graus: bloco, 8 pistões, virabrequim, cabeçotes e coletores.',
+                 o, steps, 'motor V8 mecânico')
 
 
 def _notebook(education='device'):
@@ -524,6 +571,322 @@ def _notebook(education='device'):
                  education=education)
 
 
+def _turbina_aviao():
+    o = []
+    _peca(o, 'carenagem_sup', 'Carenagem externa superior', [0, .72, 0], [1.9, .25, 2.3], '#7b8594',
+          'Capô superior de fluxo com revestimento acústico antirruído; aproximação.',
+          ('carenagem_inf', 'duto_bypass', 'fan_case'),
+          role='structural', group='external', order=1, metalness=0.8, roughness=0.3, explodeVector=[0, .9, 0])
+    _peca(o, 'carenagem_inf', 'Carenagem externa inferior', [0, -.72, 0], [1.9, .25, 2.3], '#7b8594',
+          'Capô articulado inferior para manutenção da nacelle.',
+          ('carenagem_sup', 'duto_bypass', 'caixa_engrenagens'),
+          role='structural', group='external', order=2, metalness=0.8, roughness=0.3, explodeVector=[0, -.9, 0])
+    _peca(o, 'spinner_cone', 'Cone aerodinâmico frontal', [0, 0, 1.15], [.35, .5, .35], '#c92a2a',
+          'Cone ogival frontal giratório com pintura espiral antipássaros.', ('fan_blades',),
+          group='external', order=3, kind='cone', rot=(90, 0, 0), roughness=0.2, metalness=0.6, explodeVector=[0, 0, 1.2])
+    _peca(o, 'fan_blades', 'Palhetas do Fan de Titânio', [0, 0, .85], [1.65, 1.65, .15], '#9cb3c9',
+          'Rotor de titânio forjado com palhetas de corda larga que aceleram o ar primário e secundário.', ('spinner_cone', 'fan_case', 'eixo_spool'),
+          role='functional', group='external', order=4, kind='cylinder', rot=(90, 0, 0), roughness=0.25, metalness=0.85, explodeVector=[0, 0, .9])
+    _peca(o, 'fan_case', 'Anel de contenção do fan', [0, 0, .85], [1.8, 1.8, .22], '#343a40',
+          'Anel balístico de contenção reforçado com aramida Kevlar.', ('fan_blades', 'duto_bypass'),
+          role='structural', group='external', order=5, kind='ring', rot=(90, 0, 0), roughness=0.4, metalness=0.7, explodeVector=[0, 0, .7])
+    _peca(o, 'duto_bypass', 'Duto de fluxo secundário bypass', [0, 0, 0], [1.7, 1.7, 1.2], '#495057',
+          'Duto que guia o fluxo secundário gerando até 85% do empuxo total.', ('fan_case', 'estator_ogv'),
+          role='structural', group='external', order=6, kind='pipe', rot=(90, 0, 0), opacity=0.85, transparent=True, roughness=0.5, metalness=0.5)
+    _peca(o, 'estator_ogv', 'Palhetas estatoras guia de saída', [0, 0, .58], [1.55, 1.55, .1], '#6c757d',
+          'Aletas aerodinâmicas fixas que eliminam a rotação turbulenta do ar.', ('duto_bypass', 'compressor_baixa'),
+          group='internal', order=7, kind='cylinder', rot=(90, 0, 0), metalness=0.7, roughness=0.4, explodeVector=[0, 0, .5])
+    _peca(o, 'compressor_baixa', 'Compressor de Baixa Pressão (LPC)', [0, 0, .35], [.85, .85, .28], '#868e96',
+          'Estágios axiais iniciais de compressão do núcleo central.', ('eixo_spool', 'compressor_alta'),
+          group='internal', order=8, kind='cylinder', rot=(90, 0, 0), metalness=0.8, roughness=0.3, explodeVector=[0, 0, .3])
+    _peca(o, 'compressor_alta', 'Compressor de Alta Pressão (HPC)', [0, 0, .05], [.72, .72, .32], '#adb5bd',
+          'Estágios de alta razão de pressão antes da câmara.', ('compressor_baixa', 'difusor'),
+          group='internal', order=9, kind='cylinder', rot=(90, 0, 0), metalness=0.85, roughness=0.25, explodeVector=[0, 0, .1])
+    _peca(o, 'difusor', 'Difusor anular', [0, 0, -.16], [.68, .68, .1], '#495057',
+          'Transição aerodinâmica que reduz a velocidade e eleva a pressão estática.', ('compressor_alta', 'camara_combustao'),
+          group='internal', order=10, kind='ring', rot=(90, 0, 0), metalness=0.6, roughness=0.5)
+    _peca(o, 'camara_combustao', 'Câmara de combustão anular', [0, 0, -.32], [.75, .75, .24], '#d9480f',
+          'Liner de cerâmica térmica onde o querosene é injetado e queimado a mais de 1500°C.', ('difusor', 'injetores', 'turbina_alta'),
+          group='internal', order=11, kind='cylinder', rot=(90, 0, 0), emissive='#551100', roughness=0.6, metalness=0.4, explodeVector=[0, 0, -.2])
+    _peca(o, 'injetores', 'Injetores de combustível', [0, 0, -.24], [.8, .8, .06], '#f59f00',
+          'Bicos atomizadores de querosene em anel de injeção direta.', ('camara_combustao',),
+          group='internal', order=12, kind='ring', rot=(90, 0, 0), metalness=0.9, roughness=0.2, explodeVector=[0, 0, -.1])
+    _peca(o, 'turbina_alta', 'Turbina de Alta Pressão (HPT)', [0, 0, -.5], [.68, .68, .12], '#5c7cfa',
+          'Palhetas monocristalinas resfriadas internamente que movem o compressor de alta.', ('camara_combustao', 'turbina_baixa'),
+          group='internal', order=13, kind='cylinder', rot=(90, 0, 0), metalness=0.9, roughness=0.2, explodeVector=[0, 0, -.4])
+    _peca(o, 'turbina_baixa', 'Turbinas de Baixa Pressão (LPT)', [0, 0, -.68], [.8, .8, .22], '#4263eb',
+          'Múltiplos estágios de expansão que acionam o grande fan frontal via eixo central.', ('turbina_alta', 'eixo_spool'),
+          group='internal', order=14, kind='cylinder', rot=(90, 0, 0), metalness=0.9, roughness=0.2, explodeVector=[0, 0, -.6])
+    _peca(o, 'eixo_spool', 'Eixo central de acionamento concêntrico', [0, 0, .05], [.14, .14, 1.7], '#343a40',
+          'Eixo de aço de alta resistência mecânica conectando a turbina ao fan.', ('fan_blades', 'turbina_baixa'),
+          role='structural', group='internal', order=15, kind='cylinder', rot=(90, 0, 0), metalness=0.95, roughness=0.15)
+    _peca(o, 'cone_escape', 'Cone central de exaustão', [0, 0, -1.05], [.4, .55, .4], '#212529',
+          'Plug central aerodinâmico que alinha os gases da turbina.', ('turbina_baixa', 'bocal_escape'),
+          group='external', order=16, kind='cone', rot=(-90, 0, 0), metalness=0.7, roughness=0.4, explodeVector=[0, 0, -1.0])
+    _peca(o, 'bocal_escape', 'Bocal de exaustão convergente', [0, 0, -.92], [1.15, 1.15, .35], '#343a40',
+          'Bocal de aceleração final do fluxo de gases quentes.', ('cone_escape',),
+          role='structural', group='external', order=17, kind='pipe', rot=(90, 0, 0), metalness=0.8, roughness=0.35, explodeVector=[0, 0, -.8])
+    _peca(o, 'caixa_engrenagens', 'Caixa de acessórios e bombas (AGB)', [0, -.88, .2], [.55, .22, .45], '#2b303a',
+          'Transmissão acessória com geradores elétricos e bombas hidráulicas.', ('carenagem_inf',),
+          group='external', order=18, metalness=0.6, roughness=0.4, explodeVector=[0, -.7, 0])
+    _peca(o, 'pilone_asa', 'Pilone de fixação estrutural sob a asa', [0, .92, 0], [.26, .32, 1.4], '#5c677d',
+          'Suporte estrutural reforçado que ancora o motor à asa da aeronave.', ('carenagem_sup',),
+          role='structural', group='external', order=19, metalness=0.7, roughness=0.4, explodeVector=[0, .8, 0])
+    steps = [dict(title='Carenagem e Fan', text='O fan frontal de titânio capta o ar e direciona a maior parte pelo duto bypass.', selected='fan_blades', view='front'),
+             dict(title='Núcleo do Motor', text='Compressores de baixa e alta pressão comprimem o ar antes da câmara.', selected='compressor_alta', view='side'),
+             dict(title='Combustão e Turbinas', text='A câmara queima combustível e os gases expandem nas turbinas que movem o eixo central.', selected='camara_combustao', view='side'),
+             dict(title='Modo Explodido', text='Separação axial completa ao longo do eixo mecânico.', selected='eixo_spool', exploded=True)]
+    return _cena('turbina_aviao', 'Turbina turbofan aeronáutica',
+                 'Turbina aeronáutica turbofan de alta razão de diluição (High-Bypass); modelo educativo aproximado com fan, compressores, câmara de combustão, turbina e bocal de exaustão.',
+                 o, steps, 'turbina turbofan aeronáutica')
+
+
+def _smartphone_desmontado():
+    o = []
+    _peca(o, 'chassi_titanio', 'Chassi estrutural de titânio aeroespacial', [0, 0, 0], [.82, 1.65, .06], '#495057',
+          'Chassi usinado em peça única com pontos de ancoragem para tela e componentes; aproximação.',
+          ('vidro_frontal', 'tela_oled', 'placa_mae', 'bateria_lipo', 'vidro_traseiro'),
+          role='structural', group='external', order=1, metalness=0.85, roughness=0.25)
+    _peca(o, 'vidro_frontal', 'Vidro protetor Ceramic Shield frontal', [0, 0, .18], [.78, 1.6, .02], '#809bb8',
+          'Camada de vidro cerâmico de alta resistência a riscos e impactos.', ('tela_oled',),
+          role='structural', group='external', order=2, opacity=0.35, transparent=True, roughness=0.08, metalness=0.1, explodeVector=[0, 0, 1.4])
+    _peca(o, 'tela_oled', 'Painel flexível Super Retina OLED', [0, 0, .12], [.76, 1.58, .02], '#111317',
+          'Display emissivo OLED com taxa adaptativa de 120Hz e microcontrolador táctil.', ('chassi_titanio', 'vidro_frontal'),
+          group='external', order=3, roughness=0.15, metalness=0.3, explodeVector=[0, 0, 1.0])
+    _peca(o, 'placa_mae', 'Placa lógica principal em L', [-.18, .38, .02], [.38, .75, .03], '#2b593f',
+          'PCB multicamada de alta densidade integrando o processador e memórias.', ('chassi_titanio', 'processador_soc', 'modulo_cameras'),
+          group='internal', order=4, roughness=0.4, metalness=0.5, explodeVector=[-.3, .4, .6])
+    _peca(o, 'processador_soc', 'Processador SoC com dissipador grafeno', [-.18, .45, .04], [.2, .2, .02], '#1c1f24',
+          'System on Chip com CPU de 6 núcleos, GPU gráfica e acelerador de IA neural.', ('placa_mae',),
+          group='internal', order=5, roughness=0.2, metalness=0.8, explodeVector=[-.3, .5, .9])
+    _peca(o, 'memoria_ram', 'Memória unificada LPDDR5X', [-.18, .28, .04], [.18, .14, .02], '#212529',
+          'Módulo de alta largura de banda para multitarefa veloz.', ('placa_mae',),
+          group='internal', order=6, roughness=0.2, metalness=0.7, explodeVector=[-.3, .3, .9])
+    _peca(o, 'bateria_lipo', 'Bateria Li-Ion de alta densidade energética', [.14, -.12, .01], [.46, 1.1, .05], '#343a40',
+          'Célula química selada de 4500mAh com controlador de carga rápida.', ('chassi_titanio', 'bobina_wireless'),
+          group='internal', order=7, roughness=0.5, metalness=0.3, explodeVector=[.5, -.1, .5])
+    _peca(o, 'modulo_cameras', 'Módulo triplo de câmeras estabilizadas', [-.22, .58, -.06], [.32, .32, .06], '#1e2126',
+          'Conjunto com sensor principal, ultra-angular e teleobjetiva periscópica.', ('placa_mae', 'lente_principal'),
+          group='external', order=8, roughness=0.25, metalness=0.7, explodeVector=[-.4, .6, -.8])
+    _peca(o, 'lente_principal', 'Lente grande-angular com anel de safira', [-.28, .64, -.11], [.12, .12, .04], '#0b0c10',
+          'Lente de 48MP com abertura f/1.78 e estabilização por deslocamento de sensor.', ('modulo_cameras',),
+          group='external', order=9, kind='cylinder', rot=(90, 0, 0), roughness=0.1, metalness=0.9, explodeVector=[-.5, .7, -1.2])
+    _peca(o, 'lente_telefoto', 'Lente telefoto periscópica', [-.16, .64, -.11], [.12, .12, .04], '#0b0c10',
+          'Zoom óptico de 5x com prisma reflexivo interno.', ('modulo_cameras',),
+          group='external', order=10, kind='cylinder', rot=(90, 0, 0), roughness=0.1, metalness=0.9, explodeVector=[-.3, .7, -1.2])
+    _peca(o, 'lente_ultra', 'Lente ultra grande-angular', [-.22, .52, -.11], [.12, .12, .04], '#0b0c10',
+          'Lente de 120 graus de campo de visão para fotografia macro.', ('modulo_cameras',),
+          group='external', order=11, kind='cylinder', rot=(90, 0, 0), roughness=0.1, metalness=0.9, explodeVector=[-.4, .5, -1.2])
+    _peca(o, 'bobina_wireless', 'Bobina indutiva de cobre MagSafe', [0, -.05, -.04], [.55, .55, .02], '#d97706',
+          'Espiras circulares de cobre eletrolítico para carregamento por indução magnética.', ('bateria_lipo',),
+          group='internal', order=12, kind='ring', rot=(90, 0, 0), metalness=0.9, roughness=0.2, explodeVector=[0, -.1, -.5])
+    _peca(o, 'motor_haptico', 'Atuador linear háptico Taptic Engine', [-.18, -.72, .01], [.28, .12, .03], '#495057',
+          'Ressonador linear eletromagnético que produz feedback tátil refinado.', ('chassi_titanio',),
+          group='internal', order=13, roughness=0.3, metalness=0.8, explodeVector=[-.3, -.8, .4])
+    _peca(o, 'alto_falante', 'Módulo acústico estéreo inferior', [.16, -.72, .01], [.34, .12, .03], '#212529',
+          'Câmara acústica com membrana de polímero para graves e agudos.', ('chassi_titanio',),
+          group='internal', order=14, roughness=0.4, metalness=0.5, explodeVector=[.3, -.8, .4])
+    _peca(o, 'porta_usbc', 'Conector USB-C blindado', [0, -.81, 0], [.2, .05, .04], '#adb5bd',
+          'Porta de alta velocidade USB 3.0 com suporte a saída de vídeo DisplayPort.', ('chassi_titanio',),
+          group='external', order=15, metalness=0.9, roughness=0.2, explodeVector=[0, -1.0, 0])
+    _peca(o, 'vidro_traseiro', 'Vidro traseiro fosco texturizado', [0, 0, -.06], [.78, 1.6, .02], '#5c677d',
+          'Painel traseiro de vidro microjateado resistente a impressões digitais.', ('chassi_titanio',),
+          role='structural', group='external', order=16, opacity=0.85, roughness=0.3, metalness=0.2, explodeVector=[0, 0, -1.3])
+    steps = [dict(title='Estrutura em Camadas', text='Os componentes modernos são empilhados em frações de milímetro.', selected='chassi_titanio', view='front'),
+             dict(title='Tela e Vidro Cerâmico', text='O painel OLED flexível e a cobertura de vidro ultrafina.', selected='tela_oled', view='side'),
+             dict(title='Processador e Placa-Mãe', text='O SoC principal integra CPU, GPU e acelerador neural.', selected='processador_soc', view='front'),
+             dict(title='Desmontagem Explodida', text='Separação em eixos perpendiculares para visualizar todos os chips.', selected='bateria_lipo', exploded=True)]
+    return _cena('smartphone_desmontado', 'Smartphone desmontado em camadas',
+                 'Smartphone desmontado em camadas mecânicas: chassi de titânio, tela OLED, placa-mãe em L, bateria Li-Ion, bobina MagSafe e módulo de câmeras triplo; modelo educativo aproximado.',
+                 o, steps, 'smartphone desmontado')
+
+
+def _drone_quadricoptero():
+    o = []
+    _peca(o, 'quadro_carbono', 'Chassi inferior em X de fibra de carbono 3K', [0, -.05, 0], [1.9, .06, 1.9], '#1c1f24',
+          'Estrutura em X simétrico cortada em CNC de fibra de carbono 3K com braços reforçados; aproximação.',
+          ('placa_topo', 'motor_1', 'motor_2', 'motor_3', 'motor_4'),
+          role='structural', group='external', order=1, roughness=0.35, metalness=0.2)
+    _peca(o, 'placa_topo', 'Top plate superior de carbono', [0, .16, 0], [.6, .04, 1.2], '#1c1f24',
+          'Placa superior que protege a eletrônica e ancora a bateria.', ('quadro_carbono', 'bateria_lipo'),
+          role='structural', group='external', order=2, roughness=0.35, metalness=0.2, explodeVector=[0, .6, 0])
+    _peca(o, 'stack_controladora', 'Controladora de voo F7 com ESC 4-em-1', [0, .05, 0], [.42, .12, .42], '#2b593f',
+          'Stack eletrônica montada em borrachas amortecedoras com giroscópio de 8kHz e ESCs de 45A.', ('quadro_carbono',),
+          group='internal', order=3, roughness=0.4, metalness=0.5, explodeVector=[0, .3, 0])
+    _peca(o, 'motor_1', 'Motor brushless 2306 dianteiro esquerdo', [-.75, .06, .75], [.28, .22, .28], '#0077b6',
+          'Motor elétrico sem escovas com ímãs de neodímio N52 e rolamentos cerâmicos.', ('quadro_carbono', 'helice_1'),
+          group='external', order=4, kind='cylinder', rot=(0, 0, 0), metalness=0.85, roughness=0.2, explodeVector=[-.5, .4, .5])
+    _peca(o, 'motor_2', 'Motor brushless 2306 dianteiro direito', [.75, .06, .75], [.28, .22, .28], '#0077b6',
+          'Motor elétrico sem escovas direito com rotação invertida CCW.', ('quadro_carbono', 'helice_2'),
+          group='external', order=5, kind='cylinder', rot=(0, 0, 0), metalness=0.85, roughness=0.2, explodeVector=[.5, .4, .5])
+    _peca(o, 'motor_3', 'Motor brushless 2306 traseiro esquerdo', [-.75, .06, -.75], [.28, .22, .28], '#0077b6',
+          'Motor elétrico sem escovas traseiro esquerdo CCW.', ('quadro_carbono', 'helice_3'),
+          group='external', order=6, kind='cylinder', rot=(0, 0, 0), metalness=0.85, roughness=0.2, explodeVector=[-.5, .4, -.5])
+    _peca(o, 'motor_4', 'Motor brushless 2306 traseiro direito', [.75, .06, -.75], [.28, .22, .28], '#0077b6',
+          'Motor elétrico sem escovas traseiro direito CW.', ('quadro_carbono', 'helice_4'),
+          group='external', order=7, kind='cylinder', rot=(0, 0, 0), metalness=0.85, roughness=0.2, explodeVector=[.5, .4, -.5])
+    _peca(o, 'helice_1', 'Hélice tripá de policarbonato DE', [-.75, .2, .75], [.85, .04, .85], '#00b4d8',
+          'Hélice aerodinâmica de 5 polegadas moldada em policarbonato inquebrável.', ('motor_1',),
+          group='external', order=8, kind='cylinder', opacity=0.85, roughness=0.2, metalness=0.1, explodeVector=[-.5, .8, .5])
+    _peca(o, 'helice_2', 'Hélice tripá de policarbonato DD', [.75, .2, .75], [.85, .04, .85], '#00b4d8',
+          'Hélice tripá dianteira direita com passo otimizado.', ('motor_2',),
+          group='external', order=9, kind='cylinder', opacity=0.85, roughness=0.2, metalness=0.1, explodeVector=[.5, .8, .5])
+    _peca(o, 'helice_3', 'Hélice tripá de policarbonato TE', [-.75, .2, -.75], [.85, .04, .85], '#00b4d8',
+          'Hélice tripá traseira esquerda.', ('motor_3',),
+          group='external', order=10, kind='cylinder', opacity=0.85, roughness=0.2, metalness=0.1, explodeVector=[-.5, .8, -.5])
+    _peca(o, 'helice_4', 'Hélice tripá de policarbonato TD', [.75, .2, -.75], [.85, .04, .85], '#00b4d8',
+          'Hélice tripá traseira direita.', ('motor_4',),
+          group='external', order=11, kind='cylinder', opacity=0.85, roughness=0.2, metalness=0.1, explodeVector=[.5, .8, -.5])
+    _peca(o, 'camera_fpv', 'Micro câmera FPV de baixa latência', [0, .12, .52], [.22, .22, .24], '#e63946',
+          'Sensor CMOS micro WDR ajustável para visão do piloto em tempo real.', ('placa_topo',),
+          group='external', order=12, roughness=0.3, metalness=0.6, explodeVector=[0, .2, .8])
+    _peca(o, 'antena_vtx', 'Antena circular polarizada VTX 5.8GHz', [0, .42, -.48], [.12, .45, .12], '#e63946',
+          'Antena omnidirecional lollipop de transmissão de sinal de vídeo sem interferências.', ('placa_topo',),
+          group='external', order=13, kind='cylinder', rot=(25, 0, 0), roughness=0.4, metalness=0.4, explodeVector=[0, .6, -.7])
+    _peca(o, 'bateria_lipo', 'Bateria LiPo 4S 1500mAh 120C', [0, .32, -.05], [.45, .28, .72], '#f77f00',
+          'Pack de baterias de polímero de lítio de alta taxa de descarga contínua.', ('placa_topo',),
+          group='external', order=14, roughness=0.5, metalness=0.2, explodeVector=[0, .9, 0])
+    steps = [dict(title='Estrutura em X de Fibra de Carbono', text='Braços independentes distribuem as forças e vibrações dos 4 motores.', selected='quadro_carbono', view='top'),
+             dict(title='Motores Brushless e Hélices', text='Rotação oposta nos pares (CW e CCW) anula o torque residual.', selected='motor_1', view='front'),
+             dict(title='Eletrônica e Controladora', text='Stack central com giroscópio, acelerômetro e ESCs de 45A.', selected='stack_controladora', view='side'),
+             dict(title='Desmontagem Explodida', text='Separação dos motores, hélices, bateria LiPo e câmera FPV.', selected='bateria_lipo', exploded=True)]
+    return _cena('drone_quadricoptero', 'Drone quadricóptero FPV',
+                 'Drone quadricóptero de alta performance: chassi de fibra de carbono 3K, 4 motores brushless, hélices de policarbonato, stack controladora F7 e câmera FPV; modelo educativo aproximado.',
+                 o, steps, 'drone quadricóptero FPV')
+
+
+def _coracao_humano():
+    o = []
+    _peca(o, 'ventriculo_esquerdo', 'Ventrículo esquerdo com miocárdio espesso', [.22, -.25, 0], [.72, .9, .72], '#85141c',
+          'Câmara cardíaca com espessura muscular desenvolvida para bombear sangue oxigenado para a aorta; aproximação.',
+          ('ventriculo_direito', 'arco_aorta', 'valvula_mitral', 'septo_interventricular'),
+          role='structural', group='external', order=1, kind='sphere', roughness=0.6, metalness=0.1)
+    _peca(o, 'ventriculo_direito', 'Ventrículo direito', [-.22, -.22, .12], [.68, .82, .68], '#9b1823',
+          'Câmara de ejeção pulmonar de baixa pressão.', ('ventriculo_esquerdo', 'arteria_pulmonar', 'valvula_tricuspide'),
+          role='structural', group='external', order=2, kind='sphere', roughness=0.6, metalness=0.1)
+    _peca(o, 'atrio_esquerdo', 'Átrio esquerdo posterossuperior', [.26, .35, -.18], [.55, .52, .55], '#a41926',
+          'Câmara receptora do sangue oxigenado vindo das veias pulmonares.', ('ventriculo_esquerdo', 'veias_pulmonares'),
+          role='structural', group='external', order=3, kind='sphere', roughness=0.55, metalness=0.1)
+    _peca(o, 'atrio_direito', 'Átrio direito anterossuperior', [-.32, .32, .05], [.58, .55, .58], '#ab1e2c',
+          'Câmara de recepção venosa das veias cavas superior e inferior.', ('ventriculo_direito', 'veia_cava_superior', 'veia_cava_inferior'),
+          role='structural', group='external', order=4, kind='sphere', roughness=0.55, metalness=0.1)
+    _peca(o, 'arco_aorta', 'Arco da artéria aorta ascendente', [.05, .68, 0], [.48, .62, .48], '#c92a2a',
+          'Maior vaso do corpo humano, ramificando o sangue arterial.', ('ventriculo_esquerdo', 'arteria_braquiocefalica', 'arteria_carotida', 'arteria_subclavia'),
+          group='external', order=5, kind='cylinder', rot=(0, 0, 15), roughness=0.4, metalness=0.25, explodeVector=[0, .9, 0])
+    _peca(o, 'arteria_braquiocefalica', 'Tronco braquiocefálico do arco aórtico', [-.08, .95, 0], [.14, .35, .14], '#c92a2a',
+          'Primeiro grande ramo da aorta que vasculariza o braço direito e lado direito da cabeça.', ('arco_aorta',),
+          group='external', order=6, kind='cylinder', roughness=0.4, metalness=0.25, explodeVector=[-.2, 1.2, 0])
+    _peca(o, 'arteria_carotida', 'Artéria carótida comum esquerda', [.06, .98, 0], [.12, .38, .12], '#c92a2a',
+          'Ramo aórtico que irriga o cérebro e face pelo lado esquerdo.', ('arco_aorta',),
+          group='external', order=7, kind='cylinder', roughness=0.4, metalness=0.25, explodeVector=[.1, 1.3, 0])
+    _peca(o, 'arteria_subclavia', 'Artéria subclávia esquerda', [.18, .92, -.05], [.12, .32, .12], '#c92a2a',
+          'Ramo aórtico direcionado ao membro superior esquerdo.', ('arco_aorta',),
+          group='external', order=8, kind='cylinder', roughness=0.4, metalness=0.25, explodeVector=[.3, 1.2, 0])
+    _peca(o, 'arteria_pulmonar', 'Tronco da artéria pulmonar', [-.14, .52, .22], [.42, .55, .42], '#1971c2',
+          'Vaso que conduz sangue desoxigenado do ventrículo direito para os pulmões.', ('ventriculo_direito',),
+          group='external', order=9, kind='cylinder', rot=(-20, 0, -15), roughness=0.4, metalness=0.25, explodeVector=[-.3, .7, .6])
+    _peca(o, 'veia_cava_superior', 'Veia cava superior', [-.45, .72, -.1], [.26, .55, .26], '#1864ab',
+          'Grande vaso venoso que traz sangue da cabeça, pescoço e membros superiores.', ('atrio_direito',),
+          group='external', order=10, kind='cylinder', roughness=0.4, metalness=0.2, explodeVector=[-.7, .8, -.2])
+    _peca(o, 'veia_cava_inferior', 'Veia cava inferior', [-.42, -.65, -.15], [.26, .45, .26], '#1864ab',
+          'Conduz o sangue venoso vindo dos órgãos abdominais e pernas.', ('atrio_direito',),
+          group='external', order=11, kind='cylinder', roughness=0.4, metalness=0.2, explodeVector=[-.7, -.8, -.2])
+    _peca(o, 'veias_pulmonares', 'Veias pulmonares esquerdas e direitas', [.52, .38, -.28], [.24, .32, .24], '#c92a2a',
+          'Quatro veias que desembocam sangue vermelho vivo no átrio esquerdo.', ('atrio_esquerdo',),
+          group='external', order=12, kind='cylinder', rot=(0, 0, 45), roughness=0.4, metalness=0.2, explodeVector=[.8, .4, -.5])
+    _peca(o, 'septo_interventricular', 'Septo muscular interventricular', [0, -.22, 0], [.12, .75, .55], '#6f0e16',
+          'Parede muscular que isola hermeticamente os dois lados do coração.', ('ventriculo_esquerdo', 'ventriculo_direito'),
+          role='structural', group='internal', order=13, roughness=0.6, metalness=0.1)
+    _peca(o, 'valvula_mitral', 'Válvula mitral bicúspide', [.18, .08, -.05], [.28, .05, .28], '#e9ecef',
+          'Válvula atrioventricular esquerda que impede o refluxo durante a sístole.', ('ventriculo_esquerdo', 'atrio_esquerdo'),
+          group='internal', order=14, kind='ring', rot=(90, 0, 0), roughness=0.3, metalness=0.1)
+    _peca(o, 'valvula_tricuspide', 'Válvula tricúspide atrioventricular', [-.18, .08, .08], [.28, .05, .28], '#e9ecef',
+          'Válvula com três folhetos que separa átrio e ventrículo direitos.', ('ventriculo_direito', 'atrio_direito'),
+          group='internal', order=15, kind='ring', rot=(90, 0, 0), roughness=0.3, metalness=0.1)
+    _peca(o, 'valvula_aortica', 'Válvula aórtica semilunar', [.02, .28, 0], [.25, .05, .25], '#dee2e6',
+          'Válvula que se abre sob alta pressão para permitir a ejeção sistêmica.', ('ventriculo_esquerdo', 'arco_aorta'),
+          group='internal', order=16, kind='ring', rot=(90, 0, 0), roughness=0.3, metalness=0.1)
+    steps = [dict(title='Músculo Cardíaco e Câmaras', text='O miocárdio ventricular bombeia o sangue oxigenado para o corpo.', selected='ventriculo_esquerdo', view='front'),
+             dict(title='Grandes Vasos da Base', text='Arco da aorta e artéria pulmonar distribuem o fluxo sanguíneo arterial e venoso.', selected='arco_aorta', view='front'),
+             dict(title='Circulação Venosa e Átrios', text='As veias cavas e veias pulmonares trazem o sangue de volta ao coração.', selected='veia_cava_superior', view='back'),
+             dict(title='Visão Interna das Válvulas', text='Ative o modo Raio-X ou separe as peças para examinar as válvulas e o septo.', selected='valvula_mitral', exploded=True)]
+    return _cena('coracao_humano', 'Coração humano anatômico',
+                 'Coração humano anatômico: ventrículos, átrios, arco aórtico com ramos, artéria pulmonar, veias cavas e válvulas internas; modelo educativo aproximado.',
+                 o, steps, 'coração humano anatômico')
+
+
+def _carro_eletrico():
+    o = []
+    _peca(o, 'chassi_base', 'Quadro perimetral do chassi skateboard', [0, 0, 0], [1.3, .12, 2.6], '#495057',
+          'Chassi espacial rígido em liga de alumínio fundido e extrudado que ancora os módulos; aproximação.',
+          ('pack_bateria', 'motor_dianteiro', 'motor_traseiro', 'suspensao_de', 'suspensao_dd'),
+          role='structural', group='external', order=1, metalness=0.8, roughness=0.3)
+    _peca(o, 'pack_bateria', 'Compartimento selado de bateria 800V', [0, -.06, 0], [1.15, .16, 1.7], '#212529',
+          'Gabinete estrutural blindado inferior com placas de refrigeração líquida.', ('chassi_base', 'modulos_bateria'),
+          role='structural', group='external', order=2, metalness=0.7, roughness=0.35, explodeVector=[0, -.7, 0])
+    _peca(o, 'modulos_bateria', 'Módulos internos de células Li-Ion', [0, -.04, 0], [1.0, .1, 1.55], '#0077b6',
+          'Módulos de alta densidade energética operando em arquitetura ultra rápida de 800 volts.', ('pack_bateria', 'cabeamento_hv'),
+          group='internal', order=3, roughness=0.3, metalness=0.6, emissive='#001133')
+    _peca(o, 'cabeamento_hv', 'Barramentos elétricos de alta tensão', [0, .08, 0], [.18, .04, 2.1], '#f77f00',
+          'Cabos blindados em laranja de segurança que conectam os motores à bateria.', ('motor_dianteiro', 'motor_traseiro'),
+          group='internal', order=4, roughness=0.4, metalness=0.2)
+    _peca(o, 'motor_dianteiro', 'Motor elétrico e inversor dianteiro PMSM', [0, .05, .95], [.55, .32, .45], '#343a40',
+          'Motor síncrono de ímãs permanentes compacto com diferencial dianteiro integrado.', ('chassi_base', 'barra_direcao'),
+          group='external', order=5, metalness=0.85, roughness=0.25, explodeVector=[0, .3, .9])
+    _peca(o, 'motor_traseiro', 'Unidade de tração de alta potência traseira', [0, .05, -.95], [.62, .35, .48], '#343a40',
+          'Motor elétrico traseiro com inversor de carbeto de silício (SiC) para torque imediato.', ('chassi_base',),
+          group='external', order=6, metalness=0.85, roughness=0.25, explodeVector=[0, .3, -.9])
+    _peca(o, 'barra_direcao', 'Caixa de direção elétrica dianteira', [0, .02, 1.15], [1.2, .08, .12], '#6c757d',
+          'Mecanismo de cremalheira assistido eletronicamente com esterçamento preciso.', ('motor_dianteiro',),
+          group='external', order=7, metalness=0.8, roughness=0.3)
+    _peca(o, 'suspensao_de', 'Suspensão duplo A dianteira esquerda', [-.72, .02, 1.05], [.32, .15, .28], '#6c757d',
+          'Braços de controle de alumínio forjado com amortecedor adaptativo.', ('chassi_base', 'roda_de'),
+          role='structural', group='external', order=8, metalness=0.75, roughness=0.35, explodeVector=[-.5, .2, 0])
+    _peca(o, 'suspensao_dd', 'Suspensão duplo A dianteira direita', [.72, .02, 1.05], [.32, .15, .28], '#6c757d',
+          'Braço duplo A dianteiro direito.', ('chassi_base', 'roda_dd'),
+          role='structural', group='external', order=9, metalness=0.75, roughness=0.35, explodeVector=[.5, .2, 0])
+    _peca(o, 'suspensao_te', 'Suspensão multilink traseira esquerda', [-.72, .02, -1.05], [.32, .15, .28], '#6c757d',
+          'Suspensão independente multibraço para máxima aderência em curvas.', ('chassi_base', 'roda_te'),
+          role='structural', group='external', order=10, metalness=0.75, roughness=0.35, explodeVector=[-.5, .2, 0])
+    _peca(o, 'suspensao_td', 'Suspensão multilink traseira direita', [.72, .02, -1.05], [.32, .15, .28], '#6c757d',
+          'Suspensão multibraço traseira direita.', ('chassi_base', 'roda_td'),
+          role='structural', group='external', order=11, metalness=0.75, roughness=0.35, explodeVector=[.5, .2, 0])
+    _peca(o, 'pinca_de', 'Pinça de freio esportiva dianteira esquerda', [-.92, .08, 1.05], [.1, .16, .12], '#e63946',
+          'Pinça monobloco de 6 pistões em vermelho de alto rendimento.', ('roda_de',),
+          group='external', order=12, metalness=0.6, roughness=0.3, explodeVector=[-.9, 0, 0])
+    _peca(o, 'pinca_dd', 'Pinça de freio esportiva dianteira direita', [.92, .08, 1.05], [.1, .16, .12], '#e63946',
+          'Pinça dianteira direita esportiva.', ('roda_dd',),
+          group='external', order=13, metalness=0.6, roughness=0.3, explodeVector=[.9, 0, 0])
+    _peca(o, 'pinca_te', 'Pinça de freio esportiva traseira esquerda', [-.92, .08, -1.05], [.1, .16, .12], '#e63946',
+          'Pinça traseira com acionamento do freio regenerativo.', ('roda_te',),
+          group='external', order=14, metalness=0.6, roughness=0.3, explodeVector=[-.9, 0, 0])
+    _peca(o, 'pinca_td', 'Pinça de freio esportiva traseira direita', [.92, .08, -1.05], [.1, .16, .12], '#e63946',
+          'Pinça traseira direita esportiva.', ('roda_td',),
+          group='external', order=15, metalness=0.6, roughness=0.3, explodeVector=[.9, 0, 0])
+    _peca(o, 'roda_de', 'Roda dianteira esquerda aro 21 com pneu', [-.98, 0, 1.05], [.62, .62, .26], '#1c1f24',
+          'Roda forjada esportiva com pneu de baixa resistência ao rolamento.', ('suspensao_de', 'pinca_de'),
+          group='external', order=16, kind='cylinder', rot=(0, 0, 90), roughness=0.4, metalness=0.5, explodeVector=[-1.2, 0, .2])
+    _peca(o, 'roda_dd', 'Roda dianteira direita aro 21 com pneu', [.98, 0, 1.05], [.62, .62, .26], '#1c1f24',
+          'Roda forjada dianteira direita.', ('suspensao_dd', 'pinca_dd'),
+          group='external', order=17, kind='cylinder', rot=(0, 0, 90), roughness=0.4, metalness=0.5, explodeVector=[1.2, 0, .2])
+    _peca(o, 'roda_te', 'Roda traseira esquerda aro 21 com pneu', [-.98, 0, -1.05], [.62, .62, .26], '#1c1f24',
+          'Roda forjada traseira esquerda larga para tração.', ('suspensao_te', 'pinca_te'),
+          group='external', order=18, kind='cylinder', rot=(0, 0, 90), roughness=0.4, metalness=0.5, explodeVector=[-1.2, 0, -.2])
+    _peca(o, 'roda_td', 'Roda traseira direita aro 21 com pneu', [.98, 0, -1.05], [.62, .62, .26], '#1c1f24',
+          'Roda forjada traseira direita larga.', ('suspensao_td', 'pinca_td'),
+          group='external', order=19, kind='cylinder', rot=(0, 0, 90), roughness=0.4, metalness=0.5, explodeVector=[1.2, 0, -.2])
+    _peca(o, 'coluna_direcao', 'Coluna de direção e volante de comando', [.32, .52, .62], [.42, .42, .08], '#212529',
+          'Volante estilo manche com controle digital fly-by-wire.', ('chassi_base',),
+          group='external', order=20, kind='ring', rot=(25, 0, 0), roughness=0.3, metalness=0.6, explodeVector=[.4, .8, .6])
+    steps = [dict(title='Chassi Skateboard e Bateria Estrutural', text='O piso plano acomoda o pack de baterias 800V rebaixando o centro de gravidade.', selected='chassi_base', view='top'),
+             dict(title='Motores Elétricos Dianteiro e Traseiro', text='Tração integral (AWD) independente com resposta instantânea de torque.', selected='motor_traseiro', view='side'),
+             dict(title='Suspensão Duplo A e Rodas de Alta Performance', text='Rodas de liga leve com pinças de freio esportivas e barra de direção.', selected='roda_de', view='front'),
+             dict(title='Modo Explodido da Plataforma', text='Separação mecânica dos motores, pack de bateria, rodas e suspensões.', selected='pack_bateria', exploded=True)]
+    return _cena('carro_eletrico', 'Plataforma EV Skateboard',
+                 'Plataforma e chassi skate de veículo elétrico (EV Skateboard): pack estrutural de baterias 800V, dois motores elétricos dianteiro/traseiro, suspensões independentes e freios com pinças vermelhas; modelo educativo aproximado.',
+                 o, steps, 'veículo elétrico skateboard')
+
+
 _FABRICAS = {
     'xbox': _console_compacto,
     'console': _console_generico,
@@ -539,6 +902,11 @@ _FABRICAS = {
     'suporte_celular': _suporte_celular,
     'motor_v8': _motor_v8,
     'notebook': _notebook,
+    'turbina_aviao': _turbina_aviao,
+    'smartphone_desmontado': _smartphone_desmontado,
+    'drone_quadricoptero': _drone_quadricoptero,
+    'coracao_humano': _coracao_humano,
+    'carro_eletrico': _carro_eletrico,
 }
 
 

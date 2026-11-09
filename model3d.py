@@ -8,16 +8,18 @@ import unicodedata
 import model3d_catalog
 
 KINDS = ('cube', 'sphere', 'cylinder', 'pyramid')
+ADVANCED_KINDS = ('cube', 'sphere', 'cylinder', 'pyramid', 'cone', 'torus', 'capsule', 'lathe', 'ring', 'box', 'pipe')
+EDUCATION_DOMAINS = ('', 'computer', 'geometry', 'solar', 'device', 'mechanical', 'aviation', 'automotive', 'electronics', 'robotics', 'biology', 'anatomy', 'physics', 'architecture', 'science', 'general')
 MODEL_ID = 'demo-cube'
 VIEWS = ('free', 'front', 'back', 'side', 'top')
 # V5.6: fontes novas só com prefixo editorial fixo; texto livre não passa.
 _FONTE_EXTRA = re.compile(
-    r"^(Catálogo local V5\.6|Aproximado por referências públicas|Modelo conceitual educativo)"
+    r"^(Catálogo local V5\.6|Catálogo local VEXX|Aproximado por referências públicas|Modelo conceitual educativo|Geração 3D VEXX AI|Arquiteto 3D VEXX)"
     r" — [A-Za-z0-9À-ÖØ-öø-ÿ .,;:()\[\]'/+\-%°·]{1,180}$")
 
 
 def validate_interaction(state, ids, count):
-    defaults = dict(selected='', hidden=[], isolated='', exploded=False, transparent=[],
+    defaults = dict(selected='', hidden=[], isolated='', exploded=False, transparent=[], xray=False,
                     view='free', focus='', step=0, speed=1, lessonPlaying=False)
     if not isinstance(state, dict) or set(state) - set(defaults):
         raise ValueError('Estado 3D desconhecido')
@@ -28,7 +30,7 @@ def validate_interaction(state, ids, count):
     for key in ('hidden','transparent'):
         if not isinstance(s[key],list) or len(s[key]) > 32 or any(not isinstance(v,str) or v not in ids for v in s[key]) or len(set(s[key])) != len(s[key]):
             raise ValueError('Lista de partes inválida')
-    if s['view'] not in VIEWS or type(s['exploded']) is not bool or type(s['lessonPlaying']) is not bool:
+    if s['view'] not in VIEWS or type(s['exploded']) is not bool or type(s['lessonPlaying']) is not bool or type(s['xray']) is not bool:
         raise ValueError('Visualização inválida')
     if type(s['step']) not in (int,float) or not math.isfinite(s['step']) or int(s['step']) != s['step'] or not 0 <= s['step'] < max(count,1):
         raise ValueError('Etapa inexistente')
@@ -73,7 +75,7 @@ def validate(p):
 
     obj(p, 'id version title description objects model color scale rotation camera lighting annotations autoRotate details source education steps interaction precision')
     education = p.get('education', '')
-    if education not in ('','computer','geometry','solar','device') or (not education and any(k in p for k in ('steps','interaction'))):
+    if education not in EDUCATION_DOMAINS or (not education and any(k in p for k in ('steps','interaction'))):
         raise ValueError('Cena educativa inválida')
     if type(p.get('version')) not in (int, float) or p['version'] != 1:
         raise ValueError('model3d: versão inválida')
@@ -88,9 +90,10 @@ def validate(p):
         raise ValueError('model3d: use 1..8 primitivas ou um modelo autorizado')
     items, ids = [], set()
     for item in objects:
-        obj(item, 'id kind position rotation scale label description' + (' dimensions color category related metadata role group order' if education else ''))
+        obj(item, 'id kind position rotation scale label description' + (' dimensions color category related metadata role group order roughness metalness opacity transparent wireframe emissive explodeVector' if education else ''))
         iid = ident(item.get('id'))
-        if iid in ids or item.get('kind') not in KINDS:
+        allowed_kinds = ADVANCED_KINDS if education else KINDS
+        if iid in ids or item.get('kind') not in allowed_kinds:
             raise ValueError('model3d: objeto inválido ou duplicado')
         ids.add(iid)
         items.append(dict(id=iid, kind=item['kind'], position=vector(item.get('position', [0, 0, 0]), -3, 3),
@@ -115,10 +118,28 @@ def validate(p):
             order = item.get('order',0)
             if type(order) is not int or not 0 <= order <= 32:
                 raise ValueError('Ordem de montagem inválida')
-            items[-1].update(dimensions=vector(item.get('dimensions',[1,1,1]),.015,3),
+            item_dict = dict(dimensions=vector(item.get('dimensions',[1,1,1]),.015,3),
                              color=part_color.lower(),category=category,related=item.get('related',[]),
                              metadata={'conceptual':boolean(meta.get('conceptual',True)), 'note':string(meta.get('note',''),200)},
                              role=role,group=group,order=order)
+            if 'roughness' in item:
+                item_dict['roughness'] = number(item['roughness'], 0, 1)
+            if 'metalness' in item:
+                item_dict['metalness'] = number(item['metalness'], 0, 1)
+            if 'opacity' in item:
+                item_dict['opacity'] = number(item['opacity'], 0, 1)
+            if 'transparent' in item:
+                item_dict['transparent'] = boolean(item['transparent'])
+            if 'wireframe' in item:
+                item_dict['wireframe'] = boolean(item['wireframe'])
+            if 'emissive' in item:
+                ems = item['emissive']
+                if not isinstance(ems, str) or not re.fullmatch(r'#[a-fA-F0-9]{6}', ems):
+                    raise ValueError('Cor emissiva inválida')
+                item_dict['emissive'] = ems.lower()
+            if 'explodeVector' in item:
+                item_dict['explodeVector'] = vector(item['explodeVector'], -5, 5)
+            items[-1].update(item_dict)
     if model:
         ids.add(MODEL_ID)
     if education:
@@ -163,10 +184,13 @@ def validate(p):
             raise ValueError('Etapas inválidas')
         normalized_steps = []
         for step in steps:
-            obj(step, 'title text selected view exploded')
-            s = validate_interaction({k:step[k] for k in ('selected','view','exploded') if k in step},ids,0)
-            normalized_steps.append(dict(title=string(step.get('title','Etapa'),80),text=string(step.get('text',''),400),
-                                         selected=s['selected'],view=s['view'],exploded=s['exploded']))
+            obj(step, 'title text selected view exploded xray')
+            s = validate_interaction({k:step[k] for k in ('selected','view','exploded','xray') if k in step},ids,0)
+            st_dict = dict(title=string(step.get('title','Etapa'),80),text=string(step.get('text',''),400),
+                           selected=s['selected'],view=s['view'],exploded=s['exploded'])
+            if 'xray' in step:
+                st_dict['xray'] = s['xray']
+            normalized_steps.append(st_dict)
         result.update(education=education,steps=normalized_steps,
                       interaction=validate_interaction(p.get('interaction',{}),ids,len(steps)))
     if len(json.dumps(result, ensure_ascii=False, separators=(',', ':')).encode('utf-8')) > 20000:
@@ -187,11 +211,14 @@ def request(text):
              'vista lateral':'side','vista superior':'top','mostre de cima':'top'}
     simple = {'separe as pecas':'explode','remonte as pecas':'assemble','revele todas as partes':'reveal',
               'volte ao passo anterior':'previous','proximo passo':'next','avance ao proximo passo':'next',
-              'inicie a animacao educativa':'playLesson','pause a animacao':'pauseLesson'}
+              'inicie a animacao educativa':'playLesson','pause a animacao':'pauseLesson',
+              'modo raio x':'xray','raio x':'xray','ative o raio x':'xray','desative o raio x':'xray'}
     if t in views:
         return {'action':'interact','op':'view','target':views[t]}
     if t in simple:
         return {'action':'interact','op':simple[t],'target':''}
+    if re.search(r'\b(raio[- ]?x|visao interna|modo raio)\b', t):
+        return {'action':'interact','op':'xray','target':''}
     # V5.6: grupos internos/externos e conexões entre partes.
     match = re.fullmatch(r'(?:me )?(?:mostre|exiba|veja|quero ver|deixe|oculte|esconda) (?:so|apenas|somente) (?:as |os )?(?:pecas?|partes?) (internas|externas)', t)
     if match:
@@ -369,6 +396,9 @@ def interact(props, request):
         text = (part['label'] + ' se conecta a: ' + ', '.join(rotulos) + '.'
                 if rotulos else 'Nenhuma conexão registrada para ' + part['label'] + ' nesta cena.')
         props['details'] = True
+    elif op == 'xray':
+        s['xray'] = not s.get('xray', False)
+        text = 'Modo Raio-X ativado (visão interna das peças).' if s['xray'] else 'Modo Raio-X desativado.'
     elif op in ('explode','assemble'):
         if len(props['objects']) < 2:
             return 'A cena precisa de pelo menos duas partes para separar peças.',None

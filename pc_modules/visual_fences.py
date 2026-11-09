@@ -397,6 +397,12 @@ def cmd_model3d(db, texto, owner, conv, scene_state='', pesquisa_web=False):
             aproximado = model3d_research.gerar(request['topic'])
         except Exception:
             aproximado = None
+        if not aproximado:
+            try:
+                import model3d_generative
+                aproximado = model3d_generative.gerar_modelo_3d(request['topic'])
+            except Exception:
+                aproximado = None
         if aproximado:
             if aproximado.get('precision') == 'aproximado':
                 text = ('Preparei um modelo aproximado a partir de referências públicas; as proporções vêm '
