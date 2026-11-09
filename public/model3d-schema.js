@@ -1,13 +1,13 @@
 /* Small synchronous contract only. No GPU, engine import or model fetch here. */
 'use strict';
 window.validateModel3DInteraction = function (value, ids, count) {
-  const defaults = {selected:'',hidden:[],isolated:'',exploded:false,transparent:[],view:'free',focus:'',step:0,speed:1,lessonPlaying:false};
+  const defaults = {selected:'',hidden:[],isolated:'',exploded:false,transparent:[],xray:false,view:'free',focus:'',step:0,speed:1,lessonPlaying:false};
   const fail = () => {throw Error('Estado ou parte 3D inválida');};
   if (!value || typeof value !== 'object' || Array.isArray(value) || Object.keys(value).some(k => !Object.prototype.hasOwnProperty.call(defaults,k))) fail();
   const s = {...defaults,...value};
   for (const key of ['selected','isolated','focus']) if (typeof s[key] !== 'string' || (s[key] && !ids.includes(s[key]))) fail();
   for (const key of ['hidden','transparent']) if (!Array.isArray(s[key]) || s[key].length>32 || s[key].some(v => typeof v !== 'string' || !ids.includes(v)) || new Set(s[key]).size!==s[key].length) fail();
-  if (!['free','front','back','side','top'].includes(s.view) || typeof s.exploded!=='boolean' || typeof s.lessonPlaying!=='boolean') fail();
+  if (!['free','front','back','side','top'].includes(s.view) || typeof s.exploded!=='boolean' || typeof s.lessonPlaying!=='boolean' || typeof s.xray!=='boolean') fail();
   if (!Number.isInteger(s.step) || s.step<0 || s.step>=Math.max(count,1) || typeof s.speed!=='number' || !Number.isFinite(s.speed) || s.speed<.5 || s.speed>2 || (s.lessonPlaying && !count)) fail();
   return structuredClone(s);
 };
@@ -22,7 +22,7 @@ window.validateModel3D = function (p) {
   const get = (v, k, d) => v[k] === undefined ? d : v[k];
   obj(p, 'id version title description objects model color scale rotation camera lighting annotations autoRotate details source education steps interaction precision');
   const education = get(p,'education','');
-  if (!['','computer','geometry','solar','device'].includes(education) || (!education && ('steps' in p || 'interaction' in p))) fail();
+  if (!['','computer','geometry','solar','device','mechanical','aviation','automotive','electronics','robotics','biology','anatomy','physics','architecture','science','general'].includes(education) || (!education && ('steps' in p || 'interaction' in p))) fail();
   if (p.version !== 1) fail();
   const color = get(p, 'color', '#8b9cf7');
   if (typeof color !== 'string' || !/^#[a-fA-F0-9]{6}$/.test(color)) fail();
@@ -30,10 +30,11 @@ window.validateModel3D = function (p) {
   if (!['', 'demo-cube'].includes(model)) fail();
   const raw = get(p, 'objects', []), ids = new Set();
   if (!Array.isArray(raw) || raw.length < (model ? 0 : 1) || raw.length > (education ? 32 : 8) || (model && (raw.length || education))) fail();
+  const allowedKinds = education ? ['cube', 'sphere', 'cylinder', 'pyramid', 'cone', 'torus', 'capsule', 'lathe', 'ring', 'box', 'pipe'] : ['cube', 'sphere', 'cylinder', 'pyramid'];
   const objects = raw.map(o => {
-    obj(o, 'id kind position rotation scale label description' + (education ? ' dimensions color category related metadata role group order' : ''));
+    obj(o, 'id kind position rotation scale label description' + (education ? ' dimensions color category related metadata role group order roughness metalness opacity transparent wireframe emissive explodeVector' : ''));
     const key = id(o.id);
-    if (ids.has(key) || !['cube', 'sphere', 'cylinder', 'pyramid'].includes(o.kind)) fail();
+    if (ids.has(key) || !allowedKinds.includes(o.kind)) fail();
     ids.add(key);
     const item = {id:key, kind:o.kind, position:vec(get(o, 'position', [0,0,0]), -3,3),
       rotation:vec(get(o, 'rotation', [0,0,0]), -360,360), scale:num(get(o, 'scale', 1), .25,2),
@@ -46,6 +47,16 @@ window.validateModel3D = function (p) {
       Object.assign(item,{dimensions:vec(get(o,'dimensions',[1,1,1]),.015,3),color:partColor.toLowerCase(),category,
         related:get(o,'related',[]),metadata:{conceptual:bool(get(meta,'conceptual',true)),note:str(get(meta,'note',''),200)},
         role,group,order});
+      if (o.roughness !== undefined) item.roughness = num(o.roughness, 0, 1);
+      if (o.metalness !== undefined) item.metalness = num(o.metalness, 0, 1);
+      if (o.opacity !== undefined) item.opacity = num(o.opacity, 0, 1);
+      if (o.transparent !== undefined) item.transparent = bool(o.transparent);
+      if (o.wireframe !== undefined) item.wireframe = bool(o.wireframe);
+      if (o.emissive !== undefined) {
+        if (typeof o.emissive !== 'string' || !/^#[a-fA-F0-9]{6}$/.test(o.emissive)) fail();
+        item.emissive = o.emissive.toLowerCase();
+      }
+      if (o.explodeVector !== undefined) item.explodeVector = vec(o.explodeVector, -5, 5);
     }
     return item;
   });
@@ -64,7 +75,7 @@ window.validateModel3D = function (p) {
   if (!['exato','aproximado','conceitual','educativo'].includes(precision)) fail();
   const source = model ? 'Vexx AI — cubo GLB local original (CC0)' : 'Geometria procedural local';
   if (p.source !== undefined && p.source !== source && (model || !(typeof p.source==='string' &&
-      /^(Catálogo local V5\.6|Aproximado por referências públicas|Modelo conceitual educativo) — [A-Za-z0-9À-ÖØ-öø-ÿ .,;:()\[\]'\/+\-%°·]{1,180}$/.test(p.source)))) fail();
+      /^(Catálogo local V5\.6|Catálogo local VEXX|Aproximado por referências públicas|Modelo conceitual educativo|Geração 3D VEXX AI|Arquiteto 3D VEXX) — [A-Za-z0-9À-ÖØ-öø-ÿ .,;:()\[\]'\/+\-%°·]{1,180}$/.test(p.source)))) fail();
   const result = {id:id(p.id), version:1, title:str(get(p, 'title', 'Objeto 3D'),120),
     description:str(get(p, 'description', 'Objeto tridimensional interativo.'),500), objects, model,
     color:color.toLowerCase(), scale:num(get(p, 'scale',1),.25,2), rotation:vec(get(p, 'rotation',[15,25,0]),-360,360),
@@ -76,9 +87,11 @@ window.validateModel3D = function (p) {
     if (!Array.isArray(steps) || steps.length>8) fail();
     result.education=education;
     result.steps=steps.map(step => {
-      obj(step,'title text selected view exploded');
-      const s=window.validateModel3DInteraction(Object.fromEntries(['selected','view','exploded'].filter(k=>k in step).map(k=>[k,step[k]])),[...ids],0);
-      return {title:str(get(step,'title','Etapa'),80),text:str(get(step,'text',''),400),selected:s.selected,view:s.view,exploded:s.exploded};
+      obj(step,'title text selected view exploded xray');
+      const s=window.validateModel3DInteraction(Object.fromEntries(['selected','view','exploded','xray'].filter(k=>k in step).map(k=>[k,step[k]])),[...ids],0);
+      const st = {title:str(get(step,'title','Etapa'),80),text:str(get(step,'text',''),400),selected:s.selected,view:s.view,exploded:s.exploded};
+      if ('xray' in step) st.xray = s.xray;
+      return st;
     });
     result.interaction=window.validateModel3DInteraction(get(p,'interaction',{}),[...ids],steps.length);
   }

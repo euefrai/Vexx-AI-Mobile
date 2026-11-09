@@ -29,6 +29,7 @@ export function attachEducation({props, saved, content, group, camera, reduced, 
     commit(rot.length?p0.label+' se conecta a: '+rot.join(', ')+'.':'Nenhuma conexão registrada para '+p0.label+' nesta cena.');},true);
   const explode=button('Separar peças',()=>{state.exploded=!state.exploded;commit();});
   explode.disabled=ids.length<2;
+  const xrayBtn=button('Modo Raio-X',()=>{state.xray=!state.xray;commit(state.xray?'Modo Raio-X ativado (visão interna das peças).':'Modo Raio-X desativado.');});
   const lesson=document.createElement('section');lesson.className='m3-lesson';panel.append(lesson);
   const label=make('label','Etapa ',lesson), stepSelect=make('select','',label);
   props.steps.forEach((s,i)=>{const o=make('option',s.title,stepSelect);o.value=String(i);});
@@ -44,6 +45,8 @@ export function attachEducation({props, saved, content, group, camera, reduced, 
   function refresh(){
     buttons.forEach(({b,needsPart})=>{if(needsPart)b.disabled=!state.selected;});
     explode.textContent=state.exploded?'Remontar peças':'Separar peças';view.value=state.view;
+    xrayBtn.textContent=state.xray?'Desativar Raio-X':'Modo Raio-X';
+    xrayBtn.setAttribute('aria-pressed',String(Boolean(state.xray)));
     stepSelect.value=String(state.step);speed.value=String(state.speed);
     prev.disabled=state.step===0;next.disabled=state.step>=props.steps.length-1;
     play.textContent=state.lessonPlaying?'Pausar etapas':'Reproduzir etapas';
@@ -55,15 +58,30 @@ export function attachEducation({props, saved, content, group, camera, reduced, 
       const r=target.length(),angle=orbitTime*(id==='earth'?1:.53);
       target.set(Math.cos(angle)*r,target.y,Math.sin(angle)*r);
     }
-    if(state.exploded){const direction=target.clone();if(direction.length()<.01)direction.set(0,-1,0);target.add(direction.normalize().multiplyScalar(.7));}
+    if(state.exploded){
+      const pItem = props.objects.find(o=>o.id===id);
+      if (pItem?.explodeVector && Array.isArray(pItem.explodeVector) && pItem.explodeVector.length === 3) {
+        target.add(new Vector3(...pItem.explodeVector));
+      } else {
+        const direction=target.clone();
+        if(direction.length()<.01)direction.set(0,-1,0);
+        target.add(direction.normalize().multiplyScalar(.7));
+      }
+    }
     return target;
   }
   function apply(smooth=true){
     const relacionadas=new Set(props.objects.find(o=>o.id===state.selected)?.related||[]);
     for(const [id,m] of meshes){
+      const pItem = props.objects.find(o=>o.id===id);
+      const isExternal = pItem?.group === 'external' || pItem?.role === 'structural';
       m.visible=!state.hidden.includes(id) && (!state.isolated || id===state.isolated);
-      m.material.transparent=state.transparent.includes(id);m.material.opacity=m.material.transparent ? .25 : 1;
-      m.material.depthWrite=!m.material.transparent;m.material.needsUpdate=true;
+      const isXray = state.xray && isExternal;
+      const isTransp = state.transparent.includes(id) || isXray;
+      m.material.transparent = isTransp || (m.userData.baseTransparent ?? false);
+      m.material.opacity = isXray ? 0.18 : (state.transparent.includes(id) ? 0.25 : (m.userData.baseOpacity ?? 1.0));
+      m.material.depthWrite = !m.material.transparent;
+      m.material.needsUpdate = true;
       m.material.emissive?.setHex(id===state.selected?0x393958:relacionadas.has(id)?0x1c2545:0);
       const target=targetPosition(id);
       if(smooth && !reduced.matches)transitions.set(id,{from:m.position.clone(),target,t:0});
@@ -75,7 +93,7 @@ export function attachEducation({props, saved, content, group, camera, reduced, 
   function go(index,keepPlaying=false){
     if(index<0 || index>=props.steps.length)return;
     state.step=index;state.lessonPlaying=keepPlaying;elapsed=0;
-    const step=props.steps[index]; Object.assign(state,{selected:step.selected,view:step.view,exploded:step.exploded,hidden:[],isolated:'',focus:''});commit();
+    const step=props.steps[index]; Object.assign(state,{selected:step.selected,view:step.view,exploded:step.exploded,xray:Boolean(step.xray),hidden:[],isolated:'',focus:''});commit();
   }
   apply(false);
   return {
