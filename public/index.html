@@ -117,13 +117,35 @@
           <label for="modelSelect">Modelo</label>
           <input id="modelSearch" class="model-search" type="search" placeholder="Pesquisar modelo ou provedor…" aria-label="Pesquisar modelo" autocomplete="off" />
           <select id="modelSelect" class="model-select" size="8" aria-label="Modelo de IA" aria-describedby="modelResults modelSelected">
-            <optgroup label="⚡ Modelo Próprio (VEXX AI)">
-              <option value="vexx-qwen-2.5-3b" selected>⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)</option>
+            <optgroup label="⚡ Modelo Principal (VEXX AI)">
+              <option value="vexx-qwen-2.5-3b" selected>⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)</option>
+            </optgroup>
+            <optgroup label="🖥️ IA Local (Secundário)">
+              <option value="qwen2.5-1.5b-instruct">🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)</option>
             </optgroup>
           </select>
           <small id="modelResults" class="model-hint" role="status"></small>
           <small id="modelSelected" class="model-hint"></small>
-          <button id="modelRefresh" class="model-refresh" type="button" title="Atualizar a lista de modelos e provedores" aria-label="Atualizar lista de modelos">Atualizar</button>
+          <div class="drawer-model-actions" style="display:flex;gap:6px;align-items:center;margin-top:6px;">
+            <button id="modelRefresh" class="model-refresh" type="button" title="Atualizar a lista de modelos e provedores" aria-label="Atualizar lista de modelos">Atualizar</button>
+            <button id="aiBenchmarkBtn" class="model-refresh ai-bench-btn" type="button" title="Testar latência da IA local no PC" aria-label="Testar latência da IA local no PC">⚡ Testar Latência IA</button>
+          </div>
+          <small id="aiBenchmarkHint" class="model-hint" style="margin-top:4px;display:block;"></small>
+        </div>
+        <div class="drawer-vision" id="drawerVision">
+          <div class="drawer-vision-header">
+            <label for="yoloEngineSelect">Visão Computacional (YOLO)</label>
+            <span class="yolo-badge" id="yoloBadge">PC Local</span>
+          </div>
+          <select id="yoloEngineSelect" class="yolo-select" aria-label="Motor YOLO de Visão">
+            <option value="auto">⚡ Automático (Meu Computador + Fallback Nuvem)</option>
+            <option value="local" selected>💻 Meu Computador (Local - YOLOv8)</option>
+            <option value="huggingface">☁️ Hugging Face Spaces (Nuvem)</option>
+          </select>
+          <div class="drawer-vision-actions">
+            <small id="yoloEngineHint" class="model-hint">Motor: Meu Computador (Local - YOLOv8)</small>
+            <button id="yoloBenchmarkBtn" class="model-refresh yolo-bench-btn" type="button" title="Testar latência do YOLO no PC" aria-label="Testar latência do YOLO no PC">Testar latência</button>
+          </div>
         </div>
         <div class="drawer-status"><span class="status-dot" id="drawerDot"></span><span id="aiStatus" class="muted">IA: verificando…</span></div>
         </details>
@@ -147,6 +169,7 @@
       <div class="status-pop" id="statusPop" hidden role="status" aria-label="Detalhes de status">
         <div class="status-pop-row"><span class="status-dot" id="popDot"></span><strong id="connectionLabel">Verificando…</strong></div>
         <div class="status-pop-row" id="popModelRow" role="button" tabindex="0" title="Trocar o modelo que responde"><span>Modelo</span><span id="popModel">—</span></div>
+        <div class="status-pop-row" id="popVisionRow" role="button" tabindex="0" title="Trocar o motor de visão YOLO"><span>Visão YOLO</span><span id="popVision">Local</span></div>
         <div class="status-pop-row" id="popProvidersRow" role="button" tabindex="0" title="Adicionar ou trocar chaves de API"><span>Provedores</span><span>Gerenciar…</span></div>
         <div class="status-pop-row"><span>Sincronização</span><span id="popSync">—</span></div>
       </div>

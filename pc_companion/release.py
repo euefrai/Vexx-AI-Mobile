@@ -9,9 +9,9 @@ from . import __version__
 
 ROOT = Path(__file__).resolve().parents[1]
 BUNDLE_FILES = ('__init__.py', '__main__.py', 'app.py', 'system.py', 'indexer.py',
-                'connection.py', 'release.py', 'updater.py', 'apply_update.py', 'launcher.py',
+                'connection.py', 'release.py', 'updater.py', 'apply_update.py', 'launcher.py', 'desktop.py', 'ai.py', 'capabilities.py', 'files.py', 'projects.py', 'project_host.py', 'process_group.py', 'system_audit.py',
                 'requirements.txt', 'Instalar.cmd', 'instalar.ps1', 'README.md',
-                'web/index.html', 'web/style.css', 'web/app.js')
+                'web/index.html', 'web/style.css', 'web/app.js', 'web/workspace.js')
 
 
 @lru_cache(maxsize=1)
@@ -37,4 +37,9 @@ def manifest():
         files = archive.namelist()
     return {'version': __version__, 'sha256': hashlib.sha256(payload).hexdigest(),
             'size': len(payload), 'url': '/downloads/vexx-pc-agent-windows.zip',
-            'files': files, 'minimum_python': '3.12', 'notes': 'Melhorias do Vexx PC e atualização pelo aplicativo.'}
+            'files': files, 'minimum_python': '3.12', 'installer_url':'/downloads/vexx-pc-agent-setup.exe',
+            'notes': 'Bandeja do sistema e início automático opcional para controle permanente, Copiloto com conhecimento das abas, busca e ações confirmadas, análise local e conexão a Wi-Fi salvo.'}
+
+
+def installer_url():
+    return f'https://github.com/euefrai/Vexx-AI-Mobile/releases/download/vexx-pc-v{__version__}/Vexx-PC-Setup-{__version__}.exe'

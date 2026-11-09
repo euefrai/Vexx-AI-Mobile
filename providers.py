@@ -35,7 +35,7 @@ CATALOG_TTL = 300
 
 def supports_chat(model_id, metadata=None):
     """Declared capability first; conservative exclusion when metadata is absent."""
-    if model_id in ("vexx-qwen-2.5-3b", "qwen2.5-1.5b-instruct"):
+    if model_id in ("vexx-qwen-2.5-3b", "qwen2.5-3b-instruct", "qwen2.5-1.5b-instruct"):
         return True
     meta = metadata if isinstance(metadata, dict) else {}
     capabilities = meta.get('capabilities')
@@ -71,7 +71,7 @@ def _remember_catalog(provider, ids, proxy=''):
 
 def selection_error(model, proxy=''):
     """No network on the message path; reject only known unavailable selections."""
-    if model in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b",
+    if model in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b", "qwen2.5-3b-instruct",
                  "qwen2.5-1.5b-instruct", "qwen_local/qwen2.5-1.5b-instruct",
                  "local/qwen2.5-1.5b-instruct"):
         return None
@@ -100,19 +100,19 @@ def cached_default(proxy, fallback):
     return fallback
 
 PROVIDERS = {
+    "vexx": {
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)",
+        "key_env": None, "api": "vexx_qwen",
+        "modelos": ["vexx-qwen-2.5-3b"],
+    },
     "qwen_local": {
-        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Principal)",
+        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Secundário)",
         "key_env": None,
         "base": "http://127.0.0.1:8008/v1",
         "hosts": ("127.0.0.1", "localhost"),
         "api": "openai",
         "modelos": ["qwen2.5-1.5b-instruct"],
         "api_key": "sk-local",
-    },
-    "vexx": {
-        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
-        "key_env": None, "api": "vexx_qwen",
-        "modelos": ["vexx-qwen-2.5-3b"],
     },
     "hermes": {
         "label": "Hermes (proxy local)", "key_env": None, "api": "openai",
@@ -275,7 +275,7 @@ def dividir(modelo: str) -> tuple:
     if texto in ("qwen2.5-1.5b-instruct", "qwen_local/qwen2.5-1.5b-instruct", "local/qwen2.5-1.5b-instruct") or texto.startswith(("qwen_local/", "local/")):
         resto = texto.split("/", 1)[1] if "/" in texto else texto
         return "qwen_local", resto or "qwen2.5-1.5b-instruct"
-    if texto in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b") or texto.startswith("vexx/"):
+    if texto in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b", "qwen2.5-3b-instruct", "qwen_local/qwen2.5-3b-instruct") or texto.startswith("vexx/"):
         return "vexx", "vexx-qwen-2.5-3b"
     if "/" in texto:
         prov, resto = texto.split("/", 1)
@@ -323,35 +323,37 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
     with ThreadPoolExecutor(max_workers=len(PROVIDERS)) as pool:
         pending = {nome: pool.submit(descobrir, nome, d) for nome, d in PROVIDERS.items()}
         discoveries = {nome: task.result() for nome, task in pending.items()}
+    vexx_item = {
+        "id": "vexx-qwen-2.5-3b",
+        "provider": "vexx",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)",
+        "free": True,
+    }
     local_item = {
         "id": "qwen2.5-1.5b-instruct",
         "provider": "qwen_local",
-        "label": "🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)",
+        "label": "🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)",
         "free": True,
+    }
+    vexx_provider = {
+        "id": "vexx",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)",
+        "configured": True,
+        "source": "hf_space"
     }
     local_provider = {
         "id": "qwen_local",
-        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Principal)",
+        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Secundário)",
         "configured": True,
         "source": "local_pc"
     }
     itens = [
-        local_item,
-        {
-            "id": "vexx-qwen-2.5-3b",
-            "provider": "vexx",
-            "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
-            "free": True,
-        }
+        vexx_item,
+        local_item
     ]
     provs = [
-        local_provider,
-        {
-            "id": "vexx",
-            "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
-            "configured": True,
-            "source": "hf_space"
-        }
+        vexx_provider,
+        local_provider
     ]
     for nome, d in PROVIDERS.items():
         if nome in ("qwen_local", "vexx"):
@@ -377,7 +379,7 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
                           **({"auth_error": True} if auth_ruim else {})})
     # Up to 500 proxy models + 200 per external provider. Do not silently cut
     # off the providers at the end of the registry after only 500 total IDs.
-    default = "qwen2.5-1.5b-instruct"
+    default = "vexx-qwen-2.5-3b"
     return {"models": [i["id"] for i in itens], "items": itens,
             "default": default, "providers": provs}
 
@@ -439,13 +441,13 @@ def chat_complete(prov: str, model_id: str, messages: list,
         raise BridgeErro(f"Provedor '{prov}' desconhecido.", "provedor")
     if prov == "qwen_local":
         messages = _podar_contexto_local(messages, max_chars=6000)
-    if prov == "vexx" or model_id == "vexx-qwen-2.5-3b":
+    if prov == "vexx" or model_id in ("vexx-qwen-2.5-3b", "qwen2.5-3b-instruct"):
         import qwen_llm_service
         inicio = time.monotonic()
         res = qwen_llm_service.gerar_resposta_qwen(messages, max_tokens=max_tokens, timeout=timeout)
-        if res.get("status") == "fallback" or not (res.get("resposta") or "").strip():
+        texto = (res.get("resposta") or "").strip()
+        if not texto:
             raise BridgeErro("Qwen Space em hibernação ou indisponível.", "indisponivel")
-        texto = res.get("resposta") or ""
         return {
             "texto": texto[:hermes_bridge.MAX_TEXTO],
             "truncada": len(texto) > hermes_bridge.MAX_TEXTO,
@@ -540,23 +542,31 @@ def chat_stream(prov: str, model_id: str, messages: list, on_delta,
         raise BridgeErro(f"Provedor '{prov}' desconhecido.", "provedor")
     if prov == "qwen_local":
         messages = _podar_contexto_local(messages, max_chars=6000)
-    if prov == "vexx" or model_id == "vexx-qwen-2.5-3b":
+    if prov == "vexx" or model_id in ("vexx-qwen-2.5-3b", "qwen2.5-3b-instruct"):
         import qwen_llm_service
         inicio = time.monotonic()
         res = qwen_llm_service.gerar_resposta_qwen(messages, max_tokens=max_tokens, timeout=timeout)
-        if res.get("status") == "fallback" or not (res.get("resposta") or "").strip():
+        texto = (res.get("resposta") or "").strip()
+        if not texto:
             raise BridgeErro("Qwen Space em hibernação ou indisponível.", "indisponivel")
-        texto = res.get("resposta") or ""
+        chunks = 1
         if callable(on_delta):
-            try:
-                on_delta(1, texto)
-            except TypeError:
-                on_delta(texto)
+            palavras = re.findall(r'\S+|\s+', texto)
+            seq = 0
+            for pedaco in palavras:
+                seq += 1
+                try:
+                    on_delta(seq, pedaco)
+                except TypeError:
+                    on_delta(pedaco)
+                if len(palavras) > 1 and len(pedaco.strip()) > 0:
+                    time.sleep(0.010)
+            chunks = seq
         return {
             "texto": texto[:hermes_bridge.MAX_TEXTO],
             "truncada": len(texto) > hermes_bridge.MAX_TEXTO,
             "latencia_s": round(time.monotonic() - inicio, 2),
-            "chunks": 1
+            "chunks": chunks
         }
     if prov == "hermes":
         return hermes_bridge.chat_stream(

@@ -1982,16 +1982,16 @@ function modelSelectionError() {
   return '';
 }
 let modelCatalog = {
-  models: ['qwen2.5-1.5b-instruct', 'vexx-qwen-2.5-3b'],
+  models: ['vexx-qwen-2.5-3b', 'qwen2.5-1.5b-instruct'],
   providers: [
-    { id: 'qwen_local', label: '🖥️ Qwen 2.5 1.5B (Local PC - Principal)', configured: true, source: 'local_pc' },
-    { id: 'vexx', label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)', configured: true, source: 'hf_space' }
+    { id: 'vexx', label: '⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)', configured: true, source: 'hf_space' },
+    { id: 'qwen_local', label: '🖥️ Qwen 2.5 1.5B (Local PC - Secundário)', configured: true, source: 'local_pc' }
   ],
-  default: 'qwen2.5-1.5b-instruct',
-  itemProvider: { 'qwen2.5-1.5b-instruct': 'qwen_local', 'vexx-qwen-2.5-3b': 'vexx' },
+  default: 'vexx-qwen-2.5-3b',
+  itemProvider: { 'vexx-qwen-2.5-3b': 'vexx', 'qwen2.5-1.5b-instruct': 'qwen_local' },
   itemLabel: {
-    'qwen2.5-1.5b-instruct': '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)',
-    'vexx-qwen-2.5-3b': '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)'
+    'vexx-qwen-2.5-3b': '⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)',
+    'qwen2.5-1.5b-instruct': '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)'
   }
 };
 let modelLoadVersion = 0;
@@ -2019,13 +2019,13 @@ function providerOf(id) {
   return 'hermes';
 }
 function modelDisplayLabel(id) {
-  if (id === 'qwen2.5-1.5b-instruct') return '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
-  if (id === 'vexx-qwen-2.5-3b') return '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+  if (id === 'vexx-qwen-2.5-3b') return '⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)';
+  if (id === 'qwen2.5-1.5b-instruct') return '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)';
   return (modelCatalog.itemLabel && modelCatalog.itemLabel[id]) || id;
 }
 function modelGroup(id) {
-  if (id === 'qwen2.5-1.5b-instruct') return -2;
-  if (id === 'vexx-qwen-2.5-3b') return -1;
+  if (id === 'vexx-qwen-2.5-3b') return -2;
+  if (id === 'qwen2.5-1.5b-instruct') return -1;
   const pid = providerOf(id);
   if (String(id).endsWith(':free')) return 0;
   return pid !== 'hermes' && isConfigured(pid) ? 1 : 2;
@@ -2046,16 +2046,16 @@ function fillModels(filter) {
     const key = rank + ':' + pid;
     if (!groups.has(key)) {
       const g = document.createElement('optgroup');
-      g.label = rank === -2 ? '🖥️ IA Local (Principal)' : (rank === -1 ? '⚡ Modelo Próprio (VEXX AI)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
+      g.label = rank === -2 ? '⚡ Modelo Principal (VEXX AI)' : (rank === -1 ? '🖥️ IA Local (Secundário)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
         (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave'));
       groups.set(key, g); sel.appendChild(g);
     }
     const o = document.createElement('option');
     o.value = id;
-    if (id === 'qwen2.5-1.5b-instruct') {
-      o.textContent = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
-    } else if (id === 'vexx-qwen-2.5-3b') {
-      o.textContent = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+    if (id === 'vexx-qwen-2.5-3b') {
+      o.textContent = '⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)';
+    } else if (id === 'qwen2.5-1.5b-instruct') {
+      o.textContent = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)';
     } else {
       o.textContent = pid !== 'hermes' && id.startsWith(pid + '/') ? id.slice(pid.length + 1) : id;
     }
@@ -2129,16 +2129,16 @@ async function loadModels(force) {
     modelCatalog = {
       models: allModels,
       providers: filteredProvs,
-      default: 'qwen2.5-1.5b-instruct',
+      default: 'vexx-qwen-2.5-3b',
       itemProvider: Object.fromEntries(filteredItems.map(i => [i.id, i.provider])),
       itemLabel: Object.fromEntries(filteredItems.map(i => [i.id, i.label]))
     };
-    modelCatalog.itemLabel['qwen2.5-1.5b-instruct'] = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
-    modelCatalog.itemLabel['vexx-qwen-2.5-3b'] = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+    modelCatalog.itemLabel['vexx-qwen-2.5-3b'] = '⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)';
+    modelCatalog.itemLabel['qwen2.5-1.5b-instruct'] = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)';
     let escolhido = modeloAtivo();
-    if (!escolhido || !modelCatalog.models.includes(escolhido) || escolhido.includes('crouton-alpha')) {
-      escolhido = 'qwen2.5-1.5b-instruct';
-      localStorage.setItem('julia-model', 'qwen2.5-1.5b-instruct');
+    if (!escolhido || !modelCatalog.models.includes(escolhido) || escolhido.includes('crouton-alpha') || escolhido === 'qwen2.5-1.5b-instruct') {
+      escolhido = 'vexx-qwen-2.5-3b';
+      localStorage.setItem('julia-model', 'vexx-qwen-2.5-3b');
     }
     const cur = fillModels($('modelSearch') ? $('modelSearch').value : '');
     const pid = providerOf(escolhido);
@@ -2478,15 +2478,59 @@ $('providersRefresh') && $('providersRefresh').addEventListener('click', async (
 
 
 const VEXX_THINKING_PHRASES = [
-  'Raciocinando sobre o contexto…',
-  'Consultando memórias e evidências…',
-  'Mapeando conexões cognitivas…',
-  'Processando dados factuais e visão…',
-  'Sintetizando detalhes da resposta…',
-  'Estruturando raciocínio…'
+  'Pensando…',
+  'Consultando informações…',
+  'Organizando contexto…',
+  'Sintetizando resposta…',
+  'Estruturando detalhes…'
 ];
 let vexxThinkingIdx = 0;
 let currentThinkingMsg = VEXX_THINKING_PHRASES[0];
+let vexxStepIsReal = false;
+
+function calcularPassoInicial(userText, options) {
+  const t = (userText || '').toLowerCase();
+  if (t.includes('kabum') || t.includes('kaboom')) {
+    return 'Consultando produtos no KaBuM! (kabum.com.br)…';
+  }
+  if (t.includes('amazon')) {
+    return 'Consultando produtos na Amazon (amazon.com.br)…';
+  }
+  if (t.includes('mercado livre') || t.includes('meli')) {
+    return 'Consultando produtos no Mercado Livre (mercadolivre.com.br)…';
+  }
+  if (/\b(fone|celular|smartphone|notebook|placa|processador|mouse|teclado|monitor|comprar|pre[cç]o|quanto custa|valor at[eé]|loja|lojas)\b/i.test(t)) {
+    return 'Consultando produtos em lojas especializadas e comparando preços…';
+  }
+  if (t.includes('documenta') || t.includes('docs') || t.includes('documentação')) {
+    return 'Consultando documentação oficial e referências técnicas…';
+  }
+  if (/\b(compare|comparar|comparativo|diferen[cç]a|versus|vs)\b/i.test(t)) {
+    return 'Pesquisando em múltiplas fontes para comparação aprofundada…';
+  }
+  if (/\b(foto|fotos|imagem|imagens)\b/i.test(t)) {
+    return 'Verificando imagens e analisando mídia disponível…';
+  }
+  if (/\b(pesquise|pesquisa|procure|busque|investigue|not[ií]cia)\b/i.test(t)) {
+    return 'Consultando fontes e cruzando dados na web…';
+  }
+  if (options && options.hasDoc) {
+    return 'Lendo documento anexado e extraindo trechos…';
+  }
+  return 'Analisando mensagem e preparando contexto…';
+}
+
+function atualizarPassoPensamento(passo, isReal = true) {
+  if (!passo) return;
+  currentThinkingMsg = passo;
+  if (isReal) vexxStepIsReal = true;
+  const genLab = $('genLabel');
+  if (genLab) genLab.textContent = passo;
+  if (conversation) {
+    const pills = conversation.querySelectorAll('.vexx-thinking-text');
+    pills.forEach(el => { el.textContent = passo; });
+  }
+}
 
 function vexxThinkingPillHtml(msg) {
   const frase = msg || currentThinkingMsg || 'Raciocinando…';
@@ -2506,13 +2550,15 @@ function setGenBar(on, label) {
 }
 function tickGen() {
   if (aiFirstTokenT) {
-    $('genLabel').textContent = 'Transmitindo resposta…';
-  } else {
+    if ($('genLabel')) $('genLabel').textContent = 'Transmitindo resposta…';
+  } else if (!vexxStepIsReal) {
     vexxThinkingIdx = (vexxThinkingIdx + 1) % VEXX_THINKING_PHRASES.length;
     currentThinkingMsg = VEXX_THINKING_PHRASES[vexxThinkingIdx];
-    $('genLabel').textContent = currentThinkingMsg;
-    const p = conversation ? conversation.querySelector('.vexx-thinking-text') : null;
-    if (p) p.textContent = currentThinkingMsg;
+    if ($('genLabel')) $('genLabel').textContent = currentThinkingMsg;
+    if (conversation) {
+      const pills = conversation.querySelectorAll('.vexx-thinking-text');
+      pills.forEach(el => { el.textContent = currentThinkingMsg; });
+    }
   }
 }
 function localContextKey(name) { return 'julia-context:' + currentUid + ':' + name; }
@@ -2599,8 +2645,10 @@ async function runAIRequest(userRow, options, timing) {
     return;
   }
   aiStartT = Date.now(); aiFirstTokenT = 0;
-  setGenBar(true, 'Preparando resposta…');
-  clearInterval(genTimer); genTimer = setInterval(tickGen, 500);
+  vexxStepIsReal = false;
+  currentThinkingMsg = calcularPassoInicial(userRow.text || '', options);
+  setGenBar(true, currentThinkingMsg);
+  clearInterval(genTimer); genTimer = setInterval(tickGen, 600);
   const ctx = aiLocalContext(userRow.text || '');
   const sceneContext = typeof globalThis.getModel3DContext === 'function' ? globalThis.getModel3DContext(options.owner,userRow.conversation_id) : null;
   if (sceneContext) ctx.scene_state = JSON.stringify(sceneContext);
@@ -2655,7 +2703,12 @@ async function runAIRequest(userRow, options, timing) {
           lastEvt = Date.now();
           let d = {};
           try { d = JSON.parse(dados); } catch (_) { continue; }
-          if (tipo === 'delta') {
+          if (tipo === 'step') {
+            const passo = (d.step || '').trim();
+            if (passo) {
+              atualizarPassoPensamento(passo, true);
+            }
+          } else if (tipo === 'delta') {
             if (Number.isInteger(d.seq) && d.seq > 0) {
               if (d.seq <= lastSeq) continue;
               // Tolerante a micro-agrupamento de pacotes SSE sem quebrar o stream
@@ -2785,6 +2838,7 @@ async function runAIRequest(userRow, options, timing) {
     streamDraft = null;
     clearInterval(genTimer);
     setGenBar(false);
+    vexxStepIsReal = false;
     if (rafPending) { cancelAnimationFrame(rafPending); rafPending = null; }
     if (userRow.conversation_id === activeConversation) await renderMessages();
     await renderSessions($('sessionSearch').value);

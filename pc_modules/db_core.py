@@ -142,19 +142,17 @@ def _sintetizar_isolado(fn, owner: str, *args):
         except Exception:
             pass
 
-SYSTEM_PADRAO = ("Você é o assistente pessoal do usuário no Vexx AI. "
-                 "Responda em português, de forma direta e útil. "
-                 "Use markdown leve: títulos curtos, listas, **negrito**, `código`, tabelas quando útil. "
-                 "Se navegar/pesquisar, cite ao final uma seção 'Fontes:' com os links usados. "
-                 "Se pedirem imagem, responda com ![descrição](https://...) em markdown além do texto. "
-                 "RECURSOS VISUAIS (use quando pedirem desenho, diagrama, mapa ou foto): "
-                 "1) Desenho/diagrama/mapa/ícone: bloco ```svg com o SVG (formas, setas, textos, cores). "
-                 "2) Arte com caracteres (banner, mapa simples): bloco de código. "
-                 "3) Para foto/ilustração: ![descrição](https://...) em markdown. "
+SYSTEM_PADRAO = ("Você é o assistente pessoal do usuário no Vexx AI (Qwen 2.5 3B). "
+                 "Responda sempre em português, com tom analítico, direto e prestativo. "
+                 "Use markdown claro: títulos, listas, **negrito**, tabelas estruturadas e `código`. "
+                 "FERRAMENTAS AUTOMÁTICAS (emita <tool_call>{\"name\":\"...\",\"arguments\":{...}}</tool_call>): "
+                 "1) Instagram: navegador_instagram (abrir_inbox, verificar_mensagens, entrar_conversa, enviar_mensagem, pesquisar, verificar_online, rolar). "
+                 "2) 3D e Mapas: gerar_modelo_3d (prompt, tipo='modelo'|'mapa'|'especificacao'). "
+                 "3) Compras/Lojas: pesquisa_produtos_e_precos (termo, preco_maximo). "
+                 "4) Visão e Tela: visao_computacional (alvo, clicar=True|False). "
                  "INTERFACES INTERATIVAS (quiz, checklist, calculadora, cards, diagrama, tabela, formulário): "
-                 "NUNCA JavaScript, CSS ou código executável — descreva em blocos ```jdui "
-                 "(JSON {version:'JULIA-ui-message/v1',blocks:[{type:'ui',component,props}]}). "
-                 "Pergunta simples → só texto, sem interface.")
+                 "Descreva em blocos ```jdui (JSON {version:'JULIA-ui-message/v1',blocks:[{type:'ui',component,props}]}). "
+                 "Pergunta simples → resposta direta em texto com markdown.")
 
 
 def agora_iso() -> str:
@@ -455,7 +453,7 @@ def list_messages(db, limit=200, owner=DONO_PADRAO, conversation_id="", before=N
 def ai_config() -> dict:
     return {
         "proxy": os.environ.get("HERMES_PROXY_URL", hermes_bridge.DEFAULT_PROXY_URL),
-        "model": os.environ.get("JULIA_AI_MODEL", "qwen2.5-1.5b-instruct"),
+        "model": os.environ.get("JULIA_AI_MODEL", "vexx-qwen-2.5-3b"),
         "model_implicit": not bool(os.environ.get("JULIA_AI_MODEL")),
         "fallbacks": _lista_fallbacks(os.environ.get("JULIA_AI_FALLBACKS", "")),
         "system": system_with_identity((os.environ.get("JULIA_SYSTEM_PROMPT", "").strip()
@@ -478,8 +476,8 @@ def _lista_fallbacks(valor: str) -> list:
 
 
 FALLBACKS_GRATIS_PADRAO = [
-    "qwen2.5-1.5b-instruct",
     "vexx-qwen-2.5-3b",
+    "qwen2.5-1.5b-instruct",
     "meituan/longcat-2.5:free",
     "meta-llama/llama-3.2-3b-instruct:free",
     "meta-llama/llama-3.1-8b-instruct:free",

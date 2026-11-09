@@ -18,8 +18,8 @@ log = logging.getLogger("JULIA-qwen-llm")
 
 SPACE_URL = os.environ.get("VEXX_QWEN_API_URL", "https://euefrai-api-llm-qwen.hf.space").rstrip("/")
 FALLBACK_SPACE_URL = os.environ.get("VEXX_VISION_API_URL", "https://euefrai-api-visao-yolo.hf.space").rstrip("/")
-DEFAULT_TIMEOUT = float(os.environ.get("VEXX_QWEN_TIMEOUT", 35.0))
-MAX_RETRIES = int(os.environ.get("VEXX_QWEN_MAX_RETRIES", 2))
+DEFAULT_TIMEOUT = float(os.environ.get("VEXX_QWEN_TIMEOUT", 10.0))
+MAX_RETRIES = int(os.environ.get("VEXX_QWEN_MAX_RETRIES", 1))
 
 def _obter_hf_token() -> str:
     """Recupera o token Hugging Face do ambiente ou de arquivos .env conhecidos."""
@@ -43,8 +43,8 @@ def _obter_hf_token() -> str:
 
 
 
-def _post_gradio_api(url: str, endpoint: str, payload_data: Any, timeout: float = 30.0) -> Dict[str, Any]:
-    """Chama a API Gradio 5/4 via endpoint /gradio_api/call/<endpoint> + SSE stream."""
+def _post_gradio_api(url: str, endpoint: str, payload_data: Any, timeout: float = 12.0) -> Dict[str, Any]:
+    """Chama a API Gradio 5/4 via endpoint /gradio_api/call/<endpoint> + SSE stream com parsing linha a linha."""
     call_url = f"{url}/gradio_api/call/{endpoint.lstrip('/')}"
     headers = {"Content-Type": "application/json", "User-Agent": "VEXX-AI-Client/1.0"}
     token = _obter_hf_token()
@@ -60,23 +60,39 @@ def _post_gradio_api(url: str, endpoint: str, payload_data: Any, timeout: float 
     if not event_id:
         raise ValueError(f"Endpoint {call_url} não retornou event_id válido.")
 
-    # Busca o resultado no stream SSE
+    # Busca o resultado no stream SSE com leitura linha a linha (não bloqueia por EOF)
     result_url = f"{call_url}/{event_id}"
-    req_res = urllib.request.Request(result_url, headers={"User-Agent": "VEXX-AI-Client/1.0"})
-    with urllib.request.urlopen(req_res, timeout=timeout) as resp_stream:
-        raw_events = resp_stream.read().decode("utf-8")
+    req_res = urllib.request.Request(result_url, headers={"User-Agent": "VEXX-AI-Client/1.0", "Accept": "text/event-stream"})
+    if token:
+        req_res.add_header("Authorization", f"Bearer {token}")
 
-    # Extrai o evento complete
-    for bloco in raw_events.split("\n\n"):
-        if "event: complete" in bloco or "data:" in bloco:
-            for linha in bloco.splitlines():
-                if linha.startswith("data:"):
-                    dados_json = json.loads(linha[5:].strip())
+    inicio = time.monotonic()
+    with urllib.request.urlopen(req_res, timeout=timeout) as resp_stream:
+        evento_atual = ""
+        for raw_line in resp_stream:
+            if time.monotonic() - inicio > timeout:
+                raise TimeoutError("Timeout aguardando conclusão SSE Gradio")
+            linha = raw_line.decode("utf-8", errors="replace").rstrip("\r\n")
+            if linha.startswith("event:"):
+                evento_atual = linha[6:].strip()
+            elif linha.startswith("data:"):
+                payload_str = linha[5:].strip()
+                if payload_str == "null" or not payload_str:
+                    continue
+                try:
+                    dados_json = json.loads(payload_str)
+                    if evento_atual == "error" or (isinstance(dados_json, dict) and "error" in dados_json):
+                        err_msg = dados_json.get("error", "Erro retornado pelo Space") if isinstance(dados_json, dict) else str(dados_json)
+                        raise RuntimeError(f"Gradio SSE error: {err_msg}")
                     if isinstance(dados_json, list) and len(dados_json) > 0:
                         return dados_json[0]
                     return dados_json
+                except json.JSONDecodeError:
+                    continue
+            elif not linha:
+                evento_atual = ""
 
-    raise ValueError(f"Resposta SSE não concluiu em {result_url}")
+    raise ValueError(f"Stream SSE encerrado sem payload final em {result_url}")
 
 
 def _chamar_api_qwen_com_retry(payload: Dict[str, Any], timeout: float = DEFAULT_TIMEOUT) -> Dict[str, Any]:
@@ -283,13 +299,16 @@ def sugerir_classes_visao_qwen(consulta: str) -> str:
                 if c_norm and c_norm not in classes_encontradas:
                     classes_encontradas.append(c_norm)
 
+    if classes_encontradas:
+        return ", ".join(classes_encontradas[:8])
+
     try:
         prompt = (
             "Extraia de 2 a 5 nomes de objetos em ingles para deteccao com YOLO-World v2.\n"
             f"Consulta: {consulta}\n"
             "Retorne APENAS os nomes separados por virgula (ex: 'bluetooth headphone, price, buy button')."
         )
-        resp = gerar_resposta_qwen(prompt, temperatura=0.1, max_tokens=60)
+        resp = gerar_resposta_qwen(prompt, temperatura=0.1, max_tokens=60, timeout=2.5)
         saida = resp.get("resposta", "").strip().strip(".'\"")
         if saida and len(saida) >= 3 and not saida.startswith("Erro"):
             for item in saida.split(","):

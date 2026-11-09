@@ -17,7 +17,7 @@ from pc_modules.db_core import (
     _SINT_POOL, _sintetizar_isolado, database_path, DONO_PADRAO, gerar_stream, gerar_texto,
     log, modelos_tentativa, open_db,
 )
-from pc_modules.intents_jdui import intencao_imagem, JDUI_SINTETIZAR, sintetizar_jdui
+from pc_modules.intents_jdui import intencao_imagem, intencao_pesquisa, intencao_pesquisa_aprofundada, JDUI_SINTETIZAR, sintetizar_jdui
 from pc_modules.context_providers import (
     _aplicar_arquivos_gerados, ai_estado, ai_marcar, ai_montar_mensagens, anexar_fontes,
     imagens_primeiro,
@@ -42,17 +42,47 @@ from pc_modules.visual_fences import (
 )
 
 def _texto_seguro(texto: str, mid: str = "") -> str:
-    """Última barreira: protocolo de ferramenta + fatos de identidade.
-
-    A barreira principal fica no adaptador (bridge/providers); esta garante
-    que caminhos alternativos, testes e respostas antigas não publiquem uma
-    chamada interna nem uma afirmação corporativa inventada sobre a Vexx AI.
-    """
+    """Última barreira: execução de tool calls + protocolo de ferramenta + fatos de identidade."""
+    try:
+        from pc_modules import tool_execution
+        texto, _calls = tool_execution.processar_e_executar_chamadas(texto)
+    except Exception as exc:
+        log.warning("Erro ao processar tool calls: %s", exc)
     limpo, erros = tool_protocol.sanitizar_texto(texto or "")
     for erro in erros:
         log.warning("TOOL_PROTOCOL_FINAL %s %s: %s", mid[-8:] if mid else "-",
                     erro.get("codigo"), erro.get("ferramenta") or "?")
     return limitar_afirmacoes_nao_suportadas(limpo)
+
+
+def _formatar_passo_shopping(fase: str, detalhe: str, texto_usuario: str) -> str:
+    t = (texto_usuario or "").lower()
+    loja = ""
+    if "kabum" in t or "kaboom" in t:
+        loja = "no KaBuM! (kabum.com.br)"
+    elif "amazon" in t:
+        loja = "na Amazon (amazon.com.br)"
+    elif "mercado livre" in t or "meli" in t:
+        loja = "no Mercado Livre (mercadolivre.com.br)"
+    elif "magalu" in t or "magazine" in t:
+        loja = "no Magazine Luiza"
+    elif "pichau" in t:
+        loja = "na Pichau"
+    elif "terabyte" in t:
+        loja = "na Terabyte"
+    else:
+        loja = "em múltiplas lojas (KaBuM!, Amazon, Mercado Livre)"
+
+    f = (fase or "").lower()
+    if "buscando" in f:
+        return f"Consultando produtos {loja}…"
+    if "confirmando" in f or "lendo" in f or "item" in f or "pagina" in f:
+        return f"Acessando páginas de produtos {loja} e extraindo especificações…"
+    if "comparando" in f or "filtro" in f:
+        return f"Comparando preços, especificações e avaliações entre lojas…"
+    if detalhe:
+        return f"Verificando {detalhe} {loja}…"
+    return f"Consultando lojas e comparando opções…"
 
 
 class _GuardaStreamResposta:
@@ -497,10 +527,33 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             return
         ai_marcar(db, mid, conv, modelo, "processing", owner=owner)
         cfg_eff = dict(cfg, memoria_global=prep.get("memoria_global", cfg.get("memoria_global", True)))
+
+        def emitir_passo(passo: str):
+            if not passo or sessao.parar.is_set():
+                return
+            try:
+                enviar_ws(websocket, {"request_id": request_id, "type": "ai_step", "step": passo})
+            except Exception:
+                pass
+
+        _tu = prep.get("user_text", "")
+        if shopping.detectar_intencao(_tu):
+            emitir_passo(_formatar_passo_shopping("buscando", "", _tu))
+        elif intencao_pesquisa_aprofundada(_tu):
+            emitir_passo("Iniciando pesquisa aprofundada em diversas fontes…")
+        elif any(k in _tu.lower() for k in ("documenta", "docs", "doc")):
+            emitir_passo("Consultando documentações oficiais e portais técnicos…")
+        elif intencao_pesquisa(_tu):
+            emitir_passo("Consultando fontes especializadas na web…")
+        elif "foto" in _tu.lower() or "imagem" in _tu.lower():
+            emitir_passo("Verificando mídias e imagens disponíveis…")
+        else:
+            emitir_passo("Analisando mensagem e preparando contexto…")
+
         context_started = time.monotonic()
         messages, extras = ai_montar_mensagens(
             db, conv, cfg_eff, prep.get("user_text", ""), owner,
-            prep.get("contexto_local"))
+            prep.get("contexto_local"), progresso_cb=emitir_passo)
         context_finished = time.monotonic()
 
         def enviar(obj):
@@ -561,7 +614,8 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
 
             def _prog_shop(fase, detalhe=""):
                 try:
-                    emitir(last_delta_seq[0] + 1, f"🔎 {fase}… {detalhe}\n".strip() + "\n")
+                    passo = _formatar_passo_shopping(fase, detalhe, prep.get("user_text", ""))
+                    emitir_passo(passo)
                 except Exception:
                     pass
 
@@ -586,6 +640,7 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
                 emitir(last_delta_seq[0] + 1, seguro)
 
         try:
+            emitir_passo("Sintetizando resposta mais precisa…")
             modelo_original = modelo
             res = gerar_stream(cfg, modelos_tentativa(cfg, modelo), messages,
                                emitir_modelo, deve_parar=sessao.parar.is_set,
