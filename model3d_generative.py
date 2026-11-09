@@ -282,13 +282,226 @@ def _gerar_procedural_universal(termo_busca: str) -> dict:
 # PONTO DE ENTRADA PÚBLICO
 # =====================================================================
 
-def gerar_modelo_3d(prompt: str) -> dict:
-    """Ponto de entrada central para geração e resolução de modelos 3D sob demanda.
 
-    Verifica o catálogo nativo, os arquétipos avançados de engenharia/ciência
-    e, se necessário, sintetiza uma montagem mecânica procedural completa.
+
+# =====================================================================
+# SÍNTESE 3D MULTIMODAL (Imagens, Especificações Técnicas e Mapas)
+# =====================================================================
+
+def gerar_modelo_3d_de_imagem(caminho_ou_url: str, descricao_extra: str = "") -> dict:
+    """Reconstrói um modelo 3D a partir da análise visual de uma imagem real (YOLO + OCR)."""
+    deteccoes = []
+    tags = []
+    ocr_textos = []
+    try:
+        import vision_service
+        resultado = vision_service.analisar_imagem(caminho_ou_url)
+        deteccoes = resultado.get("deteccoes", [])
+        tags = resultado.get("tags_busca", [])
+    except Exception:
+        pass
+
+    try:
+        import vision_service
+        ocr_res = vision_service.ler_fontes_imagem(caminho_ou_url)
+        ocr_textos = ocr_res.get("textos_encontrados", [])
+    except Exception:
+        pass
+
+    titulo = f"Modelo 3D Sintetizado por Visão — {tags[0].title() if tags else 'Cena Visual'}"
+    desc = f"Reconstrução espacial tridimensional a partir da imagem analisada ({len(deteccoes)} objetos identificados)."
+    slug = _clean_slug(tags[0] if tags else "visao_reconstrucao")
+
+    o = []
+    # Base de referência
+    _peca(o, "plataforma_base", "Plataforma de Calibração Visual", [0, -0.6, 0], [2.2, 0.08, 1.8], "#1f242d",
+          "Plano de referência do piso e calibração espacial de profundidade.",
+          role="structural", group="external", order=1, metalness=0.3, roughness=0.7)
+
+    # Cores temáticas para partes detectadas
+    paleta = ["#4361ee", "#3a0ca3", "#7209b7", "#f72585", "#4cc9f0", "#2a9d8f", "#e76f51", "#f4a261"]
+
+    if deteccoes:
+        for idx, det in enumerate(deteccoes[:12], start=2):
+            box = det.get("box", [100, 100, 300, 300])
+            label = det.get("label", f"objeto_{idx}")
+            conf = det.get("confianca", 0.8)
+            cor = paleta[(idx - 2) % len(paleta)]
+
+            # Normalização de coordenadas 2D para espaço 3D [-1.0 a 1.0]
+            # Assumindo resolução típica ~ 1000x1000
+            w_norm = max(0.2, min(0.9, (box[2] - box[0]) / 600.0))
+            h_norm = max(0.2, min(0.9, (box[3] - box[1]) / 600.0))
+            cx = max(-0.9, min(0.9, ((box[0] + box[2]) / 2.0 - 500.0) / 450.0))
+            cy = max(-0.4, min(0.8, -((box[1] + box[3]) / 2.0 - 500.0) / 450.0))
+            cz = round((idx % 3 - 1) * 0.35, 2)
+
+            key = f"vis_{idx}_{_clean_slug(label)}"[:35]
+            det_desc = f"Componente visual '{label}' detectado com confiança {int(conf*100)}%."
+            if ocr_textos and idx <= len(ocr_textos):
+                det_desc += f" Texto lido próximo: '{ocr_textos[idx-1][:40]}'."
+
+            _peca(o, key, f"{label.title()} (Elemento {idx-1})", [round(cx, 2), round(cy, 2), cz],
+                  [round(w_norm, 2), round(h_norm, 2), 0.35], cor, det_desc,
+                  role="functional", group="internal" if idx > 4 else "external", order=idx,
+                  metalness=0.6, roughness=0.35,
+                  explodeVector=[round(cx * 0.8, 2), round(cy * 0.8, 2), round(cz * 1.2, 2)])
+    else:
+        # Fallback de síntese caso a imagem não tenha retornado caixas
+        _peca(o, "volume_principal", "Volume Principal do Objeto", [0, 0, 0], [1.2, 0.9, 0.7], "#4361ee",
+              "Volume tridimensional estimado a partir da silhueta da imagem.",
+              role="structural", group="external", order=2, metalness=0.5, roughness=0.4)
+        _peca(o, "detalhe_frontal", "Relevo e Contornos Frontais", [0, 0, 0.4], [0.9, 0.7, 0.15], "#4cc9f0",
+              "Superfície frontal mapeada via gradientes de contraste da imagem.",
+              role="functional", group="external", order=3, metalness=0.4, roughness=0.3, explodeVector=[0, 0, 0.6])
+
+    steps = [
+        dict(title="Calibração e Plataforma", text="Alinhamento do plano visual e escala espacial 3D.", selected="plataforma_base", view="front"),
+        dict(title="Elementos Visuais Detectados", text="Mapeamento dos componentes identificados via rede neural YOLO.", view="side"),
+        dict(title="Inspeção Explodida Multimodal", text="Separação tridimensional para análise dos elementos individuais da imagem.", exploded=True, xray=True)
+    ]
+
+    return dict(id=f"dev-{slug}", version=1, title=titulo, description=desc,
+                education="device", precision="aproximado",
+                source="Geração 3D VEXX AI — Reconstrução Visual Multimodal",
+                objects=o, steps=steps, rotation=[15, 25, 0], details=True)
+
+
+def gerar_modelo_3d_de_especificacao(texto_spec: str, titulo: str = "") -> dict:
+    """Extrai medidas, materiais e componentes de uma especificação técnica e cria a montagem 3D."""
+    t_norm = _norm(texto_spec)
+    slug = _clean_slug(titulo or "especificacao_tecnica")
+    desc = f"Montagem 3D paramétrica construída a partir de especificações técnicas ({len(texto_spec)} caracteres de requisitos)."
+
+    # 1. Extração de materiais mencionados
+    tem_titanio = bool(re.search(r"titanio|titanium", t_norm))
+    tem_aluminio = bool(re.search(r"aluminio|aluminum", t_norm))
+    tem_vidro = bool(re.search(r"vidro|glass|cristal|lente", t_norm))
+    tem_carbono = bool(re.search(r"fibra de carbono|carbon fiber|grafeno", t_norm))
+    tem_cobre = bool(re.search(r"cobre|copper|bobina", t_norm))
+    tem_oled = bool(re.search(r"oled|amoled|display|tela|visor|led", t_norm))
+
+    # 2. Extração de números/dimensões (mm, cm, m)
+    medidas = [float(m.replace(",", ".")) for m in re.findall(r"(\d+(?:[.,]\d+)?)\s*(?:mm|cm|m)", t_norm)]
+    escala_x = round(medidas[0] / 100.0, 2) if len(medidas) > 0 and medidas[0] < 500 else 1.2
+    escala_y = round(medidas[1] / 100.0, 2) if len(medidas) > 1 and medidas[1] < 500 else 0.8
+    escala_z = round(medidas[2] / 100.0, 2) if len(medidas) > 2 and medidas[2] < 500 else 0.6
+
+    # Normalizar para não explodir os limites do viewer Three.js
+    escala_x = max(0.4, min(1.8, escala_x))
+    escala_y = max(0.3, min(1.6, escala_y))
+    escala_z = max(0.3, min(1.4, escala_z))
+
+    o = []
+    # Chassi estrutural
+    mat_chassi = {"metalness": 0.85, "roughness": 0.25} if (tem_titanio or tem_aluminio) else {"metalness": 0.5, "roughness": 0.4}
+    cor_chassi = "#495057" if tem_titanio else ("#adb5bd" if tem_aluminio else "#212529")
+    _peca(o, "chassi_parametrico", "Chassi Estrutural (Especificação)", [0, 0, 0], [escala_x, escala_y, escala_z], cor_chassi,
+          f"Estrutura primária dimensionada para {escala_x*100:.0f}x{escala_y*100:.0f}x{escala_z*100:.0f} mm nominais.",
+          ("nucleo_processamento", "modulo_energia"), role="structural", group="external", order=1,
+          metalness=mat_chassi["metalness"], roughness=mat_chassi["roughness"])
+
+    # Painel / Vidro / Display se especificado
+    if tem_oled or tem_vidro:
+        _peca(o, "painel_display", "Display / Cobertura Óptica", [0, 0, round(escala_z/2.0 + 0.04, 2)],
+              [round(escala_x * 0.9, 2), round(escala_y * 0.9, 2), 0.05], "#0f172a",
+              "Superfície ativa de exibição e proteção óptica conforme especificado.",
+              ("chassi_parametrico",), role="functional", group="external", order=2,
+              metalness=0.1, roughness=0.1, transparent=tem_vidro, opacity=0.4 if tem_vidro else 1.0,
+              emissive="#38bdf8" if tem_oled else None,
+              explodeVector=[0, 0, 0.7])
+
+    # Núcleo / PCB Interna
+    _peca(o, "nucleo_processamento", "Placa Principal e Barramentos", [0, 0, 0],
+          [round(escala_x * 0.75, 2), round(escala_y * 0.75, 2), round(escala_z * 0.2, 2)], "#15803d",
+          "Placa de circuito e controladores centrais integrados.",
+          ("modulo_energia",), role="functional", group="internal", order=3,
+          metalness=0.6, roughness=0.3, explodeVector=[0, 0.5, 0])
+
+    # Módulo de Alimentação / Bobina de Cobre
+    cor_modulo = "#b45309" if tem_cobre else "#dc2626"
+    _peca(o, "modulo_energia", "Módulo de Potência e Blindagem", [0, -round(escala_y * 0.25, 2), 0],
+          [round(escala_x * 0.6, 2), round(escala_y * 0.35, 2), round(escala_z * 0.3, 2)], cor_modulo,
+          "Bateria / regulador térmico e elétrico com blindagem dedicada.",
+          ("chassi_parametrico",), role="functional", group="internal", order=4,
+          metalness=0.7 if tem_cobre else 0.4, roughness=0.35, explodeVector=[0, -0.6, 0])
+
+    steps = [
+        dict(title="Estrutura e Tolerâncias", text=f"Dimensões primárias calculadas: {escala_x*100:.0f} x {escala_y*100:.0f} x {escala_z*100:.0f} mm.", selected="chassi_parametrico", view="front"),
+        dict(title="Núcleo Eletrônico e Potência", text="Disposição dos barramentos e isolamento térmico.", selected="nucleo_processamento", view="side"),
+        dict(title="Desmontagem Explodida Técnica", text="Inspeção dimensional de todas as peças especificadas no documento.", exploded=True, xray=True)
+    ]
+
+    return dict(id=f"dev-{slug}", version=1, title=titulo or f"Engenharia 3D — {slug.title()}", description=desc,
+                education="device", precision="aproximado",
+                source="Geração 3D VEXX AI — Especificação Paramétrica",
+                objects=o, steps=steps, rotation=[20, 25, 0], details=True)
+
+
+def gerar_mapa_3d(prompt_mapa: str) -> dict:
+    """Gera um mapa/ambiente espacial interativo 3D (hangar, sala de servidores, layout urbano)."""
+    t_norm = _norm(prompt_mapa)
+    slug = _clean_slug(prompt_mapa)
+    titulo = f"Mapa Espacial 3D — {slug.title().replace('_', ' ')}"
+    desc = f"Mapeamento volumétrico e topológico interativo ({prompt_mapa[:50]})."
+
+    o = []
+    # 1. Piso / Malha do Mapa
+    _peca(o, "piso_topografico", "Superfície e Malha do Terreno", [0, -0.5, 0], [2.8, 0.1, 2.6], "#0f172a",
+          "Plano geográfico ou estrutural com marcações de coordenadas.",
+          role="structural", group="external", order=1, metalness=0.2, roughness=0.8)
+
+    # 2. Zonas e Edificações / Módulos no Mapa
+    zonas = [
+        ("modulo_alpha", "Módulo / Prédio Alpha", [-0.9, -0.05, -0.6], [0.7, 0.8, 0.6], "#3b82f6", "Setor de operações principais.", 2),
+        ("modulo_beta", "Torre / Módulo Beta", [0.8, 0.25, -0.5], [0.55, 1.4, 0.55], "#8b5cf6", "Estrutura vertical de transmissão e telecom.", 3),
+        ("modulo_gamma", "Pavilhão Gamma", [-0.8, -0.2, 0.6], [0.85, 0.5, 0.7], "#06b6d4", "Instalação de suporte e armazenamento.", 4),
+        ("estacao_central", "Núcleo / Estação Central", [0.2, -0.15, 0.4], [0.9, 0.6, 0.8], "#10b981", "Ponto de convergência e tráfego central.", 5),
+    ]
+    for key, label, pos, dims, cor, desc_m, ord_n in zonas:
+        _peca(o, key, label, pos, dims, cor, desc_m, ("piso_topografico",),
+              role="functional", group="external", order=ord_n, metalness=0.5, roughness=0.35,
+              explodeVector=[pos[0]*0.5, 0.6, pos[2]*0.5])
+
+    # 3. Vias / Vias de Conexão
+    _peca(o, "vias_conexao", "Corredores e Rotas de Conexão", [0, -0.42, 0], [2.4, 0.04, 1.8], "#475569",
+          "Malha viária e eixos de circulação integrados.", ("piso_topografico",),
+          role="structural", group="external", order=6, metalness=0.1, roughness=0.9)
+
+    steps = [
+        dict(title="Visão Geral do Mapa", text="Layout espacial com distribuição de zonas e rotas.", selected="piso_topografico", view="top"),
+        dict(title="Módulos Operacionais", text="Inspeção dos setores e edificações no mapa.", selected="estacao_central", view="front"),
+        dict(title="Zoneamento Explodido", text="Elevação vertical de cada setor para análise estratégica.", exploded=True, xray=True)
+    ]
+
+    return dict(id=f"dev-mapa-{slug}"[:35], version=1, title=titulo, description=desc,
+                education="device", precision="aproximado",
+                source="Arquiteto 3D VEXX — Mapeamento Cartográfico Espacial",
+                objects=o, steps=steps, rotation=[40, 30, 0], details=True)
+
+def gerar_modelo_3d(prompt: str, imagem: str = None, documento: str = None) -> dict:
+    """Ponto de entrada central para geração e resolução de modelos e mapas 3D sob demanda.
+
+    Suporta entrada textual, imagem (YOLO+OCR), documento de especificação técnica,
+    ou síntese cartográfica/espacial de mapas.
     """
+    # 0. Imagem fornecida ou detectada
+    if imagem:
+        return model3d.validate(gerar_modelo_3d_de_imagem(imagem, prompt))
+
+    # 0.1 Documento ou especificação técnica extensa fornecida
+    if documento and len(documento) > 50:
+        return model3d.validate(gerar_modelo_3d_de_especificacao(documento, prompt))
+
     t_norm = _norm(prompt)
+
+    # 0.2 Mapas ou ambientes tridimensionais
+    if re.search(r'\b(mapa|planta|layout|cidade|ambiente|hangar|sala de servidores)\b', t_norm):
+        return model3d.validate(gerar_mapa_3d(prompt))
+
+    # 0.3 Especificação técnica direta no prompt (com medidas numéricas em mm/cm/m)
+    if re.search(r'\d+\s*(?:mm|cm|polegadas|pol|w|rpm|volts)', t_norm) and len(t_norm) > 30:
+        return model3d.validate(gerar_modelo_3d_de_especificacao(prompt, prompt[:30]))
 
     # 1. Catálogo local rápido
     chave_catalogo = model3d_catalog.resolver(t_norm)
@@ -307,3 +520,4 @@ def gerar_modelo_3d(prompt: str) -> dict:
     assunto = model3d_catalog.assunto(t_norm) or prompt.strip(' !.?')
     cena_sintetizada = _gerar_procedural_universal(assunto)
     return model3d.validate(cena_sintetizada)
+

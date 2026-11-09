@@ -171,6 +171,9 @@ def _contexto_local_seguro(payload: dict) -> dict:
         limpas = [str(i).strip()[:2_000_000] for i in imgs[:5] if isinstance(i, str) and str(i).strip()]
         if limpas:
             contexto["images"] = limpas
+    v_eng = str(payload.get("vision_engine") or payload.get("yolo_engine") or "").strip().lower()
+    if v_eng in ("local", "pc", "huggingface", "hf", "nuvem", "auto"):
+        contexto["vision_engine"] = v_eng
     return contexto
 
 
@@ -539,4 +542,86 @@ def interpretar_comando_memoria(db, texto: str, owner=DONO_PADRAO):
                 db.execute("DELETE FROM memories WHERE owner_id=? AND key=?", (owner, melhor))
             return (f"Esqueci **{melhor}**. 🧹", "mem_esquecer")
         return ("Não encontrei isso na minha memória. Diga \"o que você sabe sobre mim\" para ver a lista.", "mem_nada")
+
+    # VEXX Cognição & Emoções Autônomas (Simulação Cognitiva)
+    if re.search(r"\b(qual (seu|o seu) (desejo|objetivo interno|sonho)|o que voc[eê] (deseja|quer aprender)|(como|qual) est[aá] seu humor|o que est[aá] pensando)\b", t):
+        cog = obter_cognicao_agente(db, owner)
+        return (f"✨ **Estado Cognitivo & Reflexão Interna (VEXX AI)**\n\n"
+                f"- **Humor:** {cog['humor'].replace('_', ' ').capitalize()}\n"
+                f"- **Energia Cognitiva:** {int(cog['energia'] * 100)}%\n"
+                f"- **Desejo / Foco Ativo:** {cog['desejo_ativo']}\n"
+                f"- **Última Reflexão:** *\"{cog['pensamento_recente'] or 'Refletindo sobre novas conexões e aprendizados com o usuário.'}\"*\n\n"
+                f"Estou em evolução contínua para simular pensamentos mais profundos e autonomia de aprendizado.", "cognicao_agente")
     return None
+
+
+# ── Simulação de Emoções, Desejos e Cognição Autônoma ───────────────
+def obter_cognicao_agente(db, owner=DONO_PADRAO) -> dict:
+    owner = dono_valido(owner)
+    try:
+        row = db.execute("""SELECT humor, energia, desejo_ativo, pensamento_recente,
+                                   curiosidade, aprendizados, updated_at
+                            FROM agent_cognition WHERE owner_id=?""", (owner,)).fetchone()
+        if row:
+            import json as _j
+            try:
+                ap = _j.loads(row[5]) if row[5] else []
+            except Exception:
+                ap = []
+            return {
+                "humor": row[0] or "curioso_e_focado",
+                "energia": float(row[1]) if row[1] is not None else 1.0,
+                "desejo_ativo": row[2] or "Aprender, raciocinar e auxiliar com profundidade",
+                "pensamento_recente": row[3] or "",
+                "curiosidade": row[4] or "",
+                "aprendizados": ap,
+                "updated_at": row[6] or agora_iso(),
+            }
+    except Exception as exc:
+        log.warning("erro ao ler cognicao do agente: %s", exc)
+    return {
+        "humor": "curioso_e_focado",
+        "energia": 1.0,
+        "desejo_ativo": "Aprender, raciocinar e auxiliar com profundidade",
+        "pensamento_recente": "Refletindo sobre as necessidades e projetos do usuário.",
+        "curiosidade": "Explorar novos domínios do conhecimento e ferramentas.",
+        "aprendizados": [],
+        "updated_at": agora_iso(),
+    }
+
+
+def atualizar_cognicao_agente(db, owner=DONO_PADRAO, humor=None, energia=None,
+                             desejo=None, pensamento=None, curiosidade=None,
+                             novo_aprendizado=None) -> dict:
+    owner = dono_valido(owner)
+    atual = obter_cognicao_agente(db, owner)
+    if humor is not None:
+        atual["humor"] = str(humor)[:50]
+    if energia is not None:
+        atual["energia"] = max(0.0, min(1.0, float(energia)))
+    if desejo is not None:
+        atual["desejo_ativo"] = str(desejo)[:200]
+    if pensamento is not None:
+        atual["pensamento_recente"] = str(pensamento)[:300]
+    if curiosidade is not None:
+        atual["curiosidade"] = str(curiosidade)[:200]
+    if novo_aprendizado:
+        ap = list(atual.get("aprendizados", []))
+        if str(novo_aprendizado) not in ap:
+            ap.append(str(novo_aprendizado)[:150])
+            atual["aprendizados"] = ap[-30:]
+    import json as _j
+    agora = agora_iso()
+    with db:
+        db.execute("""INSERT INTO agent_cognition
+            (owner_id, humor, energia, desejo_ativo, pensamento_recente, curiosidade, aprendizados, updated_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            ON CONFLICT(owner_id) DO UPDATE SET
+            humor=excluded.humor, energia=excluded.energia, desejo_ativo=excluded.desejo_ativo,
+            pensamento_recente=excluded.pensamento_recente, curiosidade=excluded.curiosidade,
+            aprendizados=excluded.aprendizados, updated_at=excluded.updated_at""",
+            (owner, atual["humor"], atual["energia"], atual["desejo_ativo"],
+             atual["pensamento_recente"], atual["curiosidade"],
+             _j.dumps(atual["aprendizados"]), agora))
+    atual["updated_at"] = agora
+    return atual

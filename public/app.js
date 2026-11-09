@@ -776,7 +776,7 @@ function appendMessage(row) {
   if (type === 'ai') { const s = document.createElement('div'); s.className = 'sender'; s.textContent = 'Vexx'; content.appendChild(s); }
   const bubble = document.createElement('div'); bubble.className = 'bubble';
   if (row.status === 'generating') {
-    bubble.innerHTML = renderMarkdown(row.text) || '<span class="stream-placeholder" aria-hidden="true">···</span>';
+    bubble.innerHTML = renderMarkdown(row.text) || vexxThinkingPillHtml();
     content.appendChild(bubble);
   } else {
     bubble.innerHTML = renderMarkdown(row.text)
@@ -846,7 +846,7 @@ function paintStreaming(replyId, text) {
     el._streamComponents = document.createElement('div');
     el.replaceChildren(el._streamProse, el._streamComponents);
   }
-  el._streamProse.innerHTML = renderMarkdown(text) || '<span class="stream-placeholder" aria-hidden="true">···</span>';
+  const _rnd = renderMarkdown(text); el._streamProse.innerHTML = _rnd ? (_rnd + '<span class="stream-caret" aria-hidden="true"></span>') : vexxThinkingPillHtml();
   marcarImagensChat(el._streamProse);
   const jslots = takeJduiSlots();
   const signature = JSON.stringify(jslots);
@@ -1982,11 +1982,17 @@ function modelSelectionError() {
   return '';
 }
 let modelCatalog = {
-  models: ['vexx-qwen-2.5-3b'],
-  providers: [{ id: 'vexx', label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)', configured: true, source: 'hf_space' }],
-  default: 'vexx-qwen-2.5-3b',
-  itemProvider: { 'vexx-qwen-2.5-3b': 'vexx' },
-  itemLabel: { 'vexx-qwen-2.5-3b': '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)' }
+  models: ['qwen2.5-1.5b-instruct', 'vexx-qwen-2.5-3b'],
+  providers: [
+    { id: 'qwen_local', label: '🖥️ Qwen 2.5 1.5B (Local PC - Principal)', configured: true, source: 'local_pc' },
+    { id: 'vexx', label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)', configured: true, source: 'hf_space' }
+  ],
+  default: 'qwen2.5-1.5b-instruct',
+  itemProvider: { 'qwen2.5-1.5b-instruct': 'qwen_local', 'vexx-qwen-2.5-3b': 'vexx' },
+  itemLabel: {
+    'qwen2.5-1.5b-instruct': '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)',
+    'vexx-qwen-2.5-3b': '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)'
+  }
 };
 let modelLoadVersion = 0;
 let providerMutation = false;
@@ -1999,7 +2005,7 @@ function providerFlag(pid, campo) {
   return !!(p && p[campo]);
 }
 function isConfigured(pid) {
-  if (pid === 'hermes' || pid === 'vexx') return true;
+  if (pid === 'hermes' || pid === 'vexx' || pid === 'qwen_local' || pid === 'local') return true;
   return providerFlag(pid, 'configured') && !providerFlag(pid, 'auth_error');
 }
 function providerOf(id) {
@@ -2013,10 +2019,12 @@ function providerOf(id) {
   return 'hermes';
 }
 function modelDisplayLabel(id) {
+  if (id === 'qwen2.5-1.5b-instruct') return '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
   if (id === 'vexx-qwen-2.5-3b') return '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
   return (modelCatalog.itemLabel && modelCatalog.itemLabel[id]) || id;
 }
 function modelGroup(id) {
+  if (id === 'qwen2.5-1.5b-instruct') return -2;
   if (id === 'vexx-qwen-2.5-3b') return -1;
   const pid = providerOf(id);
   if (String(id).endsWith(':free')) return 0;
@@ -2038,13 +2046,15 @@ function fillModels(filter) {
     const key = rank + ':' + pid;
     if (!groups.has(key)) {
       const g = document.createElement('optgroup');
-      g.label = rank === -1 ? '⚡ Modelo Próprio (VEXX AI)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
-        (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave');
+      g.label = rank === -2 ? '🖥️ IA Local (Principal)' : (rank === -1 ? '⚡ Modelo Próprio (VEXX AI)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
+        (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave'));
       groups.set(key, g); sel.appendChild(g);
     }
     const o = document.createElement('option');
     o.value = id;
-    if (id === 'vexx-qwen-2.5-3b') {
+    if (id === 'qwen2.5-1.5b-instruct') {
+      o.textContent = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
+    } else if (id === 'vexx-qwen-2.5-3b') {
       o.textContent = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
     } else {
       o.textContent = pid !== 'hermes' && id.startsWith(pid + '/') ? id.slice(pid.length + 1) : id;
@@ -2075,39 +2085,60 @@ async function loadModels(force) {
     if (version !== modelLoadVersion || owner !== currentUid || !authenticated) return false;
     modelsLoadedAt = Date.now();
     const allModels = r.models || [];
-    if (!allModels.includes('vexx-qwen-2.5-3b')) {
-      allModels.unshift('vexx-qwen-2.5-3b');
+    for (const mId of ['vexx-qwen-2.5-3b', 'qwen2.5-1.5b-instruct']) {
+      const idx = allModels.indexOf(mId);
+      if (idx !== -1) allModels.splice(idx, 1);
     }
+    allModels.unshift('vexx-qwen-2.5-3b');
+    allModels.unshift('qwen2.5-1.5b-instruct');
+
     const allItems = r.items || [];
-    if (!allItems.some(i => i.id === 'vexx-qwen-2.5-3b')) {
-      allItems.unshift({
-        id: 'vexx-qwen-2.5-3b',
-        provider: 'vexx',
-        label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
-        free: true
-      });
-    }
+    const localItem = {
+      id: 'qwen2.5-1.5b-instruct',
+      provider: 'qwen_local',
+      label: '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)',
+      free: true
+    };
+    const vexxItem = {
+      id: 'vexx-qwen-2.5-3b',
+      provider: 'vexx',
+      label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
+      free: true
+    };
+    const filteredItems = allItems.filter(i => i.id !== 'qwen2.5-1.5b-instruct' && i.id !== 'vexx-qwen-2.5-3b');
+    filteredItems.unshift(vexxItem);
+    filteredItems.unshift(localItem);
+
     const allProviders = r.providers || [];
-    if (!allProviders.some(p => p.id === 'vexx')) {
-      allProviders.unshift({
-        id: 'vexx',
-        label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
-        configured: true,
-        source: 'hf_space'
-      });
-    }
+    const localProv = {
+      id: 'qwen_local',
+      label: '🖥️ Qwen 2.5 1.5B (Local PC - Principal)',
+      configured: true,
+      source: 'local_pc'
+    };
+    const vexxProv = {
+      id: 'vexx',
+      label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)',
+      configured: true,
+      source: 'hf_space'
+    };
+    const filteredProvs = allProviders.filter(p => p.id !== 'qwen_local' && p.id !== 'vexx');
+    filteredProvs.unshift(vexxProv);
+    filteredProvs.unshift(localProv);
+
     modelCatalog = {
       models: allModels,
-      providers: allProviders,
-      default: 'vexx-qwen-2.5-3b',
-      itemProvider: Object.fromEntries(allItems.map(i => [i.id, i.provider])),
-      itemLabel: Object.fromEntries(allItems.map(i => [i.id, i.label]))
+      providers: filteredProvs,
+      default: 'qwen2.5-1.5b-instruct',
+      itemProvider: Object.fromEntries(filteredItems.map(i => [i.id, i.provider])),
+      itemLabel: Object.fromEntries(filteredItems.map(i => [i.id, i.label]))
     };
+    modelCatalog.itemLabel['qwen2.5-1.5b-instruct'] = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
     modelCatalog.itemLabel['vexx-qwen-2.5-3b'] = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
     let escolhido = modeloAtivo();
     if (!escolhido || !modelCatalog.models.includes(escolhido) || escolhido.includes('crouton-alpha')) {
-      escolhido = 'vexx-qwen-2.5-3b';
-      localStorage.setItem('julia-model', 'vexx-qwen-2.5-3b');
+      escolhido = 'qwen2.5-1.5b-instruct';
+      localStorage.setItem('julia-model', 'qwen2.5-1.5b-instruct');
     }
     const cur = fillModels($('modelSearch') ? $('modelSearch').value : '');
     const pid = providerOf(escolhido);
@@ -2132,6 +2163,47 @@ $('modelRefresh') && $('modelRefresh').addEventListener('click', async () => {
   b.disabled = false;
   showToast(ok ? 'Lista de modelos atualizada' : 'Não consegui atualizar a lista agora');
 });
+async function testarLatenciaAiPC() {
+  const btn = $('aiBenchmarkBtn');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Testando…';
+  }
+  const hint = $('aiBenchmarkHint');
+  if (hint) {
+    hint.textContent = 'Executando benchmark do Qwen 2.5 no seu PC…';
+    hint.style.color = '';
+  }
+  try {
+    const res = await api('/api/ai/latency-test', { method: 'POST' });
+    if (res && res.status === 'sucesso') {
+      const msg = `⚡ Qwen Local: ${res.ttft_ms}ms TTFT · ${res.tokens_per_sec || 0} tok/s · Total: ${(res.duracao_ms/1000).toFixed(2)}s`;
+      if (hint) {
+        hint.textContent = msg;
+        hint.style.color = 'var(--accent, #10b981)';
+      }
+      showToast(msg);
+    } else {
+      const err = (res && res.mensagem) || 'IA local não respondeu na porta 8008';
+      if (hint) {
+        hint.textContent = 'Aviso: ' + err;
+        hint.style.color = '#ef4444';
+      }
+      showToast('Aviso: ' + err);
+    }
+  } catch (err) {
+    if (hint) hint.textContent = 'Erro ao medir latência da IA';
+    showToast('Não foi possível testar a latência da IA agora');
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = '⚡ Testar Latência IA';
+    }
+  }
+}
+$('aiBenchmarkBtn') && $('aiBenchmarkBtn').addEventListener('click', () => {
+  testarLatenciaAiPC();
+});
 function abrirSeletorDeModelo() {
   setDrawer(true);
   const det = document.querySelector('.drawer-connection');
@@ -2146,6 +2218,103 @@ $('popModelRow') && $('popModelRow').addEventListener('click', () => { $('status
 $('popModelRow') && $('popModelRow').addEventListener('keydown', e => {
   if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('statusPop').hidden = true; abrirSeletorDeModelo(); }
 });
+
+/* ----- Visão Computacional (YOLO) ----- */
+function yoloEngineAtivo() {
+  return localStorage.getItem('vexx-yolo-engine') || 'local';
+}
+function yoloEngineDisplayLabel(engine) {
+  if (engine === 'local') return '💻 Meu Computador (Local)';
+  if (engine === 'huggingface') return '☁️ Hugging Face (Nuvem)';
+  return '⚡ Automático (PC + Fallback)';
+}
+function atualizarYoloUI(engine) {
+  const val = engine || yoloEngineAtivo();
+  const sel = $('yoloEngineSelect');
+  if (sel && sel.value !== val) sel.value = val;
+  const hint = $('yoloEngineHint');
+  if (hint) {
+    hint.textContent = val === 'local'
+      ? 'Motor: Meu Computador (Local - YOLOv8, ~80-120ms)'
+      : val === 'huggingface'
+      ? 'Motor: Hugging Face Spaces (nuvem)'
+      : 'Motor: Automático (PC local com fallback nuvem)';
+  }
+  const badge = $('yoloBadge');
+  if (badge) {
+    badge.textContent = val === 'local' ? 'PC Local' : (val === 'huggingface' ? 'Nuvem' : 'Auto');
+    badge.style.color = val === 'huggingface' ? 'var(--blue-bright, #38bdf8)' : '#22c55e';
+    badge.style.background = val === 'huggingface' ? 'rgba(56, 189, 248, 0.15)' : 'rgba(34, 197, 94, 0.15)';
+  }
+  const popVis = $('popVision');
+  if (popVis) {
+    popVis.textContent = val === 'local' ? 'PC Local' : (val === 'huggingface' ? 'Nuvem' : 'Auto');
+  }
+}
+async function salvarYoloEngine(engine) {
+  localStorage.setItem('vexx-yolo-engine', engine);
+  atualizarYoloUI(engine);
+  try {
+    await api('/api/vision/engine', {
+      method: 'POST',
+      body: JSON.stringify({ engine })
+    });
+  } catch (_) {}
+}
+async function testarLatenciaYoloPC() {
+  const btn = $('yoloBenchmarkBtn');
+  if (btn) {
+    btn.disabled = true;
+    btn.textContent = 'Testando…';
+  }
+  const hint = $('yoloEngineHint');
+  if (hint) hint.textContent = 'Executando benchmark do YOLOv8 no seu PC…';
+  try {
+    const res = await api('/api/vision/latency-test', {
+      method: 'POST',
+      body: JSON.stringify({ iterations: 5 })
+    });
+    if (res && res.status === 'sucesso') {
+      const msg = `⚡ YOLO no PC (${res.dispositivo}): média ${res.latencia_media_ms}ms (mín ${res.latencia_min_ms}ms, máx ${res.latencia_max_ms}ms | ~${res.fps_estimado} FPS)`;
+      if (hint) hint.textContent = msg;
+      showToast(msg);
+    } else {
+      showToast('Erro no teste: ' + (res?.mensagem || 'desconhecido'));
+    }
+  } catch (err) {
+    showToast('Falha no teste de latência: ' + (err.message || ''));
+  } finally {
+    if (btn) {
+      btn.disabled = false;
+      btn.textContent = 'Testar latência';
+    }
+  }
+}
+function abrirSeletorDeYolo() {
+  setDrawer(true);
+  const det = document.querySelector('.drawer-connection');
+  if (det) det.open = true;
+  const alvo = $('yoloEngineSelect');
+  if (alvo) {
+    if (alvo.scrollIntoView) alvo.scrollIntoView({ block: 'nearest' });
+    try { alvo.focus({ preventScroll: true }); } catch (_) { alvo.focus(); }
+  }
+}
+$('yoloEngineSelect') && $('yoloEngineSelect').addEventListener('change', e => {
+  salvarYoloEngine(e.target.value);
+  showToast('Motor de visão alterado para: ' + (e.target.value === 'local' ? 'Meu Computador' : (e.target.value === 'huggingface' ? 'Hugging Face' : 'Automático')));
+});
+$('yoloBenchmarkBtn') && $('yoloBenchmarkBtn').addEventListener('click', () => {
+  testarLatenciaYoloPC();
+});
+$('popVisionRow') && $('popVisionRow').addEventListener('click', () => {
+  $('statusPop').hidden = true;
+  abrirSeletorDeYolo();
+});
+$('popVisionRow') && $('popVisionRow').addEventListener('keydown', e => {
+  if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); $('statusPop').hidden = true; abrirSeletorDeYolo(); }
+});
+
 
 /* ----- Provedores de IA: chaves ficam SÓ no PC (nunca aqui no app) ----- */
 function providerChipInfo(p) {
@@ -2307,13 +2476,44 @@ $('providersRefresh') && $('providersRefresh').addEventListener('click', async (
   showToast(ok ? 'Lista de modelos atualizada' : 'Não consegui atualizar a lista agora');
 });
 
+
+const VEXX_THINKING_PHRASES = [
+  'Raciocinando sobre o contexto…',
+  'Consultando memórias e evidências…',
+  'Mapeando conexões cognitivas…',
+  'Processando dados factuais e visão…',
+  'Sintetizando detalhes da resposta…',
+  'Estruturando raciocínio…'
+];
+let vexxThinkingIdx = 0;
+let currentThinkingMsg = VEXX_THINKING_PHRASES[0];
+
+function vexxThinkingPillHtml(msg) {
+  const frase = msg || currentThinkingMsg || 'Raciocinando…';
+  return '<div class="vexx-thinking-pill" role="status" aria-live="polite">' +
+    '<div class="vexx-thinking-orb"></div>' +
+    '<div class="vexx-thinking-body">' +
+      '<span class="vexx-thinking-text">' + esc(frase) + '</span>' +
+      '<span class="vexx-thinking-dots"><span></span><span></span><span></span></span>' +
+    '</div>' +
+  '</div>';
+}
+
 /* ----- IA com streaming rápido ----- */
 function setGenBar(on, label) {
   $('genBar').hidden = !on;
   if (label) $('genLabel').textContent = label;
 }
 function tickGen() {
-  $('genLabel').textContent = aiFirstTokenT ? 'Respondendo…' : 'Preparando resposta…';
+  if (aiFirstTokenT) {
+    $('genLabel').textContent = 'Transmitindo resposta…';
+  } else {
+    vexxThinkingIdx = (vexxThinkingIdx + 1) % VEXX_THINKING_PHRASES.length;
+    currentThinkingMsg = VEXX_THINKING_PHRASES[vexxThinkingIdx];
+    $('genLabel').textContent = currentThinkingMsg;
+    const p = conversation ? conversation.querySelector('.vexx-thinking-text') : null;
+    if (p) p.textContent = currentThinkingMsg;
+  }
 }
 function localContextKey(name) { return 'julia-context:' + currentUid + ':' + name; }
 function aiLocalContext(text) {
@@ -2404,9 +2604,11 @@ async function runAIRequest(userRow, options, timing) {
   const ctx = aiLocalContext(userRow.text || '');
   const sceneContext = typeof globalThis.getModel3DContext === 'function' ? globalThis.getModel3DContext(options.owner,userRow.conversation_id) : null;
   if (sceneContext) ctx.scene_state = JSON.stringify(sceneContext);
+  ctx.vision_engine = yoloEngineAtivo();
+  ctx.yolo_engine = yoloEngineAtivo();
   const qs = new URLSearchParams(Object.assign({
     message_id: userRow.id, conversation_id: userRow.conversation_id,
-    model: modeloAtivo() || modelCatalog.default || 'vexx-qwen-2.5-3b', memory: memoryOn() ? '1' : '0',
+    model: modeloAtivo() || modelCatalog.default || 'qwen2.5-1.5b-instruct', memory: memoryOn() ? '1' : '0',
     text: userRow.text || '', created_at: userRow.created_at || ''
   }, ctx));
   aiAbort = new AbortController();
@@ -2456,7 +2658,8 @@ async function runAIRequest(userRow, options, timing) {
           if (tipo === 'delta') {
             if (Number.isInteger(d.seq) && d.seq > 0) {
               if (d.seq <= lastSeq) continue;
-              if (lastSeq > 0 && d.seq !== lastSeq + 1) throw new Error('Conexão interrompida entre trechos da resposta');
+              // Tolerante a micro-agrupamento de pacotes SSE sem quebrar o stream
+              if (d.seq > lastSeq) lastSeq = d.seq;
               lastSeq = d.seq;
             }
             if (!aiFirstTokenT) {
@@ -2738,7 +2941,7 @@ conversation.addEventListener('click', e => {
 /* ----- Envio ----- */
 function autoresize() { messageInput.style.height = 'auto'; messageInput.style.height = Math.min(messageInput.scrollHeight, 140) + 'px'; }
 messageInput.addEventListener('input', () => {
-  autoresize();
+  autoresize(); atualizarYoloUI();
   const n = messageInput.value.length;
   $('charCount').textContent = n > 9000 ? n + ' / 10000' : '';
 });

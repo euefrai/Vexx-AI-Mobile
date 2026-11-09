@@ -382,6 +382,17 @@ def open_db(path: Path):
         state TEXT NOT NULL, updated_at TEXT NOT NULL,
         owner_id TEXT NOT NULL DEFAULT 'local'
     )""")
+    db.execute("""CREATE TABLE IF NOT EXISTS agent_cognition (
+        owner_id TEXT NOT NULL DEFAULT 'local',
+        humor TEXT NOT NULL DEFAULT 'curioso_e_focado',
+        energia REAL NOT NULL DEFAULT 1.0,
+        desejo_ativo TEXT NOT NULL DEFAULT 'Aprender, raciocinar e auxiliar com profundidade',
+        pensamento_recente TEXT NOT NULL DEFAULT '',
+        curiosidade TEXT NOT NULL DEFAULT '',
+        aprendizados TEXT NOT NULL DEFAULT '[]',
+        updated_at TEXT NOT NULL,
+        PRIMARY KEY (owner_id)
+    )""")
     _ensure_owner_coluna(db, "ui_state")
     db.execute("CREATE INDEX IF NOT EXISTS idx_uistate_msg ON ui_state(message_id)")
     db.commit()
@@ -444,7 +455,7 @@ def list_messages(db, limit=200, owner=DONO_PADRAO, conversation_id="", before=N
 def ai_config() -> dict:
     return {
         "proxy": os.environ.get("HERMES_PROXY_URL", hermes_bridge.DEFAULT_PROXY_URL),
-        "model": os.environ.get("JULIA_AI_MODEL", hermes_bridge.DEFAULT_MODEL),
+        "model": os.environ.get("JULIA_AI_MODEL", "qwen2.5-1.5b-instruct"),
         "model_implicit": not bool(os.environ.get("JULIA_AI_MODEL")),
         "fallbacks": _lista_fallbacks(os.environ.get("JULIA_AI_FALLBACKS", "")),
         "system": system_with_identity((os.environ.get("JULIA_SYSTEM_PROMPT", "").strip()
@@ -467,6 +478,7 @@ def _lista_fallbacks(valor: str) -> list:
 
 
 FALLBACKS_GRATIS_PADRAO = [
+    "qwen2.5-1.5b-instruct",
     "vexx-qwen-2.5-3b",
     "meituan/longcat-2.5:free",
     "meta-llama/llama-3.2-3b-instruct:free",
@@ -509,7 +521,7 @@ def modelos_tentativa(cfg: dict, preferido: str = "") -> list:
         saudaveis = [m for m in candidatos if _MODELOS_COOLDOWN.get(m, 0) < agora]
         em_espera = [m for m in candidatos if _MODELOS_COOLDOWN.get(m, 0) >= agora]
         fila = saudaveis + em_espera if saudaveis else candidatos
-    return [m for m in fila if m][:6]
+    return [m for m in fila if m][:8]
 
 
 def gerar_texto(cfg: dict, messages: list, preferido: str = "",
