@@ -521,7 +521,7 @@ def modelos_tentativa(cfg: dict, preferido: str = "") -> list:
         saudaveis = [m for m in candidatos if _MODELOS_COOLDOWN.get(m, 0) < agora]
         em_espera = [m for m in candidatos if _MODELOS_COOLDOWN.get(m, 0) >= agora]
         fila = saudaveis + em_espera if saudaveis else candidatos
-    return [m for m in fila if m][:6]
+    return [m for m in fila if m][:8]
 
 
 def gerar_texto(cfg: dict, messages: list, preferido: str = "",

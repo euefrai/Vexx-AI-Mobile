@@ -186,6 +186,114 @@ button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-vis
 #cancelAttachmentUpload {flex-shrink:0;min-height:44px;font-size:12px}
 .gen-bar {border:0;background:transparent;font-size:13px;padding:4px 0 12px;margin:0}
 .stream-placeholder {color:var(--muted);letter-spacing:3px}
+
+/* VEXX Luminous Thinking & Glowing Pulse */
+.vexx-thinking-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, rgba(26, 19, 48, 0.85) 0%, rgba(13, 17, 34, 0.9) 100%);
+  border: 1px solid rgba(168, 85, 247, 0.35);
+  box-shadow: 0 4px 20px rgba(168, 85, 247, 0.18), inset 0 0 12px rgba(99, 102, 241, 0.12);
+  backdrop-filter: blur(12px);
+  position: relative;
+  overflow: hidden;
+  margin: 4px 0;
+  user-select: none;
+  animation: vexx-pill-float 3s ease-in-out infinite alternate;
+}
+.vexx-thinking-pill::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 60%);
+  animation: vexx-glow-spin 4s linear infinite;
+  pointer-events: none;
+}
+.vexx-thinking-orb {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7, #38bdf8);
+  box-shadow: 0 0 10px #a855f7, 0 0 20px #38bdf8;
+  animation: vexx-orb-pulse 1.6s ease-in-out infinite alternate;
+  flex-shrink: 0;
+}
+.vexx-thinking-body {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 1;
+}
+.vexx-thinking-text {
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+  background: linear-gradient(90deg, #e2e8f0 0%, #c084fc 35%, #67e8f9 70%, #e2e8f0 100%);
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: vexx-shimmer 2.5s linear infinite;
+}
+.vexx-thinking-dots {
+  display: inline-flex;
+  gap: 3px;
+  align-items: center;
+}
+.vexx-thinking-dots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
+  animation: vexx-dot-bounce 1.2s infinite ease-in-out;
+}
+.vexx-thinking-dots span:nth-child(2) { animation-delay: 0.2s; background: #a855f7; box-shadow: 0 0 6px #a855f7; }
+.vexx-thinking-dots span:nth-child(3) { animation-delay: 0.4s; background: #c084fc; box-shadow: 0 0 6px #c084fc; }
+
+/* Stream Caret Luminous Beam */
+.stream-caret {
+  display: inline-block;
+  width: 2.5px;
+  height: 1em;
+  background: linear-gradient(180deg, #38bdf8, #a855f7);
+  box-shadow: 0 0 8px #a855f7;
+  border-radius: 2px;
+  vertical-align: -0.15em;
+  margin-left: 2px;
+  animation: vexx-caret-blink 0.8s infinite ease-in-out;
+}
+
+@keyframes vexx-pill-float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-2px); }
+}
+@keyframes vexx-glow-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+@keyframes vexx-orb-pulse {
+  0% { transform: scale(0.85); box-shadow: 0 0 6px #a855f7, 0 0 12px #38bdf8; }
+  100% { transform: scale(1.15); box-shadow: 0 0 14px #a855f7, 0 0 24px #38bdf8; }
+}
+@keyframes vexx-shimmer {
+  0% { background-position: 250% 0; }
+  100% { background-position: -250% 0; }
+}
+@keyframes vexx-dot-bounce {
+  0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+  40% { transform: scale(1.2); opacity: 1; }
+}
+@keyframes vexx-caret-blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
 .citation {display:inline-block;font-size:.8em;padding:0 5px;border-radius:5px;background:var(--surface-3);text-decoration:none}
 .refs {border-top:1px solid var(--line);padding-top:14px;margin-top:22px;font-size:12px;overflow-wrap:anywhere}
 .reference-item {margin:8px 0;color:var(--muted)}

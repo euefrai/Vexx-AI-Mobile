@@ -183,6 +183,13 @@ def ai_completa(db, payload: dict, cfg: dict) -> dict:
                                  pesquisa_web=bool(cfg.get("pesquisa_web", True)))
     if model_response:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], model_response, owner)
+    try:
+        from pc_modules import browser_automation
+        cmd_auto = browser_automation.executar_comando_automacao(prep.get("user_text", ""))
+        if cmd_auto:
+            return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd_auto, owner)
+    except Exception as exc:
+        log.warning("Erro em automacao de navegador: %s", exc)
     cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
     if cmd:
         return ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)
@@ -388,6 +395,15 @@ def ai_stream_worker(db_path: Path, cfg: dict, payload: dict, request_id: str,
             direct = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], model_response, owner)
             enviar_ws(websocket, {"request_id": request_id, "type": "ai_done", **direct})
             return
+        try:
+            from pc_modules import browser_automation
+            cmd_auto = browser_automation.executar_comando_automacao(prep.get("user_text", ""))
+            if cmd_auto:
+                direct = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd_auto, owner)
+                enviar_ws(websocket, {"request_id": request_id, "type": "ai_done", **direct})
+                return
+        except Exception as exc:
+            log.warning("Erro em automacao de navegador: %s", exc)
         cmd = interpretar_comando_memoria(db, prep.get("user_text", ""), owner)
         if cmd:
             direta = ai_resposta_direta(db, mid, conv, modelo, prep["reply_id"], cmd[0], owner)

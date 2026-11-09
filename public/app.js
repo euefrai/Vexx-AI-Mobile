@@ -776,7 +776,7 @@ function appendMessage(row) {
   if (type === 'ai') { const s = document.createElement('div'); s.className = 'sender'; s.textContent = 'Vexx'; content.appendChild(s); }
   const bubble = document.createElement('div'); bubble.className = 'bubble';
   if (row.status === 'generating') {
-    bubble.innerHTML = renderMarkdown(row.text) || '<span class="stream-placeholder" aria-hidden="true">···</span>';
+    bubble.innerHTML = renderMarkdown(row.text) || vexxThinkingPillHtml();
     content.appendChild(bubble);
   } else {
     bubble.innerHTML = renderMarkdown(row.text)
@@ -846,7 +846,7 @@ function paintStreaming(replyId, text) {
     el._streamComponents = document.createElement('div');
     el.replaceChildren(el._streamProse, el._streamComponents);
   }
-  el._streamProse.innerHTML = renderMarkdown(text) || '<span class="stream-placeholder" aria-hidden="true">···</span>';
+  const _rnd = renderMarkdown(text); el._streamProse.innerHTML = _rnd ? (_rnd + '<span class="stream-caret" aria-hidden="true"></span>') : vexxThinkingPillHtml();
   marcarImagensChat(el._streamProse);
   const jslots = takeJduiSlots();
   const signature = JSON.stringify(jslots);
@@ -2476,13 +2476,44 @@ $('providersRefresh') && $('providersRefresh').addEventListener('click', async (
   showToast(ok ? 'Lista de modelos atualizada' : 'Não consegui atualizar a lista agora');
 });
 
+
+const VEXX_THINKING_PHRASES = [
+  'Raciocinando sobre o contexto…',
+  'Consultando memórias e evidências…',
+  'Mapeando conexões cognitivas…',
+  'Processando dados factuais e visão…',
+  'Sintetizando detalhes da resposta…',
+  'Estruturando raciocínio…'
+];
+let vexxThinkingIdx = 0;
+let currentThinkingMsg = VEXX_THINKING_PHRASES[0];
+
+function vexxThinkingPillHtml(msg) {
+  const frase = msg || currentThinkingMsg || 'Raciocinando…';
+  return '<div class="vexx-thinking-pill" role="status" aria-live="polite">' +
+    '<div class="vexx-thinking-orb"></div>' +
+    '<div class="vexx-thinking-body">' +
+      '<span class="vexx-thinking-text">' + esc(frase) + '</span>' +
+      '<span class="vexx-thinking-dots"><span></span><span></span><span></span></span>' +
+    '</div>' +
+  '</div>';
+}
+
 /* ----- IA com streaming rápido ----- */
 function setGenBar(on, label) {
   $('genBar').hidden = !on;
   if (label) $('genLabel').textContent = label;
 }
 function tickGen() {
-  $('genLabel').textContent = aiFirstTokenT ? 'Respondendo…' : 'Preparando resposta…';
+  if (aiFirstTokenT) {
+    $('genLabel').textContent = 'Transmitindo resposta…';
+  } else {
+    vexxThinkingIdx = (vexxThinkingIdx + 1) % VEXX_THINKING_PHRASES.length;
+    currentThinkingMsg = VEXX_THINKING_PHRASES[vexxThinkingIdx];
+    $('genLabel').textContent = currentThinkingMsg;
+    const p = conversation ? conversation.querySelector('.vexx-thinking-text') : null;
+    if (p) p.textContent = currentThinkingMsg;
+  }
 }
 function localContextKey(name) { return 'julia-context:' + currentUid + ':' + name; }
 function aiLocalContext(text) {
@@ -2627,7 +2658,8 @@ async function runAIRequest(userRow, options, timing) {
           if (tipo === 'delta') {
             if (Number.isInteger(d.seq) && d.seq > 0) {
               if (d.seq <= lastSeq) continue;
-              if (lastSeq > 0 && d.seq !== lastSeq + 1) throw new Error('Conexão interrompida entre trechos da resposta');
+              // Tolerante a micro-agrupamento de pacotes SSE sem quebrar o stream
+              if (d.seq > lastSeq) lastSeq = d.seq;
               lastSeq = d.seq;
             }
             if (!aiFirstTokenT) {
