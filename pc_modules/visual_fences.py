@@ -273,9 +273,15 @@ def cmd_dados_atuais(db, texto, owner, conv, contexto, message_id=None):
     """Dados externos reais e continuação de cidade isolada por proprietário/conversa."""
     if _JOB_START_RE.search(texto or ''):
         return None  # Explicit deep research must reach the existing job route.
-    analysis=intent.analisar(texto)
-    if analysis.get('intencao')=='model3d':return None
-    if analysis.get('route')=='GREETING':
+    analysis = intent.analisar(texto)
+    if analysis.get('intencao') == 'model3d':
+        return None
+    if analysis.get('route') in ('SHOPPING', 'RESEARCH', 'DEEP_RESEARCH') or analysis.get('intencao') in ('shopping', 'pesquisa', 'pesquisa_profunda'):
+        return None
+    t_norm = live_data.norm(texto)
+    if re.search(r'\b(fone|celular|notebook|placa|tenis|preco|precos|comprar|promocao|oferta|r\$|\d+\s*reais)\b', t_norm):
+        return None
+    if analysis.get('route') == 'GREETING':
         return 'Oi! Tudo bem? Como posso ajudar?'
     slots=conversation_followups.weather_slots(db,dono_valido(owner),conv,texto,message_id)
     if slots:

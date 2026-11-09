@@ -2478,12 +2478,11 @@ $('providersRefresh') && $('providersRefresh').addEventListener('click', async (
 
 
 const VEXX_THINKING_PHRASES = [
-  'Raciocinando sobre o contexto…',
-  'Consultando memórias e evidências…',
-  'Mapeando conexões cognitivas…',
-  'Processando dados factuais e visão…',
-  'Sintetizando detalhes da resposta…',
-  'Estruturando raciocínio…'
+  'Pensando…',
+  'Consultando informações…',
+  'Organizando contexto…',
+  'Sintetizando resposta…',
+  'Estruturando detalhes…'
 ];
 let vexxThinkingIdx = 0;
 let currentThinkingMsg = VEXX_THINKING_PHRASES[0];

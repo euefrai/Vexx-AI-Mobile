@@ -92,6 +92,8 @@ def weather_slots(db, owner, conv, text, message_id=None):
     def advance(value, state):
         req=live_data.request(value)
         t=live_data.norm(value).strip(' .?!')
+        if re.search(r'\b(fone|celular|notebook|placa|tenis|preco|precos|comprar|promocao|oferta|r\$|\d+\s*reais)\b', t):
+            return None
         short=bool(re.fullmatch(r'(?:e |e para |no )?(?:amanha|hoje|depois de amanha|fim de semana|vai chover)',t))
         if req and req['kind']=='weather':
             city=live_data.place_from(value) or (state or {}).get('city','')

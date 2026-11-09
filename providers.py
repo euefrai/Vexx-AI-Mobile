@@ -699,9 +699,11 @@ def tentar_modelos(modelos: list, messages: list, timeout_por_tentativa: float =
             if len(fila) == 1:
                 raise
             if i == len(fila) - 1:
+                codigos = {t.get("codigo") for t in tentativas if t.get("codigo")}
+                codigo_final = exc.codigo if len(codigos) == 1 else "todos_falharam"
                 raise BridgeErro(
                     f"Nenhum modelo respondeu ({len(fila)} tentativas; "
-                    f"último: {exc.codigo}).", "todos_falharam", exc.detalhe) from None
+                    f"último: {exc.codigo}).", codigo_final, exc.detalhe) from None
     raise BridgeErro("Nenhum modelo respondeu.", "todos_falharam")
 
 
@@ -750,9 +752,11 @@ def chat_stream_fb(modelos: list, messages: list, on_delta,
             if len(fila) == 1:
                 raise
             if i == len(fila) - 1:
+                codigos = {t.get("codigo") for t in tentativas if t.get("codigo")}
+                codigo_final = exc.codigo if len(codigos) == 1 else "todos_falharam"
                 raise BridgeErro(
                     f"Nenhum modelo respondeu ({len(fila)} tentativas; "
-                    f"último: {exc.codigo}).", "todos_falharam", exc.detalhe) from None
+                    f"último: {exc.codigo}).", codigo_final, exc.detalhe) from None
     raise BridgeErro("Nenhum modelo respondeu.", "todos_falharam")
 
 def testar_latencia_ai(model_id: str = "qwen2.5-1.5b-instruct") -> dict:

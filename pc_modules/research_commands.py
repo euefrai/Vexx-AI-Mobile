@@ -690,13 +690,22 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str, model: str = "") -> str:
     official_docs = bool(re.search(r'\bpesquis\w*\b', t)
                          and re.search(r'\bdocumenta[cç][aã]o\s+oficial\b', t))
     if visual and not m and 'pesquisa profunda' not in t:
-        result=research.pesquisa_rapida(db,owner,texto)
+        termo_busca = re.sub(r'^(?:pesquis\w*|busqu\w*|procur\w*|encontr\w*|mostr\w*)\s+(?:por\s+)?(?:alguns?|algumas?|os?|as?)?\s*', '', texto, flags=re.I)
+        termo_busca = re.sub(r'\s+e\s+(?:me\s+)?(?:mostr\w*|traga|busqu\w*|encontr\w*)\s+(?:as\s+)?(?:fotos?|imagens?|midias?|fotos\s+delas?|fotos\s+deles?)\b.*$', '', termo_busca, flags=re.I).strip()
+        if not termo_busca:
+            termo_busca = texto
+        result = research.pesquisa_rapida(db, owner, termo_busca)
         import research_view
-        media=result.get('midia') or []
-        fence=research_view.media_fence(media)
+        media = result.get('midia') or []
+        fence = research_view.media_fence(media)
         if fence:
-            return imagens_primeiro(fence,f'Encontrei {len(media)} item(ns) de mídia com origem indicada. Metadados recuperados; imagens e vídeos não foram analisados.')
-        return 'Não consegui recuperar mídia pertinente nas fontes disponíveis agora. '+str(result.get('estado_texto') or '')
+            return imagens_primeiro(fence, f'Encontrei {len(media)} item(ns) de mídia com origem indicada. Metadados recuperados; imagens e vídeos não foram analisados.')
+        fontes = result.get('fontes') or []
+        if fontes:
+            resumo = research.resumo_deterministico(fontes, termo_busca)
+            anexo = anexar_fontes(resumo, fontes)
+            return (f"{anexo}\n\n*(Nota: Não foi possível obter pré-visualizações diretas de fotos para estas fontes no momento.)*")
+        return 'Não consegui recuperar mídia pertinente nas fontes disponíveis agora. ' + str(result.get('estado_texto') or '')
     if m or "inicie uma pesquisa sobre" in t or visual or official_docs:
         objetivo = (m.group(1).strip() if m else texto)[:500]
         imagem = ""

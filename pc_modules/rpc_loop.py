@@ -790,6 +790,55 @@ def run():
                         except hermes_bridge.BridgeErro as exc:
                             reply = {"request_id": request_id, "type": "ai_error",
                                      "error": str(exc), "codigo": exc.codigo}
+                    elif req.get("type") == "ai_latency_test":
+                        try:
+                            res = providers.testar_latencia_ai()
+                            reply = {"request_id": request_id, "type": "ai_latency_test_ok", "resultado": res}
+                        except Exception as exc:
+                            reply = {"request_id": request_id, "type": "ai_latency_test_ok",
+                                     "resultado": {"status": "erro", "mensagem": str(exc)}}
+                    elif req.get("type") == "vision_latency_test":
+                        try:
+                            import vision_service
+                            iters = int(req.get("iterations", 5) or 5)
+                            res = vision_service.testar_latencia_yolo_local(iteracoes=iters)
+                            reply = {"request_id": request_id, "type": "vision_latency_test_ok", "resultado": res}
+                        except Exception as exc:
+                            reply = {"request_id": request_id, "type": "vision_latency_test_ok",
+                                     "resultado": {"status": "erro", "mensagem": str(exc)}}
+                    elif req.get("type") == "vision_engine_get":
+                        try:
+                            import vision_service
+                            reply = {"request_id": request_id, "type": "vision_engine_get_ok",
+                                     "resultado": {
+                                         "engine": vision_service.obter_motor_visao(),
+                                         "engines": vision_service.listar_motores_visao()
+                                     }}
+                        except Exception as exc:
+                            reply = {"request_id": request_id, "type": "ai_error", "error": str(exc)}
+                    elif req.get("type") == "vision_engine_post":
+                        try:
+                            import vision_service
+                            novo = vision_service.definir_motor_visao(req.get("engine", ""))
+                            reply = {"request_id": request_id, "type": "vision_engine_post_ok",
+                                     "resultado": {
+                                         "ok": True,
+                                         "engine": novo,
+                                         "engines": vision_service.listar_motores_visao()
+                                     }}
+                        except Exception as exc:
+                            reply = {"request_id": request_id, "type": "ai_error", "error": str(exc)}
+                    elif req.get("type") == "vision_analyze":
+                        try:
+                            import vision_service
+                            res = vision_service.analisar_imagem(
+                                req.get("image", ""),
+                                motor=req.get("engine") or None,
+                                classes_personalizadas=req.get("classes", ""),
+                            )
+                            reply = {"request_id": request_id, "type": "vision_analyze_ok", "resultado": res}
+                        except Exception as exc:
+                            reply = {"request_id": request_id, "type": "ai_error", "error": str(exc)}
                     elif req.get("type") == "ai_stream":
                         if len(cancelados) >= 8 or request_id in cancelados:
                             enviar_ws(websocket, {"request_id": request_id, "type": "ai_error",

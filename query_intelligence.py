@@ -87,7 +87,9 @@ ANSWER_FACETS = {
 def _research_body(text):
     value = re.sub(r'^(?:fa[cç]a\s+)?(?:uma\s+)?pesquisa\s+(?:profunda(?:\s*:\s*|\s+))?(?:(?:sobre|por|acerca de)\s+)?', '', str(text).strip(), flags=re.I)
     value = re.sub(r'^investigue\s+a\s+fundo\s+(?:sobre\s+)?', '', value, flags=re.I)
-    return re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure|investigue)\s+(?:profundamente\s+|a fundo\s+)?(?:sobre\s+)?', '', value, flags=re.I)
+    value = re.sub(r'^(?:pesquise|pesquisar|encontre|busque|procure|investigue)\s+(?:profundamente\s+|a fundo\s+)?(?:sobre\s+|por\s+)?(?:alguns?|algumas?|os?|as?)?\s*', '', value, flags=re.I)
+    value = re.sub(r'\s+e\s+(?:me\s+)?(?:mostr\w*|traga|busqu\w*|encontr\w*|traga)\s+(?:as\s+)?(?:fotos?|imagens?|midias?|fotos\s+delas?|fotos\s+deles?)\b.*$', '', value, flags=re.I)
+    return value.strip()
 
 
 def _facet_subject(text):

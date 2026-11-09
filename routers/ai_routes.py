@@ -608,6 +608,13 @@ class VisionAnalyzeRequest(BaseModel):
 @router.get("/api/vision/engine")
 async def vision_engine_get():
     """Retorna o motor de visão ativo e a lista de motores disponíveis."""
+    if relay.ws is not None:
+        try:
+            res = await relay.exchange({"type": "vision_engine_get"}, timeout=10.0)
+            if res.get("type") == "vision_engine_get_ok":
+                return res.get("resultado", {})
+        except Exception as exc:
+            log.warning("Falha ao obter motor de visão via relay: %s", exc)
     import vision_service
     return {
         "engine": vision_service.obter_motor_visao(),
@@ -620,6 +627,13 @@ async def vision_engine_post(request: Request, body: VisionEngineRequest):
     """Altera o motor de visão em tempo de execução ('local', 'huggingface', 'auto')."""
     require_csrf(request)
     await revogacao_ok(request)
+    if relay.ws is not None:
+        try:
+            res = await relay.exchange({"type": "vision_engine_post", "engine": body.engine}, timeout=10.0)
+            if res.get("type") == "vision_engine_post_ok":
+                return res.get("resultado", {})
+        except Exception as exc:
+            log.warning("Falha ao configurar motor de visão via relay: %s", exc)
     import vision_service
     try:
         novo = vision_service.definir_motor_visao(body.engine)
@@ -636,10 +650,22 @@ async def vision_engine_post(request: Request, body: VisionEngineRequest):
 async def vision_latency_test(request: Request, body: VisionLatencyRequest | None = None):
     """Executa benchmark de latência do modelo YOLO no PC local."""
     require_csrf(request)
-    await revogacao_ok(request)
-    import vision_service
+    dono = await revogacao_ok(request)
     iters = body.iterations if body else 5
-    return vision_service.testar_latencia_yolo_local(iteracoes=iters)
+    if relay.ws is not None:
+        try:
+            res = await relay.exchange({"type": "vision_latency_test", "owner": dono, "iterations": iters}, timeout=25.0)
+            if res.get("type") == "vision_latency_test_ok":
+                return res.get("resultado", {})
+            return res.get("resultado") or {"status": "erro", "mensagem": res.get("error", "Erro ao executar benchmark YOLO")}
+        except Exception as exc:
+            log.warning("Falha ao delegar vision_latency_test ao PC: %s", exc)
+            return {"status": "erro", "mensagem": f"PC não respondeu ao teste de visão: {exc}"}
+    import vision_service
+    try:
+        return vision_service.testar_latencia_yolo_local(iteracoes=iters)
+    except Exception as exc:
+        return {"status": "erro", "mensagem": str(exc)}
 
 
 @router.post("/api/vision/analyze")
@@ -648,6 +674,20 @@ async def vision_analyze_post(request: Request, body: VisionAnalyzeRequest):
     require_csrf(request)
     dono = await revogacao_ok(request)
     _rate_limit(request, "ai", dono)
+    if relay.ws is not None:
+        try:
+            res = await relay.exchange({
+                "type": "vision_analyze",
+                "owner": dono,
+                "image": body.image,
+                "engine": body.engine or "",
+                "classes": body.classes,
+            }, timeout=60.0)
+            if res.get("type") == "vision_analyze_ok":
+                return res.get("resultado", {})
+            return res.get("resultado") or {"status": "erro", "mensagem": res.get("error", "Erro na análise")}
+        except Exception as exc:
+            log.warning("Falha ao delegar vision_analyze ao PC: %s", exc)
     import vision_service
     return vision_service.analisar_imagem(
         body.image,
@@ -655,11 +695,24 @@ async def vision_analyze_post(request: Request, body: VisionAnalyzeRequest):
         classes_personalizadas=body.classes,
     )
 
+
 @router.post("/api/ai/latency-test")
 async def ai_latency_test(request: Request):
     """Executa benchmark de latência da IA local (Qwen 2.5 1.5B)."""
     require_csrf(request)
-    await revogacao_ok(request)
+    dono = await revogacao_ok(request)
+    if relay.ws is not None:
+        try:
+            res = await relay.exchange({"type": "ai_latency_test", "owner": dono}, timeout=15.0)
+            if res.get("type") == "ai_latency_test_ok":
+                return res.get("resultado", {})
+            return res.get("resultado") or {"status": "erro", "mensagem": res.get("error", "Erro ao executar benchmark de IA no PC")}
+        except Exception as exc:
+            log.warning("Falha ao delegar ai_latency_test ao PC: %s", exc)
+            return {"status": "erro", "mensagem": f"PC não respondeu ao teste de latência: {exc}"}
     import providers
-    return providers.testar_latencia_ai()
+    try:
+        return providers.testar_latencia_ai()
+    except Exception as exc:
+        return {"status": "erro", "mensagem": f"Servidor local na porta 8008 inacessível: {exc}"}
 
