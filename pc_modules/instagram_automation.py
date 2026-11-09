@@ -445,7 +445,7 @@ def rotear_comando_instagram(texto: str) -> Optional[str]:
     t = orig.lower()
 
     # 1. Enviar mensagem: "envie uma mensagem para Gustavo dizendo oi", "mande mensagem para ... dizendo ..."
-    m_envio = re.search(r"(?:envie|mande|enviar|mandar)\s+(?:uma\s+)?mensagem\s+(?:para|pro|pra)\s+([\w\.\-_]+)\s+(?:dizendo|falando|com\s+o\s+texto|com)\s+[\"']?([^\"']+)[\"']?", orig, re.I)
+    m_envio = re.search(r"(?:envie|mande|enviar|mandar)\s+(?:uma\s+)?mensagem\s+(?:para|pro|pra)\s+([\w\.\-_]+)\s+(?:dizendo|falando|com\s+o\s+texto|com)\s+['\"]?([^'\"]+)['\"]?", orig, re.I)
     if m_envio:
         destinatario = m_envio.group(1).strip()
         conteudo = m_envio.group(2).strip()
@@ -461,7 +461,7 @@ def rotear_comando_instagram(texto: str) -> Optional[str]:
         res = verificar_online_usuario(contato)
         return res["resumo"]
 
-    # 3. Entrar na conversa: "entre na conversa com Gustavo", "abra as mensagens de Gustavo", "abra o chat de ..."
+    # 3. Entrar na conversa específica: "entre na conversa com Gustavo", "abra as mensagens de Gustavo", "abra o chat de ..."
     m_entrar = re.search(r"(?:entre|abrir|abra|entrar)\s+(?:na\s+conversa|no\s+chat|na\s+mensagem|as\s+mensagens)\s+(?:com|de|do|da)?\s*([\w\.\-_]+)", orig, re.I)
     if m_entrar:
         contato = m_entrar.group(1).strip()
@@ -487,5 +487,11 @@ def rotear_comando_instagram(texto: str) -> Optional[str]:
             rolar_lista_conversas(delta=-350, passos=2)
             direcao = "para baixo"
         return f"**Rolagem executada no Instagram:** Cursor posicionado sobre a lista de conversas e rolagem realizada {direcao} com sucesso."
+
+    # 6. Abertura geral / entrar no Instagram: "entre no meu instagram", "abra meu instagram", "acesse o instagram", "ver meu instagram"
+    if re.search(r"\b(entre|entrar|abra|abrir|acesse|acessar|verifique|veja|olhe|olhar|mostre|mostrar|ir|v[aá]i?)\b.*\b(instagram|insta|direct|dms?)\b", t):
+        from pc_modules.browser_automation import verificar_instagram
+        res = verificar_instagram()
+        return res["resumo"]
 
     return None

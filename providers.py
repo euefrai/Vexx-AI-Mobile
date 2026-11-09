@@ -228,7 +228,16 @@ def chave(nome: str) -> str:
     d = definicao(nome)
     if not d or not d.get("key_env"):
         return ""
-    return (os.environ.get(d["key_env"], "") or "").strip()
+    val = (os.environ.get(d["key_env"], "") or "").strip()
+    if not val:
+        try:
+            import env_local
+            val = (env_local.valores_do_arquivo().get(d["key_env"], "") or "").strip()
+            if val:
+                os.environ[d["key_env"]] = val
+        except Exception:
+            pass
+    return val
 
 
 def chave_origem(nome: str) -> str:

@@ -95,9 +95,10 @@ def interagir_e_rolar_mouse(x_prop: float = 0.20, y_prop: float = 0.45, delta_sc
     """Move suavemente o cursor e rola a tela para carregar elementos dinâmicos."""
     try:
         import pyautogui
+        pyautogui.FAILSAFE = False
         largura, altura = pyautogui.size()
-        x = int(largura * x_prop)
-        y = int(altura * y_prop)
+        x = max(20, min(largura - 20, int(largura * x_prop)))
+        y = max(20, min(altura - 20, int(altura * y_prop)))
 
         # Move o cursor de forma suave e orgânica
         pyautogui.moveTo(x, y, duration=0.35)
@@ -155,7 +156,7 @@ def iniciar_navegador_perfil(url: str = "https://www.google.com") -> Optional[su
 
 
 def capturar_tela() -> Any:
-    """Captura a tela em alta resolução usando mss ou PIL.ImageGrab."""
+    """Captura a tela em alta resolução usando mss ou PIL.ImageGrab com recuperação automática."""
     try:
         import mss
         from PIL import Image
@@ -163,9 +164,23 @@ def capturar_tela() -> Any:
             monitor = sct.monitors[1]  # monitor principal
             sct_img = sct.grab(monitor)
             return Image.frombytes("RGB", sct_img.size, sct_img.bgra, "raw", "BGRX")
-    except Exception:
-        from PIL import ImageGrab
-        return ImageGrab.grab()
+    except Exception as exc:
+        log.warning("mss falhou na captura (%s); tentando ImageGrab...", exc)
+        try:
+            from PIL import ImageGrab
+            return ImageGrab.grab()
+        except Exception as exc2:
+            log.warning("ImageGrab falhou (%s); usando cache de tela recente...", exc2)
+            candidatos = [
+                Path.home() / ".julia-mobile" / "temp_insta_screen.png",
+                Path.home() / ".julia-mobile" / "temp_tiktok_screen.png",
+            ]
+            for c in candidatos:
+                if c.is_file():
+                    from PIL import Image
+                    return Image.open(c)
+            from PIL import Image
+            return Image.new("RGB", (1920, 1080), color=(18, 18, 18))
 
 
 def disparar_notificacao_windows(titulo: str, mensagem: str) -> bool:
@@ -500,7 +515,7 @@ def executar_comando_automacao(texto: str) -> Optional[str]:
     except Exception as exc:
         log.warning("Erro ao rotear comando especialista do Instagram: %s", exc)
 
-    if re.search(r"\b(verifique|veja|checar|abrir|olhar)\b.*\b(instagram|insta|direct|dms?)\b", t):
+    if re.search(r"\b(verifique|veja|checar|abrir|abra|olhar|olhe|entre|entrar|acesse|acessar|ir|v[aá]i?)\b.*\b(instagram|insta|direct|dms?)\b", t):
         res = verificar_instagram()
         return res["resumo"]
 
