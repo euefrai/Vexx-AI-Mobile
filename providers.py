@@ -35,7 +35,7 @@ CATALOG_TTL = 300
 
 def supports_chat(model_id, metadata=None):
     """Declared capability first; conservative exclusion when metadata is absent."""
-    if model_id == "vexx-qwen-2.5-3b":
+    if model_id in ("vexx-qwen-2.5-3b", "qwen2.5-1.5b-instruct"):
         return True
     meta = metadata if isinstance(metadata, dict) else {}
     capabilities = meta.get('capabilities')
@@ -71,7 +71,9 @@ def _remember_catalog(provider, ids, proxy=''):
 
 def selection_error(model, proxy=''):
     """No network on the message path; reject only known unavailable selections."""
-    if model in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b"):
+    if model in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b",
+                 "qwen2.5-1.5b-instruct", "qwen_local/qwen2.5-1.5b-instruct",
+                 "local/qwen2.5-1.5b-instruct"):
         return None
     provider, mid = dividir(model)
     unavailable = not supports_chat(mid)
@@ -98,6 +100,15 @@ def cached_default(proxy, fallback):
     return fallback
 
 PROVIDERS = {
+    "qwen_local": {
+        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Principal)",
+        "key_env": None,
+        "base": "http://127.0.0.1:8008/v1",
+        "hosts": ("127.0.0.1", "localhost"),
+        "api": "openai",
+        "modelos": ["qwen2.5-1.5b-instruct"],
+        "api_key": "sk-local",
+    },
     "vexx": {
         "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
         "key_env": None, "api": "vexx_qwen",
@@ -212,6 +223,8 @@ def definicao(nome: str) -> dict | None:
 
 def chave(nome: str) -> str:
     """API key do provedor ("" se ausente). Nunca logar o valor."""
+    if nome == "qwen_local":
+        return "sk-local"
     d = definicao(nome)
     if not d or not d.get("key_env"):
         return ""
@@ -221,6 +234,8 @@ def chave(nome: str) -> str:
 def chave_origem(nome: str) -> str:
     """Onde a chave está definida: 'arquivo' (.env local, salva pelo app),
     'sistema' (variável do PC) ou '' (sem chave). Nunca expõe o valor."""
+    if nome == "qwen_local":
+        return "local_pc"
     d = definicao(nome)
     if not d or not d.get("key_env"):
         return ""
@@ -236,10 +251,10 @@ def chave_origem(nome: str) -> str:
 
 
 def configurados() -> list:
-    """Provedores utilizáveis agora: vexx e hermes sempre + quem tem chave."""
-    out = ["vexx", "hermes"]
+    """Provedores utilizáveis agora: qwen_local, vexx e hermes sempre + quem tem chave."""
+    out = ["qwen_local", "vexx", "hermes"]
     for nome, d in PROVIDERS.items():
-        if nome not in ("vexx", "hermes") and chave(nome):
+        if nome not in ("qwen_local", "vexx", "hermes") and chave(nome):
             out.append(nome)
     return out
 
@@ -248,6 +263,9 @@ def dividir(modelo: str) -> tuple:
     """'gemini/gemini-2.0-flash' → ('gemini', 'gemini-2.0-flash').
     Sem prefixo conhecido → ('hermes', modelo) (legado)."""
     texto = str(modelo or "").strip()
+    if texto in ("qwen2.5-1.5b-instruct", "qwen_local/qwen2.5-1.5b-instruct", "local/qwen2.5-1.5b-instruct") or texto.startswith(("qwen_local/", "local/")):
+        resto = texto.split("/", 1)[1] if "/" in texto else texto
+        return "qwen_local", resto or "qwen2.5-1.5b-instruct"
     if texto in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b") or texto.startswith("vexx/"):
         return "vexx", "vexx-qwen-2.5-3b"
     if "/" in texto:
@@ -296,20 +314,38 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
     with ThreadPoolExecutor(max_workers=len(PROVIDERS)) as pool:
         pending = {nome: pool.submit(descobrir, nome, d) for nome, d in PROVIDERS.items()}
         discoveries = {nome: task.result() for nome, task in pending.items()}
-    itens = [{
-        "id": "vexx-qwen-2.5-3b",
-        "provider": "vexx",
-        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+    local_item = {
+        "id": "qwen2.5-1.5b-instruct",
+        "provider": "qwen_local",
+        "label": "🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)",
         "free": True,
-    }]
-    provs = [{
-        "id": "vexx",
-        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+    }
+    local_provider = {
+        "id": "qwen_local",
+        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Principal)",
         "configured": True,
-        "source": "hf_space"
-    }]
+        "source": "local_pc"
+    }
+    itens = [
+        local_item,
+        {
+            "id": "vexx-qwen-2.5-3b",
+            "provider": "vexx",
+            "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+            "free": True,
+        }
+    ]
+    provs = [
+        local_provider,
+        {
+            "id": "vexx",
+            "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+            "configured": True,
+            "source": "hf_space"
+        }
+    ]
     for nome, d in PROVIDERS.items():
-        if nome == "vexx":
+        if nome in ("qwen_local", "vexx"):
             continue
         conf = True if nome == "hermes" else bool(chave(nome))
         prov = {"id": nome, "label": d["label"], "configured": conf}
@@ -332,12 +368,32 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
                           **({"auth_error": True} if auth_ruim else {})})
     # Up to 500 proxy models + 200 per external provider. Do not silently cut
     # off the providers at the end of the registry after only 500 total IDs.
-    default = "vexx-qwen-2.5-3b"
+    default = "qwen2.5-1.5b-instruct"
     return {"models": [i["id"] for i in itens], "items": itens,
             "default": default, "providers": provs}
 
 
 # ── Chamadas ──────────────────────────────────────────────────────────
+
+def _podar_contexto_local(messages: list, max_chars: int = 6000) -> list:
+    """Para modelos locais (Qwen 1.5B com contexto de 2048/4096), preserva a
+    instrução de sistema e mantém apenas as mensagens mais recentes para evitar
+    estouro de contexto e garantir TTFT sub-segundo."""
+    if not messages:
+        return []
+    sistema = [m for m in messages if isinstance(m, dict) and m.get("role") == "system"][:1]
+    historico = [m for m in messages if isinstance(m, dict) and m.get("role") != "system"]
+    total = sum(len(str(m.get("content", ""))) for m in sistema)
+    podado = []
+    for m in reversed(historico):
+        tamanho = len(str(m.get("content", "")))
+        if total + tamanho > max_chars and podado:
+            break
+        podado.append(m)
+        total += tamanho
+    podado.reverse()
+    return sistema + podado
+
 
 def _para_openai(messages: list) -> list:
     # Do not cut JSON evidence or instructions mid-message. Bound the request
@@ -372,6 +428,8 @@ def chat_complete(prov: str, model_id: str, messages: list,
     d = definicao(prov)
     if d is None:
         raise BridgeErro(f"Provedor '{prov}' desconhecido.", "provedor")
+    if prov == "qwen_local":
+        messages = _podar_contexto_local(messages, max_chars=6000)
     if prov == "vexx" or model_id == "vexx-qwen-2.5-3b":
         import qwen_llm_service
         inicio = time.monotonic()
@@ -471,6 +529,8 @@ def chat_stream(prov: str, model_id: str, messages: list, on_delta,
     d = definicao(prov)
     if d is None:
         raise BridgeErro(f"Provedor '{prov}' desconhecido.", "provedor")
+    if prov == "qwen_local":
+        messages = _podar_contexto_local(messages, max_chars=6000)
     if prov == "vexx" or model_id == "vexx-qwen-2.5-3b":
         import qwen_llm_service
         inicio = time.monotonic()
@@ -639,9 +699,11 @@ def tentar_modelos(modelos: list, messages: list, timeout_por_tentativa: float =
             if len(fila) == 1:
                 raise
             if i == len(fila) - 1:
+                codigos = {t.get("codigo") for t in tentativas if t.get("codigo")}
+                codigo_final = exc.codigo if len(codigos) == 1 else "todos_falharam"
                 raise BridgeErro(
                     f"Nenhum modelo respondeu ({len(fila)} tentativas; "
-                    f"último: {exc.codigo}).", "todos_falharam", exc.detalhe) from None
+                    f"último: {exc.codigo}).", codigo_final, exc.detalhe) from None
     raise BridgeErro("Nenhum modelo respondeu.", "todos_falharam")
 
 
@@ -690,7 +752,60 @@ def chat_stream_fb(modelos: list, messages: list, on_delta,
             if len(fila) == 1:
                 raise
             if i == len(fila) - 1:
+                codigos = {t.get("codigo") for t in tentativas if t.get("codigo")}
+                codigo_final = exc.codigo if len(codigos) == 1 else "todos_falharam"
                 raise BridgeErro(
                     f"Nenhum modelo respondeu ({len(fila)} tentativas; "
-                    f"último: {exc.codigo}).", "todos_falharam", exc.detalhe) from None
+                    f"último: {exc.codigo}).", codigo_final, exc.detalhe) from None
     raise BridgeErro("Nenhum modelo respondeu.", "todos_falharam")
+
+def testar_latencia_ai(model_id: str = "qwen2.5-1.5b-instruct") -> dict:
+    """Executa medição de latência do modelo local (TTFT, completion e tokens/s)."""
+    endpoint_url = "http://127.0.0.1:8008/v1/models"
+    req_check = urllib.request.Request(endpoint_url, headers={"Authorization": "Bearer sk-local"})
+    try:
+        with urllib.request.urlopen(req_check, timeout=1.5) as r:
+            if r.status != 200:
+                return {"status": "erro", "local_online": False, "mensagem": f"HTTP {r.status} na porta 8008"}
+    except Exception as exc:
+        return {
+            "status": "erro",
+            "local_online": False,
+            "mensagem": f"Servidor local na porta 8008 inacessível: {exc}"
+        }
+
+    prompt_teste = [{"role": "user", "content": "Diga olá em uma frase curta."}]
+    primeiro_delta = [None]
+    t0 = time.perf_counter()
+
+    def _on_delta(seq, txt):
+        if primeiro_delta[0] is None:
+            primeiro_delta[0] = time.perf_counter()
+
+    try:
+        res_stream = chat_stream("qwen_local", model_id, prompt_teste, _on_delta, max_tokens=25, timeout=10.0)
+        t_fim = time.perf_counter()
+        ttft_ms = round(((primeiro_delta[0] - t0) * 1000), 1) if primeiro_delta[0] else round((t_fim - t0) * 1000, 1)
+        duracao_total_ms = round((t_fim - t0) * 1000, 1)
+        texto = res_stream.get("texto", "").strip()
+        num_palavras = len(texto.split())
+        tps = round(num_palavras / (duracao_total_ms / 1000.0), 1) if duracao_total_ms > 0 else 0.0
+
+        return {
+            "status": "sucesso",
+            "local_online": True,
+            "modelo": model_id,
+            "ttft_ms": ttft_ms,
+            "duracao_ms": duracao_total_ms,
+            "tokens_aprox": num_palavras,
+            "tokens_per_sec": tps,
+            "exemplo": texto,
+            "motor": "Local PC (Porta 8008)",
+        }
+    except Exception as exc:
+        return {
+            "status": "erro",
+            "local_online": True,
+            "mensagem": f"Erro durante geração de teste: {exc}"
+        }
+
