@@ -34,9 +34,15 @@ def _peca(objects, key, label, pos, dims, color, desc, related=(), role='functio
           group='', order=0, kind='cube', rot=(0, 0, 0),
           roughness=0.45, metalness=0.15, opacity=1.0, transparent=False,
           wireframe=False, emissive=None, explodeVector=None):
-    p = dict(id=key, kind=kind, label=label, position=list(pos), dimensions=list(dims),
-             color=color, description=desc, related=list(related), role=role, group=group,
-             order=order, rotation=list(rot),
+    clean_pos = [max(-2.8, min(2.8, round(float(p), 3))) for p in pos]
+    clean_dims = [max(0.02, min(2.8, round(float(d), 3))) for d in dims]
+    clean_rot = [max(-360.0, min(360.0, round(float(r), 2))) for r in rot]
+    clean_order = max(0, min(32, int(order)))
+    clean_role = role if role in ('structural', 'functional', 'optional') else 'functional'
+    clean_group = group if group in ('internal', 'external') else ''
+    p = dict(id=key[:35], kind=kind, label=str(label)[:100], position=clean_pos, dimensions=clean_dims,
+             color=color.lower(), description=str(desc)[:480], related=list(related)[:8], role=clean_role, group=clean_group,
+             order=clean_order, rotation=clean_rot,
              metadata={'conceptual': True, 'note': 'Arquiteto Generativo 3D VEXX AI'})
     if roughness is not None:
         p['roughness'] = max(0.0, min(1.0, float(roughness)))
@@ -53,7 +59,7 @@ def _peca(objects, key, label, pos, dims, color, desc, related=(), role='functio
     if emissive:
         p['emissive'] = emissive
     if explodeVector is not None:
-        p['explodeVector'] = [round(float(v), 2) for v in explodeVector]
+        p['explodeVector'] = [max(-4.8, min(4.8, round(float(v), 2))) for v in explodeVector]
     objects.append(p)
 
 
@@ -438,16 +444,295 @@ def gerar_modelo_3d_de_especificacao(texto_spec: str, titulo: str = "") -> dict:
                 objects=o, steps=steps, rotation=[20, 25, 0], details=True)
 
 
+def _mapa_base_lunar(prompt_mapa: str) -> dict:
+    """Gera um mapa/base planetária lunar ou marciana de alta tecnologia."""
+    slug = _clean_slug(prompt_mapa or "base_lunar")
+    titulo = f"Base Planetária Lunar / Marte — {slug.title().replace('_', ' ')}"
+    desc = f"Mapeamento volumétrico e topológico de colônia espacial avançada ({prompt_mapa[:50]})."
+
+    o = []
+    # 1. Piso / Terreno de Regolito
+    _peca(o, "piso_topografico", "Terreno e Regolito Lunar", [0, -0.5, 0], [3.2, 0.1, 3.0], "#334155",
+          "Superfície rica em basalto e regolito compactado para estabilização de fundações.",
+          role="structural", group="external", order=1, metalness=0.1, roughness=0.9)
+
+    # 2. Domo Geodésico Principal
+    _peca(o, "domo_habitat_central", "Domo Central de Habitação", [0, 0.15, 0], [1.4, 0.85, 1.4], "#38bdf8",
+          "Cúpula pressurizada geodésica com camadas duplas de polímero antirradiação.",
+          ("piso_topografico", "tunel_conexao", "modulo_laboratorio"),
+          role="functional", group="external", order=2, kind="sphere",
+          metalness=0.2, roughness=0.1, transparent=True, opacity=0.6,
+          explodeVector=[0, 0.9, 0])
+
+    # 3. Túneis de Airlock e Conexão
+    _peca(o, "tunel_conexao", "Corredor Pressurizado e Airlock", [0.8, -0.15, 0], [0.8, 0.35, 0.35], "#cbd5e1",
+          "Eclusa de descompressão hermética com controle de contaminação por poeira lunar.",
+          ("domo_habitat_central", "modulo_laboratorio"),
+          role="structural", group="external", order=3, metalness=0.8, roughness=0.25)
+
+    # 4. Módulo de Laboratório e Pesquisa Científica
+    _peca(o, "modulo_laboratorio", "Módulo Científico e Bio-Laboratório", [1.3, -0.05, 0], [0.8, 0.55, 0.75], "#e2e8f0",
+          "Instalação estéril para análise de amostras geológicas e biológicas extraterrestres.",
+          ("tunel_conexao",),
+          role="functional", group="external", order=4, metalness=0.75, roughness=0.3,
+          explodeVector=[0.8, 0.5, 0])
+
+    # 5. Estufa Hidropônica com Iluminação Especial
+    _peca(o, "estufa_hidroponica", "Bioma e Estufa Hidropônica", [-1.0, 0, 0.4], [0.75, 0.6, 0.75], "#a855f7",
+          "Cultivo automatizado de algas e vegetais em ambiente de microgravidade com LED fotossintético.",
+          ("piso_topografico",),
+          role="functional", group="external", order=5, kind="cylinder",
+          metalness=0.3, roughness=0.2, transparent=True, opacity=0.55, emissive="#7e22ce",
+          explodeVector=[-0.8, 0.6, 0.4])
+
+    # 6. Fazenda Solar e Gerador Criogênico
+    _peca(o, "painel_solar_array", "Matriz Fotovoltaica Bifacial", [-1.1, -0.05, -0.8], [1.2, 0.05, 0.8], "#1d4ed8",
+          "Painéis solares orientáveis de alta eficiência para recarga contínua dos acumuladores.",
+          ("piso_topografico",),
+          role="functional", group="external", order=6, rot=(25, 0, 0),
+          metalness=0.85, roughness=0.2, explodeVector=[-0.8, 0.6, -0.6])
+
+    # 7. Plataforma de Atracação e Pouso de Rovers
+    _peca(o, "plataforma_pouso", "Plataforma de Lançamento e Rovers", [0.4, -0.42, 1.0], [1.1, 0.08, 1.1], "#0f172a",
+          "Plataforma de manobra com balizadores de navegação autônoma e recarga por indução.",
+          ("piso_topografico",),
+          role="functional", group="external", order=7, metalness=0.6, roughness=0.5, emissive="#0284c7")
+
+    # 8. Antena de Comunicação de Espaço Profundo
+    _peca(o, "antena_deep_space", "Parabólica de Telemetria Deep Space", [-0.2, 0.45, -0.9], [0.55, 0.55, 0.25], "#f8fafc",
+          "Enlace laser e micro-ondas de alta largura de banda para conexão com a Terra.",
+          ("piso_topografico",),
+          role="functional", group="external", order=8, kind="ring", rot=(45, 0, 0),
+          metalness=0.9, roughness=0.15, explodeVector=[0, 0.7, -0.8])
+
+    steps = [
+        dict(title="Visão Geral da Base Lunar", text="Layout espacial completo com domo central, módulos herméticos e infraestrutura de energia.", selected="piso_topografico", view="top"),
+        dict(title="Habitação e Módulos Científicos", text="Inspeção da cúpula pressurizada com polímeros antirradiação e bio-laboratório.", selected="domo_habitat_central", view="front"),
+        dict(title="Sustentação Vital e Energia", text="Matriz fotovoltaica bifacial e estufa hidropônica com luz fotossintética.", selected="estufa_hidroponica", view="side"),
+        dict(title="Desmontagem Explodida Tática", text="Elevação vertical de cada subsistema para análise de integridade e segurança estrutural.", exploded=True, xray=True)
+    ]
+
+    return dict(id=f"dev-mapa-{slug}"[:35], version=1, title=titulo, description=desc,
+                education="device", precision="aproximado",
+                source="Arquiteto 3D VEXX — Mapeamento Cartográfico Espacial",
+                objects=o, steps=steps, rotation=[38, 28, 0], details=True)
+
+
+def _mapa_datacenter(prompt_mapa: str) -> dict:
+    """Gera um mapa/ambiente espacial de Datacenter de IA e Supercomputação."""
+    slug = _clean_slug(prompt_mapa or "datacenter_ia")
+    titulo = f"Datacenter de Supercomputação e IA — {slug.title().replace('_', ' ')}"
+    desc = f"Mapeamento volumétrico e térmico de centro de dados de missão crítica ({prompt_mapa[:50]})."
+
+    o = []
+    # 1. Piso Elevado Antiestático
+    _peca(o, "piso_topografico", "Piso Elevado Antiestático e Pleno de Ar", [0, -0.5, 0], [3.0, 0.12, 2.6], "#1e293b",
+          "Piso técnico com placas de aço perfuradas para insuflamento de ar frio e cabos.",
+          role="structural", group="external", order=1, metalness=0.4, roughness=0.6)
+
+    # 2. Corredor de Racks GPU Alpha
+    _peca(o, "racks_gpu_alpha", "Fileira de Racks GPU Alpha (Clusters H100)", [-0.7, 0.25, 0], [0.65, 1.4, 1.8], "#0284c7",
+          "Armários de servidores de alta densidade com refrigeração líquida direta no chip (DLC).",
+          ("piso_topografico", "contencao_ar_frio"),
+          role="functional", group="external", order=2, metalness=0.85, roughness=0.25,
+          emissive="#0369a1", explodeVector=[-0.8, 0, 0])
+
+    # 3. Corredor de Racks GPU Beta
+    _peca(o, "racks_gpu_beta", "Fileira de Racks GPU Beta (InfiniBand)", [0.7, 0.25, 0], [0.65, 1.4, 1.8], "#0f766e",
+          "Nós de processamento interconectados por switches de rede quântica 800 Gbps.",
+          ("piso_topografico", "contencao_ar_frio"),
+          role="functional", group="external", order=3, metalness=0.85, roughness=0.25,
+          emissive="#0d9488", explodeVector=[0.8, 0, 0])
+
+    # 4. Teto de Contenção de Corredor Frio (Acrílico Translúcido)
+    _peca(o, "contencao_ar_frio", "Teto de Contenção de Corredor Frio", [0, 0.98, 0], [0.8, 0.06, 1.8], "#e2e8f0",
+          "Isolamento térmico hermético em policarbonato para retenção do fluxo de ar gelado.",
+          ("racks_gpu_alpha", "racks_gpu_beta"),
+          role="structural", group="external", order=4, transparent=True, opacity=0.35,
+          roughness=0.1, metalness=0.1, explodeVector=[0, 0.9, 0])
+
+    # 5. Climatizadores de Precisão CRAC / CRAH
+    _peca(o, "unidades_crac", "Unidades CRAC de Refrigeração", [0, 0.35, -1.0], [1.8, 1.5, 0.45], "#475569",
+          "Trocadores de calor industriais com compressores inverter e redundância N+1.",
+          ("piso_topografico",),
+          role="functional", group="external", order=5, metalness=0.7, roughness=0.3,
+          explodeVector=[0, 0, -0.8])
+
+    # 6. Leito Superior de Fibra Óptica e Energia
+    _peca(o, "leitos_fibra", "Eletrocalhas e Calhas de Fibra Amarela", [0, 1.15, 0], [1.9, 0.08, 1.6], "#f59e0b",
+          "Roteamento estruturado segregado de cabos MPO de 12 fibras e barramentos de 48V.",
+          ("contencao_ar_frio",),
+          role="structural", group="external", order=6, metalness=0.6, roughness=0.4,
+          explodeVector=[0, 1.2, 0])
+
+    # 7. Bancada de Operações e Monitoramento NOC
+    _peca(o, "estacao_noc", "Terminal de Operação e Console NOC", [0, -0.15, 0.95], [1.1, 0.55, 0.4], "#0f172a",
+          "Estação com telemetria BMS em tempo real, PUE de 1.08 e monitoramento de temperatura.",
+          ("piso_topografico",),
+          role="functional", group="external", order=7, metalness=0.5, roughness=0.3,
+          emissive="#22c55e")
+
+    steps = [
+        dict(title="Topologia do Datacenter", text="Arranjo de alta densidade energética com contenção de ar frio e piso pleno.", selected="piso_topografico", view="top"),
+        dict(title="Clusters GPU e Interconexão", text="Racks refrigerados com nós aceleradores para treinamento e inferência em escala.", selected="racks_gpu_alpha", view="front"),
+        dict(title="Refrigeração e Calhas de Fibra", text="Trocadores de calor CRAC e encaminhamento estruturado de rede óptica.", selected="unidades_crac", view="side"),
+        dict(title="Explosão e Termodinâmica", text="Deslocamento dos tetos e corredores para inspeção dos fluxos aerodinâmicos.", exploded=True, xray=True)
+    ]
+
+    return dict(id=f"dev-mapa-{slug}"[:35], version=1, title=titulo, description=desc,
+                education="device", precision="aproximado",
+                source="Arquiteto 3D VEXX — Mapeamento Cartográfico Espacial",
+                objects=o, steps=steps, rotation=[35, 30, 0], details=True)
+
+
+def _mapa_hangar_espacial(prompt_mapa: str) -> dict:
+    """Gera um mapa/ambiente de hangar aeroespacial de montagem e lançamento."""
+    slug = _clean_slug(prompt_mapa or "hangar_espacial")
+    titulo = f"Hangar Aeroespacial e Doca Orbital — {slug.title().replace('_', ' ')}"
+    desc = f"Mapeamento espacial tridimensional do complexo de atracação e montagem aeroespacial ({prompt_mapa[:50]})."
+
+    o = []
+    # 1. Piso / Baia de Carga e Pista
+    _peca(o, "piso_topografico", "Piso de Atracação e Trilhos Industriais", [0, -0.5, 0], [3.2, 0.12, 2.8], "#0f172a",
+          "Piso reforçado de alta carga com guias magnéticas e amortecedores hidráulicos.",
+          role="structural", group="external", order=1, metalness=0.3, roughness=0.8)
+
+    # 2. Nave / Módulo Central em Construção
+    _peca(o, "modulo_nave_central", "Nave Orbital em Manutenção", [0, 0.15, 0.1], [1.1, 0.75, 1.6], "#e2e8f0",
+          "Fuselagem principal em compósito de carbono-titânio com escudos térmicos cerâmicos.",
+          ("piso_topografico", "portico_guindaste"),
+          role="functional", group="external", order=2, metalness=0.9, roughness=0.2,
+          explodeVector=[0, 0.6, 0])
+
+    # 3. Asas / Superfícies Aerodinâmicas da Nave
+    _peca(o, "asas_nave", "Asas Delta e Propulsores Manobra", [0, 0.05, 0.3], [2.2, 0.08, 0.9], "#94a3b8",
+          "Asas de estabilização atmosférica e propulsores RCS de controle de atitude.",
+          ("modulo_nave_central",),
+          role="functional", group="external", order=3, metalness=0.85, roughness=0.25,
+          explodeVector=[0, 0.4, 0.4])
+
+    # 4. Pórtico Rolante de Grande Porte
+    _peca(o, "portico_guindaste", "Pórtico Rolante Industrial", [0, 0.9, -0.4], [2.6, 0.35, 0.5], "#f59e0b",
+          "Guindaste suspenso motorizado com capacidade para 120 toneladas métricas de carga.",
+          ("piso_topografico",),
+          role="structural", group="external", order=4, metalness=0.7, roughness=0.3,
+          explodeVector=[0, 1.1, 0])
+
+    # 5. Tanques de Armazenamento Criogênico
+    _peca(o, "tanques_criogenicos", "Tanques de Hidrogênio Líquido (LH2)", [-1.1, 0.1, -0.8], [0.65, 1.1, 0.65], "#0284c7",
+          "Esferas com vácuo intermediário para conservação de combustíveis a temperaturas ultrabaixas.",
+          ("piso_topografico",),
+          role="functional", group="external", order=5, kind="cylinder",
+          metalness=0.8, roughness=0.2, explodeVector=[-0.8, 0.5, -0.5])
+
+    # 6. Torre de Controle e Operações de Voo
+    _peca(o, "torre_operacoes", "Torre de Comando e Supervisão", [1.1, 0.55, -0.7], [0.55, 1.8, 0.55], "#334155",
+          "Posto avançado com visão panorâmica de 360 graus do pátio e da baia de atracação.",
+          ("piso_topografico",),
+          role="functional", group="external", order=6, metalness=0.6, roughness=0.35,
+          emissive="#38bdf8", explodeVector=[0.8, 0.8, -0.5])
+
+    # 7. Braços Mecânicos de Abastecimento Umbilical
+    _peca(o, "bracos_umbilicais", "Braços Articulados de Abastecimento", [-0.65, -0.05, 0.1], [0.45, 0.55, 0.25], "#ea580c",
+          "Linhas articuladas de combustível criogênico e cabos de dados para a espaçonave.",
+          ("modulo_nave_central",),
+          role="functional", group="external", order=7, metalness=0.75, roughness=0.3,
+          explodeVector=[-0.6, 0, 0])
+
+    steps = [
+        dict(title="Doca Espacial Integrada", text="Visão aérea do hangar com nave em manutenção, pórtico e torre de operações.", selected="piso_topografico", view="top"),
+        dict(title="Fuselagem e Asas Delta", text="Inspeção estrutural da espaçonave e superfícies térmicas de reentrada.", selected="modulo_nave_central", view="front"),
+        dict(title="Sistemas de Combustível Criogênico", text="Tanques isolados a vácuo e braços de recarga umbilical rápida.", selected="tanques_criogenicos", view="side"),
+        dict(title="Desmontagem Explodida Industrial", text="Elevação de pórticos e separação da fuselagem para manutenção profunda.", exploded=True, xray=True)
+    ]
+
+    return dict(id=f"dev-mapa-{slug}"[:35], version=1, title=titulo, description=desc,
+                education="device", precision="aproximado",
+                source="Arquiteto 3D VEXX — Mapeamento Cartográfico Espacial",
+                objects=o, steps=steps, rotation=[36, 26, 0], details=True)
+
+
+def _mapa_cidade_inteligente(prompt_mapa: str) -> dict:
+    """Gera um mapa/ambiente urbano futurista de Cidade Inteligente."""
+    slug = _clean_slug(prompt_mapa or "cidade_inteligente")
+    titulo = f"Cidade Inteligente e Mobilidade Sustentável — {slug.title().replace('_', ' ')}"
+    desc = f"Mapeamento volumétrico urbano, malha viária elétrica e prédios inteligentes ({prompt_mapa[:50]})."
+
+    o = []
+    # 1. Piso Urbanístico
+    _peca(o, "piso_topografico", "Malha Viária e Piso Urbanístico", [0, -0.5, 0], [3.2, 0.1, 3.0], "#0f172a",
+          "Plano diretor com corredores subterrâneos de utilidades e pavimentação com recarga piezoelétrica.",
+          role="structural", group="external", order=1, metalness=0.2, roughness=0.85)
+
+    # 2. Arranha-Céu Sustentável Alpha
+    _peca(o, "edificio_alpha", "Torre Sustentável com Jardins Verticais", [-0.85, 0.45, -0.6], [0.65, 1.8, 0.65], "#2563eb",
+          "Edifício comercial autossuficiente com fachada de vidro fotovoltaico e microturbinas eólicas.",
+          ("piso_topografico",),
+          role="functional", group="external", order=2, metalness=0.5, roughness=0.2,
+          explodeVector=[-0.6, 0.8, -0.6])
+
+    # 3. Torre Corporativa Beta
+    _peca(o, "edificio_beta", "Complexo Tecnológico e Data Hub", [0.85, 0.25, -0.5], [0.75, 1.4, 0.75], "#7c3aed",
+          "Centro de inovação e pesquisa conectado diretamente à rede de fibra e satélites.",
+          ("piso_topografico",),
+          role="functional", group="external", order=3, metalness=0.6, roughness=0.25,
+          explodeVector=[0.6, 0.6, -0.5])
+
+    # 4. Monotrilho Elétrico Elevado
+    _peca(o, "via_monotrilho", "Trilho Elevado de Monotrilho Magnético", [0, -0.15, -0.1], [2.8, 0.08, 0.2], "#64748b",
+          "Linha de transporte coletivo de alta velocidade com sustentação magnética sem atrito.",
+          ("piso_topografico",),
+          role="structural", group="external", order=4, metalness=0.8, roughness=0.3,
+          explodeVector=[0, 0.5, 0])
+
+    # 5. Parque Ecológico e Bioma Central
+    _peca(o, "parque_central", "Parque Ecológico com Espelho d'Água", [-0.3, -0.42, 0.6], [1.2, 0.06, 1.0], "#059669",
+          "Área verde de retenção hídrica com microclima balanceado e vegetação nativa.",
+          ("piso_topografico",),
+          role="functional", group="external", order=5, metalness=0.1, roughness=0.9,
+          emissive="#10b981")
+
+    # 6. Hub de Mobilidade e Vertiporto de Drones
+    _peca(o, "vertiporto_drones", "Vertiporto para eVTOL e Drones de Entrega", [0.9, -0.1, 0.7], [0.85, 0.65, 0.85], "#06b6d4",
+          "Terminal multimodal com plataformas elevatórias de decolagem e recarga ultra-rápida.",
+          ("piso_topografico",),
+          role="functional", group="external", order=6, metalness=0.7, roughness=0.2,
+          emissive="#0891b2", explodeVector=[0.6, 0.6, 0.6])
+
+    steps = [
+        dict(title="Plano Diretor Urbanístico", text="Zoneamento espacial balanceado entre transporte, edifícios e áreas verdes.", selected="piso_topografico", view="top"),
+        dict(title="Arranha-Céus e Tecnologia Limpa", text="Torres inteligentes com fachadas captadoras de energia solar.", selected="edificio_alpha", view="front"),
+        dict(title="Mobilidade Integrada", text="Monotrilho magnético e vertiporto para veículos elétricos de decolagem vertical.", selected="vertiporto_drones", view="side"),
+        dict(title="Desmontagem Explodida Urbana", text="Elevação das camadas prediais e modais de tráfego para planejamento.", exploded=True, xray=True)
+    ]
+
+    return dict(id=f"dev-mapa-{slug}"[:35], version=1, title=titulo, description=desc,
+                education="device", precision="aproximado",
+                source="Arquiteto 3D VEXX — Mapeamento Cartográfico Espacial",
+                objects=o, steps=steps, rotation=[40, 32, 0], details=True)
+
+
 def gerar_mapa_3d(prompt_mapa: str) -> dict:
-    """Gera um mapa/ambiente espacial interativo 3D (hangar, sala de servidores, layout urbano)."""
+    """Gera um mapa/ambiente espacial interativo 3D temático (hangar, lunar, datacenter, urbano ou topológico)."""
     t_norm = _norm(prompt_mapa)
+
+    if any(k in t_norm for k in ("lunar", "marte", "planeta", "colonia", "espacial", "astro")):
+        return _mapa_base_lunar(prompt_mapa)
+    if any(k in t_norm for k in ("datacenter", "servidor", "servidores", "rack", "ti")):
+        return _mapa_datacenter(prompt_mapa)
+    if any(k in t_norm for k in ("hangar", "nave", "astronave", "aeroespacial", "foguete")):
+        return _mapa_hangar_espacial(prompt_mapa)
+    if any(k in t_norm for k in ("cidade", "urbano", "bairro", "metropole", "smart city")):
+        return _mapa_cidade_inteligente(prompt_mapa)
+
+    # Fallback genérico topológico rico
     slug = _clean_slug(prompt_mapa)
     titulo = f"Mapa Espacial 3D — {slug.title().replace('_', ' ')}"
     desc = f"Mapeamento volumétrico e topológico interativo ({prompt_mapa[:50]})."
 
     o = []
     # 1. Piso / Malha do Mapa
-    _peca(o, "piso_topografico", "Superfície e Malha do Terreno", [0, -0.5, 0], [2.8, 0.1, 2.6], "#0f172a",
+    _peca(o, "piso_topografico", "Superfície e Malha do Terreno", [0, -0.5, 0], [3.0, 0.1, 2.8], "#0f172a",
           "Plano geográfico ou estrutural com marcações de coordenadas.",
           role="structural", group="external", order=1, metalness=0.2, roughness=0.8)
 

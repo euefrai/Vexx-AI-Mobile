@@ -1982,16 +1982,16 @@ function modelSelectionError() {
   return '';
 }
 let modelCatalog = {
-  models: ['qwen2.5-1.5b-instruct', 'vexx-qwen-2.5-3b'],
+  models: ['vexx-qwen-2.5-3b', 'qwen2.5-1.5b-instruct'],
   providers: [
-    { id: 'qwen_local', label: '🖥️ Qwen 2.5 1.5B (Local PC - Principal)', configured: true, source: 'local_pc' },
-    { id: 'vexx', label: '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)', configured: true, source: 'hf_space' }
+    { id: 'vexx', label: '⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)', configured: true, source: 'hf_space' },
+    { id: 'qwen_local', label: '🖥️ Qwen 2.5 1.5B (Local PC - Secundário)', configured: true, source: 'local_pc' }
   ],
-  default: 'qwen2.5-1.5b-instruct',
-  itemProvider: { 'qwen2.5-1.5b-instruct': 'qwen_local', 'vexx-qwen-2.5-3b': 'vexx' },
+  default: 'vexx-qwen-2.5-3b',
+  itemProvider: { 'vexx-qwen-2.5-3b': 'vexx', 'qwen2.5-1.5b-instruct': 'qwen_local' },
   itemLabel: {
-    'qwen2.5-1.5b-instruct': '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)',
-    'vexx-qwen-2.5-3b': '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)'
+    'vexx-qwen-2.5-3b': '⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)',
+    'qwen2.5-1.5b-instruct': '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)'
   }
 };
 let modelLoadVersion = 0;
@@ -2019,13 +2019,13 @@ function providerOf(id) {
   return 'hermes';
 }
 function modelDisplayLabel(id) {
-  if (id === 'qwen2.5-1.5b-instruct') return '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
-  if (id === 'vexx-qwen-2.5-3b') return '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+  if (id === 'vexx-qwen-2.5-3b') return '⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)';
+  if (id === 'qwen2.5-1.5b-instruct') return '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)';
   return (modelCatalog.itemLabel && modelCatalog.itemLabel[id]) || id;
 }
 function modelGroup(id) {
-  if (id === 'qwen2.5-1.5b-instruct') return -2;
-  if (id === 'vexx-qwen-2.5-3b') return -1;
+  if (id === 'vexx-qwen-2.5-3b') return -2;
+  if (id === 'qwen2.5-1.5b-instruct') return -1;
   const pid = providerOf(id);
   if (String(id).endsWith(':free')) return 0;
   return pid !== 'hermes' && isConfigured(pid) ? 1 : 2;
@@ -2046,16 +2046,16 @@ function fillModels(filter) {
     const key = rank + ':' + pid;
     if (!groups.has(key)) {
       const g = document.createElement('optgroup');
-      g.label = rank === -2 ? '🖥️ IA Local (Principal)' : (rank === -1 ? '⚡ Modelo Próprio (VEXX AI)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
+      g.label = rank === -2 ? '⚡ Modelo Principal (VEXX AI)' : (rank === -1 ? '🖥️ IA Local (Secundário)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
         (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave'));
       groups.set(key, g); sel.appendChild(g);
     }
     const o = document.createElement('option');
     o.value = id;
-    if (id === 'qwen2.5-1.5b-instruct') {
-      o.textContent = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
-    } else if (id === 'vexx-qwen-2.5-3b') {
-      o.textContent = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+    if (id === 'vexx-qwen-2.5-3b') {
+      o.textContent = '⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)';
+    } else if (id === 'qwen2.5-1.5b-instruct') {
+      o.textContent = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)';
     } else {
       o.textContent = pid !== 'hermes' && id.startsWith(pid + '/') ? id.slice(pid.length + 1) : id;
     }
@@ -2129,16 +2129,16 @@ async function loadModels(force) {
     modelCatalog = {
       models: allModels,
       providers: filteredProvs,
-      default: 'qwen2.5-1.5b-instruct',
+      default: 'vexx-qwen-2.5-3b',
       itemProvider: Object.fromEntries(filteredItems.map(i => [i.id, i.provider])),
       itemLabel: Object.fromEntries(filteredItems.map(i => [i.id, i.label]))
     };
-    modelCatalog.itemLabel['qwen2.5-1.5b-instruct'] = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)';
-    modelCatalog.itemLabel['vexx-qwen-2.5-3b'] = '⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI)';
+    modelCatalog.itemLabel['vexx-qwen-2.5-3b'] = '⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)';
+    modelCatalog.itemLabel['qwen2.5-1.5b-instruct'] = '🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)';
     let escolhido = modeloAtivo();
-    if (!escolhido || !modelCatalog.models.includes(escolhido) || escolhido.includes('crouton-alpha')) {
-      escolhido = 'qwen2.5-1.5b-instruct';
-      localStorage.setItem('julia-model', 'qwen2.5-1.5b-instruct');
+    if (!escolhido || !modelCatalog.models.includes(escolhido) || escolhido.includes('crouton-alpha') || escolhido === 'qwen2.5-1.5b-instruct') {
+      escolhido = 'vexx-qwen-2.5-3b';
+      localStorage.setItem('julia-model', 'vexx-qwen-2.5-3b');
     }
     const cur = fillModels($('modelSearch') ? $('modelSearch').value : '');
     const pid = providerOf(escolhido);

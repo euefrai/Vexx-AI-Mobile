@@ -42,12 +42,12 @@ from pc_modules.visual_fences import (
 )
 
 def _texto_seguro(texto: str, mid: str = "") -> str:
-    """Última barreira: protocolo de ferramenta + fatos de identidade.
-
-    A barreira principal fica no adaptador (bridge/providers); esta garante
-    que caminhos alternativos, testes e respostas antigas não publiquem uma
-    chamada interna nem uma afirmação corporativa inventada sobre a Vexx AI.
-    """
+    """Última barreira: execução de tool calls + protocolo de ferramenta + fatos de identidade."""
+    try:
+        from pc_modules import tool_execution
+        texto, _calls = tool_execution.processar_e_executar_chamadas(texto)
+    except Exception as exc:
+        log.warning("Erro ao processar tool calls: %s", exc)
     limpo, erros = tool_protocol.sanitizar_texto(texto or "")
     for erro in erros:
         log.warning("TOOL_PROTOCOL_FINAL %s %s: %s", mid[-8:] if mid else "-",
