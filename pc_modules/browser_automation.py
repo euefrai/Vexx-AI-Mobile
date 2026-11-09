@@ -491,6 +491,15 @@ def monitorar_kabum(termo: str, preco_alvo: Optional[float] = None, timeout_carr
 def executar_comando_automacao(texto: str) -> Optional[str]:
     """Roteia comandos em linguagem natural para as automações de navegador com visão."""
     t = texto.lower()
+    # Tenta ações especializadas do Instagram (envio de DM, status online, entrar no chat, busca, rolagem)
+    try:
+        from pc_modules import instagram_automation
+        res_insta_especialista = instagram_automation.rotear_comando_instagram(texto)
+        if res_insta_especialista:
+            return res_insta_especialista
+    except Exception as exc:
+        log.warning("Erro ao rotear comando especialista do Instagram: %s", exc)
+
     if re.search(r"\b(verifique|veja|checar|abrir|olhar)\b.*\b(instagram|insta|direct|dms?)\b", t):
         res = verificar_instagram()
         return res["resumo"]
