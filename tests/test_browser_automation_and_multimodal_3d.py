@@ -30,8 +30,14 @@ def test_model3d_especificacao_tecnica():
 
 
 def test_browser_automation_routing(monkeypatch):
+    # Verifica que o navegador padrão do sistema é detectado dinamicamente
+    exe_padrao = browser_automation.obter_navegador_padrao_windows()
+    assert exe_padrao is not None
+    assert "brave" in exe_padrao.lower()
+
     # Mock iniciar_navegador_perfil, sleep, e capturar_tela to run instantly in tests
     monkeypatch.setattr(browser_automation, "iniciar_navegador_perfil", lambda url: None)
+    monkeypatch.setattr(browser_automation, "abrir_navegador", lambda url, isolado=False: None)
     monkeypatch.setattr(browser_automation, "disparar_notificacao_windows", lambda t, m: True)
 
     from PIL import Image

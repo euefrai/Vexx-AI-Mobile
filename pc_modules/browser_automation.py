@@ -25,13 +25,40 @@ log = logging.getLogger("vexx.browser_automation")
 DIR_PERFIL_AUTOMACAO = Path.home() / ".julia-mobile" / "browser_automation_profile"
 
 
-def _obter_executavel_navegador() -> Optional[str]:
-    """Localiza o binário do Google Chrome ou Brave instalado no Windows."""
+def obter_navegador_padrao_windows() -> Optional[str]:
+    """Detecta dinamicamente o executável do navegador padrão configurado pelo usuário no Windows.
+
+    Consulta o registro do Windows em UserChoice para identificar se o padrão é Brave, Chrome,
+    Edge, Firefox ou outro navegador preferido do usuário.
+    """
+    try:
+        import winreg
+        import shlex
+        with winreg.OpenKey(
+            winreg.HKEY_CURRENT_USER,
+            r"Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice"
+        ) as key:
+            prog_id, _ = winreg.QueryValueEx(key, "ProgId")
+
+        with winreg.OpenKey(winreg.HKEY_CLASSES_ROOT, rf"{prog_id}\shell\open\command") as cmd_key:
+            cmd, _ = winreg.QueryValueEx(cmd_key, "")
+
+        partes = shlex.split(cmd)
+        if partes and os.path.isfile(partes[0]):
+            return partes[0]
+    except Exception as exc:
+        log.warning("Falha ao consultar navegador padrão no registro: %s", exc)
+
+    return _obter_executavel_fallback()
+
+
+def _obter_executavel_fallback() -> Optional[str]:
+    """Candidatos de fallback caso a consulta ao registro falhe."""
     candidatos = [
-        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
-        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
         r"C:\Program Files\BraveSoftware\Brave-Browser\Application\brave.exe",
         r"C:\Program Files (x86)\BraveSoftware\Brave-Browser\Application\brave.exe",
+        r"C:\Program Files\Google\Chrome\Application\chrome.exe",
+        r"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe",
         r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
         r"C:\Program Files\Microsoft\Edge\Application\msedge.exe",
     ]
@@ -41,26 +68,46 @@ def _obter_executavel_navegador() -> Optional[str]:
     return None
 
 
-def iniciar_navegador_perfil(url: str = "https://www.google.com") -> subprocess.Popen:
-    """Inicia o navegador com perfil persistente para contas reais salvas."""
-    exe = _obter_executavel_navegador()
+def abrir_navegador(url: str = "https://www.google.com", isolado: bool = False) -> Optional[subprocess.Popen]:
+    """Abre a URL no navegador padrão que o usuário está usando.
+
+    Por padrão (isolado=False), abre a URL diretamente no navegador padrão em execução
+    (ex.: Brave), reaproveitando as contas e sessões já logadas do usuário.
+    Se isolado=True, utiliza um diretório de perfil dedicado em ~/.julia-mobile.
+    """
+    exe = obter_navegador_padrao_windows()
     if not exe:
-        raise RuntimeError("Nenhum navegador suportado (Chrome, Brave ou Edge) encontrado no sistema.")
+        import webbrowser
+        webbrowser.open(url)
+        return None
 
-    DIR_PERFIL_AUTOMACAO.mkdir(parents=True, exist_ok=True)
+    if isolado:
+        DIR_PERFIL_AUTOMACAO.mkdir(parents=True, exist_ok=True)
+        args = [
+            exe,
+            f"--user-data-dir={DIR_PERFIL_AUTOMACAO}",
+            "--no-first-run",
+            "--no-default-browser-check",
+            "--disable-blink-features=AutomationControlled",
+            "--start-maximized",
+            url,
+        ]
+        log.info("Abrindo navegador padrão (%s) com perfil isolado: %s", exe, url)
+        return subprocess.Popen(args)
 
-    args = [
-        exe,
-        f"--user-data-dir={DIR_PERFIL_AUTOMACAO}",
-        "--no-first-run",
-        "--no-default-browser-check",
-        "--disable-blink-features=AutomationControlled",
-        "--start-maximized",
-        url,
-    ]
+    # Abre na sessão ativa do navegador padrão que o usuário já está usando
+    log.info("Abrindo na sessão ativa do navegador padrão (%s): %s", exe, url)
+    try:
+        return subprocess.Popen([exe, url])
+    except Exception:
+        import webbrowser
+        webbrowser.open(url)
+        return None
 
-    log.info("Iniciando navegador com perfil dedicado: %s -> %s", exe, url)
-    return subprocess.Popen(args)
+
+def iniciar_navegador_perfil(url: str = "https://www.google.com") -> Optional[subprocess.Popen]:
+    """Alias compatível: abre no navegador padrão ativo do usuário."""
+    return abrir_navegador(url, isolado=False)
 
 
 def capturar_tela() -> Any:
