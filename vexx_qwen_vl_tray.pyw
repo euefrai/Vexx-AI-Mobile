@@ -264,39 +264,43 @@ def iniciar_servidor_fastapi():
 
     @server_app.post("/v1/chat/completions")
     async def chat_completions(request: Request):
-        body = await request.json()
-        model_req = body.get("model", "qwen2.5-vl-7b-instruct")
-        messages = _trim_messages(body.get("messages", []))
-        stream = bool(body.get("stream", False))
-        max_tokens = int(body.get("max_tokens") or 2048)
-        temperature = float(body.get("temperature", 0.7))
+        try:
+            body = await request.json()
+            model_req = body.get("model", "qwen2.5-vl-7b-instruct")
+            messages = _trim_messages(body.get("messages", []))
+            stream = bool(body.get("stream", False))
+            max_tokens = int(body.get("max_tokens") or 2048)
+            temperature = float(body.get("temperature", 0.7))
 
-        llm, model_usado = carregar_llm(model_req)
+            llm, model_usado = carregar_llm(model_req)
 
-        if stream:
-            def _streamer():
-                try:
-                    for chunk in llm.create_chat_completion(
-                        messages=messages,
-                        max_tokens=max_tokens,
-                        temperature=temperature,
-                        stream=True
-                    ):
-                        yield f"data: {json.dumps(chunk, ensure_ascii=False)}\n\n"
-                    yield "data: [DONE]\n\n"
-                except Exception as e:
-                    log.error("Erro no streaming LLM: %s", e)
-                    yield f"data: {json.dumps({'error': str(e)})}\n\n"
+            if stream:
+                def _streamer():
+                    try:
+                        for chunk in llm.create_chat_completion(
+                            messages=messages,
+                            max_tokens=max_tokens,
+                            temperature=temperature,
+                            stream=True
+                        ):
+                            yield f"data: {json.dumps(chunk, ensure_ascii=False)}\n\n"
+                        yield "data: [DONE]\n\n"
+                    except Exception as e:
+                        log.error("Erro no streaming LLM: %s", e)
+                        yield f"data: {json.dumps({'error': str(e)})}\n\n"
 
-            return StreamingResponse(_streamer(), media_type="text/event-stream")
-        else:
-            res = llm.create_chat_completion(
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=temperature,
-                stream=False
-            )
-            return JSONResponse(res)
+                return StreamingResponse(_streamer(), media_type="text/event-stream")
+            else:
+                res = llm.create_chat_completion(
+                    messages=messages,
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    stream=False
+                )
+                return JSONResponse(res)
+        except Exception as exc:
+            log.exception("Erro na chamada de chat completions: %s", exc)
+            return JSONResponse({"error": str(exc)}, status_code=500)
 
     @server_app.get("/health")
     async def health():
