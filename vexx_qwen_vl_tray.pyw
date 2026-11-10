@@ -931,9 +931,12 @@ def main():
         icon.run()
 
     except Exception as exc:
-        log.warning("Aviso no pystray (modo sem bandeja visual): %s. Executando em segundo plano contínuo.", exc)
-        while not app_state["shutdown"]:
-            time.sleep(1)
+        log.warning("Aviso no pystray (modo sem bandeja visual): %s.", exc)
+
+    # Loop de persistência perpétua (garante que FastAPI e Túnel rodem 24/7 mesmo se a bandeja encerrar)
+    log.info("Loop de segurança perpétuo ativo: mantendo FastAPI e Túnel em execução contínua.")
+    while not app_state["shutdown"]:
+        time.sleep(1)
 
 
 if __name__ == "__main__":
