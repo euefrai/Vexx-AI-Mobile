@@ -78,7 +78,9 @@ CATEGORIAS = (
     "ar-condicionado", "ar condicionado", "ventilador", "bicicleta",
     "tênis", "tenis", "relógio", "relogio", "smartwatch", "câmera", "camera",
     "impressora", "roteador", "ssd", "hd externo", "placa de vídeo",
-    "placa de video", "processador", "memória ram", "memoria ram",
+    "placa de video", "placa-mãe", "placa mãe", "placa mae", "motherboard",
+    "mobo", "hardware", "processador", "memória ram", "memoria ram", "fonte",
+    "fonte atx", "gabinete", "cooler", "water cooler", "fans", "ventoinha",
     "caixa de som", "smart speaker", "kindle", "e-reader", "aspirador",
     "aspirador robô", "aspirador robo", "cafeteira", "liquidificador",
     "máquina de lavar", "maquina de lavar", "lava-louças", "lava-loucas",
@@ -108,7 +110,9 @@ _MARCAS = (
     "consul", "midea", "springer", "gorenje", "oster", "mondial", "britânia",
     "britania", "cadence", "nintendo", "microsoft", "logitech", "razer",
     "hyperx", "kingston", "sandisk", "seagate", "corsair", "nzxt", "intel",
-    "amd", "nvidia", "tp-link", "intelbras", "amazfit", "huawei", "realme",
+    "amd", "nvidia", "msi", "gigabyte", "asrock", "biostar", "husky", "tuf",
+    "aorus", "rog", "colorful", "galax", "palit", "pny", "gainward", "xfx",
+    "sapphire", "tp-link", "intelbras", "amazfit", "huawei", "realme",
     "infinix", "nokia", "asus rog", "adidas", "nike", "mizuno",
 )
 
@@ -171,14 +175,17 @@ _RX_EXPLICATIVO_PRODUTO = re.compile(
 
 def detectar_intencao(texto: str) -> bool:
     """True se o usuário pede pesquisa/compra/comparação de produtos."""
-    t = _sem_acentos(texto or "")
-    t = re.sub(r"\bplacas?\s+de\s+videos?\b", "placa de video", t)
+    t = _sem_acentos(texto or "").lower()
+    t = re.sub(r"\bplacas?\s*(?:de\s*)?m[aã]es?\b", "placa mae", t)
+    t = re.sub(r"\b(motherboards?|mobos?)\b", "placa mae", t)
+    t = re.sub(r"\bplacas?\s*(?:de\s*)?v[ií]deos?\b", "placa de video", t)
+    t = re.sub(r"\b(gpus?|placas?\s+graficas?)\b", "placa de video", t)
     tem_verbo_forte = any(v in t for v in (
         "pesquis", "busc", "encontr", "procur", "recomend", "compar",
         "comprar", "compra", "oferta", "preco", "promocao", "mais barato",
-        "menor preco", "onde comprar", "vale a pena", "custo-beneficio",
-        "custo beneficio", "qual celular", "qual notebook",
-        "quero um", "quero uma", "qual tem mais", "qual o melhor",
+        "mais barata", "barato", "barata", "menor preco", "onde comprar",
+        "vale a pena", "custo-beneficio", "custo beneficio", "qual celular",
+        "qual notebook", "quero um", "quero uma", "qual tem mais", "qual o melhor",
         "o melhor celular", "o melhor notebook"))
     tem_pedido = any(v in t for v in _VERBOS_PEDIDO_PRODUTO)
     if not (tem_verbo_forte or tem_pedido):
@@ -186,9 +193,12 @@ def detectar_intencao(texto: str) -> bool:
     if tem_pedido and not tem_verbo_forte and _RX_EXPLICATIVO_PRODUTO.search(t):
         return False
     tem_produto = ("produto" in t or "modelo" in t or "marca" in t or "loja" in t
+                   or "placa mae" in t or "placa de video" in t
                    or bool(re.search(r"\b(ram|memoria|bateria|armazenamento|polegadas|"
-                                     r"processador|gb|ssd|5g|nfc)\b", t))
-                   or any(c in t for c in CATEGORIAS))
+                                     r"processador|cpu|gpu|gb|ssd|5g|nfc|chipset|socket|soquete|"
+                                     r"lga\d+|am4|am5|ddr4|ddr5|b550|a520|h610|b450|b760|b650)\b", t))
+                   or any(c in t for c in CATEGORIAS)
+                   or any(m in t for m in _MARCAS))
     return bool(tem_produto)
 
 
@@ -472,14 +482,22 @@ def _extrair_specs(texto: str) -> dict:
 
 def extrair_criterios(texto: str) -> dict:
     """Categoria, orçamento, marcas e specs obrigatórias do pedido."""
-    t = _sem_acentos(texto or "")
-    t = re.sub(r"\bplacas?\s+de\s+videos?\b", "placa de video", t)
+    t = _sem_acentos(texto or "").lower()
+    t = re.sub(r"\bplacas?\s*(?:de\s*)?m[aã]es?\b", "placa mae", t)
+    t = re.sub(r"\b(motherboards?|mobos?)\b", "placa mae", t)
+    t = re.sub(r"\bplacas?\s*(?:de\s*)?v[ií]deos?\b", "placa de video", t)
+    t = re.sub(r"\b(gpus?|placas?\s+graficas?)\b", "placa de video", t)
     marcas = [m for m in _MARCAS if _marca_no_texto(m, t)]
     categoria = ""
     for c in sorted(CATEGORIAS, key=len, reverse=True):
         if c in t and c not in marcas:
             categoria = c
             break
+    if not categoria:
+        if "placa mae" in t:
+            categoria = "placa mae"
+        elif "placa de video" in t:
+            categoria = "placa de video"
     if categoria in ("", "galaxy") and re.search(r"\b(?:samsung\s+)?galaxy\s+[as]\d{2}\b", t):
         categoria = "celular"
     orc = _extrair_orcamento(texto or "")
@@ -2012,11 +2030,12 @@ def diagnosticar_provedores(timeout: float = 6.0) -> list:
 # ── Busca orquestrada (reusa Research Engine; sem loja única) ──────────
 
 _RX_PEDIDO_WORDS = re.compile(
-    r"\b(?:me\s+mostre|mostre|mostra|quero|queria|procuro|pesquis[ea]|"
-    r"pesquise|busque|buscar|encontre|encontrar|pre[cç]os?|preco|imagens?|"
-    r"fotos?|links?|comprar|compra|ofertas?|promo[cç][aã]o|promo|onde|"
+    r"\b(?:me\s+mostre|mostre|mostra|quero|queria|procuro|procura|procure|procurar|"
+    r"pesquis[ea]|pesquisar|pesquisa|busque|buscar|busca|encontre|encontrar|ache|achar|"
+    r"pre[cç]os?|preco|imagens?|fotos?|links?|comprar|compra|ofertas?|promo[cç][aã]o|promo|onde|"
     r"quanto|custa|por\s+favor|pra\s+mim|para\s+mim|imagem|"
     r"compare|comparativo|comparar|comparando|qual\s+o?\s*melhor|qual\s+o?\s*menor|"
+    r"qual\s+tem\s+mais|o\s+melhor|o\s+menor|uma?\s+boa|bons?|boas?|"
     r"recomende|indique|versus|\bvs\b|diferen[cç]a)\b",
     re.IGNORECASE)
 
@@ -2031,6 +2050,8 @@ def _termo_referencia(texto: str) -> str:
     if not t:
         return ""
     t = _RX_PEDIDO_WORDS.sub(" ", t)
+    t = re.sub(r"\bplacas?\s*(?:de\s*)?m[aã]es?\b", "placa mae", t, flags=re.I)
+    t = re.sub(r"\b(motherboards?|mobos?)\b", "placa mae", t, flags=re.I)
     vazias = {"e", "o", "a", "os", "as", "de", "do", "da", "dos", "das",
               "por", "com", "para", "pra", "no", "na", "nos", "nas"}
     palavras = [w for w in t.split()
@@ -2057,6 +2078,9 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
     if specs.get("vram_gb") is not None:
         search_text = re.sub(r"\b\d{1,2}\s*(?:gb\s*)?(?:de\s+)?vram\b", f"{specs['vram_gb']}GB VRAM", search_text, flags=re.I)
     ref = _termo_referencia(search_text)
+    if criterios.get("categoria") in ("placa mae", "placa mãe"):
+        ref = re.sub(r"^(?:algumas?|alguns?|umas?|uns?)\s+", "", ref, flags=re.I)
+        ref = re.sub(r"\bplacas?\s*(?:de\s*)?m[aã]es?\b", "placa mae", ref, flags=re.I)
     if criterios.get("categoria") in ("placa de video", "placa de vídeo"):
         ref = re.sub(r"^(?:algumas?|alguns?|umas?|uns?)\s+", "", ref, flags=re.I)
         ref = re.sub(r"\bque\s+(?:tem|tenham|tenha)\s+(?=\d)", "", ref, flags=re.I)
@@ -2071,6 +2095,8 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
         consultas = [f"{ref} comprar oferta".strip()]
         if orc.get("max"):
             consultas.append(f"{ref} preço até {orc['max']:g}".strip())
+        elif "kabum" not in ref.lower():
+            consultas.append(f"{ref} kabum".strip())
         else:
             consultas.append(f"melhor {ref} comprar Brasil".strip())
     else:
@@ -2674,6 +2700,28 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                 if "_consulta" not in a:
                     a["_consulta"] = q
                 achados.append(a)
+    # Loop de replanejamento: se a busca inicial rendeu poucos candidatos (< 3),
+    # cria planos secundários específicos (ex.: chipsets populares, termos diretos)
+    if len(achados) < 3 and buscar_fn is None:
+        _prog("recuperando", f"Ampliando busca de {consulta}")
+        cat = (criterios.get("categoria") or "").lower()
+        planos_extra = []
+        if cat in ("placa mae", "placa mãe"):
+            planos_extra = ["placa mae am4", "placa mae a520", "placa mae h610", "placa mae b450"]
+        elif cat in ("placa de video", "placa de vídeo"):
+            planos_extra = ["placa de video rtx", "placa de video rx", "placa de video gtx"]
+        elif cat:
+            planos_extra = [f"{cat} barata", f"{cat} menor preco", f"{cat} kabum"]
+        for extra_q in planos_extra:
+            if len(achados) >= 6:
+                break
+            parcial_extra, detapas_extra = buscar_com_fallback(extra_q, diag=decisoes, texto_lojas=texto)
+            etapas_prov.extend(f"{extra_q[:40]}: {e}" for e in detapas_extra)
+            for a in parcial_extra[:8]:
+                if a.get("url") and a["url"] not in vistas:
+                    vistas.add(a["url"])
+                    a["_consulta"] = extra_q
+                    achados.append(a)
     if not achados:
         resultado = {"produtos": [], "fontes": [], "criterios": criterios,
                      "total_bruto": 0, "excluidos": [], "de_cache": False,

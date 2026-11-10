@@ -170,18 +170,12 @@ def gerar_resposta_qwen(
     if resultado.get("status") == "sucesso" and resultado.get("resposta"):
         return resultado
 
-    # Fallback determinístico inteligente se o Space estiver hibernando
-    texto_pergunta = mensagens if isinstance(mensagens, str) else (
-        mensagens[-1].get("content", "") if mensagens else ""
-    )
-    fallback_resp = f"Análise Qwen: Processando {texto_pergunta[:80]}..."
-    if contexto_pesquisa:
-        fallback_resp = f"Com base nas evidências coletadas: {contexto_pesquisa[:300]}"
-
+    # Se o Space retornou erro, indisponibilidade ou falhou, não inventa resposta falsa
+    resp_texto = (resultado.get("resposta") or "").strip()
     return {
-        "status": "sucesso" if resultado.get("status") == "sucesso" else "fallback",
+        "status": "sucesso" if (resultado.get("status") == "sucesso" and resp_texto) else "fallback",
         "modelo": "Qwen2.5-3B-Instruct-VEXX",
-        "resposta": resultado.get("resposta") or fallback_resp,
+        "resposta": resp_texto,
         "tool_calls": resultado.get("tool_calls") or [],
         "queries_pesquisa": resultado.get("queries_pesquisa") or [],
         "uso": resultado.get("uso") or {"prompt_tokens": 0, "completion_tokens": 0, "total_tokens": 0}
