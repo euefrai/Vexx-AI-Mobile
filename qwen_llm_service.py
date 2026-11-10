@@ -25,8 +25,14 @@ def _obter_hf_token() -> str:
     """Recupera o token Hugging Face do ambiente ou de arquivos .env conhecidos."""
     token = os.environ.get("HUGGINGFACE_API_KEY") or os.environ.get("HF_TOKEN") or ""
     if not token:
-        for p in [r"C:\Users\efrai\Documents\complete_local\.env", ".env"]:
-            if os.path.exists(p):
+        from pathlib import Path
+        env_paths = [
+            Path(__file__).resolve().parent / ".env",
+            Path.home() / ".vexx" / ".env",
+            Path(".env")
+        ]
+        for p in env_paths:
+            if p.exists():
                 try:
                     with open(p, "r", encoding="utf-8") as f:
                         for line in f:

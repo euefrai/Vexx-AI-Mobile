@@ -1,48 +1,76 @@
 # -*- coding: utf-8 -*-
 """
-VEXX AI - Serviço em Segundo Plano (Bandeja / System Tray)
+VEXX AI - Serviço em Segundo Plano Portátil (System Tray & Túnel Universal)
 Executa de forma 100% oculta no Windows (sem janelas CMD).
 Inicia automaticamente com o Windows, gerencia o download e execução do Qwen2.5-VL (7B),
-fornece API compatível com OpenAI na porta 8008 e mantém o túnel ativo com vexx-ai.space.
+fornece API compatível com OpenAI na porta 8008 e mantém o túnel ativo com vexx-ai.space
+em QUALQUER computador onde for instalado, sem caminhos fixos (zero hardcoded paths).
 """
 
 import os
 import sys
 import time
 import json
+import shutil
 import socket
 import logging
 import threading
 import subprocess
 import webbrowser
 import winreg
+import urllib.request
+import urllib.error
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Tuple, Dict, Any, List
 
-from PIL import Image, ImageDraw
-import pystray
-from pystray import MenuItem as item, Menu
+# =====================================================================
+# 1. RESOLUÇÃO DINÂMICA DE DIRETÓRIOS E AMBIENTE (100% PORTÁTIL)
+# =====================================================================
+BASE_DIR = Path(__file__).resolve().parent
 
-# Configuração de caminhos e ambiente
-BASE_DIR = Path(r"C:\Users\efrai\Documents\ia-local")
-MODELS_DIR = BASE_DIR / "models" / "llm"
-MODELS_DIR.mkdir(parents=True, exist_ok=True)
+def get_models_dir() -> Path:
+    """Retorna diretório de modelos de forma portável."""
+    env_dir = os.environ.get("VEXX_MODELS_DIR")
+    if env_dir:
+        p = Path(env_dir)
+        p.mkdir(parents=True, exist_ok=True)
+        return p
 
-PYTHON_EXE = r"C:\Users\efrai\Documents\very\backend\venv\Scripts\python.exe"
-PYTHONW_EXE = r"C:\Users\efrai\Documents\very\backend\venv\Scripts\pythonw.exe"
-JULIA_REPO_DIR = Path(r"C:\Users\efrai\Documents\julia-mobile-v0.2-offline-sqlite\julia-mobile-v0.2")
+    # 1. Tenta dentro do próprio diretório da aplicação
+    local_p = BASE_DIR / "models" / "llm"
+    try:
+        local_p.mkdir(parents=True, exist_ok=True)
+        return local_p
+    except Exception:
+        pass
 
+    # 2. Fallback para %LOCALAPPDATA%\VexxAI\models\llm
+    appdata = os.environ.get("LOCALAPPDATA") or str(Path.home() / "AppData" / "Local")
+    p = Path(appdata) / "VexxAI" / "models" / "llm"
+    p.mkdir(parents=True, exist_ok=True)
+    return p
+
+MODELS_DIR = get_models_dir()
 VL_MODEL_FILE = MODELS_DIR / "Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf"
 VL_PROJ_FILE = MODELS_DIR / "mmproj-F16.gguf"
 MODEL_15B_FILE = MODELS_DIR / "qwen2.5-1.5b-instruct-q4_k_m.gguf"
 MODEL_3B_FILE = MODELS_DIR / "qwen2.5-3b-instruct-q4_k_m.gguf"
 
-RELAY_URL = "https://vexx-ai.space"
-AGENT_TOKEN = "OxnAFLKyv1T5R1GdCpmaGs1tCn9eeMZH7tNalkYCqS8fMR-UDQ4LcMhV-SxY"
-PORT = 8008
+RELAY_URL = os.environ.get("JULIA_RELAY_URL", "https://vexx-ai.space").strip().rstrip("/")
+AGENT_TOKEN = os.environ.get("JULIA_AGENT_TOKEN", "OxnAFLKyv1T5R1GdCpmaGs1tCn9eeMZH7tNalkYCqS8fMR-UDQ4LcMhV-SxY").strip()
+PORT = int(os.environ.get("VEXX_LOCAL_PORT", 8008))
 
-# Configuração de logging seguro
-LOG_FILE = BASE_DIR / "vexx_tray_service.log"
+# Logging seguro e portável
+def get_log_file() -> Path:
+    try:
+        f = BASE_DIR / "vexx_tray_service.log"
+        f.touch(exist_ok=True)
+        return f
+    except Exception:
+        temp = Path(os.environ.get("TEMP", str(Path.home())))
+        return temp / "vexx_tray_service.log"
+
+LOG_FILE = get_log_file()
 logging.basicConfig(
     filename=str(LOG_FILE),
     level=logging.INFO,
@@ -55,6 +83,7 @@ log = logging.getLogger("vexx_tray")
 app_state = {
     "server_online": False,
     "tunnel_online": False,
+    "tunnel_mode": "iniciando",
     "active_model": "Carregando...",
     "download_status": "Pronto",
     "download_progress": 0,
@@ -70,7 +99,7 @@ _loaded_model_id = ""
 _vl_chat_handler = None
 
 
-def tem_imagem(msgs) -> bool:
+def tem_imagem(msgs: List[Dict[str, Any]]) -> bool:
     for m in msgs:
         c = m.get("content")
         if isinstance(c, list):
@@ -83,7 +112,81 @@ def tem_imagem(msgs) -> bool:
 
 
 # =====================================================================
-# 1. AUTO-INICIALIZAÇÃO NO REGISTRO DO WINDOWS (Run)
+# 2. LOCALIZAÇÃO DINÂMICA DE PYTHON E PC AGENT (SEM HARDCODED PATHS)
+# =====================================================================
+def get_python_executables() -> Tuple[str, str]:
+    """Retorna (python_exe, pythonw_exe) válidos no sistema atual."""
+    # 1. Procura venv local em BASE_DIR/.venv
+    local_venv_py = BASE_DIR / ".venv" / "Scripts" / "python.exe"
+    local_venv_pyw = BASE_DIR / ".venv" / "Scripts" / "pythonw.exe"
+    if local_venv_py.exists():
+        pyw = str(local_venv_pyw) if local_venv_pyw.exists() else str(local_venv_py)
+        return str(local_venv_py), pyw
+
+    # 2. Procura no interpretador que está executando este script
+    cur_py = Path(sys.executable)
+    if cur_py.exists():
+        cur_dir = cur_py.parent
+        pyw_cand = cur_dir / "pythonw.exe"
+        if pyw_cand.exists():
+            return str(cur_py), str(pyw_cand)
+        py_cand = cur_dir / "python.exe"
+        if py_cand.exists():
+            return str(py_cand), str(cur_py)
+        return str(cur_py), str(cur_py)
+
+    # 3. Procura no PATH do sistema
+    which_py = shutil.which("python")
+    which_pyw = shutil.which("pythonw")
+    if which_py:
+        return which_py, (which_pyw or which_py)
+
+    # 4. Procura em caminhos padrão de instalação do Windows
+    local_app_data = os.environ.get("LOCALAPPDATA", "")
+    if local_app_data:
+        py_programs = Path(local_app_data) / "Programs" / "Python"
+        if py_programs.exists():
+            for p in sorted(py_programs.glob("Python3*"), reverse=True):
+                cand_py = p / "python.exe"
+                cand_pyw = p / "pythonw.exe"
+                if cand_py.exists():
+                    return str(cand_py), (str(cand_pyw) if cand_pyw.exists() else str(cand_py))
+
+    for base in [Path("C:/Python312"), Path("C:/Python311"), Path("C:/Python310"), Path("C:/Program Files/Python311")]:
+        if (base / "python.exe").exists():
+            cand_py = base / "python.exe"
+            cand_pyw = base / "pythonw.exe"
+            return str(cand_py), (str(cand_pyw) if cand_pyw.exists() else str(cand_py))
+
+    return sys.executable, sys.executable
+
+
+def find_pc_agent_dir() -> Optional[Path]:
+    """Procura onde está o pc_agent.py (se existir no repositório local)."""
+    candidatos = [
+        BASE_DIR,
+        BASE_DIR / "julia-mobile-v0.2",
+        BASE_DIR.parent / "julia-mobile-v0.2",
+        BASE_DIR.parent,
+    ]
+    # Sibling folders do tipo *pc-agent*
+    try:
+        for p in BASE_DIR.parent.glob("*pc-agent*"):
+            if p.is_dir():
+                candidatos.append(p)
+    except Exception:
+        pass
+
+    for c in candidatos:
+        if (c / "pc_agent.py").exists():
+            log.info("pc_agent.py encontrado dinamicamente em: %s", c)
+            return c.resolve()
+
+    return None
+
+
+# =====================================================================
+# 3. AUTO-INICIALIZAÇÃO NO REGISTRO DO WINDOWS (Run)
 # =====================================================================
 REG_KEY = r"Software\Microsoft\Windows\CurrentVersion\Run"
 REG_NAME = "VexxAI_Agent"
@@ -98,23 +201,24 @@ def is_startup_enabled() -> bool:
 
 def set_startup_enabled(enabled: bool):
     try:
+        _, pyw_exe = get_python_executables()
         with winreg.OpenKey(winreg.HKEY_CURRENT_USER, REG_KEY, 0, winreg.KEY_SET_VALUE) as key:
             if enabled:
-                cmd = f'"{PYTHONW_EXE}" "{Path(__file__).resolve()}"'
+                cmd = f'"{pyw_exe}" "{Path(__file__).resolve()}"'
                 winreg.SetValueEx(key, REG_NAME, 0, winreg.REG_SZ, cmd)
-                log.info("Auto-inicialização ativada no registro: %s", cmd)
+                log.info("Auto-inicialização configurada no registro: %s", cmd)
             else:
                 try:
                     winreg.DeleteValue(key, REG_NAME)
-                    log.info("Auto-inicialização desativada no registro.")
+                    log.info("Auto-inicialização removida do registro.")
                 except FileNotFoundError:
                     pass
     except Exception as exc:
-        log.warning("Falha ao atualizar registro de auto-inicialização: %s", exc)
+        log.warning("Falha ao atualizar registro de inicialização: %s", exc)
 
 
 # =====================================================================
-# 2. GERENCIADOR DE MODELOS LLM LOCAL (llama_cpp)
+# 4. GERENCIADOR DE MODELOS LLM LOCAL (llama_cpp)
 # =====================================================================
 def carregar_llm(solicitado: str = "qwen2.5-vl-7b-instruct"):
     global _loaded_llm, _loaded_model_id, _vl_chat_handler
@@ -122,7 +226,10 @@ def carregar_llm(solicitado: str = "qwen2.5-vl-7b-instruct"):
         if _loaded_llm is not None and _loaded_model_id == solicitado:
             return _loaded_llm, _loaded_model_id
 
-        from llama_cpp import Llama
+        try:
+            from llama_cpp import Llama
+        except ImportError:
+            raise RuntimeError("llama-cpp-python não está instalado no ambiente Python atual.")
 
         # 1. Tentativa de carregar Qwen 2.5-VL 7B
         if solicitado in ("qwen2.5-vl-7b-instruct", "qwen2.5-vl-7b", "auto"):
@@ -150,9 +257,9 @@ def carregar_llm(solicitado: str = "qwen2.5-vl-7b-instruct"):
                     log.info("Qwen 2.5-VL 7B carregado com sucesso na memória.")
                     return _loaded_llm, _loaded_model_id
                 except Exception as exc:
-                    log.warning("Falha ao carregar Qwen 2.5-VL 7B: %s. Tentando modelo secundário...", exc)
+                    log.warning("Falha ao carregar Qwen 2.5-VL 7B: %s. Tentando fallback...", exc)
 
-        # 2. Fallback para Qwen 2.5 1.5B (ou se solicitado)
+        # 2. Fallback para Qwen 2.5 1.5B
         if solicitado == "qwen2.5-1.5b-instruct" or not VL_MODEL_FILE.exists():
             if MODEL_15B_FILE.exists():
                 log.info("Carregando Qwen 2.5 1.5B: %s", MODEL_15B_FILE)
@@ -168,7 +275,7 @@ def carregar_llm(solicitado: str = "qwen2.5-vl-7b-instruct"):
                 app_state["active_model"] = "Qwen 2.5 (1.5B) [Fallback]"
                 return _loaded_llm, _loaded_model_id
 
-        # 3. Fallback para Qwen 2.5 3B se existir
+        # 3. Fallback para Qwen 2.5 3B
         if MODEL_3B_FILE.exists():
             log.info("Carregando Qwen 2.5 3B: %s", MODEL_3B_FILE)
             _loaded_llm = Llama(
@@ -183,17 +290,56 @@ def carregar_llm(solicitado: str = "qwen2.5-vl-7b-instruct"):
             app_state["active_model"] = "Qwen 2.5 (3B) [Fallback]"
             return _loaded_llm, _loaded_model_id
 
-        raise RuntimeError("Nenhum arquivo de modelo GGUF encontrado em " + str(MODELS_DIR))
+        # Se nenhum modelo existe ainda, avisa e retorna None
+        app_state["active_model"] = "Aguardando download do modelo..."
+        raise RuntimeError("Nenhum arquivo GGUF encontrado em " + str(MODELS_DIR))
 
 
 # =====================================================================
-# 3. DOWNLOADER AUTOMÁTICO EM SEGUNDO PLANO (Qwen2.5-VL 7B)
+# 5. DOWNLOADER AUTOMÁTICO RESILIENTE (HuggingFace Hub / Direct HTTP)
 # =====================================================================
+def _baixar_arquivo_streaming(url: str, destino: Path, status_label: str):
+    """Download direto via HTTP com suporte a retomada (resume)."""
+    tmp_dest = destino.with_suffix(".part")
+    existing_bytes = tmp_dest.stat().st_size if tmp_dest.exists() else 0
+
+    headers = {"User-Agent": "VexxAI-Downloader/2.0"}
+    if existing_bytes > 0:
+        headers["Range"] = f"bytes={existing_bytes}-"
+
+    req = urllib.request.Request(url, headers=headers)
+    log.info("Baixando %s -> %s (bytes existentes: %d)", url, destino.name, existing_bytes)
+
+    with urllib.request.urlopen(req, timeout=30) as resp:
+        total_header = resp.headers.get("Content-Length")
+        total_size = (int(total_header) + existing_bytes) if total_header else None
+
+        mode = "ab" if existing_bytes > 0 else "wb"
+        downloaded = existing_bytes
+
+        with open(tmp_dest, mode) as f:
+            while True:
+                chunk = resp.read(1024 * 1024)  # 1MB chunks
+                if not chunk:
+                    break
+                f.write(chunk)
+                downloaded += len(chunk)
+                if total_size and total_size > 0:
+                    pct = int(downloaded * 100 / total_size)
+                    app_state["download_progress"] = pct
+                    app_state["download_status"] = f"{status_label} ({pct}%)"
+
+    if tmp_dest.exists():
+        if destino.exists():
+            destino.unlink()
+        tmp_dest.rename(destino)
+    log.info("Arquivo baixado com sucesso: %s", destino)
+
+
 def baixar_qwen_vl_background():
     if app_state["is_downloading"]:
         return
 
-    # Se os arquivos já existem completamente, não baixa de novo
     if VL_MODEL_FILE.exists() and VL_PROJ_FILE.exists():
         if VL_MODEL_FILE.stat().st_size > 4_000_000_000 and VL_PROJ_FILE.stat().st_size > 1_000_000_000:
             app_state["download_status"] = "Qwen 2.5-VL 7B Pronto"
@@ -203,44 +349,56 @@ def baixar_qwen_vl_background():
     def _worker():
         app_state["is_downloading"] = True
         app_state["download_status"] = "Iniciando download..."
-        log.info("Iniciando download do modelo Qwen2.5-VL 7B GGUF...")
+        log.info("Iniciando download do modelo Qwen2.5-VL 7B em %s...", MODELS_DIR)
 
         try:
-            from huggingface_hub import hf_hub_download
-            repo_id = "unsloth/Qwen2.5-VL-7B-Instruct-GGUF"
+            # Tenta via huggingface_hub primeiro
+            hf_ok = False
+            try:
+                from huggingface_hub import hf_hub_download
+                repo_id = "unsloth/Qwen2.5-VL-7B-Instruct-GGUF"
 
-            # 1. Baixar modelo principal Q4_K_M (~4.36 GB)
-            if not VL_MODEL_FILE.exists() or VL_MODEL_FILE.stat().st_size < 4_000_000_000:
-                app_state["download_status"] = "Baixando Qwen2.5-VL-7B (Q4_K_M)..."
-                log.info("Baixando arquivo principal Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf...")
-                hf_hub_download(
-                    repo_id=repo_id,
-                    filename="Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
-                    local_dir=str(MODELS_DIR),
-                    resume_download=True
-                )
+                if not VL_MODEL_FILE.exists() or VL_MODEL_FILE.stat().st_size < 4_000_000_000:
+                    app_state["download_status"] = "Baixando Qwen2.5-VL-7B (Q4_K_M)..."
+                    hf_hub_download(
+                        repo_id=repo_id,
+                        filename="Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf",
+                        local_dir=str(MODELS_DIR),
+                        resume_download=True
+                    )
 
-            # 2. Baixar projetor multimodal mmproj-F16.gguf (~1.26 GB)
-            if not VL_PROJ_FILE.exists() or VL_PROJ_FILE.stat().st_size < 1_000_000_000:
-                app_state["download_status"] = "Baixando projetor multimodal mmproj..."
-                log.info("Baixando arquivo multimodal mmproj-F16.gguf...")
-                hf_hub_download(
-                    repo_id=repo_id,
-                    filename="mmproj-F16.gguf",
-                    local_dir=str(MODELS_DIR),
-                    resume_download=True
-                )
+                if not VL_PROJ_FILE.exists() or VL_PROJ_FILE.stat().st_size < 1_000_000_000:
+                    app_state["download_status"] = "Baixando projetor multimodal mmproj..."
+                    hf_hub_download(
+                        repo_id=repo_id,
+                        filename="mmproj-F16.gguf",
+                        local_dir=str(MODELS_DIR),
+                        resume_download=True
+                    )
+                hf_ok = True
+            except Exception as hf_err:
+                log.warning("huggingface_hub falhou ou ausente (%s). Usando download HTTP direto...", hf_err)
+
+            # Fallback direto se huggingface_hub falhou
+            if not hf_ok:
+                url_model = "https://huggingface.co/unsloth/Qwen2.5-VL-7B-Instruct-GGUF/resolve/main/Qwen2.5-VL-7B-Instruct-Q4_K_M.gguf"
+                url_proj = "https://huggingface.co/unsloth/Qwen2.5-VL-7B-Instruct-GGUF/resolve/main/mmproj-F16.gguf"
+
+                if not VL_MODEL_FILE.exists() or VL_MODEL_FILE.stat().st_size < 4_000_000_000:
+                    _baixar_arquivo_streaming(url_model, VL_MODEL_FILE, "Baixando Qwen2.5-VL-7B")
+
+                if not VL_PROJ_FILE.exists() or VL_PROJ_FILE.stat().st_size < 1_000_000_000:
+                    _baixar_arquivo_streaming(url_proj, VL_PROJ_FILE, "Baixando mmproj-F16")
 
             app_state["download_status"] = "Download concluído! Carregando..."
             app_state["download_progress"] = 100
-            log.info("Download do Qwen 2.5-VL 7B finalizado com sucesso!")
+            log.info("Download do Qwen 2.5-VL 7B concluído com sucesso!")
 
-            # Carrega o modelo novo imediatamente
             carregar_llm("qwen2.5-vl-7b-instruct")
             atualizar_tooltip_tray()
 
         except Exception as exc:
-            log.warning("Erro durante download do Qwen 2.5-VL: %s", exc)
+            log.warning("Erro durante download do modelo: %s", exc)
             app_state["download_status"] = f"Erro no download: {exc}"
         finally:
             app_state["is_downloading"] = False
@@ -250,12 +408,16 @@ def baixar_qwen_vl_background():
 
 
 # =====================================================================
-# 4. SERVIDOR FASTAPI LOCAL (Porta 8008 - OpenAI Compatível)
+# 6. SERVIDOR FASTAPI LOCAL (Porta 8008 - OpenAI Compatível)
 # =====================================================================
 def iniciar_servidor_fastapi():
-    from fastapi import FastAPI, Request
-    from fastapi.responses import JSONResponse, StreamingResponse
-    import uvicorn
+    try:
+        from fastapi import FastAPI, Request
+        from fastapi.responses import JSONResponse, StreamingResponse
+        import uvicorn
+    except ImportError:
+        log.error("fastapi ou uvicorn não instalados. Servidor local não pôde iniciar.")
+        return
 
     server_app = FastAPI(title="VEXX AI Local LLM Server")
 
@@ -286,7 +448,7 @@ def iniciar_servidor_fastapi():
             max_tokens = int(body.get("max_tokens") or 2048)
             temperature = float(body.get("temperature", 0.7))
 
-            llm, model_usado = carregar_llm(model_req)
+            llm, _ = carregar_llm(model_req)
             if tem_imagem(messages) and _vl_chat_handler is not None:
                 llm.chat_handler = _vl_chat_handler
             else:
@@ -317,7 +479,7 @@ def iniciar_servidor_fastapi():
                 )
                 return JSONResponse(res)
         except Exception as exc:
-            log.exception("Erro na chamada de chat completions: %s", exc)
+            log.exception("Erro na chamada chat completions: %s", exc)
             return JSONResponse({"error": str(exc)}, status_code=500)
 
     @server_app.get("/health")
@@ -327,6 +489,7 @@ def iniciar_servidor_fastapi():
             "active_model": app_state["active_model"],
             "download_status": app_state["download_status"],
             "tunnel_online": app_state["tunnel_online"],
+            "tunnel_mode": app_state["tunnel_mode"],
             "port": PORT
         }
 
@@ -349,15 +512,183 @@ def iniciar_servidor_fastapi():
 
 
 # =====================================================================
-# 5. GERENCIADOR DO TÚNEL WEBSOCKET DO PC AGENT
+# 7. GERENCIADOR DO TÚNEL WEBSOCKET (DUAL: SUBPROCESSO OU EMBEDDED)
 # =====================================================================
 agent_process = None
 
+def _executar_tunel_embedded():
+    """
+    Túnel WebSocket Standalone embutido:
+    Usado quando o pc_agent.py não está presente ou em instalações isoladas.
+    Conecta diretamente a wss://vexx-ai.space/api/agent/ws e atende pedidos de IA.
+    """
+    from urllib.parse import urlparse
+    parsed = urlparse(RELAY_URL)
+    ws_scheme = "wss" if parsed.scheme == "https" else "ws"
+    ws_host = parsed.netloc or "vexx-ai.space"
+    ws_url = f"{ws_scheme}://{ws_host}/api/agent/ws"
+
+    log.info("Iniciando túnel WebSocket Standalone para %s...", ws_url)
+    app_state["tunnel_mode"] = "standalone_embedded"
+
+    try:
+        from websockets.sync.client import connect
+    except ImportError:
+        log.warning("websockets não instalado. Tentando importar...")
+        return
+
+    backoff = 2
+    while not app_state["shutdown"]:
+        try:
+            log.info("Conectando ao relay WebSocket: %s", ws_url)
+            headers = {"Authorization": "Bearer " + AGENT_TOKEN}
+            with connect(ws_url, additional_headers=headers, open_timeout=20, ping_interval=20, ping_timeout=20, max_size=25_000_000) as ws:
+                app_state["tunnel_online"] = True
+                atualizar_tooltip_tray()
+                backoff = 2
+                log.info("Túnel WebSocket Standalone estabelecido com vexx-ai.space com sucesso!")
+
+                # Envia apresentação inicial do agente
+                hello_msg = {
+                    "type": "agent_hello",
+                    "commit": "vexx-universal-v2",
+                    "pid": os.getpid(),
+                    "uptime_s": 0,
+                    "db_ok": True,
+                    "python": "%d.%d.%d" % sys.version_info[:3],
+                    "models": ["qwen2.5-vl-7b-instruct", "qwen2.5-1.5b-instruct"]
+                }
+                ws.send(json.dumps(hello_msg))
+
+                for raw_msg in ws:
+                    if app_state["shutdown"]:
+                        break
+                    try:
+                        req = json.loads(raw_msg)
+                        tipo = req.get("type")
+                        req_id = req.get("request_id")
+
+                        if tipo == "ping":
+                            ws.send(json.dumps({"type": "pong", "request_id": req_id}))
+
+                        elif tipo in ("ai_models", "models"):
+                            ws.send(json.dumps({
+                                "type": "ai_models_ok",
+                                "request_id": req_id,
+                                "models": [
+                                    {"id": "qwen2.5-vl-7b-instruct", "nome": "Qwen 2.5-VL 7B (Local PC)"},
+                                    {"id": "qwen2.5-1.5b-instruct", "nome": "Qwen 2.5 1.5B (Local PC)"}
+                                ]
+                            }))
+
+                        elif tipo == "ai_latency_test":
+                            t0 = time.perf_counter()
+                            try:
+                                llm, _ = carregar_llm("qwen2.5-vl-7b-instruct")
+                                _ = llm.create_chat_completion(
+                                    messages=[{"role": "user", "content": "ping"}],
+                                    max_tokens=2,
+                                    stream=False
+                                )
+                                lat = round((time.perf_counter() - t0) * 1000)
+                            except Exception:
+                                lat = 999
+                            ws.send(json.dumps({
+                                "type": "ai_latency_ok",
+                                "request_id": req_id,
+                                "latencia_ms": lat
+                            }))
+
+                        elif tipo == "ai_stream":
+                            mid = req.get("mid") or req_id
+                            msgs = req.get("mensagens") or req.get("messages") or []
+                            model_req = req.get("model") or "qwen2.5-vl-7b-instruct"
+
+                            def _stream_worker(m_list, req_id_curr, mid_curr, m_name):
+                                try:
+                                    llm, _ = carregar_llm(m_name)
+                                    if tem_imagem(m_list) and _vl_chat_handler is not None:
+                                        llm.chat_handler = _vl_chat_handler
+                                    else:
+                                        llm.chat_handler = None
+
+                                    seq = 0
+                                    full_text = ""
+                                    for chunk in llm.create_chat_completion(
+                                        messages=m_list,
+                                        max_tokens=2048,
+                                        stream=True
+                                    ):
+                                        delta = chunk.get("choices", [{}])[0].get("delta", {}).get("content", "")
+                                        if delta:
+                                            full_text += delta
+                                            seq += 1
+                                            ws.send(json.dumps({
+                                                "type": "ai_delta",
+                                                "request_id": req_id_curr,
+                                                "mid": mid_curr,
+                                                "seq": seq,
+                                                "trecho": delta
+                                            }))
+
+                                    ws.send(json.dumps({
+                                        "type": "ai_done",
+                                        "request_id": req_id_curr,
+                                        "mid": mid_curr,
+                                        "texto": full_text
+                                    }))
+                                except Exception as exc:
+                                    log.error("Erro no streaming do túnel embedded: %s", exc)
+                                    ws.send(json.dumps({
+                                        "type": "ai_done",
+                                        "request_id": req_id_curr,
+                                        "mid": mid_curr,
+                                        "texto": f"[Erro no modelo local: {exc}]"
+                                    }))
+
+                            threading.Thread(
+                                target=_stream_worker,
+                                args=(msgs, req_id, mid, model_req),
+                                daemon=True
+                            ).start()
+
+                        elif tipo == "sync":
+                            ws.send(json.dumps({
+                                "type": "sync_ok",
+                                "request_id": req_id,
+                                "status": "online"
+                            }))
+
+                    except Exception as msg_err:
+                        log.warning("Erro ao processar mensagem do WebSocket: %s", msg_err)
+
+        except Exception as conn_err:
+            log.warning("Conexão do túnel caiu (%s). Reconectando em %ds...", conn_err, backoff)
+            app_state["tunnel_online"] = False
+            atualizar_tooltip_tray()
+            time.sleep(backoff)
+            backoff = min(30, backoff * 1.5)
+
+
 def iniciar_tunel_agent():
+    """
+    Inicia o túnel de forma inteligente:
+    Se pc_agent.py existir, executa o agente completo em subprocesso.
+    Se não existir, inicia o túnel embutido Standalone.
+    """
     global agent_process
 
     def _monitor():
         global agent_process
+        pc_dir = find_pc_agent_dir()
+
+        if pc_dir is None:
+            log.info("pc_agent.py não encontrado localmente. Ativando Túnel Standalone Embutido...")
+            _executar_tunel_embedded()
+            return
+
+        # Modo Completo com pc_agent.py
+        _, pyw_exe = get_python_executables()
         env = os.environ.copy()
         env["JULIA_RELAY_URL"] = RELAY_URL
         env["JULIA_AGENT_TOKEN"] = AGENT_TOKEN
@@ -365,12 +696,14 @@ def iniciar_tunel_agent():
         env["JULIA_REMOTE"] = "1"
         env["PYTHONUTF8"] = "1"
 
+        app_state["tunnel_mode"] = "pc_agent_full"
+
         while not app_state["shutdown"]:
             try:
-                log.info("Iniciando processo do túnel PC Agent para %s...", RELAY_URL)
+                log.info("Iniciando processo do PC Agent em %s via %s...", pc_dir, pyw_exe)
                 agent_process = subprocess.Popen(
-                    [PYTHONW_EXE, "pc_agent.py"],
-                    cwd=str(JULIA_REPO_DIR),
+                    [pyw_exe, "pc_agent.py"],
+                    cwd=str(pc_dir),
                     env=env,
                     stdout=subprocess.DEVNULL,
                     stderr=subprocess.DEVNULL,
@@ -382,7 +715,10 @@ def iniciar_tunel_agent():
                 agent_process.wait()
                 log.warning("Processo do PC Agent encerrou (código %s). Reiniciando em 5s...", agent_process.returncode)
             except Exception as exc:
-                log.warning("Falha ao executar pc_agent: %s", exc)
+                log.warning("Falha ao iniciar pc_agent: %s. Tentando túnel embedded como contingência...", exc)
+                _executar_tunel_embedded()
+                break
+
             app_state["tunnel_online"] = False
             atualizar_tooltip_tray()
             time.sleep(5)
@@ -392,9 +728,10 @@ def iniciar_tunel_agent():
 
 
 # =====================================================================
-# 6. BANDEJA DO SISTEMA (System Tray / pystray)
+# 8. BANDEJA DO SISTEMA (System Tray / pystray)
 # =====================================================================
-def criar_imagem_icone(verde: bool = True) -> Image.Image:
+def criar_imagem_icone(verde: bool = True):
+    from PIL import Image, ImageDraw
     width = 64
     height = 64
     image = Image.new("RGBA", (width, height), (11, 14, 20, 255))
@@ -426,7 +763,10 @@ def atualizar_tooltip_tray():
         status = "Online" if app_state["tunnel_online"] else "Conectando..."
         tip = f"VEXX AI - {app_state['active_model']} ({status})\nTúnel: {RELAY_URL}\nPorta: {PORT}"
         app_state["tray_icon"].title = tip
-        app_state["tray_icon"].icon = criar_imagem_icone(verde=app_state["tunnel_online"])
+        try:
+            app_state["tray_icon"].icon = criar_imagem_icone(verde=app_state["tunnel_online"])
+        except Exception:
+            pass
 
 
 def on_abrir_web(icon, item):
@@ -488,6 +828,9 @@ def on_sair(icon, item):
 
 
 def montar_menu():
+    import pystray
+    from pystray import MenuItem as item, Menu
+
     def get_status_label(item):
         return f"Status: {'🟢 Online' if app_state['tunnel_online'] else '🟡 Conectando...'}"
 
@@ -522,10 +865,14 @@ def montar_menu():
     )
 
 
+# =====================================================================
+# 9. PONTO DE ENTRADA PRINCIPAL
+# =====================================================================
 def main():
-    log.info("=== Iniciando VEXX AI Tray Service ===")
-    
-    # 1. Garante registro de auto-inicialização configurado
+    log.info("=== Iniciando VEXX AI Tray Service (Universal & Portátil) ===")
+    log.info("Diretório base: %s | Modelos: %s", BASE_DIR, MODELS_DIR)
+
+    # 1. Configura auto-inicialização no Windows
     if not is_startup_enabled():
         set_startup_enabled(True)
 
@@ -535,39 +882,38 @@ def main():
     # 3. Inicia servidor FastAPI local na porta 8008
     iniciar_servidor_fastapi()
 
-    # 4. Inicia túnel para vexx-ai.space
+    # 4. Inicia túnel resiliente para vexx-ai.space
     iniciar_tunel_agent()
 
     # 5. Verifica se o Qwen2.5-VL 7B precisa de download
     if not VL_MODEL_FILE.exists() or not VL_PROJ_FILE.exists():
-        log.info("Arquivos do Qwen2.5-VL 7B não encontrados localmente. Iniciando download em segundo plano...")
+        log.info("Arquivos do Qwen2.5-VL 7B ausentes. Iniciando download automático em segundo plano...")
         baixar_qwen_vl_background()
 
-    # 6. Inicia o ícone na bandeja do sistema
-    icon = pystray.Icon(
-        name="VexxAI",
-        icon=criar_imagem_icone(verde=False),
-        title="VEXX AI - Qwen 2.5-VL 7B (Iniciando...)",
-        menu=montar_menu()
-    )
-    app_state["tray_icon"] = icon
-
-    # Timer periódico para atualizar o tooltip
-    def _timer_update():
-        while not app_state["shutdown"]:
-            time.sleep(3)
-            try:
-                atualizar_tooltip_tray()
-            except Exception:
-                pass
-
-    threading.Thread(target=_timer_update, daemon=True).start()
-
-    # Roda o loop da bandeja (bloqueante na thread principal da interface)
+    # 6. Inicia o ícone na bandeja do sistema (com suporte a fallback caso sem GUI)
     try:
+        import pystray
+        icon = pystray.Icon(
+            name="VexxAI",
+            icon=criar_imagem_icone(verde=False),
+            title="VEXX AI - Conectando...",
+            menu=montar_menu()
+        )
+        app_state["tray_icon"] = icon
+
+        def _timer_update():
+            while not app_state["shutdown"]:
+                time.sleep(3)
+                try:
+                    atualizar_tooltip_tray()
+                except Exception:
+                    pass
+
+        threading.Thread(target=_timer_update, daemon=True).start()
         icon.run()
+
     except Exception as exc:
-        log.error("Exceção no pystray (bandeja): %s. Mantendo servidor e túnel ativos em loop contínuo.", exc)
+        log.warning("Aviso no pystray (modo sem bandeja visual): %s. Executando em segundo plano contínuo.", exc)
         while not app_state["shutdown"]:
             time.sleep(1)
 

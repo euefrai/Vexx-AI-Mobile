@@ -1,53 +1,117 @@
 @echo off
 chcp 65001 >nul
-title VEXX AI - Qwen 2.5-VL 7B ^& Túnel PC
-color 0B
-
+title Instalador e Configurador Portátil - VEXX AI (PC Agent ^& LLM)
+echo ======================================================================
+echo           VEXX AI - INSTALADOR UNIVERSAL PARA QUALQUER PC
+echo ======================================================================
 echo.
-echo  ==============================================================
-echo     ⚡ VEXX AI — SERVIÇO EM SEGUNDO PLANO ^& QWEN 2.5-VL (7B)
-echo  ==============================================================
+
+cd /d "%~dp0"
+set "APP_DIR=%~dp0"
+set "VENV_DIR=%APP_DIR%.venv"
+set "PYTHON_EXE="
+
+:: 1. Verificar se ja existe venv configurado nesta pasta
+if exist "%VENV_DIR%\Scripts\python.exe" (
+    echo [OK] Ambiente virtual local (.venv) encontrado!
+    set "PYTHON_EXE=%VENV_DIR%\Scripts\python.exe"
+    goto INSTALAR_DEPENDENCIAS
+)
+
+:: 2. Detectar Python do Sistema (py launcher ou python direto)
+echo [*] Detectando instalador Python no sistema...
+where py >nul 2>nul
+if %errorlevel%==0 (
+    for /f "delims=" %%i in ('py -3 -c "import sys; print(sys.executable)" 2^>nul') do set "SYS_PY=%%i"
+    if defined SYS_PY (
+        echo [OK] Python detectado via py launcher: %SYS_PY%
+        goto CRIAR_VENV
+    )
+)
+
+where python >nul 2>nul
+if %errorlevel%==0 (
+    for /f "delims=" %%i in ('python -c "import sys; print(sys.executable)" 2^>nul') do set "SYS_PY=%%i"
+    if defined SYS_PY (
+        echo [OK] Python detectado no PATH: %SYS_PY%
+        goto CRIAR_VENV
+    )
+)
+
+:: 3. Procurar em pastas padroes do Windows
+for /d %%D in ("%LOCALAPPDATA%\Programs\Python\Python3*") do (
+    if exist "%%D\python.exe" (
+        set "SYS_PY=%%D\python.exe"
+        echo [OK] Python encontrado em %%D
+        goto CRIAR_VENV
+    )
+)
+
+for /d %%D in ("C:\Python3*") do (
+    if exist "%%D\python.exe" (
+        set "SYS_PY=%%D\python.exe"
+        echo [OK] Python encontrado em %%D
+        goto CRIAR_VENV
+    )
+)
+
+:: 4. Se Python nao for encontrado, tenta instalar via Winget automaticamente
+echo [!] Python nao localizado. Tentando instalar Python 3.11 automaticamente via Winget...
+winget install Python.Python.3.11 --silent --accept-package-agreements --accept-source-agreements
+if %errorlevel%==0 (
+    echo [OK] Python instalado via Winget! Reiniciando deteccao...
+    timeout /t 3 >nul
+    for /d %%D in ("%LOCALAPPDATA%\Programs\Python\Python3*") do (
+        if exist "%%D\python.exe" (
+            set "SYS_PY=%%D\python.exe"
+            goto CRIAR_VENV
+        )
+    )
+)
+
+echo [ERRO] Python nao encontrado neste computador!
+echo Por favor, instale o Python 3.10 ou 3.11 marcando 'Add Python to PATH':
+echo https://www.python.org/downloads/
+pause
+exit /b 1
+
+:CRIAR_VENV
 echo.
-echo  [*] Verificando ambiente Python e dependências locais...
-
-set "PYTHONW_BIN=C:\Users\efrai\Documents\very\backend\venv\Scripts\pythonw.exe"
-set "TRAY_SCRIPT=C:\Users\efrai\Documents\ia-local\vexx_qwen_vl_tray.pyw"
-
-if not exist "%PYTHONW_BIN%" (
-    echo  [ERRO] Ambiente Python não encontrado em:
-    echo         %PYTHONW_BIN%
+echo [*] Criando ambiente virtual isolado (.venv)...
+"%SYS_PY%" -m venv "%VENV_DIR%"
+if not exist "%VENV_DIR%\Scripts\python.exe" (
+    echo [ERRO] Falha ao criar ambiente virtual em %VENV_DIR%
     pause
     exit /b 1
 )
+set "PYTHON_EXE=%VENV_DIR%\Scripts\python.exe"
+echo [OK] Ambiente virtual criado com sucesso!
 
-if not exist "%TRAY_SCRIPT%" (
-    echo  [ERRO] Script de bandeja não encontrado em:
-    echo         %TRAY_SCRIPT%
-    pause
-    exit /b 1
+:INSTALAR_DEPENDENCIAS
+echo.
+echo [*] Instalando dependencias essenciais para o agente e servidor local...
+"%PYTHON_EXE%" -m pip install --upgrade pip --quiet
+"%PYTHON_EXE%" -m pip install --quiet uvicorn fastapi pystray pillow requests websockets huggingface_hub llama-cpp-python
+
+echo.
+echo [*] Configurando inicializacao automatica com o Windows (oculta em segundo plano)...
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "VexxAI_Agent" /t REG_SZ /d "\"%VENV_DIR%\Scripts\pythonw.exe\" \"%APP_DIR%vexx_qwen_vl_tray.pyw\"" /f >nul 2>&1
+if %errorlevel%==0 (
+    echo [OK] Inicializacao automatica ativada no registro do Windows!
+) else (
+    echo [AVISO] Nao foi possivel gravar no registro; voce pode iniciar manualmente pelo icone.
 )
 
-echo  [*] Configurando inicialização automática com o Windows...
-reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v "VexxAI_Agent" /t REG_SZ /d "\"%PYTHONW_BIN%\" \"%TRAY_SCRIPT%\"" /f >nul
-
-echo  [*] Iniciando VEXX AI em segundo plano (modo oculto)...
-start "" "%PYTHONW_BIN%" "%TRAY_SCRIPT%"
+echo.
+echo [*] Iniciando servico do VEXX AI agora...
+start "" "%VENV_DIR%\Scripts\pythonw.exe" "%APP_DIR%vexx_qwen_vl_tray.pyw"
 
 echo.
-echo  ==============================================================
-echo    ✓ VEXX AI ATIVADO COM SUCESSO!
-echo  ==============================================================
+echo ======================================================================
+echo       TUDO PRONTO! O VEXX AI JA ESTA RODANDO NESTE COMPUTADOR.
+echo ======================================================================
+echo - O icone do VEXX AI aparecera na bandeja do sistema (proximo ao relogio).
+echo - O servidor local estara ativo na porta 8008.
+echo - O tunel seguro conectara automaticamente com https://vexx-ai.space.
 echo.
-echo    1. O serviço está rodando em segundo plano de forma oculta.
-echo    2. Ele iniciará automaticamente sempre que o Windows abrir.
-echo    3. Veja o ícone nos ÍCONES OCULTOS da bandeja (System Tray).
-echo    4. O túnel com https://vexx-ai.space está conectado.
-echo    5. O modelo Qwen 2.5-VL (7B) está sendo preparado/executado.
-echo.
-echo    O APK para celular foi gerado em:
-echo    C:\Users\efrai\Documents\VexxAI.apk
-echo.
-echo  ==============================================================
-echo  Pressione qualquer tecla para fechar esta janela...
-pause >nul
-exit /b 0
+timeout /t 5
