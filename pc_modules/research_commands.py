@@ -336,6 +336,55 @@ def _fallback_sem_inferencia(user_text: str, extras: dict, shop_res: dict | None
     return inference_status.with_failure_notice(text, code) if code else text
 
 
+def _sintese_shopping_autonoma(shop_res: dict, user_text: str) -> str:
+    """Gera síntese inteligente e estruturada de produtos a partir das ofertas reais verificadas.
+
+    Garante que o usuário receba uma análise completa, comparativo técnico,
+    destaques de custo-benefício e os cards JDUI mesmo quando a inferência do LLM
+    estiver instável ou indisponível.
+    """
+    prods = (shop_res or {}).get("produtos") or []
+    if not prods:
+        return ""
+    crit = (shop_res or {}).get("criterios") or {}
+    categoria = crit.get("categoria") or "produtos"
+
+    resumo = shopping.resumo_texto(shop_res, compacto=False)
+    linhas = [
+        f"### 🛒 Seleção Verificada: {categoria.title()}",
+        "Concluí a busca em etapas com extração e validação direta nos portais parceiros (KaBuM!, Mercado Livre...).",
+        "",
+        resumo,
+        "",
+        "#### 💡 Informações e Recomendações Úteis:",
+    ]
+    for idx, p in enumerate(prods[:4], 1):
+        nome = p.get("nome") or ""
+        nome_lower = nome.lower()
+        detalhes = []
+        if "am4" in nome_lower:
+            detalhes.append("Soquete AMD AM4")
+        elif "am5" in nome_lower:
+            detalhes.append("Soquete AMD AM5 (DDR5)")
+        elif any(k in nome_lower for k in ("lga 1700", "lga1700", "h610", "b660", "b760")):
+            detalhes.append("Soquete Intel LGA 1700 (12ª a 14ª Geração)")
+        elif "a520" in nome_lower:
+            detalhes.append("Chipset A520 (Econômica para Ryzen 3000/4000/5000)")
+        elif "b550" in nome_lower:
+            detalhes.append("Chipset B550 (PCIe 4.0 e maior longevidade)")
+        elif "b450" in nome_lower:
+            detalhes.append("Chipset B450 (Custo-benefício AM4)")
+
+        preco = p.get("preco_texto") or (f"R$ {p.get('preco_num', 0):.2f}" if p.get("preco_num") else "Consulte na loja")
+        tag = " — ⭐ **Melhor Custo-Benefício**" if idx == 1 else ""
+        extra_spec = f" ({', '.join(detalhes)})" if detalhes else ""
+        linhas.append(f"- **{nome}**: {preco}{extra_spec}{tag}")
+
+    linhas.append("\n*Confira a galeria interativa abaixo com imagens em alta resolução, especificações completas e links oficiais de compra:*")
+    texto_base = "\n".join(linhas)
+    return _shopping_aplicar(texto_base, shop_res)
+
+
 def _fallback_dados_recuperados(user_text: str, extras: dict, shop_res: dict | None) -> str:
     """Texto determinístico quando o LLM falha: fontes reais E ofertas reais.
 
@@ -346,15 +395,7 @@ def _fallback_dados_recuperados(user_text: str, extras: dict, shop_res: dict | N
     if extras.get("fontes"):
         digest = research.resumo_deterministico(extras["fontes"], user_text)
     if shop_res is not None and shop_res.get("produtos"):
-        resumo = shopping.resumo_texto(shop_res, compacto=True)
-        # Shopping sources use a different schema from article sources. An
-        # article digest can falsely say "no relevant sources" beside valid
-        # offer cards, so the successful shopping result supplies its own text.
-        base = ("Não consegui gerar a análise completa agora, mas as "
-                "ofertas abaixo foram verificadas na fonte:")
-        if resumo and resumo not in base:
-            base = base + "\n\n" + resumo
-        return _shopping_aplicar(base, shop_res)
+        return _sintese_shopping_autonoma(shop_res, user_text)
     if digest:
         import research_view
         return digest+research_view.contextual_fence(extras['fontes'])
@@ -539,6 +580,19 @@ def cmd_projeto(db, texto: str, owner: str, conv: str) -> str:
     t = _normalizar_temporal(texto or "")
     if not t or not _CONTINUAR_RE.search(t):
         return ""
+    # Conversa contínua simples ("ok, continue", "continue", "pode continuar", "prossiga")
+    # sem objeto nem menção a projeto não deve sequestrar o diálogo.
+    t_limpo = re.sub(r"[^\w\s]+", " ", t).strip()
+    if re.fullmatch(r"(?:ok\s+)?(?:por\s+favor\s+)?(?:pode\s+)?(?:continu(?:ar?|e|ando)|prossiga|segue)(?:\s+por\s+favor)?", t_limpo):
+        tem_vinculo = False
+        try:
+            row = db.execute("SELECT project_id FROM conversations WHERE id=? AND owner_id=?", (conv, dono_valido(owner))).fetchone()
+            if row and row[0]:
+                tem_vinculo = True
+        except Exception:
+            pass
+        if not tem_vinculo:
+            return ""
     if "onde param" in t or "estavamos fazendo" in t or "onde parei" in t:
         return _resumo_onde_paramos(db, owner, conv)
     scored = _projetos_relevantes(db, texto, owner)

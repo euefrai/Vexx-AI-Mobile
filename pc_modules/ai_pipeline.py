@@ -71,18 +71,23 @@ def _formatar_passo_shopping(fase: str, detalhe: str, texto_usuario: str) -> str
     elif "terabyte" in t:
         loja = "na Terabyte"
     else:
-        loja = "em múltiplas lojas (KaBuM!, Amazon, Mercado Livre)"
+        loja = "nos portais oficiais (KaBuM!, Mercado Livre...)"
 
     f = (fase or "").lower()
-    if "buscando" in f:
-        return f"Consultando produtos {loja}…"
-    if "confirmando" in f or "lendo" in f or "item" in f or "pagina" in f:
-        return f"Acessando páginas de produtos {loja} e extraindo especificações…"
-    if "comparando" in f or "filtro" in f:
-        return f"Comparando preços, especificações e avaliações entre lojas…"
+    if "etapa1" in f or "buscando" in f or "identificando" in f:
+        det = f" ({detalhe})" if detalhe and not detalhe.startswith("0") else ""
+        return f"🔎 Etapa 1: Acessando portais {loja} e coletando ofertas reais{det}…"
+    if "recuperando" in f:
+        return f"🔄 Etapa 1: Expandindo plano de busca e explorando catálogo adicional {loja}…"
+    if "etapa2" in f or "consultando" in f or "extraindo" in f or "validando" in f or "confirmando" in f or "lendo" in f or "item" in f or "pagina" in f or "verificando" in f:
+        det = f" ({detalhe})" if detalhe else ""
+        return f"📊 Etapa 2: Recuperando dados úteis, fotos em alta resolução e especificações técnicas{det}…"
+    if "etapa3" in f or "organizando" in f or "comparando" in f or "filtro" in f:
+        det = f" ({detalhe})" if detalhe else ""
+        return f"✨ Etapa 3: Formatando vitrine interativa JDUI e comparativo de preços{det}…"
     if detalhe:
-        return f"Verificando {detalhe} {loja}…"
-    return f"Consultando lojas e comparando opções…"
+        return f"🔎 {detalhe}…"
+    return f"🔎 Consultando lojas e comparando opções…"
 
 
 class _GuardaStreamResposta:
