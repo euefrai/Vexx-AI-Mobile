@@ -167,10 +167,16 @@ def find_pc_agent_dir() -> Optional[Path]:
         BASE_DIR,
         BASE_DIR / "julia-mobile-v0.2",
         BASE_DIR.parent / "julia-mobile-v0.2",
+        BASE_DIR.parent / "julia-mobile-v0.2-offline-sqlite" / "julia-mobile-v0.2",
+        BASE_DIR.parent / "julia-mobile-v0.2-offline-sqlite" / "vexx-pc-agent-publish-dd6f5c4",
         BASE_DIR.parent,
     ]
-    # Sibling folders do tipo *pc-agent*
+    # Sibling folders do tipo *julia* ou *pc-agent*
     try:
+        for p in BASE_DIR.parent.glob("*julia*"):
+            if p.is_dir():
+                candidatos.append(p)
+                candidatos.append(p / "julia-mobile-v0.2")
         for p in BASE_DIR.parent.glob("*pc-agent*"):
             if p.is_dir():
                 candidatos.append(p)
@@ -541,7 +547,11 @@ def _executar_tunel_embedded():
     while not app_state["shutdown"]:
         try:
             log.info("Conectando ao relay WebSocket: %s", ws_url)
-            headers = {"Authorization": "Bearer " + AGENT_TOKEN}
+            headers = {
+                "Authorization": "Bearer " + AGENT_TOKEN,
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+                "Origin": RELAY_URL,
+            }
             with connect(ws_url, additional_headers=headers, open_timeout=20, ping_interval=20, ping_timeout=20, max_size=25_000_000) as ws:
                 app_state["tunnel_online"] = True
                 atualizar_tooltip_tray()
@@ -663,11 +673,16 @@ def _executar_tunel_embedded():
                         log.warning("Erro ao processar mensagem do WebSocket: %s", msg_err)
 
         except Exception as conn_err:
-            log.warning("Conexão do túnel caiu (%s). Reconectando em %ds...", conn_err, backoff)
+            msg = str(conn_err)
+            if "403" in msg:
+                backoff = max(backoff, 120)
+                log.warning("Relay recusou o handshake (HTTP 403 / Cloudflare rate-limit). Aguardando %ds para resfriamento...", backoff)
+            else:
+                log.warning("Conexão do túnel caiu (%s). Reconectando em %ds...", conn_err, backoff)
             app_state["tunnel_online"] = False
             atualizar_tooltip_tray()
             time.sleep(backoff)
-            backoff = min(30, backoff * 1.5)
+            backoff = min(600, backoff * 1.5)
 
 
 def iniciar_tunel_agent():
