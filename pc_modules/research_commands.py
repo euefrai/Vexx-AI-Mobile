@@ -354,33 +354,78 @@ def _nome_amigavel(nome_bruto: str) -> str:
                 break
         if soquete and soquete.lower() not in modelo.lower():
             return f"{modelo} ({soquete})"
-        return modelo
+        modelo = re.sub(r"\s+\d+g\b.*$", "", modelo, flags=re.I)
+        modelo = re.sub(r"\s+\d+\s*gb\b.*$", "", modelo, flags=re.I)
+        return modelo.strip()
     return t[:40]
 
 
-def _extrair_soquete_chipset(nome: str) -> str:
+def _extrair_especificacoes_produto(nome: str, categoria: str = "") -> str:
+    cat = (categoria or "").lower()
     n = (nome or "").lower()
-    if "am4" in n and "a520" in n:
-        return "AM4 (A520)"
-    if "am4" in n and "b550" in n:
-        return "AM4 (B550)"
-    if "am4" in n and "b450" in n:
-        return "AM4 (B450)"
-    if "am5" in n and "b650" in n:
-        return "AM5 (B650)"
-    if "am5" in n and "a620" in n:
-        return "AM5 (A620)"
-    if "am5" in n:
-        return "AMD AM5"
-    if "am4" in n:
-        return "AMD AM4"
-    if "lga 1700" in n or "lga1700" in n or "h610" in n:
-        return "LGA 1700 (H610)"
-    if "b760" in n:
-        return "LGA 1700 (B760)"
-    if "lga 1200" in n or "h510" in n:
-        return "LGA 1200 (H510)"
+    if any(k in cat for k in ("placa mae", "placa mãe", "motherboard", "mobo")):
+        if "am4" in n and "a520" in n:
+            return "AM4 (A520)"
+        if "am4" in n and "b550" in n:
+            return "AM4 (B550)"
+        if "am4" in n and "b450" in n:
+            return "AM4 (B450)"
+        if "am5" in n and "b650" in n:
+            return "AM5 (B650)"
+        if "am5" in n and "a620" in n:
+            return "AM5 (A620)"
+        if "am5" in n:
+            return "AMD AM5"
+        if "am4" in n:
+            return "AMD AM4"
+        if "lga 1700" in n or "lga1700" in n or "h610" in n:
+            return "LGA 1700 (H610)"
+        if "b760" in n:
+            return "LGA 1700 (B760)"
+        if "lga 1200" in n or "h510" in n:
+            return "LGA 1200"
+        return "Padrão"
+    if any(k in cat for k in ("celular", "celulares", "smartphone", "smartphones", "telefone")):
+        partes = []
+        m_armazenamento = re.search(r"\b(64|128|256|512)\s*gb\b", nome, re.I)
+        if m_armazenamento:
+            partes.append(m_armazenamento.group(0).upper())
+        m_ram = re.search(r"\b(?:ram\s*)?(\d{1,2})\s*gb\s*(?:ram)?\b", nome, re.I)
+        if m_ram and (not m_armazenamento or m_ram.group(1) != m_armazenamento.group(1)):
+            partes.append(f"{m_ram.group(1)}GB RAM")
+        if re.search(r"\b5g\b", nome, re.I):
+            partes.append("5G")
+        elif re.search(r"\b4g\b", nome, re.I):
+            partes.append("4G")
+        return " · ".join(partes) if partes else "Smartphone"
+    if any(k in cat for k in ("fone", "fones", "headphone", "headset")):
+        partes = []
+        if re.search(r"\btws\b", n):
+            partes.append("TWS")
+        if re.search(r"\bbluetooth\b", n):
+            partes.append("Bluetooth")
+        elif re.search(r"\bsem\s+fio\b", n):
+            partes.append("Sem Fio")
+        if re.search(r"\banc\b|cancelamento\s+de\s+ru[ií]do", n):
+            partes.append("ANC")
+        return " · ".join(partes) if partes else "Áudio"
+    if any(k in cat for k in ("notebook", "laptop")):
+        partes = []
+        m_cpu = re.search(r"\b(i[3579]|ryzen\s*[3579])\b", n)
+        if m_cpu:
+            partes.append(m_cpu.group(0).upper())
+        m_ram = re.search(r"\b(\d{1,2})\s*gb\s*ram\b", n)
+        if m_ram:
+            partes.append(f"{m_ram.group(1)}GB")
+        m_ssd = re.search(r"\b(\d{3,4})\s*gb\s*ssd\b", n)
+        if m_ssd:
+            partes.append(f"{m_ssd.group(1)}GB SSD")
+        return " · ".join(partes) if partes else "Notebook"
     return "Padrão"
+
+
+def _extrair_soquete_chipset(nome: str) -> str:
+    return _extrair_especificacoes_produto(nome, "placa mae")
 
 
 def _sintese_shopping_autonoma(shop_res: dict, user_text: str) -> str:
@@ -410,44 +455,82 @@ def _sintese_shopping_autonoma(shop_res: dict, user_text: str) -> str:
         "Avaliação técnica baseada em custo por recurso, estabilidade de componentes, conectividade e opiniões de compradores."
         "</small>",
         "",
-        "| Posição | Modelo | Preço | Plataforma / Chipset | Nota | Veredito |",
+        "| Posição | Modelo | Preço | Especificações | Nota | Veredito |",
         "| :---: | :--- | :---: | :---: | :---: | :--- |",
     ]
 
     analises = []
+    cat_lower = categoria.lower()
+    eh_celular = any(k in cat_lower for k in ("celular", "smartphone", "telefone"))
+    eh_placa = any(k in cat_lower for k in ("placa mae", "placa mãe", "motherboard"))
 
     for idx, p in enumerate(prods_ordenados[:6]):
         nome_completo = p.get("nome") or "Produto"
         nome_curto = _nome_amigavel(nome_completo)
         preco = p.get("preco_texto") or (f"R$ {p.get('preco'):.2f}" if p.get("preco") else "Ver na loja")
         pos = medals[idx] if idx < len(medals) else f"#{idx+1}"
-        plat = _extrair_soquete_chipset(nome_completo)
+        plat = _extrair_especificacoes_produto(nome_completo, categoria)
 
         nome_l = nome_completo.lower()
-        if idx == 0:
-            nota = 9.8
-            veredito = "Melhor Custo-Benefício"
-            motivo = f"Preço imbatível ({preco}) com ótima estabilidade para builds de entrada e intermediárias."
-        elif "b550" in nome_l and "wifi" in nome_l:
-            nota = 9.6
-            veredito = "Mais Completa & Wi-Fi"
-            motivo = "Conta com barramento PCIe 4.0 para GPUs e SSDs ultra-rápidos, além de Wi-Fi 6E integrado."
-        elif "b550" in nome_l:
-            nota = 9.4
-            veredito = "Excelente p/ Upgrades"
-            motivo = "Suporte a PCIe 4.0 e VRMs reforçados para processadores de maior consumo."
-        elif idx == 1:
-            nota = 9.3
-            veredito = "Opção Super Econômica"
-            motivo = "Excelente alternativa de baixo custo mantendo recursos essenciais como slot M.2 NVMe."
-        elif "tuf" in nome_l:
-            nota = 9.1
-            veredito = "Construção Militar TUF"
-            motivo = "Componentes com maior tolerância térmica e durabilidade prolongada."
+        if eh_celular:
+            if idx == 0:
+                nota = 9.8
+                veredito = "Melhor Custo-Benefício"
+                motivo = f"Preço imbatível ({preco}) com ótimo conjunto de bateria e tela ampla para o dia a dia."
+            elif "iphone" in nome_l:
+                nota = 9.7
+                veredito = "Top de Linha Apple"
+                motivo = "Processador de altíssimo desempenho, câmeras de nível profissional e ecossistema iOS integrado."
+            elif "5g" in nome_l:
+                nota = 9.5
+                veredito = "Mais Conectado (5G)"
+                motivo = "Suporte a redes 5G de alta velocidade e excelente fluidez para streaming e redes sociais."
+            elif idx == 1:
+                nota = 9.3
+                veredito = "Opção Super Econômica"
+                motivo = "Alternativa acessível com bom armazenamento interno e bateria de longa duração."
+            else:
+                nota = max(8.6, round(9.1 - (idx * 0.15), 1))
+                veredito = "Equilibrado p/ Multitarefas"
+                motivo = "Bom conjunto de memória e câmeras para uso diário sem lentidão."
+        elif eh_placa:
+            if idx == 0:
+                nota = 9.8
+                veredito = "Melhor Custo-Benefício"
+                motivo = f"Preço imbatível ({preco}) com ótima estabilidade para builds de entrada e intermediárias."
+            elif "b550" in nome_l and "wifi" in nome_l:
+                nota = 9.6
+                veredito = "Mais Completa & Wi-Fi"
+                motivo = "Conta com barramento PCIe 4.0 para GPUs e SSDs ultra-rápidos, além de Wi-Fi 6E integrado."
+            elif "b550" in nome_l:
+                nota = 9.4
+                veredito = "Excelente p/ Upgrades"
+                motivo = "Suporte a PCIe 4.0 e VRMs reforçados para processadores de maior consumo."
+            elif idx == 1:
+                nota = 9.3
+                veredito = "Opção Super Econômica"
+                motivo = "Excelente alternativa de baixo custo mantendo recursos essenciais como slot M.2 NVMe."
+            elif "tuf" in nome_l:
+                nota = 9.1
+                veredito = "Construção Militar TUF"
+                motivo = "Componentes com maior tolerância térmica e durabilidade prolongada."
+            else:
+                nota = max(8.5, round(9.0 - (idx * 0.15), 1))
+                veredito = "Boa Opção de Mercado"
+                motivo = "Equilibrada para montagem básica com boa compatibilidade de memórias."
         else:
-            nota = max(8.5, round(9.0 - (idx * 0.15), 1))
-            veredito = "Boa Opção de Mercado"
-            motivo = "Equilibrada para montagem básica com boa compatibilidade de memórias."
+            if idx == 0:
+                nota = 9.8
+                veredito = "Melhor Custo-Benefício"
+                motivo = f"Oferta mais vantajosa com ótimo equilíbrio entre preço ({preco}) e qualidade."
+            elif idx == 1:
+                nota = 9.3
+                veredito = "Alternativa Econômica"
+                motivo = "Excelente escolha para economizar sem abrir mão dos recursos principais."
+            else:
+                nota = max(8.5, round(9.0 - (idx * 0.15), 1))
+                veredito = "Ótima Avaliação Geral"
+                motivo = "Produto bem avaliado pelos compradores com entrega rápida e garantia oficial."
 
         link = p.get("url_item") or p.get("url") or "#"
         linhas.append(f"| {pos} | [{nome_curto}]({link}) | **{preco}** | {plat} | **{nota:.1f}** ⭐ | {veredito} |")

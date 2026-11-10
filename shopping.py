@@ -2030,13 +2030,20 @@ def diagnosticar_provedores(timeout: float = 6.0) -> list:
 # ── Busca orquestrada (reusa Research Engine; sem loja única) ──────────
 
 _RX_PEDIDO_WORDS = re.compile(
-    r"\b(?:me\s+mostre|mostre|mostra|quero|queria|procuro|procura|procure|procurar|"
+    r"\b(?:me\s+mostr[ea]|mostr[ea]|me\s+d[eê]|me\s+d[aá]|me\s+v[eê]|me\s+indiqu?e?|me\s+recomende?|"
+    r"me\s+fale|me\s+traga|me\s+traz|me\s+ache|me\s+procure|me\s+pesquise|"
+    r"quero|queria|procuro|procura|procure|procurar|"
     r"pesquis[ea]|pesquisar|pesquisa|busque|buscar|busca|encontre|encontrar|ache|achar|"
     r"pre[cç]os?|preco|imagens?|fotos?|links?|comprar|compra|ofertas?|promo[cç][aã]o|promo|onde|"
     r"quanto|custa|por\s+favor|pra\s+mim|para\s+mim|imagem|"
     r"compare|comparativo|comparar|comparando|qual\s+o?\s*melhor|qual\s+o?\s*menor|"
-    r"qual\s+tem\s+mais|o\s+melhor|o\s+menor|uma?\s+boa|bons?|boas?|"
-    r"recomende|indique|versus|\bvs\b|diferen[cç]a)\b",
+    r"qual\s+tem\s+mais|o\s+melhor|o\s+menor|uma?\s+boa|bons?|boas?|baratos?|baratas?|"
+    r"recomende|indique|versus|\bvs\b|diferen[cç]a|"
+    r"alguns?|algumas?|uns|umas|outros?|outras?|"
+    r"nesse\s+m[eê]s(?:\s+de\s+[a-z]+)?|neste\s+m[eê]s(?:\s+de\s+[a-z]+)?|"
+    r"no\s+m[eê]s(?:\s+de\s+[a-z]+)?|deste\s+m[eê]s|desse\s+m[eê]s|"
+    r"em\s+(?:janeiro|fevereiro|mar[cç]o|abril|maio|junho|julho|agosto|setembro|outubro|novembro|dezembro)|"
+    r"(?:neste|nesse|em)\s+ano|em\s+20\d\d|hoje|agora|atualmente)\b",
     re.IGNORECASE)
 
 
@@ -2053,7 +2060,11 @@ def _termo_referencia(texto: str) -> str:
     t = re.sub(r"\bplacas?\s*(?:de\s*)?m[aã]es?\b", "placa mae", t, flags=re.I)
     t = re.sub(r"\b(motherboards?|mobos?)\b", "placa mae", t, flags=re.I)
     vazias = {"e", "o", "a", "os", "as", "de", "do", "da", "dos", "das",
-              "por", "com", "para", "pra", "no", "na", "nos", "nas"}
+              "por", "com", "para", "pra", "no", "na", "nos", "nas",
+              "me", "mim", "em", "nesse", "neste", "desse", "deste",
+              "mes", "mês", "ano", "algum", "alguns", "alguma", "algumas",
+              "um", "uma", "uns", "umas", "outro", "outros", "outra", "outras",
+              "barato", "barata", "baratos", "baratas"}
     palavras = [w for w in t.split()
                 if w.lower() not in vazias
                 and not re.fullmatch(r"[.,;:!?()\-]+", w)]
@@ -2084,6 +2095,11 @@ def _consultas_produto(criterios: dict, texto: str) -> list:
     if criterios.get("categoria") in ("placa de video", "placa de vídeo"):
         ref = re.sub(r"^(?:algumas?|alguns?|umas?|uns?)\s+", "", ref, flags=re.I)
         ref = re.sub(r"\bque\s+(?:tem|tenham|tenha)\s+(?=\d)", "", ref, flags=re.I)
+    if criterios.get("categoria") in ("celular", "celulares", "smartphone", "smartphones"):
+        ref = re.sub(r"^(?:algumas?|alguns?|umas?|uns?)\s+", "", ref, flags=re.I)
+        ref = re.sub(r"\bcelulares?\b", "smartphone", ref, flags=re.I)
+        if not ref.strip() or ref.strip() in ("smartphone", "barato", "barata", "baratos", "baratas", "smartphone barato"):
+            ref = "smartphone"
     if (criterios.get("categoria") in ("fone", "fones") or "fone" in (ref or "").lower()) and "ouvido" not in (ref or "").lower() and "head" not in (ref or "").lower() and "ear" not in (ref or "").lower():
         ref = re.sub(r"\bfones?\b", "fone de ouvido", ref, flags=re.I)
     if ref and orc.get("max"):
@@ -2421,7 +2437,10 @@ _RX_REF_URL_PRODUTO = re.compile(
     r"comprar|buy)(?:/|\?|$)", re.I)
 _RX_REF_NAO_PRODUTO = re.compile(
     r"/(?:author|autor|blog|blogs|tag|tags|forum|forums|wiki|noticias|news|"
-    r"login|entrar|conta|cadastro|sobre|contact)(?:/|$)", re.I)
+    r"login|entrar|conta|cadastro|sobre|contact|"
+    r"dicionario|dicionarios|palavra|palavras|significado|significados|"
+    r"definicao|definicoes|sinonimo|sinonimos|verbete|conjugacao|"
+    r"artigo|artigos|tutoriais|tutorial|guia|guias)(?:/|$)", re.I)
 _RX_REF_HOST_LISTA = re.compile(r"^(?:lista|busca|search|categoria)\.", re.I)
 _RX_REF_TITULO_LISTA = re.compile(
     r"(loja (de|online)|as melhores|os melhores|melhores |guia |"
@@ -2430,7 +2449,21 @@ _RX_REF_TITULO_LISTA = re.compile(
 _TERMOS_REF_IGNORADOS = {
     "para", "com", "sem", "jogar", "usar", "usado", "comprar", "oferta",
     "ofertas", "melhor", "melhores", "brasil", "preco", "quero", "barato",
-    "barata", "onde", "link", "links", "produto", "produtos"}
+    "barata", "baratos", "baratas", "onde", "link", "links", "produto", "produtos",
+    "algum", "alguns", "alguma", "algumas", "outro", "outros", "outra", "outras",
+    "nesse", "neste", "desse", "deste", "mes", "ano", "hoje", "agora", "novembro"}
+
+_HOSTS_IGNORADOS_COMPRA = {
+    "infopedia.pt", "www.infopedia.pt",
+    "escreva.ai", "www.escreva.ai",
+    "dicio.com.br", "www.dicio.com.br",
+    "significados.com.br", "www.significados.com.br",
+    "priberam.pt", "dicionario.priberam.org",
+    "wikcionario.org", "pt.wiktionary.org",
+    "wikipedia.org", "pt.wikipedia.org",
+    "todamateria.com.br", "www.todamateria.com.br",
+    "brasilescola.uol.com.br", "mundoeducacao.uol.com.br"
+}
 
 
 def _termos_busca(*textos: str) -> set:
@@ -2477,6 +2510,8 @@ def _ref_de_busca(cand: dict, motivo: dict, consulta: str,
     host = (partes.hostname or "").lower()
     caminho = partes.path or ""
     if not host or not caminho.strip("/"):
+        return None
+    if host in _HOSTS_IGNORADOS_COMPRA or any(h in host for h in ("infopedia", "escreva.ai", "dicio", "priberam", "wikcionario", "wikipedia")):
         return None
     if source_check.url_de_catalogo_produtos(url) or _RX_REF_HOST_LISTA.match(host) \
             or _RX_REF_NAO_PRODUTO.search(caminho):
@@ -2700,9 +2735,10 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
                 if "_consulta" not in a:
                     a["_consulta"] = q
                 achados.append(a)
-    # Loop de replanejamento: se a busca inicial rendeu poucos candidatos (< 3),
+    # Loop de replanejamento: se a busca inicial rendeu poucos candidatos comerciais (< 3),
     # cria planos secundários específicos (ex.: chipsets populares, termos diretos)
-    if len(achados) < 3 and buscar_fn is None:
+    comerciais_total = sum(1 for a in achados if a.get("tipo") in ("produto", "comercial") or a.get("origem") == "kabum-search")
+    if comerciais_total < 3 and buscar_fn is None:
         _prog("recuperando", f"Ampliando busca de {consulta}")
         cat = (criterios.get("categoria") or "").lower()
         planos_extra = []
@@ -2710,8 +2746,12 @@ def pesquisar(db, owner: str, texto: str, conv: str = "",
             planos_extra = ["placa mae am4", "placa mae a520", "placa mae h610", "placa mae b450"]
         elif cat in ("placa de video", "placa de vídeo"):
             planos_extra = ["placa de video rtx", "placa de video rx", "placa de video gtx"]
+        elif cat in ("celular", "celulares", "smartphone", "smartphones"):
+            planos_extra = ["smartphone", "celular barato", "smartphone kabum"]
+        elif cat in ("fone", "fones"):
+            planos_extra = ["fone bluetooth", "fone de ouvido", "headphone"]
         elif cat:
-            planos_extra = [f"{cat} barata", f"{cat} menor preco", f"{cat} kabum"]
+            planos_extra = [f"{cat} menor preco", f"{cat} kabum"]
         for extra_q in planos_extra:
             if len(achados) >= 6:
                 break
