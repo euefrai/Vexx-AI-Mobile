@@ -67,6 +67,19 @@ app_state = {
 _model_lock = threading.Lock()
 _loaded_llm = None
 _loaded_model_id = ""
+_vl_chat_handler = None
+
+
+def tem_imagem(msgs) -> bool:
+    for m in msgs:
+        c = m.get("content")
+        if isinstance(c, list):
+            for part in c:
+                if isinstance(part, dict) and part.get("type") in ("image_url", "image"):
+                    return True
+        elif isinstance(c, str) and ("data:image/" in c or any(ext in c.lower() for ext in (".jpg", ".jpeg", ".png", ".webp"))):
+            return True
+    return False
 
 
 # =====================================================================
@@ -104,7 +117,7 @@ def set_startup_enabled(enabled: bool):
 # 2. GERENCIADOR DE MODELOS LLM LOCAL (llama_cpp)
 # =====================================================================
 def carregar_llm(solicitado: str = "qwen2.5-vl-7b-instruct"):
-    global _loaded_llm, _loaded_model_id
+    global _loaded_llm, _loaded_model_id, _vl_chat_handler
     with _model_lock:
         if _loaded_llm is not None and _loaded_model_id == solicitado:
             return _loaded_llm, _loaded_model_id
@@ -115,20 +128,19 @@ def carregar_llm(solicitado: str = "qwen2.5-vl-7b-instruct"):
         if solicitado in ("qwen2.5-vl-7b-instruct", "qwen2.5-vl-7b", "auto"):
             if VL_MODEL_FILE.exists() and VL_MODEL_FILE.stat().st_size > 1_000_000_000:
                 log.info("Carregando Qwen 2.5-VL 7B: %s", VL_MODEL_FILE)
-                chat_handler = None
                 if VL_PROJ_FILE.exists() and VL_PROJ_FILE.stat().st_size > 100_000_000:
                     try:
                         from llama_cpp.llama_chat_format import Qwen25VLChatHandler
-                        chat_handler = Qwen25VLChatHandler(clip_model_path=str(VL_PROJ_FILE))
-                        log.info("Projetor multimodal VL ativado: %s", VL_PROJ_FILE)
+                        _vl_chat_handler = Qwen25VLChatHandler(clip_model_path=str(VL_PROJ_FILE))
+                        log.info("Projetor multimodal VL inicializado: %s", VL_PROJ_FILE)
                     except Exception as exc:
                         log.warning("Falha ao inicializar chat handler VL: %s", exc)
 
                 try:
                     _loaded_llm = Llama(
                         model_path=str(VL_MODEL_FILE),
-                        chat_handler=chat_handler,
-                        n_ctx=8192,
+                        chat_handler=None,
+                        n_ctx=4096,
                         n_threads=4,
                         n_batch=512,
                         verbose=False
@@ -146,7 +158,8 @@ def carregar_llm(solicitado: str = "qwen2.5-vl-7b-instruct"):
                 log.info("Carregando Qwen 2.5 1.5B: %s", MODEL_15B_FILE)
                 _loaded_llm = Llama(
                     model_path=str(MODEL_15B_FILE),
-                    n_ctx=8192,
+                    chat_handler=None,
+                    n_ctx=4096,
                     n_threads=4,
                     n_batch=512,
                     verbose=False
@@ -160,7 +173,8 @@ def carregar_llm(solicitado: str = "qwen2.5-vl-7b-instruct"):
             log.info("Carregando Qwen 2.5 3B: %s", MODEL_3B_FILE)
             _loaded_llm = Llama(
                 model_path=str(MODEL_3B_FILE),
-                n_ctx=8192,
+                chat_handler=None,
+                n_ctx=4096,
                 n_threads=4,
                 n_batch=512,
                 verbose=False
@@ -254,12 +268,12 @@ def iniciar_servidor_fastapi():
         ]
         return {"object": "list", "data": items}
 
-    def _trim_messages(msgs, max_chars=24000):
+    def _trim_messages(msgs, max_chars=12000):
         total_chars = sum(len(str(m.get("content", ""))) for m in msgs)
         if total_chars <= max_chars or len(msgs) <= 3:
             return msgs
         sys_msgs = [m for m in msgs if m.get("role") == "system"]
-        tail = [m for m in msgs if m.get("role") != "system"][-6:]
+        tail = [m for m in msgs if m.get("role") != "system"][-4:]
         return (sys_msgs[:1] if sys_msgs else []) + tail
 
     @server_app.post("/v1/chat/completions")
@@ -273,6 +287,10 @@ def iniciar_servidor_fastapi():
             temperature = float(body.get("temperature", 0.7))
 
             llm, model_usado = carregar_llm(model_req)
+            if tem_imagem(messages) and _vl_chat_handler is not None:
+                llm.chat_handler = _vl_chat_handler
+            else:
+                llm.chat_handler = None
 
             if stream:
                 def _streamer():
