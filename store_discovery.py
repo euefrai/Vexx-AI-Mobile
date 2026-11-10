@@ -24,7 +24,12 @@ def catalog_query(query):
              'na', 'a', 'à', 'e', 'para', 'por', 'gpu', 'vram', 'compare', 'comparar',
              'comparativo', 'comparando', 'qual', 'versus', 'vs', 'diferença', 'diferenca',
              'recomende', 'indique', 'abaixo', 'menos', 'ate', 'até', 'top', 'barato',
-             'barata', 'reais', 'r'}
+             'barata', 'baratos', 'baratas', 'bom', 'bons', 'boa', 'boas', 'reais', 'r',
+             'me', 'mim', 'eu', 'mostre', 'mostra', 'mostrar', 'diga', 'fale', 've', 'vê', 'ver',
+             'traz', 'traga', 'ache', 'achar', 'algum', 'alguns', 'alguma', 'algumas',
+             'uns', 'umas', 'outro', 'outros', 'outra', 'outras', 'qualquer',
+             'nesse', 'neste', 'deste', 'desse', 'mes', 'mês', 'meses', 'ano', 'anos',
+             'hoje', 'agora', 'atualmente', 'novembro', 'dezembro', 'janeiro'}
     cleaned_words = [word for word in words if word.casefold() not in noise]
     lower_words = [w.casefold() for w in cleaned_words]
     if any(w in ('fone', 'fones') for w in lower_words) and not any(w in ('ouvido', 'headphone', 'headset', 'earbuds', 'airpods') for w in lower_words):
@@ -32,6 +37,14 @@ def catalog_query(query):
         for w in cleaned_words:
             if w.casefold() in ('fone', 'fones'):
                 expanded.extend(['fone', 'de', 'ouvido'])
+            else:
+                expanded.append(w)
+        cleaned_words = expanded
+    elif any(w in ('celular', 'celulares') for w in lower_words) and not any(w in ('smartphone', 'smartphones') for w in lower_words):
+        expanded = []
+        for w in cleaned_words:
+            if w.casefold() in ('celular', 'celulares'):
+                expanded.append('smartphone')
             else:
                 expanded.append(w)
         cleaned_words = expanded
@@ -94,6 +107,8 @@ def search_kabum(query, limit=8, timeout=5):
     topic_low = topic.casefold()
     if 'fone' in topic_low or 'headphone' in topic_low or 'headset' in topic_low or 'earbud' in topic_low:
         rows = [r for r in rows if not re.search(r'\b(?:fonte\s+carregador|fonte\s+para\s+notebook|carregador\s+para|fonte\s+chaveada|fonte\s+atx)\b', (r.get('titulo') or '').casefold())]
+    if 'smartphone' in topic_low or 'celular' in topic_low:
+        rows = [r for r in rows if not re.search(r'\b(?:carregador|power\s*bank|capa|pel[ií]cula|suporte|cabo|fone|buds|headset|adaptador)\b', (r.get('titulo') or '').casefold())]
     if len(_CACHE) >= 32:
         _CACHE.pop(next(iter(_CACHE)))
     # A short discovery cache never constitutes a fresh offer verification.
