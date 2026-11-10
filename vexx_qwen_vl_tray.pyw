@@ -508,7 +508,10 @@ def iniciar_servidor_fastapi():
         log.info("Iniciando FastAPI na porta %d...", PORT)
         app_state["server_online"] = True
         try:
-            uvicorn.run(server_app, host="127.0.0.1", port=PORT, log_level="warning")
+            config = uvicorn.Config(app=server_app, host="127.0.0.1", port=PORT, log_level="warning")
+            server = uvicorn.Server(config)
+            server.install_signal_handlers = lambda: None
+            server.run()
         except Exception as exc:
             log.error("Falha no servidor FastAPI: %s", exc)
             app_state["server_online"] = False
