@@ -564,7 +564,12 @@ def main():
     threading.Thread(target=_timer_update, daemon=True).start()
 
     # Roda o loop da bandeja (bloqueante na thread principal da interface)
-    icon.run()
+    try:
+        icon.run()
+    except Exception as exc:
+        log.error("Exceção no pystray (bandeja): %s. Mantendo servidor e túnel ativos em loop contínuo.", exc)
+        while not app_state["shutdown"]:
+            time.sleep(1)
 
 
 if __name__ == "__main__":
