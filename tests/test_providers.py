@@ -126,6 +126,8 @@ def test_req_auth_header():
 
 
 def test_listar_sem_chaves_mostra_curadoria_sem_vazar(monkeypatch):
+    import env_local
+    monkeypatch.setattr(env_local, "valores_do_arquivo", lambda *a, **k: {})
     for env in ("OPENAI_API_KEY", "GEMINI_API_KEY", "ANTHROPIC_API_KEY",
                 "DEEPSEEK_API_KEY", "GROQ_API_KEY", "MISTRAL_API_KEY",
                 "OPENROUTER_API_KEY"):
@@ -134,7 +136,7 @@ def test_listar_sem_chaves_mostra_curadoria_sem_vazar(monkeypatch):
                         lambda *a, **k: (_ for _ in ()).throw(
                             hermes_bridge.BridgeErro("x", "indisponivel")))
     cat = providers.listar_tudo()
-    assert cat["models"] == [] or all("/" in m or m in ("qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b") for m in cat["models"])
+    assert cat["models"] == [] or all("/" in m or m in ("qwen2.5-vl-7b-instruct", "qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b") for m in cat["models"])
     assert "sk-" not in json.dumps(cat)
     assert {p["id"] for p in cat["providers"]} >= {"hermes", "openai", "gemini"}
     assert all(p["configured"] is False for p in cat["providers"] if p["id"] not in ("hermes", "vexx", "qwen_local"))
@@ -234,6 +236,12 @@ def test_tentar_para_no_auth(monkeypatch):
 
 
 def test_gerar_texto_roteia(monkeypatch):
+    import env_local
+    monkeypatch.setattr(env_local, "valores_do_arquivo", lambda *a, **k: {})
+    for env in ("OPENAI_API_KEY", "GEMINI_API_KEY", "ANTHROPIC_API_KEY",
+                "DEEPSEEK_API_KEY", "GROQ_API_KEY", "MISTRAL_API_KEY",
+                "OPENROUTER_API_KEY"):
+        monkeypatch.delenv(env, raising=False)
     import pc_agent
     chamadas = {}
     monkeypatch.setattr(providers, "tentar_modelos",

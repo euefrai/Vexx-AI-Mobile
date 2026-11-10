@@ -119,27 +119,33 @@ async def ai_models(request: Request):
     dono = sessao_usuario(request)
     _rate_limit(request, "ai", dono)
 
+    local_vl_item = {
+        "id": "qwen2.5-vl-7b-instruct",
+        "provider": "qwen_local",
+        "label": "🖥️ Qwen 2.5-VL 7B (Local PC - Visão & Raciocínio)",
+        "free": True
+    }
     local_item = {
         "id": "qwen2.5-1.5b-instruct",
         "provider": "qwen_local",
-        "label": "🖥️ Qwen 2.5 1.5B Instruct (Local PC - Principal)",
+        "label": "🖥️ Qwen 2.5 1.5B Instruct (Modelo 1.5 - Local PC)",
         "free": True
     }
     local_provider = {
         "id": "qwen_local",
-        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Principal)",
+        "label": "🖥️ Qwen 2.5 1.5B (Modelo 1.5 - Local PC)",
         "configured": True,
         "source": "local_pc"
     }
     vexx_item = {
         "id": "vexx-qwen-2.5-3b",
         "provider": "vexx",
-        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo 3)",
         "free": True
     }
     vexx_provider = {
         "id": "vexx",
-        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Próprio VEXX AI - Prioritário)",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo 3)",
         "configured": True,
         "source": "hf_space"
     }
@@ -151,9 +157,9 @@ async def ai_models(request: Request):
 
     if not isinstance(result, dict) or result.get("type") != "ai_models":
         return {
-            "models": ["qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b"],
-            "default": "qwen2.5-1.5b-instruct",
-            "items": [local_item, vexx_item],
+            "models": ["qwen2.5-vl-7b-instruct", "qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b"],
+            "default": "qwen2.5-vl-7b-instruct",
+            "items": [local_vl_item, local_item, vexx_item],
             "providers": [local_provider, vexx_provider]
         }
 
@@ -167,15 +173,17 @@ async def ai_models(request: Request):
     if not isinstance(models, list):
         models = []
 
-    for m_id in ("vexx-qwen-2.5-3b", "qwen2.5-1.5b-instruct"):
+    for m_id in ("vexx-qwen-2.5-3b", "qwen2.5-1.5b-instruct", "qwen2.5-vl-7b-instruct"):
         if m_id in models:
             models.remove(m_id)
     models.insert(0, "vexx-qwen-2.5-3b")
     models.insert(0, "qwen2.5-1.5b-instruct")
+    models.insert(0, "qwen2.5-vl-7b-instruct")
 
-    itens = [i for i in itens if isinstance(i, dict) and i.get("id") not in ("qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b")]
+    itens = [i for i in itens if isinstance(i, dict) and i.get("id") not in ("qwen2.5-vl-7b-instruct", "qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b")]
     itens.insert(0, vexx_item)
     itens.insert(0, local_item)
+    itens.insert(0, local_vl_item)
 
     provs = [p for p in provs if isinstance(p, dict) and p.get("id") not in ("qwen_local", "vexx")]
     provs.insert(0, vexx_provider)
