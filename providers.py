@@ -106,12 +106,12 @@ PROVIDERS = {
         "modelos": ["vexx-qwen-2.5-3b"],
     },
     "qwen_local": {
-        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Secundário)",
+        "label": "🖥️ Qwen 2.5 (Local PC)",
         "key_env": None,
         "base": "http://127.0.0.1:8008/v1",
         "hosts": ("127.0.0.1", "localhost"),
         "api": "openai",
-        "modelos": ["qwen2.5-1.5b-instruct"],
+        "modelos": ["qwen2.5-vl-7b-instruct", "qwen2.5-1.5b-instruct", "qwen2.5-3b-instruct"],
         "api_key": "sk-local",
     },
     "hermes": {
@@ -272,9 +272,9 @@ def dividir(modelo: str) -> tuple:
     """'gemini/gemini-2.0-flash' → ('gemini', 'gemini-2.0-flash').
     Sem prefixo conhecido → ('hermes', modelo) (legado)."""
     texto = str(modelo or "").strip()
-    if texto in ("qwen2.5-1.5b-instruct", "qwen_local/qwen2.5-1.5b-instruct", "local/qwen2.5-1.5b-instruct") or texto.startswith(("qwen_local/", "local/")):
+    if texto in ("qwen2.5-vl-7b-instruct", "qwen2.5-vl-7b", "qwen2.5-1.5b-instruct", "qwen_local/qwen2.5-1.5b-instruct", "local/qwen2.5-1.5b-instruct") or texto.startswith(("qwen_local/", "local/")):
         resto = texto.split("/", 1)[1] if "/" in texto else texto
-        return "qwen_local", resto or "qwen2.5-1.5b-instruct"
+        return "qwen_local", resto or "qwen2.5-vl-7b-instruct"
     if texto in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b", "qwen2.5-3b-instruct", "qwen_local/qwen2.5-3b-instruct") or texto.startswith("vexx/"):
         return "vexx", "vexx-qwen-2.5-3b"
     if "/" in texto:
@@ -326,24 +326,24 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
     vexx_item = {
         "id": "vexx-qwen-2.5-3b",
         "provider": "vexx",
-        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo 3)",
         "free": True,
     }
     local_item = {
         "id": "qwen2.5-1.5b-instruct",
         "provider": "qwen_local",
-        "label": "🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)",
+        "label": "🖥️ Qwen 2.5 1.5B Instruct (Modelo 1.5 - Local PC)",
         "free": True,
     }
     vexx_provider = {
         "id": "vexx",
-        "label": "⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)",
+        "label": "⚡ VEXX Qwen 2.5 3B (Modelo 3)",
         "configured": True,
         "source": "hf_space"
     }
     local_provider = {
         "id": "qwen_local",
-        "label": "🖥️ Qwen 2.5 1.5B (Local PC - Secundário)",
+        "label": "🖥️ Qwen 2.5 1.5B (Modelo 1.5 - Local PC)",
         "configured": True,
         "source": "local_pc"
     }

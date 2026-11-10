@@ -115,13 +115,17 @@
         </div>
         <div class="drawer-model">
           <label for="modelSelect">Modelo</label>
+          <div class="model-quick-switcher" style="display:flex;gap:6px;margin:6px 0 8px 0;">
+            <button type="button" id="btnModel3B" class="btn-model-quick" style="flex:1;padding:7px 10px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;background:var(--primary-color, #2563eb);color:#fff;border:1px solid rgba(255,255,255,0.15);transition:all 0.2s;" title="Usar Modelo 3 (Qwen 2.5 3B)">⚡ Modelo 3 (Nuvem)</button>
+            <button type="button" id="btnModel15B" class="btn-model-quick" style="flex:1;padding:7px 10px;border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;background:rgba(255,255,255,0.06);color:var(--text-muted, #94a3b8);border:1px solid rgba(255,255,255,0.1);transition:all 0.2s;" title="Usar Modelo 1.5 (Qwen 2.5 1.5B Local)">🖥️ Modelo 1.5 (PC)</button>
+          </div>
           <input id="modelSearch" class="model-search" type="search" placeholder="Pesquisar modelo ou provedor…" aria-label="Pesquisar modelo" autocomplete="off" />
           <select id="modelSelect" class="model-select" size="8" aria-label="Modelo de IA" aria-describedby="modelResults modelSelected">
-            <optgroup label="⚡ Modelo Principal (VEXX AI)">
-              <option value="vexx-qwen-2.5-3b" selected>⚡ VEXX Qwen 2.5 3B (Modelo Principal VEXX AI)</option>
+            <optgroup label="⚡ Modelo 3 (VEXX AI)">
+              <option value="vexx-qwen-2.5-3b" selected>⚡ VEXX Qwen 2.5 3B (Modelo 3)</option>
             </optgroup>
-            <optgroup label="🖥️ IA Local (Secundário)">
-              <option value="qwen2.5-1.5b-instruct">🖥️ Qwen 2.5 1.5B Instruct (Local PC - Secundário)</option>
+            <optgroup label="🖥️ Modelo 1.5 (Local PC)">
+              <option value="qwen2.5-1.5b-instruct">🖥️ Qwen 2.5 1.5B Instruct (Modelo 1.5 - Local PC)</option>
             </optgroup>
           </select>
           <small id="modelResults" class="model-hint" role="status"></small>

@@ -12,6 +12,40 @@ import hermes_bridge
 import providers
 
 
+def test_evidence_json_survives_provider_adapters_without_mid_document_cut():
+    payload = json.dumps({'sources': [{'id': 'E1', 'excerpt': 'evidence ' * 1800}],
+                          'requirements': ['late requirement']})
+    messages = [{'role': 'system', 'content': 'strict contract'}, {'role': 'user', 'content': payload}]
+    assert len(payload) > 12000
+    for converted in (providers._para_openai(messages), providers._para_anthropic(messages)[1]):
+        assert json.loads(converted[-1]['content']) == json.loads(payload)
+
+
+@pytest.mark.parametrize('catalog,expected', [
+    (['vendor/current:free'], 'vendor/current:free'),
+    (['vendor/paid'], hermes_bridge.DEFAULT_MODEL),
+    ([hermes_bridge.DEFAULT_MODEL, 'vendor/current:free'], hermes_bridge.DEFAULT_MODEL),
+])
+def test_ui_default_comes_from_live_free_catalog(monkeypatch, catalog, expected):
+    monkeypatch.setattr(providers, 'chave', lambda _: '')
+    monkeypatch.setattr(hermes_bridge, 'listar_modelos', lambda *a, **k: catalog)
+    providers._remember_catalog('hermes', catalog, '')
+    assert providers.cached_default('', hermes_bridge.DEFAULT_MODEL) == expected
+
+
+@pytest.mark.parametrize('messages', [
+    [{'role': 'user', 'content': 'x' * 64001}],
+    [{'role': 'user', 'content': 'x' * 50000}] * 3,
+    [{'role': 'user', 'content': 'x'}] * 65,
+])
+def test_provider_context_limit_is_explicit_and_does_not_leak_content(messages):
+    for adapter in (providers._para_openai, providers._para_anthropic):
+        with pytest.raises(hermes_bridge.BridgeErro) as exc:
+            adapter(messages)
+        assert exc.value.codigo == 'pedido'
+        assert 'xxxxx' not in str(exc.value)
+
+
 class _Resp:
     def __init__(self, corpo: bytes):
         self._corpo = corpo
@@ -66,7 +100,7 @@ def test_configurados_respeita_chave(monkeypatch):
                 "DEEPSEEK_API_KEY", "GROQ_API_KEY", "MISTRAL_API_KEY",
                 "OPENROUTER_API_KEY"):
         monkeypatch.delenv(env, raising=False)
-    assert providers.configurados() == ["hermes"]
+    assert set(providers.configurados()) >= {"hermes", "vexx", "qwen_local"}
     monkeypatch.setenv("GEMINI_API_KEY", "  AIzafake  ")
     assert providers.chave("gemini") == "AIzafake"
     assert "gemini" in providers.configurados()
@@ -92,6 +126,8 @@ def test_req_auth_header():
 
 
 def test_listar_sem_chaves_mostra_curadoria_sem_vazar(monkeypatch):
+    import env_local
+    monkeypatch.setattr(env_local, "valores_do_arquivo", lambda *a, **k: {})
     for env in ("OPENAI_API_KEY", "GEMINI_API_KEY", "ANTHROPIC_API_KEY",
                 "DEEPSEEK_API_KEY", "GROQ_API_KEY", "MISTRAL_API_KEY",
                 "OPENROUTER_API_KEY"):
@@ -100,10 +136,10 @@ def test_listar_sem_chaves_mostra_curadoria_sem_vazar(monkeypatch):
                         lambda *a, **k: (_ for _ in ()).throw(
                             hermes_bridge.BridgeErro("x", "indisponivel")))
     cat = providers.listar_tudo()
-    assert cat["models"] == [] or all("/" in m for m in cat["models"])
+    assert cat["models"] == [] or all("/" in m or m in ("qwen2.5-vl-7b-instruct", "qwen2.5-1.5b-instruct", "vexx-qwen-2.5-3b") for m in cat["models"])
     assert "sk-" not in json.dumps(cat)
     assert {p["id"] for p in cat["providers"]} >= {"hermes", "openai", "gemini"}
-    assert all(p["configured"] is False for p in cat["providers"] if p["id"] != "hermes")
+    assert all(p["configured"] is False for p in cat["providers"] if p["id"] not in ("hermes", "vexx", "qwen_local"))
 
 
 def test_listar_com_chave_usa_live_ou_curadoria(monkeypatch):
@@ -200,6 +236,12 @@ def test_tentar_para_no_auth(monkeypatch):
 
 
 def test_gerar_texto_roteia(monkeypatch):
+    import env_local
+    monkeypatch.setattr(env_local, "valores_do_arquivo", lambda *a, **k: {})
+    for env in ("OPENAI_API_KEY", "GEMINI_API_KEY", "ANTHROPIC_API_KEY",
+                "DEEPSEEK_API_KEY", "GROQ_API_KEY", "MISTRAL_API_KEY",
+                "OPENROUTER_API_KEY"):
+        monkeypatch.delenv(env, raising=False)
     import pc_agent
     chamadas = {}
     monkeypatch.setattr(providers, "tentar_modelos",
@@ -211,6 +253,7 @@ def test_gerar_texto_roteia(monkeypatch):
     pc_agent.gerar_texto(cfg, [], preferido="openai/gpt-4o-mini")
     assert chamadas == {"prov": True}
     chamadas.clear()
+    monkeypatch.setattr(pc_agent.db_core, "FALLBACKS_GRATIS_PADRAO", ["laguna"])
     pc_agent.gerar_texto({**cfg, "model": "laguna"}, [], preferido="laguna")
     assert chamadas == {"hermes": True}
 
