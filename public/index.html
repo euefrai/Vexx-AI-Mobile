@@ -617,12 +617,106 @@
   </dialog>
 
   <dialog id="providersDialog" class="organize-dialog providers-dialog" aria-labelledby="providersTitle">
-    <div class="dialog-heading"><h2 id="providersTitle">Provedores de IA</h2><button class="icon-button" id="providersClose" type="button" aria-label="Fechar"><svg class="icon"><use href="#i-close"/></svg></button></div>
-    <p class="dialog-description">Cole a chave de API para usar os modelos do provedor como IA. As chaves ficam <strong>só neste PC</strong> — o servidor e o aplicativo nunca guardam nem mostram de volta.</p>
-    <div id="providersList" class="providers-list" aria-live="polite"></div>
-    <p id="providersNotice" class="provider-notice" role="status"></p>
-    <p id="providersError" class="login-error" role="alert" hidden></p>
-    <div class="dialog-actions"><button class="subtle-button" id="providersRefresh" type="button">Atualizar lista de modelos</button></div>
+    <div class="dialog-heading"><h2 id="providersTitle">Conexões & Provedores de IA</h2><button class="icon-button" id="providersClose" type="button" aria-label="Fechar"><svg class="icon"><use href="#i-close"/></svg></button></div>
+
+    <!-- Navegação por Abas -->
+    <div class="providers-tabs-bar" role="tablist">
+      <button class="prov-tab-btn active" id="tabBtnOfficial" type="button" role="tab" aria-selected="true" data-tab="official">🔑 Oficiais</button>
+      <button class="prov-tab-btn" id="tabBtnCustom" type="button" role="tab" aria-selected="false" data-tab="custom">🌐 Personalizado / Remoto</button>
+      <button class="prov-tab-btn" id="tabBtnTunnels" type="button" role="tab" aria-selected="false" data-tab="tunnels">🚇 Túnel SSH & Outro PC</button>
+    </div>
+
+    <!-- Aba 1: Provedores Oficiais -->
+    <div id="tabPaneOfficial" class="prov-tab-pane active" role="tabpanel">
+      <p class="dialog-description">Cole a chave de API para usar os modelos do provedor. As chaves ficam <strong>só neste PC</strong> — o servidor e o aplicativo nunca guardam nem mostram de volta.</p>
+      <div id="providersList" class="providers-list" aria-live="polite"></div>
+      <p id="providersNotice" class="provider-notice" role="status"></p>
+      <p id="providersError" class="login-error" role="alert" hidden></p>
+      <div class="dialog-actions"><button class="subtle-button" id="providersRefresh" type="button">Atualizar lista de modelos</button></div>
+    </div>
+
+    <!-- Aba 2: Provedor Personalizado (Ollama, vLLM, LM Studio, VPS) -->
+    <div id="tabPaneCustom" class="prov-tab-pane" role="tabpanel" hidden>
+      <p class="dialog-description">Conecte qualquer servidor compatível com OpenAI (Ollama, LM Studio, vLLM, LocalAI, VPS remota ou IP local na rede).</p>
+      <div class="custom-prov-form">
+        <div class="form-row-2">
+          <label>Nome do Provedor
+            <input type="text" id="custProvLabel" placeholder="Ex: Meu Servidor Ollama / GPU Remota" />
+          </label>
+          <label>Tipo de Dispositivo / Local
+            <select id="custProvDevice">
+              <option value="custom">Nuvem / VPS Remota</option>
+              <option value="ollama">Ollama Local ou Rede</option>
+              <option value="lmstudio">LM Studio</option>
+              <option value="vllm">vLLM / TextGen</option>
+              <option value="another_pc">Outro Computador (Rede Local)</option>
+            </select>
+          </label>
+        </div>
+        <label>URL Base da API (Endpoint)
+          <input type="text" id="custProvBase" placeholder="http://192.168.1.50:11434/v1 ou https://meu-tunel.ngrok-free.app/v1" />
+        </label>
+        <div class="form-row-2">
+          <label>Chave de API (opcional se não exigir)
+            <input type="password" id="custProvKey" placeholder="Cole o token ou chave se necessário" />
+          </label>
+          <div style="display:flex;align-items:flex-end;">
+            <button type="button" class="action-button secondary" id="custProvProbeBtn" style="width:100%;height:38px;">⚡ Testar & Detectar Modelos</button>
+          </div>
+        </div>
+        <div id="custProvProbeStatus" class="probe-status" hidden></div>
+        <label>Modelos Disponíveis (IDs separados por vírgula)
+          <input type="text" id="custProvModels" placeholder="Ex: llama3:8b, mistral:7b, qwen2.5-coder:7b" />
+        </label>
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px;">
+          <button type="button" class="subtle-button" id="custProvCancelBtn">Limpar</button>
+          <button type="button" class="action-button" id="custProvSaveBtn">Salvar Provedor</button>
+        </div>
+      </div>
+
+      <h3 style="font-size:14px;margin:16px 0 8px;color:var(--text, #f1f5f9);">Provedores Configurados</h3>
+      <div id="customProvidersList" class="custom-providers-list">
+        <p class="muted-text" style="font-size:13px;color:var(--muted,#94a3b8);">Carregando provedores…</p>
+      </div>
+    </div>
+
+    <!-- Aba 3: Túneis SSH & Outros Dispositivos -->
+    <div id="tabPaneTunnels" class="prov-tab-pane" role="tabpanel" hidden>
+      <p class="dialog-description">Faça conexão reversa de outro computador, máquina com GPU ou VPS para o Vexx AI através de túnel criptografado.</p>
+      <div class="tunnel-selector-row">
+        <label>Tipo de Túnel / Ponte:
+          <select id="tunnelTypeSelect">
+            <option value="ssh_reverse">🚇 Túnel SSH Reverso (Universal)</option>
+            <option value="cloudflare">☁️ Cloudflare Tunnel (cloudflared)</option>
+            <option value="ngrok">⚡ Ngrok (Rápido)</option>
+            <option value="pinggy">📡 Pinggy (Sem cadastro prévio)</option>
+            <option value="outro_pc_agente">💻 Outro Computador com Vexx Agent</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="tunnel-inputs-row" id="tunnelInputsRow" style="display:flex;gap:10px;margin:10px 0;">
+        <label style="flex:1;">Porta Local:
+          <input type="number" id="tunnelPortInput" value="8008" />
+        </label>
+        <label style="flex:2;" id="tunnelHostLabel">Host / Usuário SSH:
+          <input type="text" id="tunnelHostInput" value="usuario@outro-computador" />
+        </label>
+      </div>
+
+      <div class="tunnel-code-block-wrapper">
+        <div class="tunnel-code-header" style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <span id="tunnelCodeDesc" style="font-size:12.5px;color:var(--muted,#94a3b8);">Comando pronto:</span>
+          <button type="button" class="tunnel-copy-btn" id="tunnelCopyBtn">📋 Copiar Comando</button>
+        </div>
+        <pre class="tunnel-code-pre" id="tunnelCodePre" style="background:#0f172a;padding:12px;border-radius:8px;font-size:12px;overflow-x:auto;color:#38bdf8;border:1px solid rgba(255,255,255,0.08);"><code>ssh -R 8008:localhost:8008 usuario@outro-computador</code></pre>
+      </div>
+
+      <div class="tunnel-tips-box" style="margin-top:12px;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;border:1px solid rgba(255,255,255,0.06);">
+        <strong style="font-size:12.5px;color:var(--text,#f1f5f9);">💡 Como usar:</strong>
+        <p style="margin:4px 0 0;font-size:12px;color:var(--muted,#94a3b8);" id="tunnelTipsText">Após iniciar o túnel no outro dispositivo, adicione o endpoint na aba "Personalizado / Remoto" com a URL e clique em Testar Conexão!</p>
+      </div>
+    </div>
   </dialog>
   <!-- MODO DE VOZ CONVERSACIONAL (CHATGPT VOICE STYLE) -->
   <div id="voiceModeOverlay" class="voice-mode-overlay" hidden>

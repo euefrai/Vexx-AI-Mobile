@@ -254,12 +254,21 @@ def extrair_midia(pagina: str, url_base: str, titulo: str = "") -> list[dict]:
     for image in parser.images:
         if image["src"] and _clean(image["alt"], 160):
             image_candidates.append((image["src"], image["alt"]))
+    padroes_lixo = (
+        'sino', 'notificacao', 'notificação', 'notificações', 'notification', 'bell',
+        'icon', 'icone', 'ícone', 'logo', 'logotipo', 'badge', 'avatar-placeholder',
+        'pixel', 'spacer', 'tracking', 'banner-ad', 'compartilhar', 'share-button',
+        'btn-', 'assets-v4', 'assets-v3', 'favicon'
+    )
     for raw, alt in image_candidates:
         url = _safe_url(raw, base)
         if not url or not (_is_image(url) or _meta(parser, "og:image")):
             continue
+        comb = (str(url) + " " + str(alt) + " " + str(raw)).lower()
+        if any(p in comb for p in padroes_lixo) or url.endswith(".svg"):
+            continue
         _add(out, _base_item(
-            "image", url, title=alt or page_title or "Imagem descoberta",
+            "image", url, title=alt or page_title or "Imagem",
             source_title=page_title, source_url=base, date=published,
             excerpt=alt or description, access_state="metadata_only",
             analysis_state="not_analyzed"), seen)

@@ -918,18 +918,26 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str, model: str = "") -> str:
         if not termo_busca:
             termo_busca = texto
         result = research.pesquisa_rapida(db, owner, termo_busca)
-        import research_view
         media = result.get('midia') or []
-        fence = research_view.media_fence(media)
+        if not media:
+            run_aprof = research.pesquisa_aprofundada(db, owner, termo_busca, None)
+            media = run_aprof.get('midia') or []
+            if run_aprof.get('fontes'):
+                result['fontes'] = (result.get('fontes') or []) + run_aprof.get('fontes', [])
+        import research_view
+        midias_validas = []
+        padroes_lixo = ('sino', 'notificacao', 'notificação', 'notificações', 'notification', 'bell', 'icon', 'icone', 'ícone', 'logo', 'badge', 'assets-v4', 'assets-v3', 'pixel', 'avatar', 'placeholder')
+        for m_item in media:
+            url_l = str(m_item.get('url') or '').split('?', 1)[0].strip().lower()
+            txt = (
+                str(m_item.get('title') or m_item.get('titulo') or '') + ' '
+                + url_l + ' ' + str(m_item.get('alt') or '')
+            ).lower()
+            if not any(p in txt for p in padroes_lixo) and not url_l.endswith('.svg'):
+                midias_validas.append(m_item)
+        fence = research_view.media_fence(midias_validas) if midias_validas else ""
         fontes = result.get('fontes') or []
         if fence:
-            midias_validas = []
-            padroes_lixo = ('sino', 'notificacao', 'notificação', 'notificações', 'notification', 'bell', 'icon', 'icone', 'logo', 'badge', 'assets-v4', 'pixel')
-            for m_item in media:
-                txt = (str(m_item.get('title') or '') + ' ' + str(m_item.get('url') or '')).lower()
-                if not any(p in txt for p in padroes_lixo) and not txt.endswith('.svg'):
-                    midias_validas.append(m_item)
-            
             topicos_destaque = []
             for m_item in midias_validas[:6]:
                 tit = (m_item.get('title') or '').strip()
@@ -940,7 +948,7 @@ def cmd_pesquisa(db, texto: str, owner: str, conv: str, model: str = "") -> str:
             
             linhas_destaque = "\n".join(f"- {d}" for d in topicos_destaque) if topicos_destaque else ""
             corpo = (
-                f"Encontrei fotos e notícias recentes sobre celebridades e personalidades em destaque:\n\n"
+                f"Encontrei fotos e notícias recentes sobre as principais personalidades em destaque:\n\n"
                 f"{linhas_destaque}\n\n"
                 f"*(Galeria com {len(midias_validas)} imagens verificadas das fontes oficiais anexada acima.)*"
             )

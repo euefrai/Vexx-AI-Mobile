@@ -293,17 +293,18 @@ def ai_montar_mensagens(db, conversation_id: str, cfg: dict, texto_usuario: str,
     # V4.9.1: pedido de produto → o worker faz a busca shopping dedicada
     # (com cards verificados); a pesquisa genérica síncrona é pulada aqui
     # para não duplicar carga no Render Free.
-    eh_shop = shopping.detectar_intencao(texto_usuario) \
-        and not shopping.followup_sem_contexto(texto_usuario) \
-        and extras["podem_pesquisar"]
-    extras["shop"] = eh_shop
     # Explicit page/list reading uses the same safe downloader and keeps each
     # failure separate, so one blocked page cannot erase a valid comparison.
-    if cfg.get("pesquisa_web", True) and not eh_shop and extras["podem_pesquisar"] \
-            and not _JOB_START_RE.search(texto_usuario or ""):
-        urls_pu = [u for u in research.urls_pedidas(texto_usuario)
-                   if u not in set(imagens_associadas)]
-        if urls_pu:
+    urls_pu = ([u for u in research.urls_pedidas(texto_usuario)
+                if u not in set(imagens_associadas)]
+               if cfg.get("pesquisa_web", True) and extras["podem_pesquisar"]
+               and not _JOB_START_RE.search(texto_usuario or "") else [])
+    eh_shop = shopping.detectar_intencao(texto_usuario) \
+        and not shopping.followup_sem_contexto(texto_usuario) \
+        and extras["podem_pesquisar"] \
+        and not urls_pu
+    extras["shop"] = eh_shop
+    if urls_pu and not eh_shop:
             if progresso_cb:
                 try:
                     d_host = urllib.parse.urlsplit(urls_pu[0]).netloc or urls_pu[0]

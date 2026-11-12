@@ -60,8 +60,8 @@ def _req(url: str, corpo: dict, timeout: float, api_key: str = "",
 
 
 def base_publica(url: str, hosts: tuple) -> str:
-    """Base HTTPS de provedor direto (ou HTTP para loopback local). Só hosts da allowlist do provedor;
-    sem credenciais, query ou fragmento."""
+    """Base HTTPS de provedor direto (ou HTTP para loopback local/LAN).
+    Permite hosts cadastrados ou wildcard '*' para provedores personalizados externos."""
     base = (url or "").strip().rstrip("/")
     try:
         parte = urllib.parse.urlsplit(base)
@@ -69,9 +69,11 @@ def base_publica(url: str, hosts: tuple) -> str:
         raise BridgeErro(f"URL do provedor inválida: {exc}.", "url_invalida") from None
     host_lower = (parte.hostname or "").lower()
     is_loopback = host_lower in LOOPBACK
-    if (parte.scheme != "https" and not (parte.scheme == "http" and is_loopback)) or not parte.hostname:
-        raise BridgeErro("Provedor direto exige https://host (ou http:// para loopback local).", "url_invalida")
-    if host_lower not in tuple(h.lower() for h in hosts):
+    is_lan = any(host_lower.startswith(prefix) for prefix in ("192.168.", "10.", "172.16.", "172.17.", "172.18.", "172.19.", "172.2", "172.3", "100.")) or host_lower.endswith(".local")
+    wildcard = "*" in hosts
+    if (parte.scheme != "https" and not (parte.scheme == "http" and (is_loopback or is_lan or wildcard))) or not parte.hostname:
+        raise BridgeErro("Provedor direto exige https://host (ou http:// para loopback local e rede interna).", "url_invalida")
+    if not wildcard and host_lower not in tuple(h.lower() for h in hosts):
         raise BridgeErro(f"Host '{parte.hostname}' fora da lista do provedor.",
                          "url_bloqueada")
     if parte.username or parte.password or parte.query or parte.fragment:
