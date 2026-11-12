@@ -2049,8 +2049,16 @@ function fillModels(filter) {
     const key = rank + ':' + pid;
     if (!groups.has(key)) {
       const g = document.createElement('optgroup');
-      g.label = rank === -2 ? '⚡ Modelo 3 (VEXX AI)' : (rank === -1 ? '🖥️ Modelo 1.5 (Local PC)' : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
-        (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave'));
+      g.label = rank === -3
+        ? '🖥️ Modelo Principal (Qwen 2.5-VL 7B — Local PC)'
+        : rank === -2
+        ? '⚡ Modelo 3 (VEXX AI)'
+        : rank === -1
+        ? '🖥️ Modelo 1.5 (Local PC)'
+        : pid.startsWith('custom_')
+        ? '🌐 Externos / Personalizados — ' + providerLabel(pid)
+        : (['Grátis', 'Suas API keys', 'Outros'][rank] || 'Outros') + ' — ' + providerLabel(pid) +
+          (pronto ? '' : recusada ? ' — chave recusada' : ' — sem chave');
       groups.set(key, g); sel.appendChild(g);
     }
     const o = document.createElement('option');
@@ -2080,7 +2088,7 @@ function fillModels(filter) {
   return cur;
 }
 async function loadModels(force) {
-  if (!authenticated || !pcOnline) { $('aiStatus').textContent = pcOnline ? 'IA: conectado' : 'IA: desconectado'; return false; }
+  if (!authenticated) { $('aiStatus').textContent = 'IA: desconectado'; return false; }
   if (providerMutation && !force) return false;
   if (!force && Date.now() - modelsLoadedAt < 300000) return true;
   const version = ++modelLoadVersion, owner = currentUid;
@@ -2522,6 +2530,216 @@ $('providersRefresh') && $('providersRefresh').addEventListener('click', async (
   showToast(ok ? 'Lista de modelos atualizada' : 'Não consegui atualizar a lista agora');
 });
 
+/* ----- Provedores Personalizados & Túneis Externos ----- */
+function alternarAbaProvedores(tabName) {
+  const tabs = [
+    { btn: $('tabBtnOfficial'), pane: $('tabPaneOfficial'), name: 'official' },
+    { btn: $('tabBtnCustom'), pane: $('tabPaneCustom'), name: 'custom' },
+    { btn: $('tabBtnTunnels'), pane: $('tabPaneTunnels'), name: 'tunnels' },
+  ];
+  tabs.forEach(t => {
+    const active = t.name === tabName;
+    if (t.btn) {
+      t.btn.classList.toggle('active', active);
+      t.btn.setAttribute('aria-selected', active ? 'true' : 'false');
+    }
+    if (t.pane) t.pane.hidden = !active;
+  });
+  if (tabName === 'custom') carregarCustomProviders();
+  if (tabName === 'tunnels') atualizarComandoTunel();
+}
+
+$('tabBtnOfficial') && $('tabBtnOfficial').addEventListener('click', () => alternarAbaProvedores('official'));
+$('tabBtnCustom') && $('tabBtnCustom').addEventListener('click', () => alternarAbaProvedores('custom'));
+$('tabBtnTunnels') && $('tabBtnTunnels').addEventListener('click', () => alternarAbaProvedores('tunnels'));
+
+async function carregarCustomProviders() {
+  const container = $('customProvidersList');
+  if (!container) return;
+  try {
+    const res = await api('/api/providers/custom');
+    const provs = (res && res.providers) || [];
+    if (!provs.length) {
+      container.innerHTML = '<p class="muted-text" style="font-size:13px;color:var(--muted,#94a3b8);padding:10px 0;">Nenhum provedor personalizado configurado ainda.</p>';
+      return;
+    }
+    container.innerHTML = '';
+    provs.forEach(p => {
+      const card = document.createElement('div');
+      card.className = 'custom-prov-card';
+      const modelsCount = (p.modelos || []).length;
+      card.innerHTML = `
+        <div class="custom-prov-info">
+          <span class="custom-prov-title">${esc(p.label || p.id)} <span style="font-size:11px;font-weight:normal;opacity:0.8;">(${esc(p.device_type || 'custom')})</span></span>
+          <span class="custom-prov-meta">${esc(p.base)} · ${modelsCount} modelo(s) configurado(s)</span>
+        </div>
+        <div class="custom-prov-acts">
+          <button type="button" class="subtle-button" style="padding:4px 8px;font-size:12px;" data-del="${esc(p.id)}">Remover</button>
+        </div>
+      `;
+      card.querySelector('[data-del]').addEventListener('click', () => removerCustomProvider(p.id));
+      container.appendChild(card);
+    });
+  } catch (err) {
+    container.innerHTML = '<p class="muted-text" style="font-size:13px;color:#ef4444;">Erro ao carregar provedores personalizados: ' + esc(err.message || '') + '</p>';
+  }
+}
+
+async function removerCustomProvider(pid) {
+  if (!confirm('Deseja realmente remover este provedor?')) return;
+  try {
+    await api('/api/providers/custom/' + encodeURIComponent(pid), { method: 'DELETE' });
+    showToast('Provedor removido com sucesso');
+    carregarCustomProviders();
+    await loadModels(true);
+  } catch (err) {
+    showToast('Falha ao remover provedor: ' + (err.message || ''));
+  }
+}
+
+async function testarConexaoCustomProvider() {
+  const base = ($('custProvBase') && $('custProvBase').value || '').trim();
+  const key = ($('custProvKey') && $('custProvKey').value || '').trim();
+  const statusDiv = $('custProvProbeStatus');
+  const btn = $('custProvProbeBtn');
+  if (!base) {
+    showToast('Informe a URL Base antes de testar.');
+    return;
+  }
+  if (btn) { btn.disabled = true; btn.textContent = 'Testando…'; }
+  if (statusDiv) {
+    statusDiv.hidden = false;
+    statusDiv.className = 'probe-status';
+    statusDiv.textContent = 'Conectando ao endpoint e descobrindo modelos…';
+  }
+  try {
+    const res = await api('/api/providers/test', {
+      method: 'POST',
+      body: JSON.stringify({ base, chave: key })
+    });
+    if (res && (res.status === 'sucesso' || res.status === 'ok')) {
+      const modelos = res.modelos || [];
+      const lat = res.latencia_ms || 0;
+      if (res.base_sugerida && $('custProvBase')) {
+        $('custProvBase').value = res.base_sugerida;
+      }
+      if (statusDiv) {
+        statusDiv.className = 'probe-status success';
+        statusDiv.textContent = `⚡ Conexão OK! Latência: ${lat}ms · ${modelos.length} modelo(s) encontrado(s): ${modelos.slice(0, 5).join(', ')}${modelos.length > 5 ? '…' : ''}`;
+      }
+      if ($('custProvModels') && modelos.length) {
+        $('custProvModels').value = modelos.join(', ');
+      }
+      showToast(`Conexão estabelecida (${lat}ms, ${modelos.length} modelos)`);
+    } else {
+      const err = (res && res.mensagem) || 'Não foi possível conectar ao endpoint';
+      if (statusDiv) {
+        statusDiv.className = 'probe-status error';
+        statusDiv.textContent = 'Falha na conexão: ' + err;
+      }
+      showToast('Falha no teste: ' + err);
+    }
+  } catch (err) {
+    if (statusDiv) {
+      statusDiv.className = 'probe-status error';
+      statusDiv.textContent = 'Erro ao testar endpoint: ' + (err.message || '');
+    }
+    showToast('Erro ao testar: ' + (err.message || ''));
+  } finally {
+    if (btn) { btn.disabled = false; btn.textContent = '⚡ Testar & Detectar Modelos'; }
+  }
+}
+
+async function salvarCustomProvider() {
+  const label = ($('custProvLabel') && $('custProvLabel').value || '').trim();
+  const base = ($('custProvBase') && $('custProvBase').value || '').trim();
+  const key = ($('custProvKey') && $('custProvKey').value || '').trim();
+  const device = ($('custProvDevice') && $('custProvDevice').value || 'custom').trim();
+  const modelsRaw = ($('custProvModels') && $('custProvModels').value || '').trim();
+  const models = modelsRaw.split(',').map(m => m.trim()).filter(Boolean);
+
+  if (!base) {
+    showToast('A URL Base da API é obrigatória.');
+    return;
+  }
+  const id = 'custom_' + (label || 'servidor').toLowerCase().replace(/[^a-z0-9_-]/g, '_').substring(0, 24);
+  const btn = $('custProvSaveBtn');
+  if (btn) btn.disabled = true;
+  try {
+    await api('/api/providers/custom', {
+      method: 'POST',
+      body: JSON.stringify({
+        id,
+        label: label || 'Provedor ' + base.replace(/^https?:\/\//, '').split('/')[0],
+        base,
+        chave: key,
+        api: 'openai',
+        device_type: device,
+        modelos: models
+      })
+    });
+    showToast('Provedor salvo com sucesso!');
+    if ($('custProvLabel')) $('custProvLabel').value = '';
+    if ($('custProvBase')) $('custProvBase').value = '';
+    if ($('custProvKey')) $('custProvKey').value = '';
+    if ($('custProvModels')) $('custProvModels').value = '';
+    if ($('custProvProbeStatus')) $('custProvProbeStatus').hidden = true;
+    carregarCustomProviders();
+    await loadModels(true);
+  } catch (err) {
+    showToast('Erro ao salvar provedor: ' + (err.message || ''));
+  } finally {
+    if (btn) btn.disabled = false;
+  }
+}
+
+$('custProvProbeBtn') && $('custProvProbeBtn').addEventListener('click', () => testarConexaoCustomProvider());
+$('custProvSaveBtn') && $('custProvSaveBtn').addEventListener('click', () => salvarCustomProvider());
+$('custProvCancelBtn') && $('custProvCancelBtn').addEventListener('click', () => {
+  if ($('custProvLabel')) $('custProvLabel').value = '';
+  if ($('custProvBase')) $('custProvBase').value = '';
+  if ($('custProvKey')) $('custProvKey').value = '';
+  if ($('custProvModels')) $('custProvModels').value = '';
+  if ($('custProvProbeStatus')) $('custProvProbeStatus').hidden = true;
+});
+
+async function atualizarComandoTunel() {
+  const tipo = ($('tunnelTypeSelect') && $('tunnelTypeSelect').value) || 'ssh_reverse';
+  const porta = parseInt(($('tunnelPortInput') && $('tunnelPortInput').value) || '8008', 10);
+  const host = ($('tunnelHostInput') && $('tunnelHostInput').value) || 'usuario@outro-computador';
+  
+  if ($('tunnelHostLabel')) {
+    $('tunnelHostLabel').style.display = (tipo === 'ssh_reverse') ? 'block' : 'none';
+  }
+
+  try {
+    const res = await api(`/api/tunnel/guide?tipo=${encodeURIComponent(tipo)}&porta=${porta}&host=${encodeURIComponent(host)}`);
+    if (res && res.comando) {
+      if ($('tunnelCodePre')) $('tunnelCodePre').querySelector('code').textContent = res.comando;
+      if ($('tunnelCodeDesc')) $('tunnelCodeDesc').textContent = res.titulo || 'Comando pronto:';
+      if ($('tunnelTipsText')) $('tunnelTipsText').textContent = res.descricao || '';
+    }
+  } catch (_) {
+    if (tipo === 'ssh_reverse') {
+      $('tunnelCodePre').querySelector('code').textContent = `ssh -R ${porta}:localhost:${porta} ${host}`;
+    }
+  }
+}
+
+$('tunnelTypeSelect') && $('tunnelTypeSelect').addEventListener('change', () => atualizarComandoTunel());
+$('tunnelPortInput') && $('tunnelPortInput').addEventListener('input', () => atualizarComandoTunel());
+$('tunnelHostInput') && $('tunnelHostInput').addEventListener('input', () => atualizarComandoTunel());
+
+$('tunnelCopyBtn') && $('tunnelCopyBtn').addEventListener('click', () => {
+  const code = $('tunnelCodePre') ? $('tunnelCodePre').querySelector('code').textContent : '';
+  if (!code) return;
+  navigator.clipboard.writeText(code).then(() => {
+    showToast('Comando copiado para a área de transferência! 📋');
+  }).catch(() => {
+    showToast('Não foi possível copiar automaticamente.');
+  });
+});
+
 
 const VEXX_THINKING_PHRASES = [
   'Pensando…',
@@ -2536,34 +2754,46 @@ let vexxStepIsReal = false;
 
 function calcularPassoInicial(userText, options) {
   const t = (userText || '').toLowerCase();
+  if (options && options.hasDoc) {
+    return 'Lendo documento anexado e analisando conteúdo…';
+  }
+  if (options && options.hasImage) {
+    return 'Examinando imagem e detectando elementos com YOLO…';
+  }
   if (t.includes('kabum') || t.includes('kaboom')) {
     return 'Consultando produtos no KaBuM! (kabum.com.br)…';
   }
   if (t.includes('amazon')) {
     return 'Consultando produtos na Amazon (amazon.com.br)…';
   }
-  if (t.includes('mercado livre') || t.includes('meli')) {
+  if (t.includes('mercado livre') || t.includes('mercadolivre') || t.includes('meli')) {
     return 'Consultando produtos no Mercado Livre (mercadolivre.com.br)…';
   }
-  if (/\b(fone|celular|smartphone|notebook|placa|processador|mouse|teclado|monitor|comprar|pre[cç]o|quanto custa|valor at[eé]|loja|lojas)\b/i.test(t)) {
-    return 'Consultando produtos em lojas especializadas e comparando preços…';
+  if (t.includes('shopee')) {
+    return 'Consultando ofertas na Shopee (shopee.com.br)…';
   }
-  if (t.includes('documenta') || t.includes('docs') || t.includes('documentação')) {
-    return 'Consultando documentação oficial e referências técnicas…';
+  if (t.includes('magalu') || t.includes('magazine luiza')) {
+    return 'Consultando ofertas no Magazine Luiza…';
+  }
+  if (t.includes('aliexpress')) {
+    return 'Consultando catálogo no AliExpress…';
+  }
+  if (/\b(fone|celular|smartphone|notebook|placa|processador|mouse|teclado|monitor|comprar|pre[cç]o|quanto custa|valor at[eé]|loja|lojas)\b/i.test(t)) {
+    return 'Consultando lojas especializadas e comparando preços…';
+  }
+  if (t.includes('documenta') || t.includes('docs') || t.includes('documentação') || t.includes('api') || t.includes('tutorial')) {
+    return 'Consultando documentações oficiais e referências técnicas…';
   }
   if (/\b(compare|comparar|comparativo|diferen[cç]a|versus|vs)\b/i.test(t)) {
-    return 'Pesquisando em múltiplas fontes para comparação aprofundada…';
+    return 'Pesquisando em múltiplas fontes para comparação detalhada…';
   }
-  if (/\b(foto|fotos|imagem|imagens)\b/i.test(t)) {
-    return 'Verificando imagens e analisando mídia disponível…';
+  if (/\b(foto|fotos|imagem|imagens|celebridade|celebridades|quem [eé]|not[ií]cia)\b/i.test(t)) {
+    return 'Pesquisando fontes atualizadas na web e cruzando dados…';
   }
-  if (/\b(pesquise|pesquisa|procure|busque|investigue|not[ií]cia)\b/i.test(t)) {
-    return 'Consultando fontes e cruzando dados na web…';
+  if (/\b(pesquise|pesquisa|procure|busque|investigue)\b/i.test(t)) {
+    return 'Pesquisando fontes atualizadas na web e cruzando dados…';
   }
-  if (options && options.hasDoc) {
-    return 'Lendo documento anexado e extraindo trechos…';
-  }
-  return 'Analisando mensagem e preparando contexto…';
+  return 'Analisando mensagem e organizando raciocínio…';
 }
 
 function atualizarPassoPensamento(passo, isReal = true) {
@@ -2586,13 +2816,18 @@ function vexxThinkingPillHtml(msg) {
       '<span class="vexx-thinking-text">' + esc(frase) + '</span>' +
       '<span class="vexx-thinking-dots"><span></span><span></span><span></span></span>' +
     '</div>' +
+    '<button type="button" class="vexx-thinking-stop-btn" onclick="document.getElementById(\'stopGen\') && document.getElementById(\'stopGen\').click()" title="Interromper geração">' +
+      '<svg class="icon" style="width:11px;height:11px;margin-right:2px;vertical-align:-1px;"><use href="#i-stop"/></svg>Interromper' +
+    '</button>' +
   '</div>';
 }
 
 /* ----- IA com streaming rápido ----- */
 function setGenBar(on, label) {
-  $('genBar').hidden = !on;
-  if (label) $('genLabel').textContent = label;
+  // Mantém genBar oculta para eliminar a barra duplicada embaixo; o botão Interromper fica na pílula superior
+  const gb = $('genBar');
+  if (gb) gb.hidden = true;
+  if (label && $('genLabel')) $('genLabel').textContent = label;
 }
 function tickGen() {
   if (aiFirstTokenT) {
@@ -2691,15 +2926,17 @@ async function runAIRequest(userRow, options, timing) {
     return;
   }
   aiStartT = Date.now(); aiFirstTokenT = 0;
-  vexxStepIsReal = false;
-  currentThinkingMsg = calcularPassoInicial(userRow.text || '', options);
-  setGenBar(true, currentThinkingMsg);
+  if (typeof vexxStepIsReal !== 'undefined') vexxStepIsReal = false;
+  const _passoIni = typeof calcularPassoInicial === 'function' ? calcularPassoInicial(userRow.text || '', options) : 'Preparando resposta…';
+  if (typeof currentThinkingMsg !== 'undefined') currentThinkingMsg = _passoIni;
+  setGenBar(true, _passoIni);
   clearInterval(genTimer); genTimer = setInterval(tickGen, 600);
   const ctx = aiLocalContext(userRow.text || '');
   const sceneContext = typeof globalThis.getModel3DContext === 'function' ? globalThis.getModel3DContext(options.owner,userRow.conversation_id) : null;
   if (sceneContext) ctx.scene_state = JSON.stringify(sceneContext);
-  ctx.vision_engine = yoloEngineAtivo();
-  ctx.yolo_engine = yoloEngineAtivo();
+  const _yEngine = typeof yoloEngineAtivo === 'function' ? yoloEngineAtivo() : 'hf_space';
+  ctx.vision_engine = _yEngine;
+  ctx.yolo_engine = _yEngine;
   const qs = new URLSearchParams(Object.assign({
     message_id: userRow.id, conversation_id: userRow.conversation_id,
     model: modeloAtivo() || modelCatalog.default || 'qwen2.5-1.5b-instruct', memory: memoryOn() ? '1' : '0',
@@ -2751,14 +2988,13 @@ async function runAIRequest(userRow, options, timing) {
           try { d = JSON.parse(dados); } catch (_) { continue; }
           if (tipo === 'step') {
             const passo = (d.step || '').trim();
-            if (passo) {
+            if (passo && typeof atualizarPassoPensamento === 'function') {
               atualizarPassoPensamento(passo, true);
             }
           } else if (tipo === 'delta') {
             if (Number.isInteger(d.seq) && d.seq > 0) {
               if (d.seq <= lastSeq) continue;
-              // Tolerante a micro-agrupamento de pacotes SSE sem quebrar o stream
-              if (d.seq > lastSeq) lastSeq = d.seq;
+              if (lastSeq > 0 && d.seq !== lastSeq + 1) throw new Error('Conexão interrompida entre trechos da resposta');
               lastSeq = d.seq;
             }
             if (!aiFirstTokenT) {
@@ -2884,7 +3120,7 @@ async function runAIRequest(userRow, options, timing) {
     streamDraft = null;
     clearInterval(genTimer);
     setGenBar(false);
-    vexxStepIsReal = false;
+    if (typeof vexxStepIsReal !== 'undefined') vexxStepIsReal = false;
     if (rafPending) { cancelAnimationFrame(rafPending); rafPending = null; }
     if (userRow.conversation_id === activeConversation) await renderMessages();
     await renderSessions($('sessionSearch').value);

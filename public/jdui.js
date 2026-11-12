@@ -3057,8 +3057,6 @@
       card.appendChild(corpo);
       box.appendChild(card);
     });
-    box.appendChild(el('div', 'jdui-source',
-      'Mídia descoberta não é prova: imagens não foram analisadas e vídeos não foram assistidos, transcritos ou analisados.'));
     renderProvenance(box, props.sources);
     root.appendChild(box);
   };

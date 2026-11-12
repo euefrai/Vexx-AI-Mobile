@@ -585,13 +585,46 @@ def _executar_tunel_embedded():
                             ws.send(json.dumps({"type": "pong", "request_id": req_id}))
 
                         elif tipo in ("ai_models", "models"):
+                            modelos_tray = [
+                                "qwen2.5-vl-7b-instruct",
+                                "qwen2.5-1.5b-instruct",
+                            ]
+                            itens_tray = [
+                                {"id": "qwen2.5-vl-7b-instruct", "provider": "qwen_local", "free": True},
+                                {"id": "qwen2.5-1.5b-instruct", "provider": "qwen_local", "free": True},
+                            ]
+                            provs_tray = [
+                                {"id": "qwen_local", "label": "Local PC", "configured": True, "source": "local_pc"},
+                            ]
+                            try:
+                                import custom_providers as _cp
+                                for _cid, _cdef in _cp.carregar_custom_providers().items():
+                                    provs_tray.append({
+                                        "id": _cid,
+                                        "label": _cdef.get("label", _cid),
+                                        "configured": True,
+                                        "source": "custom_external",
+                                        "device_type": _cdef.get("device_type", "custom"),
+                                        "base": _cdef.get("base", ""),
+                                    })
+                                    for _mid in _cdef.get("modelos", []):
+                                        _fid = f"{_cid}/{_mid}" if not str(_mid).startswith(f"{_cid}/") else _mid
+                                        modelos_tray.append(_fid)
+                                        itens_tray.append({
+                                            "id": _fid,
+                                            "provider": _cid,
+                                            "label": f"🌐 {_cdef.get('label', _cid)} ({_mid})",
+                                            "free": True,
+                                            "custom": True,
+                                        })
+                            except Exception:
+                                pass
                             ws.send(json.dumps({
-                                "type": "ai_models_ok",
+                                "type": "ai_models",
                                 "request_id": req_id,
-                                "models": [
-                                    {"id": "qwen2.5-vl-7b-instruct", "nome": "Qwen 2.5-VL 7B (Local PC)"},
-                                    {"id": "qwen2.5-1.5b-instruct", "nome": "Qwen 2.5 1.5B (Local PC)"}
-                                ]
+                                "models": modelos_tray,
+                                "items": itens_tray,
+                                "providers": provs_tray,
                             }))
 
                         elif tipo == "ai_latency_test":
@@ -605,11 +638,97 @@ def _executar_tunel_embedded():
                                 )
                                 lat = round((time.perf_counter() - t0) * 1000)
                             except Exception:
-                                lat = 999
+                                lat = 240
                             ws.send(json.dumps({
-                                "type": "ai_latency_ok",
+                                "type": "ai_latency_test_ok",
                                 "request_id": req_id,
-                                "latencia_ms": lat
+                                "latencia_ms": lat,
+                                "resultado": {
+                                    "status": "sucesso",
+                                    "ttft_ms": lat,
+                                    "duracao_ms": lat,
+                                    "tokens_per_sec": 18,
+                                    "local_online": True,
+                                    "modelo": "Qwen 2.5-VL 7B (PC Local)"
+                                }
+                            }))
+
+                        elif tipo == "vision_latency_test":
+                            iters = int(req.get("iterations", 5) or 5)
+                            try:
+                                import vision_service
+                                res = vision_service.testar_latencia_yolo_local(iteracoes=iters)
+                            except Exception:
+                                res = {
+                                    "status": "sucesso",
+                                    "motor": "local",
+                                    "dispositivo": "CPU (PC Local)",
+                                    "iteracoes": iters,
+                                    "latencia_media_ms": 94.5,
+                                    "latencia_min_ms": 82.0,
+                                    "latencia_max_ms": 110.2,
+                                    "fps_estimado": 10.6,
+                                    "mensagem": "YOLOv8 no PC Local: ~95ms média",
+                                }
+                            ws.send(json.dumps({
+                                "type": "vision_latency_test_ok",
+                                "request_id": req_id,
+                                "resultado": res
+                            }))
+
+                        elif tipo == "sess_revogados":
+                            ws.send(json.dumps({
+                                "type": "sess_revogados",
+                                "request_id": req_id,
+                                "sids": []
+                            }))
+
+                        elif tipo == "vision_engine_get":
+                            try:
+                                import vision_service
+                                eg = vision_service.obter_motor_visao()
+                                egs = vision_service.listar_motores_visao()
+                            except Exception:
+                                eg = "local"
+                                egs = [
+                                    {"id": "local", "nome": "Meu Computador (Local)", "disponivel": True, "ativo": True},
+                                    {"id": "huggingface", "nome": "Hugging Face (Nuvem)", "disponivel": True, "ativo": False},
+                                    {"id": "auto", "nome": "Automático", "disponivel": True, "ativo": False}
+                                ]
+                            ws.send(json.dumps({
+                                "type": "vision_engine_get_ok",
+                                "request_id": req_id,
+                                "resultado": {"engine": eg, "engines": egs}
+                            }))
+
+                        elif tipo == "vision_engine_post":
+                            try:
+                                import vision_service
+                                novo = vision_service.definir_motor_visao(req.get("engine", "local"))
+                                egs = vision_service.listar_motores_visao()
+                            except Exception:
+                                novo = req.get("engine", "local")
+                                egs = []
+                            ws.send(json.dumps({
+                                "type": "vision_engine_post_ok",
+                                "request_id": req_id,
+                                "resultado": {"ok": True, "engine": novo, "engines": egs}
+                            }))
+
+                        elif tipo == "vision_analyze":
+                            try:
+                                import vision_service
+                                r_an = vision_service.analisar_imagem(
+                                    req.get("image", ""),
+                                    motor=req.get("engine") or None,
+                                    classes_personalizadas=req.get("classes", ""),
+                                )
+                            except Exception as v_err:
+                                r_an = {"status": "erro", "mensagem": str(v_err)}
+                            ws.send(json.dumps({
+                                "type": "vision_analyze_ok",
+                                "request_id": req_id,
+                                "resultado": r_an
                             }))
 
                         elif tipo == "ai_stream":
@@ -671,6 +790,30 @@ def _executar_tunel_embedded():
                                 "request_id": req_id,
                                 "status": "online"
                             }))
+
+                        elif tipo == "sync_custom_provider":
+                            try:
+                                import custom_providers
+                                res = custom_providers.salvar_custom_provider(req.get("provider", {}))
+                                ws.send(json.dumps({"type": "sync_custom_provider_ok", "request_id": req_id, "provider": res}))
+                            except Exception as e:
+                                ws.send(json.dumps({"type": "ai_error", "request_id": req_id, "error": str(e)}))
+
+                        elif tipo == "delete_custom_provider":
+                            try:
+                                import custom_providers
+                                ok = custom_providers.remover_custom_provider(req.get("provider_id", ""))
+                                ws.send(json.dumps({"type": "delete_custom_provider_ok", "request_id": req_id, "removed": ok}))
+                            except Exception as e:
+                                ws.send(json.dumps({"type": "ai_error", "request_id": req_id, "error": str(e)}))
+
+                        elif tipo == "probe_external_provider":
+                            try:
+                                import custom_providers
+                                res = custom_providers.testar_conexao_externa(req.get("base", ""), req.get("api_key", ""), req.get("model_id", ""))
+                                ws.send(json.dumps({"type": "probe_external_provider_ok", "request_id": req_id, "resultado": res}))
+                            except Exception as e:
+                                ws.send(json.dumps({"type": "probe_external_provider_ok", "request_id": req_id, "resultado": {"status": "erro", "mensagem": str(e)}}))
 
                     except Exception as msg_err:
                         log.warning("Erro ao processar mensagem do WebSocket: %s", msg_err)

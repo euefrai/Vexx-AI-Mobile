@@ -24,6 +24,7 @@ import urllib.request
 import env_local
 import hermes_bridge
 import tool_protocol
+import custom_providers
 from hermes_bridge import BridgeErro
 
 log = logging.getLogger("JULIA-providers")
@@ -73,9 +74,11 @@ def selection_error(model, proxy=''):
     """No network on the message path; reject only known unavailable selections."""
     if model in ("vexx-qwen-2.5-3b", "vexx/vexx-qwen-2.5-3b", "qwen2.5-3b-instruct",
                  "qwen2.5-1.5b-instruct", "qwen_local/qwen2.5-1.5b-instruct",
-                 "local/qwen2.5-1.5b-instruct"):
+                 "local/qwen2.5-1.5b-instruct") or str(model).startswith("custom_"):
         return None
     provider, mid = dividir(model)
+    if (definicao(provider) or {}).get("source") == "custom_external":
+        return None
     unavailable = not supports_chat(mid)
     with _CATALOG_LOCK:
         row = _CATALOGS.get(provider)
@@ -218,7 +221,13 @@ def _chamar(fn, prov: str, model_id: str, *args, **kwargs):
 
 
 def definicao(nome: str) -> dict | None:
-    return PROVIDERS.get(str(nome or "").lower())
+    norm = str(nome or "").lower()
+    if norm in PROVIDERS:
+        return PROVIDERS[norm]
+    try:
+        return custom_providers.obter_custom_provider(norm)
+    except Exception:
+        return None
 
 
 def chave(nome: str) -> str:
@@ -226,27 +235,26 @@ def chave(nome: str) -> str:
     if nome == "qwen_local":
         return "sk-local"
     d = definicao(nome)
-    if not d or not d.get("key_env"):
+    if not d:
         return ""
-    val = (os.environ.get(d["key_env"], "") or "").strip()
-    if not val:
-        try:
-            import env_local
-            val = (env_local.valores_do_arquivo().get(d["key_env"], "") or "").strip()
-            if val:
-                os.environ[d["key_env"]] = val
-        except Exception:
-            pass
-    return val
+    if d.get("source") == "custom_external" or str(nome).startswith("custom_"):
+        return d.get("api_key", "") or "sk-custom"
+    if not d.get("key_env"):
+        return ""
+    return (os.environ.get(d["key_env"], "") or "").strip()
 
 
 def chave_origem(nome: str) -> str:
     """Onde a chave está definida: 'arquivo' (.env local, salva pelo app),
-    'sistema' (variável do PC) ou '' (sem chave). Nunca expõe o valor."""
+    'sistema' (variável do PC), 'custom_external' ou '' (sem chave). Nunca expõe o valor."""
     if nome == "qwen_local":
         return "local_pc"
     d = definicao(nome)
-    if not d or not d.get("key_env"):
+    if not d:
+        return ""
+    if d.get("source") == "custom_external" or str(nome).startswith("custom_"):
+        return "custom_external"
+    if not d.get("key_env"):
         return ""
     atual = chave(nome)
     if not atual:
@@ -279,7 +287,7 @@ def dividir(modelo: str) -> tuple:
         return "vexx", "vexx-qwen-2.5-3b"
     if "/" in texto:
         prov, resto = texto.split("/", 1)
-        if prov.lower() in PROVIDERS and resto:
+        if (prov.lower() in PROVIDERS or definicao(prov.lower()) is not None) and resto:
             return prov.lower(), resto
     return "hermes", texto
 
@@ -320,8 +328,9 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
             return _modelos_vivos_openai(nome, d)
         return None, ""
 
-    with ThreadPoolExecutor(max_workers=len(PROVIDERS)) as pool:
-        pending = {nome: pool.submit(descobrir, nome, d) for nome, d in PROVIDERS.items()}
+    active_providers = {nome: d for nome, d in PROVIDERS.items() if nome not in ("vexx", "qwen_local")}
+    with ThreadPoolExecutor(max_workers=max(1, len(active_providers))) as pool:
+        pending = {nome: pool.submit(descobrir, nome, d) for nome, d in active_providers.items()}
         discoveries = {nome: task.result() for nome, task in pending.items()}
     vexx_item = {
         "id": "vexx-qwen-2.5-3b",
@@ -377,6 +386,31 @@ def listar_tudo(proxy_cfg: str = "") -> dict:
                           **({"needs_key": True} if not conf else {}),
                           **({"curated": True} if not vivos else {}),
                           **({"auth_error": True} if auth_ruim else {})})
+
+    # Carrega provedores personalizados e conexões externas cadastradas
+    try:
+        custom_provs = custom_providers.carregar_custom_providers()
+        for c_id, c_def in custom_provs.items():
+            provs.append({
+                "id": c_id,
+                "label": c_def.get("label", c_id),
+                "configured": True,
+                "source": "custom_external",
+                "device_type": c_def.get("device_type", "custom"),
+                "base": c_def.get("base", "")
+            })
+            for mid in c_def.get("modelos", []):
+                full_id = f"{c_id}/{mid}" if not str(mid).startswith(f"{c_id}/") else mid
+                itens.append({
+                    "id": full_id,
+                    "provider": c_id,
+                    "label": f"🌐 {c_def.get('label', c_id)} ({mid})",
+                    "free": True,
+                    "custom": True
+                })
+    except Exception as exc:
+        log.warning("Falha ao carregar provedores customizados: %s", exc)
+
     # Up to 500 proxy models + 200 per external provider. Do not silently cut
     # off the providers at the end of the registry after only 500 total IDs.
     default = "vexx-qwen-2.5-3b"
@@ -477,7 +511,7 @@ def chat_complete(prov: str, model_id: str, messages: list,
     return _chamar(hermes_bridge.chat_complete, prov, model_id,
                    d["base"], model_id, _para_openai(messages),
                    timeout=timeout, max_tokens=max_tokens,
-                   api_key=key, hosts=d["hosts"])
+                   api_key=key, hosts=d.get("hosts", ("*",)))
 
 
 def _anthropic_complete(d: dict, key: str, model_id: str, messages: list,
@@ -601,7 +635,7 @@ def chat_stream(prov: str, model_id: str, messages: list, on_delta,
     return _chamar(hermes_bridge.chat_stream, prov, model_id,
                    d["base"], model_id, _para_openai(messages), on_delta,
                    deve_parar, timeout, max_tokens,
-                   api_key=key, hosts=d["hosts"])
+                   api_key=key, hosts=d.get("hosts", ("*",)))
 
 
 def _anthropic_stream(d: dict, key: str, model_id: str, messages: list, on_delta,
